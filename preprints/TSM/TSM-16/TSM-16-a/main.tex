@@ -1,0 +1,147 @@
+\documentclass{situationist-preprint}
+
+\title{Relativity and the Present}
+\msid{TSM-16-a}
+\msfamily{TSM-16}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mskeywords{relativity of simultaneity; objective now; Minkowski spacetime; local present; neo-Lorentzian; cosmic time; Putnam--Rietdijk argument}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is there an objective now, a set of events throughout the universe present together independently of any observer's motion? We argue that there is not: simultaneity is frame-relative, and the present is a local rather than a global notion. We prove that Minkowski spacetime admits no simultaneity relation, in the minimal sense of a nontrivial equivalence relation that never relates causally connectable events, that is invariant under the spacetime's symmetries; given that objective relations are invariant ones, there is no objective now. What survives is local: the events in the causal diamond of an observer's interval are dated within that interval by every frame, but the region's extent is bounded by the interval's duration and shrinks to the here-now. We answer the neo-Lorentzian, the appeal to cosmic time, the Putnam--Rietdijk argument and the argument from quantum nonlocality.
+\end{abstract}
+
+\section{The problem}
+
+For Newton, any two events either occurred at the same time or did not. \citet{Einstein1905} showed that, if the laws of electrodynamics and the speed of light are the same in every inertial frame, events simultaneous in one frame are not simultaneous in another, and \citet{Minkowski1909} recast the result as a claim about a four-dimensional spacetime in which only the interval between events is invariant.
+
+\citet{Rietdijk1966} and \citet{Putnam1967} argued that relativity settles the metaphysics of time: if what is real for me includes what is simultaneous with me, and simultaneity varies with frame, then events in my future are real for some observer real for me, and so the future is as determinate as the past. \citet{Stein1968,Stein1991} replied that the only relation of \enquote{having become} that is invariant and nontrivial in Minkowski spacetime is that of lying in an event's causal past; becoming is relative to a point-event, not to a hyperplane. Defenders of a privileged present appeal to an undetectable privileged frame \citep{Craig2001} or to the cosmic time of general relativity; \citet{Godel1949}, having found solutions of Einstein's equations without a global time, concluded that time is not objective at all.
+
+We argue that there is no objective now: simultaneity is frame-relative and the present is local. This supports TSM-15 from physics rather than from the analysis of tense.
+
+\section{Framework}
+
+\begin{definition}[Spacetime and separation]\label{d:mink}
+Minkowski spacetime is the set of events with the structure given by the interval. Two distinct events are \emph{timelike} separated if a signal slower than light can connect them, \emph{null} separated if only a light signal can, and \emph{spacelike} separated otherwise. Events are \emph{causally connectable} if they are timelike or null separated. Its \emph{symmetries} are the transformations preserving the interval and the distinction between future and past: translations, rotations and boosts.
+\end{definition}
+
+\begin{definition}[Simultaneity relation]\label{d:sim}
+A relation $S$ on events is a \emph{simultaneity relation} if it is an equivalence relation, it never relates two distinct causally connectable events, and it relates at least one pair of distinct events.
+\end{definition}
+
+The conditions are minimal: an event that can signal another precedes it on any account of time order, and nontriviality excludes identity. Einstein's simultaneity relative to an inertial frame satisfies Definition~\ref{d:sim}.
+
+\begin{principle}[Objectivity as invariance]\label{p:inv}
+A physical relation among events is objective only if it is invariant under the symmetries of spacetime: if it relates $x$ and $y$, it relates their images under every symmetry.
+\end{principle}
+
+\begin{assumption}[Relativistic spacetime]\label{a:rel}
+The structure of spacetime is Minkowskian, exactly in special relativity and locally in general relativity.
+\end{assumption}
+
+\begin{definition}[Objective now]\label{d:now}
+An \emph{objective now} is an equivalence class of an objective simultaneity relation.
+\end{definition}
+
+Principle~\ref{p:inv} is the standard criterion: what varies under a symmetry is relative to a choice the theory treats as arbitrary, as velocities are \citep{Earman1989}.
+
+\section{The argument}
+
+\begin{lemma}[Boost lemma]\label{l:boost}
+If $x$ and $y$ are spacelike separated, there are symmetries $\Lambda_1$ and $\Lambda_2$ that fix $x$ and carry $y$ to events $y_1$ and $y_2$ that are timelike separated.
+\end{lemma}
+
+\begin{proof}
+There is an inertial frame in which $x$ and $y$ are simultaneous; choose coordinates in it with $x$ at the origin and $y$ at time $0$ and position $d>0$ along the first spatial axis, in units in which the speed of light is $1$. A boost along that axis with rapidity $a$ fixes the origin and carries $y$ to the event with time coordinate $d\sinh a$ and position $d\cosh a$; the boost with rapidity $-a$ carries it to time $-d\sinh a$ and the same position. For $a\neq 0$ the two images are at the same place in these coordinates and differ in time by $2d\sinh a$, so they are timelike separated.
+\end{proof}
+
+\begin{theorem}\label{t:nosim}
+There is no objective simultaneity relation. Hence there is no objective now.
+\end{theorem}
+
+\begin{proof}
+Suppose $S$ is a simultaneity relation satisfying Principle~\ref{p:inv}. By nontriviality it relates distinct events $x$ and $y$, which are not causally connectable (Definition~\ref{d:sim}) and so are spacelike separated. Take $\Lambda_1,\Lambda_2$, $y_1$ and $y_2$ as in Lemma~\ref{l:boost}. By invariance, $S$ relates $\Lambda_1 x = x$ to $y_1$ and $\Lambda_2 x = x$ to $y_2$. By symmetry and transitivity it relates $y_1$ to $y_2$, which are distinct and timelike separated, contrary to Definition~\ref{d:sim}. So no simultaneity relation is objective, and by Definition~\ref{d:now} there is no objective now.
+\end{proof}
+
+It complements the result of \citet{Malament1977} that, given an inertial worldline, standard simultaneity relative to it is the only nontrivial simultaneity relation definable from the causal structure; definable simultaneity is relative to a worldline.
+
+\section{The local present}
+
+\begin{definition}[Local present]\label{d:local}
+Let $p$ and $q$ be events on an observer's worldline, $p$ earlier than $q$. The \emph{local present} of the interval from $p$ to $q$ is the set of events that are causally connectable to both, lying in the causal future of $p$ and the causal past of $q$, together with $p$ and $q$.
+\end{definition}
+
+\begin{proposition}\label{p:local}
+The local present of an interval is invariantly defined; every inertial frame assigns each of its events a time between those of $p$ and $q$; and its spatial extent, in the observer's rest frame, is at most the distance light travels in the interval's duration.
+\end{proposition}
+
+\begin{proof}
+It is defined from the causal relations alone, which the symmetries preserve. If $e$ lies in the causal future of $p$, every inertial frame dates $e$ no earlier than $p$, since frames disagree about the order only of spacelike separated events; likewise every frame dates $e$ no later than $q$. In the rest frame, an event reachable from $p$ and able to reach $q$ by signals no faster than light lies within half the light-travel distance of the interval's duration from the observer's position at its midpoint.
+\end{proof}
+
+\begin{corollary}\label{c:local}
+The present is a local notion. The only frame-independent present available to an observer over an interval of duration $\tau$ is a region whose spatial extent is bounded by $\tau$ times the speed of light, and as $\tau$ shrinks it shrinks to the observer's here-now.
+\end{corollary}
+
+Corollary~\ref{c:local} explains why a global now seems natural. Over a tenth of a second the local present has a radius of about fifteen thousand kilometers and contains the whole Earth. The extension of \enquote{now} to the Andromeda galaxy is a convention; within one's own region it is not.
+
+In a relativistic setting the moments of the branching structure of TSM-12 are replaced by point-events, and what is settled relative to a point-event is fixed by its causal past \citep{Stein1991,Belnap1992}. Settledness, like presentness, is local.
+
+\section{Objections and replies}
+
+\begin{objection}[The neo-Lorentzian]\label{o:lorentz}
+A theory with a privileged but undetectable frame, in which moving rods contract and clocks slow, is empirically equivalent to special relativity and restores absolute simultaneity \citep{Craig2001}.
+\end{objection}
+
+\begin{reply}
+The privileged frame is structure that no law uses and no measurement detects, and Principle~\ref{p:inv} is how physics discards such structure, as it discarded Newton's absolute rest \citep{Earman1989}. SCI-04 holds that theories are underdetermined only by empirically equivalent rivals that lack independent motivation, and this is one: its motivation is the A-theory's need for a global present, which TSM-01 rejects.
+\end{reply}
+
+\begin{objection}[Cosmic time]\label{o:cosmic}
+The cosmological models of general relativity that fit observation have a preferred foliation, the cosmic time of observers at rest relative to the mean motion of matter, whose hypersurfaces are a global now.
+\end{objection}
+
+\begin{reply}
+Cosmic time is defined by the distribution of matter, not by the structure of time. It exists only in solutions with a special symmetry, holds only on average, and fails in other solutions of the same equations \citep{Godel1949}. A present that depends on how matter happens to be distributed is a convention adapted to cosmology, not an objective now in the sense of Definition~\ref{d:now}. Locally, by Assumption~\ref{a:rel}, Theorem~\ref{t:nosim} applies unchanged.
+\end{reply}
+
+\begin{objection}[Putnam--Rietdijk]\label{o:putnam}
+Events in my future are simultaneous, in some frame, with events simultaneous with me in another. If what is simultaneous with what is real for me is real for me, the future is already real \citep{Rietdijk1966,Putnam1967}.
+\end{objection}
+
+\begin{reply}
+As in the proof of Theorem~\ref{t:nosim}, chaining frame-relative simultaneities across frames relates timelike separated events. The lesson is that being settled for an event is defined not by simultaneity but by the causal past \citep{Stein1968,Stein1991}, and on that account my future is not settled for me. The argument does not touch TSM-12, and our reply does not require that future events exist.
+\end{reply}
+
+\begin{objection}[Quantum nonlocality]\label{o:quantum}
+Violations of Bell's inequalities require nonlocal correlations, and a collapse of the wave function across space requires a preferred foliation \citep{Maudlin1994}.
+\end{objection}
+
+\begin{reply}
+The inference requires a collapse. On the Everett interpretation defended in SCI-09 there is none, and relativistic collapse theories have been constructed without a preferred foliation \citep{Tumulka2006}.
+\end{reply}
+
+\section{Conclusion}
+
+Minkowski spacetime admits no simultaneity relation invariant under its symmetries, so there is no objective now; the only frame-independent present is the causal diamond of an observer's interval, bounded by its duration. The present is local. This removes a global present, not temporal order, which the causal structure preserves; it does not make time unreal, as G\"odel concluded (see TSM-01), and it concerns presentness, not existence.
+
+\begin{thebibliography}{99}\small
+\bibitem[Belnap(1992)]{Belnap1992} Belnap, N. (1992). Branching space-time. \emph{Synthese}, 92(3), 385--434.
+\bibitem[Craig(2001)]{Craig2001} Craig, W.~L. (2001). \emph{Time and the Metaphysics of Relativity}. Kluwer.
+\bibitem[Earman(1989)]{Earman1989} Earman, J. (1989). \emph{World Enough and Space-Time: Absolute versus Relational Theories of Space and Time}. MIT Press.
+\bibitem[Einstein(1905)]{Einstein1905} Einstein, A. (1905). Zur Elektrodynamik bewegter K\"orper. \emph{Annalen der Physik}, 17, 891--921.
+\bibitem[G\"odel(1949)]{Godel1949} G\"odel, K. (1949). A remark about the relationship between relativity theory and idealistic philosophy. In P.~A. Schilpp (ed.), \emph{Albert Einstein: Philosopher-Scientist}, 555--562.
+\bibitem[Malament(1977)]{Malament1977} Malament, D. (1977). Causal theories of time and the conventionality of simultaneity. \emph{No\^us}, 11(3), 293--300.
+\bibitem[Maudlin(1994)]{Maudlin1994} Maudlin, T. (1994). \emph{Quantum Non-Locality and Relativity}. Blackwell.
+\bibitem[Minkowski(1909)]{Minkowski1909} Minkowski, H. (1909). Raum und Zeit. \emph{Physikalische Zeitschrift}, 10, 104--111.
+\bibitem[Putnam(1967)]{Putnam1967} Putnam, H. (1967). Time and physical geometry. \emph{The Journal of Philosophy}, 64(8), 240--247.
+\bibitem[Rietdijk(1966)]{Rietdijk1966} Rietdijk, C.~W. (1966). A rigorous proof of determinism derived from the special theory of relativity. \emph{Philosophy of Science}, 33(4), 341--344.
+\bibitem[Stein(1968)]{Stein1968} Stein, H. (1968). On Einstein--Minkowski space-time. \emph{The Journal of Philosophy}, 65(1), 5--23.
+\bibitem[Stein(1991)]{Stein1991} Stein, H. (1991). On relativity theory and openness of the future. \emph{Philosophy of Science}, 58(2), 147--167.
+\bibitem[Tumulka(2006)]{Tumulka2006} Tumulka, R. (2006). A relativistic version of the Ghirardi--Rimini--Weber model. \emph{Journal of Statistical Physics}, 125(4), 821--840.
+\end{thebibliography}
+
+\end{document}

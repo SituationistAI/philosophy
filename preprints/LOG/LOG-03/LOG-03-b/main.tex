@@ -1,0 +1,57 @@
+\documentclass{situationist-preprint}
+
+\title{Paraconsistency Without Dialetheism}
+\msid{LOG-03-b}
+\msfamily{LOG-03}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{paraconsistency; dialetheism; inconsistent information; LP; explosion; Exclusion}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-03-a argues that no contradiction is true. A dialetheist may reply that paraconsistent logics are indispensable for reasoning from inconsistent theories, databases and statutes, and that their indispensability supports gluts. We argue that it does not. Read as a logic of what a body of information supports, LP is correct and its failures of explosion and of modus ponens are virtues; read as a logic of truth, it requires gluts. The two readings share every valuation, as the gap and glut readings do in LOG-03-a, and only the second conflicts with Exclusion. Paraconsistency is therefore a feature of reasoning from information, which is compatible with there being no true contradictions.
+\end{abstract}
+
+\section{Two readings of LP}
+
+A logic is \emph{paraconsistent} if explosion fails in it: $A$ and $\neg A$ do not entail an arbitrary $B$. Reasoners must work with inconsistent theories, databases and bodies of law, and they do not conclude everything from them \citep{Jaskowski1969,Belnap1977}. The dialetheist adds an explanation: explosion fails because some contradictions are true \citep{Priest1979}.
+
+LOG-03-a shows that the dialetheist's cases fit the truth tables shared by LP and K3 and that what separates gluts from gaps is the designation of the middle value; Exclusion, the principle that a sentence and its negation are not both true, settles it in favor of gaps (Lemma 3.1 and Theorem 3.2 there). The same structure appears in the case of paraconsistency. Give the values of Definition 2.1 of LOG-03-a a second reading: for a body of information $I$, a sentence has the value $2$ if $I$ supports it and not its negation, $0$ if $I$ supports its negation and not it, and $1$ if $I$ supports both. LP's designated values, $1$ and $2$, are then the values of sentences that $I$ supports, and LP-consequence is the relation: every body of information that supports the premises supports the conclusion, where support is computed by the Kleene clauses. This is the four-valued reading of \citet{Belnap1977} restricted to complete bodies of information.
+
+\begin{proposition}\label{p:sep}
+A body of information can support both $A$ and $\neg A$ while Exclusion holds of truth.
+\end{proposition}
+
+\begin{proof}
+A database fed by two sources, one reporting that $p$ and the other that not $p$, supports both, and exactly one of the reports is correct.
+\end{proof}
+
+On the information reading, the failure of explosion is correct: a database that supports $p$ and $\neg p$ does not thereby support $q$. So is the failure of modus ponens for the material conditional that LOG-03-a records as a cost of the glut reading of truth (Proposition 3.5 there). If $I$ supports both $p$ and $\neg p$, it supports $\neg p \vee q$, because it supports $\neg p$, and it supports $p$; but it would be a mistake to combine the support that $\neg p \vee q$ derives from $\neg p$ with the support for $p$ and conclude $q$, since the two come from sources that contradict each other. What is a defect in a theory of truth is a virtue in a theory of inconsistent information. The strategies of reasoning with inconsistent theories developed by \citet{SchotchJennings1980} and \citet{BrownPriest2004} have the same shape: they confine inference to consistent fragments of an inconsistent whole, and none of them requires that the whole be true.
+
+\section{The argument}
+
+The dialetheist's inference runs from the correctness of a paraconsistent logic to the existence of gluts. It needs the premise that the logic is correct as a theory of truth-preservation, and that premise is exactly what the information reading denies. Given Proposition~\ref{p:sep}, the information reading delivers non-explosive reasoning from inconsistent inputs without any sentence and its negation being both true, so Exclusion and Theorem 3.2 of LOG-03-a stand. The paraconsistent logician and the classical logician need not disagree. LOG-02 holds that classical logic is the logic of consequence and that non-classical logics describe other relations; LP, on the information reading, describes the relation of support between bodies of information and sentences.
+
+\begin{objection}
+Some inconsistent theories, such as naive set theory, are not mere inputs: the dialetheist holds that they are true.
+\end{objection}
+
+\begin{reply}
+Then the case is one of the dialetheist's cases, not an argument from the usefulness of paraconsistency, and LOG-03-a treats it: membership in Russell's set takes the middle value and is neither true nor false. The usefulness of paraconsistent reasoning about inconsistent theories is the same whether or not a theory is true, which is why it cannot be evidence that one is.
+\end{reply}
+
+\section{Conclusion}
+
+Paraconsistent logics are correct as logics of what inconsistent bodies of information support, and their failures of explosion and detachment are what such a logic should have. On that reading the value assigned to a contradictory pair records conflicting support, not truth. The dialetheist's argument from paraconsistency therefore fails, and paraconsistency is compatible with the thesis of LOG-03 that there are no true contradictions.
+
+\begin{thebibliography}{99}\small
+\bibitem[Belnap(1977)]{Belnap1977} Belnap, N.~D. (1977). A useful four-valued logic. In J.~M. Dunn and G. Epstein (eds.), \emph{Modern Uses of Multiple-Valued Logic}, Reidel, 5--37.
+\bibitem[Brown and Priest(2004)]{BrownPriest2004} Brown, B. and Priest, G. (2004). Chunk and permeate, a paraconsistent inference strategy. Part I: The infinitesimal calculus. \emph{Journal of Philosophical Logic}, 33(4), 379--388.
+\bibitem[Ja\'skowski(1969)]{Jaskowski1969} Ja\'skowski, S. (1969). Propositional calculus for contradictory deductive systems. \emph{Studia Logica}, 24, 143--157. (Polish original 1948.)
+\bibitem[Priest(1979)]{Priest1979} Priest, G. (1979). The logic of paradox. \emph{Journal of Philosophical Logic}, 8(1), 219--241.
+\bibitem[Schotch and Jennings(1980)]{SchotchJennings1980} Schotch, P.~K. and Jennings, R.~E. (1980). Inference and necessity. \emph{Journal of Philosophical Logic}, 9(3), 327--340.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,124 @@
+\documentclass{situationist-preprint}
+
+\title{Deflationism Defended}
+\msid{LNG-10-a}
+\msfamily{LNG-10}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_10.lean}
+\mskeywords{truth; deflationism; equivalence schema; disquotation; conservativeness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is truth a substantive property, with a nature that a theory could uncover, as correspondence and coherence theories hold? We argue that it is not: deflationism is correct. The concept of truth is exhausted by the equivalence schema, and the truth predicate serves to generalize over what is said. We prove that the schema determines the truth predicate completely, that generalizations made with it are equivalent to generalizations over what sentences say, and that any condition satisfied by truth is satisfied by the relation of saying what obtains. Truth therefore has no further nature for a substantive theory to describe; its role in explaining success is the role of a device of generalization. We answer the objections from the norm of assertion, from conservativeness and from the liar. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Correspondence, coherence and pragmatist theories take truth to be a property with a nature, as being water has the nature of being $\mathrm{H}_2\mathrm{O}$. Deflationists deny this. \citet{Ramsey1927} held that \enquote{it is true that Caesar was murdered} means no more than that Caesar was murdered; \citet{Quine1970} that the truth predicate is a device of disquotation; \citet{Horwich1998} that the concept is given by the instances of \enquote{the proposition that $p$ is true if and only if $p$}; \citet{Field1994} that disquotational truth is all we need. Against them, \citet{Dummett1959} and \citet{Wright1992} argue that truth plays a role in assertion or inquiry that the schema cannot account for. We argue that the schema fixes everything there is to fix about truth (Section~\ref{s:arg}), and that no role claimed for a substantive property requires more (Section~\ref{s:obj}).
+
+\section{Framework}
+
+\begin{definition}\label{d:frame}
+Consider the sentences of a language and a range of worlds. What a sentence says either obtains at a world or does not. This relation is fixed by meaning and by how things are, and stating it needs no semantic vocabulary: that \enquote{snow is white} says what obtains at a world is just that snow is white there.
+\end{definition}
+
+\begin{principle}[Equivalence schema]\label{p:schema}
+At every world, a sentence is true if and only if what it says obtains.
+\end{principle}
+
+Deflationism is the thesis that Principle~\ref{p:schema}, in its propositional and disquotational forms, exhausts the concept of truth. A substantive theory adds that truth has a nature in virtue of which the instances of the schema hold.
+
+\section{The argument}\label{s:arg}
+
+\begin{theorem}\label{t:fix}
+Any predicate that satisfies the equivalence schema is the truth predicate.
+\end{theorem}
+
+\begin{proof}
+If $T$ satisfies the schema, then at every world and for every sentence, $T$ applies just in case what the sentence says obtains, just in case the sentence is true. Predicates that apply to the same things at every world are, for the purposes of the schema, the same predicate.
+\end{proof}
+
+\begin{proposition}\label{p:gen}
+For every collection of sentences, the claim that all of them are true is equivalent to the claim that what each of them says obtains.
+\end{proposition}
+
+\begin{proof}
+Apply the schema to each member of the collection.
+\end{proof}
+
+This is the expressive role of truth: \enquote{everything she said is true} endorses what she said without restating it, and says neither more nor less than the infinite conjunction of her claims \citep{Quine1970,Horwich1998}.
+
+\begin{proposition}\label{p:surplus}
+Any condition satisfied by the truth predicate is satisfied by the relation of saying what obtains, and conversely.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{t:fix} applied to the relation of saying what obtains, which satisfies the schema trivially, the two are the same predicate.
+\end{proof}
+
+Proposition~\ref{p:surplus} is the deflationist's conclusion in a precise form. Whatever role a substantive theorist assigns to truth, correspondence or otherwise, is played by the relation that holds when what a sentence says obtains; for \enquote{snow is white}, by snow's being white. When true beliefs are said to explain success, each instance cites what the belief is about (she caught the train because she believed it left at noon and it did), and the truth predicate only generalizes over the instances \citep{Leeds1978}. There is no further property common to all truths whose nature a theory could investigate.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[The norm of assertion]
+\citet{Dummett1959} argued that the point of assertion, aiming at truth, cannot be explained by the schema; \citet{Wright1992} that truth is a norm of assertion distinct from warranted assertibility, so that deflationism is unstable and \enquote{inflates}.
+\end{objection}
+
+\begin{reply}
+By the schema, aiming to assert that $p$ only if it is true that $p$ is aiming to assert that $p$ only if $p$: a schema of norms, one for each content, collected by the truth predicate. That truth and warrant come apart is also given by the schema, since it may be that $p$ without warrant for asserting it. Wright shows that truth is not warranted assertibility, which no deflationist claims.
+\end{reply}
+
+\begin{objection}[Conservativeness]
+\citet{Shapiro1998} and \citet{Ketland1999} showed that adding a truth predicate with the compositional axioms to arithmetic, with induction extended to the new vocabulary, proves the consistency of arithmetic, which arithmetic does not prove. A predicate that yields new non-semantic consequences is substantive.
+\end{objection}
+
+\begin{reply}
+The new consequences come from induction over formulas containing the truth predicate, not from the truth axioms themselves; with induction restricted to the old vocabulary, the theory is conservative \citep{Halbach2011}. Extending induction is an expression of the theorist's understanding of the natural numbers, which is not a fact about truth \citep{Field1999}. The companion manuscript LNG-10-b examines the argument in detail.
+\end{reply}
+
+\begin{objection}[The liar]
+In classical logic the schema is inconsistent for a language containing its own truth predicate, so deflationism rests on an inconsistent principle.
+\end{objection}
+
+\begin{reply}
+The schema and classical logic cannot both hold for every sentence of such a language. LOG-01-a keeps the schema for every sentence, following \citet{Field2008}, in a non-classical logic on which the liar is neither true nor false; truth is transparent, as deflationism requires. Our results concern the fragment without the truth predicate, where schema and classical logic coexist.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LNG/LNG_10.lean} proves Theorem~\ref{t:fix} and Propositions~\ref{p:gen} and~\ref{p:surplus} (\texttt{generalization}, \texttt{no\_surplus}).
+
+\begin{lstlisting}
+theorem schema_determines (T : World → Sentence → Prop)
+    (hT : ∀ w s, T w s ↔ holds w s) : T = True'
+
+'Philosophy.LNG_10.schema_determines' depends on axioms: [propext, Quot.sound,
+ Philosophy.LNG_10.Sentence, Philosophy.LNG_10.True', Philosophy.LNG_10.World,
+ Philosophy.LNG_10.equivalence, Philosophy.LNG_10.holds]
+\end{lstlisting}
+
+\texttt{Sentence}, \texttt{World} and \texttt{holds} are the primitives of Definition~\ref{d:frame}, \texttt{True'} the truth predicate and \texttt{equivalence} Principle~\ref{p:schema}; \texttt{propext} and \texttt{Quot.sound}, from Lean's logic, identify predicates that agree everywhere. \texttt{no\_surplus} has the same axioms.
+
+\section{Conclusion}
+
+The equivalence schema fixes the truth predicate, explains its use in generalization, and leaves nothing for a substantive property to do. Deflationism about truth is correct.
+
+\begin{thebibliography}{99}\small
+\bibitem[Dummett(1959)]{Dummett1959} Dummett, M. (1959). Truth. \emph{Proceedings of the Aristotelian Society}, 59, 141--162.
+\bibitem[Field(1994)]{Field1994} Field, H. (1994). Deflationist views of meaning and content. \emph{Mind}, 103(411), 249--285.
+\bibitem[Field(1999)]{Field1999} Field, H. (1999). Deflating the conservativeness argument. \emph{The Journal of Philosophy}, 96(10), 533--540.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[Halbach(2011)]{Halbach2011} Halbach, V. (2011). \emph{Axiomatic Theories of Truth}. Cambridge University Press.
+\bibitem[Horwich(1998)]{Horwich1998} Horwich, P. (1998). \emph{Truth}, 2nd edn. Oxford University Press.
+\bibitem[Ketland(1999)]{Ketland1999} Ketland, J. (1999). Deflationism and Tarski's paradise. \emph{Mind}, 108(429), 69--94.
+\bibitem[Leeds(1978)]{Leeds1978} Leeds, S. (1978). Theories of reference and truth. \emph{Erkenntnis}, 13(1), 111--129.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\bibitem[Ramsey(1927)]{Ramsey1927} Ramsey, F.~P. (1927). Facts and propositions. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 7, 153--170.
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Proof and truth: Through thick and thin. \emph{The Journal of Philosophy}, 95(10), 493--521.
+\bibitem[Wright(1992)]{Wright1992} Wright, C. (1992). \emph{Truth and Objectivity}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

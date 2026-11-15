@@ -1,0 +1,91 @@
+\documentclass{situationist-preprint}
+
+\title{Knowledge First, Then Justification}
+\msid{EPI-01-c}
+\msfamily{EPI-01}
+\msdiscipline{Epistemology}
+\mstype{Alternative proof}
+\mskeywords{knowledge first; justification; safety; Gettier problem; internal duplicates}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EPI-01-a analyses knowledge as safe, justified, true belief, taking justification as an unanalysed primitive, and shows that Gettier cases are exactly the unsafe justified true beliefs. We reach the same biconditional by the opposite route. Following the knowledge-first programme, we take knowledge as primitive and define justification in terms of it: a belief is justified if an internal duplicate of the believer, believing on the same basis, knows. Two premises about knowledge itself, that it requires safety and that safety is the only external condition separating a knower from her internal duplicates, then yield the analysis and the characterization of Gettier cases. The analysis therefore does not depend on treating justification as prior to knowledge.
+\end{abstract}
+
+\section{The route}
+
+The principal manuscript of this family, EPI-01-a, defines knowledge as justified, safe belief (its Definition~2.3), proves that safety entails truth (Theorem~3.1), and shows that a justified true belief is safe if and only if it is not a Gettier case (Theorem~3.3). The definition is supported by the verdicts it delivers on cases, and justification enters it as a primitive about which the analysis is non-reductive. A defender of the knowledge-first programme \citep{Williamson2000} will object to the order of explanation: knowledge, on that programme, is not built from justification and further conditions; rather, justification is to be understood through knowledge. The objection is not to the biconditional but to the claim that it analyses knowledge.
+
+We show that the biconditional, and with it the characterization of Gettier cases, follows from knowledge-first premises. The premise of EPI-01-a that this route avoids is its treatment of justification as a status given independently of knowledge. Justification is here defined from knowledge, so the result holds whichever of the two is explanatorily prior.
+
+\section{The argument}
+
+Worlds, bases and closeness are as in EPI-01-a: a subject $S$ believes $p$ at $w$ on a basis $m$, and closeness is centred (its Assumption~2.1). Safety is as in its Definition~2.2. We write $K_m(S,p,w)$ for: at $w$, $S$ knows $p$ on basis $m$. Internal duplicates are subjects alike in their mental states and the history of those states, as in Definition~2.1 of EPI-06-a.
+
+\begin{definition}[Justification from knowledge]\label{d:just}
+$S$'s belief that $p$ on basis $m$ at $w$ is \emph{justified} if and only if there is a world $v$ and a subject $S'$ who is, at $v$, an internal duplicate of $S$ at $w$, who believes $p$ on basis $m$ at $v$, and who knows $p$ on $m$ at $v$.
+\end{definition}
+
+Definition~\ref{d:just} is a version of the account of \citet{Bird2007}: to be justified is to believe as someone with one's mental life could believe in knowing. It makes justification internalist, since internal duplicates have the same duplicates, and so agrees with Theorem~3.3 of EPI-06-a. The victim of the demon is justified, because her unvictimized duplicate knows.
+
+\begin{assumption}[Safety]\label{a:safety}
+If $K_m(S,p,w)$, then $S$'s belief that $p$ on $m$ is safe at $w$.
+\end{assumption}
+
+\begin{assumption}[Safety is the external difference]\label{a:external}
+If $S$ at $w$ and $S'$ at $v$ are internal duplicates who believe $p$ on $m$, $S'$ knows $p$ on $m$ at $v$, and $S$'s belief that $p$ on $m$ is safe at $w$, then $S$ knows $p$ on $m$ at $w$.
+\end{assumption}
+
+Assumption~\ref{a:safety} is the safety principle that knowledge-first theorists themselves defend, in the form that knowledge requires the absence of close error on the same basis \citep{Williamson2000}. Assumption~\ref{a:external} says that, once the internal side of a case is fixed at one that can be the internal side of a knower, nothing outside the subject but the modal profile of her basis can prevent her from knowing. It is a claim about knowledge, not about justification, and it is what knowledge-first theorists mean when they say that the knower's advantage over her deceived duplicate is environmental and consists in her not being in danger of error.
+
+\begin{theorem}[The analysis]\label{t:analysis}
+$S$ knows $p$ on $m$ at $w$ if and only if she believes $p$ on $m$ at $w$, her belief is justified in the sense of Definition~\ref{d:just}, and it is safe.
+\end{theorem}
+
+\begin{proof}
+Left to right: knowledge on $m$ includes belief on $m$; the subject is an internal duplicate of herself, so $v = w$ and $S' = S$ witness Definition~\ref{d:just}; safety follows from Assumption~\ref{a:safety}. Right to left: justification supplies a duplicate $S'$ at $v$ who knows $p$ on $m$; with safety at $w$, Assumption~\ref{a:external} gives knowledge at $w$.
+\end{proof}
+
+By centring, a safe belief is true, so Theorem~\ref{t:analysis} is the analysis of EPI-01-a with Definition~\ref{d:just} supplying the justification condition. The characterization of Gettier cases then follows exactly as in EPI-01-a.
+
+\begin{corollary}[Gettier cases]\label{c:gettier}
+A justified true belief on basis $m$ fails to be knowledge on $m$ if and only if there is a close world at which the subject believes $p$ on $m$ and $p$ is false.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:analysis}, a justified belief on $m$ is knowledge on $m$ if and only if it is safe, and it is unsafe exactly when there is such a world.
+\end{proof}
+
+In Gettier's case of the ten coins \citep{Gettier1963}, Smith is justified because his duplicate in a world in which Jones gets the job knows that the man who will get the job has ten coins in his pocket; Smith does not know, because the world in which he has nine coins and believes on the same basis is close.
+
+\section{Objections}
+
+\begin{objection}
+Assumption~\ref{a:external} is the analysis of EPI-01-a in disguise, so the route is not independent.
+\end{objection}
+
+\begin{reply}
+It does not mention justification, and it is consistent with the denial that justification is a component of knowledge. Its content is that two subjects with the same inner life, one of whom knows, differ in knowledge only if they differ in safety. The rival external conditions that the literature has proposed, such as the absence of false lemmas, causal connection or the absence of undefeated defeaters, either reduce to safety in the cases that motivate them or misclassify cases, as EPI-01-a shows in its comparison with the rivals (its Section~5). The principal manuscript uses those comparisons to support a definition of knowledge; we use them to support a claim about what distinguishes duplicates. The two uses rest on different premises about the order of explanation.
+\end{reply}
+
+\begin{objection}
+Knowledge-first theorists deny that knowledge has an analysis, and Theorem~\ref{t:analysis} provides one.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:analysis} is a necessary biconditional, and its right-hand side mentions justification, which Definition~\ref{d:just} defines through knowledge. It is not a reduction of knowledge to independently intelligible conditions, and it is consistent with the claim that knowledge is the most general factive mental state \citep{Williamson2000}. What the knowledge-first programme must give up is only the claim that no true biconditional of this form exists.
+\end{reply}
+
+\section{Conclusion}
+
+Whether justification is prior to knowledge or knowledge to justification, knowledge is safe, justified, true belief, and the Gettier cases are exactly the justified true beliefs that are unsafe. The family's conclusion does not depend on the order of explanation.
+
+\begin{thebibliography}{9}\small
+\bibitem[Bird(2007)]{Bird2007} Bird, A. (2007). Justified judging. \emph{Philosophy and Phenomenological Research}, 74(1), 81--110.
+\bibitem[Gettier(1963)]{Gettier1963} Gettier, E.~L. (1963). Is justified true belief knowledge? \emph{Analysis}, 23(6), 121--123.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,223 @@
+\documentclass{situationist-preprint}
+
+\title{The Simulation Argument Undermined}
+\msid{MET-25-a}
+\msfamily{MET-25}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_25.lean}
+\mskeywords{simulation argument; Bostrom; self-undermining arguments; scepticism; evidence; base-level physics; credence}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Bostrom's simulation argument concludes that, unless almost all civilizations at our level fail to reach a technologically mature stage or almost all mature civilizations decline to run simulations of their ancestors, we are almost certainly living in a computer simulation. We argue that we are not, in the sense that the argument gives us no reason to believe that we are, and that it cannot give us one, because it is self-undermining. Its crucial premise, that a mature civilization would have the computing power to run vast numbers of ancestor-simulations, is supported only by our physics. Our physics is evidence about the physics of the base level of reality only if we are not simulated. If we are simulated, our physical evidence concerns the rules of the simulation and is silent on the resources of the simulators. We prove that no rational state is confident that we are simulated on the basis of the argument, and that the argument can raise credence in the simulation hypothesis to a given level only to the extent that one already assigns a comparable credence to the conjunction of that hypothesis with the premise. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Bostrom2003} argued that at least one of the following propositions is true: (1) the fraction of civilizations at our level of development that reach a technologically mature, or \enquote{posthuman}, stage is very close to zero; (2) the fraction of posthuman civilizations interested in running simulations of their evolutionary history, or ancestor-simulations, is very close to zero; (3) the fraction of all observers with experiences like ours who are living in a simulation is very close to one. The argument for the trilemma is a counting argument. If $f_P$ is the fraction of civilizations that reach maturity, $\bar N$ the average number of ancestor-simulations run by a mature civilization, and $\bar H$ the average number of observers who live in a civilization before it reaches maturity, then the fraction of observers with human-type experiences who are simulated is
+\[
+f_{\mathrm{sim}} = \frac{f_P \bar N \bar H}{f_P \bar N \bar H + \bar H}.
+\]
+Since a mature civilization would, Bostrom argues, have enough computing power to run an astronomically large number of ancestor-simulations, $\bar N$ is enormous unless almost no mature civilization runs any, and $f_{\mathrm{sim}}$ is close to one unless $f_P$ is close to zero. A principle of indifference, on which one's credence that one is simulated should equal $f_{\mathrm{sim}}$ when one has no evidence bearing on which observer one is, converts the third disjunct into the conclusion that we are almost certainly simulated.
+
+The premise that does the work is the claim that a mature civilization would have the requisite computing power. Bostrom supports it by estimates, drawn from the physics of computation and from neuroscience, of the number of operations needed to simulate a human mental history and of the number of operations a planetary-scale computer could perform. We call it the \emph{feasibility premise}. Two further assumptions are needed: that consciousness is substrate-independent, so that simulated brains have experiences, and that the simulations are fine-grained enough to be indistinguishable from the inside.
+
+The literature has focused on the indifference principle \citep{Weatherson2003,Bostrom2005} and on the reference class of observers \citep{BostromKulczycki2011}. A smaller literature has pointed to a tension between the argument's reliance on our empirical knowledge and the doubt about that knowledge which its conclusion introduces. \citet{Birch2013} argues that the argument requires a selective scepticism: it asks us to trust our evidence about the capacities of technologically mature civilizations while doubting that our evidence concerns base-level reality. \citet{Chalmers2022} defends the opposite view that the simulation hypothesis is a live possibility and that, if we are simulated, our world is real but digital, so that the hypothesis is not sceptical. We develop the first line of criticism into a proof. The simulation argument is self-undermining: the truth of its conclusion would remove the support for its crucial premise, and no rational credence can rest on it.
+
+\section{Framework}
+
+\begin{definition}[Hypotheses]\label{d:hyp}
+$S$ is the \emph{simulation hypothesis}: we are living in a computer simulation, so that the physics we observe is not the physics of the base level of reality. $P$ is the \emph{feasibility premise}: the physics of the base level permits a mature civilization to run a very large number of ancestor-simulations. $E$ is our total physical and neuroscientific evidence. In a world, $E$ \emph{supports} $P$ if it is evidence for $P$ in that world.
+\end{definition}
+
+\begin{definition}[Argument-based attitude]\label{d:viaarg}
+An epistemic state's attitude to $S$ is \emph{argument-based} if it rests on the simulation argument: the state has no source of credence in $S$ other than the argument.
+\end{definition}
+
+The restriction in Definition~\ref{d:viaarg} matters. We do not claim that no one could have reason to believe that they are simulated: a glitch in the sky might provide one. We claim that the simulation argument cannot.
+
+\begin{assumption}[Dependence]\label{a:dep}
+An argument-based confidence in $S$ requires rational confidence in $P$.
+\end{assumption}
+
+\begin{assumption}[Evidential base]\label{a:base}
+Our evidence supports $P$ in a world only if, in that world, we are not simulated; and rational confidence in $P$ requires rational confidence that we are not simulated.
+\end{assumption}
+
+\begin{assumption}[Coherence]\label{a:coh}
+No rational state is confident both that $S$ and that not-$S$.
+\end{assumption}
+
+\begin{assumption}[Probability]\label{a:prob}
+Credences, measured in percent, are at most $100$, and the credence in $P$ is at most the credence in not-$S$ plus the credence in the conjunction of $S$ and $P$.
+\end{assumption}
+
+\begin{assumption}[Transmission]\label{a:trans}
+An argument-based credence in $S$ is at most the credence in $P$.
+\end{assumption}
+
+Assumption~\ref{a:dep} records the structure of the argument: without the feasibility premise, $\bar N$ is not known to be large, and the third disjunct receives no support. Assumption~\ref{a:trans} is its quantitative counterpart. An argument can confer on its conclusion no more credence than it confers on the premise it essentially depends on, since if the premise is false the argument provides no support at all.
+
+Assumption~\ref{a:base} is the substantive premise, and we defend it here. The feasibility premise is a claim about the physics of the base level, since it is the base-level civilization, or some civilization at a level above ours, that runs the simulations. Our evidence for it consists of observations of our world: measurements, theories of computation, estimates of the energy available in planetary systems, and facts about our brains. If we are not simulated, these are observations of base-level physics, and they bear on $P$ in the ordinary way. If we are simulated, they are observations of the simulation, and the laws they reveal are the rules the simulators chose to implement. The rules of a simulation are evidence about the resources of the machine that runs it only through some assumption about how the simulators chose the rules, and such an assumption cannot itself be supported by observations made inside the simulation. The second clause of the assumption follows from the first: rational confidence in $P$ must be confidence grounded in evidence, which by the first clause supports $P$ only if not-$S$; a state that is confident in $P$ on this basis is thereby committed to the claim that its evidence concerns base-level physics.
+
+\section{Results}
+
+\begin{lemma}[The dilemma]\label{l:dilemma}
+In no world is our evidence a support for the feasibility premise and the simulation hypothesis true.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:base}, in any world in which $E$ supports $P$, we are not simulated.
+\end{proof}
+
+Lemma~\ref{l:dilemma} states the self-undermining structure in its simplest form. If the conclusion of the argument is false, its crucial premise may be supported, but the conclusion is false. If the conclusion is true, the premise is unsupported. The argument is never a supported argument for a true conclusion.
+
+\begin{theorem}[Self-undermining]\label{t:main}
+No rational state is confident that we are simulated on the basis of the simulation argument.
+\end{theorem}
+
+\begin{proof}
+Suppose that a state is confident in $S$ and that its confidence is argument-based. By Assumption~\ref{a:dep} it is confident in $P$, so by Assumption~\ref{a:base} it is confident in not-$S$. This contradicts Assumption~\ref{a:coh}.
+\end{proof}
+
+Theorem~\ref{t:main} concerns confidence, a qualitative notion. The quantitative version shows how far the argument can move credence below the level of confidence.
+
+\begin{proposition}[Credence cap]\label{p:cap}
+If $s$ is an argument-based credence in $S$ and $c$ is the credence in the conjunction of $S$ and $P$, then $2s \le 100 + c$.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:trans}, $s$ is at most the credence in $P$, which by Assumption~\ref{a:prob} is at most $(100 - s) + c$. Hence $2s \le 100 + c$.
+\end{proof}
+
+\begin{corollary}\label{c:ninety}
+An argument-based credence of at least $90$ in $S$ requires a credence of at least $80$ in the conjunction of $S$ and $P$.
+\end{corollary}
+
+\begin{proof}
+If $s \ge 90$, then $180 \le 100 + c$ by Proposition~\ref{p:cap}, so $c \ge 80$.
+\end{proof}
+
+Corollary~\ref{c:ninety} shows what the argument would need to deliver the near-certainty of Bostrom's third disjunct. The subject must already be highly confident that she is simulated and that base-level physics permits ancestor-simulations. That credence cannot come from the argument, which concerns $S$ only, and it cannot come from her physical evidence, which by Assumption~\ref{a:base} is silent on $P$ in the worlds in which $S$ is true. The argument can transmit such a credence; it cannot generate it.
+
+The extent of the silence can be made precise. Let $q$ be the subject's prior credence that base-level physics permits ancestor-simulation on the required scale, that is, her credence in $P$ before taking account of physical evidence that she might be in no position to interpret.
+
+\begin{assumption}[Silence]\label{a:silence}
+Under $S$, our evidence is silent on $P$: $100\,c \le q\,s$.
+\end{assumption}
+
+Assumption~\ref{a:silence} says that the credence in $P$ conditional on $S$ is no higher than the prior $q$, which is the quantitative form of the first clause of Assumption~\ref{a:base}.
+
+\begin{proposition}[Cap under silence]\label{p:silent}
+Under Assumption~\ref{a:silence}, an argument-based credence $s$ in $S$ satisfies $(200 - q)\,s \le 10000$.
+\end{proposition}
+
+\begin{proof}
+Multiply the inequality of Proposition~\ref{p:cap} by $100$ and apply Assumption~\ref{a:silence}: $200 s \le 10000 + 100 c \le 10000 + q s$.
+\end{proof}
+
+\begin{corollary}\label{c:values}
+If the prior $q$ is at most $50$, an argument-based credence in $S$ is at most $66$; if $q$ is $0$, it is at most $50$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Proposition~\ref{p:silent}, since $150 \cdot 67 > 10000$ and $200 \cdot 51 > 10000$.
+\end{proof}
+
+These bounds are upper bounds on what the argument could support, not values it attains. They show that even on assumptions favorable to it, the argument cannot support the conclusion that we are almost certainly simulated, and that any credence above one half that it appears to support is borrowed from a prior opinion about the physics of an unobserved level of reality.
+
+We draw the conclusion that answers the question of this manuscript. The simulation argument is the only serious positive reason that has been offered for believing that we are simulated, and it gives no such reason. In its absence, the simulation hypothesis has the epistemic status of other hypotheses on which our experience is produced by a mechanism we cannot observe, such as the hypothesis that we are brains in vats. EPI-02 argues that, by the standards that govern ordinary knowledge, we know that we are not brains in vats, because envatted worlds are not close to ours; the same reasoning applies to simulated worlds, which are not close to ours if the world is as our evidence presents it. We are not living in a simulation, and nothing in the simulation argument shows otherwise.
+
+\section{Objections and replies}
+
+\begin{objection}[Ancestor-simulations copy base physics]
+Ancestor-simulations simulate the simulators' own past. If we are simulated, our physics is therefore a copy of the physics of the simulators' world, and our evidence bears on $P$ after all. Assumption~\ref{a:base} is false.
+\end{objection}
+
+\begin{reply}
+The objection replaces Assumption~\ref{a:base} by a fidelity premise: if we are simulated, the simulation reproduces base physics faithfully in the respects relevant to computation. That premise is not supported by our evidence, for the reason the objection itself makes vivid: whether a simulation is faithful is a fact about the relation between the simulation and a level we cannot observe. Bostrom himself notes that a simulation need not compute the microphysics of regions that no simulated observer examines, which makes fidelity in exactly the respects relevant to the limits of computation doubtful. A subject who accepts the fidelity premise without evidence has a high prior credence in the conjunction of $S$ and $P$, and Corollary~\ref{c:ninety} shows that the argument then delivers only what that prior already contains. The objection relocates the gap; it does not close it.
+\end{reply}
+
+\begin{objection}[Simulators at any level]
+The argument need not rely on our physics. If any reality anywhere permits large simulations, then most observers are simulated, and the feasibility premise can be stated without reference to base-level physics.
+\end{objection}
+
+\begin{reply}
+Stated that way, the premise has no support at all. What makes it plausible that \emph{some} reality permits large simulations is the estimate that ours does, if ours is base-level. Without that estimate, the claim that some level of reality has the resources for astronomically many ancestor-simulations is a pure conjecture about unobservable physics, to which the subject's credence is her prior $q$. Proposition~\ref{p:silent} then applies directly.
+\end{reply}
+
+\begin{objection}[Reductio of non-simulation]
+Self-undermining arguments can be rational. Suppose that we take our physics at face value, and so assume not-$S$. From our physics and the indifference principle, it follows that we are probably simulated. This is a reductio of the assumption that our physics is base-level, and reductio arguments are allowed to undermine their own premises.
+\end{objection}
+
+\begin{reply}
+A reductio derives a contradiction from its assumption. Here no contradiction is derived. A subject who assumes not-$S$ has credence zero in $S$, and the indifference principle does not apply to her, since she has evidence about which observer she is, namely that she is not simulated. The subject who is not certain of not-$S$, but trusts her physics, is in the situation of Proposition~\ref{p:cap}, in which raising her credence in $S$ lowers her credence in $P$, and the argument settles at a credence that is at most the bound of Proposition~\ref{p:silent}. Nothing in this sequence forces her to abandon not-$S$; what is forced is the recognition that her trust in her physics and her credence in $S$ cannot both be high, which is Theorem~\ref{t:main}.
+\end{reply}
+
+\begin{objection}[The hypothesis is not sceptical]
+On the view of \citet{Chalmers2022}, a simulated world is a real world, made of digital objects. The simulated subject has hands and knows it. The comparison with brains in vats is therefore misplaced, and so is the appeal to EPI-02.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:main} and Proposition~\ref{p:silent} do not depend on the comparison. Whether or not a simulated subject has real hands, she is in no position to obtain evidence about the physics of the level that implements her world, and that is the only premise our results use. The appeal to EPI-02 serves the further claim that we know we are not simulated, and for that claim what matters is that the simulation hypothesis, like the vat hypothesis, describes a world that is not close to ours in ordinary contexts. That is so whether or not the simulated world contains real hands. The view of \citet{Chalmers2005} that the hypothesis is a metaphysical rather than a sceptical one is consistent with the realism of MET-03: if we were simulated, the external world would still exist, and its base level would be independent of any mind.
+\end{reply}
+
+\begin{objection}[Neuroscience]
+The argument also relies on substrate-independence and on estimates of the computational cost of simulating a brain. These are claims about minds, not about base-level physics, and our evidence for them is not undermined by $S$.
+\end{objection}
+
+\begin{reply}
+If we are simulated, our neuroscience is the neuroscience of simulated brains, and our evidence that minds are substrate-independent is evidence gathered in a world whose substrate we cannot inspect. The estimates of computational cost are estimates of what it would take to simulate brains like ours with the physics we observe. Under $S$, both are silent on the costs the simulators face in their own physics. The argument therefore loses these premises in the same way as the feasibility premise, and the conclusion of Theorem~\ref{t:main} is reinforced rather than weakened.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that simulations of conscious beings are impossible, or that no technologically mature civilization will run them. It does not show that the trilemma is false: the disjunction of Bostrom's three propositions may be true, and a subject who is confident that she is not simulated may accept it while rejecting the third disjunct. It does not refute the indifference principle, which we have not needed to discuss. And it does not show that no evidence could ever make it rational to believe that one is simulated. It shows that the simulation argument cannot, because the only evidence that supports its crucial premise is evidence that bears on that premise only if its conclusion is false.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MET/MET_25.lean} formalizes Lemma~\ref{l:dilemma}, Theorem~\ref{t:main}, Propositions~\ref{p:cap} and~\ref{p:silent} and Corollaries~\ref{c:ninety} and~\ref{c:values}. Worlds and epistemic states are primitive types; simulation, support, confidence and argument-basing are primitive predicates; credences are natural numbers read as percentages. The main statements are:
+
+\begin{lstlisting}
+theorem no_confidence_via_argument (σ : State) (h : ViaArg σ) :
+    ¬ ConfS σ
+
+theorem credence_cap (σ : State) (h : ViaArg σ) :
+    2 * crS σ ≤ 100 + crSP σ
+
+theorem silent_cap (σ : State) (h : ViaArg σ) :
+    (200 - prior σ) * crS σ ≤ 10000
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MET_25.no_confidence_via_argument' depends on axioms:
+  [ConfNotS, ConfS, State, ViaArg, coherence, dependence,
+   evidential_base]
+'Philosophy.MET_25.credence_cap' depends on axioms:
+  [propext, Quot.sound, State, ViaArg, crP, crS, crSP, crS_le,
+   total_probability, transmission]
+'Philosophy.MET_25.silent_cap' depends on axioms:
+  [propext, Quot.sound, State, ViaArg, crP, crS, crSP, crS_le,
+   prior, silence, total_probability, transmission]
+\end{lstlisting}
+
+Namespace prefixes are omitted. \texttt{dependence} is Assumption~\ref{a:dep}; \texttt{evidential\_base} is the epistemic clause of Assumption~\ref{a:base}, and \texttt{support\_requires\_base}, used by Lemma~\ref{l:dilemma}, is its worldly clause; \texttt{coherence} is Assumption~\ref{a:coh}; \texttt{crS\_le} and \texttt{total\_probability} are Assumption~\ref{a:prob}; \texttt{transmission} is Assumption~\ref{a:trans}; \texttt{silence} is Assumption~\ref{a:silence}. \texttt{propext} and \texttt{Quot.sound} are standard axioms of Lean's logic used by the arithmetic decision procedure. The formalization shows that the qualitative and quantitative results rest on disjoint sets of premises: Theorem~\ref{t:main} uses no assumption about credences, and Proposition~\ref{p:cap} uses no assumption about the evidential base. The two results support the same conclusion independently.
+
+\section{Conclusion}
+
+The simulation argument relies on a premise about the computing power available at the base level of reality, and the only support for that premise is our physics, which bears on the base level only if we are not simulated. The argument is therefore self-undermining. No rational state is confident that we are simulated on its basis, and the credence it can support is bounded by what one already believes about a level of reality one cannot observe. We have no reason to believe that we are living in a simulation, and we are not.
+
+\begin{thebibliography}{99}\small
+\bibitem[Birch(2013)]{Birch2013} Birch, J. (2013). On the \enquote{simulation argument} and selective scepticism. \emph{Erkenntnis}, 78, 95--107.
+\bibitem[Bostrom(2003)]{Bostrom2003} Bostrom, N. (2003). Are you living in a computer simulation? \emph{Philosophical Quarterly}, 53, 243--255.
+\bibitem[Bostrom(2005)]{Bostrom2005} Bostrom, N. (2005). The simulation argument: Reply to Weatherson. \emph{Philosophical Quarterly}, 55, 90--97.
+\bibitem[Bostrom and Kulczycki(2011)]{BostromKulczycki2011} Bostrom, N., and Kulczycki, M. (2011). A patch for the simulation argument. \emph{Analysis}, 71, 54--61.
+\bibitem[Chalmers(2005)]{Chalmers2005} Chalmers, D. J. (2005). The Matrix as metaphysics. In C. Grau (ed.), \emph{Philosophers Explore the Matrix}. Oxford University Press.
+\bibitem[Chalmers(2022)]{Chalmers2022} Chalmers, D. J. (2022). \emph{Reality+: Virtual Worlds and the Problems of Philosophy}. W. W. Norton.
+\bibitem[Weatherson(2003)]{Weatherson2003} Weatherson, B. (2003). Are you a sim? \emph{Philosophical Quarterly}, 53, 425--431.
+\end{thebibliography}
+
+\end{document}

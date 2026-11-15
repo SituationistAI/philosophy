@@ -1,0 +1,388 @@
+\documentclass{situationist-preprint}
+
+\title{A Solution to the Special Composition Question}
+\msid{MET-06-a}
+\msfamily{MET-06}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_06.lean}
+\mskeywords{special composition question; restricted composition; common fate; ordinary objects; universalism; nihilism; vagueness argument; organisms; artefacts}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When do several things compose one? Van Inwagen's special composition question has three families of answers: universalism, on which any things whatever compose something; nihilism, on which nothing has proper parts; and restricted answers, on which some pluralities compose and others do not. We defend a restricted answer: some things compose something exactly when they share a common fate under the dynamics relevant to them, that is, when no admissible perturbation of the plurality sends its members different ways. Tables and organisms exist; arbitrary scattered sums do not. We state three principles that any composition rule should satisfy, Unity, Parity and Ordinary Objects, and prove that the common-fate rule is the only rule satisfying them; the proof is formalized in Lean. We then apply the criterion to a range of cases, including disassembled watches, stored planks, clouds, flocks and undetached parts, and answer the argument from vagueness of Lewis and Sider. Common fate admits borderline cases, but on the epistemic view of vagueness these mark an unknown sharp boundary, not indeterminacy in what exists, and we prove that the boundary is unique along any series ordered by coupling.
+\end{abstract}
+
+\section{The question}
+
+There is a table in the room. It has legs and a top, and these are made of wood, which is made of cells, molecules and, eventually, of whatever is not made of anything further. Call the things at the bottom, if there is a bottom, \emph{simples}. The simples arranged tablewise in the room compose something, the table. The simples arranged tablewise in the room, together with one simple in the Andromeda galaxy, do not, on the face of it, compose anything that anyone has ever had reason to mention. The \emph{special composition question}, as \citet{vanInwagen1987,vanInwagen1990} named it, asks for the general condition: for which pluralities $xx$ is there an object $y$ such that the $xx$ compose $y$?
+
+The question asks for a condition stated without mereological vocabulary. An answer of the form \enquote{the $xx$ compose something if and only if there is something of which each of the $xx$ is a part and every part of which overlaps one of the $xx$} is a definition of composition, not an answer to the question of when it occurs. What is wanted is a condition on the $xx$ themselves, stated in terms of their properties and relations, under which they compose.
+
+The answers in the literature fall into three families.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Universalism}: any non-overlapping things whatever compose something \citep{Lewis1986,Lewis1991,Sider2001}. There are tables, and there is also the fusion of the table and a simple in Andromeda, the fusion of the Eiffel Tower and the left half of a trout, and so on without restriction.
+\item \emph{Nihilism}: no things compose anything; there are only simples, arranged in various ways \citep{Unger1979,RosenDorr2002,Sider2013}. There are simples arranged tablewise, but no tables.
+\item \emph{Restricted composition}: some pluralities compose something and others do not. The most developed restricted view is van Inwagen's, on which the $xx$ compose something if and only if their activity constitutes a life, so that the only composites are organisms \citep{vanInwagen1990}. A related view, on which there are organisms and conscious beings but no inanimate macroscopic objects, is defended by \citet{Merricks2001}. Views that restore ordinary inanimate objects have been defended more recently by \citet{Korman2015} and \citet{Carmichael2015}.
+\end{enumerate}
+
+We defend a restricted answer that is broader than van Inwagen's and narrower than universalism.
+
+\begin{quote}
+\textbf{Thesis.} Some things compose something exactly when they share a common fate under the relevant dynamics. Tables and organisms exist; arbitrary scattered sums do not.
+\end{quote}
+
+The expression \emph{common fate} is borrowed from the psychology of perception, where Wertheimer's law of common fate states that elements that move together are perceived as belonging together \citep{Wertheimer1923}, and from the social psychology of groups, where \citet{Campbell1958} proposed common fate as the main index of whether an aggregate of persons is a genuine entity. Our use is metaphysical rather than perceptual or evidential. What matters is not whether the parts are seen to move together, nor whether they are found together on observation, but whether the dynamics governing them would carry them together through the perturbations to which their environment exposes them. Section~3 makes this precise.
+
+The argument proceeds as follows. Section~2 reviews the history of the question, recording for each answer the case that defeats it. Section~3 sets out the framework and three principles. Section~4 proves that the common-fate rule is the only composition rule that satisfies them. Section~5 defends the principles. Section~6 applies the criterion to cases. Section~7 answers the argument from vagueness, which is the main argument for universalism. Section~8 discusses recent literature, Section~9 objections, and Section~10 what the result does not establish. Section~11 describes the formalization.
+
+\section{A history of answers}
+
+The special composition question was posed in its modern form by van Inwagen, but several of its answers are older. We review the main ones in the order in which van Inwagen considered them, and then the three positions that dominate the current debate.
+
+\subsection{Contact, fastening, cohesion and fusion}
+
+\citet{vanInwagen1990} began by considering a series of answers that take composition to be a matter of physical connection. They form a natural sequence, each strengthening its predecessor.
+
+\emph{Contact.} The $xx$ compose something if and only if they are in contact. Two people who shake hands are in contact, and nothing is composed of them; two blocks resting side by side are in contact, and it is doubtful that anything is composed of them that was not there before. Contact is neither sufficient nor, since a table may have parts that do not touch one another directly, obviously necessary.
+
+\emph{Fastening.} The $xx$ compose something if and only if they are fastened, that is, in contact and so arranged that, among the forces that could easily be brought to bear on them, few would separate them. Fastening improves on contact by requiring resistance to separation. But fastening is a relation that can hold between things that intuitively compose nothing: two people whose hands have been glued together are fastened, and van Inwagen's verdict, which we share, is that nothing new comes into existence when the glue sets. Fastening also counts parts of an organism that are only loosely connected, such as the blood, as not fastened to the rest.
+
+\emph{Cohesion.} The $xx$ compose something if and only if they cannot be pulled apart or moved in relation to one another without being broken or permanently deformed. Cohesion is stronger than fastening, and it inherits fastening's problem: the glued handshakers satisfy it. It also fails for composites whose parts are not rigidly joined, which includes every organism and many artefacts.
+
+\emph{Fusion.} The $xx$ compose something if and only if they are joined so that there is no boundary between them, as when two pieces of metal are welded. Van Inwagen's counterexample is the case in which two people's hands are fused by a hypothetical process that leaves no seam; nothing is composed of the two people. Fusion also excludes the parts of a table that are screwed rather than glued.
+
+What these answers share is that they make composition depend on a relation between the parts that is too local. Contact, fastening, cohesion and fusion are relations between neighbouring parts, at the places where the parts meet. Whether a plurality composes something, in the cases that drive intuition, turns rather on the behavior of the whole plurality: whether it moves, resists and recovers as one. The handshakers fail, not because their hands are inadequately joined, but because each of them remains an organism whose fate is settled by its own metabolism and whose limbs answer to its own nervous system. Joining their hands does not make them one locus of fate.
+
+\subsection{Life}
+
+Van Inwagen's own answer is that the $xx$ compose something if and only if their activity constitutes a life \citep{vanInwagen1990}. A life, on his account, is a self-maintaining, well-individuated event of the kind that biology studies. The answer has three merits that any rival must match: it counts organisms as composites, it counts arbitrary scattered sums as nothing, and it gives a principled reason, the unity of a life, for the difference.
+
+Its defect is that it denies the existence of tables, chairs, rocks, stars and every other inanimate macroscopic object. Van Inwagen accepts this consequence and proposes a paraphrase strategy: when one says that there is a table, what one says is true just in case there are simples arranged tablewise. The strategy is ingenious, but it was introduced to save a view from its consequences, and it is available to the nihilist for organisms as well. If ordinary talk of tables can be paraphrased into talk of simples arranged tablewise without loss, ordinary talk of cats can be paraphrased into talk of simples arranged catwise. Van Inwagen's answer to this is that organisms, unlike tables, are needed to account for thought: there is a thinker, and it cannot be a plurality \citep{vanInwagen1990}. The argument justifies organisms only as thinkers, which is why \citet{Merricks2001} drew the conclusion that only conscious organisms exist and non-conscious ones do not. Life, in short, was meant to mark a natural boundary, but the argument for it marks a different one.
+
+\subsection{Brutal composition}
+
+\citet{Markosian1998} argued that there is no true, nontrivial and finitely statable answer to the special composition question: composition is brute. Some pluralities compose and others do not, and no condition stated in other terms says which. The view has the advantage that it can count tables and organisms as composites and scattered sums as not, without being held to any criterion that might yield counterexamples. Its cost is that it makes the distinction between composites and non-composites inexplicable. Two pluralities that are alike in every respect stated in non-mereological terms may differ in whether they compose, and nothing in their natures accounts for the difference. Markosian accepts this cost; we take it to be a reason to look for a criterion before accepting that there is none.
+
+\subsection{Universalism and the argument from vagueness}
+
+Universalism has two attractions. It is simple, and it is the only answer on which composition is closed under all operations of classical mereology. Its main argument, however, is the argument from vagueness, due to \citet[pp.~211--213]{Lewis1986} and developed by \citet[§4.9]{Sider2001}. Any restricted answer must say that composition occurs in some cases and not others. There is a continuous series of cases leading from a case in which it occurs (simples arranged tablewise) to one in which it does not (simples scattered across the galaxy). If composition is restricted, then either there is a sharp cutoff in the series, which would be arbitrary, or composition is vague somewhere in the series. But composition cannot be vague, because if it were, the number of things in the world would be vague, and sentences stating how many things there are can be formulated in purely logical vocabulary, which is not vague. So composition is unrestricted.
+
+Universalism's defect is the extravagance of its ontology. It countenances, for every plurality of things, a further object. Most of these objects play no role in any explanation, are referred to by no one, and are counted by no practice except metaphysics. The universalist replies that the objects are an ontological free lunch, since they are \enquote{nothing over and above} their parts \citep[pp.~81--87]{Lewis1991}. The reply is contested, and we return to it in Section~5.
+
+\subsection{Nihilism and eliminativism}
+
+Nihilism is the mirror image of universalism. It shares universalism's virtue of avoiding any cutoff, and adds a parsimony that universalism lacks. Its arguments are, first, the argument from vagueness run in the other direction; second, arguments from overdetermination, on which a baseball adds no causal power to the simples arranged baseballwise, so that positing it either makes it causally idle or makes the shattering of the window overdetermined \citep{Merricks2001}; and third, the view that the dispute is shallow, so that one may as well speak with the nihilist \citep{Sider2013}.
+
+Nihilism's cost is that it denies the existence of everything one encounters: tables, mountains, trees, animals and, unless an exception is made, persons. The nihilist offers paraphrases, but the paraphrases presuppose the very distinctions between pluralities that the nihilist refuses to treat as distinctions in what exists. The simples arranged tablewise are distinguished from the simples arranged tablewise plus one in Andromeda by the fact that the former, and not the latter, are arranged tablewise; and \enquote{arranged tablewise} is not a predicate that the nihilist can define without speaking of tables. This is the observation that motivates our criterion. The difference between the two pluralities is a real difference in how they behave, and it is the difference that the existence of the table records.
+
+\section{Framework}
+
+We use plural quantification over simples. Nothing in the argument depends on whether there are simples; if matter is gunky, the framework can be relativized to any level of decomposition, and the criterion applies at each level. We assume classical logic throughout, including bivalence for vague predicates; this is the view of MET-18.
+
+\begin{definition}[Simples and pluralities]\label{d:plur}
+A \emph{simple} is an object with no proper parts. A \emph{plurality} is one or more simples, referred to plurally. A plurality is non-empty by definition, and we write $xx$, $yy$ for pluralities and $x \prec xx$ for \enquote{$x$ is one of the $xx$}.
+\end{definition}
+
+\begin{definition}[Relevant dynamics and admissible perturbations]\label{d:adm}
+The \emph{relevant dynamics} for a plurality $xx$ are the laws governing the interactions among the $xx$ themselves, together with the regime of external influences to which the environment of the $xx$ characteristically exposes them: its temperature, pressures, forces and chemical conditions. An \emph{admissible perturbation} of $xx$ is an intervention on one or more of the $xx$ whose magnitude lies within that regime.
+\end{definition}
+
+For objects on the surface of the earth, the regime is the one familiar from ordinary life: pushes, knocks, heat and cold within ordinary ranges, the forces of wind and water. A blow from a hammer is admissible for a table; a blast from a demolition charge is not. For a star, the regime is set by the stellar environment, and for a bacterium by the medium in which it lives. Two features of the definition are important. First, the regime is fixed by the environment, not by the plurality: whether a perturbation is admissible does not depend on whether it would separate the $xx$, which would make the criterion circular. Second, it is fixed by what the environment \emph{characteristically} does, not by what it actually does on a given occasion. A table that is never knocked still has a fate under knocks.
+
+\begin{definition}[Fate]\label{d:fate}
+The \emph{fate} of a simple $x \prec xx$ under an admissible perturbation $p$ is the coarse-grained outcome of $x$'s subsequent evolution, when the $xx$ evolve under their internal interactions together with $p$: in particular, which of the bound systems into which the $xx$ are sorted after the perturbation $x$ ends up in, and what that system does.
+\end{definition}
+
+\begin{definition}[Common fate]\label{d:cf}
+The $xx$ \emph{share a common fate} if and only if, under every admissible perturbation of the $xx$, every two of the $xx$ have the same fate.
+\end{definition}
+
+The definition evaluates the fate of each simple under the internal dynamics of the plurality in question. This is deliberate. Two simples in different legs of a table move together when the table is pushed, but they do so because of the simples between them, which are not members of the plurality consisting of the two. Under the internal dynamics of that plurality alone, the two simples are not bound to each other, and a push on one leaves the other where it was. They do not share a common fate in the sense of Definition~\ref{d:cf}, although each shares a common fate with the rest of the table.
+
+\begin{definition}[Composition rule]\label{d:rule}
+A \emph{composition rule} is a condition $\rho$ on pluralities, read as: the $xx$ compose something if and only if $\rho(xx)$. The \emph{common-fate rule} is the rule $\rho(xx)$ if and only if the $xx$ share a common fate.
+\end{definition}
+
+The special composition question asks which composition rule is correct. We impose three conditions on an answer.
+
+\begin{principle}[Unity]\label{p:unity}
+If the $xx$ compose something, then the $xx$ share a common fate.
+\end{principle}
+
+\begin{principle}[Parity]\label{p:parity}
+If the $xx$ and the $yy$ both share a common fate, then the $xx$ compose something if and only if the $yy$ compose something.
+\end{principle}
+
+\begin{principle}[Ordinary Objects]\label{p:ordinary}
+The simples of a table compose something.
+\end{principle}
+
+Principle~\ref{p:unity} says that composition requires dynamical unity: there cannot be a single object whose parts would, under the ordinary perturbations of their environment, go different ways. Principle~\ref{p:parity} says that once dynamical unity is present, nothing further distinguishes pluralities that compose from pluralities that do not. Principle~\ref{p:ordinary} says that there are tables. We defend the three principles in Section~5. The application of the result to particular objects requires two empirical assumptions.
+
+\begin{assumption}\label{a:ordinary}
+The simples of a table share a common fate, and there are at least two of them. The simples of an organism share a common fate.
+\end{assumption}
+
+\begin{assumption}\label{a:scattered}
+The simples of a scattered plurality, such as a simple of a table on earth together with a simple of a star in Andromeda, do not share a common fate: some admissible perturbation sends two of them different ways.
+\end{assumption}
+
+Assumption~\ref{a:ordinary} is a claim about how tables and organisms respond to the perturbations of their environments. A table pushed at one leg moves as a whole, and a table heated in the sun expands as a whole and returns as a whole. An organism differs from a table in that its parts are not rigidly joined and are continually replaced; but its parts are bound by a metabolism that responds to perturbations by restoring the organization of the whole, so that a bruise heals and a limb that is pushed carries the body with it or is resisted by it. Assumption~\ref{a:scattered} is a claim about the absence of any such binding: a push on the simple in the table does nothing to the simple in Andromeda, and the evolution of the plurality consisting of the two, under the interactions between them alone, is the evolution of two independent things.
+
+\section{The uniqueness theorem}
+
+\begin{theorem}\label{t:unique}
+If a composition rule $\rho$ satisfies Principles~\ref{p:unity}, \ref{p:parity} and \ref{p:ordinary}, then for every plurality $xx$, $\rho(xx)$ holds if and only if the $xx$ share a common fate.
+\end{theorem}
+
+\begin{proof}
+Let $xx$ be any plurality. If $\rho(xx)$, then the $xx$ share a common fate by Principle~\ref{p:unity}. Conversely, suppose that the $xx$ share a common fate. The simples of the table share a common fate by Assumption~\ref{a:ordinary}, and they compose something by Principle~\ref{p:ordinary}. By Principle~\ref{p:parity}, applied to the $xx$ and the simples of the table, the $xx$ compose something.
+\end{proof}
+
+\begin{proposition}\label{p:adequate}
+The common-fate rule satisfies Principles~\ref{p:unity}, \ref{p:parity} and \ref{p:ordinary}.
+\end{proposition}
+
+\begin{proof}
+Under the common-fate rule, the $xx$ compose something only if they share a common fate, which is Principle~\ref{p:unity}. Any two pluralities that share a common fate both compose something under the rule, which gives Principle~\ref{p:parity}. The simples of the table share a common fate by Assumption~\ref{a:ordinary}, so they compose something under the rule, which is Principle~\ref{p:ordinary}.
+\end{proof}
+
+Theorem~\ref{t:unique} and Proposition~\ref{p:adequate} together say that the three principles are jointly satisfiable and that they determine the answer to the special composition question. Like the uniqueness theorems of other domains, the argument is short once the principles are in place, and its interest lies in the principles. What the theorem shows is that the work is done by three claims that can be assessed separately: that composition requires unity of fate, that unity of fate is all it requires, and that there are tables.
+
+\begin{corollary}\label{c:objects}
+Under any composition rule satisfying Principles~\ref{p:unity}--\ref{p:ordinary}, the simples of a table compose something, the simples of an organism compose something, and the simples of a scattered plurality do not.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:unique} and Assumptions~\ref{a:ordinary} and~\ref{a:scattered}.
+\end{proof}
+
+\begin{corollary}\label{c:extremes}
+Under any composition rule satisfying Principles~\ref{p:unity}--\ref{p:ordinary}, universalism and nihilism are both false.
+\end{corollary}
+
+\begin{proof}
+Universalism requires that the scattered plurality compose something, which Corollary~\ref{c:objects} denies. Nihilism requires that no plurality of two or more simples compose anything; but the simples of a table are at least two, by Assumption~\ref{a:ordinary}, and they compose something.
+\end{proof}
+
+It is instructive to see which principle each rival answer gives up. Universalism violates Principle~\ref{p:unity}, since it counts scattered pluralities as composing. Nihilism violates Principle~\ref{p:ordinary}. Van Inwagen's answer violates Principle~\ref{p:parity}, since it distinguishes between pluralities that share a common fate, the simples of a cat and those of a table, according to whether their activity constitutes a life. The same holds of Merricks's view, which distinguishes according to consciousness. Brutal composition violates Principle~\ref{p:parity} in the most general way, since on it no non-mereological feature, including common fate, settles whether composition occurs. Contact, fastening, cohesion and fusion violate Principle~\ref{p:unity}: the glued handshakers are fastened and cohesive, and do not share a common fate, since an admissible perturbation of one of them, such as a stimulus to which she responds by walking away, is resisted by the other.
+
+\section{Defending the principles}
+
+\subsection{Unity}
+
+Principle~\ref{p:unity} is the claim that a composite object is a locus of fate. The argument for it is that the existence of a composite makes a commitment about the future of its parts. To say that there is a table is to say, among other things, that there is one thing that will be where the table is moved, will be damaged when the table is damaged, and will last as long as the table lasts. If the simples that are said to compose it would, under the ordinary perturbations of their environment, go different ways, then there is no one thing to which these predications apply. Nothing that happens to one of the simples is something that happens to it, and its career is not the career of anything.
+
+The principle is also what answers the overdetermination argument of \citet{Merricks2001}. Merricks argues that if a baseball shatters a window, the simples arranged baseballwise shatter it too, so that the baseball is either causally redundant or a source of systematic overdetermination. The argument has force against a view on which a composite is an additional object whose causal powers are added to those of its parts. It has no force against a view on which a composite exists exactly when its parts are dynamically bound. On such a view, the baseball's shattering the window and the simples' shattering it are not two causal processes, one of which overdetermines the other; they are one process described at two grains. What the composite adds is not an extra cause but a unified variable: the fate of the plurality can be specified by a single description, because the plurality does not come apart. This is why the counterfactuals that mention the baseball are stable under variations in which particular simples compose it. Had the baseball been made of slightly different simples, the window would still have shattered. That counterfactual is true because the simples share a fate, and Principle~\ref{p:unity} says that this is the condition under which there is a composite for such counterfactuals to be about. This is consistent with the account of causation as counterfactual difference-making in MET-04.
+
+\subsection{Parity}
+
+Principle~\ref{p:parity} is the principle that excludes the rivals that restrict composition more narrowly than common fate. Its defence has two parts.
+
+The first part is that every proposed additional condition is either a special case of common fate, and so adds nothing, or yields counterexamples. Life is the most important case. The unity of a life is a particular way of sharing a common fate: a metabolism is a process by which a plurality restores its own organization after perturbation and so keeps its members together. But metabolism is not the only way in which a plurality can be kept together. The simples of a table are kept together by chemical bonds and by the joints the carpenter made, and the simples of a stone by the forces of its crystal lattice. That one mechanism of binding is biological and the other is not does not, by itself, bear on whether there is something that the bound simples compose. Van Inwagen's argument for treating life as special appeals to the existence of thinkers, which supports the existence of thinking organisms, not the non-existence of stones.
+
+The second part is that the denial of Principle~\ref{p:parity} leaves an unexplained difference. If two pluralities share a common fate and one composes something while the other does not, then there is a difference in what exists that corresponds to no difference in how the pluralities behave, since behavior under the relevant dynamics is exactly what common fate records. This is Markosian's brutalism in a restricted form, and it carries the same cost. The cost is not that brutalism is inconsistent, which it is not, but that it gives up on the project of explaining why some pluralities compose and others do not before there is any reason to think that the project has failed.
+
+\subsection{Ordinary Objects}
+
+Principle~\ref{p:ordinary} is a Moorean premise. It is more reasonable to believe that there are tables than to believe any of the philosophical premises that have been used to argue that there are not \citep{Korman2015}. The premises of the arguments against tables are, in each case, general principles about causation, vagueness or parsimony, whose support derives from their success in cases other than the one at issue. A principle that entails that there are no tables loses more credibility from that consequence than the consequence gains from the principle.
+
+Principle~\ref{p:ordinary} mentions tables, but nothing turns on the choice of example. Any uncontroversial inanimate composite would do, and the theorem would go through with a mountain, a stone or a hammer in place of the table. It is important that the example be inanimate, since the principle is used to secure, through Parity, that inanimate composites exist. If the example were an organism, the argument would still yield that tables exist, since a table and an organism both share a common fate; the choice of a table makes vivid that the dispute with van Inwagen turns on Parity.
+
+\section{Cases}
+
+The criterion is tested by its verdicts. We consider nine cases, beginning with the ones the thesis names and proceeding to harder ones.
+
+\paragraph{Tables and other rigid artefacts.} The simples of a table share a common fate under the perturbations of a domestic environment, and the table exists. The same holds of chairs, hammers, cars and ships at sea. The criterion is indifferent to whether the binding is chemical, as in a solid board, or mechanical, as in a jointed frame, since what matters is the response of the whole to perturbation. Whether a given composite falls under an artefact kind, so that it is a ship rather than a ship-shaped composite, is a further question. On the account of MET-07-a, artefact kinds involve practices of making, using and maintaining, and the persistence of an artefact through the replacement of its parts is governed by maintenance. The common-fate criterion does not compete with that account: it says which pluralities compose something at a time, and the account of artefacts says which of the composites so obtained are ships and when a later ship is the same as an earlier one.
+
+\paragraph{Organisms.} The simples of an organism share a common fate in the sense that its metabolism restores the organization of the whole after perturbation. The criterion counts organisms, including human animals, as composites, which is consistent with the view of PID-05 that each of us is a thinking organism. An organism's parts change continually, so that the plurality of simples that composes it at one time is not the plurality that composes it later. The criterion is synchronic: it says which pluralities compose something at a given time, and the identity over time of the composites so obtained is a further question.
+
+\paragraph{The disassembled watch.} A watch taken apart for cleaning lies in pieces in the repairer's tray. Its parts do not share a common fate while they lie there, since a knock on the tray scatters them. By Corollary~\ref{c:objects}, applied to the parts in the tray, nothing is composed of them during that interval. When the watch is reassembled, its parts again compose something. MET-07-a holds that the reassembled watch is the same watch as the one that was taken apart, because the two are connected by a maintenance process. The two results together entail that the watch has intermittent existence: it exists before the cleaning, does not exist while its parts are in the tray, and exists again afterwards. We accept this consequence. The identity of the watch across the interval is secured by the maintenance process that connects its earlier and later existence, and nothing in the account of artefacts in MET-07-a requires that the process connect them through a continuous existence of the watch.
+
+\paragraph{The stored planks.} In Hobbes's version of the Ship of Theseus, the planks removed from the ship are kept in storage before being reassembled. While in storage they compose nothing, since they do not share a common fate. When they are reassembled, they compose a ship, which MET-07-a argues is a new ship and not the ship of Theseus. Our criterion agrees that something comes into existence at the reassembly, and is neutral, as it should be, on which ship it is. The \enquote{heap of planks} in storage is, on our view, the planks themselves, referred to plurally: there are planks, each of which is a composite, but there is no further thing that is the heap.
+
+\paragraph{Clouds.} A cloud is a mass of droplets whose edges are not sharp. The droplets of the cloud share a common fate under the air movements that carry them, and the cloud exists. But many pluralities that differ from one another by a few droplets at the edge also share a common fate, so that the criterion yields many composites where we count one cloud. This is the problem of the many \citep{Unger1980}. MET-05 argues that there is one cloud, since the candidate aggregates are not each a cloud and the vagueness of \enquote{cloud} selects one of them. The common-fate criterion is consistent with this conclusion: it says which pluralities compose something, and leaves to the semantics of \enquote{cloud} the question which of the composites so obtained is a cloud. What the criterion adds is a constraint on the candidates. A plurality that includes a droplet that has drifted free of the mass, and is carried by a different current, does not share a common fate and is not a candidate.
+
+\paragraph{Undetached parts.} The left half of a table is a plurality of simples that share a common fate under their internal dynamics: if the right half were not there, the left half would still move as a whole when pushed. So the left half exists, as do the legs and the top. By contrast, a plurality consisting of one simple from each leg does not share a common fate under its internal dynamics, since the simples are bound to one another only through simples that are not among them. The criterion therefore counts as existing those undetached parts that are cohesive in their own right, and not arbitrary sub-pluralities of a composite. This is the result that intuition delivers, and it is a result that neither universalism, which counts every sub-plurality, nor van Inwagen's view, which counts no undetached part, can deliver.
+
+\paragraph{Heaps and cairns.} A heap of sand does not share a common fate: a gust of wind takes some grains and leaves others, and a kick scatters it. The heap is the grains. A cairn of large stones, by contrast, is held together by gravity and friction against the perturbations of a mountain environment, and a push on one stone is resisted by the others. The cairn is a borderline case, closer to composition than the heap of sand and further from it than a mortared wall. Section~7 explains how such cases are to be understood.
+
+\paragraph{Flocks and groups.} Campbell's original application of common fate was to groups of persons, and it is natural to ask whether a flock of birds or a crowd of people shares a common fate. The answer is no, in the sense of Definition~\ref{d:cf}. Birds in a flock move together, but they do so by responding to one another's motions through perception, and a perturbation of one bird, such as an attack by a predator, removes it from the flock without carrying the others with it. The flock is a plurality whose members behave in a correlated way, not a plurality that is bound. Nothing in this verdict settles whether social groups exist in some other sense, which is a question about social ontology. MET-20 argues that social kinds exist and depend on the absence of collective rejection; the common-fate criterion concerns material composition and does not bear on that claim.
+
+\paragraph{The cosmos.} The plurality of all simples has no environment, and therefore no admissible perturbations in the sense of Definition~\ref{d:adm}. It shares a common fate vacuously, and the criterion counts the cosmos as a composite. This is the right result: the cosmos is the limiting case of a closed system, whose single fate is the evolution of everything. Whether the cosmos is prior to its parts, as MET-09 argues, is a question about the direction of grounding, which the special composition question leaves open. The criterion says only that the cosmos exists; MET-09 says that it is fundamental. The verdict does not reintroduce arbitrary scattered sums: the fusion of a table and a star is not the cosmos, and it has an environment, which perturbs its members independently.
+
+\paragraph{Persistence through time.} The criterion has been stated for composition at a time. On a perdurantist view, of the kind defended for persons in PID-11, objects also have temporal parts, and the question arises which pluralities of temporal parts compose a persisting object. The common-fate criterion extends naturally to this case. The temporal parts of a persisting object are connected by the relevant dynamics: later stages are what the earlier stages evolve into, under the laws governing them. A sum of stages so connected shares a common fate in the diachronic sense, and composes a persisting object. A sum of a stage of the Eiffel Tower in 1900 and a stage of a trout in 2000 does not. The criterion is therefore compatible with perdurantism and with the claim of PID-11 that persons are four-dimensional objects with temporal parts; it denies only that every sum of temporal parts composes something, which is the universalist thesis that perdurantists have often adopted on the strength of the argument from vagueness \citep{Sider2001}. We now turn to that argument.
+
+\section{The argument from vagueness}
+
+\subsection{The argument}
+
+The argument from vagueness is the main argument for universalism, and it applies to every restricted answer. In Sider's formulation, it runs as follows \citep[§4.9]{Sider2001}.
+\begin{enumerate}[label=(\arabic*)]
+\item If not every plurality composes something, then there is a pair of cases connected by a continuous series such that in one composition occurs and in the other it does not.
+\item In no such series is there a sharp cutoff in whether composition occurs.
+\item In any case of composition, either composition definitely occurs or it definitely does not.
+\item So, every plurality composes something.
+\end{enumerate}
+Premise (2) is defended on the ground that a sharp cutoff would be arbitrary: there is nothing in the series that could make it the case that composition occurs at one point and not at the next. Premise (3) is defended on the ground that vagueness is a matter of semantic indecision, and that the language in which existence can be expressed, the language of logic with the unrestricted quantifier, admits no indecision, so that a vague case of composition would be a case of vague existence, which makes no sense.
+
+\subsection{Common fate admits borderline cases}
+
+We grant the premise that matters to Sider's argument. Common fate admits borderline cases. Whether a plurality shares a common fate depends on whether every admissible perturbation leaves its members bound, and both the regime that fixes admissibility and the coarse-graining that fixes when two members have the same fate are specified in vague terms. The cairn is a borderline case, and a sorites series running from a mortared wall through a cairn to a heap of sand passes through many more.
+
+The question is what to say about such cases. Our answer is the one given by MET-18: vagueness lies in language and knowledge, not in the world, and vague predicates have sharp but unknowable boundaries. Applied here, the predicate \enquote{shares a common fate under the relevant dynamics} has a sharp boundary. In any sorites series of pluralities, there is a last plurality that shares a common fate and a first that does not, and we cannot know which they are. Since composition coincides with common fate by Theorem~\ref{t:unique}, composition also has a sharp boundary in the series. Premise (3) of the argument is therefore true, and premise (2) is false.
+
+\begin{lemma}\label{l:sharp}
+Let $P$ be any condition on the members of a finite series $s_0, \dots, s_n$. If $P$ holds of $s_0$ and fails of $s_n$, then there is a $k < n$ such that $P$ holds of $s_k$ and fails of $s_{k+1}$.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$. If $n = 0$, the hypotheses are contradictory. Suppose the lemma holds for $n = m$, and that $P$ holds of $s_0$ and fails of $s_{m+1}$. By bivalence, $P$ either holds or fails of $s_m$. If it holds, take $k = m$. If it fails, the induction hypothesis gives a $k < m$ with the required property.
+\end{proof}
+
+The lemma uses bivalence, and nothing else. It is the formal core of the epistemicist's claim that a sorites series has a sharp transition, and it holds for any condition to which bivalence applies, including vague ones. A critic who denies the lemma for \enquote{shares a common fate} must deny bivalence for that predicate, which is the view MET-18 rejects for all vague predicates.
+
+\begin{corollary}\label{c:sharpcomp}
+In any finite series of pluralities beginning with one that shares a common fate and ending with one that does not, every composition rule satisfying Principles~\ref{p:unity}--\ref{p:ordinary} has a sharp transition: there is a $k$ such that the $k$th plurality composes something and the $(k{+}1)$th does not.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:sharp}, applied to common fate, and Theorem~\ref{t:unique}.
+\end{proof}
+
+\subsection{The cutoff is not arbitrary}
+
+Sider's defence of premise (2) is that a sharp cutoff would be arbitrary. There are two things this might mean.
+
+It might mean that nothing in the world grounds the location of the cutoff. That is false on the present view. The location of the cutoff is fixed by the dynamics: by the strength of the binding among the members of each plurality in the series, relative to the perturbations to which their environment exposes them. What is not fixed by the world, but by the use of the predicate, is which degree of binding counts as sufficient. On the epistemic view, this is how every vague predicate works: the world fixes the heights of people and use fixes, sharply and unknowably, the height above which they are tall. The cutoff is arbitrary only in the sense in which every boundary of a vague predicate is arbitrary, and MET-18 argues that this is no objection.
+
+Alternatively, it might mean that there could be several cutoffs, with nothing to choose between them. This is the worry that the series might oscillate, so that composition comes and goes several times along it, which would indeed be arbitrary. We show that it cannot, when the series is ordered by binding.
+
+\begin{proposition}\label{p:unique}
+Let $s_0, \dots, s_n$ be a series of pluralities and $c(s_i)$ a magnitude of binding that does not increase along the series. If composition holds of $s_i$ exactly when $c(s_i)$ reaches a threshold $\theta$, then there is at most one $k$ such that $s_k$ composes something and $s_{k+1}$ does not.
+\end{proposition}
+
+\begin{proof}
+Suppose $k$ and $j$ are two such points and $k < j$. Then $k + 1 \le j$, so $c(s_j) \le c(s_{k+1})$, since $c$ does not increase. Since $s_{k+1}$ does not compose, $c(s_{k+1}) < \theta$, so $c(s_j) < \theta$, and $s_j$ does not compose, contrary to hypothesis. The case $j < k$ is symmetric.
+\end{proof}
+
+Proposition~\ref{p:unique} shows that, in a series ordered by binding, there is exactly one place where composition gives out, given Lemma~\ref{l:sharp}. The place is unknown, but it is not one of several equally good candidates. The threshold model is an idealization, since common fate depends on more than one magnitude; but in the series that drive the argument from vagueness, such as the gradual dispersal of the simples of a table, the magnitudes move together, and the idealization is harmless.
+
+\subsection{Counting}
+
+Sider's defence of premise (3) appeals to numerical sentences. If composition were vague, then for some $n$ it would be vague whether there are exactly $n$ concrete objects, and the sentence saying that there are exactly $n$ can be written using only quantifiers, identity and connectives, which are not vague. On the present view, composition is not vague in the world, and there is a fact about how many concrete objects there are. What is vague is the predicate \enquote{shares a common fate}, and its vagueness, like that of every vague predicate, consists in our ignorance of its sharp boundary. The numerical sentence has a determinate truth value, and we do not know what it is. This is the combination that premise (3) requires and that the argument then fails to exploit.
+
+\section{Recent literature}
+
+Three developments in the last fifteen years bear on the argument.
+
+\paragraph{Commonsense ontology.} \citet{Korman2015} defends the existence of ordinary objects against debunking and against the arguments of universalists and nihilists, and argues that the ordinary ontology is not arbitrary: the conditions under which we judge composition to occur correspond to real features of the world, although Korman does not offer a single criterion. Our account offers one, and it agrees with Korman's verdicts in the central cases. \citet{Carmichael2015} proposes that some things compose something when they are unified by a relation of the right kind, and develops the idea in terms of what he calls a \enquote{commonsense} answer to the special composition question. Carmichael's account and ours share the aim of counting tables and organisms and excluding scattered sums, and differ in that we take the unifying relation to be a single dynamical one rather than a family of relations tied to kinds.
+
+\paragraph{Deflationism.} \citet{Thomasson2007} and \citet{Hirsch2005} argue, in different ways, that the special composition question is not a deep question: on Thomasson's view, existence questions are answered by the application conditions of our terms, and on Hirsch's, the disputants speak different languages in which different sentences are true. \citet{Bennett2009} argues that the dispute is substantive but that the evidence available to settle it is weak. We have three replies. First, the deflationist owes an account of why the application conditions of \enquote{table} and \enquote{organism} align with a natural dynamical condition and those of \enquote{trout-turkey} do not; common fate is that account. Second, the argument from vagueness and the overdetermination argument are arguments about the world, and they are answered by claims about the world, as in Sections~5 and~7. Third, Bennett's point about evidential weakness is met by Theorem~\ref{t:unique}, which reduces the question to three principles each of which can be assessed on its own evidence.
+
+\paragraph{Nihilism without paraphrase.} \citet{Sider2013} argues that parthood is not a fundamental notion and that a perspicuous description of the world can do without it, so that nihilism is the best view of the fundamental level. This is compatible with our thesis, read as a thesis about which composites there are rather than about which are fundamental. A composite that exists because its parts share a common fate need not be fundamental, and its existence may be grounded in the dynamics of its parts. What Sider's view cannot do without, on our account, is the distinction between pluralities that share a common fate and pluralities that do not, since that distinction is drawn by the dynamics, which every view must describe.
+
+\section{Objections}
+
+\begin{objection}[Interest-relativity]
+Which perturbations are admissible depends on what we count as the regime of an environment, and this is a matter of our interests. The criterion therefore makes existence interest-relative.
+\end{objection}
+
+\begin{reply}
+The regime of an environment is fixed by the environment: by the temperatures, pressures and forces that it characteristically produces. These are physical magnitudes, and they do not depend on anyone's interests. The description of the regime is vague, and on the epistemic view its boundaries are sharp but unknown; this makes the criterion's verdicts in borderline cases unknowable, not interest-relative. It is true that we would describe the regime differently for different purposes, but the criterion uses the regime that the environment produces, not any description of it chosen for a purpose.
+\end{reply}
+
+\begin{objection}[Ice cubes and statues]
+A statue exists, and so does the lump of clay of which it is made; the criterion counts one composite where the debate over coincidence counts two. Conversely, an ice cube that melts loses its common fate, but the water persists. The criterion gets the number of objects wrong.
+\end{objection}
+
+\begin{reply}
+The special composition question asks when some things compose something, not how many things they compose or what kind of thing it is. The criterion says that the simples of the statue compose something; whether they compose one thing or two coinciding things is the question of coincidence, which the criterion leaves open. The ice cube is no counterexample: when it melts, its simples no longer share a common fate, and the composite ceases to exist. The water persists as molecules, each of which is a composite, and as a plurality that may, if it is contained in a glass, share a common fate under the dynamics of the glass. The criterion counts the water in a glass as composing something only if it is bound; a liquid held by a container is a borderline case, whose status depends on whether the binding is attributed to the water or to the glass.
+\end{reply}
+
+\begin{objection}[Gerrymandered dynamics]
+Any plurality shares a common fate under some dynamics. The simple in the table and the simple in Andromeda share the fate of being acted on by the laws of physics. The restriction to the relevant dynamics does all the work and is unprincipled.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:fate} does not allow fates to be chosen freely. The fate of a simple is the bound system it ends up in after an admissible perturbation, under the internal interactions of the plurality. The simple in the table and the simple in Andromeda do not end up in the same bound system after a push on the first, since the push moves one and not the other. Being acted on by the laws of physics is a feature that every simple shares with every other, and it is not a fate in the sense of the definition. The relevant dynamics are those of the plurality and its environment, which are fixed by the laws and the circumstances, and leave no room for gerrymandering.
+\end{reply}
+
+\begin{objection}[Universalism is simpler]
+Universalism has a one-word criterion: always. The common-fate criterion is complex, and simplicity should decide between them.
+\end{objection}
+
+\begin{reply}
+The simplicity of a criterion is one virtue among several. Universalism purchases its simplicity by violating Principle~\ref{p:unity}: it posits objects whose parts go different ways, which play no role in any explanation. The common-fate criterion is complex only in the sense that the dynamics it appeals to are complex; its statement is short, and the complexity it inherits is the complexity of the world, which every account of the world must describe. Simplicity is a reason to prefer the less complex of two theories with the same explanatory reach, and universalism and the common-fate view do not have the same reach, since only the latter explains why tables and organisms, and not trout-turkeys, figure in the counterfactuals of the special sciences.
+\end{reply}
+
+\begin{objection}[Unknowable existence]
+If composition has a sharp but unknowable boundary, there are objects whose existence we cannot know. That is worse than the arbitrariness the epistemicist claims to avoid.
+\end{objection}
+
+\begin{reply}
+It is a consequence of the view, and we accept it. There are already many facts we cannot know, and some of them concern existence: whether there are planets outside the observable universe, for example. The facts left unknown by the criterion are of a narrow and predictable kind. They concern pluralities in borderline cases of binding, such as cairns and liquids in containers, and in each such case we know what the existence of the composite would consist in. Ignorance of this kind is the cost of bivalence, and MET-18 argues that it is a cost worth paying.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not settle the question of coincidence, that is, whether a plurality that composes something composes exactly one thing. It does not establish an account of the persistence of composites, which on our view is a separate question; for artefacts, the account of MET-07-a applies. It does not decide which composites are fundamental, which is the question addressed by MET-09. It does not establish that there are simples, although it is stated in terms of them. And it does not establish that the boundary located by Lemma~\ref{l:sharp} can be known; on the contrary, it relies on MET-18 for the claim that it cannot. Finally, the empirical Assumptions~\ref{a:ordinary} and~\ref{a:scattered} are claims about the physics and biology of tables, organisms and scattered pluralities. They are not established by philosophical argument, and the verdicts of Corollary~\ref{c:objects} are only as secure as they are.
+
+\section{Formalization}
+
+Theorem~\ref{t:unique}, Proposition~\ref{p:adequate}, Corollaries~\ref{c:objects}, \ref{c:extremes} and~\ref{c:sharpcomp}, Lemma~\ref{l:sharp} and Proposition~\ref{p:unique} are formalized in \nolinkurl{Philosophy/MET/MET_06.lean}. Simples, perturbations and outcomes are primitive types; a plurality is represented by its membership predicate. Admissibility (Definition~\ref{d:adm}) and fate (Definition~\ref{d:fate}) are primitive functions, and common fate (Definition~\ref{d:cf}) is defined from them. The three principles are hypotheses of the theorems, and the main theorem reads as follows.
+
+\begin{lstlisting}
+theorem uniqueness (rho : Plurality → Prop)
+    (h1 : Unity rho) (h2 : Parity rho) (h3 : Ordinary rho) :
+    ∀ xx, rho xx ↔ CommonFate xx
+\end{lstlisting}
+
+The output of \texttt{\#print axioms} for the main theorem and for Corollary~\ref{c:extremes} is:
+
+\begin{lstlisting}
+'Philosophy.MET_06.uniqueness' depends on axioms:
+ [Philosophy.MET_06.Admissible, Philosophy.MET_06.Outcome,
+  Philosophy.MET_06.Perturbation, Philosophy.MET_06.Simple,
+  Philosophy.MET_06.fate, Philosophy.MET_06.table,
+  Philosophy.MET_06.table_commonFate]
+'Philosophy.MET_06.neither_extreme' depends on axioms:
+ [Philosophy.MET_06.Admissible, Philosophy.MET_06.Outcome,
+  Philosophy.MET_06.Perturbation, Philosophy.MET_06.Simple,
+  Philosophy.MET_06.fate, Philosophy.MET_06.organism,
+  Philosophy.MET_06.organism_commonFate, Philosophy.MET_06.scattered,
+  Philosophy.MET_06.scattered_divergent, Philosophy.MET_06.table,
+  Philosophy.MET_06.table_commonFate, Philosophy.MET_06.table_two]
+\end{lstlisting}
+
+The axioms \texttt{Simple}, \texttt{Perturbation}, \texttt{Outcome}, \texttt{Admissible} and \texttt{fate} introduce the primitives of Definitions~\ref{d:plur}--\ref{d:fate}. The five axioms whose names begin with \texttt{table} or \texttt{organism} state Assumption~\ref{a:ordinary}, and the two whose names begin with \texttt{scattered} state Assumption~\ref{a:scattered}. The main theorem depends on the first of these assumptions only through the claim that the table shares a common fate, which is what makes Parity and Ordinary Objects jointly yield the converse direction. Lemma~\ref{l:sharp} and Proposition~\ref{p:unique} depend only on Lean's standard axioms \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The appeal to classical logic in Lemma~\ref{l:sharp} is essential: the proof uses excluded middle at each step, which is the formal counterpart of the bivalence that MET-18 defends for vague predicates.
+
+\section{Conclusion}
+
+Some things compose something exactly when they share a common fate under the dynamics relevant to them. The criterion is the only composition rule that requires dynamical unity of composites, treats all dynamically unified pluralities alike, and counts tables as existing. It delivers tables, organisms, stones and the cohesive parts of each, and denies the existence of arbitrary scattered sums and of arbitrary sub-pluralities of composites. It admits borderline cases, which on the epistemic view of vagueness mark a sharp but unknown boundary, unique along any series ordered by binding, and the argument from vagueness therefore gives no reason to prefer universalism. The special composition question has an answer, and it is the one that the ordinary practice of counting things has approximated all along.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bennett(2009)]{Bennett2009} Bennett, K. (2009). Composition, colocation, and metaontology. In D.~J. Chalmers, D. Manley and R. Wasserman (Eds.), \emph{Metametaphysics: New Essays on the Foundations of Ontology} (pp.~38--76). Oxford University Press.
+\bibitem[Campbell(1958)]{Campbell1958} Campbell, D.~T. (1958). Common fate, similarity, and other indices of the status of aggregates of persons as social entities. \emph{Behavioral Science}, 3(1), 14--25.
+\bibitem[Carmichael(2015)]{Carmichael2015} Carmichael, C. (2015). Toward a commonsense answer to the special composition question. \emph{Australasian Journal of Philosophy}, 93(3), 475--490.
+\bibitem[Hirsch(2005)]{Hirsch2005} Hirsch, E. (2005). Physical-object ontology, verbal disputes, and common sense. \emph{Philosophy and Phenomenological Research}, 70(1), 67--97.
+\bibitem[Korman(2015)]{Korman2015} Korman, D.~Z. (2015). \emph{Objects: Nothing Out of the Ordinary}. Oxford University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Lewis(1991)]{Lewis1991} Lewis, D. (1991). \emph{Parts of Classes}. Blackwell.
+\bibitem[Markosian(1998)]{Markosian1998} Markosian, N. (1998). Brutal composition. \emph{Philosophical Studies}, 92(3), 211--249.
+\bibitem[Merricks(2001)]{Merricks2001} Merricks, T. (2001). \emph{Objects and Persons}. Oxford University Press.
+\bibitem[Rosen and Dorr(2002)]{RosenDorr2002} Rosen, G. and Dorr, C. (2002). Composition as a fiction. In R.~M. Gale (Ed.), \emph{The Blackwell Guide to Metaphysics} (pp.~151--174). Blackwell.
+\bibitem[Sider(2001)]{Sider2001} Sider, T. (2001). \emph{Four-Dimensionalism: An Ontology of Persistence and Time}. Oxford University Press.
+\bibitem[Sider(2013)]{Sider2013} Sider, T. (2013). Against parthood. \emph{Oxford Studies in Metaphysics}, 8, 237--293.
+\bibitem[Thomasson(2007)]{Thomasson2007} Thomasson, A.~L. (2007). \emph{Ordinary Objects}. Oxford University Press.
+\bibitem[Unger(1979)]{Unger1979} Unger, P. (1979). There are no ordinary things. \emph{Synthese}, 41(2), 117--154.
+\bibitem[Unger(1980)]{Unger1980} Unger, P. (1980). The problem of the many. \emph{Midwest Studies in Philosophy}, 5, 411--467.
+\bibitem[van Inwagen(1987)]{vanInwagen1987} van Inwagen, P. (1987). When are objects parts? \emph{Philosophical Perspectives}, 1, 21--47.
+\bibitem[van Inwagen(1990)]{vanInwagen1990} van Inwagen, P. (1990). \emph{Material Beings}. Cornell University Press.
+\bibitem[Wertheimer(1923)]{Wertheimer1923} Wertheimer, M. (1923). Untersuchungen zur Lehre von der Gestalt, II. \emph{Psychologische Forschung}, 4, 301--350.
+\end{thebibliography}
+
+\end{document}

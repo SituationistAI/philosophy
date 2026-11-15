@@ -1,0 +1,81 @@
+\documentclass{situationist-preprint}
+
+\title{Being For, Made Compositional}
+\msid{MTE-03-b}
+\msfamily{MTE-03}
+\msdiscipline{Metaethics}
+\mstype{Companion manuscript}
+\mskeywords{expressivism; Frege--Geach problem; being for; compositionality; quantifiers}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTE-03-a argues that expressivism solves the Frege--Geach problem: every sentence expresses a single attitude, being for, whose contents are sets of fact-plan worlds, and validity coincides with consequence in the logic of plans. That result is stated for contents. We show that it yields compositionality at the level of the states of mind themselves: there are operations on states of being for, corresponding to negation, disjunction and the quantifiers, such that the state expressed by any sentence is obtained from the states expressed by its atoms. The extension to quantified sentences answers the form of Geach's challenge that concerns embedding under \enquote{everything} and \enquote{something}. We close by recording what compositionality costs.
+\end{abstract}
+
+\section{Compositionality of states}\label{s:comp}
+
+The Frege--Geach problem \citep{Geach1965} is a demand for compositionality: the state of mind that a complex sentence expresses must be fixed by the states its parts would express if asserted, in such a way that the validity of moral modus ponens is explained. MTE-03-a meets the demand for contents. Contents are defined compositionally (Definition~3.3 of MTE-03-a), and, by the Expression assumption (Assumption~3.4 of MTE-03-a), each sentence expresses being for its content. It might seem that this leaves the expressivist with compositional contents and no compositional attitudes, a worry close to the one \citet{Unwin1999} pressed about negation against earlier versions. The single-attitude structure of the view removes the complaint.
+
+Let $W$ be the set of fact-plan worlds (Definition~3.1 of MTE-03-a), and let a \emph{state} be a state of being for some set $X\subseteq W$, written $\mathrm{FOR}(X)$. We take states to be individuated by their contents: $\mathrm{FOR}(X)$ and $\mathrm{FOR}(Y)$ are the same state just in case $X=Y$. This is how intentions are individuated, and it is what the Inheritance and Only inheritance assumptions (Assumptions~3.5 and 3.6 of MTE-03-a) presuppose when they make the consistency of states a matter of their contents alone.
+
+\begin{definition}[Operations on states]\label{d:ops}
+For states $\mathrm{FOR}(X)$ and $\mathrm{FOR}(Y)$ and a family of states $\mathrm{FOR}(X_i)$, $i\in I$:
+$\mathrm{not}(\mathrm{FOR}(X))=\mathrm{FOR}(W\setminus X)$; $\mathrm{either}(\mathrm{FOR}(X),\mathrm{FOR}(Y))=\mathrm{FOR}(X\cup Y)$; $\mathrm{all}_{i}\,\mathrm{FOR}(X_i)=\mathrm{FOR}(\bigcap_i X_i)$; $\mathrm{some}_{i}\,\mathrm{FOR}(X_i)=\mathrm{FOR}(\bigcup_i X_i)$.
+\end{definition}
+
+The operations are well defined because states are individuated by contents. Each has a description in terms of the attitude: to be in $\mathrm{not}(\mathrm{FOR}(X))$ is to be for excluding $X$; to be in $\mathrm{either}$ of two states is to be for realizing one of their contents; and so on. None introduces a second attitude.
+
+\begin{proposition}[Compositionality]\label{p:comp}
+For every sentence $\varphi$ of the language of MTE-03-a, the state expressed by $\neg\varphi$ is $\mathrm{not}$ of the state expressed by $\varphi$, and the state expressed by $\varphi\vee\psi$ is $\mathrm{either}$ of the states expressed by $\varphi$ and $\psi$. Hence the state expressed by any sentence is determined by the states expressed by its atoms.
+\end{proposition}
+
+\begin{proof}
+By the Expression assumption, $\neg\varphi$ expresses $\mathrm{FOR}([\neg\varphi])$, and by Definition~3.3 of MTE-03-a, $[\neg\varphi]=W\setminus[\varphi]$; so the state is $\mathrm{not}(\mathrm{FOR}([\varphi]))$. The case of disjunction is the same, with union. The second claim follows by induction on the construction of sentences (Definition~3.2 of MTE-03-a).
+\end{proof}
+
+\section{Quantifiers}\label{s:quant}
+
+Geach's own examples include generality: \enquote{if everything he did was wrong, then his last act was wrong}. Extend the language with a domain $D$ of acts and a moral predicate, so that $\mathsf{W}d$ is a moral atom for each $d\in D$, and let $[\forall d\,\varphi(d)]=\bigcap_{d\in D}[\varphi(d)]$ and $[\exists d\,\varphi(d)]=\bigcup_{d\in D}[\varphi(d)]$.
+
+\begin{proposition}\label{p:quant}
+The state expressed by $\forall d\,\varphi(d)$ is $\mathrm{all}_{d}$ of the states expressed by the instances $\varphi(d)$, and the state expressed by $\exists d\,\varphi(d)$ is $\mathrm{some}_{d}$ of them. Universal instantiation is valid in the sense of Definition~3.7 of MTE-03-a.
+\end{proposition}
+
+\begin{proof}
+The first claim is immediate from the clauses and the Expression assumption, as in Proposition~\ref{p:comp}. For the second, accepting $\forall d\,\varphi(d)$ while accepting $\neg\varphi(d_0)$ is being for $\bigcap_d[\varphi(d)]$ and for $W\setminus[\varphi(d_0)]$; the first set is included in $[\varphi(d_0)]$, so the two contents have no world in common, and by Inheritance the states are inconsistent.
+\end{proof}
+
+With finite $D$ the quantifiers are iterated conjunctions and disjunctions, and Theorem~4.1 of MTE-03-a applies directly; Proposition~\ref{p:quant} shows that nothing in the account depends on finiteness. The negation of a quantified moral sentence is handled as in Proposition~4.4 of MTE-03-a: \enquote{not everything he did was wrong} expresses being for excluding the worlds that blame for every act in $D$, which is a different state from being for not blaming for each of them.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}
+The inconsistency of being for has been stipulated to deliver the logic. Compositionality is then a product of the stipulation, not a discovery about moral thought \citep{Schroeder2008}.
+\end{objection}
+
+\begin{reply}
+The inconsistency of being for is the inconsistency of being for things that cannot all be realized, which is the inconsistency of intentions and plans \citep{Gibbard2003}. It is not chosen to fit the logic; the logic is what that inconsistency yields. What is chosen is to have a single attitude, and that choice is what makes Definition~\ref{d:ops} available.
+\end{reply}
+
+\begin{objection}
+The operations apply to descriptive sentences as well. Compositionality has been purchased by treating belief that grass is green as being for something.
+\end{objection}
+
+\begin{reply}
+This is correct, and it is the price recorded in MTE-03-a, as in \citet{Schroeder2008}. The operations of Definition~\ref{d:ops} are indifferent to whether a content constrains the fact part or the plan part of a world. That is why the solution succeeds and also why, as MTE-17 argues, quasi-realism made explicit is indistinguishable from realism: once its commitments are spelled out, expressivism's success collapses into realism. The present result concerns only the first half of this: being for is compositional.
+\end{reply}
+
+\section{Conclusion}
+
+Being for is compositional in the strongest sense available: there are operations on states of mind, not merely on contents, which take the states expressed by the parts of a sentence, including quantified sentences, to the state expressed by the whole. Expressivism therefore has the compositional semantics that the Frege--Geach problem demands.
+
+\begin{thebibliography}{99}\small
+\bibitem[Geach(1965)]{Geach1965} Geach, P.~T. (1965). Assertion. \emph{The Philosophical Review}, 74(4), 449--465.
+\bibitem[Gibbard(2003)]{Gibbard2003} Gibbard, A. (2003). \emph{Thinking How to Live}. Harvard University Press.
+\bibitem[Schroeder(2008)]{Schroeder2008} Schroeder, M. (2008). \emph{Being For: Evaluating the Semantic Program of Expressivism}. Oxford University Press.
+\bibitem[Unwin(1999)]{Unwin1999} Unwin, N. (1999). Quasi-realism, negation and the Frege--Geach problem. \emph{The Philosophical Quarterly}, 49(196), 337--352.
+\end{thebibliography}
+
+\end{document}

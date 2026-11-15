@@ -1,0 +1,197 @@
+\documentclass{situationist-preprint}
+
+\title{Perdurantism and Persons}
+\msid{PID-11-a}
+\msfamily{PID-11}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PID/PID\_11.lean}
+\mskeywords{perdurantism; temporal parts; endurantism; temporary intrinsics; stage view; diachronic composition; persons}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are persons four-dimensional objects? We argue that they are: persons have temporal parts, and perdurantism is the best account of their persistence. We state four adequacy conditions on an account of the persistence of persons: temporary intrinsic properties are monadic; the past is real; whatever has a temporary intrinsic property has it simpliciter; and persons are the subjects of states that take time. Each of the four main rivals, endurance with time-relative properties, presentist endurance, adverbial endurance and the stage view, violates one condition, and perdurance satisfies all four. Given that the true account is adequate, persons have a temporal part at every time at which they exist. A person is then a sum of person-stages unified by a persistence relation, possibly scattered in time; following MET-06-a, we deny that every sum of stages composes something, and hold that only stages linked by the relevant dynamics compose. The uniqueness result is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+A person is now sitting and was earlier standing; she is now calm and was earlier anxious. How can one and the same thing have incompatible properties? Endurantists answer that a person is wholly present at each time at which she exists, and has different properties at different times. Perdurantists answer that a person is extended in time as she is in space, and has different temporal parts at different times, which bear the incompatible properties, as a road is wide in one place and narrow in another \citep{Quine1950,Lewis1976,Heller1990,Sider2001}. A third view, the stage view, holds that a person is an instantaneous stage, and that she persists by having temporal counterparts at other times \citep{Sider2001,Hawley2001}.
+
+\citet[202--204]{Lewis1986} put the problem of temporary intrinsics at the center of the debate, and the endurantist replies have taken three forms: that shapes and moods are relations to times \citep{Mellor1981,vanInwagen1990}; that only the present exists, so that only present properties are had \citep{Merricks1994}; and that the time is an adverbial modification of the having, not of the property \citep{Johnston1987,Haslanger1989}. Objections to perdurantism have been that it is an unintelligible metaphysics of \enquote{crazy} objects \citep{Thomson1983} and that it multiplies thinkers.
+
+We argue for perdurantism about persons by stating adequacy conditions that any account must meet and showing that it alone meets them. The argument is comparative: it says that perdurantism is the best account of the options on the table, not that it is beyond doubt.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:tp}
+A thing $s$ is an \emph{instantaneous temporal part} of $x$ at a time $t$ if and only if $s$ exists only at $t$, $s$ is part of $x$ at $t$, and $s$ overlaps at $t$ everything that is part of $x$ at $t$ \citep{Sider2001}.
+\end{definition}
+
+\begin{definition}\label{d:perd}
+A thing \emph{perdures} if and only if it has an instantaneous temporal part at every time at which it exists. \emph{Perdurance} is the account on which persons perdure: if it is the true account, every person has a temporal part at every time at which it exists.
+\end{definition}
+
+\begin{definition}\label{d:person}
+A \emph{person}, on the perdurantist account, is a sum of person-stages unified by a persistence relation $R$, such that the stages are linked by the relevant dynamics. The stages may be scattered in time.
+\end{definition}
+
+Definition~\ref{d:person} leaves $R$ open. PID-01 identifies it as psychological continuity, with bodily continuity as a tie-breaker in branching; nothing in the present argument depends on that identification. The clause about dynamics applies to persons the criterion of MET-06-a: only temporal parts that share a common fate, in the sense that later stages are what earlier stages evolve into under the laws governing them, compose a persisting object. We therefore reject the unrestricted diachronic composition that perdurantists have often accepted \citep{Sider2001}. A sum of a stage of you today and a stage of a trout tomorrow composes nothing. The relevant dynamics need not be spatially or temporally continuous: a causal process that carries a person's psychology across a gap, as in the teletransportation case of PID-02-a, links the stages it connects, and the person is then scattered in time.
+
+\begin{assumption}\label{a:exh}
+The serious accounts of the persistence of persons are five: perdurance; endurance with time-relative properties (\emph{relationalism}); endurance with presentism; endurance with time-modified having (\emph{adverbialism}); and the stage view.
+\end{assumption}
+
+\begin{principle}[Monadic intrinsics]\label{p:mon}
+Temporary intrinsic properties, such as shapes and moods, are monadic properties of whatever bears them non-derivatively, not relations to times.
+\end{principle}
+
+\begin{principle}[Reality of the past]\label{p:past}
+Past times and their occupants exist.
+\end{principle}
+
+\begin{principle}[Having simpliciter]\label{p:simp}
+Whatever has a temporary intrinsic property non-derivatively has it simpliciter, not in a manner relative to a time.
+\end{principle}
+
+\begin{principle}[Extended subjects]\label{p:ext}
+A person is the subject of states that take time, such as hearing a melody, deliberating or making a promise, and so exists at more than one time.
+\end{principle}
+
+\begin{assumption}\label{a:adeq}
+The true account of the persistence of persons satisfies Principles~\ref{p:mon}--\ref{p:ext}.
+\end{assumption}
+
+Principle~\ref{p:mon} is Lewis's datum: to be bent is to have a shape, and a shape is not a relation \citep{Lewis1986}. Principle~\ref{p:past} is the conclusion of TSM-03, that the past is elsewhere in time as distant places are elsewhere in space. We do not assume that the future exists; TSM-12 holds that future contingents are not yet settled, and perdurantism requires only that a person's past and present stages exist. Principle~\ref{p:simp} says that the instantiation of a property is not itself relativized: if it were, the relativization would do the work of a relation to a time, and Principle~\ref{p:mon} would be satisfied only in name \citep{Lewis2002}. Principle~\ref{p:ext} rests on the temporal extent of experience and agency: an instantaneous thing cannot hear a melody or keep a promise, since there is no time at which the whole melody is heard or the promise kept. PID-11-b develops this point for present experience.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:rivals}
+Each rival account violates one principle: relationalism violates Principle~\ref{p:mon}; presentist endurance violates Principle~\ref{p:past}; adverbialism violates Principle~\ref{p:simp}; the stage view violates Principle~\ref{p:ext}.
+\end{lemma}
+
+\begin{proof}
+Relationalism makes being bent a relation between a person and a time, which Principle~\ref{p:mon} denies. Presentism denies that past times and their occupants exist, which Principle~\ref{p:past} asserts. Adverbialism holds that a person has bentness at-$t$ and not simpliciter, which Principle~\ref{p:simp} denies. The stage view identifies a person with an instantaneous stage, which exists at only one time, contrary to Principle~\ref{p:ext}.
+\end{proof}
+
+\begin{lemma}\label{l:perd}
+Perdurance satisfies Principles~\ref{p:mon}--\ref{p:ext}.
+\end{lemma}
+
+\begin{proof}
+On perdurance, temporary intrinsics are borne non-derivatively by stages, which have them simpliciter, as monadic properties; the person has them derivatively, by having stages that have them. So Principles~\ref{p:mon} and~\ref{p:simp} are satisfied. Perdurance is compatible with the existence of past stages, and indeed requires it, so it satisfies Principle~\ref{p:past}. The person is a sum of stages at many times, and is the subject of an extended state by having stages that jointly realize it; so it satisfies Principle~\ref{p:ext}.
+\end{proof}
+
+\begin{theorem}\label{t:unique}
+Perdurance is the only account of the persistence of persons that satisfies Principles~\ref{p:mon}--\ref{p:ext}.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:exh} there are five accounts. By Lemma~\ref{l:rivals} each of the four rivals violates some principle, and by Lemma~\ref{l:perd} perdurance satisfies all of them.
+\end{proof}
+
+\begin{corollary}\label{c:parts}
+Persons have temporal parts: every person has a temporal part at every time at which it exists.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:adeq} the true account satisfies the four principles, so by Theorem~\ref{t:unique} it is perdurance. By Definition~\ref{d:perd}, every person then has a temporal part at every time at which it exists.
+\end{proof}
+
+\section{Persons as sums}\label{s:sums}
+
+Corollary~\ref{c:parts} and Definition~\ref{d:person} give a picture of persons on which several results of the family fall into place.
+
+\paragraph{Fission.} PID-03 concludes that fission produces two persons, each of whom has what matters in survival. On perdurantism the two post-fission persons are two sums that share their pre-fission stages \citep{Lewis1976}. Counted at a time before fission by their stages, there is one person there; counted by the sums, there are two. Neither count requires that any thing be identical with two things, and PID-03's claim that identity is not what matters is not threatened by the fact that the persons were overlapping all along.
+
+\paragraph{Teletransportation and gaps.} PID-02-a concludes that a person survives teletransportation if the original is destroyed before the replica is activated. On the present account the surviving person is a sum of stages scattered in time, with a gap during transmission, whose parts are linked by the dynamics of scanning, transmission and reconstruction. REL-08-a treats a post-mortem realization in the same way, and Definition~\ref{d:person} supplies the gloss it requires.
+
+\paragraph{Animals and persons.} PID-05 concludes that you are a thinking organism. On the present account the organism is a sum of organism-stages unified by the continuity of life, and the person of PID-01 is a sum of person-stages unified by psychological continuity. Both are four-dimensional, both satisfy Corollary~\ref{c:parts}, and in ordinary cases they share all their stages during the organism's personal phase. Where they diverge, as in the brain-in-a-vat case, they are distinct sums that share some stages; PID-05-a explains why \enquote{you} refers to the organism.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Crazy objects]
+Perdurantism implies that when a person sits in a chair there is, besides the person and the chair, a thing composed of the person's stages before noon and the chair's stages after noon \citep{Thomson1983}.
+\end{objection}
+
+\begin{reply}
+That implication follows from perdurantism together with unrestricted diachronic composition, which we reject. By Definition~\ref{d:person}, and by the criterion of MET-06-a, only stages linked by the relevant dynamics compose; the person-before-noon and the chair-after-noon are linked by nothing of the kind. The perdurantist is committed to temporal parts, not to arbitrary sums of them.
+\end{reply}
+
+\begin{objection}[Restriction and vagueness]
+Without unrestricted composition, perdurantism inherits the problem of vague composition: there will be sums of stages for which it is indeterminate whether they compose \citep{Sider2001}.
+\end{objection}
+
+\begin{reply}
+MET-06-a answers the argument from vagueness for composition in general, and the answer carries over: the predicate \enquote{shares a common fate under the relevant dynamics} is vague, but it does not follow that existence is vague, since the vagueness lies in which predicate the word picks out, not in whether there is something. The cases in which it is unclear whether a sum of stages is a person are cases in which it is unclear whether the persistence relation holds, and PID-03 and PID-06 argue that in such cases little that matters turns on the answer.
+\end{reply}
+
+\begin{objection}[Present experience]
+I am wholly present now; it is I, not a part of me, who feels this pain. Perdurantism makes the subject of my pain a stage, and so not me.
+\end{objection}
+
+\begin{reply}
+The pain is felt by the stage and by the person, the latter in virtue of having the stage as a part, as the whole person is cut when her hand is cut. The phenomenology of being wholly present is the phenomenology of having all of one's current stage present, which perdurantism grants. PID-11-b treats the objection in detail.
+\end{reply}
+
+\begin{objection}[Begging the question]
+Principles~\ref{p:simp} and~\ref{p:ext} are tailored to exclude adverbialism and the stage view.
+\end{objection}
+
+\begin{reply}
+Each principle is supported independently of the account it excludes: Principle~\ref{p:simp} by the observation that a time-modified having is a relation to a time under another name \citep{Lewis2002}, and Principle~\ref{p:ext} by the temporal extent of experience and agency. A defender of the stage view who accepts that persons hear melodies must deny Principle~\ref{p:ext} and say that hearing a melody is the having of an instantaneous state with temporal counterparts, which is a substantive cost. The argument is comparative, and the costs are where the rivals pay them.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The argument does not identify the persistence relation $R$, which PID-01 identifies. It does not show that the future exists, and is compatible with the open future of TSM-12. It does not establish perdurantism for all objects, though the principles are general. And its conclusion is no stronger than its premises: the formalization shows that it depends on Lemmas~\ref{l:rivals} and~\ref{l:perd} and on the exhaustiveness of Assumption~\ref{a:exh}.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/PID/PID_11.lean} represents the accounts of Assumption~\ref{a:exh} as an inductive type with five constructors and the principles as a type with four, so that the exhaustiveness assumption is encoded in the type. The verdicts of Lemmas~\ref{l:rivals} and~\ref{l:perd}, argued informally above, enter as premises. The module proves Theorem~\ref{t:unique} and Corollary~\ref{c:parts}.
+
+\begin{lstlisting}
+theorem unique_adequate (a : Account) :
+    Adequate a ↔ a = .perdurance
+theorem persons_have_temporal_parts :
+    ∀ x t, ExistsAt x t → ∃ s, TemporalPartAt s x t
+\end{lstlisting}
+
+The checker reports (namespace prefix \texttt{Philosophy.PID\_11} omitted):
+
+\begin{lstlisting}
+'unique_adequate' depends on axioms: [Satisfies,
+ lemma_3_1_adverbial, lemma_3_1_presentist,
+ lemma_3_1_relational, lemma_3_1_stage, lemma_3_2]
+'persons_have_temporal_parts' depends on axioms:
+ [ExistsAt, Person, Satisfies, Stage, TemporalPartAt,
+ Time, assumption_2_5, definition_2_2,
+ lemma_3_1_adverbial, lemma_3_1_presentist,
+ lemma_3_1_relational, lemma_3_1_stage, lemma_3_2,
+ trueAccount]
+\end{lstlisting}
+
+\texttt{Satisfies}, \texttt{Person}, \texttt{Time}, \texttt{Stage}, \texttt{ExistsAt}, \texttt{TemporalPartAt} and \texttt{trueAccount} are primitives; the four \texttt{lemma\_3\_1} axioms and \texttt{lemma\_3\_2} are the verdicts of Lemmas~\ref{l:rivals} and~\ref{l:perd}; \texttt{assumption\_2\_5} and \texttt{definition\_2\_2} are Assumption~\ref{a:adeq} and Definition~\ref{d:perd}.
+
+\section{Conclusion}
+
+Persons are four-dimensional objects. Of the five accounts of their persistence, only perdurance treats temporary intrinsics as monadic properties had simpliciter, accepts the reality of the past, and makes persons the subjects of states that take time. Persons are therefore sums of stages unified by a persistence relation, possibly scattered in time, composed only of stages linked by the relevant dynamics.
+
+\begin{thebibliography}{99}\small
+\bibitem[Haslanger(1989)]{Haslanger1989} Haslanger, S. (1989). Endurance and temporary intrinsics. \emph{Analysis}, 49(3), 119--125.
+\bibitem[Hawley(2001)]{Hawley2001} Hawley, K. (2001). \emph{How Things Persist}. Oxford University Press.
+\bibitem[Heller(1990)]{Heller1990} Heller, M. (1990). \emph{The Ontology of Physical Objects: Four-Dimensional Hunks of Matter}. Cambridge University Press.
+\bibitem[Johnston(1987)]{Johnston1987} Johnston, M. (1987). Is there a problem about persistence? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 61, 107--135.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Survival and identity. In A.~O. Rorty (ed.), \emph{The Identities of Persons} (pp.~17--40). University of California Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Lewis(2002)]{Lewis2002} Lewis, D. (2002). Tensing the copula. \emph{Mind}, 111(441), 1--13.
+\bibitem[Mellor(1981)]{Mellor1981} Mellor, D.~H. (1981). \emph{Real Time}. Cambridge University Press.
+\bibitem[Merricks(1994)]{Merricks1994} Merricks, T. (1994). Endurance and indiscernibility. \emph{The Journal of Philosophy}, 91(4), 165--184.
+\bibitem[Quine(1950)]{Quine1950} Quine, W.~V.~O. (1950). Identity, ostension, and hypostasis. \emph{The Journal of Philosophy}, 47(22), 621--633.
+\bibitem[Sider(2001)]{Sider2001} Sider, T. (2001). \emph{Four-Dimensionalism: An Ontology of Persistence and Time}. Oxford University Press.
+\bibitem[Thomson(1983)]{Thomson1983} Thomson, J.~J. (1983). Parthood and identity across time. \emph{The Journal of Philosophy}, 80(4), 201--220.
+\bibitem[van Inwagen(1990)]{vanInwagen1990} van Inwagen, P. (1990). Four-dimensional objects. \emph{No\^us}, 24(2), 245--255.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass{situationist-preprint}
+
+\title{Against Tropes}
+\msid{MET-08-a}
+\msfamily{MET-08}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mskeywords{tropes; universals; particularized universals; exact resemblance; states of affairs; bundle theory}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Trope theory holds that properties are particulars: the redness of this rose is numerically distinct from the redness of that one, and what the roses have in common is that their rednesses exactly resemble. We argue that there are no tropes in the sense the theory requires. Given two principles that trope theorists accept, that a trope cannot pass from one bearer to another and that one bearer cannot have two exactly resembling tropes, the structure of tropes, bearers and exact resemblance is isomorphic to the structure of instances of universals, that is, of pairs of a particular and a universal it instantiates. Every truth of trope theory is therefore a truth about particularized universals, and every role that tropes play, as relata of causation, as objects of perception, as constituents of bundles, is played by instances of universals. Trope theory adds nothing that a theory of universals lacks, and it purchases its one distinctive feature, the possibility of swapping exactly resembling tropes between bearers, at the cost of an idle primitive.
+\end{abstract}
+
+\section{The question}
+
+\citet{Williams1953} proposed that the basic constituents of reality are tropes, abstract particulars such as the particular redness of this rose or the particular shape of this coin. Two red roses do not share one universal; each has its own redness, and the two rednesses exactly resemble each other. \citet{Campbell1990} developed the view into a one-category ontology in which objects are bundles of compresent tropes and properties are classes of exactly resembling tropes. Trope theory has since been defended as the best basis for mental causation \citep{Ehring2011}, as the correct account of the objects of perception and of truthmakers \citep{MulliganSimonsSmith1984}, and as a middle way between nominalism and realism \citep{Maurin2002}.
+
+The question is whether there are tropes in addition to, or instead of, universals. MET-02-a argues that there are sparse universals. We argue here that tropes, so far as they do any work, are particularized universals: a trope is a universal as had by a particular, and the theory of tropes is a notational variant of the theory of instances of universals, with one idle addition.
+
+\section{Framework}
+
+\begin{definition}\label{d:trope}
+A \emph{trope structure} consists of a domain of tropes, a domain of bearers, a function assigning to each trope its bearer, and a relation of exact resemblance among tropes. Exact resemblance is an equivalence relation, and its classes are called \emph{trope properties}.
+\end{definition}
+
+On the bundle version of trope theory, the bearer of a trope is the bundle of tropes compresent with it; on the substance version, it is a substance. Nothing below depends on the choice.
+
+\begin{definition}\label{d:instance}
+Given objects and universals, an \emph{instance} is a pair $\langle a, F\rangle$ of an object $a$ and a universal $F$ that $a$ instantiates. Instances are \emph{particularized universals}: the universal $F$ as had by $a$, or in Armstrong's terms the state of affairs of $a$'s being $F$ \citep{Armstrong1997}.
+\end{definition}
+
+\begin{principle}[Non-transferability]\label{p:nontransfer}
+Each trope has exactly one bearer, and could not have had another.
+\end{principle}
+
+\begin{principle}[No piling]\label{p:nopiling}
+No bearer has two distinct tropes that exactly resemble each other.
+\end{principle}
+
+Principle~\ref{p:nontransfer} is accepted by most trope theorists and is required by the role of tropes as particulars: if the redness of this rose could have belonged to that rose, it would not be this rose's redness in the sense the theory needs. Principle~\ref{p:nopiling} excludes the case in which one rose has two exactly resembling rednesses. \citet{Armstrong1989} pressed the possibility of such piling as an objection to trope theory, and trope theorists have generally accepted the principle in response; we discuss its denial in Objection~\ref{o:piling}.
+
+\section{The correspondence}
+
+\begin{proposition}\label{p:corr}
+Let a trope structure satisfy Principles~\ref{p:nontransfer} and~\ref{p:nopiling}, and take the trope properties as universals and the bearers as objects. Then the map sending each trope $t$ to the instance $\langle \mathrm{bearer}(t), [t]\rangle$, where $[t]$ is the exact-resemblance class of $t$, is a one-to-one correspondence between tropes and instances.
+\end{proposition}
+
+\begin{proof}
+The map is well defined, since the bearer of $t$ has a trope in the class $[t]$ and so instantiates that trope property. It is onto: if $a$ instantiates the trope property $C$, then $a$ bears some trope in $C$, which is mapped to $\langle a, C\rangle$. It is one-to-one: if $t$ and $t'$ are mapped to the same instance, they have the same bearer and exactly resemble each other, so by Principle~\ref{p:nopiling} they are identical.
+\end{proof}
+
+\begin{theorem}\label{t:iso}
+Under the correspondence of Proposition~\ref{p:corr}, two tropes exactly resemble each other if and only if the corresponding instances have the same universal, and two tropes are compresent if and only if the corresponding instances have the same object. Every statement formulated in terms of tropes, bearers, exact resemblance and compresence is therefore true of the trope structure if and only if its translation is true of the instances.
+\end{theorem}
+
+\begin{proof}
+The first two claims are immediate from the definition of the correspondence. The third follows, since a one-to-one correspondence that preserves the primitive relations of two structures preserves every statement formulated in terms of them.
+\end{proof}
+
+Theorem~\ref{t:iso} is the precise sense in which a trope is a particularized universal. The trope is not a new entity alongside the universal and the particular; it is the universal as had by the particular, and everything the trope theorist says about it can be said about the instance. The exact-resemblance classes are universals in the sense of MET-02-a: by the argument of that manuscript, exact resemblance must be grounded in the structure of a sparse system of genuine properties, and the classes are those properties.
+
+\begin{corollary}\label{c:roles}
+Any role that tropes play in virtue of their bearers and their exact resemblances is played by instances of universals.
+\end{corollary}
+
+Three roles have been claimed for tropes. As \emph{causal relata}: the heat of this stove, not heat in general, burned the hand. The instance $\langle$this stove, the determinate temperature$\rangle$ is as particular and as located as the trope, and does the same work. As \emph{objects of perception}: what one sees is the particular red of this rose \citep{MulliganSimonsSmith1984}. The instance is as particular as the trope, and is equally the thing seen. As \emph{truthmakers}: the trope makes it true that the rose is red. The instance, or state of affairs, does so in the same way \citep{Armstrong1997}. In each case the trope can be replaced by its image under the correspondence without loss.
+
+\section{Objections and replies}
+
+\begin{objection}[Swapping]\label{o:swap}
+On trope theory, two exactly resembling tropes could have swapped bearers: this rose could have had that rose's redness, and that rose this one's. The swapped world differs from the actual one. The theory of universals cannot represent the difference, and so trope theory has more expressive power.
+\end{objection}
+
+\begin{reply}
+The objection is \citet{Armstrong1989}'s, inverted: Armstrong took the swapping possibility to count against tropes, and we agree. First, the swap is excluded by Principle~\ref{p:nontransfer}, which most trope theorists accept; a trope theorist who allows it gives up the sense in which a trope is this rose's redness. Second, even if the swap is allowed, the swapped world differs from the actual one in no qualitative respect, no causal respect, and no respect that any observer could detect. The difference consists entirely in which trope is which, a primitive that does no work. That is the only addition trope theory makes to the theory of instances, and it is an idle one.
+\end{reply}
+
+\begin{objection}[Piling]\label{o:piling}
+Principle~\ref{p:nopiling} is not obligatory. A trope theorist may allow that one bearer has two exactly resembling tropes, for example two charges of the same magnitude, and then the correspondence fails to be one-to-one.
+\end{objection}
+
+\begin{reply}
+If piling is allowed, the theory of universals represents a bearer with two exactly resembling tropes as an object having a determinable to a greater degree: two unit charges in one bearer amount to a charge of two units. Where physics treats such cases, it treats them as instantiation of a different determinate, and the correspondence can be restored by mapping the pile to the instance of the corresponding determinate. Where no such determinate exists, the distinction between one trope and two exactly resembling ones in the same bearer is, again, a difference without a qualitative or causal difference.
+\end{reply}
+
+\begin{objection}[Trope bundles and Black's spheres]\label{o:bundle}
+MET-29-a shows that bundle theories based on absolute or relative discernibility fail for Black's spheres, since the spheres would be one bundle of qualities. Trope bundle theory escapes the argument: the spheres are two bundles of distinct, exactly resembling tropes. Tropes thus do something that universals cannot.
+\end{objection}
+
+\begin{reply}
+The trope bundle theory distinguishes the spheres only by the primitive distinctness of their tropes. If the tropes are individuated by their bearers, as Principle~\ref{p:nontransfer} suggests and as \citet{Schaffer2001} discusses for spatiotemporal individuation, the explanation is circular, since the bearers are the bundles to be distinguished. If the tropes are distinct primitively, the theory posits a primitive distinctness of tropes where the substance view posits a primitive distinctness of substances. MET-23-a argues that the latter needs no substratum; the former is the same primitive placed in a different category, and under the correspondence of Proposition~\ref{p:corr} it is the distinctness of the bearers.
+\end{reply}
+
+\section{Conclusion}
+
+Given non-transferability and the exclusion of piling, tropes correspond one-to-one with instances of universals, and the correspondence preserves exact resemblance and compresence. Tropes are therefore particularized universals, and trope theory adds nothing that a theory of universals lacks, except the possibility of swapping, which is an idle primitive. The sparse universals of MET-02-a, instantiated by substances, do all the work tropes were introduced to do.
+
+\begin{thebibliography}{9}\small
+\bibitem[Armstrong(1989)]{Armstrong1989} Armstrong, D.~M. (1989). \emph{Universals: An Opinionated Introduction}. Westview Press.
+\bibitem[Armstrong(1997)]{Armstrong1997} Armstrong, D.~M. (1997). \emph{A World of States of Affairs}. Cambridge University Press.
+\bibitem[Campbell(1990)]{Campbell1990} Campbell, K. (1990). \emph{Abstract Particulars}. Blackwell.
+\bibitem[Ehring(2011)]{Ehring2011} Ehring, D. (2011). \emph{Tropes: Properties, Objects, and Mental Causation}. Oxford University Press.
+\bibitem[Maurin(2002)]{Maurin2002} Maurin, A.-S. (2002). \emph{If Tropes}. Kluwer.
+\bibitem[Mulligan et~al.(1984)]{MulliganSimonsSmith1984} Mulligan, K., Simons, P. and Smith, B. (1984). Truth-makers. \emph{Philosophy and Phenomenological Research}, 44(3), 287--321.
+\bibitem[Schaffer(2001)]{Schaffer2001} Schaffer, J. (2001). The individuation of tropes. \emph{Australasian Journal of Philosophy}, 79(2), 247--257.
+\bibitem[Williams(1953)]{Williams1953} Williams, D.~C. (1953). On the elements of being: I. \emph{The Review of Metaphysics}, 7(1), 3--18.
+\end{thebibliography}
+
+\end{document}

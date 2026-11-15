@@ -1,0 +1,125 @@
+\documentclass{situationist-preprint}
+
+\title{Teletransportation and Extrinsic Survival}
+\msid{PID-02-a}
+\msfamily{PID-02}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/PID/PID\_02.lean}
+\mskeywords{teletransportation; personal identity; branching; closest continuer; only-$x$-and-$y$ principle; Parfit}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A teletransporter scans a person, destroys her, and creates an exact replica on Mars. Does she survive? We argue that she does, provided she is destroyed before the replica is activated, and that she does not if her original body survives, or survives until after the replica is activated. Survival therefore depends on facts extrinsic to the relation between the original and the replica, and on their timing. We defend this consequence against the only-$x$-and-$y$ principle, and explain why the principle, which holds for artefacts (MET-07), fails for persons.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 stated that the person survives if the original is destroyed. This leaves open the case in which the original is destroyed after the replica has been activated, so that for a period both exist. In that case the process branches, and the argument of Section~3 implies that the person does not survive as the replica. The main claim now includes the temporal condition.
+
+\section{The cases}
+
+\citet[ch.~10]{Parfit1984} describes two cases.
+\begin{description}
+\item[Simple Teletransportation.] A scanner records the exact state of every cell in a person's body and brain, destroying them in the process. The information is sent to Mars, where a replicator builds an exact copy, which is psychologically continuous with the original.
+\item[Branch-Line.] A new scanner records the information without destroying the original. A replica is built on Mars, and the original, on Earth, is told that her heart has been damaged by the scan and that she will die within days.
+\end{description}
+
+Most people who accept that one survives Simple Teletransportation are reluctant to say that the person on Earth in Branch-Line survives as the replica on Mars. Yet the relation between the original and the replica is the same in the two cases: the replica is in each case exactly similar and psychologically continuous with the original, and its existence is caused in the same way. The difference lies in whether the original continues to exist. This is the puzzle.
+
+\section{Framework}
+
+\begin{definition}\label{d:cont}
+A later person $y$ is \emph{psychologically continuous} with an earlier person $x$ if there are overlapping chains of strong psychological connectedness, such as memories, intentions and character, running from $x$ to $y$, caused in a reliable way.
+\end{definition}
+
+\begin{definition}\label{d:branch}
+A process \emph{branches} if at some time there exist two persons each psychologically continuous with the earlier person.
+\end{definition}
+
+\begin{assumption}[Psychological criterion]\label{a:psych}
+A person survives as a later person if and only if the later person is psychologically continuous with her and the process does not branch.
+\end{assumption}
+
+Assumption~\ref{a:psych} is the non-branching psychological criterion \citep{Shoemaker1984,Parfit1984}, with the tie-breaking role of bodily continuity, defended in PID-01, reserved for the case in which branching occurs. We adopt it here and examine its consequences.
+
+\section{The argument}
+
+\begin{proposition}\label{p:simple}
+In Simple Teletransportation, the person survives as the replica.
+\end{proposition}
+
+\begin{proof}
+The replica is psychologically continuous with the original by the description of the case. The original is destroyed by the scan, before the replica is built, so at no time do two persons continuous with the original exist. By Assumption~\ref{a:psych}, the person survives.
+\end{proof}
+
+\begin{proposition}\label{p:branch}
+In Branch-Line, the person does not survive as the replica.
+\end{proposition}
+
+\begin{proof}
+While the original lives on Earth and the replica on Mars, two persons are psychologically continuous with the person who entered the scanner. The process branches, so by Assumption~\ref{a:psych} she does not survive as the replica. She continues, for the remaining days, as the original.
+\end{proof}
+
+\begin{theorem}\label{t:timing}
+If the original is destroyed before the replica is activated, the person survives as the replica; if the original exists at any time after the replica is activated, she does not.
+\end{theorem}
+
+\begin{proof}
+If the original is destroyed before activation, there is no time at which both exist, so the process does not branch, and the argument of Proposition~\ref{p:simple} applies. If the original exists at some time after activation, then at that time both exist and the process branches, and the argument of Proposition~\ref{p:branch} applies.
+\end{proof}
+
+\begin{corollary}\label{c:extrinsic}
+Survival by teletransportation is extrinsic: whether the person survives as the replica depends on facts about the original that are not features of the relation between the original and the replica.
+\end{corollary}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/PID/PID_02.lean} represents a teletransportation case by whether the replica is psychologically continuous with the original, whether the original is destroyed, and whether destruction occurs before activation. Survival is defined by Assumption~\ref{a:psych}. The module proves Theorem~\ref{t:timing} and Corollary~\ref{c:extrinsic}, the latter in the form: there are two cases in which the relation between original and replica is the same and the verdicts on survival differ.
+
+\begin{lstlisting}
+theorem extrinsic : ∃ c d : Case, c.continuous = d.continuous ∧
+    Survives c ∧ ¬ Survives d
+\end{lstlisting}
+
+\section{The only-$x$-and-$y$ principle}
+
+Corollary~\ref{c:extrinsic} violates the principle that whether $x$ is identical to $y$ depends only on $x$, $y$ and the relations between them \citep{Wiggins1980,Noonan1985}. MET-07-a defends this principle for artefacts. Consistency requires an account of why it holds for ships and not for persons.
+
+The account is this. The relation that grounds the persistence of artefacts, maintenance, cannot branch: a maintenance process is aimed at keeping a particular artefact in service, and a single process cannot aim at keeping two artefacts in service as the same artefact. Since the grounding relation cannot branch, there is never a need for a tie-breaker, and identity depends only on the relation between the earlier and the later artefact. The relation that grounds the persistence of persons, psychological continuity, can branch, as the Branch-Line case shows. Where it branches, identity cannot follow both branches, by the transitivity of identity, and something extrinsic to each branch must decide. The only-$x$-and-$y$ principle holds for kinds whose persistence relation is non-branching by nature, and fails for kinds whose persistence relation can branch.
+
+This is a substantive result, not an ad hoc exception. It explains why the principle seems compelling in the cases from which it is usually defended, which involve artefacts and organisms, and why it seems to fail in the cases that have driven the literature on personal identity since \citet{Williams1970}, which all involve branching.
+
+\section{Objections}
+
+\begin{objection}
+It is absurd that whether I survive as the replica depends on whether a distant body is destroyed a few seconds earlier or later.
+\end{objection}
+
+\begin{reply}
+It is surprising, but it is a consequence of any view on which survival requires non-branching psychological continuity, and every such view faces it. \citet{Parfit1984} took the surprise as evidence that identity is not what matters in survival; PID-06 develops that thought. We accept that identity has this extrinsic character, and we agree with Parfit that what matters, psychological connectedness, does not.
+\end{reply}
+
+\begin{objection}
+A closest-continuer theory gives a better verdict on Branch-Line: the original, being the closest continuer, is the person, and the replica is not \citep{Nozick1981}.
+\end{objection}
+
+\begin{reply}
+The closest-continuer theory gives the same verdict on Branch-Line, and it is equally extrinsic. It differs in the case in which the original survives only briefly after activation: it says that the person is the replica once the original dies, while we say that she survived as the original until its death. Our verdict is preferable because it does not make the identity of the person at a time depend on what happens later.
+\end{reply}
+
+\section{Conclusion}
+
+One survives teletransportation if, and only if, one's original body is destroyed before the replica is activated. Survival is extrinsic, because the relation on which it depends can branch. The only-$x$-and-$y$ principle holds for artefacts and fails for persons, and the difference is explained by the branching structure of the relations that ground their persistence.
+
+\begin{thebibliography}{99}\small
+\bibitem[Noonan(1985)]{Noonan1985} Noonan, H.~W. (1985). The only $x$ and $y$ principle. \emph{Analysis}, 45(2), 79--83.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Oxford University Press.
+\bibitem[Shoemaker(1984)]{Shoemaker1984} Shoemaker, S. (1984). Personal identity: A materialist's account. In S. Shoemaker and R. Swinburne, \emph{Personal Identity} (pp.~67--132). Blackwell.
+\bibitem[Wiggins(1980)]{Wiggins1980} Wiggins, D. (1980). \emph{Sameness and Substance}. Blackwell.
+\bibitem[Williams(1970)]{Williams1970} Williams, B. (1970). The self and the future. \emph{The Philosophical Review}, 79(2), 161--180.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,350 @@
+\documentclass{situationist-preprint}
+
+\title{Logical Monism}
+\msid{LOG-02-a}
+\msfamily{LOG-02}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_02.lean}
+\mskeywords{logical monism; logical pluralism; classical logic; intuitionistic logic; relevant logic; many-valued logic; Post completeness; collapse argument}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is there one true logic? We argue that there is, and that it is classical logic; the non-classical logics are correct, but they describe relations other than consequence. The argument has three steps. First, consequence is truth-preservation over all interpretations of the non-logical vocabulary, and for sentences with classical content truth obeys the classical clauses; given that every distribution of truth values over atomic sentences is realized by some interpretation, truth-preservation coincides with classical consequence. Second, by a theorem going back to Post, classical propositional logic has no consistent proper extension closed under substitution, so no rival can be stronger, and a weaker rival fails to count as valid some arguments that preserve truth. Third, the pluralist's further consequence relations either coincide with this one or are relations of another kind. Intuitionistic logic describes provability, relevant logics describe relevance, and the many-valued logics used for the semantic paradoxes describe the behavior of semantically defective sentences; we prove that every such logic whose connectives agree with the classical ones on the classical values coincides with classical logic on sentences with classical content. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Logic studies consequence: the relation that holds between premises and a conclusion when the conclusion follows from the premises. Since the beginning of the twentieth century logicians have developed systems that disagree with classical logic about which arguments are valid. Intuitionistic logic rejects excluded middle and double negation elimination; relevant logics reject disjunctive syllogism and the inference from a contradiction to an arbitrary sentence; many-valued logics reject excluded middle, and some reject non-contradiction or contraction; quantum logic rejects the distribution of conjunction over disjunction. The question whether there is one true logic is the question whether at most one of these systems, or of systems not yet devised, correctly describes consequence.
+
+Three answers are on offer. \emph{Classical monism} holds that there is one correct logic and that it is classical. \emph{Non-classical monism} holds that there is one correct logic and that it is some non-classical system: intuitionistic logic for \citet{Dummett1991}, a relevant or paraconsistent logic for \citet{Priest2006b}. \emph{Pluralism} holds that there is more than one correct logic. In its most developed form, due to \citet{BeallRestall2000,BeallRestall2006}, pluralism holds that the concept of consequence is the concept of truth-preservation in all cases, and that there are several equally good ways of specifying what a case is, each of which yields a correct logic.
+
+We defend classical monism. The defense has a positive and a negative part. The positive part is an argument that consequence, for sentences with classical content, is classical consequence: it is a theorem, given premises about truth and interpretation that we state and defend, that truth-preservation over all interpretations coincides with classical consequence (Theorem~\ref{t:class}), and a theorem of Post that classical logic cannot be consistently strengthened (Theorem~\ref{t:post}). The negative part is an account of what the non-classical logics describe. They are not failed theories of consequence. Each is a correct theory of a different relation: intuitionistic logic of provability, relevant logics of relevance, the many-valued logics used for the paradoxes of truth of the behavior of semantically defective sentences. This is the second half of our thesis, and it is what reconciles classical monism with the non-classical treatments of the semantic paradoxes. LOG-01 resolves the liar in Łukasiewicz logic; LOG-03 treats the dialetheist's cases with truth-value gaps; LOG-04 resolves Curry's paradox by giving up contraction for the conditional. Section~\ref{s:defect} shows that these results are consistent with classical monism and in what sense.
+
+\section{A short history of the debate}\label{s:history}
+
+\subsection{Deviant logics}
+
+The first rivals to classical logic were proposed for specific purposes. \citet{LewisLangford1932} developed systems of strict implication in reaction to the paradoxes of material implication, holding that a conditional that is true whenever its antecedent is false is not implication. \citet{Lukasiewicz1920} introduced a third truth value for future contingents, taking statements about undetermined future events to be neither true nor false. \citet{Brouwer1908} attacked the unrestricted use of excluded middle in mathematics, and \citet{Heyting1930} codified the logic that intuitionistic mathematics uses. Each proposal was presented as a correction: classical logic, it was said, gets consequence wrong for a certain class of sentences.
+
+\citet{Quine1970} replied that the deviant logician changes the subject. If the intuitionist rejects excluded middle, her negation is not classical negation, since what makes a connective negation is precisely that $A \vee \neg A$ and the falsity of $A \wedge \neg A$ hold for it. The disagreement is then verbal: the deviant logician and the classical logician use the same signs with different meanings. \citet{Haack1974} distinguished \emph{deviant} systems, which share the classical vocabulary and differ in their theorems, from \emph{extended} systems, such as modal logics, which add vocabulary; and she argued that Quine's argument is too quick, since the identity of a connective is not fixed by all its classical laws. The meaning-variance argument has been refined since \citep{Hjortland2013}, and it remains the main reason to doubt that logical disputes are substantive. We return to it in Section~\ref{s:obj}; our view is that it is partly right. Many deviant connectives do mean something other than the classical ones, and what they mean is the key to what the deviant logics describe.
+
+\subsection{Tolerance}
+
+\citet[\S 17]{Carnap1934} proposed the principle of tolerance: there are no morals in logic, and everyone is free to build a language with whatever rules she likes, provided she states them clearly. On this view there is no question which logic is correct, only which is convenient for which purpose. The view is a form of pluralism, and it fails for the reason that defeated Carnap's conventionalism in general: if the rules of a language are adopted by convention, the consequences of the conventions are not themselves conventional, and the logic in which they are drawn is not a matter of choice. The principle of tolerance also makes it impossible to say that a system is defective, which every logician does say of some systems, for instance of one in which every sentence is a theorem.
+
+\subsection{Meaning-theoretic revision}
+
+\citet{Dummett1991}, developing his earlier work \citep{Dummett1978}, argued that classical logic should be revised on grounds in the theory of meaning. If the meaning of a sentence is given by the conditions under which it can be recognized as warranted, and if many sentences have truth conditions that we cannot in general recognize as obtaining or not, then bivalence is unjustified and excluded middle with it. The constraint that logical rules be in \emph{harmony}, so that the elimination rules for a connective extract no more than the introduction rules put in, is satisfied by the intuitionistic rules and violated by classical negation. The argument was the most serious case for non-classical monism in the twentieth century. It was met in two ways: by rejecting the verificationist premise about meaning \citep{Williamson1994}, and by showing that harmonious rules can be given for classical logic once denial is treated as a speech act on a par with assertion \citep{Rumfitt2000}. The second response is the more telling, because it accepts Dummett's constraint and shows that it does not favor intuitionistic logic.
+
+\subsection{Pluralism}
+
+\citet{BeallRestall2000,BeallRestall2006} defend what they call the generalized Tarski thesis: an argument is valid if and only if, in every case in which the premises are true, the conclusion is true. The thesis is schematic in \enquote{case}. If cases are complete and consistent possible worlds, or Tarskian models, the thesis yields classical logic. If cases are constructions, which may leave a sentence and its negation both unverified, it yields intuitionistic logic. If cases are situations, which may be incomplete and inconsistent, it yields a relevant logic. Each specification is admissible, they argue, because each respects the settled core of the concept of consequence: necessity, normativity and formality. So there are at least three correct logics.
+
+The pluralist proposal is the most important challenge to monism, and its difficulty has been identified more than once. \citet{Priest2006b} and \citet{Read2006} pressed the \emph{collapse argument}. Suppose classical and relevant logic are both correct, and the premises of a classically valid but relevantly invalid argument are true. Since the argument is classically valid, the conclusion is true; so the relevant logician who refuses to draw the conclusion is refusing a truth that follows. The weaker logic is then not a correct account of what follows, and pluralism collapses into monism about the strongest admissible logic. \citet{Keefe2014} added that once the normativity of logic is taken seriously, the several logics cannot all have the authority over reasoning that a correct logic should have. We state the collapse argument precisely in Section~\ref{s:argument} (Corollary~\ref{c:collapse}).
+
+\subsection{Anti-exceptionalism}
+
+The recent debate has been reshaped by the view that logic is not special among the sciences: logical theories are chosen, like other theories, by abductive criteria such as strength, simplicity and fit with the data \citep{Priest2014,Hjortland2017,Williamson2017}. Anti-exceptionalism is neutral between monism and pluralism, but it changes the terms of the debate. \citet{Priest2014} argues that the data, among them the semantic paradoxes, favor a paraconsistent logic. \citet{Williamson2017} argues that the same methodology favors classical logic, because classical logic is stronger and simpler than its rivals, and because non-classical solutions to the paradoxes cost more in the mathematics they cripple than they gain in the paradoxes they resolve. \citet{Hjortland2017} argues that the methodology favors a revisable and possibly non-classical logic. We do not rely on anti-exceptionalism, but we note that our argument has the form an abductivist would require: it identifies the data (the truth conditions of sentences with classical content), shows that classical logic fits them (Theorem~\ref{t:class}), and shows that it is the strongest logic that fits anything (Theorem~\ref{t:post}).
+
+\section{Framework}\label{s:frame}
+
+We work with a propositional language. The extension to quantifiers is discussed in Section~\ref{s:limits}.
+
+\begin{definition}\label{d:lang}
+The sentences of the language are built from atomic sentences $p_0, p_1, \ldots$ and the constant $\bot$ by negation $\neg$, conjunction $\wedge$, disjunction $\vee$ and the conditional $\to$. The atomic sentences have \emph{classical content}: each is about some subject matter and determinately says that things are a certain way, and none contains a semantic predicate.
+\end{definition}
+
+\begin{definition}\label{d:val}
+A \emph{valuation} assigns true or false to each atomic sentence and extends to all sentences by the classical truth tables, with $\bot$ false and $A \to B$ false just when $A$ is true and $B$ false. A sentence is a \emph{tautology} if every valuation makes it true. A sentence $A$ is a \emph{classical consequence} of a set of sentences $\Gamma$ if every valuation that makes every member of $\Gamma$ true makes $A$ true.
+\end{definition}
+
+\begin{definition}\label{d:interp}
+An \emph{interpretation} assigns to the atomic sentences contents, and to the non-logical vocabulary that composes them extensions, in some domain. A sentence is \emph{true in} an interpretation if what it says, so interpreted, is the case.
+\end{definition}
+
+Definition~\ref{d:interp} is deliberately informal. In the formalization, interpretations and truth in an interpretation are primitives, and what we assume about them is stated in the next two assumptions.
+
+\begin{assumption}\label{a:clauses}
+\emph{Classical clauses.} In every interpretation, $\bot$ is not true; $\neg A$ is true if and only if $A$ is not true; $A \wedge B$ is true if and only if both are true; $A \vee B$ is true if and only if at least one is true; and $A \to B$ is true if and only if $B$ is true if $A$ is.
+\end{assumption}
+
+\begin{assumption}\label{a:free}
+\emph{Freedom of atoms.} For every valuation there is an interpretation in which exactly the atomic sentences that the valuation makes true are true.
+\end{assumption}
+
+\begin{definition}\label{d:conseq}
+$A$ is a \emph{consequence} of $\Gamma$ if $A$ is true in every interpretation in which every member of $\Gamma$ is true.
+\end{definition}
+
+Definition~\ref{d:conseq} is the account of consequence defended in LOG-06, on which consequence is truth-preservation in all models, provided the class of models includes one isomorphic to the actual world. In the propositional case the proviso is met by Assumption~\ref{a:free}: whatever the actual truth values of the atomic sentences, some interpretation gives them those values. The account is also the classical specification of the pluralist's generalized Tarski thesis, with interpretations as cases.
+
+\begin{principle}[Correctness]\label{p:correct}
+A logic is correct as a theory of consequence for a language if and only if its consequence relation coincides with consequence in the sense of Definition~\ref{d:conseq}.
+\end{principle}
+
+\begin{principle}[Other relations]\label{p:other}
+A logic whose consequence relation differs from consequence may be correct as a theory of another relation between sentences, if it coincides with that relation.
+\end{principle}
+
+The substantive premise is Assumption~\ref{a:clauses}. Its negation clause says two things: that no sentence is both true and not true, and that every sentence is true or its negation is. Applied to sentences with classical content, these are the claims that content of this kind is not inconsistent and is not incomplete: a sentence that says that things are a certain way says something true or something false. The clause is not asserted of sentences without classical content, such as the liar, and the restriction in Definition~\ref{d:lang} is essential to the argument. The clauses for conjunction and disjunction are not in dispute between the classical logician and any of her rivals with the exception of the quantum logician, whose case LOG-13 rejects. The conditional clause is the material conditional, which LOG-07 defends as the conditional of logic. Vague sentences have classical content in the sense of Definition~\ref{d:lang}: LOG-15 argues, with MET-18, that vague predicates are bivalent, with sharp boundaries that cannot be known.
+
+Assumption~\ref{a:free} says that the atomic sentences are logically independent. It holds for the atomic sentences of a language whose non-logical vocabulary is interpreted freely, and it is needed: in a language with only one atomic sentence, interpreted so that it is true in every interpretation, the atomic sentence would come out a consequence of anything, though it is not a tautology. That would be a failure of formality, not a deviation from classical logic.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:truth}
+If a valuation agrees with an interpretation on the atomic sentences, it agrees with it on every sentence: a sentence is true in the interpretation if and only if the valuation makes it true.
+\end{lemma}
+
+\begin{proof}
+By induction on the construction of sentences. For atomic sentences, this is the hypothesis. For $\bot$, both sides are false. For a negation, conjunction, disjunction or conditional, the clause of Assumption~\ref{a:clauses} for that connective and the corresponding truth table of Definition~\ref{d:val} compute the value of the compound from the values of its components in the same way, and the components agree by the induction hypothesis.
+\end{proof}
+
+\begin{theorem}\label{t:class}
+Given Assumptions~\ref{a:clauses} and~\ref{a:free}, $A$ is a consequence of $\Gamma$ if and only if $A$ is a classical consequence of $\Gamma$.
+\end{theorem}
+
+\begin{proof}
+Suppose $A$ is a consequence of $\Gamma$, and let a valuation make every member of $\Gamma$ true. By Assumption~\ref{a:free} there is an interpretation agreeing with the valuation on the atomic sentences, and by Lemma~\ref{l:truth} it agrees with it on every sentence. So every member of $\Gamma$ is true in the interpretation, hence so is $A$, hence the valuation makes $A$ true.
+
+Conversely, suppose $A$ is a classical consequence of $\Gamma$, and let an interpretation make every member of $\Gamma$ true. The interpretation determines a valuation: the one that makes an atomic sentence true just when it is true in the interpretation. By Lemma~\ref{l:truth}, the valuation makes every member of $\Gamma$ true, hence makes $A$ true, hence $A$ is true in the interpretation.
+\end{proof}
+
+The second half of the proof uses the fact that each interpretation determines a valuation, which requires that each atomic sentence be true or not true in it. This is classical reasoning in the metalanguage, and the formalization records it (Section~\ref{s:formal}). An intuitionist will not grant it, and we return to the point in Objection~\ref{o:beg}.
+
+Theorem~\ref{t:class} establishes that classical logic is correct, in the sense of Principle~\ref{p:correct}. It does not yet establish that it is the only correct logic, since a rival might coincide with it on some language and diverge on another. The next result shows that no rival can diverge in the direction of strength.
+
+\begin{definition}\label{d:logic}
+A \emph{substitution} replaces each atomic sentence by a sentence, uniformly. A \emph{logic}, for present purposes, is a set of sentences, its theorems, closed under substitution and under modus ponens: if $A$ and $A \to B$ are theorems, so is $B$.
+\end{definition}
+
+\begin{theorem}[\citealp{Post1921}]\label{t:post}
+A logic that contains every tautology and some sentence that is not a tautology contains every sentence.
+\end{theorem}
+
+\begin{proof}
+Let $A$ be a theorem that is not a tautology, and let $v$ be a valuation that makes it false. Substitute for each atomic sentence $\neg\bot$ if $v$ makes it true and $\bot$ if $v$ makes it false. The result $A^*$ contains no atomic sentences, and every valuation gives it the value that $v$ gives $A$, namely false. $A^*$ is a theorem, since logics are closed under substitution. For any sentence $B$, $A^* \to B$ is true under every valuation, since its antecedent is false under every valuation; so it is a tautology and a theorem. By modus ponens, $B$ is a theorem.
+\end{proof}
+
+\begin{corollary}\label{c:unique}
+A logic that contains every tautology and does not contain every sentence has exactly the tautologies as its theorems.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:post}, every theorem of such a logic is a tautology; and every tautology is a theorem by hypothesis.
+\end{proof}
+
+Theorem~\ref{t:post} and Corollary~\ref{c:unique} close off one way of being a rival. A logic stronger than classical logic, in the same language and with the same closure properties, is trivial. Every rival that has been seriously proposed is therefore weaker: its theorems are among the tautologies, and its consequence relation is included in classical consequence. Intuitionistic logic, the relevant logics, Łukasiewicz logic, the strong Kleene logic, LP and quantum logic are all of this kind. The dispute between classical logic and its rivals is therefore always the same dispute: whether classical logic counts as valid some arguments that are not.
+
+By Theorem~\ref{t:class}, it does not, if Assumption~\ref{a:clauses} holds. An argument that is classically valid preserves truth in every interpretation in which the classical clauses hold, and in a language of sentences with classical content they hold in every interpretation. A weaker logic therefore undergenerates as a theory of consequence: it fails to count as valid some arguments that cannot lead from truths to a falsehood. Excluded middle, double negation elimination and disjunctive syllogism are such arguments. Each preserves truth, given the classical clauses, and each is rejected by some rival. A logic that rejects them may be correct about something; it is not correct about what follows from what.
+
+\begin{corollary}\label{c:collapse}
+Any two consequence relations that are correct in the sense of Principle~\ref{p:correct} coincide with classical consequence, and so with each other.
+\end{corollary}
+
+\begin{proof}
+Both coincide with consequence in the sense of Definition~\ref{d:conseq}, which by Theorem~\ref{t:class} is classical consequence.
+\end{proof}
+
+Corollary~\ref{c:collapse} is the collapse argument in its simplest form. It is trivial once Theorem~\ref{t:class} is in hand, and its interest lies in what it says about pluralism. The pluralist holds that classical, intuitionistic and relevant logics are all correct. If \enquote{correct} means correct as a theory of consequence, in the sense of Principle~\ref{p:correct}, the corollary shows that at most one of them is, and Theorem~\ref{t:class} shows that it is classical logic. The pluralist must therefore hold that the logics are correct about different things: that constructions and situations are not interpretations in the sense of Definition~\ref{d:interp}, and that truth-preservation across constructions or situations is a relation distinct from consequence. That is what we hold too. The difference between pluralism and our monism is then whether the other relations deserve the name of consequence. We think they do not, because consequence is the relation that guarantees that the truth of the premises brings the truth of the conclusion with it, and the other relations either fail to guarantee this or guarantee something more. What the other relations are is the topic of the next section.
+
+\section{What non-classical logics describe}\label{s:noncl}
+
+\subsection{Provability}
+
+Intuitionistic logic was devised as the logic of mathematics as the intuitionist conceives it, in which asserting a sentence is claiming to possess a proof of it. On the interpretation of \citet{Heyting1930} and \citet{Kolmogorov1932}, a proof of $A \wedge B$ is a pair of proofs, a proof of $A \vee B$ is a proof of one disjunct together with an indication of which, a proof of $A \to B$ is a method that transforms any proof of $A$ into a proof of $B$, and a proof of $\neg A$ is a method that transforms any proof of $A$ into a proof of $\bot$. Excluded middle fails because there is in general no method that yields, for each $A$, either a proof of $A$ or a refutation of it.
+
+On this interpretation intuitionistic logic is the logic of provability, and the fact can be made exact. \citet{Goedel1933} defined a translation that prefixes a modal operator, read \enquote{it is provable that}, to subformulas of an intuitionistic sentence, and observed that the translations of intuitionistic theorems are theorems of the modal logic S4; \citet{McKinseyTarski1948} proved the converse. A sentence is therefore an intuitionistic theorem if and only if its translation, which says that certain things are provable, is a theorem of a classical modal logic of provability. \citet{Artemov2001} completed the picture by giving an explicit logic of proofs into which S4 embeds, so that the intuitionistic connectives receive their intended meaning as operations on proofs, and the logic of those operations is classical. The intuitionist's disjunction is the claim that one of the disjuncts is provable together with a choice between them; her negation is the claim that $A$ is refutable. These are not the classical connectives, and the relation intuitionistic logic describes, between a set of sentences and a sentence whose provability follows from theirs, is not consequence.
+
+Nothing in this disputes the intuitionist's mathematics. The constructive content of a proof, which intuitionistic logic tracks, is a real and valuable feature of proofs. What it does not track is truth: MTH-07 argues that excluded middle holds in mathematics, so that the classical connectives remain correct for mathematical sentences, and that the intuitionist objections to it fail.
+
+\subsection{Relevance}
+
+Relevant logics were devised to capture a notion of entailment on which the premises of a valid argument must be relevant to its conclusion \citep{AndersonBelnap1975}. The classical inferences from $A \wedge \neg A$ to an arbitrary $B$, and from $B$ to $A \to B$, are rejected because the premise has nothing to do with the conclusion. Disjunctive syllogism is rejected because, together with the inference from $A$ to $A \vee B$, it yields the first of these.
+
+The relevant logician is right that there is a relation of relevance between premises and conclusion, and that classical consequence ignores it. An argument from \enquote{it is raining and it is not raining} to \enquote{the moon is made of cheese} is useless, and the relevant logics give a precise account of why: the conclusion shares no content with the premises, and the derivation does not use the premises in reaching it. But the argument is not one that leads from truths to a falsehood, since its premise cannot be true. \citet{Burgess2005} put the point by distinguishing what follows from a set of premises from what can usefully be inferred from them; classical logic is the theory of the first, and the relevant logics are theories of a refinement of the second. On this reading the relevant entailments are the classically valid arguments that also satisfy a relevance constraint, which is how the main relevant logics behave in the vocabulary they share with classical logic. A relevant logic describes a relation that implies consequence and adds to it. LOG-03 makes a parallel point for paraconsistent logics in general: their usefulness for reasoning about inconsistent information is a reason to have them, not a reason to think that any contradiction is true.
+
+\subsection{Semantic defect}\label{s:defect}
+
+The most important non-classical logics in contemporary philosophy are those used to treat the semantic paradoxes. LOG-01 argues that the liar sentence is neither true nor false and models the behavior of the truth predicate in Łukasiewicz logic, in which the liar receives an intermediate value. LOG-03 argues that the dialetheist's cases are better treated with truth-value gaps than gluts, in the strong Kleene logic. LOG-04 argues that Curry's paradox is resolved by giving up contraction for the conditional, which fails in Łukasiewicz logic for sentences with intermediate values. Are these results consistent with classical monism?
+
+They are, and the reason is precise. The sentences that receive intermediate values in these logics are sentences without classical content: the liar, the truth-teller, Curry's sentence, and other ungrounded sentences involving the truth predicate. Such sentences do not say that things are a certain way independently of what they say about themselves, and Assumption~\ref{a:clauses} is not asserted of them. For sentences with classical content, the logics of LOG-01, LOG-03 and LOG-04 agree with classical logic. The many-valued logics therefore describe the behavior of semantically defective sentences in combination with the truth predicate; they do not describe consequence among sentences with classical content, and they do not compete with classical logic on its own ground. The following results make this exact.
+
+\begin{definition}\label{d:mv}
+A \emph{many-valued semantics} on the values $0, 1, \ldots, k$, where $0$ is falsity and $k$ is full truth, interprets each connective by a function on these values, with $\bot$ taking the value $0$. It is \emph{regular} if its connectives agree with the classical ones on the classical values $0$ and $k$. The \emph{Łukasiewicz} semantics has $\neg x = k - x$, $x \wedge y = \min(x,y)$, $x \vee y = \max(x,y)$ and $x \to y = \min(k, k - x + y)$, as in LOG-01. The \emph{strong Kleene} semantics has the same negation, conjunction and disjunction, and $x \to y = \max(k - x, y)$, which for $k = 2$ is the logic of LOG-03.
+\end{definition}
+
+\begin{theorem}\label{t:conserv}
+In a regular many-valued semantics, if every atomic sentence receives a classical value, every sentence receives the classical value it receives under the corresponding classical valuation.
+\end{theorem}
+
+\begin{proof}
+By induction on sentences. For atomic sentences, this is the hypothesis, and $\bot$ receives $0$ in both. For a compound sentence, its components receive classical values by the induction hypothesis, and the many-valued connective, applied to classical values, agrees with the classical one by regularity.
+\end{proof}
+
+\begin{corollary}\label{c:conserv}
+The Łukasiewicz and strong Kleene semantics are regular. Hence, for each $k > 0$, if consequence in either is defined as preservation of the value $k$, then on valuations that give every atomic sentence a classical value it coincides with classical consequence.
+\end{corollary}
+
+\begin{proof}
+On the values $0$ and $k$, $k - x$ exchanges them, $\min$ and $\max$ are classical conjunction and disjunction, and both $\min(k, k - x + y)$ and $\max(k - x, y)$ take the value $0$ exactly when $x = k$ and $y = 0$. The second claim follows from Theorem~\ref{t:conserv}, since a sentence then has the value $k$ exactly when the classical valuation makes it true.
+\end{proof}
+
+\begin{proposition}\label{p:contr}
+On the classical values, the Łukasiewicz conditional is contractive: $x \to (x \to y) = x \to y$ whenever $x, y \in \{0, k\}$.
+\end{proposition}
+
+\begin{proof}
+If $x = 0$, both sides are $k$. If $x = k$, then $x \to y = y$, and both sides equal $y$.
+\end{proof}
+
+Corollary~\ref{c:conserv} is the propositional core of a result \citet{Field2008} proves for his theory of truth, that it is conservative over classical logic for sentences not containing the truth predicate, and of the feature of \citet{Kripke1975}'s construction that grounded sentences receive their classical values at the fixed point. Proposition~\ref{p:contr} is the observation LOG-04 makes about contraction: it fails only for sentences with intermediate values, and holds wherever the values are classical. The failure of contraction in LOG-04 and of excluded middle in LOG-01 and LOG-03 are therefore failures that occur only where Assumption~\ref{a:clauses} does not apply.
+
+LOG-01 records a tension between its use of Łukasiewicz logic and the thesis of the present manuscript, and suggests the reading adopted here, without claiming to dissolve the tension. Theorem~\ref{t:conserv} dissolves it. The tension would be real if Łukasiewicz logic and classical logic gave different verdicts on some argument among sentences with classical content. They give none. They differ only on arguments involving sentences that lack classical content, and about those classical logic, as a theory of consequence among sentences with classical content, makes no claim. The resulting picture has a single logic of consequence, classical logic, and a logic of the truth predicate for sentences that are semantically defective, in which some classically valid forms fail because their instances involve such sentences. The two logics have different subject matters.
+
+One might object that the liar is formed from the same connectives as any other sentence, so that the restriction to classical content is a restriction on which sentences of a single language the logic applies to. That is correct, and it is the right restriction. A logic for a language containing its own truth predicate has to say something about the liar, and LOG-01 says it. What the monist denies is that this logic is a rival account of consequence for sentences that say that things are a certain way. It is an account of how the truth predicate behaves when applied to sentences that do not.
+
+\subsection{Other cases}
+
+The same pattern recurs elsewhere in the discipline. Quantum logic, which rejects the distributive law, describes the lattice of closed subspaces of a Hilbert space, that is, the structure of experimental propositions about a quantum system; LOG-13 argues that quantum mechanics revises probability theory and not logic, and that distributivity survives \citep{Putnam1968}. The logic of indicative conditionals describes their assertibility, which on the view of LNG-20 is given by conditional probability rather than truth \citep{Adams1975}; since indicative conditionals then lack truth values, their logic is not a theory of truth-preservation, and LOG-07 accordingly defends the material conditional as the conditional of logic. LOG-14 defines a logic of imperatives by satisfaction-preservation, which is a relation between commands, not between sentences with truth values. In each case a non-classical logic, or a logic for a non-classical subject matter, describes a relation that is not consequence among sentences with classical content.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Begging the question]\label{o:beg}
+Assumption~\ref{a:clauses} is classical logic stated in the metalanguage. The negation clause is bivalence. An intuitionist, a relevant logician or a dialetheist will reject it, and an argument for classical logic that assumes it begs the question.
+\end{objection}
+
+\begin{reply}
+The assumption is not classical logic but a claim about truth for sentences with classical content: that what such a sentence says is either the case or not, and not both. Each rival rejects it for a reason, and the reasons are the topic of Section~\ref{s:noncl}. The intuitionist rejects it because she identifies truth with provability, and the claim that every sentence is provable or refutable is false; but that is a claim about provability, not truth. The dialetheist rejects it because of the paradoxes; but the paradoxical sentences lack classical content, and LOG-03 argues that they are better treated as gaps than as gluts. Many relevant logicians have no quarrel with the clause as a claim about truth; her quarrel is with the claim that consequence is mere truth-preservation. The argument assumes the classical metalanguage, as every argument for a logic assumes some logic. What it shows is that the classical metalanguage, together with the classical clauses, yields classical consequence, and that no stronger logic is available; a rival who grants the clauses for sentences with classical content cannot resist the conclusion.
+\end{reply}
+
+\begin{objection}[Harmony]
+Classical negation violates harmony: its elimination rule, double negation elimination, yields more than its introduction rule puts in. A logic whose rules are not harmonious does not confer determinate meanings on its connectives, so classical logic is not a correct logic \citep{Dummett1991}.
+\end{objection}
+
+\begin{reply}
+The harmony requirement concerns the proof-theoretic justification of rules, that is, the relation between a system of derivation and the meanings of its connectives. It is therefore a constraint on theories of provability, and intuitionistic natural deduction satisfies it, as it should if intuitionistic logic is the logic of provability. It is not a constraint on consequence. Even as a constraint on proof systems, it does not favor intuitionistic logic: \citet{Rumfitt2000} gives a harmonious bilateral system for classical logic, with rules for denial as well as assertion, and the introduction and elimination rules of each connective are in harmony.
+\end{reply}
+
+\begin{objection}[Pluralism]
+The concept of consequence is truth-preservation in all cases, and \enquote{case} admits several precisifications \citep{BeallRestall2006}. Classical logic is correct for one, intuitionistic and relevant logic for others. Corollary~\ref{c:collapse} assumes that only interpretations are cases.
+\end{objection}
+
+\begin{reply}
+Corollary~\ref{c:collapse} assumes that a correct theory of consequence must coincide with truth-preservation in all interpretations, and it holds of any other notion of case only if that notion yields the same relation. The question is whether constructions and situations are cases in the sense the concept of consequence requires. They are not, because truth in a construction is being proved by it, and truth in a situation is being supported by the information in it. A construction that proves neither $A$ nor $\neg A$, or a situation that supports both, does not show that an argument can lead from truths to a falsehood, since the world is not such a construction or situation. Truth-preservation across constructions is the preservation of provability, and across situations the preservation of support; both are relations worth studying, and Principle~\ref{p:other} assigns them their logics. The pluralist and the monist agree about the logics and disagree about the word \enquote{consequence}. The monist's use is the one on which consequence guarantees the transmission of truth, which is what the pluralist's own core requirement of necessity demands.
+\end{reply}
+
+\begin{objection}[Meaning variance]
+If the rivals' connectives mean something other than the classical ones, as the reply to the pluralist suggests, then there is no disagreement between classical logic and its rivals, and the monist thesis is either trivial or verbal \citep{Quine1970}.
+\end{objection}
+
+\begin{reply}
+The monist thesis is that classical logic is the correct theory of consequence among sentences with classical content, built with the connectives that express the classical truth functions. That thesis is not trivial: it was denied by Dummett, who held that the connectives of mathematics do not express those functions, and it is denied by every non-classical monist. The meaning-variance argument shows that some apparent disputes between logics are not disputes about consequence, and Section~\ref{s:noncl} accepts this for intuitionistic and relevant logics. It does not show that all disputes are verbal. A rival who holds that the connectives of ordinary language express non-classical operations, or that the sentences of ordinary language lack classical content, disagrees with the monist about a matter of fact, and the argument of Section~\ref{s:argument} is addressed to her.
+\end{reply}
+
+\begin{objection}[The paradoxes]
+Natural languages contain their own truth predicate. A logic that applies to them must handle the liar. Classical logic cannot, given transparent truth, so the one true logic, if there is one, is non-classical \citep{Priest2006b,Field2008}.
+\end{objection}
+
+\begin{reply}
+The objection is correct about the logic of the truth predicate and incorrect about consequence. A language containing its own truth predicate contains sentences without classical content, and LOG-01 gives the logic of the truth predicate for such a language. By Corollary~\ref{c:conserv}, that logic agrees with classical logic wherever the sentences have classical content. The liar shows that the truth predicate cannot be both transparent and classical on all sentences; it does not show that consequence among sentences with classical content is non-classical. \citet{Williamson2017} argues, in addition, that a non-classical logic adopted for the paradoxes costs too much elsewhere; the present view avoids the cost, since the non-classical logic is confined to the sentences that need it.
+\end{reply}
+
+\section{Recent literature}
+
+\citet{GriffithsPaseau2022} give the most extended recent defense of logical monism, arguing against the main forms of pluralism and against the view that logics are merely instrumental. Our argument agrees with theirs in rejecting pluralism and adds an explicit account of what the rival logics describe, so that the monist can accept the rival logics as correct theories of something.
+
+\citet{Russell2008} argues for a pluralism that turns on truth-bearers: whether excluded middle and other laws hold depends on whether the bearers of truth are sentences, which may be defective, or propositions, which may not. The view is close to ours in its diagnosis. Sentences without classical content, such as the liar, are the cases in which some classical laws fail for sentences, and Definition~\ref{d:lang} restricts the monist thesis to sentences with classical content. Russell takes this to support pluralism; we take it to support a monism about consequence among contentful sentences, with a separate logic for defective ones.
+
+\citet{Field2009} argues that the question which logic is correct may lack a factual answer, since the role of logic is normative and the norms are evaluated by their consequences for belief. The view is a form of pluralism that does not depend on precisifying \enquote{case}. LOG-05 argues that logic constrains belief only through a weak bridge principle, on which one ought not to disbelieve the logical consequences of what one believes; on that view the normative role of logic presupposes a prior fact about what the consequences are, and the facts of Section~\ref{s:argument} supply it.
+
+\citet{Shapiro2014} defends a pluralism on which each mathematical theory may come with its own logic, so that intuitionistic logic is correct for smooth infinitesimal analysis and classical logic for classical analysis. The view is a claim about which logic is suited to reasoning within a theory whose objects are characterized by non-classical axioms. Smooth infinitesimal analysis is inconsistent with classical logic, and is therefore a theory of structures whose properties are described only constructively; the relation it requires is constructive derivability, which Principle~\ref{p:other} allows.
+
+\citet{Hjortland2017} argues that anti-exceptionalism supports the revisability of logic, and \citet{Priest2014} that the data favor a paraconsistent logic. \citet{Williamson2017} argues that abductive comparison favors classical logic, since it is stronger and simpler. Theorem~\ref{t:post} gives the strength claim an exact form: classical logic is maximal among consistent propositional logics closed under substitution. On abductive grounds, a weaker logic must earn its place by fitting data that classical logic does not fit; Section~\ref{s:noncl} argues that every such datum concerns a relation other than consequence.
+
+\section{What the result does not establish}\label{s:limits}
+
+The formal results concern a propositional language. For quantifiers, the analogue of Assumption~\ref{a:clauses} is the Tarskian clauses for the universal and existential quantifier over a domain, and the analogue of Assumption~\ref{a:free} is the freedom to interpret the non-logical vocabulary on any domain. The analogue of Theorem~\ref{t:class} is then the identification of consequence with first-order validity, which is the subject of LOG-06; Theorem~\ref{t:post} has no exact first-order analogue: first-order logic with identity has consistent extensions closed under substitution, for instance by the sentence saying that there are at least two things. Such extensions are excluded by the account of LOG-06, which counts as valid only what holds in all models, one-element models included; they are restrictions of the class of models, not rival logics. Whether second-order logic, which LOG-09 argues is logic, should also be called classical is a matter of terminology: its connectives and quantifiers obey the classical clauses, and its consequence relation is not axiomatizable.
+
+The argument does not establish Assumption~\ref{a:clauses}. It argues that the assumption holds for sentences with classical content, defends this against the rivals' reasons for denying it, and leaves it as the premise on which the monist thesis rests. It does not establish that every sentence of a natural language has classical content; the liar does not, and there may be others. It does not show that the non-classical logics are useless or that their study is a mistake. On the contrary, Principle~\ref{p:other} makes each of them correct for a relation, and the relations they describe, provability, relevance and the behavior of semantically defective sentences, are among the most important that logic studies.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/LOG/LOG_02.lean} formalizes Definitions~\ref{d:lang}--\ref{d:conseq}, Lemma~\ref{l:truth}, Theorem~\ref{t:class}, Definition~\ref{d:logic}, Theorem~\ref{t:post}, Corollaries~\ref{c:unique} and~\ref{c:collapse}, Definition~\ref{d:mv}, Theorem~\ref{t:conserv}, Corollary~\ref{c:conserv} and Proposition~\ref{p:contr}. Interpretations and truth in an interpretation are primitives; the classical clauses and the freedom of atoms are axioms. Sentences, valuations, substitution and the many-valued semantics are defined. The main theorems are stated as follows.
+
+\begin{lstlisting}
+theorem classicality (G : Formula → Prop) (A : Formula) :
+    Conseq G A ↔ ClassCons G A
+theorem post_maximality (S : Formula → Prop) (hS : IsLogic S)
+    (htaut : ∀ A, Taut A → S A) (A : Formula) (hA : S A)
+    (hnt : ¬ Taut A) : ∀ B, S B
+theorem conservative_consequence (M : MVSemantics) (hM : Regular M)
+    (hk : 0 < M.k) (G : Formula → Prop) (A : Formula) :
+    (∀ v : Nat → Bool,
+      (∀ B, G B → mval M (fun n => cl M.k (v n)) B = M.k) →
+        mval M (fun n => cl M.k (v n)) A = M.k) ↔ ClassCons G A
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_02.classicality' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.LOG_02.Interp, Philosophy.LOG_02.TrueIn,
+   Philosophy.LOG_02.clause_bot, Philosophy.LOG_02.clause_conj,
+   Philosophy.LOG_02.clause_disj, Philosophy.LOG_02.clause_imp,
+   Philosophy.LOG_02.clause_neg, Philosophy.LOG_02.freedom]
+'Philosophy.LOG_02.post_maximality' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.LOG_02.nontrivial_extension_is_classical'
+  depends on axioms: [propext, Classical.choice, Quot.sound]
+'Philosophy.LOG_02.conservative_consequence' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+\texttt{Interp} and \texttt{TrueIn} are the primitives of Definition~\ref{d:interp}. The five \texttt{clause} axioms are Assumption~\ref{a:clauses}, and \texttt{freedom} is Assumption~\ref{a:free}. Theorem~\ref{t:class} depends on \texttt{Classical.choice}, used to define the valuation induced by an interpretation; this is the classical reasoning in the metalanguage noted after the proof. Theorem~\ref{t:post} and Corollary~\ref{c:unique} use no premises beyond Lean's standard axioms: they are mathematical facts about classical logic. Corollary~\ref{c:conserv} uses no premises at all, and not even the axiom of choice, which reflects the fact that the agreement of the many-valued logics with classical logic on classical values is a matter of computation. The formalization does not cover the quantified case or the claims of Section~\ref{s:noncl} about provability and relevance, which rest on results cited from the literature.
+
+\section{Conclusion}
+
+There is one true logic, and it is classical. For sentences with classical content, truth obeys the classical clauses; consequence, as truth-preservation over all interpretations, is then classical consequence; and by Post's theorem no logic can be stronger without being trivial. The rival logics are weaker, and each is correct about a relation other than consequence. Intuitionistic logic describes provability, relevant logics describe relevance, and the many-valued logics of the truth predicate describe the behavior of semantically defective sentences, agreeing with classical logic wherever the sentences have classical content. The non-classical results of LOG-01, LOG-03 and LOG-04 are therefore results about the logic of truth for defective sentences, and they are consistent with classical monism about consequence.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1975)]{Adams1975} Adams, E.~W. (1975). \emph{The Logic of Conditionals}. Reidel.
+\bibitem[Anderson and Belnap(1975)]{AndersonBelnap1975} Anderson, A.~R. and Belnap, N.~D. (1975). \emph{Entailment: The Logic of Relevance and Necessity}, vol.~1. Princeton University Press.
+\bibitem[Artemov(2001)]{Artemov2001} Artemov, S.~N. (2001). Explicit provability and constructive semantics. \emph{Bulletin of Symbolic Logic}, 7(1), 1--36.
+\bibitem[Beall and Restall(2000)]{BeallRestall2000} Beall, J.~C. and Restall, G. (2000). Logical pluralism. \emph{Australasian Journal of Philosophy}, 78(4), 475--493.
+\bibitem[Beall and Restall(2006)]{BeallRestall2006} Beall, J.~C. and Restall, G. (2006). \emph{Logical Pluralism}. Oxford University Press.
+\bibitem[Brouwer(1908)]{Brouwer1908} Brouwer, L.~E.~J. (1908). De onbetrouwbaarheid der logische principes. \emph{Tijdschrift voor Wijsbegeerte}, 2, 152--158.
+\bibitem[Burgess(2005)]{Burgess2005} Burgess, J.~P. (2005). No requirement of relevance. In S. Shapiro (ed.), \emph{The Oxford Handbook of Philosophy of Mathematics and Logic}, Oxford University Press.
+\bibitem[Carnap(1934)]{Carnap1934} Carnap, R. (1934). \emph{Logische Syntax der Sprache}. Springer.
+\bibitem[Dummett(1978)]{Dummett1978} Dummett, M. (1978). The philosophical basis of intuitionistic logic. In \emph{Truth and Other Enigmas}, Duckworth.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{The Logical Basis of Metaphysics}. Harvard University Press.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[Field(2009)]{Field2009} Field, H. (2009). Pluralism in logic. \emph{Review of Symbolic Logic}, 2(2), 342--359.
+\bibitem[G\"odel(1933)]{Goedel1933} G\"odel, K. (1933). Eine Interpretation des intuitionistischen Aussagenkalk\"uls. \emph{Ergebnisse eines mathematischen Kolloquiums}, 4, 39--40.
+\bibitem[Griffiths and Paseau(2022)]{GriffithsPaseau2022} Griffiths, O. and Paseau, A.~C. (2022). \emph{One True Logic: A Monist Manifesto}. Oxford University Press.
+\bibitem[Haack(1974)]{Haack1974} Haack, S. (1974). \emph{Deviant Logic}. Cambridge University Press.
+\bibitem[Heyting(1930)]{Heyting1930} Heyting, A. (1930). Die formalen Regeln der intuitionistischen Logik. \emph{Sitzungsberichte der Preussischen Akademie der Wissenschaften, Physikalisch-mathematische Klasse}, 42--56.
+\bibitem[Hjortland(2013)]{Hjortland2013} Hjortland, O.~T. (2013). Logical pluralism, meaning-variance, and verbal disputes. \emph{Australasian Journal of Philosophy}, 91(2), 355--373.
+\bibitem[Hjortland(2017)]{Hjortland2017} Hjortland, O.~T. (2017). Anti-exceptionalism about logic. \emph{Philosophical Studies}, 174(3), 631--658.
+\bibitem[Keefe(2014)]{Keefe2014} Keefe, R. (2014). What logical pluralism cannot be. \emph{Synthese}, 191, 1375--1390.
+\bibitem[Kolmogorov(1932)]{Kolmogorov1932} Kolmogorov, A. (1932). Zur Deutung der intuitionistischen Logik. \emph{Mathematische Zeitschrift}, 35, 58--65.
+\bibitem[Kripke(1975)]{Kripke1975} Kripke, S. (1975). Outline of a theory of truth. \emph{Journal of Philosophy}, 72(19), 690--716.
+\bibitem[Lewis and Langford(1932)]{LewisLangford1932} Lewis, C.~I. and Langford, C.~H. (1932). \emph{Symbolic Logic}. Century.
+\bibitem[Łukasiewicz(1920)]{Lukasiewicz1920} Łukasiewicz, J. (1920). O logice trójwartościowej. \emph{Ruch Filozoficzny}, 5, 170--171.
+\bibitem[McKinsey and Tarski(1948)]{McKinseyTarski1948} McKinsey, J.~C.~C. and Tarski, A. (1948). Some theorems about the sentential calculi of Lewis and Heyting. \emph{Journal of Symbolic Logic}, 13(1), 1--15.
+\bibitem[Post(1921)]{Post1921} Post, E.~L. (1921). Introduction to a general theory of elementary propositions. \emph{American Journal of Mathematics}, 43(3), 163--185.
+\bibitem[Priest(2006)]{Priest2006b} Priest, G. (2006). \emph{Doubt Truth to Be a Liar}. Oxford University Press.
+\bibitem[Priest(2014)]{Priest2014} Priest, G. (2014). Revising logic. In P. Rush (ed.), \emph{The Metaphysics of Logic}, Cambridge University Press.
+\bibitem[Putnam(1968)]{Putnam1968} Putnam, H. (1968). Is logic empirical? In R.~S. Cohen and M.~W. Wartofsky (eds.), \emph{Boston Studies in the Philosophy of Science}, vol.~5, Reidel.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\bibitem[Read(2006)]{Read2006} Read, S. (2006). Monism: The one true logic. In D. DeVidi and T. Kenyon (eds.), \emph{A Logical Approach to Philosophy}, Springer.
+\bibitem[Rumfitt(2000)]{Rumfitt2000} Rumfitt, I. (2000). \enquote{Yes} and \enquote{no}. \emph{Mind}, 109(436), 781--823.
+\bibitem[Russell(2008)]{Russell2008} Russell, G. (2008). One true logic? \emph{Journal of Philosophical Logic}, 37(6), 593--611.
+\bibitem[Shapiro(2014)]{Shapiro2014} Shapiro, S. (2014). \emph{Varieties of Logic}. Oxford University Press.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\bibitem[Williamson(2017)]{Williamson2017} Williamson, T. (2017). Semantic paradoxes and abductive methodology. In B. Armour-Garb (ed.), \emph{Reflections on the Liar}, Oxford University Press.
+\end{thebibliography}
+
+\end{document}

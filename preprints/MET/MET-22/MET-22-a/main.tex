@@ -1,0 +1,105 @@
+\documentclass{situationist-preprint}
+
+\title{Bradley's Regress Is Not Vicious}
+\msid{MET-22-a}
+\msfamily{MET-22}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mskeywords{relations; Bradley's regress; unity of the fact; instantiation; grounding; vicious regress}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Bradley argued that relations cannot be real: if a relation is to relate its terms, it must itself be related to them by a further relation, and so on without end. We argue that relations are real and that the regress is not vicious. A regress is vicious when each of its members requires the next as a condition of its obtaining, so that none obtains unless infinitely many do. Bradley's regress has the opposite direction. That $a$ bears $R$ to $b$ is a single fact; that $R$, $a$ and $b$ stand in the instantiation relation, and that this triple stands in a further instantiation relation, are facts that obtain because the first does, not conditions of it. The premise that generates the regress in its vicious form treats the relation as a third term alongside $a$ and $b$, and is false: a relation is what relates its terms, and it relates them without the need for a further relating relation. The result supports the realism about relations on which MET-02-a and MET-28-a rely.
+\end{abstract}
+
+\section{The regress}
+
+\citet[chs.~2--3]{Bradley1893} argued that relations are unreal. Suppose $a$ and $b$ stand in the relation $R$. If $R$ is nothing to $a$ and $b$, it does not relate them. If it is something to them, it must be related to them, by relations $R_1$ (linking $R$ to $a$) and $R_1'$ (linking $R$ to $b$); and the same question then arises for $R_1$, which needs $R_2$, and so on. Since the series never closes, $a$ and $b$ are never related, and relations, Bradley concluded, are appearance. A parallel regress arises for the instantiation of properties, and it is the regress usually urged against realism about universals.
+
+Three responses are standard. \citet[ch.~4]{Russell1903} distinguished the relation as a term from the relation as actually relating, and held that the latter is not a further term in the complex. \citet{Frege1892} held that concepts and relations are unsaturated, and so need no glue to combine with objects. \citet{Armstrong1997} held that instantiation is not a relation but a non-relational tie, and so not subject to the regress. The literature has since asked whether these responses stop the regress or merely relabel it \citep{Gaskin2008,Maurin2012}. We argue that the regress need not be stopped: it exists but is benign, and the step that would make it vicious rests on a false premise.
+
+\section{Framework}
+
+\begin{definition}\label{d:fact}
+A \emph{relational fact} is the obtaining of a relation among terms: that $a$ bears $R$ to $b$, written $Rab$. The \emph{instantiation regress} of $Rab$ is the sequence of facts $I_1$: $R$, $a$ and $b$ stand in instantiation; $I_2$: instantiation, $R$, $a$ and $b$ stand in instantiation; and so on.
+\end{definition}
+
+\begin{definition}\label{d:vicious}
+An infinite sequence of facts is \emph{vicious} if each fact in it obtains only if the next obtains, and its obtaining is \emph{conditional} on the next, in the sense that the next is among what it obtains in virtue of. It is \emph{benign} if each fact after the first obtains in virtue of the one before it.
+\end{definition}
+
+A vicious regress is one in which the obtaining of the first member is postponed indefinitely: it waits on the second, which waits on the third. A benign regress is one in which infinitely many facts obtain because the first one does, as infinitely many truths follow from \enquote{$p$}, among them \enquote{it is true that $p$}, \enquote{it is true that it is true that $p$}, and so on. The difference is not the length of the sequence but the direction of dependence \citep{Cameron2008}.
+
+\begin{principle}[Relations relate]\label{p:relate}
+If $R$ is a relation and $a$ and $b$ are its terms, the fact $Rab$ obtains in virtue of nothing more than $R$, $a$ and $b$ and the relating of $a$ to $b$ by $R$, which is not a further constituent.
+\end{principle}
+
+\begin{principle}[Instantiation follows]\label{p:follows}
+For each $n$, the fact $I_{n+1}$ obtains in virtue of $I_n$, and $I_1$ obtains in virtue of $Rab$.
+\end{principle}
+
+Principle~\ref{p:relate} is the core of the realist view: a relation is not an inert item that needs linking; to be a relation is to be the kind of entity that relates. Principle~\ref{p:follows} records the direction of the regress. That $R$, $a$ and $b$ stand in instantiation is not a condition of $a$'s bearing $R$ to $b$; it is a redescription of it at a higher order, and higher-order descriptions are true because lower-order ones are.
+
+\section{The argument}
+
+\begin{proposition}\label{p:benign}
+Given Principles~\ref{p:relate} and~\ref{p:follows}, the instantiation regress of any relational fact is benign.
+\end{proposition}
+
+\begin{proof}
+By Principle~\ref{p:follows}, each member after $Rab$ obtains in virtue of the one before it, which is the definition of a benign regress (Definition~\ref{d:vicious}). By Principle~\ref{p:relate}, $Rab$ does not obtain in virtue of $I_1$, so the regress does not also run in the vicious direction. Hence $Rab$ obtains without waiting on any member of the regress.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Bradley's argument does not show that relations are unreal.
+\end{theorem}
+
+\begin{proof}
+Bradley's argument requires the regress to be vicious: $a$ and $b$ are never related only if their being related waits on infinitely many further relatings. By Proposition~\ref{p:benign}, the regress is benign given Principles~\ref{p:relate} and~\ref{p:follows}. Bradley's argument therefore requires the denial of one of them. The denial of Principle~\ref{p:follows} would make a higher-order redescription prior to what it redescribes, which reverses the order of explanation that holds for truth and for other semantic ascents. The denial of Principle~\ref{p:relate} is Bradley's premise that a relation, to relate, must be related to its terms; but this treats the relation as one more term, on a par with $a$ and $b$, and a third term would indeed need linking. A relation is not such a term: if it were, the regress would arise for every unity whatever, including the unity of a single object with its properties, and the argument would prove that nothing has any property, which Bradley did not accept either. The premise is therefore false, and the argument fails.
+\end{proof}
+
+We note that the argument does not require that infinite descending chains of grounding be harmless in general, which MET-10 defends. The instantiation regress is not a descending chain: it ascends from $Rab$, and each of its members is grounded in a fact with a finite grounding history.
+
+\section{Objections and replies}
+
+\begin{objection}[The unity of the fact]
+The list $R$, $a$, $b$ exists whether or not $a$ bears $R$ to $b$. Something must distinguish the fact $Rab$ from the mere list, and whatever does so is a further relating relation.
+\end{objection}
+
+\begin{reply}
+What distinguishes the fact from the list is that $R$ relates $a$ to $b$. That is not a further item but the obtaining of $R$ between them, which is what Principle~\ref{p:relate} says. The demand for a further item assumes that only items can make a difference, and that assumption is what generates the regress in the first place. The list exists in every world in which $R$, $a$ and $b$ exist; the fact exists only in those in which $R$ relates them, and the difference between the two classes of worlds needs no constituent to mark it \citep{Gaskin2008}.
+\end{reply}
+
+\begin{objection}[Relabelling]
+To say that relations relate \enquote{by their nature} is Armstrong's non-relational tie under another name, and the critics of the tie have shown that it is either a relation, and regresses, or a mystery \citep{Maurin2012}.
+\end{objection}
+
+\begin{reply}
+Our reply differs from Armstrong's in conceding that instantiation is a relation. We do not exempt it from the regress; we allow the regress and show that it is benign. The dilemma, relation or mystery, assumes that if instantiation is a relation it must be a condition of the facts it figures in, which Principle~\ref{p:follows} denies.
+\end{reply}
+
+\begin{objection}[Internal relations]
+Many relations, such as being taller than, supervene on the intrinsic properties of their terms. These need no relating at all, and the remaining external relations are the ones whose reality is in question.
+\end{objection}
+
+\begin{reply}
+We agree that internal relations supervene on their terms. External relations, such as spatiotemporal distance, do not, and they are the paradigm genuine relations in the sense of MET-02-a. The distance between Black's two spheres, which weakly discerns them in MET-28-a (Proposition~4.1), is such a relation. The argument above applies to external relations as much as to internal ones, since nothing in it depends on whether $Rab$ supervenes on the intrinsic natures of $a$ and $b$.
+\end{reply}
+
+\section{Conclusion}
+
+Relations are real, and Bradley's regress does not show otherwise. The regress exists, but each of its members obtains because the previous one does, and the first, $a$'s bearing $R$ to $b$, obtains without waiting on any of them. A relation relates its terms without the need for a further relating relation. The same reply answers the instantiation regress against universals (MET-02-a, Objection~1).
+
+\begin{thebibliography}{9}\small
+\bibitem[Armstrong(1997)]{Armstrong1997} Armstrong, D.~M. (1997). \emph{A World of States of Affairs}. Cambridge University Press.
+\bibitem[Bradley(1893)]{Bradley1893} Bradley, F.~H. (1893). \emph{Appearance and Reality}. Swan Sonnenschein.
+\bibitem[Cameron(2008)]{Cameron2008} Cameron, R.~P. (2008). Turtles all the way down: Regress, priority and fundamentality. \emph{The Philosophical Quarterly}, 58(230), 1--14.
+\bibitem[Frege(1892)]{Frege1892} Frege, G. (1892). \"Uber Begriff und Gegenstand. \emph{Vierteljahrsschrift f\"ur wissenschaftliche Philosophie}, 16, 192--205.
+\bibitem[Gaskin(2008)]{Gaskin2008} Gaskin, R. (2008). \emph{The Unity of the Proposition}. Oxford University Press.
+\bibitem[Maurin(2012)]{Maurin2012} Maurin, A.-S. (2012). Bradley's regress. \emph{Philosophy Compass}, 7(11), 794--807.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

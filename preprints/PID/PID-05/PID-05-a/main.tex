@@ -1,0 +1,202 @@
+\documentclass{situationist-preprint}
+
+\title{Animalism Defended}
+\msid{PID-05-a}
+\msfamily{PID-05}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PID/PID\_05.lean}
+\mskeywords{animalism; thinking animal argument; brain in a vat; phase sortals; persons; organisms; what matters}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are you an animal? We argue that you are: you are a thinking organism, and you would not survive as a brain in a vat. The argument is the thinking animal argument. There is a human organism where you are; it thinks your thoughts; your thoughts have only one thinker; so you are that organism. Since an organism persists through the continuity of its life, and a brain kept alive by machinery is an organ and not a living organism, you would not be the brain in the vat. We then reconcile this conclusion with the psychological criterion of personal identity (PID-01) and with the verdict on teletransportation (PID-02). \enquote{Person} is a phase sortal, true of the organism while it has certain capacities. The psychological criterion gives the conditions under which person-stages belong to one person; it does not say what the thinker of your thoughts fundamentally is. In the vat case the two come apart: a person psychologically continuous with you continues in the vat, and has much of what matters in survival (PID-06), but that person is not you. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Locke distinguished the idea of a man, a living organized body, from the idea of a person, a thinking intelligent being that can consider itself as itself in different times and places, and took personal identity to follow consciousness rather than the body \citep[II.xxvii]{Locke1694}. The psychological tradition that descends from him \citep{Shoemaker1970,Parfit1984} holds that we persist through psychological continuity. Its central case is the transplant: if your cerebrum were moved into another head, the resulting person would remember your life, carry out your plans and have your character, and most judge that this person would be you.
+
+Animalism denies that we are the kind of thing the transplant case suggests. On the view defended by \citet{Snowdon1990,Snowdon2014}, \citet{Olson1997,Olson2007} and, in a different framework, \citet{vanInwagen1990}, each of us is a human animal, an organism of the species \emph{Homo sapiens}, and an organism persists through the continuity of its biological life, not of its psychology. Rival views say that we are things constituted by animals \citep{Baker2000}, embodied minds or parts of brains \citep{McMahan2002}, or, as \citet{Parfit2012} argued late in his career, the conscious, thinking parts of animals.
+
+We defend animalism in the form the catalogue states: you are a thinking organism, and you would not survive as a brain in a vat. The verdict on the vat is the hardest consequence to accept, and we derive it from premises that make its source visible. We also owe an account of how the view stands to the psychological criterion defended in PID-01 and applied to teletransportation in PID-02-a, since a reader of both may suspect that the family contradicts itself. Section~\ref{s:recon} shows that it does not.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:org}
+An \emph{organism} is a living thing whose parts are organized by a self-maintaining metabolic process, its \emph{life}, which takes in matter, regulates its own conditions and restores its organization after perturbation.
+\end{definition}
+
+The definition is the one on which MET-06-a counts organisms as composites: their parts share a common fate under the dynamics of metabolism. A human organism's life is coordinated, at the level of the whole, largely by the brainstem and the endocrine and autonomic systems.
+
+\begin{definition}\label{d:person}
+A thing is a \emph{person} at a time if and only if it has at that time the capacities for rational thought and for thinking of itself as itself, the same thinking thing in different times and places.
+\end{definition}
+
+\enquote{Person}, so defined, is a \emph{phase sortal} in the sense of \citet{Wiggins1980}: like \enquote{child} or \enquote{adult}, it applies to a thing during part of its career, in virtue of what the thing can do then, and does not by itself fix the conditions under which that thing persists. The substance sortal under which a thing persists is the one that gives its persistence conditions; for a human being this is \enquote{organism}, if the argument below is sound.
+
+\begin{definition}\label{d:survive}
+You \emph{survive as} a later thing $y$ if and only if you exist at the later time and are $y$.
+\end{definition}
+
+The brain-in-a-vat case is this. Your brain is removed whole from your skull and kept alive in a vat by machinery that supplies oxygenated blood, removes waste and regulates temperature and chemistry. It remains conscious, and its psychology is continuous with yours. The rest of your body is destroyed.
+
+\begin{assumption}\label{a:orgthinks}
+There is a human organism located where you are, and it thinks your present thoughts.
+\end{assumption}
+
+\begin{assumption}\label{a:one}
+Your present thoughts have at most one non-derivative thinker.
+\end{assumption}
+
+\begin{assumption}\label{a:you}
+You think your present thoughts.
+\end{assumption}
+
+\begin{assumption}\label{a:life}
+An organism exists at a later time only if it is then a living organism: its persistence consists in the continuation of its life.
+\end{assumption}
+
+\begin{assumption}\label{a:vat}
+The brain in the vat is not a living organism.
+\end{assumption}
+
+\begin{assumption}\label{a:pc}
+The brain in the vat is, at the later time, a person psychologically continuous with you.
+\end{assumption}
+
+Assumption~\ref{a:orgthinks} rests on the fact that the organism has a normal, functioning human brain, and that nothing more is needed for thought than such a brain suitably embedded \citep{Olson1997}. Assumption~\ref{a:one} denies that there are two thinkers of your thoughts, an animal and a person, one of which is mistaken about which it is; PID-05-b treats the alternatives in detail. Assumption~\ref{a:you} is the least controversial premise in the philosophy of mind. Assumption~\ref{a:life} is the biological criterion of persistence for organisms, which the rival views generally accept for organisms, disputing only that we are organisms. Assumption~\ref{a:vat} is defended in Section~\ref{s:obj}. Assumption~\ref{a:pc} describes the case.
+
+\section{The argument}\label{s:arg}
+
+\begin{theorem}\label{t:animal}
+You are an organism.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:orgthinks} there is an organism that thinks your thoughts. By Assumption~\ref{a:you} you think them. By Assumption~\ref{a:one} they have at most one thinker. So you are that organism.
+\end{proof}
+
+\begin{theorem}\label{t:vat}
+You would not survive as a brain in a vat.
+\end{theorem}
+
+\begin{proof}
+Suppose you survive as the brain in the vat. Then, by Definition~\ref{d:survive}, you exist at the later time and are the brain in the vat. By Theorem~\ref{t:animal} you are an organism, and by Assumption~\ref{a:life} an organism that exists later is then a living organism. So the brain in the vat is a living organism, contradicting Assumption~\ref{a:vat}.
+\end{proof}
+
+\begin{corollary}\label{c:other}
+In the vat case there is later a person psychologically continuous with you who is not you.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:pc} the brain in the vat is a person psychologically continuous with you. If it were you, you would survive as it, contradicting Theorem~\ref{t:vat}.
+\end{proof}
+
+The proof of Theorem~\ref{t:vat} shows where the verdict comes from. It is not that the brain lacks your psychology; by Assumption~\ref{a:pc} it has it. It is that you are a thing of a kind whose persistence is fixed by life, and what is in the vat is a part of you whose life has been taken over by a machine. Corollary~\ref{c:other} records the cost honestly: the animalist must say that the person in the vat, who believes she is you, is mistaken.
+
+\section{Animalism and the psychological criterion}\label{s:recon}
+
+PID-01 concludes that what makes you the same person over time is psychological continuity, with bodily continuity as a tie-breaker in cases of branching. PID-02-a applies that criterion to teletransportation and concludes that you survive if the original is destroyed before the replica is activated. Theorem~\ref{t:vat} and Corollary~\ref{c:other} seem to deny both. They do not, once one distinguishes two questions that the word \enquote{you} lets us run together.
+
+The first question is what the persistence conditions of persons, as such, are. Since \enquote{person} is a phase sortal (Definition~\ref{d:person}), this is the question which relation unifies the stages of a thing's career during which it is a person into one person's life. On the perdurantist account of PID-11, on which persons are sums of temporal parts unified by a persistence relation, the answer of PID-01 is that the unifying relation is psychological continuity, with the bodily tie-breaker. The second question is what the thing that thinks your thoughts fundamentally is, that is, under which substance sortal it falls and so which persistence conditions it has as the thing it is. Theorem~\ref{t:animal} answers this second question: it is an organism, and its persistence is biological.
+
+\begin{proposition}\label{p:recon}
+The conclusions of PID-01, PID-02 and PID-05 are jointly consistent. In every case in which an organism's psychology continues in the organism, the person whose stages are unified by psychological continuity and the organism coincide during the organism's personal phase. In the vat case and in teletransportation they come apart: the person continues, in the sense of PID-01 and PID-02-a, and the organism, which is what you are, does not.
+\end{proposition}
+
+\begin{proof}
+In the ordinary case, the stages of the organism during the period in which it is a person are psychologically continuous with one another and with no stages outside it; the person of PID-01 then has exactly those stages, so that the person and the organism during its personal phase coincide. In the vat case, psychological continuity runs from your present stages to the vat stages, so that by PID-01 these are stages of one person; by Theorem~\ref{t:vat} the vat stages are not stages of you. The same holds of the replica in teletransportation, whose stages are psychologically continuous with yours under the temporal condition of PID-02-a and are not stages of the organism, which has been destroyed. In neither case is anything both identical and not identical with anything else; there are two unity relations and two sums, which share stages in ordinary cases and diverge in these.
+\end{proof}
+
+\begin{remark}\label{r:perd}
+On the perdurantist account of PID-11, the organism and the person of PID-01 are four-dimensional sums that share your present stage. Both then think your present thoughts, in the sense in which a persisting thing thinks at a time in virtue of its stage at that time, and Assumption~\ref{a:one} is to be read as counting thinkers at the present time by their present stages, as \citet{Lewis1976} counts persons before fission: there is one thinker now. The thinking animal argument then shows that this thinker falls under the substance sortal \enquote{organism}, and the first-person pronoun refers to the continuant whose persistence that sortal fixes. The sum unified by psychological continuity, which in the vat case runs on into the vat, shares your present stage but is not what \enquote{you} refers to. The three-dimensional idiom of the formal argument is a convenient abbreviation of this reading.
+\end{remark}
+
+Proposition~\ref{p:recon} fixes how the verdicts of the family are to be read. PID-01 and PID-02-a state when there is \emph{the same person}; the present manuscript states what \emph{you} are. When PID-02-a says that you survive teletransportation under its temporal condition, the claim, read together with Theorem~\ref{t:animal}, is that the person continues, not that the organism does. This is the reading REL-08-a gives of a post-mortem realization of a person's pattern: if animalism is true, the realizer is a person and has much of what matters in your survival, but is not you. It is also the reading PID-14 needs: the upload is a psychologically continuous successor, a person in the sense of Definition~\ref{d:person} if MND-08 is right that thinking is functional, and not the original thinking organism. PID-10's conclusion that disembodied persons are possible in principle is untouched, since a phase sortal can apply to things of more than one kind.
+
+Two features of this reconciliation should be stated plainly. First, it does not make the psychological criterion a criterion for \emph{our} identity; it makes it a criterion for the unity of person-stages, which is what PID-01 states. Second, it explains why the psychological criterion has seemed to be the criterion of our identity. PID-03 and PID-06 argue that what matters in survival is psychological connectedness and continuity, not identity. Our concern for our own future is concern for the future of the person, which in every ordinary case is the future of the organism we are. In the vat case, the concern follows the person, and the intuition that \enquote{you} go with the brain is the intuition that what matters goes with it, which is correct.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[The transplant intuition]
+Almost everyone judges that you would go where your cerebrum goes. A theory that denies this is refuted by the case it is meant to explain.
+\end{objection}
+
+\begin{reply}
+The judgment is evidence, but evidence about what it measures. Subjects asked about transplant cases are asked, in effect, whom they would care about, whom they would hold responsible, and who would have their memories and plans; and the answers track psychological continuity, because these attitudes track it. By Proposition~\ref{p:recon} the animalist agrees that the person goes with the cerebrum and that this person has what matters. What the judgment does not settle is whether the thinker of your thoughts is a thing that can be reduced to a brain, and on that question the transplant intuition is silent, since it is never asked under that description \citep{Snowdon1990,Olson1997}.
+\end{reply}
+
+\begin{objection}[Thinking parts]
+The argument proves too much. Your brain, or your cerebrum, is also located where you are and also thinks your thoughts, so Assumption~\ref{a:one} is either false or, if true, as good an argument that you are a brain as that you are an organism \citep{McMahan2002,Parfit2012}.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:one} concerns non-derivative thinkers. A brain thinks, if at all, in the derivative sense in which a hand grasps: it is the organ by which the organism thinks, as the hand is the organ by which it grasps. What thinks non-derivatively is what has the perceptual states, emotions and bodily feelings that thoughts integrate, and these belong to the organism, which sees with its eyes, hungers with its gut and is afraid with its whole physiology. The rival who says that the cerebrum thinks non-derivatively must say that the organism thinks derivatively, though nothing about the organism suggests that its relation to its thoughts is borrowed, and must explain how a thing whose existence is sustained by the organism's life could be the non-derivative subject of states that are states of that life. PID-05-b develops the reply.
+\end{reply}
+
+\begin{objection}[The pared-down organism]
+\citet{vanInwagen1990} suggests that a human organism could be pared down to a living brain and survive. If so, Assumption~\ref{a:vat} is false, and the organism, and so you, would be in the vat.
+\end{objection}
+
+\begin{reply}
+The suggestion turns on whether the brain in the vat has a life of its own. By Definition~\ref{d:org}, a life is a self-maintaining process that regulates its own conditions. The brain in the vat regulates none of them: its oxygenation, temperature, chemistry and waste removal are maintained by the machine, as the conditions of a kidney awaiting transplant are maintained by a cooler. The brainstem functions that coordinated the organism's life have no body to coordinate. What remains is an organ kept alive, not an organism kept alive in a reduced form. Where the brain is removed with a substantial part of the regulatory machinery of the body, the case becomes one of a mutilated organism, and the animalist then says, consistently with Theorem~\ref{t:vat}, that you survive mutilated, not that you survive as a brain in a vat.
+\end{reply}
+
+\begin{objection}[The remnant]
+After the brain is removed, the organism, according to animalism, remains in the operating theatre, mindless but alive if supported. It is absurd to say that you are the mindless thing on the table and not the conscious being in the vat \citep{Johnston2007}.
+\end{objection}
+
+\begin{reply}
+In the vat case as described the rest of the body is destroyed, so that the organism ceases. In the variant in which the body is kept alive, the animalist does say that you remain, without a mind, and the absurdity is in the description rather than the view: we already accept that each of us was once a fetus without a mind and that some of us will end in a persistent vegetative state. That the thing that thinks your thoughts can exist without thinking is part of what it is for thinking to be something an organism does rather than what it is.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The argument does not establish that the person in the vat lacks moral status or that its interests count for less than yours; it is a person, and by PID-06 it has much of what matters in your survival. It does not settle what you should prefer, before the operation, about the vat; PID-06 suggests that you have strong reasons to care about the person in the vat in the way you care about your own future. It does not decide the dispute about the transplant case for persons as such, which PID-01 decides in favor of psychological continuity. And the formal result depends on Assumption~\ref{a:one}, which the rival views deny; the formalization makes this dependence explicit.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/PID/PID_05.lean} represents things, your present thoughts and a later time in the vat case by uninterpreted predicates, and states Definition~\ref{d:survive} and Assumptions~\ref{a:orgthinks} to~\ref{a:pc} as axioms. It proves Theorem~\ref{t:animal}, Theorem~\ref{t:vat} and Corollary~\ref{c:other}.
+
+\begin{lstlisting}
+theorem not_vat_survivor : ¬ VatOccupant you
+theorem continuant_not_you :
+    ∃ y, PersonLater y ∧ PsychContinuous you y ∧ y ≠ you
+\end{lstlisting}
+
+The checker reports, for the first theorem (namespace prefix \texttt{Philosophy.PID\_05} omitted):
+
+\begin{lstlisting}
+'not_vat_survivor' depends on axioms: [Organism, Thing,
+ Thinks, VatOccupant, assumption_2_4, assumption_2_5,
+ assumption_2_6, assumption_2_7, assumption_2_8,
+ definition_2_3, you]
+\end{lstlisting}
+
+\noindent and for Corollary~\ref{c:other} the same list together with \texttt{PersonLater}, \texttt{PsychContinuous} and \texttt{assumption\_2\_9}. \texttt{Thing}, \texttt{you}, \texttt{Organism}, \texttt{Thinks}, \texttt{VatOccupant}, \texttt{PersonLater} and \texttt{PsychContinuous} are primitives; the remaining axioms are Definition~\ref{d:survive} and Assumptions~\ref{a:orgthinks}--\ref{a:pc}. No axiom of Lean's classical core is used: the argument is constructive.
+
+\section{Conclusion}
+
+You are a thinking organism. The thinker of your thoughts is the human animal where you are, because that animal thinks them and they have only one thinker; and since an organism persists through its life, and a brain kept alive by a machine is not a living organism, you would not survive as a brain in a vat. This is compatible with the psychological criterion of PID-01 and the verdict of PID-02-a, which concern the unity of persons, a phase sortal of the organism. In the vat, a person psychologically continuous with you continues, and has much of what matters; that person is not you.
+
+\begin{thebibliography}{99}\small
+\bibitem[Baker(2000)]{Baker2000} Baker, L.~R. (2000). \emph{Persons and Bodies: A Constitution View}. Cambridge University Press.
+\bibitem[Johnston(2007)]{Johnston2007} Johnston, M. (2007). \enquote{Human beings} revisited: My body is not an animal. In D. Zimmerman (ed.), \emph{Oxford Studies in Metaphysics}, Vol.~3. Oxford University Press.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Survival and identity. In A.~O. Rorty (ed.), \emph{The Identities of Persons} (pp.~17--40). University of California Press.
+\bibitem[Locke(1694)]{Locke1694} Locke, J. (1694). \emph{An Essay Concerning Human Understanding}, 2nd edn. Cited by book, chapter and section.
+\bibitem[McMahan(2002)]{McMahan2002} McMahan, J. (2002). \emph{The Ethics of Killing: Problems at the Margins of Life}. Oxford University Press.
+\bibitem[Olson(1997)]{Olson1997} Olson, E.~T. (1997). \emph{The Human Animal: Personal Identity without Psychology}. Oxford University Press.
+\bibitem[Olson(2007)]{Olson2007} Olson, E.~T. (2007). \emph{What Are We? A Study in Personal Ontology}. Oxford University Press.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Oxford University Press.
+\bibitem[Parfit(2012)]{Parfit2012} Parfit, D. (2012). We are not human beings. \emph{Philosophy}, 87(1), 5--28.
+\bibitem[Shoemaker(1970)]{Shoemaker1970} Shoemaker, S. (1970). Persons and their pasts. \emph{American Philosophical Quarterly}, 7(4), 269--285.
+\bibitem[Snowdon(1990)]{Snowdon1990} Snowdon, P.~F. (1990). Persons, animals, and ourselves. In C. Gill (ed.), \emph{The Person and the Human Mind}. Clarendon Press.
+\bibitem[Snowdon(2014)]{Snowdon2014} Snowdon, P.~F. (2014). \emph{Persons, Animals, Ourselves}. Oxford University Press.
+\bibitem[van Inwagen(1990)]{vanInwagen1990} van Inwagen, P. (1990). \emph{Material Beings}. Cornell University Press.
+\bibitem[Wiggins(1980)]{Wiggins1980} Wiggins, D. (1980). \emph{Sameness and Substance}. Blackwell.
+\end{thebibliography}
+
+\end{document}

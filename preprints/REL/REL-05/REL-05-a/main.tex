@@ -1,0 +1,234 @@
+\documentclass{situationist-preprint}
+
+\title{Foreknowledge Without Fatalism}
+\msid{REL-05-a}
+\msfamily{REL-05}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_05.lean}
+\mskeywords{divine foreknowledge; theological fatalism; counterfactual dependence; timelessness; future contingents; Ockhamism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+If God knows what we will do, it seems we cannot do otherwise: God's knowledge belongs to the fixed past and cannot be mistaken. We argue that divine foreknowledge is compatible with human freedom because foreknowledge depends counterfactually on free choices, not conversely. We first show that the fatalist argument is valid, and that it requires exactly one premise beyond the factivity of knowledge: that God's knowledge of a choice is among the facts held fixed when we ask what the agent can do. Given that the agent can take each of her options, this premise is false: for every option, there is an open alternative in which she takes it and God knows that she does, so God's knowledge varies with her choice and is not a temporally located fact prior to it. A structural model then makes the asymmetry precise: intervening on the choice changes God's knowledge, while intervening on God's knowledge leaves the choice unchanged. The results are formalized in Lean. We reconcile the account with the thesis that future contingents lack a truth value: the knowledge in question is timeless, and requires the truth of a proposition relative to the actual history, not its truth at a moment before the choice.
+\end{abstract}
+
+\section{The problem}
+
+Augustine considered the objection that if God foreknows our sins, we sin by necessity, and replied that God's foreknowledge no more compels the future than our memory compels the past \citep[III]{AugustineLibero}. Boethius gave the problem its classical form and the most influential solution: God does not foreknow, but sees all things in an eternal present, and knowledge of what is present imposes no necessity on it \citep[V]{Boethius}. Ockham distinguished propositions that are \enquote{about the past} in word only from those that are about the past in fact, and held that God's past knowledge of future contingents is of the first kind, so that it shares the contingency of what it is about.
+
+\citet{Pike1965} revived the problem in analytic form. His argument has three premises: God is essentially omniscient, so that God's beliefs cannot be false; God existed and held beliefs at a time before the agent acts; and no one can so act that a belief held in the past would not have been held. It follows that no one can do otherwise than God believed she would. \citet{Adams1967} replied in Ockham's spirit that a fact such as \enquote{God believed at $t_0$ that Jones would mow his lawn at $t_1$} is a soft fact about $t_0$, not a hard one, and is not fixed. The debate that followed concerned the distinction between hard and soft facts \citep{Fischer1989}. \citet{Plantinga1986} proposed a modal criterion: a fact about the past is accidentally necessary if no one can act so that it would not have obtained, and God's past beliefs about future free actions are not accidentally necessary. \citet{Zagzebski1991} surveyed the options and concluded that none of the standard solutions is without cost.
+
+Three positions dominate the current debate. Ockhamists hold that God's past beliefs are soft facts that depend on the future. Eternalists, following Boethius, hold that God is timeless and that the problem of a fixed past does not arise \citep{StumpKretzmann1981}. Open theists hold that God does not know future free actions, either because there is nothing to know or because their knowability would threaten freedom \citep{Hasker1989}. A fourth view, defended by \citet{Merricks2009}, is that the argument fails for a reason that has nothing specifically to do with God: truths about the future depend on what the future is like, and the same holds of beliefs whose correctness is guaranteed.
+
+Our thesis combines the eternalist position with Merricks's point about dependence. Foreknowledge depends counterfactually on free choices, not conversely. We establish the first half by showing that, given the agent's ability, God's knowledge varies with her choice across her open alternatives; the second half by showing that, in a structural model of the situation, the choice does not vary with God's knowledge. And we argue that this dependence is coherent because the knowledge is not located in time, which also reconciles it with the thesis of ACT-17 that future contingents lack a truth value.
+
+\section{Framework}
+
+We consider an agent who, at a time $t_1$, chooses among a set of options. For each world $w$, $\mathrm{ch}(w)$ is the option the agent takes at $w$, and $K(w, c)$ says that, at $w$, God knows that the agent takes $c$.
+
+\begin{definition}\label{d:open}
+A world $w$ is an \emph{open alternative} for the agent if $w$ agrees with the actual world on every fact held fixed at the time of the choice.
+\end{definition}
+
+\begin{definition}\label{d:can}
+The agent \emph{can take} option $c$ if some open alternative is one in which she takes $c$.
+\end{definition}
+
+Which facts are held fixed is a parameter of the framework. On a libertarian view they include the whole past and the laws; on the reasons-responsiveness view defended in ACT-01, on which free will is compatible with both determinism and indeterminism, they include the agent's mechanism and situation and vary the reasons available to her. The argument below needs only one thing from Definition~\ref{d:open}: an answer to the question whether God's knowledge is among the facts held fixed.
+
+\begin{assumption}\label{a:factive}
+Divine knowledge is factive: if, at $w$, God knows that the agent takes $c$, then she takes $c$ at $w$.
+\end{assumption}
+
+\begin{assumption}\label{a:omni}
+At every world, God knows which option the agent takes there.
+\end{assumption}
+
+\begin{assumption}\label{a:ability}
+The agent can take each of her options.
+\end{assumption}
+
+Assumption~\ref{a:ability} is what the fatalist denies, and we assume it only to show that foreknowledge does not refute it. Whether agents in fact have this ability is the subject of ACT-01. ACT-02 argues that responsibility does not require alternative possibilities; we grant the fatalist the stronger requirement, since if foreknowledge leaves alternative possibilities intact, it leaves intact whatever weaker condition freedom requires.
+
+\begin{definition}\label{d:fatalist}
+The \emph{fatalist premise} holds if, in every open alternative, God knows exactly what God knows at the actual world.
+\end{definition}
+
+\begin{assumption}\label{a:fixity}
+If God's knowledge of the choice were a temporally located fact obtaining before $t_1$, the fatalist premise would hold.
+\end{assumption}
+
+Assumption~\ref{a:fixity} is the principle of the fixity of the past, applied to God's knowledge. We grant it in full: a fact about what God knew at $t_0$, if there were such a fact, would be as fixed at $t_1$ as any other fact about $t_0$. We thereby set aside the Ockhamist strategy, which denies that such facts are fixed.
+
+\section{The argument}
+
+\begin{proposition}\label{p:valid}
+If the fatalist premise holds, the agent takes the actual option in every open alternative.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:omni}, God knows at the actual world that the agent takes the actual option. If $w$ is an open alternative, by the fatalist premise God knows the same at $w$, and by Assumption~\ref{a:factive} the agent takes the actual option at $w$.
+\end{proof}
+
+Proposition~\ref{p:valid} is the fatalist argument, and it is valid. Any reply must therefore deny the fatalist premise or factivity, and a theist cannot deny factivity.
+
+\begin{theorem}\label{t:main}
+For every option $c$, there is an open alternative in which the agent takes $c$ and God knows that she does.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:ability}, some open alternative $w$ is one in which the agent takes $c$. By Assumption~\ref{a:omni}, God knows at $w$ that she takes $c$.
+\end{proof}
+
+\begin{corollary}\label{c:false}
+If the agent has at least two options, the fatalist premise is false: God's knowledge differs between open alternatives in which the agent chooses differently.
+\end{corollary}
+
+\begin{proof}
+Let $c \neq c'$. By Assumption~\ref{a:ability} there are open alternatives $w$ and $w'$ in which the agent takes $c$ and $c'$. If the fatalist premise held, by Proposition~\ref{p:valid} she would take the actual option in both, so $c = c'$.
+\end{proof}
+
+\begin{corollary}\label{c:located}
+If the agent has at least two options, God's knowledge of her choice is not a temporally located fact obtaining before the choice.
+\end{corollary}
+
+\begin{proof}
+From Corollary~\ref{c:false} and Assumption~\ref{a:fixity}.
+\end{proof}
+
+\begin{proposition}\label{p:consistent}
+Assumptions~\ref{a:factive}, \ref{a:omni}, \ref{a:ability} and~\ref{a:fixity} are jointly consistent with the agent's having two options.
+\end{proposition}
+
+\begin{proof}
+Take two worlds, both open, in which the agent takes different options, let God know at each world exactly the option taken there, and let God's knowledge not be temporally located, so that Assumption~\ref{a:fixity} holds vacuously.
+\end{proof}
+
+Theorem~\ref{t:main} is the compatibility thesis: for each thing the agent can do, she can do it in a world where God knows she does it. Corollary~\ref{c:false} is the first half of our thesis, read across open alternatives: God's knowledge covaries with the agent's choice. Had she chosen otherwise, God would have known otherwise. Corollary~\ref{c:located} shows what this requires. Granting the fixity of the past without restriction, God's knowledge can covary with a free choice only if it is not a fact about a time before the choice. This is the conclusion of REL-19, that God is timeless, reached from the other direction: given freedom and the fixity of the past, the knowledge must be timeless.
+
+\section{The direction of dependence}
+
+Covariation is symmetric. If God would have known otherwise had the agent chosen otherwise, then, on a backtracking reading, the agent would have chosen otherwise had God known otherwise. Our thesis is that the dependence runs one way, and this requires a representation of dependence that is not symmetric. We use the interventionist representation of structural models \citep{Pearl2009}, on which $Y$ depends counterfactually on $X$ if setting $X$ to different values by intervention, while every other variable follows its own equation, yields different values of $Y$. This is the non-backtracking reading of counterfactuals that \citet{Lewis1979} took to govern ordinary counterfactual dependence.
+
+\begin{definition}\label{d:model}
+The \emph{foreknowledge model} has two variables, the choice $C$ and the content $K$ of God's knowledge, and two equations: $C = g(r, K)$, where $g$ is the agent's mechanism and $r$ her reasons; and $K = C$.
+\end{definition}
+
+The second equation encodes Assumptions~\ref{a:factive} and~\ref{a:omni}: God knows exactly the choice made. The first allows, for generality, that the content of God's knowledge might be an input to the agent's mechanism.
+
+\begin{assumption}\label{a:inert}
+The content of God's knowledge is not an input to the agent's mechanism: for all reasons $r$ and contents $k, k'$, $g(r,k) = g(r,k')$.
+\end{assumption}
+
+Assumption~\ref{a:inert} says that the agent deliberates from her reasons, and that what God knows does not enter her deliberation except through her reasons. Knowledge as such is not a cause: God's knowing that she will choose $c$ does not act on her. The case in which God's knowledge is communicated to her is a different case, discussed in Section~7.
+
+\begin{proposition}\label{p:solution}
+For any reasons, the model has exactly one solution, and in it God's knowledge is correct.
+\end{proposition}
+
+\begin{proof}
+Let $c = g(r, k_0)$ for any $k_0$. Then $(c, c)$ is a solution, since $g(r, c) = c$ by Assumption~\ref{a:inert}. If $(c, k)$ and $(c', k')$ are solutions, $c = g(r,k) = g(r,k') = c'$ by Assumption~\ref{a:inert}, and $k = c = c' = k'$. In any solution $k = c$ by the second equation.
+\end{proof}
+
+\begin{theorem}\label{t:asym}
+Intervening on the choice changes God's knowledge: distinct settings of $C$ yield distinct values of $K$. Intervening on God's knowledge does not change the choice: all settings of $K$ yield the same value of $C$.
+\end{theorem}
+
+\begin{proof}
+If $C$ is set to $x$, $K$ follows its equation and equals $x$; distinct settings give distinct values. If $K$ is set to $y$, $C$ follows its equation and equals $g(r, y)$, which by Assumption~\ref{a:inert} does not depend on $y$.
+\end{proof}
+
+Theorem~\ref{t:asym} is the second half of our thesis. God's knowledge depends counterfactually on the agent's choice; the agent's choice does not depend counterfactually on God's knowledge. The backtracking counterfactual \enquote{had God known otherwise, she would have chosen otherwise} is true on a reading that holds fixed the factivity of knowledge and lets the choice adjust, but that is the reading on which \enquote{had the barometer fallen, a storm would have come} is true, and it does not show that storms depend on barometers. The agent's choice is explained by her reasons, and God's knowledge by her choice.
+
+\section{Future contingents and timeless knowledge}
+
+ACT-17 argues that future contingents lack a truth value, and that fatalism is therefore unsupported. This appears to conflict with any doctrine of foreknowledge. If, at $t_0$, the proposition that the agent will take $c$ at $t_1$ is neither true nor false, then no one knows it at $t_0$, since knowledge requires truth. Divine foreknowledge would then be either impossible or a threat to the thesis of ACT-17.
+
+The conflict is genuine for temporally located foreknowledge, and we accept its conclusion: there is no knowledge, held at a time before a free choice, that the choice will be made. This agrees with Corollary~\ref{c:located}, which reaches the same conclusion from freedom and the fixity of the past rather than from truth-value gaps. A God who is in time, and who does not know future contingents because they lack truth values, is the God of open theism \citep{Hasker1989}.
+
+The conflict does not arise for timeless knowledge. In the branching-time semantics in which the thesis of ACT-17 is standardly formulated \citep{Prior1967,Thomason1970}, sentences are evaluated at a moment relative to a history passing through it, and a sentence is settled at a moment if it has the same value on every history through that moment. We read the thesis of ACT-17 as a thesis about truth at a moment: before $t_1$, \enquote{the agent will take $c$} is true on some histories through the present moment and false on others, and so has no truth value at that moment. A tenseless proposition, \enquote{the agent takes $c$ at $t_1$}, is evaluated relative to a history; relative to the actual history it is true. Timeless knowledge is not held at any moment, and so does not require that anything be settled at a moment before $t_1$. It requires only that the proposition known be true relative to the actual history, and which history is actual is fixed, in the relevant respect, by the agent's choice at $t_1$. There is no moment at which God knows and the choice is unsettled, because there is no moment at which God knows.
+
+The reconciliation therefore depends on REL-19. Without timelessness, Corollary~\ref{c:located} and ACT-17 together would exclude divine knowledge of future free choices, and the compatibility thesis would hold only vacuously, in the absence of foreknowledge. With timelessness, \enquote{foreknowledge} names knowledge of what is future relative to us, not knowledge held at an earlier time, and this knowledge is both real and compatible with freedom. The cost, recorded in REL-19, is that a timeless God lacks indexical knowledge of what time it is now. The present argument requires no indexical knowledge: the propositions in Assumption~\ref{a:omni} are tenseless.
+
+It may be objected that the appeal to \enquote{the actual history} reintroduces the thin red line that branching-time theorists reject: a privileged future singled out in advance \citep{BelnapGreen1994}. The objection to the thin red line is that it makes the future settled at a moment before it happens, in violation of the indeterminism that branching time was introduced to represent. The actual history, as we use it, is singled out by the choices made along it, not by any fact at a moment before them; that a given history is actual is not true at any moment before $t_1$. It is this fact, not settled at any earlier moment, on which God's timeless knowledge depends.
+
+\section{Objections}
+
+\begin{objection}[The Ockhamist redux]
+The view is Ockhamism under another name: it says that God's knowledge is not fixed because it depends on the future. Fischer's objections to Ockhamism, that God's past beliefs are hard facts even if their being knowledge is not, apply unchanged \citep{Fischer1989}.
+\end{objection}
+
+\begin{reply}
+The objections presuppose that God held a belief at a past time. The Ockhamist accepts this and argues that the past belief is soft; we deny it, by Corollary~\ref{c:located}, and grant Assumption~\ref{a:fixity} in full. There is no past divine belief, hard or soft, for the agent's choice to be constrained by. What the Ockhamist calls a soft fact about the past is, on our view, a timeless fact that is not about the past at all.
+\end{reply}
+
+\begin{objection}[Begging the question with Assumption~\ref{a:ability}]
+The fatalist denies that the agent has alternatives. To assume that she does, and conclude that God's knowledge is not fixed, is to assume what is in dispute.
+\end{objection}
+
+\begin{reply}
+The fatalist argument (Proposition~\ref{p:valid}) has two premises, factivity and the fatalist premise, and the dispute is about the second. Our argument shows that the fatalist premise and the agent's ability are incompatible, and gives an independent reason, timelessness, to reject the fatalist premise rather than the ability. The fatalist who holds that God's knowledge is temporally located must deny REL-19; she then faces ACT-17, on which there is no temporally located knowledge of future contingents to hold fixed. Either way the fatalist premise lacks support, and the agent's ability is left to be settled by the theory of free will, which is the subject of ACT-01.
+\end{reply}
+
+\begin{objection}[Inertness is stipulated]
+Assumption~\ref{a:inert} delivers the asymmetry of Theorem~\ref{t:asym} by fiat.
+\end{objection}
+
+\begin{reply}
+The asymmetry is the content of the assumption that the agent's deliberation does not take God's knowledge as input, and the theorem makes this explicit; it does not hide it. The assumption is the theological counterpart of the platitude that knowing that something will happen does not make it happen. It fails only if God's knowledge acts on the agent, which no theist holds of knowledge as such, or if it is communicated to her, which is a different case.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that agents can do otherwise; it establishes that divine knowledge does not prevent them. It does not establish that God is timeless, which is argued in REL-19; it shows that, given the fixity of the past, freedom requires that God's knowledge of free choices be timeless. It does not treat prophecy, in which God's knowledge is communicated at a time before the choice: the communication is a temporally located fact, and if its content is a future contingent, the thesis of ACT-17 applies to it. Nor does it treat middle knowledge, God's knowledge of what agents would freely do in circumstances that do not obtain, which raises a different problem about the grounding of counterfactuals of freedom.
+
+\section{Formalization}
+
+The results of Sections~3 and~4 are formalized in \nolinkurl{Philosophy/REL/REL_05.lean}. Worlds, the actual world, options, the agent's choice, God's knowledge, the open alternatives and the proposition that God's knowledge is temporally located (\texttt{Located}) are primitive constants; Assumptions~\ref{a:factive}--\ref{a:ability}, \ref{a:fixity} and~\ref{a:inert} are axioms; the fatalist premise and the interventions are defined. The main theorem reads:
+
+\begin{lstlisting}
+theorem compatibility (c : Choice) :
+    ∃ w, Open w ∧ choice w = c ∧ Knows w c
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_05.compatibility' depends on axioms:
+  [Choice, Knows, Open, World, ability, choice, omniscient]
+'Philosophy.REL_05.not_located' depends on axioms:
+  [Choice, Knows, Located, Open, World, ability, actual, choice,
+   factive, fixity, omniscient]
+'Philosophy.REL_05.asymmetry' depends on axioms:
+  [Choice, Reasons, choiceEq, inert]
+'Philosophy.REL_05.Model.consistent' does not depend on any axioms
+\end{lstlisting}
+
+\noindent Here \texttt{factive}, \texttt{omniscient}, \texttt{ability} and \texttt{fixity} are Assumptions~\ref{a:factive}, \ref{a:omni}, \ref{a:ability} and~\ref{a:fixity}; \texttt{inert} is Assumption~\ref{a:inert} and \texttt{choiceEq} the agent's mechanism of Definition~\ref{d:model}; the rest are primitive constants (namespace prefixes omitted). \texttt{not\_located} is Corollary~\ref{c:located}, \texttt{asymmetry} Theorem~\ref{t:asym}, and \texttt{Model.consistent} Proposition~\ref{p:consistent}, proved in a concrete two-world model. The lists confirm that Theorem~\ref{t:main} does not use factivity or the fixity of the past, and that the asymmetry of Theorem~\ref{t:asym} rests on inertness alone. The formalization does not represent branching time, and the argument of Section~5 is not formalized.
+
+\section{Conclusion}
+
+The fatalist argument is valid, and its crucial premise is that God's knowledge of a free choice is among the facts held fixed when we ask what the agent can do. Given the agent's ability, that premise is false: for every option, there is an open alternative in which she takes it and God knows she does, so God's knowledge varies with her choice and cannot be a fact about an earlier time. In a structural model, God's knowledge depends on her choice and her choice does not depend on God's knowledge. Divine foreknowledge, understood as the timeless knowledge of what is future relative to us, is therefore compatible with human freedom, and it is consistent with the thesis that future contingents lack a truth value at any moment before they are settled.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1967)]{Adams1967} Adams, M.~M. (1967). Is the existence of God a \enquote{hard} fact? \emph{The Philosophical Review}, 76(4), 492--503.
+\bibitem[Augustine(c.~395)]{AugustineLibero} Augustine (c.~388--395). \emph{De libero arbitrio}.
+\bibitem[Belnap and Green(1994)]{BelnapGreen1994} Belnap, N. and Green, M. (1994). Indeterminism and the thin red line. \emph{Philosophical Perspectives}, 8, 365--388.
+\bibitem[Boethius(c.~524)]{Boethius} Boethius (c.~524). \emph{De consolatione philosophiae}.
+\bibitem[Fischer(1989)]{Fischer1989} Fischer, J.~M. (Ed.) (1989). \emph{God, Foreknowledge, and Freedom}. Stanford University Press.
+\bibitem[Hasker(1989)]{Hasker1989} Hasker, W. (1989). \emph{God, Time, and Knowledge}. Cornell University Press.
+\bibitem[Lewis(1979)]{Lewis1979} Lewis, D. (1979). Counterfactual dependence and time's arrow. \emph{Noûs}, 13(4), 455--476.
+\bibitem[Merricks(2009)]{Merricks2009} Merricks, T. (2009). Truth and freedom. \emph{The Philosophical Review}, 118(1), 29--57.
+\bibitem[Pearl(2009)]{Pearl2009} Pearl, J. (2009). \emph{Causality: Models, Reasoning, and Inference} (2nd ed.). Cambridge University Press.
+\bibitem[Pike(1965)]{Pike1965} Pike, N. (1965). Divine omniscience and voluntary action. \emph{The Philosophical Review}, 74(1), 27--46.
+\bibitem[Plantinga(1986)]{Plantinga1986} Plantinga, A. (1986). On Ockham's way out. \emph{Faith and Philosophy}, 3(3), 235--269.
+\bibitem[Prior(1967)]{Prior1967} Prior, A.~N. (1967). \emph{Past, Present and Future}. Clarendon Press.
+\bibitem[Stump and Kretzmann(1981)]{StumpKretzmann1981} Stump, E. and Kretzmann, N. (1981). Eternity. \emph{The Journal of Philosophy}, 78(8), 429--458.
+\bibitem[Thomason(1970)]{Thomason1970} Thomason, R.~H. (1970). Indeterminist time and truth-value gaps. \emph{Theoria}, 36(3), 264--281.
+\bibitem[Zagzebski(1991)]{Zagzebski1991} Zagzebski, L.~T. (1991). \emph{The Dilemma of Freedom and Foreknowledge}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

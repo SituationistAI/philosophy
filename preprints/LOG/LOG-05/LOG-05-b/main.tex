@@ -1,0 +1,64 @@
+\documentclass{situationist-preprint}
+
+\title{Bridge Principles and the Preface}
+\msid{LOG-05-b}
+\msfamily{LOG-05}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{normativity of logic; bridge principles; preface paradox; Lockean belief; agglomeration}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-05-a argues that logic constrains belief only through a permissive single-premise bridge principle: if $A$ entails $C$, one ought not both believe $A$ and disbelieve $C$. We examine the preface case in detail. We show that the preface author satisfies the principle however many claims her book contains and whichever of their sub-conjunctions she believes, and that she violates it exactly when she believes a single proposition that entails the conjunction of her claims, such as the claim that her book is free of error. The principle thus forbids the one attitude that intuitively makes the preface author irrational, and permits the rest.
+\end{abstract}
+
+\section{The case}
+
+An author has written a book whose claims are $s_1, \ldots, s_n$. She has checked each, and believes each. She also knows that books of this kind contain errors, and believes $\neg(s_1 \wedge \cdots \wedge s_n)$: that her book contains at least one \citep{Makinson1965}. EPI-10 argues that her attitudes are rational. LOG-05-a shows that they violate every multi-premise bridge principle of negative polarity and that they satisfy the single-premise principle (B) (Lemma 3.2 and Corollary 3.7 there). The second claim deserves a closer look, since the author's belief state contains much more than the $n$ claims and the denial of their conjunction. She believes many conjunctions of her claims, many disjunctions, and much else.
+
+We represent her, as in LOG-05-a, as a Lockean believer with threshold $t > \tfrac12$ and a coherent credence function $P$ (Definition 3.4 there). Let $C = s_1 \wedge \cdots \wedge s_n$, and suppose that she believes each $s_i$ and disbelieves $C$, so that $P(\neg C) \geq t$.
+
+\begin{proposition}\label{p:safe}
+The author satisfies (B): there is no $A$ and $D$ such that $A \models D$, she believes $A$ and she disbelieves $D$.
+\end{proposition}
+
+\begin{proof}
+If $A \models D$, then $\neg D \models \neg A$, so $P(\neg D) \leq P(\neg A) = 1 - P(A)$. If she believes $A$, $P(A) \geq t > \tfrac12$, so $P(\neg D) < \tfrac12 < t$, and she does not disbelieve $D$.
+\end{proof}
+
+Proposition~\ref{p:safe} is Corollary 3.6 of LOG-05-a applied to the whole of her belief state, not only to the claims of the book. It holds whatever her sub-conjunctions are. If $t$ is close to $1$ and her claims are probabilistically independent with credence $1 - \varepsilon$ each, she believes the conjunction of any $m$ of them as long as $(1-\varepsilon)^m \geq t$, and disbelieves the conjunction of all of them once $1 - (1 - \varepsilon)^n \geq t$. Between these thresholds lie conjunctions she neither believes nor disbelieves. None of the conjunctions she believes entails anything she disbelieves.
+
+\begin{proposition}\label{p:unsafe}
+If the author believes a single proposition $A$ that entails $C$, she violates (B). In particular, she violates it if she believes that her book contains no error.
+\end{proposition}
+
+\begin{proof}
+She believes $A$, $A \models C$, and she disbelieves $C$. The proposition that the book contains no error entails each claim in it, and so entails $C$.
+\end{proof}
+
+By Proposition~\ref{p:safe}, a Lockean author cannot be in this position, and an author who is in it has a credence function that is not coherent or a threshold that does not separate belief from disbelief. Propositions~\ref{p:safe} and~\ref{p:unsafe} together say that (B) draws its line at agglomeration into a single proposition. The author may believe each claim, and conjunctions of few claims; she may not believe the proposition that her book is error-free while believing that it contains an error.
+
+\section{Why this is the right line}
+
+The verdicts match the intuitive assessment of the case. An author who writes \enquote{any errors that remain are my own} is not thought to have contradicted herself, although she asserts each claim of her book and the existence of an error among them. An author who says both \enquote{everything in this book is correct} and \enquote{this book contains an error} has contradicted herself, and the criticism is a logical one. The first author satisfies (B); the second violates it, with a single believed premise and a single disbelieved conclusion. A multi-premise principle cannot distinguish the two authors, since it condemns both; the absence of any bridge principle cannot distinguish them, since it condemns neither. (B) distinguishes them, and this is evidence that it captures the residual criticism of Principle P3 of LOG-05-a.
+
+\begin{objection}
+The preface sentence may be written into the book as one of its claims, $s_{n+1}$, so that the book itself is inconsistent. The author then believes each claim of an inconsistent set.
+\end{objection}
+
+\begin{reply}
+She does, and (B) does not forbid it. The set $\{s_1, \ldots, s_{n+1}\}$ is inconsistent, but no single member of it is, and no single member entails the negation of another unless the claims are logically redundant. (B) forbids her only to believe one inconsistent proposition, or to combine belief in one proposition with disbelief in a consequence. \citet{Christensen2004} argues on independent grounds that rational belief need not be consistent, and the analysis here locates the constraint that remains.
+\end{reply}
+
+\section{Conclusion}
+
+The preface author satisfies the permissive single-premise bridge principle in every belief she holds, however many claims her book contains and whichever of their conjunctions she believes. She would violate it only by believing a single proposition that entails all her claims, such as that her book is free of error, while believing that it contains one. That is the attitude that is irrational in the case, and it is the only one (B) forbids. The preface is compatible with the permissive bridge principle, and logic remains weakly normative for belief.
+
+\begin{thebibliography}{99}\small
+\bibitem[Christensen(2004)]{Christensen2004} Christensen, D. (2004). \emph{Putting Logic in Its Place: Formal Constraints on Rational Belief}. Oxford University Press.
+\bibitem[Makinson(1965)]{Makinson1965} Makinson, D.~C. (1965). The paradox of the preface. \emph{Analysis}, 25(6), 205--207.
+\end{thebibliography}
+
+\end{document}

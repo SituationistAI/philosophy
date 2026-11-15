@@ -1,0 +1,175 @@
+\documentclass{situationist-preprint}
+
+\title{On the Hard Problem of Consciousness\\[0.4em]\large Volume I: The Problem and the Structure of Physical Explanation}
+\msid{MND-01-a}
+\msfamily{MND-01}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript, Volume I of IV}
+\mslean{lean/Philosophy/MND/MND\_01.lean}
+\mskeywords{hard problem; consciousness; explanatory gap; two-dimensional semantics; Russellian monism; structuralism; physicalism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This work argues that the hard problem of consciousness can be solved. Consciousness is the intrinsic nature of physical structure, and the explanatory gap between physical and phenomenal truths arises because the same facts are presented in two ways: structurally, by physics, and intrinsically, in experience. Volume I states the problem and argues that physical explanation is structural: it tells us what physical entities do, not what they are in themselves. It then reconstructs the two-dimensional argument against materialism and shows, with a Lean formalization, that its premises entail a disjunction: either materialism is false, or Russellian monism is true. Taking materialism in the extended sense defended in MND-02, we conclude that Russellian monism is true, and that the zombie hypothesis is conceivable and primarily possible but not metaphysically possible. This locates the explanatory gap in the difference between two modes of presentation rather than between two kinds of fact. Volume II develops the account of modes of presentation, Volume III the metaphysics of Russellian monism, and Volume IV the combination problem.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Problem and the Structure of Physical Explanation & 1--371 \\
+II & Modes of Presentation and the Explanatory Gap & 372--744 \\
+III & Russellian Monism & 745--1,118 \\
+IV & The Combination Problem & 1,119--1,488 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+The hard problem of consciousness is the problem of explaining why physical processes in the brain are accompanied by experience: why there is something it is like to see red, feel pain or taste coffee \citep{Chalmers1995}. Much of the literature since Chalmers named the problem has divided into two camps. One holds that the problem cannot be solved within a physicalist framework and that consciousness is a fundamental, non-physical feature of the world. The other holds that there is no hard problem, either because consciousness is identical to physical processes and the appearance of a gap is a cognitive illusion, or because consciousness, in the sense that seems to generate the problem, does not exist.
+
+This work takes a third route, which is old but has been revived in the last two decades. Its central observation, due to Russell and Eddington, is that physics describes the world only in terms of structure and dynamics: it tells us how entities are related to one another and how they change, not what they are intrinsically. The one case in which we are acquainted with the intrinsic character of something physical is our own experience. The hypothesis that experience is the intrinsic character of at least some physical structure fills a gap in physics rather than adding something to it. The work defends this hypothesis and argues that it solves the hard problem, in the sense that it explains why there is an explanatory gap and why the gap does not reflect a gap in reality.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & The hard problem stated & 29 \\
+3 & Structure and dynamics & 58 \\
+4 & The two-dimensional argument & 97 \\
+5 & What the formalization establishes & 139 \\
+6 & Type-B physicalism and the phenomenal concept strategy & 162 \\
+7 & Illusionism & 214 \\
+8 & Dualisms & 259 \\
+9 & The Russellian alternative & 301 \\
+10 & Summary and plan of Volumes II to IV & 352 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+A theory of consciousness should answer two questions. The first is which physical processes are accompanied by which experiences: why seeing a ripe tomato involves an experience of red and not of green, and why some neural processes are conscious and others not. Call these the \emph{easy problems}, as Chalmers does, not because they are easy but because they are problems of specifying mechanisms, of the kind that cognitive science is equipped to solve. The second question is why any physical process is accompanied by experience at all. Even a complete account of the mechanisms underlying perception, attention and report seems to leave open why those mechanisms are not performed \enquote{in the dark}. This is the hard problem.
+
+The hard problem has been formulated in several ways: as the problem of the explanatory gap \citep{Levine1983}, as the problem of what it is like to be a subject \citep{Nagel1974}, as the problem of the conceivability of zombies \citep{Chalmers1996}, and as the problem of the knowledge that Mary lacks in her black-and-white room. MND-04 and MND-05 discuss the last two arguments. The present work takes the explanatory gap as its central formulation, because it isolates what the other arguments have in common: from a complete physical description of a system, no truth about its experience can be derived a priori.
+
+\section{The hard problem stated}
+
+Let $P$ be the conjunction of all microphysical truths about the world, and $Q$ an arbitrary phenomenal truth, for example that some subject is having a red experience. The hard problem can then be stated as a conditional claim and a question.
+
+\begin{principle}[The gap]\label{p:gap}
+The material conditional $P \to Q$ is not knowable a priori.
+\end{principle}
+
+The question is what follows from \ref{p:gap}. For most macroscopic truths that are not phenomenal, the corresponding conditional is knowable a priori, at least in principle. Given $P$, together with the information that one is located in a certain place at a certain time, a sufficiently able reasoner could derive that there is water in the glass, that the tide is coming in and that the gene for haemoglobin is expressed in this cell. If phenomenal truths are an exception, they are an exception that needs explaining.
+
+\section{Structure and dynamics}
+
+Physics characterizes its basic entities by their roles in laws. Mass is what resists acceleration and is a source of gravitation; charge is what is a source of the electromagnetic field and responds to it; the electron is whatever has a certain mass, charge and spin. These characterizations are relational: they say what an entity does, how it is disposed to interact with other entities, not what it is in itself. \citet{Russell1927} drew the conclusion that physics gives us knowledge of the abstract, mathematical structure of the physical world and leaves its intrinsic character unknown, and \citet{Eddington1928} added that the intrinsic nature that physics leaves open might be the stuff of consciousness.
+
+We state the observation as a principle.
+
+\begin{principle}[Structuralism about physics]\label{p:struct}
+The microphysical truths $P$ specify the structural and dynamical properties of the world and do not specify the intrinsic, categorical properties, if any, that realize them.
+\end{principle}
+
+\ref{p:struct} explains the exceptional status of phenomenal truths. A macroscopic truth such as \enquote{there is water in the glass} is itself structural: water is whatever plays the water role, and that something plays the role can be derived from a structural description. A phenomenal truth is not structural: \enquote{this is what red is like} does not say what role the experience plays but what it is like in itself. No derivation from structure alone yields a truth that is not about structure. \ref{p:gap} is therefore a consequence of \ref{p:struct} together with the non-structural character of phenomenal truths, and needs no further explanation.
+
+\citet{Stoljar2001} distinguished two conceptions of the physical. On the \emph{theory-based} conception, physical properties are those that physical theory tells us about; on the \emph{object-based} conception, they are the properties required by a complete account of the intrinsic nature of paradigmatic physical objects. \ref{p:struct} implies that the two conceptions come apart, and MND-02 argues that physicalism is true if \enquote{physical} is understood by reference to current physics and its foreseeable extensions. The present work proposes that the intrinsic natures left open by physics are among those foreseeable extensions: they are physical in the object-based sense, and they are phenomenal or protophenomenal.
+
+\section{The two-dimensional argument}
+
+The most rigorous version of the argument from the gap to the falsity of materialism is the two-dimensional argument \citep{Chalmers1996,Chalmers2009}. It distinguishes two kinds of possibility for a sentence. A sentence is \emph{primarily possible} if it is true at some world considered as actual, that is, if it could have turned out to be true, given how its terms pick out their referents. It is \emph{secondarily possible} if it is true at some world considered as counterfactual, given what its terms actually pick out. \enquote{Water is not H$_2$O} is primarily possible, since water could have turned out to be XYZ, but not secondarily possible, since water is in fact H$_2$O. Ideal conceivability is linked to primary possibility, and metaphysical possibility is secondary possibility.
+
+\begin{assumption}\label{a:2d}
+The following premises hold of the zombie hypothesis $P \wedge \neg Q$:
+\begin{enumerate}[label=(\alph*),nosep]
+\item $P \wedge \neg Q$ is ideally conceivable;
+\item if $P \wedge \neg Q$ is ideally conceivable, it is primarily possible;
+\item if $P \wedge \neg Q$ is primarily possible, then it is secondarily possible, or Russellian monism is true;
+\item if $P \wedge \neg Q$ is secondarily possible, materialism is false.
+\end{enumerate}
+\end{assumption}
+
+Premise (c) is the crucial one, and its disjunctive form is due to Chalmers himself. Primary and secondary possibility coincide for a sentence whose terms have the same primary and secondary intension, that is, whose terms pick out their referents in a way that does not depend on which world is actual. Phenomenal terms are plausibly of this kind: what it is like to see red is picked out by how it is like. Physical terms may not be: if \enquote{mass} picks out whatever intrinsic property actually plays the mass role, then its secondary intension depends on that property, and a world considered as actual in which the mass role is played by a non-phenomenal property is not a world in which mass, the actual property, lacks phenomenal character. This is the Russellian loophole.
+
+\begin{theorem}\label{t:dilemma}
+Materialism is false or Russellian monism is true.
+\end{theorem}
+
+\begin{proof}
+By (a) and (b), $P \wedge \neg Q$ is primarily possible. By (c), it is secondarily possible or Russellian monism is true. In the first case, materialism is false by (d).
+\end{proof}
+
+\begin{corollary}\label{c:russell}
+Given materialism, Russellian monism is true.
+\end{corollary}
+
+\begin{corollary}\label{c:gap}
+Given materialism, the zombie hypothesis is primarily possible but not secondarily possible.
+\end{corollary}
+
+Corollary~\ref{c:gap} is the formal statement of the thesis that the gap is between modes of presentation. The zombie hypothesis could have turned out to be true, for all we can tell a priori, because the physical terms in $P$ pick out their referents by structural roles that could have been played by non-phenomenal natures. But given what those terms actually pick out, it could not have been true, because the natures that actually play the roles are phenomenal. The same facts are presented structurally in $P$ and intrinsically in $Q$, and the conditional $P \to Q$ is a posteriori in the same way as \enquote{if the mass role is played, then this intrinsic nature is instantiated}. MND-05 reaches the corresponding conclusion that zombies are conceivable but impossible, and that the principle that ideal conceivability entails metaphysical possibility fails; Corollary~\ref{c:gap} explains where it fails.
+
+\subsection*{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_01.lean} states the four premises of Assumption~\ref{a:2d} as axioms over propositional constants and proves Theorem~\ref{t:dilemma} and Corollaries~\ref{c:russell} and~\ref{c:gap}.
+
+\begin{lstlisting}
+theorem dilemma : ¬ Materialism ∨ RussellianMonism
+
+theorem gap (m : Materialism) : PrimarilyPossible ∧ ¬ SecondarilyPossible
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_01.dilemma' depends on axioms:
+  [Philosophy.MND_01.Materialism, Philosophy.MND_01.RussellianMonism,
+   Philosophy.MND_01.SecondarilyPossible, Philosophy.MND_01.conceivable,
+   Philosophy.MND_01.cp, Philosophy.MND_01.primary_secondary,
+   Philosophy.MND_01.secondary_refutes]
+\end{lstlisting}
+
+\section{What the formalization establishes}
+
+The formal argument is propositional and short. Its value lies in showing exactly what a materialist must accept, given the premises Chalmers regards as most secure. A materialist who accepts (a), (b) and (d) must accept Russellian monism, and the only alternative is to reject one of the three. This puts pressure on the main materialist positions in the literature.
+
+\emph{Type-B physicalism} rejects (b): it holds that the zombie hypothesis is ideally conceivable but not primarily possible, because phenomenal concepts are special concepts whose connection to physical concepts is a posteriori \citep{Loar1990,Papineau2002,Balog2012}. Chapter~6 argues that this \enquote{phenomenal concept strategy} faces a dilemma \citep{Chalmers2007}: either the features of phenomenal concepts that explain the gap are themselves physically explicable, in which case the gap should close for them, or they are not, in which case the problem has been relocated rather than solved.
+
+\emph{Illusionism} rejects (a): it holds that the zombie hypothesis is not ideally conceivable, because phenomenal properties as we conceive them do not exist, and what we take to be phenomenal truths are artefacts of introspective representation \citep{Dennett1991,Frankish2016}. Chapter~7 argues that illusionism is coherent but that the illusion it posits is itself an experience, or else is not the kind of thing that could have seemed to us to be one. The meta-problem of why we judge that there is a hard problem \citep{Chalmers2018} is real, and any solution to the hard problem should solve it too; we argue in Volume~II that the present account does.
+
+\emph{Russellian monism} accepts all four premises and the materialism that MND-02 defends, and takes the second disjunct of Theorem~\ref{t:dilemma}. It has been developed in several forms \citep{Strawson2006,Goff2017,AlterNagasawa2015}. Its main difficulty is the combination problem: how the phenomenal or protophenomenal natures of microphysical entities combine to yield the unified experience of a subject \citep{Coleman2014}. Volume~IV is devoted to it; MND-01-d gives a preliminary treatment.
+
+The formalization does not settle the status of materialism itself. If materialism is false, Theorem~\ref{t:dilemma} is satisfied by its first disjunct and Russellian monism is not required. The argument for Russellian monism is therefore exactly as strong as the argument for materialism, which is that of MND-02, together with the argument that the Russellian position is a form of materialism in the relevant sense. The latter is the subject of Chapter~9 and of Volume~III.
+
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 6 to 10.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Alter and Nagasawa(2015)]{AlterNagasawa2015} Alter, T. and Nagasawa, Y. (Eds.) (2015). \emph{Consciousness in the Physical World: Perspectives on Russellian Monism}. Oxford University Press.
+\bibitem[Balog(2012)]{Balog2012} Balog, K. (2012). Acquaintance and the mind--body problem. In C.~Hill and S.~Gozzano (Eds.), \emph{New Perspectives on Type Identity}. Cambridge University Press.
+\bibitem[Chalmers(1995)]{Chalmers1995} Chalmers, D.~J. (1995). Facing up to the problem of consciousness. \emph{Journal of Consciousness Studies}, 2(3), 200--219.
+\bibitem[Chalmers(1996)]{Chalmers1996} Chalmers, D.~J. (1996). \emph{The Conscious Mind: In Search of a Fundamental Theory}. Oxford University Press.
+\bibitem[Chalmers(2007)]{Chalmers2007} Chalmers, D.~J. (2007). Phenomenal concepts and the explanatory gap. In T.~Alter and S.~Walter (Eds.), \emph{Phenomenal Concepts and Phenomenal Knowledge} (pp.~167--194). Oxford University Press.
+\bibitem[Chalmers(2009)]{Chalmers2009} Chalmers, D.~J. (2009). The two-dimensional argument against materialism. In B.~McLaughlin, A.~Beckermann and S.~Walter (Eds.), \emph{The Oxford Handbook of Philosophy of Mind} (pp.~313--335). Oxford University Press.
+\bibitem[Chalmers(2018)]{Chalmers2018} Chalmers, D.~J. (2018). The meta-problem of consciousness. \emph{Journal of Consciousness Studies}, 25(9--10), 6--61.
+\bibitem[Coleman(2014)]{Coleman2014} Coleman, S. (2014). The real combination problem: panpsychism, micro-subjects, and emergence. \emph{Erkenntnis}, 79(1), 19--44.
+\bibitem[Dennett(1991)]{Dennett1991} Dennett, D.~C. (1991). \emph{Consciousness Explained}. Little, Brown.
+\bibitem[Eddington(1928)]{Eddington1928} Eddington, A.~S. (1928). \emph{The Nature of the Physical World}. Cambridge University Press.
+\bibitem[Frankish(2016)]{Frankish2016} Frankish, K. (2016). Illusionism as a theory of consciousness. \emph{Journal of Consciousness Studies}, 23(11--12), 11--39.
+\bibitem[Goff(2017)]{Goff2017} Goff, P. (2017). \emph{Consciousness and Fundamental Reality}. Oxford University Press.
+\bibitem[Levine(1983)]{Levine1983} Levine, J. (1983). Materialism and qualia: the explanatory gap. \emph{Pacific Philosophical Quarterly}, 64(4), 354--361.
+\bibitem[Loar(1990)]{Loar1990} Loar, B. (1990). Phenomenal states. \emph{Philosophical Perspectives}, 4, 81--108.
+\bibitem[Nagel(1974)]{Nagel1974} Nagel, T. (1974). What is it like to be a bat? \emph{The Philosophical Review}, 83(4), 435--450.
+\bibitem[Papineau(2002)]{Papineau2002} Papineau, D. (2002). \emph{Thinking about Consciousness}. Oxford University Press.
+\bibitem[Russell(1927)]{Russell1927} Russell, B. (1927). \emph{The Analysis of Matter}. Kegan Paul.
+\bibitem[Stoljar(2001)]{Stoljar2001} Stoljar, D. (2001). Two conceptions of the physical. \emph{Philosophy and Phenomenological Research}, 62(2), 253--281.
+\bibitem[Strawson(2006)]{Strawson2006} Strawson, G. (2006). Realistic monism: why physicalism entails panpsychism. \emph{Journal of Consciousness Studies}, 13(10--11), 3--31.
+\end{thebibliography}
+
+\end{document}

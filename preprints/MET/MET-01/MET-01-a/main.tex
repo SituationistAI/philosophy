@@ -1,0 +1,185 @@
+\documentclass{situationist-preprint}
+
+\title{Why There Is Something Rather Than Nothing\\[0.4em]\large Volume I: The Measure of Nothing}
+\msid{MET-01-a}
+\msfamily{MET-01}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript, Volume I of III}
+\mslean{lean/Philosophy/MET/MET\_01.lean}
+\mskeywords{nothingness; empty world; modal plenitude; principle of indifference; van Inwagen; subtraction argument; sufficient reason}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Why is there something rather than nothing? This work argues that the question has an answer, and that the answer is modal: the empty world is not a stable possibility. Volume I develops an argument due to van Inwagen. If there are many ways for there to be something and only one way for there to be nothing, and if no way is privileged over another, then the probability that there is nothing is vanishingly small. The argument has been criticized because there is no uniform probability measure on a countably infinite set of worlds. We reconstruct it with a combinatorial measure over finite spaces of potential objects and prove that the measure of the empty world tends to zero as the number of potential objects grows. The argument thus survives the standard objection, at the cost of making explicit its two premises: a principle of plenitude for potential objects and a principle of indifference among their combinations. Both are defended. Volume II examines the subtraction argument, which purports to show that the empty world is possible, and argues that it is compatible with the present thesis. Volume III asks whether the answer given here is an explanation, and argues that it is, though not of the kind demanded by the principle of sufficient reason.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Measure of Nothing & 1--398 \\
+II & The Subtraction Argument and Its Converse & 399--811 \\
+III & Explanation, Sufficient Reason and the Brute Fact & 812--1,212 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+Leibniz called the question why there is something rather than nothing \enquote{the first question we have a right to ask} \citep[\S 7]{Leibniz1714}, and Heidegger called it the fundamental question of metaphysics \citep{Heidegger1935}. Both took it to call for a reason, and both thought that the reason, if there was one, lay outside the world whose existence it explained. Much twentieth-century philosophy concluded that the question is either unanswerable or confused. We think it is neither. It has a partial answer that can be given without leaving the world, by asking what the space of possibilities is like and where in it the empty world lies.
+
+The answer we defend has three parts, one for each volume. The first is probabilistic: among the possibilities, the empty world has measure zero. The second is modal: the empty world is possible in the weak sense that its description is consistent, but it is not stable, in a sense made precise in Chapter~7 of the present volume. The third is explanatory: the fact that there is something is explained by the structure of the space of possibilities, and this is the only kind of explanation the fact could have. The reader who wants only the argument may read Chapters~3 and~4 of the present volume, which contain it, together with its formalization.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & Forms of the question & 31 \\
+3 & Van Inwagen's argument & 64 \\
+4 & The combinatorial measure & 97 \\
+5 & What the formalization establishes & 131 \\
+6 & Measure and probability & 152 \\
+7 & Stability & 201 \\
+8 & The empty world and the null set & 259 \\
+9 & Objections & 301 \\
+10 & Summary and plan of Volumes II and III & 377 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+\subsection{The question}
+
+There is a world, and it contains things: particles, fields, stars, organisms. There might, it seems, have been none of these. The question why there is something rather than nothing asks why the actual world is not empty. It is not the question why there are these particular things rather than others, which is a question about the contents of the world; nor is it the question how the universe began, which is a question for physics. It is a question about the contrast between the actual world and a single alternative, the empty world, in which there are no concrete objects at all.
+
+The restriction to concrete objects is important. If numbers, sets and propositions exist necessarily, as MTH-01 argues for numbers, then there is no possible world in which there is nothing whatever, and the question in its unrestricted form has a trivial answer: there is something because there must be. That answer is correct but uninteresting. The interesting question concerns the concrete: why is there a concrete world?
+
+\subsection{Three kinds of answer}
+
+Answers to the question fall into three classes. \emph{Necessitarian} answers hold that the empty world is impossible: it is necessary that something concrete exists. Theistic answers are often of this form, since if God exists necessarily and is concrete, there is necessarily something concrete; REL-01 argues for the existence of a being of this kind. \emph{Probabilistic} answers hold that the empty world is possible but that its actuality would be overwhelmingly improbable. \emph{Deflationary} answers hold that the question has no answer, either because it is meaningless or because the existence of the world is a brute fact.
+
+This work defends an answer of the second kind, and argues in Volume~II that it is compatible with the most persuasive argument for the possibility of the empty world. It does not rely on any necessitarian answer, and it is compatible with the view that there are no necessary concrete beings. If REL-01 is correct, the present answer is redundant for the actual world but still informative about the structure of possibility.
+
+\section{Forms of the question}
+
+The question can be posed in at least four forms, which are often confused. (Q1) Why does anything concrete exist? (Q2) Why is the actual world non-empty rather than empty? (Q3) Why is it not the case that there is nothing? (Q4) What explains the fact that something exists? Q1 and Q4 ask for an explanation; Q2 asks for a contrastive explanation; Q3 asks for a reason against an alternative. The probabilistic answer addresses Q2 and Q3 directly: it says that, of the two alternatives, the non-empty one is overwhelmingly favoured by the structure of possibility. Whether it also addresses Q1 and Q4 is the subject of Volume~III.
+
+\citet{Nozick1981} canvassed a range of possible answers, including the suggestion that nothingness is unstable in the sense that \enquote{nothing} would itself produce something. We take up Nozick's metaphor of instability in Chapter~7, where we give it a precise sense that does not require nothing to have causal powers. \citet{Parfit1998} distinguished the question why anything exists from the question why this world exists, and argued that the selection of a world might be explained by a \enquote{selector}, such as goodness or simplicity, or by its absence. The present answer is selector-free: it does not explain why this world exists, only why the actual world is among the non-empty ones.
+
+\section{Van Inwagen's argument}
+
+\citet{vanInwagen1996} gave the following argument. There are infinitely many possible worlds. There is at most one empty world, since any two worlds containing no concrete objects are indiscernible. The probability of each world is the same, or at least no world has a probability greater than zero unless all do. Therefore the probability of the empty world is zero. Since there is something if and only if the empty world is not actual, the probability that there is something is one.
+
+The argument has been widely discussed and widely criticized \citep{Lowe1996,Grunbaum2004,Rundle2004}. Three objections are standard.
+
+\emph{The objection from measure.} There is no uniform, countably additive probability measure on a countably infinite set of worlds: if each world has probability zero, the probabilities sum to zero, not one; if each has the same positive probability, they sum to infinity. If the set of worlds is uncountable, a uniform measure requires more structure on the space than the argument provides. The conclusion that the empty world has probability zero therefore does not follow from the premises as stated.
+
+\emph{The objection from indifference.} The premise that all worlds are equally probable is an application of the principle of indifference, which is notoriously sensitive to the way possibilities are individuated. If the possibilities are partitioned into two cells, \enquote{something} and \enquote{nothing}, indifference assigns each probability one half.
+
+\emph{The objection from meaning.} It is not clear what the probability of a world could be. It cannot be a frequency, since there is only one actual world, and it cannot be a subjective credence if the argument is to explain anything about the world.
+
+We accept that the argument as van Inwagen stated it is vulnerable to the first objection, and we answer it in Chapter~4 by replacing the uniform measure on an infinite set with a limit of uniform measures on finite combinatorial spaces. The second objection is answered by a principle that fixes the individuation of possibilities: they are combinations of potential objects, not arbitrary propositions. The third objection is the subject of Chapter~6, where we argue that the measure in question is not a probability of actuality but a measure of the share of logical space a possibility occupies. The argument requires the following principles.
+
+\begin{principle}[Combinatorial plenitude]\label{p:plen}
+For every $n$, there are possible worlds containing $n$ potential concrete objects, and for any such objects, every combination of their existence and non-existence is possible.
+\end{principle}
+
+\begin{principle}[Combinatorial indifference]\label{p:ind}
+For a space of worlds generated by $n$ potential objects, each combination receives the same measure.
+\end{principle}
+
+\ref{p:plen} is a version of the combinatorial theory of possibility \citep{Armstrong1989}, applied to existence: whatever objects there could be, they could exist or fail to exist independently of one another. It is the same principle that underwrites the subtraction argument of Volume~II, which is why the two arguments are compatible. \ref{p:ind} fixes the individuation of possibilities that the second objection found arbitrary. The cells to which indifference applies are maximal combinations, not coarse-grained propositions such as \enquote{something exists}. This choice is not ad hoc: it is the individuation on which no possibility is a disjunction of others, and indifference applied to any coarser partition would give different measures to logically equivalent descriptions of the same space.
+
+\section{The combinatorial measure}
+
+\begin{definition}\label{d:space}
+Given $n$ potential concrete objects $a_1, \ldots, a_n$, the \emph{combinatorial space} $W_n$ is the set of assignments of existence or non-existence to each $a_i$. The \emph{empty world} in $W_n$ is the assignment on which no $a_i$ exists. The \emph{measure} of a set of worlds in $W_n$ is the number of its members divided by the number of members of $W_n$.
+\end{definition}
+
+\begin{proposition}\label{p:card}
+$W_n$ has $2^n$ members.
+\end{proposition}
+
+\begin{proposition}\label{p:unique}
+Exactly one member of $W_n$ is empty.
+\end{proposition}
+
+\begin{proof}
+By induction on $n$. For $n = 0$, the only world is the empty assignment. Each world in $W_{n+1}$ extends a world in $W_n$ by an assignment to $a_{n+1}$; it is empty if and only if it extends the empty world of $W_n$ and $a_{n+1}$ does not exist.
+\end{proof}
+
+By \ref{p:ind}, the measure of the empty world in $W_n$ is $1/2^n$.
+
+\begin{theorem}\label{t:vanish}
+For every $k \geq 1$ and every $n \geq k$, the measure of the empty world in $W_n$ is less than $1/k$.
+\end{theorem}
+
+\begin{proof}
+$k < 2^k \leq 2^n$.
+\end{proof}
+
+\begin{corollary}\label{c:something}
+For every $k \geq 1$ and every $n \geq k$, the measure of the set of non-empty worlds in $W_n$ is greater than $(k - 1)/k$.
+\end{corollary}
+
+By \ref{p:plen}, there is no finite bound on the number of potential concrete objects. Theorem~\ref{t:vanish} then says that the measure of the empty world tends to zero, and Corollary~\ref{c:something} that the measure of the non-empty worlds tends to one, as the space of potential objects is enlarged. This is van Inwagen's conclusion, obtained without a uniform measure on an infinite set. The limit is not itself a measure on an infinite space, and we do not claim that it is; we claim that every finite approximation to the space of possibilities assigns the empty world a measure that becomes arbitrarily small as the approximation improves, and that this is what \enquote{measure zero} should mean here. Chapter~6 compares this notion with the alternatives available in the theory of finitely additive and non-standard probability.
+
+The empty world is special in one more respect, which Chapter~7 develops into the notion of stability. Call two worlds of $W_n$ neighbours if they differ with respect to a single object. For $n \geq 2$, every non-empty world has at least $n - 1$ non-empty neighbours, whereas every one of the $n$ neighbours of the empty world is non-empty: the empty world is the only world none of whose neighbours shares its status. The empty world is thus maximally isolated in the space: any variation of it is a variation into something. This is the sense in which nothingness is unstable, and it is a structural property of the space, not a causal power of nothing.
+
+\subsection*{Formalization}
+
+The module \nolinkurl{Philosophy/MET/MET_01.lean} represents worlds as lists of Booleans and constructs $W_n$ by recursion on $n$. It proves Propositions~\ref{p:card} and~\ref{p:unique}, Theorem~\ref{t:vanish} and Corollary~\ref{c:something}. The main results are stated as follows.
+
+\begin{lstlisting}
+theorem unique_empty (n : Nat) : countEmpty (worlds n) = 1
+
+theorem vanishing (k n : Nat) (hn : k ≤ n) : k < 2 ^ n
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MET_01.unique_empty' depends on axioms: [propext, Quot.sound]
+'Philosophy.MET_01.vanishing' depends on axioms: [propext, Quot.sound]
+\end{lstlisting}
+
+The formal results depend on no philosophical premise. \ref{p:plen} enters through the definition of $W_n$, which includes every combination, and \ref{p:ind} through the definition of measure as a ratio of counts. Chapter~5 discusses what this division of labour between definitions and premises means for the status of the argument.
+
+\section{What the formalization establishes}
+
+The formalization establishes that, given the combinatorial space and the indifference measure, the measure of the empty world tends to zero. It is worth being clear about what this does and does not add to van Inwagen's argument.
+
+First, it removes the objection from measure. The conclusion is reached through finite spaces only, each of which carries a uniform measure without difficulty, and the limit is taken over the conclusions rather than over the spaces. Nothing in the argument requires a uniform measure on an infinite set.
+
+Second, it shows that the argument depends on the premises only through the definitions. This is a common pattern in the present collection, and it has a specific significance here. A critic who rejects the conclusion cannot point to a step in the proof. She must reject the definition of $W_n$, by denying that every combination of potential objects is possible, or the definition of measure, by denying that each combination is to count equally. These are exactly \ref{p:plen} and \ref{p:ind}, and the remaining chapters of this volume are devoted to them.
+
+Third, it makes visible a premise that van Inwagen's formulation hid: that the space of possibilities is generated by potential objects. On some views of modality there are no merely potential objects. On others, every object exists necessarily but is only contingently concrete. The necessitism of \citet{Williamson2013} is of the second kind. On that view, the question why there is something concrete becomes the question why some necessarily existing objects are concrete. The combinatorial argument transfers directly. Concreteness replaces existence in Definition~\ref{d:space}, $W_n$ becomes the space of assignments of concreteness to $n$ objects, and Theorem~\ref{t:vanish} holds unchanged. The argument is therefore neutral between contingentism and necessitism, and we shall not need to decide between them.
+
+Fourth, it shows how the present argument relates to the subtraction argument of \citet{Baldwin1996}, to which Volume~II is devoted. The subtraction argument proceeds from a world with finitely many concrete objects, each of which could fail to exist without the existence of any other being required, to the conclusion that a world with no concrete objects is possible. In the terms of Definition~\ref{d:space}, it argues that the empty world belongs to $W_n$, which \ref{p:plen} already grants. The subtraction argument establishes that nothing is possible; the measure argument establishes that it has measure zero. The two conclusions are compatible, as an event of probability zero may be possible. The refinements of the subtraction argument by \citet{RodriguezPereyra1997} and \citet{EfirdStoneham2005} are considered in Volume~II, where we argue that each strengthens the case for the possibility of the empty world without bearing on its measure.
+
+What the formalization does not establish is that a possibility of measure zero is not actual, or that it is unreasonable to expect it to be. Measure zero is not impossibility: a dart thrown at the real line hits some point, each of which had measure zero. Chapter~6 argues that the analogy fails for the empty world, because the empty world is not one point among many of the same kind but the unique point of its kind, and Chapter~7 develops this into the claim that the empty world, though possible, is not a stable possibility.
+
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 6 to 10.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Armstrong(1989)]{Armstrong1989} Armstrong, D.~M. (1989). \emph{A Combinatorial Theory of Possibility}. Cambridge University Press.
+\bibitem[Baldwin(1996)]{Baldwin1996} Baldwin, T. (1996). There might be nothing. \emph{Analysis}, 56(4), 231--238.
+\bibitem[Efird and Stoneham(2005)]{EfirdStoneham2005} Efird, D. and Stoneham, T. (2005). The subtraction argument for metaphysical nihilism. \emph{The Journal of Philosophy}, 102(6), 303--325.
+\bibitem[Grünbaum(2004)]{Grunbaum2004} Grünbaum, A. (2004). The poverty of theistic cosmology. \emph{The British Journal for the Philosophy of Science}, 55(4), 561--614.
+\bibitem[Heidegger(1935)]{Heidegger1935} Heidegger, M. (1953 [1935]). \emph{Einführung in die Metaphysik}. Niemeyer.
+\bibitem[Leibniz(1714)]{Leibniz1714} Leibniz, G.~W. (1714). \emph{Principes de la nature et de la grâce fondés en raison}.
+\bibitem[Lowe(1996)]{Lowe1996} Lowe, E.~J. (1996). Why is there anything at all? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 70, 111--120.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Parfit(1998)]{Parfit1998} Parfit, D. (1998). Why anything? Why this? \emph{London Review of Books}, 20(2) and 20(3).
+\bibitem[Rodriguez-Pereyra(1997)]{RodriguezPereyra1997} Rodriguez-Pereyra, G. (1997). There might be nothing: the subtraction argument improved. \emph{Analysis}, 57(3), 159--166.
+\bibitem[Rundle(2004)]{Rundle2004} Rundle, B. (2004). \emph{Why There Is Something Rather Than Nothing}. Clarendon Press.
+\bibitem[van Inwagen(1996)]{vanInwagen1996} van Inwagen, P. (1996). Why is there anything at all? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 70, 95--110.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

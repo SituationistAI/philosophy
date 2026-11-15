@@ -1,0 +1,344 @@
+\documentclass{situationist-preprint}
+
+\title{The Consequentializing Equivalence}
+\msid{ETH-02-a}
+\msfamily{ETH-02}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_02.lean}
+\mskeywords{consequentialism; deontology; consequentializing; agent-relative value; constraints; extensional equivalence; revealed preference}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Consequentialists hold that an act is right if and only if its outcome is best; deontologists hold that some acts are forbidden, or permitted, whatever their outcomes. We argue that the opposition is not a disagreement about which acts are right. On any finite choice structure in which the outcome of an option records the option and the situation in which it is taken, a deontic theory is extensionally equivalent to a consequentialist theory with an agent-relative value function if and only if it forbids nothing unavailable and generates no dilemmas; every consequentialist theory is such a theory; and the two translations are mutually inverse up to equivalence. Since there are no genuine moral dilemmas, every deontological theory has a consequentialist counterpart, and conversely. We show what the counterparts must look like: coarse, agent-neutral value functions do not suffice, as Horton's all-or-nothing case and the classical agent-centered constraints show, but lexical constraints are represented by finite penalties. We conclude that the dispute between consequentialism and deontology, as a dispute about the right, is notational. The proofs are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Two families of theory have dominated normative ethics since the nineteenth century. On the consequentialist view, the rightness of an act depends only on the goodness of its outcome, and an act is right if and only if no alternative has a better outcome. \citet[ch.~5]{Moore1903} gave the view its canonical statement: to say that an act is one's duty is to say that it will produce more good than any possible alternative. On the deontological view, there are acts that are forbidden even when their outcome would be best, such as killing an innocent person to prevent two other killings, and acts that are permitted even when their outcome is not best, such as spending one's evening on one's own projects rather than on the relief of distant suffering. \citet{Ross1930} gave the view its classical form, with a plurality of prima facie duties, including duties of fidelity and reparation, that do not reduce to the duty to promote the good; \citet{Nozick1974} gave it its sharpest structural statement, contrasting moral \emph{side constraints} on action with moral \emph{goals} to be promoted.
+
+\citet[\S 5]{Rawls1971} drew the distinction in terms of the relation between the right and the good: teleological theories define the good independently of the right and the right as what maximizes the good; deontological theories are all those that are not teleological. On this definition the two families exhaust the field, and the question which of them is correct appears to be the central question of normative ethics. It is the question this manuscript addresses.
+
+We argue that, as a question about which acts are right, it has no answer, because there is nothing for it to be about. Every deontological theory is extensionally equivalent to a consequentialist theory with a suitable value function, and every consequentialist theory is extensionally equivalent to a deontological theory. The dispute is notational: it concerns which of two equivalent representations of a deontic structure to take as primitive, not which acts are permissible.
+
+The thesis is not new in outline. It is the thesis that consequentializers have defended for three decades \citep{Dreier1993,Dreier2011,Portmore2007,Portmore2009}, and against which \citet{Brown2011} has argued that some deontological theories cannot be consequentialized. What we add is a precise statement of the equivalence on finite choice structures, an exact characterization of the theories for which it holds, a proof that the characterization is met by every theory without dilemmas, and an account of what the value functions must be like, including the conditions under which coarser value functions suffice. The characterization shows that the objections to consequentializing that have been thought decisive either rest on a choice of outcome individuation that the deontologist herself has reason to reject, or concern something other than the extension of the right.
+
+\subsection{A history of the debate}
+
+The idea that a non-consequentialist theory might be represented as consequentialist is older than the word ``consequentializing''. Its history can be told as a sequence of proposals, each of which was met by a case it seemed unable to handle.
+
+\paragraph{Neutral value and the constraint.} The first proposal, implicit in Moore, is that the value to be promoted is agent-neutral: the same ranking of outcomes applies to every agent. A deontologist who accepts a constraint against killing might try to capture it by giving killings great negative value. \citet{Nozick1974} showed why this fails. If killings are bad and the agent is to minimize them, then she may kill one person to prevent two killings by others, which is exactly what the constraint forbids. Nozick called the resulting view a ``utilitarianism of rights'' and contrasted it with a theory of side constraints, on which the agent is not to violate rights herself, even to minimize violations by others. The case that defeated the neutral proposal is the case of the constraint: an agent-centered restriction cannot be represented by any agent-neutral ranking of outcomes described by the number of violations.
+
+\paragraph{Evaluator relativity.} \citet{Sen1982} responded that the evaluation of states of affairs may be relative to the evaluator. The state in which I kill one may be worse, from my point of view, than the state in which two others kill two, while the reverse holds from the point of view of a bystander. Sen called a theory that combines such evaluator-relative rankings with the requirement to choose the best a ``goal rights system'' and argued that it could capture much of what deontologists want without abandoning the evaluation of outcomes. \citet{Scheffler1982} had meanwhile separated two features of common-sense morality: agent-centered \emph{prerogatives}, which permit agents not to maximize the good, and agent-centered \emph{restrictions}, which forbid them to do certain things even to maximize it. He accepted the first and rejected the second, on the ground that restrictions appear paradoxical: if violating a constraint is bad, it is puzzling that one may not violate it to prevent more violations. The paradox presupposes neutral evaluation; with evaluator-relative value, it is not puzzling that each agent's ranking puts her own violations below the violations of others.
+
+\paragraph{The general representation.} \citet{Vallentyne1988} and \citet{OddieMilne1991} asked how far the representation could be pushed. Oddie and Milne gave a general result to the effect that a wide class of moral theories can be represented as maximizing an appropriate value function, while Vallentyne argued that such representations are ``gimmicky'': a value function built to reproduce the verdicts of a theory does no independent work. \citet{Dreier1993} drew the moral that has guided the subsequent debate. If agent-relative value is admitted, then every theory of the familiar sort can be represented as consequentialist, and the distinction that matters is not that between consequentialism and deontology but that between agent-neutral and agent-relative theories. \citet{Smith2003} argued in the same direction, that relative value is the natural generalization of the Moorean framework and that the theories it makes available include the deontological ones.
+
+\paragraph{The deontic equivalence thesis.} \citet{Portmore2007,Portmore2009} gave the view its most explicit statement, as the thesis that for every plausible non-consequentialist theory there is a consequentialist theory that is deontically equivalent to it, in the sense that the two yield the same verdicts about every act in every choice situation. Portmore's recipe takes the outcome of an act to include the act itself, so that the value function can rank an outcome lower because it contains the agent's breaking a promise or killing an innocent. \citet{Louise2004} examined the cost of this generality: once value is relativized to agents and times, the consequentialist umbrella can be stretched over every theory, and it becomes unclear what consequentialism, as a distinctive position, still asserts. \citet{Sachs2010} pressed the point as a dilemma: if consequentializing succeeds universally, consequentialism no longer says anything that its rivals deny.
+
+\paragraph{Resistance.} Three lines of resistance have emerged. The first, due to \citet{Schroeder2007}, concerns the notion of agent-relative goodness. The appeal of consequentialism rests on the thought that it is always permissible to bring about the best outcome; but ``good'' in that thought is not agent-relative, and the agent-relative ``good-relative-to'' introduced by the consequentializer is not a notion we antecedently understand. The second, due to \citet{Brown2011}, is structural. Brown characterizes consequentialism by three conditions, agent-neutrality, the absence of moral dilemmas and a dominance condition, and argues that the last two are substantive: a theory that admits dilemmas, or that violates dominance, cannot be consequentialized, whatever value function is chosen. The third, due to \citet{Hurley2013}, turns the consequentializer's argument around. If every theory can be consequentialized, every theory can equally be ``deontologized'', and the extensional equivalence then gives no support to the consequentialist framework over its rival. We agree with Hurley's conclusion and draw from it the thesis of this manuscript: the equivalence is symmetric, and its symmetry is what makes the dispute notational.
+
+\paragraph{The question of individuation.} Running through the debate is the question how finely outcomes are to be individuated. \citet[ch.~5]{Broome1991} showed, for rational choice generally, that sufficiently fine individuation can make any pattern of choice consistent with maximizing, and argued that the individuation must therefore be disciplined by an independent account of which differences between outcomes can rationally matter. The moral case is parallel. If the outcome of an act includes everything about the act and its circumstances, every theory without dilemmas can be represented; if outcomes are individuated coarsely, by the welfare of those affected, many cannot. The question is which individuation is legitimate for the purpose of comparing theories, and we argue in Section~\ref{s:notational} that the answer is fixed by what the theories themselves treat as relevant.
+
+\section{Framework}\label{s:framework}
+
+We work with finite choice structures. The finiteness assumption is not a limitation for ethics, since any actual agent faces finitely many options in any situation, and it allows a value function with natural-number values to represent any ranking of a menu.
+
+\begin{definition}[Choice structure]\label{d:structure}
+A \emph{choice structure} consists of a set of agents, a set of situations, a set of options and a set of outcomes, together with: (a) for each agent $i$ and situation $s$, a finite nonempty \emph{menu} $M_i(s)$ of options open to $i$ in $s$; and (b) for each agent $i$, situation $s$ and option $a$, the \emph{outcome} $o_i(s,a)$ of $i$'s taking $a$ in $s$.
+\end{definition}
+
+\begin{definition}[Deontic theory]\label{d:deontic}
+A \emph{deontic theory} $D$ assigns to each agent $i$, situation $s$ and option $a$ a verdict, permissible or not; we write $D_i(s,a)$ when $a$ is permissible for $i$ in $s$. $D$ is \emph{admissible} if it permits only available options: $D_i(s,a)$ implies $a \in M_i(s)$. An option is \emph{obligatory} if it is the only permissible option, and \emph{forbidden} if it is available and not permissible.
+\end{definition}
+
+\begin{definition}[Consequentialist theory]\label{d:conseq}
+An \emph{agent-relative value function} $V$ assigns to each agent $i$ and outcome $o$ a natural number $V_i(o)$. The \emph{consequentialist theory} $C_V$ with value function $V$ permits $a$ to $i$ in $s$ if and only if $a \in M_i(s)$ and $V_i(o_i(s,b)) \leq V_i(o_i(s,a))$ for every $b \in M_i(s)$. $V$ is \emph{agent-neutral} if $V_i = V_j$ for all agents $i,j$.
+\end{definition}
+
+On a finite structure, any real-valued ranking of the outcomes in each menu can be replaced by a natural-valued one with the same maxima, so the restriction to natural numbers loses no generality for the purpose of verdicts.
+
+\begin{definition}[Extensional equivalence]\label{d:equiv}
+Deontic theories $D$ and $E$ are \emph{extensionally equivalent} if $D_i(s,a)$ holds exactly when $E_i(s,a)$ holds, for every agent, situation and option. A deontic theory is \emph{consequentializable} if it is extensionally equivalent to some consequentialist theory.
+\end{definition}
+
+\begin{definition}[Act-inclusive outcomes]\label{d:inclusive}
+The outcomes of a choice structure are \emph{act-inclusive} if the outcome of an option records the situation and the option: whenever $o_i(s,a) = o_i(s',a')$, we have $s = s'$ and $a = a'$.
+\end{definition}
+
+Two substantive assumptions frame the argument.
+
+\begin{assumption}[Individuation]\label{a:individuation}
+For the purpose of evaluating an agent's options, the outcome of an option includes the fact that the agent took that option in that situation. Outcomes are therefore act-inclusive.
+\end{assumption}
+
+\begin{assumption}[No dilemmas]\label{a:nodilemmas}
+In every situation, every agent has at least one permissible option.
+\end{assumption}
+
+Assumption~\ref{a:individuation} is the consequentializer's standard individuation \citep{Portmore2007,Dreier2011}. It is weaker than it may seem. It does not say that the value of an outcome depends on the act it contains; it says only that the outcome contains enough information for the value to depend on the act, if the theory makes it so. When I break a promise, the world in which I do so contains my breaking it, and the situation in which I faced the choice, including the alternatives I declined, is part of the history of that world. A value function that ignores these facts is available; Assumption~\ref{a:individuation} merely does not require us to use it. We return in Section~\ref{s:coarse} to what is lost if outcomes are individuated more coarsely.
+
+Assumption~\ref{a:nodilemmas} is the conclusion of ETH-15, which argues that every apparent moral dilemma has a uniquely permissible option. We use only the weaker claim that some option is permissible. A deontic theory that violates the assumption is one on which an agent may find herself in a situation where whatever she does is wrong, and the argument of ETH-15 is that no correct theory has this feature. For the purposes of the present manuscript we take it as a premise; Theorem~\ref{t:equivalence} below shows that it is exactly the premise needed.
+
+\begin{definition}[The two families]\label{d:families}
+A \emph{deontological theory} is an admissible deontic theory satisfying Assumption~\ref{a:nodilemmas}, presented by rules that classify options by their features (constraints, permissions and duties) rather than by the ranking of their outcomes. A \emph{consequentialist theory} is a theory $C_V$ for some agent-relative value function $V$.
+\end{definition}
+
+Definition~\ref{d:families} makes the two families differ in presentation: a deontological theory is given by rules, a consequentialist one by a value function. Whether they differ in extension is the question.
+
+\section{The equivalence}\label{s:equivalence}
+
+\begin{lemma}[Finite maxima]\label{l:max}
+For every agent-relative value function $V$, agent $i$ and situation $s$, some option in $M_i(s)$ has an outcome whose value for $i$ is at least that of every other option in $M_i(s)$.
+\end{lemma}
+
+\begin{proof}
+By induction on the length of the menu, which is finite and nonempty by Definition~\ref{d:structure}. A one-element menu has its element as maximum. For a longer menu, take a maximal element of the menu without its first option, which exists by the induction hypothesis, and compare it with the first option; the greater of the two is maximal in the whole menu.
+\end{proof}
+
+The value function we use to consequentialize a deontic theory is the simplest one that could serve.
+
+\begin{definition}[Indicator value]\label{d:indicator}
+The \emph{indicator value function} of a deontic theory $D$ assigns to agent $i$ and outcome $o$ the value $1$ if $o$ is the outcome, for $i$, of some option that $D$ permits to $i$ in some situation, and $0$ otherwise.
+\end{definition}
+
+\begin{theorem}[From deontology to consequentialism]\label{t:cons}
+Given act-inclusive outcomes, every admissible deontic theory without dilemmas is extensionally equivalent to the consequentialist theory whose value function is its indicator value function.
+\end{theorem}
+
+\begin{proof}
+Let $D$ be admissible and without dilemmas, and let $V$ be its indicator value function. Suppose first that $D_i(s,a)$. Then $a$ is available, by admissibility, and $V_i(o_i(s,a)) = 1$, which is the greatest value $V$ takes; so $a$ is maximal and $C_V$ permits it. Suppose conversely that $C_V$ permits $a$ to $i$ in $s$. Since $D$ has no dilemmas, some $b \in M_i(s)$ is permitted by $D$, so $V_i(o_i(s,b)) = 1$, and since $a$ is maximal, $V_i(o_i(s,a)) = 1$ as well. By the definition of $V$, $o_i(s,a)$ is the outcome of some option $a'$ that $D$ permits to $i$ in some situation $s'$. Since outcomes are act-inclusive, $s' = s$ and $a' = a$, so $D_i(s,a)$.
+\end{proof}
+
+\begin{theorem}[From consequentialism to deontology]\label{t:deont}
+Every consequentialist theory is an admissible deontic theory without dilemmas.
+\end{theorem}
+
+\begin{proof}
+$C_V$ permits only available options by definition. By Lemma~\ref{l:max}, every menu contains a maximal option, which $C_V$ permits.
+\end{proof}
+
+Theorem~\ref{t:deont} holds for every outcome individuation, coarse or fine; only the passage from deontology to consequentialism needs Assumption~\ref{a:individuation}. A consequentialist theory is turned into a deontological theory, in the sense of Definition~\ref{d:families}, by stating its verdicts as rules: for each situation and each non-maximal option, a constraint forbidding that option there. The rule ``do not choose an option when an available alternative has a better outcome'' is a single constraint that generates all of them, and it is no less a rule for being general.
+
+\begin{theorem}[The consequentializing equivalence]\label{t:equivalence}
+Given act-inclusive outcomes, a deontic theory is consequentializable if and only if it is admissible and has no dilemmas.
+\end{theorem}
+
+\begin{proof}
+If $D$ is admissible and has no dilemmas, it is equivalent to the consequentialist theory of its indicator value function by Theorem~\ref{t:cons}. Conversely, if $D$ is equivalent to $C_V$, then $D$ is admissible and has no dilemmas because $C_V$ is, by Theorem~\ref{t:deont}, and both properties are preserved by extensional equivalence.
+\end{proof}
+
+By Assumption~\ref{a:nodilemmas}, every deontological theory in the sense of Definition~\ref{d:families} satisfies the right-hand side of Theorem~\ref{t:equivalence}, and so has a consequentialist counterpart; by Theorem~\ref{t:deont}, every consequentialist theory has a deontological counterpart. The two families coincide in extension.
+
+The equivalence is not merely a matching of classes. The translations between the two forms of presentation are inverse to each other, in the following sense.
+
+\begin{corollary}[Notational variants]\label{c:variants}
+Let $\tau$ send each admissible deontic theory without dilemmas to the consequentialist theory of its indicator value function, and let $\sigma$ send each value function $V$ to the deontic theory $C_V$. Given act-inclusive outcomes, $\sigma(\tau(D))$ is extensionally equivalent to $D$ for every such $D$, and $\tau(\sigma(V))$ is extensionally equivalent to $C_V$ for every $V$.
+\end{corollary}
+
+\begin{proof}
+The first claim is Theorem~\ref{t:cons}. For the second, $C_V$ is admissible and has no dilemmas by Theorem~\ref{t:deont}, so Theorem~\ref{t:cons} applies to it.
+\end{proof}
+
+The two round trips differ in one respect, which is instructive. Going from a theory to its indicator value function and back returns the same verdicts. Going from a value function to its verdicts and back returns a different value function, the indicator, with the same verdicts but a coarser structure: it no longer records how much better one non-maximal outcome is than another. That information is idle for the purpose of verdicts. It becomes relevant for other purposes, notably for choice under uncertainty and for comparisons across theories, and we return to it in Section~\ref{s:notestablished}.
+
+\section{What the value function must look like}\label{s:coarse}
+
+Theorem~\ref{t:cons} uses the coarsest value function and the finest outcomes. The critics of consequentializing are right that this combination makes the value function look like a relabelling of the verdicts \citep{Vallentyne1988}. A more informative representation uses a value function that is not built from the verdicts and outcomes individuated more coarsely. The results of this section show how far coarsening can go before representation fails, and that where it fails, it fails because a feature that the deontologist counts as relevant has been left out of the outcome.
+
+\begin{definition}[Coarse outcomes]\label{d:coarse}
+The outcomes of a choice structure are \emph{coarse} if the outcome of an option does not depend on the situation in which it is taken: $o_i(s,a) = g_i(a)$ for some function $g$.
+\end{definition}
+
+\begin{proposition}[Contraction consistency]\label{p:contraction}
+With coarse outcomes, every consequentialist theory satisfies contraction consistency: if $a$ is permissible for $i$ in $s$, and $s'$ is a situation whose menu contains $a$ and is contained in the menu of $s$, then $a$ is permissible for $i$ in $s'$.
+\end{proposition}
+
+\begin{proof}
+If $a$'s outcome is ranked at least as high as that of every option in $M_i(s)$, it is ranked at least as high as that of every option in the smaller menu $M_i(s')$, since outcomes do not change with the situation.
+\end{proof}
+
+Contraction consistency is Sen's condition $\alpha$ on choice functions \citep{Sen1971}. In the theory of revealed preference, a choice function on a domain of menus can be rationalized by a single ranking only if it satisfies a family of consistency conditions of this kind; on rich domains, $\alpha$ together with an expansion condition is also sufficient \citep{Arrow1959,Sen1971}, and on arbitrary domains the necessary and sufficient condition is Richter's congruence axiom \citep{Richter1966}. Brown's dominance condition belongs to the same family \citep{Brown2011}. Proposition~\ref{p:contraction} is therefore the moral counterpart of a familiar point in choice theory: maximization over coarse outcomes imposes consistency across menus.
+
+Some deontological verdicts violate it.
+
+\begin{proposition}[Horton's case]\label{p:horton}
+Consider an agent who can save no child, one child, or two children trapped in a collapsing building, where entering costs her an arm whether she saves one or two. Suppose the verdicts are: when all three options are available, saving none and saving both are permissible and saving one is not; when saving both is not available, saving one is permissible. Then no value function on coarse outcomes yields these verdicts. An act-inclusive value function, which records whether saving both was available, yields them.
+\end{proposition}
+
+\begin{proof}
+Suppose a value function $v$ on the three options yields the verdicts. Since saving one is permissible in the smaller menu, $v(\text{none}) \leq v(\text{one})$. Since saving none is permissible in the larger menu, $v(\text{both}) \leq v(\text{none})$. Hence every option in the larger menu has value at most $v(\text{one})$, so saving one is permissible in the larger menu, contrary to the verdicts. For the second claim, give value $0$ to saving one when saving both was available, and value $1$ to every other option in every menu.
+\end{proof}
+
+The verdicts are those of \citet{Horton2017}, whose ``all or nothing problem'' was introduced to show a tension between the permission not to bear great costs to save others and the requirement not to let die gratuitously. Proposition~\ref{p:horton} shows that the verdicts violate contraction consistency, and hence that they are beyond the reach of any coarse consequentialism. It does not show that they are beyond the reach of consequentialism. The outcome of saving one child when one could have saved both, at no further cost, contains a gratuitous letting die; the outcome of saving one child when saving both was impossible does not. The deontologist who holds Horton's verdicts holds them because of this difference, and an outcome that records it is individuated by a feature she herself treats as relevant.
+
+The second classical obstacle is the agent-centered constraint.
+
+\begin{proposition}[Constraints need relativity]\label{p:relativity}
+Consider the verdicts that an agent may not kill one person to prevent two killings by others, and may prevent one of two killings by others when doing so costs nothing. No agent-neutral value function on the total number of killings yields both verdicts. An agent-relative value function on the pair (killings by the agent, killings by others) yields both.
+\end{proposition}
+
+\begin{proof}
+The first verdict requires the outcome with one killing to be ranked strictly below the outcome with two, since killing is forbidden and refraining is the only alternative; the second requires the outcome with one killing to be ranked at least as high as that with two. For the second claim, let the value of an outcome with $m$ killings by the agent and $n$ killings by others be $10 - 5m - n$. Killing gives $5$ and refraining $8$; preventing gives $9$ and not preventing $8$.
+\end{proof}
+
+Proposition~\ref{p:relativity} is Nozick's point in formal dress, and its second half is Sen's and Dreier's reply. The value function that works is agent-relative in exactly the sense that the constraint is agent-centered: each agent's ranking counts her own killings more heavily than the killings of others.
+
+A deontologist may object that constraints are not weighty but lexically prior: no amount of good outweighs a violation. Lexical priority is often thought to resist numerical representation. On a finite structure it does not.
+
+\begin{definition}[Lexical constraint theory]\label{d:lexical}
+Let $c(a)$ be the number of constraint violations by the agent in option $a$ and $g(a)$ the impersonal good of its outcome. The \emph{lexical constraint theory} permits $a$ if and only if $a$ minimizes $c$ in the menu and, among options that minimize $c$, maximizes $g$. If $g(a) \leq B$ for every option, the \emph{weighted cost} of $a$ is $(B+1)\,c(a) + (B - g(a))$.
+\end{definition}
+
+\begin{proposition}[Finite representation of lexical constraints]\label{p:lexical}
+If the good is bounded by $B$, the lexical constraint theory coincides with the theory that minimizes the weighted cost, that is, with the consequentialist theory whose agent-relative value is the negation of the weighted cost.
+\end{proposition}
+
+\begin{proof}
+It suffices to compare two options $a$ and $b$. If $c(a) < c(b)$, the weighted cost of $a$ is at most $(B+1)c(a) + B$, which is less than $(B+1)(c(a)+1) \leq (B+1)c(b)$, so $a$ is cheaper; and the lexical theory prefers $a$. If $c(a) > c(b)$, the same reasoning shows that $b$ is cheaper, and the lexical theory prefers $b$. If $c(a) = c(b)$, the weighted costs differ only in the terms $B - g(a)$ and $B - g(b)$, so $a$ is at least as cheap as $b$ exactly when $g(a) \geq g(b)$, which is the lexical comparison.
+\end{proof}
+
+The penalty needed is one unit more than the whole range of the good at stake. This is the precise sense in which, in the consequentialized counterpart of a constraint theory, the prohibitions appear as very large but finite differences in value, and it is the sense used in MTE-16, which treats deontological theories under moral uncertainty by way of their consequentialized counterparts. Threshold deontology, on which a constraint may be infringed when the good at stake exceeds a threshold $t$, is represented in the same way by a penalty of $t$ per violation, so that an option involving one violation is preferred to a non-violating alternative exactly when its good exceeds that alternative's by more than $t$.
+
+The results of this section locate the cost of consequentializing exactly. Coarse, agent-neutral value functions suffice for theories that satisfy contraction consistency and make no agent-centered distinctions; Propositions~\ref{p:horton} and~\ref{p:relativity} show that common-sense deontology is not among them. Agent-relative values on outcomes individuated by the features the theory counts as relevant suffice in every case, by Theorem~\ref{t:equivalence}, and in the central cases they can be chosen to be informative, as Proposition~\ref{p:lexical} shows for constraints.
+
+\section{Cases}\label{s:cases}
+
+We apply the construction to five deontological doctrines.
+
+\paragraph{The redirected threat.} ETH-03 argues that, in trolley cases, it is permissible to redirect an existing threat so that it harms fewer people and impermissible to introduce a new threat to a person in order to save others. The doctrine of the redirected threat is a deontic rule, stated in terms of features of acts. It is admissible and, since doing nothing is always permissible under it, has no dilemmas. By Theorem~\ref{t:equivalence} it has a consequentialist counterpart. The counterpart's value function ranks, for each agent, outcomes in which she has introduced a new threat to someone below outcomes in which she has not, and, among outcomes in which she has introduced none, does not rank outcomes in which she redirected a threat so as to kill at least as many as it saves above the outcome of doing nothing. ETH-03 leaves open whether the doctrine can be justified by a deeper theory; the present result shows that, whatever the justification, it cannot consist in the doctrine's being deontological rather than consequentialist, since the doctrine is both.
+
+\paragraph{Promises.} Ross held that the duty of fidelity is not a duty to promote promise-keeping: I may not break my promise to prevent two others from breaking theirs \citep{Ross1930}. This is a constraint, and Proposition~\ref{p:relativity} applies with promise-breakings in place of killings. The consequentialized counterpart ranks, for each agent, outcomes by a value that counts her own promise-breakings more heavily than those of others.
+
+\paragraph{The all-or-nothing case.} Proposition~\ref{p:horton} shows what Horton's verdicts require: an outcome individuation that distinguishes saving one when both could have been saved from saving one when they could not. The deontologist explains her verdict by saying that the first is a gratuitous failure to save; the consequentializer represents it by giving the outcome containing that failure lower value. Neither account explains more than the other, since each relies on the same feature of the case.
+
+\paragraph{Prerogatives and supererogation.} Scheffler's agent-centered prerogative permits an agent to give her own projects more weight than impartial value warrants \citep{Scheffler1982}. A consequentialist representation must give each agent a ranking in which outcomes favoring her projects are not ranked below outcomes with more impartial good, and in which the options the prerogative permits are tied at the top. Ties of this kind make supererogation look puzzling, since an option that is better than another but not required must be ranked no higher than it. ETH-14 argues that supererogatory acts exist, bounded above by sainthood and below by decency. Supererogation is a distinction among permissible options, not among verdicts of permissibility, and it is represented by a second ranking of permissible options by their moral merit, as in Portmore's dual-ranking consequentialism \citep{Portmore2011}. The extensional equivalence concerns verdicts of permissibility; it is silent on the second ranking, which is available to both families.
+
+\paragraph{Lying.} The Kantian prohibition on lying is a constraint and is represented, by Proposition~\ref{p:lexical}, by a finite penalty on outcomes in which the agent lies. Whether the prohibition is correct, and in particular whether it holds when lying would protect a victim from a murderer, is a first-order question; ETH-04 argues that it does not. The equivalence does not bear on that question. It shows that if the prohibition were correct, the correct theory could be stated either way.
+
+\section{Why the dispute is notational}\label{s:notational}
+
+The step from extensional equivalence to the conclusion that the dispute is notational requires an account of when two theories are notational variants. We adopt the following criterion. Two theories are notational variants, with respect to a subject matter, if there are translations between them that preserve every claim each makes about that subject matter, and if each translation can be computed from the other theory's claims without further substantive input. Corollary~\ref{c:variants} shows that, with respect to the subject matter of right action, consequentialist and deontological theories meet the criterion: the indicator construction and the maximizing construction are such translations.
+
+Three features of the situation support applying the criterion here.
+
+First, the dispute was presented by both sides as a dispute about the right. Moore's thesis was that rightness consists in maximizing the good; Ross's objection was that some acts are right although they do not maximize the good, and he supported it with cases, such as the promise case, in which the two theories were thought to give different verdicts. If every such case can be accommodated by the other side without changing the verdicts, the cases do not discriminate between the theories, and no case does.
+
+Second, the individuation needed for the equivalence is the deontologist's own. Assumption~\ref{a:individuation} allows outcomes to include the act and the situation, and Section~\ref{s:coarse} shows that the representation needs only those features of the act and situation that the theory's verdicts depend on: whether the agent kills, whether she breaks a promise, whether saving both was available. A deontologist who denies that these features may enter the evaluation of outcomes is not denying that they matter; she is denying that their mattering may be described as value. That is a claim about the vocabulary of evaluation, not about which acts are right.
+
+Third, the translations go both ways, as \citet{Hurley2013} observed. A consequentialist cannot claim that the equivalence vindicates her framework, since the same equivalence shows that every consequentialist theory is a deontological theory with a single rule. Neither framework has a better claim to be the true form of a moral theory on the basis of verdicts alone.
+
+The criterion does not say that the two forms of presentation are equally illuminating, any more than the notational equivalence of two coordinate systems makes them equally convenient for every calculation. For some purposes the rule form is perspicuous, for instance when a theory is to be taught or followed; for others the value form is, for instance when theories are to be compared or aggregated under uncertainty, as in MTE-16. The choice between them is a choice of notation in the sense in which that choice can matter: it affects what is easy to see, not what is true.
+
+\section{Objections}
+
+\begin{objection}[Triviality]
+The indicator value function is built from the verdicts. A consequentialism that can represent every theory says nothing; the equivalence is therefore trivial and shows only that ``consequentialism'', so understood, is empty \citep{Louise2004,Sachs2010}.
+\end{objection}
+
+\begin{reply}
+We accept the second half of the objection and deny the first. If consequentialism is the thesis that the right is what maximizes some agent-relative value on act-inclusive outcomes, then it is empty as a constraint on verdicts, and that is the conclusion of the manuscript: it is not a rival to deontology as a view about which acts are right. What is not trivial is the characterization in Theorem~\ref{t:equivalence}, which identifies exactly the theories that can be consequentialized, and the results of Section~\ref{s:coarse}, which show what is needed beyond the coarse, agent-neutral case. A substantive consequentialism remains available, namely agent-neutral consequentialism on coarse outcomes, and it is a rival to deontology. But its rivalry is a first-order dispute about the value function, of the same kind as the dispute between hedonism and pluralism, and not a dispute between frameworks.
+\end{reply}
+
+\begin{objection}[Agent-relative goodness]
+The consequentialized counterparts rank outcomes by ``value relative to an agent''. There is no such value. Goodness is agent-neutral, and the appeal of consequentialism depends on its using the ordinary notion \citep{Schroeder2007}. A counterpart that uses an invented notion is not a consequentialist theory.
+\end{objection}
+
+\begin{reply}
+The objection is correct about the appeal and does not touch the equivalence. Definition~\ref{d:conseq} requires an agent-relative ranking of outcomes, not that the ranking be a ranking by goodness in the ordinary sense. If agent-relative rankings are not rankings by goodness, then the counterparts are not consequentialist in Moore's sense, and the theory that the right maximizes ordinary goodness is agent-neutral consequentialism, which is a substantive first-order view. If they are, the counterparts are consequentialist. Either way the dispute between frameworks, as distinct from the first-order dispute about value, has no extensional content. We note, in addition, that the deontologist cannot use the objection without cost: she too needs the notion of what an agent has most reason to bring about, given her own constraints, in order to state how an agent should choose among permissible options.
+\end{reply}
+
+\begin{objection}[Dominance and dilemmas]
+Brown shows that consequentialism is committed to the absence of dilemmas and to a dominance principle, and that some deontological theories violate one or the other \citep{Brown2011}. Those theories cannot be consequentialized, so the equivalence is not universal.
+\end{objection}
+
+\begin{reply}
+The objection has two parts. Theorem~\ref{t:equivalence} agrees with the first: a theory with dilemmas has no consequentialist counterpart. But a theory with dilemmas is not a correct theory, by Assumption~\ref{a:nodilemmas} and the argument of ETH-15, and the thesis of this manuscript concerns deontological theories that might be true. As for dominance, conditions of this kind are consequences of maximizing over outcomes whose identity is fixed independently of the menu, as Proposition~\ref{p:contraction} shows for contraction consistency. With act-inclusive outcomes they do not follow, and Proposition~\ref{p:horton} gives a case in which a theory violating such a condition is nonetheless consequentialized. What Brown's argument establishes is that the consequentializer needs act-inclusive individuation, which is Assumption~\ref{a:individuation}.
+\end{reply}
+
+\begin{objection}[Explanatory priority]
+Even if the theories agree in extension, they differ in what they say makes acts right. For the consequentialist, a promise-breaking is wrong because it makes the outcome worse; for the deontologist, the outcome is worse, if at all, because the promise-breaking is wrong. This is a difference in explanation, not in notation.
+\end{objection}
+
+\begin{reply}
+Explanatory claims of this kind are claims about the order of grounding between the right and the value of outcomes, and the equivalence does not settle them. But it removes the evidence on which either side could decide them. The data of normative ethics are verdicts about cases, and by Corollary~\ref{c:variants} every pattern of verdicts is accommodated equally by both orders of explanation. A claim about the direction of explanation that no verdict could confirm or disconfirm is not a claim of normative ethics; if it is a claim at all, it belongs to metaethics, where the relation between reasons and value is a question in its own right. The dispute between consequentialism and deontology, as normative ethics has conducted it, is the dispute about verdicts, and it is that dispute we call notational.
+\end{reply}
+
+\begin{objection}[Risk]
+Under uncertainty, the theories come apart. A constraint theory forbids killing; but almost every act carries some probability of killing someone, and a consequentialized counterpart that assigns a large finite penalty to killing must say how that penalty is traded against probabilities. The deontologist's absolute constraint has no such trade-off and may forbid almost everything \citep{JacksonSmith2006}.
+\end{objection}
+
+\begin{reply}
+The equivalence is stated for choice under certainty, and we do not claim more; Section~\ref{s:notestablished} records the limit. The objection, however, does not show that deontology and consequentialism differ under risk; it shows that a deontological theory must be extended to risk before it gives verdicts under risk, and that the extension is a substantive choice. Each extension is again a deontic theory on a richer choice structure, whose options are lotteries, and Theorem~\ref{t:equivalence} applies to it in turn. What the objection reveals is that absolutist theories have no plausible extension, which is a difficulty for absolutism, not for the equivalence.
+\end{reply}
+
+\section{What the result does not establish}\label{s:notestablished}
+
+The result establishes that, as theories of right action under certainty, consequentialism and deontology are extensionally equivalent. It does not establish the following.
+
+It does not establish which deontic theory is correct. The equivalence holds for every theory without dilemmas, including false ones. The first-order questions of normative ethics, whether one may divert the trolley (ETH-03), how much one must give (ETH-06) or whether one may lie to the murderer (ETH-04), remain open after the equivalence and must be answered on their merits.
+
+It does not determine the value function. Theorem~\ref{t:cons} shows that some value function represents each theory; it does not identify a privileged one, and the indicator function is the least informative choice. Determining the value of outcomes is a separate task. ETH-01 undertakes it for the good of outcomes, and the present result implies that its findings are available to deontologists and consequentialists alike: whatever framework the account of the good is embedded in, it supplies the impartial component of the value function, to which agent-relative components are added by whatever constraints and prerogatives the correct theory contains.
+
+It does not extend automatically to risk. The cardinal structure of a value function is idle for verdicts under certainty, as Corollary~\ref{c:variants} shows, but it determines verdicts under risk if the theory maximizes expected value. Two value functions that agree on verdicts under certainty may disagree under risk. The extension to risk therefore requires a choice of cardinal scale, which is not fixed by the verdicts under certainty, and the comparison of theories under moral uncertainty requires a normalization of scales across theories, which MTE-16 supplies.
+
+It does not establish that agent-neutral consequentialism is false. Propositions~\ref{p:horton} and~\ref{p:relativity} show that agent-neutral consequentialism on coarse outcomes cannot represent certain deontological verdicts. If those verdicts are mistaken, agent-neutral consequentialism may be correct. That is a first-order question.
+
+\section{Formalization}\label{s:formal}
+
+The results of Sections~\ref{s:equivalence} and~\ref{s:coarse} are formalized in \nolinkurl{Philosophy/ETH/ETH_02.lean}. A choice structure is a Lean structure with a menu function into lists, which makes menus finite, together with a proof that every menu is nonempty, and an outcome function. Deontic theories are predicates on agents, situations and options; value functions take values in the natural numbers. Assumptions~\ref{a:individuation} and~\ref{a:nodilemmas} appear as hypotheses of the theorems: \texttt{ActInclusive} and \texttt{NoDilemmas}. The main theorem is Theorem~\ref{t:equivalence}.
+
+\begin{lstlisting}
+theorem equivalence (C : ChoiceStructure Agent Sit Opt Out)
+    (D : DeonticTheory Agent Sit Opt) (hinc : ActInclusive C) :
+    (∃ V : ValueFunction Agent Out, Equivalent D (maximizing C V)) ↔
+      (Admissible C D ∧ NoDilemmas C D)
+\end{lstlisting}
+
+Lemma~\ref{l:max} is proved by induction on lists; Theorem~\ref{t:cons} uses classical reasoning to define the indicator value function, whose value depends on whether an outcome is the outcome of some permitted option. The checker reports, for Theorem~\ref{t:equivalence} and for Corollary~\ref{c:variants} (\texttt{round\_trip}):
+
+\begin{lstlisting}
+'Philosophy.ETH_02.equivalence' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.ETH_02.round_trip' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+\end{lstlisting}
+
+These are the standard axioms of Lean's logic (propositional extensionality, the axiom of choice and the soundness of quotients); the module adds none of its own. The two philosophical premises are hypotheses of the theorems rather than axioms, so the theorems are conditional statements about every choice structure and every deontic theory. Propositions~\ref{p:contraction}, \ref{p:horton}, \ref{p:relativity} and~\ref{p:lexical} are formalized as \texttt{contraction}, \texttt{horton\_coarse} with \texttt{horton\_inclusive}, \texttt{constraint\_needs\_relativity} and \texttt{lexical\_finite}; the last depends on the same three standard axioms, and \texttt{horton\_coarse} on \texttt{propext} and \texttt{Quot.sound} only.
+
+What the formalization does not cover is the step from extensional equivalence to the claim that the dispute is notational, which rests on the criterion of Section~\ref{s:notational}, and the defence of the two assumptions.
+
+\section{Conclusion}
+
+On any finite choice structure with act-inclusive outcomes, a deontic theory has a consequentialist counterpart exactly when it permits only available options and generates no dilemmas, and every consequentialist theory is a deontic theory of that kind; the translations are inverse up to extensional equivalence. Since there are no genuine dilemmas, every deontological theory is extensionally equivalent to a consequentialist theory with a suitable value function, and conversely. The value functions needed are agent-relative and defined on outcomes that record the features the deontologist counts as relevant; coarse agent-neutral values do not suffice, and lexical constraints need only finite penalties. As a dispute about which acts are right, the dispute between consequentialism and deontology is notational. What remains are first-order questions about verdicts and about value, which both frameworks must answer and neither answers by being the framework it is.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arrow(1959)]{Arrow1959} Arrow, K.~J. (1959). Rational choice functions and orderings. \emph{Economica}, 26(102), 121--127.
+\bibitem[Broome(1991)]{Broome1991} Broome, J. (1991). \emph{Weighing Goods: Equality, Uncertainty and Time}. Blackwell.
+\bibitem[Brown(2011)]{Brown2011} Brown, C. (2011). Consequentialize this. \emph{Ethics}, 121(4), 749--771.
+\bibitem[Dreier(1993)]{Dreier1993} Dreier, J. (1993). Structures of normative theories. \emph{The Monist}, 76(1), 22--40.
+\bibitem[Dreier(2011)]{Dreier2011} Dreier, J. (2011). In defense of consequentializing. In M.~Timmons (ed.), \emph{Oxford Studies in Normative Ethics}, Vol.~1, 97--119. Oxford University Press.
+\bibitem[Horton(2017)]{Horton2017} Horton, J. (2017). The all or nothing problem. \emph{The Journal of Philosophy}, 114(2), 94--104.
+\bibitem[Hurley(2013)]{Hurley2013} Hurley, P. (2013). Consequentializing and deontologizing: Clogging the consequentialist vacuum. In M.~Timmons (ed.), \emph{Oxford Studies in Normative Ethics}, Vol.~3. Oxford University Press.
+\bibitem[Jackson and Smith(2006)]{JacksonSmith2006} Jackson, F. and Smith, M. (2006). Absolutist moral theories and uncertainty. \emph{The Journal of Philosophy}, 103(6), 267--283.
+\bibitem[Louise(2004)]{Louise2004} Louise, J. (2004). Relativity of value and the consequentialist umbrella. \emph{The Philosophical Quarterly}, 54(217), 518--536.
+\bibitem[Moore(1903)]{Moore1903} Moore, G.~E. (1903). \emph{Principia Ethica}. Cambridge University Press.
+\bibitem[Nozick(1974)]{Nozick1974} Nozick, R. (1974). \emph{Anarchy, State, and Utopia}. Basic Books.
+\bibitem[Oddie and Milne(1991)]{OddieMilne1991} Oddie, G. and Milne, P. (1991). Act and value: Expectation and the representability of moral theories. \emph{Theoria}, 57(1--2), 42--76.
+\bibitem[Portmore(2007)]{Portmore2007} Portmore, D.~W. (2007). Consequentializing moral theories. \emph{Pacific Philosophical Quarterly}, 88(1), 39--73.
+\bibitem[Portmore(2009)]{Portmore2009} Portmore, D.~W. (2009). Consequentializing. \emph{Philosophy Compass}, 4(2), 329--347.
+\bibitem[Portmore(2011)]{Portmore2011} Portmore, D.~W. (2011). \emph{Commonsense Consequentialism: Wherein Morality Meets Rationality}. Oxford University Press.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\bibitem[Richter(1966)]{Richter1966} Richter, M.~K. (1966). Revealed preference theory. \emph{Econometrica}, 34(3), 635--645.
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Clarendon Press.
+\bibitem[Sachs(2010)]{Sachs2010} Sachs, B. (2010). Consequentialism's double-edged sword. \emph{Utilitas}, 22(3), 258--271.
+\bibitem[Scheffler(1982)]{Scheffler1982} Scheffler, S. (1982). \emph{The Rejection of Consequentialism}. Clarendon Press.
+\bibitem[Schroeder(2007)]{Schroeder2007} Schroeder, M. (2007). Teleology, agent-relative value, and `good'. \emph{Ethics}, 117(2), 265--295.
+\bibitem[Sen(1971)]{Sen1971} Sen, A. (1971). Choice functions and revealed preference. \emph{The Review of Economic Studies}, 38(3), 307--317.
+\bibitem[Sen(1982)]{Sen1982} Sen, A. (1982). Rights and agency. \emph{Philosophy \& Public Affairs}, 11(1), 3--39.
+\bibitem[Smith(2003)]{Smith2003} Smith, M. (2003). Neutral and relative value after Moore. \emph{Ethics}, 113(3), 576--598.
+\bibitem[Vallentyne(1988)]{Vallentyne1988} Vallentyne, P. (1988). Gimmicky representations of moral theories. \emph{Metaphilosophy}, 19(3--4), 253--263.
+\end{thebibliography}
+
+\end{document}

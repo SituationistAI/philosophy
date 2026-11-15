@@ -1,0 +1,80 @@
+\documentclass{situationist-preprint}
+
+\title{Deviant Causal Chains: A Taxonomy}
+\msid{ACT-03-b}
+\msfamily{ACT-03}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Companion manuscript}
+\mskeywords{causal theory of action; deviant causal chains; sensitivity; basic deviance; consequential deviance; heteromesial deviance}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The literature on deviant causal chains classifies cases by where the deviance occurs: between reason and intention, between intention and movement, or between movement and result. We propose a second axis, which classifies cases by how the deviant link treats the content of the reason: whether it collapses all contents, collapses some, preserves them, or preserves them by accident. Combining the two axes yields a taxonomy on which the sensitivity condition of ACT-03 gives a verdict for each cell. Total and partial collapse defeat action or intentional result; preservation, whether by a nerve, a prosthesis or another agent, does not. The taxonomy shows that the condition draws its line where the cases draw theirs.
+\end{abstract}
+
+\section{Two axes}
+
+ACT-03-a argues that an action is a bodily movement caused by a reason and sensitive to counterfactual variations in that reason (Theorem~3.1), and extends the condition to the results of action (Remark~4.1). A causal chain from reason to movement is \emph{deviant} if the movement depends on the reason without being guided by it. We classify deviant and apparently deviant chains along two axes.
+
+\paragraph{Location.} On the familiar classification, which \citet{Bishop1989} develops from the cases of \citet{Davidson1973}, the deviant link may lie between the reason and the intention or decision it causes (\emph{antecedential}), between the intention and the bodily movement (\emph{basic}), or between the movement and a result that the agent aimed at (\emph{consequential}).
+
+\paragraph{Treatment of content.} By Proposition~3.4 of ACT-03-a, when a reason affects a movement only through an intermediate variable $I$, so that the movement is $h(g(c))$ for content $c$, sensitivity holds over a range $V$ if and only if $h \circ g$ agrees with the rationalized movement $\rho$ on $V \cup \{c\}$. This gives four kinds of link.
+
+\begin{definition}\label{d:kinds}
+Let $V$ be a non-trivial variation range for a reason with actual content $c$, and $I$ an intermediary through which the reason operates. The link through $I$ is
+\begin{enumerate}
+\item[(a)] \emph{collapsing} if $g$ is constant on $V \cup \{c\}$;
+\item[(b)] \emph{partially collapsing} if $g$ identifies some but not all pairs of contents in $V \cup \{c\}$ that rationalize different movements;
+\item[(c)] \emph{preserving} if $g$ separates every such pair and $h$ maps each value of $g$ to the movement its contents rationalize;
+\item[(d)] \emph{misaligned} if $g$ separates every such pair but $h$ does not map its values to the rationalized movements.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}\label{p:exhaust}
+Every link through a single intermediary falls under exactly one of (a)--(d), and the movement is sensitive to the reason over $V$ if and only if the link is preserving.
+\end{proposition}
+
+\begin{proof}
+Either $g$ separates every pair of contents in $V \cup \{c\}$ that rationalize different movements, or it does not. If it does not, it either identifies all of them, which on a non-trivial range includes the case of a constant $g$, or only some: cases (a) and (b). If it does, $h$ either maps each value to the rationalized movement or fails to: cases (c) and (d). The second claim is Proposition~3.4 of ACT-03-a: sensitivity requires $g$ to separate the relevant pairs, which excludes (a) and (b), and requires $h \circ g = \rho$ on the range, which excludes (d).
+\end{proof}
+
+Chains with several intermediaries reduce to the single case by composing the links, and the composite is preserving only if every link preserves the distinctions the next one needs.
+
+\section{The cells}
+
+\paragraph{Basic, collapsing.} Davidson's climber and Frankfurt's nervous party guest \citep{Frankfurt1978} are the paradigm. Agitation is a collapsing link: it takes the same value whatever the content of the reason that produced it. Corollary~3.5 of ACT-03-a gives the verdict that the movement is not an action.
+
+\paragraph{Basic, partially collapsing.} These cases are less discussed but instructive. A pianist intends to play a passage loudly, and her anxiety about the performance makes her strike the keys hard. Had she intended to play softly, her anxiety would have made her play loudly all the same; had she intended to play a different passage, she would have played it, loudly. Her choice of notes is guided by her reason; her dynamics are not. The taxonomy yields the verdict that the playing of the passage is an action, but that its loudness is not something she does in playing it intentionally, though it coincides with what she intended. This is the right result, and it shows that deviance can attach to an aspect of a movement rather than to the movement as a whole.
+
+\paragraph{Basic, preserving.} A patient whose motor nerve has been replaced by a device, or by a neuroscientist who reads her motor cortex and presses buttons accordingly \citep{Peacocke1979}, acts, provided the relay separates the contents that call for different movements and maps them correctly. Such chains are sometimes called \emph{heteromesial} when the intermediary is another agent \citep{Bishop1989}. The taxonomy places them in the same cell as the intact nerve, which is where ACT-03-a places them.
+
+\paragraph{Basic, misaligned.} A device that separates contents but scrambles them, moving the arm left when the agent intends right and right when she intends left, produces movements that depend on the reason and distinguish its contents, yet are not guided by it. The verdict is that the agent does not act, though she may learn to: once she adapts, her reason's content becomes \enquote{move so that the arm goes right}, and relative to that content the link is preserving. The verdict tracks the agent's mastery of her instrument, as it should.
+
+\paragraph{Consequential.} The cells repeat at the level of results, with the condition of Remark~4.1 of ACT-03-a. The killer whose shot misses but stampedes the pigs that trample his victim \citep{Davidson1973} acts in shooting; the stampede is a collapsing link between the aim and the death, so he does not kill intentionally. A marksman who allows for wind does kill intentionally, since the wind is accommodated by his aim and the link from content to result is preserving.
+
+\paragraph{Antecedential.} Here the deviant link lies before the intention, and ACT-03-a does not apply the condition to it (Section~4 there). The taxonomy explains why: whatever route produced the intention, the question whether the movement is an action concerns the link from intention to movement, which may be preserving. Antecedential deviance bears on whether the agent acted \emph{for} the reason that caused her intention, not on whether she acted.
+
+\section{An objection}
+
+\begin{objection}[Gerrymandered intermediaries]
+Any chain can be divided into intermediaries in many ways, and a link that is collapsing under one division may be preserving under another. The taxonomy is then relative to a choice of variables.
+\end{objection}
+
+\begin{reply}
+Sensitivity is defined by the profile of the movement as a function of the reason's content (Definition~2.4 of ACT-03-a), which does not depend on how the intervening process is divided. The taxonomy classifies links in order to explain why a profile is or is not sensitive, and Proposition~\ref{p:exhaust} guarantees that the verdict agrees with the profile under every division: a composite of links is preserving exactly when the movement is sensitive. Different divisions locate the failure differently, but they cannot disagree about whether there is one.
+\end{reply}
+
+\section{Conclusion}
+
+Classifying deviant chains by how their links treat the content of the reason, as well as by where the links lie, yields a complete taxonomy of single-intermediary cases and a verdict for each. Collapsing, partially collapsing and misaligned links defeat action at the level they occur; preserving links do not, whatever their physical or personal nature. The taxonomy thus confirms the conclusion of ACT-03: an action is a bodily movement caused in the right way by a reason, and the right way is sensitivity to counterfactual variations in the reason.
+
+\begin{thebibliography}{9}
+\bibitem[Bishop(1989)]{Bishop1989} Bishop, J. (1989). \emph{Natural Agency: An Essay on the Causal Theory of Action}. Cambridge University Press.
+\bibitem[Davidson(1973)]{Davidson1973} Davidson, D. (1973). Freedom to act. In T.~Honderich (ed.), \emph{Essays on Freedom of Action}. Routledge \& Kegan Paul.
+\bibitem[Frankfurt(1978)]{Frankfurt1978} Frankfurt, H.~G. (1978). The problem of action. \emph{American Philosophical Quarterly}, 15(2), 157--162.
+\bibitem[Peacocke(1979)]{Peacocke1979} Peacocke, C. (1979). \emph{Holistic Explanation: Action, Space, Interpretation}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

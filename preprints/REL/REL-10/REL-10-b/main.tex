@@ -1,0 +1,84 @@
+\documentclass{situationist-preprint}
+
+\title{Neither Fine-Tuned nor Coarse-Tuned}
+\msid{REL-10-b}
+\msfamily{REL-10}
+\msdiscipline{Philosophy of Religion}
+\mstype{Consequence}
+\mskeywords{fine-tuning; coarse-tuning; normalizability; finite additivity; principle of indifference; design argument}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-10-a argues that fine-tuning does not support theism, because there is no normalizable probability measure over the space of physical constants that gives equal ranges equal weight, and so the claimed improbability is undefined. We derive a consequence about the distinction between fine-tuning and coarse-tuning. Under a finitely additive uniform measure, every bounded range, however wide, has probability zero, so a coarse-tuned universe would be as improbable as a fine-tuned one. Under a normalizable measure, the width of a range does not fix its probability, so a narrow range may be more probable than a wide one. On neither option does the narrowness of the life-permitting range, which is what the word \enquote{fine} describes, make a probabilistic difference. The universe is neither fine-tuned nor coarse-tuned in any sense that bears on design.
+\end{abstract}
+
+\section{The coarse-tuning problem}
+
+The fine-tuning argument appeals to the narrowness of the life-permitting ranges of the constants \citep{Collins2009}. \citet{McGrewMcGrewVestrup2001} objected that, on the unbounded ranges of the constants, a uniform measure is not normalizable, and \citet{ColyvanGarfieldPriest2005} pressed the point in the form of a dilemma that includes coarse-tuning: if the argument worked, it would work equally well for a universe whose life-permitting ranges were very wide, provided they were bounded. REL-10-a accepts the first point (Theorem~3.3) and notes the second in passing. We derive the second from the first and extend it to the normalizable alternatives.
+
+We use the discrete setting of REL-10-a: the range of a constant is divided into countably many cells of equal width, indexed by the natural numbers, and the life-permitting range is bounded (Assumption~2.3), so that it contains finitely many cells.
+
+\section{Two options}
+
+A defender who keeps the principle of indifference (Principle~P1 of REL-10-a) must give up countable additivity, since by Theorem~3.1 of REL-10-a no countably additive measure gives every cell the same weight. The standard recourse is a finitely additive measure, as \citet{deFinetti1974} permitted.
+
+\begin{proposition}\label{p:fa}
+Let $\mu$ be a finitely additive probability on the sets of cells that gives every cell the same weight. Then $\mu$ gives every finite set of cells probability $0$.
+\end{proposition}
+
+\begin{proof}
+Let $c$ be the common weight. For every $n$, the first $n$ cells form a set of weight $nc$ by finite additivity, and $nc \leq 1$. So $c \leq 1/n$ for every $n$, and $c = 0$. A finite set of cells has weight equal to the sum of finitely many zeros.
+\end{proof}
+
+\begin{corollary}\label{c:coarse}
+Under such a measure, a life-permitting range of any bounded width, however wide, has probability $0$ on the hypothesis of no design. A coarse-tuned universe, with a range of $10^{100}$ cells, is exactly as improbable as a fine-tuned one, with a range of one.
+\end{corollary}
+
+The fine-tuning argument infers design from the improbability of the life-permitting range on the hypothesis of no design. By Corollary~\ref{c:coarse}, that improbability does not depend on the width of the range. Whatever support the argument gives, it would give equally if the constants could vary over ranges vastly wider than the life-permitting ones, or if every bounded range were life-permitting; and a datum that would confirm design whatever its value is not evidence about how the constants are tuned. On this option the word \enquote{fine} does no work.
+
+A defender may instead drop indifference and choose a normalizable measure. REL-10-a's Proposition~3.4 shows that such measures can give any bounded range any probability. We draw the comparative consequence.
+
+\begin{proposition}\label{p:reverse}
+Let $L_1$ and $L_2$ be bounded ranges, each containing a cell not in the other. There is a normalizable measure under which $L_1$ is more probable than $L_2$, and another under which $L_2$ is more probable than $L_1$.
+\end{proposition}
+
+\begin{proof}
+Put weight $1$ on a cell in $L_1$ not in $L_2$: then $L_1$ has probability $1$ and $L_2$ probability $0$. Exchange the roles for the second measure.
+\end{proof}
+
+Proposition~\ref{p:reverse} applies when $L_1$ is a single cell and $L_2$ contains a billion. On a normalizable measure, whether a range is narrow or wide is a fact about the cells; whether it is probable is a fact about the measure, and the first does not fix the second. A narrow life-permitting range is improbable only relative to a measure chosen to make it so, and the choice cannot be read off the physics, which is the conclusion of REL-10-a.
+
+\section{Restricted and logarithmic measures}
+
+\begin{objection}
+Physics supplies natural ranges. \citet{Collins2009} restricts each constant to an epistemically illuminated region, the range over which current theory is known to apply, and takes the uniform measure on that bounded region. That measure is normalizable, and on it a narrow life-permitting range is improbable.
+\end{objection}
+
+\begin{reply}
+The restricted uniform measure is one of the measures of Proposition~\ref{p:reverse}, and the improbability it assigns is fixed by the size of the region relative to the life-permitting range. The region is chosen by the reach of current theory, which is a fact about us, not about how the constants could have been. A wider theory would widen the region and lower the probability; a narrower one would raise it. The resulting improbability measures the ignorance of the theorist, and it is not a probability of the constants on the hypothesis of no design.
+\end{reply}
+
+\begin{objection}
+For scale parameters, the natural measure is uniform in the logarithm, which gives equal weight to each order of magnitude.
+\end{objection}
+
+\begin{reply}
+On the positive reals the logarithmic measure is uniform on the line of logarithms, which is unbounded in both directions, and Theorem~3.1 of REL-10-a applies to it unchanged: its total weight is infinite. Truncating it returns the previous objection.
+\end{reply}
+
+The same reasoning applies wherever an improbability is computed from a uniform measure over an unbounded space. TSM-05-a makes a related point about the improbability attributed to the low-entropy initial state of the universe: the measure that yields it has a role only conditional on the past hypothesis, and so cannot be used to assess that hypothesis.
+
+\section{Conclusion}
+
+If the measure over the constants is uniform, it is at most finitely additive, and then every bounded range has probability zero, so that fine and coarse tuning are equally improbable. If it is normalizable, the width of a range does not fix its probability, so that a fine range need not be improbable at all. The life-permitting ranges may be narrow, but their narrowness is not an improbability, and the universe is neither fine-tuned nor coarse-tuned in any sense that could confirm design.
+
+\begin{thebibliography}{99}\small
+\bibitem[Collins(2009)]{Collins2009} Collins, R. (2009). The teleological argument: An exploration of the fine-tuning of the universe. In W.~L. Craig and J.~P. Moreland (eds.), \emph{The Blackwell Companion to Natural Theology}, 202--281. Wiley-Blackwell.
+\bibitem[Colyvan et~al.(2005)]{ColyvanGarfieldPriest2005} Colyvan, M., Garfield, J.~L. and Priest, G. (2005). Problems with the argument from fine tuning. \emph{Synthese}, 145(3), 325--338.
+\bibitem[de Finetti(1974)]{deFinetti1974} de Finetti, B. (1974). \emph{Theory of Probability}, vol.~1. Wiley.
+\bibitem[McGrew et~al.(2001)]{McGrewMcGrewVestrup2001} McGrew, T., McGrew, L. and Vestrup, E. (2001). Probabilities and the fine-tuning argument: A sceptical view. \emph{Mind}, 110(440), 1027--1038.
+\end{thebibliography}
+
+\end{document}

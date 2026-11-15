@@ -1,0 +1,127 @@
+\documentclass{situationist-preprint}
+
+\title{Future Contingents and Fatalism}
+\msid{ACT-17-a}
+\msfamily{ACT-17}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mskeywords{future contingents; fatalism; branching time; supervaluation; bivalence; settledness; sea battle}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The fatalist argues that, since every statement about the future is already true or already false, whatever will happen is already unavoidable. We argue that the future is not already settled: future contingents lack a truth value, and fatalism is therefore unsupported. The framework is supervaluationist branching time. Moments branch toward the future; a future-tensed sentence is true at a moment if and only if it is true on every history through that moment, false if and only if it is false on every such history, and otherwise lacks a truth value. A free choice not yet made is open at the moments before it, so the sentence that it will be made lacks a value then. Excluded middle survives, since the disjunction of a future contingent and its negation is true on every history, but bivalence fails, and the fatalist's argument needs bivalence. Tenseless propositions about the choice are true or false relative to the actual history, but no fact at an earlier moment singles that history out. The rejection of fatalism concerns contingents; events settled by the laws and present conditions are settled, and this is not fatalism.
+\end{abstract}
+
+\section{The problem}
+
+Aristotle asked whether it is now true or false that there will be a sea battle tomorrow \citep[ch.~9]{AristotleDeInt}. If every assertion is either true or false, then one of \enquote{there will be a sea battle tomorrow} and \enquote{there will not be a sea battle tomorrow} is true now; and if it is true now that there will be a battle, it seems that nothing anyone does can prevent it, since nothing done later can make false what is already true. Generalized, the argument concludes that whatever will happen is unavoidable: \emph{fatalism}. It uses no premise about causes or laws, only the logic of truth and time, and that is what makes it disturbing. \citet{Taylor1962} gave it a modern defence, arguing that the premises a fatalist needs are ones that everyone accepts in reasoning about the past.
+
+Three replies are current. The first accepts bivalence and denies the inference from present truth to unavoidability: that it is now true that the battle will occur is a fact about the present only in a soft sense, determined by what happens tomorrow, and soft facts are not fixed in the way hard facts about the present are. The second, Aristotle's on its most common reading, denies that future contingents are now true or false. \citet{Lukasiewicz1920} developed this reply by assigning future contingents a third truth value, at the cost of classical logic: in his system the disjunction of a future contingent with its negation is not true. The third, which we adopt, keeps classical logic and denies bivalence. It was given precise form in branching-time semantics by \citet{Prior1967} and \citet{Thomason1970}, and developed for agency by \citet{Belnap2001}. TSM-12 argues on independent grounds that the future is open; the present manuscript states the semantics precisely and draws its consequence for fatalism.
+
+\section{Framework}
+
+\begin{definition}[Branching structure]\label{d:branch}
+\emph{Moments} are partially ordered by temporal precedence, and the order branches toward the future but not toward the past: any two moments have a common lower bound, and the predecessors of any moment are linearly ordered. A \emph{history} is a maximal linearly ordered set of moments. The histories through a moment are its possible continuations.
+\end{definition}
+
+\begin{definition}[Truth at a moment and history]\label{d:mh}
+A future-tensed sentence \enquote{it will be that $\phi$} is true at a moment $m$ relative to a history $h$ through $m$ if $\phi$ is true at some later moment of $h$ relative to $h$. A \emph{tenseless} sentence, such as \enquote{the agent takes $c$ at $t_1$}, is true relative to a history $h$ if the event it describes occurs on $h$.
+\end{definition}
+
+\begin{definition}[Settledness]\label{d:settled}
+A future-tensed sentence is \emph{settled true} at $m$ if it is true at $m$ relative to every history through $m$, \emph{settled false} if it is false relative to every such history, and \emph{open} at $m$ otherwise. A \emph{future contingent} at $m$ is a sentence open at $m$.
+\end{definition}
+
+\begin{principle}[Supervaluation]\label{p:super}
+A future-tensed sentence is true at $m$ if and only if it is settled true at $m$, false at $m$ if and only if it is settled false at $m$, and lacks a truth value at $m$ if it is open.
+\end{principle}
+
+\begin{assumption}[Open choices]\label{a:open}
+If an agent faces a free choice at $t_1$ between taking $c$ and not taking it, then at every moment before $t_1$ there are histories on which she takes $c$ and histories on which she does not.
+\end{assumption}
+
+Assumption~\ref{a:open} is the claim that free choices are not settled before they are made. It does not require that every event be unsettled. By the definitions, an event that the laws together with the conditions at $m$ guarantee occurs on every history through $m$ whose course satisfies the laws, and if the histories through $m$ are the lawful continuations of the course of events up to $m$, a sentence reporting such an event is settled true at $m$. EPI-25 uses this consequence to show that such events can be known.
+
+\section{The argument}
+
+\begin{theorem}\label{t:gap}
+Before a free choice is made, the sentence that it will be made lacks a truth value.
+\end{theorem}
+
+\begin{proof}
+Let $m$ precede $t_1$, at which the agent freely chooses whether to take $c$. By Assumption~\ref{a:open}, some histories through $m$ contain her taking $c$ and others do not. By Definition~\ref{d:mh}, \enquote{she will take $c$} is true at $m$ relative to the first and false relative to the second. By Definition~\ref{d:settled}, it is open at $m$, and by Principle~\ref{p:super} it lacks a truth value at $m$.
+\end{proof}
+
+\begin{proposition}\label{p:lem}
+At every moment, the sentence \enquote{she will take $c$ or she will not take $c$} is true, though neither disjunct may be.
+\end{proposition}
+
+\begin{proof}
+Relative to every history through $m$, one disjunct is true, so the disjunction is true relative to every history and is settled true; by Principle~\ref{p:super}, it is true at $m$. That neither disjunct need be true is Theorem~\ref{t:gap}.
+\end{proof}
+
+Proposition~\ref{p:lem} is the advantage of supervaluation over a three-valued logic. Every classical tautology is true relative to every history, and so true at every moment; the logic of the language is classical, as LOG-02 holds that logic is, and what fails is bivalence, the principle that every sentence is true or false. Truth-value gaps are the treatment LOG-03 recommends for the cases the dialetheist offers, and the open future is a further case of the same kind.
+
+\begin{theorem}\label{t:fat}
+The fatalist argument is unsound, and fatalism about free choices is unsupported by it.
+\end{theorem}
+
+\begin{proof}
+The argument has three steps: (i) at $m$, either \enquote{she will take $c$} is true or \enquote{she will not take $c$} is true; (ii) whichever is true at $m$, nothing done after $m$ can make it false, so its truth makes the corresponding outcome unavoidable after $m$; (iii) so whatever she does at $t_1$ was unavoidable. Step (i) is an instance of bivalence. By Theorem~\ref{t:gap}, if the choice is free, neither sentence is true at $m$, so (i) is false for it. The fatalist cannot establish (i) by excluded middle, since by Proposition~\ref{p:lem} excluded middle holds without it. Without (i), (ii) and (iii) have nothing to apply to.
+\end{proof}
+
+The theorem does not beg the question. Assumption~\ref{a:open} says that free choices are open before they are made, and the fatalist denies that there are free choices in this sense; but she claims to establish the denial from logic alone. Theorem~\ref{t:fat} shows that the logic does not establish it: in a branching structure in which choices are open, every logical truth holds and the fatalist's first premise fails. Whether our world contains open choices is then a question for the theory of free will and the laws, not for logic, and logic gives the fatalist no support.
+
+Two clarifications fix the scope of the result. First, openness is a matter of the unsettledness of tensed sentences at a moment. It is not a state of affairs that neither obtains nor fails to obtain, and it gives no example of the metaphysical indeterminacy that MET-19 restricts to self-referential states of affairs: each history is fully determinate, and the gap arises from evaluating a sentence at a moment through which several histories pass. Second, the rejection of fatalism concerns contingents, paradigmatically choices not yet made. An eclipse that the laws and present conditions guarantee is settled now; that it is settled is not fatalism, since no choice now available could affect it.
+
+\section{Objections and replies}
+
+\begin{objection}[Tenseless truth]
+Whatever the agent chooses, the tenseless proposition that she takes $c$ at $t_1$ is either true or false. If it is true, it was always true, and the fatalist can run her argument with it.
+\end{objection}
+
+\begin{reply}
+Tenseless propositions are evaluated relative to a history, by Definition~\ref{d:mh}, and relative to the actual history the proposition that she takes $c$ at $t_1$ is true if she does. But the actual history is not singled out by any fact at a moment before $t_1$; it is singled out by the choices made along it, including hers. To claim that at $m$ one history is already the actual one would be to posit a \enquote{thin red line} through the branching structure, settled in advance \citep{BelnapGreen1994}, which is the fatalist's conclusion rather than an argument for it. That a tenseless proposition is true relative to the actual history is consistent with its not being settled at any earlier moment, and nothing about the agent's ability follows from it. This is the distinction on which REL-05 relies in reconciling timeless divine knowledge with the open future.
+\end{reply}
+
+\begin{objection}[Retrospective truth]
+After the choice, we say that it was true yesterday that she would take $c$. If that is correct, the sentence was true before the choice.
+\end{objection}
+
+\begin{reply}
+What is true after the choice is the past-tensed sentence \enquote{it was the case that she would take $c$}, evaluated at a later moment: on every history through that moment, there is an earlier moment at which her taking $c$ lies ahead, so the sentence is settled true at the later moment. It does not follow that \enquote{she will take $c$} was true at the earlier moment, evaluated there, since the earlier moment had histories on which she did not \citep{Thomason1970}. Our retrospective talk is correct about what is now settled, not about what was settled then.
+\end{reply}
+
+\begin{objection}[Assertion and prediction]
+We assert future contingents, bet on them and hold predictors to their predictions. If future contingents lack a truth value, all such assertions are defective.
+\end{objection}
+
+\begin{reply}
+An assertion that the agent will take $c$ commits the speaker to a claim that, if things go as she says, will be vindicated, and it is evaluated, after the event, by whether they did. What is lacking at the time of assertion is a truth value at that moment, not a standard of correctness, and the assertion can be well grounded in evidence about present intentions and tendencies, as EPI-25 argues in the case of one's own planned conduct, where what is known is the present intention and its reliability. The practice of prediction requires no more than this.
+\end{reply}
+
+\begin{objection}[Divine foreknowledge]
+If God knows now what the agent will choose, the sentence that she will choose it is true now.
+\end{objection}
+
+\begin{reply}
+Knowledge held at a moment before the choice would require the sentence to be true at that moment, and by Theorem~\ref{t:gap} it is not. If God's knowledge is located in time, there is no such knowledge of future free choices. REL-05 argues that divine knowledge is timeless, and timeless knowledge requires only the truth of tenseless propositions relative to the actual history, which the first reply grants.
+\end{reply}
+
+\section{Conclusion}
+
+In supervaluationist branching time, a future-tensed sentence is true at a moment if and only if it is settled there, and a free choice not yet made is not settled. Sentences about such choices lack a truth value until the choice is made; excluded middle holds for them, but bivalence does not, and the fatalist argument needs bivalence. Tenseless propositions about the choice are true relative to the actual history, which no earlier fact singles out. The future is not already settled, and fatalism is unsupported.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(De Int.)]{AristotleDeInt} Aristotle. \emph{De Interpretatione}. Trans. J.~L. Ackrill, in \emph{Categories and De Interpretatione}. Clarendon Press, 1963.
+\bibitem[Belnap and Green(1994)]{BelnapGreen1994} Belnap, N. and Green, M. (1994). Indeterminism and the thin red line. \emph{Philosophical Perspectives}, 8, 365--388.
+\bibitem[Belnap et~al.(2001)]{Belnap2001} Belnap, N., Perloff, M. and Xu, M. (2001). \emph{Facing the Future: Agents and Choices in Our Indeterminist World}. Oxford University Press.
+\bibitem[{\L}ukasiewicz(1920)]{Lukasiewicz1920} {\L}ukasiewicz, J. (1920). O logice tr\'ojwarto\'sciowej. \emph{Ruch Filozoficzny}, 5, 170--171. English translation, On three-valued logic, in L. Borkowski (ed.), \emph{Selected Works}, North-Holland, 1970.
+\bibitem[Prior(1967)]{Prior1967} Prior, A.~N. (1967). \emph{Past, Present and Future}. Clarendon Press.
+\bibitem[Taylor(1962)]{Taylor1962} Taylor, R. (1962). Fatalism. \emph{The Philosophical Review}, 71(1), 56--66.
+\bibitem[Thomason(1970)]{Thomason1970} Thomason, R.~H. (1970). Indeterminist time and truth-value gaps. \emph{Theoria}, 36(3), 264--281.
+\end{thebibliography}
+
+\end{document}

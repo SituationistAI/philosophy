@@ -1,0 +1,73 @@
+\documentclass{situationist-preprint}
+
+\title{Eliminativism Is Self-Undermining}
+\msid{MND-13-a}
+\msfamily{MND-13}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_13.lean}
+\mskeywords{eliminative materialism; belief; assertion; self-refutation; folk psychology}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Eliminative materialism holds that there are no beliefs: folk psychology is a false theory, and its posits, like phlogiston, do not exist. We argue that beliefs exist, because eliminativism is self-undermining. To assert a thesis sincerely is to express a belief in it, so a sincere assertion of eliminativism is the existence of a belief, and the thesis asserted is false. The argument has two premises, that sincere assertion requires belief and that eliminativism has been sincerely asserted; a Lean formalization confirms that the conclusion depends on these alone. We reply to the objection that the first premise begs the question.
+\end{abstract}
+
+\section{The question}
+
+\citet{Churchland1981} argued that folk psychology, the theory that explains behavior by beliefs and desires, is stagnant, explanatorily limited and unlikely to be reduced to neuroscience, and should be eliminated as earlier folk theories were; \citet{Stich1983} argued for a related conclusion from cognitive science. The objection that the view is self-refuting was pressed by \citet{Baker1987} and given a sharper form by \citet{Boghossian1990}. We state the simplest version.
+
+\section{Assumptions}
+
+\begin{assumption}[Assertion requires belief]\label{a:assert}
+Whoever sincerely asserts a content believes it.
+\end{assumption}
+
+\begin{assumption}\label{a:asserted}
+Someone has sincerely asserted that there are no beliefs.
+\end{assumption}
+
+Assumption~\ref{a:assert} is the norm that distinguishes sincere assertion from lying, supposing and reciting. Assumption~\ref{a:asserted} is a matter of record: eliminativists present their thesis as true and argue for it.
+
+\section{The theorem}
+
+\begin{theorem}\label{t:main}
+There are beliefs, and eliminativism is false.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:asserted}, some agent has sincerely asserted that there are no beliefs. By Assumption~\ref{a:assert}, that agent believes that there are no beliefs. So there is at least one belief, and the thesis that there are none is false.
+\end{proof}
+
+\begin{objection}[Begging the question]
+\citet{Churchland1981} replies that the argument assumes the folk-psychological conception of assertion. A completed neuroscience would describe what the eliminativist does in other terms, and would not count it as expressing a belief.
+\end{objection}
+
+\begin{reply}
+The eliminativist who accepts the reply must say what makes her utterance an assertion of her thesis rather than a noise, and why her audience should accept it. If her successor notion stands to her thesis as belief does, in being correct when the thesis is true and in being responsive to her reasons, it is belief under another name, and Assumption~\ref{a:assert} holds of it. If it does not, she has not asserted her thesis, and Assumption~\ref{a:asserted} fails because there is no eliminativist thesis on offer. Either way the thesis that there are no beliefs cannot be both asserted and true. MND-13-b develops the reply.
+\end{reply}
+
+\paragraph{Formalization.} \nolinkurl{Philosophy/MND/MND_13.lean} states the two assumptions as axioms over primitive relations of belief and sincere assertion and proves the theorem.
+
+\begin{lstlisting}
+theorem beliefs_exist : (∃ a c, Believes a c) ∧ ¬ Eliminativism
+
+'Philosophy.MND_13.beliefs_exist' depends on axioms:
+  [Philosophy.MND_13.Agent, Philosophy.MND_13.Believes,
+   Philosophy.MND_13.Content, Philosophy.MND_13.SincerelyAsserts,
+   Philosophy.MND_13.assumption_2_1, Philosophy.MND_13.assumption_2_2,
+   Philosophy.MND_13.elim]
+\end{lstlisting}
+
+\texttt{assumption\_2\_1} and \texttt{assumption\_2\_2} are Assumptions~\ref{a:assert} and~\ref{a:asserted}; \texttt{elim} is the content that there are no beliefs, and the remaining axioms are primitives.
+
+\begin{thebibliography}{9}\small
+\bibitem[Baker(1987)]{Baker1987} Baker, L.~R. (1987). \emph{Saving Belief: A Critique of Physicalism}. Princeton University Press.
+\bibitem[Boghossian(1990)]{Boghossian1990} Boghossian, P.~A. (1990). The status of content. \emph{The Philosophical Review}, 99(2), 157--184.
+\bibitem[Churchland(1981)]{Churchland1981} Churchland, P.~M. (1981). Eliminative materialism and the propositional attitudes. \emph{The Journal of Philosophy}, 78(2), 67--90.
+\bibitem[Stich(1983)]{Stich1983} Stich, S.~P. (1983). \emph{From Folk Psychology to Cognitive Science: The Case Against Belief}. MIT Press.
+\end{thebibliography}
+
+\end{document}

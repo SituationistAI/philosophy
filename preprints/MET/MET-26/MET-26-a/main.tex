@@ -1,0 +1,165 @@
+\documentclass{situationist-preprint}
+
+\title{Against Informational Ontology}
+\msid{MET-26-a}
+\msfamily{MET-26}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mskeywords{information; it from bit; informational structural realism; ontic structural realism; Newman's objection; physical medium; structure}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Several programmes in physics and philosophy hold that reality is made of information: that physical things are, at bottom, bits, or that the world is an informational structure. We argue that it is not. Information, in every sense in which it is measured or transmitted, is a selection among alternative states of something, and so requires a medium whose states they are; a world made of information without a medium is a selection with nothing to select among. The informational ontologist may reply that the medium is itself informational, but then each level of medium is a medium, and the thesis that reality consists of information and nothing else is not reached at any level. The structural version of the view fails for a parallel reason: a structure is a pattern of relations, relations relate terms, and a structure without terms that have a nature of their own is, by Newman's argument, specified by nothing more than its cardinality. Information and structure are real, and physics may describe nothing else; but what physics describes is the structure of something that is not itself information.
+\end{abstract}
+
+\section{The question}\label{s:question}
+
+The thesis that reality is made of information has a physical and a philosophical form. In its physical form, it is Wheeler's slogan \enquote{it from bit}: every physical quantity derives its meaning from answers to yes-or-no questions, so that the physical world has an informational origin \citep{Wheeler1990}. Related programmes in digital physics hold that the universe is a computation on a discrete substrate \citep{Zuse1969,Fredkin2003}, and reconstructions of quantum theory from information-theoretic principles have been read as showing that information is the basic stuff of the quantum world \citep{CliftonBubHalvorson2003}. In its philosophical form, the thesis is informational structural realism, on which the ultimate nature of reality is a structure of informational objects \citep{Floridi2008,Floridi2011}, and, more generally, ontic structural realism, on which there are no objects with intrinsic natures, only structure \citep{LadymanRoss2007,French2014}. \citet{Tegmark2008} took the structural thesis to its limit: the physical world is a mathematical structure, and nothing else.
+
+Against these views stands the dictum of \citet{Landauer1991} that information is physical: it is always carried by a physical system, in its states, and is subject to the laws that govern them. \citet{Timpson2013} argued that \enquote{information}, in the sense of information theory, is an abstract noun, and that quantum information is not a kind of stuff.
+
+We argue for the negative answer.
+
+\begin{quote}
+\textbf{Thesis.} Reality is not made of information. Information requires a physical medium, and structure presupposes something structured.
+\end{quote}
+
+The thesis has two parts, and they answer the two forms of the view. Section~\ref{s:framework} fixes the notions. Section~\ref{s:medium} argues that information requires a medium, and Section~\ref{s:structure} that structure requires something structured. Section~\ref{s:objections} answers objections.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Information]\label{d:info}
+A \emph{source} is a set of alternatives with a probability distribution over them. The \emph{information} of a source, in Shannon's sense, is a measure of the uncertainty its distribution resolves \citep{Shannon1948}. An \emph{information token} is the occurrence of one alternative rather than the others, in a system capable of each.
+\end{definition}
+
+\begin{definition}[Medium]\label{d:medium}
+A \emph{medium} for a source is a system that has a state for each alternative of the source and is in exactly one of them at a time. An information token is \emph{carried} by a medium if it consists in the medium's being in one of those states.
+\end{definition}
+
+\begin{definition}[Structure]\label{d:structure}
+A \emph{structure} is a domain together with relations on it. A system \emph{has} a structure if there is a domain of its parts or states and relations among them that instantiate the structure. Two systems have the same structure if they are isomorphic.
+\end{definition}
+
+The three definitions are the standard ones. Definition~\ref{d:info} covers information in the sense in which it is quantified, stored and transmitted. Semantic information, in the sense in which a signal carries the information that something is the case \citep{Dretske1981}, is defined in terms of the same notion, as the information a signal carries about a source on which its state depends; the argument below applies to it as well. Definition~\ref{d:structure} is neutral on whether the domain consists of objects, positions or states.
+
+\begin{principle}[Selection]\label{p:selection}
+Every information token is the occurrence of one alternative among several, and alternatives are alternative states of something.
+\end{principle}
+
+\begin{principle}[Relata]\label{p:relata}
+Every relation that is instantiated relates terms, and an instantiated structure has a domain of terms that the relations relate.
+\end{principle}
+
+\ref{p:selection} is a gloss on Definition~\ref{d:info}: the information of a source is a measure on a set of alternatives, and an information token is the realization of one of them; a realization is a system's being in a state. \ref{p:relata} is the claim of MET-22 that relations are real and relate their terms, without needing a further relating relation; what it adds is the platitude that a relation with no terms relates nothing.
+
+\section{Information requires a medium}\label{s:medium}
+
+\begin{proposition}[No token without a medium]\label{p:medium}
+Every information token is carried by a medium.
+\end{proposition}
+
+\begin{proof}
+By \ref{p:selection}, an information token is the occurrence of one alternative among several, and the alternatives are states of something. That something has a state for each alternative and is in exactly one of them when the token occurs. By Definition~\ref{d:medium}, it is a medium for the source, and the token consists in its being in one of those states; so the token is carried by it.
+\end{proof}
+
+\begin{theorem}[Reality is not made of information]\label{t:main}
+It is not the case that every concrete thing is an information token, or a structure of information tokens, and nothing else.
+\end{theorem}
+
+\begin{proof}
+Suppose that every concrete thing is an information token or a structure of tokens and nothing else. By Proposition~\ref{p:medium}, every token is carried by a medium and consists in the medium's being in a state. A medium is a concrete system, so by the supposition it too is a token or a structure of tokens and nothing else; its states are then themselves the occurrence of alternatives in a further medium, and so on. At each stage there is a system whose being in a state is what the token consists in, and that system is not identical to any of its own states. So at every stage there is something, the medium, that is not a token but has tokens as its states, contrary to the supposition.
+\end{proof}
+
+The proof leaves the informational ontologist one way out: to deny that the medium at any stage is anything over and above the tokens it carries, so that the medium is nothing but a pattern of tokens, each of which is a state of nothing. That is to deny \ref{p:selection}, and with it the notion of information. A token that is not the occurrence of one alternative rather than another, in something that could have been in another, carries no information, since there is no uncertainty it resolves. The view that reality consists of bits with no bearer is the view that there are answers without anything that answers.
+
+The regress in the proof is not itself an objection to the view. MET-10 argues that an infinite descent of levels, each grounded in a lower one, is not vicious, and an informational ontologist may hold that every medium is carried by a further medium without end. The objection is that the descent never reaches a level that consists of information alone. At every level there is a medium, and the information is the medium's being in one state rather than another. The descent may be infinite; what it descends through is media.
+
+Wheeler's own formulation confirms the point. The bits from which, on his view, physical quantities derive are the answers to yes-or-no questions posed by registering equipment \citep{Wheeler1990}. A registration is an event in a physical apparatus, the click of a counter or the darkening of a grain, and the information is carried by it. Read as a thesis about the dependence of physical quantities on registration, it-from-bit is a thesis about the role of measurement in physics, which may be true; read as the thesis that the apparatus and everything else is made of bits, it presupposes the media it was meant to eliminate. Digital physics, likewise, describes a computation, and a computation is a sequence of states of something that computes. On the view of \citet{Chalmers2022}, even virtual objects, which are as close to pure information as anything we know, are real digital objects grounded in processes in physical computers; virtual realism about them is a thesis about what physical media can realize, not a thesis that media are dispensable.
+
+\section{Structure presupposes something structured}\label{s:structure}
+
+The structural form of the view does not say that reality is made of bits but that it is a structure: a domain of relata, or of positions, and relations on them, with no intrinsic natures in the relata. Ontic structural realism, in its eliminative form, holds that there are no relata at all, only relations \citep{LadymanRoss2007}; in its moderate form, it holds that the relata exist but have no natures beyond their places in the structure.
+
+\begin{proposition}[Relata]\label{p:relataprop}
+Every instantiated structure has a domain of terms.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{d:structure}, a system has a structure if relations among parts or states of it instantiate the structure. By \ref{p:relata}, the instantiated relations relate terms, and the terms are the domain.
+\end{proof}
+
+Proposition~\ref{p:relataprop} defeats eliminative structuralism, which denies that there are relata. It does not by itself defeat the moderate form, on which the relata exist but are mere positions in the structure. Against the moderate form, the decisive consideration is due to \citet{Newman1928}, in reply to the structural realism of \citet{Russell1927}.
+
+\begin{proposition}[Newman]\label{p:newman}
+If the content of a theory of the world is exhausted by the claim that there exist relations on the domain of concrete things that instantiate a structure $S$, then the theory is true provided only that the domain has the cardinality of the domain of $S$.
+\end{proposition}
+
+\begin{proof}
+Let $D$ be the domain of concrete things, and suppose that $D$ has the same cardinality as the domain of $S$. Take any bijection $\beta$ from the domain of $S$ to $D$, and for each relation $R$ of $S$ define a relation on $D$ that holds of some things exactly when $R$ holds of their preimages under $\beta$. The relations so defined exist, since a relation, in the sense of an arbitrary set of tuples, exists for any set of tuples. They instantiate $S$ on $D$, so the theory is true.
+\end{proof}
+
+Proposition~\ref{p:newman} shows that the claim that the world has a structure, and nothing more, says nothing beyond a claim about how many things there are \citep{DemopoulosFriedman1985}. A structural realist can escape only by restricting the relations that count to some privileged class: the genuine, or natural, relations, in the sense of MET-02. But a relation is genuine because of what it is, not because of its place in the structure; to say that the relations in the world are genuine is to say something non-structural about them. The moderate structuralist who restricts the relations to the genuine ones has granted that the world has a nature beyond its structure, located in the relations if not in the relata. That the world has such a nature is what the second part of our thesis asserts: structure presupposes something structured, something whose character is not exhausted by the fact that it instantiates the structure.
+
+The conclusion is consistent with the view that physics is structural. MND-01 argues that the microphysical truths specify the structural and dynamical properties of the world and not the intrinsic properties that realize them (MND-01-a, Principle~P2), and that consciousness is the intrinsic nature of physical structure. Our argument shows that there must be some such nature, and that physics, in describing structure, describes the structure of something. It does not show what the nature is; that is the question MND-01 answers. Nor does it conflict with structuralism in mathematics. MTH-14 argues that numbers are positions in structures with no properties beyond their structural ones. A mathematical structure is not a concrete thing, and Newman's argument has no force against it, since there is no question of distinguishing the true mathematical structure from the others by its relation to a given domain; the objection is to the thesis that the \emph{concrete} world is nothing but a structure.
+
+The result also fixes the sense in which patterns are real. REL-08-a defends a pattern theory of persons, on which a person is a concrete realization of a psychological pattern (Definitions~3.1 and~3.2), and it takes a pattern to be a structure of a realizer, not something that can exist unrealized. That is what Propositions~\ref{p:medium} and~\ref{p:relataprop} require. A pattern, like any information or structure, is real when it is the pattern of something, and the something is not itself a pattern.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Relations first]\label{o:ofirst}
+Quantum particles of the same kind are indiscernible except by their relations, and permutation symmetry shows that they lack individuality. The relata are therefore constituted by the relations, and the relations are prior \citep{LadymanRoss2007,French2014}.
+\end{objection}
+
+\begin{reply}
+That relata are individuated by their relations does not show that there are no relata, or that they have no nature beyond their relations. Two electrons are weakly discernible by a symmetric, irreflexive relation, and they share their intrinsic properties, mass, charge and spin; MET-28 argues that Black's spheres are discernible in the same weak way. What permutation symmetry shows is that the identity of the relata is not fixed independently of the relations, not that the relations relate nothing. The relations, moreover, are physical relations, which are genuine and not merely set-theoretic, and so, by the reasoning that follows Proposition~\ref{p:newman}, have a nature that is not structural.
+\end{reply}
+
+\begin{objection}[Information-theoretic reconstructions]\label{o:recon}
+Quantum theory can be derived from a few principles about the transmission and processing of information \citep{CliftonBubHalvorson2003}. If the theory is derivable from informational constraints, information is the subject matter of physics.
+\end{objection}
+
+\begin{reply}
+A derivation of a theory from principles about information shows that the theory constrains what information its systems can carry and how it can be processed. It does not show that there are no systems. The principles of such reconstructions are stated about physical systems, preparations and measurements, and the information they speak of is carried by those systems' states; that is the sense in which \citet{Timpson2013} called \enquote{information} an abstract noun. A characterization of physics in terms of what its systems can encode is a characterization of the systems.
+\end{reply}
+
+\begin{objection}[The mathematical universe]\label{o:math}
+The physical world might simply be a mathematical structure, so that there is no medium and nothing structured beyond the structure \citep{Tegmark2008}. Every concrete fact would be a fact about positions in a structure, as MTH-14 says numbers are.
+\end{objection}
+
+\begin{reply}
+If the physical world were a mathematical structure, it would be abstract, and there would be no difference between the structures that are physically realized and those that are merely mathematically possible. Tegmark accepts this consequence: every mathematical structure exists, and physically exists, in the same sense. But then the thesis that we inhabit one structure rather than another has no content beyond the claim that we are in one of them, and the Newman problem returns at the level of the whole: what distinguishes the structure we observe is not a structural fact. Treating the concrete world as a mathematical structure therefore does not make information or structure self-standing; it gives up the distinction between the concrete and the abstract, which is the distinction the question presupposes. The same holds of the hypothesis that we live in a simulation: a simulated world would consist of data structures, which are states of a physical computer, and so would illustrate Proposition~\ref{p:medium} rather than refute it.
+\end{reply}
+
+
+\section{What the result does not establish}\label{s:limits}
+
+The result does not establish that information is unreal or unimportant. Information is a real and measurable feature of physical systems, and physics may be right that it is conserved, that its erasure has a thermodynamic cost \citep{Landauer1991}, and that it constrains the dynamics. Nor does the result refute structural realism as an epistemic thesis, the view that what our best theories get right is the structure of the world \citep{Worrall1989}; it refutes only the ontic thesis that structure is all there is. It does not say what the medium of physical information is, or what the intrinsic nature of the structured world is. And it does not establish that there is a fundamental medium; it is consistent with the view of MET-10 that every level is grounded in a lower one.
+
+\section{Conclusion}
+
+Reality is not made of information. An information token is one alternative's occurring rather than another in something that could be in either, and so every token is carried by a medium, which is not itself a token. A structure is a pattern of relations among terms, and a world that is nothing but a structure is, by Newman's argument, characterized by nothing more than its cardinality. Information and structure are features of the world, and physics may describe nothing else; what it describes is the information carried by, and the structure of, something that is neither.
+
+\begin{thebibliography}{99}\small
+\bibitem[Chalmers(2022)]{Chalmers2022} Chalmers, D.~J. (2022). \emph{Reality+: Virtual Worlds and the Problems of Philosophy}. W.~W. Norton.
+\bibitem[Clifton et~al.(2003)]{CliftonBubHalvorson2003} Clifton, R., Bub, J. and Halvorson, H. (2003). Characterizing quantum theory in terms of information-theoretic constraints. \emph{Foundations of Physics}, 33(11), 1561--1591.
+\bibitem[Demopoulos and Friedman(1985)]{DemopoulosFriedman1985} Demopoulos, W. and Friedman, M. (1985). Bertrand Russell's \emph{The Analysis of Matter}: Its historical context and contemporary interest. \emph{Philosophy of Science}, 52(4), 621--639.
+\bibitem[Dretske(1981)]{Dretske1981} Dretske, F.~I. (1981). \emph{Knowledge and the Flow of Information}. MIT Press.
+\bibitem[Floridi(2008)]{Floridi2008} Floridi, L. (2008). A defence of informational structural realism. \emph{Synthese}, 161(2), 219--253.
+\bibitem[Floridi(2011)]{Floridi2011} Floridi, L. (2011). \emph{The Philosophy of Information}. Oxford University Press.
+\bibitem[Fredkin(2003)]{Fredkin2003} Fredkin, E. (2003). An introduction to digital philosophy. \emph{International Journal of Theoretical Physics}, 42(2), 189--247.
+\bibitem[French(2014)]{French2014} French, S. (2014). \emph{The Structure of the World: Metaphysics and Representation}. Oxford University Press.
+\bibitem[Ladyman and Ross(2007)]{LadymanRoss2007} Ladyman, J. and Ross, D. (2007). \emph{Every Thing Must Go: Metaphysics Naturalized}. Oxford University Press.
+\bibitem[Landauer(1991)]{Landauer1991} Landauer, R. (1991). Information is physical. \emph{Physics Today}, 44(5), 23--29.
+\bibitem[Newman(1928)]{Newman1928} Newman, M.~H.~A. (1928). Mr. Russell's \enquote{causal theory of perception}. \emph{Mind}, 37(146), 137--148.
+\bibitem[Russell(1927)]{Russell1927} Russell, B. (1927). \emph{The Analysis of Matter}. Kegan Paul.
+\bibitem[Shannon(1948)]{Shannon1948} Shannon, C.~E. (1948). A mathematical theory of communication. \emph{Bell System Technical Journal}, 27, 379--423 and 623--656.
+\bibitem[Tegmark(2008)]{Tegmark2008} Tegmark, M. (2008). The mathematical universe. \emph{Foundations of Physics}, 38(2), 101--150.
+\bibitem[Timpson(2013)]{Timpson2013} Timpson, C.~G. (2013). \emph{Quantum Information Theory and the Foundations of Quantum Mechanics}. Oxford University Press.
+\bibitem[Wheeler(1990)]{Wheeler1990} Wheeler, J.~A. (1990). Information, physics, quantum: The search for links. In W.~H. Zurek (ed.), \emph{Complexity, Entropy, and the Physics of Information}. Addison-Wesley.
+\bibitem[Worrall(1989)]{Worrall1989} Worrall, J. (1989). Structural realism: The best of both worlds? \emph{Dialectica}, 43(1--2), 99--124.
+\bibitem[Zuse(1969)]{Zuse1969} Zuse, K. (1969). \emph{Rechnender Raum}. Vieweg.
+\end{thebibliography}
+
+\end{document}

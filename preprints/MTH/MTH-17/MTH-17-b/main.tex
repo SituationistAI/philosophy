@@ -1,0 +1,54 @@
+\documentclass{situationist-preprint}
+
+\title{Machine-Generated Mathematics: A Review}
+\msid{MTH-17-b}
+\msfamily{MTH-17}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{computer-assisted proof; automated theorem proving; formal verification; mathlib; machine learning; mathematical discovery}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-17-a argues that machines can produce new mathematical results, distinguishing three roles a machine may play: verifier, searcher and author. We review the main developments in each role, from the four colour theorem to recent machine-learning systems, and record what each establishes. Searching and verifying machines have contributed essential parts of accepted proofs; authoring machines have found proofs and constructions that settled open questions. The review supports MTH-17-a's conclusion, and it bears out MTH-08 and MTH-09: the machine contributions are proofs, and the case-exhausting ones do not explain.
+\end{abstract}
+
+\section{Search}
+
+The first essential machine contributions were exhaustive searches within a proof designed by people. \citet{AppelHaken1977} proved the four colour theorem by reducing it to the reducibility of an unavoidable set of configurations and checking each by computer. \citet{Hales2005} proved the Kepler conjecture by reducing it to a large family of inequalities and linear programs settled by machine. \citet{HeuleEtAl2016} settled the Boolean Pythagorean triples problem by a satisfiability solver, producing a certificate of some two hundred terabytes. In each case the result was new and the machine's part could not be replaced by human calculation. By Corollary~4.2 of MTH-08-a, such proofs do not explain why their conclusions hold.
+
+\section{Verification}
+
+Formal verification answered the doubt whether such proofs are proofs. \citet{Gonthier2008} verified the four colour theorem in the Coq proof assistant, and the Flyspeck project verified the Kepler conjecture in HOL Light and Isabelle \citep{HalesEtAl2017}. Large formal libraries now make verification routine outside such special cases: Lean's \emph{mathlib} \citep{mathlib2020} contains a substantial part of undergraduate and graduate mathematics, maintained by a community of contributors, and in 2022 the Liquid Tensor Experiment completed the formal verification of a central theorem of Clausen and Scholze's condensed mathematics within it. By Corollary~3.2 of MTH-09-a, a formally verified derivation is a proof whether or not it is surveyed.
+
+\section{Authorship}
+
+A machine is an author when it finds a proof or construction that no person specified. The Robbins conjecture was proved in 1996 by the automated prover EQP \citep{McCune1997}, after some six decades as an open problem. Recent systems combine learned models with search. \citet{DaviesEtAl2021} used machine learning to suggest conjectures in knot theory and representation theory that mathematicians then proved; the machine's role there was to direct human attention, short of authorship. \citet{RomeraParedesEtAl2024} used a language model within an evolutionary program search to find cap sets in certain dimensions larger than any previously known. \citet{TrinhEtAl2024} built a system that proves olympiad geometry problems at the level of strong human competitors, and in 2024 systems combining language models with formal proof search reached the standard of a silver medal at the International Mathematical Olympiad. Collections of machine-generated manuscripts have also been released that present many results at once, some accompanied by formal proofs.
+
+\begin{objection}
+Olympiad problems and improved bounds are not significant mathematics.
+\end{objection}
+
+\begin{reply}
+The question is whether machines can produce new results, not whether they have produced the most important ones. The Robbins conjecture and the cap-set bounds were open questions that mathematicians had attempted and recognized as contributions when settled.
+\end{reply}
+
+\section{Conclusion}
+
+Machines have contributed in all three roles that MTH-17-a distinguishes, and in the role of author they have settled previously open questions. This is what Proposition~1.1 of MTH-17-a asserts: machines can produce new mathematical results.
+
+\begin{thebibliography}{99}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Davies et~al.(2021)]{DaviesEtAl2021} Davies, A. et~al. (2021). Advancing mathematics by guiding human intuition with AI. \emph{Nature}, 600, 70--74.
+\bibitem[Gonthier(2008)]{Gonthier2008} Gonthier, G. (2008). Formal proof---the four-color theorem. \emph{Notices of the American Mathematical Society}, 55(11), 1382--1393.
+\bibitem[Hales(2005)]{Hales2005} Hales, T.~C. (2005). A proof of the Kepler conjecture. \emph{Annals of Mathematics}, 162(3), 1065--1185.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[Heule et~al.(2016)]{HeuleEtAl2016} Heule, M.~J.~H., Kullmann, O. and Marek, V.~W. (2016). Solving and verifying the Boolean Pythagorean triples problem via cube-and-conquer. In \emph{Theory and Applications of Satisfiability Testing (SAT 2016)}, Lecture Notes in Computer Science 9710, 228--245. Springer.
+\bibitem[McCune(1997)]{McCune1997} McCune, W. (1997). Solution of the Robbins problem. \emph{Journal of Automated Reasoning}, 19(3), 263--276.
+\bibitem[mathlib Community(2020)]{mathlib2020} The mathlib Community (2020). The Lean mathematical library. In \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs (CPP 2020)}, 367--381.
+\bibitem[Romera-Paredes et~al.(2024)]{RomeraParedesEtAl2024} Romera-Paredes, B. et~al. (2024). Mathematical discoveries from program search with large language models. \emph{Nature}, 625, 468--475.
+\bibitem[Trinh et~al.(2024)]{TrinhEtAl2024} Trinh, T.~H., Wu, Y., Le, Q.~V., He, H. and Luong, T. (2024). Solving olympiad geometry without human demonstrations. \emph{Nature}, 625, 476--482.
+\end{thebibliography}
+
+\end{document}

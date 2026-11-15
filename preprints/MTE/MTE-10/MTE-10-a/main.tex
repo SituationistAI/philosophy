@@ -1,0 +1,98 @@
+\documentclass{situationist-preprint}
+
+\title{Ought From Is: A Reconsideration}
+\msid{MTE-10-a}
+\msfamily{MTE-10}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mskeywords{Hume's law; is--ought gap; Prior's paradox; bridge principles; normative significance; ought implies can; Searle}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Hume's law is usually stated as the claim that no conclusion containing \enquote{ought} follows from premises that do not. Prior showed that this formulation is false: \enquote{tea-drinking is common in England} entails \enquote{tea-drinking is common in England, or all New Zealanders ought to be shot}. We argue that Hume's law is nevertheless true in a corrected form. Call a sentence purely descriptive if its truth depends only on the descriptive facts, and call a conclusion normatively significant, given some premises, if it excludes a normative possibility left open by the descriptive facts those premises allow. Then no normatively significant conclusion follows from purely descriptive premises. Ought follows from is only with a normative bridge premise: a premise whose truth depends, in some descriptive circumstances, on the normative facts. Prior's counterexamples are valid but carry no normative significance, and Prior's dilemma is resolved by observing that its second argument contains a bridge premise.
+\end{abstract}
+
+\section{The problem}
+
+Hume observed that writers on morality pass, without notice, from propositions connected by \enquote{is} to propositions connected by \enquote{ought}, and asked how the new relation could be a deduction from others entirely different from it \citep[3.1.1]{HumeTreatise}. The passage has been read as stating a logical thesis, that no ought-conclusion can be validly derived from is-premises, and as stating something weaker \citep{MacIntyre1959}. On the logical reading, \citet{Searle1964} argued that the thesis is false, since from \enquote{Jones uttered the words \enquote{I hereby promise to pay you five dollars}} one can derive, through a series of steps each seemingly analytic, \enquote{Jones ought to pay five dollars}.
+
+\citet{Prior1960} raised a different difficulty. From \enquote{tea-drinking is common in England} it follows by disjunction introduction that tea-drinking is common in England or all New Zealanders ought to be shot. If the conclusion is ethical, an ethical conclusion has followed from a non-ethical premise. If it is not ethical, then from it and the non-ethical premise \enquote{tea-drinking is not common in England} it follows that all New Zealanders ought to be shot, and again an ethical conclusion follows from non-ethical premises. The usual formulation is refuted on either horn. Later formulations that survive Prior locate the gap in semantics rather than vocabulary: in the variability of ought-sentences with the descriptive facts fixed \citep{Karmo1988}, in the conservativeness of logic \citep{Pigden1989}, in the irrelevance to validity of the normative parts of conclusions drawn from descriptive premises \citep{Schurz1997}, and in a general theory of barriers to implication \citep{RussellRestall2010}. We give a formulation in this spirit.
+
+\section{Framework}
+
+Let the language contain descriptive and normative vocabulary. A model is a pair $(d,n)$ of a descriptive state $d$, which settles the descriptive facts, and a normative state $n$, which settles the normative facts.
+
+\begin{assumption}[Logical autonomy]\label{a:auton}
+Logic imposes no constraint linking the descriptive and the normative states: if $(d,n)$ and $(d',n')$ are admissible models, so is $(d,n')$.
+\end{assumption}
+
+\begin{definition}\label{d:desc}
+A sentence is \emph{purely descriptive} if any two admissible models with the same descriptive state agree on its truth value.
+\end{definition}
+
+\begin{definition}\label{d:sig}
+A sentence $\varphi$ is \emph{normatively significant given} premises $\Gamma$ if there is an admissible model $(d,n)$ of $\Gamma$ and an admissible model $(d,n')$, with the same descriptive state, at which $\varphi$ is false. A \emph{normative bridge premise} is a premise that is not purely descriptive.
+\end{definition}
+
+Both definitions are semantic: \enquote{either it ought to be that $p$ or not} contains \enquote{ought} and is purely descriptive. A conclusion is normatively significant if it rules out some way the normative facts could be, consistently with descriptive facts the premises allow.
+
+\section{Hume's law corrected}
+
+\begin{theorem}\label{t:hume}
+If every member of $\Gamma$ is purely descriptive and $\Gamma$ entails $\varphi$, then $\varphi$ is not normatively significant given $\Gamma$.
+\end{theorem}
+
+\begin{proof}
+Let $(d,n)$ be an admissible model of $\Gamma$ and $(d,n')$ an admissible model with the same descriptive state; it is admissible by Assumption~\ref{a:auton}. Each member of $\Gamma$ is purely descriptive, so it has the same truth value at $(d,n')$ as at $(d,n)$, and $(d,n')$ is a model of $\Gamma$. Since $\Gamma$ entails $\varphi$, $\varphi$ is true at $(d,n')$. So no model of the kind Definition~\ref{d:sig} requires exists.
+\end{proof}
+
+\begin{corollary}\label{c:bridge}
+If $\Gamma$ entails a conclusion that is normatively significant given $\Gamma$, then $\Gamma$ contains a normative bridge premise.
+\end{corollary}
+
+Theorem~\ref{t:hume} is Hume's law for purely descriptive premise sets. It is not the usual formulation, which is too strong. Prior's first argument has a purely descriptive premise and a conclusion containing \enquote{ought}, and it is valid; but its conclusion is not normatively significant given its premise, since at every model of the premise the disjunction is true whatever the normative state. Prior's second argument has the premise \enquote{tea-drinking is common in England or all New Zealanders ought to be shot}, which is not purely descriptive: at a model in which tea-drinking is not common, its truth depends on the normative state. It is therefore a normative bridge premise, and Corollary~\ref{c:bridge} allows the normatively significant conclusion. Prior's dilemma assumed a single classification of sentences into ethical and non-ethical; Definitions~\ref{d:desc} and \ref{d:sig} replace it with two, and the dilemma has no horn on which the corrected law fails.
+
+\section{Objections and replies}
+
+\begin{objection}[Ought implies can]
+\enquote{Jones cannot swim} entails \enquote{it is not the case that Jones ought to swim}, if ought implies can. The conclusion is normatively significant, since it excludes the normative state in which Jones ought to swim, and the premise is descriptive. So Theorem~\ref{t:hume} is false.
+\end{objection}
+
+\begin{reply}
+If ought implies can is a truth of logic, Assumption~\ref{a:auton} fails, since there are then no admissible models in which Jones cannot swim and ought to swim. But the principle is not a truth of logic. It is a substantive normative principle, defended and disputed on normative grounds, and it links the descriptive and normative states as a bridge premise does. Stated as a premise, it is not purely descriptive, and the argument falls under Corollary~\ref{c:bridge}. EPI-26-a treats its epistemic counterpart in the same way.
+\end{reply}
+
+\begin{objection}[Institutional facts]
+Searle's derivation proceeds from a purely descriptive premise, that Jones uttered certain words, through constitutive rules of the institution of promising, to the conclusion that Jones ought to pay \citep{Searle1964}.
+\end{objection}
+
+\begin{reply}
+The derivation requires the premise that one who has undertaken an obligation ought, other things equal, to fulfil it. Searle regarded the step as analytic, but it is a normative bridge premise in the sense of Definition~\ref{d:sig}: there are descriptive circumstances, those in which someone has promised, in which its truth depends on the normative state. Described as facts about an institution, the constitutive rules entail only that the promiser is counted as obliged; the step to his being obliged is the bridge.
+\end{reply}
+
+\begin{objection}[Thick concepts]
+From descriptive premises about a remark one may infer that it was lewd, and lewdness is normative.
+\end{objection}
+
+\begin{reply}
+By MTE-15, \emph{lewd} cannot be factored into a descriptive concept plus an evaluation, so no purely descriptive premises fix its application; an inference that concludes that a remark was lewd relies on a thick premise, which is a bridge premise in the sense of Definition~\ref{d:sig}.
+\end{reply}
+
+\section{Conclusion}
+
+Ought can be derived from is only with a normative bridge premise. Hume's law holds for purely descriptive premise sets: from them, no normatively significant conclusion follows. The usual formulation, in terms of vocabulary, is too strong, and Prior's counterexamples show it; they do not touch the corrected law. The result is used in EPI-26-a, which argues that no purely descriptive premises about belief formation settle what is justified without an epistemic bridge premise, and parallels the treatment of imperatives in LOG-14-a.
+
+\begin{thebibliography}{99}\small
+\bibitem[Hume(1739--40)]{HumeTreatise} Hume, D. (1739--40). \emph{A Treatise of Human Nature}.
+\bibitem[Karmo(1988)]{Karmo1988} Karmo, T. (1988). Some valid (but no sound) arguments trivially span the \enquote{is}--\enquote{ought} gap. \emph{Mind}, 97(386), 252--257.
+\bibitem[MacIntyre(1959)]{MacIntyre1959} MacIntyre, A.~C. (1959). Hume on \enquote{is} and \enquote{ought}. \emph{The Philosophical Review}, 68(4), 451--468.
+\bibitem[Pigden(1989)]{Pigden1989} Pigden, C.~R. (1989). Logic and the autonomy of ethics. \emph{Australasian Journal of Philosophy}, 67(2), 127--151.
+\bibitem[Prior(1960)]{Prior1960} Prior, A.~N. (1960). The autonomy of ethics. \emph{Australasian Journal of Philosophy}, 38(3), 199--206.
+\bibitem[Russell and Restall(2010)]{RussellRestall2010} Russell, G. and Restall, G. (2010). Barriers to implication. In C.~R. Pigden (ed.), \emph{Hume on Is and Ought}. Palgrave Macmillan.
+\bibitem[Schurz(1997)]{Schurz1997} Schurz, G. (1997). \emph{The Is-Ought Problem: An Investigation in Philosophical Logic}. Kluwer.
+\bibitem[Searle(1964)]{Searle1964} Searle, J.~R. (1964). How to derive \enquote{ought} from \enquote{is}. \emph{The Philosophical Review}, 73(1), 43--58.
+\end{thebibliography}
+
+\end{document}

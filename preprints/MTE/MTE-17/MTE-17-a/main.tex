@@ -1,0 +1,195 @@
+\documentclass{situationist-preprint}
+
+\title{The Collapse of Quasi-Realism}
+\msid{MTE-17-a}
+\msfamily{MTE-17}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_17.lean}
+\mskeywords{quasi-realism; expressivism; creeping minimalism; moral error; mind-independence; deflationism; naturalism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Quasi-realism is the program of explaining, on expressivist foundations, why we are entitled to say everything the realist says: that moral claims are true or false, that there are moral facts, that they do not depend on our attitudes, and that we may be mistaken about them. The program is unstable. We argue that its explanatory commitments, once made explicit, are two: an account of moral error on which a moral judgment is correct exactly when an improved sensibility would share it, and the requirement that the standard of improvement be characterized without moral vocabulary, since otherwise the explanation presupposes what it was to explain. Given deflationism about truth and the coarse individuation of minimal properties, these commitments are equivalent to the realism of MTE-01, on which wrongness is a natural property of being disapproved under idealized conditions. If the quasi-realist drops the second commitment, her explanation presupposes moral facts, and her view is a non-naturalist realism. The equivalence is proved and formalized in Lean. The success of the expressivist semantics (MTE-03) is what makes the collapse unavoidable.
+\end{abstract}
+
+\section{The problem}
+
+Expressivism explains the meaning of moral sentences by the non-cognitive states they express \citep{Blackburn1984,Gibbard1990,Gibbard2003}. Quasi-realism, the name \citet{Blackburn1984,Blackburn1993} gave to his program, is the attempt to show that the expressivist is entitled to the whole of ordinary moral discourse, including the parts that seem to commit the speaker to realism: calling moral claims true, speaking of moral facts and properties, holding that kicking dogs would be wrong even if we approved of it, and allowing that one's own moral views may be mistaken. The quasi-realist does not deny these things. She explains, from expressivist materials, why we say them, and claims that the explanation shows them to be compatible with the absence of a realm of moral facts that moral judgments represent.
+
+The program has been criticized from two sides. Realists have argued that if the quasi-realist succeeds in earning the right to everything the realist says, her view becomes indistinguishable from realism \citep{Wright1992,Rosen1998,Dworkin1996}. \citet{Dreier2004} called this the problem of creeping minimalism: once truth, fact and property are understood in the minimal sense that deflationism allows, the expressivist can say that moral sentences are true, that they state facts and that they ascribe properties, and the realist cannot say anything more that is not also, in the minimal sense, available to the expressivist. Dreier proposed that the distinction be located in explanation: the expressivist explains what it is to make a moral judgment without appealing to moral properties, while the realist explains it by the judgment's representing a moral property. From the other side, critics have argued that the quasi-realist cannot earn all of what she claims. \citet{Egan2007} argued that she cannot make sense of the possibility of fundamental moral error, in which one's stable and fully informed attitudes are mistaken, and \citet{Street2011} argued that she cannot have mind-independence without the realist's commitments.
+
+We argue that the two criticisms combine into a dilemma that the quasi-realist cannot escape. To answer the second kind of criticism she must make her account of moral error explicit, and the only explicit account available to her identifies correctness with the verdict of an improved sensibility. To preserve Dreier's explanatory distinction she must characterize improvement without moral vocabulary. With both commitments in place, deflationism about truth (LNG-10) entails that wrongness is necessarily coextensive with a natural property, the property of being disapproved by an improved sensibility, and the coarse individuation of minimal properties identifies the two. That is the realism of MTE-01. Without the second commitment, the explanation of error appeals to moral facts about which sensibilities are better, and the view is a realism of another kind. Either way quasi-realism is indistinguishable from realism.
+
+The argument presupposes that the expressivist semantics works. MTE-03 shows that it does: moral sentences express states of being for, which compose according to the logic of plans, and the Frege--Geach problem is solved. That result is a premise here, not a target. A quasi-realist whose semantics failed could keep her distance from realism by failing to earn the realist's logic; one whose semantics succeeds has earned it, and the question is what is left to distinguish her. The two manuscripts form a pair: MTE-03 shows the technical success of the semantics, and the present manuscript shows that the success, made explicit, collapses into realism.
+
+\section{The explicit commitments}\label{s:commit}
+
+We set out what the quasi-realist must say, in her own terms, to earn each piece of realist discourse, and then isolate the two commitments on which the argument turns.
+
+\paragraph{Truth, fact, property.} With deflationism, which LNG-10 defends, \enquote{it is true that lying is wrong} says no more than that lying is wrong, and \enquote{it is a fact that lying is wrong} and \enquote{lying has the property of wrongness} likewise. Since by MTE-03 \enquote{lying is wrong} is a sentence with a content that embeds and combines like any other, the quasi-realist may assert all three whenever she asserts that lying is wrong \citep{Blackburn1998}. This is the part of the program that creeping minimalism concerns, and the quasi-realist accepts it.
+
+\paragraph{Mind-independence.} \enquote{If we approved of kicking dogs, it would still be wrong} is, for the quasi-realist, a first-order moral claim, accepted because what she disapproves of in kicking dogs is the suffering of the dog, not the violation of anyone's attitude \citep{Blackburn1984,Blackburn1993}. She can accept it, and so can the realist. Neither side gains a distinguishing thesis here.
+
+\paragraph{Error.} The quasi-realist must also earn \enquote{I might be wrong about this}. Blackburn's account of the thought is that the speaker's present sensibility might be improved: there is a possible sensibility that results from hers by improvements, such as acquiring information, removing inconsistency, and correcting for partiality, and that would reject her present verdict \citep{Blackburn1993,Blackburn1998}. Fear of error is fear that one's verdict would not survive improvement. Egan's challenge is that this account leaves no room for errors that would survive every improvement available from one's own standpoint \citep{Egan2007}. The answer must be that the standard is not improvement from one's own standpoint but improvement simpliciter: a verdict is mistaken if an improved sensibility, whatever the starting point, would reject it. That is the first commitment.
+
+\begin{enumerate}[label=(Q\arabic*)]
+\item\label{q:fall} \emph{Fallibility.} The judgment that an act is wrong is correct exactly when an improved sensibility would be for blaming for it.
+\end{enumerate}
+
+\paragraph{Explanation.} The quasi-realist's account of moral judgment is distinguished from the realist's, if Dreier is right, by its explanatory order. Moral judgment is explained by attitudes, and the explanation does not appeal to moral properties. The account of error is part of the explanation, since it is what explains the thought that one might be wrong. So the notion of an improved sensibility that figures in \ref{q:fall} must itself be explained without appeal to moral properties: improvement must consist in features such as information, consistency and impartiality, specified non-morally. If the standard of improvement were itself moral, so that a sensibility counts as improved when its verdicts are morally better, the explanation of error would presuppose moral facts. That is the second commitment.
+
+\begin{enumerate}[label=(Q\arabic*),resume]
+\item\label{q:expl} \emph{Explanation.} The standard of improvement is characterized without moral vocabulary, so that being disapproved by an improved sensibility is a natural property.
+\end{enumerate}
+
+Blackburn himself sometimes describes the standards of improvement as standards we endorse from within our moral sensibility \citep{Blackburn1998}. That is the second horn of the dilemma of Section~\ref{s:theorem}, and we discuss it there. The claim of this section is conditional: a quasi-realist who wishes to keep Dreier's explanatory distinction is committed to \ref{q:expl}.
+
+\section{Framework}\label{s:framework}
+
+We work with acts, possible worlds and properties of acts, where for each property, act and world it is settled whether the act has the property at the world. \emph{Wrongness} is the minimal property expressed by \enquote{wrong}. \emph{Ideal disapproval} is the property an act has at a world when an improved sensibility would be for blaming for it there. The following assumptions are common ground between the quasi-realist and the realist.
+
+\begin{assumption}[Correctness as truth]\label{a:corr}
+A judgment that an act is wrong is correct exactly when its content is true.
+\end{assumption}
+
+\begin{assumption}[Equivalence schema]\label{a:eq}
+It is true that an act is wrong exactly when it is wrong, that is, when it has wrongness.
+\end{assumption}
+
+\begin{assumption}[Coarse individuation]\label{a:coarse}
+Minimal properties that are had by the same acts at every world are identical.
+\end{assumption}
+
+Assumption~\ref{a:corr} is the deflationist's account of correctness for a state with a content: an assertion or judgment is correct when what it says is so. Assumption~\ref{a:eq} is the equivalence schema, which deflationism takes to exhaust the notion of truth (LNG-10). Assumption~\ref{a:coarse} is the minimalist's view of properties: a minimal property is the shadow of a predicate, and it has no nature beyond the conditions under which the predicate applies; minimal properties that agree in their application at every world are therefore one property. The quasi-realist needs the assumption as much as the realist does, since it is what entitles her to say that wrongness is a property at all without positing a robust property behind the predicate.
+
+\begin{definition}[Quasi-realism, explicit]\label{d:qr}
+\emph{Quasi-realism} is the conjunction of \ref{q:fall} and \ref{q:expl}: the judgment that an act is wrong is correct exactly when the act has ideal disapproval, and ideal disapproval is a natural property.
+\end{definition}
+
+\begin{definition}[Realism]\label{d:r}
+\emph{Realism} is the conjunction of two theses: wrongness is ideal disapproval, and wrongness is a natural property.
+\end{definition}
+
+Definition~\ref{d:r} is the realism of MTE-01, on which moral facts are natural facts about idealized reactions. The definitions omit the theses on which the two positions already agree: that moral sentences have the semantics of MTE-03, that they may be called true and fact-stating in the minimal sense, and that wrongness does not depend on our actual attitudes.
+
+\section{The collapse}\label{s:theorem}
+
+\begin{theorem}\label{t:collapse}
+Given Assumptions~\ref{a:corr}, \ref{a:eq} and \ref{a:coarse}, quasi-realism is equivalent to realism.
+\end{theorem}
+
+\begin{proof}
+Suppose quasi-realism. For any act and world, by Assumption~\ref{a:eq} the act is wrong exactly when it is true that it is wrong; by Assumption~\ref{a:corr}, exactly when the judgment that it is wrong is correct; and by \ref{q:fall}, exactly when it has ideal disapproval. So wrongness and ideal disapproval are had by the same acts at every world, and by Assumption~\ref{a:coarse} they are identical. Since ideal disapproval is natural by \ref{q:expl}, so is wrongness. Both theses of realism hold.
+
+Conversely, suppose realism. The judgment that an act is wrong is correct exactly when its content is true (Assumption~\ref{a:corr}), exactly when the act has wrongness (Assumption~\ref{a:eq}), and so, since wrongness is ideal disapproval, exactly when it has ideal disapproval: \ref{q:fall} holds. Ideal disapproval is wrongness, which is natural: \ref{q:expl} holds.
+\end{proof}
+
+The first half of the proof is the substantive one. It shows that the quasi-realist's account of error, combined with the deflationism she relies on to earn truth talk, yields the biconditional that the naturalist realist asserts, and that her own explanatory constraint makes the right-hand side natural. The deflationism that was to have made truth cheap makes the account of error expensive: the account of when a moral judgment is correct is, by the equivalence schema, an account of when its content holds, and so a substantive account of what wrongness is.
+
+The second horn is the quasi-realist who rejects \ref{q:expl}.
+
+\begin{proposition}\label{p:moral}
+If ideal disapproval is not a natural property, quasi-realism in the sense of Definition~\ref{d:qr} fails.
+\end{proposition}
+
+\begin{proof}
+Quasi-realism includes \ref{q:expl}.
+\end{proof}
+
+The proposition is trivial as logic, and its interest lies in what remains of the quasi-realist's position when it applies. Suppose she holds that what makes a sensibility improved is a moral matter, settled from within morality: a sensibility is better when it is, by our best moral lights, more humane, more just, more sensitive to suffering \citep{Blackburn1998}. Then the first half of the proof of Theorem~\ref{t:collapse} still goes through, without the final step: wrongness is ideal disapproval, where ideal disapproval is now a morally characterized property. The quasi-realist has asserted that moral facts exist, that moral judgments are correct when they match them, and that what they match is characterized by moral standards that are not reducible to anything non-moral. That is non-naturalist realism, or the quietist realism of \citet{Dworkin1996}, and the explanation of moral judgment in terms of attitudes no longer goes without appeal to moral properties, since the attitudes that fix correctness are picked out by their moral quality. Dreier's distinguishing explanation is lost.
+
+\begin{corollary}\label{c:indist}
+Quasi-realism, with its explanatory commitments explicit, accepts a thesis about the nature of wrongness if and only if a form of realism accepts it: naturalist realism if \ref{q:expl} is retained, non-naturalist realism if it is dropped.
+\end{corollary}
+
+\begin{proof}
+If \ref{q:expl} is retained, Theorem~\ref{t:collapse} identifies the positions. If it is dropped, the argument following Proposition~\ref{p:moral} shows that the remaining commitments are those of non-naturalist realism. On the theses not covered by Definitions~\ref{d:qr} and \ref{d:r}, the positions agree by construction.
+\end{proof}
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Explanation is hyperintensional]
+The quasi-realist and the realist may agree that wrongness is ideal disapproval and still differ in what explains what. The quasi-realist holds that moral judgments are explained by attitudes, and that wrongness is a projection of them; the realist holds that moral judgments are explained by their responsiveness to wrongness. Explanatory claims are hyperintensional, and identity of properties does not settle them.
+\end{objection}
+
+\begin{reply}
+We grant that explanation is hyperintensional with respect to descriptions. But consider what each side says explains a correct moral judgment once the commitments are explicit. The quasi-realist says it is explained by the speaker's sensibility together with the fact that an improved sensibility would agree, since that is what makes it correct. The realist of MTE-01 says it is explained by the speaker's sensibility together with the fact that the act is wrong, which is the fact that an improved sensibility would disapprove. These are the same explanans described in the same non-moral terms. The difference that the objection needs is a difference between a judgment's being explained by attitudes and its being explained by a property; but the property, on both views, is a property of being the object of certain attitudes, and the two explanations cite the same attitudes. No hyperintensional distinction among facts is available that would separate them.
+\end{reply}
+
+\begin{objection}[Error is internal]
+The quasi-realist's account of error does not state a standard of correctness. It expresses an attitude towards possible improvements of one's sensibility. \enquote{I might be wrong} expresses the speaker's openness to change her attitudes under certain conditions, and \ref{q:fall} misdescribes it as a truth condition.
+\end{objection}
+
+\begin{reply}
+If \enquote{I might be wrong} expresses an attitude, then by the semantics of MTE-03 it has a content, and the content combines with others. In particular the quasi-realist accepts \enquote{my judgment that lying is wrong is correct if and only if lying is wrong}, which follows from Assumptions~\ref{a:corr} and \ref{a:eq}, and \enquote{my judgment is correct if and only if an improved sensibility would share it}, which is her account of error. From these two, by a valid argument in the logic of plans, she must accept that lying is wrong if and only if an improved sensibility would disapprove of it. Whether the premises express attitudes or beliefs makes no difference to the validity of the inference, and that is the point of having solved the Frege--Geach problem. The objection would succeed only if the quasi-realist's account of error did not embed, and then she would not have earned \enquote{I might be wrong} at all.
+\end{reply}
+
+\begin{objection}[The biconditional is first-order]
+The biconditional between wrongness and ideal disapproval, if the quasi-realist accepts it, is a first-order moral claim, like the claim that kicking dogs would be wrong even if we approved of it. The realist asserts it as a metaphysical identity; the quasi-realist asserts it as a moral commitment. The difference in status is the difference between the views.
+\end{objection}
+
+\begin{reply}
+Under deflationism the distinction between asserting a biconditional as a moral commitment and asserting it as a metaphysical thesis has no content beyond the biconditional itself, together with its modal profile. The quasi-realist accepts it with full necessity, since her account of error is meant to hold at every world, and Assumption~\ref{a:coarse} turns necessary coextension of minimal properties into identity. A difference in the status with which one accepts a thesis that both sides accept, with the same modal force, is not a difference in the theses accepted. It may be a difference in the theorists' self-understanding, but self-understanding is not a position.
+\end{reply}
+
+\begin{objection}[Coarse individuation is false]
+Properties are individuated more finely than by necessary coextension: being triangular and being trilateral are necessarily coextensive and distinct. Assumption~\ref{a:coarse} is false, and without it Theorem~\ref{t:collapse} yields only necessary coextension.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:coarse} is restricted to minimal properties, and the quasi-realist is the theorist who holds that wrongness is minimal. A theorist who holds that wrongness is a fine-grained property distinct from every necessarily coextensive property has a robust conception of wrongness, which is the realist's. Moreover, even if the assumption is dropped, the quasi-realist is left asserting that wrongness is necessarily coextensive with a natural property and that moral judgments are correct when they match it. Several forms of naturalist realism ask for no more, and the realism of MTE-01 is satisfied by any property that plays the role of moral facts as natural facts about idealized reactions.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The theorem does not establish realism. It establishes that quasi-realism, with its explanatory commitments explicit, is equivalent to it; a theorist who rejects both may reject the commitments, but then she is no longer a quasi-realist. An expressivist who gives up the ambition to earn realist discourse, and who accepts that some ordinary moral thought, such as the thought of fundamental error, is unavailable to her, is untouched by the argument; her view is stable but revisionary. Nor does the theorem show that the expressivist semantics fails. On the contrary, it depends on its success: it is because moral sentences have contents that combine according to the logic of plans (MTE-03) that the quasi-realist's account of error and the equivalence schema jointly entail the realist's biconditional. The success of the semantics is what makes the collapse inescapable.
+
+\section{Formalization}\label{s:formal}
+
+Theorem~\ref{t:collapse} and Proposition~\ref{p:moral} are formalized in \nolinkurl{Philosophy/MTE/MTE_17.lean}. Acts, worlds and properties are primitive types, and having a property is a primitive relation. Wrongness, ideal disapproval, naturalness, the truth of the content of a moral judgment and its correctness are primitives. Assumptions~\ref{a:corr}, \ref{a:eq} and \ref{a:coarse} are axioms, and quasi-realism and realism are defined as in Definitions~\ref{d:qr} and \ref{d:r}. The main theorem reads:
+
+\begin{lstlisting}
+def QuasiRealism : Prop :=
+  (∀ a w, Correct a w ↔ Has idealDisapproval a w) ∧ Natural idealDisapproval
+def Realism : Prop :=
+  wrongness = idealDisapproval ∧ Natural wrongness
+
+theorem collapse : QuasiRealism ↔ Realism
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MTE_17.collapse' depends on axioms: [propext,
+ Philosophy.MTE_17.Act, Philosophy.MTE_17.Correct, Philosophy.MTE_17.Has,
+ Philosophy.MTE_17.Natural, Philosophy.MTE_17.Property,
+ Philosophy.MTE_17.TrueWrong, Philosophy.MTE_17.World,
+ Philosophy.MTE_17.coarse, Philosophy.MTE_17.correct_iff_true,
+ Philosophy.MTE_17.equivalence_schema,
+ Philosophy.MTE_17.idealDisapproval, Philosophy.MTE_17.wrongness]
+\end{lstlisting}
+
+Apart from \texttt{propext}, an axiom of Lean's logic used in rewriting with biconditionals, the axioms are the primitives and three premises: \texttt{correct\_iff\_true} is Assumption~\ref{a:corr}, \texttt{equivalence\_schema} is Assumption~\ref{a:eq}, and \texttt{coarse} is Assumption~\ref{a:coarse}. Properties are a primitive type rather than Lean predicates, so that coarse individuation is a visible premise and not a consequence of Lean's extensionality. The module does not formalize the argument of Section~\ref{s:commit} that the quasi-realist is committed to \ref{q:fall} and \ref{q:expl}, which is philosophical, nor the second horn beyond Proposition~\ref{p:moral}.
+
+\section{Conclusion}
+
+Quasi-realism is not stable. To earn the thought that she might be wrong, the quasi-realist must say that a moral judgment is correct when an improved sensibility would share it; to keep her explanatory distance from realism, she must characterize improvement non-morally. Deflationism and the minimal conception of properties, which she needs in order to earn truth and fact talk, then identify wrongness with a natural property of being disapproved under idealized conditions, which is the realism of MTE-01. If she characterizes improvement morally, her view is a realism of the non-naturalist kind. The expressivist semantics of MTE-03 succeeds, and its success, made explicit, is the collapse.
+
+\begin{thebibliography}{99}\small
+\bibitem[Blackburn(1984)]{Blackburn1984} Blackburn, S. (1984). \emph{Spreading the Word: Groundings in the Philosophy of Language}. Clarendon Press.
+\bibitem[Blackburn(1993)]{Blackburn1993} Blackburn, S. (1993). \emph{Essays in Quasi-Realism}. Oxford University Press.
+\bibitem[Blackburn(1998)]{Blackburn1998} Blackburn, S. (1998). \emph{Ruling Passions: A Theory of Practical Reasoning}. Clarendon Press.
+\bibitem[Dreier(2004)]{Dreier2004} Dreier, J. (2004). Meta-ethics and the problem of creeping minimalism. \emph{Philosophical Perspectives}, 18, 23--44.
+\bibitem[Dworkin(1996)]{Dworkin1996} Dworkin, R. (1996). Objectivity and truth: You'd better believe it. \emph{Philosophy \& Public Affairs}, 25(2), 87--139.
+\bibitem[Egan(2007)]{Egan2007} Egan, A. (2007). Quasi-realism and fundamental moral error. \emph{Australasian Journal of Philosophy}, 85(2), 205--219.
+\bibitem[Gibbard(1990)]{Gibbard1990} Gibbard, A. (1990). \emph{Wise Choices, Apt Feelings: A Theory of Normative Judgment}. Harvard University Press.
+\bibitem[Gibbard(2003)]{Gibbard2003} Gibbard, A. (2003). \emph{Thinking How to Live}. Harvard University Press.
+\bibitem[Rosen(1998)]{Rosen1998} Rosen, G. (1998). Blackburn's \emph{Essays in Quasi-Realism}. \emph{No\^us}, 32(3), 386--405.
+\bibitem[Street(2011)]{Street2011} Street, S. (2011). Mind-independence without the mystery: Why quasi-realists can't have it both ways. \emph{Oxford Studies in Metaethics}, 6, 1--32.
+\bibitem[Wright(1992)]{Wright1992} Wright, C. (1992). \emph{Truth and Objectivity}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

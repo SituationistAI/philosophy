@@ -1,0 +1,176 @@
+\documentclass{situationist-preprint}
+
+\title{On Free Will\\[0.4em]\large Volume I: The Compatibility Thesis}
+\msid{ACT-01-a}
+\msfamily{ACT-01}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript, Volume I of III}
+\mslean{lean/Philosophy/ACT/ACT\_01.lean}
+\mskeywords{free will; compatibilism; determinism; indeterminism; reasons-responsiveness; consequence argument; luck}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This work argues that we have free will, and that free will is compatible both with determinism and with indeterminism. Volume I states the thesis and its main argument. Free will is the capacity to act from a mechanism of practical reasoning that is one's own and that responds to reasons. Whether an agent has this capacity depends on counterfactual facts about how her action would vary with the reasons available to her, and these facts are settled neither by determinism nor by indeterminism. Determinism does not remove the counterfactual dependence of action on reasons, and indeterminism, when confined to the right places, does not remove its reliability. The argument is formalized in Lean, and the formalization shows that the compatibility thesis follows from a single premise: that reasons-responsiveness is independent of whether the laws are deterministic. Volume II defends that premise against the consequence argument; Volume III defends it against the luck objection.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Compatibility Thesis & 1--322 \\
+II & Determinism and the Consequence Argument & 323--641 \\
+III & Indeterminism, Luck and Responsibility & 642--960 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+The problem of free will has the reputation of being the most intractable in philosophy. The reputation is partly deserved: the problem connects metaphysics, ethics and the philosophy of mind, and it has been discussed for over two thousand years without consensus. But it is also partly the result of a confusion. The problem is often posed as a dilemma: either determinism is true, in which case our actions are fixed by the past and the laws, or it is false, in which case they are partly a matter of chance; and in neither case, it is said, are we free. We argue that the dilemma is false. Free will requires neither determinism nor indeterminism; it requires a capacity whose presence is settled by facts that both hypotheses leave open.
+
+The work is organized around this claim. Volume I defines free will and proves the compatibility thesis from a premise about the independence of reasons-responsiveness from determinism. Volume II takes up the most influential argument against compatibility with determinism, van Inwagen's consequence argument, and argues that it fails at its transfer rule. Volume III takes up the most influential argument against compatibility with indeterminism, the luck objection, and argues that it fails when the agent's effort is directed at each of the competing outcomes. Consequences for moral responsibility, for punishment and for the reactive attitudes are drawn throughout.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & Free will as reasons-responsive control & 29 \\
+3 & The compatibility thesis & 58 \\
+4 & What the formalization establishes & 81 \\
+5 & Ownership & 102 \\
+6 & Alternative possibilities & 141 \\
+7 & The reactive attitudes & 187 \\
+8 & Manipulation & 226 \\
+9 & Degrees of freedom & 268 \\
+10 & Summary and plan of Volumes II and III & 305 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+\subsection{The question}
+
+Do we have free will? We understand the question as asking whether human beings have the kind of control over their actions that is required for moral responsibility: for it to be appropriate to praise or blame them, to resent or admire them, for what they do. This is the sense of \enquote{free will} at stake in the philosophical debate, and it is the sense in which most people take themselves to have it.
+
+The answers fall into four families. \emph{Libertarians} hold that we have free will and that it is incompatible with determinism, so that determinism is false \citep{Kane1996}. \emph{Hard determinists} and \emph{hard incompatibilists} hold that free will is incompatible with determinism and, in the latter case, with indeterminism as well, and that we lack it \citep{Pereboom2001}. \emph{Compatibilists} hold that free will is compatible with determinism, and most hold that we have it \citep{FischerRavizza1998,Vihvelin2013,List2019}. \emph{Illusionists} hold that we lack free will but that the belief that we have it is necessary or beneficial \citep{Smilansky2000}; ACT-18 argues that their position is unmotivated if free will is real.
+
+We defend a form of compatibilism, but a form that is stronger than usual in one respect: it holds that free will is compatible not only with determinism but with indeterminism, and therefore that the question of whether we have free will can be answered without settling the question of whether determinism is true. This matters because the latter question is an empirical one, about the laws of physics, which philosophy cannot settle and which physics has not settled.
+
+\subsection{A short history}
+
+The compatibilist tradition begins, in its modern form, with Hobbes and Hume, who held that liberty is the power of acting according to the determinations of the will, and that it is opposed not to necessity but to constraint \citep{Hume1748}. In the early twentieth century, \citet{Moore1912} proposed the conditional analysis: an agent could have done otherwise if she would have done otherwise had she chosen to. \citet{Ayer1954} defended a similar view. The conditional analysis was criticized on the ground that an agent who could not have chosen otherwise satisfies it vacuously, and by the 1960s it was widely regarded as refuted.
+
+Two developments revived compatibilism. \citet{Strawson1962} argued that moral responsibility is constituted by the reactive attitudes, such as resentment and gratitude, and that no theoretical discovery, including the discovery that determinism is true, could give us reason to abandon them. \citet{Frankfurt1969} argued that moral responsibility does not require the ability to do otherwise, by describing cases in which an agent acts on her own but could not have done otherwise because a counterfactual intervener would have ensured that she did. \citet{Frankfurt1971} proposed that free will consists in a relation between first-order and second-order desires. These developments shifted the debate from the question of alternative possibilities to the question of what makes an action the agent's own.
+
+On the incompatibilist side, \citet{vanInwagen1983} gave the consequence argument its definitive form: if determinism is true, our acts are the consequences of the laws of nature and events in the remote past; we have no choice about the laws or the remote past; so we have no choice about our acts. The argument relies on a transfer principle, Rule Beta, which says that if one has no choice about $p$, and no choice about whether $p$ implies $q$, then one has no choice about $q$. \citet{McKayJohnson1996} showed that Rule Beta, in van Inwagen's formulation, is invalid. The debate since has concerned whether a valid version of the rule can be found. Volume II argues that it cannot.
+
+The libertarian tradition faced the luck objection: if an action is not determined by the agent's prior states, its occurrence seems to be a matter of chance, and chance is no more freedom than necessity is \citep{Mele2006}. \citet{Kane1996} replied that in cases of self-forming action the agent makes an effort in both directions, so that whichever way the indeterminacy is resolved, the outcome is something she tried to bring about. Volume III develops this reply, and ACT-15 states its main result.
+
+The most recent development is the account of free will as a capacity of the agent understood at the level of psychology rather than physics. \citet{List2019} argues that intentional agency, alternative possibilities and causal control are emergent features of agents, compatible with physical determinism because they are defined at a higher level of description. The account defended here is close to List's in spirit, though it is formulated in terms of reasons-responsiveness rather than levels of description.
+
+\subsection{Plan of the volume}
+
+Chapter~2 defines free will as reasons-responsive control. Chapter~3 states and proves the compatibility thesis. Chapter~4 discusses what the formalization establishes. Chapters~5 to 9 develop the account: ownership of the mechanism of action, the role of alternative possibilities, the reactive attitudes, manipulation cases, and degrees of freedom. Chapter~10 summarizes the volume and introduces Volumes II and III.
+
+\section{Free will as reasons-responsive control}
+
+\begin{definition}\label{d:mech}
+The \emph{mechanism} of an action is the process of practical reasoning that issues in it: the agent's deliberation, her weighing of considerations, and her decision.
+\end{definition}
+
+\begin{definition}\label{d:rr}
+A mechanism is \emph{reasons-responsive} if, operating as it actually operates, it would recognize sufficient reasons to act otherwise in a range of situations in which such reasons are present, and would in some of those situations act on them \citep{FischerRavizza1998}.
+\end{definition}
+
+\begin{definition}\label{d:own}
+A mechanism is the agent's \emph{own} if it has not been installed or manipulated by another agent in a way that bypasses her own practical reasoning, and she takes responsibility for it, in the sense of regarding herself as an apt target of the reactive attitudes for actions that issue from it.
+\end{definition}
+
+\begin{definition}\label{d:free}
+An agent acts \emph{freely} if her action issues from a mechanism that is her own and reasons-responsive. She \emph{has free will} if she is capable of so acting.
+\end{definition}
+
+Definition~\ref{d:free} follows \citet{FischerRavizza1998} closely. Two features are important for what follows. First, reasons-responsiveness is a counterfactual property: it concerns what the mechanism would do in situations in which the reasons were different. It is therefore a dispositional property of the agent, of the kind whose reality MET-11 defends. Second, it does not require that the agent could have done otherwise in the actual situation, holding everything fixed. It requires that she would have done otherwise in relevantly different situations. This is why Frankfurt cases do not threaten it (ACT-02).
+
+\section{The compatibility thesis}
+
+\subsection{Statement}
+
+Let a world be \emph{deterministic} if a complete description of its state at any time, together with its laws, entails a complete description of its state at every other time.
+
+\begin{assumption}[Independence]\label{a:indep}
+Whether an agent's mechanism is reasons-responsive and her own does not depend on whether her world is deterministic: there are deterministic worlds containing agents with such mechanisms, and indeterministic worlds containing agents with such mechanisms.
+\end{assumption}
+
+\begin{theorem}[Compatibility]\label{t:compat}
+Free will is compatible with determinism and compatible with indeterminism.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:indep}, there is a deterministic world containing an agent whose mechanism is reasons-responsive and her own. By Definition~\ref{d:free}, she has free will. So free will is compatible with determinism. The same reasoning applied to the indeterministic case shows that free will is compatible with indeterminism.
+\end{proof}
+
+\begin{corollary}\label{c:open}
+Whether we have free will does not depend on whether determinism is true.
+\end{corollary}
+
+\subsection{The case for independence}
+
+Theorem~\ref{t:compat} is only as strong as Assumption~\ref{a:indep}. We give the case for it here, and the full defence in Volumes II and III.
+
+\paragraph{Determinism.} Reasons-responsiveness is a matter of how the agent's mechanism would operate in situations where the reasons differ. In a deterministic world, a situation in which the reasons differ is one in which the past differs, since the present state is fixed by the past and the laws. The counterfactual \enquote{had there been sufficient reason to act otherwise, she would have recognized it and acted on it} is therefore evaluated at worlds with a slightly different past, or, on \citet{Lewis1981}'s account of counterfactuals under determinism, at worlds in which a small miracle diverts the course of events just before the decision. On either account, determinism does not make the counterfactual false. A deterministic agent can be such that, had the reasons been different, she would have acted differently; and this is all reasons-responsiveness requires.
+
+\paragraph{Indeterminism.} Reasons-responsiveness requires that the mechanism reliably track reasons. Indeterminism threatens reliability only if it intervenes between the agent's reasons and her action in a way that makes the action vary independently of the reasons. Indeterminism at the level of microphysics need not do this: the macroscopic processes of deliberation can be reliable even if the microphysical processes that realize them are not deterministic, just as a coin-sorting machine can reliably sort coins although the motion of its parts is subject to quantum fluctuation. Where indeterminism does intervene in deliberation, as in Kane's self-forming actions, the luck objection arises, and Volume III argues that it can be met.
+
+\subsection{Formalization}
+
+Theorem~\ref{t:compat} is formalized in \nolinkurl{Philosophy/ACT/ACT_01.lean}. Worlds carry a Boolean determinism flag; reasons-responsiveness and ownership are predicates on worlds; free will is defined by Definition~\ref{d:free}; and Assumption~\ref{a:indep} is the only axiom about the relation between free will and determinism.
+
+\begin{lstlisting}
+theorem compatible_both :
+    (∃ w, Deterministic w ∧ FreeWill w) ∧ (∃ w, ¬ Deterministic w ∧ FreeWill w)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ACT_01.compatible_both' depends on axioms:
+  [propext, Owned, ReasonsResponsive, World, deterministic,
+   independence]
+\end{lstlisting}
+
+\section{What the formalization establishes}
+
+The formalization establishes that the compatibility thesis follows from the independence assumption, and from nothing else. This has two consequences.
+
+First, it locates the debate. Incompatibilists who hold that free will is incompatible with determinism must deny the first half of Assumption~\ref{a:indep}: they must hold that no deterministic world contains an agent with a reasons-responsive mechanism of her own. The consequence argument is an argument for that denial, and Volume II is devoted to it. Hard incompatibilists who hold that free will is also incompatible with indeterminism must deny the second half, and the luck objection is their argument; Volume III is devoted to it. No other logical route to incompatibilism is available.
+
+Second, it shows that the compatibility thesis does not depend on any particular view of the laws of nature. Since Assumption~\ref{a:indep} concerns the existence of worlds of each kind, and not the nature of our world, Corollary~\ref{c:open} holds whatever physics eventually discovers. This is the sense in which the problem of free will, as it is usually posed, rests on a confusion: it ties the question of whether we are free to a question about the laws that has no bearing on it.
+
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 5 to 10.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Ayer(1954)]{Ayer1954} Ayer, A.~J. (1954). Freedom and necessity. In \emph{Philosophical Essays} (pp.~271--284). Macmillan.
+\bibitem[Fischer and Ravizza(1998)]{FischerRavizza1998} Fischer, J.~M. and Ravizza, M. (1998). \emph{Responsibility and Control: A Theory of Moral Responsibility}. Cambridge University Press.
+\bibitem[Frankfurt(1969)]{Frankfurt1969} Frankfurt, H.~G. (1969). Alternate possibilities and moral responsibility. \emph{The Journal of Philosophy}, 66(23), 829--839.
+\bibitem[Frankfurt(1971)]{Frankfurt1971} Frankfurt, H.~G. (1971). Freedom of the will and the concept of a person. \emph{The Journal of Philosophy}, 68(1), 5--20.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}, Section VIII.
+\bibitem[Kane(1996)]{Kane1996} Kane, R. (1996). \emph{The Significance of Free Will}. Oxford University Press.
+\bibitem[Lewis(1981)]{Lewis1981} Lewis, D. (1981). Are we free to break the laws? \emph{Theoria}, 47(3), 113--121.
+\bibitem[List(2019)]{List2019} List, C. (2019). \emph{Why Free Will Is Real}. Harvard University Press.
+\bibitem[McKay and Johnson(1996)]{McKayJohnson1996} McKay, T.~J. and Johnson, D. (1996). A reconsideration of an argument against compatibilism. \emph{Philosophical Topics}, 24(2), 113--122.
+\bibitem[Mele(2006)]{Mele2006} Mele, A.~R. (2006). \emph{Free Will and Luck}. Oxford University Press.
+\bibitem[Moore(1912)]{Moore1912} Moore, G.~E. (1912). \emph{Ethics}. Williams and Norgate.
+\bibitem[Pereboom(2001)]{Pereboom2001} Pereboom, D. (2001). \emph{Living Without Free Will}. Cambridge University Press.
+\bibitem[Smilansky(2000)]{Smilansky2000} Smilansky, S. (2000). \emph{Free Will and Illusion}. Oxford University Press.
+\bibitem[Strawson(1962)]{Strawson1962} Strawson, P.~F. (1962). Freedom and resentment. \emph{Proceedings of the British Academy}, 48, 1--25.
+\bibitem[van Inwagen(1983)]{vanInwagen1983} van Inwagen, P. (1983). \emph{An Essay on Free Will}. Clarendon Press.
+\bibitem[Vihvelin(2013)]{Vihvelin2013} Vihvelin, K. (2013). \emph{Causes, Laws, and Free Will: Why Determinism Doesn't Matter}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

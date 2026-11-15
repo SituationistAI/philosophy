@@ -1,0 +1,45 @@
+\documentclass{situationist-preprint}
+
+\title{Lewis's Triviality Results}
+\msid{LNG-20-b}
+\msfamily{LNG-20}
+\msdiscipline{Philosophy of Language}
+\mstype{Companion manuscript}
+\mskeywords{indicative conditionals; triviality; Lewis; conditional probability; Adams's thesis; truth conditions}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lewis's triviality results show that the probability of a proposition cannot in general equal the conditional probability of one proposition given another. LNG-20-a proves the core of the first result and concludes that indicative conditionals lack truth values. We set out how the premises of the results enter, and argue that of the four ways of escaping them, denying the thesis, restricting the class of credences, letting the proposition vary with the credence, and denying truth values, only the last preserves both the data and the point of having truth conditions. The third way, in particular, gives up what truth conditions are for: it makes disagreement about conditionals impossible between people with different credences.
+\end{abstract}
+
+\section{The results and their premises}
+
+\citet{Lewis1976} considered the thesis that for every credence $P$ in some class, the probability of the conditional \enquote{if $A$, $C$} is $P(C \mid A)$ whenever $P(A) > 0$ (Principle P1 of LNG-20-a). He assumed that the conditional expresses a proposition $X$, fixed independently of the credence (Assumption 3.3 of LNG-20-a), and that the class is closed under conditionalization (Assumption 3.4). The first result, Theorem 4.3 of LNG-20-a, is that every credence in the class that gives positive weight to both $A \wedge C$ and $A \wedge \neg C$ makes $A$ and $C$ independent. The proof is short: by the thesis applied to $P$ conditioned on $C$ and on $\neg C$, $P(X \mid C) = 1$ and $P(X \mid \neg C) = 0$, so by total probability $P(X) = P(C)$, while the thesis says that $P(X) = P(C \mid A)$. Lewis's second result strengthens the first: a class closed under conditionalization in which every member satisfies the thesis for every pair of propositions contains only trivial credences, which take at most four values.
+
+Each premise has a precise role. The thesis is applied three times, to $P$, $P_C$ and $P_{\neg C}$. Closure guarantees that $P_C$ and $P_{\neg C}$ are in the class. Credence-independence guarantees that the same $X$ serves for all three. Remove any one, and the proof does not go through. There are accordingly four ways out.
+
+\section{The four ways out}
+
+\paragraph{Deny the thesis.} \citet{Lewis1976} took this course, supplementing the material conditional with an account of assertability. But the thesis is what predicts the confidence speakers have in conditionals, and LNG-20-a reviews the evidence that it does so where every truth-conditional rival fails. Denying it gives up the data.
+
+\paragraph{Restrict the class.} One may hold that the reasonable credences are not closed under conditionalization. But the restriction must exclude conditionalizing on the consequent and on its negation, which are ordinary learning events: someone who learns that the match was cancelled should still have a credence in \enquote{if it rained, the match was cancelled}. \citet{Bradley2000} showed that a much weaker preservation condition suffices for triviality, so that the restriction would have to be severe.
+
+\paragraph{Let the proposition vary.} One may let the proposition expressed by \enquote{if $A$, $C$} depend on the credence of the person assessing it, as in the construction of \citet{vanFraassen1976}. Then each credence has its own proposition, and the triviality proof, which needs one $X$ for $P$, $P_C$ and $P_{\neg C}$, is blocked. The cost is to the point of truth conditions. If two people with different credences assess \enquote{if it rained, the match was cancelled}, they assess different propositions, and the one who rejects the conditional does not reject what the other accepts. Yet they disagree, and each takes the other to be wrong about the same thing. Truth conditions that vary with the assessor's credence cannot represent this disagreement, which was a reason to want truth conditions in the first place. And when one of them learns $C$, the proposition he assesses changes, so that conditionalizing does not update his credence in a fixed content. The view keeps the word \enquote{proposition} and gives up the role. LNG-20-a answers this construction directly (its Objection 1); the point here is that it is the price of escape, not an incidental feature.
+
+\paragraph{Deny truth values.} The last course rejects Assumption 3.3 of LNG-20-a at its antecedent: indicative conditionals do not have truth values, and their probability is a conditional probability, not the probability of anything's being true \citep{Adams1975,Edgington1995}. The thesis is kept, closure is kept, and nothing pretends to be a proposition that is not one. Disagreement is represented as a difference in conditional credence about the same $A$ and $C$, which are fixed.
+
+\section{Conclusion}
+
+Lewis's results use three premises, each essentially. Denying the thesis loses the data; restricting the class excludes ordinary learning; letting the proposition vary loses what propositions are for. Denying that indicative conditionals have truth values keeps everything that matters, which is why LNG-20-a takes that course.
+
+\begin{thebibliography}{9}\small
+\bibitem[Adams(1975)]{Adams1975} Adams, E.~W. (1975). \emph{The Logic of Conditionals}. Reidel.
+\bibitem[Bradley(2000)]{Bradley2000} Bradley, R. (2000). A preservation condition for conditionals. \emph{Analysis}, 60(3), 219--222.
+\bibitem[Edgington(1995)]{Edgington1995} Edgington, D. (1995). On conditionals. \emph{Mind}, 104(414), 235--329.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Probabilities of conditionals and conditional probabilities. \emph{The Philosophical Review}, 85(3), 297--315.
+\bibitem[van Fraassen(1976)]{vanFraassen1976} van Fraassen, B.~C. (1976). Probabilities of conditionals. In W.~L. Harper and C.~A. Hooker (eds), \emph{Foundations of Probability Theory, Statistical Inference, and Statistical Theories of Science}, Vol.~I. Reidel.
+\end{thebibliography}
+
+\end{document}

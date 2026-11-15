@@ -1,0 +1,216 @@
+\documentclass{situationist-preprint}
+
+\title{The Ethics of Eating Animals}
+\msid{ETH-10-a}
+\msfamily{ETH-10}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_10.lean}
+\mskeywords{animal ethics; factory farming; vegetarianism; humane farming; badness of death; time-relative interests; causal inefficacy}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is it wrong to eat meat? We distinguish two practices. In factory farming, animals are confined, bred and mutilated in ways that cause severe and prolonged suffering, for benefits to consumers that are available by other means. In humane farming, animals live lives that are good on balance and are killed without suffering. Starting from the thesis of ETH-07 that sentience is necessary and sufficient for moral status, we argue that factory farming is impermissible, because it imposes severe suffering on beings with moral status for the sake of benefits that are not necessary. Eating meat from humanely farmed animals is permissible, but it is not morally neutral: killing an animal whose future would be good deprives it of that good, and this is a moral reason against the practice, though not a decisive one. It is not decisive because the animal's time-relative interest in continuing to live is weak, and because the practice brings into existence lives that are good. We answer the objection from causal inefficacy and the objection that plant agriculture also kills animals. The logical structure of the argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Most meat eaten in industrialized countries comes from animals raised in intensive systems. Broiler chickens are bred to grow so quickly that a substantial proportion develop leg disorders that impair their ability to walk \citep{Knowles2008}; breeding sows are confined for much of their lives in stalls in which they cannot turn around; laying hens are kept in cages; and painful procedures such as castration, tail docking and beak trimming are routinely performed without anaesthesia. Tens of billions of land animals are raised and slaughtered each year, most of them in such systems.
+
+The philosophical debate about eating meat has three main positions. \citet{Singer1975} argued, on utilitarian grounds and from the principle of equal consideration of interests, that the suffering caused by intensive farming cannot be justified by the pleasure of eating meat, and that we should become vegetarians. \citet{Regan1983} argued, on rights-based grounds, that animals who are subjects of a life have a right not to be treated as resources, so that all animal farming, however humane, is wrong. A third position, defended in different forms by \citet{Fischer2020} and in part by \citet{Harman2011}, distinguishes the suffering of farmed animals, which matters greatly, from their death, whose badness is more disputed.
+
+We defend a version of the third position, with a precise statement of what it permits and what it does not. Our thesis has two parts. Factory farming is impermissible. Eating meat from animals raised and killed without suffering is permissible, but it is not morally neutral. The first part follows from ETH-07 and one principle about suffering. The second requires an account of the badness of death for animals, which we take from \citet{McMahan2002}, and an account of why that badness does not make the practice wrong.
+
+A methodological remark is in order. Arguments about eating animals are sometimes conducted under moral uncertainty: even if one is unsure whether animals matter, the stakes if they do are so high that one should act as if they do. MTE-16-a argues that, under its preferred rule for moral uncertainty, the strength of a theory's preference does not amplify a small credence in that theory, and that the case for vegetarianism must therefore raise the credence itself. Our argument does not rely on considerations of uncertainty. It argues directly, from the account of moral status in ETH-07, that farmed animals have moral status and that factory farming wrongs them.
+
+\section{Framework}
+
+\begin{definition}[Factory farming]\label{d:factory}
+\emph{Factory farming} is the practice of raising animals for food in conditions, such as close confinement, breeding for rapid growth and mutilation without anaesthesia, that cause them severe and prolonged suffering.
+\end{definition}
+
+\begin{definition}[Humane farming]\label{d:humane}
+\emph{Humane farming} is the practice of raising animals for food in conditions in which their lives are good on balance, and killing them without suffering.
+\end{definition}
+
+\begin{definition}[Moral neutrality]\label{d:neutral}
+A practice is \emph{morally neutral} if there is no moral reason against it.
+\end{definition}
+
+A practice that is permissible may fail to be neutral: there may be a reason against it that is outweighed. The thesis that eating humanely farmed meat is permissible but not neutral is the thesis that there is such a reason and that it is outweighed.
+
+\begin{assumption}[Moral status]\label{a:status}
+The animals raised in factory farming and in humane farming have moral status.
+\end{assumption}
+
+Assumption~\ref{a:status} follows from ETH-07, which argues that sentience is necessary and sufficient for moral status, together with the evidence, reviewed in MND-23, that mammals and birds are conscious. The animals in question, pigs, cattle, sheep and chickens, are mammals and birds, and their behavioral and physiological responses to injury, confinement and fear leave no serious doubt that they have valenced experiences.
+
+\begin{assumption}[Factory farming]\label{a:ff}
+Factory farming causes severe suffering, and its benefits to consumers who have adequate alternatives are not necessary: they consist in pleasures of taste, convenience and lower prices that can be obtained, or adequately replaced, by other means.
+\end{assumption}
+
+\begin{assumption}[Humane farming]\label{a:hf}
+Humane farming causes no severe suffering; it kills animals whose future lives would have been good; their lives are good on balance; and their time-relative interest in continuing to live is weak.
+\end{assumption}
+
+The first three conjuncts of Assumption~\ref{a:hf} hold by Definition~\ref{d:humane}. The fourth uses McMahan's notion of a \emph{time-relative interest} in continuing to live: the strength of a being's present interest in its future, which depends on how much good the future would contain and on how strongly the being is psychologically connected to its future self, through memory, anticipation and the continuity of its desires and projects \citep{McMahan2002}. Pigs, cattle and chickens have some such connections, but much weaker ones than a normal human adult. Section~\ref{s:death} defends this.
+
+\begin{principle}[Unnecessary suffering]\label{p:suffering}
+It is impermissible to engage in a practice that imposes severe suffering on beings with moral status for the sake of benefits that are not necessary.
+\end{principle}
+
+\begin{principle}[Deprivation]\label{p:deprivation}
+If a practice kills beings with moral status whose future lives would be good, there is a moral reason against it.
+\end{principle}
+
+\begin{principle}[Humane permission]\label{p:permission}
+A practice that causes no severe suffering, whose animals live lives that are good on balance, and that kills only beings with a weak time-relative interest in continuing to live, is permissible.
+\end{principle}
+
+Principle~\ref{p:suffering} is the weakest principle of animal ethics that anyone defends who grants animals moral status at all. It does not require equal consideration of interests, though it follows from it: even on a hierarchical view on which an animal's suffering counts for less than a human being's equal suffering, severe and prolonged suffering for the whole of an animal's life outweighs the difference between a meal with meat and a meal without. Principle~\ref{p:deprivation} expresses the deprivation account of the badness of death, applied to animals. Principle~\ref{p:permission} is the substantive claim of the second part of our thesis, defended in Section~\ref{s:death}.
+
+\section{The argument}
+
+\begin{theorem}\label{t:ff}
+Factory farming is impermissible.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:status}, the animals in factory farming have moral status. By Assumption~\ref{a:ff}, the practice imposes severe suffering on them for the sake of benefits that are not necessary. By Principle~\ref{p:suffering}, it is impermissible.
+\end{proof}
+
+\begin{proposition}\label{p:reason}
+Humane farming is not morally neutral.
+\end{proposition}
+
+\begin{proof}
+By Assumptions~\ref{a:status} and \ref{a:hf}, humane farming kills beings with moral status whose futures would be good. By Principle~\ref{p:deprivation}, there is a moral reason against it, so by Definition~\ref{d:neutral} it is not neutral.
+\end{proof}
+
+\begin{theorem}\label{t:hf}
+Humane farming is permissible.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:hf}, humane farming causes no severe suffering, its animals live good lives, and their time-relative interest in continuing to live is weak. By Principle~\ref{p:permission}, it is permissible.
+\end{proof}
+
+\begin{corollary}\label{c:main}
+Factory farming is impermissible, and humane farming is permissible but not morally neutral.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{t:ff}, Theorem~\ref{t:hf} and Proposition~\ref{p:reason}.
+\end{proof}
+
+The argument is valid and its structure is simple. Its interest lies in the premises, and in particular in the combination of Principles~\ref{p:deprivation} and \ref{p:permission}, which say that killing a humanely raised animal is something there is reason not to do and something one is permitted to do. The two principles are consistent, and they are not in tension: a reason against an act is outweighed when the act is permissible despite it. What would be inconsistent is the view that there is a decisive reason against humane farming and that it is permissible, or the view that it is permissible because there is no reason against it.
+
+\section{The badness of death for animals}\label{s:death}
+
+Why is killing a humanely raised animal bad for it, and why is the badness not decisive?
+
+On the deprivation account, death is bad for the one who dies because it deprives her of the goods her life would otherwise have contained. The account applies to any being whose future would contain goods, and so to a pig whose future would be good. Principle~\ref{p:deprivation} follows. A view on which death is not bad for animals at all, because they lack the concept of their own future or a desire to continue living, must explain why the deprivation of future goods is bad for a human infant, who also lacks these; we know of no explanation that does not concede that deprivation is bad for any being with a good future.
+
+But the deprivation account, taken alone, implies that the death of a young pig is a very great harm, since a pig deprived of ten years of good life loses more good than a human adult of eighty deprived of five. \citet{McMahan2002} argued that this is a mistake, and that what matters for the badness of a death to the one who dies, at the time of death, is the being's time-relative interest in continuing to live, which discounts future goods by the weakness of the psychological connections between the being now and the being later. A pig's connections to its future self are weaker than a human adult's: it has some memory and some anticipation, but no plans for its future and no conception of its life as a whole. Its time-relative interest in continuing to live is therefore weaker than the goods it would lose, and much weaker than that of a human adult. This is not a judgment that the pig counts for less. ETH-07 argues for equal consideration of equal interests, and the time-relative interest account is a claim about what interests the pig has, not about how much they count. It is the form that the variation of moral status with the capacity for welfare takes in the case of death: a being with less temporal integration has less at stake in its continued life.
+
+A weak interest is still an interest, and its frustration is a reason against killing; this is why humane farming is not neutral. That the reason is not decisive depends on three further considerations.
+
+First, the interest is weak. Against it stand the benefits to those who eat the meat, which, though not necessary, are real: pleasures of taste, cultural practices and ways of life organized around animal husbandry. Since the animal suffers nothing, these benefits need only outweigh a weak time-relative interest, not severe suffering, and we judge that they do.
+
+Second, the animals of humane farming exist because of the practice. This does not make the practice good for them, since a being is not benefited by being brought into existence in the sense in which it is benefited by being given something it would otherwise have lacked. But ETH-08 argues that our obligations regarding future beings are impersonal, owed to no one in particular, and ETH-09, in accepting the repugnant conclusion, holds that adding lives worth living makes an outcome better. A practice that brings into existence animals with good lives therefore does something impersonally good, which counts in its favor in the overall assessment. This is a weak form of what has been called the \enquote{logic of the larder}. It does not show that killing an animal is compensated by the creation of its replacement, as on the replaceability argument considered by \citet{Singer1993}: the loss to the animal killed is not made up by a gain to another animal. It shows only that the practice as a whole has a good to set against that loss.
+
+Third, the permission is limited to practices meeting the conditions of Principle~\ref{p:permission}. It does not extend to killing beings with strong time-relative interests, such as human beings or, possibly, great apes, nor to practices in which the animals' lives are not good on balance. \citet{McMahan2008} argued that the logic of humane farming, once its premises are granted, would equally permit the humane farming of human beings with comparable psychological capacities. Our view denies this, on the ground that such beings are owed more than their capacities alone ground: ETH-07 argues that many of the strongest duties owed to human beings with profound cognitive impairments arise from relationships of care, membership and dependence. A practice of farming them would violate those duties. The objection shows that the permission is conditional on facts about the animals and our relations to them, not that it is unprincipled.
+
+\section{Individual consumption}
+
+Theorem~\ref{t:ff} concerns a practice. What follows for an individual who buys factory-farmed meat? The \emph{causal inefficacy objection} holds that nothing follows, because no single purchase makes a difference to how many animals are raised: producers respond only to large changes in demand.
+
+\citet{Kagan2011} replies with an expected-effect argument. Suppose that a producer adjusts production in batches, so that one in every $n$ purchases triggers the raising of $n$ further animals, and a consumer does not know whether her purchase is the triggering one. Her purchase has a probability of $1/n$ of causing $n$ animals to be raised, and so an expected effect of one animal: the same as if production responded to each purchase. \citet{Norcross2004} makes a parallel argument and adds a case: a person who tortures puppies to obtain a chemical that enables him to enjoy chocolate acts wrongly, and a consumer who knowingly supports factory farming to enjoy meat is relevantly similar. \citet{Budolfson2019} has argued that real supply chains contain buffers that make the expected effect of a purchase much smaller than Kagan's model suggests. We think the dispute concerns the size of the effect rather than its existence, and that a positive expected effect on the severe suffering of animals, obtained for a benefit that is not necessary, is enough for Principle~\ref{p:suffering} to apply to purchases as well as to practices. Even on the most pessimistic estimates, moreover, a person who buys factory-farmed meat knowingly participates in and pays for the practice, and participation in a wrongful practice for the sake of an unnecessary benefit is itself a ground of criticism.
+
+We conclude that buying the products of factory farming is impermissible for consumers who have adequate alternatives.
+
+\section{Objections}
+
+\begin{objection}[Lower status]
+Animals have a lower degree of moral status than human beings. Their suffering therefore weighs less than the benefits to human beings of cheap and plentiful meat.
+\end{objection}
+
+\begin{reply}
+ETH-07 argues that degrees of status show themselves in what is at stake for a being, not in a discount on its interests, so that an equal pain counts equally whoever suffers it. But the conclusion of Theorem~\ref{t:ff} does not depend on this. Even on a hierarchical view on which an animal's suffering is discounted, the suffering at issue is severe, prolonged and imposed on billions of animals, and the benefit is the difference between eating factory-farmed meat and eating something else. No discount short of the denial of status makes the comparison close.
+\end{reply}
+
+\begin{objection}[Abolition]
+If animals have moral status, killing them for food is as wrong as killing human beings for food. Humane farming is therefore impermissible \citep{Regan1983}.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the wrongness of killing a being is fixed by its having moral status, independently of what it loses. On the time-relative interest account it is not: what a being loses by being killed depends on its psychological connections to its future, which vary greatly. The objection also proves too much by its own lights. \citet{Regan1983} himself concluded that in a lifeboat a dog should be sacrificed rather than a human being, because death is a lesser harm to the dog; that concession is the premise from which our permission follows, when the competing benefit is real and the animal's interest weak.
+\end{reply}
+
+\begin{objection}[Field deaths]
+Plant agriculture kills many animals: mice, rabbits and birds are killed by harvesting and pest control. \citet{Davis2003} argued that a diet including meat from grazing ruminants may kill fewer animals than a vegan diet. If so, there is no moral advantage in abstaining.
+\end{objection}
+
+\begin{reply}
+The objection concerns killing, not suffering, and so bears at most on the second part of our thesis, which already permits humane farming. It does not touch Theorem~\ref{t:ff}: the field deaths caused by growing feed for factory-farmed animals are added to, not substituted for, the suffering in the farms. Davis's estimate has also been disputed on the ground that it compares land areas rather than the amounts of food produced \citep{Matheny2003}. Where the objection is correct, and a particular form of pasture farming kills fewer animals than a particular form of crop farming, it confirms the view that humanely farmed meat can be permissible.
+\end{reply}
+
+\begin{objection}[Humane farming is a fiction]
+No actual farming meets the conditions of Definition~\ref{d:humane}. Transport, slaughter and the separation of mothers and young cause suffering on even the best farms. The permission is therefore empty.
+\end{objection}
+
+\begin{reply}
+The permission is conditional, and its conditions are demanding. If no actual farm meets them, then no actual meat is permissibly eaten under the second part of our thesis, and the practical conclusion approaches vegetarianism. We think that some farms and some hunting practices meet them, and that the conditions can be met more widely at a cost. The thesis states the conditions under which eating meat is permissible; it does not certify that they are met by any product sold as \enquote{humane}.
+\end{reply}
+
+\section{What the argument does not establish}
+
+The argument does not settle the status of fish and invertebrates. Fishing and aquaculture fall under Principle~\ref{p:suffering} to the extent that the animals are sentient and suffer severely; the evidence on fish is not reviewed here, and ETH-07-b discusses invertebrates. The argument concerns consumers with adequate alternatives, and it says nothing against people for whom animal products are necessary for health or subsistence. It is not an argument about legal regulation. Finally, the weighing in Section~\ref{s:death} is a judgment about the strength of a reason, and a reader who judges a farmed animal's time-relative interest to be stronger than we do will accept Proposition~\ref{p:reason} and reject Theorem~\ref{t:hf}. The formalization makes this explicit: Theorem~\ref{t:hf} depends on Principle~\ref{p:permission} and on nothing in the first part of the argument.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/ETH/ETH_10.lean} formalizes the argument of Section~3. Practices form a primitive type, with two distinguished practices, and the properties used in the assumptions and principles are primitive predicates. Assumptions~\ref{a:status}--\ref{a:hf} and Principles~\ref{p:suffering}--\ref{p:permission} are axioms; moral neutrality is defined as in Definition~\ref{d:neutral}. The main theorem is Corollary~\ref{c:main}.
+
+\begin{lstlisting}
+theorem main :
+    ¬ Permissible factory ∧ Permissible humane ∧ ¬ Neutral humane
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_10.main' depends on axioms:
+  [Philosophy.ETH_10.GoodLives, Philosophy.ETH_10.KillsGoodFutures,
+   Philosophy.ETH_10.NecessaryBenefit, Philosophy.ETH_10.Permissible,
+   Philosophy.ETH_10.Practice, Philosophy.ETH_10.ReasonAgainst,
+   Philosophy.ETH_10.SevereSuffering, Philosophy.ETH_10.StatusVictims,
+   Philosophy.ETH_10.WeakTRI, Philosophy.ETH_10.deprivation,
+   Philosophy.ETH_10.factory, Philosophy.ETH_10.factory_facts,
+   Philosophy.ETH_10.humane, Philosophy.ETH_10.humane_facts,
+   Philosophy.ETH_10.humane_permission, Philosophy.ETH_10.status_victims,
+   Philosophy.ETH_10.unnecessary_suffering]
+\end{lstlisting}
+
+The axioms are the primitives, the three assumptions and the three principles. Assumptions~\ref{a:status}, \ref{a:ff} and \ref{a:hf} are the axioms \texttt{status\_victims}, \texttt{factory\_facts} and \texttt{humane\_facts}; Principle~\ref{p:suffering} is \texttt{unnecessary\_suffering}, Principle~\ref{p:deprivation} is \texttt{deprivation}, and Principle~\ref{p:permission} is \texttt{humane\_permission}. No standard axiom of Lean's logic is used. The \texttt{\#print axioms} output for Theorem~\ref{t:hf} lists only \texttt{humane\_facts} and \texttt{humane\_permission} among the substantive axioms: the permission for humane farming does not depend on the premises that condemn factory farming, and the condemnation of factory farming does not depend on the deprivation account of the badness of death.
+
+\section{Conclusion}
+
+Factory farming imposes severe suffering on beings with moral status for benefits that are not necessary, and it is impermissible; buying its products is impermissible for those who have adequate alternatives. Eating meat from animals that lived good lives and were killed without suffering is permissible, because the reason against it, the deprivation of a future to which the animal is weakly connected, is outweighed. It is not morally neutral, because that reason remains.
+
+\begin{thebibliography}{99}\small
+\bibitem[Budolfson(2019)]{Budolfson2019} Budolfson, M. (2019). The inefficacy objection to consequentialism and the problem with the expected consequences response. \emph{Philosophical Studies}, 176.
+\bibitem[Davis(2003)]{Davis2003} Davis, S.~L. (2003). The least harm principle may require that humans consume a diet containing large herbivores, not a vegan diet. \emph{Journal of Agricultural and Environmental Ethics}, 16(4), 387--394.
+\bibitem[Fischer(2020)]{Fischer2020} Fischer, B. (2020). \emph{The Ethics of Eating Animals: Usually Bad, Sometimes Wrong, Often Permissible}. Routledge.
+\bibitem[Harman(2011)]{Harman2011} Harman, E. (2011). The moral significance of animal pain and animal death. In T.~L. Beauchamp and R.~G. Frey (eds.), \emph{The Oxford Handbook of Animal Ethics}. Oxford University Press.
+\bibitem[Kagan(2011)]{Kagan2011} Kagan, S. (2011). Do I make a difference? \emph{Philosophy \& Public Affairs}, 39(2), 105--141.
+\bibitem[Knowles et~al.(2008)]{Knowles2008} Knowles, T.~G., Kestin, S.~C., Haslam, S.~M., Brown, S.~N., Green, L.~E., Butterworth, A., Pope, S.~J., Pfeiffer, D. and Nicol, C.~J. (2008). Leg disorders in broiler chickens: Prevalence, risk factors and prevention. \emph{PLoS ONE}, 3(2), e1545.
+\bibitem[Matheny(2003)]{Matheny2003} Matheny, G. (2003). Least harm: A defense of vegetarianism from Steven Davis's omnivore proposal. \emph{Journal of Agricultural and Environmental Ethics}, 16(5), 505--511.
+\bibitem[McMahan(2002)]{McMahan2002} McMahan, J. (2002). \emph{The Ethics of Killing: Problems at the Margins of Life}. Oxford University Press.
+\bibitem[McMahan(2008)]{McMahan2008} McMahan, J. (2008). Eating animals the nice way. \emph{Daedalus}, 137(1), 66--76.
+\bibitem[Norcross(2004)]{Norcross2004} Norcross, A. (2004). Puppies, pigs, and people: Eating meat and marginal cases. \emph{Philosophical Perspectives}, 18, 229--245.
+\bibitem[Regan(1983)]{Regan1983} Regan, T. (1983). \emph{The Case for Animal Rights}. University of California Press.
+\bibitem[Singer(1975)]{Singer1975} Singer, P. (1975). \emph{Animal Liberation}. New York Review/Random House.
+\bibitem[Singer(1993)]{Singer1993} Singer, P. (1993). \emph{Practical Ethics}. 2nd edn. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

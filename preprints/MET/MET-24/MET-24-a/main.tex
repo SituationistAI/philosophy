@@ -1,0 +1,377 @@
+\documentclass{situationist-preprint}
+
+\title{Existence as a First-Order Property}
+\msid{MET-24-a}
+\msfamily{MET-24}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_24.lean}
+\mskeywords{existence; Meinong; nonexistent objects; characterization principle; noneism; allism; negative existentials; quantification; Kant; Frege}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What is existence? We argue that existence is a first-order property, had by everything: for a thing to exist is for something to be identical to it. The property is expressed by a predicate of individuals, defined by the unrestricted quantifier, and it holds universally. Kant's and Frege's insight that existence adds nothing to a concept is preserved, since adding a universal property to a condition does not change what satisfies it; their conclusion that existence is not a property of individuals does not follow. Meinongian objects, things that have properties without existing, do not exist and are not in the domain of quantification. The argument has two stages. First, given absolute generality, whatever the Meinongian's particular quantifier ranges over is something, and so exists in our sense; we prove that Meinongian theories are intertranslatable with classical theories in which the Meinongian's existence predicate is an ordinary predicate. Second, the objects the characterization principle posits have their characterizing properties either in the plain sense, in which case they are not in the domain, since there are no golden mountains, or in another sense, in which case they are existing abstract objects. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Some things exist: this desk, the planet Mars, the number seven if MTH-01 is right. Some do not: Pegasus, the golden mountain, the round square. Or so we say. The question what existence is asks what is being said of the desk when it is said to exist, and what is being denied of Pegasus. Three answers have dominated the debate.
+
+The first is that existence is not a property of individuals at all. \citet[A598/B626]{Kant1787} held that being is not a real predicate: it adds nothing to the concept of a thing. \citet[\S 53]{Frege1884} held that existence is analogous to number, so that to affirm existence is to deny the number nought of a concept; \citet{Russell1918} that existence is a property of propositional functions, not of the things that satisfy them. On this view, existence is a second-order property, the property of a concept of being instantiated, and \enquote{Mars exists} must be analyzed as saying of some concept that it is instantiated.
+
+The second answer is that existence is a first-order property which some things lack. \citet{Meinong1904} held that there are objects that do not exist, and that an object's having properties is independent of its existing: the golden mountain is golden and a mountain, and does not exist. Neo-Meinongian theories \citep{Parsons1980,Routley1980,Priest2005,Berto2013} develop the view with a consistent logic.
+
+The third answer is that existence is a first-order property had by everything. On this view, which is implicit in \citet{Quine1948} and defended in different forms by \citet{Salmon1987} and \citet{Williamson2013}, \enquote{$x$ exists} means that something is identical to $x$, and since everything is identical to itself, everything exists. There are no objects that do not exist, and \enquote{Pegasus does not exist} must be understood without positing an object of which it is true.
+
+We defend the third answer. Section~\ref{s:history} reviews the history of the debate and the case that defeated each of the main proposals. Section~\ref{s:frame} sets out the framework, Section~\ref{s:arg} the argument, and Section~\ref{s:none} the formal comparison of Meinongian and classical theories. Section~\ref{s:cases} applies the view to negative existentials, fiction, intentionality, possible and impossible objects, the past, and absences. Section~\ref{s:recent} discusses recent literature, Section~\ref{s:obj} objections, and Section~\ref{s:lean} the formalization.
+
+\section{History of the debate}\label{s:history}
+
+\subsection{Existence as a perfection}
+
+The ontological argument of Anselm (\emph{Proslogion} 2) compares a being that exists only in the understanding with one that exists also in reality, and holds that the second is greater. Descartes (\emph{Meditation} V) holds that existence belongs to the essence of a supremely perfect being as having angles equal to two right angles belongs to the essence of a triangle. Both treat existence as a property that a thing can have or lack, and that adds to the greatness or perfection of its bearer. The view that existence is a first-order property is thus as old as the argument most often used to refute it.
+
+\subsection{Hume and Kant}
+
+\citet[1.2.6]{Hume1739} argued that there is no distinct idea of existence: to conceive of a thing and to conceive of it as existing are the same, so that the idea of existence adds nothing to the idea of an object. \citet[A598/B626]{Kant1787} turned the point against the ontological argument. A real predicate is a determination that enlarges the concept of a thing; being is not such a predicate, since a hundred actual thalers contain no more than a hundred possible ones. Existence therefore cannot belong to the concept of a thing as one of its marks, and cannot be extracted from it by analysis.
+
+The case that told against Kant's formulation is the contingent singular existential. \enquote{Kant exists} was true in 1787 and is not true now in the tensed sense; the difference between the actual and the possible thalers is a difference in something. Kant's view leaves it unclear what that difference is, if not the possession of a property by the thalers. What survives of Kant's view is the claim that existence adds nothing to a concept, in the sense that a concept and the concept with existence added apply to the same things. Proposition~\ref{p:kant} below shows that this is true on the first-order view.
+
+\subsection{Frege and Russell}
+
+\citet[\S 53]{Frege1884} gave Kant's point a logical form. A statement of existence is a statement about a concept, saying that something falls under it, and is in this respect like a statement of number. \citet{Russell1905} showed how definite descriptions could be eliminated in favor of quantifiers, so that \enquote{the golden mountain does not exist} says that nothing is uniquely golden and a mountain, without referring to any golden mountain. \citet{Russell1918} drew the conclusion that existence is a property of propositional functions, and that to say of an individual that it exists is not false but meaningless. \citet{Moore1936} examined the grammatical differences between \enquote{tame tigers exist} and \enquote{tame tigers growl}, and concluded that \enquote{exist} does not stand for a property in the way \enquote{growl} does, while allowing that \enquote{this exists} may be significant.
+
+The case that defeated the second-order view as a complete account is the singular existential with a genuine name. Russell could treat \enquote{Socrates exists} as meaningful only by treating \enquote{Socrates} as an abbreviated description. \citet{Kripke1980} showed that ordinary proper names are not abbreviated descriptions but rigid designators. \enquote{Socrates might not have existed} is then true and is about Socrates: it says of him that he might have lacked something he has. A second-order property of concepts cannot be what he might have lacked, since the concept of being Socrates is not what the sentence is about. The singular existential requires a property of individuals.
+
+\subsection{Meinong and Russell's objection}
+
+\citet{Meinong1904} proposed a theory of objects in which an object's being so-and-so (its \emph{Sosein}) is independent of its being (\emph{Sein}). Every intentional act has an object; the object of the thought of the golden mountain is golden and a mountain, and it does not exist. Meinong's principle of independence is naturally strengthened to a characterization principle: for every condition, there is an object that satisfies it. \citet{Russell1905} raised two objections. The round square is round and square, and therefore round and not round, violating the law of non-contradiction. And the existent golden mountain is, by the characterization principle, existent, a golden mountain; but there is no existing golden mountain. Meinong replied that the law of non-contradiction applies only to the actual, and that the existent golden mountain is existent but does not exist, distinguishing a characterizing sense of \enquote{existent} from existence itself.
+
+The case that defeated the unrestricted theory is the inconsistent condition. A condition such as \enquote{$x$ is not self-identical} yields, by the unrestricted characterization principle, an object that is not self-identical, and contradiction follows in any logic in which self-identity is a law (Theorem~\ref{t:cp} below). Meinong's reply to the existent golden mountain contains the germ of every later Meinongian theory: a distinction between properties to which the characterization principle applies and properties to which it does not.
+
+\subsection{Quine}
+
+\citet{Quine1948} treated the question as one about the commitments of a theory: to be is to be the value of a variable. His philosopher Wyman, who holds that Pegasus has being but lacks actuality, is charged with confusion: the only sense of \enquote{there is} is the one expressed by the existential quantifier, and to say that there is something that does not exist is a contradiction. Quine thereby identified existence with being in the domain of quantification. The criticism of Quine's position, developed by the neo-Meinongians, is that it begs the question: it assumes that the quantifier is existentially loaded, which is what the Meinongian denies.
+
+\subsection{Neo-Meinongian theories}
+
+\citet{Parsons1980} restricted the characterization principle to \emph{nuclear} properties, such as being golden and being a mountain, and excluded \emph{extranuclear} properties, such as existing, being possible and being thought of. The existent golden mountain is then a golden mountain with the watered-down nuclear counterpart of existence, and it does not exist. \citet{Routley1980} defended a noneist logic in which the particular quantifier carries no existential commitment, so that \enquote{some objects do not exist} is true. \citet{Zalta1983} distinguished two modes of predication: abstract objects \emph{encode} properties and ordinary objects \emph{exemplify} them, and comprehension holds for encoding. On Zalta's theory, the golden mountain is an abstract object that encodes being golden and being a mountain and exemplifies neither; it exists, but it is not a golden mountain. \citet{Priest2005} qualified the characterization principle by worlds: an object characterized as golden and a mountain has those properties at the worlds that realize the way it is represented, which need not include the actual world.
+
+Each theory is consistent, and each was challenged at the point where it restricts or qualifies the characterization principle. The nuclear-extranuclear distinction has been criticized for lacking an independent criterion; encoding has been criticized as a technical device whose relation to ordinary predication is unclear; and Priest's worlds have been criticized for leaving the object's actual properties undetermined. \citet{Lewis1990} made a more general point: the noneist's distinction between what there is and what exists can be matched, sentence by sentence, by the allist's distinction between everything and the things that satisfy a restricted predicate, and the noneist's theory can be translated into the allist's. Section~\ref{s:none} proves a version of this result and draws a consequence Lewis did not draw.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}[Existence]\label{d:exist}
+$x$ \emph{exists} if and only if something is identical to $x$: $E!x \leftrightarrow \exists y\, (y = x)$.
+\end{definition}
+
+So defined, existence is a property in the abundant sense: it is constructed from identity by existential quantification, and is not among the sparse universals of MET-02. That it is first-order and had by everything is compatible with its not being a fundamental universal; the same holds of self-identity.
+
+\begin{assumption}[Absolute generality]\label{a:abs}
+The quantifier in Definition~\ref{d:exist} ranges over absolutely everything, and \enquote{there is} has a single, unrestricted sense that this quantifier expresses.
+\end{assumption}
+
+The first part of Assumption~\ref{a:abs} is the conclusion of LOG-08, on which absolute generality is coherent and Russell's paradox does not threaten it. The second is the univocity of \enquote{there is} defended by \citet{vanInwagen1998}: \enquote{there are dogs} and \enquote{there are prime numbers} use the same quantifier, and there is no further sense of \enquote{there is} on which there are things that are not among everything. If the Meinongian says that there are objects that do not exist, then on Assumption~\ref{a:abs} those objects are among everything, and the question is what she means by \enquote{exist}.
+
+\begin{definition}[Instantiation]\label{d:inst}
+A condition $F$ is \emph{instantiated} if and only if $\exists x\, F x$.
+\end{definition}
+
+Definition~\ref{d:inst} is the second-order notion of Frege and Russell. Proposition~\ref{p:inter} shows that it is interdefinable with the first-order notion of Definition~\ref{d:exist}.
+
+\begin{assumption}[Univocity of predication]\label{a:univ}
+When the Meinongian says that the golden mountain is golden and a mountain, either she uses \enquote{golden} and \enquote{mountain} in their ordinary senses, in which a thing is golden if it is made of gold, or she uses them in some other sense; in the first case, what she says entails that some thing is golden and a mountain in the ordinary sense.
+\end{assumption}
+
+Assumption~\ref{a:univ} is not a restriction on the Meinongian. It records an alternative she must choose between, and the argument of Theorem~\ref{t:dilemma} turns on it.
+
+\begin{assumption}[The plain facts]\label{a:plain}
+There are no golden mountains.
+\end{assumption}
+
+Assumption~\ref{a:plain} is empirical and is accepted by all parties, the Meinongian included: she holds that the golden mountain does not exist, not that some existing thing is golden and a mountain. Under Assumption~\ref{a:abs}, it says that nothing whatever is golden and a mountain.
+
+\begin{definition}[Meinongian object]\label{d:mobj}
+A \emph{Meinongian object} for a condition $\varphi$ is a thing that satisfies $\varphi$ and does not exist.
+\end{definition}
+
+\begin{definition}[Characterization]\label{d:cp}
+The \emph{characterization principle} for a condition $\varphi$ says that some object satisfies $\varphi$. It is \emph{unrestricted} if it holds for every condition, and \emph{nuclear} if it holds for every condition built from nuclear properties in the sense of \citet{Parsons1980}.
+\end{definition}
+
+\section{The argument}\label{s:arg}
+
+\begin{proposition}[Universality]\label{p:univ}
+Everything exists.
+\end{proposition}
+
+\begin{proof}
+Let $x$ be anything. Then $x = x$, so something is identical to $x$, and by Definition~\ref{d:exist}, $x$ exists.
+\end{proof}
+
+Proposition~\ref{p:univ} is a theorem of classical first-order logic with identity. Its philosophical content lies in Assumption~\ref{a:abs}: because the quantifier is unrestricted, \enquote{everything exists} means that there is nothing whatever that does not exist. The property of existence is first-order, since it is expressed by an open formula in one individual variable, and it is had by everything.
+
+\begin{proposition}[Interdefinability]\label{p:inter}
+A condition is instantiated if and only if some existing thing satisfies it; and a thing exists if and only if the condition of being identical to it is instantiated.
+\end{proposition}
+
+\begin{proof}
+If $Fx$, then $x$ exists by Proposition~\ref{p:univ}, so some existing thing is $F$; the converse is immediate. The second claim is Definition~\ref{d:exist} restated with Definition~\ref{d:inst}.
+\end{proof}
+
+Proposition~\ref{p:inter} shows that the Fregean and the first-order notions are not rivals. Each is definable from the other. Frege's thesis that existential statements about kinds say of a concept that it is instantiated is correct; Russell's further thesis that a singular existential is meaningless is not, since \enquote{Socrates exists} says that the condition of being Socrates is instantiated, which is to say that something is Socrates.
+
+\begin{proposition}[Kant's point preserved]\label{p:kant}
+For every condition $F$ and thing $x$: $Fx$ if and only if $Fx$ and $x$ exists.
+\end{proposition}
+
+\begin{proof}
+From left to right by Proposition~\ref{p:univ}; from right to left trivially.
+\end{proof}
+
+Proposition~\ref{p:kant} is the precise content of Kant's claim that existence adds nothing to the concept of a thing: the concept of a hundred thalers and the concept of a hundred existing thalers apply to exactly the same things. It does not follow that existence is not a property of individuals. Self-identity also adds nothing to any concept, and it is a property of individuals. A universal property is not a discriminating mark, and that is all Kant's argument requires.
+
+\begin{theorem}[Russell]\label{t:cp}
+Over any domain, the unrestricted characterization principle is inconsistent.
+\end{theorem}
+
+\begin{proof}
+Apply the principle to the condition that is satisfied by nothing, for instance \enquote{$x$ is not self-identical}. It yields an object that satisfies the condition, which is impossible.
+\end{proof}
+
+\begin{proposition}[The existent golden mountain]\label{p:egm}
+Let $E$ be any predicate that the Meinongian uses for existence. If the characterization principle applies to the condition \enquote{$x$ is golden, a mountain and $E$}, and nothing that is golden and a mountain is $E$, contradiction follows.
+\end{proposition}
+
+\begin{proof}
+The principle supplies an object that is golden, a mountain and $E$; the second premise says that it is not $E$.
+\end{proof}
+
+Theorem~\ref{t:cp} and Proposition~\ref{p:egm} are Russell's two objections. They force the Meinongian to restrict the characterization principle, as Parsons does by excluding extranuclear properties, or to qualify the predication involved, as Zalta and Priest do. Any such theory posits, for the condition \enquote{golden and a mountain}, an object in its domain that satisfies the condition and lacks $E$. The next theorem states what follows.
+
+\begin{theorem}[The Meinongian dilemma]\label{t:dilemma}
+Suppose the Meinongian posits, in the domain of everything, an object $g$ that is golden and a mountain in her senses of these words and that lacks her existence predicate $E$. Then (i) her senses of \enquote{golden} and \enquote{mountain} are not the plain senses; and (ii) $g$ exists in the sense of Definition~\ref{d:exist} and lacks $E$, so that $E$ is not existence.
+\end{theorem}
+
+\begin{proof}
+(i) If her senses were the plain ones, then by Assumption~\ref{a:univ} $g$ would be golden and a mountain, contradicting Assumption~\ref{a:plain}. (ii) By Proposition~\ref{p:univ}, $g$ exists; by hypothesis, it lacks $E$.
+\end{proof}
+
+\begin{corollary}[No Meinongian objects]\label{c:main}
+There is no Meinongian object for any condition, and the golden mountain, taken with plain predication, is not in the domain of quantification.
+\end{corollary}
+
+\begin{proof}
+A Meinongian object would be a thing that does not exist, contrary to Proposition~\ref{p:univ}. Under plain predication, the golden mountain would be something golden and a mountain, and by Assumptions~\ref{a:abs} and~\ref{a:plain} there is no such thing.
+\end{proof}
+
+Corollary~\ref{c:main} is the thesis of the manuscript. The first part follows from the definition of existence and absolute generality; the second from univocity and the plain facts. Theorem~\ref{t:dilemma} explains how the Meinongian theories manage to be consistent: each takes the second horn, and its objects, where they are in the domain at all, are things that exist and lack some further property, or things that are \enquote{golden} in some sense other than being made of gold. On the first horn, the objects are not in the domain; on the second, they are not Meinongian objects.
+
+\section{Noneism and allism}\label{s:none}
+
+The neo-Meinongian will object that Theorem~\ref{t:dilemma} begs the question: it reads \enquote{in the domain of everything} with an existentially loaded quantifier, whereas her particular quantifier carries no existential commitment. We now show that the objection does not touch the argument, by proving that a Meinongian theory and its classical counterpart say the same thing.
+
+\begin{definition}[Meinongian language]\label{d:mlang}
+The \emph{Meinongian language} has atomic predications, identity, an existence predicate $E!$, negation, conjunction, a particular quantifier $\Sigma$, which ranges over all objects, and an existentially loaded quantifier $\exists_E$. A \emph{model} consists of a domain $D$, a subset $E$ of $D$, and interpretations of the other predicates. $\Sigma x\, \varphi$ is true under an assignment if some $d \in D$ satisfies $\varphi$; $\exists_E x\, \varphi$ is true if some $d \in E$ does; and $E!x$ is true if the value of $x$ is in $E$.
+\end{definition}
+
+Definition~\ref{d:mlang} is the outer-domain semantics of noneist logic \citep{Routley1980,Priest2005}, and also the semantics of negative and positive free logic with an outer domain \citep{Lambert2003}. The objects in $D$ but not in $E$ are the nonexistent objects.
+
+\begin{definition}[Classical language]\label{d:clang}
+The \emph{classical language} has the same atomic predications, identity, an ordinary unary predicate $C$, negation, conjunction and a single quantifier $\exists$. A model is as in Definition~\ref{d:mlang}, with $E$ read as the extension of $C$, and $\exists x\, \varphi$ is true if some $d \in D$ satisfies $\varphi$.
+\end{definition}
+
+Translate Meinongian into classical formulas by replacing $\Sigma$ with $\exists$, $E!x$ with $Cx$, and $\exists_E x\, \varphi$ with $\exists x\, (Cx \wedge \varphi)$; translate back by the inverse replacements.
+
+\begin{theorem}[Translation]\label{t:trans}
+For every model, assignment and Meinongian formula $\varphi$, $\varphi$ is true in the Meinongian semantics if and only if its translation is true in the classical semantics.
+\end{theorem}
+
+\begin{theorem}[Converse translation]\label{t:back}
+For every model, assignment and classical formula $\psi$, $\psi$ is true in the classical semantics if and only if its back-translation is true in the Meinongian semantics.
+\end{theorem}
+
+\begin{proof}[Proof of Theorems~\ref{t:trans} and~\ref{t:back}]
+By induction on formulas. The atomic, identity, negation and conjunction clauses are identical in the two semantics. $\Sigma$ and $\exists$ both range over $D$. $\exists_E x\, \varphi$ is true iff some $d \in E$ satisfies $\varphi$, iff some $d \in D$ satisfies both $Cx$ and the translation of $\varphi$, by the induction hypothesis and the reading of $C$ as $E$. The back-translation is handled in the same way.
+\end{proof}
+
+\begin{corollary}[Two notions of existence]\label{c:two}
+In every Meinongian model, the existence predicate defined from the particular quantifier as in Definition~\ref{d:exist}, $\Sigma y\,(y = x)$, holds of every object, while the predicate defined from the loaded quantifier, $\exists_E y\,(y = x)$, holds exactly of the objects in $E$.
+\end{corollary}
+
+\begin{proposition}[Collapse]\label{p:collapse}
+If $E = D$ in a Meinongian model, then $\exists_E x\, \varphi$ and $\Sigma x\, \varphi$ agree for every formula $\varphi$ and assignment.
+\end{proposition}
+
+\begin{proof}[Proof of Corollary~\ref{c:two} and Proposition~\ref{p:collapse}]
+$\Sigma y\,(y = x)$ is satisfied by the value of $x$ itself. $\exists_E y\,(y = x)$ requires an element of $E$ identical to the value of $x$, which exists iff that value is in $E$. If $E = D$, the restriction to $E$ in the clause for $\exists_E$ is vacuous.
+\end{proof}
+
+Theorems~\ref{t:trans} and~\ref{t:back} are a precise version of the claim of \citet{Lewis1990}: the noneist and the allist can say exactly the same things. Whatever the noneist asserts with $\Sigma$, the allist asserts with $\exists$; whatever the noneist asserts with $E!$, the allist asserts with a first-order predicate $C$, which she may read as \enquote{concrete}, \enquote{actual} or \enquote{causally efficacious}, as the noneist's own account of existence suggests. Corollary~\ref{c:two} shows which of the noneist's two notions corresponds to existence in the sense of Definition~\ref{d:exist}: the one defined from the quantifier that ranges over everything, which is $\Sigma$. Under Assumption~\ref{a:abs}, the noneist's $\Sigma$ is our quantifier, since it ranges over absolutely everything and there is no wider sense of \enquote{some}. Her nonexistent objects therefore exist in our sense, and \enquote{some objects do not exist} says that some things lack $C$.
+
+Lewis concluded that the dispute between noneism and allism is largely verbal. We draw a further consequence. Once the translation is granted, the question that separates the Meinongian from the allist is not the meaning of the quantifier but the truth of the atomic predications. The noneist asserts $\Sigma x\, (\mathrm{Golden}(x) \wedge \mathrm{Mountain}(x))$; its translation is $\exists x\, (\mathrm{Golden}(x) \wedge \mathrm{Mountain}(x))$, which is false if \enquote{golden} has its plain sense. This is Theorem~\ref{t:dilemma} again, now reached without any assumption about which quantifier is loaded. The objection that the argument begs the question about quantification is therefore answered: the argument does not depend on how quantification is read, only on how predication is.
+
+\section{Further cases}\label{s:cases}
+
+\subsection{Negative existentials}
+
+\enquote{Pegasus does not exist} is true, and on the present view no object is its subject. If \enquote{Pegasus} is a disguised description, the sentence says that nothing satisfies the description, as \citet{Russell1905} proposed and as LNG-03 defends for definite descriptions. If \enquote{Pegasus} is an empty name, the sentence does not express a singular proposition about an object; it can be treated as saying that the name has no bearer, or as a denial issued from within a practice of pretend reference \citep{Evans1982,Kripke2013}. Either way, its truth requires only that nothing be Pegasus, not that something be Pegasus and fail to exist. MET-24-c develops this treatment.
+
+The case is worth stating precisely, because it is the most common argument for nonexistent objects: a true sentence must be about something, and \enquote{Pegasus does not exist} is about Pegasus. The premise is ambiguous. If it means that every true sentence has a subject matter, it is true, and the subject matter here is the world, which contains no winged horse. If it means that every true sentence of subject-predicate form has a referent for its subject term, it is false, and negative existentials are the counterexample.
+
+\subsection{Fiction}
+
+Sherlock Holmes does not exist, in the sense that no detective lived at 221B Baker Street. But there is a sense in which Holmes is something: a character, created by Conan Doyle, discussed by critics. LNG-14 argues that fictional names refer to abstract artefacts created by authors, following \citet{Thomasson1999} and \citet{vanInwagen2003}. On that view, Holmes exists, as an abstract artefact, and is not a detective; he is ascribed the property of being a detective by the stories. This is the second horn of Theorem~\ref{t:dilemma}: \enquote{Holmes is a detective} is true only on a reading on which \enquote{is a detective} does not express the plain property, and on that reading Holmes is an existing abstract object. \citet{Zalta1983} gives the same structure with encoding in place of ascription. Neither view posits a Meinongian object.
+
+\subsection{Intentionality}
+
+One can think about the golden mountain, and it may seem that thinking about something requires that there be something one thinks about. The present view denies this. To think about the golden mountain is to have a thought whose content is given by the condition of being golden and a mountain, and the thought can have that content whether or not anything satisfies it. There are no non-existent objects to think about. What a thought of the golden mountain requires is a condition, which exists, and a thinker, who exists. \citet{Crane2013} argues that intentional objects need not exist and that this is a datum any theory of intentionality must respect; we accept the datum, that one can think of what does not exist, and reject the inference that there are objects of thought that do not exist. The datum is that there need be no object the thought is about; it is not that there is an object the thought is about which lacks existence.
+
+\subsection{Merely possible objects}
+
+I might have had a sibling who does not actually exist. Is there a merely possible sibling, and does it fail to exist? On contingentism, there is no such thing: the domain contains only what actually exists, and the modal claim is that there could have been something that is my sibling. On the necessitism of \citet{Williamson2013}, everything necessarily is something, and the possible sibling is something, a merely possible object that is not concrete but could have been. On both views, Proposition~\ref{p:univ} holds: on contingentism, nothing in the domain fails to exist; on necessitism, the possible sibling exists in the sense of Definition~\ref{d:exist} and lacks concreteness. Our thesis is therefore neutral between the two, as MET-01-a's combinatorial argument is: on necessitism, MET-01-a's question becomes why some necessarily existing things are concrete, and on the present view that is a question about the first-order predicate $C$ of Section~\ref{s:none}, not about existence.
+
+\subsection{Impossible objects}
+
+The round square is the hardest case for the Meinongian, since no world realizes it. \citet{Priest2005} admits impossible worlds at which it is round and square. TSM-09 argues that impossible worlds are needed to model hyperintensional content, and on TSM-07 worlds are sets of propositions. On that conception, an impossible world at which something is round and square is a set of propositions that includes the proposition that something is round and square; it exists, and it is not round or square. The content of the thought of the round square is modelled without any object that is round and square, and Assumption~\ref{a:plain} applies a fortiori: there are no round squares.
+
+\subsection{The past}
+
+Socrates no longer exists. On the view of TSM-03, the past exists, elsewhere in time, as distant places exist elsewhere in space. \enquote{Socrates no longer exists} then says that Socrates is not located at the present time, which is a first-order predicate of Socrates, who is in the domain. Tensed uses of \enquote{exists} are thus restricted uses, like \enquote{there is no beer} said of a refrigerator, and they introduce no nonexistent objects.
+
+\subsection{Absences and holes}
+
+MET-16 argues that absences do not exist but that there are true sentences about them, and MET-15 that holes exist as dependent immaterial particulars. Both are consistent with the present view, and they illustrate its two sides. A hole is in the domain and so exists. An absence is not in the domain; \enquote{there is an absence of milk in the refrigerator} is true because no milk is in the refrigerator, not because something, the absence, fails to exist.
+
+\section{Recent literature}\label{s:recent}
+
+Neo-Meinongianism has been developed in two directions in the last fifteen years. \citet{Berto2013} defends a modal Meinongianism on which existence is a real, first-order property that some objects lack, and the characterization principle holds at the worlds that realize an object's characterization. By Theorems~\ref{t:trans} and~\ref{t:back}, Berto's theory, insofar as it is stated with an outer-domain semantics, is intertranslatable with an allist theory in which existence in his sense is an ordinary predicate; the question between us is whether the objects in his outer domain are golden mountains in the plain sense at the actual world, and he agrees that they are not. His view thus takes the second horn of Theorem~\ref{t:dilemma}.
+
+A second direction concerns the meaning of quantifiers. \citet{Hirsch2011} defends quantifier variance: there are many equally good meanings for the quantifier, and ontological disputes often turn on choosing among them. If quantifier variance were true, the Meinongian and the allist might simply be using different quantifiers. We reject quantifier variance for the reason given by \citet{Sider2011}: among the candidate meanings, one carves reality at its joints, and Assumption~\ref{a:abs} uses it. Our main argument does not depend on rejecting variance, however, since Section~\ref{s:none} shows that the dispute about predication survives any choice of quantifier.
+
+\citet{Hofweber2016} distinguishes an internal reading of quantifiers, which concerns their inferential role and on which \enquote{there is something we are looking for} can be true without commitment to an object in the domain, from an external, domain-conditions reading. We accept that natural language quantifiers have such uses. The internal reading, on Hofweber's account, makes no claim about what the domain contains, and so cannot supply the Meinongian with nonexistent objects in it; Assumption~\ref{a:abs} concerns the external reading.
+
+\citet{Kripke2013}, publishing lectures given in 1973, argues that fictional characters are abstract entities whose existence depends on the fictions, and that negative existentials involving empty names are to be understood through pretence. Both claims fit the present view, as Section~\ref{s:cases} shows. \citet{Crane2013} defends a non-relational view of intentionality and accepts that thought can be directed at what does not exist, while denying that there are nonexistent objects in any substantial sense. His view differs from ours mainly in vocabulary. \citet{Williamson2013}, finally, defends the definition of existence we adopt and adds the modal thesis of necessitism, which we neither accept nor reject.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Triviality]
+A property that everything has is no property at all, or at least no interesting one. If existence is universal, \enquote{Mars exists} is as uninformative as \enquote{Mars is self-identical}.
+\end{objection}
+
+\begin{reply}
+Universality does not make a predication uninformative. \enquote{Mars exists} is informative in the way that \enquote{Mars is something} is: it tells us that the name \enquote{Mars} has a bearer, and it is false of nothing only because nothing is there for it to be false of. The informativeness of singular existentials lies in the reference of their subject terms, and the falsity of a negative existential such as \enquote{Vulcan exists} lies in the failure of reference, as Section~\ref{s:cases} explains. The thesis that existence is universal is not trivial either: it is the denial that there are Meinongian objects, which philosophers have affirmed.
+\end{reply}
+
+\begin{objection}[Contingency]
+Mars might not have existed. If existence is had by everything, it seems to be had necessarily.
+\end{objection}
+
+\begin{reply}
+Proposition~\ref{p:univ} is not a modal claim. It says that everything exists, not that everything necessarily exists. Whether \enquote{Mars might not have existed} is true depends on the dispute between contingentism and necessitism, on which the present thesis is neutral. On contingentism, there is a world at which nothing is Mars; at that world, Mars is not in the domain, and still everything there exists. On necessitism, Mars exists at every world but might not have been concrete.
+\end{reply}
+
+\begin{objection}[Begging the question]
+The argument assumes that the quantifier is existentially loaded, which is what the Meinongian denies.
+\end{objection}
+
+\begin{reply}
+Section~\ref{s:none} shows that the argument does not need this assumption. Whatever the Meinongian says with her two quantifiers and her existence predicate can be said with one quantifier and a first-order predicate, and the translation preserves truth in every model. The issue between us is whether her objects satisfy the plain predicates she attributes to them, and Theorem~\ref{t:dilemma} answers it.
+\end{reply}
+
+\begin{objection}[The nuclear restriction]
+Parsons's theory restricts the characterization principle to nuclear properties, and \enquote{golden} is nuclear. The golden mountain is golden in the plain sense, and it does not exist. Assumption~\ref{a:univ} then says that something is golden and a mountain, but the Meinongian accepts this, since \enquote{something} for her ranges over nonexistents.
+\end{objection}
+
+\begin{reply}
+Then Assumption~\ref{a:plain} is denied in the only sense in which it can be stated with an unrestricted quantifier: there is, among absolutely everything, something golden and a mountain. The Meinongian says the golden mountain is not located anywhere, has no mass, and could not be climbed. A thing that has no mass and is not located is not made of gold in the plain sense, since being made of gold requires having a mass of gold located somewhere. So the nuclear property \enquote{golden}, as Parsons's golden mountain has it, is not the plain property, and the theory takes the second horn after all.
+\end{reply}
+
+\begin{objection}[Ordinary speech]
+We say, without confusion, that some of the characters we have discussed do not exist, and that there are things we fear that do not exist. Ordinary speech is Meinongian.
+\end{objection}
+
+\begin{reply}
+These sentences have true readings on the present view: the first says that some of the characters are not real people, which is a first-order predicate of abstract artefacts; the second says that some of our fears have contents that nothing satisfies. Ordinary speech uses \enquote{there are} in restricted and internal senses, as \citet{Hofweber2016} documents, and nothing in it requires a domain containing things that are not anything.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result does not establish which things exist. It is consistent with any ontology of abstract objects, whether or not numbers exist (MTH-01 argues that they do), and with any view of fictional characters that does not make them Meinongian objects. It does not decide between contingentism and necessitism, and is compatible with the combinatorial argument of MET-01-a under either. It does not give a full semantics of empty names, which is the subject of MET-24-c. It does not establish absolute generality, which is argued in LOG-08, or the univocity of predication, which we have defended but not proved. And it does not show that the neo-Meinongian theories are inconsistent: Theorem~\ref{t:dilemma} shows that, where consistent, they take the second horn, and that their objects are then existing things that lack some further property or have their characterizing properties in a non-plain sense.
+
+The view has consequences for neighboring questions. MET-21 diagnoses Parmenides' argument against change as an equivocation between the existential and predicative uses of \enquote{is}. On the present account the existential use is expressed by the quantifier and the predicate of Definition~\ref{d:exist}, and \enquote{$x$ is not}, in that use, is false of everything, while the predicative \enquote{$x$ is not $F$} is true of many things. The two come apart exactly as MET-21 requires. And the question of MET-01, why there is something rather than nothing, is on the present view a question about concrete things: there is no world at which there is something that is nothing, and the empty world is the world at which nothing is concrete.
+
+\section{Formalization}\label{s:lean}
+
+The module \nolinkurl{Philosophy/MET/MET_24.lean} declares the domain of everything as an axiom (\texttt{Thing}, Assumption~\ref{a:abs}), defines existence and instantiation as in Definitions~\ref{d:exist} and~\ref{d:inst}, and states the plain predicates and Assumption~\ref{a:plain} as axioms. The Meinongian's characterization principle and her senses of the predicates appear as hypotheses, since they are premises of the view under examination and not of ours. The main results are stated as follows.
+
+\begin{lstlisting}
+theorem dilemma (MG MM E : Thing → Prop)
+    (cp : ∃ x, MG x ∧ MM x ∧ ¬ E x) :
+    ¬ ((∀ x, MG x → Golden x) ∧ (∀ x, MM x → Mountain x)) ∧
+    (∃ x, Exists x ∧ ¬ E x)
+
+theorem no_meinongian_objects :
+    (∀ F : Thing → Prop, ¬ ∃ x, MeinongianObject F x) ∧
+    ¬ ∃ x, Golden x ∧ Mountain x
+
+theorem translation (M : Model) (f : MFm) :
+    ∀ g, mEval M g f ↔ cEval M g (tr f)
+\end{lstlisting}
+
+\noindent The checker reports the following dependencies.
+
+\begin{lstlisting}
+'Philosophy.MET_24.no_meinongian_objects' depends on axioms:
+  [Philosophy.MET_24.Golden, Philosophy.MET_24.Mountain,
+   Philosophy.MET_24.Thing, Philosophy.MET_24.no_golden_mountain]
+'Philosophy.MET_24.dilemma' depends on axioms:
+  [Philosophy.MET_24.Golden, Philosophy.MET_24.Mountain,
+   Philosophy.MET_24.Thing, Philosophy.MET_24.no_golden_mountain]
+'Philosophy.MET_24.translation' depends on axioms:
+  [propext, Quot.sound]
+'Philosophy.MET_24.back_translation' depends on axioms:
+  [propext]
+'Philosophy.MET_24.defined_existence' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+\texttt{Thing} is the domain of Assumption~\ref{a:abs}; \texttt{Golden} and \texttt{Mountain} are the plain predicates; \texttt{no\_golden\_mountain} is Assumption~\ref{a:plain}. The univocity of Assumption~\ref{a:univ} appears in \texttt{dilemma} as the conjunction whose negation is the first part of the conclusion: the theorem says that, given the Meinongian's posit, univocity fails. The translation results (Theorems~\ref{t:trans} and~\ref{t:back}, Corollary~\ref{c:two}) depend on no philosophical axiom; they are proved by induction on a datatype of formulas, with models as structures containing a domain and an interpretation of the existence predicate. Propositions~\ref{p:univ}, \ref{p:inter} and~\ref{p:kant} and Theorem~\ref{t:cp} depend only on the axiom declaring the domain. The formalization makes visible that the main thesis follows from the definition of existence and the assumptions of Section~\ref{s:frame} with almost no logical work; the philosophical weight lies in Definition~\ref{d:exist} and Assumptions~\ref{a:abs} and~\ref{a:univ}, which Sections~\ref{s:history} to~\ref{s:obj} defend.
+
+\section{Conclusion}
+
+Existence is the first-order property of being identical to something, and with the quantifier unrestricted, everything has it. Kant's point that existence adds nothing to a concept is a consequence of its universality, and the Fregean notion of instantiation is definable from it. The Meinongian's objects are, by the translation theorem, either things in the domain that lack some further property, and so exist, or things with their characterizing properties in a sense other than the plain one. Taken in the plain sense, the golden mountain and the round square are not in the domain, because nothing whatever is golden and a mountain or round and square. Meinongian objects do not exist and are not among the things there are.
+
+\begin{thebibliography}{99}\small
+\bibitem[Berto(2013)]{Berto2013} Berto, F. (2013). \emph{Existence as a Real Property: The Ontology of Meinongianism}. Springer.
+\bibitem[Crane(2013)]{Crane2013} Crane, T. (2013). \emph{The Objects of Thought}. Oxford University Press.
+\bibitem[Evans(1982)]{Evans1982} Evans, G. (1982). \emph{The Varieties of Reference}. Ed. J. McDowell. Oxford University Press.
+\bibitem[Frege(1884)]{Frege1884} Frege, G. (1884). \emph{Die Grundlagen der Arithmetik}. Koebner.
+\bibitem[Hirsch(2011)]{Hirsch2011} Hirsch, E. (2011). \emph{Quantifier Variance and Realism: Essays in Metaontology}. Oxford University Press.
+\bibitem[Hofweber(2016)]{Hofweber2016} Hofweber, T. (2016). \emph{Ontology and the Ambitions of Metaphysics}. Oxford University Press.
+\bibitem[Hume(1739)]{Hume1739} Hume, D. (1739). \emph{A Treatise of Human Nature}.
+\bibitem[Kant(1787)]{Kant1787} Kant, I. (1781/1787). \emph{Kritik der reinen Vernunft}.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Kripke(2013)]{Kripke2013} Kripke, S. (2013). \emph{Reference and Existence: The John Locke Lectures}. Oxford University Press.
+\bibitem[Lambert(2003)]{Lambert2003} Lambert, K. (2003). \emph{Free Logic: Selected Essays}. Cambridge University Press.
+\bibitem[Lewis(1990)]{Lewis1990} Lewis, D. (1990). Noneism or allism? \emph{Mind}, 99(393), 23--31.
+\bibitem[Meinong(1904)]{Meinong1904} Meinong, A. (1904). Über Gegenstandstheorie. In A.~Meinong (ed.), \emph{Untersuchungen zur Gegenstandstheorie und Psychologie}. Barth.
+\bibitem[Moore(1936)]{Moore1936} Moore, G.~E. (1936). Is existence a predicate? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 15, 175--188.
+\bibitem[Parsons(1980)]{Parsons1980} Parsons, T. (1980). \emph{Nonexistent Objects}. Yale University Press.
+\bibitem[Priest(2005)]{Priest2005} Priest, G. (2005). \emph{Towards Non-Being: The Logic and Metaphysics of Intentionality}. Oxford University Press.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V.~O. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Routley(1980)]{Routley1980} Routley, R. (1980). \emph{Exploring Meinong's Jungle and Beyond}. Research School of Social Sciences, Australian National University.
+\bibitem[Russell(1905)]{Russell1905} Russell, B. (1905). On denoting. \emph{Mind}, 14(56), 479--493.
+\bibitem[Russell(1918)]{Russell1918} Russell, B. (1918--19). The philosophy of logical atomism. \emph{The Monist}, 28--29.
+\bibitem[Salmon(1987)]{Salmon1987} Salmon, N. (1987). Existence. \emph{Philosophical Perspectives}, 1, 49--108.
+\bibitem[Sider(2011)]{Sider2011} Sider, T. (2011). \emph{Writing the Book of the World}. Oxford University Press.
+\bibitem[Thomasson(1999)]{Thomasson1999} Thomasson, A.~L. (1999). \emph{Fiction and Metaphysics}. Cambridge University Press.
+\bibitem[van Inwagen(1998)]{vanInwagen1998} van Inwagen, P. (1998). Meta-ontology. \emph{Erkenntnis}, 48(2--3), 233--250.
+\bibitem[van Inwagen(2003)]{vanInwagen2003} van Inwagen, P. (2003). Existence, ontological commitment, and fictional entities. In M.~J. Loux and D.~W. Zimmerman (eds.), \emph{The Oxford Handbook of Metaphysics}. Oxford University Press.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\bibitem[Zalta(1983)]{Zalta1983} Zalta, E.~N. (1983). \emph{Abstract Objects: An Introduction to Axiomatic Metaphysics}. Reidel.
+\end{thebibliography}
+
+\end{document}

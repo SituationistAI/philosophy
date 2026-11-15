@@ -1,0 +1,190 @@
+\documentclass{situationist-preprint}
+
+\title{The Basic Argument Fails}
+\msid{ACT-08-a}
+\msfamily{ACT-08}
+\msdiscipline{Action and Free Will}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ACT/ACT\_08.lean}
+\mskeywords{Basic Argument; ultimate responsibility; self-formation; Galen Strawson; reasons-responsiveness; regress}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Must we be the ultimate source of our actions in order to be responsible for them? Galen Strawson's Basic Argument says that we must, and that we cannot be: one acts as one does because of how one is, so responsibility for action requires responsibility for how one is, and this would require having made oneself from a prior self for which one was already responsible, which launches a regress that no finite agent completes. We argue that the argument is valid and that its regress premise is a correct analysis of ultimate responsibility, so that ultimate responsibility is indeed impossible; but its ultimacy premise is false. Responsibility for action requires only that the action issue from an owned, reasons-responsive mechanism, as ACT-01 argues. Responsibility for how one is is then acquired by degrees, as actions for which one is responsible shape the nature from which later actions flow. Self-formation of this kind starts from an unchosen nature and need not start from nothing. The skeleton of the argument is formalized in Lean: granting the regress premise, the ultimacy premise is inconsistent with the sufficiency of reasons-responsiveness and the existence of a reasons-responsive stage.
+\end{abstract}
+
+\section{The problem}
+
+The Basic Argument was stated by \citet{Strawson1986} and given its canonical form by \citet{Strawson1994}. In outline: (1) you do what you do because of the way you are, in certain mental respects; (2) so to be truly responsible for what you do, you must be truly responsible for the way you are in those respects; (3) to be truly responsible for the way you are, you must have intentionally brought it about that you are that way, in the light of some prior nature of yours; (4) for that to confer true responsibility, you must already have been truly responsible for that prior nature; and so on without end. Since no one can complete an infinite series of self-formations, no one is truly responsible for anything. Strawson takes the argument to hold whether determinism is true or false, since an undetermined event in one's mental life is not something one is responsible for either.
+
+The argument has three main kinds of reply. Libertarians grant that responsibility requires ultimacy and argue that it is possible: \citet{Kane1996} holds that agents are ultimately responsible in virtue of undetermined self-forming actions, which stop the regress because they are not settled by the agent's prior nature. Compatibilists of an Aristotelian bent hold that we are responsible for our characters because we formed them by our actions \citep[III.5]{AristotleNE}, and that the demand to have formed the initial character too is excessive \citep{Dennett1984}. Historical compatibilists hold that what matters is how an agent came to have the mechanism from which she acts, and that an agent can take responsibility for a mechanism she did not choose \citep{FischerRavizza1998}. Skeptics accept the argument and conclude, with \citet{Pereboom2001}, that we lack the kind of responsibility that would justify basic desert.
+
+We argue for the Aristotelian reply in a form that makes its premises explicit. We grant the regress premise, read as an analysis of what it would be to be \emph{ultimately} responsible for one's nature, and conclude with Strawson that no one is. The argument nonetheless fails, because its second premise, which demands ultimate responsibility for one's nature as a condition of responsibility for action, is false. Self-formation is real, but it need not start from nothing.
+
+\section{Framework}\label{s:frame}
+
+We divide an agent's history into stages, indexed by the natural numbers, at each of which she has a nature and does something. Stage $0$ is the agent's initial state, which she did not bring about.
+
+\begin{definition}\label{d:nature}
+The agent's \emph{nature} at a stage is the totality of her mental features that bear on what she does at that stage: her desires and values, her beliefs, and her dispositions of deliberation and attention.
+\end{definition}
+
+\begin{definition}\label{d:ult}
+An agent is \emph{ultimately responsible} for her nature at a stage if and only if she is responsible for it in a way that does not depend on any feature of her for which she is not responsible.
+\end{definition}
+
+\begin{definition}\label{d:rr}
+An agent acts at a stage from an \emph{owned, reasons-responsive mechanism} if and only if the mechanism of practical reasoning from which she acts would respond to a sufficient reason to act otherwise, in an understandable pattern of cases, and she has come to regard it as her own \citep{FischerRavizza1998}.
+\end{definition}
+
+Strawson's premises, in the present terms, are these.
+
+\begin{principle}\label{p:source}
+What an agent does at a stage is done because of her nature at that stage.
+\end{principle}
+
+\begin{principle}\label{p:ult}
+An agent is responsible for what she does at a stage only if she is ultimately responsible for her nature at that stage.
+\end{principle}
+
+\begin{principle}\label{p:regress}
+An agent is ultimately responsible for her nature at a stage only if that stage has a predecessor at which she was already ultimately responsible for her nature.
+\end{principle}
+
+Principle~\ref{p:regress} compresses steps (3) and (4) of the outline. To be ultimately responsible for one's nature one must have brought it about by an earlier act; that act was done because of one's earlier nature (Principle~\ref{p:source}); and by Definition~\ref{d:ult}, responsibility for the result depends on that earlier nature, so it must be ultimate responsibility in turn. We accept Principles~\ref{p:source} and~\ref{p:regress}. Our own premises are the following.
+
+\begin{assumption}\label{a:suff}
+If an agent acts at a stage from an owned, reasons-responsive mechanism, she is responsible for what she does at that stage.
+\end{assumption}
+
+\begin{assumption}\label{a:mature}
+For a normal adult agent there is a stage $k$ from which on she acts from an owned, reasons-responsive mechanism.
+\end{assumption}
+
+\begin{assumption}\label{a:sediment}
+What an agent does at a stage contributes to her nature at the next stage.
+\end{assumption}
+
+Assumption~\ref{a:suff} is the analysis of free will defended in ACT-01-a, applied to responsibility; it is the premise we place against Principle~\ref{p:ult}. Assumption~\ref{a:mature} is the empirical claim that normal agents become reasons-responsive in the course of development. Assumption~\ref{a:sediment} records the familiar fact that choices leave traces: deliberating in a certain way makes one more disposed to deliberate so, acting on a value entrenches it, and attending to some considerations rather than others shapes what one later notices.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:regress}
+Given Principle~\ref{p:regress}, no agent is ultimately responsible for her nature at any stage. Given Principle~\ref{p:ult} in addition, no agent is responsible for anything she does.
+\end{lemma}
+
+\begin{proof}
+By induction on stages. At stage $0$ there is no predecessor, so by Principle~\ref{p:regress} the agent is not ultimately responsible for her nature. If she is not ultimately responsible for her nature at stage $n$, then stage $n+1$ has a predecessor, namely $n$, at which she was not, so by Principle~\ref{p:regress} she is not ultimately responsible for her nature at $n+1$. The second claim follows by Principle~\ref{p:ult}.
+\end{proof}
+
+Lemma~\ref{l:regress} is the Basic Argument, and it is valid. The well-foundedness of an agent's history, not the length of her life, is what makes the regress vicious: even an agent with infinitely many past stages would need a first one, if her history begins.
+
+\begin{theorem}\label{t:fails}
+Given Principle~\ref{p:regress} and Assumptions~\ref{a:suff} and~\ref{a:mature}, Principle~\ref{p:ult} is false: at stage $k$ the agent is responsible for what she does but is not ultimately responsible for her nature.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:mature}, the agent acts at stage $k$ from an owned, reasons-responsive mechanism; by Assumption~\ref{a:suff}, she is responsible for what she does then. By Lemma~\ref{l:regress}, she is not ultimately responsible for her nature at $k$. So Principle~\ref{p:ult} fails at $k$.
+\end{proof}
+
+Since Principles~\ref{p:ult} and~\ref{p:regress} jointly entail that the agent is responsible for nothing, while Assumptions~\ref{a:suff} and~\ref{a:mature} entail that she is responsible for what she does at $k$, the four cannot all be true. The choice between Principle~\ref{p:ult} and Assumption~\ref{a:suff} is the real issue between Strawson and the compatibilist, and Section~\ref{s:why} argues for keeping the latter.
+
+\begin{proposition}\label{p:selfform}
+Given Assumptions~\ref{a:suff}--\ref{a:sediment}, for every stage $n>k$ the agent's nature at $n$ is partly formed by something she did at an earlier stage and is responsible for.
+\end{proposition}
+
+\begin{proof}
+Let $n>k$. Then $n-1\geq k$, so by Assumptions~\ref{a:mature} and~\ref{a:suff} the agent is responsible for what she does at $n-1$, and by Assumption~\ref{a:sediment} what she does at $n-1$ contributes to her nature at $n$.
+\end{proof}
+
+Proposition~\ref{p:selfform} is the sense in which self-formation is real. The agent's nature after stage $k$ is partly of her making, and the part grows as the actions for which she is responsible accumulate. It is never the whole: the nature of stage $0$, and whatever in later natures is owed to it and to the world rather than to her actions, remains unchosen. This is the Aristotelian picture of \citet[III.5]{AristotleNE}, on which the unjust man is responsible for being unjust because he became so by acting unjustly, though not for the dispositions with which he began.
+
+\section{Why the ultimacy premise fails}\label{s:why}
+
+Principle~\ref{p:ult} borrows its plausibility from a weaker principle. It is plausible that an agent who is responsible for what she does must stand in \emph{some} relation of responsibility to the nature from which she acts: an agent whose values were installed yesterday by a neurosurgeon, and who has had no opportunity to examine them, seems less than fully responsible for what she does from them. But the relation that this case shows to be required is not ultimacy. It is that the nature be one the agent's mechanism can assess and revise in response to reasons, and that she have had the opportunity to do so. An agent who acts from an owned, reasons-responsive mechanism meets this condition: if her values gave her sufficient reason to change them, she would. What she does is then answerable to reasons, including reasons bearing on the nature she acts from, and this is what holding her responsible presupposes.
+
+Ultimacy demands more: that responsibility for one's nature not depend on any feature one is not responsible for. No agent who begins can meet this demand, and Lemma~\ref{l:regress} shows why. The question is whether responsibility for action requires it, and we see no reason to think so. The practices in which we hold one another responsible, by resentment, blame and gratitude, are responses to the quality of will an agent's action expresses \citep{Strawson1962}, and the quality of will is a feature of the agent's present mechanism and its sensitivity to reasons, not of the origin of her initial nature. Strawson's own formulation, that one must be \enquote{truly} responsible for how one is, carries the demand for ultimacy in the qualifier. Read without it, the second step of his argument is true but supports no regress, since responsibility for one's nature by degrees, as in Proposition~\ref{p:selfform}, is available. Read with it, the step does support the regress, and it is false.
+
+The failure is therefore located precisely: self-formation is possible, and confers responsibility for one's nature by degrees, but it begins from an unchosen nature. To demand that it start from nothing is to demand that the agent have chosen before she had anything to choose with.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Constitutive luck]
+At stage $k$ the agent's nature is wholly due to factors beyond her control. If she is responsible for what she does then, her responsibility rests on luck, and luck cannot ground desert.
+\end{objection}
+
+\begin{reply}
+Responsibility at stage $k$ rests on the fact that her action issues from a mechanism that responds to reasons, not on the fact that she has the nature she has. That her nature is a matter of constitutive luck \citep{Nagel1979} affects what she is responsible for, not whether she is responsible: she is responsible for acting as she did from that nature, given that she could have recognized and responded to reasons to act otherwise. To insist that constitutive luck undermines responsibility altogether is to insist on Principle~\ref{p:ult} again, and the objection gives no independent reason to accept it.
+\end{reply}
+
+\begin{objection}[Manipulation]
+An agent whose initial nature was implanted by manipulators is not responsible for what she does from it \citep{Pereboom2001}. An agent whose initial nature was produced by genes and upbringing differs from her in no relevant respect. Since the manipulated agent is not responsible, neither is the natural one, and the difference must be ultimacy, which both lack.
+\end{objection}
+
+\begin{reply}
+The cases do differ, in the ownership condition of Definition~\ref{d:rr}. A mechanism that was installed so as to bypass the agent's own development, and that she has not come to regard as hers through its operation, is not owned, and Assumption~\ref{a:suff} does not apply to it \citep{FischerRavizza1998}. Where the manipulation is so thorough that the agent's mechanism is owned and reasons-responsive in exactly the way a natural agent's is, we accept that she is responsible for what she does from then on, though not for having been manipulated. Neither the natural nor the manipulated agent originated her initial nature, so ultimacy cannot be what separates them in the cases where we judge them differently.
+\end{reply}
+
+\begin{objection}[Libertarian self-formation]
+The regress stops at undetermined self-forming actions, which are not settled by the agent's prior nature \citep{Kane1996}. Ultimacy is therefore possible, and Principle~\ref{p:regress} is false.
+\end{objection}
+
+\begin{reply}
+An undetermined self-forming action is still done from a prior nature: the efforts on each side are the agent's efforts, grounded in her competing values. Its outcome is not settled by that nature, but the agent's responsibility for it depends on the efforts, and so on features she did not choose. Such actions are one way, perhaps an important way, in which Assumption~\ref{a:sediment} is realized, and ACT-15-a argues that the indeterminacy in them does not undermine responsibility. They do not deliver ultimacy in the sense of Definition~\ref{d:ult}, and our argument does not need them to.
+\end{reply}
+
+\begin{objection}[Heaven-and-hell responsibility]
+Strawson's target is responsibility of a kind that could make it just to reward or punish an agent eternally. The compatibilist's responsibility is not of that kind, and Theorem~\ref{t:fails} changes the subject.
+\end{objection}
+
+\begin{reply}
+We agree that no one has responsibility of that kind; Lemma~\ref{l:regress} is our reason. But the question of ACT-08 is whether we must be the ultimate source of our actions to be responsible for them in the sense presupposed by the reactive attitudes and by ordinary practices of praise and blame. Theorem~\ref{t:fails} answers that question. If the Basic Argument is restricted to a kind of responsibility that ordinary practice does not require, it is sound and of limited consequence.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not establish Assumption~\ref{a:suff}; it relies on ACT-01-a, which defends reasons-responsiveness as the condition of free will, and on the defence of that condition against manipulation given above. It does not establish that we are ultimately responsible for anything; on the contrary, it grants Lemma~\ref{l:regress}. It does not settle how much of an adult's nature is self-formed, which is an empirical question about how far choices sediment into character; Proposition~\ref{p:selfform} says only that some of it is, from stage $k$ on. And it does not show that the degree of an agent's responsibility for an action is independent of how much of her nature is self-formed. It is plausible that it is not, and that agents are more fully answerable for actions that flow from values they have repeatedly endorsed, but that thesis is not needed for the reply to Strawson.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/ACT/ACT_08.lean} represents stages by natural numbers and takes responsibility for action, ultimate responsibility for one's nature, acting from an owned reasons-responsive mechanism, and contribution to a later nature as uninterpreted predicates. Assumptions~\ref{a:suff}--\ref{a:sediment} are axioms. Principles~\ref{p:ult} and~\ref{p:regress} are definitions, \texttt{P2} and \texttt{P3}, used as hypotheses of the theorems, since the module refutes the first and grants the second. Lemma~\ref{l:regress} is proved by induction on the natural numbers. The main theorem and Proposition~\ref{p:selfform} are stated as follows.
+
+\begin{lstlisting}
+theorem basic_argument_fails (h3 : P3) :
+    ∃ n, RespAct n ∧ ¬ UltNature n
+theorem self_formation (n : Nat) (h : k < n) :
+    ∃ m, m < n ∧ RespAct m ∧ Shapes m n
+\end{lstlisting}
+
+The checker reports (namespace prefix \texttt{Philosophy.ACT\_08} omitted):
+
+\begin{lstlisting}
+'basic_argument_fails' depends on axioms: [propext,
+ Quot.sound, RespAct, UltNature, assumption_2_4,
+ assumption_2_5, k]
+'self_formation' depends on axioms: [propext,
+ Quot.sound, RespAct, Shapes, assumption_2_4,
+ assumption_2_5, assumption_2_6, k]
+\end{lstlisting}
+
+\texttt{RespAct}, \texttt{UltNature}, \texttt{Shapes} and \texttt{k} (the stage of Assumption~\ref{a:mature}) are primitives; \texttt{assumption\_2\_4} to \texttt{assumption\_2\_6} are Assumptions~\ref{a:suff}--\ref{a:sediment}. \texttt{propext} and \texttt{Quot.sound} are part of Lean's core logic and enter through the arithmetic tactic. The module also proves that \texttt{P2} and \texttt{P3} are not both true.
+
+\section{Conclusion}
+
+The Basic Argument is valid, and its regress premise correctly describes what ultimate responsibility for oneself would require; no one who begins has it. But responsibility for action does not require it. An agent who acts from an owned, reasons-responsive mechanism is responsible for what she does, and the actions for which she is responsible shape her later nature, so that responsibility for how she is accrues by degrees from an unchosen start. Self-formation need not start from nothing, and we need not be the ultimate source of our actions.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(NE)]{AristotleNE} Aristotle. \emph{Nicomachean Ethics}. Cited by book and chapter.
+\bibitem[Dennett(1984)]{Dennett1984} Dennett, D.~C. (1984). \emph{Elbow Room: The Varieties of Free Will Worth Wanting}. MIT Press.
+\bibitem[Fischer and Ravizza(1998)]{FischerRavizza1998} Fischer, J.~M. and Ravizza, M. (1998). \emph{Responsibility and Control: A Theory of Moral Responsibility}. Cambridge University Press.
+\bibitem[Kane(1996)]{Kane1996} Kane, R. (1996). \emph{The Significance of Free Will}. Oxford University Press.
+\bibitem[Nagel(1979)]{Nagel1979} Nagel, T. (1979). Moral luck. In \emph{Mortal Questions}. Cambridge University Press.
+\bibitem[Pereboom(2001)]{Pereboom2001} Pereboom, D. (2001). \emph{Living Without Free Will}. Cambridge University Press.
+\bibitem[Strawson(1962)]{Strawson1962} Strawson, P.~F. (1962). Freedom and resentment. \emph{Proceedings of the British Academy}, 48, 1--25.
+\bibitem[Strawson(1986)]{Strawson1986} Strawson, G. (1986). \emph{Freedom and Belief}. Clarendon Press.
+\bibitem[Strawson(1994)]{Strawson1994} Strawson, G. (1994). The impossibility of moral responsibility. \emph{Philosophical Studies}, 75, 5--24.
+\end{thebibliography}
+
+\end{document}

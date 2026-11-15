@@ -1,0 +1,145 @@
+\documentclass{situationist-preprint}
+
+\title{Luck and Libertarian Freedom}
+\msid{ACT-15-a}
+\msfamily{ACT-15}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ACT/ACT\_15.lean}
+\mskeywords{luck objection; indeterminism; self-forming actions; dual efforts; intention; Kane; Bratman's video game}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+If a choice is undetermined by everything prior to it, so that the agent might, with the same past, have chosen otherwise, it seems a matter of luck which choice she makes, and luck seems to undermine responsibility. We argue that indeterministic luck is compatible with responsibility when the agent tries to bring about each of the competing outcomes. The argument has two parts. The first is an attribution principle: an outcome that results from an effort the agent controls is one she is responsible for, even if the effort might have failed. The second is that an agent can try, and indeed intend, to bring about each of two outcomes she knows to be incompatible. We defend the second part against the objection that intending incompatible outcomes is irrational, using Bratman's video-game case: the requirement that intentions be consistent with belief applies to each intention singly, and the agglomeration of intentions is required only of intentions that belong to a single plan. Both parts are formalized in Lean. The result supplies the defence of the indeterminist half of the compatibility thesis of ACT-01.
+\end{abstract}
+
+\section{The problem}
+
+The luck objection is the main argument against libertarian accounts of free will, and against the claim that free will is compatible with indeterminism \citep{Mele2006}. Suppose that an agent deliberates about whether to keep a promise or to break it, and decides to keep it, and that her decision was not determined: there is a possible world with exactly the same past and laws in which she decides to break it. Then nothing about her, no feature of her character, her reasons or her effort, accounts for the difference between the two worlds. The difference is, in the relevant sense, a matter of luck. And if it is a matter of luck that she kept the promise rather than breaking it, it seems that she cannot be credited with keeping it. \citet{vanInwagen2000} makes the point vivid with the rollback argument: if God were to return the world to the moment before the decision a thousand times, the agent would keep the promise on some replays and break it on others, in proportions fixed by the chances, and it would be hard to regard the outcome on any one replay as up to her.
+
+The most developed libertarian reply is \citet{Kane1996}'s. In what Kane calls self-forming actions, the agent faces a conflict between competing motivations, such as moral duty and self-interest, and makes an effort of will to overcome the temptations on each side. Kane's businesswoman, on her way to an important meeting, sees an assault in an alley and must decide whether to stop and help. She tries to bring about the moral choice and she tries to bring about the ambitious choice; the indeterminacy in her brain, stirred up by the conflict, makes the outcome uncertain; and whichever choice she makes, she makes it as the result of her own effort to make it \citep{Kane1999}. ACT-01-a relies on this reply in its defence of the claim that free will is compatible with indeterminism, and ETH-13-a relies on it in its treatment of causal luck.
+
+The reply faces two objections. The first is that it changes nothing about the luck: it is still not up to the agent which of the efforts succeeds. The second is that it attributes to the agent an incoherent state of mind: one cannot try, or intend, to bring about each of two outcomes one knows to be incompatible \citep{Bratman1987,Mele2006}. We answer both.
+
+\section{Framework}
+
+\begin{definition}[Self-forming choice]\label{d:sfc}
+A \emph{self-forming choice} is a choice between competing outcomes at least one of which will occur, and which of them occurs is not determined by the past and the laws.
+\end{definition}
+
+\begin{principle}[Attribution]\label{p:attr}
+If an outcome occurs as the result of an effort that the agent makes to bring it about, and the effort issues from a mechanism that is reasons-responsive and her own, she is responsible for the outcome, even if the effort might have failed.
+\end{principle}
+
+\begin{assumption}[Control]\label{a:control}
+The agent's efforts in the self-forming choice issue from a reasons-responsive mechanism of her own.
+\end{assumption}
+
+\begin{assumption}[Dual effort]\label{a:dual}
+The agent tries to bring about each of the competing outcomes.
+\end{assumption}
+
+Principle~\ref{p:attr} is supported by cases of indeterministic success that have nothing to do with free will. \citet{Austin1956} described the golfer who misses a short putt although he did everything right; the converse case is the golfer who holes a long putt, the success of which, given his stroke, was a matter of chance. He holed it, and is credited with holing it. Kane's assassin, who shoots at the prime minister with a hand that may waver because of indeterminism in his nervous system, and who hits, is responsible for the killing although he might have missed \citep{Kane1999}. What makes the outcome his is that it came about through his effort to bring it about; that the effort might have failed is irrelevant once it has succeeded. The clause about the mechanism ensures that the effort is one the agent controls in the sense of ACT-01-a.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+In a self-forming choice satisfying Assumptions~\ref{a:control} and~\ref{a:dual}, the agent is responsible for whichever outcome occurs.
+\end{theorem}
+
+\begin{proof}
+Let $o$ be the outcome that occurs. By Assumption~\ref{a:dual}, the agent tried to bring about $o$; since $o$ occurred and her effort to bring it about was in progress, $o$ occurred as the result of that effort. By Assumption~\ref{a:control}, the effort issued from a reasons-responsive mechanism of her own. By Principle~\ref{p:attr}, she is responsible for $o$.
+\end{proof}
+
+\begin{corollary}\label{c:some}
+In a self-forming choice satisfying the assumptions, the agent is responsible for the outcome that occurs, and the indeterminism of the choice does not prevent this.
+\end{corollary}
+
+The proof uses nothing about which outcome occurs, and nothing about why that outcome rather than the other occurred. That is the point. The luck objection asks what explains the difference between the replay on which she keeps the promise and the replay on which she breaks it, and finds nothing in the agent. Theorem~\ref{t:main} concedes that nothing in the agent explains the contrast; it denies that responsibility requires a contrastive explanation. It requires that the outcome that occurs be attributable to the agent's effort, and on each replay it is.
+
+The theorem has a condition, and the condition matters. If the agent tries only to keep the promise, and the indeterminacy produces a decision to break it, the decision is not the result of any effort of hers, and the luck objection is correct: she is not responsible for it, though she may be responsible for having let herself be in a position where it could happen. Indeterminism is compatible with responsibility when the agent tries to bring about each of the competing outcomes, and not in general.
+
+\subsection{Intending incompatible outcomes}
+
+The second objection is that Assumption~\ref{a:dual} describes an incoherent state. \citet{Bratman1984,Bratman1987} offers a case designed to show this. A player of a video game must hit a target, and can try to hit target 1 with a missile guided by his right hand and target 2 with a missile guided by his left. The game is so built that if both targets are about to be hit, it shuts down and neither is hit; the player knows this. Sensibly, he guides both missiles at once, to increase his chance of hitting one. He hits target 1. Bratman holds that he hits it intentionally, and that he tries to hit each target, but that he does not intend to hit target 1. If he did, he would equally intend to hit target 2, and then he would have intentions that, taken together, he knows cannot both be fulfilled; and a rational agent's intentions, Bratman holds, must be consistent with one another in conjunction with her beliefs.
+
+Bratman's case therefore supports the claim that an agent can try to bring about each of two outcomes she knows to be incompatible, which is all that Theorem~\ref{t:main} requires. We go further, and hold that the player intends each. The rational requirement on intention that is not in dispute is that each intention be consistent with what the agent believes: one cannot rationally intend what one believes impossible, though, as ACT-11 argues, one can intend to try. The requirement that intentions be \emph{agglomerated}, that whoever intends $A$ and intends $B$ be committed to intending $A$ and $B$, is plausible for intentions that belong to a single plan, whose parts the agent will execute together and coordinate with each other. The player's intentions do not form a single plan: they are alternative means to a single end, pursued in parallel, each with the expectation that it may fail and the knowledge that both cannot succeed. Agglomeration has no rationale for such intentions, and without it the consistency requirement is satisfied.
+
+The structure of the case can be stated exactly. Let a world specify, for each target, whether it is hit; there are four. The player believes that the world is one in which not both targets are hit.
+
+\begin{proposition}\label{p:game}
+In the video-game model, the intention to hit target 1 is consistent with the player's belief, the intention to hit target 2 is consistent with it, and their conjunction is not.
+\end{proposition}
+
+\begin{proof}
+The world in which target 1 alone is hit satisfies the belief and the first intention; the world in which target 2 alone is hit satisfies the belief and the second; the only world in which both are hit is excluded by the belief.
+\end{proof}
+
+The businesswoman is in the player's position. She intends to resist the temptation to hurry on, and she intends to resist the temptation to stop; she knows that she will not succeed in both; and her intentions are rational because each is consistent with what she believes, and because her situation is precisely one in which she does not yet have a single plan. Her choice will make one of her intentions the plan.
+
+\section{Objections and replies}
+
+\begin{objection}[Luck relocated]
+Even if the outcome is the result of an effort, it is a matter of luck which effort succeeds. The luck has moved from the outcome to the success of the effort, but it has not gone away \citep{Mele2006}.
+\end{objection}
+
+\begin{reply}
+The objection is correct about where the luck is and wrong about what follows. Every agent who acts in an indeterministic world is subject to luck about whether her efforts succeed, and Principle~\ref{p:attr}, supported by the putt and the assassin, says that this luck does not undermine responsibility for successes. ETH-13 argues more generally that moral luck is real and does not undermine responsibility. The luck objection would show something only if responsibility for a successful effort required that its success be ensured, and no one accepts that requirement in ordinary cases.
+\end{reply}
+
+\begin{objection}[Divided agent]
+An agent who tries to bring about incompatible outcomes is at war with herself. Whichever outcome occurs, one part of her has lost, and it is not clear that the agent, rather than the winning part, is responsible.
+\end{objection}
+
+\begin{reply}
+The efforts are both the agent's: both issue from her own reasons-responsive mechanism, by Assumption~\ref{a:control}, and both are responses to reasons she has. A division in what she is trying to do is not a division in who is trying. The agent who struggles with temptation and wins is not a different agent from the one who struggles and loses; she is the same agent, and the outcome of her struggle is hers either way.
+\end{reply}
+
+\begin{objection}[Lack of explanation]
+On the rollback, the agent keeps the promise on some replays and breaks it on others. Since nothing about her distinguishes them, she cannot be praised on the first kind and blamed on the second.
+\end{objection}
+
+\begin{reply}
+On each replay the agent is responsible for the outcome on that replay, by Theorem~\ref{t:main}. What she cannot be credited with is the difference between replays, and no one is praised for a difference between replays. Praise and blame attach to what an agent did, and on each replay what she did was the result of her effort. The rollback dramatizes the absence of a contrastive explanation, and the absence was conceded above.
+\end{reply}
+
+\section{Formalization}
+
+Theorem~\ref{t:main} and Proposition~\ref{p:game} are formalized in \nolinkurl{Philosophy/ACT/ACT_15.lean}. Outcomes, trying, occurring and responsibility are primitives; Principle~\ref{p:attr} and Assumptions~\ref{a:control} and~\ref{a:dual} are axioms. The video-game model is a concrete four-world model, and Proposition~\ref{p:game} is proved in it without axioms of the framework.
+
+\begin{lstlisting}
+theorem responsible_whichever : ∀ o, Occurs o → ResponsibleFor o
+
+theorem video_game :
+    (∃ w : World, believed w = true ∧ w.1 = true) ∧
+    (∃ w : World, believed w = true ∧ w.2 = true) ∧
+    ¬ (∃ w : World, believed w = true ∧ w.1 = true ∧ w.2 = true)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ACT_15.responsible_whichever' depends on axioms:
+  [Philosophy.ACT_15.Occurs, Philosophy.ACT_15.Outcome,
+   Philosophy.ACT_15.ResponsibleFor, Philosophy.ACT_15.attribution,
+   Philosophy.ACT_15.control, Philosophy.ACT_15.dual_effort]
+'Philosophy.ACT_15.video_game' depends on axioms: [propext]
+\end{lstlisting}
+
+The substantive axioms of the first theorem are \texttt{attribution} (Principle~\ref{p:attr}), \texttt{control} (Assumption~\ref{a:control}) and \texttt{dual\_effort} (Assumption~\ref{a:dual}). The second depends only on propositional extensionality, a principle of Lean's logic. The formalization does not establish that agents make dual efforts in actual hard choices, which is an empirical question about deliberation.
+
+\section{Conclusion}
+
+An outcome that results from an agent's controlled effort to bring it about is hers, whether or not the effort could have failed. An agent who tries to bring about each of the competing outcomes of a choice is responsible for whichever occurs, and her state of mind is coherent, since each of her intentions is consistent with what she believes. Indeterministic luck is compatible with responsibility when the agent tries to bring about each of the competing outcomes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Austin(1956)]{Austin1956} Austin, J.~L. (1956). A plea for excuses. \emph{Proceedings of the Aristotelian Society}, 57, 1--30.
+\bibitem[Bratman(1984)]{Bratman1984} Bratman, M.~E. (1984). Two faces of intention. \emph{The Philosophical Review}, 93(3), 375--405.
+\bibitem[Bratman(1987)]{Bratman1987} Bratman, M.~E. (1987). \emph{Intention, Plans, and Practical Reason}. Harvard University Press.
+\bibitem[Kane(1996)]{Kane1996} Kane, R. (1996). \emph{The Significance of Free Will}. Oxford University Press.
+\bibitem[Kane(1999)]{Kane1999} Kane, R. (1999). Responsibility, luck, and chance: reflections on free will and indeterminism. \emph{The Journal of Philosophy}, 96(5), 217--240.
+\bibitem[Mele(2006)]{Mele2006} Mele, A.~R. (2006). \emph{Free Will and Luck}. Oxford University Press.
+\bibitem[van Inwagen(2000)]{vanInwagen2000} van Inwagen, P. (2000). Free will remains a mystery. \emph{Philosophical Perspectives}, 14, 1--19.
+\end{thebibliography}
+
+\end{document}

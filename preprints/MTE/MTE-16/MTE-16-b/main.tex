@@ -1,0 +1,81 @@
+\documentclass{situationist-preprint}
+
+\title{Deontology Under Moral Uncertainty}
+\msid{MTE-16-b}
+\msfamily{MTE-16}
+\msdiscipline{Metaethics}
+\mstype{Consequence}
+\mskeywords{moral uncertainty; deontology; constraints; variance normalization; consequentializing; veto}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTE-16-a defends maximizing expected choiceworthiness under variance normalization, for all theories that are not indifferent among the options. We derive what the rule implies for deontological theories, represented by the consequentialized counterparts of ETH-02, on which a lexical constraint becomes a finite penalty one unit larger than the range of the good at stake. We prove that a constraint theory's say is bounded by the agent's credence in it, whatever penalty represents it, and that a larger penalty buys no further influence: in the limit it spends the theory's whole say on the forbidden option and none on the ranking of the others. Deontological theories have no veto under uncertainty, though they retain an influence that can favor compromise options.
+\end{abstract}
+
+\section{Constraint theories as choiceworthiness functions}
+
+Maximizing expected choiceworthiness requires that each theory assign choiceworthiness to options. A deontological theory states what is forbidden and permitted, not how choiceworthy options are, and MTE-16-a notes that if no representation were available, the rule would not apply to it. ETH-02 supplies the representation. Let $c(o)$ be the number of constraint violations by the agent in option $o$, and $g(o)$ the impersonal good of its outcome, with $0\le g(o)\le B$. The lexical constraint theory permits $o$ if and only if $o$ minimizes $c$ and, among such options, maximizes $g$. By Proposition~4.6 of ETH-02-a, the lexical theory ranks options exactly as the weighted cost $(B+1)c(o)+(B-g(o))$ does. The prohibition appears as a finite penalty, one unit more than the whole range of the good at stake; this is the precise sense in which a constraint corresponds to a very large difference in choiceworthiness.
+
+\begin{definition}\label{d:cw}
+The \emph{choiceworthiness} of an option according to the constraint theory with penalty $P$ is $\mathrm{CW}_P(o) = g(o) - P\,c(o)$. The \emph{canonical representation} takes $P = B+1$.
+\end{definition}
+
+Since choiceworthiness is determined up to positive affine transformation, $\mathrm{CW}_{B+1}$ is the negative of the weighted cost of ETH-02-a up to an additive constant. Every $P\ge B+1$ yields the same ranking, but different values of $P$ are not affine transformations of one another, and variance normalization treats them differently. The results below hold for every $P$, so the choice of representative does not affect them. A constraint theory is indifferent in the sense of Definition~2.1 of MTE-16-a only if no option violates more constraints than another and all outcomes are equally good; such a theory is excluded from normalization by Definition~2.2 of MTE-16-a and, by Proposition~3.2 of MTE-16-a, its exclusion affects no verdict.
+
+\section{Results}
+
+\begin{lemma}\label{l:bound}
+Let $x_1,\dots,x_k$ be the normalized choiceworthiness values of a non-indifferent theory over $k$ options. Then $|x_j|\le\sqrt{k-1}$ for every $j$, and $|x_j - x_l|\le\sqrt{2k}$ for every $j,l$.
+\end{lemma}
+
+\begin{proof}
+By Proposition~5.1 of MTE-16-a, $\sum_i x_i = 0$ and $\sum_i x_i^2 = k$. Then $x_j = -\sum_{i\neq j} x_i$, and by the Cauchy--Schwarz inequality $x_j^2 \le (k-1)\sum_{i\neq j}x_i^2 = (k-1)(k-x_j^2)$, so $k\,x_j^2\le k(k-1)$. For the second claim, $(x_j-x_l)^2\le 2(x_j^2+x_l^2)\le 2k$.
+\end{proof}
+
+\begin{proposition}[No veto]\label{p:noveto}
+Let the agent have credence $d$ in a constraint theory with any penalty $P$, and let $f$ be an option it forbids and $a$ an option it permits. The constraint theory's contribution to the difference $\mathrm{EC}(a)-\mathrm{EC}(f)$ is at most $d\sqrt{2k}$. Hence if the other theories together favor $f$ over $a$ by more than $d\sqrt{2k}$ in expected normalized choiceworthiness, VN-MEC ranks $f$ above $a$.
+\end{proposition}
+
+\begin{proof}
+The contribution is $d\,(\widehat{\mathrm{CW}}_P(a)-\widehat{\mathrm{CW}}_P(f))$, which is at most $d\sqrt{2k}$ by Lemma~\ref{l:bound}. The bound does not depend on $P$.
+\end{proof}
+
+In a choice between two options, the bound is $2d$ and the rival theories' total is at most twice their credence, so Proposition~\ref{p:noveto} reduces to Proposition~4.1 of MTE-16-a: the constraint theory is outvoted by a rival in which the agent has greater credence. With more options, it is still credence, not stringency, that fixes the theory's influence.
+
+\begin{proposition}[Saturation]\label{p:sat}
+Suppose exactly one option $f$ involves a violation, and fix $g$. As $P$ grows without bound, the normalized choiceworthiness of $f$ according to the constraint theory tends to $-\sqrt{k-1}$, and that of every other option tends to $1/\sqrt{k-1}$.
+\end{proposition}
+
+\begin{proof}
+Normalization is invariant under positive scaling, so $\widehat{\mathrm{CW}}_P$ is the normalization of $\mathrm{CW}_P/P$, which tends to the function that is $-1$ at $f$ and $0$ elsewhere. Normalization is continuous at functions that are not constant, so the limit is the normalization of that function. Its mean is $-1/k$, its deviations are $-(k-1)/k$ at $f$ and $1/k$ elsewhere, and its variance is $(k-1)/k^2$. Dividing the deviations by the standard deviation $\sqrt{k-1}/k$ gives the stated values.
+\end{proof}
+
+Proposition~\ref{p:sat} shows what the deontologist gains by expressing her constraint as more stringent. By Lemma~\ref{l:bound}, the value $-\sqrt{k-1}$ is the lowest a normalized function can assign to a single option, so the forbidden option is already disfavored as much as any theory can disfavor anything. The cost is that the differences among the permitted options shrink toward zero: a theory that makes its prohibition overwhelming loses its voice on everything else. The canonical penalty $B+1$ keeps both, placing the forbidden option one unit below the worst permitted one in the case of a single violation, and lets the theory's ranking of permitted options by the good count.
+
+\section{An illustration}
+
+Three options are available: $f$ breaks a promise to prevent a harm, $a$ keeps it, and $b$ keeps it while mitigating the harm in part. The agent's credence is $0.6$ in a consequentialist theory and $0.4$ in a constraint theory that forbids $f$. If the consequentialist theory favors $f$ alone and is indifferent between $a$ and $b$, its normalized profile is the mirror of the saturated constraint profile, and VN-MEC chooses $f$, since its expected choiceworthiness is $(0.6-0.4)\sqrt{2}>0$ while that of $a$ and $b$ is negative. If instead the consequentialist ranks $f$ above $b$ above $a$ at equal intervals, its normalized values are approximately $1.22$, $0$ and $-1.22$, and against the saturated constraint profile the expected choiceworthiness of $b$, about $0.28$, exceeds that of $f$, about $0.17$. The constraint theory does not veto $f$; it shifts the choice to the compromise option, and only because the consequentialist theory itself counts that option as nearly as good.
+
+\section{Objection and reply}
+
+\begin{objection}
+Absolutist theories cannot be represented by any finite penalty, and \citet{JacksonSmith2006} show that, under uncertainty, an absolute constraint must either forbid almost every act or be traded off against probabilities, which absolutism disallows.
+\end{objection}
+
+\begin{reply}
+The penalty represents the theory's ranking of options in a choice situation, which is all that maximizing expected choiceworthiness uses. Proposition~4.6 of ETH-02-a shows that the finite penalty $B+1$ represents the lexical ranking exactly, and Proposition~\ref{p:noveto} shows that any larger penalty, including one that tends to infinity, gives the theory no more say. The problem Jackson and Smith raise concerns empirical uncertainty within a constraint theory; it does not show that the theory has more weight than its credence when the uncertainty is about which theory is true.
+\end{reply}
+
+\section{Conclusion}
+
+Represented by the consequentialized counterparts of ETH-02, deontological theories fall under variance-normalized expected choiceworthiness like any other theory that is not indifferent. Their influence is bounded by the agent's credence in them, independently of the penalty that represents their constraints, and making the constraints more stringent spends their influence rather than increasing it. Deontological theories have no veto under moral uncertainty and receive less weight than their proponents expect, as MTE-16-a concludes, though they can still move the choice toward options that both they and their rivals rank well \citep{MacAskillBykvistOrd2020, CottonBarrattMacAskillOrd2020}.
+
+\begin{thebibliography}{9}\small
+\bibitem[Cotton-Barratt et~al.(2020)]{CottonBarrattMacAskillOrd2020} Cotton-Barratt, O., MacAskill, W. and Ord, T. (2020). Statistical normalization methods in interpersonal and intertheoretic comparisons. \emph{The Journal of Philosophy}, 117(2), 61--95.
+\bibitem[Jackson and Smith(2006)]{JacksonSmith2006} Jackson, F. and Smith, M. (2006). Absolutist moral theories and uncertainty. \emph{The Journal of Philosophy}, 103(6), 267--283.
+\bibitem[MacAskill et~al.(2020)]{MacAskillBykvistOrd2020} MacAskill, W., Bykvist, K. and Ord, T. (2020). \emph{Moral Uncertainty}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,405 @@
+\documentclass{situationist-preprint}
+
+\title{The Sparse Universals Theorem}
+\msid{MET-02-a}
+\msfamily{MET-02}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_02.lean}
+\mskeywords{universals; sparse properties; naturalness; resemblance; nominalism; supervenience; construction; ugly duckling theorem}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do universals exist? We argue that they do, and that they are sparse: there are few genuine universals, and every other property is constructed from them. The argument has three parts. First, objective resemblance discriminates between pairs of objects and is grounded in a shared constituent; hence some property is genuinely shared by distinct things, and that property is a universal. Second, a structural form of Watanabe's ugly duckling theorem shows that if every class of objects were the extension of a genuine property, resemblance could not distinguish any pair of distinct objects from any other; resemblance does so distinguish, so the genuine properties are a proper and highly structured subclass of the properties. Third, we prove that a property supervenes on the genuine properties exactly when it is preserved by every symmetry of their distribution, and that every such property is constructed from the genuine properties by negation, conjunction, disjunction and relational projection. The three results are combined in the sparse universals theorem, which is formalized in Lean. We apply the theorem to determinables, gerrymandered predicates, colours, social kinds, laws, and Black's spheres, and we answer the instantiation regress and the trope alternative.
+\end{abstract}
+
+\section{The problem of universals}
+
+Two electrons have the same charge; two ripe tomatoes are both red; a cube of salt and a die are both cubical. In each case we say that different things have the same property. The problem of universals is the problem of what, if anything, this sameness consists in. The realist answers that there is one entity, the universal, which is present in each of the things and makes them alike. The nominalist answers that there are only particulars, and that the sameness is to be explained, or explained away, without an entity that is literally in many places at once.
+
+The problem has a second dimension, which has come to dominate recent discussion. Grant that there are properties in some sense. Are there as many properties as there are ways of dividing the objects into those that have it and those that do not, or only a few, which mark the respects in which things genuinely resemble one another and which figure in the laws? The first conception is \emph{abundant}, the second \emph{sparse}. \citet{Lewis1983} argued that both conceptions answer to genuine theoretical needs, and that the work done by the sparse conception, which he called the work of naturalness, cannot be done without some privileged class of properties, whether these are universals, natural classes, or classes of exactly resembling tropes.
+
+The thesis of the present manuscript joins the two questions. Universals exist; they are sparse; and every other property is constructed from them. We shall call this \emph{sparse realism}. It is the position of \citet{Armstrong1978}, with two modifications that the formal development makes precise. The first concerns what construction is: we prove that a property is constructed from the universals if and only if it supervenes on them, and that it supervenes on them if and only if it is preserved by every symmetry of their distribution. The second concerns the argument for sparseness. Armstrong argued for sparseness from the needs of science and causation; we argue for it from a structural property of resemblance, using a result that is in effect a generalization of Watanabe's ugly duckling theorem \citep{Watanabe1969}. The generalization shows that the abundant conception is not merely uneconomical but incapable of grounding any resemblance structure at all.
+
+The plan is as follows. Section~\ref{s:history} reviews the history of the debate and the case that defeated each main proposal. Section~\ref{s:framework} sets out the framework. Section~\ref{s:existence} proves that universals exist and that they are sparse; Section~\ref{s:construction} proves that the other properties are constructed from them. Section~\ref{s:cases} applies the result to a series of cases, and Section~\ref{s:recent} relates it to the recent literature on naturalness. Section~\ref{s:objections} answers objections, Section~\ref{s:limits} records what the result does not establish, and Section~\ref{s:formal} describes the formalization.
+
+\section{A history of the debate}\label{s:history}
+
+\subsection{Plato and Aristotle}
+
+The argument from the one over many begins with Plato, who posits a single Form for each group of many things to which we give the same name \citep[596a]{PlatoRepublic}. The theory of Forms is transcendent realism: the Form exists apart from the things that participate in it. Plato himself recorded the objection that later came to be called the Third Man \citep[132a--b]{PlatoParmenides}. If the large things are large because they participate in the Form of the Large, and if the Form is itself large, then the large things together with the Form form a new many, which requires a new Form, and so on without end. The regress depends on the self-predication of the Form, and the lesson most later realists drew was that the universal is not itself an instance of what it makes its instances be.
+
+Aristotle rejected the separation of the Forms. Universals, on his view, exist only in the particulars that instantiate them, and the primary beings are individual substances, this man or this horse, of which the universals are said \citep{AristotleCategories,AristotleMetaphysics}. This immanent realism is the ancestor of the view defended here: universals are wholly present in each of their instances and do not exist apart from them, and the bearers of universals are substances, not bare substrata (see MET-23-a).
+
+\subsection{The medieval debate}
+
+Porphyry's \emph{Isagoge} posed three questions it declined to answer: whether genera and species subsist or are only in the understanding; whether, if they subsist, they are corporeal or incorporeal; and whether they exist apart from sensibles or in them \citep{PorphyryIsagoge}. The medieval debate was organized around these questions. Its nominalist culmination is Ockham, for whom everything that exists is singular and universality belongs only to signs, mental or spoken, that signify many singulars \citep{OckhamSL}. Ockham's razor was turned against universals: if singular things and singular concepts suffice to explain predication, universals are superfluous. The reply that became standard among realists is that singular concepts do not suffice, because the question is why a concept applies to these singulars and not to others, and the answer must mention something about the singulars themselves.
+
+\subsection{Russell and the resemblance regress}
+
+\citet[ch.~9]{Russell1912} gave the argument that has remained the realist's principal weapon against resemblance nominalism. Suppose one tries to avoid the universal \emph{whiteness} by saying that white things are those that resemble a chosen paradigm white patch. Then the resemblance between this white thing and the paradigm, and between that white thing and the paradigm, are two cases of the same relation; if they are not, nothing has been explained. So resemblance itself is a universal, and since the nominalist must admit at least one universal, there is no reason to resist admitting others. The resemblance nominalist can reply that resemblances themselves resemble without further resemblances, or that the resemblance relation is not an entity at all \citep{Price1953,RodriguezPereyra2002}, and we return to this reply in Section~\ref{s:framework}.
+
+\subsection{Quine, Goodman and the semantics of predication}
+
+\citet{Quine1948} reframed the question as one of ontological commitment. To say that the house and the rose are both red commits us to houses and roses but not, Quine held, to redness, since the predicate \enquote{red} is not a name and is not quantified over. The fact that predicates are true of many things is, on this view, ultimate and irreducible. \citet{Armstrong1978} called this position ostrich nominalism, and \citet{Devitt1980} defended it against the charge. The issue between them is whether \enquote{$a$ is $F$} requires a ground beyond $a$, and we take the side of Armstrong: if it requires none, then nothing distinguishes the case where $a$ and $b$ are both $F$ because they genuinely resemble from the case where they are both $F$ because \enquote{$F$} is a gerrymandered predicate. Principle~\ref{p:shared} below is the point at which we take this side.
+
+\citet{Goodman1951} identified two problems that defeat the simplest forms of resemblance and class nominalism. The \emph{companionship} difficulty arises when every object that has one property also has another, so that the class of resembling objects for the first coincides with the class for the second. The \emph{imperfect community} difficulty arises when every two members of a class resemble one another, but no single respect is common to all: $a$, $b$ and $c$ may share pairwise the properties $FG$, $GH$ and $FH$ without sharing any one. Class nominalism faces the further difficulty of coextension: if \emph{having a heart} and \emph{having a kidney} are true of the same things, the class nominalist must identify them, although they are different properties \citep{Armstrong1978}. Goodman's later work on projection \citep{Goodman1955} supplied the case that every subsequent theory of properties must handle: \emph{grue}, which applies to things examined before a given time just in case they are green and to other things just in case they are blue. Nothing in the abundant conception distinguishes \emph{green} from \emph{grue}, and yet only one of them is projectible (see EPI-04).
+
+\subsection{Armstrong, Lewis and the sparse conception}
+
+\citet{Armstrong1978} combined three theses: universals exist (against all forms of nominalism); they are immanent, wholly present in their instances (against Plato); and they are sparse, since which universals exist is a question for total science rather than for semantics (against the view that every meaningful predicate corresponds to a universal). He also rejected uninstantiated universals, uninstantiated universals being, on his view, the remnant of Platonism that a naturalist cannot accept. \citet{Armstrong1989} gave an accessible account of the whole position, and later \citep{Armstrong1997} set it within an ontology of states of affairs.
+
+\citet{Lewis1983} accepted the distinction between sparse and abundant properties while remaining neutral on whether sparse properties are universals. He listed the work they do: they ground objective resemblance and duplication, they enter into the laws of nature, they underwrite the minimal physicalism that says the world is fixed by its physics, and they constrain the interpretation of language and thought. On Lewis's view the abundant properties are just classes of possibilia, there are as many of them as there are such classes, and any two things share as many abundant properties as any other two. That last point is the observation from which our argument for sparseness starts.
+
+\subsection{Trope theory}
+
+\citet{Williams1953} proposed that the alphabet of being consists of tropes, particular instances of qualities, such as the redness of this rose, which is numerically distinct from the redness of that one. \citet{Campbell1990} developed the theory into a full ontology, in which objects are bundles of compresent tropes and properties are classes of exactly resembling tropes. Trope theory answers the companionship difficulty, since two coextensive properties have different tropes, and it avoids the identity of one entity in many places. Its cost, which MET-08-a examines, is that exact resemblance between tropes must be taken as primitive, and that the resulting resemblance classes play exactly the role of universals. We argue in MET-08-a that tropes are best understood as particularized universals and that the theory adds nothing a theory of universals lacks.
+
+\subsection{Taking stock}
+
+Each nominalist proposal fails at a definite point. Ostrich nominalism cannot distinguish genuine from gerrymandered sameness. Class nominalism identifies coextensive properties. Resemblance nominalism faces Russell's regress and Goodman's difficulties, and its most careful modern form \citep{RodriguezPereyra2002} answers them at the cost of a resemblance relation whose structure is exactly as rich as the structure of universals it replaces. Trope theory replaces one universal by a class of exactly resembling particulars. The realist position survives these failures, but it inherits two burdens: to say which universals there are, and to say how the other properties are related to them. The present manuscript discharges the second burden fully and the first in part.
+
+\section{Framework}\label{s:framework}
+
+We work with a domain of objects. The \emph{properties}, in the abundant sense, are all the ways of dividing the objects: for every condition on objects, there is the property of satisfying it. Some properties and some binary relations are distinguished as genuine.
+
+\begin{definition}\label{d:genuine}
+A property is \emph{genuine} if it is a respect in which things can resemble one another as a matter of their own nature, rather than a way in which we happen to classify them. Genuine binary relations are understood in the same way. A \emph{universal} is a genuine property that is instantiated by at least two distinct objects.
+\end{definition}
+
+Definition~\ref{d:genuine} does not say which properties are genuine; the principles below constrain the class. The requirement that a universal be instantiated by two distinct objects makes explicit what is at issue between realist and nominalist: whether one and the same genuine property can be had by distinct things. It also reflects Armstrong's rejection of uninstantiated universals, though nothing in the argument depends on that rejection.
+
+\begin{definition}\label{d:reshuffle}
+A \emph{permutation} of the objects is a one-to-one mapping $f$ of the objects onto themselves, given with its inverse $g$. A permutation is a \emph{reshuffle} if it maps genuine properties onto genuine properties: for each genuine property $U$, the properties $U \circ g$ and $U \circ f$ are genuine.
+\end{definition}
+
+A reshuffle moves objects around in a way that carries the pattern of genuine properties onto itself. If $f$ maps $x$ to $f(x)$, then the property $U \circ g$ holds of $f(x)$ exactly when $U$ holds of $x$; so a reshuffle may exchange which genuine properties things have, provided it maps the whole system of genuine properties onto itself. If every property is genuine, every permutation is a reshuffle.
+
+\begin{definition}\label{d:symmetry}
+A permutation $f$ is a \emph{symmetry} if it preserves every genuine property and every genuine relation: $U(x)$ if and only if $U(f(x))$, and $R(x,y)$ if and only if $R(f(x),f(y))$, for all objects $x,y$, genuine properties $U$ and genuine relations $R$. It is a \emph{monadic symmetry} if it preserves every genuine property.
+\end{definition}
+
+The difference between Definitions~\ref{d:reshuffle} and~\ref{d:symmetry} matters. A symmetry fixes each genuine property; a reshuffle need only map the system of genuine properties onto itself. In Black's world (MET-28-a), the map exchanging the two spheres is a symmetry. A map that exchanged all the red things with all the green things, in a world in which red and green were distributed in mirror image, would be a reshuffle but not a symmetry.
+
+\begin{definition}\label{d:construction}
+The \emph{constructions} are generated by the following clauses: each genuine property $U$ is a construction, expressing $U$; if $c$ is a construction, so is its negation; for any family of constructions, indexed by any set, their conjunction and their disjunction are constructions; and if $R$ is a genuine relation and $c$ a construction, the \emph{projection} of $c$ along $R$ is a construction, expressing the property of bearing $R$ to something that has the property $c$ expresses. A property is \emph{constructed} if some construction expresses it.
+\end{definition}
+
+The operations of Definition~\ref{d:construction} are negation, arbitrary conjunction and disjunction, and existential quantification restricted by a genuine relation. The first three, and existential quantification itself, are invariant under all permutations of the domain, and are therefore logical operations in the sense of LOG-16. Constructing a property from universals thus adds nothing non-logical to the universals and relations used. The allowance of arbitrary conjunctions and disjunctions reflects the fact that, if determinate magnitudes such as determinate masses are genuine, there are infinitely many of them; nothing in the argument requires the conjunctions to be finite when the stock of genuine properties is finite.
+
+\begin{definition}\label{d:supervene}
+Two objects \emph{agree} on the genuine properties if each genuine property holds of both or of neither. A property $P$ \emph{supervenes} on the genuine properties if, whenever two objects agree on the genuine properties and $P$ holds of one, $P$ holds of the other.
+\end{definition}
+
+We now state the four principles on which the argument rests. The first two concern objective resemblance, the relation that holds between two objects when they are alike in some respect as a matter of their own nature: two electrons, two cubes, two red patches.
+
+\begin{principle}[Discrimination]\label{p:discrimination}
+Some pairs of distinct objects resemble each other and some do not.
+\end{principle}
+
+\begin{principle}[Structural grounding]\label{p:structural}
+Every reshuffle preserves resemblance: if $f$ is a reshuffle, then $x$ resembles $y$ if and only if $f(x)$ resembles $f(y)$.
+\end{principle}
+
+\begin{principle}[Shared constituent]\label{p:shared}
+Objects that resemble each other share a genuine property.
+\end{principle}
+
+\begin{principle}[Completeness]\label{p:complete}
+Every local qualitative property supervenes on the genuine properties. A property is \emph{local qualitative} if it is intrinsic, qualitative and not structural, that is, it does not consist in an arrangement of the object's proper parts.
+\end{principle}
+
+Principle~\ref{p:discrimination} records the datum the problem of universals starts from: resemblance is not indiscriminate. An electron resembles an electron; an electron does not resemble a quasar in the way two electrons resemble each other. Even the ostrich nominalist accepts the datum, though not its explanation.
+
+Principle~\ref{p:structural} says that resemblance is grounded in the \emph{pattern} of genuine property sharing. If resemblance consists in having genuine properties in common, then whether $x$ and $y$ resemble depends on whether, and how, the genuine properties of $x$ overlap those of $y$; and a reshuffle maps the overlap pattern of $x$ and $y$ onto the overlap pattern of $f(x)$ and $f(y)$, since it maps the system of genuine properties onto itself. The principle therefore does not assume that resemblance depends on the identity of the properties shared, only on the structure of sharing. This is the weakest assumption that makes resemblance a matter of genuine property sharing, and it is precisely what the nominalist who identifies properties with arbitrary classes is committed to as well, since for her the properties shared are all the classes containing both objects. We discuss the principle further in Objection~\ref{o:structural}.
+
+Principle~\ref{p:shared} is the realist premise. It says that resemblance has a ground in the things that resemble, namely a genuine property both of them have. The resemblance nominalist denies it, holding that resemblance is primitive. We accept the principle for the reasons Russell gave (Section~\ref{s:history}): a primitive resemblance relation that is itself had by many pairs is one universal, and a family of primitive resemblance relations, one for each respect, is a family of universals under another name. The principle does not say that resemblance is \emph{nothing but} sharing a genuine property; it says only that the former requires the latter.
+
+Principle~\ref{p:complete} is the principle that the genuine properties, in Lewis's phrase, characterize things completely. Two objects that agree on every genuine property are alike in every local qualitative respect. The restriction to local properties is deliberate. Structural properties, such as being a water molecule, consist in the arrangement of parts and are fixed by the genuine properties of the parts together with the genuine relations among them; extrinsic properties, such as being two miles from an iron sphere, involve other objects. Both are treated in Remark~\ref{r:relational} and Section~\ref{s:cases}; the formal construction theorem concerns the local case.
+
+\section{The existence and sparseness of universals}\label{s:existence}
+
+\begin{theorem}[Existence]\label{t:exist}
+There are universals.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:discrimination}, some distinct objects $x$ and $y$ resemble each other. By Principle~\ref{p:shared}, they share a genuine property $U$. Since $U$ is genuine and instantiated by the two distinct objects $x$ and $y$, it is a universal by Definition~\ref{d:genuine}.
+\end{proof}
+
+The proof is short because the work is done by the principles, and in particular by Principle~\ref{p:shared}. Its interest lies in making explicit that the existence of universals follows from two claims that most parties accept, that resemblance is discriminating and that it is grounded in what resembling things have in common, once the second is read realistically. The nominalist who wishes to resist the conclusion must deny that grounding, and must then explain how resemblance can be discriminating without it.
+
+\begin{lemma}[Two-point homogeneity]\label{l:twopoint}
+For any two pairs $(x,y)$ and $(x',y')$ of distinct objects, there is a permutation $f$ with $f(x) = x'$ and $f(y) = y'$.
+\end{lemma}
+
+\begin{proof}
+Let $s$ be the transposition exchanging $x$ and $x'$ (the identity if they coincide), and let $y_1 = s(y)$. Then $y_1 \neq x'$: if $y = x'$, then $y_1 = x$, which differs from $x'$ because $x \neq y = x'$; otherwise $y_1 = y \neq x'$. Let $t$ be the transposition exchanging $y_1$ and $y'$. Since $x'$ differs from both $y_1$ and $y'$, $t$ fixes $x'$. The composite $t \circ s$ sends $x$ to $x'$ and $y$ to $y'$, and it is a permutation, with inverse $s \circ t$.
+\end{proof}
+
+\begin{theorem}[Ugly duckling, structural form]\label{t:ugly}
+If every property were genuine, then for any two pairs $(x,y)$ and $(x',y')$ of distinct objects, $x$ would resemble $y$ if and only if $x'$ resembled $y'$.
+\end{theorem}
+
+\begin{proof}
+Suppose every property is genuine, and let the pairs be given. By Lemma~\ref{l:twopoint}, there is a permutation $f$ with $f(x) = x'$ and $f(y) = y'$. Since every property is genuine, $f$ maps genuine properties onto genuine properties, and so it is a reshuffle. By Principle~\ref{p:structural}, $x$ resembles $y$ if and only if $f(x)$ resembles $f(y)$, that is, if and only if $x'$ resembles $y'$.
+\end{proof}
+
+Watanabe's original theorem is a counting result: in a finite domain of $n$ objects, if every subset counts as a property, any two distinct objects share exactly $2^{n-2}$ properties, so that, measured by shared properties, every pair is as similar as every other \citep{Watanabe1969}. Theorem~\ref{t:ugly} generalizes the result in two ways. It does not depend on finiteness or on counting, and it applies to any notion of resemblance that is grounded in the structure of property sharing, not only to the number of shared properties. The underlying reason is the one that LOG-16 makes central to the theory of logical constants: on the abundant conception, the system of properties is invariant under all permutations of the domain, and the only binary relations among objects that are invariant under all permutations are the universal relation, the empty relation, identity and distinctness \citep{Tarski1986}. A resemblance relation grounded in the abundant properties alone would have to be one of these four, which is to say that it would be a logical relation rather than a relation of resemblance.
+
+\begin{theorem}[Sparseness]\label{t:sparse}
+There are pairs $(x,y)$ and $(x',y')$ of distinct objects such that no reshuffle maps $x$ to $x'$ and $y$ to $y'$.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:discrimination}, there are distinct $x,y$ that resemble each other and distinct $x',y'$ that do not. If a reshuffle $f$ mapped $x$ to $x'$ and $y$ to $y'$, then by Principle~\ref{p:structural} $x'$ would resemble $y'$, which it does not.
+\end{proof}
+
+\begin{corollary}\label{c:notall}
+Not every property is genuine.
+\end{corollary}
+
+\begin{proof}
+If every property were genuine, Theorem~\ref{t:ugly} would make $x$ resemble $y$ if and only if $x'$ resembled $y'$ for the pairs of Principle~\ref{p:discrimination}, contradicting that principle.
+\end{proof}
+
+Theorem~\ref{t:sparse} is stronger than Corollary~\ref{c:notall}, and it is the precise sense in which the genuine properties are sparse. It says not merely that some property is not genuine, but that the system of genuine properties is rigid enough to separate pairs of objects: its group of reshuffles is not two-point homogeneous. The group of reshuffles is not monotone in the system: a small system of properties may be mapped onto itself by few permutations, while the system of all properties is mapped onto itself by every permutation. Between the two extremes lies a range of systems, and Theorem~\ref{t:sparse} locates the genuine properties in that range, away from the abundant end. Section~\ref{s:cases} argues that closure under Boolean operations also moves a system toward the abundant end, which is why the genuine properties must be the generators of the constructed properties and not their closure.
+
+\section{Construction}\label{s:construction}
+
+We now prove that the remaining properties are constructed from the universals. The first result says that construction never leads out of the qualitative.
+
+\begin{theorem}[Qualitativeness]\label{t:qual}
+Every symmetry preserves every constructed property: if $f$ is a symmetry and $c$ a construction, then $c$ holds of $x$ if and only if it holds of $f(x)$.
+\end{theorem}
+
+\begin{proof}
+By induction on the construction. For a genuine property $U$, the claim is the definition of a symmetry. Negations, conjunctions and disjunctions preserve the claim, since each is determined pointwise by its components. For the projection of $c$ along a genuine relation $R$, suppose $x$ bears $R$ to some $y$ that satisfies $c$. Then $f(x)$ bears $R$ to $f(y)$, since $f$ preserves $R$, and $f(y)$ satisfies $c$ by the induction hypothesis. Conversely, suppose $f(x)$ bears $R$ to some $y$ that satisfies $c$, and let $g$ be the inverse of $f$. Then $f(x)$ bears $R$ to $f(g(y))$, so $x$ bears $R$ to $g(y)$; and $g(y)$ satisfies $c$ because $f(g(y)) = y$ does, by the induction hypothesis.
+\end{proof}
+
+\begin{corollary}[Black's world]\label{c:black}
+If a symmetry maps $a$ to $b$, no constructed property distinguishes $a$ from $b$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{t:qual}.
+\end{proof}
+
+Corollary~\ref{c:black} recovers, for the constructed properties, the result of MET-28-a (Theorem~3.1) that no qualitative property distinguishes Black's two spheres. In MET-28-a, a property is called qualitative when it is invariant under every symmetry of the world; Theorem~\ref{t:qual} shows that the constructed properties are qualitative in that sense, and Proposition~\ref{p:iff} and Theorem~\ref{t:construct} below show that, for local properties, the converse also holds.
+
+\begin{lemma}\label{l:swapmono}
+If two objects agree on the genuine properties, the transposition that exchanges them is a monadic symmetry.
+\end{lemma}
+
+\begin{proof}
+The transposition is its own inverse. It fixes every object other than the two, and it maps each of the two to the other, which has the same genuine properties.
+\end{proof}
+
+\begin{proposition}\label{p:iff}
+A property supervenes on the genuine properties if and only if every monadic symmetry preserves it.
+\end{proposition}
+
+\begin{proof}
+Suppose $P$ supervenes, and let $f$ be a monadic symmetry. Then $x$ and $f(x)$ agree on the genuine properties, so $P$ holds of one if and only if it holds of the other. Conversely, suppose every monadic symmetry preserves $P$, and let $x$ and $y$ agree on the genuine properties. By Lemma~\ref{l:swapmono}, the transposition exchanging them is a monadic symmetry, so $P$ holds of $x$ if and only if it holds of $y$.
+\end{proof}
+
+\begin{theorem}[Construction]\label{t:construct}
+Every property that supervenes on the genuine properties is constructed from them, using negation, conjunction and disjunction only.
+\end{theorem}
+
+\begin{proof}
+Let $P$ supervene on the genuine properties. For each object $y$ and each genuine property $U$, let the \emph{literal} $\ell_{y,U}$ be $U$ if $y$ has $U$ and the negation of $U$ otherwise; an object $x$ satisfies $\ell_{y,U}$ just in case $x$ has $U$ if and only if $y$ does. Let $\tau_y$, the \emph{type} of $y$, be the conjunction of the literals $\ell_{y,U}$ over all genuine $U$; an object satisfies $\tau_y$ just in case it agrees with $y$ on the genuine properties. Let $c$ be the disjunction of the types $\tau_y$ over all objects $y$ that have $P$. If $x$ has $P$, then $x$ satisfies its own type, which is a disjunct of $c$. If $x$ satisfies $c$, then $x$ agrees on the genuine properties with some $y$ that has $P$, and since $P$ supervenes, $x$ has $P$. So $c$ expresses $P$.
+\end{proof}
+
+The proof uses the disjunctive normal form familiar from propositional logic, transposed to properties. When the genuine properties are finitely many, the conjunctions in the types are finite, and the disjunction ranges over at most finitely many distinct types, so the construction is finite.
+
+\begin{theorem}[The sparse universals theorem]\label{t:main}
+There are universals; not every property is genuine, and some pairs of distinct objects are related by no reshuffle; and every local qualitative property is constructed from the genuine properties.
+\end{theorem}
+
+\begin{proof}
+The first clause is Theorem~\ref{t:exist}; the second is Corollary~\ref{c:notall} and Theorem~\ref{t:sparse}. For the third, let $P$ be local qualitative. By Principle~\ref{p:complete}, $P$ supervenes on the genuine properties, and by Theorem~\ref{t:construct} it is constructed from them.
+\end{proof}
+
+\begin{remark}\label{r:relational}
+Theorem~\ref{t:main} concerns local properties. Structural and extrinsic qualitative properties involve other objects, the object's parts or its surroundings, and their construction requires the genuine relations. Theorem~\ref{t:qual} shows that projection along genuine relations never leads outside the qualitative. The converse, that every structural or extrinsic qualitative property is constructed, holds for finite worlds when the constructions are extended to first-order formulas with identity: if the world contains finitely many objects $o_1,\dots,o_n$, the formula stating that there are exactly $n$ objects, distinct, standing in exactly the genuine properties and relations in which $o_1,\dots,o_n$ stand, with $x$ identical to the $i$th of them, defines the orbit of $o_i$ under the symmetries, and any property preserved by every symmetry is a disjunction of such orbits. For infinite worlds the analogous result requires infinitary languages with infinitely many variables, and we do not develop it here.
+\end{remark}
+
+\section{Further cases}\label{s:cases}
+
+The theorem divides properties into three classes: the genuine properties, few and structured; the constructed properties, which supervene on them; and the remaining abundant properties, which do neither. We now apply the division to cases that have figured in the debate.
+
+\subsection{Determinables and determinates}
+
+Having a mass of exactly one kilogram and having a mass of exactly two kilograms are both determinates of the determinable \emph{having mass}. Which of these are genuine? On the view that best fits physics, the determinates are genuine and the determinable is constructed, as the disjunction of its determinates. The determinates, though infinitely many, are few in the sense that matters: they are organized by a single quantity, and the resemblance among them, the fact that one kilogram is more like two kilograms than like a hundred, is grounded in the structure of the quantity, that is, in genuine relations among the determinates such as being more massive than. Theorem~\ref{t:sparse} is consistent with this: a system containing all the determinate masses is not invariant under arbitrary permutations, since a permutation that moved some one-kilogram objects to two-kilogram positions and others not would fail to map the system onto itself. That the conjunctions and disjunctions of Definition~\ref{d:construction} may be infinite is what allows the determinable to be constructed from infinitely many determinates. The sense in which the universals are few is therefore that they fall under few fundamental quantities and relations, not that they are finite in number.
+
+\subsection{Green and grue}
+
+Grue is constructed: it is the disjunction of being green and examined before the given time with being blue and not so examined. Green, or rather the surface reflectance profile that realizes it, is constructed as well, but by a shorter construction from the genuine properties of physics. On the present view, \emph{grue} is not unreal; it is a property in the abundant sense and is constructed from genuine ones. What distinguishes it from \emph{green} is the complexity of its shortest construction, which is the measure of relative naturalness that \citet[p.~61]{Lewis1986} proposed. This is the notion of naturalness on which EPI-04 rests the projectibility of \enquote{green}: the sparse universals of the present manuscript are the perfectly natural properties, and the projectible predicates are those that denote properties close to them.
+
+\subsection{Colours}
+
+According to MET-17, colours are real relational properties of objects, dependent on perceivers. In the present framework this makes them constructed, extrinsic properties: being red is having a surface that is disposed to produce a certain kind of experience in a certain kind of perceiver under certain conditions, and each element in that description is either genuine or constructed. The verdict that colours are not sparse universals is compatible with their reality, since construction is not elimination.
+
+\subsection{Social kinds and natural kinds}
+
+MET-20 argues that social kinds exist and are no less real than natural kinds, though they depend on the absence of collective rejection. The construction theorem supports the first half of that claim: social kinds are constructed from genuine properties and relations of persons and their attitudes, and construction does not diminish reality. MET-27 argues that natural kinds are real divisions in nature, fewer than standard taxonomies suggest. On the present view, a natural kind corresponds to a cluster of genuine properties that tend to be coinstantiated because of the laws, and the kind is constructed as the conjunction of the cluster; a taxonomic category that does not correspond to such a cluster is constructed by a longer and more disjunctive route, which is why it is less natural.
+
+\subsection{Existence and the logical properties}
+
+MET-24 holds that existence is a first-order property had by everything. In the present framework existence is the property expressed by the empty conjunction, which every object satisfies. It is constructed from no genuine property at all; it is preserved by every permutation, and is therefore a logical property in the sense of LOG-16. The same holds of self-identity. Nothing in the sparse theory requires that existence be a universal, and nothing in MET-24 requires that it be one.
+
+\subsection{Dispositions}
+
+MET-11 argues that dispositions are real and irreducible properties of their bearers. The sparse universals theorem is neutral on whether the genuine properties are categorical, dispositional, or both. If irreducible dispositions are among the genuine properties, as dispositional essentialists hold \citep{Bird2007}, then the theorem applies to them as to any other genuine property. Construction in our sense is a relation of supervenience and definability; the irreducibility that MET-11 asserts is irreducibility to categorical bases, which the theorem does not deny.
+
+\subsection{Laws}
+
+According to MET-12, laws of nature are the axioms of the best system summarizing the mosaic of particular events. As \citet{Lewis1983} observed, the best-system account requires a privileged vocabulary: if any predicate could be used, a single axiom stating that everything is $F$, for a suitably gerrymandered $F$, would be maximally simple and maximally strong. The sparse universals supply that vocabulary. The present manuscript therefore provides one of the presuppositions of MET-12, and the construction theorem explains why it suffices to restrict the language of the best system to predicates for genuine properties and relations: every local qualitative fact about the mosaic can then be stated, though perhaps not simply.
+
+\subsection{Black's spheres and the individuation of objects}
+
+MET-28-a shows that Black's two spheres share all their qualitative properties and relations, taken in either order, and are distinguished only weakly, by the irreflexive relation of being two miles apart. Corollary~\ref{c:black} explains why: the exchange of the spheres is a symmetry, so no constructed property separates them. On the sparse theory, the spheres instantiate exactly the same universals, and the relation of distance between them, a genuine relation whose reality is defended in MET-22-a, does the weak discerning. It follows that the identity of the spheres is not fixed by the universals they instantiate. MET-29-a draws the corresponding consequence for bundle theory, and MET-23-a explains why the alternative is not a bare substratum. The view of objects that results is that objects are substances, each with a real definition stating what it is (MET-13), which instantiate universals without being composed of them.
+
+\subsection{Boolean closure}
+
+Lewis's abundant properties are closed under Boolean operations, and it is natural to ask whether the genuine properties could be closed under them too. The answer is negative, for a reason closely related to Theorem~\ref{t:ugly}. If the genuine properties were closed under arbitrary Boolean combinations of some base, then every union of complete types of that base would be genuine, and any permutation that maps each type onto a type of the same size would be a reshuffle. Within each type, any pair of distinct objects could then be mapped to any other pair, and pairs across types of equal size could be mapped to one another regardless of how different the types are. Resemblance would then register only whether two objects are of the same type, not degrees of resemblance across types, such as the fact that red is more like orange than like blue. Graded resemblance requires that the generators be distinguished from their combinations, and that is what the sparse theory does by counting only the generators as genuine.
+
+\section{The recent literature}\label{s:recent}
+
+The last fifteen years have seen the theory of naturalness become a central topic in metaphysics, and the sparse universals theorem bears on several of its developments.
+
+\citet{Sider2011} generalized naturalness to \emph{structure}: not only predicates but also quantifiers, connectives and other expressions may carve at the joints, and the world's fundamental structure is given by the expressions that do. The present framework is narrower, since it concerns properties and relations only, and it treats the logical operations of construction as invariant under all permutations (LOG-16) rather than as further joints. The construction theorem can be read as a partial vindication of Sider's claim that the non-fundamental is defined from the fundamental, restricted to the local qualitative properties, together with a characterization of the defined properties in terms of symmetry.
+
+\citet{DorrHawthorne2013} surveyed the theoretical roles of naturalness and asked whether a single notion can play all of them. They distinguished, among others, the roles of grounding similarity, of underwriting laws, of fixing reference, and of determining the intrinsic. In the present framework three of these roles are connected by theorems rather than by stipulation: resemblance is tied to genuine properties by Principles~\ref{p:structural} and~\ref{p:shared}, the intrinsic is tied to them by Principle~\ref{p:complete} and Theorem~\ref{t:construct}, and the lawful vocabulary is tied to them through MET-12. Their question whether the roles can come apart then becomes the question whether the principles can be jointly satisfied, which Theorem~\ref{t:main} answers positively given that the principles are true.
+
+\citet{Schaffer2004} distinguished two conceptions of sparse properties: a \emph{fundamental} conception, on which the sparse properties are those of the fundamental level, and a \emph{scientific} conception, on which they are those that figure in the laws of the sciences at every level. Schaffer argued that the scientific conception is preferable, in part because there may be no fundamental level \citep{Schaffer2003}. The present theory is closer to the scientific conception than its formulation might suggest: the principles concern resemblance and supervenience, not levels, and the genuine properties are required to ground resemblance among objects at whatever level the objects are found. We take up the question of levels in Objection~\ref{o:level}.
+
+\citet{Dasgupta2018} argued that the realist about naturalness cannot explain why we should care about natural properties: if naturalness is a primitive feature of some properties, it is unclear why inquiry should aim at them rather than at others. The sparse universals theorem does not answer that challenge directly, since it takes genuineness as given, but it constrains the answer. By Theorem~\ref{t:sparse}, the genuine properties are the ones in virtue of which some pairs of objects resemble and others do not; a classification that disregarded them would be unable to register the difference between resemblance and its absence. That is a reason to care about them that does not presuppose that they are natural in some further sense.
+
+\citet{RodriguezPereyra2002} gave the most developed defence of resemblance nominalism, answering Goodman's companionship and imperfect community difficulties by taking resemblance to hold among pairs and pairs of pairs, and Russell's regress by denying that resemblances are entities. The present argument does not refute resemblance nominalism directly; it shows what it costs. Theorem~\ref{t:sparse} constrains any resemblance relation grounded in the structure of a property system, and the resemblance nominalist's primitive relation must be such that no permutation of the objects that preserves it is two-point homogeneous. A resemblance relation with that structure is, as far as the work it does, a system of sparse properties under another description.
+
+Dispositional essentialism \citep{Bird2007} holds that the fundamental properties have their dispositional character essentially. As noted in Section~\ref{s:cases}, the sparse universals theorem is neutral on the categorical or dispositional nature of the genuine properties, and so compatible with this view. It is equally compatible with the categoricalist view that \citet{Lewis2009} combined with the thesis that we cannot know which fundamental property plays which role.
+
+\citet{Maudlin2007} argued that the fundamental structure of physics is better represented by fibre bundles than by the instantiation of properties by objects, and that the logical form of predication may not match the form of physical reality. The present theory is formulated in the language of objects and properties, and it would require reformulation if Maudlin were right. We note, however, that the notions it relies on, symmetry and invariance, are those of the geometrical framework Maudlin favours, and we expect the main results to survive the translation.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[The instantiation regress]\label{o:regress}
+If $a$ instantiates the universal $F$, then $a$, $F$ and the relation of instantiation stand in a further relation, which must itself be instantiated, and so on. The realist about universals is committed to an infinite regress of instantiation relations, and the regress is vicious, since each step is needed for the one before it to obtain \citep{Bradley1893}.
+\end{objection}
+
+\begin{reply}
+The regress argument applies to relations in general, and MET-22-a answers it in that form: a relation relates its terms without a further relating relation. Applied to instantiation, the reply is that $a$'s instantiating $F$ is the obtaining of a single fact, and the further facts generated by the regress, that $a$ and $F$ stand in instantiation, that they stand in instantiation of instantiation, and so on, are consequences of that fact, not conditions of it. The regress is real but runs in the direction of entailment, not of grounding, and such regresses are not vicious. Armstrong reached the same conclusion by calling instantiation a non-relational tie \citep{Armstrong1997}; the argument of MET-22-a shows that the tie need not be exempted from being a relation for the regress to be benign.
+\end{reply}
+
+\begin{objection}[Tropes suffice]\label{o:tropes}
+Everything the sparse theory does with universals can be done with tropes: exactly resembling tropes replace a single universal, the sparse classes of tropes replace the sparse universals, and Principle~\ref{p:shared} can be reformulated with \enquote{exactly resembling tropes} in place of \enquote{a genuine property}. Trope theory has the further advantage of avoiding entities wholly present in many places.
+\end{objection}
+
+\begin{reply}
+We agree that trope theory can mimic the formal structure, and that is the point of MET-08-a. Exact resemblance among tropes is an equivalence relation, and its classes do the work of universals; the trope theorist must hold that the classes are not arbitrary, which is Principle~\ref{p:structural} for classes of tropes, and the argument of Section~\ref{s:existence} then applies to them unchanged. MET-08-a argues that a trope is best understood as a particularized universal, the instance of a universal in a particular, and that trope theory adds nothing a theory of universals lacks. The alleged advantage, avoiding multiple location, is purchased by taking exact resemblance as primitive, which is itself a relation holding among many pairs of tropes: a universal by Russell's argument.
+\end{reply}
+
+\begin{objection}[Bare particulars]\label{o:bare}
+If universals are the qualitative constituents of objects, then whatever remains when the universals are subtracted is a bare particular, a substratum that instantiates universals but has no nature of its own. Since bare particulars are unintelligible, so is the theory that requires them. Armstrong's thin particular is an example.
+\end{objection}
+
+\begin{reply}
+The sparse theory does not say that universals are constituents of objects in a sense that leaves a remainder. It says that objects instantiate universals and that their local qualitative properties are constructed from the universals they instantiate. MET-23-a argues that an object stripped of all its properties is nothing at all and that bare substrata are explanatorily idle; the bearer of universals is the substance itself, which has its properties, and some of them essentially (MET-13). Here we part company with Armstrong's thin particular, while retaining his theory of universals. MET-29-a shows that the alternative of making objects bundles of universals fails in the forms that rely on absolute or relative discernibility, so the substance view is not the only option, but it is the one that fits the sparse theory without residue.
+\end{reply}
+
+\begin{objection}[Structural grounding is too strong]\label{o:structural}
+Principle~\ref{p:structural} requires resemblance to be preserved by every reshuffle. But a reshuffle may exchange which genuine properties things have. If red and green were distributed in mirror image, a reshuffle exchanging the red things with the green things would map the resemblance of two red things to the resemblance of two green things, which is acceptable; but it would also preserve the resemblance between a red and an orange thing only if it mapped orange to something equally close to green. Resemblance depends on which properties are shared, not only on the pattern of sharing.
+\end{objection}
+
+\begin{reply}
+The objection presupposes that the closeness of red to orange is not itself encoded in the genuine properties and relations. On the sparse theory it is: degrees of resemblance among determinates are grounded in genuine relations among them, or, as with colour, in the genuine properties of physics on which the colours are constructed (Section~\ref{s:cases}). A reshuffle preserves the whole system of genuine properties, and so preserves whatever closeness relations that system encodes. If, in the imagined world, a permutation maps the system onto itself while exchanging red with green, then red and green occupy structurally identical positions in the system, and any difference in resemblance between them would be ungrounded. The principle thus amounts to the claim that resemblance has no source outside the genuine properties, which is what grounding means.
+\end{reply}
+
+\begin{objection}[No fundamental level]\label{o:level}
+According to MET-10, every level of reality is grounded in a lower one, and there is no fundamental level. A sparse theory on which all properties are constructed from a base of fundamental universals seems to require a bottom level of properties and so to conflict with MET-10.
+\end{objection}
+
+\begin{reply}
+The conflict is only apparent. The infinite descent of MET-10 concerns objects and the grounding of facts about wholes in facts about their parts. The sparse theory concerns properties and is formulated without reference to levels: the genuine properties are those in virtue of which objects resemble, and the local qualitative properties of an object at any level are constructed from the genuine properties of that object. An infinite descent of objects is compatible with a fixed stock of genuine properties, instantiated at every level, as when every part at every level has mass and charge and stands in spatiotemporal relations. This is the scientific conception of sparse properties of \citet{Schaffer2004}, and nothing in our principles requires the fundamental conception. What the sparse theory does require is that construction, in the sense of Definition~\ref{d:construction}, terminate in genuine properties; it does not require that grounding terminate in a bottom level of objects.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The sparse universals theorem establishes that, given four principles, universals exist, the genuine properties are a structured proper subclass of the properties, and every local qualitative property is constructed from them. It does not establish which properties are genuine. That question belongs to physics and, for the relational universals, to the theory of space and time; the inventory of fundamental universals is the subject of the companion manuscript in this family. The theorem gives a test for any proposed inventory: the inventory must ground resemblance as Principles~\ref{p:structural} and~\ref{p:shared} require, and it must be complete in the sense of Principle~\ref{p:complete}.
+
+The theorem does not establish that the genuine properties are finitely many. They are few in the sense of Theorem~\ref{t:sparse} and in the sense, discussed in Section~\ref{s:cases}, that they fall under a small number of quantities and relations. A world with infinitely many fundamental quantities would satisfy the principles as well as ours does.
+
+The theorem does not establish, in its formal part, that structural and extrinsic qualitative properties are constructed; Remark~\ref{r:relational} records the finite case, which we have not formalized. Nor does it establish that impure properties, such as being two miles from this sphere, are constructed from universals alone. They are constructed from universals with objects as parameters, and the theory allows that.
+
+Finally, the theorem does not decide between immanent and transcendent realism, or between the view that uninstantiated universals exist and the view that they do not. Definition~\ref{d:genuine} counts as a universal only what is instantiated by two things, and Theorem~\ref{t:exist} establishes the existence of universals in that sense. The further dispute concerns genuine properties that are instantiated once or not at all, and the present argument is silent on it.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/MET/MET_02.lean} formalizes Theorems~\ref{t:exist}, \ref{t:ugly}, \ref{t:sparse}, \ref{t:qual}, \ref{t:construct} and~\ref{t:main}, Lemmas~\ref{l:twopoint} and~\ref{l:swapmono}, Corollaries~\ref{c:notall} and~\ref{c:black} and Proposition~\ref{p:iff}. Objects form a primitive type; properties are functions from objects to propositions; genuineness of properties and of relations, resemblance, and the class of local qualitative properties are primitives. Constructions are an inductive type with five constructors, for genuine properties, negation, conjunction and disjunction over an arbitrary index type, and projection along a genuine relation, and the property a construction expresses is defined by structural recursion. The four principles are axioms. The main theorem reads:
+
+\begin{lstlisting}
+theorem sparse_universals_theorem :
+    (∃ U, IsUniversal U) ∧
+    (∃ U, ¬ Genuine U) ∧
+    (∃ x y x' y', x ≠ y ∧ x' ≠ y' ∧
+      ∀ f g, Reshuffle f g → ¬ (f x = x' ∧ f y = y')) ∧
+    (∀ P, LocalQual P → Constructed P)
+\end{lstlisting}
+
+The checker reports that it depends on the following axioms:
+
+\begin{lstlisting}
+'Philosophy.MET_02.sparse_universals_theorem' depends on axioms:
+ [propext, Classical.choice, Quot.sound,
+  Philosophy.MET_02.Genuine, Philosophy.MET_02.GenuineRel,
+  Philosophy.MET_02.LocalQual, Philosophy.MET_02.Obj,
+  Philosophy.MET_02.Res, Philosophy.MET_02.p1_discrimination,
+  Philosophy.MET_02.p2_structural, Philosophy.MET_02.p3_shared,
+  Philosophy.MET_02.p4_complete]
+\end{lstlisting}
+
+The first three are the standard axioms of Lean's classical logic; classical choice is used to decide, for each genuine property and object, which literal to take in the proof of Theorem~\ref{t:construct}, and to construct transpositions. \texttt{Obj}, \texttt{Genuine}, \texttt{GenuineRel}, \texttt{Res} and \texttt{LocalQual} are the primitives of Definition~\ref{d:genuine} and Principles~\ref{p:discrimination}--\ref{p:complete}, and the last four axioms are those principles. Theorem~\ref{t:qual} depends on no principle, and Proposition~\ref{p:iff} and Theorem~\ref{t:construct} depend on none either: they are results about any system of genuine properties. The principles enter only in Theorems~\ref{t:exist}, \ref{t:ugly} and~\ref{t:sparse}, Corollary~\ref{c:notall} and the third clause of Theorem~\ref{t:main}. Lemma~\ref{l:twopoint} is proved by composing two transpositions, as in the prose proof. The formalization made explicit that Theorem~\ref{t:construct} requires conjunctions and disjunctions indexed by arbitrary types, which is why Definition~\ref{d:construction} allows them.
+
+\section{Conclusion}
+
+Universals exist: resemblance discriminates between pairs of objects and is grounded in a shared genuine property, and a genuine property shared by distinct objects is a universal. They are sparse: if every property were genuine, resemblance could not tell any pair of distinct objects from any other, and the genuine properties form a system rigid enough to separate pairs. And every local qualitative property is constructed from them, since construction from the genuine properties coincides with supervenience on them and with invariance under their symmetries. The universals of the theorem are the natural properties on which the projectibility of EPI-04 and the best system of MET-12 rely, and the objects that instantiate them are neither bundles nor bare substrata but substances.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(Cat.)]{AristotleCategories} Aristotle. \emph{Categories}.
+\bibitem[Aristotle(Met.)]{AristotleMetaphysics} Aristotle. \emph{Metaphysics}.
+\bibitem[Armstrong(1978)]{Armstrong1978} Armstrong, D.~M. (1978). \emph{Universals and Scientific Realism} (2 vols.). Cambridge University Press.
+\bibitem[Armstrong(1989)]{Armstrong1989} Armstrong, D.~M. (1989). \emph{Universals: An Opinionated Introduction}. Westview Press.
+\bibitem[Armstrong(1997)]{Armstrong1997} Armstrong, D.~M. (1997). \emph{A World of States of Affairs}. Cambridge University Press.
+\bibitem[Bird(2007)]{Bird2007} Bird, A. (2007). \emph{Nature's Metaphysics: Laws and Properties}. Oxford University Press.
+\bibitem[Bradley(1893)]{Bradley1893} Bradley, F.~H. (1893). \emph{Appearance and Reality}. Swan Sonnenschein.
+\bibitem[Campbell(1990)]{Campbell1990} Campbell, K. (1990). \emph{Abstract Particulars}. Blackwell.
+\bibitem[Dasgupta(2018)]{Dasgupta2018} Dasgupta, S. (2018). Realism and the absence of value. \emph{The Philosophical Review}, 127(3), 279--322.
+\bibitem[Devitt(1980)]{Devitt1980} Devitt, M. (1980). \enquote{Ostrich nominalism} or \enquote{mirage realism}? \emph{Pacific Philosophical Quarterly}, 61, 433--439.
+\bibitem[Dorr and Hawthorne(2013)]{DorrHawthorne2013} Dorr, C. and Hawthorne, J. (2013). Naturalness. \emph{Oxford Studies in Metaphysics}, 8.
+\bibitem[Goodman(1951)]{Goodman1951} Goodman, N. (1951). \emph{The Structure of Appearance}. Harvard University Press.
+\bibitem[Goodman(1955)]{Goodman1955} Goodman, N. (1955). \emph{Fact, Fiction, and Forecast}. Harvard University Press.
+\bibitem[Lewis(1983)]{Lewis1983} Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy}, 61(4), 343--377.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Lewis(2009)]{Lewis2009} Lewis, D. (2009). Ramseyan humility. In D. Braddon-Mitchell and R. Nola (Eds.), \emph{Conceptual Analysis and Philosophical Naturalism}. MIT Press.
+\bibitem[Maudlin(2007)]{Maudlin2007} Maudlin, T. (2007). \emph{The Metaphysics Within Physics}. Oxford University Press.
+\bibitem[Ockham(SL)]{OckhamSL} William of Ockham. \emph{Summa Logicae}, Part I.
+\bibitem[Plato(Parm.)]{PlatoParmenides} Plato. \emph{Parmenides}.
+\bibitem[Plato(Rep.)]{PlatoRepublic} Plato. \emph{Republic}, Book X.
+\bibitem[Porphyry(Isag.)]{PorphyryIsagoge} Porphyry. \emph{Isagoge}.
+\bibitem[Price(1953)]{Price1953} Price, H.~H. (1953). \emph{Thinking and Experience}. Hutchinson.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Rodriguez-Pereyra(2002)]{RodriguezPereyra2002} Rodriguez-Pereyra, G. (2002). \emph{Resemblance Nominalism: A Solution to the Problem of Universals}. Oxford University Press.
+\bibitem[Russell(1912)]{Russell1912} Russell, B. (1912). \emph{The Problems of Philosophy}. Williams and Norgate.
+\bibitem[Schaffer(2003)]{Schaffer2003} Schaffer, J. (2003). Is there a fundamental level? \emph{No\^us}, 37(3), 498--517.
+\bibitem[Schaffer(2004)]{Schaffer2004} Schaffer, J. (2004). Two conceptions of sparse properties. \emph{Pacific Philosophical Quarterly}, 85(1), 92--102.
+\bibitem[Sider(2011)]{Sider2011} Sider, T. (2011). \emph{Writing the Book of the World}. Oxford University Press.
+\bibitem[Tarski(1986)]{Tarski1986} Tarski, A. (1986). What are logical notions? \emph{History and Philosophy of Logic}, 7(2), 143--154.
+\bibitem[Watanabe(1969)]{Watanabe1969} Watanabe, S. (1969). \emph{Knowing and Guessing: A Quantitative Study of Inference and Information}. Wiley.
+\bibitem[Williams(1953)]{Williams1953} Williams, D.~C. (1953). On the elements of being: I. \emph{The Review of Metaphysics}, 7(1), 3--18.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,76 @@
+\documentclass{situationist-preprint}
+
+\title{An Elementary Version of the Argument}
+\msid{REL-01-g}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Alternative proof}
+\mskeywords{ontological argument; propositional modal logic; Anselm's principle; Barcan formula; Hartshorne}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The main argument of \emph{On the Existence of God} (REL-01-a) is stated in quantified modal logic over a constant domain with an existence predicate, and so takes on the Barcan formula and a form of necessitism. We give a version that needs no quantifiers and no domain. It has two premises, the possibility premise read as a sentence and Anselm's principle that if a maximally great being exists it does so necessarily, and it reaches the conclusion in four propositional steps. The version avoids the constant-domain assumption of the main argument, though not the possibility premise, and it makes the dialectical situation, including the converse argument, visible to a reader with only elementary modal logic.
+\end{abstract}
+
+\section{The premise avoided}
+
+REL-01-a works with a constant domain of beings and an existence predicate (Section~2.2), a framework that validates the Barcan formula and with it a form of necessitism \citep{Williamson2013}. It announces that the argument can be reformulated for variable domains at the cost of an additional premise. The version below avoids the question. It treats \enquote{a maximally great being exists} as an unanalysed sentence $G$, so that no quantifier crosses a modal operator and no assumption about domains is made. What it keeps is the possibility premise (Assumption~3.1 of REL-01-a), in sentential form. The version is in substance Hartshorne's modal proof \citep{Hartshorne1962}, which develops a suggestion of \citet{Malcolm1960}.
+
+\section{The argument}
+
+We use the normal modal logic of the operators $\nec$ and $\pos$, with $\pos p$ defined as $\neg\nec\neg p$, and the accessibility conditions of Assumption~2.1 of REL-01-a \citep{HughesCresswell1996}.
+
+\begin{assumption}[Possibility]\label{a:pos}
+$\pos G$.
+\end{assumption}
+
+\begin{assumption}[Anselm's principle]\label{a:anselm}
+$\nec(G \to \nec G)$.
+\end{assumption}
+
+\begin{theorem}\label{t:main}
+$G$, and indeed $\nec G$.
+\end{theorem}
+
+\begin{proof}
+(1) From Assumption~\ref{a:anselm}, by the K principle for $\pos$, $\pos G \to \pos\nec G$. (2) With Assumption~\ref{a:pos}, $\pos\nec G$. (3) By the principle $\pos\nec p \to \nec p$ (Lemma~3.3 of REL-01-a), $\nec G$. (4) By reflexivity, $G$.
+\end{proof}
+
+The proof uses nothing but the propositional modal principles of Assumption~2.1. Step~(3) is the characteristic S5 step; the weaker principle $\pos\nec p \to p$, which needs only symmetry, would yield $G$ directly from step~(2).
+
+Assumption~\ref{a:anselm} is not an extra premise relative to the main argument but a sentential summary of part of it. Maximal greatness, by Definition~2.4 of REL-01-a, includes existence and excellence at every accessible world, and Lemma~3.2 of REL-01-a shows that whatever is maximally great at a world accessible from $w$ is maximally great at every world accessible from $w$. Assumption~\ref{a:anselm} records this consequence without the apparatus that proves it. The elementary version therefore relocates the S5 conditions rather than dispensing with them: they are used in step~(3), and they underwrite Assumption~\ref{a:anselm}. A version without the S5 axiom is the subject of REL-01-b.
+
+\begin{proposition}\label{p:converse}
+From $\pos\neg G$ and Assumption~\ref{a:anselm} it follows that $\neg G$.
+\end{proposition}
+
+\begin{proof}
+Suppose $G$. By Assumption~\ref{a:anselm} and reflexivity, $\nec G$, which contradicts $\pos\neg G$.
+\end{proof}
+
+Proposition~\ref{p:converse} is the sentential form of Proposition~4.1 of REL-01-a. The elementary version thus displays in two lines what the formalization of Volume~I establishes in general: given Anselm's principle, the question whether a maximally great being exists is the question which of $\pos G$ and $\pos\neg G$ is true, and the argument for the first is the task of Volume~III.
+
+\section{An objection}
+
+\begin{objection}
+A sentential $G$ hides the structure on which the ontological argument depends; the elementary version proves nothing about beings.
+\end{objection}
+
+\begin{reply}
+It proves that a sentence is true, and the sentence says that a maximally great being exists. What it does not provide is an analysis of that sentence, and for that reason it is silent on the questions that analysis raises, such as whether a being can exist necessarily if domains vary. That silence is the point of the version. Whatever the correct semantics for quantification into modal contexts, the two premises above, if true, settle the question, and an objector to the argument must reject one of them rather than the semantics of REL-01-a.
+\end{reply}
+
+\section{Conclusion}
+
+The main result of REL-01-a can be reached by a four-step propositional argument that needs no constant domain, no existence predicate and no Barcan formula. It keeps the possibility premise and the S5 conditions, and it makes the role of the possibility premise as plain as possible.
+
+\begin{thebibliography}{99}\small
+\bibitem[Hartshorne(1962)]{Hartshorne1962} Hartshorne, C. (1962). \emph{The Logic of Perfection}. Open Court.
+\bibitem[Hughes and Cresswell(1996)]{HughesCresswell1996} Hughes, G.~E. and Cresswell, M.~J. (1996). \emph{A New Introduction to Modal Logic}. Routledge.
+\bibitem[Malcolm(1960)]{Malcolm1960} Malcolm, N. (1960). Anselm's ontological arguments. \emph{The Philosophical Review}, 69(1), 41--62.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

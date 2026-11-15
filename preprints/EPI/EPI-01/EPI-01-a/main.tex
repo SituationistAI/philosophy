@@ -1,0 +1,317 @@
+\documentclass{situationist-preprint}
+
+\title{The Analysis of Knowledge}
+\msid{EPI-01-a}
+\msfamily{EPI-01}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_01.lean}
+\mskeywords{knowledge; Gettier problem; safety; epistemic luck; justification; analysis}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We defend an analysis of propositional knowledge: a subject knows that $p$ if and only if she has a justified belief that $p$ which is safe, in the sense that in all close worlds in which she believes that $p$ on the same basis, $p$ is true. We prove that, on this analysis, a justified true belief falls short of knowledge exactly when its truth is lucky relative to its basis, and we show that this condition characterizes the Gettier cases: every case in the literature that is classified as a Gettier case is one in which the belief is unsafe, and every justified true belief that is unsafe has the structure of a Gettier case. We show that the truth condition of the traditional analysis becomes redundant once safety is added, and we answer the main objections to safety as a necessary condition of knowledge. The analysis is non-reductive about justification and closeness, and we argue that this is not a defect. The definitions and the two main theorems are formalized in Lean.
+\end{abstract}
+
+\section{Introduction}
+
+For most of the twentieth century, philosophers who attempted an analysis of knowledge began from the tripartite analysis: a subject $S$ knows that $p$ if and only if $p$ is true, $S$ believes that $p$, and $S$ is justified in believing that $p$. \citet{Gettier1963} showed in three pages that the analysis is insufficient. In his first case, Smith has strong evidence that Jones will get a job and that Jones has ten coins in his pocket, and infers that the man who will get the job has ten coins in his pocket. Unknown to Smith, he himself will get the job, and he himself has ten coins in his pocket. His belief is justified and true, but he does not know.
+
+The decades that followed produced many proposals for a fourth condition and many counterexamples to each \citep{Shope1983}. \citet{Zagzebski1994} argued that the problem is inescapable for any analysis in which justification does not entail truth: given any such analysis, one can construct a case in which a justified belief is false by bad luck and then made true by good luck, so that all the conditions hold without knowledge. \citet{Williamson2000} drew the more radical conclusion that knowledge is unanalysable, and that it should be taken as primitive in epistemology rather than defined in terms of belief and justification.
+
+\subsection{Fourth conditions and their counterexamples}
+
+The response to Gettier took the form of a search for a fourth condition, and each proposal was met by a counterexample. A brief review shows the pattern that the present analysis is designed to break.
+
+\paragraph{No false lemmas.} \citet{Clark1963} proposed that knowledge requires that the subject's justification not depend on any false belief. Gettier's own cases satisfy the proposal's diagnosis, since Smith reasons from the false belief that Jones will get the job. But the fake-barn case \citep{Goldman1976} involves no inference at all: Henry forms a perceptual belief directly, relying on no false lemma, and still does not know.
+
+\paragraph{Defeasibility.} \citet{LehrerPaxson1969} proposed that knowledge is justified true belief that is undefeated: there is no truth such that, if the subject came to believe it, her justification would be lost. The proposal faces the problem of misleading defeaters. In their own example, a subject sees Tom Grabit steal a book from the library. Unknown to her, Tom's mother has said that Tom has an identical twin who was in the library; but the mother is deluded, and there is no twin. The truth that the mother said this would defeat the subject's justification, yet she knows that Tom stole the book. Refinements that distinguish misleading from genuine defeaters multiplied without converging.
+
+\paragraph{Causal connection.} \citet{Goldman1967} proposed that knowledge requires an appropriate causal connection between the fact that $p$ and the belief that $p$. Henry's belief is caused by the real barn, so the condition is satisfied in the fake-barn case, which Goldman himself later recognized. The causal condition also has difficulty with knowledge of general and mathematical truths, which do not stand in causal relations to beliefs.
+
+\paragraph{Sensitivity.} \citet{Nozick1981} proposed that if $p$ were false, the subject would not believe that $p$. Sensitivity handles the fake-barn case, but it violates closure: a subject can know that she has hands and not know that she is not a handless brain in a vat, since if she were a brain in a vat she would still believe she was not. Kripke's red-barn case, discussed in Section~4, shows that the failure of closure is not confined to sceptical hypotheses.
+
+\paragraph{Reliability.} Process reliabilism holds that a belief is justified, and on some versions known, if it is produced by a reliable process \citep{Goldman1979}. Henry's perceptual process is reliable in normal environments, and the question whether it is reliable in the fake-barn region depends on how the process is described. Reliabilism thus faces the generality problem in its most acute form, and its verdict on the central case depends on it.
+
+\paragraph{Virtue.} Virtue epistemologies hold that knowledge is true belief whose truth is creditable to the subject's cognitive abilities \citep{Sosa2007,Greco2010}. In the fake-barn case, Henry's true belief seems to be creditable to his perceptual abilities, which are functioning perfectly, and pure virtue theories have difficulty explaining why he does not know \citep{Pritchard2012}.
+
+Each proposal fixes on a feature present in some Gettier cases and absent in others. What is present in all of them, we argue, is the modal feature that safety captures.
+
+We argue that the two conclusions drawn from this history are premature. The common structure of the Gettier cases, which Zagzebski's recipe makes explicit, is that the subject's belief is true, but would easily have been false given the basis on which it was formed. This is the condition that the safety literature has identified \citep{Sosa1999,Williamson2000,Pritchard2005}. Our contribution is to show that safety, added to justified belief, gives an exact analysis: it is necessary and sufficient for knowledge, it renders the truth condition redundant, and it coincides with the absence of the kind of luck that the Gettier cases exhibit. Section~2 sets out the framework, Section~3 states and proves the main results, Section~4 applies them to the cases, Section~5 answers objections, and Section~6 relates the analysis to other results in the collection.
+
+\section{Framework}
+
+\subsection{Worlds and closeness}
+
+We assume a set of possible worlds and a relation of \emph{closeness} between worlds. For worlds $w$ and $v$, $C(w,v)$ means that $v$ is close to $w$: that things could easily have been as they are at $v$, given how they are at $w$. We impose one structural condition on closeness.
+
+\begin{assumption}[Centring]\label{a:centring}
+Every world is close to itself: $C(w,w)$ for all $w$.
+\end{assumption}
+
+Assumption~\ref{a:centring} is the minimal condition that makes closeness a notion of modal proximity: whatever actually happens could easily have happened. We do not assume that closeness is symmetric or transitive, and we do not assume that it is determined by a similarity metric. We return to the question of what fixes closeness in Section~5.
+
+\subsection{Belief, basis and justification}
+
+Beliefs are formed on bases: perception, testimony, inference from evidence, memory and so on. A basis is individuated finely enough to include the evidence the subject relies on and the way in which she relies on it. We write $B_m(S, p, w)$ for \enquote{at $w$, $S$ believes that $p$ on basis $m$} and $J_m(S,p,w)$ for \enquote{at $w$, $S$ is justified in believing that $p$ on basis $m$}.
+
+We take justification as primitive. Nothing in the analysis depends on which theory of justification is correct, but the results of EPI-06 apply: justification is an internalist notion, while the safety condition, which concerns the relation between the subject and the world, is externalist. The analysis therefore combines an internalist and an externalist component, as EPI-06 recommends.
+
+\subsection{Safety}
+
+\begin{definition}[Safety]\label{d:safety}
+$S$'s belief that $p$, formed at $w$ on basis $m$, is \emph{safe} if and only if, for every world $v$ close to $w$ at which $S$ believes that $p$ on basis $m$, $p$ is true at $v$:
+\[
+\mathrm{Safe}_m(S,p,w) \iff \forall v\,\big(C(w,v) \wedge B_m(S,p,v) \to p(v)\big).
+\]
+\end{definition}
+
+Definition~\ref{d:safety} follows \citet{Williamson2000} and \citet{Pritchard2005}. It differs from \citet{Nozick1981}'s sensitivity condition, which requires that if $p$ were false, $S$ would not believe it. Sensitivity looks at the closest worlds where $p$ is false; safety looks at the close worlds where $S$ believes that $p$. The difference matters for cases discussed in Section~4.
+
+\begin{definition}[Knowledge]\label{d:knowledge}
+$S$ knows that $p$ at $w$ if and only if there is a basis $m$ such that, at $w$, $S$ believes that $p$ on basis $m$, is justified in so believing, and the belief is safe:
+\[
+K(S,p,w) \iff \exists m\,\big(B_m(S,p,w) \wedge J_m(S,p,w) \wedge \mathrm{Safe}_m(S,p,w)\big).
+\]
+\end{definition}
+
+\subsection{Gettier cases}
+
+To state the main result, we need a characterization of the Gettier cases that does not presuppose the analysis. We use the structure that Gettier's examples, and Zagzebski's recipe, have in common.
+
+\begin{definition}[Gettier case]\label{d:gettier}
+A \emph{Gettier case} is a situation in which $S$ has a justified true belief that $p$ on basis $m$ at $w$, and there is a world $v$ close to $w$ at which $S$ believes that $p$ on the same basis $m$ while $p$ is false.
+\end{definition}
+
+The definition captures the idea that the subject's belief is true by luck: given everything about how she came to believe it, the belief could easily have been false. In Gettier's first case, the close world is one in which Smith does not have ten coins in his pocket (he left some at home), while everything about his evidence concerning Jones remains the same. In the fake-barn case, the close world is one in which Henry's eyes fall on a facade rather than on the one real barn. We check these and other cases in Section~4.
+
+\section{Main results}
+
+\begin{theorem}[Truth is redundant]\label{t:truth}
+If $S$'s belief that $p$ on basis $m$ at $w$ is safe, then $p$ is true at $w$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:centring}, $w$ is close to itself. Since $S$ believes that $p$ on basis $m$ at $w$, safety requires that $p$ be true at $w$.
+\end{proof}
+
+\begin{corollary}\label{c:factive}
+Knowledge is factive: if $K(S,p,w)$ then $p$ is true at $w$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Definition~\ref{d:knowledge} and Theorem~\ref{t:truth}.
+\end{proof}
+
+Corollary~\ref{c:factive} shows that the analysis does not need a separate truth condition. Knowledge, on Definition~\ref{d:knowledge}, is justified safe belief, and its factivity follows from the centring of closeness. This is a small but significant gain over the traditional analysis, in which the truth condition was an independent requirement whose relation to the others was unexplained.
+
+\begin{theorem}[Characterization]\label{t:char}
+Suppose that $S$ believes that $p$ on basis $m$ at $w$, is justified in so believing, and that $p$ is true at $w$. Then $S$'s belief is safe if and only if the situation is not a Gettier case.
+\end{theorem}
+
+\begin{proof}
+Suppose the belief is safe, and let $v$ be close to $w$ with $S$ believing that $p$ on basis $m$ at $v$. By safety, $p$ is true at $v$. Hence there is no close world at which $S$ believes that $p$ on basis $m$ while $p$ is false, and the situation is not a Gettier case.
+
+Conversely, suppose the situation is not a Gettier case, and let $v$ be close to $w$ with $S$ believing that $p$ on basis $m$ at $v$. If $p$ were false at $v$, the situation would satisfy Definition~\ref{d:gettier}, since $S$ has a justified true belief at $w$. So $p$ is true at $v$, and the belief is safe.
+\end{proof}
+
+\begin{corollary}\label{c:gettier}
+A justified true belief on a given basis fails to be knowledge on that basis if and only if it is a Gettier case.
+\end{corollary}
+
+Theorem~\ref{t:char} is, formally, a short argument, and the formalization confirms that it uses nothing beyond the definitions. Its philosophical content lies in Definition~\ref{d:gettier}: the claim that what is wrong in a Gettier case is that the belief could easily have been false on the same basis. If that characterization is correct, the Gettier problem is solved by the safety condition, not merely patched. The remaining task is to show that the characterization fits the cases.
+
+\subsection{Formalization}
+
+Definitions~\ref{d:safety} to \ref{d:gettier} and Theorems~\ref{t:truth} and \ref{t:char} are formalized in \nolinkurl{Philosophy/EPI/EPI_01.lean}. Worlds, subjects, propositions, bases, closeness, belief and justification are primitive; Assumption~\ref{a:centring} is the only axiom about them.
+
+\begin{lstlisting}
+theorem characterization {S : Subject} {p : Proposition}
+    {m : Basis} {w : World}
+    (hb : Believes S p m w) (hj : Justified S p m w) (ht : p w) :
+    Safe S p m w ↔ ¬ GettierCase S p m w
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_01.truth_redundant' depends on axioms:
+  [Basis, Believes, Close, Subject, World, centring]
+\end{lstlisting}
+
+\section{The cases}
+
+\paragraph{Gettier's first case.} Smith believes that the man who will get the job has ten coins in his pocket, on the basis of inference from his evidence about Jones. The belief is true because Smith himself has ten coins and will get the job. There are close worlds in which Smith has nine coins, or in which someone other than Smith or Jones gets the job, and in which Smith believes the same proposition on the same basis. The belief is unsafe, and it is a Gettier case.
+
+\paragraph{Gettier's second case.} Smith believes that either Jones owns a Ford or Brown is in Barcelona, inferred from his evidence that Jones owns a Ford. Jones does not own a Ford, but by coincidence Brown is in Barcelona. In close worlds Brown is elsewhere, and Smith's belief, on the same basis, is false. Unsafe.
+
+\paragraph{Fake barns.} Henry drives through a region in which almost every barn is a facade; he looks at the one real barn and believes that it is a barn \citep{Goldman1976}. In close worlds his gaze falls on a facade, and he believes, on the same perceptual basis, that what he sees is a barn. The belief is unsafe. Note that whether it is unsafe depends on how the proposition is individuated: Henry's belief that \emph{that} object is a barn, where \enquote{that} refers to the real barn, is not false in any world in which he looks at the same object. The analysis therefore requires that safety be assessed for the proposition the subject would believe on the same basis in the close worlds, which is the proposition expressed by \enquote{what I am looking at is a barn}. We take this to be the natural reading of the case.
+
+\paragraph{Russell's clock.} A subject looks at a clock that stopped exactly twelve hours ago and forms a true belief about the time. In close worlds she looks a few minutes earlier or later and forms a false belief on the same basis. Unsafe.
+
+\paragraph{Zagzebski's recipe.} Take any case of justified false belief, and add a stroke of good luck that makes the belief true while leaving the basis unchanged \citep{Zagzebski1994}. The resulting belief is justified and true. It is unsafe, because the case without the stroke of luck is close: the luck consists precisely in the fact that the belief could easily have been false. Zagzebski's argument shows that no condition on justification alone can exclude such cases; it does not touch a condition on the modal profile of the belief, such as safety.
+
+\paragraph{Lotteries.} A subject believes that her ticket will lose, on the basis of the odds. The belief is justified and true. It is unsafe, since there is a close world in which her ticket wins and she believes, on the same basis, that it will lose. The analysis therefore classifies lottery beliefs as non-knowledge, in agreement with EPI-09.
+
+\paragraph{The red barn.} \citet{Kripke2011} pointed out that, in the fake-barn region, if all the facades are blue and the one real barn is red, Henry knows that he sees a red barn but, on Nozick's sensitivity account, does not know that he sees a barn, which violates closure. Safety gives the right verdict for both propositions. In close worlds where Henry believes on the same basis that he sees a red barn, he sees the real barn, so the belief is safe; and his belief that he sees a barn, if formed by inference from his belief that he sees a red barn, is a belief on a different basis from his purely perceptual belief that he sees a barn, and is safe on that basis. The perceptual belief remains unsafe. This is the correct result: Henry can come to know that he sees a barn by reasoning from the colour, but not by looking at its shape.
+
+\section{Comparison with the rivals}
+
+The cases of Section~4 allow a direct comparison between safety and the conditions reviewed in Section~1.1. The table records whether each condition, added to justified true belief, classifies the case correctly.
+
+\begin{center}\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & No false & Undefeated & Causal & Sensitive & Reliable & Safe \\
+ & lemmas & & & & & \\
+\midrule
+Gettier I (coins) & yes & yes & yes & yes & yes & yes \\
+Gettier II (Barcelona) & yes & yes & yes & yes & ? & yes \\
+Fake barns & no & yes & no & yes & ? & yes \\
+Red barn & yes & yes & yes & no & ? & yes \\
+Russell's clock & yes & yes & yes & yes & ? & yes \\
+Lottery & no & ? & yes & yes & no & yes \\
+Tom Grabit & yes & no & yes & yes & yes & yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A question mark indicates that the verdict depends on how the generality problem is resolved. The table is not an argument that safety is correct; it records that, on the standard cases, safety is the only condition that never errs, and that its rivals err in different places. This pattern is what one would expect if safety captured the feature that the other conditions approximate. No false lemmas and causal connection approximate it in inferential and perceptual cases respectively; defeasibility approximates it by asking whether the subject's evidence would survive the discovery of further truths; sensitivity approximates it by looking at the closest worlds where $p$ is false, which often, but not always, are close worlds where the subject believes $p$ on the same basis.
+
+\section{Closure}
+
+The analysis has a structural consequence that its rival, sensitivity, lacks.
+
+\begin{proposition}\label{p:closure}
+Suppose $S$'s belief that $p$ on basis $m$ is safe at $w$, that $p$ entails $q$, and that $S$ believes $q$ on a basis $m'$ of competent deduction from her belief that $p$ on basis $m$, so that in every world in which she believes $q$ on $m'$ she believes $p$ on $m$. Then her belief that $q$ on $m'$ is safe at $w$.
+\end{proposition}
+
+\begin{proof}
+Let $v$ be close to $w$ with $S$ believing $q$ on $m'$ at $v$. Then $S$ believes $p$ on $m$ at $v$, so by safety $p$ is true at $v$, and since $p$ entails $q$, $q$ is true at $v$.
+\end{proof}
+
+Proposition~\ref{p:closure} shows that safety is closed under competent deduction, which is the form of closure defended in EPI-20. Together with closure of justification under competent deduction, which we do not discuss, it yields closure of knowledge. The proposition is formalized in the module. It also explains the red-barn case of Section~4: Henry's belief that he sees a barn, deduced from his safe belief that he sees a red barn, is safe on its deductive basis, while his purely perceptual belief that he sees a barn is not.
+
+\section{Inductive knowledge}
+
+A test for any modal condition on knowledge is whether it allows ordinary inductive knowledge. Sensitivity notoriously does not. \citet{Sosa1999} gives the example of a subject who drops a bag of rubbish down the chute of a high-rise building and believes, on the basis of long experience, that it has reached the basement. If it had not reached the basement, because it had snagged on the way down, she would still believe that it had. Her belief is insensitive, yet she knows.
+
+\begin{proposition}\label{p:induction}
+A belief formed by reliable induction is safe whenever the worlds in which the inductive basis leads to a false conclusion are not close.
+\end{proposition}
+
+\begin{proof}
+Immediate from Definition~\ref{d:safety}: safety quantifies only over close worlds in which the subject believes on the same basis.
+\end{proof}
+
+In the rubbish chute case, worlds in which the bag snags are not close: the chute has worked for years, and nothing in the actual situation makes a snag easy. The belief is safe, and the analysis gives the right verdict. The contrast with sensitivity is instructive. Sensitivity asks what the subject would believe in the closest world in which her belief is false, however remote that world is; safety asks only whether such worlds are close. Inductive knowledge is possible precisely because the worlds in which induction fails are typically remote, and an analysis of knowledge must allow remote error. Safety does; sensitivity does not.
+
+\section{Vagueness and margins for error}
+
+Closeness is vague: there is no sharp boundary between the worlds that are close to the actual world and those that are not. It follows that safety, and therefore knowledge, is vague. We regard this as a virtue. The application of \enquote{knows} is vague in the same places where closeness is vague, for example in lottery cases with very large numbers of tickets, or in perceptual cases at the limits of discrimination.
+
+On the view of vagueness defended in MET-18, vague predicates have sharp but unknowable boundaries. Applied here, it implies that there is a sharp boundary between knowledge and its absence, which we cannot locate. This has a familiar consequence, first drawn by \citet{Williamson2000}: knowledge requires a margin for error. If a subject knows that $p$ on a basis that would, in a slightly different situation, have led her to believe $p$ falsely, then she does not know. Margin-for-error principles follow from safety, given that slightly different situations are close.
+
+\begin{proposition}\label{p:margin}
+If $S$ knows that $p$ on basis $m$ at $w$, then $p$ is true at every close world at which $S$ believes that $p$ on basis $m$.
+\end{proposition}
+
+\begin{proof}
+This is Definition~\ref{d:safety}, applied to the safe belief required by Definition~\ref{d:knowledge}.
+\end{proof}
+
+Proposition~\ref{p:margin} is the general form of Williamson's margin principles. It has the consequence, which Williamson uses against the KK principle, that a subject may know that $p$ without knowing that she knows it, since the worlds that are close to the close worlds may include worlds in which her belief is false. LOG-11-a uses the same consequence in its treatment of the surprise examination, where it shows that the students cannot rely on knowledge of their own knowledge.
+
+\section{Testimony}
+
+The analysis applies to testimonial knowledge without modification. A hearer who believes that $p$ on the basis of a speaker's testimony knows that $p$ if her belief is justified and safe. Her belief is safe if, in close worlds in which she believes $p$ on the same testimonial basis, $p$ is true. Since the testimonial basis includes the speaker's reliability with respect to $p$, the hearer's belief is safe when, and because, the speaker's belief is safe. This is the formal counterpart of the thesis of EPI-08 that testimony transmits knowledge but does not generate it: a hearer cannot acquire a safe belief from a speaker whose belief is unsafe, since the close worlds in which the speaker's belief is false are close worlds in which the hearer believes on the same basis and is wrong.
+
+\section{A taxonomy of luck}
+
+The analysis claims that knowledge excludes one kind of luck. It is worth distinguishing it from the kinds it does not exclude \citep{Pritchard2005}.
+
+\emph{Content luck} is luck that the proposition believed is true at all: it is lucky that the subject's lottery ticket is the winning one, but a subject who reads the result in a reliable newspaper knows that it won. \emph{Capacity luck} is luck that the subject is capable of knowing at all: it is lucky that she was born with working eyes, but she knows what she sees. \emph{Evidential luck} is luck that the subject has the evidence she has: it is lucky that she happened to walk past the window at the moment of the robbery, but she knows who the robber was. None of these is incompatible with knowledge, and none makes a belief unsafe, because in each case the close worlds in which the subject believes on the same basis are worlds in which the belief is true. A subject who reads the result in a newspaper believes on a basis that, in close worlds, delivers the true result, whatever that result is.
+
+\emph{Veritic luck} is luck that the belief is true, given the basis on which it is held. This is the luck present in the Gettier cases, and it is exactly what unsafety measures: a belief is veritically lucky when there are close worlds in which the subject holds it on the same basis and it is false. Theorem~\ref{t:char} can therefore be read as the statement that knowledge is incompatible with veritic luck and with no other kind.
+
+\emph{Environmental luck}, the luck of Henry in the fake-barn region, is a species of veritic luck: it is luck that, given his basis, the belief is true, because his environment makes false beliefs on the same basis easy. \emph{Reflective luck} is luck from the subject's own point of view: a belief may be safe without the subject being in a position to tell that it is. Reflective luck is compatible with knowledge on our analysis, as it is on any externalist analysis, but not with reflective knowledge in the sense of \citet{Sosa2007}. The analysis is an analysis of knowledge, not of reflective knowledge, and it does not claim that every knower can tell, from the inside, that her belief is safe.
+
+\section{Recent work}
+
+The recent literature on safety has moved in two directions. The first combines safety with an ability condition. \citet{Pritchard2012} argues that safety alone is insufficient, because a belief can be safe through no credit to the subject, as when a benevolent demon ensures that whatever a subject believes about a certain matter is true. His anti-luck virtue epistemology requires both safety and that the subject's true belief be the product of her cognitive ability. We agree that the demon case shows that safety alone is not sufficient, and our analysis does not claim that it is: it requires justification as well, and a subject whose beliefs are true only because of a demon's intervention, without any grounds, is not justified. The justification condition in Definition~\ref{d:knowledge} therefore does the work that Pritchard's ability condition does, without requiring a separate theory of abilities.
+
+The second direction presses counterexamples to the necessity of safety. \citet{Bogardus2014} describes a subject who reads the time from an atomic clock that, through a radioactive accident, could easily have malfunctioned, but did not. The subject seems to know the time, yet her belief seems unsafe. We reply as we did to Comesa{\~n}a's case in the next section: the basis of the subject's belief is the reading of a functioning clock, and in close worlds in which the clock malfunctions, the subject is reading a malfunctioning clock, which is a different basis. If bases are individuated more coarsely, the case becomes a Gettier case, and the verdict that the subject knows becomes doubtful. In either case, the analysis is preserved.
+
+\section{Objections}
+
+\begin{objection}[Unsafe knowledge]
+\citet{Comesana2005} describes a case in which a host at a Halloween party tells a guest the way to the party, intending to direct anyone who asks to the wrong house, but happening to give the right directions to this guest because the guest is the host's friend. The guest seems to know where the party is, yet there are close worlds in which he is misdirected while believing on the same basis.
+\end{objection}
+
+\begin{reply}
+The case turns on the individuation of the basis. The guest believes on the basis of testimony from someone who, as it happens, is disposed to tell him the truth, because he is the host's friend. In close worlds in which the host misdirects him, the host is not disposed to tell him the truth, and the guest's basis, which includes the reliability of the testimony he receives, is different. Once bases are individuated so as to include the features of the testimonial source that make it reliable for the subject, the belief is safe. If instead the basis is individuated so coarsely that it includes testimony from a misdirecting host, the case is a Gettier case and the guest does not know, which is the verdict many readers give on reflection.
+\end{reply}
+
+\begin{objection}[Generality]
+Safety depends on the individuation of bases, and there is no principled way to individuate them. This is the generality problem familiar from reliabilism \citep{ConeeFeldman1998}.
+\end{objection}
+
+\begin{reply}
+The objection is correct that the analysis requires an individuation of bases, and we have relied on intuitive individuations in Section~4. We accept that the analysis is in this sense non-reductive: it explains knowledge in terms of a notion of basis that is not itself reduced. But the same is true of every analysis that has any chance of being correct, including those that appeal to evidence or to reasons. An analysis can be informative without being reductive, provided its primitive notions are independently intelligible and do not presuppose the analysandum. Bases do not presuppose knowledge: whether a belief is formed by perception, inference or testimony is a question about its causal and psychological history.
+\end{reply}
+
+\begin{objection}[Necessary truths]
+If $p$ is a necessary truth, every belief that $p$ is safe by Definition~\ref{d:safety}, since $p$ is true in every world. So a subject who believes a necessary truth on the basis of a lucky guess would count as knowing it, provided she is justified.
+\end{objection}
+
+\begin{reply}
+The case requires that the guess be justified, which it is not. In the cases that remain, where a subject has a justified but defective basis for believing a necessary truth, we accept the amendment proposed by \citet{Pritchard2005}: safety should be assessed not only for the proposition believed but for the propositions that the subject would believe on the same basis in close worlds. A subject who reaches a true mathematical belief by a method that would easily have produced false mathematical beliefs does not have a safe basis, even though the particular proposition could not have been false. The amendment requires no change to the formal results, since it only changes what is quantified over in Definition~\ref{d:safety}.
+\end{reply}
+
+\begin{objection}[Knowledge first]
+\citet{Williamson2000} argues that knowledge is the most general factive mental state and cannot be analysed into a non-factive mental component and further conditions. The present analysis is such an analysis.
+\end{objection}
+
+\begin{reply}
+Williamson's argument is directed at analyses that decompose knowledge into a purely internal component and an external component. Definition~\ref{d:knowledge} is not of that form: safety is a relation between the subject's belief and the world, and it is not a further condition added to an internal state. We regard the analysis as compatible with the core of the knowledge-first programme, namely the thesis that knowledge is a unified mental state. What it denies is only that the state cannot be informatively characterized. EPI-01-c pursues this line.
+\end{reply}
+
+\section{Relations to other results}
+
+The analysis bears on several other families in the collection. On closure (EPI-20), Proposition~\ref{p:closure} shows that safety is preserved under competent deduction, which supports the thesis that closure holds. On contextualism (EPI-13), the closeness relation is a natural locus for context-sensitivity: what counts as a close world may vary with the stakes and the alternatives salient in the context of attribution. On the value of knowledge (EPI-14), safety explains why knowledge is more stable than mere true belief: a safe belief is one that does not easily become false, which is the property Plato's image of the tethered statues describes.
+
+\section{What the analysis is for}
+
+A final question concerns the point of an analysis of knowledge. \citet{Williamson2000} argues that knowledge is a primitive in epistemology, and that the failure of analysis after Gettier is evidence that none is possible. Even if Definition~\ref{d:knowledge} is correct, one may ask what is gained by it.
+
+We see three gains. First, the analysis unifies the Gettier cases. Without it, they appear as a heterogeneous collection of counterexamples, each requiring its own repair; with it, they appear as instances of a single phenomenon, the unsafety of a justified true belief, which Corollary~\ref{c:gettier} characterizes exactly. Second, the analysis explains structural features of knowledge that would otherwise be unexplained: its factivity (Corollary~\ref{c:factive}), its closure under competent deduction (Proposition~\ref{p:closure}), its compatibility with inductive error in remote worlds (Proposition~\ref{p:induction}), and its failure to iterate (Proposition~\ref{p:margin}). Third, the analysis locates the externalist component of knowledge precisely, in the modal relation between belief and world, and so clarifies the division of labour between epistemic justification, which is internal, and knowledge, which is not (EPI-06).
+
+None of these gains requires that the analysis be reductive. Closeness and basis are not defined, and it is open to a knowledge-first theorist to hold that they cannot be understood without the concept of knowledge. What the analysis shows is that knowledge is related to them in a systematic way, and this is enough for the explanatory work just described.
+
+\section{Conclusion}
+
+Knowledge is safe, justified belief; its truth follows from its safety. Gettier cases are exactly those in which a justified true belief is unsafe. The analysis survives the cases that defeated its predecessors because it locates the defect of the Gettier cases where it lies: not in the subject's justification, which is impeccable, but in the modal relation between her belief and the world. The price of the analysis is a reliance on the notions of closeness and basis, which it does not reduce. We have argued that the price is worth paying.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bogardus(2014)]{Bogardus2014} Bogardus, T. (2014). Knowledge under threat. \emph{Philosophy and Phenomenological Research}, 88(2), 289--313.
+\bibitem[Clark(1963)]{Clark1963} Clark, M. (1963). Knowledge and grounds: A comment on Mr. Gettier's paper. \emph{Analysis}, 24(2), 46--48.
+\bibitem[Comesa{\~n}a(2005)]{Comesana2005} Comesa{\~n}a, J. (2005). Unsafe knowledge. \emph{Synthese}, 146(3), 395--404.
+\bibitem[Conee and Feldman(1998)]{ConeeFeldman1998} Conee, E. and Feldman, R. (1998). The generality problem for reliabilism. \emph{Philosophical Studies}, 89(1), 1--29.
+\bibitem[Gettier(1963)]{Gettier1963} Gettier, E.~L. (1963). Is justified true belief knowledge? \emph{Analysis}, 23(6), 121--123.
+\bibitem[Goldman(1967)]{Goldman1967} Goldman, A.~I. (1967). A causal theory of knowing. \emph{The Journal of Philosophy}, 64(12), 357--372.
+\bibitem[Goldman(1976)]{Goldman1976} Goldman, A.~I. (1976). Discrimination and perceptual knowledge. \emph{The Journal of Philosophy}, 73(20), 771--791.
+\bibitem[Goldman(1979)]{Goldman1979} Goldman, A.~I. (1979). What is justified belief? In G.~S. Pappas (Ed.), \emph{Justification and Knowledge} (pp.~1--23). Reidel.
+\bibitem[Greco(2010)]{Greco2010} Greco, J. (2010). \emph{Achieving Knowledge: A Virtue-Theoretic Account of Epistemic Normativity}. Cambridge University Press.
+\bibitem[Kripke(2011)]{Kripke2011} Kripke, S.~A. (2011). Nozick on knowledge. In \emph{Philosophical Troubles: Collected Papers, Volume 1} (pp.~162--224). Oxford University Press.
+\bibitem[Lehrer and Paxson(1969)]{LehrerPaxson1969} Lehrer, K. and Paxson, T. (1969). Knowledge: Undefeated justified true belief. \emph{The Journal of Philosophy}, 66(8), 225--237.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Pritchard(2005)]{Pritchard2005} Pritchard, D. (2005). \emph{Epistemic Luck}. Oxford University Press.
+\bibitem[Pritchard(2012)]{Pritchard2012} Pritchard, D. (2012). Anti-luck virtue epistemology. \emph{The Journal of Philosophy}, 109(3), 247--279.
+\bibitem[Shope(1983)]{Shope1983} Shope, R.~K. (1983). \emph{The Analysis of Knowing: A Decade of Research}. Princeton University Press.
+\bibitem[Sosa(1999)]{Sosa1999} Sosa, E. (1999). How to defeat opposition to Moore. \emph{Philosophical Perspectives}, 13, 141--153.
+\bibitem[Sosa(2007)]{Sosa2007} Sosa, E. (2007). \emph{A Virtue Epistemology: Apt Belief and Reflective Knowledge, Volume I}. Oxford University Press.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\bibitem[Zagzebski(1994)]{Zagzebski1994} Zagzebski, L. (1994). The inescapability of Gettier problems. \emph{The Philosophical Quarterly}, 44(174), 65--73.
+\end{thebibliography}
+
+\end{document}

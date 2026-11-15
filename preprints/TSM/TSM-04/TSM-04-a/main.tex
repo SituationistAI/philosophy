@@ -1,0 +1,181 @@
+\documentclass{situationist-preprint}
+
+\title{Time Travel and the Grandfather Paradox}
+\msid{TSM-04-a}
+\msfamily{TSM-04}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/TSM/TSM\_04.lean}
+\mskeywords{time travel; grandfather paradox; causal loops; changing the past; self-consistency; branching time; Lewis}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A traveller goes back in time and tries to kill her grandfather before her parent is conceived. If she succeeds, she is never born and never makes the journey; so, it is argued, backward time travel is impossible. We argue that backward time travel is consistent provided the past is not changed, and that the grandfather paradox shows only that the traveller fails. Changing the past would require that one and the same time contain an event and its absence, which no history can. Affecting the past is another matter: a traveller can cause what happened, which then always was as she caused it to be. We model a history containing a causal loop as a fixed point of the causal dependencies around the loop, and prove three results: there are consistent histories in which the traveller arrives and tries; in every consistent history in which she arrives, her grandfather survives; and the setting in which she tries, circumstances favor her and she later departs has no consistent history at all. In branching time, the loop lies within a single history, and from the moment of her arrival her failure is settled.
+\end{abstract}
+
+\section{The problem}
+
+Backward time travel appears in physics as well as in fiction. \citet{Godel1949} found solutions of Einstein's field equations containing closed timelike curves, along which an object could return to its own past, and the subsequent literature has studied such spacetimes in detail \citep{Earman1995}. The philosophical objection is older and does not depend on physics. If backward travel were possible, a traveller could go back and kill her grandfather in his youth; she would then never be born, and so could not have travelled; so she both does and does not kill him. Since this is a contradiction, the objection runs, backward time travel is impossible.
+
+\citet{Lewis1976} gave the reply that has framed the debate since. Time travel requires only a discrepancy between the traveller's personal time and external time; it requires no change in the past. The traveller can, in one sense, kill her grandfather: she has the gun, the skill and the opportunity. In another sense she cannot, since her killing him is not compossible with the fact that he survived to have children. Both are true, because \enquote{can} is relative to a set of facts held fixed. The grandfather paradox shows that she will fail, not that she cannot travel. \citet{Horwich1975} reached a similar verdict, and later argued that a world with many time travellers would require improbable coincidences \citep{Horwich1987}; \citet{Smith1997} and \citet{Sider2002} answered that the improbability does not amount to impossibility.
+
+We defend Lewis's conclusion and give it a precise model. The model treats a history containing a causal loop as consistent if the course of events around the loop is a fixed point of the causal dependencies, which is the self-consistency condition stated for the grandfather case. Two features of the collection's view of time bear on the result. Time is constituted by the B-series (TSM-01), so a history is a single tenseless course of events and there is no second, changed version of any time. And the future is open in the sense of ACT-17-a: histories branch toward the future, and settledness is relative to moments. We show in Section~\ref{s:branch} that the loop lies within a single history and that this settles the traveller's failure from the moment of her arrival.
+
+\section{Framework}
+
+\begin{definition}[Time travel]\label{d:travel}
+A journey is \emph{time travel} if its duration in the traveller's personal time, measured by the processes that make up her life, differs from the separation in external time between departure and arrival \citep{Lewis1976}. It is \emph{backward} if the arrival is earlier in external time than the departure.
+\end{definition}
+
+\begin{definition}[History]\label{d:history}
+A \emph{history} is a complete course of events in external time: for each time and each kind of event, it settles whether an event of that kind occurs at that time. In a branching structure a history is a maximal linearly ordered set of moments, as in ACT-17-a.
+\end{definition}
+
+\begin{definition}[Changing the past]\label{d:change}
+To \emph{change the past} is to bring it about that an event that occurred at a time $t$ did not occur at $t$. To \emph{affect the past} is to cause an event that occurs at a time earlier than the cause.
+\end{definition}
+
+\begin{assumption}\label{a:onecourse}
+A history contains, for each time, one course of events: no event both occurs and does not occur at the same time on the same history.
+\end{assumption}
+
+\begin{principle}[Self-consistency]\label{p:consistency}
+A course of events containing a causal loop is possible if and only if it satisfies the causal dependencies around the loop: the value it assigns to each variable in the loop is the value that the dependencies return when given the values it assigns.
+\end{principle}
+
+\begin{definition}[Grandfather model]\label{d:model}
+Three facts are fixed independently of the loop: whether the traveller \emph{tries} to kill her grandfather on arrival; whether the circumstances are \emph{favorable}, that is, such that an attempt would succeed; and whether the adult traveller, if she exists, \emph{decides} to depart. The \emph{loop variable} $d$ records whether she departs. The dependencies are: she arrives if and only if $d$; her grandfather is killed if and only if she arrives, tries and the circumstances are favorable; she is born if and only if he is not killed; and she departs if and only if she is born and decides to depart. The \emph{loop map} sends $d$ to the value of \enquote{she departs} that these dependencies return.
+\end{definition}
+
+\begin{definition}[Consistent history]\label{d:consistent}
+Given the three fixed facts, a value $d$ of the loop variable yields a \emph{consistent history} if it is a fixed point of the loop map.
+\end{definition}
+
+The model is minimal. The variable \enquote{favorable} gathers whatever would make the difference between an attempt that succeeds and one that fails: the gun's condition, the grandfather's movements, the banana peel on which Lewis's traveller slips. Definition~\ref{d:consistent} applies Principle~\ref{p:consistency} to the grandfather case.
+
+\section{The argument}
+
+\begin{lemma}\label{l:nochange}
+The past cannot be changed.
+\end{lemma}
+
+\begin{proof}
+To change the past, by Definition~\ref{d:change}, is to bring it about that an event that occurred at $t$ did not occur at $t$. Then the event both occurs and does not occur at $t$. If this held on one history, Assumption~\ref{a:onecourse} would be violated; and an event's occurring at $t$ on one history and not on another is no change, since the two histories are two alternatives, not an earlier and a later state of one time.
+\end{proof}
+
+Lemma~\ref{l:nochange} is the familiar point that a time has no \enquote{before} and \enquote{after} versions. In a B-theoretic world there is nowhere for a second version of 1920 to be. REL-22-a draws the same conclusion about divine power, and notes the distinction between changing the past and affecting it, which Lemma~\ref{l:nochange} leaves untouched.
+
+\begin{theorem}[Consistency]\label{t:consistency}
+There is a consistent history in which the traveller arrives in the past and tries to kill her grandfather.
+\end{theorem}
+
+\begin{proof}
+Let her try, let the circumstances be unfavorable, and let her decide to depart; take $d$ true. She arrives; since the circumstances are unfavorable, her grandfather is not killed; so she is born; since she decides to depart, the loop map returns true. Hence $d$ is a fixed point.
+\end{proof}
+
+\begin{theorem}[Failure]\label{t:failure}
+In every consistent history in which the traveller arrives, her grandfather is not killed; and if she tries, the circumstances are unfavorable.
+\end{theorem}
+
+\begin{proof}
+Suppose $d$ is a fixed point and she arrives, so $d$ is true. If her grandfather were killed, she would not be born, would not depart, and the loop map would return false, contradicting the fixed-point condition. So he is not killed. Since he would be killed if she arrived, tried and the circumstances were favorable, if she tries the circumstances are unfavorable.
+\end{proof}
+
+\begin{proposition}\label{p:unrealized}
+If the traveller tries, the circumstances are favorable and she decides to depart, there is no consistent history.
+\end{proposition}
+
+\begin{proof}
+If $d$ is true, she arrives and kills him, is not born, and does not depart; the loop map returns false. If $d$ is false, she does not arrive, he survives, she is born and decides to depart; the loop map returns true. Neither value is a fixed point.
+\end{proof}
+
+Proposition~\ref{p:unrealized} is the grandfather paradox in the model. It does not show that something impossible happens when the setting obtains. It shows that the setting does not obtain in any consistent history: any history in which she departs and tries is one in which the circumstances defeat her. Together with Theorem~\ref{t:failure}, it gives the precise content of the claim that the paradox shows only that the traveller fails. Lewis's two senses of \enquote{can} fall out of the model: relative to the facts about her skill and equipment, which hold in the histories of Theorem~\ref{t:consistency} and are compatible with favorable circumstances, she can kill him; relative to the further fact that she arrived, which by Theorem~\ref{t:failure} excludes his death, she cannot.
+
+\section{Time travel in branching time}\label{s:branch}
+
+The collection's account of the future is branching: at a moment before a free choice there are histories through it on which the choice is made and histories on which it is not, and a future-tensed sentence is true at a moment only if it is settled there (ACT-17-a). Does backward time travel require histories that branch toward the past, or a traveller who passes from one history to another?
+
+It does not. A history is a maximal chain of moments ordered by external time, and a consistent loop is a course of events on one such chain: the departure (say in 2050) and the arrival (say in 1920) lie on the same history. What Principle~\ref{p:consistency} constrains is which chains there are. A history through the moment of the arrival must contain a departure that produces it, so the departure lies on every history through that moment. Two consequences follow. First, the traveller's failure is settled from the moment of her arrival: every history through that moment contains her later birth, hence her grandfather's survival, which is Theorem~\ref{t:failure} in the language of settledness. Second, her departure is settled from that moment on as well. By the contrapositive of the assumption in ACT-17-a that free choices are open at all earlier moments, the departure is not a free choice in that assumption's sense at the moments after her arrival; it may still be open at moments before 1920, on histories some of which contain no arrival at all. The decision to try, on the other hand, can be open at the moments between her arrival and her attempt, since both trying and not trying are consistent with his survival. The loop restricts which events are open at which moments; it does not require that the past branch.
+
+The traveller who arrives at a 1920 moment that does not lie on her own history, as in the many-worlds treatment of \citet{Deutsch1991}, has not travelled into her own past; whatever she does there does not touch the moments that precede her departure.
+
+\section{Objections and replies}
+
+\begin{objection}[Improbable coincidences]
+In a world with many attempts on the past, every attempt must fail through some accident. Such a run of accidents is enormously improbable; a theory that requires it is not credible \citep{Horwich1987}.
+\end{objection}
+
+\begin{reply}
+The objection concedes consistency, which is all the thesis claims. It also miscomputes the relevant probability. Conditional on the traveller's arrival, the probability that her attempt fails is one, by Theorem~\ref{t:failure}; the accidents are improbable only relative to a prior that ignores what the arrival entails \citep{Smith1997}. Whether worlds with many travellers are unlikely is a question about which consistent histories the laws favor, not about whether backward travel is possible.
+\end{reply}
+
+\begin{objection}[What she cannot do]
+On the most natural reading of the counterfactual, if she had tried to kill him she would have failed; and an agent who would fail whatever she tried cannot do it. So the traveller cannot kill her grandfather, and Lewis's sense in which she can is idle \citep{Vihvelin1996}.
+\end{objection}
+
+\begin{reply}
+The catalogue thesis requires only that she fails, and we grant the counterfactual. The model locates its truth: in every consistent history in which she arrives, the circumstances are unfavorable, so the nearest histories in which she tries are ones in which she fails. Whether this deprives her of an ability depends on the facts held fixed in ascribing abilities, which is Lewis's point; the time travel thesis does not turn on it.
+\end{reply}
+
+\begin{objection}[Hypertime]
+Perhaps the past can be changed after all, if there is a second temporal dimension in which 1920 is first one way and then, after the traveller arrives, another.
+\end{objection}
+
+\begin{reply}
+Then what changes is not the past of the traveller's world but the content of a hypertemporal sequence of whole histories. Each member of the sequence satisfies Assumption~\ref{a:onecourse}, and none contains a change of its own past, so Lemma~\ref{l:nochange} is not contradicted. The thesis that time travel is consistent provided the past is not changed applies to each history in the sequence; whether there is hypertime is a further question, on which we take no position.
+\end{reply}
+
+\begin{objection}[Chronology protection]
+Physics may forbid closed timelike curves, as the chronology protection conjecture proposes \citep{Hawking1992}. If so, time travel is impossible.
+\end{objection}
+
+\begin{reply}
+If the conjecture is true, backward travel is physically impossible in our world. The thesis concerns consistency: the grandfather paradox does not show that time travel is impossible, whatever physics shows. Where physicists study such spacetimes, they impose the self-consistency condition of \citet{Friedman1990}, which is Principle~\ref{p:consistency} in physical form.
+\end{reply}
+
+\section{Formalization}
+
+The grandfather model and Theorems~\ref{t:consistency} and~\ref{t:failure} and Proposition~\ref{p:unrealized} are formalized in \nolinkurl{Philosophy/TSM/TSM_04.lean}. The three fixed facts form a structure of Booleans; the dependencies of Definition~\ref{d:model} define a function from the loop variable to a course of events; a value is consistent when it is a fixed point of the loop map (Definition~\ref{d:consistent}).
+
+\begin{lstlisting}
+theorem consistency :
+    ∃ s d, Consistent s d ∧ (course s d).arrives = true ∧ s.tries = true
+
+theorem failure (s : Setting) (d : Bool) (hc : Consistent s d)
+    (ha : (course s d).arrives = true) :
+    (course s d).killed = false ∧ (s.tries = true → s.favorable = false)
+
+theorem paradox_unrealized (s : Setting) (ht : s.tries = true)
+    (hf : s.favorable = true) (hd : s.decides = true) :
+    ¬ ∃ d, Consistent s d
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.TSM_04.consistency' does not depend on any axioms
+'Philosophy.TSM_04.failure' depends on axioms: [propext]
+'Philosophy.TSM_04.paradox_unrealized' depends on axioms: [propext]
+\end{lstlisting}
+
+The module has no substantive axioms, because the model is given by definitions: \texttt{propext} is part of Lean's core logic. The philosophical premises, Principle~\ref{p:consistency} and the dependencies of Definition~\ref{d:model}, enter as these definitions, and the formalization checks the combinatorial core of the argument: that the fixed points are exactly as Theorems~\ref{t:consistency} and~\ref{t:failure} and Proposition~\ref{p:unrealized} state. It does not establish that the dependencies are the right ones or that consistent loops are possible; those are the premises.
+
+\section{Conclusion}
+
+The past cannot be changed, since a time cannot contain both an event and its absence. It can be affected, and a traveller who arrives in the past is a cause of what happened there. A history containing her journey is consistent if the events around the loop satisfy the dependencies among them, and there are such histories, including ones in which she tries to kill her grandfather. In all of them she fails. The grandfather paradox shows that the setting in which she would succeed is not realized in any consistent history, and that, from her arrival on, her failure is settled.
+
+\begin{thebibliography}{99}\small
+\bibitem[Deutsch(1991)]{Deutsch1991} Deutsch, D. (1991). Quantum mechanics near closed timelike lines. \emph{Physical Review D}, 44(10), 3197--3217.
+\bibitem[Earman(1995)]{Earman1995} Earman, J. (1995). \emph{Bangs, Crunches, Whimpers, and Shrieks: Singularities and Acausalities in Relativistic Spacetimes}. Oxford University Press.
+\bibitem[Friedman et~al.(1990)]{Friedman1990} Friedman, J., Morris, M.~S., Novikov, I.~D., Echeverria, F., Klinkhammer, G., Thorne, K.~S. and Yurtsever, U. (1990). Cauchy problem in spacetimes with closed timelike curves. \emph{Physical Review D}, 42(6), 1915--1930.
+\bibitem[G\"odel(1949)]{Godel1949} G\"odel, K. (1949). An example of a new type of cosmological solutions of Einstein's field equations of gravitation. \emph{Reviews of Modern Physics}, 21(3), 447--450.
+\bibitem[Hawking(1992)]{Hawking1992} Hawking, S.~W. (1992). Chronology protection conjecture. \emph{Physical Review D}, 46(2), 603--611.
+\bibitem[Horwich(1975)]{Horwich1975} Horwich, P. (1975). On some alleged paradoxes of time travel. \emph{The Journal of Philosophy}, 72(14), 432--444.
+\bibitem[Horwich(1987)]{Horwich1987} Horwich, P. (1987). \emph{Asymmetries in Time}. MIT Press.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). The paradoxes of time travel. \emph{American Philosophical Quarterly}, 13(2), 145--152.
+\bibitem[Sider(2002)]{Sider2002} Sider, T. (2002). Time travel, coincidences and counterfactuals. \emph{Philosophical Studies}, 110(2), 115--138.
+\bibitem[Smith(1997)]{Smith1997} Smith, N.~J.~J. (1997). Bananas enough for time travel? \emph{The British Journal for the Philosophy of Science}, 48(3), 363--389.
+\bibitem[Vihvelin(1996)]{Vihvelin1996} Vihvelin, K. (1996). What time travelers cannot do. \emph{Philosophical Studies}, 81(2--3), 315--330.
+\end{thebibliography}
+
+\end{document}

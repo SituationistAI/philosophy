@@ -1,0 +1,218 @@
+\documentclass{situationist-preprint}
+
+\title{Moral Progress Is Measurable}
+\msid{MTE-19-a}
+\msfamily{MTE-19}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_19.lean}
+\mskeywords{moral progress; expanding circle; moral status; moral realism; historicism; regress; measurement}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is moral progress real? Sceptics hold that what we call progress is change seen from the standpoint of its winners, and that there is no standard against which the moral outlook of one period can be ranked above another's. We argue that moral progress is real and measurable, as the expansion of the moral circle: the set of beings to whom a society's effective norms give due consideration. The standard against which expansion is measured is the correct circle, the beings who are owed consideration, which is fixed independently of any society's norms by the facts about idealized reactions defended in MTE-01. Relative to this standard, we define a measure and a relation of progress, and prove that progress strictly increases the measure, that it is a strict partial order, and that any two circles are comparable by the measure. We then show why the standard must be fixed: a standard set by the latest stage of a history makes regress at the end of that history impossible by definition. With a fixed standard, regress is possible, and the historical record shows that it has occurred. Moral progress is therefore real, but neither steady nor irreversible. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The abolition of chattel slavery, the extension of legal and political standing to women, the prohibition of judicial torture and the protection of animals from cruelty are commonly described as moral progress. The description implies more than change. It implies that later outlooks are better than earlier ones, and so that there is a standard by which both are judged. Two kinds of sceptic deny that there is. The relativist holds that each society's outlook is correct by its own standard and that there is no further standard; on this view, the abolition of slavery was a change in standards, not an improvement. The historicist critic of \enquote{Whig history} holds that judgments of progress are projections of present values onto the past, which inevitably find the past deficient by the measure of the present.
+
+The idea of moral progress as the widening of the range of beings whose interests are counted is old. \citet{Lecky1869} described the history of European morals as an expansion of sympathy from the family to the class, the nation and humanity, and finally to animals, and \citet{Darwin1871} made a similar suggestion about the extension of the social instincts. \citet{Singer1981} gave the image of the expanding circle its modern currency, arguing that reason, once it is applied to ethics, carries us beyond the group whose interests evolution first taught us to weigh. \citet{Pinker2011} assembled quantitative evidence for a long-term decline in violence, which he interpreted as evidence of moral improvement. \citet{BuchananPowell2018} argued that the expansion of the circle is real but fragile, depending on social conditions that reduce the perception of threat from outsiders and that can be reversed.
+
+Philosophical accounts of progress have been more cautious. \citet{MoodyAdams1999} argued that moral progress is better understood as the deepening of our grasp of moral concepts we already possess than as movement toward an independent standard. \citet{Jamieson2002} defended progress against relativist and historicist objections by appeal to the improvement of conditions by the standards of a broadly consequentialist morality. \citet{Kitcher2021} offered a pragmatist account on which progress is the solution of problems that arise within a moral practice, with no fixed endpoint.
+
+We argue that progress is measured against a fixed standard, and that the expansion of the moral circle is its measure. The standard is the correct circle. MTE-01 argues that moral facts are natural facts about idealized reactions, which do not vary with the actual attitudes of any agent; ETH-07 argues that sentience is necessary and sufficient for moral status, and that moral status varies with the capacity for welfare. Together they fix which beings are owed consideration and how much, independently of what any society believes. We show that, relative to this standard, progress is measurable, and that the standard does not make progress steady or irreversible.
+
+\section{Framework}
+
+\begin{definition}[Moral circle]\label{d:circle}
+The \emph{moral circle} of a society at a time is the set of beings to whom its effective norms give due consideration: whose interests are weighed, in the society's practices, laws and institutions, in proportion to their moral status.
+\end{definition}
+
+The circle is defined by effective norms, not by professed principles. A society that professes the equality of all persons while enslaving some of them does not give the enslaved due consideration, and they are outside its circle. The definition also concerns practices rather than individual attitudes: the circle is a property of a society's institutions and the conduct they sustain.
+
+\begin{definition}[The standard]\label{d:std}
+The \emph{standard} is the correct circle: the set of beings who are owed consideration.
+\end{definition}
+
+\begin{assumption}[Fixity]\label{a:fix}
+The standard is fixed independently of the norms of any society.
+\end{assumption}
+
+Assumption~\ref{a:fix} follows from MTE-01. A being is owed consideration if the idealized reactions of all agents converge on disapproval of acts that disregard its interests. By Corollary~6.3 of MTE-01, such facts do not vary with the actual attitudes of any agent, holding fixed the natures of agents and the circumstances of acts; and the norms of a society are a pattern of actual attitudes and the conduct they sustain. By ETH-07, the beings so owed are the sentient beings, with weight proportional to their capacity for welfare.
+
+\begin{definition}[Measure]\label{d:measure}
+Fix a finite class of beings, or of kinds of beings, relevant to a comparison. The \emph{measure} of a circle is the number of members of that class that belong both to the standard and to the circle.
+\end{definition}
+
+\begin{definition}[Progress]\label{d:progress}
+A circle $D$ is a \emph{progress} over a circle $C$ if $D$ includes every being in the standard that $C$ includes, and at least one relevant being in the standard that $C$ excludes.
+\end{definition}
+
+\begin{remark}[Graded consideration]\label{r:graded}
+Definitions~\ref{d:circle} to~\ref{d:progress} treat membership as all or nothing. Since moral status comes in degrees (ETH-07), and since societies may weigh the interests of a being less than its status warrants without disregarding them altogether, a more refined measure assigns to each being the proportion of its due weight that the society's norms give it, and sums over relevant beings. Progress in this sense includes the improvement of treatment within the circle, such as the abolition of judicial torture for citizens who were already counted, since it raises the weight given to their interest in not being tortured toward its due. The results of Section~\ref{s:results} hold for the graded measure with the same proofs, using sums in place of counts; we formalize only the all-or-nothing case.
+\end{remark}
+
+\section{Results}\label{s:results}
+
+\begin{theorem}\label{t:measure}
+If $D$ is a progress over $C$, the measure of $D$ is greater than the measure of $C$.
+\end{theorem}
+
+\begin{proof}
+Every relevant being in the standard that $C$ includes is included in $D$, so it is counted in the measure of $D$ whenever it is counted in the measure of $C$. In addition, at least one relevant being in the standard is included in $D$ and not in $C$, and it is counted in the measure of $D$ but not of $C$.
+\end{proof}
+
+\begin{proposition}\label{p:order}
+Progress is irreflexive and transitive: no circle is a progress over itself, and if $D$ is a progress over $C$ and $E$ over $D$, then $E$ is a progress over $C$.
+\end{proposition}
+
+\begin{proof}
+A circle cannot both include and exclude the same being, so it is not a progress over itself. If $D$ includes every standard being that $C$ includes, and $E$ every one that $D$ includes, then $E$ includes every one that $C$ includes; and the being that $D$ adds to $C$ is in $D$ and therefore in $E$, but not in $C$.
+\end{proof}
+
+\begin{proposition}\label{p:comp}
+Any two circles are comparable by the measure.
+\end{proposition}
+
+\begin{proof}
+The measure is a natural number, and natural numbers are totally ordered.
+\end{proof}
+
+Theorem~\ref{t:measure} and Proposition~\ref{p:order} say that progress is a strict partial order that the measure respects. Proposition~\ref{p:comp} says that the measure extends the order to a total comparison: even two circles neither of which is a progress over the other, because each includes some standard beings the other excludes, can be compared by the number of standard beings each includes. The measure loses information, since equal counts may conceal different patterns of inclusion, and it should not be used to say that a society that includes one group and excludes another has made progress over one that does the reverse merely because the first group is larger. But it makes moral progress measurable in the ordinary sense: there is a quantity whose increase is progress.
+
+The next result shows why the standard must be fixed. Suppose instead that each period is judged by the norms of the latest period, so that the standard is whatever circle the most recent society has.
+
+\begin{proposition}[Latest standard]\label{p:whig}
+If the standard is the circle of the latest stage of a history, no earlier stage of that history has a greater measure than the latest. Under such a standard, no history can end in a regress.
+\end{proposition}
+
+\begin{proof}
+Measured against the latest circle, an earlier circle counts only the beings it shares with the latest circle, and the latest circle counts all of its own members. So the earlier count is never greater.
+\end{proof}
+
+Proposition~\ref{p:whig} is the formal content of the historicist's complaint against Whig history, turned against the historicist's own alternative to a fixed standard. If progress is judged by present norms, then the present is, by definition, the best that history has produced, whatever it contains. A society that contracted its circle, excluding a group it had previously included, would count its contraction as progress by its own lights. A standard that can register regress must be independent of the history it measures. Assumption~\ref{a:fix} supplies such a standard.
+
+\begin{theorem}[Progress is real]\label{t:real}
+There have been transitions between historical circles that satisfy Definition~\ref{d:progress}.
+\end{theorem}
+
+\begin{proof}
+Consider the abolition of chattel slavery in the British Empire in 1833 and in the United States in 1865. Before abolition, the enslaved were outside the circle in the sense of Definition~\ref{d:circle}: their interests in liberty, in bodily security and in their family relationships were not weighed by the effective norms of the slaveholding societies. They are sentient beings and so belong to the standard. Abolition brought them within the scope of the law's protection of liberty and bodily security, and it did not remove from the circle any being in the standard who was previously included in it. The anti-cruelty statutes of the nineteenth century, beginning with the British act of 1822 against the cruel treatment of cattle, brought some animals within the circle in the graded sense of Remark~\ref{r:graded}, by giving some weight to their interest in not suffering. Each transition satisfies Definition~\ref{d:progress}, or its graded counterpart.
+\end{proof}
+
+The proof requires only that the standard include the beings brought within the circle, which, given ETH-07, is not in doubt. It does not require any judgment about the motives of those who brought the change about, or about its timing. ETH-23-a draws on this account in its treatment of judgments of past agents: if progress is real, the later standard of conduct can be better than the earlier one, and the same standard applies to the acts of those who held the earlier one.
+
+\section{Neither steady nor irreversible}
+
+\begin{definition}[Regress]\label{d:regress}
+A transition from circle $C$ to circle $D$ is a \emph{regress} if $C$ is a progress over $D$.
+\end{definition}
+
+\begin{proposition}\label{p:regress}
+The fixed standard is consistent with regress: there are histories in which a progress is followed by a regress.
+\end{proposition}
+
+\begin{proof}
+Take three relevant beings, all in the standard, and a history whose first stage includes one of them, whose second stage includes two, and whose third stage includes only the first again. By Definition~\ref{d:progress}, the second stage is a progress over the first, and the second is a progress over the third, so the transition from second to third is a regress.
+\end{proof}
+
+Proposition~\ref{p:regress} is a consistency result. That such histories are actual is shown by the record. The emancipation of the enslaved in the United States was followed, after the end of Reconstruction, by the systematic exclusion of their descendants from the protections of law in much of the country, in a regime of disenfranchisement, segregation and tolerated lynching that lasted for most of a century. The Jews of Germany, emancipated in the course of the nineteenth century, were excluded from the protection of law by the Nuremberg laws of 1935 and then subjected to genocide. In both cases, a group that had been brought within the circle was expelled from it, and the transitions satisfy Definition~\ref{d:regress}. Progress is therefore not irreversible.
+
+Nor is it steady. The expansions that the record shows were concentrated in particular periods, the late eighteenth and nineteenth centuries for the abolition of slavery and the mid-twentieth century for the extension of civil and political rights, and they were often preceded by long periods in which arguments for expansion were available and were not acted on. \citet{BuchananPowell2018} argue that expansion depends on conditions, such as the absence of perceived threat from outsiders, that can deteriorate, and that the inclusive dispositions that expansion requires are adaptively flexible rather than fixed. If so, expansion is neither guaranteed nor steady, and its reversal is to be expected where those conditions fail. Nothing in the measure presupposes otherwise. The measure is defined stage by stage, against a standard that does not depend on the history, and it is consistent with any pattern of advance and retreat.
+
+\section{Why the circle}
+
+It may be objected that the expansion of the circle is one dimension of moral progress among several, and that progress also consists in improved understanding of what is owed to those already within the circle, in better institutions for securing it, or in the refinement of moral concepts \citep{MoodyAdams1999}. We agree that these are improvements. Remark~\ref{r:graded} shows that the first two are captured by the graded measure, since they raise the weight that a society's norms give to the interests of beings toward their due. The third is progress in moral knowledge rather than in morality; it matters because it leads to the first two.
+
+The circle is the right measure for a further reason, which the account of MTE-01 explains. Moral facts are facts about idealized reactions, and the actual reactions of a society depart from idealization by ignorance, failure of imagination, error and partiality. The departures that have most affected the circle are partiality toward one's own group and ignorance or denial of the capacities of others. Each of the expansions in the record was driven by the correction of one or both: by the spread of information about the capacities and sufferings of the excluded, often through their own testimony, and by arguments that exposed the partiality of the norms that excluded them. Progress takes the form of expansion because expansion is what correction toward idealization yields when the principal departure from it is partiality.
+
+\section{Objections and replies}
+
+\begin{objection}[Parochialism]
+The standard is our standard. To measure past societies by it is to commit the error the historicist warns against.
+\end{objection}
+
+\begin{reply}
+The standard is not our circle. It is the correct circle, fixed by the facts about idealized reactions, and our own society's circle falls short of it as surely as past societies' did. Proposition~\ref{p:whig} shows that a standard set by the present would make the present unimprovable, and the historicist's complaint is properly a complaint against such a standard. A fixed standard implies that future societies may find ours deficient, and that some past societies may have included beings we exclude; it is the opposite of parochial.
+\end{reply}
+
+\begin{objection}[Overextension]
+A circle can expand in the wrong direction, by including beings that are not owed consideration, or by giving some beings more consideration than they are owed. Expansion as such is not progress.
+\end{objection}
+
+\begin{reply}
+The objection is correct, and Definition~\ref{d:progress} accommodates it. The measure counts only beings in the standard, so the inclusion of beings outside it does not increase the measure. Where the inclusion of such beings imposes costs on beings in the standard, as when the protection of an idol is purchased with the lives of its worshippers, it reduces the consideration given to the latter, and the graded measure registers a regress. Progress is the expansion of the circle toward the standard, not expansion simpliciter.
+\end{reply}
+
+\begin{objection}[Population]
+The measure counts beings, so it increases with population. A society that grows without changing its norms would appear to progress.
+\end{objection}
+
+\begin{reply}
+The measure is relative to a class of beings fixed for the comparison (Definition~\ref{d:measure}). Comparisons across periods use a common class, which may be a class of kinds of beings, such as the enslaved, women, children, prisoners, foreigners, animals of various kinds, rather than of individuals. The measure then registers changes in norms, not in numbers. The formalization fixes the relevant class in the same way.
+\end{reply}
+
+\begin{objection}[Kitcher's pragmatism]
+Progress need not be movement toward a fixed endpoint. It can be the solution of problems that arise within a practice, as progress in medicine is the solution of medical problems rather than approach to a final state of health \citep{Kitcher2021}.
+\end{objection}
+
+\begin{reply}
+The pragmatist picture requires a criterion of when a problem has been solved rather than merely dissolved or suppressed. The exclusion of a group from the circle is a problem for those excluded, and it can be \enquote{solved}, from the standpoint of the excluding society, by silencing them. What distinguishes the abolition of slavery from the suppression of a slave revolt is that the first meets the claims of the excluded and the second does not, and that distinction requires a standard of what those claims are. The fixed standard is not a final state to which history tends; it is the measure against which each of its states is assessed.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that the present circle is the correct one, or that any society has reached the standard. It does not predict that progress will continue, and it gives no ground for expecting history to tend toward the standard. It does not settle the membership of the standard at its margins, such as the status of beings whose sentience is uncertain, which depends on the evidence considered by ETH-07. And it does not establish that there is a corresponding progress in other domains of value. AES-16 argues that there is progress in artistic means but not in artistic value; the contrast is that moral progress is measured against a fixed standard, the correct circle, while artistic value has no fixed aim of this kind.
+
+\section{Formalization}
+
+The results of Section~\ref{s:results} and Proposition~\ref{p:regress} are formalized in \nolinkurl{Philosophy/MTE/MTE_19.lean}. Beings form a primitive type, a circle is a Boolean predicate of beings, and the standard and the finite list of relevant beings are axioms; the fixity of the standard (Assumption~\ref{a:fix}) is reflected in its being a constant rather than a function of a history. The measure counts the relevant beings included in both the circle and the standard.
+
+\begin{lstlisting}
+def Progress (c d : Circle) : Prop :=
+  (∀ b, standard b = true → c b = true → d b = true) ∧
+  ∃ b, b ∈ relevant ∧ standard b = true ∧
+    d b = true ∧ c b = false
+
+theorem progress_increases (c d : Circle)
+    (h : Progress c d) : measure c < measure d
+
+theorem latest_standard_no_regress (h : Nat → Circle)
+    (t n : Nat) :
+    measureBy (h n) (h t) ≤ measureBy (h n) (h n)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MTE_19.progress_increases' depends on axioms:
+ [propext, Quot.sound, Philosophy.MTE_19.Being,
+  Philosophy.MTE_19.relevant, Philosophy.MTE_19.standard]
+'Philosophy.MTE_19.latest_standard_no_regress' depends on
+ axioms: [propext, Quot.sound, Philosophy.MTE_19.Being,
+  Philosophy.MTE_19.relevant]
+'Philosophy.MTE_19.Example.progress_then_regress' depends
+ on axioms: [propext, Quot.sound]
+\end{lstlisting}
+
+The axioms \texttt{propext} and \texttt{Quot.sound} belong to Lean's core logic and are used by the simplifier. The remaining axioms declare the type of beings, the relevant beings and the standard; no philosophical premise is needed for these results beyond the definitions, since their content is structural. Proposition~\ref{p:whig} does not depend on the fixed standard at all, as it concerns the alternative standard set by the latest stage. Proposition~\ref{p:regress} is proved for a concrete history of three beings, \texttt{progress\_then\_regress}, by computation. The module also proves Proposition~\ref{p:order} and Proposition~\ref{p:comp}. Theorem~\ref{t:real} is historical and is not formalized.
+
+\section{Conclusion}
+
+Moral progress is real. It is measured by the expansion of the moral circle toward a standard, the beings who are owed consideration, which is fixed by the moral facts and not by the norms of any society. Relative to that standard, progress is a strict partial order, respected by a numerical measure that makes any two circles comparable, and a standard fixed in this way, unlike one set by the present, can register regress. The historical record contains both progress and regress. Moral progress is therefore real and measurable, and it is neither steady nor irreversible.
+
+\begin{thebibliography}{99}\small
+\bibitem[Buchanan and Powell(2018)]{BuchananPowell2018} Buchanan, A. and Powell, R. (2018). \emph{The Evolution of Moral Progress: A Biocultural Theory}. Oxford University Press.
+\bibitem[Darwin(1871)]{Darwin1871} Darwin, C. (1871). \emph{The Descent of Man, and Selection in Relation to Sex}. John Murray.
+\bibitem[Jamieson(2002)]{Jamieson2002} Jamieson, D. (2002). Is there progress in morality? \emph{Utilitas}, 14(3), 318--338.
+\bibitem[Kitcher(2021)]{Kitcher2021} Kitcher, P. (2021). \emph{Moral Progress}. Oxford University Press.
+\bibitem[Lecky(1869)]{Lecky1869} Lecky, W.~E.~H. (1869). \emph{History of European Morals from Augustus to Charlemagne}. Longmans, Green.
+\bibitem[Moody-Adams(1999)]{MoodyAdams1999} Moody-Adams, M.~M. (1999). The idea of moral progress. \emph{Metaphilosophy}, 30(3), 168--185.
+\bibitem[Pinker(2011)]{Pinker2011} Pinker, S. (2011). \emph{The Better Angels of Our Nature: Why Violence Has Declined}. Viking.
+\bibitem[Singer(1981)]{Singer1981} Singer, P. (1981). \emph{The Expanding Circle: Ethics and Sociobiology}. Farrar, Straus and Giroux.
+\end{thebibliography}
+
+\end{document}

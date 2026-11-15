@@ -1,0 +1,119 @@
+\documentclass{situationist-preprint}
+
+\title{Actual Infinity}
+\msid{MTH-10-a}
+\msfamily{MTH-10}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{actual infinity; potential infinity; Aristotle; Cantor; axiom of infinity; potentialism; finitism; indispensability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Since Aristotle, a strong tradition has held that the infinite exists only potentially: there is no completed infinite totality, only processes that can always be continued. We argue that actual infinities exist, as set theory requires. The argument has two steps. First, set theory asserts the existence of infinite sets as completed objects, and mathematics, including the mathematics applied in physics, uses these assertions essentially; given the indispensability argument, they are true. Second, the potentialist alternatives either reinstate actual infinities, as contemporary modal potentialism does for every set below the universe as a whole, or recover only a fragment of mathematics. We answer the objections from the paradoxes of infinity, from the kalām argument and from finitist reconstructions of analysis.
+\end{abstract}
+
+\section{The question}
+
+\citet[III.6]{AristotlePhysics} distinguished two ways in which something may be infinite. A magnitude is \emph{potentially} infinite if it can always be divided further, or a series extended further, without end; it is \emph{actually} infinite if infinitely many parts or members exist together as a completed whole. Aristotle held that only the first exists. The view dominated mathematics until the nineteenth century, and Gauss could still protest, in a letter to Schumacher of 1831, against the use of an infinite magnitude as something completed.
+
+\citet{Dedekind1888} and \citet{Cantor1883} broke with the tradition. Dedekind defined an infinite system as one that can be mapped one-to-one onto a proper part of itself, and he constructed the natural numbers from such a system. Cantor treated infinite sets as objects with sizes that can be compared, and he argued that the transfinite numbers are as determinate as the finite ones. \citet{Hilbert1926} defended Cantor's theory as a paradise from which mathematicians would not be expelled, while holding that the infinite is nowhere realized in physical reality and that its use must be justified by finitary consistency proofs.
+
+The question we address is whether there are actual infinities: collections with infinitely many members that exist as completed wholes. Our thesis is that there are, as set theory requires. The thesis concerns mathematical existence. We do not argue that space, time or matter is actually infinite.
+
+\section{Framework}
+
+\begin{definition}\label{d:actual}
+An \emph{actual infinity} is a collection that exists as a single object and has infinitely many members, in the sense that it can be mapped one-to-one onto a proper subcollection of itself.
+\end{definition}
+
+\begin{definition}\label{d:potential}
+A domain is \emph{merely potentially infinite} if, for every collection of its members that exists, a larger collection could exist, but no collection of all its members exists.
+\end{definition}
+
+\begin{assumption}\label{a:indisp}
+The existential claims of mathematical theories that are indispensable to our best science, interpreted at face value, are true.
+\end{assumption}
+
+Assumption~\ref{a:indisp} is the conclusion of the indispensability argument, which MTH-01 defends and which MTH-16 supports by arguing that physics cannot be nominalized \citep{Quine1981,Putnam1971}.
+
+\section{The argument}
+
+\begin{proposition}\label{p:sets}
+Set theory asserts that there are actual infinities.
+\end{proposition}
+
+\begin{proof}
+The axiom of infinity asserts that there is a set containing the empty set and closed under the successor operation $x \mapsto x \cup \{x\}$. By separation there is a least such set, $\omega$. It is a single object, a member of other sets, and the map $n \mapsto n \cup \{n\}$ sends it one-to-one onto the proper subset $\omega \setminus \{\emptyset\}$. By Definition~\ref{d:actual}, $\omega$ is an actual infinity. By the power set axiom, so is $\mathcal{P}(\omega)$, which by Cantor's theorem is larger.
+\end{proof}
+
+\begin{proposition}\label{p:indisp}
+The assertion that there are actual infinities is indispensable to our best science.
+\end{proposition}
+
+\begin{proof}[Argument]
+The real numbers, as analysis treats them, are completed infinite objects: a real is a Dedekind cut or an equivalence class of Cauchy sequences, each an infinite set of rationals. The theorems of analysis that physics uses quantify over all reals and over sets and functions of reals: the completeness of the real line, which underwrites the existence of limits, the theory of measure and integration, and the spectral theory of operators on Hilbert space used in quantum mechanics. Each of these requires that the collections quantified over exist as wholes, since completeness says that every bounded set of reals has a least upper bound, and the claim is about sets taken as wholes, not about stages in their construction. The continuum is, moreover, uncountable. A merely potential infinity, in the Aristotelian sense of a process each stage of which is finite, is at most countable, since it is exhausted by a sequence of finite stages; it cannot supply the continuum.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Actual infinities exist.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:indisp}, the claim that actual infinities exist is part of mathematics indispensable to science, and by Proposition~\ref{p:sets} it is made by set theory, interpreted at face value. By Assumption~\ref{a:indisp}, it is true.
+\end{proof}
+
+The strongest contemporary alternative is modal potentialism, on which the universe of sets is generated in stages and the quantifier \enquote{all sets} is understood modally, as \enquote{all sets that could be formed} \citep{Linnebo2013,LinneboShapiro2019}. Linnebo shows that the theorems of ZF can be translated into a modal theory of this kind. The view does not tell against Theorem~\ref{t:main}. On it, $\omega$ is formed at a stage, as a completed set, and so is $\mathcal{P}(\omega)$: potentiality is reserved for the hierarchy as a whole, which is not a set. Modal potentialism is therefore a theory of actually infinite sets, and its point of disagreement with actualism concerns the universe, not infinity. LOG-08 argues that quantification over the whole universe is coherent; that question is independent of the present one.
+
+\section{Objections}
+
+\begin{objection}[Paradoxes]
+Actual infinities generate absurdities. \citet{Galileo1638} observed that there are as many squares as natural numbers, though most numbers are not squares. In Hilbert's hotel, every room is occupied, yet a new guest can be accommodated by moving each guest one room along. A notion that makes a part as large as the whole is incoherent.
+\end{objection}
+
+\begin{reply}
+The cases show that infinite collections violate the principle that a proper part is smaller than the whole, a principle that holds for finite collections and that Dedekind's definition takes as the mark of the infinite. They show no contradiction: the claims that describe Hilbert's hotel are jointly consistent, and each, read as a claim about $\omega$, is a theorem. The appearance of absurdity comes from applying to infinite collections a principle established for finite ones. MTH-10-b examines the hotel in detail.
+\end{reply}
+
+\begin{objection}[Kalām]
+\citet{Craig1979} argues that an actual infinite cannot exist in reality, on the ground of these paradoxes, and that the past is therefore finite.
+\end{objection}
+
+\begin{reply}
+Craig's argument concerns concrete infinities, and he does not deny that set theory is consistent. Our thesis concerns mathematical objects, and whether concrete reality contains an actual infinity is a separate question, on which we take no position. If Craig's argument relies on the claim that actual infinities are impossible as such, it is answered by the reply to the previous objection.
+\end{reply}
+
+\begin{objection}[Finitism]
+Much of analysis can be carried out in weak systems. The system $\mathrm{WKL}_0$ of reverse mathematics proves a large part of classical analysis and is conservative over primitive recursive arithmetic for $\Pi^0_2$ sentences, so that its finitary consequences are finitistically justified \citep{Simpson2009,Tait1981}. Actual infinities are thus dispensable.
+\end{objection}
+
+\begin{reply}
+$\mathrm{WKL}_0$ is a second-order theory whose set variables range over infinite sets of natural numbers; it does not dispense with infinite sets but limits which ones it asserts. The conservation result shows that the finitary consequences of these assertions could have been obtained otherwise, not that the assertions are false or unused. Physical theory, moreover, does not restrict itself to $\Pi^0_2$ consequences: it asserts the existence of fields, states and measures, whose mathematical representatives are infinite objects. The finitist reconstruction is a result about proof theory, and it is compatible with Theorem~\ref{t:main}.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not establish that any concrete collection is actually infinite, nor that the universe of sets is itself a completed set; on the latter question, the universe is not a set, and LOG-08 holds that it can nevertheless be quantified over. It is consistent with TSM-13, on which an infinite series of intervals has a finite sum, and with MET-10, on which grounding descends without end: both presuppose infinite collections of the kind whose existence we defend. It is consistent with the view that we know the infinite only through finite means, which concerns our access to infinite objects and not their existence \citep{Moore1990}.
+
+\section{Conclusion}
+
+Set theory asserts that there are infinite sets existing as completed objects, and the mathematics that science uses depends on these assertions. Given the indispensability argument, they are true. Modal potentialism, the strongest alternative, accepts infinite sets and reserves potentiality for the universe; finitist reconstructions show what can be proved with fewer assertions, not that the assertions are false; and the paradoxes of infinity show only that infinite collections are unlike finite ones. Actual infinities exist, as set theory requires.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(Physics)]{AristotlePhysics} Aristotle. \emph{Physics}.
+\bibitem[Cantor(1883)]{Cantor1883} Cantor, G. (1883). \emph{Grundlagen einer allgemeinen Mannigfaltigkeitslehre}. Teubner.
+\bibitem[Craig(1979)]{Craig1979} Craig, W. L. (1979). \emph{The Kal\=am Cosmological Argument}. Macmillan.
+\bibitem[Dedekind(1888)]{Dedekind1888} Dedekind, R. (1888). \emph{Was sind und was sollen die Zahlen?} Vieweg.
+\bibitem[Galilei(1638)]{Galileo1638} Galilei, G. (1638). \emph{Discorsi e dimostrazioni matematiche intorno a due nuove scienze}. Elzevir.
+\bibitem[Hilbert(1926)]{Hilbert1926} Hilbert, D. (1926). Über das Unendliche. \emph{Mathematische Annalen}, 95, 161--190.
+\bibitem[Linnebo(2013)]{Linnebo2013} Linnebo, Ø. (2013). The potential hierarchy of sets. \emph{Review of Symbolic Logic}, 6, 205--228.
+\bibitem[Linnebo and Shapiro(2019)]{LinneboShapiro2019} Linnebo, Ø. and Shapiro, S. (2019). Actual and potential infinity. \emph{Noûs}, 53, 160--191.
+\bibitem[Moore(1990)]{Moore1990} Moore, A. W. (1990). \emph{The Infinite}. Routledge.
+\bibitem[Putnam(1971)]{Putnam1971} Putnam, H. (1971). \emph{Philosophy of Logic}. Harper and Row.
+\bibitem[Quine(1981)]{Quine1981} Quine, W. V. (1981). Success and limits of mathematization. In \emph{Theories and Things}, 148--155. Harvard University Press.
+\bibitem[Simpson(2009)]{Simpson2009} Simpson, S. G. (2009). \emph{Subsystems of Second Order Arithmetic}. 2nd ed. Cambridge University Press.
+\bibitem[Tait(1981)]{Tait1981} Tait, W. W. (1981). Finitism. \emph{Journal of Philosophy}, 78, 524--546.
+\end{thebibliography}
+
+\end{document}

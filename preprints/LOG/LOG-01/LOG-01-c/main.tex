@@ -1,0 +1,91 @@
+\documentclass{situationist-preprint}
+
+\title{Determinateness and Its Iteration}
+\msid{LOG-01-c}
+\msfamily{LOG-01}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Consequence}
+\mskeywords{liar paradox; determinateness; iteration; Łukasiewicz logic; strong conjunction; hierarchy}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-01-a resolves the liar with a hierarchy of determinateness operators and proves that the hierarchy does not collapse. We derive what the resolution implies about the operator and its iterations. Determinateness is self-fusion: $DA$ is equivalent to the Łukasiewicz strong conjunction of $A$ with itself, so that $D^n A$ is the $2^n$-fold fusion of $A$. We give the closed form of $D^n$ on every finite Łukasiewicz logic, show that each iteration preserves full truth and only full truth, that $D$ is idempotent exactly on the classical values, and that every sentence short of full truth is determinately not true at some finite level, though no level suffices for all. The hierarchy has no top because there is no bound on how far short of truth a sentence can fall.
+\end{abstract}
+
+\section{Determinateness as self-fusion}
+
+We use the logics $\mathrm{L}_k$ of LOG-01-a (Definition 3.1 there), with values $0, \ldots, k$, $\neg x = k - x$ and $x \to y = \min(k,\ k - x + y)$. The determinateness operator is $DA := A \wedge \neg(A \to \neg A)$, interpreted by $Dx = \max(0,\ 2x - k)$ (Definition 3.3 of LOG-01-a, following \citealp{Field2003}). Łukasiewicz logic also has a \emph{strong conjunction} or fusion, definable as $A \odot B := \neg(A \to \neg B)$, with value $\max(0,\ x + y - k)$ \citep{Hajek1998}.
+
+\begin{proposition}\label{p:fusion}
+$DA$ and $A \odot A$ have the same value under every valuation of every $\mathrm{L}_k$. Hence $D^n A$ has the value of the $2^n$-fold fusion $A \odot \cdots \odot A$.
+\end{proposition}
+
+\begin{proof}
+$A \odot A$ has the value $\max(0, 2x - k)$, which is the value of $DA$. By induction on $m$, the $m$-fold fusion of $A$ has the value $\max(0,\ mx - (m-1)k)$. Fusing a sentence with that value with itself gives $\max(0,\ 2mx - (2m-1)k)$, the value of the $2m$-fold fusion (both sides are $0$ when the first is). Since $D^n A$ is $D^{n-1}A$ fused with itself, the second claim follows by induction on $n$.
+\end{proof}
+
+Proposition~\ref{p:fusion} gives the operator a reading that is independent of its definition. Fusion is the conjunction that counts premises: $A \odot A$ is what one has when one has used $A$ twice, and each use of a sentence that falls short of full truth by $d$ costs $d$. To say that $A$ is determinately true is to say that $A$ survives being used twice; to say that it is $D^n$-true, that it survives $2^n$ uses. This is the same accounting that LOG-04-a uses to explain the failure of contraction for the conditional: a sentence that is only partly true cannot be used twice for the price of once. The liar and Curry's sentence, which take intermediate values, are exactly the sentences for which the accounting matters.
+
+\section{The iterated operator}
+
+\begin{proposition}\label{p:closed}
+In $\mathrm{L}_k$, $D^n x = \max(0,\ k - 2^n(k - x))$ for every $n$ and $x$.
+\end{proposition}
+
+\begin{proof}
+By induction on $n$. For $n = 0$ the right side is $x$. Suppose the claim holds for $n$. If $k - 2^n(k - x) \geq 0$, then $D^{n+1}x = \max(0,\ 2(k - 2^n(k - x)) - k) = \max(0,\ k - 2^{n+1}(k-x))$. Otherwise $D^n x = 0$ and $D^{n+1} x = D0 = 0$, while $k - 2^{n+1}(k - x) \leq k - 2^n(k-x) < 0$.
+\end{proof}
+
+Lemma 4.2 of LOG-01-a is the special case $k = 2^n + 1$, $x = 2^n$: there $k - x = 1$ and $D^m x = 2^n + 1 - 2^m$. The closed form makes several properties of the hierarchy immediate.
+
+\begin{corollary}\label{c:props}
+For all $n$ and all $x$ in $\mathrm{L}_k$:
+\begin{enumerate}[label=(\alph*)]
+\item $D^{n+1}x \leq D^n x \leq x$, and $D^n$ is monotone;
+\item $D^n x = k$ if and only if $x = k$, and $D^n 0 = 0$;
+\item $Dx = x$ if and only if $x \in \{0, k\}$;
+\item $D^n x = 0$ if and only if $2^n(k - x) \geq k$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(a), (b) and (d) are read off Proposition~\ref{p:closed}, since $2^n(k-x)$ is non-decreasing in $n$ and non-increasing in $x$, and is $0$ exactly when $x = k$. For (c), $\max(0, 2x - k) = x$ requires either $x = 0$ or $2x - k = x$, that is, $x = k$.
+\end{proof}
+
+Clause (b) says that every level of the hierarchy agrees with truth on full truth and full falsity, and clause (c) that $D$ changes the value of a sentence exactly when the sentence has an intermediate value. For sentences with classical content, which take only the values $0$ and $k$, $DA$, $D^nA$ and $A$ are equivalent. This is the expected consequence of the treatment of the liar in LOG-01-a together with LOG-02, which holds that classical logic correctly describes consequence among such sentences: the determinateness hierarchy is idle where the values are classical and does its work only where self-reference produces intermediate values.
+
+Clause (d) gives, for each sentence, the level at which it becomes determinately not true.
+
+\begin{corollary}\label{c:level}
+If $x < k$, then $\neg D^n A$ is fully true for every $n$ with $2^n \geq k/(k-x)$, and for no $n$ with $2^n < k/(k - x)$. For every $n$ there is, in a sufficiently fine $\mathrm{L}_k$, a value $x < k$ such that $D^n x > 0$.
+\end{corollary}
+
+\begin{proof}
+$\neg D^n A$ has the value $k$ just when $D^n x = 0$, which by Corollary~\ref{c:props}(d) is when $2^n(k-x) \geq k$. For the second claim, take $k = 2^{n+1}$ and $x = k - 1$: then $2^n(k - x) = 2^n < k$.
+\end{proof}
+
+Corollary~\ref{c:level} is the precise form of the claim that the hierarchy has no top. Every sentence that is not fully true is determinately not true at some finite level, which is fixed by how far short of truth it falls; the closer to truth, the higher the level. Since there is no bound on how close to truth a sentence can come short of it, no single level serves for all. The $D^n$-liar of Theorem 4.3 of LOG-01-a, with value $2^n$ in $\mathrm{L}_{2^n+1}$, falls short by one part in $2^n + 1$ and so is determinately not true exactly from level $n+1$ on, which is the computation used in the replies of LOG-01-a, Section 6.
+
+\section{Objection and reply}
+
+\begin{objection}
+If determinateness is self-fusion, it is not a semantic notion at all. Field introduced $D$ to express the defectiveness of the liar; on this reading it merely measures how many times a sentence may be used.
+\end{objection}
+
+\begin{reply}
+The two readings coincide because, in a logic with a transparent truth predicate, a sentence and the claim that it is true are intersubstitutable. That $A$ survives two uses is that \enquote{$A$ is true} survives two uses, and Proposition~\ref{p:fusion} says that this is what determinate truth comes to. The fusion reading explains why the operator behaves as \citet{Field2008} required: it agrees with truth on classical sentences, it is strictly stronger than truth elsewhere, and its iterations form an unending sequence. It is not a rival to the semantic reading but an account of why the semantic notion has the structure it has.
+\end{reply}
+
+\section{Conclusion}
+
+The resolution of the liar in LOG-01-a implies that determinateness is self-fusion, that its $n$-th iteration is the $2^n$-fold fusion with the closed form of Proposition~\ref{p:closed}, that every iteration agrees with truth on the classical values and is idle on sentences with classical content, and that each sentence short of full truth is determinately not true from a level fixed by its distance from truth. The hierarchy of determinateness operators is unbounded because that distance is, and this is why the revenge sentences built from finite iterations of $D$ have values and can each be described, one level up, as defective.
+
+\begin{thebibliography}{99}\small
+\bibitem[Field(2003)]{Field2003} Field, H. (2003). A revenge-immune solution to the semantic paradoxes. \emph{Journal of Philosophical Logic}, 32(2), 139--177.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[H\'ajek(1998)]{Hajek1998} H\'ajek, P. (1998). \emph{Metamathematics of Fuzzy Logic}. Kluwer.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass{situationist-preprint}
+
+\title{Approval Voting and Arrow's Conditions}
+\msid{POL-17-b}
+\msfamily{POL-17}
+\msdiscipline{Political Philosophy}
+\mstype{Companion manuscript}
+\mskeywords{approval voting; Arrow's theorem; dichotomous preferences; domain restriction; independence of irrelevant alternatives}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+POL-17-a argues that approval voting best balances the desiderata that remain once Arrow's theorem is granted. This companion locates approval voting precisely with respect to Arrow's conditions. On the domain of dichotomous preferences, the ranking of candidates by approval count coincides with the pairwise majority relation and satisfies weak Pareto, independence of irrelevant alternatives and non-dictatorship; approval voting is thus a restriction of domain, of the kind that single-peakedness provides for majority rule. On the unrestricted domain, approval ballots coarsen voters' rankings by a threshold that depends on the menu, and independence fails. Approval voting does not evade Arrow's theorem; it gives up the condition that matters least when preferences are close to dichotomous.
+\end{abstract}
+
+\section{Approval voting on the dichotomous domain}
+
+Arrow's theorem (Theorem~2.2 of POL-17-a) concerns social welfare functions, which map profiles of weak orderings to a collective weak ordering \citep{Arrow1951}. Approval ballots are not orderings, and it is sometimes said that approval voting therefore escapes the theorem \citep{BramsFishburn1978}. The claim is correct in one sense and misleading in another.
+
+Call a preference \emph{dichotomous} if it divides the candidates into two indifference classes, the approved and the unapproved. On the domain $D$ of profiles of dichotomous preferences, a sincere approval ballot simply is the preference. Let $a(x)$ be the number of voters who approve $x$, and rank $x$ at least as high as $y$ when $a(x) \geq a(y)$.
+
+\begin{proposition}\label{p:dichotomous}
+On $D$, the approval ranking coincides with the pairwise majority relation, and it satisfies weak Pareto, independence of irrelevant alternatives and non-dictatorship.
+\end{proposition}
+
+\begin{proof}
+Let $n_{xy}$ be the number of voters who approve $x$ but not $y$. Then $a(x) - a(y) = n_{xy} - n_{yx}$, which is positive exactly when a majority of those who distinguish $x$ from $y$ prefer $x$. So the approval ranking is the majority relation, and it is a weak ordering because it is induced by a numerical score. If every voter strictly prefers $x$ to $y$, every voter approves $x$ and not $y$, so $a(x) > a(y)$: weak Pareto holds. Whether $x$ is ranked above $y$ depends only on $n_{xy}$ and $n_{yx}$, which depend only on voters' preferences between $x$ and $y$: independence holds. With at least two voters, no single voter's strict preference is always decisive, since the other voters can offset or outvote her: non-dictatorship holds.
+\end{proof}
+
+On $D$, then, approval voting satisfies three of Arrow's conditions, and fails only unrestricted domain. It is the same kind of escape as Black's: on the domain of single-peaked preferences, pairwise majority rule is transitive and satisfies the remaining conditions \citep{Black1948}. Proposition~4.3 of POL-17-a, that the approval winner is the Condorcet winner under dichotomous preferences and sincere ballots, is the special case of Proposition~\ref{p:dichotomous} that concerns the top of the ranking.
+
+\section{Approval voting on the unrestricted domain}
+
+When preferences are not dichotomous, a voter must decide where to draw the line between approved and unapproved, and a sensible voter draws it in relation to the candidates available: she approves those she prefers to some benchmark set by the field, such as the expected outcome.
+
+\begin{proposition}\label{p:iia}
+On the unrestricted domain, approval voting with menu-dependent thresholds violates independence of irrelevant alternatives with respect to voters' underlying rankings.
+\end{proposition}
+
+\begin{proof}
+Suppose a voter ranks $x \succ y \succ z$ and approves the candidates above the middle of the field. With menu $\{x, y, z\}$ she approves $x$ only. Add a candidate $w$ she ranks below $z$: she now approves $x$ and $y$. Her ranking of $x$ against $y$ is unchanged, but her ballot now gives $y$ an approval it lacked, and in a close contest this can reverse the collective ranking of $y$ against some third candidate.
+\end{proof}
+
+\begin{objection}
+If approval voting violates independence in this way, it shows the same sensitivity to irrelevant alternatives that POL-17-a holds against plurality and instant-runoff.
+\end{objection}
+
+\begin{reply}
+The sensitivity is of a different kind. Under plurality, adding a candidate can defeat a candidate by splitting the votes of her supporters, which is the failure of clone independence; approval voting satisfies clone independence (Proposition~4.2 of POL-17-a), since a voter may approve both clones. What remains is that a voter's threshold depends on the field. This makes no voter's ballot count against her, so it violates none of the protective desiderata to which POL-17-a gives priority.
+\end{reply}
+
+\section{Conclusion}
+
+Approval voting does not escape Arrow's theorem. It satisfies Arrow's conditions on the domain of dichotomous preferences, where it is majority rule, and on the unrestricted domain it gives up independence in a form that leaves the protective desiderata intact. This supports the conclusion of POL-17: no voting rule satisfies all of Arrow's conditions, and approval voting best balances the desiderata that remain.
+
+\begin{thebibliography}{9}\small
+\bibitem[Arrow(1951)]{Arrow1951} Arrow, K. J. (1951). \emph{Social Choice and Individual Values}. Wiley.
+\bibitem[Black(1948)]{Black1948} Black, D. (1948). On the rationale of group decision-making. \emph{Journal of Political Economy}, 56(1), 23--34.
+\bibitem[Brams and Fishburn(1978)]{BramsFishburn1978} Brams, S. J. and Fishburn, P. C. (1978). Approval voting. \emph{American Political Science Review}, 72(3), 831--847.
+\end{thebibliography}
+
+\end{document}

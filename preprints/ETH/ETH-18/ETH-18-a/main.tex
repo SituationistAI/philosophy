@@ -1,0 +1,130 @@
+\documentclass{situationist-preprint}
+
+\title{The Duty to Rescue and Its Limits}
+\msid{ETH-18-a}
+\msfamily{ETH-18}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_18.lean}
+\mskeywords{duty to rescue; Bad Samaritan; demandingness; supererogation; iteration}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+There is a duty to rescue a person in grave danger when one can do so at moderate cost, and beyond that cost rescue is supererogatory. The difficulty is to say what ``moderate'' means without either collapsing the limit, when emergencies recur, or leaving the duty without content. We propose that the limit is a cumulative allowance: an agent is required to perform a rescue whose cost does not exceed what remains of an annual allowance of one tenth of her income, measured in income-equivalents, after the rescues already required of her. We prove that on this rule the cost of required rescues never exceeds the allowance, however many emergencies arise, that costless rescues are always required, and that rescues beyond the remaining allowance are supererogatory. The proof is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+A passer-by who can save a child drowning in a shallow pond at the cost of wet clothes is required to do so \citep{Singer1972}. Almost everyone accepts this, and many legal systems impose a corresponding duty of easy rescue, a point defended in the common-law context by \citet{Weinrib1980} and \citet{Feinberg1984}. Equally, almost everyone accepts that a passer-by is not required to enter a burning building at serious risk of death to save a stranger, though doing so is admirable. Scanlon's rescue principle captures both judgments: if you are presented with a situation in which you can prevent something very bad from happening to someone by making only a slight or moderate sacrifice, it would be wrong not to do so \citep[ch.~5]{Scanlon1998}.
+
+The limit is less easy to state than the duty. Suppose the limit is per rescue: each rescue costing no more than a moderate amount is required. Then an agent who lives beside a pond into which children fall every day is required to bear a moderate cost every day, and the sum of moderate costs is not moderate. This is the iteration problem, and it is the route by which \citet{Unger1996} argued that the demands of rescue, like those of beneficence, are severe. We argue that there is a duty to rescue up to moderate cost and that beyond that point rescue is supererogatory, in the sense of ETH-14, and we state the limit so that iteration does not defeat it.
+
+\section{Framework}
+
+Rescue costs include risk, injury, time and money. We measure them in income-equivalents: the cost of a rescue to an agent is the amount of income whose loss she would regard as equally bad. We assume this commensurability without defending it here.
+
+\begin{definition}[Allowance]\label{d:allowance}
+The \emph{rescue allowance} of an agent with annual income $I$ is $I/10$ for the year.
+\end{definition}
+
+\begin{assumption}[Rescue principle]\label{a:principle}
+If an agent can save a person from death or serious harm by a rescue whose cost does not exceed what remains of her allowance after the costs of the rescues already required of her that year, she is required to perform it.
+\end{assumption}
+
+\begin{assumption}[Limit]\label{a:limit}
+A rescue whose cost exceeds what remains of the allowance is not required.
+\end{assumption}
+
+\begin{assumption}\label{a:permitted}
+Rescue is permitted.
+\end{assumption}
+
+\begin{definition}\label{d:super}
+A rescue is \emph{supererogatory} if it is permitted and not required.
+\end{definition}
+
+The allowance is a tenth of income for the same reason that ETH-06 sets the duty of beneficence at a tenth: it is a cost that an affluent life absorbs without the displacement of its central projects, and so a moderate one. The two duties are distinct. Rescue is owed to a particular person whom the agent is uniquely or specially placed to help, and it is not a share of a collective task; it therefore does not draw on the share owed under ETH-06, and the share does not draw on the allowance. A rescue that occurs on the far side of the world, through the agent's gifts, is beneficence; a rescue that the agent alone can perform, here and now, is rescue in the present sense. The allowance counts only the costs of rescues that were required; supererogatory rescues do not use it up.
+
+\section{The bounded duty}
+
+\begin{theorem}\label{t:bounded}
+Given Assumptions~\ref{a:principle} and~\ref{a:limit}: (a) whatever sequence of emergencies an agent meets in a year, if she performs exactly the required rescues, their total cost does not exceed her allowance; (b) a costless rescue is always required; (c) the first rescue of the year is required whenever its cost does not exceed the allowance.
+\end{theorem}
+
+\begin{proof}
+(a) By induction on the sequence. Initially the cost borne is $0$, within the allowance. At each emergency, a rescue is required only if its cost is at most the remaining allowance, so performing it leaves the total within the allowance; a rescue that is not required adds nothing. (b) A cost of $0$ never exceeds the remaining allowance, which is at least $0$. (c) At the start of the year the remaining allowance is the whole allowance.
+\end{proof}
+
+\begin{corollary}\label{c:super}
+Given Assumptions~\ref{a:limit} and~\ref{a:permitted}, a rescue whose cost exceeds the remaining allowance is supererogatory.
+\end{corollary}
+
+\begin{proof}
+It is permitted by Assumption~\ref{a:permitted} and not required by Assumption~\ref{a:limit}.
+\end{proof}
+
+Theorem~\ref{t:bounded}(b) answers the worry that a cumulative limit allows an agent to stand by while a child drowns in a puddle once her allowance is spent. It does not: a rescue that costs nothing is required whatever the agent has already done, and the limit binds only rescues that cost something. Part (a) answers the iteration problem: the agent beside the pond bears at most a tenth of her income in a year, however many children fall in. The rescues beyond that are supererogatory by Corollary~\ref{c:super}, which is the conclusion that ETH-14 leads one to expect. Rescues beyond moderate cost, like other supererogatory acts, lie above the line of decency, and ETH-14 bounds them above by sainthood.
+
+\section{Objections}
+
+\begin{objection}
+It is monstrous that the agent beside the pond may let a child drown because she has already rescued others this year.
+\end{objection}
+
+\begin{reply}
+The case is not one in which a costless rescue is refused, which Theorem~\ref{t:bounded}(b) forbids. It is one in which an agent has already borne a tenth of her income in rescue costs and is asked to bear more. That such an agent is not required to continue is the content of the claim that the duty is limited, and the alternative is a duty that, in a world of recurring emergencies, consumes the agent's life. The situation is one that calls for institutions, such as a lifeguard, rather than for an unlimited duty on whoever happens to live nearby.
+\end{reply}
+
+\begin{objection}
+Risk of death cannot be converted into income-equivalents.
+\end{objection}
+
+\begin{reply}
+The model needs only an ordering of costs against the allowance, not a market price. Serious risk of death exceeds any moderate allowance on any reasonable conversion, so rescues that involve it are not required, which is the common judgment.
+\end{reply}
+
+\begin{objection}
+Why a tenth? A drowning child is worth more than a tenth of a year's income.
+\end{objection}
+
+\begin{reply}
+The allowance does not measure the value of the child's life; it measures the cost that the agent can be required to bear. That a child's life is worth more than any moderate cost is why rescue beyond the allowance is admirable and not merely permitted. The figure of a tenth aligns the meaning of ``moderate'' across the duties of rescue and beneficence, and ETH-28 shows that, so aligned, the duties together leave room for a personal prerogative.
+\end{reply}
+
+\section{Formalization}
+
+Theorem~\ref{t:bounded} and Corollary~\ref{c:super} are formalized in \nolinkurl{Philosophy/ETH/ETH_18.lean}. Requirement and permission are primitive predicates of income, cost already borne and cost of the rescue; Assumptions~\ref{a:principle}--\ref{a:permitted} are axioms. The cost borne over a sequence of emergencies is defined recursively, with truncated subtraction for the remaining allowance.
+
+\begin{lstlisting}
+theorem bounded_duty (I : Nat) :
+    (∀ l : List Nat, borne I 0 l ≤ allowance I) ∧
+    (∀ x, Required I x 0) ∧
+    (∀ c, c ≤ allowance I → Required I 0 c)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_18.bounded_duty' depends on axioms:
+  [propext, Quot.sound, Philosophy.ETH_18.Required,
+   Philosophy.ETH_18.rescue_principle]
+'Philosophy.ETH_18.beyond_supererogatory' depends on axioms:
+  [Philosophy.ETH_18.Permitted, Philosophy.ETH_18.Required,
+   Philosophy.ETH_18.rescue_limit, Philosophy.ETH_18.rescue_permitted]
+\end{lstlisting}
+
+Part (a) of the theorem is arithmetic and uses no moral premise; parts (b) and (c) use the rescue principle (\texttt{rescue\_principle}, Assumption~\ref{a:principle}), and the corollary uses the limit (\texttt{rescue\_limit}, Assumption~\ref{a:limit}) and permission (\texttt{rescue\_permitted}, Assumption~\ref{a:permitted}).
+
+\section{Conclusion}
+
+There is a duty to rescue up to moderate cost. Stated as a cumulative allowance of a tenth of income per year, the duty requires every costless rescue and every rescue within the allowance, and it never requires more than the allowance in total, however often emergencies recur. Beyond that point, rescue is supererogatory.
+
+\begin{thebibliography}{9}\small
+\bibitem[Feinberg(1984)]{Feinberg1984} Feinberg, J. (1984). \emph{Harm to Others}. Oxford University Press.
+\bibitem[Scanlon(1998)]{Scanlon1998} Scanlon, T.~M. (1998). \emph{What We Owe to Each Other}. Harvard University Press.
+\bibitem[Singer(1972)]{Singer1972} Singer, P. (1972). Famine, affluence, and morality. \emph{Philosophy \& Public Affairs}, 1(3), 229--243.
+\bibitem[Unger(1996)]{Unger1996} Unger, P. (1996). \emph{Living High and Letting Die: Our Illusion of Innocence}. Oxford University Press.
+\bibitem[Weinrib(1980)]{Weinrib1980} Weinrib, E.~J. (1980). The case for a duty to rescue. \emph{The Yale Law Journal}, 90(2), 247--293.
+\end{thebibliography}
+
+\end{document}

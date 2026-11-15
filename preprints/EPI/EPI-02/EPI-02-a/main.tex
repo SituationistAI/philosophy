@@ -1,0 +1,226 @@
+\documentclass{situationist-preprint}
+
+\title{A Defence of Moore's Proof}
+\msid{EPI-02-a}
+\msfamily{EPI-02}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_02.lean}
+\mskeywords{scepticism; Moore's proof; brain in a vat; closure; safety; contextualism; transmission failure}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Moore offered a proof of an external world: here is one hand, here is another, so there are at least two external things. The sceptic offers an argument against it: I do not know that I am not a handless brain in a vat; if I know that I have hands, I know that I am not; so I do not know that I have hands. We argue that scepticism can be refuted in the following sense. Moore's proof is sound, and Moore knows its premises; the sceptical argument is valid, its closure premise is true, and its first premise is false, as evaluated in the contexts in which the knowledge claims it targets are made. The key move is to take knowledge to be justified safe belief and to make the closeness relation, on which safety depends, sensitive to context. In ordinary contexts, envatted worlds are not close, the subject's belief that she is not envatted is safe, and she knows it by deduction from her knowledge that she has hands. In the context the sceptic creates by attending to envatted worlds, all three premises of the sceptical argument are true, but its conclusion no longer contradicts any ordinary knowledge claim. We reply to the charges of question-begging and transmission failure. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+In \enquote{Proof of an External World}, \citet{Moore1939} held up his hands and argued: here is one hand; here is another; therefore at least two external things exist. He claimed that the proof satisfied the three conditions of a rigorous proof: its premise differs from its conclusion, its conclusion follows from its premise, and he knew the premise to be true. Few have been satisfied. The proof has seemed to beg the question against the sceptic, who doubts precisely that Moore knows he has hands \citep{Stroud1984}.
+
+The sceptic's own argument uses a hypothesis designed to be undetectable. Let $H$ be the proposition that I have hands, and $V$ the proposition that I am a handless brain in a vat, stimulated so as to have exactly the experiences I now have \citep{Putnam1981}. The argument runs:
+
+\begin{enumerate}
+\item[(S1)] I do not know that $\neg V$.
+\item[(S2)] If I know that $H$, then I know that $\neg V$.
+\item[(S3)] Therefore, I do not know that $H$.
+\end{enumerate}
+
+The argument is valid. (S2) is an instance of closure, since $H$ entails $\neg V$. (S1) is supported by the thought that nothing in my experience could tell me that I am not envatted. Since the conclusion is incredible, at least one premise must be false, and the responses to the argument divide by which premise they reject.
+
+\citet{Dretske1970} and \citet{Nozick1981} rejected (S2), denying closure. EPI-20 shows that closure holds, and we take that result as given. Contextualists \citep{Cohen1988,DeRose1995,Lewis1996} hold that \enquote{know} is context-sensitive, so that (S1) is true in contexts in which the sceptical hypothesis is salient and false in ordinary contexts. Neo-Mooreans \citep{Sosa1999,Pryor2000,Williamson2000} deny (S1) outright: we know that we are not envatted, and we know it because we know that we have hands. The neo-Moorean must explain why (S1) seems true; the contextualist must explain why the sceptic's conclusion, true in its own context, does not threaten ordinary knowledge. Against both, \citet{Wright2002} argues that Moore's proof fails to transmit warrant: one's warrant for believing that one has hands depends on a prior entitlement to assume that one is not envatted, so the proof cannot be a way of coming to know its conclusion.
+
+We defend a position that combines the neo-Moorean diagnosis with the contextualist semantics. Our thesis is that Moore's proof is sound, and that the sceptical argument is valid but has a false premise, namely (S1), as evaluated in the contexts in which the knowledge claims it is directed against are made. We also show, in agreement with EPI-13, that the sceptical argument succeeds in the context its own premise creates, and that its success there is harmless.
+
+\section{Framework}
+
+We extend the safety analysis of EPI-01 by indexing closeness to contexts. There is a set of worlds, a set of bases on which beliefs are held, and a set of contexts of attribution. $B_m(p,w)$ says that at $w$ the subject believes $p$ on basis $m$, and $J_m(p,w)$ that she is justified in so believing.
+
+\begin{definition}[Contextual closeness]\label{d:close}
+For each context $c$, $C_c(w,v)$ says that, by the standards of $c$, $v$ is close to $w$.
+\end{definition}
+
+\begin{assumption}[Centring]\label{a:centring}
+For every context $c$ and world $w$, $C_c(w,w)$.
+\end{assumption}
+
+\begin{definition}[Safety and knowledge in a context]\label{d:know}
+The belief that $p$ on $m$ is \emph{safe in $c$} at $w$ if $p$ is true at every $v$ with $C_c(w,v)$ at which the subject believes $p$ on $m$. The subject \emph{knows$_c$} $p$ at $w$ if for some basis $m$ she believes $p$ on $m$ at $w$, is justified, and the belief is safe in $c$ at $w$.
+\end{definition}
+
+Definition~\ref{d:know} locates the context-sensitivity of \enquote{know} in the closeness relation, as EPI-01 suggests: the context of attribution fixes which error possibilities count as easily realized. Justification is not context-relative, in line with EPI-06, on which justification is internalist and answers to a different concern from knowledge.
+
+\begin{assumption}[Justification is closed]\label{a:jclosure}
+If the subject is justified in believing $p$ on $m$ at $w$, $p$ entails $q$, and at $w$ she believes $q$ on a basis $m'$ such that at every world at which she believes $q$ on $m'$ she believes $p$ on $m$, then she is justified in believing $q$ on $m'$ at $w$.
+\end{assumption}
+
+This is Assumption 2.4 of EPI-20, and with Definition~\ref{d:know} it yields closure in every context. Let $E$ be the proposition that there are external things. $H$ entails $E$, since hands are external things, and $H$ entails $\neg V$, since the envatted subject is handless.
+
+\begin{assumption}[Moore's situation]\label{a:moore}
+At the actual world $@$, the subject believes $H$ on the basis $\pi$ of perception and is justified in so believing; and she believes $E$ and $\neg V$ on bases $\delta_E$ and $\delta_V$ of competent deduction from her belief that $H$ on $\pi$.
+\end{assumption}
+
+The justification clause is supplied by EPI-19: if it seems to a subject that $p$, she has prima facie justification for believing that $p$, and nothing in Moore's situation defeats it.
+
+Two contexts matter. The \emph{ordinary context} $o$ is the context in which ordinary knowledge claims, such as \enquote{she knows she has hands} or \enquote{she knows where her car is}, are made and assessed. The \emph{sceptical context} $s$ is the context created by attending to the sceptical hypothesis as a possibility to be ruled out.
+
+\begin{assumption}[Ordinary closeness]\label{a:ordinary}
+At every world $v$ with $C_o(@,v)$ at which the subject believes $H$ on $\pi$, $H$ is true.
+\end{assumption}
+
+\begin{assumption}[Envatted counterparts]\label{a:counterpart}
+For every world $w$ and basis $m$ there is a world $v$ at which $V$ is true and the subject believes on $m$ everything she believes on $m$ at $w$.
+\end{assumption}
+
+\begin{assumption}[Attention]\label{a:attention}
+In the sceptical context, every envatted counterpart of a world, in the sense of Assumption~\ref{a:counterpart}, is close to it.
+\end{assumption}
+
+Assumption~\ref{a:counterpart} is the defining feature of the sceptical hypothesis: whatever the basis of a belief, there is an envatted world in which the belief is held on the same basis. Assumption~\ref{a:attention} is a version of the rule of attention of \citet{Lewis1996}: a possibility attended to is not properly ignored. Assumption~\ref{a:ordinary} is the substantive anti-sceptical premise. It says that, by ordinary standards, the actual world is not one in which the subject's perceptual belief that she has hands could easily have been false. It is a claim about the actual world, not about the subject's evidence; we defend it in Section~4.
+
+\section{The argument}
+
+\begin{proposition}[Moore's proof is sound]\label{p:sound}
+$H$ is true at $@$, and so is $E$; the inference from $H$ to $E$ is valid.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:centring}, $@$ is $o$-close to itself, and by Assumption~\ref{a:moore} the subject believes $H$ on $\pi$ at $@$; so by Assumption~\ref{a:ordinary} $H$ is true at $@$. Since $H$ entails $E$, $E$ is true at $@$.
+\end{proof}
+
+Proposition~\ref{p:sound} is context-invariant: the premise and the conclusion of Moore's proof are about hands and external things, not about knowledge, and their truth does not depend on the standards in play. Moore's further condition, that the premise be known, is where context enters.
+
+\begin{theorem}[Moore knows]\label{t:moore}
+At $@$ the subject knows$_o$ $H$, knows$_o$ $E$ and knows$_o$ $\neg V$.
+\end{theorem}
+
+\begin{proof}
+Her belief that $H$ on $\pi$ is held, justified (Assumption~\ref{a:moore}) and safe in $o$ (Assumption~\ref{a:ordinary}), so she knows$_o$ $H$. Her beliefs in $E$ and $\neg V$ are held on bases of competent deduction from it. By Assumption~\ref{a:jclosure} they are justified, and by the closure of safety (EPI-20, Lemma 3.1, which holds for each $C_c$) they are safe in $o$. So she knows$_o$ both.
+\end{proof}
+
+\begin{corollary}[The sceptical argument has a false premise]\label{c:false}
+Evaluated in the ordinary context, (S1) is false at $@$, while (S2) is true; the argument is valid, and its conclusion (S3) is false.
+\end{corollary}
+
+\begin{proof}
+(S1) is false by Theorem~\ref{t:moore}. (S2) holds in every context by the closure argument in the proof of Theorem~\ref{t:moore}. Validity is propositional. (S3) is false by Theorem~\ref{t:moore}.
+\end{proof}
+
+\begin{theorem}[The sceptic's context]\label{t:sceptic}
+At every world $w$, the subject does not know$_s$ $\neg V$ and does not know$_s$ $H$. Hence all three of (S1)--(S3) are true in $s$.
+\end{theorem}
+
+\begin{proof}
+Suppose she believes $\neg V$ on some basis $m$ at $w$. By Assumption~\ref{a:counterpart} there is a world $v$ at which $V$ is true and she believes $\neg V$ on $m$; by Assumption~\ref{a:attention}, $v$ is $s$-close to $w$. So her belief is not safe in $s$, whatever its basis, and she does not know$_s$ $\neg V$. The same argument applies to $H$, since $V$ entails $\neg H$. (S2) holds in $s$ by closure.
+\end{proof}
+
+\begin{corollary}[Compatibility]\label{c:compat}
+At $@$, the subject knows$_o$ $H$ and does not know$_s$ $H$.
+\end{corollary}
+
+Corollary~\ref{c:compat} is the sense in which the sceptical argument succeeds only in the context it creates, as EPI-13 holds. Its first premise makes envatted worlds salient, and in the context so created the argument is sound. But its conclusion there is the claim that the subject fails to know$_s$ $H$, and that is consistent with every ordinary knowledge claim, each of which is a claim about knowledge$_o$. Scepticism, as a thesis about our ordinary knowledge, needs (S3) to be true as evaluated in $o$. It is not, and the premise responsible is (S1).
+
+\section{Defending ordinary closeness}
+
+The argument rests on Assumption~\ref{a:ordinary}, and the sceptic will say that it begs the question. We distinguish two complaints.
+
+The first is that Assumption~\ref{a:ordinary} could be false: if the subject were envatted, envatted worlds would be close to her world, and she would know nothing. This is correct and is no objection. Knowledge, on the safety analysis, depends on how the world is, and an anti-sceptical result can only be as secure as the facts that make our beliefs safe. The sceptic's premise (S1) is a claim that the subject lacks knowledge; the analysis shows that whether she lacks it depends on whether envatted worlds are close, and that in our world, if it is as we take it to be, they are not. The sceptic has given no reason to think they are; she has given a reason to think that we could not tell if they were, which is a different claim, and one that concerns our ability to discriminate rather than our knowledge.
+
+The second complaint is that we are not entitled to assert Assumption~\ref{a:ordinary} without first establishing that we are not envatted. This is the demand that knowledge be accompanied by a non-circular demonstration of the conditions that make it knowledge. EPI-03 shows that this demand, applied to induction, would rule out the justification of every basic source of belief, and that the circularity involved in using a reliable source to vindicate itself is rule-circular and benign \citep{Alston1986}. We know Assumption~\ref{a:ordinary}, if we do, in the way we know other contingent facts about our circumstances: by perception, memory and induction. That is circular in Alston's sense and not in a sense that defeats knowledge.
+
+\section{Objections}
+
+\begin{objection}[Transmission failure]
+Moore's warrant for believing he has hands depends on a prior entitlement to take it that he is not envatted. A proof whose premise is warranted only given its conclusion cannot transmit warrant to that conclusion \citep{Wright2002}.
+\end{objection}
+
+\begin{reply}
+On the present account, Moore's perceptual justification for $H$ does not depend on any prior warrant for $\neg V$: it is the immediate justification that a perceptual seeming confers (EPI-19), as the dogmatist holds \citep{Pryor2000}. And his knowledge of $H$ depends on safety, which is a condition on the world, not on a further belief. So there is nothing for the warrant for $\neg V$ to be prior to. Wright's point retains force as a point about dialectic: the proof will not persuade someone who already doubts $\neg V$ \citep{Pryor2004}. EPI-02-c separates this dialectical failure from the soundness of the proof, which is our concern here.
+\end{reply}
+
+\begin{objection}[Insensitivity]
+If I were envatted I would still believe that I am not. A belief that one would hold even if it were false cannot be knowledge, and this is why (S1) seems true \citep{Nozick1981,DeRose1995}.
+\end{objection}
+
+\begin{reply}
+The belief that I am not envatted is insensitive, and safe. EPI-20 shows that sensitivity is not closed and gives a model in which an insensitive belief deduced from a sensitive one is safe; the belief that I am not envatted is a belief of that kind \citep{Sosa1999}. The insensitivity explains why (S1) is attractive; it does not show that (S1) is true in ordinary contexts. Moreover, the moment the insensitivity is pointed out, the envatted world is attended to, and by Assumption~\ref{a:attention} the context becomes $s$, in which (S1) is true. The appeal of (S1) is in part the appeal of a premise that makes itself true when considered, which is exactly what Theorem~\ref{t:sceptic} predicts.
+\end{reply}
+
+\begin{objection}[Underdetermination]
+The sceptic does not need closure. My evidence is the same whether I have hands or am envatted, so it does not favour $H$ over $V$, and I cannot know $H$.
+\end{objection}
+
+\begin{reply}
+The premise that my evidence is the same in both cases is false if, as EPI-21 argues, one's evidence is one's knowledge. In the good case my evidence includes that I have hands, which favours $H$ over $V$ conclusively; the envatted subject has less evidence, though she cannot tell that she has less. What is the same in both cases is what seems to the subject to be so, and that fixes her justification (EPI-06, EPI-19), not her knowledge. The underdetermination argument therefore establishes that the envatted subject is justified in believing what she believes, which we accept, and not that the unenvatted subject fails to know.
+\end{reply}
+
+\begin{objection}[The theorist's context]
+In writing this paper we attend to envatted worlds. By Assumption~\ref{a:attention} we are therefore in $s$, and cannot truly say that Moore knows he has hands.
+\end{objection}
+
+\begin{reply}
+We do not say that Moore knows$_s$ that he has hands; we say that he knows$_o$ it, which is a claim about the standards governing ordinary attributions and is true whatever context we who make it are in. This is the semantic ascent \citet{Lewis1996} recommends to the contextualist, and it is what Corollary~\ref{c:compat} records. The sceptic, by contrast, cannot make the corresponding claim: she cannot truly say that Moore fails to know$_o$ that he has hands, since by Theorem~\ref{t:moore} he does.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that we are not envatted; it shows that if the world is as Assumption~\ref{a:ordinary} describes, we know that we are not, and that the sceptic has not shown otherwise. It does not provide a demonstration that would move a sceptic who refuses every premise about the actual world. It does not rely on the semantic externalist argument of \citet{Putnam1981}, which EPI-02-b examines. And it does not deny that the envatted subject is justified: the analysis is externalist about knowledge and internalist about justification, as EPI-06 holds.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_02.lean} represents worlds, bases and contexts as primitive types, closeness, belief and justification as primitive relations, and the assumptions of Section~2 as axioms. It proves Proposition~\ref{p:sound}, Theorems~\ref{t:moore} and~\ref{t:sceptic} and Corollaries~\ref{c:false} and~\ref{c:compat}. The main statements are:
+
+\begin{lstlisting}
+theorem moore_knows :
+    Knows ordinary Hands actual ∧
+    Knows ordinary External actual ∧
+    Knows ordinary NotVat actual
+
+theorem sceptic_context (w : World) :
+    ¬ Knows sceptical NotVat w ∧ ¬ Knows sceptical Hands w
+
+theorem compatibility :
+    Knows ordinary Hands actual ∧
+    ¬ Knows sceptical Hands actual
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_02.moore_knows' depends on axioms:
+  [Basis, Believes, Close, Context, External, Hands, Justified,
+   Vat, World, actual, believes_conclusions, believes_hands,
+   deduced_external, deduced_notvat, deductionE, deductionV,
+   hands_external, justification_closure, justified_hands,
+   ordinary, ordinary_closeness, perception, vat_handless]
+'Philosophy.EPI_02.sceptic_context' depends on axioms:
+  [Basis, Believes, Close, Context, Hands, Justified, Vat, World,
+   attention, counterpart, counterpart_beliefs, counterpart_vat,
+   sceptical, vat_handless]
+\end{lstlisting}
+
+\begin{sloppypar}
+The axioms \texttt{believes\_hands}, \texttt{justified\_hands}, \texttt{believes\_conclusions}, \texttt{deduced\_external} and \texttt{deduced\_notvat} are the clauses of Assumption~\ref{a:moore}; \texttt{ordinary\_closeness} is Assumption~\ref{a:ordinary}; \texttt{counterpart}, \texttt{counterpart\_vat} and \texttt{counterpart\_beliefs} are Assumption~\ref{a:counterpart}; \texttt{attention} is Assumption~\ref{a:attention}; \texttt{hands\_external} and \texttt{vat\_handless} are the two entailments. The formalization makes visible that Theorem~\ref{t:moore} does not need Assumption~\ref{a:centring}, which is used only for the truth of the premise in Proposition~\ref{p:sound}; that the sceptical theorem does not use Assumption~\ref{a:ordinary}, and the anti-sceptical theorem does not use Assumptions~\ref{a:counterpart} and~\ref{a:attention}: the two results are independent, which is why they are compatible.
+\end{sloppypar}
+
+\section{Conclusion}
+
+Moore's proof is sound: its premise is true, its inference valid, and Moore knows its premise by the standards that govern ordinary knowledge claims. The sceptical argument is valid and its closure premise is true; its first premise, that one does not know that one is not a brain in a vat, is false by those standards, because envatted worlds are not close to ours. In the context the sceptic creates by attending to them, the argument is sound, but what it establishes there is not a denial of anything we ordinarily claim to know.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alston(1986)]{Alston1986} Alston, W.~P. (1986). Epistemic circularity. \emph{Philosophy and Phenomenological Research}, 47(1), 1--30.
+\bibitem[Cohen(1988)]{Cohen1988} Cohen, S. (1988). How to be a fallibilist. \emph{Philosophical Perspectives}, 2, 91--123.
+\bibitem[DeRose(1995)]{DeRose1995} DeRose, K. (1995). Solving the skeptical problem. \emph{The Philosophical Review}, 104(1), 1--52.
+\bibitem[Dretske(1970)]{Dretske1970} Dretske, F. (1970). Epistemic operators. \emph{The Journal of Philosophy}, 67(24), 1007--1023.
+\bibitem[Lewis(1996)]{Lewis1996} Lewis, D. (1996). Elusive knowledge. \emph{Australasian Journal of Philosophy}, 74(4), 549--567.
+\bibitem[Moore(1939)]{Moore1939} Moore, G.~E. (1939). Proof of an external world. \emph{Proceedings of the British Academy}, 25, 273--300.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Pryor(2000)]{Pryor2000} Pryor, J. (2000). The skeptic and the dogmatist. \emph{No\^us}, 34(4), 517--549.
+\bibitem[Pryor(2004)]{Pryor2004} Pryor, J. (2004). What's wrong with Moore's argument? \emph{Philosophical Issues}, 14, 349--378.
+\bibitem[Putnam(1981)]{Putnam1981} Putnam, H. (1981). \emph{Reason, Truth and History}. Cambridge University Press.
+\bibitem[Sosa(1999)]{Sosa1999} Sosa, E. (1999). How to defeat opposition to Moore. \emph{Philosophical Perspectives}, 13, 141--153.
+\bibitem[Stroud(1984)]{Stroud1984} Stroud, B. (1984). \emph{The Significance of Philosophical Scepticism}. Oxford University Press.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\bibitem[Wright(2002)]{Wright2002} Wright, C. (2002). (Anti-)sceptics simple and subtle: G.~E. Moore and John McDowell. \emph{Philosophy and Phenomenological Research}, 65(2), 330--348.
+\end{thebibliography}
+
+\end{document}

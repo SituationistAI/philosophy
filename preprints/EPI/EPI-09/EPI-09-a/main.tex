@@ -1,0 +1,123 @@
+\documentclass{situationist-preprint}
+
+\title{The Lottery Paradox Resolved}
+\msid{EPI-09-a}
+\msfamily{EPI-09}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mskeywords{lottery paradox; safety; knowledge; practical reasoning; knowledge norm of action; expected utility}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+You hold one ticket in a large, fair lottery whose draw has taken place but not yet been announced. Do you know that your ticket has lost? Most philosophers think not, yet you plan your affairs on the assumption that it has, and you seem rational to do so. If knowledge is the norm of practical reasoning, the two verdicts conflict. We argue that you do not know that your ticket will lose, but that you may rationally act as if it will. You do not know, because knowledge requires safety and a world in which your ticket wins, while you believe on the same basis that it loses, is close. You may act as if it will lose, because acting as if a proposition is true is rational whenever the act that is best if the proposition is true is also best in expectation, and with long odds this holds in ordinary decisions, though not in all. The lottery case therefore shows that the reasons for which one may rationally act are not restricted to what one knows.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Kyburg1961} introduced the lottery to show that high probability is not sufficient for rational acceptance if acceptance is closed under conjunction: of each ticket in a fair lottery of a thousand, it is highly probable that it will lose, but not that all will lose. EPI-10 draws the moral for rational belief, which is not closed under conjunction. The question about knowledge is different. \citet{Harman1973} observed that one does not know, merely on the basis of the odds, that one's ticket will lose, even though one can know that it lost by reading the result in a newspaper whose chance of misprinting is greater than the chance that the ticket won. \citet{Vogel1990} and \citet{Hawthorne2004} showed how far the case reaches: if I do not know that my ticket will lose, it is hard to see how I know that I will not be able to afford a safari next year, which entails it. \citet{Nelkin2000} argued that the lottery belief is not even rational, since a belief based on purely statistical evidence lacks the right connection to its object.
+
+The practical side of the case is less discussed but equally pressing. A ticket holder who does not cancel her plans, does not open negotiations with a yacht broker, and budgets for the year as if she will not win, seems entirely rational. If, as \citet{HawthorneStanley2008} argue, one should treat a proposition as a reason for acting only if one knows it, she is not.
+
+We argue that she does not know that her ticket will lose, and that she may nevertheless rationally act as if it will.
+
+\section{Framework}
+
+We use the analysis of knowledge defended in EPI-01.
+
+\begin{definition}[Safety and knowledge]\label{d:safe}
+A belief that $p$, held at $w$ on basis $m$, is \emph{safe} if $p$ is true at every world close to $w$ at which the subject believes $p$ on basis $m$. A subject \emph{knows} that $p$ if she has a justified, safe belief that $p$.
+\end{definition}
+
+\begin{assumption}[Close winners]\label{a:close}
+For the holder of a ticket in a fair lottery, there is a world close to the actual world at which her ticket wins.
+\end{assumption}
+
+Assumption~\ref{a:close} is the claim of \citet{Pritchard2005}'s modal account of luck applied to lotteries. A fair lottery is a device designed to make each outcome as easily realized as every other. The world in which a different ball is drawn differs from the actual world only in the small details of the mixing, and nothing that would have to change for her ticket to win is more substantial than what did change for some ticket to win. Closeness, in the sense relevant to safety, is a matter of how little would have to differ, not of how probable the difference is.
+
+\begin{definition}[Acting as if]\label{d:asif}
+In a decision between acts, an agent \emph{acts as if} $p$ if she chooses an act that would be best were $p$ true.
+\end{definition}
+
+\begin{principle}[Expected utility]\label{p:eu}
+In a decision under uncertainty, an act is rationally permitted if and only if no alternative has greater expected utility by the agent's rational credences.
+\end{principle}
+
+\section{The argument}
+
+\begin{theorem}[No knowledge]\label{t:noknow}
+A ticket holder in a fair lottery who believes, on the basis of the odds, that her ticket will lose does not know that it will lose.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:close}, there is a close world at which her ticket wins. Her basis, the odds, is the same there, since the odds do not depend on the outcome, and so she believes on that basis that her ticket will lose, which is false there. Her belief is unsafe, and by Definition~\ref{d:safe} it is not knowledge.
+\end{proof}
+
+The verdict does not depend on denying that the belief is justified, or that it is rational. With the analysis of EPI-01 we may grant that the belief is justified; with EPI-10 we may grant that rational belief is licensed by sufficiently high credence, so that the ticket holder rationally believes, of each ticket, that it will lose, and also that one ticket will win. Knowledge, unlike rational belief, is closed under known entailment (EPI-20); Theorem~\ref{t:noknow} is what prevents the closure of knowledge from producing the conclusion that no ticket will win.
+
+\begin{proposition}[Acting as if]\label{p:asif}
+Let the ticket holder's rational credence that her ticket will lose be $1 - 1/N$, and consider a decision between an act $a$, best if the ticket loses, and an alternative $b$. Let $g$ be the advantage of $a$ over $b$ if the ticket loses, and $k$ the advantage of $b$ over $a$ if it wins. Then acting as if her ticket will lose, by choosing $a$, is rationally permitted if and only if $k \leq (N-1)\,g$.
+\end{proposition}
+
+\begin{proof}
+By Principle~\ref{p:eu}, $a$ is permitted if and only if its expected utility is not less than that of $b$, that is, if and only if $(1 - 1/N)\,g \geq (1/N)\,k$. Multiplying by $N$ gives $k \leq (N-1)\,g$.
+\end{proof}
+
+\begin{corollary}\label{c:ordinary}
+In decisions in which the cost of having acted as if the ticket would lose, should it win, is not more than $N - 1$ times the benefit of so acting, should it lose, the ticket holder may rationally act as if her ticket will lose. In such decisions she does so without knowing that it will.
+\end{corollary}
+
+Most of the decisions of ordinary life fall under Corollary~\ref{c:ordinary}. If the ticket wins, the holder who budgeted as if it would not loses nothing she cannot recover: she revises her plans with the prize in hand. The cost $k$ is small or zero, $g$ is the value of planning around her actual circumstances, and with odds of a million to one the condition is met with a wide margin. Some decisions do not fall under it. Selling the ticket for a penny before the draw is acting as if it will lose, and the cost if it wins is the whole prize. Proposition~\ref{p:asif} permits the sale only if the prize is at most $N-1$ pennies, that is, roughly, only if the penny is worth at least the ticket's expected value. This is the correct verdict, and it explains the intuition, stressed by \citet{Hawthorne2004}, that the holder may not reason from \enquote{my ticket will lose} to the sale. She may not, but not because she lacks knowledge; she may not because the stakes in that decision are wrong.
+
+\section{Objections}
+
+\begin{objection}[The knowledge norm]
+One may treat $p$ as a reason for acting only if one knows that $p$ \citep{HawthorneStanley2008}. The ticket holder does not know that her ticket will lose, so she may not act on it.
+\end{objection}
+
+\begin{reply}
+The ticket holder's reason is not that her ticket will lose, but that it will very probably lose and that, in the decision at hand, little is risked by acting on the assumption that it will. Both are things she knows. Acting as if $p$, in the sense of Definition~\ref{d:asif}, is choosing an act whose choiceworthiness is settled by the known probability of $p$ and the known stakes; it does not require using $p$ itself as a premise. The knowledge norm, read as a norm on premises, is therefore consistent with Corollary~\ref{c:ordinary}. Read as a norm on acting as if, it is refuted by it, since the budgeting holder is rational and does not know.
+\end{reply}
+
+\begin{objection}[Ordinary knowledge of the future]
+If one does not know that one's ticket will lose, one does not know that one will not be able to afford a safari, nor, by the same reasoning, that one will be in Paris next week, since one might win the lottery and go elsewhere \citep{Vogel1990,Hawthorne2004}. The result spreads scepticism about the future.
+\end{objection}
+
+\begin{reply}
+It spreads only as far as the lottery reaches. As EPI-20-a shows, the verdict on the ticket and the verdict on a future-directed claim that entails its loss stand or fall together, and where winning is a close possibility neither is known. That is a limitation on some everyday claims, but not on most: one's belief that one will be in Paris is unsafe only if the worlds in which one is prevented from going are close, and for most travellers they are not. Much of the future can be known by inference from laws and present conditions, as EPI-25 holds, and the lottery shows only that chance processes designed to make each outcome equally available are an exception.
+\end{reply}
+
+\begin{objection}[The newspaper]
+The chance that the newspaper misprinted the winning number exceeds the chance that one's ticket won. If the reader of the newspaper knows that her ticket lost, so does the ticket holder who reasons from the odds.
+\end{objection}
+
+\begin{reply}
+The comparison is of probabilities, and safety is not a matter of probability. A world in which the newspaper prints the wrong number differs from the actual world by a failure of a reliable process, and such worlds are remote even when not very improbable; a world in which a different ball is drawn differs by an ordinary outcome of a process designed to be indifferent among outcomes, and such worlds are close. This is why the newspaper reader knows and the ticket holder does not \citep{Pritchard2005}. A similar contrast is drawn by \citet{Smith2010}, who locates it in justification rather than in safety; we do not need to deny that the lottery belief is justified.
+\end{reply}
+
+\begin{objection}[Context]
+On the contextualism of EPI-13, standards for \enquote{know} vary. In a context in which the lottery is not under discussion, the holder can truly be said to know that her ticket will lose.
+\end{objection}
+
+\begin{reply}
+On the version of contextualism defended in EPI-13, the context fixes which worlds count as close, and attending to a possibility makes it close. To ask whether the holder knows that her ticket will lose is to attend to the possibility that it wins. \citet{Lewis1996} reached the same verdict by another route: by his rule of resemblance, the possibility that her ticket wins resembles the possibility that the actual winner wins, which cannot be properly ignored. Moreover, Assumption~\ref{a:close} does not rest on attention: the winning world is close because of the chance structure of the lottery, and a context that counted it as remote would count as remote worlds that differ from actuality less than the worlds it treats as close.
+\end{reply}
+
+\section{Conclusion}
+
+The ticket holder does not know that her ticket will lose, because a world in which it wins while she believes, on the same basis, that it loses is close, and knowledge requires safety. She may nevertheless act as if it will lose in every decision in which the cost of so acting, should it win, is small relative to the benefit, should it lose; that covers the decisions of ordinary life and excludes selling the ticket for a penny. What licenses her action is not knowledge of the outcome but knowledge of its probability and of the stakes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Harman(1973)]{Harman1973} Harman, G. (1973). \emph{Thought}. Princeton University Press.
+\bibitem[Hawthorne(2004)]{Hawthorne2004} Hawthorne, J. (2004). \emph{Knowledge and Lotteries}. Oxford University Press.
+\bibitem[Hawthorne and Stanley(2008)]{HawthorneStanley2008} Hawthorne, J. and Stanley, J. (2008). Knowledge and action. \emph{The Journal of Philosophy}, 105(10), 571--590.
+\bibitem[Kyburg(1961)]{Kyburg1961} Kyburg, H.~E. (1961). \emph{Probability and the Logic of Rational Belief}. Wesleyan University Press.
+\bibitem[Lewis(1996)]{Lewis1996} Lewis, D. (1996). Elusive knowledge. \emph{Australasian Journal of Philosophy}, 74(4), 549--567.
+\bibitem[Nelkin(2000)]{Nelkin2000} Nelkin, D.~K. (2000). The lottery paradox, knowledge, and rationality. \emph{The Philosophical Review}, 109(3), 373--409.
+\bibitem[Pritchard(2005)]{Pritchard2005} Pritchard, D. (2005). \emph{Epistemic Luck}. Oxford University Press.
+\bibitem[Smith(2010)]{Smith2010} Smith, M. (2010). What else justification could be. \emph{No\^us}, 44(1), 10--31.
+\bibitem[Vogel(1990)]{Vogel1990} Vogel, J. (1990). Are there counterexamples to the closure principle? In M.~D. Roth and G. Ross (eds.), \emph{Doubting: Contemporary Perspectives on Skepticism}. Kluwer.
+\end{thebibliography}
+
+\end{document}

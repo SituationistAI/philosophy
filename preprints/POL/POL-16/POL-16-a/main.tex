@@ -1,0 +1,163 @@
+\documentclass{situationist-preprint}
+
+\title{The Paradox of Tolerance}
+\msid{POL-16-a}
+\msfamily{POL-16}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/POL/POL\_16.lean}
+\mskeywords{toleration; paradox of tolerance; Popper; Rawls; militant democracy; intolerance}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Popper observed that unlimited tolerance of the intolerant may lead to the disappearance of tolerance. The observation is often taken to license suppressing intolerant views as such. We argue that it licenses much less. A society should tolerate all views except active intolerance, and should restrict even active intolerance only when it threatens the conditions under which toleration is possible. We prove that, under three assumptions about how the conditions of toleration can be threatened, exactly one policy both preserves those conditions and restricts only what it must to do so: the policy that tolerates a view if and only if it does not threaten them. That policy, which is Rawls's, tolerates all views that are not active intolerance; the policy of restricting all intolerance restricts more than it must. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The paradox appears in a note to \emph{The Open Society and Its Enemies}. \citet[vol.~1, ch.~7, n.~4]{Popper1945} observed that if we extend unlimited tolerance even to those who are intolerant, and are not prepared to defend a tolerant society against them, the tolerant will be destroyed, and tolerance with them. He did not hold that intolerant philosophies should always be suppressed, so long as argument and public opinion keep them in check, but claimed the right to suppress them if necessary.
+
+The commitment to toleration thus seems to require two incompatible things: tolerating every view, and preserving toleration, which an intolerant movement may destroy. One response takes the paradox to show that liberal toleration is partisan \citep{Marcuse1965} or an impossible virtue \citep{Williams1996}. The other, which we defend, bounds toleration by its own conditions. \citet[§35]{Rawls1971} held that a just constitution must tolerate an intolerant sect, and that the tolerant have a right to restrict the liberty of the intolerant only when they sincerely and with reason believe that their own security and that of the institutions of liberty are in danger. The same structure underlies the doctrine of militant democracy \citep{Loewenstein1937,Kirshner2014} and Forst's account of toleration as reciprocal justification \citep{Forst2013}. What the response lacks is a demonstration that it is the resolution rather than one among several. We supply it.
+
+\section{Framework}
+
+\begin{definition}[Intolerant and active views]\label{d:views}
+A view is \emph{intolerant} if it holds that some other views, or the people who hold them, ought to be suppressed. An intolerant view is \emph{active} if its holders act, or organize to act, to bring about the suppression it prescribes.
+\end{definition}
+
+\begin{definition}[Policy]\label{d:policy}
+A \emph{policy} assigns to each view one of two statuses: tolerated, or restricted. A view is restricted if its expression or organization is subject to legal sanction; it is tolerated otherwise.
+\end{definition}
+
+\begin{definition}[Conditions of toleration]\label{d:conditions}
+The \emph{conditions of toleration} are the institutional and social conditions under which a policy of toleration can be maintained: chiefly, constitutional protection of liberty of conscience and expression, the rule of law, and a distribution of power that prevents any group from suppressing others. A policy \emph{preserves} the conditions of toleration if, under it, they are maintained. A view \emph{threatens} the conditions of toleration if its holders are in a position to destroy them should it be tolerated.
+\end{definition}
+
+Whether a view threatens depends on circumstances: a small sect preaching the suppression of heretics does not threaten a stable constitutional democracy; an armed party with the same programme, near power in a fragile one, does. We make three assumptions.
+
+\begin{assumption}\label{a:only}
+Only active intolerance threatens the conditions of toleration.
+\end{assumption}
+
+\begin{assumption}\label{a:fails}
+A policy that tolerates a view that threatens the conditions of toleration does not preserve them.
+\end{assumption}
+
+\begin{assumption}\label{a:suffices}
+A policy that tolerates no view that threatens the conditions of toleration preserves them.
+\end{assumption}
+
+Assumption~\ref{a:only} holds because a view that does not prescribe suppression gives its holders no reason, as holders of it, to dismantle the protection of others, and a view held but not acted upon does nothing. Assumption~\ref{a:fails} follows from Definition~\ref{d:conditions}. Assumption~\ref{a:suffices} is an idealization: the conditions can also erode through crisis or war, but these are not threats that a policy deciding which views to restrict can address. Two principles constrain any policy of toleration.
+
+\begin{principle}[Preservation]\label{p:pres}
+A policy of toleration must preserve the conditions of toleration.
+\end{principle}
+
+\begin{principle}[Necessity]\label{p:nec}
+A policy of toleration may restrict a view only if the view threatens the conditions of toleration.
+\end{principle}
+
+P\ref{p:pres} expresses the coherence of a commitment to toleration: a commitment that predictably ends toleration defeats itself. P\ref{p:nec} expresses its content: a restriction not needed to preserve toleration is a failure to tolerate, and by Assumption~\ref{a:suffices} the needed restrictions are those of threatening views. Both answer to the requirement of POL-02 that the state be justifiable to all reasonable persons subject to it: a restriction not needed to preserve the conditions under which all can hold their views could not be justified to those it restricts.
+
+\section{The argument}
+
+\begin{theorem}[Popper's paradox]\label{t:paradox}
+If some view threatens the conditions of toleration, unlimited tolerance does not preserve them.
+\end{theorem}
+
+\begin{proof}
+Unlimited tolerance tolerates every view, and in particular the threatening one. By Assumption~\ref{a:fails}, it does not preserve the conditions of toleration.
+\end{proof}
+
+The paradox is thus conditional: where no view threatens the conditions, unlimited tolerance is not only permissible but required by P\ref{p:nec}.
+
+\begin{theorem}[Resolution]\label{t:resolution}
+A policy satisfies Principles~\ref{p:pres} and~\ref{p:nec} if and only if it tolerates a view exactly when the view does not threaten the conditions of toleration.
+\end{theorem}
+
+\begin{proof}
+Suppose a policy satisfies both principles, and consider any view. If the policy tolerates it and it threatens the conditions, then by Assumption~\ref{a:fails} the policy does not preserve them, contrary to P\ref{p:pres}; so a tolerated view does not threaten. If the policy restricts it, then by P\ref{p:nec} it threatens; so a view that does not threaten is tolerated. Conversely, suppose a policy tolerates exactly the views that do not threaten. Then it tolerates no threatening view, so by Assumption~\ref{a:suffices} it preserves the conditions of toleration, and it satisfies P\ref{p:pres}; and every view it restricts threatens the conditions, so it satisfies P\ref{p:nec}.
+\end{proof}
+
+\begin{corollary}\label{c:active}
+A policy satisfying Principle~\ref{p:nec} tolerates every view that is not active intolerance, and restricts a view only if the view is intolerant and threatens the conditions of toleration.
+\end{corollary}
+
+\begin{proof}
+If the policy restricts a view, then by P\ref{p:nec} the view threatens the conditions of toleration, and by Assumption~\ref{a:only} it is active intolerance. Hence a view that is not active intolerance is not restricted, and a restricted view is both intolerant and threatening.
+\end{proof}
+
+Theorem~\ref{t:resolution} and Corollary~\ref{c:active} give the thesis, and the policy they single out is Rawls's. Popper's note alone is compatible with a stricter policy.
+
+\begin{proposition}\label{p:strict}
+If some intolerant view does not threaten the conditions of toleration, the policy of restricting all intolerant views violates Principle~\ref{p:nec}.
+\end{proposition}
+
+\begin{proof}
+That policy restricts the intolerant view in question, which does not threaten the conditions of toleration.
+\end{proof}
+
+The antecedent holds in every stable liberal democracy.
+
+\section{Objections}
+
+\begin{objection}[Too late]
+By the time an intolerant movement threatens the conditions of toleration, it may be too strong to restrict. Prudence requires acting earlier, against intolerance as such.
+\end{objection}
+
+\begin{reply}
+Threat in the sense of Definition~\ref{d:conditions} is being in a position to destroy the conditions if tolerated, not being about to do so. The objection identifies a difficulty of judgment, not a reason to replace the criterion of threat by that of intolerance.
+\end{reply}
+
+\begin{objection}[Partisanship]
+Following \citet{Marcuse1965}, the criterion of threat will be applied by those in power, who will find threats among their opponents. A bounded toleration is, in practice, a partisan one.
+\end{objection}
+
+\begin{reply}
+The danger attends every criterion, Marcuse's included. The criterion of threat is less exposed to it than that of intolerance, being narrower and tied to observable features of a movement: its organization, means and acts. The remedy lies in procedure, in restrictions imposed by independent courts under public standards, and in the equal access to public debate that POL-20 requires, so that claims of threat can be contested.
+\end{reply}
+
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/POL/POL_16.lean}. The predicates of Definitions~\ref{d:views} and~\ref{d:conditions} are primitive, a policy is a predicate on views, Assumptions~\ref{a:only}--\ref{a:suffices} are axioms, and all four results of Section~3 are proved. The main theorem is:
+
+\begin{lstlisting}
+theorem resolution_unique (p : Policy) :
+    (Preserves p ∧ Necessity p) ↔ ∀ v, p v ↔ resolution v
+\end{lstlisting}
+
+\noindent and Lean reports:
+
+\begin{lstlisting}
+'Philosophy.POL_16.resolution_unique' depends on axioms:
+ [propext, Classical.choice, Quot.sound,
+  Philosophy.POL_16.Preserves, Philosophy.POL_16.Threatens,
+  Philosophy.POL_16.View,
+  Philosophy.POL_16.assumption_2_5,
+  Philosophy.POL_16.assumption_2_6]
+\end{lstlisting}
+
+The first three are Lean's classical axioms; the next three declare primitives; the last two are Assumptions~\ref{a:fails} and~\ref{a:suffices}. Corollary~\ref{c:active} uses only Assumption~\ref{a:only}.
+
+\section{What the result does not establish}
+
+It does not say which views threaten the conditions of toleration in a given society, a judgment of circumstance that POL-16-b takes up; it does not establish the three assumptions; and it does not decide whether views may be restricted on other grounds, such as the prevention of harm to the targets of intolerant speech.
+
+\section{Conclusion}
+
+Unlimited tolerance defeats itself only where some view threatens the conditions of toleration. A policy that preserves those conditions and restricts nothing it need not tolerates exactly the views that do not threaten them: every view that is not active intolerance, and active intolerance unless it threatens the conditions of toleration.
+
+\begin{thebibliography}{99}\small
+\bibitem[Forst(2013)]{Forst2013} Forst, R. (2013). \emph{Toleration in Conflict: Past and Present}. Trans. C. Cronin. Cambridge University Press.
+\bibitem[Kirshner(2014)]{Kirshner2014} Kirshner, A.~S. (2014). \emph{A Theory of Militant Democracy: The Ethics of Combatting Political Extremism}. Yale University Press.
+\bibitem[Loewenstein(1937)]{Loewenstein1937} Loewenstein, K. (1937). Militant democracy and fundamental rights, I. \emph{American Political Science Review}, 31(3), 417--432.
+\bibitem[Marcuse(1965)]{Marcuse1965} Marcuse, H. (1965). Repressive tolerance. In R.~P. Wolff, B. Moore Jr. and H. Marcuse, \emph{A Critique of Pure Tolerance}. Beacon Press.
+\bibitem[Popper(1945)]{Popper1945} Popper, K.~R. (1945). \emph{The Open Society and Its Enemies}. 2 vols. Routledge.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\bibitem[Williams(1996)]{Williams1996} Williams, B. (1996). Toleration: An impossible virtue? In D. Heyd (ed.), \emph{Toleration: An Elusive Virtue}. Princeton University Press.
+\end{thebibliography}
+
+\end{document}

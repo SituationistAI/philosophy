@@ -1,0 +1,226 @@
+\documentclass{situationist-preprint}
+
+\title{The Asymmetry Argument Fails}
+\msid{ETH-20-a}
+\msfamily{ETH-20}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_20.lean}
+\mskeywords{antinatalism; Benatar; asymmetry; procreation; impersonal value; population ethics; harm of coming into existence}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Benatar argues that coming into existence is always a harm, and that it is therefore wrong to have children. His argument rests on an asymmetry: the absence of pain is good even if no one enjoys that good, while the absence of pleasure is not bad unless there is someone for whom it is a deprivation. Comparing existence with never existing column by column, he concludes that never existing is better for every life containing any pain. We argue that the asymmetry evaluates the two columns by different standards: the absence of pain impersonally, the absence of pleasure personally. We show that on either uniform standard the comparison favors never existing only for lives containing no good at all. Since Benatar's own claim about the absence of pain can only be made on the impersonal standard, parity requires evaluating the absence of pleasure impersonally too. On that standard the absence of pleasure, though bad for no one, is not neutral: it is worse than the presence of the pleasure. Existence is then better than never existing for a life containing more good than bad, and having children is not wrong. The structure of the argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Antinatalism is the view that it is wrong to bring new people into existence. Its most influential defense is due to \citet{Benatar1997,Benatar2006}, who argues that coming into existence is always a serious harm to the one who comes into existence, and that it is wrong to inflict it. The argument does not depend on any pessimistic estimate of how lives actually go, though Benatar offers such estimates separately. It depends on an asymmetry between pain and pleasure.
+
+Benatar states the asymmetry in four claims \citep[ch.~2]{Benatar2006}:
+\begin{enumerate}[label=(\arabic*)]
+\item the presence of pain is bad;
+\item the presence of pleasure is good;
+\item the absence of pain is good, even if that good is not enjoyed by anyone;
+\item the absence of pleasure is not bad unless there is somebody for whom this absence is a deprivation.
+\end{enumerate}
+He then compares two scenarios: A, in which a person X exists, and B, in which X never exists. In the pain column, A contains pain, which is bad by (1), and B contains its absence, which is good by (3): B has the advantage. In the pleasure column, A contains pleasure, which is good by (2), and B contains its absence, which by (4) is not bad, since in B there is no one to be deprived: Benatar concludes that A has no advantage, because good is not an advantage over \enquote{not bad}. B is better in one column and no worse in the other, so never existing is better than existing, for any life containing any pain.
+
+Benatar supports the asymmetry by its power to explain four further asymmetries that he takes to be widely accepted: that there is a duty not to create people whose lives would be miserable but no duty to create people whose lives would be happy; that it is strange to cite the interests of a potential child as a reason for creating it, but not strange to cite them as a reason for not creating it; that we may regret having created a miserable person, but do not regret, for the sake of the person, not having created a happy one; and that we are saddened by the suffering of the inhabitants of distant places, but not by the absence of happy people from uninhabited ones.
+
+The critical literature is large. \citet{Harman2009} questions whether the four claims can be read so as to be both plausible and jointly sufficient for the conclusion. \citet{Bradley2010} examines the betterness relations the argument relies on and argues that it does not survive a precise statement of them. \citet{DeGrazia2010} and \citet{Metz2011} offer alternative explanations of the supporting asymmetries. \citet{Overall2012} rejects the argument as part of a general defense of the permissibility of procreation. \citet{Benatar2013} has replied to many of these critics.
+
+We argue that the asymmetry fails for a reason that can be stated precisely: claims (3) and (4) evaluate the two columns by different standards, and the comparison succeeds only on the mixed evaluation. On any single standard, the argument shows at most that never existing is better for lives containing no good at all. The standard that Benatar's own claim (3) requires is the impersonal one, and on it the absence of pleasure, though bad for no one, is not neutral. We conclude that having children is not wrong, at least on the ground that existence harms the child.
+
+\section{Framework}
+
+\begin{definition}[Lives]\label{d:life}
+A \emph{possible life} is described by the amount of good $g$ and the amount of bad $b$ it would contain, measured on a common scale.
+\end{definition}
+
+The measure is a simplification, and nothing in the argument depends on the goods being pleasures in particular. ETH-05 argues that well-being includes contact with reality, and ETH-01 that the good has seven components; $g$ and $b$ may be read as the total of the goods and evils of the life for the one who lives it. A \emph{column verdict} is an integer whose sign says which scenario the column favors: positive for existence, negative for never existing, zero for neither.
+
+\begin{definition}[Standards]\label{d:standards}
+On the \emph{personal standard}, a state of affairs is good or bad only if it is good or bad for someone. On the \emph{impersonal standard}, a state of affairs is good or bad simpliciter, whether or not it is good or bad for anyone. The verdicts of the two standards on the two columns are as follows.
+\begin{itemize}
+\item Personal standard: in the pain column, the absence of pain in B is good for no one, and the presence of pain in A is bad for X, but B is not better \emph{for X}, since in B there is no X; the verdict is $0$. Likewise the pleasure column gives $0$.
+\item Impersonal standard: in the pain column, the presence of pain is bad and its absence is good, and the verdict is $-b$; in the pleasure column, the presence of pleasure is good and its absence is worse than its presence, and the verdict is $g$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Benatar's evaluation]\label{d:benatar}
+\emph{Benatar's evaluation} gives the pain column the impersonal verdict $-b$ and the pleasure column the personal verdict $0$.
+\end{definition}
+
+\begin{definition}[Dominance]\label{d:dominance}
+Never existing \emph{dominates} existence if some column favors never existing and no column favors existence.
+\end{definition}
+
+The personal verdict in the pain column needs comment. One might say that the absence of pain in B is good for X in a counterfactual sense: good for the person who would otherwise have existed. Benatar sometimes speaks this way. But then the absence of pleasure in B is bad for X in the same counterfactual sense, since X would otherwise have had the pleasure, and the counterfactual reading assigns the pleasure column a verdict favoring existence. It belongs with the impersonal standard for our purposes, because it evaluates both absences by reference to a person who does not exist. What no reading can do without changing standards is to count the absence of pain in favor of B by reference to the merely possible X, while refusing to count the absence of pleasure against B on the ground that X is merely possible.
+
+\begin{principle}[Parity]\label{p:parity}
+The two columns are evaluated by the same standard.
+\end{principle}
+
+\begin{assumption}[The absence of pain is good]\label{a:pain}
+For a life containing some bad, the pain column favors never existing.
+\end{assumption}
+
+\begin{principle}[Child-regarding wrongness]\label{p:wrong}
+Creating a person is wrong, on the ground of what existence does to the person created, only if the column verdicts, correctly evaluated, sum to a verdict favoring never existing.
+\end{principle}
+
+Principle~\ref{p:parity} is the core of our argument. Its ground is that a column-by-column comparison is a comparison of advantages, and the advantages must be measured in a common currency if the overall comparison is to be meaningful. If one column records what is good simpliciter and the other what is good for someone, the conclusion that B is better \emph{overall} combines verdicts that answer different questions. Assumption~\ref{a:pain} is Benatar's claim (3), which we grant. Principle~\ref{p:wrong} combines the column verdicts by summing them, as is standard in comparing lives; it applies only to the child-regarding objection to procreation, the one the asymmetry argument supports, and leaves aside objections from consent and from the effects of a child's existence on others.
+
+\section{The argument}
+
+\begin{proposition}[Validity]\label{p:valid}
+On Benatar's evaluation, never existing dominates existence for every life containing some bad.
+\end{proposition}
+
+\begin{proof}
+If $b > 0$, the pain column gives $-b < 0$, which favors never existing, and the pleasure column gives $0$, which favors neither.
+\end{proof}
+
+Benatar's argument is therefore valid on his evaluation. The question is whether the evaluation is coherent.
+
+\begin{theorem}[Uniform standards]\label{t:uniform}
+On either uniform standard, never existing dominates existence only for lives containing no good.
+\end{theorem}
+
+\begin{proof}
+On the personal standard both columns give $0$, so no column favors never existing, and dominance fails for every life. On the impersonal standard the pleasure column gives $g$; if never existing dominates, no column favors existence, so $g \le 0$, and since $g$ is non-negative, $g = 0$.
+\end{proof}
+
+\begin{lemma}\label{l:impersonal}
+Given Principle~\ref{p:parity} and Assumption~\ref{a:pain}, both columns are to be evaluated by the impersonal standard.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:parity} there is one standard. Consider a life with some bad. By Assumption~\ref{a:pain}, its pain column favors never existing. On the personal standard the pain column gives $0$, which favors neither scenario. So the standard is not the personal one, and it is the impersonal one.
+\end{proof}
+
+\begin{corollary}[Non-neutrality]\label{c:nonneutral}
+The absence of pleasure is not neutral: for every life containing some good, the pleasure column favors existence, and never existing does not dominate existence.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:impersonal}, the pleasure column gives $g > 0$. Dominance fails by Theorem~\ref{t:uniform}.
+\end{proof}
+
+Corollary~\ref{c:nonneutral} is the precise sense in which the absence of pleasure, though bad for no one, is not neutral. It is bad for no one, as Benatar's claim (4) says: in B there is no one for whom it is bad. But the scenario that lacks the pleasure is worse, in that respect, than the scenario that contains it, and this is all that a column comparison requires.
+
+\begin{proposition}[Overall comparison]\label{p:overall}
+On the impersonal standard, the sum of the column verdicts favors existence if and only if the life contains more good than bad.
+\end{proposition}
+
+\begin{proof}
+The sum is $g - b$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Given Principles~\ref{p:parity} and \ref{p:wrong} and Assumption~\ref{a:pain}, creating a person whose life would contain at least as much good as bad is not wrong on the ground of what existence does to that person; and for every life containing some good, the asymmetry argument fails.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:impersonal} the columns are evaluated impersonally, and their verdicts sum to $g - b \ge 0$, which does not favor never existing. By Principle~\ref{p:wrong}, creating the person is not wrong on the child-regarding ground. The second claim is Corollary~\ref{c:nonneutral}.
+\end{proof}
+
+The argument does not deny any of Benatar's four claims as he intends them. It denies that (3) and (4), so understood, can be combined in a single comparison. Claim (3) is true on the impersonal standard and claim (4) is true on the personal standard, and Theorem~\ref{t:uniform} shows that neither standard, applied to both columns, delivers the conclusion.
+
+\section{The supporting asymmetries}
+
+Benatar's strongest support for the asymmetry is its explanation of the four asymmetries listed in Section~1. If the asymmetry fails, these need another explanation. We think they have one: they are asymmetries in what is owed to whom and in the attitudes appropriate on someone's behalf, not asymmetries in value, and they are explained by the fact, which we accept, that the absence of pleasure is bad for no one.
+
+\paragraph{The procreative asymmetry.} There is a duty not to create a person whose life would be miserable, and no duty to create a person whose life would be happy \citep{Narveson1973,McMahan1981}. A miserable person, once created, is wronged by her creation: there is someone for whom her existence is bad. A happy person who is not created is wronged by no one, since there is no one. This explains why the duty runs only one way, without making the absence of the happy person's pleasure neutral. The outcome without the happy person is worse in one respect, and there is a reason to create her, as ETH-09's acceptance of the impersonal value of adding good lives implies; but the reason does not ground a duty owed to anyone, and it is not a requiring reason for any particular agent, since the demands of morality leave room for a personal prerogative (ETH-28). ETH-08 argues that our obligations to future generations are impersonal and owed to no one in particular. These obligations concern the conditions in which future people will live; they do not include a duty of any particular person to procreate.
+
+\paragraph{Prospective beneficence.} It is strange to say that one had a child for the child's sake. It is strange because, before conception, there is no child for whose sake one could act, and so no one who could be benefited. The value of the child's life is not a benefit to anyone in advance; it is an impersonal good that the parents bring about. The asymmetry in what one can do \emph{for someone's sake} is an asymmetry in the personal standard, which we accept.
+
+\paragraph{Retrospective regret and distant places.} We regret, for the person's sake, having created someone whose life is miserable, and we pity the suffering inhabitants of distant places, but we do not pity the merely possible happy people who never came to be. Pity and regret on someone's behalf require someone on whose behalf to feel them. These asymmetries again belong to the personal standard. They are compatible with judging that a world containing the happy inhabitants would have been better than one without them, and most people who reflect on the matter so judge.
+
+In each case the explanation uses only the uncontested part of claim (4), that the absence of pleasure is bad for no one, and not the part on which the asymmetry argument relies, that it is neutral in a column comparison.
+
+\section{Objections}
+
+\begin{objection}[The asymmetry is between good and not bad]
+Benatar's claim is not that the absence of pleasure is neutral but that it is \enquote{not bad}, and that a good (the pleasure in A) is no advantage over something not bad. The impersonal standard misdescribes the claim.
+\end{objection}
+
+\begin{reply}
+If \enquote{not bad} means \enquote{not bad for anyone}, the claim is true and does not support the comparison, for the reason given by Theorem~\ref{t:uniform}: in the pain column, the absence of pain is also good for no one. If \enquote{not bad} means \enquote{not worse than the presence of the pleasure}, then the claim is the denial of Corollary~\ref{c:nonneutral}, and it is false on the impersonal standard on which claim (3) is true. Our diagnosis is in this respect close to that of \citet{Bradley2010}, who examines the argument in terms of betterness relations rather than standards.
+\end{reply}
+
+\begin{objection}[No impersonal value]
+There is no impersonal value. Everything good is good for someone. The impersonal standard is therefore not available, and the argument begs the question.
+\end{objection}
+
+\begin{reply}
+If there is no impersonal value, then claim (3) is false, since the absence of pain in B is good for no one, and Benatar's argument loses its first column. The objection therefore does not help the antinatalist: on the purely personal standard, Theorem~\ref{t:uniform} shows that dominance fails for every life. We also think the premise is false. ETH-01 argues that fairness and beauty are components of the good that are not components of anyone's well-being, and ETH-09 argues for the impersonal value of adding good lives.
+\end{reply}
+
+\begin{objection}[Quality of life]
+Even if the asymmetry fails, actual lives contain much more bad than their subjects believe. Benatar argues that self-assessments of well-being are distorted by optimism bias, adaptation and comparison with others, and that every actual life is very bad \citep[ch.~3]{Benatar2006}. If so, Principle~\ref{p:wrong} condemns procreation after all.
+\end{objection}
+
+\begin{reply}
+This is a separate argument, and Theorem~\ref{t:main} is conditional on the life containing at least as much good as bad. We note two points against it. First, the argument assesses lives by a standard external to them, on which a life is bad if it falls short of an ideal free of all suffering and frustration; but a life's containing more good than bad is a matter of the goods and evils it contains, not of its distance from an ideal. Second, the biases Benatar cites operate in both directions, and the assessment of a life by its subject, made with knowledge of its contents, is better evidence of its quality than an assessment from outside that discounts the subject's judgment by an amount chosen to support the conclusion. Typical lives, in typical conditions, contain more good than bad.
+\end{reply}
+
+\begin{objection}[Consent]
+Even if existence benefits the child, creating a child imposes the risk of serious harm on someone who cannot consent to it \citep{Shiffrin1999}.
+\end{objection}
+
+\begin{reply}
+The objection is independent of the asymmetry, and ETH-20-b examines it. Theorem~\ref{t:main} concerns only the ground that the asymmetry argument offers, namely that existence is worse for the child than never existing.
+\end{reply}
+
+\section{What the argument does not establish}
+
+The argument shows that the asymmetry argument fails and that, where a life would contain at least as much good as bad, having a child is not wrong on the child-regarding ground. It does not show that every act of procreation is permissible: a child whose life would be miserable should not be created, and there may be other grounds for criticizing particular decisions to have children, concerning the parents' circumstances or the effects on others. Nor does it show that there is a duty to have children. That the absence of pleasure is not neutral gives a reason to create happy lives, but not a requirement on anyone.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/ETH/ETH_20.lean} formalizes Section~3. A life is a pair of natural numbers, the two standards form an inductive type, and the column verdicts of Definition~\ref{d:standards} are defined functions to the integers. Principle~\ref{p:parity} is represented by a single constant \texttt{std}, the standard by which both columns are evaluated. Assumption~\ref{a:pain} and Principle~\ref{p:wrong} are axioms.
+
+\begin{lstlisting}
+theorem uniform_blocks (s : Standard) (l : Life)
+    (h : NonExistenceDominates (painColumn s l) (pleasureColumn s l)) :
+    l.good = 0
+
+theorem not_wrong (l : Life) (h : l.good ≥ l.bad) :
+    ¬ WrongToCreate l ∧
+    (l.good > 0 → ¬ NonExistenceDominates (painColumn std l)
+                                           (pleasureColumn std l))
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_20.uniform_blocks' depends on axioms: [propext, Quot.sound]
+'Philosophy.ETH_20.not_wrong' depends on axioms:
+  [propext, Quot.sound, Philosophy.ETH_20.WrongToCreate,
+   Philosophy.ETH_20.absence_of_pain_good, Philosophy.ETH_20.std,
+   Philosophy.ETH_20.wrong_only_if_worse]
+\end{lstlisting}
+
+Theorem~\ref{t:uniform} depends only on standard axioms of Lean's logic: it is a fact about the two standards as Definition~\ref{d:standards} describes them. Theorem~\ref{t:main} depends in addition on \texttt{std} (Principle~\ref{p:parity}), \texttt{absence\_of\_pain\_good} (Assumption~\ref{a:pain}), and the primitive \texttt{WrongToCreate} with the axiom \texttt{wrong\_only\_if\_worse} (Principle~\ref{p:wrong}). Proposition~\ref{p:valid}, Lemma~\ref{l:impersonal}, Corollary~\ref{c:nonneutral} and Proposition~\ref{p:overall} are also proved.
+
+\section{Conclusion}
+
+Benatar's asymmetry evaluates the absence of pain impersonally and the absence of pleasure personally, and his argument is valid only on that mixed evaluation. On any single standard, never existing is better only for lives without any good. Since Benatar's own claim that the absence of pain is good requires the impersonal standard, the absence of pleasure must be evaluated on it too, and there it is not neutral, though it is bad for no one. Existence is then better than never existing for a life with more good than bad, and having children whose lives will be good on balance is not wrong.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benatar(1997)]{Benatar1997} Benatar, D. (1997). Why it is better never to come into existence. \emph{American Philosophical Quarterly}, 34(3), 345--355.
+\bibitem[Benatar(2006)]{Benatar2006} Benatar, D. (2006). \emph{Better Never to Have Been: The Harm of Coming into Existence}. Oxford University Press.
+\bibitem[Benatar(2013)]{Benatar2013} Benatar, D. (2013). Still better never to have been: A reply to (more of) my critics. \emph{The Journal of Ethics}, 17, 121--151.
+\bibitem[Bradley(2010)]{Bradley2010} Bradley, B. (2010). Benatar and the logic of betterness. \emph{Journal of Ethics and Social Philosophy}, discussion note.
+\bibitem[DeGrazia(2010)]{DeGrazia2010} DeGrazia, D. (2010). Is it wrong to impose the harms of human life? A reply to Benatar. \emph{Theoretical Medicine and Bioethics}, 31(4), 317--331.
+\bibitem[Harman(2009)]{Harman2009} Harman, E. (2009). Critical study of David Benatar, \emph{Better Never to Have Been}. \emph{No\^us}, 43(4), 776--785.
+\bibitem[McMahan(1981)]{McMahan1981} McMahan, J. (1981). Problems of population theory. \emph{Ethics}, 92(1), 96--127.
+\bibitem[Metz(2011)]{Metz2011} Metz, T. (2011). Are lives worth creating? \emph{Philosophical Papers}, 40(2), 233--255.
+\bibitem[Narveson(1973)]{Narveson1973} Narveson, J. (1973). Moral problems of population. \emph{The Monist}, 57(1), 62--86.
+\bibitem[Overall(2012)]{Overall2012} Overall, C. (2012). \emph{Why Have Children? The Ethical Debate}. MIT Press.
+\bibitem[Shiffrin(1999)]{Shiffrin1999} Shiffrin, S.~V. (1999). Wrongful life, procreative responsibility, and the significance of harm. \emph{Legal Theory}, 5(2), 117--148.
+\end{thebibliography}
+
+\end{document}

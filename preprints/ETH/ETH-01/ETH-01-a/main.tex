@@ -1,0 +1,177 @@
+\documentclass{situationist-preprint}
+
+\title{On the Good\\[0.4em]\large Volume I: The Concept of the Good and the Method of Isolation}
+\msid{ETH-01-a}
+\msfamily{ETH-01}
+\msdiscipline{Ethics}
+\mstype{Principal manuscript, Volume I of VI}
+\mslean{lean/Philosophy/ETH/ETH\_01.lean}
+\mskeywords{the good; value pluralism; objective list; reflective endorsement; method of isolation; hedonism; monism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This work gives an account of the good. It argues that the good is what idealized reflective endorsement converges on, and that what it converges on is plural: there are seven irreducible components of the good, namely well-being, knowledge, achievement, relationships, fairness, beauty and autonomy. Volume I defines the good, defends the method by which its components are identified, and proves that the good is plural. The method is a refinement of Moore's method of isolation: a component is irreducible if there are two outcomes that differ only in that component and differ in value. Given the isolation results, we prove that the value of an outcome does not supervene on any proper subset of the seven components, and hence that every monistic theory of the good, hedonism included, is false. The proof is formalized in Lean, where the isolation results appear as the single substantive axiom. Volumes II to V examine the components in turn, and Volume VI argues that the list is complete.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Concept of the Good and the Method of Isolation & 1--402 \\
+II & Well-Being and Knowledge & 403--781 \\
+III & Achievement and Relationships & 782--1,160 \\
+IV & Fairness & 1,161--1,559 \\
+V & Beauty and Autonomy & 1,560--1,947 \\
+VI & The Closure of the List & 1,948--2,340 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+Theories of the good have usually been either monistic or unsystematic. Monistic theories, such as hedonism and desire-satisfaction theories, identify a single property that makes things good, and are refuted by cases in which outcomes equal in that property differ in value. Pluralistic theories, from Ross's list of prima facie duties to the objective-list theories of well-being, avoid the counterexamples but are open to the charge that their lists are arbitrary: they are compiled from intuitions and offer no criterion for what belongs on them.
+
+This work aims at a pluralism that is systematic. The good is defined by a single criterion, idealized reflective endorsement, and the plurality of its components is derived rather than assumed. The method that identifies the components is uniform and its results are checkable: a component belongs on the list if and only if it passes an isolation test, and the list is complete if and only if every difference in value is accounted for by a difference in some component. Volume~I establishes the criterion, the method and the plurality; the remaining volumes apply the method to each candidate component and argue for closure.
+
+The work is long because the subject is. Each component has its own literature, and each must be shown to pass the isolation test against the best attempts to reduce it to the others.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & The concept of the good & 34 \\
+3 & Idealized reflective endorsement & 71 \\
+4 & The method of isolation & 118 \\
+5 & Plurality: the formal argument & 160 \\
+6 & Incommensurability and comparability & 191 \\
+7 & Monisms refuted & 238 \\
+8 & The seven components introduced & 301 \\
+9 & Objections & 352 \\
+10 & Summary and plan of Volumes II to VI & 389 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+\subsection{The question}
+
+What is the good? The question is ambiguous between at least three readings. It may ask what the word \enquote{good} means, what property, if any, the word picks out, or what things have that property. Moore held that the first two questions have a short answer, since good is a simple, indefinable property, and devoted his ethics to the third \citep{Moore1903}. We hold, against Moore, that the good can be characterized, though not defined by a synonymous expression, and that the characterization guides the inquiry into what things are good.
+
+We are concerned with the good of outcomes, or states of affairs: what makes one way the world might go better than another. This is the notion that consequentialists take to be fundamental and that deontologists need for their account of beneficence and harm. By ETH-02, the two are less opposed than they appear, since every deontological theory is extensionally equivalent to a consequentialist theory with a suitable value function. The present work may be read as a contribution to determining that value function, whatever framework it is embedded in.
+
+\subsection{Attributive and predicative goodness}
+
+\citet{Geach1956} argued that \enquote{good} is an attributive adjective: a good knife, a good thief, a good person, with no property of goodness simpliciter. \citet{Thomson2008} developed the argument into a rejection of the notion of good outcomes. We accept that most uses of \enquote{good} are attributive, but deny that this excludes a predicative use. \enquote{It would be better if fewer people suffered} is intelligible and true, and it does not mean that the outcome would be better as an outcome of some kind. The predicative use is the one in which the good is what reasons for choice among outcomes track. Chapter~2 develops this reply.
+
+\section{The concept of the good}
+
+We characterize the good functionally. An outcome is good to the extent that there is reason to prefer it, from a standpoint that gives equal consideration to everyone affected. The good is the property, whatever it turns out to be, that plays this role. On this characterization, the question what the good is becomes the question which features of outcomes provide reasons for preferring them from the impartial standpoint, and how those reasons combine. The characterization does not prejudge whether there is one such feature or many, whether they are natural or non-natural, or whether they are commensurable. Chapter~3 adds a criterion that makes the question answerable.
+
+\section{Idealized reflective endorsement}
+
+\begin{definition}\label{d:endorse}
+An agent's \emph{idealized reflective endorsement} of an outcome is the attitude she would take toward it if she were fully informed about it and about the alternatives, vividly imagined each of them, reasoned without error, and considered it from a standpoint giving equal weight to everyone affected.
+\end{definition}
+
+\begin{definition}\label{d:good}
+The \emph{good} is what idealized reflective endorsement converges on: one outcome is better than another if and only if every agent's idealized reflective endorsement would prefer the first.
+\end{definition}
+
+Definition~\ref{d:good} belongs to the family of ideal-observer and full-information accounts \citep{Firth1952,Brandt1979,Railton1986}, and MTE-01 argues that moral facts in general are natural facts about idealized reactions of this kind. It differs from full-information accounts of an individual's good, such as Railton's, in being impartial: the idealized agent considers everyone affected, not only herself. The convergence condition is substantive. If idealized agents would diverge, there is no fact about which of the outcomes in question is better, and the account predicts incomparability where they diverge. Chapter~6 argues that such cases exist but are rarer than they seem, and that many apparent cases are cases of parity in the sense of \citet{Chang2002}.
+
+Full-information accounts face a familiar objection: an agent fully informed about every possible life would be so unlike any actual agent that her preferences have no authority for us \citep{Rosati1995,Sobel1994}. We reply that the account requires full information about the outcomes being compared, not about every possible life, and that the information need not be held all at once; it is enough that the agent's preference would survive exposure to each relevant fact in turn. This weaker idealization is defended in Chapter~3.
+
+\section{The method of isolation}
+
+Moore proposed to determine what has intrinsic value by considering \enquote{what things are such that, if they existed by themselves, in absolute isolation, we should yet judge their existence to be good} \citep[\S 112]{Moore1903}. The method in this form has been criticized on two grounds. Some goods, such as relationships, cannot exist in isolation; and the judgments it elicits are unreliable, since they concern bizarre situations in which ordinary sensitivities are not engaged.
+
+We use a contrastive refinement that meets both objections. Instead of considering a good in isolation, we consider two outcomes that are alike in every respect except one and ask whether idealized reflective endorsement would prefer one to the other.
+
+\begin{definition}\label{d:pass}
+A candidate component $C$ \emph{passes the isolation test} if there are two outcomes that differ only in their level of $C$ and that idealized reflective endorsement ranks differently.
+\end{definition}
+
+The test does not require that $C$ exist alone, so it applies to relational goods. It concerns ordinary outcomes, differing in a single respect, so it engages ordinary sensitivities. It is the method used informally in the classic arguments against hedonism. Nozick's experience machine, for instance, compares two lives alike in their experiences and different in their contact with reality, and ETH-05 concludes from it that well-being includes contact with reality. The same structure underlies the arguments for the value of knowledge and achievement \citep{Hurka1993} and for the objective-list theories of \citet{Parfit1984}, \citet{Griffin1986} and \citet{Fletcher2013}.
+
+Chapter~4 applies the test to the seven components. For each of them it gives a pair of outcomes that differ only in that component and that are ranked differently on reflection. Two examples will indicate the method. For \emph{fairness}: two outcomes contain the same total and the same distribution of well-being, knowledge and so on, but in one the distribution results from a lottery to which everyone consented and in the other from a procedure that favoured some arbitrarily; the first is better. For \emph{beauty}: two outcomes are alike in every respect, including the experiences of every sentient being, except that in one a region no one will ever see contains a beautiful formation and in the other a formless one. Moore's own case \citep[\S 50]{Moore1903} is the extreme version, and we think it succeeds in the contrastive form, though the verdict is weaker than for the other components. Volume~V examines this case at length.
+
+\section{Plurality: the formal argument}
+
+Represent an outcome by a profile assigning a level to each of the seven components, and let $V$ be the value assigned to profiles by idealized reflective endorsement.
+
+\begin{assumption}\label{a:iso}
+For each of the seven components there are two profiles that agree on all other components and differ in value.
+\end{assumption}
+
+Assumption~\ref{a:iso} is the conjunction of the isolation results of Chapter~4. Say that $V$ \emph{supervenes} on a set $S$ of components if any two profiles that agree on every component in $S$ have the same value.
+
+\begin{theorem}\label{t:plural}
+$V$ does not supervene on any set of components that omits at least one of the seven.
+\end{theorem}
+
+\begin{proof}
+Let $S$ omit the component $i$. By Assumption~\ref{a:iso} there are profiles $x$ and $y$ that agree on every component other than $i$ and differ in value. Since $S$ does not contain $i$, $x$ and $y$ agree on every component in $S$. If $V$ supervened on $S$, they would have the same value.
+\end{proof}
+
+\begin{corollary}\label{c:monism}
+The value of an outcome is not a function of any single component.
+\end{corollary}
+
+\begin{corollary}\label{c:hedonism}
+The value of an outcome is not a function of well-being alone; in particular, hedonism and every theory on which the good is the sum of individual well-being are false.
+\end{corollary}
+
+Corollary~\ref{c:hedonism} applies to welfarism in all its forms, since welfarist theories make the value of an outcome a function of the well-being of individuals, and the profile records well-being as a single component only for simplicity: the argument goes through unchanged if well-being is replaced by a vector of individual welfare levels, provided Assumption~\ref{a:iso} holds for the other components. The corollary does not refute theories on which well-being itself includes knowledge, achievement and relationships, as objective-list theories of well-being hold. Such theories are not monistic in the relevant sense; they relocate the plurality inside well-being. Chapter~7 argues that the relocation fails for fairness, beauty and autonomy, which are goods of outcomes but not components of anyone's well-being.
+
+\subsection*{Formalization}
+
+The module \nolinkurl{Philosophy/ETH/ETH_01.lean} represents profiles as functions from a seven-element type to natural numbers, takes value as a primitive, and states Assumption~\ref{a:iso} as an axiom. It proves Theorem~\ref{t:plural} and Corollaries~\ref{c:monism} and~\ref{c:hedonism}.
+
+\begin{lstlisting}
+theorem plurality (S : Component → Bool) (i : Component) (hi : S i = false) :
+    ¬ Supervenes S
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_01.plurality' depends on axioms:
+  [Philosophy.ETH_01.isolation, Philosophy.ETH_01.value]
+'Philosophy.ETH_01.no_hedonism' depends on axioms:
+  [propext, Philosophy.ETH_01.isolation, Philosophy.ETH_01.value]
+\end{lstlisting}
+
+The formalization makes the structure of the argument plain. The theorem is logically weak: it follows in a few lines from Assumption~\ref{a:iso}. Its interest lies entirely in the assumption, which is the conjunction of seven substantive verdicts about pairs of outcomes. This is the correct location of the dispute between monists and pluralists. A monist cannot object to the proof. She must reject at least one of the isolation verdicts, and since there are seven, she must reject at least six, one for each component other than the one she takes to be fundamental. Chapter~7 examines the attempts to do so on behalf of hedonism, desire-satisfaction theories and perfectionism.
+
+What the formalization does not show is that the list is complete. Theorem~\ref{t:plural} shows that seven components are necessary; it does not show that they are sufficient, that is, that $V$ supervenes on all seven together. That is the claim of Volume~VI, and it is the claim that has most often been doubted for objective-list theories. Its formal counterpart is a supervenience thesis, which can be stated but not proved by the methods of this volume.
+
+\subsection*{Comparison with earlier lists}
+
+Lists of basic goods have a long history. \citet{Ross1930} recognized four intrinsic goods: virtue, pleasure, knowledge, and the apportionment of pleasure to virtue. \citet{Finnis1980} listed seven basic forms of human good: life, knowledge, play, aesthetic experience, sociability, practical reasonableness and religion. \citet{Parfit1984} gave the objective-list theory its name with a list that included moral goodness, rational activity, the development of one's abilities, having children, knowledge and the awareness of true beauty. The present list differs from these in two respects. It is a list of goods of outcomes, not of goods for persons, which is why it includes fairness, a good no individual has. And it is derived by a uniform test rather than collected from reflection on what human beings pursue. The coincidence in number with Finnis's list has no significance; the coincidence in content, which is partial, is evidence that the test tracks what careful reflection on the good has always found.
+
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 6 to 10.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Brandt(1979)]{Brandt1979} Brandt, R.~B. (1979). \emph{A Theory of the Good and the Right}. Clarendon Press.
+\bibitem[Chang(2002)]{Chang2002} Chang, R. (2002). The possibility of parity. \emph{Ethics}, 112(4), 659--688.
+\bibitem[Finnis(1980)]{Finnis1980} Finnis, J. (1980). \emph{Natural Law and Natural Rights}. Clarendon Press.
+\bibitem[Firth(1952)]{Firth1952} Firth, R. (1952). Ethical absolutism and the ideal observer. \emph{Philosophy and Phenomenological Research}, 12(3), 317--345.
+\bibitem[Fletcher(2013)]{Fletcher2013} Fletcher, G. (2013). A fresh start for the objective-list theory of well-being. \emph{Utilitas}, 25(2), 206--220.
+\bibitem[Geach(1956)]{Geach1956} Geach, P.~T. (1956). Good and evil. \emph{Analysis}, 17(2), 33--42.
+\bibitem[Griffin(1986)]{Griffin1986} Griffin, J. (1986). \emph{Well-Being: Its Meaning, Measurement and Moral Importance}. Clarendon Press.
+\bibitem[Hurka(1993)]{Hurka1993} Hurka, T. (1993). \emph{Perfectionism}. Oxford University Press.
+\bibitem[Moore(1903)]{Moore1903} Moore, G.~E. (1903). \emph{Principia Ethica}. Cambridge University Press.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Clarendon Press.
+\bibitem[Railton(1986)]{Railton1986} Railton, P. (1986). Facts and values. \emph{Philosophical Topics}, 14(2), 5--31.
+\bibitem[Rosati(1995)]{Rosati1995} Rosati, C.~S. (1995). Persons, perspectives, and full information accounts of the good. \emph{Ethics}, 105(2), 296--325.
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Clarendon Press.
+\bibitem[Sobel(1994)]{Sobel1994} Sobel, D. (1994). Full information accounts of well-being. \emph{Ethics}, 104(4), 784--810.
+\bibitem[Thomson(2008)]{Thomson2008} Thomson, J.~J. (2008). \emph{Normativity}. Open Court.
+\end{thebibliography}
+
+\end{document}

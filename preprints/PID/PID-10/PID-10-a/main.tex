@@ -1,0 +1,131 @@
+\documentclass{situationist-preprint}
+
+\title{Disembodied Persons}
+\msid{PID-10-a}
+\msfamily{PID-10}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PID/PID\_10.lean}
+\mskeywords{disembodiment; persons; phase sortals; functionalism; emulation; animalism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can there be persons without bodies? We argue that there can be in principle, though no actual case is established. A person is a thing with the capacities for rational thought and for thinking of itself as itself, and \enquote{person} is a phase sortal that can apply to things of more than one kind (PID-05). A body is something through which one perceives or on which one acts directly. If thinking is functional (MND-08), a closed emulation, a computational system with the functional organization of a reflective thinker and no sensory or motor coupling to anything, would be a person without a body, and no soul is needed. A disembodied person would not be an organism, and so, if PID-05 is right, would not be any of us; and PID-14 shows that a human person does not become one by uploading. No actual case is established. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet[VI]{Descartes1641} argued that he could clearly and distinctly conceive of himself as a thinking thing without a body, and concluded that he could exist without one. \citet{Penelhum1970} argued that bodily criteria of identity are indispensable, so that disembodied survival is at best doubtfully intelligible.
+
+Defenders of the possibility have usually been dualists; we argue for it without dualism. The question is not whether we could exist without bodies, but whether anything could be a person without one.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:person}
+A thing is a \emph{person} if and only if it has the capacities for rational thought and for thinking of itself as itself, the same thinking thing at different times.
+\end{definition}
+
+This is the definition of PID-05-a, after \citet[II.xxvii.9]{Locke1694}. It makes \enquote{person} a phase sortal in the sense of \citet{Wiggins1980}: it applies to a thing in virtue of what the thing can do, and does not settle what kind of thing it is.
+
+\begin{definition}\label{d:body}
+A thing is \emph{embodied} if and only if something is its body; a thing is \emph{disembodied} if it is not embodied.
+\end{definition}
+
+\begin{definition}\label{d:closed}
+A \emph{closed emulation} is a computational system that realizes the functional organization of a reflective thinker, including memory, reasoning and self-representation, and whose states are not caused by any sensory transducer nor cause any effector: it perceives through nothing and acts directly on nothing.
+\end{definition}
+
+\begin{assumption}\label{a:func}
+A closed emulation has the capacities of Definition~\ref{d:person}.
+\end{assumption}
+
+\begin{assumption}\label{a:poss}
+There could be a closed emulation.
+\end{assumption}
+
+\begin{assumption}\label{a:coupled}
+A body of a thing is something through which it perceives or on which it acts directly.
+\end{assumption}
+
+\begin{assumption}\label{a:org}
+A thinking organism perceives through and acts directly on itself, and so is its own body.
+\end{assumption}
+
+Assumption~\ref{a:func} follows from MND-08, on which thinking is a functional property that machines can have, since reasoning and self-reference require no perception of an external world. Assumption~\ref{a:coupled} records what distinguishes one's body from other things that support one's existence: a machine that keeps one alive is not part of one's body, because one neither perceives through it nor moves it at will. Assumption~\ref{a:org} is the animalist's view that the human body is the organism itself \citep{Olson2007}.
+
+\section{The argument}\label{s:arg}
+
+\begin{theorem}\label{t:poss}
+Disembodied persons are possible.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:poss}, there could be a closed emulation. By Assumption~\ref{a:func}, it would have the capacities of Definition~\ref{d:person}, and so would be a person. Suppose it had a body. By Assumption~\ref{a:coupled}, it would perceive through that body or act directly on it. By Definition~\ref{d:closed}, it perceives through nothing and acts directly on nothing. So it has no body, and by Definition~\ref{d:body} it is disembodied.
+\end{proof}
+
+\begin{proposition}\label{p:notorg}
+No disembodied person is an organism.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:org}, an organism is its own body, so by Definition~\ref{d:body} it is embodied.
+\end{proof}
+
+\begin{remark}\label{r:you}
+If PID-05 is right that you are a thinking organism, Proposition~\ref{p:notorg} entails that no disembodied person is you. This is consistent with Theorem~\ref{t:poss}, since a phase sortal can apply to things of different kinds, and with PID-14-a, on which uploading produces a psychologically continuous successor and not the original person: a human person does not become disembodied by being uploaded, though an upload running without sensors or effectors would be a disembodied person if it is a person at all.
+\end{remark}
+
+\section{No actual case is established}\label{s:actual}
+
+No closed emulation of a reflective thinker has been built. Patients in a completely locked-in state lack voluntary movement but retain perception through their bodies, so they are embodied by Assumption~\ref{a:coupled}. A brain kept alive in a vat without inputs or outputs would sustain one, but no such case has occurred. Reports of out-of-body experience concern embodied subjects, and REL-08-a argues that, although survival of death is coherent, no evidence available before death could confirm it over its rivals.
+
+\section{Objections and replies}
+
+\begin{objection}[The realizer is a body]
+The computer that runs a closed emulation is its body, since its mental life would cease if the computer were destroyed.
+\end{objection}
+
+\begin{reply}
+Dependence for existence is not embodiment. A human person depends on her brain, but the brain is not that through which she perceives; it is that in virtue of which she perceives through her body. The realizer of a closed emulation stands to it as the brain does. A closed emulation lacks a body, not a physical basis, and so is consistent with the physicalism of MND-02.
+\end{reply}
+
+\begin{objection}[Persons are agents in a world]
+A being that cannot perceive or act on anything has nothing to think about, and so lacks the capacities of Definition~\ref{d:person}.
+\end{objection}
+
+\begin{reply}
+A closed emulation can reason about mathematics, about its own past states, and about hypotheses concerning what lies outside it, and it acts in thought, by attending and inferring. What does require a body is identification by others \citep{Strawson1959}, not the capacities that make something a person.
+\end{reply}
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/PID/PID_10.lean} quantifies over possible worlds and things and proves Theorem~\ref{t:poss} and Proposition~\ref{p:notorg}. The main theorem and the checker's report (namespace prefix omitted) are:
+
+\begin{lstlisting}
+theorem disembodied_possible :
+    ∃ w x, Person w x ∧ ¬ Embodied w x
+
+'disembodied_possible' depends on axioms:
+ [BodyOf, Capacities, ClosedEmulation, Person, Thing, World,
+ assumption_2_4, assumption_2_5, assumption_2_6,
+ definition_2_1, definition_2_3]
+\end{lstlisting}
+
+\noindent The first six names are primitives; the rest are Definitions~\ref{d:person} and~\ref{d:closed} and Assumptions~\ref{a:func}--\ref{a:coupled}. Proposition~\ref{p:notorg} uses Assumption~\ref{a:org}. No axiom of Lean's classical core is used.
+
+\section{Conclusion}
+
+If thinking is functional, a closed emulation would be a person without a body, so disembodied persons are possible in principle, without dualism; such a person would not be one of us, and no actual case is established.
+
+\begin{thebibliography}{9}\small
+\bibitem[Descartes(1641)]{Descartes1641} Descartes, R. (1641). \emph{Meditationes de prima philosophia}. Cited by meditation.
+\bibitem[Locke(1694)]{Locke1694} Locke, J. (1694). \emph{An Essay Concerning Human Understanding}, 2nd edn. Cited by book, chapter and section.
+\bibitem[Olson(2007)]{Olson2007} Olson, E.~T. (2007). \emph{What Are We? A Study in Personal Ontology}. Oxford University Press.
+\bibitem[Penelhum(1970)]{Penelhum1970} Penelhum, T. (1970). \emph{Survival and Disembodied Existence}. Routledge \& Kegan Paul.
+\bibitem[Strawson(1959)]{Strawson1959} Strawson, P.~F. (1959). \emph{Individuals: An Essay in Descriptive Metaphysics}. Methuen.
+\bibitem[Wiggins(1980)]{Wiggins1980} Wiggins, D. (1980). \emph{Sameness and Substance}. Blackwell.
+\end{thebibliography}
+
+\end{document}

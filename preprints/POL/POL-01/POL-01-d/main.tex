@@ -1,0 +1,69 @@
+\documentclass{situationist-preprint}
+
+\title{The Difference Principle Modified}
+\msid{POL-01-d}
+\msfamily{POL-01}
+\msdiscipline{Political Philosophy}
+\mstype{Consequence}
+\mskeywords{difference principle; maximin; leximin; Pareto principle; sufficiency; levelling down}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+POL-01 concludes that justice is fairness, with the difference principle in a modified form. We state the modification compactly: distributions are ranked by the level of the worst-off position, and ties on that level are broken by the total. We derive three consequences. The modified principle satisfies the strong Pareto principle, which strict maximin violates. It ranks every levelling down below the status quo and so is not egalitarian. And it guarantees the sufficiency floor wherever a floor-guaranteeing distribution is feasible, without treating inequality above the floor as bad in itself.
+\end{abstract}
+
+\section{The principle}
+
+Represent a distribution $x$ among the representative positions of a society by the level $m_x$ of primary goods of its worst-off position and the total $t_x$ of the levels of all positions.
+
+\begin{definition}[Modified difference principle]\label{d:mdp}
+$x$ is more just than $y$ if and only if $m_x > m_y$, or $m_x = m_y$ and $t_x > t_y$.
+\end{definition}
+
+In words: \emph{maximize the worst-off level; among distributions that tie on it, maximize the total.} Definition~\ref{d:mdp} is Definition~5.1 of POL-01-a. It is the lexicographic order on the pair $(m, t)$, and so a strict weak order (Propositions~5.2 and~5.3 of POL-01-a) whose choices over finite feasible sets are undominated (Theorem~5.4 of POL-01-a). It differs from Rawls's own lexical version \citep[\S 13]{Rawls1971}, which breaks ties by the second worst-off position, and from utilitarianism and strict maximin (Proposition~5.5 of POL-01-a).
+
+\section{Consequences}
+
+\begin{proposition}[Strong Pareto]\label{p:pareto}
+If in $x$ no position is worse off than in $y$ and some position is better off, $x$ is more just than $y$.
+\end{proposition}
+
+\begin{proof}
+No position is worse off, so $m_x \geq m_y$; some position is better off, so $t_x > t_y$. If $m_x > m_y$, the first clause applies; otherwise the tie-breaker does.
+\end{proof}
+
+Strict maximin violates the strong Pareto principle whenever a gain falls only to positions above the worst off; the modified principle does not. This is the respect in which it answers the objection of \citet{Gustafsson2018} that the difference principle is insensitive to gains above the minimum.
+
+\begin{corollary}\label{c:level}
+The modified principle ranks every levelling down strictly below the status quo.
+\end{corollary}
+
+\begin{proof}
+A levelling down makes some worse off and no one better off; apply Proposition~\ref{p:pareto} with the status quo as $x$.
+\end{proof}
+
+Corollary~\ref{c:level} is Proposition~4.1 of POL-08-a. It shows that the modified principle is not egalitarian: it assigns no value to the reduction of inequality as such, and permits any inequality that raises the worst-off level or, leaving it fixed, raises the total. Its priority for the worst off is grounded not in the badness of the gap between them and others but in the reasoning of parties who choose under ignorance and cannot risk an inadequate life \citep{Parfit1997}.
+
+\begin{proposition}[The floor]\label{p:floor}
+If some feasible distribution gives every position a level at or above the sufficiency threshold, every distribution chosen by the modified principle does so.
+\end{proposition}
+
+\begin{proof}
+If $x$ is feasible and $m_x$ is at or above the threshold, a chosen distribution $z$ is not less just than $x$, so $m_z \geq m_x$, and every position in $z$ is at or above $m_z$.
+\end{proof}
+
+The floor is the level of Assumption~3.3 of POL-01-a and the sufficiency threshold of POL-08-a. Proposition~\ref{p:floor} makes explicit that the modified principle presupposes and secures it: sufficiency is the floor, and the principle's guidance above the floor, which favors the greater total once the worst-off level is fixed, does not compete with it.
+
+\section{Conclusion}
+
+The modified difference principle is the lexicographic order on worst-off level and total. It respects the strong Pareto principle, condemns every levelling down, and secures the sufficiency floor wherever it can be secured. It gives absolute priority to the worst off without valuing equality for its own sake.
+
+\begin{thebibliography}{9}
+\bibitem[Gustafsson(2018)]{Gustafsson2018} Gustafsson, J.~E. (2018). The difference principle would not be chosen behind the veil of ignorance. \emph{The Journal of Philosophy}, 115(11), 588--604.
+\bibitem[Parfit(1997)]{Parfit1997} Parfit, D. (1997). Equality and priority. \emph{Ratio}, 10(3), 202--221.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

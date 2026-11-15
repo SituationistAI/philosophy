@@ -1,0 +1,70 @@
+\documentclass{situationist-preprint}
+
+\title{Against Formalism}
+\msid{MTH-15-a}
+\msfamily{MTH-15}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{formalism; game formalism; Hilbert's programme; applicability; Frege; Curry}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is mathematics a game played with symbols? We argue that it is not, because formalism cannot explain the applicability of mathematics. Frege's objection to the game formalists of his day was that applicability alone distinguishes arithmetic from a game. We sharpen the objection into an argument about explanation: the fact to be explained is that the outputs of mathematical calculation are reliably true of the things to which mathematics is applied, and any explanation of that fact must credit mathematical sentences with a content that the applications share. Game formalism denies them such content. Curry's formalism can describe which systems are useful but not why; Hilbert's instrumentalism explains applicability by a conservativeness result it cannot establish by its own standards.
+\end{abstract}
+
+\section{The question}
+
+Formalism holds that mathematics is the rule-governed manipulation of symbols. In its \emph{game} form, defended by Heine and Thomae and criticized by \citet[§§86--137]{Frege1903}, the symbols mean nothing and mathematics is like chess. In \citeauthor{Curry1951}'s form, mathematics is the science of formal systems, whose statements are about what is derivable in them \citep{Curry1951}. In Hilbert's form, only finitary mathematics has content, and the rest is an instrument justified by a consistency proof \citep{Hilbert1926}. Frege's central objection was that it is applicability alone that raises arithmetic above a game to the rank of a science \citep[§91]{Frege1903}. We develop the objection into an argument.
+
+\section{The argument}
+
+\begin{definition}\label{d:app}
+Mathematics is \emph{applicable} when there are reliable inferences, through mathematical calculation, from premises about a subject matter to true conclusions about it. An \emph{explanation of applicability} says why such inferences are reliable.
+\end{definition}
+
+\begin{principle}\label{p:expl}
+An inference through a calculation is reliably truth-preserving only if the steps of the calculation preserve something that the premises and conclusion share: a content, or a structure that the subject matter instantiates.
+\end{principle}
+
+Principle~\ref{p:expl} requires only that reliability not be a coincidence. If a carpenter computes $3 \times 4 = 12$ and orders twelve tiles for three rows of four, the order is right because the multiplication is true of the rows; were the symbols moved by rules with no bearing on the rows, its correctness would be a coincidence.
+
+\begin{theorem}\label{t:main}
+Game formalism cannot explain the applicability of mathematics.
+\end{theorem}
+
+\begin{proof}
+On game formalism, formulae have no content and the rules answer to nothing. By Principle~\ref{p:expl}, explaining applicability requires that calculation preserve a content or structure shared by the premises and conclusion of the applied inference, and a manipulation of contentless symbols preserves no such thing. To credit the formulae with a content, or the rules with a structure the subject matter instantiates, is to give up game formalism. In the second case, mathematics becomes the study of the structures that rules mirror, which is structuralism (MTH-14), not formalism.
+\end{proof}
+
+\section{Objections}
+
+\begin{objection}[Curry]
+Formalism need not deny that mathematical statements are true; they are true statements about what is derivable in formal systems. Which system is applied to a subject matter is an empirical question of usefulness, not a matter for mathematics \citep{Curry1951}.
+\end{objection}
+
+\begin{reply}
+Curry's formalism describes the explanandum, a system's usefulness, without explaining it. Why is the system of arithmetic, rather than some other, useful for counting tiles? The answer is that its theorems are true of the cardinalities of collections, and that answer credits arithmetic with a content beyond derivability.
+\end{reply}
+
+\begin{objection}[Hilbert]
+Finitary arithmetic has content. Ideal mathematics is an instrument, applicable because it is conservative over finitary mathematics.
+\end{objection}
+
+\begin{reply}
+This is a genuine explanation, but it requires a proof of conservativeness, which implies consistency. By Gödel's second incompleteness theorem, the consistency of a system containing finitary arithmetic cannot be proved by means formalizable in that system \citep{Godel1931}, and so not by finitary means. The instrumentalist explanation is therefore unavailable by the instrumentalist's own standards. Moreover, ideal mathematics is applied directly to physical quantities that are not finitary, and MTH-16 argues that physics cannot be nominalized.
+\end{reply}
+
+\section{Conclusion}
+
+Mathematics is not a game played with symbols. The reliability of calculation in application requires that calculation preserve a content or structure the applications share, which game formalism denies. Curry's formalism describes applicability without explaining it, and Hilbert's instrumentalism explains it only by a conservativeness result it cannot prove by its own means.
+
+\begin{thebibliography}{9}\small
+\bibitem[Curry(1951)]{Curry1951} Curry, H.~B. (1951). \emph{Outlines of a Formalist Philosophy of Mathematics}. North-Holland.
+\bibitem[Frege(1903)]{Frege1903} Frege, G. (1903). \emph{Grundgesetze der Arithmetik}, vol.~II. Pohle.
+\bibitem[G\"odel(1931)]{Godel1931} G\"odel, K. (1931). \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f\"ur Mathematik und Physik}, 38, 173--198.
+\bibitem[Hilbert(1926)]{Hilbert1926} Hilbert, D. (1926). \"Uber das Unendliche. \emph{Mathematische Annalen}, 95, 161--190.
+\end{thebibliography}
+
+\end{document}

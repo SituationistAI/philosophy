@@ -1,0 +1,318 @@
+\documentclass{situationist-preprint}
+
+\title{On Meaning}
+\msid{LNG-01-a}
+\msfamily{LNG-01}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_01.lean}
+\mskeywords{meaning; use; truth-conditions; inferentialism; logical constants; tonk; harmony; Carnap's problem; compositionality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Two traditions answer the question what meaning is. On the first, the meaning of an expression is its use: the rules that govern its application and the inferences it licenses. On the second, the meaning of a sentence is its truth-condition, and the meaning of a word is its contribution to the truth-conditions of the sentences in which it occurs. We argue that meaning is use constrained by truth-conditions, and that the two traditions, properly stated, are not rivals. Use constitutes meaning; but a use confers meaning only if some compositional truth-conditional assignment makes its rules truth-preserving, and the truth-conditional contribution of an expression is the one that all such assignments share. We establish the thesis first for the logical constants, where it can be proved: the constraint excludes Prior's tonk, it singles out a unique classical truth function for each standard connective, and without it, as Carnap observed, use underdetermines truth-conditions. The proofs are formalized in Lean. We then extend the account to observational and theoretical vocabulary, to indexicals and to names, and answer the objections from compositionality, holism, deflationism and rule-following.
+\end{abstract}
+
+\section{The question}
+
+What is it for an expression to mean what it does? The question is not what this or that word means, which a dictionary answers, but what kind of fact the fact that a word means something is. Two answers have dominated the philosophy of language since the middle of the twentieth century.
+
+The first is that meaning is use. \citet[\S43]{Wittgenstein1953} proposed that for a large class of cases the meaning of a word is its use in the language, and the proposal was developed in different ways by \citet{Sellars1954}, who described language as governed by rules of entry, inference and exit; by \citet{Dummett1975,Dummett1991}, who required that a theory of meaning be a theory of what a speaker knows in knowing a language, and that this knowledge be manifest in use; by \citet{Brandom1994}, for whom the content of a sentence is its role in the practice of giving and asking for reasons; and by \citet{Horwich1998}, for whom the meaning of a word is constituted by the acceptance property that explains its overall use.
+
+The second answer is that the meaning of a sentence is its truth-condition. It descends from \citet{Frege1892} and from the \emph{Tractatus} \citep[4.024]{Wittgenstein1922}, on which to understand a proposition is to know what is the case if it is true. \citet{Davidson1967} gave it its modern form: a theory of meaning for a language is a finitely axiomatized theory that entails, for each sentence $s$, a theorem of the form \enquote{$s$ is true if and only if $p$}, where $p$ translates $s$, and the meaning of a word is its contribution to the truth-conditions of the sentences in which it occurs. Model-theoretic semantics in the tradition of \citet{Lewis1970gs} and Montague is the working form of the view in linguistics.
+
+The two answers are usually presented as rivals. Use theorists complain that truth-conditions are idle: a speaker's knowledge of the truth-condition of an undecidable sentence cannot be manifested in anything she does, and so cannot be what her understanding consists in \citep{Dummett1975}. Truth-conditional theorists complain that use is unsystematic: roles in inference are not compositional, they make meaning holistic, and they cannot explain how a finite mind understands infinitely many sentences \citep{FodorLepore1991,FodorLepore1992}.
+
+We argue that meaning is use constrained by truth-conditions. The thesis has three parts. Use is what constitutes meaning: an expression means what it does because of the rules that govern it in a practice. Not every use confers meaning: a use confers meaning only if some compositional assignment of truth-conditions makes its rules truth-preserving. And where use confers meaning, the truth-conditional contribution of the expression is the one common to all such assignments. On this view, the use theorist is right about what meaning is, and the truth-conditional theorist is right about what meaning must be like. The theory of truth for a language is not a rival to the account of its use but a constraint on it, and the constraint has teeth.
+
+\subsection{A short history of the debate}
+
+The proposals have been tested against a small number of cases, and the history of the debate can be told through them.
+
+\paragraph{The Tractatus.} The early Wittgenstein gave a clean account of the logical constants as truth functions and of elementary propositions as pictures of possible states of affairs \citep[4.0312]{Wittgenstein1922}. It failed on the cases the later Wittgenstein took up: words like \enquote{game}, whose applications share no common feature, and words for sensations \citep[\S\S66--67, 258]{Wittgenstein1953}.
+
+\paragraph{Meaning as use.} The \emph{Investigations} replaced the picture with the slogan, and \citet{Sellars1954} supplied a structure for it: a word's use is fixed by language-entry transitions (responding to an observed red object with \enquote{red}), intra-linguistic moves (inferring \enquote{colored} from \enquote{red}) and language-exit transitions (acting on \enquote{I shall now raise my hand}). The view handled the cases the \emph{Tractatus} could not. Its difficulty was the opposite one: it said little about how the use of a complex expression depends on the uses of its parts, and it seemed to place no limit on which uses could confer a meaning.
+
+\paragraph{Tonk.} \citet{Prior1960} made the second difficulty precise. Define a connective \enquote{tonk} by an introduction rule, from $A$ infer $A$ tonk $B$, and an elimination rule, from $A$ tonk $B$ infer $B$. If meaning is conferred by rules of inference, tonk has a meaning; but with it, anything follows from anything. \citet{Belnap1962} replied that a definition by rules must be conservative over the language it extends, and that it must be consistent with the antecedently given notion of consequence. The reply is correct, but it raises the question what grounds the constraint. Belnap's condition is stated in terms of deducibility; the constraint we defend states it in terms of truth, and Proposition~\ref{p:tonk} below shows that it excludes tonk.
+
+\paragraph{Harmony.} \citet{Dummett1973,Dummett1991}, drawing on \citet{Gentzen1935} and \citet{Prawitz1965}, proposed that the introduction and elimination rules of a logical constant must be in harmony: the elimination rules must license drawing from a sentence no more and no less than its introduction rules require for asserting it. Harmony is a use-internal criterion, and much recent work has been devoted to stating it exactly \citep{Steinberger2011}. We return to its relation to the truth-conditional constraint in Section~\ref{s:logic}.
+
+\paragraph{Davidson's program.} \citet{Davidson1967} proposed that a Tarskian truth theory could serve as a theory of meaning, and \citet{Davidson1973} that the theory could be confirmed by the evidence available to a radical interpreter, chiefly the circumstances in which speakers hold sentences true. \citet{Foster1976} showed that a truth theory can be extensionally correct without being interpretive: if \enquote{snow is white} is true if and only if snow is white, then it is also true if and only if snow is white and grass is green, and a theory that issues the second theorem is as true as one that issues the first. Davidson's response was to strengthen the empirical constraints on the theory, requiring that its theorems be laws, supported by counterfactuals about speakers' attitudes; in our terms, he let use select among truth theories. The point generalizes: the truth theory does not determine which assignment is the language's, and use must select it.
+
+\paragraph{Carnap's problem.} \citet{Carnap1943} observed that the consequence relation of classical propositional logic does not fix the classical truth-tables. A valuation that makes every sentence true preserves truth across every valid argument, since every conclusion is true, but it makes both a sentence and its negation true. So the rules of classical logic, considered as a relation of consequence, are satisfied by a valuation on which negation is not the classical truth function. The problem has been revived as a difficulty for inferentialism by \citet{Raatikainen2008}, and answered by \citet{MurziHjortland2009}, who appeal to rules of a richer form, and by \citet{BonnayWesterstahl2016}, who show that adding compositionality to the constraint solves the problem. Our Proposition~\ref{p:carnap} is a version of Carnap's observation, and our answer is the second: it is the truth-conditional constraint, which is compositional, that excludes the trivial valuation.
+
+\paragraph{Conceptual role semantics.} Conceptual role theories \citep{Field1977,Harman1982,Block1986,Peacocke1992} identified meaning or content with role in inference and perception, often supplemented by a referential factor. \citet{FodorLepore1991,FodorLepore1992} objected that roles do not compose and that inferential role semantics is holistic. We reply in Section~\ref{s:objections}.
+
+\subsection{Recent work}
+
+Recent work bears on the thesis in three ways. \citet{Garson2013} studies systematically which semantics a natural deduction system determines, and shows that on a suitable reading the standard rules of several connectives fix their classical truth conditions; our Theorem~\ref{t:det} is the simplest case of such results. \citet{Warren2020} defends a conventionalist inferentialism on which rules of use fix the meanings of logical and mathematical expressions; our thesis adds that the fixing depends on a truth-conditional constraint. And \citet{Williamson2007} argues that understanding requires the acceptance of no particular inference, which we answer in Section~\ref{s:objections}.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Use]\label{d:use}
+The \emph{use} of an expression in a language is the set of rules that govern it in the practice of the language's speakers: rules of entry, specifying circumstances in which applying it is correct; rules of inference, specifying transitions to and from sentences containing it; and rules of exit, specifying actions that sentences containing it license. A rule is a norm of the practice, not a regularity in or a disposition to behavior.
+\end{definition}
+
+The last clause matters. That speakers are disposed to say \enquote{red} in the presence of red things, and to infer \enquote{colored} from \enquote{red}, is evidence of the rules, not their content. Rules can be broken, and speakers can be disposed to break them; a speaker who applies \enquote{red} to an orange object in bad light has made a mistake, not altered the rule. The account of meaning that follows is therefore not a reduction of meaning to non-semantic facts about behavior, and it is consistent with the view of LNG-05 that there is a primitive fact about what a speaker means.
+
+\begin{definition}[Truth-conditional assignment]\label{d:assign}
+A \emph{truth-conditional assignment} for a language assigns to each expression a semantic value such that (a) the value of a complex expression is a function of the values of its constituents and its mode of composition, and (b) the value of a sentence determines, for each circumstance of evaluation, whether the sentence is true in it. For a sentential connective in a bivalent language, the value is a truth function.
+\end{definition}
+
+\begin{definition}[Soundness]\label{d:sound}
+An assignment is \emph{sound} for a rule if the rule never leads from truths to a falsehood in a circumstance: a rule of inference is sound if, in every circumstance in which its premises are true, its conclusion is true; a rule of entry is sound if, in every normal circumstance in which it licenses application, the resulting sentence is true. An assignment is \emph{admissible} for a use if it is sound for each of its rules.
+\end{definition}
+
+\begin{definition}[Meaning-conferring, determinate]\label{d:conf}
+A use is \emph{meaning-conferring} if some assignment is admissible for it, and \emph{determinate} for an expression if all admissible assignments agree on that expression's value.
+\end{definition}
+
+The thesis is the conjunction of three principles.
+
+\begin{principle}[Use]\label{p:use}
+What an expression means is fixed by its use. Two expressions with the same use in a language mean the same.
+\end{principle}
+
+\begin{principle}[Truth-conditional constraint]\label{p:constraint}
+An expression contributes a semantic value to the truth-conditions of sentences only if the value belongs to an assignment admissible for its use. A use for which no assignment is admissible confers no meaning.
+\end{principle}
+
+\begin{principle}[Determination]\label{p:det}
+If a use is determinate for an expression, the expression contributes the value that all admissible assignments give it.
+\end{principle}
+
+Principle~\ref{p:use} is the use theorist's claim, and Principles~\ref{p:constraint} and~\ref{p:det} state how truth-conditions constrain it. Principle~\ref{p:constraint} is a necessary condition for meaning, and it is where the truth-conditional theorist's insistence on compositional truth-conditions enters: an admissible assignment must be compositional by Definition~\ref{d:assign}. Principle~\ref{p:det} is a sufficient condition for an expression's contributing a particular value. Neither principle says that the meaning of an expression is its truth-conditional contribution. Meaning is the use; the truth-conditional contribution is what the use fixes, under the constraint. Two expressions can therefore share a truth-conditional contribution and differ in meaning, as \enquote{and} and \enquote{but} do: their rules of inference are the same, but \enquote{but} is governed by a further rule, that it is correctly used only where a contrast is in view, which affects no truth-condition \citep{Frege1892}.
+
+\section{The logical constants}\label{s:logic}
+
+The logical constants are the case in which the thesis can be stated and proved exactly. Their use is given by rules of inference, and their truth-conditional contribution by truth functions. We consider a bivalent propositional language, where a circumstance is a valuation of the sentence letters and an assignment gives each binary connective a function from pairs of truth values to truth values.
+
+\begin{definition}[Soundness conditions]\label{d:conds}
+For a binary connective $\ast$ assigned the truth function $f$, the standard rules are sound under the following conditions, where $a$ and $b$ range over the truth values of the immediate constituents in a valuation.
+\begin{enumerate}[label=(\alph*)]
+\item $\wedge$-introduction (from $A$ and $B$, infer $A\wedge B$): if $a$ and $b$ are true, $f(a,b)$ is true. $\wedge$-elimination (from $A \wedge B$, infer $A$; infer $B$): if $f(a,b)$ is true, $a$ is true and $b$ is true.
+\item $\vee$-introduction: if $a$ is true, or $b$ is true, $f(a,b)$ is true. $\vee$-elimination (from $A\vee B$, a derivation of $C$ from $A$ and one of $C$ from $B$, infer $C$): for every truth value $c$, if $f(a,b)$ is true, $a$ true implies $c$ true, and $b$ true implies $c$ true, then $c$ is true.
+\item $\to$-introduction (from a derivation of $B$ from $A$, infer $A \to B$): if $a$ true implies $b$ true, $f(a,b)$ is true. $\to$-elimination: if $f(a,b)$ and $a$ are true, $b$ is true.
+\item $\neg$-introduction (from a derivation of absurdity from $A$, infer $\neg A$): if $a$ is not true, $g(a)$ is true. $\neg$-elimination (from $A$ and $\neg A$, infer absurdity): $g(a)$ and $a$ are not both true.
+\item tonk-introduction (from $A$, infer $A$ tonk $B$): if $a$ is true, $f(a,b)$ is true. tonk-elimination (from $A$ tonk $B$, infer $B$): if $f(a,b)$ is true, $b$ is true.
+\end{enumerate}
+\end{definition}
+
+The conditions for rules that discharge assumptions read the subsidiary derivation locally: a derivation of $B$ from $A$ is taken to be truth-preserving in the valuation at hand. This is the reading on which a rule's soundness is a constraint on the truth function assigned to the connective, and it is the reading Principle~\ref{p:constraint} requires, since that principle concerns the contribution of a connective to the truth-conditions of sentences, not the global relation of consequence. The contrast with the global reading is the subject of Proposition~\ref{p:carnap}.
+
+\begin{proposition}[Tonk]\label{p:tonk}
+No truth function is admissible for the tonk rules.
+\end{proposition}
+
+\begin{proof}
+Let $a$ be true and $b$ false. By the introduction condition, $f(a,b)$ is true; by the elimination condition, $b$ is then true, which it is not.
+\end{proof}
+
+By Principle~\ref{p:constraint}, tonk means nothing. The verdict agrees with Belnap's, but its ground is different: tonk is excluded not because it disturbs a prior relation of deducibility but because there is no way the world could be on which its rules preserve truth. A rule set is defective, on this view, when it cannot be read as describing a contribution to truth-conditions.
+
+\begin{theorem}[Determination]\label{t:det}
+The standard rules for conjunction, disjunction, the conditional and negation are each determinate. The unique admissible truth function is in each case the classical one.
+\end{theorem}
+
+\begin{proof}
+Conjunction. The classical function is admissible, as inspection of its table shows. Let $f$ be admissible. If $a$ and $b$ are true, $f(a,b)$ is true by the introduction condition. If either is false, $f(a,b)$ is false, since if it were true, the elimination conditions would make both $a$ and $b$ true.
+
+Disjunction. The classical function is admissible: if it gives truth, one of the disjuncts is true, and the elimination condition is satisfied. Let $f$ be admissible. If either argument is true, $f(a,b)$ is true by the introduction conditions. If both are false and $f(a,b)$ were true, apply the elimination condition with $c$ false: $a$ true implies $c$ true holds vacuously, and so does $b$ true implies $c$ true, so $c$ would be true, which it is not.
+
+The conditional. The classical function is admissible. Let $f$ be admissible. If $a$ is false or $b$ is true, then $a$ true implies $b$ true, and $f(a,b)$ is true by the introduction condition. If $a$ is true and $b$ false and $f(a,b)$ were true, the elimination condition would make $b$ true.
+
+Negation. The classical function is admissible. Let $g$ be admissible. If $a$ is false, $g(a)$ is true by the introduction condition. If $a$ is true, $g(a)$ is false by the elimination condition.
+\end{proof}
+
+By Principle~\ref{p:det}, each connective contributes its classical truth function. The truth-conditions of the logical constants are therefore not an independent stipulation that their use must respect: they are what their use fixes.
+
+The proof shows something about the division of labor between the rules. In each case the introduction rules fix where the function gives truth and the elimination rules fix where it gives falsehood. This is the content of harmony on the present account.
+
+\begin{proposition}[Harmony]\label{p:harmony}
+The introduction rule for conjunction alone admits more than one truth function, among them conjunction, disjunction and the constantly true function. The elimination rules alone admit more than one, namely conjunction and the constantly false function.
+\end{proposition}
+
+\begin{proof}
+Each of the three functions named in the first sentence gives truth when both arguments are true, which is all the introduction condition requires. The elimination conditions require only that the function give falsehood unless both arguments are true, and conjunction and the constant false function both meet this. These functions are pairwise distinct.
+\end{proof}
+
+A connective governed only by the introduction rule has a use for which some assignment is admissible, so by Principle~\ref{p:constraint} it may have a meaning; but its use is not determinate, and Principle~\ref{p:det} does not assign it a truth function. The use under-specifies the contribution. Harmony, on this reading, is the condition under which a rule set is determinate: the introduction rules and the elimination rules must together leave exactly one value. Tonk fails the other way: its elimination rule allows inferring more than its introduction rule supplies, and no value remains. Proposition~\ref{p:tonk} and Proposition~\ref{p:harmony} together show that the truth-conditional constraint draws the line that the harmony requirement was introduced to draw, and draws it on both sides.
+
+We now show that the constraint is indispensable. Use, taken as a relation of consequence among sentences, does not fix truth-conditions without it.
+
+\begin{proposition}[Carnap's problem]\label{p:carnap}
+Consider the valuation $v^\top$ that makes every sentence of the language true. For every rule of inference whatever, $v^\top$ never leads from truths to a falsehood. But $v^\top$ makes a sentence and its negation both true, and so it is induced by no truth function admissible for the rules of negation.
+\end{proposition}
+
+\begin{proof}
+Every conclusion is true in $v^\top$, so no rule leads from truths to a falsehood. For a sentence letter $p$, $v^\top(p)$ and $v^\top(\neg p)$ are both true. If $v^\top$ were induced by a truth function $g$ for negation admissible for its rules, then $g$ would be classical negation by Theorem~\ref{t:det}, and $v^\top(\neg p)$ would be false.
+\end{proof}
+
+The proposition is the precise form of the observation that use, considered as the set of arguments speakers accept, leaves the truth-conditions open. The trivial valuation respects every inference speakers make. What it violates is compositionality: there is no function from the truth value of $p$ to that of $\neg p$ under which the rules of negation are sound. The constraint of Principle~\ref{p:constraint} requires an assignment of values to expressions, not merely of truth values to sentences, and this is what excludes $v^\top$, in the way \citet{BonnayWesterstahl2016} proposed.
+
+The reconciliation of the two traditions can now be stated as a theorem about the logical constants.
+
+\begin{theorem}[Reconciliation]\label{t:recon}
+Given Principles~\ref{p:constraint} and~\ref{p:det}: (a) if exactly one truth function is admissible for the rules governing a connective, the connective contributes that function and no other; (b) if none is admissible, the connective contributes none.
+\end{theorem}
+
+\begin{proof}
+(a) Let $f$ be the unique admissible function. By Principle~\ref{p:det}, the connective contributes $f$. If it contributes $g$, then by Principle~\ref{p:constraint} $g$ is admissible, so $g = f$. (b) If the connective contributed some $g$, then $g$ would be admissible by Principle~\ref{p:constraint}.
+\end{proof}
+
+\begin{corollary}\label{c:conj}
+A connective used with the rules of conjunction contributes classical conjunction; one used with the rules of tonk contributes nothing.
+\end{corollary}
+
+\begin{proof}
+From Theorem~\ref{t:recon}, Theorem~\ref{t:det} and Proposition~\ref{p:tonk}.
+\end{proof}
+
+The four results together give the reconciliation its content. The use theorist's thesis survives intact: nothing but the rules is needed to fix what the connectives contribute, and connectives with the same rules contribute the same. The truth-conditional theorist's thesis survives as a constraint: rules that cannot be read as fixing a contribution to compositional truth-conditions confer no meaning (Proposition~\ref{p:tonk}), and rules read without the requirement of compositionality underdetermine truth-conditions (Proposition~\ref{p:carnap}). Neither half suffices alone.
+
+\section{Beyond the logical constants}\label{s:beyond}
+
+The logical constants are the cleanest case because their use consists of rules of inference and their values are truth functions. Most vocabulary is governed by rules of entry and exit as well, and its values are properties and objects rather than truth functions. The structure of the account is the same; the proofs are not available, because the space of candidate values is not finite.
+
+\paragraph{Observational predicates.} The use of \enquote{red} includes an entry rule, that it is correct to apply it to a surface seen in good light that looks red, and inferential rules, from \enquote{red} to \enquote{colored} and to \enquote{not green}. An assignment is admissible if it makes the entry rule sound in normal circumstances and the inferences truth-preserving. Many assignments satisfy these conditions in the actual circumstances of use: the property of being red, and gerrymandered properties that coincide with redness on surfaces that have been or will be observed. Determinacy here requires that the admissible assignments be restricted to those that are not gerrymandered. Such a restriction to natural or eligible values has been defended by \citet{Lewis1983} and is defended for projectibility in EPI-04; its role in translation is examined in LNG-06. We accept it as part of the truth-conditional constraint: an admissible assignment assigns eligible values. The fact that a speaker means red rather than a gerrymandered property is not reduced to this constraint; on LNG-05 it is primitive, and the constraint explains why the speaker's meaning and the public meaning coincide in normal cases.
+
+\paragraph{Theoretical terms.} Terms such as \enquote{electron} have no entry rules of their own. They are applied through their inferential connections with other terms: from claims about tracks in cloud chambers, deflections in fields and the outcomes of experiments, to claims about electrons and back. On the present account they nonetheless have meaning, since meaning is fixed by use and their use is fixed by these connections; and they have determinate truth-conditional values if the admissible assignments, which must make the connections truth-preserving and must assign eligible values, agree on what the terms denote. This is the structure of the Ramsey--Lewis account of theoretical terms \citep{Lewis1970}, on which a theoretical term denotes the occupant of the role the theory specifies. On the scientific realism of SCI-02, the roles specified by mature theories are occupied. The same structure explains why expressions that cannot be applied on the basis of observation, such as those of religious discourse, can have meaning in use and truth-conditions that outrun verification, as REL-18-a argues.
+
+\paragraph{Indexicals.} The meaning of \enquote{I} is a rule of use: in any context, it refers to the speaker. Its contribution to truth-conditions varies with the context. \citet{Kaplan1989} distinguished the character of an indexical, a function from contexts to contents, from its content in a context, and identified the linguistic meaning of an indexical with its character. Kaplan's semantics is an instance of the thesis: the character is the rule of use, and the content is what the rule fixes, in a context, as a contribution to truth-conditions. Speakers who understand \enquote{I} know the rule, not the content of each use. The truth-conditional constraint holds context by context: the character must determine, in each context, a content for which the sentences containing the indexical have truth-conditions.
+
+\paragraph{Names.} A proper name has a thin use: it is applied to its bearer, introduced by a baptism or a description, and passed from speaker to speaker. On LNG-02, names refer by causal chains, with a descriptive component that takes over when the chain breaks. Both components are aspects of use. The rule for a name is to use it as the speakers from whom one acquired it did; the causal chain is the history of conformity to that rule, and the descriptive backup is the rule of entry that governs the name where the chain fails. The truth-conditional constraint then requires a referent, and selects the object at the source of the chain where there is one.
+
+Since meaning is constituted by rules and not by the frequency of their exercise, a word that falls out of use retains its meaning until its rules are replaced, as the treatment of the persistence of conventions in MET-20 requires.
+
+\section{The scope of use}\label{s:scope}
+
+\enquote{Use} covers more than meaning-constituting rules. A speaker uses a sentence metaphorically, ironically, to implicate something it does not say, to insult or to persuade. If meaning were all use, every such use would change meaning, and the thesis would be false. The answer is in Definition~\ref{d:use}: the use that constitutes meaning is the set of rules that govern an expression type in the practice, not the totality of things done with its tokens. A metaphorical use of \enquote{Juliet is the sun} does not follow a rule of the practice for \enquote{sun}, and does not alter the meaning of the word; its effect lies in use, not in meaning, as LNG-09 argues. Conversational implicatures are derived from the rules of the practice together with general maxims of cooperative conversation, and they are cancellable because they are not part of those rules (LNG-11). Speech acts are individuated by constitutive rules (LNG-13), and these rules belong to the use of the expressions that mark them, such as the performative verbs and the mood of the sentence.
+
+The distinction between meaning-constituting rules and other regularities is the analytic--synthetic distinction under another name. Some inferences involving \enquote{red} are constitutive of its use (to \enquote{colored}); others record facts about red things (to \enquote{the color of ripe tomatoes}). We hold, with LNG-04, that the distinction is real but vague: for some inferences, it is indeterminate whether they belong to the use that constitutes meaning. The vagueness does not threaten the account; it is inherited by the notion of synonymy, which is vague too.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Compositionality]
+Inferential roles do not compose. The inferential role of \enquote{brown cow} includes the inference to \enquote{dangerous} for a speaker who believes brown cows dangerous, and this is not determined by the roles of \enquote{brown} and \enquote{cow}. Since meanings compose, meanings are not inferential roles \citep{FodorLepore1991}.
+\end{objection}
+
+\begin{reply}
+The objection identifies the inferential role of an expression with all the inferences a speaker would make. On Definition~\ref{d:use}, the use of an expression is the set of rules governing it in the practice, and the inference from \enquote{brown cow} to \enquote{dangerous} is not among them; it is a belief about brown cows. The rules for \enquote{brown cow} are determined by those for \enquote{brown}, those for \enquote{cow}, and the rule for adjectival modification, which is that a brown cow is something that is brown and a cow (for intersective adjectives). Moreover, by Principle~\ref{p:constraint}, an admissible assignment is compositional by definition, so the truth-conditional contributions fixed by use compose. The constraint is what secures compositionality where the use theorist alone could not.
+\end{reply}
+
+\begin{objection}[Holism]
+If some of an expression's inferences are constitutive of its meaning, there is no principled way to say which. Either all are, and no two speakers mean the same thing by any word, or none are, and inferential role is not meaning \citep{FodorLepore1992}.
+\end{objection}
+
+\begin{reply}
+The dilemma assumes that the constitutive inferences must be sharply bounded. They are not; the boundary is vague (Section~\ref{s:scope}; LNG-04), and a vague boundary is a boundary. There are clear cases of constitutive rules (from \enquote{red} to \enquote{colored}; the introduction and elimination rules for \enquote{and}) and clear cases of beliefs (from \enquote{brown cow} to \enquote{dangerous}). The argument from the absence of a principled sharp line to the absence of a distinction is a sorites argument, and fails as such arguments do. The determination results of Section~\ref{s:logic} show, in addition, that a small set of rules, two or three for each connective, suffices to fix a truth-conditional contribution. Speakers who share these rules share meaning, whatever else they believe.
+\end{reply}
+
+\begin{objection}[Deflationism]
+On the deflationism of LNG-10, truth is not a substantive property, and the truth predicate is a device of generalization. A deflationary truth cannot constrain meaning; the constraint presupposes that sentences have truth-conditions antecedently to their use, which is the substantive notion of truth that deflationism denies \citep{Dummett1991,Horwich1998}.
+\end{objection}
+
+\begin{reply}
+The constraint uses truth only as the value of a compositional assignment. Principle~\ref{p:constraint} requires that there be an assignment of values to expressions under which the rules preserve the designated value; it does not require that truth be a substantive property, explain the success of action, or be analyzable. A deflationist can accept that \enquote{snow is white} is true if and only if snow is white, and that the rules of conjunction preserve truth; this is all the constraint needs. What deflationism excludes is the claim that meaning is explained by truth-conditions, where truth is prior to meaning. Our thesis does not make that claim: meaning is use, and truth-conditions are what use fixes. The order of explanation runs from use to truth-conditions, which is the order deflationism requires.
+\end{reply}
+
+
+\begin{objection}[Understanding without assent]
+Competent speakers reject inferences that inferentialists treat as constitutive: a logician who rejects the inference from \enquote{every $F$ is $G$} to \enquote{some $F$ is $G$}, or modus ponens for certain conditionals, still understands the words \citep{Williamson2007}. So no inference is required for understanding, and use does not constitute meaning.
+\end{objection}
+
+\begin{reply}
+The rules that constitute meaning are norms of the practice, not dispositions of each speaker (Definition~\ref{d:use}). A deviant logician who rejects a rule is a participant in the practice who holds that one of its rules is mistaken. She understands the word because she knows the rule she rejects, and her dissent is intelligible to others as dissent from it; a speaker who did not know the rule could not dispute it. Williamson's argument shows that acceptance of a constitutive rule by each speaker is not necessary for understanding. It does not show that the practice's rules do not constitute what the word means. Whether a speaker who successfully revises a rule thereby changes the meaning of the word is a vague matter, as Section~\ref{s:scope} anticipates.
+\end{reply}
+
+
+\section{What the result does not establish}\label{s:not}
+
+First, the thesis is not a naturalistic reduction. Use is normative, rules are not dispositions, and which rule a speaker follows is not fixed by non-semantic facts (LNG-05). Our account says what meaning is, and how truth-conditions are fixed by it; it does not say what grounds rule-following, and so it is untouched by Kripke's argument that no non-semantic fact determines which rule a speaker follows \citep{Kripke1982}; LNG-07 adds that any rule a language could have is public. On the related question for mental content, MND-12 argues that aboutness is primitive.
+
+Second, the formal results assume bivalence, which holds for the language of classical logic that LOG-02 defends. In a language with truth-value gaps the space of admissible values is larger, and the determination results would have to be proved again.
+
+Third, the account does not settle which expressions are logical constants. That is a question about the invariance of their values, answered in LOG-16.
+
+Fourth, the manifestation challenge of \citet{Dummett1975} is met at the level of words, not sentences: a speaker manifests her grasp of the rules for each constituent, and the truth-conditions of a sentence, which may outrun verification, are fixed by composition.
+
+\section{Formalization}\label{s:formal}
+
+Definition~\ref{d:conds}, Propositions~\ref{p:tonk}, \ref{p:harmony} and~\ref{p:carnap}, Theorems~\ref{t:det} and~\ref{t:recon} and Corollary~\ref{c:conj} are formalized in \nolinkurl{Philosophy/LNG/LNG_01.lean}. A truth function is a function of type \texttt{Bool → Bool → Bool}, and a rule set is represented by the soundness condition it imposes on a truth function. The results of Section~\ref{s:logic} that concern truth functions are proved without philosophical premises. The reconciliation theorem concerns an arbitrary connective; the connectives, their rule sets and the relation of contributing a truth function are primitives, and Principles~\ref{p:constraint} and~\ref{p:det} are axioms.
+
+\begin{lstlisting}
+theorem determination :
+    (∀ f, AndRules f ↔ f = fun a b => a && b) ∧
+    (∀ f, OrRules f ↔ f = fun a b => a || b) ∧
+    (∀ f, ImpRules f ↔ f = fun a b => !a || b) ∧
+    (∀ g, NegRules g ↔ g = fun a => !a)
+
+theorem reconciliation (c : Conn) :
+    (∀ f, rules c f → (∀ g, rules c g → g = f) →
+        ∀ g, Means c g ↔ g = f) ∧
+    ((∀ f, ¬ rules c f) → ∀ f, ¬ Means c f)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.LNG_01.determination' depends on axioms:
+  [Quot.sound]
+'Philosophy.LNG_01.carnap' depends on axioms: [Quot.sound]
+'Philosophy.LNG_01.reconciliation' depends on axioms:
+  [Philosophy.LNG_01.Conn, Philosophy.LNG_01.Means,
+   Philosophy.LNG_01.principle_P2,
+   Philosophy.LNG_01.principle_P3, Philosophy.LNG_01.rules]
+'Philosophy.LNG_01.conjunction_and_tonk' depends on axioms:
+  [Quot.sound, Philosophy.LNG_01.Conn,
+   Philosophy.LNG_01.Means, Philosophy.LNG_01.principle_P2,
+   Philosophy.LNG_01.principle_P3, Philosophy.LNG_01.rules]
+\end{lstlisting}
+
+\texttt{Quot.sound} is part of Lean's core logic and enters through function extensionality. \texttt{Conn}, \texttt{rules} and \texttt{Means} are the primitives: connectives, the rule set governing each, and the relation of contributing a truth function. \texttt{principle\_P2} and \texttt{principle\_P3} are Principles~\ref{p:constraint} and~\ref{p:det}. Principle~\ref{p:use} is not an axiom of the module; it is reflected in the fact that the axioms make what a connective contributes depend on nothing but its rules. The formalization confirms that the determination and Carnap results owe nothing to the philosophical principles, and that the reconciliation theorem needs exactly the two principles that state how truth-conditions constrain use.
+
+\section{Conclusion}
+
+Meaning is use: the rules that govern an expression in the practice of its speakers. But a use confers meaning only if a compositional assignment of truth-conditions makes its rules truth-preserving, and the truth-conditional contribution of an expression is the one that all such assignments share. For the logical constants this can be proved: the constraint excludes tonk, it fixes the classical truth functions for the standard connectives, and without it use underdetermines truth-conditions. For the rest of the vocabulary the same structure holds with eligibility as part of the constraint. The use theorist and the truth-conditional theorist were describing two aspects of one fact.
+
+\begin{thebibliography}{99}\small
+\bibitem[Belnap(1962)]{Belnap1962} Belnap, N.~D. (1962). Tonk, plonk and plink. \emph{Analysis}, 22(6), 130--134.
+\bibitem[Block(1986)]{Block1986} Block, N. (1986). Advertisement for a semantics for psychology. \emph{Midwest Studies in Philosophy}, 10, 615--678.
+\bibitem[Bonnay and Westerst{\aa}hl(2016)]{BonnayWesterstahl2016} Bonnay, D. and Westerst{\aa}hl, D. (2016). Compositionality solves Carnap's problem. \emph{Erkenntnis}, 81, 721--739.
+\bibitem[Brandom(1994)]{Brandom1994} Brandom, R. (1994). \emph{Making It Explicit: Reasoning, Representing, and Discursive Commitment}. Harvard University Press.
+\bibitem[Carnap(1943)]{Carnap1943} Carnap, R. (1943). \emph{Formalization of Logic}. Harvard University Press.
+\bibitem[Davidson(1967)]{Davidson1967} Davidson, D. (1967). Truth and meaning. \emph{Synthese}, 17, 304--323.
+\bibitem[Davidson(1973)]{Davidson1973} Davidson, D. (1973). Radical interpretation. \emph{Dialectica}, 27, 313--328.
+\bibitem[Dummett(1973)]{Dummett1973} Dummett, M. (1973). \emph{Frege: Philosophy of Language}. Duckworth.
+\bibitem[Dummett(1975)]{Dummett1975} Dummett, M. (1975). What is a theory of meaning? In S.~Guttenplan (ed.), \emph{Mind and Language}. Clarendon Press.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{The Logical Basis of Metaphysics}. Harvard University Press.
+\bibitem[Field(1977)]{Field1977} Field, H. (1977). Logic, meaning, and conceptual role. \emph{Journal of Philosophy}, 74(7), 379--409.
+\bibitem[Fodor and Lepore(1991)]{FodorLepore1991} Fodor, J. and Lepore, E. (1991). Why meaning (probably) isn't conceptual role. \emph{Mind \& Language}, 6(4), 328--343.
+\bibitem[Fodor and Lepore(1992)]{FodorLepore1992} Fodor, J. and Lepore, E. (1992). \emph{Holism: A Shopper's Guide}. Blackwell.
+\bibitem[Foster(1976)]{Foster1976} Foster, J.~A. (1976). Meaning and truth theory. In G.~Evans and J.~McDowell (eds.), \emph{Truth and Meaning: Essays in Semantics}. Clarendon Press.
+\bibitem[Frege(1892)]{Frege1892} Frege, G. (1892). {\"U}ber Sinn und Bedeutung. \emph{Zeitschrift f{\"u}r Philosophie und philosophische Kritik}, 100, 25--50.
+\bibitem[Garson(2013)]{Garson2013} Garson, J.~W. (2013). \emph{What Logics Mean: From Proof Theory to Model-Theoretic Semantics}. Cambridge University Press.
+\bibitem[Gentzen(1935)]{Gentzen1935} Gentzen, G. (1935). Untersuchungen {\"u}ber das logische Schlie{\ss}en. \emph{Mathematische Zeitschrift}, 39, 176--210, 405--431.
+\bibitem[Harman(1982)]{Harman1982} Harman, G. (1982). Conceptual role semantics. \emph{Notre Dame Journal of Formal Logic}, 23(2), 242--256.
+\bibitem[Horwich(1998)]{Horwich1998} Horwich, P. (1998). \emph{Meaning}. Clarendon Press.
+\bibitem[Kaplan(1989)]{Kaplan1989} Kaplan, D. (1989). Demonstratives. In J.~Almog, J.~Perry and H.~Wettstein (eds.), \emph{Themes from Kaplan}. Oxford University Press.
+\bibitem[Kripke(1982)]{Kripke1982} Kripke, S.~A. (1982). \emph{Wittgenstein on Rules and Private Language}. Harvard University Press.
+\bibitem[Lewis(1970a)]{Lewis1970gs} Lewis, D. (1970a). General semantics. \emph{Synthese}, 22, 18--67.
+\bibitem[Lewis(1970b)]{Lewis1970} Lewis, D. (1970b). How to define theoretical terms. \emph{Journal of Philosophy}, 67(13), 427--446.
+\bibitem[Lewis(1983)]{Lewis1983} Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy}, 61(4), 343--377.
+\bibitem[Murzi and Hjortland(2009)]{MurziHjortland2009} Murzi, J. and Hjortland, O.~T. (2009). Inferentialism and the categoricity problem: Reply to Raatikainen. \emph{Analysis}, 69(3), 480--488.
+\bibitem[Peacocke(1992)]{Peacocke1992} Peacocke, C. (1992). \emph{A Study of Concepts}. MIT Press.
+\bibitem[Prawitz(1965)]{Prawitz1965} Prawitz, D. (1965). \emph{Natural Deduction: A Proof-Theoretical Study}. Almqvist \& Wiksell.
+\bibitem[Prior(1960)]{Prior1960} Prior, A.~N. (1960). The runabout inference-ticket. \emph{Analysis}, 21(2), 38--39.
+\bibitem[Raatikainen(2008)]{Raatikainen2008} Raatikainen, P. (2008). On rules of inference and the meanings of logical constants. \emph{Analysis}, 68(4), 282--287.
+\bibitem[Sellars(1954)]{Sellars1954} Sellars, W. (1954). Some reflections on language games. \emph{Philosophy of Science}, 21(3), 204--228.
+\bibitem[Steinberger(2011)]{Steinberger2011} Steinberger, F. (2011). What harmony could and could not be. \emph{Australasian Journal of Philosophy}, 89(4), 617--639.
+\bibitem[Warren(2020)]{Warren2020} Warren, J. (2020). \emph{Shadows of Syntax: Revitalizing Logical and Mathematical Conventionalism}. Oxford University Press.
+\bibitem[Williamson(2007)]{Williamson2007} Williamson, T. (2007). \emph{The Philosophy of Philosophy}. Blackwell.
+\bibitem[Wittgenstein(1922)]{Wittgenstein1922} Wittgenstein, L. (1922). \emph{Tractatus Logico-Philosophicus}. Kegan Paul.
+\bibitem[Wittgenstein(1953)]{Wittgenstein1953} Wittgenstein, L. (1953). \emph{Philosophical Investigations}. Blackwell.
+\end{thebibliography}
+
+\end{document}

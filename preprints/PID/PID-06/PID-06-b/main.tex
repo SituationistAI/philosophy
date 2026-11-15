@@ -1,0 +1,79 @@
+\documentclass{situationist-preprint}
+
+\title{Connectedness and Concern}
+\msid{PID-06-b}
+\msfamily{PID-06}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Consequence}
+\mskeywords{prudence; self-concern; psychological connectedness; discounting; time-relative interests; Parfit}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+PID-06-a concludes that psychological connectedness, not identity, carries most of what matters in survival. We derive what follows for rational self-concern. Concern for a future being should be proportioned chiefly to the degree of connectedness with it. Three consequences follow: a person may rationally care less about her remote future than about her near future, not because it is later but because it is less connected; she may rationally care about a strongly connected successor who is not she nearly as much as about herself; and she can raise the rational claim of her future on her present concern by acting to sustain connectedness. We answer the objection that the view licenses imprudence.
+\end{abstract}
+
+\section{From what matters to concern}
+
+PID-06-a defines what matters, $M$, as the strength of the prudential reasons a relation gives a person for concern about a future being's future (Definition~2.4), and argues that, approximately, $M = w_I I + w_C C + w_K K$, with identity $I$ and continuity $C$ taking the values $0$ or $1$ and connectedness $K$ between $0$ and $1$ (Assumption~2.5). Its main result is that $w_K \geq 1 - \delta > \tfrac12$ and $w_K > w_I + w_C$ (Theorem~3.3), and that $w_I \leq \varepsilon$ (Lemma~3.2).
+
+\begin{definition}\label{d:prop}
+A person's concern for future beings is \emph{proportioned} if the strength of her prudential concern for each is proportional to $M$ for her relation to it.
+\end{definition}
+
+\begin{assumption}\label{a:prop}
+Rational prudential concern is proportioned.
+\end{assumption}
+
+Assumption~\ref{a:prop} restates the definition of what matters as a norm: if $M$ measures the strength of a person's prudential reasons for concern, then concern in excess of those reasons, or short of them, is to that extent not supported by them.
+
+\section{Consequences}
+
+\begin{proposition}\label{p:discount}
+Rational concern for one's own future may decline with the decline of connectedness. For two future selves both identical and continuous with a person, her rational concern for them differs by $w_K$ times the difference in their connectedness with her.
+\end{proposition}
+
+\begin{proof}
+For both, $I = C = 1$, so their values of $M$ differ only in the term $w_K K$. Apply Assumption~\ref{a:prop}.
+\end{proof}
+
+Proposition~\ref{p:discount} vindicates a kind of discounting that is not discounting for time. Pure time preference, a lesser concern for a future good merely because it is later, has been widely regarded as irrational since \citet[III.13]{Sidgwick1907}. The discount defended here tracks a different variable. Connectedness usually declines with time, but not always: a person whose values and projects are stable is strongly connected with her self of decades hence, and has correspondingly strong reason for concern with it. \citet[ch.~14]{Parfit1984} raised this possibility, and \citet{McMahan2002} built on it the notion of time-relative interests. Since $w_K > \tfrac12$, the discount can be large; since identity keeps a small residual weight, concern for a self that is identical and continuous need not fall to zero however weak the connection.
+
+\begin{proposition}\label{p:succ}
+A person may have rational reason for concern about a strongly connected successor that is not she nearly as strong as for her own near future, and stronger than for her own remote future.
+\end{proposition}
+
+\begin{proof}
+For a successor, as in fission (PID-03) or uploading (PID-14), $I = 0$ and $C = 1$ with $K$ near $1$, so $M \geq 1 - \varepsilon$ (PID-06-a, Principle~P1), against $1$ for her own near future. For her remote future, $M \leq \delta < \tfrac12$ (PID-06-a, Principle~P2).
+\end{proof}
+
+\begin{proposition}\label{p:sustain}
+By sustaining connectedness, a person increases the rational claim of her future on her present concern.
+\end{proposition}
+
+\begin{proof}
+Connectedness consists in the persistence of beliefs, desires, values and traits, the fulfillment of intentions and the retention of memories (PID-06-a, Definition~2.1). Some of these are under a person's control: she can keep her commitments, cultivate stable values and record and revisit her past. Each increases $K$ between her present and future selves, and hence, by Assumption~\ref{a:prop}, the concern rationally owed.
+\end{proof}
+
+Proposition~\ref{p:sustain} explains a pattern in ordinary prudence. People who are indifferent to their remote future are often people whose lives lack the continuity of project and value that would connect them to it, and the remedy often recommended, to adopt long-term commitments, is a remedy for the lack of connectedness, not for a defect of reasoning. The same structure underlies the reconstruction, in EXI-03-a, of Williams's argument against the desirability of immortality: the later reaches of an endless life would be connected with the present only through a chain, and so would give the person now little of what matters.
+
+\begin{objection}
+If concern for the remote future may be weak, it is rational for the young to smoke, overspend and neglect their health.
+\end{objection}
+
+\begin{reply}
+It does not follow. First, much of the harm of these practices falls on near and strongly connected future selves, and Proposition~\ref{p:discount} gives no discount there. Second, the residual weight of identity, though small, does not vanish. Third, prudence is not the only source of reasons. If the remote self is less closely related to the present one, harming it becomes more like harming another person, and the reasons against harming others apply \citep[ch.~15]{Parfit1984}. The view redistributes reasons between prudence and morality; it does not remove them.
+\end{reply}
+
+\section{Conclusion}
+
+If connectedness carries most of what matters, rational self-concern is proportioned chiefly to connectedness. It may decline with connectedness and not with mere time; it may extend nearly undiminished to a strongly connected successor; and it is partly in a person's power to raise.
+
+\begin{thebibliography}{99}\small
+\bibitem[McMahan(2002)]{McMahan2002} McMahan, J. (2002). \emph{The Ethics of Killing: Problems at the Margins of Life}. Oxford University Press.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Oxford University Press.
+\bibitem[Sidgwick(1907)]{Sidgwick1907} Sidgwick, H. (1907). \emph{The Methods of Ethics}, 7th edn. Macmillan. Cited by book and chapter.
+\end{thebibliography}
+
+\end{document}

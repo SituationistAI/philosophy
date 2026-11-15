@@ -1,0 +1,299 @@
+\documentclass{situationist-preprint}
+
+\title{The Repugnant Conclusion Is Not Repugnant}
+\msid{ETH-09-a}
+\msfamily{ETH-09}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_09.lean}
+\mskeywords{population ethics; repugnant conclusion; mere addition paradox; total view; lives barely worth living; neutral level; Parfit; impossibility theorems}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Parfit's repugnant conclusion states that for any population of very good lives there is a better population of lives barely worth living, provided it is large enough. Most population ethics since 1984 has been an attempt to avoid it. We argue that it is true and that it is not repugnant. It is true because it follows from three premises weaker than the total view, transitivity, the mere addition principle and non-anti-egalitarianism, in a single step of mere addition followed by equalization; we prove this and show that the total view satisfies the premises, so that they are consistent. It is not repugnant because the intuition against it rests on a misunderstanding of what a life barely worth living is. Characterized across the plural components of the good rather than hedonically, and measured from the neutral level rather than from the standpoint of a life far above it, such a life is not the drab existence the intuition pictures but one whose goods, which may be considerable, narrowly outweigh its evils. Once the case is correctly described, the intuition loses the features that gave it weight. The arithmetic is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Consider a population A of ten billion people, all of whom have lives of very high quality. Now consider a population Z, far larger, all of whose members have lives that are barely worth living. \citet[388]{Parfit1984} called the claim that, for any population like A, some population like Z would be better, \emph{the repugnant conclusion}. He found it impossible to accept, and he spent much of Part Four of \emph{Reasons and Persons} showing that it was hard to avoid. The total view, on which one outcome is better than another if it contains a greater sum of well-being, implies it, since a sufficient number of small positive quantities exceeds any finite sum. Sidgwick had already noticed that utilitarianism, in its total form, directs us to increase population for as long as the addition of people increases the total of happiness, even at the cost of a lower average \citep[Book IV, ch.~1, \S 2]{Sidgwick1907}. What Parfit added was a proof that the conclusion does not depend on the total view: it follows from premises that seem much harder to deny.
+
+That proof is the \emph{mere addition paradox} \citep[ch.~19]{Parfit1984}. Population A+ consists of A together with an extra group of people whose lives are worth living but less good than those in A, and who affect no one in A. It seems that A+ is not worse than A, since the extra people have lives worth living and no one is worse off for their existence. Population B$-$ has the same number of people as A+, all at the same level, with a higher total and a higher average than A+. It seems that B$-$ is better than A+, since it is more equal and better on any reasonable measure of overall well-being. If B$-$ is better than A+, and A+ is not worse than A, then B$-$ is better than A. Repeating the construction yields a sequence of ever larger populations with ever lower levels of well-being, each better than its predecessor, and transitivity takes us to Z.
+
+The reactions fall into four groups. The first restricts the value of numbers: the average view, the variable value views of \citet{Hurka1983} and \citet{Ng1989}, and the critical-level views of \citet{Blackorby2005}. The second appeals to the structure of value: Parfit's own later proposal that some goods are lexically superior to others \citep{Parfit1986}, Feldman's desert-adjusted utilitarianism \citep{Feldman1995}, and Temkin's argument that \emph{better than} is not transitive \citep{Temkin2012}. The third denies that the comparisons are impersonal, and replaces them with person-affecting principles. The fourth accepts the conclusion. \citet{Tannsjo2002} argued that we ought to accept it because, when we consider realistically what lives barely worth living are like, the conclusion loses its sting; \citet{Huemer2008} argued that the intuitions against it are less reliable than the principles from which it follows; and a statement signed by a large group of population ethicists held that avoiding it should not be treated as a necessary condition of an adequate theory \citep{Zuber2021}.
+
+The impossibility theorems of \citet{Arrhenius2000} gave the debate its current shape. Arrhenius showed that no axiology can satisfy, together, a small set of adequacy conditions each of which seems compelling, one of which is the avoidance of the repugnant conclusion. Since then the question has been which condition to give up. We argue that the condition to give up is the avoidance of the repugnant conclusion itself, and that doing so costs nothing, because the intuition the condition encodes is the product of a misdescription.
+
+The argument has two parts. Sections~\ref{s:framework}--\ref{s:ma} establish that the conclusion is true: it follows from the total view, and also from three weaker premises, in a single step of mere addition and equalization. Section~\ref{s:exits} reviews the exits and what each costs. Section~\ref{s:barely} establishes that it is not repugnant, by examining what a life barely worth living is on a pluralist theory of the good of the kind defended in ETH-01-a. Section~\ref{s:objections} answers objections, Section~\ref{s:notestablish} records what we have not shown, and Section~\ref{s:formal} describes the formalization.
+
+\section{Framework}\label{s:framework}
+
+We work with populations of lives worth living, since the repugnant conclusion concerns only such populations.
+
+\begin{definition}[Population]\label{d:pop}
+A \emph{population} is a finite collection of groups, each consisting of a number of people who share a \emph{level}: the value of a life, for the one who lives it, measured on a ratio scale whose zero is the \emph{neutral level}, that of a life which is neither worth living nor not worth living. A life is \emph{worth living} if its level is positive.
+\end{definition}
+
+The level of a life is the net value of the life across all the respects in which a life can go well or badly. On the pluralist theory of ETH-01-a, these respects are the components of the good insofar as they are realized in a life: well-being in the narrow sense, knowledge, achievement, relationships and autonomy, together with the person's share in the beauty she encounters. We say more about this in Section~\ref{s:barely}. For now the only feature that matters is that levels can be added: the formal results assume that the value of a life can be represented by a number, and that the numbers of different lives are comparable.
+
+\begin{definition}[Uniform population]\label{d:uniform}
+The population of $n$ lives at level $a$ is written $(n,a)$. A population is \emph{perfectly equal} if it is uniform.
+\end{definition}
+
+\begin{definition}[Total view]\label{d:total}
+The \emph{total value} of a population is the sum, over its groups, of the number of people in the group times their level. The \emph{total view} holds that one population is better than another if and only if its total value is greater.
+\end{definition}
+
+In the notation of Definition~\ref{d:uniform}, A is $(n,a)$ and Z is $(m,z)$, with $z$ small and positive. The repugnant conclusion is the claim that, for any $(n,a)$ and any positive $z$, there is an $m$ such that $(m,z)$ is better than $(n,a)$.
+
+The mere addition argument does not assume the total view. It uses a primitive relation, \emph{at least as good as}, written $P \succeq Q$, and defines $P \succ Q$ (\emph{$P$ is better than $Q$}) as $P \succeq Q$ and not $Q \succeq P$. It then assumes three things about it.
+
+\begin{assumption}[Transitivity]\label{a:trans}
+If $P \succeq Q$ and $Q \succeq R$, then $P \succeq R$.
+\end{assumption}
+
+\begin{assumption}[Mere addition]\label{a:ma}
+If $P^{+}$ consists of $P$ together with a group of people whose lives are worth living, and the addition affects no one in $P$, then $P^{+} \succeq P$.
+\end{assumption}
+
+\begin{assumption}[Non-anti-egalitarianism]\label{a:nae}
+If $Q$ is perfectly equal, has the same number of people as $P$, and has a greater total value than $P$, then $Q \succ P$.
+\end{assumption}
+
+Assumption~\ref{a:ma} is Parfit's mere addition principle in its weak form: it does not say that adding good lives makes things better, only that it does not make them worse. Assumption~\ref{a:nae} is the principle that \citet{Ng1989} called non-anti-egalitarianism. It says that among populations of the same size, a perfectly equal distribution with a greater total is better. It is weak: it does not say that equality is good, only that it is not bad enough to outweigh a gain in total when the number of people is held fixed. Note that with the number of people fixed, greater total value is greater average value, so that the principle is also accepted by the average view.
+
+\section{The total view}\label{s:total}
+
+On the total view, the repugnant conclusion is a matter of arithmetic.
+
+\begin{proposition}\label{p:comparison}
+On the total view, $(m,z)$ is better than $(n,a)$ if and only if $m z > n a$.
+\end{proposition}
+
+\begin{proof}
+The total value of a uniform population $(n,a)$ is $na$, by Definition~\ref{d:total}. The total view ranks $(m,z)$ above $(n,a)$ just in case $mz > na$.
+\end{proof}
+
+\begin{theorem}[Repugnant conclusion, total form]\label{t:rctotal}
+On the total view, for every population $(n,a)$ and every positive level $z$, there is a number $m$ such that $(m,z)$ is better than $(n,a)$.
+\end{theorem}
+
+\begin{proof}
+Take $m = na + 1$. Since $z \geq 1$ in units of the scale, $mz \geq m = na + 1 > na$, and Proposition~\ref{p:comparison} gives the result.
+\end{proof}
+
+The choice of unit in the proof is harmless. Since the scale of Definition~\ref{d:pop} is a ratio scale, we may choose the unit so that $z$ is a whole number of units, however small $z$ is relative to $a$. The size of the required $m$ depends on the ratio $a/z$: if lives in A are a thousand times better than lives in Z, Z must have somewhat more than a thousand times as many people as A.
+
+The steps of Parfit's paradox are also arithmetical on the total view.
+
+\begin{lemma}\label{l:addition}
+On the total view: (i) \emph{mere addition}: adding $k > 0$ lives at a positive level $w$ to any population yields a better population; (ii) \emph{benign addition}: raising each of $n$ lives from $a$ to $a' \geq a$ and adding $k > 0$ lives at a positive level $w$ yields a better population than $(n,a)$.
+\end{lemma}
+
+\begin{proof}
+(i) The total of $P^{+}$ is the total of $P$ plus $kw$, and $kw \geq 1$. (ii) The total of the new population is $na' + kw \geq na + kw > na$.
+\end{proof}
+
+Clause (ii) records the step on which \citet{Parfit2016} came to rest his late discussion. In benign addition, A+ is not merely A with extra people: the original people are also better off. A theorist who denies that mere addition is harmless may still find it hard to deny that benign addition is an improvement, since it is better for some and worse for no one. The total view makes both steps improvements, and the mere addition argument needs only the weaker claim that they are not worsenings.
+
+\section{The mere addition argument}\label{s:ma}
+
+We now show that the repugnant conclusion does not depend on the total view. Parfit's version of the argument proceeds through many intermediate populations. We give a version that reaches Z in one step of addition and one of equalization, which isolates the premises the argument requires.
+
+\begin{lemma}\label{l:mixed}
+If $P \succ Q$ and $Q \succeq R$, then $P \succ R$.
+\end{lemma}
+
+\begin{proof}
+From $P \succeq Q$ and $Q \succeq R$, Assumption~\ref{a:trans} gives $P \succeq R$. Suppose $R \succeq P$. Then from $Q \succeq R$ and $R \succeq P$, Assumption~\ref{a:trans} gives $Q \succeq P$, contradicting $P \succ Q$. So not $R \succeq P$, and $P \succ R$.
+\end{proof}
+
+\begin{theorem}[Repugnant conclusion from weak premises]\label{t:rc}
+Given Assumptions~\ref{a:trans}, \ref{a:ma} and \ref{a:nae}, for every population $(n,a)$ and every level $z \geq 2$ (in units of the scale), there is an $m$ such that $(m,z) \succ (n,a)$.
+\end{theorem}
+
+\begin{proof}
+Let $k = na + 1$, and let A+ consist of $(n,a)$ together with $k$ people at level $z - 1$, who are not affected by and do not affect the people in A. Since $z \geq 2$, their lives are worth living, and by Assumption~\ref{a:ma}, A+ $\succeq (n,a)$.
+
+A+ has $n + k$ people and total value $na + k(z-1)$. Let Z be $(n+k, z)$. Its total value is $nz + kz = nz + k(z-1) + k$. Since $k = na + 1 > na$, the total of Z exceeds $na + k(z-1)$, the total of A+. Z is perfectly equal and has the same number of people as A+, so by Assumption~\ref{a:nae}, Z $\succ$ A+.
+
+By Lemma~\ref{l:mixed}, Z $\succ (n,a)$, with $m = n + k$.
+\end{proof}
+
+Three features of the proof deserve comment. First, the added people in A+ are at a level just below $z$; the equalization raises them slightly and lowers the original people a great deal. The equalization step is therefore where the cost to the original people appears, and it is licensed by non-anti-egalitarianism only because the number of added people is large enough for the slight gain of each to outweigh, in total, the large loss of each original person. Second, the restriction $z \geq 2$ in units is again harmless, since the unit is arbitrary; it says only that there is some level of worthwhile life below $z$. Third, the theorem holds whatever the level $a$ and whatever the relation between $z$ and $a$: nothing in the argument depends on Z's lives being bad, or on their being drab, only on their being worth living.
+
+The premises are consistent, and the total view shows it.
+
+\begin{proposition}\label{p:consistent}
+The ordering of populations by total value satisfies Assumptions~\ref{a:trans}, \ref{a:ma} and \ref{a:nae}.
+\end{proposition}
+
+\begin{proof}
+The relation \emph{has at least as great a total as} is transitive. Adding a group of lives at positive levels does not lower the total. A perfectly equal population with a greater total than $P$ has at least as great a total as $P$, and $P$ does not have at least as great a total as it.
+\end{proof}
+
+Proposition~\ref{p:consistent} matters because the mere addition paradox is often presented as an inconsistency between the three premises and the denial of the repugnant conclusion. That is the right presentation. The three premises are jointly satisfiable; what is unsatisfiable is the conjunction of the three premises with the claim that Z is not better than A. One of the four must go, and the only question is which.
+
+\section{The exits and their costs}\label{s:exits}
+
+Each of the standard ways of avoiding the repugnant conclusion rejects one of the premises of Theorem~\ref{t:rc}, or the framework of Definition~\ref{d:pop}. We take them in turn, with the case that has been taken to defeat each.
+
+\paragraph{The average view.} The average view rejects Assumption~\ref{a:ma}: adding lives worth living below the average makes things worse. Its defeating case is well known \citep[ch.~19]{Parfit1984}. If the average view is correct, a population of lives of intense suffering could be made better by adding further lives of suffering, provided they suffer slightly less than the existing people, since the average would rise. And whether it would be good to have a child in our circumstances would depend on how well off the ancient Egyptians were. Both verdicts are unacceptable, and few now defend the view.
+
+\paragraph{Variable value views.} \citet{Hurka1983} and \citet{Ng1989} proposed that the contributive value of additional lives diminishes as population grows, so that the total value of a population is bounded as the number of lives at a given level increases. Such views reject Assumption~\ref{a:nae} in some cases, or Assumption~\ref{a:ma}, depending on the formulation. Ng proved that his ``Theory X'' could not satisfy all of his conditions, and \citet{Arrhenius2000} showed that variable value views imply that adding a sufficiently large number of lives worth living to a population can be worse than adding a smaller number of lives not worth living. This is the \emph{sadistic conclusion}, and it is worse than the conclusion the views were designed to avoid.
+
+\paragraph{Critical-level views.} \citet{Blackorby2005} defend views on which a life contributes positively to the value of a population only if its level exceeds a positive critical level. Lives above zero but below the critical level make things worse. These views reject Assumption~\ref{a:ma}, and they too imply a sadistic conclusion: adding many lives just below the critical level, all of them worth living, can be worse than adding a few lives of misery.
+
+\paragraph{Lexical views.} \citet{Parfit1986} suggested that the best things in life, such as the highest forms of love, knowledge and creation, might be lexically superior to the goods available in Z, so that no amount of the latter could outweigh the loss of the former. The view rejects the representation of levels by numbers that can be added. Its cost is discontinuity: there must be a pair of lives, as close as one likes in quality, such that no number of the worse outweighs one of the better. The step-by-step arguments that \citet{Arrhenius2000} formalized as conditions on axiologies show how hard it is to locate such a discontinuity.
+
+\paragraph{Intransitivity.} \citet{Temkin2012} argued that the mere addition paradox, together with spectrum arguments of the same shape, should lead us to give up Assumption~\ref{a:trans}. When we compare A with A+, the relevant consideration is whether anyone is made worse off; when we compare A+ with B$-$, it is equality and total; when we compare A with Z, it is quality of life. Since different considerations are relevant to different comparisons, there is no reason to expect the comparisons to be transitive. We discuss this in Section~\ref{s:objections}.
+
+\paragraph{Person-affecting views.} Person-affecting views hold that one outcome can be worse than another only if it is worse for someone. On such views Z is not worse than A for anyone in Z, since the people in Z would not have existed in A, and A is not worse than Z for anyone in A. The views therefore avoid the repugnant conclusion, at the cost of being unable to say that Z is worse than A either. They fail in different-number cases for the reason that they fail in same-number cases: the non-identity problem shows that many choices that are clearly wrong make no one worse off (ETH-08). The obligations we have to future generations are impersonal, and a population axiology that serves those obligations must compare populations of different people.
+
+\paragraph{Desert.} \citet{Feldman1995} proposed that the value of a life is adjusted for the desert of the person who lives it, and that people in Z, who deserve better than lives barely worth living, contribute less value than their well-being suggests. The proposal rejects the representation of value by levels of welfare, but it can be restated within our framework: a desert-adjusted level is still a level, and Theorems~\ref{t:rctotal} and \ref{t:rc} apply to it. Desert adjustment shifts the neutral level, and so affects which lives count as barely worth living; it does not block the arithmetic.
+
+Arrhenius's theorem shows that the costs are not accidental. Any axiology meeting the conditions that the exits try to preserve must violate one of them. Every theory of population value accepts some conclusion that is counterintuitive, and the choice is between conclusions. The total view's conclusion is the repugnant conclusion. Our claim is that, of the conclusions on offer, it is the only one whose counterintuitiveness can be explained away, because it alone rests on a description of the case that the intuition misreads.
+
+\section{What ``barely worth living'' means}\label{s:barely}
+
+The repugnant conclusion compares two populations, one of which consists of lives barely worth living. Whether it is repugnant depends on what such lives are. We argue that the intuition against the conclusion rests on three mistakes about them.
+
+\subsection{The value of a life}
+
+\begin{definition}[Value of a life]\label{d:lifevalue}
+The \emph{value of a life} for the one who lives it is the value that idealized reflective endorsement assigns to it, taking into account each component of the good realized in it: the subject's well-being, her knowledge, her achievements, her relationships, her autonomy, and the beauty she apprehends, together with the corresponding evils.
+\end{definition}
+
+Definition~\ref{d:lifevalue} applies the account of the good of ETH-01-a to lives. On that account, the good is what idealized reflective endorsement converges on, and it has seven irreducible components; six of them are realized in individual lives, and the seventh, fairness, is a feature of distributions. The neutral level is the level at which idealized reflection is indifferent between the subject's having lived that life and her not having lived at all.
+
+\begin{definition}[Barely worth living]\label{d:barely}
+A life is \emph{barely worth living} if its value, in the sense of Definition~\ref{d:lifevalue}, is positive and small relative to the values of the lives with which it is being compared.
+\end{definition}
+
+Definition~\ref{d:barely} says nothing about the content of such a life. Many different lives have the same small positive value. A life may be barely worth living because it contains few goods and few evils, or because it contains great goods and evils that nearly balance them, or because it is short and good while it lasts. The intuition against the repugnant conclusion, we argue, attaches to one of these kinds of life, and the argument for the conclusion applies to all of them.
+
+\subsection{Three mistakes}
+
+\begin{principle}[Debunking]\label{p:debunk}
+An intuitive verdict about a case loses its evidential weight if it is produced by features that the case, correctly described, does not have, and disappears when the case is described so as to exclude them.
+\end{principle}
+
+The principle is not specific to population ethics. It is the principle by which ETH-03-a set aside the influence of physical contact on judgments about the footbridge, and by which ETH-05-a examined, and rejected, the claim that the experience machine intuition reflects status quo bias. Applied here, it requires us to identify the features that produce the intuition and to ask whether Z, correctly described, has them.
+
+\paragraph{The hedonic picture.} The first mistake is to picture lives barely worth living hedonically, as lives in which pleasure narrowly exceeds pain. Parfit's own illustration was of lives with nothing but muzak and potatoes \citep{Parfit1986}: lives with mild pleasures, no suffering, and nothing else. On a pluralist theory this picture omits most of what makes a life go well or badly. A life of muzak and potatoes is a life without knowledge worth having, without achievement, without relationships and without contact with reality in the sense in which ETH-05-a showed that contact is part of well-being. Such a life is not barely worth living; it is, if worth living at all, worth living only by a margin that the absence of five components makes very small. But it is one point in a large class. Most lives with small positive value are lives with friendships and losses, with work that partly succeeds, with illnesses and recoveries, and with knowledge of their own situation. The intuition is formed by attending to the muzak-and-potatoes point and generalized to the class.
+
+When we picture instead a population of lives of the second kind, lives that contain love and grief, accomplishment and failure, understanding and confusion, in a balance that is narrowly favorable, the sense of repugnance fades. A world containing a vast number of such lives is not a world of monotony. It is a world much like the actual world, many of whose inhabitants, by any honest assessment, live lives whose goods do not greatly outweigh their evils.
+
+\paragraph{The anchored comparison.} The second mistake is to assess the lives in Z from the standpoint of a life in A, or of our own. Asked to imagine a life barely worth living, we imagine a life much worse than ours and assess it as a loss relative to ours. The life then strikes us as deprived, and a population of deprived lives as bad. But the value of a life, in Definition~\ref{d:lifevalue}, is measured from the neutral level, not from the level of the evaluator. The question is not whether one would trade one's own life for a life in Z, but whether it is better that the life in Z be lived than not. By hypothesis, it is. The anchored comparison converts a small positive quantity into a large negative one, and the intuition registers the negative one.
+
+\paragraph{The misplaced zero.} The third mistake is to locate the neutral level too high. Many people, asked where a life stops being worth living, place the point near the level of a life they would be content to live, or of a life with nothing to complain about. If the neutral level is placed there, a life ``barely worth living'' becomes a life that is already decent, and the conclusion seems to concern only small differences above decency; but then the intuition is directed at the wrong lives, for its objects are the lives just above a much lower point. Conversely, if one tacitly locates the zero where lives become bad enough to regret, and then imagines lives ``barely above'' that point as hovering near misery, one has located the zero too low and imagined lives that are not worth living at all. The neutral level of Definition~\ref{d:pop} is a determinate point fixed by idealized reflection, not by the evaluator's tolerance, and both mislocations distort the intuition.
+
+\paragraph{Scope.} A fourth factor is not a mistake about lives but a limitation of intuition. Intuitive judgments about aggregates are insensitive to their size beyond small numbers \citep{Huemer2008}. We cannot represent the difference between ten billion and ten trillion lives; we can only be told it. A judgment that compares a population of very good lives with a population of slightly good lives, without registering the difference in their size, is not a judgment about the repugnant conclusion, which is a claim about the case in which the size is large enough to make the difference.
+
+\subsection{The diagnosis}
+
+\begin{proposition}\label{p:diagnosis}
+Given Principle~\ref{p:debunk}, the intuition that Z is worse than A has no evidential weight against Theorems~\ref{t:rctotal} and \ref{t:rc}.
+\end{proposition}
+
+\begin{proof}
+The intuition is produced by one or more of the following features: the hedonic poverty of the lives in Z, their deprivation relative to lives like ours, their proximity to misery, and the indistinctness of their number. None of these is a feature of Z as specified. The lives in Z may be as rich in the components of the good as any lives whose value is small and positive; their value is measured from the neutral level and not relative to ours; they are, by hypothesis, worth living; and their number is whatever it must be to outweigh the loss in quality. When Z is described so as to exclude the four features, as a vast population of lives like the many actual lives whose goods narrowly outweigh their evils, the repugnance that the intuition registered is not present. By Principle~\ref{p:debunk}, the intuition loses its evidential weight.
+\end{proof}
+
+The proposition does not say that no one, on reflection, will continue to prefer A. It says that the preference, if it survives correct description, survives without the feature that made it seem decisive. A residual preference for A over Z, held after the case has been correctly described, is a preference for quality over quantity, which the total view does not deny is a value; it denies only that it is a value lexically prior to all others. Such a preference is one consideration among others, and it is outweighed by the premises of Theorem~\ref{t:rc}, each of which is more secure.
+
+The conclusion that results is the one in the title. The repugnant conclusion is true, because it follows from premises we have reason to accept and the exits from it are costlier. And it is not repugnant, because what made it seem so was a picture of lives barely worth living that the conclusion does not require.
+
+\subsection{Consistency with neighbouring views}
+
+The population ethics defended here is impersonal and totalist, and it has consequences for neighbouring questions. It requires that the absence of a good life be a loss, though a loss to no one: if adding a life worth living did not make an outcome better in at least the weak sense of Assumption~\ref{a:ma}, mere addition would carry no weight. This is the claim on which ETH-20 rests its rejection of Benatar's asymmetry \citep{Benatar2006}: the absence of pleasure, though bad for no one, is not neutral. It also requires that the betterness relation compare populations of different people. That is the claim of ETH-08, on which our obligations to future generations are owed to no one in particular and are impersonal. The three positions form one view: the value of outcomes is impersonal and additive across lives, the non-existence of good lives is a loss to no one, and the duties grounded in that value are owed to no one in particular.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Intransitivity]
+Following \citet{Temkin2012}, the relation \emph{all things considered better than} is essentially comparative: which considerations are relevant depends on which outcomes are compared. Assumption~\ref{a:trans} then fails, and Theorem~\ref{t:rc} has a false premise.
+\end{objection}
+
+\begin{reply}
+The objection pays a high price. If betterness is intransitive, then there are options $P$, $Q$, $R$ with $P$ better than $Q$, $Q$ better than $R$ and $R$ better than $P$, and an agent choosing among the three has no option that is not worse than another. Temkin accepts that this threatens the coherence of practical reasoning. It is also unnecessary here. Our version of the argument contains only one application of transitivity, in Lemma~\ref{l:mixed}, and the objection must claim that Z can be better than A+, and A+ at least as good as A, while Z is not better than A. The considerations relevant to the first comparison are total and equality; to the second, whether anyone is worse off. Both considerations are also present in the comparison of Z and A. What Temkin's view requires is that the comparison of Z with A bring in a further consideration, quality of life, that is not relevant to the other comparisons. But the quality of life in Z is no lower than in the Z of Theorem~\ref{t:rc}'s second step, which is already compared with A+. The consideration is relevant there too, and it has been weighed.
+\end{reply}
+
+\begin{objection}[Fairness and mere addition]
+ETH-01-a counts fairness among the components of the good. A+ is unequal where A was equal, so it is worse in one component; Assumption~\ref{a:ma} is therefore not secure on the pluralist view the manuscript relies on.
+\end{objection}
+
+\begin{reply}
+The inequality in A+ is between people who exist and people who would otherwise not have existed, and it is produced by no one's being denied anything. Unfairness, on the account in ETH-01-a, concerns the distribution of goods among those with claims to them; the added people have no claim against A's people to a share of their goods, since their existence does not depend on, or detract from, those goods. Parfit made the point by imagining A+ as two communities unaware of each other \citep[ch.~19]{Parfit1984}. But suppose one disagrees, and counts the inequality in A+ as a disvalue. Then one may replace mere addition by benign addition, raising the original people slightly as the others are added (Lemma~\ref{l:addition}(ii)). The gain to the original people can be made as large as one likes relative to any disvalue of inequality, and the argument proceeds as before. In the equalization step, fairness counts in favor of Z.
+\end{reply}
+
+\begin{objection}[The very repugnant conclusion]
+The total view also implies that for any population of very good lives there is a better population consisting of a vast number of lives barely worth living together with a large number of lives of intense suffering. This \emph{very repugnant conclusion} \citep{Arrhenius2000} cannot be explained away by redescribing lives barely worth living.
+\end{objection}
+
+\begin{reply}
+The total view implies it, and so does any view on which positive and negative values of lives are commensurable and additive. Most of the force of the case comes from the suffering lives, and the conclusion asks us to weigh them against a quantity of positive value large enough to outweigh both their suffering and the loss of the good lives. The diagnosis of Section~\ref{s:barely} applies to the positive part: the many lives barely worth living are not drab, not to be measured from our standpoint, and not near misery. What remains is the judgment that great suffering cannot be outweighed by any amount of moderate good, which is a lexical view of suffering. That view has the costs of the lexical views discussed in Section~\ref{s:exits}, and it has them in a sharper form: it implies that preventing a single episode of intense suffering is more important than any quantity of moderate goods for any number of people. We regard the very repugnant conclusion as a hard case, not as a refutation, and we note that the statement of \citet{Zuber2021} applies to it on the same terms.
+\end{reply}
+
+\begin{objection}[Practical consequences]
+If Z is better than A, we ought to bring about Z. The view therefore requires a policy of maximal population growth, which is monstrous.
+\end{objection}
+
+\begin{reply}
+The repugnant conclusion is a claim about the ranking of outcomes, not about what anyone ought to do. The passage from value to obligation is governed by the deontic principles defended elsewhere: obligations of beneficence are bounded, and agents enjoy a prerogative to pursue their own projects (ETH-06, ETH-28); decisions about procreation fall within the autonomy that ETH-01-a counts as a component of the good. Moreover, in any realistic case the comparison is not between A and Z but between nearby populations, and the means of increasing population affect the quality of existing and future lives. The ranking of A and Z says that a world containing Z would be a better world. It does not say that anyone may coerce anyone in order to approach it.
+\end{reply}
+
+\begin{objection}[Begging the question about lives]
+The diagnosis of Section~\ref{s:barely} replaces Parfit's lives with richer lives. But the repugnant conclusion is about whatever lives are barely worth living. If muzak-and-potatoes lives are among them, the conclusion holds for a Z made of those lives, and the intuition against that Z is untouched.
+\end{objection}
+
+\begin{reply}
+The conclusion does hold for such a Z, and we accept it. Our claim is not that every Z is attractive but that the intuition against the conclusion has no evidential weight. The muzak-and-potatoes Z is the case in which the hedonic picture is accurate, and in that case the other mistakes remain: the comparison is anchored, the zero is misplaced, and the numbers are not represented. Moreover, the intuition about that Z is borrowed from a feature, the absence of five components of the good, which affects the value of each life and has already been counted in fixing its level. A muzak-and-potatoes life is barely worth living only if its small positive value is accurately measured; if so, its poverty is already reflected in that small value, and counting it again in the comparison of populations would count it twice.
+\end{reply}
+
+\section{What the result does not establish}\label{s:notestablish}
+
+First, the argument does not establish the total view. Theorem~\ref{t:rc} uses premises weaker than the total view, and other axiologies satisfying them may exist; we have argued only that the repugnant conclusion is true, and that the total view is a natural home for it. Second, the argument does not settle the representation of the plural components of the good by a single number. Definition~\ref{d:lifevalue} assumes that idealized reflection assigns each life a value, and that values of lives are comparable; a pluralist who denies the second assumption faces difficulties in population ethics that are independent of the repugnant conclusion. Third, the argument does not address the treatment of risk and uncertainty over populations, nor infinite populations. Fourth, nothing in the argument bears on the deontic question of what we ought to do about population size, which, as the fourth reply notes, is governed by principles of beneficence and prerogative rather than by the axiology alone. The companion manuscripts develop two themes further: ETH-09-b examines the notion of a life barely worth living, and ETH-09-c shows how the view handles the other standard puzzles of population ethics.
+
+\section{Formalization}\label{s:formal}
+
+The arithmetic of Sections~\ref{s:total} and \ref{s:ma} is formalized in \nolinkurl{Philosophy/ETH/ETH_09.lean}. A population is a list of pairs (number of people, level) with natural-number entries, and total value is defined by recursion (Definitions~\ref{d:pop}--\ref{d:total}). Proposition~\ref{p:comparison}, Theorem~\ref{t:rctotal} and Lemma~\ref{l:addition} are proved from these definitions alone. For the argument of Section~\ref{s:ma}, the relation \emph{at least as good as} is an undefined primitive, and the three premises are stated as axioms about it. The main theorem is the following.
+
+\begin{lstlisting}
+theorem repugnant_conclusion (n a z : Nat) (hz : 2 ≤ z) :
+    ∃ m, Better (uniform m z) (uniform n a)
+\end{lstlisting}
+
+The output of \texttt{\#print axioms} for this theorem is:
+
+\begin{lstlisting}
+'Philosophy.ETH_09.repugnant_conclusion' depends on axioms:
+  [propext, Quot.sound, Philosophy.ETH_09.Geq,
+   Philosophy.ETH_09.geq_trans, Philosophy.ETH_09.mere_addition,
+   Philosophy.ETH_09.non_anti_egalitarianism]
+\end{lstlisting}
+
+Besides two standard axioms of Lean's logic, the theorem depends on the primitive relation \texttt{Geq} and on three axioms: \texttt{geq\_trans} is Assumption~\ref{a:trans}, \texttt{mere\_addition} is Assumption~\ref{a:ma}, and \texttt{non\_anti\_egalitarianism} is Assumption~\ref{a:nae}. Theorem~\ref{t:rctotal}, the total form of the conclusion, depends only on \texttt{propext} and \texttt{Quot.sound}. Proposition~\ref{p:consistent}, which states that the total ordering satisfies the three premises, depends only on the standard axioms of Lean's logic. The formalization does not represent the material of Section~\ref{s:barely}: the claim that the intuition rests on a misunderstanding is argued in prose and is not a theorem of the module.
+
+\section{Conclusion}
+
+For any population of excellent lives there is a better population of lives barely worth living, provided it is large enough. This follows from the total view, and it follows from three weaker premises in one step of addition and one of equalization. The intuition that it is repugnant is produced by a picture of the lives in question as drab, as deprived relative to our own, as close to misery, and as uncountable; none of these belongs to the case. A life barely worth living, correctly understood, is a life whose goods narrowly outweigh its evils, and a world containing very many of them is a world containing a great deal of good.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arrhenius(2000)]{Arrhenius2000} Arrhenius, G. (2000). An impossibility theorem for welfarist axiologies. \emph{Economics and Philosophy}, 16(2), 247--266.
+\bibitem[Benatar(2006)]{Benatar2006} Benatar, D. (2006). \emph{Better Never to Have Been: The Harm of Coming into Existence}. Oxford University Press.
+\bibitem[Blackorby et~al.(2005)]{Blackorby2005} Blackorby, C., Bossert, W. and Donaldson, D. (2005). \emph{Population Issues in Social Choice Theory, Welfare Economics, and Ethics}. Cambridge University Press.
+\bibitem[Feldman(1995)]{Feldman1995} Feldman, F. (1995). Justice, desert, and the repugnant conclusion. \emph{Utilitas}, 7(2), 189--206.
+\bibitem[Huemer(2008)]{Huemer2008} Huemer, M. (2008). In defence of repugnance. \emph{Mind}, 117(468), 899--933.
+\bibitem[Hurka(1983)]{Hurka1983} Hurka, T. (1983). Value and population size. \emph{Ethics}, 93(3), 496--507.
+\bibitem[Ng(1989)]{Ng1989} Ng, Y.-K. (1989). What should we do about future generations? Impossibility of Parfit's Theory X. \emph{Economics and Philosophy}, 5(2), 235--253.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Clarendon Press.
+\bibitem[Parfit(1986)]{Parfit1986} Parfit, D. (1986). Overpopulation and the quality of life. In P. Singer (ed.), \emph{Applied Ethics}, 145--164. Oxford University Press.
+\bibitem[Parfit(2016)]{Parfit2016} Parfit, D. (2016). Can we avoid the repugnant conclusion? \emph{Theoria}, 82(2), 110--127.
+\bibitem[Sidgwick(1907)]{Sidgwick1907} Sidgwick, H. (1907). \emph{The Methods of Ethics}, 7th edn. Macmillan.
+\bibitem[Temkin(2012)]{Temkin2012} Temkin, L.~S. (2012). \emph{Rethinking the Good: Moral Ideals and the Nature of Practical Reasoning}. Oxford University Press.
+\bibitem[T{\"a}nnsj{\"o}(2002)]{Tannsjo2002} T{\"a}nnsj{\"o}, T. (2002). Why we ought to accept the repugnant conclusion. \emph{Utilitas}, 14(3), 339--359.
+\bibitem[Zuber et~al.(2021)]{Zuber2021} Zuber, S., Venkatesh, N., T{\"a}nnsj{\"o}, T., et al. (2021). What should we agree on about the repugnant conclusion? \emph{Utilitas}, 33(4), 379--383.
+\end{thebibliography}
+
+\end{document}

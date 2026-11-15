@@ -1,0 +1,59 @@
+\documentclass{situationist-preprint}
+
+\title{Computational Limits and Reduction}
+\msid{SCI-11-b}
+\msfamily{SCI-11}
+\msdiscipline{Philosophy of Science}
+\mstype{Companion manuscript}
+\mskeywords{reduction; chemistry; quantum chemistry; computational complexity; emergence; feasibility}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+SCI-11-a argues that chemistry reduces to physics in principle but not in practice, and that the failure in practice is explained by the exponential cost of solving the Coulomb Hamiltonian. A critic may reply that a reduction that can never be carried out is no reduction, and that the indispensability of chemical concepts is itself evidence of autonomy. We argue that computational limits are the wrong kind of fact to support autonomy: they are relative to resources, they vary with computational technology while the chemistry stays fixed, and they hold equally within physics itself, where no one infers autonomy from them.
+\end{abstract}
+
+\section{The objection from infeasibility}
+
+\citet{Dirac1929} remarked that the laws needed for the whole of chemistry were completely known and that the difficulty lay only in solving the equations. SCI-11-a vindicates the first half of the remark (its Theorem~3.3) and explains the second: by its Proposition~3.4, exact solution of the Coulomb Hamiltonian requires resources growing exponentially in the number of electrons, and computing ground-state energies of interacting electron systems is hard in general \citep{SchuchVerstraete2009}. Its Corollary~3.5 concludes that chemistry does not reduce in practice, and Corollary~3.6 that it is not ontologically autonomous.
+
+The objection is that the gap between these corollaries is illegitimate. If the entailment from physics to chemistry can never be computed, then the claim that it holds is idle, and the chemical concepts that do the actual work, such as bond, functional group and aromaticity, deserve the ontological standing that their indispensability suggests \citep{Hendry2010}.
+
+\section{Why computational limits do not bear on autonomy}
+
+By Definition~2.3 of SCI-11-a, chemistry would be autonomous if some chemical kind or causal power were not fixed by the kinds, laws and conditions of physics. Whether something is fixed by a set of facts is a question about entailment; whether the entailment can be carried out is a question about the resources of those who would carry it out. Three observations show that infeasibility tracks the second and not the first.
+
+\begin{proposition}\label{p:relative}
+The boundary between feasible and infeasible derivations is relative to computational resources, and it moves when the resources change while the chemical facts do not.
+\end{proposition}
+
+\begin{proof}
+Systems whose properties could not be computed from first principles in one decade are computed in the next, with no change in the systems. Density functional methods made a large class of molecular properties computable at polynomial cost \citep{Kohn1999}, and a quantum computer would simulate quantum systems at a cost polynomial in their size \citep{Feynman1982}. A boundary that moves under changes in our machines while the molecules stay the same is not a boundary in the molecules.
+\end{proof}
+
+Second, the same limits hold within physics. The thermodynamic behavior of a gas, the phases of a solid and the turbulence of a fluid are not computed from the microdynamics either; physicists use coarse-grained variables for the same reason chemists do. No one infers that the hydrodynamic velocity field is ontologically autonomous from the motions of the molecules. If infeasibility does not establish autonomy within physics, it does not establish it between physics and chemistry.
+
+Third, the success of chemical concepts is explained by the reduction rather than in tension with it. A chemical concept earns its place by compressing the consequences of the Hamiltonian for a class of systems into a form that can be used without solving it. Compression of this kind is possible only because the regularities are there to be compressed, and SCI-11-a's Lemma~3.2 says that they are entailed by the Hamiltonian together with physical conditions.
+
+\begin{objection}
+Molecular structure appears only when the nuclei are treated as classical and fixed, an assumption the exact theory does not license, so the gap is not computational but conceptual.
+\end{objection}
+
+\begin{reply}
+SCI-11-a answers this in its Section~4: molecular structure emerges from the exact theory through decoherence by the environment, as other classical properties do. The Born--Oppenheimer separation is an approximation controlled by the exact theory, and the cost of not using it is again computational.
+\end{reply}
+
+\section{Conclusion}
+
+Computational limits explain why chemistry must have its own concepts. They do not show that those concepts track anything over and above the physics, because they are facts about the cost of deriving, not about what is derived.
+
+\begin{thebibliography}{99}\small
+\bibitem[Dirac(1929)]{Dirac1929} Dirac, P.~A.~M. (1929). Quantum mechanics of many-electron systems. \emph{Proceedings of the Royal Society of London A}, 123, 714--733.
+\bibitem[Feynman(1982)]{Feynman1982} Feynman, R.~P. (1982). Simulating physics with computers. \emph{International Journal of Theoretical Physics}, 21(6--7), 467--488.
+\bibitem[Hendry(2010)]{Hendry2010} Hendry, R.~F. (2010). Ontological reduction and molecular structure. \emph{Studies in History and Philosophy of Modern Physics}, 41(2), 183--191.
+\bibitem[Kohn(1999)]{Kohn1999} Kohn, W. (1999). Nobel lecture: Electronic structure of matter---wave functions and density functionals. \emph{Reviews of Modern Physics}, 71(5), 1253--1266.
+\bibitem[Schuch and Verstraete(2009)]{SchuchVerstraete2009} Schuch, N. and Verstraete, F. (2009). Computational complexity of interacting electrons and fundamental limitations of density functional theory. \emph{Nature Physics}, 5(10), 732--735.
+\end{thebibliography}
+
+\end{document}

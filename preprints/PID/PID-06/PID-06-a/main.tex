@@ -1,0 +1,153 @@
+\documentclass{situationist-preprint}
+
+\title{What Matters in Survival}
+\msid{PID-06-a}
+\msfamily{PID-06}
+\msdiscipline{Personal Identity and the Self}
+\mstype{Principal manuscript}
+\mskeywords{what matters; psychological connectedness; psychological continuity; prudential concern; Parfit; Relation R}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does identity matter in survival? We argue that it matters less than commonly assumed, and that psychological connectedness, not identity, carries most of what matters. We distinguish three relations a person may bear to a future being: identity, psychological continuity (overlapping chains of direct psychological connections) and psychological connectedness (the holding of direct connections, which comes in degrees). Three comparisons separate their contributions. In fission (PID-03), connectedness and continuity hold without identity, and what matters is almost wholly present. In the long chain, identity and continuity hold across a life while connectedness has faded to almost nothing, and the prudential concern it grounds is correspondingly weak. In ordinary survival all three hold. If the contribution of the three relations is approximately additive, these comparisons imply that connectedness carries more than identity and continuity together. We defend the result against the objections that it makes concern for one's distant future irrational, that it cannot account for responsibility, and that Williams's torture case shows identity to matter after all.
+\end{abstract}
+
+\section{The problem}
+
+The common view is that what matters to a person, in caring about her own future, is that the future person will be her. \citet{Parfit1971,Parfit1984} argued that what matters is instead Relation R, psychological connectedness and/or continuity with any cause, and that identity, which is R holding in a one-one form, adds nothing of importance. Critics have replied that identity grounds the special concern each of us has for her own future \citep{Johnston1997}, that the reductionist view cannot sustain the practical concerns bound up with personal identity \citep{Schechtman1996}, and that our concern follows the body in cases designed to elicit it \citep{Williams1970}. Others have refined Parfit's view: \citet{Lewis1976} argued that, on a perdurantist account, identity and R coincide in the relevant cases; \citet{Martin1998} examined how far self-concern can be detached from identity; and empirical work has found that people's concern for their future selves varies with how connected they feel to them \citep{BartelsUrminsky2011}.
+
+Parfit himself was uncertain whether connectedness or continuity matters more. The catalogue's conclusion takes a definite side: connectedness carries most of what matters. We argue for it by comparing cases in which the relations come apart.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:conn}
+A \emph{direct psychological connection} between a person at $t$ and a being at $t'$ is the holding of a memory at $t'$ of an experience at $t$, the carrying out at $t'$ of an intention formed at $t$, or the persistence from $t$ to $t'$ of a belief, desire, value or character trait. The \emph{connectedness} $K$ of the pair is the degree to which such connections hold, normalized so that $K=1$ over a single day of an ordinary life.
+\end{definition}
+
+\begin{definition}\label{d:cont}
+\emph{Psychological continuity} $C$ holds between a person at $t$ and a being at $t'$ if and only if they are linked by a chain of stages each strongly connected with the next.
+\end{definition}
+
+\begin{definition}\label{d:id}
+\emph{Identity} $I$ holds if and only if the being at $t'$ is the person at $t$, by the criterion of PID-01.
+\end{definition}
+
+\begin{definition}\label{d:m}
+\emph{What matters}, $M$, in the relation between a person and a future being is the strength of the prudential reasons the relation gives the person to be concerned about that being's future, normalized so that $M=1$ in ordinary survival over a short interval.
+\end{definition}
+
+\begin{assumption}\label{a:add}
+Approximately, $M = w_I \cdot I + w_C \cdot C + w_K \cdot K$, where $I$ and $C$ take the values $0$ or $1$, $K$ lies between $0$ and $1$, and the weights are non-negative.
+\end{assumption}
+
+\begin{principle}[Fission]\label{p:fission}
+In fission, where $C=1$ and $K$ is close to $1$ but $I=0$, $M \geq 1-\varepsilon$ for a small $\varepsilon$.
+\end{principle}
+
+\begin{principle}[Long chain]\label{p:chain}
+In the relation between a person and her very distant future or past self, where $I=1$ and $C=1$ but $K$ is close to $0$, $M \leq \delta$ for some $\delta < \tfrac{1}{2}$.
+\end{principle}
+
+Principle~\ref{p:fission} is the conclusion of PID-03 that each successor in fission has what matters; the $\varepsilon$ allows for the loss of goods of uniqueness that PID-03-a assigns to identity's small residue. Principle~\ref{p:chain} is supported by Reid's case of the officer who remembers his boyhood flogging as a young man but not as an old general \citep[III.6]{Reid1785}: the general is linked to the boy by continuity and identity, but the boy's prospective concern for the general could rest on almost nothing the general will remember, intend or value. PID-07 concludes in the same spirit that connectedness with one's childhood self is weak, and so are the obligations it grounds. The empirical finding that people discount their future selves in proportion to perceived disconnection \citep{BartelsUrminsky2011} is evidence that concern in fact tracks connectedness; Principle~\ref{p:chain} is the normative claim that it rightly does so to a large degree.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:sum}
+$w_I + w_C + w_K = 1$.
+\end{lemma}
+
+\begin{proof}
+In ordinary survival over a short interval, $I=C=K=1$ and $M=1$ by Definition~\ref{d:m}. Substitute in Assumption~\ref{a:add}.
+\end{proof}
+
+\begin{lemma}\label{l:wi}
+$w_I \leq \varepsilon$, where $\varepsilon$ is the bound of Principle~\ref{p:fission}, taking $K=1$ in fission.
+\end{lemma}
+
+\begin{proof}
+In fission $I=0$ and $C=K=1$, so $M = w_C + w_K = 1 - w_I$ by Lemma~\ref{l:sum}. By Principle~\ref{p:fission}, $1-w_I \geq 1-\varepsilon$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Connectedness carries most of what matters: $w_K \geq 1-\delta > \tfrac12$, and $w_K > w_I + w_C$.
+\end{theorem}
+
+\begin{proof}
+In the long chain $I=C=1$ and $K$ is close to $0$, so $M$ is at least $w_I + w_C$. By Principle~\ref{p:chain}, $w_I + w_C \leq \delta$. By Lemma~\ref{l:sum}, $w_K = 1 - (w_I + w_C) \geq 1-\delta$, which exceeds $\tfrac{1}{2}$ since $\delta < \tfrac12$. Then $w_K > \tfrac12 > \delta \geq w_I + w_C$.
+\end{proof}
+
+\begin{corollary}\label{c:less}
+Identity matters less than commonly assumed: its weight is at most $\varepsilon$, against the common assumption that it carries all of what matters.
+\end{corollary}
+
+The common view assigns $w_I = 1$: what matters is that the future person will be me. Lemma~\ref{l:wi} bounds $w_I$ by the small loss fission involves. The argument also separates connectedness from continuity, which Parfit left undecided: continuity contributes at most $\delta$, since in the long chain it holds fully while what matters has nearly gone. Neither weight is shown to be zero; the conclusion is the comparative one the catalogue states.
+
+The role of Assumption~\ref{a:add} should be made explicit. If the relations interact, for instance if connectedness matters only when continuity also holds, the decomposition fails. But the conclusion survives a weaker monotonicity assumption: adding identity to a relation that already includes connectedness and continuity adds little (from fission), while adding connectedness to a relation that already includes identity and continuity adds most of what matters (from the long chain). Whatever the form of the function, the variation in $M$ that the cases exhibit is driven by connectedness.
+
+\section{Further cases}\label{s:cases}
+
+\paragraph{Teletransportation.} PID-02-a concludes that whether a person survives teletransportation depends on whether the original is destroyed before the replica is activated. The replica's connectedness with the original is the same whatever the timing. On Theorem~\ref{t:main}, what matters in the replica's future is therefore almost the same in the two cases, and the difference of timing, which decides identity, decides little that matters. This removes the air of paradox from PID-02-a's verdict: an extrinsic and temporal fact settles a question whose answer carries only a small weight.
+
+\paragraph{Dementia.} A person with advancing dementia remains, by PID-01, the same person, and her psychology is continuous through gradual change; but her connectedness with her earlier self declines. Theorem~\ref{t:main} implies that her earlier self's prudential reasons concerning her later condition are grounded mainly in what connectedness remains, and that the later person's present interests are not straightforwardly overridden by the earlier person's wishes. This is one consideration in the debate over the authority of advance directives, where \citet{Dworkin1993} defended the precedence of the earlier, critical interests. The present thesis does not settle that debate, since the authority of directives is not only a matter of prudence, but it weakens the argument from identity alone: that the later person is the same person does not by itself transfer the earlier person's authority over her.
+
+\paragraph{Gradual change.} Imagine a series of cases in which a growing proportion of a person's psychology is altered, from none to all. Identity, on most criteria, either holds throughout or fails at some point; connectedness declines smoothly. Concern for the end-points of such a series declines smoothly too, and does not exhibit the sudden drop that identity would predict \citep{Parfit1984}. The shape of our concern across the series is further evidence that connectedness is what it tracks.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Temporal neutrality]
+If connectedness carries most of what matters, a person has weaker reason to care about her distant future than about her near future. But a rational agent is temporally neutral: she gives equal weight to all parts of her life \citep{Sidgwick1907}.
+\end{objection}
+
+\begin{reply}
+The objection draws the right consequence and rejects it on the authority of a principle that presupposes identity is what matters. If prudential concern is grounded in connectedness, then a mild discount for reduced connectedness is not irrational; it is the appropriate response to a weaker ground \citep{Parfit1984}. The consequence is less dramatic than it sounds, because connectedness in an ordinary adult life decays slowly: character, values and long-term projects persist over decades. What Theorem~\ref{t:main} licenses is discounting by connectedness, not by mere distance in time, and it condemns the imprudence of discounting a well-connected future.
+\end{reply}
+
+\begin{objection}[Responsibility]
+Responsibility and desert follow identity: an old person is responsible for what she did decades ago, however little she remembers. A view on which connectedness carries most of what matters cannot explain this \citep{Schechtman1996}.
+\end{objection}
+
+\begin{reply}
+The thesis concerns what matters in survival, the ground of prudential concern; it is not a theory of responsibility. But the reply need not concede much. Our practices already weaken responsibility over long intervals with large psychological change: statutes of limitation, the special treatment of offences committed in childhood, the forgiveness of those who have changed. PID-07 draws the corresponding conclusion for obligations incurred in childhood. Where identity holds and connectedness is strong, the two views agree; where they diverge, our practices side, though not without exception, with connectedness.
+\end{reply}
+
+\begin{objection}[Williams's torture case]
+\citet{Williams1970} described a case in which you are told that your memories will be transferred to another body and that the body you now have will be tortured. Most fear for the body, which suggests that what matters follows the body and so identity, not psychology.
+\end{objection}
+
+\begin{reply}
+Williams showed that the same case, described as an exchange of bodies, elicits the opposite response. The divergence shows that concern in such cases is unstable under redescription, and so not a reliable measure of what grounds it. On the view of PID-05, the organism tortured is the thing you are, and the person psychologically continuous with you is in the other body; the fear for the body is, on that view, fear for the organism. Corollary~\ref{c:less} implies that this fear is not wholly misplaced, since identity carries a small weight, and that the larger part of what you care about in your future goes with the psychology.
+\end{reply}
+
+\begin{objection}[The extreme claim]
+If identity is not what matters, there is no reason to be specially concerned for one's own future at all; one should care for one's future self as for any other connected person.
+\end{objection}
+
+\begin{reply}
+The objection identifies what matters with identity again. On the present view, a person has reason for special concern for those future beings to whom she is strongly connected, and in every ordinary case these are her own future stages and no one else's. The concern is special because the connections are, not because a further fact of identity holds.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The argument does not fix the values of the weights, only bounds on them, and these bounds are no sharper than Principles~\ref{p:fission} and~\ref{p:chain}. It does not decide which psychological connections matter most; PID-08 argues that memory is not necessary for survival, which suggests that the connections of character and value weigh heavily among them. And it does not say that identity matters not at all.
+
+\section{Conclusion}
+
+Identity, continuity and connectedness can be separated by cases. Fission removes identity and leaves almost all of what matters; the long chain keeps identity and continuity and leaves little. Under an approximately additive model, and under the weaker assumption that the variation of what matters across these cases is monotone in each relation, connectedness carries most of what matters in survival, and identity much less than commonly assumed.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bartels and Urminsky(2011)]{BartelsUrminsky2011} Bartels, D.~M., and Urminsky, O. (2011). On intertemporal selfishness: How the perceived instability of identity underlies impatient consumption. \emph{Journal of Consumer Research}, 38(1), 182--198.
+\bibitem[Dworkin(1993)]{Dworkin1993} Dworkin, R. (1993). \emph{Life's Dominion: An Argument about Abortion, Euthanasia, and Individual Freedom}. Alfred A. Knopf.
+\bibitem[Johnston(1997)]{Johnston1997} Johnston, M. (1997). Human concerns without superlative selves. In J. Dancy (ed.), \emph{Reading Parfit}. Blackwell.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Survival and identity. In A.~O. Rorty (ed.), \emph{The Identities of Persons} (pp.~17--40). University of California Press.
+\bibitem[Martin(1998)]{Martin1998} Martin, R. (1998). \emph{Self-Concern: An Experiential Approach to What Matters in Survival}. Cambridge University Press.
+\bibitem[Parfit(1971)]{Parfit1971} Parfit, D. (1971). Personal identity. \emph{The Philosophical Review}, 80(1), 3--27.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Oxford University Press.
+\bibitem[Reid(1785)]{Reid1785} Reid, T. (1785). \emph{Essays on the Intellectual Powers of Man}. Cited by essay and chapter.
+\bibitem[Schechtman(1996)]{Schechtman1996} Schechtman, M. (1996). \emph{The Constitution of Selves}. Cornell University Press.
+\bibitem[Sidgwick(1907)]{Sidgwick1907} Sidgwick, H. (1907). \emph{The Methods of Ethics}, 7th edn. Macmillan.
+\bibitem[Williams(1970)]{Williams1970} Williams, B. (1970). The self and the future. \emph{The Philosophical Review}, 79(2), 161--180.
+\end{thebibliography}
+
+\end{document}

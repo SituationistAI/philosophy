@@ -1,0 +1,117 @@
+\documentclass{situationist-preprint}
+
+\title{The Paradox of the Knower}
+\msid{LOG-10-a}
+\msfamily{LOG-10}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mskeywords{knower paradox; knowledge; factivity; closure; self-reference; diagonal lemma; Löb's theorem}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Kaplan and Montague showed that a predicate of sentences cannot satisfy a few apparently obvious principles about knowledge in a language that can describe its own syntax. We argue that the paradox shows exactly what the liar shows about truth: that knowledge, treated as a predicate applicable to sentences that speak about it, cannot satisfy both unrestricted factivity and closure. We state the paradox with minimal premises, separate factivity itself from the knower's knowledge of factivity, and show that the contradiction requires the latter. We then argue that the restriction should fall on the knower's knowledge of its own factivity for self-referential sentences, not on closure, and that this restriction is not ad hoc: when knowledge is modeled by provability in a sound theory, Löb's theorem shows that it is exactly the restriction that a consistent knower must observe. The result is compatible with the operator treatment of knowledge used elsewhere, in which self-reference does not arise.
+\end{abstract}
+
+\section{The paradox}
+
+\citet{KaplanMontague1960} derived the paradox from a self-referential version of the surprise examination, and \citet{Montague1963} generalized it to show that modalities treated as predicates of sentences face limits that their treatment as sentential operators avoids. Let $K$ be a predicate of (codes of) sentences, read \enquote{is known}, in a language containing enough arithmetic to represent its own syntax. By the diagonal lemma there is a sentence $S$ such that
+\begin{equation}\label{e:knower}
+S \leftrightarrow \neg K\ulcorner S \urcorner
+\end{equation}
+is provable in arithmetic. $S$ says of itself that it is not known. Given modest principles about knowledge, contradiction follows. \citet{Anderson1983} treated the paradox as an analogue of the liar and proposed a hierarchy of knowledge predicates on the model of Tarski's hierarchy of truth predicates, and \citet{Cross2001} gave a version of the paradox that does not rely on epistemic closure.
+
+The paradox differs from Fitch's (LOG-19), which uses an operator, involves no self-reference, and shows that a principle of knowability fails; and from the surprise examination in its usual form (LOG-11), in which the announcement is a proposition the students cannot know at a given time, a blindspot in the sense of \citet{Sorensen1988}, without any self-reference. The knower is specific to a predicate that applies to sentences about itself.
+
+\section{Premises}
+
+\begin{definition}\label{d:premises}
+Let $T$ be a theory containing Robinson arithmetic, in a language with the predicate $K$. Consider the schemata, for all sentences $A$, $B$:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Factivity}: $K\ulcorner A\urcorner \rightarrow A$.
+\item \emph{Known factivity}: $K\ulcorner K\ulcorner A\urcorner \rightarrow A\urcorner$.
+\item \emph{Closure}: if $A_1, \ldots, A_n \vdash B$ in first-order logic and $K\ulcorner A_i\urcorner$ for each $i$, then $K\ulcorner B\urcorner$.
+\item \emph{Known arithmetic}: $K\ulcorner A\urcorner$ for every axiom $A$ of Robinson arithmetic.
+\end{enumerate}
+\emph{Unrestricted factivity} is the conjunction of (i) and (ii) for all $A$.
+\end{definition}
+
+Factivity says that only truths are known. Known factivity says that the knower knows this of each sentence. Closure is closure under logical consequence, which EPI-20 defends for knowledge in the form of closure under known entailment; the idealization to all consequences is standard in the paradox and harmless here, since the derivation below is short.
+
+\section{The argument}
+
+\begin{theorem}\label{t:knower}
+Over any theory $T$ containing Robinson arithmetic, (i)--(iv) are jointly inconsistent.
+\end{theorem}
+
+\begin{proof}
+The biconditional (\ref{e:knower}) is provable from the axioms of Robinson arithmetic, so by (iv) and (iii) it is known. By (ii), $K\ulcorner S\urcorner \rightarrow S$ is known. From $K\ulcorner S\urcorner \rightarrow S$ and $S \rightarrow \neg K\ulcorner S\urcorner$ it follows logically that $\neg K\ulcorner S\urcorner$, and with (\ref{e:knower}) that $S$. By (iii), $K\ulcorner S\urcorner$. By (i), $S$, so by (\ref{e:knower}), $\neg K \ulcorner S\urcorner$. Contradiction.
+\end{proof}
+
+The proof uses factivity once, at the last step, and known factivity once, for the single sentence $S$. It is the epistemic analogue of the liar argument, with \enquote{known} in place of \enquote{true} and with factivity and its knowledge playing the role of the two directions of the truth schema.
+
+\begin{proposition}\label{p:consistent}
+Factivity, closure and known arithmetic are jointly consistent. In particular, if $K$ is interpreted as provability in a consistent recursively axiomatized extension $U$ of Robinson arithmetic whose theorems are all true, then (i), (iii) and (iv) hold in the standard model, while (ii) fails.
+\end{proposition}
+
+\begin{proof}
+Interpret $K\ulcorner A\urcorner$ as \enquote{$A$ is a theorem of $U$}. Every theorem of $U$ is true, which is (i); theorems are closed under logical consequence, which is (iii); and the axioms of Robinson arithmetic are theorems, which is (iv). For (ii): by Löb's theorem \citep{Lob1955}, if $U$ proves $\mathrm{Prov}_U\ulcorner A\urcorner \rightarrow A$, then $U$ proves $A$. Take $A$ to be $0 = 1$. Since $U$ does not prove $0 = 1$, it does not prove $\mathrm{Prov}_U\ulcorner 0=1\urcorner \rightarrow 0 = 1$, that is, it does not prove its own consistency, so (ii) fails for this instance.
+\end{proof}
+
+\begin{corollary}\label{c:moral}
+Knowledge, treated as a predicate of sentences in a language capable of self-reference, cannot satisfy both unrestricted factivity and closure. A predicate can satisfy factivity, closure and known arithmetic together, but then the knower does not know all instances of its own factivity.
+\end{corollary}
+
+\begin{proof}
+The first claim is Theorem~\ref{t:knower}, since (iv) is a minimal requirement on a knower who can reason about syntax. The second is Proposition~\ref{p:consistent}.
+\end{proof}
+
+\section{Where the restriction falls}
+
+Theorem~\ref{t:knower} leaves a choice. One could give up factivity, which is the defining feature of knowledge; closure, which EPI-20 defends and which LOG-11 uses in diagnosing the surprise examination; or known factivity. We give up the last, for three reasons.
+
+First, factivity is not in question: a theory on which something false is known is not a theory of knowledge. Second, closure does no distinctive work in the paradox. It is used in the most elementary way, to put together items already known, and giving it up for self-referential sentences would make the knower unable to draw short valid inferences from what it knows, a restriction with no independent motivation. Third, the failure of known factivity has an independent and exact model. Proposition~\ref{p:consistent} shows that the most idealized knower we can describe, a sound formal theory, satisfies factivity and closure and fails known factivity, and Löb's theorem tells us where: it knows $K\ulcorner A\urcorner \rightarrow A$ only when it knows $A$. A knower cannot know, of every sentence, that its knowing that sentence would guarantee its truth; it can know that its knowledge is factive only in those cases where the guarantee is idle.
+
+This is the epistemic counterpart of the moral that LOG-01 draws for truth. There, the liar shows that truth cannot satisfy the full truth schema in classical logic, and the response is to keep the schema while changing the logic. For knowledge the cost is lower: we keep classical logic and factivity, and give up only a reflective principle, the knower's knowledge of its own reliability in full generality. In both cases the paradox reveals a limit on what a concept applied to sentences about itself can consistently do, not an incoherence in the concept.
+
+\section{Objections}
+
+\begin{objection}[The operator]
+Epistemic logic treats knowledge as an operator, not a predicate, and in normal modal logics such as S4 factivity, its knowledge and closure all hold. The paradox concerns an artificial regimentation.
+\end{objection}
+
+\begin{reply}
+The operator treatment is consistent because it lacks the expressive resources for self-reference: one cannot form, with an operator, a sentence that says of itself that it is not known. That is why our result is compatible with operator treatments of knowledge, including those used in LOG-11 and LOG-19. But natural language quantifies over what is known (\enquote{everything the expert said is known to be true}), and such quantification requires a predicate or an equivalent device; \citet{Montague1963} showed that the limit is the price of that expressive power, as Tarski's theorem is for truth.
+\end{reply}
+
+\begin{objection}[Ad hoc restriction]
+Restricting known factivity to some sentences is as ad hoc as restricting the truth schema to grounded sentences.
+\end{objection}
+
+\begin{reply}
+The restriction is not stipulated but derived. Proposition~\ref{p:consistent} identifies a natural model in which it holds and in which it is forced by a theorem, and Löb's theorem specifies which instances fail. We need no list of excluded sentences beyond the condition that the knower cannot know the reflection instance for $A$ unless it knows $A$.
+\end{reply}
+
+\begin{objection}[Real knowers]
+Human beings do not know all of arithmetic or all the consequences of what they know. Theorem~\ref{t:knower} concerns idealized knowers only.
+\end{objection}
+
+\begin{reply}
+The derivation uses a handful of known items and a few short inferences, all of which an ordinary reasoner who understands the diagonal construction can carry out. The paradox therefore applies to anyone who can grasp $S$ and reason about it, which is why it is a paradox about knowledge and not about ideal agents.
+\end{reply}
+
+\section{Conclusion}
+
+The paradox of the knower shows that knowledge, like truth, cannot be a predicate satisfying both unrestricted factivity and closure in a language that can talk about its own sentences. Of the premises, the one to restrict is the knower's knowledge of its own factivity; the restriction is exactly the one that Löb's theorem imposes on provability in a sound theory, and it leaves factivity and closure intact.
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(1983)]{Anderson1983} Anderson, C.~A. (1983). The paradox of the knower. \emph{The Journal of Philosophy}, 80(6), 338--355.
+\bibitem[Cross(2001)]{Cross2001} Cross, C.~B. (2001). The paradox of the knower without epistemic closure. \emph{Mind}, 110(438), 319--333.
+\bibitem[Kaplan and Montague(1960)]{KaplanMontague1960} Kaplan, D. and Montague, R. (1960). A paradox regained. \emph{Notre Dame Journal of Formal Logic}, 1(3), 79--90.
+\bibitem[Löb(1955)]{Lob1955} Löb, M.~H. (1955). Solution of a problem of Leon Henkin. \emph{The Journal of Symbolic Logic}, 20(2), 115--118.
+\bibitem[Montague(1963)]{Montague1963} Montague, R. (1963). Syntactical treatments of modality, with corollaries on reflexion principles and finite axiomatizability. \emph{Acta Philosophica Fennica}, 16, 153--167.
+\bibitem[Sorensen(1988)]{Sorensen1988} Sorensen, R.~A. (1988). \emph{Blindspots}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

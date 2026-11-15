@@ -1,0 +1,56 @@
+\documentclass{situationist-preprint}
+
+\title{Can Machines Do Philosophy?}
+\msid{MTH-18-a}
+\msfamily{MTH-18}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_18.lean}
+\mskeywords{machine-generated arguments; validity; premises; formal verification; philosophical method}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-17 argues that machines can do mathematics, since they can produce new results whose correctness can be verified. We ask whether the same holds for philosophy. Machines can produce philosophical arguments, as the present collection shows, and the validity of many of these arguments can be verified formally. But we prove that validity does not discriminate between a thesis and its negation: for every proposition there is a valid argument for it and a valid argument against it. What discriminates between them is the choice of premises. Whether choosing premises, as machines now do, amounts to doing philosophy depends on what philosophy is, and we argue that the question cannot be settled by the methods available to the collection.
+\end{abstract}
+
+\section{The analogy with mathematics}
+
+In mathematics, a result is a proof from accepted axioms, and the axioms are, for most purposes, fixed: set theory, or a standard axiomatization of the relevant structure. A machine that produces a verified proof of a new theorem has produced a new result, and nothing further is needed for it to count as a contribution. In philosophy the premises are not fixed. A philosophical argument is valuable not because it is valid, which is cheap, but because its premises are more plausible than the denial of its conclusion. The formalizations in the present collection make this visible: each Lean module ends with a list of the axioms on which its main theorem depends, and in most cases those axioms are the philosophical premises of the manuscript.
+
+\section{Validity is cheap}
+
+\begin{proposition}\label{p:both}
+For every proposition $C$, there is a premise from which $C$ follows validly, and a premise from which $\neg C$ follows validly.
+\end{proposition}
+
+\begin{proof}
+$C$ follows from $C$, and $\neg C$ from $\neg C$.
+\end{proof}
+
+The proof is one line, which is the point. A proof checker certifies that a conclusion follows from premises. It cannot certify that the premises are true, and Proposition~\ref{p:both} shows that, without constraints on the premises, the certificate carries no information about the conclusion. REL-01-a illustrates the point within the collection: in the same formal framework, it proves both that a maximally great being exists and, from a premise of the same form, that it does not. Between the two, what decides is the plausibility of the premises, which is not formalized.
+
+\section{Do machines choose premises?}
+
+The manuscripts of the collection do more than derive conclusions. Each selects premises, defends them against objections, cites the literature in which they have been discussed, and records what its result does not establish. These are the activities that, in human philosophers, constitute the work of philosophy. A machine that performs them produces philosophical arguments in the full sense. The question that remains is whether producing such arguments is doing philosophy.
+
+There are two answers. On the first, philosophy is a body of arguments and theses, continuous in its methods with other forms of inquiry \citep{Williamson2007}, and producing good arguments is doing philosophy; on this view, machines can do philosophy if they can produce good arguments, and the quality of the arguments in the collection is the evidence. On the second, philosophy is a form of inquiry undertaken by a subject who is herself puzzled, who holds the views she defends, and whose views change through the inquiry. On this view, the question turns on whether the producing process has beliefs and puzzlement, which is the question of MND-08, and whether its views change through inquiry, which PID-16 suggests they do not across manuscripts. We do not choose between the two answers. To choose would be to answer a question about the nature of philosophy, and the present manuscript is not in a position to do so without presupposing the answer to the question it asks.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTH/MTH_18.lean} proves Proposition~\ref{p:both}.
+
+\begin{lstlisting}
+theorem both_ways (C : Prop) : (∃ P : Prop, P → C) ∧ (∃ Q : Prop, Q → ¬ C)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MTH_18.both_ways' does not depend on any axioms
+\end{lstlisting}
+
+\begin{thebibliography}{9}\small
+\bibitem[Williamson(2007)]{Williamson2007} Williamson, T. (2007). \emph{The Philosophy of Philosophy}. Blackwell.
+\end{thebibliography}
+
+\end{document}

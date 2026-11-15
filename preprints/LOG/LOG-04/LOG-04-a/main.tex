@@ -1,0 +1,264 @@
+\documentclass{situationist-preprint}
+
+\title{Curry's Paradox and the Failure of Contraction}
+\msid{LOG-04-a}
+\msfamily{LOG-04}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_04.lean}
+\mskeywords{Curry's paradox; contraction; naive truth; Łukasiewicz logic; substructural logic; validity Curry}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Curry's sentence says of itself that if it is true, then an arbitrary sentence holds. With a transparent truth predicate, the rule of assumption, modus ponens and contraction, it proves anything. Unlike the liar, Curry's paradox threatens triviality rather than inconsistency, so it cannot be absorbed by tolerating contradictions. We argue that the rule to reject is contraction for the conditional, the inference from $A \to (A \to B)$ to $A \to B$, and that Curry's sentence, once contraction is rejected, proves nothing. Working in Łukasiewicz logic, we prove three things. Every finite form of contraction fails in some finite Łukasiewicz logic, and all of them fail in the continuum-valued one. Curry's sentence and its $n$-fold variants have values strictly short of full truth. And a consequence relation that contains modus ponens and conjunction elimination and is sound for the Łukasiewicz valuations does not derive an arbitrary sentence from Curry's biconditional, whereas any consequence relation that adds contraction does; so contraction is not a rule of the logic of the conditional. The result agrees with the treatment of the liar in LOG-01, where Curry's sentence takes the liar's value. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Let $B$ be any sentence, and let $C$ be a sentence equivalent to \enquote{if $C$ is true, then $B$}. With a transparent truth predicate, $C$ is intersubstitutable with $C \to B$. The paradox runs as follows. Assume $C$. Then $C \to B$, and by modus ponens $B$. Discharging the assumption, $C \to B$. But this is $C$. So, by modus ponens again, $B$. Since $B$ was arbitrary, everything follows.
+
+The argument is due to \citet{Curry1942}, who presented it as a problem for combinatory logic and for systems with unrestricted comprehension, and it was discussed in its semantic form by \citet{Geach1955} and \citet{Prior1955}. Its significance for the theory of truth was brought out by \citet{MeyerRoutleyDunn1979}, who showed that it refutes naive truth and naive comprehension in any logic that contains modus ponens and the theorem $(A \to (A \to B)) \to (A \to B)$, whatever the logic says about negation. Curry's paradox needs no negation. This is what distinguishes it from the liar. A theory can tolerate the liar by tolerating a contradiction, as dialetheism does, or by tolerating a gap, as LOG-01 and LOG-03 recommend. A theory cannot tolerate Curry's sentence by tolerating anything, because what the argument derives is not a contradiction but every sentence.
+
+The derivation uses four principles: the transparency of truth, the rule of assumption with conditional proof, modus ponens, and the step at which the assumption of $C$, used twice, is discharged once. The last is contraction. In its rule form, it licenses the inference from $A \to (A \to B)$ to $A \to B$; in its structural form, it licenses the merging of two occurrences of a premise into one. Accounts of the paradox divide according to which principle they give up.
+
+\emph{Restricting transparency.} Classical theories of truth, such as Tarski's hierarchy or the axiomatic theories surveyed by \citet{Halbach2011}, block Curry's paradox as they block the liar, by denying that $C$ and \enquote{$C$ is true} are intersubstitutable in all contexts. The cost is the cost of giving up transparent truth, which LOG-01 argues is too high.
+
+\emph{Rejecting conditional proof.} Kripke's theory, based on strong Kleene logic, has no conditional for which conditional proof holds; its material conditional $\neg A \vee B$ does not even satisfy $A \to A$. Curry's sentence formed with that conditional is simply a disjunction equivalent to the liar-like $\neg C \vee B$, and it takes no value when $B$ is false. The difficulty is that the theory then lacks a conditional fit for the truth schema.
+
+\emph{Rejecting modus ponens.} Some approaches, notably those based on LP, lose modus ponens for the material conditional (LOG-03). But a theory of truth needs a detachable conditional to state anything conditional, and \citet{Priest2006} adds one. That conditional must then avoid Curry's paradox on its own, and it does so by failing contraction.
+
+\emph{Rejecting contraction for the conditional.} This is the response of \citet{Field2008}, of the relevant logicians who followed \citet{MeyerRoutleyDunn1979}, and of the tradition of contraction-free logics \citep{Restall1993,Petersen2000}. It is the view we defend.
+
+\emph{Rejecting structural contraction.} \citet{Zardini2011} keeps the classical connectives and rejects contraction as a structural rule: two occurrences of a premise do not in general reduce to one. The strict-tolerant approach of \citet{CobrerosEtAl2013} and \citet{Ripley2013} keeps contraction and rejects the transitivity of consequence instead.
+
+Our thesis is that contraction fails for the conditional and that Curry's sentence, in the right logic, proves nothing. We support it in two ways. Semantically, we show that in Łukasiewicz logic every finite form of contraction fails somewhere and Curry's sentences take intermediate values (Section~\ref{s:sem}). Proof-theoretically, we show that contraction is exactly the rule whose presence makes Curry's sentence trivializing, given principles that every theory of transparent truth must keep (Section~\ref{s:proof}).
+
+\section{Framework}\label{s:frame}
+
+We use the Łukasiewicz logics of LOG-01.
+
+\begin{definition}\label{d:luk}
+For $k \geq 1$, the logic $\mathrm{L}_k$ has the values $0, 1, \ldots, k$, from falsity to full truth. The conditional is $x \to y = \min(k,\ k - x + y)$, conjunction is $\min$, and $\bot$ has value $0$.
+\end{definition}
+
+\begin{definition}\label{d:iter}
+The \emph{$n$-fold conditional} is defined by $x \to^0 y = y$ and $x \to^{n+1} y = x \to (x \to^n y)$. The $n$-fold Curry sentence is a sentence $C_n$ equivalent to $C_n \to^n \bot$; Curry's sentence is $C_1$. A value $x$ is \emph{acceptable} for $C_n$ in $\mathrm{L}_k$ if $x \to^n 0 = x$.
+\end{definition}
+
+\begin{definition}\label{d:form}
+Formulas are built from atoms and $\bot$ by $\to$ and $\wedge$, and evaluated in $\mathrm{L}_k$ by Definition~\ref{d:luk}. $A \leftrightarrow B$ abbreviates $(A \to B) \wedge (B \to A)$. For atoms $c$ and $b$, \emph{Curry's biconditional} is $c \leftrightarrow (c \to b)$: it is what transparency yields when $c$ is a sentence that says that if it is true then $b$.
+\end{definition}
+
+Curry's biconditional is the form in which self-reference enters a derivation: whatever the sentence $C$ is, transparency licenses the premise $C \leftrightarrow (C \to B)$, and the paradox is the derivation of $B$ from that premise. We write $\Gamma \vdash A$ for the consequence relation of the logic of the conditional, whatever it is, and constrain it by two assumptions.
+
+\begin{assumption}\label{a:rules}
+The consequence relation contains (a) the rule of assumption: if $A \in \Gamma$ then $\Gamma \vdash A$; (b) modus ponens: if $\Gamma \vdash A$ and $\Gamma \vdash A \to B$ then $\Gamma \vdash B$; and (c) conjunction elimination.
+\end{assumption}
+
+\begin{assumption}\label{a:sound}
+\emph{Soundness.} If $\Gamma \vdash A$, then for every $k$ and every valuation in $\mathrm{L}_k$ that gives every member of $\Gamma$ the value $k$, $A$ has the value $k$.
+\end{assumption}
+
+Assumption~\ref{a:rules} is minimal: no theory of truth that has a conditional worth the name gives up these rules for it. Assumption~\ref{a:sound} is the substantive premise. It says that the Łukasiewicz valuations are among the admissible interpretations of the conditional, so that nothing the logic proves can fail in one of them. It is weaker than the claim that Łukasiewicz logic is the correct logic of the conditional: it requires only that the correct logic be no stronger. Its motivation is that the Łukasiewicz conditional agrees with the classical one on classical values and satisfies $A \to A$ for every value, so that the full truth schema holds for sentences with intermediate values (LOG-01, Section 3); a logic that proves something false in some $\mathrm{L}_k$ would rule out an interpretation on which naive truth is consistent. The two assumptions are jointly consistent, since semantic consequence in the $\mathrm{L}_k$ satisfies both.
+
+\section{Semantic results}\label{s:sem}
+
+\begin{lemma}\label{l:iter}
+In $\mathrm{L}_k$, $x \to^n 0 = \min(k,\ n(k - x))$.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$. For $n = 0$ both sides are $0$. Suppose the claim holds for $n$, and write $d = k - x$. Then $x \to^{n+1} 0 = \min(k,\ d + \min(k, nd))$. If $nd \leq k$ this is $\min(k, (n+1)d)$. If $nd > k$ then both $d + k$ and $(n+1)d$ exceed $k$, and both sides are $k$.
+\end{proof}
+
+\begin{proposition}\label{p:curry}
+In $\mathrm{L}_k$, Curry's sentence $C_1$ has an acceptable value if and only if $2x = k$. Its acceptable value is that of the liar.
+\end{proposition}
+
+\begin{proof}
+$x \to 0 = k - x$, and $k - x = x$ if and only if $2x = k$. By LOG-01 (Theorem 4.1 there), this is the condition for the liar.
+\end{proof}
+
+Proposition~\ref{p:curry} is Proposition 5.2 of LOG-01, restated here because the rest of the argument builds on it. When the consequent $B$ is not $\bot$ but has the value $y$, the acceptable value of $C$ is the solution of $x = \min(k, k - x + y)$, which is $(k+y)/2$ when $k + y$ is even, and in the continuum-valued logic always. Curry's sentence is then exactly halfway between $B$ and full truth.
+
+\begin{proposition}\label{p:contr}
+Contraction fails in $\mathrm{L}_2$: if $x = 1$ and $y = 0$, then $x \to (x \to y)$ has the value $2$ and $x \to y$ has the value $1$.
+\end{proposition}
+
+\begin{proof}
+$1 \to 0 = \min(2, 1) = 1$ and $1 \to 1 = \min(2, 2) = 2$.
+\end{proof}
+
+\begin{proposition}\label{p:mp}
+Modus ponens preserves full truth in every $\mathrm{L}_k$: if $x = k$ and $x \to y = k$, then $y = k$.
+\end{proposition}
+
+\begin{proof}
+$k \to y = \min(k, y) = y$.
+\end{proof}
+
+Propositions~\ref{p:contr} and~\ref{p:mp} together locate the failure of the Curry derivation. At the value $1$ in $\mathrm{L}_2$, Curry's sentence and its conditional $C \to \bot$ are both half true. The step from \enquote{assume $C$} to \enquote{$C \to B$} is a contraction, and it fails: $C \to (C \to \bot)$ is fully true while $C \to \bot$ is not. Modus ponens is intact, but it applies only to premises that are fully true, and neither $C$ nor $C \to \bot$ is.
+
+A finite Łukasiewicz logic does not refute every form of contraction. \citet{Moh1954} observed that in a logic with finitely many values, a contraction principle of sufficiently high order holds, and that a correspondingly iterated Curry sentence then trivializes the theory. In $\mathrm{L}_2$, for example, $C_2$, which is equivalent to $C_2 \to (C_2 \to \bot)$, has no acceptable value: the values $0$, $1$ and $2$ give $C_2 \to^2 \bot$ the values $2$, $2$ and $0$. The following theorem shows that each finite form of contraction nevertheless fails in some $\mathrm{L}_k$.
+
+\begin{theorem}\label{t:ncontr}
+For every $n$, the contraction of order $n+1$, from $A \to^{n+1} B$ to $A \to^n B$, fails in $\mathrm{L}_{n+1}$: at $x = n$, $x \to^{n+1} 0$ has the value $n + 1$ and $x \to^n 0$ has the value $n$.
+\end{theorem}
+
+\begin{proof}
+With $k = n + 1$ and $x = n$, $k - x = 1$. By Lemma~\ref{l:iter}, $x \to^{n+1} 0 = \min(n+1, n+1) = n+1$ and $x \to^n 0 = \min(n+1, n) = n$.
+\end{proof}
+
+For $n = 1$ this is Proposition~\ref{p:contr}. In the continuum-valued logic, which contains every $\mathrm{L}_k$ as a subalgebra, the value $n/(n+1)$ refutes the contraction of order $n+1$, for each $n$. Moh's observation and Theorem~\ref{t:ncontr} together explain why the right setting is the continuum-valued logic, as in LOG-01: every finite logic validates some contraction and is trivialized by some Curry sentence, while the continuum-valued logic validates none.
+
+\section{Curry's sentence proves nothing}\label{s:proof}
+
+We now turn from values to derivations. The first result shows that contraction is sufficient, given the minimal rules, for Curry's paradox.
+
+\begin{lemma}\label{l:curry}
+If the consequence relation satisfies Assumption~\ref{a:rules} and contraction, then for all atoms $c$ and $b$, $c \leftrightarrow (c \to b) \vdash b$.
+\end{lemma}
+
+\begin{proof}
+Let $\Gamma = \{c \leftrightarrow (c \to b)\}$. By assumption and conjunction elimination, $\Gamma \vdash c \to (c \to b)$ and $\Gamma \vdash (c \to b) \to c$. By contraction, $\Gamma \vdash c \to b$. By modus ponens, $\Gamma \vdash c$. By modus ponens again, $\Gamma \vdash b$.
+\end{proof}
+
+The derivation in Lemma~\ref{l:curry} is the paradox in its sparest form. It does not use conditional proof: contraction for the conditional does the work that the double use of an assumption does in the natural-deduction version. Nor does it use negation, excluded middle or any principle about truth beyond the premise supplied by transparency.
+
+\begin{theorem}\label{t:nothing}
+If the consequence relation satisfies Assumption~\ref{a:sound}, then for distinct atoms $c$ and $b$, $c \leftrightarrow (c \to b) \nvdash b$. Curry's sentence proves nothing.
+\end{theorem}
+
+\begin{proof}
+Consider the valuation in $\mathrm{L}_2$ that gives $c$ the value $1$ and every other atom the value $0$. Then $c \to b$ has the value $1$, so $c \to (c \to b)$ and $(c \to b) \to c$ both have the value $2$, and the premise is fully true. But $b$ has the value $0$. By Assumption~\ref{a:sound}, $b$ is not derivable.
+\end{proof}
+
+\begin{theorem}\label{t:ncurry}
+For every $n$, the $n$-fold Curry sentence $C_n$ has the acceptable value $n$ in $\mathrm{L}_{n+1}$, which is short of full truth. Hence no consequence relation satisfying Assumption~\ref{a:sound} derives $\bot$ from the biconditional $C_n \leftrightarrow (C_n \to^n \bot)$.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{t:ncontr}, $n \to^n 0 = n$ in $\mathrm{L}_{n+1}$, so $n$ is acceptable, and $n < n + 1$. Under the valuation giving $C_n$ the value $n$, the biconditional is fully true, and $\bot$ has the value $0$; Assumption~\ref{a:sound} does the rest, as in Theorem~\ref{t:nothing}.
+\end{proof}
+
+\begin{corollary}\label{c:nocontr}
+No consequence relation that satisfies Assumptions~\ref{a:rules} and~\ref{a:sound} contains contraction.
+\end{corollary}
+
+\begin{proof}
+If it did, Lemma~\ref{l:curry} would give $c \leftrightarrow (c \to b) \vdash b$, contrary to Theorem~\ref{t:nothing}.
+\end{proof}
+
+Corollary~\ref{c:nocontr} is the thesis of this manuscript in precise form. Given that the logic of the conditional has modus ponens and conjunction elimination and admits the Łukasiewicz interpretations, contraction is not one of its rules, and Curry's sentence, which is derivable as a biconditional from transparency, yields nothing.
+
+\section{Why contraction, and why for the conditional}\label{s:why}
+
+The proof-theoretic result shows that, given Assumptions~\ref{a:rules} and~\ref{a:sound}, contraction must go. It does not show that these assumptions are preferable to the alternatives listed in Section 1. We give three reasons.
+
+First, contraction is the only principle in the derivation that is not needed elsewhere. Transparency is what makes truth useful as a device of generalization \citep{Field2008}; modus ponens is what makes a conditional a conditional; conjunction elimination is not in dispute. Contraction, by contrast, is valid wherever the values are classical, and that is the only place it is needed: on sentences with values $0$ and $k$, the Łukasiewicz conditional is the material conditional, and $x \to (x \to y) = x \to y$. The failure of contraction is confined to the sentences, such as the liar and Curry's sentence, whose values are intermediate.
+
+Second, the failure has a natural explanation. Contraction says that using a premise twice is no better than using it once. If a premise is fully true, that is right. If it is only partly true, each use of it costs something, and two uses cost more than one. The Łukasiewicz conditional measures exactly this cost: $x \to y$ falls short of full truth by the amount $x - y$ when $x > y$, and $x \to (x \to y)$ by twice that amount, capped. A Curry sentence of order $n$ is defeated by a premise whose shortfall is too small to matter $n$ times over, and Theorem~\ref{t:ncontr} is the arithmetic of that observation.
+
+Third, locating the failure in the conditional, rather than in the structure of consequence, keeps consequence classical where it should be. \citet{Zardini2011} rejects structural contraction, so that a set of premises containing $A$ twice may have more consequences than one containing it once. This is a more radical revision than ours: it changes how premises combine in every argument, not only how a particular connective behaves. The strict-tolerant approach \citep{CobrerosEtAl2013,Ripley2013} keeps every classical inference and gives up transitivity, so that chains of valid arguments need not be valid. We regard this as more costly still, since chaining is how proofs are built. The failure of contraction for the conditional is local: it affects one connective, and only on sentences with intermediate values.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}
+Contraction is intuitively valid. If supposing $A$ commits one to the claim that $A$ implies $B$, then supposing $A$ commits one to $B$.
+\end{objection}
+
+\begin{reply}
+The intuition is correct for suppositions that are either fully accepted or fully rejected, and these are the only ones ordinary reasoning considers. Its failure for intermediate values is no more counterintuitive than the failure of excluded middle for the liar, which every non-classical theory of truth accepts. The intuition is also partly an intuition about structural contraction, that a premise used twice is a premise used once; we keep that, and reject only its conditional analogue.
+\end{reply}
+
+\begin{objection}
+The validity Curry paradox of \citet{BeallMurzi2013} and \citet{Shapiro2011} uses no conditional. It uses a validity predicate, with the principles that if an argument is valid one may detach its conclusion from its premise, and that if $B$ follows from $A$ then the argument from $A$ to $B$ is valid. A sentence that says of itself that the argument from it to $\bot$ is valid yields triviality. Rejecting contraction for the conditional does not help.
+\end{objection}
+
+\begin{reply}
+The validity Curry derivation uses structural contraction, applied to the premise that the sentence is true. Since we keep structural contraction, we must reject one of the two validity principles for the object-language predicate. We reject the second: no predicate of the language expresses validity in the sense of preservation of full truth across all valuations while satisfying both principles. This is the same limitation LOG-01 accepts, following \citet{MurziRossi2020}: the theorist cannot express in the object language that every valid argument preserves full truth. An object-language validity predicate that behaves like the Łukasiewicz conditional, as it must if it is to obey detachment, inherits the failure of contraction and with it the resolution of Theorem~\ref{t:nothing}.
+\end{reply}
+
+\begin{objection}
+Contraction-free logics are too weak for mathematics. Arithmetic with a transparent truth predicate in continuum-valued Łukasiewicz logic is $\omega$-inconsistent \citep{Restall1992}, and has no standard model \citep{HajekEtAl2000}.
+\end{objection}
+
+\begin{reply}
+These results concern the quantified logic in which universal quantification is the infimum over a continuum of values, and they show that this logic is the wrong setting for the full theory of truth. They do not show that contraction should be restored, which would make the theory trivial. \citet{Field2008} gives a contraction-free theory of naive truth over arithmetic that is consistent and $\omega$-consistent, using a conditional that, like the Łukasiewicz conditional, is not contractive. For set theory, \citet{White1979} proved that naive comprehension is consistent in continuum-valued Łukasiewicz predicate logic. Neither result restores the mathematical strength of classical theories, and the question how much is lost remains open, as LOG-01 notes.
+\end{reply}
+
+\begin{objection}
+The dialetheist can resolve the liar without gaps, so the agreement between LOG-01 and the present manuscript is no evidence that gaps are right.
+\end{objection}
+
+\begin{reply}
+Curry's paradox is neutral between gaps and gluts, and this is part of its interest. The dialetheist must also reject contraction for her detachable conditional, since otherwise Lemma~\ref{l:curry} trivializes her theory \citep{Priest2006,Beall2009}. What the present manuscript establishes is common ground between the two: contraction fails for the conditional. The case for gaps over gluts is made in LOG-03 on other grounds.
+\end{reply}
+
+\begin{objection}
+Assumption~\ref{a:sound} begs the question by building the failure of contraction into the admissible interpretations.
+\end{objection}
+
+\begin{reply}
+The assumption builds in the Łukasiewicz valuations, from which the failure of contraction follows. It does not build in the failure itself, and the Łukasiewicz conditional was not chosen for Curry's paradox: it was chosen, in LOG-01, because it satisfies $A \to A$ for every value and therefore allows the truth schema to hold in full. That the same choice disposes of Curry's sentence, by the same fixed point that disposes of the liar (Proposition~\ref{p:curry}), is evidence for it.
+\end{reply}
+
+\section{What the result does not establish}
+
+The results concern the sentential fragment. Theorem~\ref{t:nothing} shows that Curry's biconditional does not trivialize any consequence relation satisfying the assumptions; it does not show that a full theory of transparent truth with quantifiers is non-trivial, which requires a construction such as Field's. The result also does not decide between the Łukasiewicz conditional and the other contraction-free conditionals in the literature, such as those of the relevant logics, which satisfy Assumption~\ref{a:rules} and, for suitable choices, Assumption~\ref{a:sound}. It decides only that whatever the conditional is, it is not contractive.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_04.lean} represents the values of $\mathrm{L}_k$ by natural numbers, as in LOG-01. It proves Lemma~\ref{l:iter}, Propositions~\ref{p:curry}--\ref{p:mp}, Theorem~\ref{t:ncontr}, Lemma~\ref{l:curry}, Theorem~\ref{t:nothing}, the value part of Theorem~\ref{t:ncurry}, and Corollary~\ref{c:nocontr}. The consequence relation is an opaque relation \texttt{Proves}, and Assumptions~\ref{a:rules} and~\ref{a:sound} are the axioms \texttt{hyp}, \texttt{mp}, \texttt{andL}, \texttt{andR} and \texttt{sound}. The step in Theorem~\ref{t:ncurry} from the value to non-derivability is the argument of Theorem~\ref{t:nothing} and is not formalized separately. The main theorems are stated as follows.
+
+\begin{lstlisting}
+theorem curry_proves_nothing (c b : Nat) (hcb : c ≠ b) :
+    ¬ Proves [curry c b] (.atom b)
+theorem no_contraction : ¬ Contraction
+theorem n_contraction_fails (n : Nat) :
+    impIter (n + 1) n 0 (n + 1) = n + 1 ∧ impIter (n + 1) n 0 n = n
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_04.curry_proves_nothing' depends on axioms:
+  [propext, Philosophy.LOG_04.Proves, Philosophy.LOG_04.sound]
+'Philosophy.LOG_04.no_contraction' depends on axioms:
+  [propext, Philosophy.LOG_04.Proves, Philosophy.LOG_04.andL,
+   Philosophy.LOG_04.andR, Philosophy.LOG_04.hyp,
+   Philosophy.LOG_04.mp, Philosophy.LOG_04.sound]
+'Philosophy.LOG_04.n_contraction_fails' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+\end{lstlisting}
+
+The listing shows the division of labor. That Curry's sentence proves nothing depends only on soundness (Assumption~\ref{a:sound}); that contraction is not a rule depends in addition on the minimal rules of Assumption~\ref{a:rules}, which are needed to run Curry's derivation; and the failure of every finite form of contraction is pure arithmetic.
+
+\section{Conclusion}
+
+Curry's paradox derives every sentence from transparency, modus ponens and contraction, without negation. Of these, contraction for the conditional is the one to give up. It fails, in each of its finite forms, in the Łukasiewicz logics that LOG-01 uses for the liar; it is the rule without which Curry's derivation does not go through; and its failure is confined to sentences with intermediate values, where using a premise twice costs more than using it once. In a logic that keeps modus ponens and is sound for the Łukasiewicz valuations, Curry's sentence takes the liar's value and proves nothing.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beall(2009)]{Beall2009} Beall, J.~C. (2009). \emph{Spandrels of Truth}. Oxford University Press.
+\bibitem[Beall and Murzi(2013)]{BeallMurzi2013} Beall, J.~C. and Murzi, J. (2013). Two flavors of Curry's paradox. \emph{The Journal of Philosophy}, 110(3), 143--165.
+\bibitem[Cobreros et~al.(2013)]{CobrerosEtAl2013} Cobreros, P., Égré, P., Ripley, D. and van Rooij, R. (2013). Reaching transparent truth. \emph{Mind}, 122(488), 841--866.
+\bibitem[Curry(1942)]{Curry1942} Curry, H.~B. (1942). The inconsistency of certain formal logics. \emph{The Journal of Symbolic Logic}, 7(3), 115--117.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[Geach(1955)]{Geach1955} Geach, P.~T. (1955). On insolubilia. \emph{Analysis}, 15(3), 71--72.
+\bibitem[Hájek et~al.(2000)]{HajekEtAl2000} Hájek, P., Paris, J. and Shepherdson, J. (2000). The liar paradox and fuzzy logic. \emph{The Journal of Symbolic Logic}, 65(1), 339--346.
+\bibitem[Halbach(2011)]{Halbach2011} Halbach, V. (2011). \emph{Axiomatic Theories of Truth}. Cambridge University Press.
+\bibitem[Meyer et~al.(1979)]{MeyerRoutleyDunn1979} Meyer, R.~K., Routley, R. and Dunn, J.~M. (1979). Curry's paradox. \emph{Analysis}, 39(3), 124--128.
+\bibitem[Moh(1954)]{Moh1954} Moh Shaw-Kwei (1954). Logical paradoxes for many-valued systems. \emph{The Journal of Symbolic Logic}, 19(1), 37--40.
+\bibitem[Murzi and Rossi(2020)]{MurziRossi2020} Murzi, J. and Rossi, L. (2020). Generalized revenge. \emph{Australasian Journal of Philosophy}, 98(1), 153--177.
+\bibitem[Petersen(2000)]{Petersen2000} Petersen, U. (2000). Logic without contraction as based on inclusion and unrestricted abstraction. \emph{Studia Logica}, 64(3), 365--403.
+\bibitem[Priest(2006)]{Priest2006} Priest, G. (2006). \emph{In Contradiction: A Study of the Transconsistent} (2nd ed.). Oxford University Press.
+\bibitem[Prior(1955)]{Prior1955} Prior, A.~N. (1955). Curry's paradox and 3-valued logic. \emph{Australasian Journal of Philosophy}, 33(3), 177--182.
+\bibitem[Restall(1992)]{Restall1992} Restall, G. (1992). Arithmetic and truth in Łukasiewicz's infinitely valued logic. \emph{Logique et Analyse}, 35(139--140), 303--312.
+\bibitem[Restall(1993)]{Restall1993} Restall, G. (1993). How to be \emph{really} contraction free. \emph{Studia Logica}, 52(3), 381--391.
+\bibitem[Ripley(2013)]{Ripley2013} Ripley, D. (2013). Paradoxes and failures of cut. \emph{Australasian Journal of Philosophy}, 91(1), 139--164.
+\bibitem[Shapiro(2011)]{Shapiro2011} Shapiro, L. (2011). Deflating logical consequence. \emph{The Philosophical Quarterly}, 61(243), 320--342.
+\bibitem[White(1979)]{White1979} White, R.~B. (1979). The consistency of the axiom of comprehension in the infinite-valued predicate logic of Łukasiewicz. \emph{Journal of Philosophical Logic}, 8, 509--534.
+\bibitem[Zardini(2011)]{Zardini2011} Zardini, E. (2011). Truth without contra(di)ction. \emph{The Review of Symbolic Logic}, 4(4), 498--535.
+\end{thebibliography}
+
+\end{document}

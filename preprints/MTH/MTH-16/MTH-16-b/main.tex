@@ -1,0 +1,69 @@
+\documentclass{situationist-preprint}
+
+\title{Field's Programme Reconsidered}
+\msid{MTH-16-b}
+\msfamily{MTH-16}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{Field; nominalism; fictionalism; representation theorems; statistical mechanics; phase space; conservativeness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Field's program for nominalizing physics has three parts: the conservativeness of mathematics, representation theorems for particular theories, and the claim that the method extends to all of physics. MTH-16-a argues that the third part fails for quantum mechanics, since its predictions are computed from uninstantiated states. We reconsider the program as a whole and locate the boundary of its success. The boundary does not fall between classical and quantum physics: deterministic classical dynamics falls on Field's side, and classical statistical mechanics does not, since its probabilities are computed by measuring regions of phase space that no system occupies. The failure of fictionalism therefore does not depend on any feature peculiar to quantum mechanics.
+\end{abstract}
+
+\section{The three parts}
+
+\citet{Field1980} argued that a nominalist is entitled to use mathematics in science if mathematics is conservative over nominalistic theories and if each physical theory has a nominalistic counterpart related to it by a representation theorem. He carried out the second task for Newtonian gravitation, replacing real-valued fields by comparative relations among spacetime points, and proposed that the method would extend to the rest of physics.
+
+The first part has been contested on formal grounds. \citet{Shapiro1983} showed that over second-order nominalistic theories, which Field needs to capture the content of the physics, mathematics is not deductively conservative. The second part is a genuine achievement: the representation theorem for Newtonian gravitation is a theorem, and it shows that the content of that theory concerning actual spacetime can be stated without mathematical objects. The third part is the one on which fictionalism depends, since the fictionalist accepts only the nominalistic content of our best theories (Definition~2.1 of MTH-16-a), and she is entitled to accept a theory only if it is nominalizable (Assumption~2.3 of MTH-16-a).
+
+\section{Where the method works}
+
+MTH-16-a explains the scope of Field's method by Lemma~3.1: no theory in whose predictions about actual systems an uninstantiated state figures is nominalizable. Its converse is not established, but the cases on Field's side all have the same mark.
+
+\paragraph{Deterministic dynamics.} In Newtonian gravitation and in Hamiltonian mechanics applied to a single system, the prediction of the system's future is computed from its actual state and the dynamical law. The law is stated for all of phase space, but the computation of an actual trajectory uses its values only at the states the system passes through, each of which is instantiated at some time. These theories satisfy the condition Field's method needs. \citet{Malament1982} grouped Hamiltonian mechanics with quantum mechanics because both use a space of possible states; the distinction drawn here shows that such a space defeats nominalization only when predictions are computed from its uninstantiated points.
+
+\paragraph{Statistical mechanics.} Classical statistical mechanics predicts the frequencies of macroscopic outcomes, such as the approach to equilibrium, by integrating a probability measure over regions of phase space: the probability that a gas will be found in a given macrostate is the measure of the region of microstates compatible with it. Almost every point of that region is a microstate that no system is in, and the measure of the region depends on all of them.
+
+\begin{proposition}\label{p:sm}
+Classical statistical mechanics is not nominalizable.
+\end{proposition}
+
+\begin{proof}
+The predictions of statistical mechanics about actual systems are computed from the measure of regions of phase space whose points are mostly uninstantiated, so uninstantiated states figure in them. By Lemma~3.1 of MTH-16-a, the theory is not nominalizable.
+\end{proof}
+
+Proposition~\ref{p:sm} shows that the obstacle MTH-16-a identifies is not peculiar to quantum mechanics. It arises wherever a theory computes probabilities from a space of possibilities, which is to say in every statistical theory in physics. The Born rule is one instance; the microcanonical measure is another.
+
+\section{Objections}
+
+\begin{objection}
+The fictionalist can accept statistical mechanics as a theory about frequencies in actual ensembles, which are concrete.
+\end{objection}
+
+\begin{reply}
+The actual ensembles are finite and the predicted probabilities are not frequencies in them; they are measures on a continuum of microstates, from which the frequencies are predicted. A nominalistic theory that mentions only actual frequencies does not have the predictive content of the theory, as Assumption~2.5 of MTH-16-a requires.
+\end{reply}
+
+\begin{objection}
+Field's program could be completed by a modal nominalization, which speaks of possible configurations rather than of states.
+\end{objection}
+
+\begin{reply}
+MTH-16-a answers the modal response for quantum mechanics, and its answer applies here. The measure of a region of possibilities is not a modal fact about any one possibility; a theory that states it relates possible structures, not concrete configurations, to the mathematics, and so is not a nominalization in the sense of Definition~2.2 of MTH-16-a. A modal theory that takes mathematical statements to be true under reinterpretation is, moreover, no longer fictionalism.
+\end{reply}
+
+\section{Conclusion}
+
+Field's representation theorems show what nominalization can do: restate the content of a theory computed from the actual state of the world. The program fails where theories compute predictions from spaces of possible states, and these include classical statistical mechanics as well as quantum mechanics. Physics cannot be nominalized, and fictionalism fails with the program.
+
+\begin{thebibliography}{99}\small
+\bibitem[Field(1980)]{Field1980} Field, H. (1980). \emph{Science Without Numbers: A Defence of Nominalism}. Blackwell.
+\bibitem[Malament(1982)]{Malament1982} Malament, D. (1982). Review of Hartry Field, \emph{Science Without Numbers}. \emph{The Journal of Philosophy}, 79(9), 523--534.
+\bibitem[Shapiro(1983)]{Shapiro1983} Shapiro, S. (1983). Conservativeness and incompleteness. \emph{The Journal of Philosophy}, 80(9), 521--531.
+\end{thebibliography}
+
+\end{document}

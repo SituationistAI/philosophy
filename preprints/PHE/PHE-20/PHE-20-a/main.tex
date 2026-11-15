@@ -1,0 +1,146 @@
+\documentclass{situationist-preprint}
+
+\title{The Irreducible Residue}
+\msid{PHE-20-a}
+\msfamily{PHE-20}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_20.lean}
+\mskeywords{transcendental ego; reduction; epoché; reflection; Husserl; Sartre; Fink}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can the ego bracket itself? Husserl held that the pure ego survives the phenomenological reduction as a \enquote{transcendence in immanence}; Sartre replied that the ego is a transcendent object like any other and falls under the epoché, leaving an impersonal field of consciousness. We argue that both are partly right. No act of bracketing brackets itself, so every reduction leaves a residue: the bracketing act, lived through by the one who performs it. This residue is what the transcendental ego is. But it is not a persisting entity. Whatever persists across acts can be bracketed by some act, and every act can be bracketed by a later reflection, which leaves its own residue in turn. The ego therefore cannot bracket itself, and it survives every reduction, but it survives each reduction as what that act cannot bracket, present in each act of reflection and not before or after them. The three premises and the derivation are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+In the \emph{Ideas}, after the epoché has put the general thesis of the world out of action, Husserl asks what remains. The answer is the field of pure consciousness, and in it the pure ego, which \enquote{remains} because it belongs to every act as the one who lives through it. The pure ego is, in Husserl's phrase, a peculiar transcendence within immanence, not a part of the stream of experiences but not outside it either \citep[§57]{Husserl1913}. It is the residue that no reduction removes. The first edition of the \emph{Logical Investigations} had found no such ego in the phenomenological data; Husserl added it, against his earlier self and in agreement with Natorp, in the years before the \emph{Ideas} \citep[ch.~2]{Zahavi2005}.
+
+\citet{Sartre1936} turned the reduction against the pure ego. The ego, he argued, is not in consciousness but in the world: it is constituted as the synthetic unity of states and actions, it appears only to reflection, and it is transcendent in the same sense as a tree. A rigorous epoché must bracket it, and what remains is an impersonal, pre-reflectively self-aware field. \citet{Gurwitsch1941} developed the same non-egological conception from Husserlian materials. \citet{Fink1995}, by contrast, did not reject the ego but doubled it: beside the constituting ego there is the \enquote{phenomenologizing onlooker} who performs the reduction and is not itself given among the constituted.
+
+We defend the thesis that the transcendental ego survives every reduction as an irreducible residue, and we specify what kind of residue it is. It is what each act of reflection cannot bracket. It is not a persisting entity. Sartre is right that anything with the identity of a thing across acts falls under the epoché; Husserl is right that something always remains; and the two claims are reconciled once the residue is indexed to the act.
+
+\section{Framework}
+
+\begin{definition}\label{d:bracket}
+An act $b$ \emph{brackets} an item $x$ if, in $b$, the positing of $x$ (as existing, as having its properties, as belonging to the world) is put out of action, so that $x$ is attended to only as it is given.
+\end{definition}
+
+Items include worldly objects, psychological states, the empirical self, and acts, including acts of bracketing, which can be reflected on.
+
+\begin{assumption}[Residue]\label{a:residue}
+No act of bracketing brackets itself.
+\end{assumption}
+
+To bracket an act is to put its positing out of action and attend to it only as given. An act of bracketing that did this to itself would, in being performed, be attended to as merely given, and so would not be lived through as the performance it is. But an act of bracketing is performed only if it is lived through as performing; this is why Husserl describes the epoché as an act of freedom \citep[§31]{Husserl1913}. Self-bracketing is therefore not a limiting case of bracketing but a failure to bracket. PHE-22-a states the same assumption for operations of suspension in general.
+
+\begin{assumption}[Iteration]\label{a:iteration}
+Every act of bracketing can itself be bracketed by a further act of reflection.
+\end{assumption}
+
+Assumption~\ref{a:iteration} is the possibility of reflection on reflection. It is what Fink's onlooker exploits, and it is the reason that phenomenology can study its own method.
+
+\begin{assumption}[Transcendence of the persisting]\label{a:persist}
+Whatever persists across acts, existing before or after a given act, can be bracketed by some act.
+\end{assumption}
+
+Assumption~\ref{a:persist} is Sartre's insight. Whatever has an identity across several acts is constituted as a unity of them, and whatever is constituted can be taken as merely given; that is all bracketing requires.
+
+\section{The residue}
+
+\begin{theorem}[Irreducible residue]\label{t:residue}
+Every reduction leaves something unbracketed, namely its own act.
+\end{theorem}
+
+\begin{proof}
+Let $b$ be an act of bracketing. By Assumption~\ref{a:residue}, $b$ does not bracket $b$. So $b$, as performed, is not among the items it brackets.
+\end{proof}
+
+\begin{theorem}\label{t:notpersisting}
+Nothing that persists across acts survives every reduction.
+\end{theorem}
+
+\begin{proof}
+Suppose $x$ persists across acts and is bracketed by no act. By Assumption~\ref{a:persist}, some act brackets $x$, a contradiction.
+\end{proof}
+
+\begin{corollary}\label{c:renewed}
+The residue of each act can be bracketed by a later reflection, which leaves a residue of its own.
+\end{corollary}
+
+\begin{proof}
+Given $b$, Assumption~\ref{a:iteration} supplies an act $b'$ that brackets $b$, and Assumption~\ref{a:residue} gives that $b'$ does not bracket itself.
+\end{proof}
+
+Taken together, the three results answer the question. The ego cannot bracket itself: in every reduction the bracketing act is lived through and not bracketed, and the one who lives through it is the transcendental ego (Theorem~\ref{t:residue}). Yet the ego is not thereby a thing that outlasts all reductions (Theorem~\ref{t:notpersisting}). What cannot be bracketed in an act of reflection is present in each such act, not before or after them; a later reflection can take the earlier act as its theme, but only by being itself an act it cannot take as its theme (Corollary~\ref{c:renewed}). The residue is irreducible in the sense that it is never absent, not in the sense that it is always the same item.
+
+This reading agrees with Husserl's own characterization of the pure ego as having no content that could be described, being only the ego of its acts \citep[§80]{Husserl1913}, and with the view, defended in PID-13, that the self is a process that persists only as long as its constituent activities. It also explains why the natural attitude returns once the act lapses (PHE-01): the residue does not outlive the act that leaves it.
+
+\section{Objections}
+
+\begin{objection}[Sartre]
+The ego Husserl finds after the reduction is an object of reflection, and as such is transcendent. The argument has smuggled the ego back in.
+\end{objection}
+
+\begin{reply}
+What is found by a later reflection is indeed an object, and Corollary~\ref{c:renewed} grants that it can be bracketed. The residue of an act is not found by that act: it is the act's performing, given pre-reflectively in it. Sartre's own non-thetic self-awareness of consciousness supplies exactly this. Our disagreement with him is terminological once the residue is distinguished from the reflected ego: we call the residue the transcendental ego because it is the dative of everything the reduction discloses.
+\end{reply}
+
+\begin{objection}[Regress]
+If every residue can be bracketed by a later act with its own residue, the ego dissolves into an infinite series and the reduction is never complete.
+\end{objection}
+
+\begin{reply}
+The series is potential, not actual, and nothing requires it to be completed. A reduction is complete as an act when it has bracketed what it set out to bracket; it is not incomplete because a further act could bracket it. That a complete reduction of everything, including the reducing, is impossible is what the theorem asserts.
+\end{reply}
+
+\begin{objection}[Unity]
+Husserl's ego is the identical pole of all acts in a stream. An act-indexed residue cannot account for the unity of the stream.
+\end{objection}
+
+\begin{reply}
+Unity across acts is supplied by time-consciousness, by retention of earlier acts in later ones (PHE-05), and by habitualities. These unify acts as a constituted stream, and what is constituted can be bracketed (Assumption~\ref{a:persist}). The identity pole is therefore a theme of a further reflection, not the residue that every reflection leaves.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/PHE/PHE_20.lean} takes items, acts, bracketing and persistence as primitives and the three assumptions as axioms. The main statements are:
+
+\begin{lstlisting}
+theorem irreducible_residue (b : Act) :
+    ∃ x, x = asItem b ∧ ¬ Brackets b x
+theorem no_persisting_residue :
+    ¬ ∃ x, Persisting x ∧ ∀ b, ¬ Brackets b x
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.PHE_20.irreducible_residue' depends on axioms:
+  [Philosophy.PHE_20.Act, Philosophy.PHE_20.Brackets,
+   Philosophy.PHE_20.Item, Philosophy.PHE_20.asItem,
+   Philosophy.PHE_20.residue]
+'Philosophy.PHE_20.no_persisting_residue' depends on axioms:
+  [Philosophy.PHE_20.Act, Philosophy.PHE_20.Brackets,
+   Philosophy.PHE_20.Item, Philosophy.PHE_20.Persisting,
+   Philosophy.PHE_20.persisting_bracketable]
+\end{lstlisting}
+
+\noindent Apart from the primitives, Theorem~\ref{t:residue} depends only on Assumption~\ref{a:residue} and Theorem~\ref{t:notpersisting} only on Assumption~\ref{a:persist}; Corollary~\ref{c:renewed} uses Assumptions~\ref{a:residue} and~\ref{a:iteration}. The model does not represent givenness in reflection, so the claim that the residue is lived through by the one who performs the act is not part of what the module proves.
+
+\section{Conclusion}
+
+The ego cannot bracket itself. Every reduction leaves its own act unbracketed, and the transcendental ego is that residue: what each act of reflection cannot bracket. Because whatever persists across acts can be bracketed, the residue is not a persisting entity; it is present in each act and is renewed, not preserved, when a later reflection takes the earlier act as its theme.
+
+\begin{thebibliography}{9}\small
+\bibitem[Fink(1995)]{Fink1995} Fink, E. (1995). \emph{Sixth Cartesian Meditation: The Idea of a Transcendental Theory of Method} (R. Bruzina, Trans.). Indiana University Press. (Original work written 1932.)
+\bibitem[Gurwitsch(1941)]{Gurwitsch1941} Gurwitsch, A. (1941). A non-egological conception of consciousness. \emph{Philosophy and Phenomenological Research}, 1(3), 325--338.
+\bibitem[Husserl(1913)]{Husserl1913} Husserl, E. (1913). \emph{Ideen zu einer reinen Phänomenologie und phänomenologischen Philosophie. Erstes Buch}. Niemeyer.
+\bibitem[Sartre(1936)]{Sartre1936} Sartre, J.-P. (1936). La transcendance de l'Ego: esquisse d'une description phénoménologique. \emph{Recherches philosophiques}, 6, 85--123.
+\bibitem[Zahavi(2005)]{Zahavi2005} Zahavi, D. (2005). \emph{Subjectivity and Selfhood: Investigating the First-Person Perspective}. MIT Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,166 @@
+\documentclass{situationist-preprint}
+
+\title{The Rationality of Faith Under Underdetermination}
+\msid{REL-17-a}
+\msfamily{REL-17}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_17.lean}
+\mskeywords{faith; evidentialism; ethics of belief; acceptance; practical commitment; underdetermination; will to believe}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is faith rational? Evidentialists have held that it is not, since faith goes beyond the evidence, and fideists that it need not answer to evidence at all. We argue that faith is rational where the evidence underdetermines the question and the stakes are practical, and that evidentialism, properly understood, neither requires nor forbids it. Evidentialism is a norm on doxastic attitudes: it permits exactly the attitude that fits the evidence. Faith that $p$, on the non-doxastic conception we defend, is a practical commitment to $p$ that excludes disbelief but does not require belief. Under underdetermination the fitting attitude is suspension, which is compatible with faith; and since evidentialism assesses no commitments, it never requires faith either. Whether faith is rational is then settled by the practical stakes. Evidentialism excludes faith only where the evidence supports the negation of what faith commits to. The results are formalized in Lean; the formal content is small, and the philosophical work lies in the conceptions of evidentialism and of faith, which we defend against four objections.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Clifford1877} held that it is wrong always, everywhere and for anyone to believe anything upon insufficient evidence. \citet{James1896} replied that where an option is live, forced and momentous, and cannot be decided on intellectual grounds, our passional nature may lawfully decide it. The exchange set the terms of the debate: either faith is held to evidential standards, and fails them, or it is exempt from them, and its rationality is in doubt. Contemporary evidentialism states the norm precisely: the justified attitude toward a proposition is the one that fits the agent's evidence \citep{ConeeFeldman1985}. On the other side, \citet{Plantinga1983} argued that belief in God may be properly basic, so that the evidentialist demand does not apply.
+
+A third approach separates faith from belief. \citet{Alston1996} distinguished belief from acceptance, a voluntary adoption of a proposition as a basis for action and reasoning, and argued that religious faith may consist in acceptance. \citet{Audi2011} and \citet{HowardSnyder2013} defend non-doxastic conceptions of propositional faith, on which faith that $p$ requires a positive orientation toward $p$ and is incompatible with disbelief, but does not require belief. \citet{Buchak2012} argued, in decision-theoretic terms, that faith involves committing to act on a proposition without first gathering further evidence, and that this can be rational.
+
+We develop the third approach into a precise thesis. Faith is rational where the evidence underdetermines the question and the stakes are practical; evidentialism, properly understood, neither requires nor forbids it.
+
+\section{Framework}
+
+\begin{definition}[Evidential status]\label{d:status}
+Relative to an agent's total evidence, a proposition $p$ is \emph{supported} if the evidence favours $p$ over its negation sufficiently for belief, \emph{opposed} if it so favours $\neg p$, and \emph{underdetermined} otherwise.
+\end{definition}
+
+\begin{definition}[Fit]\label{d:fit}
+The doxastic attitudes toward $p$ are belief, disbelief and suspension. Belief fits a supported proposition, disbelief an opposed one, and suspension an underdetermined one.
+\end{definition}
+
+\begin{principle}[Evidentialism properly understood]\label{p:ev}
+A doxastic attitude toward $p$ is epistemically permitted if and only if it fits the evidence. Evidentialism assesses doxastic attitudes only.
+\end{principle}
+
+The second clause is what \enquote{properly understood} adds. It is part of \citeauthor{ConeeFeldman1985}'s own formulation, which concerns the epistemic justification of attitudes and not what one ought to do; and it is required by the fact that belief is not under direct voluntary control, while action is (EPI-11). A norm on what one may do cannot be a norm of fit to evidence alone, since it must also answer to what is at stake.
+
+\begin{definition}[Faith]\label{d:faith}
+\emph{Faith that $p$} is a practical commitment to $p$, that is, a policy of acting on $p$, directing attention toward $p$ and taking $p$ as a premise in practical deliberation, together with the absence of disbelief that $p$.
+\end{definition}
+
+\begin{definition}[Practical stakes]\label{d:stakes}
+The stakes of a question are \emph{practical} if the agent faces a choice between acts whose value depends on whether $p$, and commitment to $p$ has, by her lights, at least the expected value of abstention.
+\end{definition}
+
+REL-06-a gives a criterion for the case of religious commitment: under bounded utilities, commitment is favoured exactly when the agent's credence exceeds a threshold fixed by the ratio of its cost to its gain.
+
+\begin{principle}[Practical rationality]\label{p:prac}
+A commitment is practically rational if and only if the stakes warrant it in the sense of Definition~\ref{d:stakes}.
+\end{principle}
+
+\begin{definition}[Rationality all things considered]\label{d:rational}
+An agent's state toward $p$, consisting of a doxastic attitude and the presence or absence of a commitment, is \emph{rational} if its attitude is epistemically permitted and it contains a commitment only if the commitment is practically rational.
+\end{definition}
+
+\section{The argument}
+
+\begin{lemma}\label{l:suspend}
+Under underdetermination, the only epistemically permitted attitude is suspension.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:fit} and Principle~\ref{p:ev}.
+\end{proof}
+
+\begin{proposition}[Not forbidden]\label{p:notforb}
+Under underdetermination, evidentialism permits faith.
+\end{proposition}
+
+\begin{proof}
+The state of suspended judgement with a commitment to $p$ has the permitted attitude by Lemma~\ref{l:suspend}, and it is a state of faith by Definition~\ref{d:faith}, since suspension is not disbelief.
+\end{proof}
+
+\begin{proposition}[Not required]\label{p:notreq}
+Whatever the evidential status of $p$, evidentialism permits a state that is not a state of faith.
+\end{proposition}
+
+\begin{proof}
+The fitting attitude without a commitment is permitted by Principle~\ref{p:ev}, which does not assess commitments, and it is not faith, since faith requires a commitment.
+\end{proof}
+
+\begin{theorem}[Rationality of faith]\label{t:main}
+If the evidence underdetermines $p$ and the stakes are practical, faith that $p$ is rational.
+\end{theorem}
+
+\begin{proof}
+Suspension with a commitment to $p$ is a state of faith with a permitted attitude (Proposition~\ref{p:notforb}), and its commitment is practically rational by Principle~\ref{p:prac}. By Definition~\ref{d:rational}, it is rational.
+\end{proof}
+
+\begin{corollary}\label{c:only}
+Evidentialism excludes every state of faith only where the evidence opposes $p$.
+\end{corollary}
+
+\begin{proof}
+If $p$ is supported, belief with commitment is permitted and is faith; if $p$ is underdetermined, Proposition~\ref{p:notforb} applies. Only where $p$ is opposed is the permitted attitude disbelief, which faith excludes.
+\end{proof}
+
+Corollary~\ref{c:only} shows the sense in which evidentialism neither requires nor forbids faith. It contains no requirement or prohibition directed at faith; its only bearing on faith is the bearing of the evidence on the one attitude that faith excludes. Faith against the evidence is excluded, and faith beyond the evidence is not.
+
+\section{Objections}
+
+\begin{objection}[Faith is belief]
+On the traditional view, faith is assent: Aquinas defines it as an act of the intellect assenting to divine truth at the command of the will. A commitment without belief is not faith.
+\end{objection}
+
+\begin{reply}
+Doxastic faith is covered by the results: where $p$ is supported, belief with commitment is permitted and may be rational. Where $p$ is underdetermined, doxastic faith is believing beyond the evidence, and Principle~\ref{p:ev} does forbid it. The non-doxastic conception is not a revision invented to avoid this. It describes the faith of those who pray and act while doubting, whom religious traditions do not count as faithless \citep{HowardSnyder2013}. And since belief follows attention (EPI-11), a commitment that directs attention toward $p$ may in time bring evidence to light; the resulting belief is then assessed by that evidence, not by the commitment.
+\end{reply}
+
+\begin{objection}[Clifford]
+Acting on a proposition one does not believe is the very thing Clifford condemned: the shipowner was blameworthy for sending the ship to sea, not only for believing it sound.
+\end{objection}
+
+\begin{reply}
+The shipowner's evidence opposed the soundness of the ship, and the stakes were borne by others. Corollary~\ref{c:only} excludes his case, and Principle~\ref{p:prac} does too, since the expected value of sailing was negative by any reasonable credence. Clifford's example does not bear on the case of underdetermination, which is the only one Theorem~\ref{t:main} concerns.
+\end{reply}
+
+\begin{objection}[Knowledge norm of action]
+One should treat $p$ as a reason for acting only if one knows $p$ \citep{HawthorneStanley2008}. Commitment without belief violates this norm.
+\end{objection}
+
+\begin{reply}
+Under uncertainty the agent's reason for committing is not $p$ but the expected value of acting on $p$, which she may know. The physician who treats for the more dangerous of two diagnoses acts on that diagnosis without treating it as known, and violates no norm. Faith of the kind defined acts on $p$ in this policy sense, as Buchak's account makes explicit \citep{Buchak2012}.
+\end{reply}
+
+\begin{objection}[Too permissive]
+Theorem~\ref{t:main} licenses faith in any underdetermined proposition whatever, including those of rival religions.
+\end{objection}
+
+\begin{reply}
+It licenses faith wherever the stakes warrant commitment, and the stakes discriminate. Commitments to incompatible propositions compete for the same actions, and Principle~\ref{p:prac} favours the one with the greater expected value, which depends on credence as well as on what is at stake.
+\end{reply}
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/REL/REL_17.lean}, with evidential statuses and attitudes as three-element types and a state as an attitude paired with a Boolean commitment. The main theorems read:
+
+\begin{lstlisting}
+theorem not_forbidden : ∃ st, EpPermitted .under st ∧ Faith st
+theorem not_required : ∀ s, ∃ st, EpPermitted s st ∧ ¬ Faith st
+theorem faith_rational : ∃ st, Rational .under true st ∧ Faith st
+\end{lstlisting}
+
+The checker reports that none of the four main theorems depends on any axioms, because Principles~\ref{p:ev} and~\ref{p:prac} and Definition~\ref{d:faith} are built into the definitions. Once evidentialism assesses attitudes only and faith excludes only disbelief, the results are a finite case analysis; the philosophical content lies in those two conceptions.
+
+\section{Conclusion}
+
+Evidentialism is a norm of fit between attitudes and evidence, and faith is a commitment that excludes disbelief without requiring belief. Under underdetermination the fitting attitude is suspension, which faith does not exclude, and evidentialism, which assesses no commitments, never requires faith. Whether faith is rational in such cases is settled by the practical stakes, and where they warrant commitment, faith is rational.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alston(1996)]{Alston1996} Alston, W.~P. (1996). Belief, acceptance, and religious faith. In J. Jordan and D. Howard-Snyder (eds.), \emph{Faith, Freedom, and Rationality}. Rowman \& Littlefield.
+\bibitem[Audi(2011)]{Audi2011} Audi, R. (2011). \emph{Rationality and Religious Commitment}. Oxford University Press.
+\bibitem[Buchak(2012)]{Buchak2012} Buchak, L. (2012). Can it be rational to have faith? In J. Chandler and V.~S. Harrison (eds.), \emph{Probability in the Philosophy of Religion}. Oxford University Press.
+\bibitem[Clifford(1877)]{Clifford1877} Clifford, W.~K. (1877). The ethics of belief. \emph{Contemporary Review}, 29, 289--309.
+\bibitem[Conee and Feldman(1985)]{ConeeFeldman1985} Conee, E. and Feldman, R. (1985). Evidentialism. \emph{Philosophical Studies}, 48(1), 15--34.
+\bibitem[Hawthorne and Stanley(2008)]{HawthorneStanley2008} Hawthorne, J. and Stanley, J. (2008). Knowledge and action. \emph{The Journal of Philosophy}, 105(10), 571--590.
+\bibitem[Howard-Snyder(2013)]{HowardSnyder2013} Howard-Snyder, D. (2013). Propositional faith: what it is and what it is not. \emph{American Philosophical Quarterly}, 50(4), 357--372.
+\bibitem[James(1896)]{James1896} James, W. (1896). The will to believe. \emph{The New World}, 5, 327--347.
+\bibitem[Plantinga(1983)]{Plantinga1983} Plantinga, A. (1983). Reason and belief in God. In A. Plantinga and N. Wolterstorff (eds.), \emph{Faith and Rationality}. University of Notre Dame Press.
+\end{thebibliography}
+
+\end{document}

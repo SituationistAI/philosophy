@@ -1,0 +1,259 @@
+\documentclass{situationist-preprint}
+
+\title{Contextualism and Scepticism}
+\msid{EPI-13-a}
+\msfamily{EPI-13}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_13.lean}
+\mskeywords{contextualism; scepticism; safety; closeness; rule of attention; closure; subject-sensitive invariantism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is \enquote{know} context-sensitive? We argue that it is: the standards that a subject must meet for \enquote{she knows that $p$} to be true shift with the context of attribution, and sceptical arguments succeed only in the contexts they themselves create. We locate the context-sensitivity in a single place. Knowledge is justified safe belief, and safety is truth across the worlds that are close to the subject's world; which worlds count as close is fixed by the context of attribution, while belief, justification and truth are not. Attending to a sceptical hypothesis makes the worlds in which it holds close. We prove three results: closure holds within each context; the subject who knows by ordinary standards that she has hands fails to know it in the context created by raising the hypothesis that she is a brain in a vat; and, in every context, she fails to know that she has hands exactly when some sceptical hypothesis is attended to. The sceptic's argument is therefore sound in the context its first premise creates, and in no context in which no such hypothesis is attended to. We defend the linguistic credentials of the view against the objections from gradability and semantic blindness, and compare it with subject-sensitive invariantism and relativism. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Ordinary speakers say without hesitation that they know that they have hands. Presented with the hypothesis that they might be brains in vats, the same speakers concede that they do not know that they are not, and, pressed with the closure principle, that perhaps they do not know that they have hands either. Something has changed between the two episodes. The question is whether what has changed is the truth value of the knowledge claims, the subject's epistemic position, or only what it is appropriate to say.
+
+\emph{Contextualism} answers that the truth conditions of knowledge attributions vary with the context in which they are made. The view was formulated in response to scepticism by \citet{Stine1976}, who argued that which alternatives are relevant to a knowledge claim depends on the context, and developed by \citet{Cohen1988,Cohen1999}, \citet{DeRose1992,DeRose1995,DeRose2009} and \citet{Lewis1996}. Cohen located the shift in how strong one's reasons must be. DeRose located it in the strength of epistemic position required, and proposed a \emph{rule of sensitivity}: when it is asserted that a subject knows or does not know that $p$, the standards tend to rise to the point at which her belief that $p$ must be sensitive to count as knowledge. Lewis held that a subject knows that $p$ if her evidence eliminates every not-$p$ possibility except those properly ignored, and that, by the \emph{rule of attention}, a possibility attended to is not properly ignored: knowledge is elusive, and vanishes when examined.
+
+Three rival positions keep the content of \enquote{know} fixed. \emph{Sceptical invariantism} holds that the standards are always high and that ordinary knowledge claims are false \citep{Unger1975}. \emph{Classical invariantism} holds that the standards are always moderate; the apparent shifts are pragmatic, a matter of what it is appropriate to assert rather than of what is true \citep{Rysiew2001,Williamson2005}. \emph{Subject-sensitive invariantism} holds that whether a subject knows depends on her own practical situation, such as what is at stake for her, but not on the attributor's \citep{Hawthorne2004,Stanley2005}. A fourth position, \emph{relativism}, makes the truth of knowledge attributions depend on the context from which they are assessed rather than the context in which they are made \citep{MacFarlane2005}.
+
+We defend contextualism. Our thesis has two parts. The standards for \enquote{know} shift with context; and sceptical arguments succeed only in the contexts they themselves create, so that their success there does not touch the knowledge attributed in ordinary contexts. The distinctive feature of our version is that it locates all the context-sensitivity in one relation, the closeness relation on which safety depends. This has three advantages. It leaves justification, belief and truth context-invariant, as EPI-06 requires of justification; it makes closure hold within each context by the same argument that establishes it in EPI-20; and it turns Lewis's rule of attention into a principle about closeness from which the success and failure of the sceptic can be derived rather than described.
+
+\section{Framework}
+
+We use the analysis of knowledge defended in EPI-01, on which knowledge is safe, justified, true belief, and we index closeness to contexts, as EPI-01 suggests in discussing contextualism. There is a set of worlds, a set of bases on which beliefs are held, and a set of contexts of attribution. $B_m(p,w)$ says that at $w$ the subject believes $p$ on basis $m$, and $J_m(p,w)$ that she is justified in so believing. Neither is indexed to contexts.
+
+\begin{definition}[Contextual closeness]\label{d:close}
+For each context $c$, $C_c(w,v)$ says that, by the standards of $c$, $v$ is close to $w$.
+\end{definition}
+
+\begin{assumption}[Centring]\label{a:centring}
+For every context $c$ and world $w$, $C_c(w,w)$.
+\end{assumption}
+
+\begin{definition}[Safety and knowledge in a context]\label{d:know}
+The belief that $p$ on $m$ is \emph{safe in $c$} at $w$ if $p$ is true at every $v$ with $C_c(w,v)$ at which the subject believes $p$ on $m$. The subject \emph{knows$_c$} $p$ at $w$ if for some basis $m$ she believes $p$ on $m$ at $w$, is justified in so believing, and the belief is safe in $c$ at $w$.
+\end{definition}
+
+The sentence \enquote{$S$ knows that $p$}, uttered in context $c$, is true at $w$ just in case $S$ knows$_c$ $p$ at $w$. The context of utterance supplies a closeness relation, and nothing else.
+
+\begin{definition}[Context-sensitivity]\label{d:cs}
+\enquote{Know} is \emph{context-sensitive} if there are contexts $c$ and $c'$, a proposition $p$ and a world $w$ such that the subject knows$_c$ $p$ at $w$ and does not know$_{c'}$ $p$ at $w$.
+\end{definition}
+
+Definition~\ref{d:cs} holds the subject, the world and the proposition fixed, and therefore everything about the subject's belief, justification and circumstances. It is the claim that the subject-sensitive invariantist denies: on her view, two attributions concerning the same subject in the same world cannot differ in truth value.
+
+\begin{assumption}[Justification is closed]\label{a:jclosure}
+If the subject is justified in believing $p$ on $m$ at $w$, $p$ entails $q$, and at $w$ she believes $q$ on a basis $m'$ such that at every world at which she believes $q$ on $m'$ she believes $p$ on $m$, then she is justified in believing $q$ on $m'$ at $w$.
+\end{assumption}
+
+This is Assumption 2.4 of EPI-20. A basis $m'$ that meets its conditions is a \emph{competent deduction} of $q$ from the belief that $p$ on $m$. Let $H$ be the proposition that the subject has hands.
+
+\begin{definition}[Sceptical hypothesis]\label{d:sceptical}
+A proposition $X$ is a \emph{sceptical hypothesis} (for $H$) if $X$ entails $\neg H$ and, for every world $w$ and basis $m$, there is a world $x_{X}(w,m)$, the \emph{$X$-counterpart} of $w$ for $m$, at which $X$ is true and the subject believes on $m$ everything she believes on $m$ at $w$.
+\end{definition}
+
+The hypothesis $V$ that the subject is a handless brain in a vat, stimulated so as to have the experiences she now has, is the standard example; the demon hypothesis and the hypothesis that she is dreaming that she has hands are others. What makes a hypothesis sceptical is that it can be fitted to any basis: whatever the subject's grounds, there is a world in which the hypothesis holds and she has the same grounds.
+
+\begin{definition}[Attention]\label{d:attention}
+$A(c,X)$ says that in context $c$ the hypothesis $X$ is attended to as a possibility that the subject must rule out.
+\end{definition}
+
+\begin{assumption}[Moore's situation]\label{a:moore}
+At the actual world $@$, the subject believes $H$ on the basis $\pi$ of perception and is justified in so believing; and for each hypothesis $X$ she believes $\neg X$ on a basis $\delta_X$ of competent deduction from her belief that $H$ on $\pi$.
+\end{assumption}
+
+The justification clause is supplied by EPI-19: if it seems to a subject that $p$, she has prima facie justification for believing that $p$, and nothing in the situation defeats it.
+
+\begin{assumption}[Rule of attention]\label{a:attention}
+If $X$ is a sceptical hypothesis and $A(c,X)$, then for every world $w$ and basis $m$, $C_c(w, x_X(w,m))$.
+\end{assumption}
+
+\begin{assumption}[Inattention]\label{a:inattention}
+If a context $c$ attends to no sceptical hypothesis, the subject's perceptual belief that $H$ is safe in $c$ at $@$.
+\end{assumption}
+
+\begin{assumption}[Raising]\label{a:raise}
+For every context $c$ and hypothesis $X$, asserting in $c$ that the subject does not know that $\neg X$ produces a context $c^{X}$ in which $X$ is attended to. The \emph{ordinary context} $o$ attends to no sceptical hypothesis.
+\end{assumption}
+
+Assumption~\ref{a:attention} is our version of Lewis's rule of attention. Lewis stated it in terms of possibilities that may be properly ignored; we state it in terms of closeness, to the same effect. Assumption~\ref{a:inattention} is the substantive anti-sceptical premise. It is a claim about the actual world: that, by any standards that do not attend to sceptical hypotheses, the actual world is not one in which the subject's perceptual belief that she has hands could easily have been false. It is the generalization to all inattentive contexts of the ordinary closeness assumption of EPI-02 (Assumption 2.6), and it is defended there. Assumption~\ref{a:raise} records the way sceptical contexts are created. To consider whether one knows that one is not envatted is to attend to the possibility that one is.
+
+\section{The argument}
+
+\begin{lemma}[Factivity]\label{l:factive}
+In every context, knowledge is factive: if the subject knows$_c$ $p$ at $w$, then $p$ is true at $w$.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:centring}, $w$ is $c$-close to itself, and the subject believes $p$ on some basis at $w$ on which the belief is safe in $c$.
+\end{proof}
+
+\begin{lemma}[Closure within each context]\label{l:closure}
+For every context $c$: if the subject's belief that $p$ on $m$ is justified and safe in $c$ at $w$, and she believes $q$ on a competent deduction $m'$ from it, then she knows$_c$ $q$ at $w$.
+\end{lemma}
+
+\begin{proof}
+She is justified in believing $q$ on $m'$ by Assumption~\ref{a:jclosure}. Let $v$ be $c$-close to $w$ with the subject believing $q$ on $m'$ at $v$. Then she believes $p$ on $m$ at $v$, so $p$ is true at $v$ by safety, and so is $q$, which $p$ entails.
+\end{proof}
+
+Lemma~\ref{l:closure} is the closure theorem of EPI-20 (Theorem 3.2) relativized to an arbitrary context. Since the proof uses only the fact that the closeness relation is fixed throughout, it holds for every context, whatever its standards.
+
+\begin{theorem}[Shift]\label{t:shift}
+For every sceptical hypothesis $X$, the subject knows$_o$ $H$ at $@$ and does not know$_{o^X}$ $H$ at $@$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:raise}, $o$ attends to no sceptical hypothesis, so by Assumption~\ref{a:inattention} the subject's perceptual belief in $H$ is safe in $o$; it is held and justified by Assumption~\ref{a:moore}, so she knows$_o$ $H$. In $o^X$, $X$ is attended to (Assumption~\ref{a:raise}). Suppose she believes $H$ on some basis $m$ at $@$. The $X$-counterpart $x_X(@,m)$ is $o^X$-close to $@$ by Assumption~\ref{a:attention}; she believes $H$ on $m$ there by Definition~\ref{d:sceptical}; and $H$ is false there, since $X$ entails $\neg H$. So no belief in $H$ is safe in $o^X$, and she does not know$_{o^X}$ $H$.
+\end{proof}
+
+\begin{corollary}[Context-sensitivity]\label{c:cs}
+If there is a sceptical hypothesis, \enquote{know} is context-sensitive in the sense of Definition~\ref{d:cs}.
+\end{corollary}
+
+\begin{proof}
+Take $c = o$, $c' = o^X$, $p = H$ and $w = @$ in Theorem~\ref{t:shift}.
+\end{proof}
+
+The proof of Theorem~\ref{t:shift} shows more than a shift. In the raised context, no belief in $H$ is safe, on any basis: the sceptical hypothesis is fitted to every basis, and attention brings its counterparts close. This is the precise sense in which envatted worlds are close in the sceptical context. Nothing the subject could do to improve her grounds would make her belief safe there, since any improved basis has its own envatted counterpart. The next theorem shows that attention to some sceptical hypothesis is also necessary for the loss of knowledge.
+
+\begin{theorem}[Characterization]\label{t:char}
+For every context $c$, the subject fails to know$_c$ $H$ at $@$ if and only if $c$ attends to some sceptical hypothesis.
+\end{theorem}
+
+\begin{proof}
+If $c$ attends to a sceptical hypothesis $X$, the argument of Theorem~\ref{t:shift} shows that no belief in $H$ is safe in $c$. Conversely, if $c$ attends to none, her perceptual belief in $H$ is safe in $c$ by Assumption~\ref{a:inattention}, and held and justified by Assumption~\ref{a:moore}, so she knows$_c$ $H$.
+\end{proof}
+
+The sceptical argument from a hypothesis $X$ has three steps: (S1) the subject does not know that $\neg X$; (S2) if she knows that $H$, she knows that $\neg X$; (S3) she does not know that $H$. Evaluated in a context $c$, each step is a claim about knowledge$_c$. Say that the argument is \emph{sound in $c$} if all three are true in $c$ at $@$.
+
+\begin{corollary}[The sceptic's success is self-created]\label{c:self}
+Let $X$ be a sceptical hypothesis. (i) If the argument from $X$ is sound in a context $c$, then $c$ attends to some sceptical hypothesis. (ii) For every context $c$, the argument from $X$ is sound in $c^X$, the context created by asserting its first premise. (iii) In the ordinary context, (S1) is false: the subject knows$_o$ $\neg X$.
+\end{corollary}
+
+\begin{proof}
+(i) If the argument is sound in $c$, (S3) is true in $c$, and by Theorem~\ref{t:char} $c$ attends to a sceptical hypothesis. (ii) In $c^X$, $X$ is attended to. Every $X$-counterpart of $@$ is $c^X$-close to it, and at each the subject holds her beliefs on the same bases while $\neg X$ and $H$ are both false. So no belief in $\neg X$ or in $H$ is safe in $c^X$: (S1) and (S3) are true, and (S2) is true because its antecedent is false. (iii) Her perceptual belief in $H$ is justified and safe in $o$ (Theorem~\ref{t:shift}), and her belief in $\neg X$ is a competent deduction from it, since $X$ entails $\neg H$; by Lemma~\ref{l:closure} she knows$_o$ $\neg X$.
+\end{proof}
+
+Corollary~\ref{c:self} is the sense in which sceptical arguments succeed only in the contexts they create. The argument is not merely sound in some contexts and unsound in others: the contexts in which it is sound are exactly those in which a sceptical hypothesis is attended to, and the argument's own first premise, once asserted, produces such a context. The sceptic therefore always speaks truly when she draws her conclusion, and her conclusion never contradicts an ordinary knowledge attribution, which is evaluated by the standards of a context that attends to no sceptical hypothesis. Together with Lemma~\ref{l:closure}, the corollary also explains why the sceptical argument never refutes closure: (S2) is true in every context, and the contexts differ over (S1) and (S3) together.
+
+\section{The mechanisms of the shift}
+
+Attention is not the only factor that moves the standards for \enquote{know}. The bank cases of \citet{DeRose1992} and the airport case of \citet{Cohen1999} suggest that stakes do so as well: when much depends on whether the bank will be open on Saturday, a speaker who would otherwise say that she knows that it will be open says that she does not know, and seems to speak truly. EPI-13-b examines these cases. In the present framework, high stakes widen the set of close worlds. A world in which the bank has changed its hours is close by the standards of a context in which an error would be costly, and remote by the standards of a context in which it would not. Unlike attention to a sceptical hypothesis, the widening produced by stakes is limited: it brings in worlds that differ from actuality in ways the subject's basis does not exclude, not worlds that are fitted to every basis. This is why raising the stakes can be met by gathering further evidence, while raising a sceptical hypothesis cannot.
+
+DeRose's rule of sensitivity is a special case of Assumption~\ref{a:attention}. To assert that someone knows that $\neg X$ is to consider whether she knows it, and so to attend to $X$; the nearest $X$-worlds, which are the worlds that sensitivity concerns, thereby become close. DeRose's explanation of the appeal of (S1), that the belief that one is not envatted is insensitive, is preserved in this form: the insensitivity is noticed only by considering the envatted world, and to consider it is to make it close. We do not need sensitivity as a condition on knowledge, which EPI-20 shows to be unclosed; we need only that attending to a possibility makes it close.
+
+\citet{BlomeTillmann2009} reformulates Lewis's rule of attention in terms of pragmatic presupposition, so that merely mentioning a possibility, without ceasing to presuppose that it does not obtain, does not destroy knowledge. We accept the refinement as an account of $A(c,X)$: a speaker who mentions the vat hypothesis only to dismiss it does not attend to it in the sense of Definition~\ref{d:attention}. Nothing in our results depends on how wide the class of attending contexts is, only on the fact that asserting (S1) in earnest places the speaker in one.
+
+\section{Linguistic credentials}
+
+Contextualism is a semantic thesis, and it must answer to the evidence about how context-sensitive expressions behave. LNG-19 holds that context-sensitivity extends only to indexicals, demonstratives and gradable adjectives. The present account introduces no further category. On the analysis of EPI-01, the context-sensitivity of \enquote{know} is the context-sensitivity of safety, and \enquote{safe} is a gradable adjective: a bridge may be safe for a car and not for a train, and a belief may be safe by the standards of a casual conversation and not by the standards of an inquiry into the foundations of knowledge. \citet{KennedyMcNally2005} distinguish relative gradable adjectives such as \enquote{tall}, whose standard is a contextually supplied point on a scale, from absolute ones such as \enquote{flat} or \enquote{empty}, whose standard is the scale's maximum; \citet{Unger1975} built his scepticism on the observation that \enquote{flat} seems to demand the maximum. On our account, \enquote{safe}, as it occurs in the analysis of knowledge, behaves like a relative adjective whose scale is the ordering of worlds by closeness, and whose cut-off is supplied by context. The verb inherits that sensitivity from the gradable notion it embeds.
+
+\citet{Stanley2004} objected that \enquote{know} is not gradable: we do not say that someone knows that $p$ very much, or more than someone else does, and the comparative and degree modifiers that are the mark of gradable expressions do not combine with \enquote{know}. The objection is correct about the verb and does not touch our view, since we do not claim that \enquote{know} is itself a gradable expression. The degree structure lies in safety, which is the condition the verb expresses, and it surfaces where we would expect it, in expressions such as \enquote{she knows it well enough for present purposes} and \enquote{she does not know it for certain}. The context-sensitivity of an expression whose analysis contains a gradable condition need not be marked by the grammar of the expression itself.
+
+\section{Objections}
+
+\begin{objection}[Semantic blindness]
+If \enquote{know} were context-sensitive, competent speakers would be aware of it, as they are aware that \enquote{I} and \enquote{here} shift their reference. They are not: they take the sceptic to contradict them, and they report what others said about knowledge without adjusting for context. Contextualism must attribute to competent speakers a systematic blindness to the semantics of their own language \citep{Schiffer1996}.
+\end{objection}
+
+\begin{reply}
+Some blindness must be attributed by every view, since speakers' judgements about knowledge shift with attention and stakes in ways that no single fixed standard predicts. The invariantist must explain the shifts as errors of assertion or as psychological bias; the contextualist explains them as correct responses to changes in the standards, and needs only that speakers fail to notice when the standards have changed. That failure is familiar from gradable adjectives. Speakers who agree that a room is empty and then, when a speck of dust is pointed out, agree that it is not, do not take themselves to have changed the subject, and they report earlier uses of \enquote{empty} without adjusting the standard. The case of \enquote{know} is the same, with the difference that the scale of closeness is not perceptible, which makes the change of standards harder to notice and the sceptic's apparent contradiction more compelling.
+\end{reply}
+
+\begin{objection}[Subject-sensitive invariantism]
+The data can be explained without making the truth of attributions depend on the attributor. What changes in the bank cases is what is at stake for the subject; knowledge is sensitive to practical interests, and it is the subject's interests, not the attributor's context, that fix whether she knows \citep{Hawthorne2004,Stanley2005}.
+\end{objection}
+
+\begin{reply}
+In the sceptical case nothing changes in the subject: her stakes, her evidence and her beliefs are the same whether or not someone discusses envatted worlds in another room. Subject-sensitive invariantism must therefore say either that she knows in both cases, in which case the sceptic's premise (S1) is simply false and its appeal unexplained, or that she knows in neither, in which case scepticism is true. Theorem~\ref{t:shift} records the alternative it cannot express: the same subject, at the same world, knows by one standard and not by another. Subject-sensitive invariantism also predicts that a subject in a high-stakes situation whose stakes have fallen can truly say \enquote{I did not know yesterday, when much depended on it, but I know now}, without having acquired new evidence. Such reports seem false. The contextualist predicts that they are false, since the speaker's present context governs both halves of the report.
+\end{reply}
+
+\begin{objection}[Contextualism does not answer the sceptic]
+The sceptic does not claim that we fail to know by some special standard. She claims that we fail to know by the ordinary standards, the ones we use when we say that we know. A view that concedes her conclusion in her own context, and denies it only in ours, has changed the subject \citep{Feldman1999,Sosa2000}.
+\end{objection}
+
+\begin{reply}
+If the sceptic claims that we fail to know$_o$ that we have hands, her argument requires (S1) evaluated in $o$, and by Corollary~\ref{c:self}(iii) that premise is false. The contextualist does not avoid the ordinary-standards sceptic; she refutes her, with the help of Assumption~\ref{a:inattention}. What contextualism adds is an explanation of why the argument nonetheless seems compelling: considering its first premise produces a context in which that premise is true. The neo-Moorean diagnosis, that (S1) is false as evaluated in ordinary contexts, and the contextualist explanation of its appeal are complementary, as EPI-02 argues; Corollary~\ref{c:self} proves that they fit together.
+\end{reply}
+
+\section{What the result does not establish}
+
+The results do not establish Assumption~\ref{a:inattention}, which is a contingent claim about the actual world; they show what follows if it is true. They do not establish that attention and stakes are the only mechanisms by which the closeness relation shifts, and they say nothing about how far other epistemic expressions, such as \enquote{justified} and \enquote{evidence}, share the context-sensitivity of \enquote{know}; on our view, as on EPI-06, justification is not context-relative. Finally, Definition~\ref{d:sceptical} concerns hypotheses that can be fitted to every basis. Hypotheses that can be fitted only to some bases, such as the hypothesis that the animals in the zoo are cleverly disguised mules, raise standards without making knowledge unattainable; EPI-20 treats that case.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_13.lean} represents worlds, bases and contexts as primitive types, closeness, belief, justification and attention as primitive relations, and Assumptions~\ref{a:centring}, \ref{a:jclosure} and~\ref{a:moore}--\ref{a:raise} as axioms. Safety, knowledge, context-sensitivity, sceptical hypotheses and the soundness of the sceptical argument are defined. It proves Lemmas~\ref{l:factive} and~\ref{l:closure}, Theorems~\ref{t:shift} and~\ref{t:char} and Corollaries~\ref{c:cs} and~\ref{c:self}. The main statements are:
+
+\begin{lstlisting}
+theorem shift (X : Proposition) (hX : Sceptical X) :
+    Knows ordinary Hands actual ∧
+    ¬ Knows (raise ordinary X) Hands actual
+
+theorem characterization (c : Context) :
+    ¬ Knows c Hands actual ↔ ∃ X, Sceptical X ∧ Attends c X
+
+theorem self_created (X : Proposition) (hX : Sceptical X) :
+    (∀ c, Sound c X → ∃ Y, Sceptical Y ∧ Attends c Y) ∧
+    (∀ c, Sound (raise c X) X) ∧
+    Knows ordinary (fun v => ¬ X v) actual
+\end{lstlisting}
+
+\begin{sloppypar}
+The \texttt{\#print axioms} output for the first and third, with the namespace prefix omitted, is as follows; that for \texttt{characterization} is the list for \texttt{self\_created} without \texttt{believes\_denial}, \texttt{deduced\_denial}, \texttt{deduction}, \texttt{justification\_closure}, \texttt{ordinary}, \texttt{ordinary\_inattentive}, \texttt{raise} and \texttt{raise\_attends}.
+\end{sloppypar}
+
+\begin{lstlisting}
+'shift' depends on axioms:
+  [Attends, Basis, Believes, Close, Context, Hands, Justified,
+   World, actual, attention, believes_hands, counterpart,
+   inattention, justified_hands, ordinary, ordinary_inattentive,
+   perception, raise, raise_attends]
+'self_created' depends on axioms:
+  [propext, Classical.choice, Quot.sound, Attends, Basis,
+   Believes, Close, Context, Hands, Justified, World, actual,
+   attention, believes_denial, believes_hands, counterpart,
+   deduced_denial, deduction, inattention, justification_closure,
+   justified_hands, ordinary, ordinary_inattentive, perception,
+   raise, raise_attends]
+\end{lstlisting}
+
+\begin{sloppypar}
+\texttt{Attends}, \texttt{Basis}, \texttt{Believes}, \texttt{Close}, \texttt{Context}, \texttt{Justified}, \texttt{World} and \texttt{counterpart} are the primitives of Section~2; \texttt{Hands}, \texttt{actual}, \texttt{perception}, \texttt{deduction}, \texttt{ordinary} and \texttt{raise} name the proposition, world, bases and contexts of Assumptions~\ref{a:moore} and~\ref{a:raise}. \texttt{believes\_hands}, \texttt{justified\_hands}, \texttt{believes\_denial} and \texttt{deduced\_denial} are the clauses of Assumption~\ref{a:moore}; \texttt{attention} is Assumption~\ref{a:attention}; \texttt{inattention} is Assumption~\ref{a:inattention}; \texttt{raise\_attends} and \texttt{ordinary\_inattentive} are the two clauses of Assumption~\ref{a:raise}; \texttt{justification\_closure} is Assumption~\ref{a:jclosure}. The first three axioms in the second list are the standard axioms of Lean's classical logic, used in the proof by contradiction of Theorem~\ref{t:char}.
+\end{sloppypar}
+
+Theorem~\ref{t:char} does not use the raising assumption or the ordinary context, and Theorem~\ref{t:shift} does not use the closure of justification, which enters only in Corollary~\ref{c:self}(iii).
+
+\section{Conclusion}
+
+\enquote{Know} is context-sensitive. The context of attribution fixes which worlds count as close, and with them which beliefs are safe; belief, justification and truth stay fixed. Closure holds within each context. A subject who knows by ordinary standards that she has hands fails to know it in a context that attends to the hypothesis that she is envatted, because attending to that hypothesis brings worlds fitted to her every basis into the set of close worlds. In every context she fails to know that she has hands exactly when such a hypothesis is attended to, and the sceptic's first premise, once asserted, creates such a context. The sceptical argument is sound there, and only in contexts like it; its conclusion does not contradict what we say when we say, by ordinary standards, that we know.
+
+\begin{thebibliography}{99}\small
+\bibitem[Blome-Tillmann(2009)]{BlomeTillmann2009} Blome-Tillmann, M. (2009). Knowledge and presuppositions. \emph{Mind}, 118(470), 241--294.
+\bibitem[Cohen(1988)]{Cohen1988} Cohen, S. (1988). How to be a fallibilist. \emph{Philosophical Perspectives}, 2, 91--123.
+\bibitem[Cohen(1999)]{Cohen1999} Cohen, S. (1999). Contextualism, skepticism, and the structure of reasons. \emph{Philosophical Perspectives}, 13, 57--89.
+\bibitem[DeRose(1992)]{DeRose1992} DeRose, K. (1992). Contextualism and knowledge attributions. \emph{Philosophy and Phenomenological Research}, 52(4), 913--929.
+\bibitem[DeRose(1995)]{DeRose1995} DeRose, K. (1995). Solving the skeptical problem. \emph{The Philosophical Review}, 104(1), 1--52.
+\bibitem[DeRose(2009)]{DeRose2009} DeRose, K. (2009). \emph{The Case for Contextualism: Knowledge, Skepticism, and Context, Vol.~1}. Oxford University Press.
+\bibitem[Feldman(1999)]{Feldman1999} Feldman, R. (1999). Contextualism and skepticism. \emph{Philosophical Perspectives}, 13, 91--114.
+\bibitem[Hawthorne(2004)]{Hawthorne2004} Hawthorne, J. (2004). \emph{Knowledge and Lotteries}. Oxford University Press.
+\bibitem[Kennedy and McNally(2005)]{KennedyMcNally2005} Kennedy, C. and McNally, L. (2005). Scale structure, degree modification, and the semantics of gradable predicates. \emph{Language}, 81(2), 345--381.
+\bibitem[Lewis(1996)]{Lewis1996} Lewis, D. (1996). Elusive knowledge. \emph{Australasian Journal of Philosophy}, 74(4), 549--567.
+\bibitem[MacFarlane(2005)]{MacFarlane2005} MacFarlane, J. (2005). The assessment sensitivity of knowledge attributions. \emph{Oxford Studies in Epistemology}, 1, 197--233.
+\bibitem[Rysiew(2001)]{Rysiew2001} Rysiew, P. (2001). The context-sensitivity of knowledge attributions. \emph{No\^us}, 35(4), 477--514.
+\bibitem[Schiffer(1996)]{Schiffer1996} Schiffer, S. (1996). Contextualist solutions to scepticism. \emph{Proceedings of the Aristotelian Society}, 96, 317--333.
+\bibitem[Sosa(2000)]{Sosa2000} Sosa, E. (2000). Skepticism and contextualism. \emph{Philosophical Issues}, 10, 1--18.
+\bibitem[Stanley(2004)]{Stanley2004} Stanley, J. (2004). On the linguistic basis for contextualism. \emph{Philosophical Studies}, 119(1--2), 119--146.
+\bibitem[Stanley(2005)]{Stanley2005} Stanley, J. (2005). \emph{Knowledge and Practical Interests}. Oxford University Press.
+\bibitem[Stine(1976)]{Stine1976} Stine, G.~C. (1976). Skepticism, relevant alternatives, and deductive closure. \emph{Philosophical Studies}, 29(4), 249--261.
+\bibitem[Unger(1975)]{Unger1975} Unger, P. (1975). \emph{Ignorance: A Case for Scepticism}. Oxford University Press.
+\bibitem[Williamson(2005)]{Williamson2005} Williamson, T. (2005). Contextualism, subject-sensitive invariantism and knowledge of knowledge. \emph{The Philosophical Quarterly}, 55(219), 213--235.
+\end{thebibliography}
+
+\end{document}

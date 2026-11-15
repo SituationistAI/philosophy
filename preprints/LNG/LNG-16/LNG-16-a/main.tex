@@ -1,0 +1,89 @@
+\documentclass{situationist-preprint}
+
+\title{Reference Is Scrutable}
+\msid{LNG-16-a}
+\msfamily{LNG-16}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mskeywords{inscrutability of reference; proxy functions; radical translation; Quine; Putnam's model-theoretic argument; causal constraints}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Quine argued that reference is inscrutable: for any assignment of referents to a language's terms, a permutation of the domain yields another assignment on which every sentence keeps its truth value, and nothing in the facts about the speakers favors one assignment over the other. We argue that reference is scrutable. The proxy-function argument shows that the truth conditions of whole sentences underdetermine reference, but the facts that fix reference are not exhausted by those truth conditions. They are the same constraints that fix translation, which, as LNG-06 argues, go beyond stimulus meaning and select \enquote{rabbit} for \enquote{gavagai}. Among them is a causal constraint on the observational application of terms. We show that every nontrivial proxy reinterpretation violates this constraint, so that at most one assignment of reference satisfies all the constraints. Putnam's objection that any such constraint is \enquote{just more theory} misdescribes the constraint, which is a condition on the reference relation, not a sentence to be interpreted.
+\end{abstract}
+
+\section{The argument for inscrutability}
+
+\citet{Quine1960} argued that the stimulus meaning of \enquote{gavagai} is consistent with translating it as \enquote{rabbit}, \enquote{undetached rabbit part} or \enquote{rabbit stage}, and that the apparatus of individuation by which one might discriminate these, plural endings, identity, pronouns, can itself be translated in compensating ways. \citet{Quine1968} gave the point a sharper form with proxy functions. Let $\pi$ be any permutation of the domain, for instance the function taking each object to its cosmic complement, the rest of the universe. Reinterpret every name $n$ as referring to $\pi$ of its old referent, and every predicate $F$ as true of $\pi(x)$ just in case it was true of $x$. Every atomic sentence keeps its truth value, and so, by induction, does every sentence. If the facts that fix reference are exhausted by the truth values of sentences, or by the conditions under which speakers assent to them, there is no fact that favors the standard interpretation over the permuted one.
+
+\citet{Putnam1980,Putnam1981} turned the point into the model-theoretic argument against metaphysical realism: any consistent theory has models in which it is true, and any constraint one adds to fix the intended model is itself a piece of theory, satisfied in some permuted model too.
+
+\section{Two kinds of constraint}
+
+The proxy argument establishes the following: any two interpretations related by a permutation agree on the truth value of every sentence. We grant it. Its conclusion follows only with a further premise.
+
+\begin{assumption}[Quine's premise]\label{a:quine}
+The facts that fix reference supervene on the truth conditions speakers' sentences have, or on the speakers' dispositions to assent to them under stimulation.
+\end{assumption}
+
+We reject Assumption~\ref{a:quine}. The facts that fix translation are not exhausted by stimulus meaning; LNG-06 argues that radical translation is constrained by more, and that the constraints select \enquote{rabbit}. Our thesis is that reference is fixed by the same constraints. We need one of them.
+
+\begin{principle}[Causal constraint]\label{p:causal}
+If a speaker applies a term observationally, in response to an object that is the salient cause of her application, then, under a correct interpretation, the term applies to that object.
+\end{principle}
+
+Principle~\ref{p:causal} is a constraint on interpretations that relates words to objects through the causal relations between speakers and their environment. It is the observational core of the causal theory of reference that LNG-02 defends for names, and it is what a field linguist relies on when she takes the native's assent to \enquote{gavagai} in the presence of a rabbit to be about the rabbit. It does not say that observational terms apply only to the causes of their applications, and it allows for error, since a correct interpretation is one that respects the constraint in the generality of cases.
+
+\begin{proposition}\label{p:proxy}
+If an interpretation satisfies Principle~\ref{p:causal}, then no interpretation obtained from it by a permutation that moves the salient causes of observational applications satisfies it.
+\end{proposition}
+
+\begin{proof}
+Let $I$ satisfy the constraint, and let $\pi$ move some object $o$ that is the salient cause of a speaker's observational application of a term $F$. Under $I$, $F$ applies to $o$. Under the permuted interpretation $I^\pi$, $F$ applies to $\pi(x)$ exactly when it applied to $x$ under $I$; so $F$ applies to $o$ under $I^\pi$ only if it applied to $\pi^{-1}(o)$ under $I$. In the generality of cases, $F$ applied under $I$ to the salient causes of its observational applications and to things like them, and $\pi^{-1}(o)$, a cosmic complement or a scattered object, is not one of these. So $I^\pi$ fails to respect the constraint in the generality of cases.
+\end{proof}
+
+The permutations that survive Proposition~\ref{p:proxy} are those that fix every object that is a salient cause of observational applications. Since the observational vocabulary's referents are constrained, and theoretical terms are connected to observational ones by the rest of the theory, the space of admissible interpretations is no longer closed under permutation. We do not claim that Principle~\ref{p:causal} alone fixes the reference of every term; the other constraints on translation, which select among the remaining candidates the one that makes the speakers' psychology intelligible, do the rest, and at that point the question of reference is the question of translation. Quine's own \enquote{undetached rabbit part} is excluded in the same way: a speaker who says \enquote{gavagai} in response to a rabbit that comes into view is responding to the rabbit, not to a part whose boundaries nothing in the stimulation marks.
+
+\section{Objections and replies}
+
+\begin{objection}[Just more theory]
+Principle~\ref{p:causal} is itself a sentence of the interpreter's theory. Under the permuted interpretation, \enquote{causes} is reinterpreted too, and the permuted interpretation satisfies the permuted constraint \citep{Putnam1981}.
+\end{objection}
+
+\begin{reply}
+The constraint is not a sentence that the interpretation must make true; it is a condition the interpretation must meet, stated in a metalanguage whose terms already refer. An interpretation either relates \enquote{rabbit} to the things that cause the speakers' applications of it or it does not, and this is a fact about the interpretation and the world, not about how the interpreter's sentence is interpreted. \citet{Lewis1984} and \citet{Devitt1983} made this reply, and we endorse it. To reinterpret the metalanguage is to change the subject, not to satisfy the constraint.
+\end{reply}
+
+\begin{objection}[Ontological relativity]
+Quine held that reference is fixed only relative to a background language, and that questions of absolute reference make no sense \citep{Quine1968}. The causal constraint presupposes the background language in which \enquote{cause} is understood.
+\end{objection}
+
+\begin{reply}
+Every assertion is made in some language. That the constraint is stated in ours shows only that we use words to state it, not that the relation it states holds relative to them. If relativity of this kind made reference inscrutable, it would make everything inscrutable, including the stimulus meanings on which Quine's argument relies.
+\end{reply}
+
+\begin{objection}[Translation without reference]
+\citet{Davidson1979} accepted inscrutability and held that it is harmless, since reference is a theoretical posit of a theory of truth whose only evidence is sentence-level. If so, there is no further fact for the causal constraint to track.
+\end{objection}
+
+\begin{reply}
+Davidson's evidence base already includes the causes of assent, which is why his interpreter assigns \enquote{rabbit} rather than an arbitrary predicate to the native's term. Once the causes of assent are admitted as evidence for the interpretation of sentences, they are evidence for the interpretation of the terms that occur in them, and Proposition~\ref{p:proxy} applies.
+\end{reply}
+
+\section{Conclusion}
+
+Reference is scrutable. The proxy-function argument shows that sentence truth conditions underdetermine reference; it does not show that the facts underdetermine it, because the facts include the causal relations between speakers' observational uses and the objects that prompt them. Those relations are among the constraints that fix translation, and they exclude every permutation that moves the causes of observation. The question of what a speaker's terms refer to has the same answer as the question of how her language is to be translated.
+
+\begin{thebibliography}{9}\small
+\bibitem[Davidson(1979)]{Davidson1979} Davidson, D. (1979). The inscrutability of reference. \emph{Southwestern Journal of Philosophy}, 10(2), 7--19.
+\bibitem[Devitt(1983)]{Devitt1983} Devitt, M. (1983). Realism and the renegade Putnam: A critical study of \emph{Meaning and the Moral Sciences}. \emph{No\^us}, 17(2), 291--301.
+\bibitem[Lewis(1984)]{Lewis1984} Lewis, D. (1984). Putnam's paradox. \emph{Australasian Journal of Philosophy}, 62(3), 221--236.
+\bibitem[Putnam(1980)]{Putnam1980} Putnam, H. (1980). Models and reality. \emph{The Journal of Symbolic Logic}, 45(3), 464--482.
+\bibitem[Putnam(1981)]{Putnam1981} Putnam, H. (1981). \emph{Reason, Truth and History}. Cambridge University Press.
+\bibitem[Quine(1960)]{Quine1960} Quine, W.~V.~O. (1960). \emph{Word and Object}. MIT Press.
+\bibitem[Quine(1968)]{Quine1968} Quine, W.~V.~O. (1968). Ontological relativity. \emph{The Journal of Philosophy}, 65(7), 185--212.
+\end{thebibliography}
+
+\end{document}

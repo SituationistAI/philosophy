@@ -1,0 +1,334 @@
+\documentclass{situationist-preprint}
+
+\title{Absolute Generality Defended}
+\msid{LOG-08-a}
+\msfamily{LOG-08}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_08.lean}
+\mskeywords{absolute generality; unrestricted quantification; Russell's paradox; indefinite extensibility; plural quantification; all-in-one principle; generality relativism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can we quantify over absolutely everything? Generality relativists answer no: Russell's paradox shows that for any domain we quantify over, there is an object, the Russell set of the domain, that lies outside it, so that no domain contains everything. We argue that absolute generality is coherent and that Russell's paradox does not threaten it. The argument from Russell has two premises besides absolute generality: that the things in any domain form a set, which Cartwright called the all-in-one principle, and that sets are among the things there are. We prove that the all-in-one principle fails over every domain, restricted or unrestricted, and that the relativist's extensibility premise, stated with the generality it needs, fails over every domain as well. What Russell's argument refutes is therefore the all-in-one principle, which the relativist and the absolutist must both give up. Over the domain of everything, every condition determines a plurality, and there is no universal set and no Russell set; none of this is a contradiction. We then give the positive case for absolute generality from the expressibility of the relativist's own thesis, from generalizations about kinds and from the generality of logic. The main results are formalized in Lean, and the central lemma is constructively valid.
+\end{abstract}
+
+\section{The problem}
+
+Metaphysicians say that everything is physical, or that nothing is both round and square, or that everything is self-identical. Logicians say that a logical truth is true however its non-logical vocabulary is interpreted, and that the logical constants are invariant under all permutations of the domain of objects (LOG-16). Such claims purport to concern absolutely everything: not everything in the room, or every physical object, or every set, but everything whatever. The question of this manuscript is whether such quantification is possible. Can the quantifier \enquote{everything}, in a suitable context, range over absolutely everything there is?
+
+Two positions divide the literature. \emph{Absolutists} answer yes. \citet{Cartwright1994} argued that unrestricted quantification is presupposed by ordinary reasoning, and that the arguments against it rest on a principle he called the all-in-one principle; \citet{Lewis1991}, \citet{Boolos1984}, \citet{McGee2000} and \citet{Williamson2003} defended absolute generality on different grounds, and \citet{Williamson2003} gave the most systematic case. \emph{Generality relativists}, or restrictionists, answer no: every domain of quantification can be extended, so that whatever we take ourselves to quantify over, there is something more. The most influential source of the relativist position is \citet{Dummett1991}, whose notion of indefinite extensibility was designed to explain the set-theoretic paradoxes; it was developed by \citet{Parsons1974}, \citet{Glanzberg2004}, \citet{Fine2006} and \citet{Hellman2006}, and is defended at book length by \citet{Studd2019}. The papers collected by \citet{RayoUzquiano2006} give the state of the debate at mid-point.
+
+Three arguments have been offered against absolute generality. The \emph{argument from Russell} holds that for any domain, the things in it that are not members of themselves form a set that cannot be in the domain, so that no domain is all-inclusive. The \emph{semantic argument} holds that a domain of quantification must be a set, and that there is no set of everything. The \emph{argument from indeterminacy} holds that nothing in our use of \enquote{everything} could select an absolutely unrestricted interpretation from among the restricted ones. The first is the central one, since the second is a version of it applied to the semantics, and the third, if it worked, would apply equally to restricted quantifiers.
+
+We argue that absolute generality is coherent and that Russell's paradox does not threaten it. Section~\ref{s:frame} isolates the premises of the argument from Russell. Section~\ref{s:russell} proves that the premise the argument actually refutes is the all-in-one principle, and that this principle fails over every domain, so that the argument cannot discriminate between absolute and restricted quantification. Section~\ref{s:models} gives models. Section~\ref{s:case} gives the positive case for absolute generality, and Section~\ref{s:variants} applies the diagnosis to the semantic, propositional and ordinal versions of the paradox.
+
+\section{A short history of the debate}\label{s:history}
+
+\subsection{Russell and the limits of classes}
+
+\citet{Russell1903} discovered that the class of all classes that are not members of themselves would be a member of itself if and only if it were not. His first diagnosis was that some propositional functions do not determine classes, and in \citet{Russell1906} he surveyed three ways of saying which ones: the zigzag theory, on which only sufficiently simple functions determine classes; the theory of limitation of size, on which only functions satisfied by not too many things do; and the no-classes theory, on which there are no classes at all and talk of classes is a façon de parler. By \citet{Russell1908} he had adopted the theory of types, motivated by the vicious circle principle: no totality can contain members definable only in terms of that totality. Russell drew from this the conclusion that a statement about \enquote{all propositions} or \enquote{all properties} is meaningless unless restricted to a type, and his position is the first form of generality relativism. It is notable that Russell's restriction applied to quantification over propositions and propositional functions, entities of higher type; his own logic contained a quantifier over all individuals, which was not restricted.
+
+\subsection{Zermelo and the open-ended hierarchy}
+
+\citet{Zermelo1908} replaced naive comprehension by the axiom of separation: given a set, the members of it that satisfy a condition form a set. Separation does not let one form the set of all things satisfying a condition, only the set of things in a given set satisfying it. The paradox becomes a theorem: there is no universal set. \citet{Zermelo1930} went further and described the universe of sets as an unending sequence of models, each a set in the next; no model is the whole, and the paradoxes show only that each model can be extended. This picture inspired later relativists, though Zermelo himself was concerned with the open-endedness of set theory rather than of quantification in general.
+
+\subsection{Indefinite extensibility}
+
+\citet{Dummett1963,Dummett1991} introduced the term \enquote{indefinitely extensible} for concepts such as \emph{set}, \emph{ordinal} and \emph{cardinal}: concepts such that, given any definite totality of things falling under them, we can characterize a further thing falling under them that is not in the totality. Dummett took the lesson of the paradoxes to be that quantification over the instances of an indefinitely extensible concept is not quantification over a determinate totality, and he concluded that such quantification obeys intuitionistic rather than classical logic. \citet{Parsons1974} gave a contextualist variant: after we reason about \enquote{all sets} and conclude that their Russell set is not a set in the original range, the range of \enquote{all sets} in subsequent discourse has expanded. \citet{Glanzberg2004,Glanzberg2006} generalized the contextualist view from sets to quantification in general: every context provides a domain, and reflection on any domain produces a wider one.
+
+\subsection{The absolutist response}
+
+\citet{Cartwright1994} identified the principle on which the relativist arguments depend: the \emph{all-in-one principle}, that the objects over which a quantifier ranges form a set or some other single object. Without it, he argued, the argument from Russell collapses, and the principle is not one we have reason to believe. \citet{Boolos1984,Boolos1985} had already shown how to do without it in semantics: plural quantification lets us say that there are some things that are all and only the objects satisfying a condition without saying that there is a set of them. \citet{Lewis1991} built his metaphysics of classes on unrestricted mereology and plural quantification. \citet{Williamson2003} argued that generality relativism cannot be coherently stated and that kind generalizations require absolutely unrestricted quantifiers, and drew the moral that interpretations must be represented by higher-order rather than first-order entities. \citet{RayoUzquiano1999} and \citet{RayoWilliamson2003} developed the model theory: with a second-order or plural metalanguage, one can define validity for absolutely unrestricted languages and prove completeness. \citet{McGee2000} argued that the meaning of the unrestricted quantifier is fixed by its inferential role, so that the argument from indeterminacy fails.
+
+\subsection{Recent work}
+
+Since the collection of \citet{RayoUzquiano2006}, the debate has moved in three directions. The first is modal: \citet{Fine2006} proposed that the relativist's thesis be stated with a postulational modality, \enquote{however the domain is extended}, and \citet{Linnebo2010,Linnebo2013} developed a potentialist set theory in which the hierarchy of sets is never completed. \citet{Studd2019} combines this with a theory of interpretations to give the most developed relativist position. The second is the analysis of indefinite extensibility itself: \citet{Uzquiano2015} distinguishes several notions of extensibility and argues that the absolutist can accept some of them, and \citet{Warren2017} connects the debate to quantifier variance. The third is the logic of plurals: \citet{FlorioLinnebo2021} examine whether plural logic can be the absolutist's metalanguage, and argue that it brings back questions of extensibility at the level of pluralities. We take up these developments in Sections~\ref{s:case} and~\ref{s:obj}.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:domain}
+The \emph{absolutely general domain} is everything there is. A quantifier is \emph{absolutely general} if its domain is the absolutely general domain. \emph{Membership} is a relation between objects. Sets, if there are any, are among the objects.
+\end{definition}
+
+\begin{definition}\label{d:codes}
+Let $R$ be a binary relation on a domain. An object $y$ \emph{codes} a condition $P$ with respect to $R$ if, for every $x$ in the domain, $x$ bears $R$ to $y$ if and only if $x$ satisfies $P$.
+\end{definition}
+
+\begin{definition}\label{d:collapse}
+\emph{Collapse}, or the \emph{all-in-one principle}, holds over a domain with respect to $R$ if every condition on the domain is coded, with respect to $R$, by some object of the domain.
+\end{definition}
+
+\begin{definition}\label{d:ext}
+The \emph{extensibility premise} holds over a domain with respect to $R$ if, for every subdomain $S$, there is an object $y$ of the domain such that, for every $x$ in $S$, $x$ bears $R$ to $y$ if and only if $x$ does not bear $R$ to itself.
+\end{definition}
+
+Definition~\ref{d:codes} is stated for an arbitrary relation $R$ because the argument from Russell does not depend on what membership is: it applies to membership in sets, to the relation between an object and a property, to the relation between an object and an interpretation of a predicate, and to any relation by which objects might represent conditions on objects. Definition~\ref{d:ext} states the premise on which the relativist's argument turns: every domain, however wide, has a Russell object, an object that codes the Russell condition among the things in the domain. The premise is stated with the subdomain quantifier \enquote{for every subdomain} unrestricted within the domain, as it must be if the relativist's thesis is to apply to every domain we might quantify over.
+
+\begin{principle}[Plural comprehension]\label{p:plural}
+For every condition, there are some things that are all and only the things that satisfy it, or nothing satisfies it.
+\end{principle}
+
+Principle~\ref{p:plural} is a principle of plural logic \citep{Boolos1984}. It says that conditions determine pluralities, not that pluralities are objects. LOG-09 argues that second-order and plural quantification is logic and not set theory in disguise, and we rely on that conclusion: Principle~\ref{p:plural} carries no commitment to objects beyond those that satisfy the condition.
+
+\begin{assumption}[Separation]\label{a:sep}
+For any object $a$ and any condition $P$, some object has as members exactly the members of $a$ that satisfy $P$.
+\end{assumption}
+
+Assumption~\ref{a:sep} is the axiom of separation of \citet{Zermelo1908}, generalized to treat non-sets as having no members. It is accepted by absolutists and relativists alike, and it is justified on the iterative conception of set \citep{Boolos1971}: a set is formed from things already available, and a subcollection of a set is formed from things already available.
+
+\section{What Russell's argument shows}\label{s:russell}
+
+The argument from Russell, in the form in which relativists use it, runs as follows. Suppose that some quantifier ranges over absolutely everything. The things it ranges over form a set, and so do the things among them that are not members of themselves. Call the latter set $r$. Since the quantifier ranges over everything, and $r$ is something, $r$ is in its range; so $r$ is a member of itself if and only if it is not. Therefore no quantifier ranges over absolutely everything.
+
+The argument uses three premises: absolute generality, the all-in-one principle in the form \enquote{the things in a domain that satisfy a condition form a set}, and the claim that sets are among the things there are. The relativist rejects the first. Our thesis is that the second is the one the argument refutes, and that it is refuted whether or not the first is true.
+
+\begin{lemma}[Russell's lemma]\label{l:russell}
+For any domain and any binary relation $R$ on it, no object codes the condition \enquote{does not bear $R$ to itself}.
+\end{lemma}
+
+\begin{proof}
+Suppose $y$ codes the condition. Then, for every $x$, $x$ bears $R$ to $y$ if and only if $x$ does not bear $R$ to itself. Taking $x$ to be $y$, $y$ bears $R$ to itself if and only if it does not. If $y$ bore $R$ to itself, it would not; so it does not; but then it does. This is a contradiction, and the reasoning uses no classical principle: it is valid in intuitionistic logic.
+\end{proof}
+
+\begin{theorem}[Neutrality]\label{t:neutral}
+Collapse fails over every domain, with respect to every relation, whether or not the domain is absolutely general.
+\end{theorem}
+
+\begin{proof}
+If Collapse held, the condition of Lemma~\ref{l:russell} would be coded by some object of the domain.
+\end{proof}
+
+Theorem~\ref{t:neutral} is the first part of the diagnosis. The argument from Russell, stated for an arbitrary domain, refutes the all-in-one principle for that domain. Its conclusion does not depend on whether the domain is everything, everything in the room or the natural numbers. A premise that is false of every domain cannot be used to show that some domains are impossible.
+
+The relativist will answer that she does not assert Collapse. What she asserts is that the Russell object of a domain exists but lies \emph{outside} the domain, so that the domain can be extended. The next lemma states what is correct in this.
+
+\begin{lemma}[Escape]\label{l:escape}
+Let $S$ be a subdomain of a domain, and suppose that an object $y$ codes the Russell condition among the members of $S$: for every $x$ in $S$, $x$ bears $R$ to $y$ if and only if $x$ does not bear $R$ to itself. Then $y$ is not in $S$.
+\end{lemma}
+
+\begin{proof}
+If $y$ were in $S$, the hypothesis applied to $y$ itself would give that $y$ bears $R$ to itself if and only if it does not.
+\end{proof}
+
+Lemma~\ref{l:escape} is the formal content of indefinite extensibility. Given a domain $S$ and a Russell object for $S$, the Russell object is outside $S$, and $S$ together with it forms a larger domain. To conclude that \emph{every} domain can be extended, the relativist needs the premise that every domain has a Russell object, which is the extensibility premise of Definition~\ref{d:ext}.
+
+\begin{theorem}\label{t:ext}
+The extensibility premise fails over every domain.
+\end{theorem}
+
+\begin{proof}
+Apply the premise to the subdomain consisting of everything in the domain. It yields an object $y$ of the domain that codes the Russell condition among the members of that subdomain. By Lemma~\ref{l:escape}, $y$ is not in the subdomain; but every object of the domain is in it.
+\end{proof}
+
+Theorem~\ref{t:ext} is the second part of the diagnosis. Whatever domain the relativist's quantifiers range over, the extensibility premise, stated with those quantifiers, is false. The relativist can maintain that every domain is extensible only by stating the premise with a quantifier over domains that ranges more widely than any domain over which her object quantifiers range, and then the question is what that wider quantifier ranges over. We return to this point in Section~\ref{s:case}.
+
+The same argument, applied to functions from objects to conditions rather than to relations, gives Cantor's theorem.
+
+\begin{proposition}[Cantor]\label{p:cantor}
+For any domain and any assignment of conditions to objects, some condition is assigned to no object.
+\end{proposition}
+
+\begin{proof}
+Let $f$ assign to each object $y$ a condition $f(y)$. Consider the condition satisfied by $x$ just in case $x$ does not satisfy $f(x)$. If it were $f(y)$, then $y$ would satisfy $f(y)$ if and only if it did not.
+\end{proof}
+
+Proposition~\ref{p:cantor} shows that there are more conditions on the objects of any domain than there are objects in it. It holds for the absolutely general domain as for any other. Its moral is that conditions, or pluralities, or interpretations of predicates, cannot all be represented by objects, and this is precisely the moral that \citet{Williamson2003} drew from the semantic version of the paradox: interpretations are not objects in the range of the first-order quantifiers. It is not the moral that the first-order quantifiers cannot range over everything.
+
+We now apply the results to the absolutely general domain itself.
+
+\begin{theorem}\label{t:nouniv}
+Given Separation, nothing has every object as a member.
+\end{theorem}
+
+\begin{proof}
+Suppose $u$ has every object as a member. By Assumption~\ref{a:sep}, some object $r$ has as members exactly the members of $u$ that are not members of themselves, that is, exactly the objects that are not members of themselves. This contradicts Lemma~\ref{l:russell}.
+\end{proof}
+
+\begin{theorem}[Russell's paradox is no threat]\label{t:main}
+Over the absolutely general domain: every condition determines a plurality; no object is the set of all objects that are not members of themselves; Collapse fails; and, given Separation, there is no universal set. These results are jointly consistent with the domain's being absolutely general, and none of them is a contradiction.
+\end{theorem}
+
+\begin{proof}
+The first clause is Principle~\ref{p:plural}. The second is Lemma~\ref{l:russell} applied to membership, the third is Theorem~\ref{t:neutral}, and the fourth is Theorem~\ref{t:nouniv}. Their consistency is shown by the model of Proposition~\ref{p:twomodel}, which satisfies Separation and the four clauses with its quantifiers ranging over the whole of its domain.
+\end{proof}
+
+Theorem~\ref{t:main} shows that the absolutist who rejects the all-in-one principle loses nothing she needs. She can say that the objects that are not members of themselves are some things; she cannot say that they form a set, and she does not want to. What she gives up, Collapse, the relativist must give up too, by Theorem~\ref{t:neutral}. The two positions therefore differ not over Collapse but over the extensibility premise, which the relativist accepts and the absolutist rejects; and by Theorem~\ref{t:ext} that premise, stated with absolutely general quantifiers over domains, is inconsistent.
+
+\section{Models and the iterative conception}\label{s:models}
+
+The results of Section~\ref{s:russell} are consistency-neutral: they say what is refuted, not that what remains is consistent. Two small models show that the absolutist's assumptions are jointly satisfiable with quantifiers ranging over the whole domain of the model.
+
+\begin{proposition}\label{p:twomodel}
+Consider a domain of two objects, the empty set and its singleton, with membership holding only between the empty set and the singleton. Separation holds, and no object has every object as a member.
+\end{proposition}
+
+\begin{proof}
+The empty set has no members, so every separation from it is the empty set. The members of the singleton satisfying a condition are either its one member, if that member satisfies the condition, or none; in the first case the singleton itself has exactly those members, in the second the empty set does. The singleton is a member of nothing, so nothing has every object as a member.
+\end{proof}
+
+The model is small, but its point is general. Its quantifiers range over everything in it, membership is well behaved, and Russell's argument proves there that the singleton and the empty set do not jointly form a set, which is true. The cumulative hierarchy of sets is a model of the same kind on a vast scale: every set is formed at some stage from sets formed earlier, the totality of sets is formed at no stage, and quantifiers over all sets range over all of them. Separation holds because a subcollection of a set is formed at the same stage as the set; Collapse fails because the plurality of all sets is not bounded in rank \citep{Boolos1971}. The absolutist's universe contains the hierarchy and possibly much else; nothing in the iterative conception requires that the hierarchy be extendible beyond itself.
+
+The second model shows how the relativist's observations can be true without her conclusion.
+
+\begin{proposition}\label{p:bounded}
+In the domain of natural numbers with $x < y$ as membership, every bounded subdomain has a Russell object outside it, but the whole domain has none.
+\end{proposition}
+
+\begin{proof}
+Let $S$ be bounded by $n$, so that every member of $S$ is less than $n$. No number is less than itself, so the Russell condition is satisfied by every number, and for each $x$ in $S$ we have $x < n$; hence $n$ codes the Russell condition among the members of $S$, and $n$ is not in $S$ since $n < n$ fails. For the whole domain, an object coding the Russell condition would be a number greater than every number, including itself.
+\end{proof}
+
+Proposition~\ref{p:bounded} represents in miniature the situation the relativist describes. Every bounded domain is extended by a Russell object; reflection on any such domain carries us beyond it. But the whole domain exists, quantification over it is unproblematic, and the process of extension does not apply to it. The relativist's data, that every domain we reflect on in practice is extensible, are explained by the fact that the domains we reflect on in practice are bounded, as every set is bounded in rank. The model also shows that an actually infinite domain is not threatened by the open-endedness of the process that generates it, which is consistent with MTH-10's conclusion that actual infinities exist.
+
+\section{The case for absolute generality}\label{s:case}
+
+Sections~\ref{s:russell} and~\ref{s:models} remove the main argument against absolute generality. We now give the positive case.
+
+\subsection{Expressibility}
+
+The relativist's thesis is that no quantifier ranges over absolutely everything, or, in Dummett's terms, that every domain can be extended. If the quantifier in \enquote{every domain} is absolutely general, the thesis refutes itself, since it uses what it says cannot be used. If the quantifier is restricted, the thesis is the claim that every domain in some restricted range can be extended, which the absolutist accepts: in Proposition~\ref{p:bounded}, every bounded domain is extensible. The relativist thus faces a dilemma in stating her view \citep{Lewis1991,Williamson2003}. Theorem~\ref{t:ext} gives the dilemma a precise form: the extensibility premise, stated with a quantifier over all subdomains of any domain whatever, is inconsistent.
+
+The relativist's best reply is to deny that her view should be stated by a universal generalization at all. \citet{Lavine2006}, in the tradition of Russell's typical ambiguity, proposes that it be expressed schematically, by a rule rather than an assertion: given any domain, one may infer that it can be extended. \citet{Fine2006} proposes that it be expressed with a postulational modality: however the domain is extended, it can be extended further. \citet{Studd2019} combines the modal approach with a theory of interpretation. We do not think either device succeeds. A schema cannot be negated or embedded, so the relativist who states her view schematically cannot say that the absolutist is wrong, only refuse to accept what he says \citep{Williamson2003}. The modal device faces the dilemma one level up: the claim that \emph{necessarily} every domain can be extended quantifies over all the possible extensions, and either this quantification is absolutely general or it is not.
+
+\subsection{Kind generalizations}
+
+\citet{Williamson2003} observed that generalizations about kinds have an absolutely general character. \enquote{No donkey talks} is not true merely because no donkey in some domain talks; it would be refuted by a talking donkey anywhere, including a donkey that some restricted domain omitted. The relativist can say that the generalization is to be read as holding of every domain, but then the generalization over domains must be absolutely general, and the dilemma of the previous subsection recurs. The same holds for the axioms of set theory: \enquote{every set has a power set} is meant to apply to every set, not to every set in some domain that further reflection would extend.
+
+\subsection{The generality of logic}
+
+Logical truths are true of everything. The logical constants are those operations that are invariant under all permutations of the domain (LOG-16), and the domain in question is the domain of everything, since a permutation that left some objects out would not test topic neutrality. Logical consequence is truth-preservation in all models, and LOG-06 argues that the class of models must include one isomorphic to the actual world. A model whose domain is everything is not a set, by Theorem~\ref{t:nouniv}; but it is a plurality, and plural or second-order model theory provides it \citep{Boolos1985,RayoUzquiano1999,RayoWilliamson2003}. If absolute generality were incoherent, logic would have no subject matter it could state.
+
+\subsection{Semantics without the all-in-one principle}
+
+The semantic argument holds that a quantifier's domain must be a set. The premise is a remnant of the all-in-one principle. In a plural metalanguage, a quantifier is interpreted by some things, its domain, and no set of them is required; in a second-order metalanguage, by a condition. \citet{RayoWilliamson2003} prove completeness for absolutely unrestricted first-order languages in this setting. The interpretation of a predicate letter, likewise, is given by a second-order entity, not by an object; Proposition~\ref{p:cantor} shows why it must be. The semantic version of Russell's paradox then has the same diagnosis as the set-theoretic version: what it refutes is the assumption that interpretations are objects in the first-order domain.
+
+\section{Further cases}\label{s:variants}
+
+The diagnosis applies to every paradox that has been used against absolute generality, because each has the structure of Lemma~\ref{l:russell} or Proposition~\ref{p:cantor}.
+
+\paragraph{Properties.} If properties are objects, consider the property of being a property that does not instantiate itself. By Lemma~\ref{l:russell}, applied to instantiation, no object is that property. The lesson is that not every condition determines a property-object, or that properties are higher-order entities rather than objects. Neither lesson restricts the first-order quantifier.
+
+\paragraph{Interpretations.} Suppose that interpretations of a monadic predicate letter are objects, and that for every condition some interpretation assigns the letter that condition as its extension. By Proposition~\ref{p:cantor}, applied to the function from interpretations to extensions, some condition is the extension under no interpretation. This is the paradox that \citet{Williamson2003} uses to argue that a semantics for absolutely general languages must interpret predicates by higher-order means. We agree, and we note that this requires second-order quantification to be logic, as LOG-09 argues, but not that the first-order domain be restricted.
+
+\paragraph{Propositions and worlds.} \citet{Kaplan1995} observed that if for every set of worlds there is a proposition true at exactly those worlds, and if for every proposition there is a world at which it alone is the proposition that someone is entertaining, then there are as many worlds as sets of worlds, contrary to Cantor's theorem. Proposition~\ref{p:cantor} gives the diagnosis: one of the two correspondences fails, and which one is a substantive question in the metaphysics of propositions. Restricting the first-order quantifier would not help, since the argument applies to any domain.
+
+\paragraph{Ordinals.} The Burali-Forti paradox \citep{BuraliForti1897} shows that the ordinals, well-ordered by magnitude, cannot themselves have an ordinal, since that ordinal would be greater than every ordinal including itself. The argument is the order-theoretic analogue of Proposition~\ref{p:bounded}: every bounded collection of ordinals has a least strict upper bound, and the collection of all ordinals has none. The ordinals form a plurality and not a set; quantification over all of them is unproblematic.
+
+\paragraph{Pluralities.} \citet{FlorioLinnebo2021} ask whether the absolutist faces a paradox at the level of pluralities: if every plurality were one of the things, the plurality of things that are not among themselves would yield a contradiction. On our view, this is again Lemma~\ref{l:russell}, applied to the relation of being one of, and it shows that pluralities are not objects, which is what Principle~\ref{p:plural} presupposes. The open question is whether plural quantification itself can be absolutely general at its own level, and we believe it can, for the same reasons; but the thesis of this manuscript concerns first-order quantification.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Indefinite extensibility]
+The concept \emph{set} is indefinitely extensible \citep{Dummett1991}: given any definite totality of sets, we can define a set not in it. Theorem~\ref{t:ext} assumes that the relativist's premise quantifies over all subdomains, including the whole domain. But the premise concerns only definite totalities, and the whole domain of sets is not a definite totality. The theorem therefore attacks a premise no relativist holds.
+\end{objection}
+
+\begin{reply}
+If the extensibility premise is restricted to definite totalities, everything turns on what a definite totality is. If definite totalities are the bounded ones, those that form sets, then the restricted premise is true, as Proposition~\ref{p:bounded} illustrates, and the absolutist accepts it; it yields no argument against an absolutely general domain, which is not bounded. If the relativist's notion of a definite totality is such that every domain of quantification is one, then the premise is the unrestricted premise and Theorem~\ref{t:ext} applies. The relativist needs a notion on which every domain of quantification is definite enough to be extended, and the theorem shows that there is no such notion on which the premise is consistent. Dummett's own conclusion, that quantification over indefinitely extensible domains is intuitionistic, does not help: Lemma~\ref{l:russell} and Theorem~\ref{t:ext} are intuitionistically valid, as the formalization confirms.
+\end{reply}
+
+\begin{objection}[Contextualism]
+Reasoning about a domain changes the context. When we consider the Russell set of the things in our domain, the context shifts to one in which the quantifier ranges more widely, and it is this shift, not Collapse, that the argument from Russell exhibits \citep{Parsons1974,Glanzberg2004}.
+\end{objection}
+
+\begin{reply}
+The contextualist must say why the context shifts. On Glanzberg's account, the shift is driven by a principle of reflection: given the domain of a context, we can always form a set of its members, or an extension of a predicate that holds of them, and so make them the subject of further quantification. This principle is Collapse relativized to a wider domain: it says that the things in any domain are coded by an object, perhaps outside the domain. Applied to the context in which the quantifier ranges over everything, it is the extensibility premise, and Theorem~\ref{t:ext} applies. Without the reflection principle, nothing in the reasoning forces a shift: the reasoning shows that some things, the members of the domain that are not members of themselves, form no set, and this can be stated in the original context with a plural quantifier.
+\end{reply}
+
+\begin{objection}[Semantics]
+A model-theoretic semantics assigns a set to every quantifier as its domain. There is no set of everything, by Theorem~\ref{t:nouniv}. Therefore no quantifier, as interpreted by our best semantics, ranges over everything.
+\end{objection}
+
+\begin{reply}
+The objection identifies semantics with set-theoretic model theory, and the identification is optional. A semantics stated in a plural or second-order metalanguage assigns to a quantifier some things as its domain \citep{Boolos1985,RayoUzquiano1999}, and \citet{RayoWilliamson2003} prove that the resulting notion of validity for absolutely unrestricted first-order languages coincides with derivability. Set-theoretic model theory remains adequate for the purpose for which it was designed, the study of first-order validity, because, by an argument of \citet{Kreisel1967}, a first-order sentence is valid in all set-sized models if and only if it is valid in all models whatever. The availability of the set-theoretic semantics is therefore no evidence that set-sized domains are the only ones.
+\end{reply}
+
+\begin{objection}[Indeterminacy]
+Nothing in our use of \enquote{everything} selects an unrestricted interpretation over restricted ones. Any use is compatible with interpretations on which the quantifier ranges over a set-sized domain, as the L\"owenheim--Skolem theorem shows for first-order theories \citep{Putnam1980}. So even if absolute generality is coherent, we cannot achieve it.
+\end{objection}
+
+\begin{reply}
+The argument proves too much: if it showed that \enquote{everything} cannot be unrestricted, it would equally show that \enquote{every natural number} cannot range over just the natural numbers. Where the argument is resisted in the arithmetical case, by appeal to the open-ended character of the induction schema or to the meaning-constituting role of rules, the same resistance is available for the unrestricted quantifier. \citet{McGee2000} argues that the rules of universal instantiation, applied open-endedly to any term that might be introduced, fix the meaning of the unrestricted quantifier: a quantifier that ranged over a restricted domain would fail universal instantiation for a name of an object outside it.
+\end{reply}
+
+\begin{objection}[Quantifier variance]
+There is no single most inclusive meaning for \enquote{everything}. Different languages carve the world into different objects, and in each the unrestricted quantifier ranges over the objects of that language. Absolute generality presupposes that there is a privileged range, and there is not \citep[compare][]{Warren2017}.
+\end{objection}
+
+\begin{reply}
+The thesis of this manuscript is that absolute generality is coherent and that Russell's paradox does not threaten it. Quantifier variance, whatever its merits, does not bear on that thesis: if there are several unrestricted quantifiers, each ranges over everything in its own sense, and in each sense the argument from Russell is answered as in Section~\ref{s:russell}. The variance thesis would show that absolute generality is ambiguous, not that it is incoherent; and it is itself stated by generalizing over all languages and all their quantifiers, which brings back the question whether that generalization is absolutely general.
+\end{reply}
+
+\section{What the result does not establish}
+
+The formal results establish what the argument from Russell refutes: Collapse, over every domain, and the extensibility premise, over every domain. They do not establish that the quantifiers of English, in any particular context, range over absolutely everything; that is the claim of Section~\ref{s:case}, which rests on philosophical argument rather than on a theorem.
+
+They do not establish a particular theory of what there is. The absolutely general domain contains whatever there is, and the results are compatible with its containing sets, properties, possibilia or none of these. They do not settle the debate between the iterative conception and its rivals, nor between platonism and nominalism about sets; Theorem~\ref{t:main} holds on every view on which, if there are sets, Separation holds.
+
+Finally, they do not establish that plural or second-order quantification is free of ontological commitment. That conclusion is argued in LOG-09, and the absolutist's use of plural comprehension depends on it. If the plural quantifier were a quantifier over sets, Principle~\ref{p:plural} would be a version of Collapse, and the position would fail. This is why LOG-08 and LOG-09 stand together.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_08.lean} proves the general results for an arbitrary type and an arbitrary binary relation: coding, Collapse and the extensibility premise are Definitions~\ref{d:codes}, \ref{d:collapse} and~\ref{d:ext}; Lemmas~\ref{l:russell} and~\ref{l:escape}, Theorems~\ref{t:neutral} and~\ref{t:ext} and Proposition~\ref{p:cantor} are proved without axioms. The absolutely general domain and membership are primitive axioms (Definition~\ref{d:domain}), and Separation is an axiom (Assumption~\ref{a:sep}). Plural quantification is represented by quantification over predicates of type \texttt{Obj → Prop}, so that Principle~\ref{p:plural} is a theorem of the ambient higher-order logic. The module also proves Theorems~\ref{t:nouniv} and~\ref{t:main} and Propositions~\ref{p:twomodel} and~\ref{p:bounded}. The main theorem is stated as follows.
+
+\begin{lstlisting}
+theorem russell_no_threat :
+    (∀ P : Obj → Prop, ∃ X : Obj → Prop, ∀ x, X x ↔ P x) ∧
+    (¬ ∃ r, Codes mem r (fun x => ¬ mem x x)) ∧
+    ¬ Collapse Obj mem ∧
+    ¬ ∃ u : Obj, ∀ x, mem x u
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_08.russell_no_threat' depends on axioms:
+ [Philosophy.LOG_08.Obj, Philosophy.LOG_08.mem,
+  Philosophy.LOG_08.separation]
+'Philosophy.LOG_08.extensibility_fails' does not depend on any axioms
+'Philosophy.LOG_08.bounded_extend' does not depend on any axioms
+\end{lstlisting}
+
+The main theorem depends only on the primitives of Definition~\ref{d:domain} and on Separation. It does not depend on the axiom of choice, the law of excluded middle or propositional extensionality, which confirms that the diagnosis is intuitionistically valid. The failure of the extensibility premise (Theorem~\ref{t:ext}) and the bounded-extension model (Proposition~\ref{p:bounded}) use no axioms at all. The consistency claim in Theorem~\ref{t:main} is witnessed by the model of Proposition~\ref{p:twomodel}, which the module verifies.
+
+\section{Conclusion}
+
+Russell's argument proves that, over any domain, the things that are not members of themselves form no set. It proves this for the domain of everything as for any other, and so it refutes the all-in-one principle, not absolute generality. The relativist's extensibility premise, stated with the generality it requires, fails over every domain, and in its restricted form, for bounded domains, it is true and harmless. Over the domain of everything, every condition determines a plurality, there is no universal set and no Russell set, and none of this is a contradiction. The positive case, from the expressibility of the relativist's thesis, from kind generalizations and from the generality of logic, then favors the conclusion that we can quantify over absolutely everything.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boolos(1971)]{Boolos1971} Boolos, G. (1971). The iterative conception of set. \emph{The Journal of Philosophy}, 68(8), 215--231.
+\bibitem[Boolos(1984)]{Boolos1984} Boolos, G. (1984). To be is to be a value of a variable (or to be some values of some variables). \emph{The Journal of Philosophy}, 81(8), 430--449.
+\bibitem[Boolos(1985)]{Boolos1985} Boolos, G. (1985). Nominalist Platonism. \emph{The Philosophical Review}, 94(3), 327--344.
+\bibitem[Burali-Forti(1897)]{BuraliForti1897} Burali-Forti, C. (1897). Una questione sui numeri transfiniti. \emph{Rendiconti del Circolo Matematico di Palermo}, 11, 154--164.
+\bibitem[Cartwright(1994)]{Cartwright1994} Cartwright, R.~L. (1994). Speaking of everything. \emph{No\^us}, 28(1), 1--20.
+\bibitem[Dummett(1963)]{Dummett1963} Dummett, M. (1963). The philosophical significance of G\"odel's theorem. \emph{Ratio}, 5.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{Frege: Philosophy of Mathematics}. Duckworth.
+\bibitem[Fine(2006)]{Fine2006} Fine, K. (2006). Relatively unrestricted quantification. In \citet{RayoUzquiano2006}.
+\bibitem[Florio and Linnebo(2021)]{FlorioLinnebo2021} Florio, S. and Linnebo, {\O}. (2021). \emph{The Many and the One: A Philosophical Study of Plural Logic}. Oxford University Press.
+\bibitem[Glanzberg(2004)]{Glanzberg2004} Glanzberg, M. (2004). Quantification and realism. \emph{Philosophy and Phenomenological Research}, 69(3), 541--572.
+\bibitem[Glanzberg(2006)]{Glanzberg2006} Glanzberg, M. (2006). Context and unrestricted quantification. In \citet{RayoUzquiano2006}.
+\bibitem[Hellman(2006)]{Hellman2006} Hellman, G. (2006). Against \enquote{absolutely everything}! In \citet{RayoUzquiano2006}.
+\bibitem[Kaplan(1995)]{Kaplan1995} Kaplan, D. (1995). A problem in possible-world semantics. In W.~Sinnott-Armstrong, D.~Raffman and N.~Asher (eds), \emph{Modality, Morality, and Belief: Essays in Honor of Ruth Barcan Marcus}, Cambridge University Press, 41--52.
+\bibitem[Kreisel(1967)]{Kreisel1967} Kreisel, G. (1967). Informal rigour and completeness proofs. In I.~Lakatos (ed.), \emph{Problems in the Philosophy of Mathematics}, North-Holland, 138--186.
+\bibitem[Lavine(2006)]{Lavine2006} Lavine, S. (2006). Something about everything: Universal quantification in the universal sense of universal quantification. In \citet{RayoUzquiano2006}.
+\bibitem[Lewis(1991)]{Lewis1991} Lewis, D. (1991). \emph{Parts of Classes}. Blackwell.
+\bibitem[Linnebo(2010)]{Linnebo2010} Linnebo, {\O}. (2010). Pluralities and sets. \emph{The Journal of Philosophy}, 107(3), 144--164.
+\bibitem[Linnebo(2013)]{Linnebo2013} Linnebo, {\O}. (2013). The potential hierarchy of sets. \emph{The Review of Symbolic Logic}, 6(2), 205--228.
+\bibitem[McGee(2000)]{McGee2000} McGee, V. (2000). \enquote{Everything}. In G.~Sher and R.~Tieszen (eds), \emph{Between Logic and Intuition: Essays in Honor of Charles Parsons}, Cambridge University Press, 54--78.
+\bibitem[Parsons(1974)]{Parsons1974} Parsons, C. (1974). Sets and classes. \emph{No\^us}, 8(1), 1--12.
+\bibitem[Putnam(1980)]{Putnam1980} Putnam, H. (1980). Models and reality. \emph{The Journal of Symbolic Logic}, 45(3), 464--482.
+\bibitem[Rayo and Uzquiano(1999)]{RayoUzquiano1999} Rayo, A. and Uzquiano, G. (1999). Toward a theory of second-order consequence. \emph{Notre Dame Journal of Formal Logic}, 40(3), 315--325.
+\bibitem[Rayo and Uzquiano(2006)]{RayoUzquiano2006} Rayo, A. and Uzquiano, G. (eds) (2006). \emph{Absolute Generality}. Clarendon Press.
+\bibitem[Rayo and Williamson(2003)]{RayoWilliamson2003} Rayo, A. and Williamson, T. (2003). A completeness theorem for unrestricted first-order languages. In J.~C. Beall (ed.), \emph{Liars and Heaps: New Essays on Paradox}, Oxford University Press, 331--356.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\bibitem[Russell(1906)]{Russell1906} Russell, B. (1906). On some difficulties in the theory of transfinite numbers and order types. \emph{Proceedings of the London Mathematical Society}, s2-4(1), 29--53.
+\bibitem[Russell(1908)]{Russell1908} Russell, B. (1908). Mathematical logic as based on the theory of types. \emph{American Journal of Mathematics}, 30(3), 222--262.
+\bibitem[Studd(2019)]{Studd2019} Studd, J.~P. (2019). \emph{Everything, More or Less: A Defence of Generality Relativism}. Oxford University Press.
+\bibitem[Uzquiano(2015)]{Uzquiano2015} Uzquiano, G. (2015). Varieties of indefinite extensibility. \emph{Notre Dame Journal of Formal Logic}, 56(1), 147--166.
+\bibitem[Warren(2017)]{Warren2017} Warren, J. (2017). Quantifier variance and indefinite extensibility. \emph{The Philosophical Review}, 126(1), 81--122.
+\bibitem[Williamson(2003)]{Williamson2003} Williamson, T. (2003). Everything. \emph{Philosophical Perspectives}, 17, 415--465.
+\bibitem[Zermelo(1908)]{Zermelo1908} Zermelo, E. (1908). Untersuchungen \"uber die Grundlagen der Mengenlehre I. \emph{Mathematische Annalen}, 65, 261--281.
+\bibitem[Zermelo(1930)]{Zermelo1930} Zermelo, E. (1930). \"Uber Grenzzahlen und Mengenbereiche. \emph{Fundamenta Mathematicae}, 16, 29--47.
+\end{thebibliography}
+
+\end{document}

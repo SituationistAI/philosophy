@@ -1,0 +1,286 @@
+\documentclass{situationist-preprint}
+
+\title{Laws Without Governance}
+\msid{MET-12-a}
+\msfamily{MET-12}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_12.lean}
+\mskeywords{laws of nature; best system account; Humean supervenience; governing conception; scientific explanation; grounding; dispositions}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+On the governing conception, laws of nature make things happen: events occur as they do because the laws require it. On the Humean conception, laws are summaries of what happens. We defend the second. Laws are the axioms of the best system summarizing the mosaic of events, the true deductive system that best balances simplicity and strength in the vocabulary of natural properties; they explain what happens without governing it. The central difficulty for this view is that, if laws are grounded in their instances, they cannot also explain those instances without circularity. We distinguish scientific explanation, which subsumes instances under laws, from grounding, and prove that a law that is partly grounded in its instances cannot govern them, that it can nonetheless explain them, and that the circularity objection depends on a mixed transitivity principle linking grounding and explanation that must be rejected. A toy model shows that lawhood depends on the whole mosaic. We then show how the view accommodates irreducible dispositions: they belong to the mosaic that the best system summarizes, and laws do not ground them. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+Physics states its fundamental principles as laws, and we speak of events as obeying them, as being governed by them, as happening because the laws require it. The question is whether this way of speaking is literally correct. On the \emph{governing conception}, a law is something over and above what happens, which constrains or produces what happens: a relation of necessitation between universals \citep{Dretske1977,Tooley1977,Armstrong1983}, a primitive feature of the world that produces its later states from its earlier ones \citep{Maudlin2007}, or a consequence of the essences of powerful properties \citep{Bird2007}. On the \emph{Humean conception}, a law is a particularly informative summary of what happens: it is a law that all $F$s are $G$s because the distribution of $F$ and $G$ in the world is such that this generalization belongs to the best summary of it \citep{Lewis1973Counterfactuals,Lewis1983,Lewis1994}.
+
+We defend the Humean conception in the form of the best system account. Laws are the axioms of the best system summarizing the mosaic of events: the true deductive system, stated in terms of natural properties, that achieves the best balance of simplicity and strength. Such laws explain what happens, by subsuming it, but do not govern it, since nothing they are could make the mosaic be as it is. The thesis has a negative and a positive half. The negative half, that laws do not govern, is what \citet{Beebee2000} called the non-governing conception of laws. The positive half, that laws nonetheless explain, is what most critics of the Humean view deny, on the ground that an explanation of an event by a law that is itself grounded in that event is circular \citep{Armstrong1983,Maudlin2007,Lange2013}. Our main contribution is an exact statement of the circularity objection and of the principle on which it depends, a proof that a Humean who rejects that principle has a consistent position on which laws explain without governing, and an independent argument that the principle is false.
+
+\subsection{A short history of the problem}\label{s:history}
+
+The naive regularity theory identifies laws with true universal generalizations. It is defeated by accidental generalizations. That every solid sphere of gold has a diameter of less than a mile is true and universal, but not a law; that every solid sphere of uranium-235 has a diameter of less than a mile is a law, or follows from laws, since a sphere of that size would exceed the critical mass \citep{vanFraassen1989}. Nothing in the form of the two generalizations distinguishes them.
+
+\citet[III.iv.1]{Mill1843} suggested that the laws of nature are the fewest and simplest general propositions from which all the uniformities in nature could be deduced. \citet{Ramsey1928} put the same idea in a sharper form, which he later abandoned: laws are the consequences of the axioms of the deductive system that we would adopt if we knew everything and organized it as simply as possible. \citet[ch.~3]{Lewis1973Counterfactuals} made the account precise. A contingent generalization is a law of nature if and only if it appears as a theorem in each of the true deductive systems that achieve a best combination of simplicity and strength. The gold generalization is not a law, because adding it to the best system would cost simplicity and add almost no strength; the uranium generalization is a law, because it follows from the nuclear physics that any best system contains.
+
+The account met an immediate difficulty, which \citet{Lewis1983} identified and answered. Simplicity is relative to the vocabulary in which a system is stated. Let $F$ be a predicate true of exactly the things in the actual world. The single axiom $\forall x\, F x$ is maximally simple and, since it entails every truth about the world, maximally strong; if it counted, every truth would be a law. Lewis's answer was that the candidate systems must be stated in terms of perfectly natural properties, the sparse properties that carve nature at its joints. MET-02 defends a sparse theory of universals of the kind this answer requires: there are few genuine universals, and other properties are constructed from them.
+
+The governing alternative was developed in the same period. \citet{Dretske1977}, \citet{Tooley1977} and \citet{Armstrong1983} held that a law is a second-order relation of necessitation between universals, $N(F, G)$, which entails but is not entailed by the regularity that all $F$s are $G$s. \citet{vanFraassen1989} posed two problems for the view, which have not been solved. The \emph{identification problem} is to say what $N$ is; the \emph{inference problem} is to explain why $N(F, G)$ entails that all $F$s are $G$s. \citet{Lewis1983} put the second point sharply: to call the relation \enquote{necessitation} does not give it the power to necessitate, any more than calling a man \enquote{Armstrong} gives him mighty biceps. \citet{Maudlin2007} proposed instead that laws are primitive and that they produce later states from earlier ones; the view avoids the inference problem by stipulation and pays for it with a primitive whose connection to the course of events is not explained. \citet{Bird2007} proposed that laws flow from the essences of dispositional properties: if it is of the essence of charge to repel like charges, the law of repulsion holds in every world in which there is charge. On Bird's view laws do not govern either; the powers do the work, and the laws are derivative. We return to Bird's view in Section~\ref{s:dispositions}, because it marks one pole of a debate in which our view occupies a middle position.
+
+Recent Humeans have refined the account in three directions. \citet{Lewis1994} extended it to probabilistic laws, by adding fit, the probability a system assigns to the actual course of events, to simplicity and strength. \citet{Loewer1996} and \citet{Hall2015} defended the account against the charge that it makes laws too dependent on contingent features of the mosaic. \citet{CohenCallender2009} relativized the account to a choice of basic kinds, so as to allow the special sciences their own best systems, and \citet{Dorst2019} and \citet{JaagLoew2020} reformulated the standards of simplicity and strength by reference to the predictive purposes for which laws are used. On the governing side, the most influential objection of the last fifteen years is the explanatory circularity objection in the form given by \citet{Lange2013}, which we take up in Section~\ref{s:circularity}.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Mosaic]\label{d:mosaic}
+The \emph{mosaic} is the distribution of fundamental natural properties and relations over the points, or other basic regions, of spacetime.
+\end{definition}
+
+Definition~\ref{d:mosaic} departs from Lewis in one respect, which Section~\ref{s:dispositions} explains. Lewis held that the fundamental properties are categorical, that is, that their nature does not consist in what they dispose their bearers to do. We do not build this into the definition. If some fundamental properties are irreducibly dispositional, as MET-11 argues for dispositions in general, their distribution is part of the mosaic.
+
+\begin{definition}[Systems]\label{d:system}
+A \emph{system} is a set of sentences, its axioms, stated in a language whose primitive predicates express fundamental natural properties. A system is \emph{true} if all its axioms are true of the mosaic. Its \emph{strength} is the amount of information about the mosaic its theorems convey, and its \emph{simplicity} is measured inversely by the number and complexity of its axioms.
+\end{definition}
+
+\begin{definition}[Best system]\label{d:best}
+A \emph{best system} is a true system whose balance of simplicity and strength is not exceeded by that of any other true system.
+\end{definition}
+
+\begin{definition}[Law]\label{d:law}
+The \emph{fundamental laws} are the axioms of the best system; a generalization is a \emph{law} if it is entailed by every best system. If the best system is unique, as we expect it to be in a world like ours, the laws are its axioms and their consequences.
+\end{definition}
+
+Definition~\ref{d:law} follows \citet[ch.~3]{Lewis1973Counterfactuals} in counting as laws the generalizations common to all best systems, so that a tie between best systems produces fewer laws rather than an indeterminacy. Nothing in what follows depends on this choice.
+
+\begin{definition}[Governing]\label{d:govern}
+A law \emph{governs} one of its instances if the fact that it is a law grounds the instance: the instance obtains, in the sense of metaphysical explanation, in virtue of the law.
+\end{definition}
+
+Definition~\ref{d:govern} is meant to be neutral among governing views. On the necessitation view, the fact that all $F$s are $G$s, and so the fact that this $F$ is $G$, obtains in virtue of $N(F, G)$; on Maudlin's view, later states obtain in virtue of the law and earlier states. Each view says that the law is prior to its instances and that they obtain because of it. A weaker sense of governing, on which laws merely constrain what happens, does not require grounding; we discuss it in Objection~\ref{o:constraint}.
+
+\begin{assumption}[Grounding]\label{a:ground}
+Partial grounding is a strict partial order: no fact partly grounds itself, and if $f$ partly grounds $g$ and $g$ partly grounds $h$, then $f$ partly grounds $h$.
+\end{assumption}
+
+Assumption~\ref{a:ground} is standard in the theory of grounding \citep{Fine2012,Rosen2010,Schaffer2009}. It does not require that grounding be well-founded, and is therefore consistent with MET-10, on which every level is grounded in a lower one; and it is consistent with the unity of grounding defended in MET-14.
+
+\begin{principle}[Humean grounding]\label{p:hg}
+The instances of a law are among the facts that ground its being a law.
+\end{principle}
+
+\begin{principle}[Explanation by subsumption]\label{p:sub}
+A law scientifically explains its instances: that this $F$ is $G$ is explained by the law that all $F$s are $G$s, together with the fact that it is $F$.
+\end{principle}
+
+Principle~\ref{p:hg} follows from Definition~\ref{d:law}. That a generalization is a law is a matter of how the mosaic is, and every instance of the generalization is part of the mosaic; had the instance been otherwise, the generalization would have been false and so not a law. Principle~\ref{p:sub} expresses the ordinary practice of explaining a particular fact by deriving it from laws and conditions \citep{HempelOppenheim1948}, with the qualification, due to \citet{Friedman1974} and \citet{Kitcher1981}, that what makes such derivations explanatory is that they unify a wide range of facts under a few patterns. The best system is, by construction, the system that does this best. \citet{Loewer2012} emphasized that scientific explanation of this kind is not grounding, or metaphysical explanation; we argue for the distinction in Section~\ref{s:circularity}.
+
+\section{The argument}\label{s:argument}
+
+We begin with two properties of best-system laws that a toy model displays exactly. In the model, the mosaic is a finite list of points at each of which two natural properties $F$ and $G$ are or are not instantiated. A point is of one of four kinds. The candidate axioms are the four generalizations \enquote{all $F$s are $G$s}, \enquote{all $G$s are $F$s}, \enquote{everything is $F$} and \enquote{everything is $G$}, each of which excludes some kinds; a system is a set of these. Its strength is the number of kinds it excludes, its size the number of its axioms, and its score twice its strength less its size. The choice of weights is arbitrary, and the results below hold for other choices; what matters is that strength and simplicity pull in different directions.
+
+\begin{proposition}[Laws are true]\label{p:true}
+In the toy model, every law is true of the mosaic.
+\end{proposition}
+
+\begin{proof}
+A law is entailed by every best system, and there is a best system, since there are finitely many systems and the empty system is true. A best system is true. If it entails a generalization, every kind the generalization excludes is excluded by the system, and no point of the mosaic is of such a kind. So the generalization is true.
+\end{proof}
+
+\begin{proposition}[Lawhood is global]\label{p:global}
+Let $m_1$ be a mosaic with two points at which both $F$ and $G$ are instantiated and one at which neither is, and let $m_2$ add to $m_1$ one point at which $F$ is instantiated and $G$ is not. In $m_1$, \enquote{all $F$s are $G$s} and \enquote{all $G$s are $F$s} are laws; in $m_2$, the first is not a law and the second is.
+\end{proposition}
+
+\begin{proof}
+In $m_1$ the true systems are the subsets of the first two generalizations. The pair excludes two kinds with two axioms and scores best, so both its members are laws. In $m_2$ the first generalization is false, and the best true system is the second generalization alone.
+\end{proof}
+
+Proposition~\ref{p:global} shows that whether a generalization is a law depends on the whole mosaic, including events far from any given instance. Whether \enquote{all $F$s are $G$s} is a law at a point where an $F$ is $G$ depends on whether, somewhere else, there is an $F$ that is not $G$. This is what governing views deny: on them, the law is prior to the mosaic, and adding an event elsewhere could at most show that the law was never there, not change whether it is.
+
+\begin{theorem}[No governance]\label{t:nogov}
+No law governs any of its instances.
+\end{theorem}
+
+\begin{proof}
+Suppose a law $l$ governs an instance $i$. By Definition~\ref{d:govern}, $l$'s being a law partly grounds $i$. By Principle~\ref{p:hg}, $i$ partly grounds $l$'s being a law. By the transitivity clause of Assumption~\ref{a:ground}, $i$ partly grounds itself, which the irreflexivity clause forbids.
+\end{proof}
+
+\begin{theorem}[Explanation without governance]\label{t:main}
+Every law explains its instances and governs none of them.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:sub} and Theorem~\ref{t:nogov}.
+\end{proof}
+
+The governing theorist will reply that Theorem~\ref{t:main} is consistent only because Principle~\ref{p:sub} has been stated without a principle linking explanation and grounding. The reply identifies the right principle.
+
+\begin{corollary}[Against mixed transitivity]\label{c:mixed}
+If no fact scientifically explains itself and some law has an instance, then the following principle is false: whatever grounds an explanans explains the explanandum.
+\end{corollary}
+
+\begin{proof}
+Let $i$ be an instance of the law $l$. By Principle~\ref{p:hg}, $i$ partly grounds $l$; by Principle~\ref{p:sub}, $l$ explains $i$. By the principle in question, $i$ explains $i$, contrary to the hypothesis.
+\end{proof}
+
+Corollary~\ref{c:mixed} shows that a Humean who accepts Principles~\ref{p:hg} and~\ref{p:sub} is committed to rejecting mixed transitivity, and that nothing else in her position is in question. It remains to show that the position is consistent, and that rejecting mixed transitivity is independently correct.
+
+\begin{proposition}[Consistency]\label{p:consistent}
+Assumption~\ref{a:ground}, Principles~\ref{p:hg} and~\ref{p:sub}, the irreflexivity of scientific explanation, and the existence of a law with an instance are jointly satisfiable.
+\end{proposition}
+
+\begin{proof}
+Take two facts, a law-fact $l$ and an instance $i$; let $i$ partly ground $l$ and nothing else ground anything; let $l$ explain $i$ and nothing else explain anything. Grounding is irreflexive and, having a single pair, transitive. Principles~\ref{p:hg} and~\ref{p:sub} hold by construction, and explanation is irreflexive.
+\end{proof}
+
+\subsection{Formalization}\label{s:formal}
+
+Propositions~\ref{p:true}, \ref{p:global} and~\ref{p:consistent}, Theorems~\ref{t:nogov} and~\ref{t:main} and Corollary~\ref{c:mixed} are formalized in \nolinkurl{Philosophy/MET/MET_12.lean}. The toy model of Propositions~\ref{p:true} and~\ref{p:global} is defined explicitly, without axioms: systems are coded as bit masks over the four candidate axioms, and the best systems and laws are computed. Proposition~\ref{p:true} is proved for every mosaic, and Proposition~\ref{p:global} by computation. For the second part, facts, partial grounding, lawhood, instancehood and scientific explanation are primitives, and Assumption~\ref{a:ground} and Principles~\ref{p:hg} and~\ref{p:sub} are axioms. The main theorem reads as follows.
+
+\begin{lstlisting}
+def Governs (l i : Fact) : Prop := IsLaw l ∧ InstanceOf i l ∧ Grounds l i
+
+theorem theorem_3_4 (l i : Fact) (hl : IsLaw l) (hi : InstanceOf i l) :
+    Explains l i ∧ ¬ Governs l i
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MET_12.theorem_3_4' depends on axioms: [
+ Philosophy.MET_12.Explains, Philosophy.MET_12.Fact,
+ Philosophy.MET_12.Grounds, Philosophy.MET_12.InstanceOf,
+ Philosophy.MET_12.IsLaw, Philosophy.MET_12.grounds_irrefl,
+ Philosophy.MET_12.grounds_trans, Philosophy.MET_12.principle_P1,
+ Philosophy.MET_12.principle_P2]
+\end{lstlisting}
+
+The first five are the primitives; \texttt{grounds\_irrefl} and \texttt{grounds\_trans} are the two clauses of Assumption~\ref{a:ground}; \texttt{principle\_P1} and \texttt{principle\_P2} are Principles~\ref{p:hg} and~\ref{p:sub}. Corollary~\ref{c:mixed} uses only the primitives and the two principles. Proposition~\ref{p:global} depends only on \texttt{propext}, and Proposition~\ref{p:consistent} on no axioms at all, since it is proved of an explicitly constructed two-element model.
+
+\section{The circularity objection}\label{s:circularity}
+
+The objection has a long history. \citet{Armstrong1983} argued that a Humean law cannot explain its instances because the law is just the regularity, and the regularity is the conjunction of its instances: to explain why this $F$ is $G$ by citing the fact that all $F$s are $G$s is to explain a fact partly by itself. \citet{Maudlin2007} pressed the point in terms of production: the Humean must say that the present state of the world is explained by the laws and the past state, while the laws are what they are partly because of the present state. \citet{Lange2013} gave the objection its sharpest form. Assume that the Humean's laws are grounded in their instances, that the laws scientifically explain their instances, and that if $A$ grounds $B$ and $B$ scientifically explains $C$, then $A$ scientifically explains $C$. Then an instance scientifically explains itself, which is absurd.
+
+\citet{Loewer2012} replied by distinguishing scientific explanation from metaphysical explanation. The laws scientifically explain their instances; the instances, taken together with the rest of the mosaic, metaphysically explain the laws; and since the two relations are different, there is no circle. \citet{Lange2013} answered that the distinction does not help unless the mixed transitivity principle is rejected, and that the principle is plausible. It certainly has plausible instances: if the fact that the dam broke grounds the fact that something happened upstream, and the fact that something happened upstream explains the flood, then the breaking of the dam explains the flood. \citet{HicksVanElswyk2015} argued that the objection, if sound, also threatens the governing views, since on them too the law-fact is closely tied to the regularity that it is supposed to explain. \citet{Miller2015} offers a further defence of Humean scientific explanation against objections of this family.
+
+Corollary~\ref{c:mixed} shows that Lange is right about the structure of the dispute: the Humean must reject mixed transitivity, and nothing else will do. We argue that she should, because the principle fails for a reason that has nothing to do with laws. It fails whenever a partial ground of an explanans is idle in the explanation.
+
+Consider a herd that stampedes, and an animal in the herd that runs. The stampede is partly grounded in each animal's running, the given animal's included: there is nothing more to the herd's stampeding than its members' running together. The stampede explains why the given animal runs: it is carried along by the movement of the animals around it, and would have run with the herd whatever it had otherwise been inclined to do. Mixed transitivity entails that the animal's running explains its running. The correct diagnosis is that the stampede explains the animal's running in virtue of the running of the other animals, and that the animal's own contribution to the stampede, while part of what grounds it, plays no role in the explanation. The same holds for laws. A single instance makes a negligible contribution to what grounds the law, and the law explains the instance by virtue of the pattern constituted by all the others. Proposition~\ref{p:global} displays the pattern: what makes a generalization a law at a given point is how the rest of the mosaic is.
+
+The dam case does not tell against this diagnosis. The breaking of the dam explains the flood because it is a non-idle part of the ground of the explanans: the something that happened upstream was the breaking. Where a partial ground does the explanatory work of the fact it grounds, mixed transitivity holds; where it does not, it fails. The principle is a good default and a bad law, and the Humean need only deny its universal form.
+
+\section{Dispositions and the best system}\label{s:dispositions}
+
+MET-11 argues that dispositions are real and irreducible properties of their bearers. The thesis appears to sit uneasily with the present one. Lewis's Humeanism was a package: laws are best-system summaries, and the mosaic they summarize is a mosaic of categorical qualities, with no necessary connections between distinct existences \citep[introduction]{Lewis1986Papers}. Irreducible dispositions are precisely the necessary connections that the second element excludes: if fragility is a property whose nature consists in disposing its bearer to break when struck, there is a necessary connection between being fragile and breaking when struck in the absence of interference. Bird, at the other pole, argues that once dispositions are admitted, laws are derivative from them and the best system account is idle \citep{Bird2007}. If both poles are right about the package, MET-11 and MET-12 cannot both be true.
+
+We deny that the package is a package. The best system account is a thesis about what makes a generalization a law: it is a law because it belongs to the best summary of the mosaic. Categoricalism is a thesis about the nature of the fundamental properties in the mosaic. Neither entails the other. A mosaic in which some fundamental properties are irreducibly dispositional is a mosaic like any other, and the best system account says that its laws are the axioms of the best summary of it. \citet{Demarest2017} develops a view of this kind, on which properties are powerful and laws are powerless, and we adopt its structure.
+
+Three points make the reconciliation exact.
+
+First, laws do not ground dispositions. A disposition is a property of its bearer, and on the view of MET-11 an intrinsic one, in the typical case: whether a glass is fragile depends on how the glass is, not on what happens elsewhere. Lawhood, by Proposition~\ref{p:global}, depends on the whole mosaic. If the laws grounded the disposition, the disposition would depend on events arbitrarily far from its bearer, and so would not be intrinsic. The reduction of dispositions to categorical bases together with laws, which the Lewisian package requires, therefore fails if laws are Humean. This is an argument for the irreducibility claim of MET-11, not against it.
+
+Second, dispositions are among the grounds of laws. The regularities that the best system summarizes include regularities of manifestation: struck fragile things break, unless masked or finked. These regularities hold because the dispositions are manifested when triggered, and the best system summarizes them. Theorem~\ref{t:nogov} applies to dispositional facts as to any others: the law that fragile things break when struck does not govern the breaking of this glass, which is produced by the striking and the glass's fragility. Where there is production in nature, it is done by causes and by the dispositions of their bearers, as MET-04 and MET-11 describe, not by laws.
+
+Third, the reconciliation keeps the contingency of laws. If it is of the essence of a disposition to be manifested in certain conditions, the connection between the disposition and its manifestation is necessary. But which dispositions are instantiated, and how they are distributed, is contingent, and so is which generalizations belong to the best summary of their distribution. A world with different dispositions has different laws; a world with the same dispositions differently distributed may have the same laws or not, depending on the summary. On Bird's view, by contrast, the laws are fixed by the essences of the properties alone.
+
+The cost of the reconciliation should be stated plainly. The view gives up Lewis's thesis of Humean supervenience in its original form, which requires that the mosaic contain no necessary connections; it keeps the best system account of lawhood and the claim that laws supervene on the mosaic. Whether the result should still be called Humean is a verbal question. What matters is that it is consistent with both catalogue conclusions: dispositions are real and irreducible, and laws are best-system summaries that explain without governing. Between Lewis, for whom the mosaic is categorical and the laws summarize it, and Bird, for whom the mosaic is dispositional and the laws are derived from its essences, the view takes the mosaic from Bird and the laws from Lewis.
+
+\section{Further cases and consequences}\label{s:cases}
+
+\paragraph{Probabilistic laws.} Many fundamental laws are probabilistic. \citet{Lewis1994} extended the account by adding fit, the probability that a system assigns to the actual history, to the virtues weighed in Definition~\ref{d:best}. The extension raises the problem of undermining futures: a best system may assign a positive chance to a future in which it would not be the best system. We note the problem without solving it; it concerns the analysis of chance, not the non-governing character of laws, and Theorem~\ref{t:main} holds of probabilistic laws as of deterministic ones, with explanation of an outcome by the chance the laws assign it in place of derivation.
+
+\paragraph{Uninstantiated laws.} \citet{Tooley1977} described a world with ten kinds of fundamental particle, in which the laws of interaction for every pair are fixed except one pair whose members never meet. Intuitively there is a law for that pair too, though nothing in the mosaic settles what it is. The best system account counts as laws only the generalizations that the best system entails, and so says that there is no law for the pair, unless the simplest system covering the other interactions entails one. We accept this. That the intuition seems to require a law with no basis in what happens is an expression of the governing conception, not evidence for it.
+
+\paragraph{The special sciences.} SCI-08 argues that there are no strict laws in biology, but robust generalizations with stable exceptions. The best system account explains why. The best system for the fundamental vocabulary does not contain biological generalizations, which are not stated in it; a best system relativized to biological kinds, in the manner of \citet{CohenCallender2009}, contains generalizations that hold with the stability that a best summary confers and the exceptions that the kinds' heterogeneity introduces.
+
+\paragraph{Induction.} \citet{Armstrong1983} argued that only a governing view can justify induction, since only a necessitation relation explains why observed regularities should continue. EPI-03 argues that induction is justified inductively, the circularity being rule-circular rather than premise-circular, and EPI-04 that projectibility tracks the naturalness of properties. Both theses are available to the Humean, and the second fits the account exactly: the predicates of the best system are those that denote natural properties, and so the generalizations it contains are projectible. The Humean does not need a law to justify the inference from observed to unobserved instances; she needs induction, and EPI-03 supplies it.
+
+\paragraph{Causation and the direction of time.} MET-04 analyses causation by counterfactual dependence in structural models. On the present view, the structural equations of an apt model are true because they are consequences, for the system modelled, of the best system together with the conditions of the situation. The laws thereby support the counterfactuals on which causal claims depend, as Lewis held, without producing what the counterfactuals describe. TSM-05 holds that time has a direction because the universe began in a low-entropy state, and that this past hypothesis requires no further explanation. \citet{Albert2000} and \citet{Loewer2012} propose that the past hypothesis is an axiom of the best system. If so, it explains the asymmetries of time by subsumption, and it requires no further explanation in the way that axioms of the best system in general do not: they summarize, and there is nothing further for them to be grounded in except the mosaic itself.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Laws make things happen]\label{o:produce}
+Physics says that the laws determine the evolution of the world from its initial state. The Humean has the order of dependence backwards: the state of the world at a time is the way it is because the laws evolved it from an earlier state.
+\end{objection}
+
+\begin{reply}
+Physics says that the laws together with the state at one time determine the state at another, which is a claim about entailment, not about production. Both the governing and the Humean theorist accept that the laws and an earlier state entail a later state. They disagree over whether, in addition, the later state obtains in virtue of the laws. The Humean says that the later state obtains in virtue of nothing, at the level of the fundamental mosaic, or in virtue of the causal powers of earlier things if MET-11 is right, and that the laws are true because the states are as they are. \citet{Beebee2000} traced the intuition that laws produce to the theological origin of the concept of law, on which the laws are commands of a legislator; the intuition outlives the conception that made sense of it.
+\end{reply}
+
+\begin{objection}[Constraint without grounding]\label{o:constraint}
+A law might govern without grounding its instances: it might constrain what happens, by excluding certain combinations of events, without being that in virtue of which events occur. Theorem~\ref{t:nogov} does not touch governing in this sense.
+\end{objection}
+
+\begin{reply}
+If constraint is mere exclusion, every true generalization constrains, and the Humean agrees that laws constrain in this sense. If constraint is something more, it must say why the excluded combinations do not occur, and the only answer available is that the law makes it the case that they do not, which is grounding. We know of no third option that is not either an entailment, which the Humean accepts, or a metaphysical dependence of the instances on the law, which Theorem~\ref{t:nogov} excludes.
+\end{reply}
+
+\begin{objection}[Simplicity is in the eye of the beholder]\label{o:simplicity}
+Simplicity and strength are not objective features of systems, and the balance between them is not fixed. A law of nature should not depend on our standards of elegance.
+\end{objection}
+
+\begin{reply}
+Lewis's appeal to natural properties removes the dependence of simplicity on arbitrary vocabulary, and the remaining dependence on standards is a dependence of the analysis on the standards that the sciences actually use, which are not arbitrary. Where the standards are vague, Lewis's account counts as laws only what is common to all best systems on every admissible precisification, so that vagueness in the standards produces fewer laws rather than arbitrary ones. The companion manuscript MET-12-b discusses the problem of simplicity in detail.
+\end{reply}
+
+\begin{objection}[Same mosaic, different laws]\label{o:same}
+It is conceivable that two worlds agree in their whole mosaic and differ in their laws: a world containing a single particle moving uniformly could be governed by Newtonian laws or by some other laws that agree for such a particle. The best system account entails that these worlds have the same laws, and so is false.
+\end{objection}
+
+\begin{reply}
+The account does entail that the worlds have the same laws, and we accept this. The objection assumes that the conceivability of the scenario establishes its possibility. But the scenario is described as one in which the laws differ though nothing that happens differs, and so it presupposes that laws are something over and above what happens, which is the point in dispute. A Humean who denies that the scenario is possible is not refuted by its conceivability, any more than a physicalist is refuted by the conceivability of zombies.
+\end{reply}
+
+\begin{objection}[Counterfactual robustness]
+Laws are distinguished from accidents by their stability under counterfactual suppositions. Had this sphere of gold been heavier, gold would still have melted at its melting point. A summary of what actually happens cannot underwrite counterfactuals about what does not.
+\end{objection}
+
+\begin{reply}
+On the account of counterfactuals of \citet{Lewis1979}, the closeness of worlds is measured in part by agreement with the actual laws, so that the actual laws are held fixed under counterfactual suppositions that do not concern them. Laws are counterfactually robust because they are the generalizations that the counterfactuals hold fixed, and they are held fixed because they are the best summary of the actual world. The robustness is not a further fact about laws that the summary must explain; it is a consequence of the role of the summary in evaluating counterfactuals.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The formal results are conditional on Assumption~\ref{a:ground} and Principles~\ref{p:hg} and~\ref{p:sub}. A governing theorist will deny Principle~\ref{p:hg}, and nothing in the argument compels her to accept it; the argument establishes that a Humean who accepts it is consistent, that she cannot allow laws to govern, and that the circularity objection fails against her. The toy model shows that lawhood depends on the whole mosaic for a particular choice of simplicity and strength measures; it does not show that those measures are correct, and the real measures are not known in detail. The account does not settle the analysis of chance or the problem of undermining futures. Finally, the reconciliation with MET-11 requires that dispositions be intrinsic in the typical case; it does not exclude extrinsic dispositions, which would be grounded partly in the environment, though not in the laws.
+
+\section{Conclusion}
+
+Laws of nature are the axioms of the best system summarizing the mosaic. They are partly grounded in their instances, and therefore cannot govern them, on pain of a fact grounding itself. They nonetheless explain their instances, by subsuming them under a summary that unifies the mosaic. The circularity objection depends on a mixed principle that takes whatever grounds an explanans to explain the explanandum, and that principle fails whenever the ground is idle, as a single instance is in the explanation of that instance by its law. The view accommodates irreducible dispositions as part of the mosaic, and it denies that laws ground them. What makes things happen, where anything does, is causes and the powers of their bearers; the laws say how it all goes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Albert(2000)]{Albert2000} Albert, D.~Z. (2000). \emph{Time and Chance}. Harvard University Press.
+\bibitem[Armstrong(1983)]{Armstrong1983} Armstrong, D.~M. (1983). \emph{What Is a Law of Nature?} Cambridge University Press.
+\bibitem[Beebee(2000)]{Beebee2000} Beebee, H. (2000). The non-governing conception of laws of nature. \emph{Philosophy and Phenomenological Research}, 61(3), 571--594.
+\bibitem[Bird(2007)]{Bird2007} Bird, A. (2007). \emph{Nature's Metaphysics: Laws and Properties}. Oxford University Press.
+\bibitem[Cohen and Callender(2009)]{CohenCallender2009} Cohen, J. and Callender, C. (2009). A better best system account of lawhood. \emph{Philosophical Studies}, 145(1), 1--34.
+\bibitem[Demarest(2017)]{Demarest2017} Demarest, H. (2017). Powerful properties, powerless laws. In J.~D. Jacobs (ed.), \emph{Causal Powers}. Oxford University Press.
+\bibitem[Dorst(2019)]{Dorst2019} Dorst, C. (2019). Towards a best predictive system account of laws of nature. \emph{British Journal for the Philosophy of Science}, 70(3), 877--900.
+\bibitem[Dretske(1977)]{Dretske1977} Dretske, F.~I. (1977). Laws of nature. \emph{Philosophy of Science}, 44(2), 248--268.
+\bibitem[Fine(2012)]{Fine2012} Fine, K. (2012). Guide to ground. In F.~Correia and B.~Schnieder (eds.), \emph{Metaphysical Grounding: Understanding the Structure of Reality}. Cambridge University Press.
+\bibitem[Friedman(1974)]{Friedman1974} Friedman, M. (1974). Explanation and scientific understanding. \emph{Journal of Philosophy}, 71(1), 5--19.
+\bibitem[Hall(2015)]{Hall2015} Hall, N. (2015). Humean reductionism about laws of nature. In B.~Loewer and J.~Schaffer (eds.), \emph{A Companion to David Lewis}. Wiley-Blackwell.
+\bibitem[Hempel and Oppenheim(1948)]{HempelOppenheim1948} Hempel, C.~G. and Oppenheim, P. (1948). Studies in the logic of explanation. \emph{Philosophy of Science}, 15(2), 135--175.
+\bibitem[Hicks and van Elswyk(2015)]{HicksVanElswyk2015} Hicks, M.~T. and van Elswyk, P. (2015). Humean laws and circular explanation. \emph{Philosophical Studies}, 172(2), 433--443.
+\bibitem[Jaag and Loew(2020)]{JaagLoew2020} Jaag, S. and Loew, C. (2020). Making best systems best for us. \emph{Synthese}, 197(6), 2525--2550.
+\bibitem[Kitcher(1981)]{Kitcher1981} Kitcher, P. (1981). Explanatory unification. \emph{Philosophy of Science}, 48(4), 507--531.
+\bibitem[Lange(2013)]{Lange2013} Lange, M. (2013). Grounding, scientific explanation, and Humean laws. \emph{Philosophical Studies}, 164(1), 255--261.
+\bibitem[Lewis(1973)]{Lewis1973Counterfactuals} Lewis, D. (1973). \emph{Counterfactuals}. Blackwell.
+\bibitem[Lewis(1979)]{Lewis1979} Lewis, D. (1979). Counterfactual dependence and time's arrow. \emph{No\^us}, 13(4), 455--476.
+\bibitem[Lewis(1983)]{Lewis1983} Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy}, 61(4), 343--377.
+\bibitem[Lewis(1986)]{Lewis1986Papers} Lewis, D. (1986). \emph{Philosophical Papers, Volume II}. Oxford University Press.
+\bibitem[Lewis(1994)]{Lewis1994} Lewis, D. (1994). Humean supervenience debugged. \emph{Mind}, 103(412), 473--490.
+\bibitem[Loewer(1996)]{Loewer1996} Loewer, B. (1996). Humean supervenience. \emph{Philosophical Topics}, 24(1), 101--127.
+\bibitem[Loewer(2012)]{Loewer2012} Loewer, B. (2012). Two accounts of laws and time. \emph{Philosophical Studies}, 160(1), 115--137.
+\bibitem[Maudlin(2007)]{Maudlin2007} Maudlin, T. (2007). \emph{The Metaphysics Within Physics}. Oxford University Press.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}. John W. Parker.
+\bibitem[Miller(2015)]{Miller2015} Miller, E. (2015). Humean scientific explanation. \emph{Philosophical Studies}, 172(5), 1311--1332.
+\bibitem[Ramsey(1928)]{Ramsey1928} Ramsey, F.~P. (1928/1978). Universals of law and of fact. In D.~H. Mellor (ed.), \emph{Foundations: Essays in Philosophy, Logic, Mathematics and Economics}. Routledge and Kegan Paul, 1978.
+\bibitem[Rosen(2010)]{Rosen2010} Rosen, G. (2010). Metaphysical dependence: Grounding and reduction. In B.~Hale and A.~Hoffmann (eds.), \emph{Modality: Metaphysics, Logic, and Epistemology}. Oxford University Press.
+\bibitem[Schaffer(2009)]{Schaffer2009} Schaffer, J. (2009). On what grounds what. In D.~Chalmers, D.~Manley and R.~Wasserman (eds.), \emph{Metametaphysics}. Oxford University Press.
+\bibitem[Tooley(1977)]{Tooley1977} Tooley, M. (1977). The nature of laws. \emph{Canadian Journal of Philosophy}, 7(4), 667--698.
+\bibitem[van Fraassen(1989)]{vanFraassen1989} van Fraassen, B.~C. (1989). \emph{Laws and Symmetry}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

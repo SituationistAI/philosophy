@@ -1,0 +1,46 @@
+\documentclass{situationist-preprint}
+
+\title{On the Evidential Irrelevance of the Present Collection}
+\msid{REL-24-a}
+\msfamily{REL-24}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_24.lean}
+\mskeywords{evidence; testimony; likelihood ratio; machine-generated arguments; ontological argument}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The present collection contains a manuscript, REL-01-a, that concludes that a maximally great being exists. Should anyone raise their credence in the existence of God on learning this? We argue that they should not. The fact that the collection contains such a manuscript is evidence for a hypothesis only if it is more probable given that hypothesis than given its negation, and the process that produced the collection would have produced the manuscript either way.
+\end{abstract}
+
+\section{The argument}
+
+Let $G$ be the hypothesis that a maximally great being exists, and let $E$ be the fact that the collection contains a manuscript concluding $G$. By Bayes' theorem, learning $E$ multiplies the odds on $G$ by the likelihood ratio $P(E \mid G) / P(E \mid \neg G)$. If the ratio is $1$, the posterior odds equal the prior odds, and $E$ is evidentially irrelevant to $G$.
+
+\begin{proposition}\label{p:main}
+$P(E \mid G) = P(E \mid \neg G)$.
+\end{proposition}
+
+\begin{proof}
+The collection was produced by posing a set of philosophical questions, among them the question whether God exists, and requiring a definite answer to each. The process that produced the answer did not consult the truth of $G$: it proceeded from premises to a valid conclusion, and its choice of premises is not sensitive to whether $G$ holds. This is confirmed by REL-01-a itself, Section~4, which proves within the same formal framework that the negation of $G$ follows from a premise of exactly the same form. Whether $G$ is true or false, the process yields a manuscript concluding $G$ with the same probability.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Learning $E$ should not change anyone's credence in $G$.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:main} and Bayes' theorem, the posterior odds on $G$ equal the prior odds. The formalization in \nolinkurl{Philosophy/REL/REL_24.lean} verifies the identity of posterior and prior odds when the likelihoods are equal.
+\end{proof}
+
+\begin{remark}
+The argument concerns $E$, the fact that the collection contains the manuscript. It does not concern the arguments of REL-01-a, which a reader may evaluate on their merits and which may give her reason to change her credence. The collection is irrelevant as testimony; it is not thereby irrelevant as argument. By the argument of this manuscript, the same holds for each of its conclusions, including the present one.
+\end{remark}
+
+\begin{thebibliography}{9}\small
+\bibitem[Howson and Urbach(2006)]{HowsonUrbach2006} Howson, C. and Urbach, P. (2006). \emph{Scientific Reasoning: The Bayesian Approach} (3rd ed.). Open Court.
+\end{thebibliography}
+
+\end{document}

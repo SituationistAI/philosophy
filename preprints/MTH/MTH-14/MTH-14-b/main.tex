@@ -1,0 +1,74 @@
+\documentclass{situationist-preprint}
+
+\title{The Caesar Problem}
+\msid{MTH-14-b}
+\msfamily{MTH-14}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{Caesar problem; Frege; Hume's principle; structuralism; sortal concepts; identity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Frege observed that his contextual definition of number does not decide whether Julius Caesar is a number, and abandoned it for explicit definition. We examine the problem in detail. We distinguish its referential form, which asks what fixes the reference of number terms, from its metaphysical form, which asks whether a number could be Caesar. MTH-14-a's thesis that numbers have no properties beyond their structural ones answers the metaphysical form outright and the referential form by showing that nothing more needs fixing. We compare the answer with the neo-Fregean sortal answer, which it supports without depending on, and with the mixed identity statements between numbers and sets.
+\end{abstract}
+
+\section{The problem}
+
+In the \emph{Grundlagen}, \citet[§§56, 66]{Frege1884} considered defining number contextually: the number of $F$s is the number of $G$s if and only if the $F$s and $G$s are equinumerous. He objected that the definition settles the truth of identities between number terms but not of identities such as \enquote{the number of planets is Julius Caesar}, and so does not tell us what numbers are. Two problems are run together here.
+
+\begin{definition}
+The \emph{referential} Caesar problem asks whether Hume's principle (HP) suffices to fix the reference of number terms. The \emph{metaphysical} Caesar problem asks whether any number is identical with an object, such as Caesar, that is not given as a number.
+\end{definition}
+
+The two come apart. HP might fail to fix reference while the metaphysical question has a determinate negative answer, and HP might fix all there is to fix even if it decides nothing about Caesar, provided there is nothing about Caesar for it to decide.
+
+\section{The structuralist answer}
+
+By Theorem~3.2 of MTH-14-a, the natural numbers are the positions of the natural number structure and have no properties beyond their structural ones (Definition~2.2 of MTH-14-a). Caesar has properties that are not structural: having been born in Rome, having crossed the Rubicon, being identical with Caesar (which MTH-14-a counts as non-structural).
+
+\begin{proposition}\label{p:caesar}
+No number is Caesar, and no number is any object with a non-structural property.
+\end{proposition}
+
+\begin{proof}
+If a number $n$ were identical with an object $o$ that has a non-structural property, then by Leibniz's law $n$ would have that property, contrary to Theorem~3.2 of MTH-14-a.
+\end{proof}
+
+Proposition~\ref{p:caesar} answers the metaphysical problem. It also answers the referential problem in the only sense in which it needs an answer. By Proposition~3.1 of MTH-14-a, any assignment of non-structural properties to the numbers is matched by an equally good one that denies them; and MTH-04-a shows that HP fixes the number operator up to relabeling (Proposition~5.3 of MTH-04-a). What HP leaves undetermined is therefore exactly which non-structural objects the number terms might denote, and Proposition~\ref{p:caesar} shows they denote none. Since by Principle~P1 of MTH-14-a the positions of the structure exist, and by Proposition~3.3 of MTH-14-a the structure is rigid, the number terms have determinate referents: the positions. MTH-04-a reaches the same verdict through its Principle~P2, that no number has a property not preserved by relabeling; the present argument derives that principle from the structuralist thesis.
+
+\section{Comparisons}
+
+\paragraph{The sortal answer.} \citet[ch.~14]{HaleWright2001} answer that number is a sortal concept whose criterion of identity is equinumerosity, and that objects falling under sortals with different criteria are distinct; Caesar falls under \enquote{person}, so is not a number. \citet{MacBride2003} objects that one object may fall under sortals with different criteria. The structuralist answer does not need the sortal principle, but it explains why the principle holds in this case: the criterion of identity for numbers is exhausted by structural facts, so nothing that has a criterion involving non-structural facts can be a number.
+
+\paragraph{Mixed identities.} \citet{Benacerraf1965} asked whether $2$ is $\{\{\emptyset\}\}$ or $\{\emptyset, \{\emptyset\}\}$. Proposition~\ref{p:caesar} answers that it is neither, since being a member of a given set is not a structural property of a position in the natural number structure. Set-theoretic representatives of the numbers are systems that exemplify the structure, not the numbers themselves. The Caesar problem and Benacerraf's problem thus receive one answer.
+
+\begin{objection}
+The answer begs the question. That numbers have only structural properties is just what the Caesar problem casts in doubt.
+\end{objection}
+
+\begin{reply}
+The thesis is not assumed from the Caesar problem but established in MTH-14-a by Benacerraf's argument, from the matching of rival assignments (Proposition~3.1 of MTH-14-a) and the principle that arbitrary choices are not facts (Principle~P2 of MTH-14-a). The Caesar problem is a case of that argument, which shows why HP leaves it open and why leaving it open is no defect.
+\end{reply}
+
+\begin{objection}
+Numbers have impure properties, such as being the number of planets. If such properties are allowed, why not being Caesar?
+\end{objection}
+
+\begin{reply}
+Section~5 of MTH-14-a treats being the number of the planets as structural, since the relation \enquote{is the number of} is among the distinguished relations of the cardinal number structure. Being Caesar is not a relation of a number to a concept, and it is not preserved by relabeling.
+\end{reply}
+
+\section{Conclusion}
+
+Caesar is not a number. HP does not say so, and need not: given that numbers have no properties beyond their structural ones, nothing with a non-structural nature is a number, and the number terms refer to the positions of a rigid structure.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1965)]{Benacerraf1965} Benacerraf, P. (1965). What numbers could not be. \emph{Philosophical Review}, 74(1), 47--73.
+\bibitem[Frege(1884)]{Frege1884} Frege, G. (1884). \emph{Die Grundlagen der Arithmetik}. Koebner.
+\bibitem[Hale and Wright(2001)]{HaleWright2001} Hale, B. and Wright, C. (2001). \emph{The Reason's Proper Study: Essays towards a Neo-Fregean Philosophy of Mathematics}. Oxford University Press.
+\bibitem[MacBride(2003)]{MacBride2003} MacBride, F. (2003). Speaking with shadows: A study of neo-logicism. \emph{British Journal for the Philosophy of Science}, 54(1), 103--163.
+\end{thebibliography}
+
+\end{document}

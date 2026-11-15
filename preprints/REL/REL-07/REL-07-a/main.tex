@@ -1,0 +1,93 @@
+\documentclass{situationist-preprint}
+
+\title{Hume's Maxim Quantified}
+\msid{REL-07-a}
+\msfamily{REL-07}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/REL/REL\_07.lean}
+\mskeywords{miracles; testimony; Hume; Bayesian confirmation; independent witnesses; Condorcet}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Hume held that no testimony is sufficient to establish a miracle unless its falsehood would be more miraculous than the fact it endeavours to establish. Formalized in Bayesian terms, the maxim states a correct condition on credibility, but it does not imply Hume's conclusion that miracles can never be credibly attested. We show that, for any prior probability of a miracle that is not zero, there is a finite number of testimonies that makes the miracle more probable than not, provided the testimonies are independent conditional on the truth of what they report and each is more likely to be given if the report is true than if it is false. We discuss the independence condition, which is where the real difficulty lies.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 assumed that the testimonies were unconditionally independent. Testimonies to the same event are not unconditionally independent: if the event occurred, all witnesses are more likely to report it, so their reports are correlated. The correct assumption is independence conditional on the truth or falsity of the report (Assumption~\ref{a:indep}). The threshold formula of Proposition~\ref{p:threshold} has been corrected accordingly; the qualitative conclusion is unchanged.
+
+\section{Hume's maxim}
+
+In Section~X of the \emph{Enquiry}, Hume argues that a wise man proportions his belief to the evidence, that the evidence for the laws of nature is uniform experience, and that a miracle, being a violation of those laws, has against it the strongest possible proof from experience \citep{Hume1748}. He concludes with a maxim: \enquote{no testimony is sufficient to establish a miracle, unless the testimony be of such a kind, that its falsehood would be more miraculous, than the fact, which it endeavours to establish.}
+
+Read probabilistically, the maxim says that testimony $T$ to a miracle $M$ should lead us to believe $M$ only if $P(M \mid T) > P(\neg M \mid T)$, which by Bayes' theorem holds if and only if
+\[
+P(M)\,P(T \mid M) > P(\neg M)\,P(T \mid \neg M).
+\]
+The left side is the probability that the miracle occurred and was reported; the right side, that it did not occur and was reported anyway, which is the probability of the testimony's \enquote{falsehood}. On this reading the maxim is a theorem of probability, as \citet{Sobel1991} and \citet{Earman2000} observe. The question is whether Hume's further claim, that the condition is never met, follows.
+
+\section{Many witnesses}
+
+The question of multiple witnesses was raised in Hume's own time by Price, and treated mathematically by Condorcet and later by \citet{Babbage1837}; \citet{Owen1987} reviews the history. The answer depends on how the witnesses are related.
+
+\begin{assumption}[Conditional independence]\label{a:indep}
+Given that $M$ occurred, the testimonies $T_1, \dots, T_n$ are probabilistically independent; and given that $M$ did not occur, they are independent.
+\end{assumption}
+
+\begin{assumption}[Reliability]\label{a:reliab}
+For each witness, $P(T_i \mid M) = r$ and $P(T_i \mid \neg M) = s$, with $r > s$.
+\end{assumption}
+
+Assumption~\ref{a:reliab} says that each witness is more likely to report the miracle if it occurred than if it did not. It does not require that witnesses be highly reliable: $r$ may be small, provided $s$ is smaller.
+
+\begin{proposition}\label{p:threshold}
+Under Assumptions~\ref{a:indep} and \ref{a:reliab}, the posterior odds on $M$ after $n$ testimonies are
+\[
+\frac{P(M \mid T_1, \dots, T_n)}{P(\neg M \mid T_1,\dots,T_n)} = \frac{P(M)}{P(\neg M)} \left(\frac{r}{s}\right)^n .
+\]
+\end{proposition}
+
+\begin{proof}
+By Bayes' theorem, the posterior odds are the prior odds times the likelihood ratio $P(T_1,\dots,T_n \mid M)/P(T_1,\dots,T_n \mid \neg M)$. By Assumption~\ref{a:indep}, each likelihood factorizes, and by Assumption~\ref{a:reliab} the ratio is $(r/s)^n$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+If $P(M) > 0$, there is a finite number $n$ of testimonies satisfying Assumptions~\ref{a:indep} and \ref{a:reliab} that makes $M$ more probable than not.
+\end{theorem}
+
+\begin{proof}
+Since $r/s > 1$, $(r/s)^n$ grows without bound, so for some $n$ it exceeds $P(\neg M)/P(M)$, and the posterior odds exceed $1$.
+\end{proof}
+
+Theorem~\ref{t:main} shows that Hume's maxim does not imply his conclusion. If miracles have non-zero prior probability, enough independent witnesses can establish one. To reach Hume's conclusion, one must either assign miracles probability zero, which begs the question, or deny that testimonies to miracles satisfy Assumption~\ref{a:indep}.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/REL/REL_07.lean} proves Theorem~\ref{t:main} in integer form. Prior odds are represented by natural numbers $a : b$ with $a \geq 1$, and the likelihood ratio by a natural number $L \geq 2$. The theorem states that for some $n$, $a L^n > b$. The proof takes $n = b$ and uses the fact that $n < 2^n$.
+
+\begin{lstlisting}
+theorem enough_witnesses (a b L : Nat) (ha : 1 ≤ a) (hL : 2 ≤ L) :
+    ∃ n, a * L ^ n > b
+\end{lstlisting}
+
+\section{Where the difficulty lies}
+
+The real question is Assumption~\ref{a:indep}. Testimonies to religious miracles are rarely independent in the required sense. Witnesses talk to one another; later reports depend on earlier ones; communities that share expectations produce correlated errors. If the testimonies are positively correlated given that the miracle did not occur, their combined likelihood ratio is smaller than $(r/s)^n$, and may be bounded, so that no number of such witnesses suffices. Hume's observations about the circumstances of miracle reports, that they abound among \enquote{ignorant and barbarous nations}, that they are propagated by those with an interest in them, and that they are contradicted by the miracles of rival religions, can be read as arguments that the independence condition typically fails.
+
+On this reading, Hume's case against miracles is not a priori but empirical. It depends on the actual structure of the testimony available, and it is strong when the testimony is correlated and weak when it is not. Theorem~\ref{t:main} shows what kind of evidence would establish a miracle; Hume's empirical observations show why such evidence is rarely available.
+
+\section{Conclusion}
+
+Hume's maxim is a correct condition on the credibility of testimony. It does not imply that miracles can never be credibly attested: with non-zero prior probability, enough conditionally independent and minimally reliable witnesses would establish one. Whether any actual miracle report meets this standard is an empirical question about the independence of the witnesses, and the answer, in the cases Hume considered, is usually no.
+
+\begin{thebibliography}{99}\small
+\bibitem[Babbage(1837)]{Babbage1837} Babbage, C. (1837). \emph{The Ninth Bridgewater Treatise: A Fragment}. John Murray.
+\bibitem[Earman(2000)]{Earman2000} Earman, J. (2000). \emph{Hume's Abject Failure: The Argument Against Miracles}. Oxford University Press.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}, Section X.
+\bibitem[Owen(1987)]{Owen1987} Owen, D. (1987). Hume versus Price on miracles and prior probabilities: Testimony and the Bayesian calculation. \emph{The Philosophical Quarterly}, 37(147), 187--202.
+\bibitem[Sobel(1991)]{Sobel1991} Sobel, J.~H. (1991). Hume's theorem on testimony sufficient to establish a miracle. \emph{The Philosophical Quarterly}, 41(163), 229--237.
+\end{thebibliography}
+
+\end{document}

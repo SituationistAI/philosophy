@@ -1,0 +1,326 @@
+\documentclass{situationist-preprint}
+
+\title{Moral Status and the Capacity for Welfare}
+\msid{ETH-07-a}
+\msfamily{ETH-07}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_07.lean}
+\mskeywords{moral status; animals; sentience; welfare; degrees of moral status; equal consideration of interests; speciesism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do animals have moral status, and if so, do they have it to the same degree as human beings? We argue that sentience, understood as the capacity for valenced experience, is necessary and sufficient for moral status, and that the degree of a being's moral status varies with its capacity for welfare. The argument has three premises: that a being has moral status if and only if it is a subject of welfare, that nothing is a subject of welfare unless it is sentient, and that every sentient being is a subject of welfare. Many animals therefore have moral status. For degrees, we show that any assignment of status that is fixed by the capacity for welfare and increases with it ranks beings in the same order, so that the ordering of beings by status is uniquely determined by the ordering by capacity. The cardinal shape of the dependence is not fixed by these principles, and we argue, against hierarchical views, that it is fixed by the equal consideration of equal interests: weighting a being's interests by its status in addition counts its capacity twice. We examine the history of the debate and a series of hard cases, including plants, non-valenced minds, human infants and invertebrates. The core results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+A being has \emph{moral status} if it matters morally for its own sake: if there are things that can be done to it, and not merely with regard to it, that wrong it. Every serious moral view grants moral status to adult human beings, and almost none grants it to stones. The question is where between these the boundary lies, and what grounds it. For animals the question has two parts. The first is the \emph{threshold question}: which animals, if any, have moral status at all? The second is the \emph{degree question}: do the animals that have it have it to the same degree as human beings, or does moral status come in degrees?
+
+Answers to the threshold question name a property that grounds status. The main candidates are rational nature or personhood, the capacity to be party to agreements, being the subject of a life, sentience, and life itself. Answers to the degree question divide between \emph{egalitarian} views, on which every being with moral status has it to the same degree, and \emph{hierarchical} views, on which some beings have more of it than others. The two questions are connected, because a view that grounds status in a property that comes in degrees owes an account of why the degrees do or do not matter.
+
+We argue for the following answer.
+
+\begin{quote}
+Sentience is necessary and sufficient for moral status, and the degree of a being's moral status varies with its capacity for welfare.
+\end{quote}
+
+Many animals, including at least the mammals and birds, are sentient, and therefore have moral status. Which further animals are sentient is an empirical question that we do not settle here; MND-23 reviews the evidence and concludes that mammals and birds are conscious, that cephalopods probably are, and that the evidence for insects remains inconclusive. Our thesis concerns what follows once that question is answered.
+
+The thesis is sometimes called \emph{sentientism}, and its first half is old. What is less often noticed is that the first half and the second half are supported by the same premise, namely that moral status is grounded in being a subject of welfare, and that once this is seen the degree question can be answered with some precision. We show that any assignment of degrees of status that respects the grounding premise ranks beings in the same order (Theorem~\ref{t:ordinal}), and we argue that the remaining freedom, which concerns the cardinal shape of the dependence of status on capacity, is removed by the principle of equal consideration of interests.
+
+\subsection{A history of the debate}
+
+The history of the question is a history of candidate grounds of status, each abandoned in the face of a case it could not accommodate.
+
+\paragraph{Instrumental views.} Aristotle held that plants exist for the sake of animals and animals for the sake of human beings (\emph{Politics} I.8, 1256b). Descartes held that animals are machines whose behavior can be explained without ascribing thought or feeling to them, and drew the conclusion that their cries are no more evidence of suffering than the sounds of a clock (\emph{Discourse on the Method}, Part V). If Descartes were right about the facts, the threshold question would be settled against animals on any view on which experience matters. He was not right about the facts. The view that mammals feel pain is now as well supported as any claim about other minds can be, and the denial of animal sentience survives only as a sceptical hypothesis that, applied consistently, would equally deny the experiences of other human beings.
+
+\paragraph{Indirect duty views.} Aquinas and Kant held that we have duties \emph{regarding} animals but not \emph{to} them. Kant argued that cruelty to animals is wrong because a person who is cruel to animals becomes hard in his dealings with human beings, so that the duty not to be cruel is at bottom a duty to humanity \citep{KantLectures}. The case that defeats the view is cruelty without effects on character: an agent alone on an island, who will never meet another human being, tortures a dog for amusement. On the indirect view the act wrongs no one, or wrongs only the agent's own humanity, and its wrongness does not depend on what happens to the dog. But what makes the act wrong is evidently what happens to the dog. A related difficulty is that the indirect view makes the wrongness of cruelty proportional to its effect on the agent's dispositions rather than to the suffering it causes, so that an agent who is not coarsened by cruelty would have weaker reasons to refrain from it.
+
+\paragraph{Sentience and equal consideration.} \citet[ch.~XVII]{Bentham1789} gave the canonical statement of the alternative: the question is \enquote{not, Can they reason? nor, Can they talk? but, Can they suffer?} \citet{Singer1975} developed it into the principle of equal consideration of interests, on which like interests are to be given like weight whoever has them, and coined the charge of speciesism against views that give less weight to an interest because its bearer is not human. Singer's view answers the threshold question with sentience and the degree question with equality of consideration, while allowing that beings with different capacities have different interests, and so that killing a being with a rich future may be worse than killing one with a poor future \citep{Singer1993}.
+
+\paragraph{Contractualism.} Contractualist views hold that moral requirements are those that could be justified to the parties to a hypothetical agreement, and that only beings capable of entering such an agreement are owed justification. \citet{Carruthers1992} drew the conclusion that animals have no direct moral status. The case that defeats the view is the argument from species overlap, often called the argument from marginal cases: human infants and human beings with profound cognitive impairments cannot be parties to agreement either. Carruthers responded that granting them status is required for social stability, since a society that denied it would be on a slippery slope. The response makes the wrongness of torturing an infant depend on its social effects, which is the indirect duty view in another form. \citet[ch.~4]{Scanlon1998} allowed that beings who cannot be parties may be owed justification through trustees, which concedes that being party is not what grounds status.
+
+\paragraph{The subject of a life.} \citet{Regan1983} held that a being has inherent value, and equal inherent value with every other being that has it, if it is the \emph{subject of a life}: if it has beliefs and desires, perception, memory, a sense of its own future, an emotional life, preferences, the ability to initiate action, psychological identity over time, and an individual welfare. The criterion was offered as sufficient, not necessary, but it is the only ground Regan's theory provides. The case that strains it is a being that can suffer but lacks most of the listed capacities, such as a fish or a decapod crustacean with nociceptive and affective responses but limited memory and no sense of its future. Regan's view leaves the wrongness of torturing such a being unexplained. A second difficulty concerns degrees. In his lifeboat case, Regan concluded that a dog should be thrown overboard rather than any of four human beings, because death is a greater harm to each of the humans than to the dog. The verdict is plausible, but it concedes that the badness of harming different beings varies with what they have at stake, which is what the degree question is about.
+
+\paragraph{Biocentrism and ecocentrism.} \citet{Taylor1986} extended inherent worth to every living thing on the ground that every organism has a good of its own: there are things that are good or bad for an oak, as water and blight are. \citet{Leopold1949} extended moral concern to biotic communities as wholes. Biocentrism faces what \citet{Basl2019} calls the problem of artefacts: the teleological sense in which water is good for an oak is the sense in which oil is good for an engine, and if having a good of one's own in this sense were sufficient for moral status, many artefacts would have it. Ecocentrism faces the converse difficulty: a holistic ethic that values communities for their own sake can require the sacrifice of the individuals that compose them, and it is unclear in what sense a community can be wronged.
+
+\paragraph{The present state of the debate.} Three recent developments frame our argument. \citet{Korsgaard2018} has argued, from within a Kantian framework, that animals are ends in themselves, because they are creatures for whom things can be good or bad and who pursue their own good; the Kantian tradition has thereby moved towards the grounding premise we defend. \citet{Kagan2019} has defended a hierarchical view on which status comes in degrees determined by a being's psychological capacities, and on which equal interests of beings of different status are to be weighed unequally. And the science of animal sentience has advanced to the point at which sentience can be assessed with explicit criteria \citep{Birch2020,Browning2022}, which has prompted a literature on how to act under uncertainty about it \citep{Birch2024}. Our view agrees with Korsgaard about the threshold and with Kagan that status comes in degrees, and it disagrees with Kagan about how degrees enter moral reasoning.
+
+\section{Framework}
+
+\begin{definition}[Moral status]\label{d:status}
+A being has \emph{moral status} if it matters morally for its own sake, that is, if it can be wronged. We write $\sigma(x)$ for the \emph{degree} of moral status of $x$, a non-negative quantity, with $\sigma(x) > 0$ if and only if $x$ has moral status.
+\end{definition}
+
+The degree of status is to be understood as the moral importance of the being itself: how much is owed to it, in total, for its own sake. We leave open for now how this quantity enters the weighing of particular interests; Section~\ref{s:degrees} takes up that question.
+
+\begin{definition}[Sentience]\label{d:sentience}
+A being is \emph{sentient} if it is capable of valenced experience: experience that feels good or bad to the one who has it. Valenced experience includes pleasure and pain, and also felt satisfaction and frustration, comfort and distress, and the felt character of fear, boredom and contentment.
+\end{definition}
+
+Sentience in this sense is narrower than consciousness. A being might have conscious experience none of which is valenced; we discuss such beings in Section~\ref{s:requirement}. It is broader than the capacity for pain: a being that feels contentment and frustration but not pain is sentient.
+
+\begin{definition}[Subject of welfare]\label{d:welfare}
+A being is a \emph{subject of welfare} if things can go better or worse \emph{for} it: if its life can contain things that are good or bad for the being whose life it is.
+\end{definition}
+
+\begin{definition}[Capacity for welfare]\label{d:capacity}
+The \emph{capacity for welfare} of a being, $c(x)$, is the extent of the range of welfare levels open to it over its life, given its nature. It is positive if and only if the being is a subject of welfare.
+\end{definition}
+
+Capacity for welfare depends on the variety and intensity of a being's valenced states, on its temporal integration (memory and anticipation, which determine how much of its future it has at stake), and on its access to the goods that, besides pleasure, make up well-being. ETH-05 argues that well-being includes contact with reality, and ETH-01 that well-being is one of seven components of the good, alongside knowledge, achievement and relationships, which can also enter the life of a being as goods for it. A being that can know, achieve and love has a wider range of welfare than one that can only feel comfort and distress. We assume that capacities can be compared ordinally, and represent them by non-negative integers; Section~\ref{s:limits} discusses the assumption.
+
+The argument uses three principles and two assumptions.
+
+\begin{principle}[Interest principle]\label{p:interest}
+A being has moral status if and only if it is a subject of welfare.
+\end{principle}
+
+\begin{assumption}[Experiential requirement]\label{a:exp}
+Every subject of welfare is sentient.
+\end{assumption}
+
+\begin{assumption}[Sufficiency of valence]\label{a:val}
+Every sentient being is a subject of welfare.
+\end{assumption}
+
+\begin{principle}[Supervenience]\label{p:sup}
+Beings with the same capacity for welfare have the same degree of moral status.
+\end{principle}
+
+\begin{principle}[Monotonicity]\label{p:mono}
+If one being has a greater capacity for welfare than another, it has a greater degree of moral status.
+\end{principle}
+
+\begin{definition}[Admissible assignment]\label{d:admissible}
+An assignment $s$ of non-negative degrees to beings is \emph{admissible} if it satisfies Principles~\ref{p:interest}, \ref{p:sup} and \ref{p:mono} with $s$ in place of $\sigma$: $s(x) > 0$ if and only if $x$ is a subject of welfare; $s(x) = s(y)$ whenever $c(x) = c(y)$; and $s(x) < s(y)$ whenever $c(x) < c(y)$.
+\end{definition}
+
+Principle~\ref{p:interest} is a version of what \citet{Feinberg1974} called the interest principle. Its left-to-right direction says that only beings that can be benefited or harmed can be wronged. The ground is that what is owed to a being for its own sake must concern something that matters to it, and what matters to a being for its own sake is how things go for it; a being for which nothing can go better or worse offers no point at which a wrong could land. Its right-to-left direction says that every subject of welfare can be wronged. The ground is impartiality: if a being's pain is bad for it, the reason this gives others not to cause it is grounded in the badness of the pain for the one who feels it, not in any further fact about the species, intelligence or social relations of the sufferer. To deny the right-to-left direction is to hold that the badness of a pain for its subject sometimes gives no one any reason, which no one who has considered the island case of Section~1.1 believes.
+
+Principles~\ref{p:sup} and \ref{p:mono} extend Principle~\ref{p:interest} from the threshold to degrees. If status is grounded in being a subject of welfare, then how much a being matters for its own sake is grounded in how much can be at stake for it, and nothing else contributes. Principle~\ref{p:sup} records that nothing else contributes; Principle~\ref{p:mono} records that more at stake means more status. The two assumptions are the substantive claims about welfare, and Section~\ref{s:requirement} defends them.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:welfare}
+A being is a subject of welfare if and only if it is sentient.
+\end{lemma}
+
+\begin{proof}
+Left to right by Assumption~\ref{a:exp}, right to left by Assumption~\ref{a:val}.
+\end{proof}
+
+\begin{theorem}[Threshold]\label{t:threshold}
+Sentience is necessary and sufficient for moral status: for every being $x$, $\sigma(x) > 0$ if and only if $x$ is sentient.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:interest}, $\sigma(x) > 0$ if and only if $x$ is a subject of welfare, and by Lemma~\ref{l:welfare} this holds if and only if $x$ is sentient.
+\end{proof}
+
+\begin{proposition}[Variation]\label{p:variation}
+For all beings $x$ and $y$: if $c(x) < c(y)$ then $\sigma(x) < \sigma(y)$, and if $c(x) = c(y)$ then $\sigma(x) = \sigma(y)$. In particular, if $x$ is sentient and $y$ is not, then $\sigma(y) = 0 < \sigma(x)$.
+\end{proposition}
+
+\begin{proof}
+The first two claims are Principles~\ref{p:mono} and \ref{p:sup}. For the third, $\sigma(x) > 0$ and $\sigma(y) = 0$ by Theorem~\ref{t:threshold}.
+\end{proof}
+
+Proposition~\ref{p:variation} states the second half of our thesis: status varies with capacity. The next result shows that the principles fix more than this. They do not fix the degrees of status themselves, since any increasing transformation of an admissible assignment satisfies Principles~\ref{p:sup} and \ref{p:mono} as well, but they fix the order.
+
+\begin{theorem}[Ordinal uniqueness]\label{t:ordinal}
+If $s$ and $t$ are admissible assignments, then for all beings $x$ and $y$, $s(x) \le s(y)$ if and only if $t(x) \le t(y)$.
+\end{theorem}
+
+\begin{proof}
+Capacities are compared by a total order, so either $c(x) < c(y)$, or $c(x) = c(y)$, or $c(y) < c(x)$. In the first case, monotonicity gives $s(x) < s(y)$ and $t(x) < t(y)$, so both inequalities hold. In the second, supervenience gives $s(x) = s(y)$ and $t(x) = t(y)$, so both hold. In the third, monotonicity gives $s(y) < s(x)$ and $t(y) < t(x)$, so both fail.
+\end{proof}
+
+\begin{proposition}[Consistency]\label{p:consistent}
+The capacity assignment $c$ is admissible. Hence the conditions of Definition~\ref{d:admissible} are jointly satisfiable.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{d:capacity}, $c(x) > 0$ if and only if $x$ is a subject of welfare; supervenience and monotonicity hold for $c$ trivially.
+\end{proof}
+
+Theorem~\ref{t:ordinal} and Proposition~\ref{p:consistent} together say that there is exactly one ordering of beings by moral status consistent with the principles, and that it is the ordering by capacity for welfare. Whatever the degrees of status are, a being has at least as much status as another if and only if it has at least as great a capacity for welfare.
+
+\begin{corollary}[Irrelevance of species]\label{c:species}
+Two beings of different species with the same capacity for welfare have the same degree of moral status, on every admissible assignment.
+\end{corollary}
+
+\begin{proof}
+Immediate from supervenience. Species membership does not enter Definition~\ref{d:admissible}.
+\end{proof}
+
+Corollary~\ref{c:species} is the formal content of the charge of speciesism. It does not say that human beings and other animals have equal status; on our view, most human beings have greater capacity for welfare than most other animals, and so greater status. It says that species membership, as such, is not what makes the difference.
+
+\section{Defending the experiential requirement}\label{s:requirement}
+
+Assumption~\ref{a:exp} is the premise on which the first half of the thesis turns, since it is what excludes plants, ecosystems and non-sentient artefacts. It is denied by three kinds of view: views on which non-conscious organisms have welfare in virtue of their biological functioning, views on which beings with desires or goals have welfare whether or not they are sentient, and views on which conscious beings without valence have welfare.
+
+\paragraph{Biological functioning.} An oak can flourish or languish, and there is a sense in which water is good for it. But the sense is teleological: it is the sense in which a thing has functions and can perform them well or badly. Engines, thermostats and self-repairing machines have functions in this sense, and there are things good and bad for them. If the teleological sense sufficed for welfare, then either artefacts would be subjects of welfare, or a further principle would have to restrict welfare to products of natural selection. The first alternative is not credible: nothing is owed to an engine for its own sake. The second would make welfare depend on the aetiology of a function rather than on anything in the being's present condition, and two physically identical things, one evolved and one assembled, would differ in whether they could be wronged. We conclude, with \citet{Basl2019}'s diagnosis though not with his view, that teleological goods are not welfare. What a plant has is a good of its own in the sense in which a machine has one; what it lacks is anything for which its flourishing is good.
+
+\paragraph{Desire without experience.} On desire-satisfaction theories of well-being, a life goes well to the extent that the subject's desires are satisfied. If a non-sentient system can have desires, these theories might seem to make it a subject of welfare. But a desire-satisfaction theory must distinguish the subject's desires from the states of any goal-directed system, on pain of ascribing welfare to every thermostat whose setpoint is reached. What distinguishes a desire whose satisfaction is good for its subject from a mere setpoint is that the subject is affected by its frustration: that the frustration matters to the subject from its own point of view. A system to which nothing is felt as mattering has goal states but not concerns, and the satisfaction of goal states is good for the system only in the teleological sense already discussed. The same holds for the objective goods on the list of ETH-01. ETH-05 characterizes contact with reality in terms of the veridicality of the subject's experiences and the achievement of the aims she takes herself to be pursuing; both presuppose a subject with experiences. Knowledge, achievement and relationships can be goods for a being only if the being has a point of view from which its life goes better or worse.
+
+\paragraph{Consciousness without valence.} \citet[ch.~18]{Chalmers2022} imagines \emph{Vulcans}: beings who are conscious, who think and perceive, but who have no valenced experiences, neither pleasure nor pain nor any felt emotion. He holds that killing a Vulcan would be seriously wrong, and concludes that consciousness, not sentience in the narrow sense, grounds status. The case is a genuine challenge, and our answer depends on Definition~\ref{d:sentience}. Either the Vulcan cares about its projects in a way that is felt, so that the failure of a project is experienced as a setback and its success as a fulfillment, or it does not. If it does, the Vulcan has valenced experience in the broad sense of Definition~\ref{d:sentience}, though not pleasure or pain, and it is sentient. If it does not, then nothing is felt by the Vulcan as mattering at all, and its projects stand to it as a chess program's objectives stand to the program. We think that the intuition that killing a Vulcan is wrong is driven by the first reading, and that on the second reading the intuition does not survive: a being that perceives and thinks but to which nothing whatever matters, including its own continued existence, is not wronged by being switched off, though its destruction may be a loss of knowledge or of a remarkable thing. \citet{Shepherd2018} argues that phenomenal consciousness grounds moral status principally through its evaluative character, which is the view we take; and recent work on the value of consciousness has questioned whether consciousness as such, as distinct from its valenced and evaluative contents, carries any value \citep{Kriegel2019,Lee2019}.
+
+Assumption~\ref{a:val} is less contested. If a being has an experience that feels bad to it, then it is in a state that is bad for it, at least to some degree and at least in one respect; this is close to what \enquote{feels bad to it} means. A theorist who denies Assumption~\ref{a:val} must hold that a sentient being's pain can be bad in feel without being bad for the being, which separates the badness of pain from the subject who feels it.
+
+\section{Degrees of status and the equal consideration of interests}\label{s:degrees}
+
+Theorem~\ref{t:ordinal} determines the order of beings by status but not the shape of the dependence of status on capacity, and the shape matters for practice. On the hierarchical view of \citet{Kagan2019}, equal interests of beings with different status are weighed unequally: an equal pain counts for more when it is suffered by a being of higher status. On the egalitarian view of \citet{Singer1975}, equal interests count equally, and beings differ only in what interests they have. Both views can be stated as admissible assignments.
+
+\begin{definition}[Equal consideration]\label{d:ec}
+\emph{Equal consideration of interests} holds if a given welfare change of a given magnitude has the same moral weight whichever being undergoes it. Under equal consideration, the degree of status of a being is the total weight of what can be at stake for it, which is its capacity for welfare.
+\end{definition}
+
+\begin{proposition}[Hierarchy is admissible]\label{p:hierarchy}
+The assignment $h(x) = c(x)^2$, on which each unit of welfare change of a being counts in proportion to its capacity, is admissible.
+\end{proposition}
+
+\begin{proof}
+$c(x)^2 > 0$ if and only if $c(x) > 0$, which holds if and only if $x$ is a subject of welfare; equal capacities give equal squares; and if $c(x) < c(y)$ then $c(x)^2 \le c(x)c(y) < c(y)^2$.
+\end{proof}
+
+Proposition~\ref{p:hierarchy} shows that Principles~\ref{p:interest}--\ref{p:mono} do not decide between egalitarian and hierarchical views. The quadratic assignment represents the simplest hierarchical view: a being's capacity determines both how much is at stake for it and how much each unit at stake counts. We argue that the second role is a double count.
+
+Consider two beings, $x$ of low capacity and $y$ of high capacity, and a pain of the same intensity and duration that would be suffered by either, with the same effect on the rest of its life. The difference in capacity between $x$ and $y$ consists in the range of other goods and evils open to $y$: its knowledge, its projects, its relationships, its anticipation of its future. None of these is at stake in the pain. If the pain counts for more when $y$ suffers it, the extra weight is grounded in goods that the pain does not affect. But by Principle~\ref{p:interest}, the reasons that a being's status gives others are grounded in what can go better or worse for it, and a reason grounded in goods that are not at stake is not a reason of that kind. Equal consideration is therefore not an additional egalitarian commitment; it is what Principle~\ref{p:interest} implies for the weighing of particular interests. The status of $y$ is greater than that of $x$, but the greater status shows itself in what $y$ has at stake (in particular, in the greater harm that death or the frustration of its projects does to it), not in a multiplier on each of its interests.
+
+Where the pain does affect the rest of the being's life, as when $y$ anticipates it with dread or is prevented by it from pursuing its projects, the pain is a greater harm to $y$, and equal consideration weighs it more for that reason. This is how the egalitarian view accommodates the judgments that motivate the hierarchical one. Regan's lifeboat verdict is an instance: the dog is to be thrown overboard because death deprives a human being of more than it deprives a dog, not because a unit of the human's welfare counts more.
+
+\section{Hard cases}\label{s:cases}
+
+\paragraph{Human infants and human beings with profound cognitive impairments.} Our view grounds the status of every human being in her capacity for welfare, not in her species or in her rational nature. A newborn infant has a large capacity for welfare, because Definition~\ref{d:capacity} concerns the range open to a being over its life, and the life of a normal infant includes the goods of a normal human life. A human being with a profound and permanent cognitive impairment may have a capacity for welfare comparable to that of some other animals, and on our view a comparable degree of status. This is the conclusion that \citet{Kittay2005} and \citet{Williams2006}, in different ways, have resisted, and that \citet{McMahan2002} and \citet{Kagan2016} accept in some form. We accept it, with two qualifications. First, under equal consideration a comparable degree of status does not mean that such a person's interests count for less than anyone else's: an equal pain counts equally. Second, many of the strongest duties owed to such persons are not grounded in status alone but in relationships of care, membership and dependence, which generate special obligations; ETH-19 argues that such partiality is justified without appeal to impartial reasons. The duties of a parent to a profoundly impaired child are not weaker for being grounded partly in the relationship.
+
+\paragraph{Pre-sentient human organisms.} An early human embryo is not sentient, and on our view has no moral status, though it may have value of other kinds and though the beings it may become will have status. When sentience begins is an empirical question. The view implies that there is a time before which a developing human organism cannot be wronged, which is a consequence many find acceptable and some find unacceptable; we record it as a consequence of the thesis.
+
+\paragraph{Permanent loss of consciousness.} A human being in a permanent vegetative state has, by the best evidence, lost the capacity for valenced experience. On our view she no longer has the capacity on which status depends. What is owed in her case is owed to the person she was, whose wishes about her care continue to bind, and to those who are related to her. The view does not license treating her body as a thing; it locates the source of the duties elsewhere.
+
+\paragraph{Plants, fungi and microorganisms.} These have no moral status, for the reasons of Section~\ref{s:requirement}. The extinction of a plant species may be a great loss, in knowledge and in beauty (both components of the good according to ETH-01), but it wrongs no plant.
+
+\paragraph{Ecosystems and species.} The same holds. ETH-01 distinguishes components of the good that are goods for individuals from components, such as beauty and fairness, that are goods of outcomes but not components of anyone's well-being. The value of an ecosystem belongs largely to the second kind, together with the welfare of the sentient beings that live in it. Ecosystems are therefore valuable without having moral status, and the reasons to preserve them are reasons to promote the good, not duties owed to them.
+
+\paragraph{Invertebrates.} If insects or crustaceans are sentient, they have moral status, and our view says so without qualification. Since their capacity for welfare is probably small, so is their degree of status, though the numbers involved are very large. The evidence concerning invertebrate sentience, and the practical question of how to act on it, are examined in ETH-07-b. What our view adds is that uncertainty about whether such a being has status is uncertainty about an empirical fact, sentience, and not about the grounds of status.
+
+\paragraph{Artificial systems.} An artificial system has moral status if and only if it is sentient, and to the degree fixed by its capacity for welfare. The view is neutral about the substrate: nothing in the principles refers to biology. ETH-24 applies the view to current systems.
+
+\section{Recent work}\label{s:recent}
+
+\paragraph{Hierarchy.} \citet{Kagan2019} offers the most developed recent defense of a hierarchical view. He argues that the intuitive judgments about conflicts between humans and animals cannot be accommodated by egalitarian views, and that a principle of unequal consideration, on which status depends on a being's psychological capacities and equal benefits count for more when they go to beings of higher status, best explains them. We have argued that the judgments Kagan cites are accommodated by differences in what is at stake (Section~\ref{s:degrees}), and that unequal consideration double-counts capacity. Kagan also proposes that beings who could have been persons, such as human beings with profound cognitive impairments, have a higher status than other beings with the same actual capacities (\enquote{modal personhood}). Our view does not accept this, since it makes status depend on a modal fact that does not affect what can be at stake for the being; but it agrees that such beings are often owed more, through the special relationships discussed in Section~\ref{s:cases}.
+
+\paragraph{Kantian views.} \citet{Korsgaard2018} argues that animals are ends in themselves, because what makes something an end in itself is being a creature for whom things can be good or bad, not being rational. The rational being's role is to confer value on what is good for creatures, including those that cannot themselves confer it. We agree with the threshold this sets, which is close to Principle~\ref{p:interest}. Korsgaard is sceptical of comparisons of the importance of different creatures' lives, on the ground that there is no standpoint from which such lives can be ranked. Theorem~\ref{t:ordinal} shows how little ranking our view needs: only an ordinal comparison of capacities, from which the ordering of status follows.
+
+\paragraph{Precaution.} \citet{Birch2024} develops a framework for acting under uncertainty about sentience, on which a being that is a \enquote{sentience candidate}, one for which there is a realistic possibility of sentience supported by evidence, warrants proportionate precautions. Our thesis is compatible with the framework and explains why it is needed: since status depends on sentience and on nothing else, uncertainty about sentience is uncertainty about status, and the precautions are precautions against wronging a being.
+
+\paragraph{Illusionism.} \citet{Kammerer2019} argues that illusionism about phenomenal consciousness, the view that phenomenal consciousness does not exist and only seems to, poses a problem for views that ground moral status in consciousness. If illusionism were true, Definition~\ref{d:sentience} would have no extension, and nothing would have moral status. We take this as a reason to reject illusionism rather than our account; MND-10 argues independently that qualia exist. A theorist who accepts illusionism could restate Definition~\ref{d:sentience} in terms of the states that seem to their subjects to be valenced, and the argument of Section~\ref{s:argument} would go through unchanged.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Rational agency]
+Persons have a dignity that is grounded in their rational agency and not in their welfare. A view on which status depends only on capacity for welfare cannot explain why persons may not be used as means even to increase total welfare.
+\end{objection}
+
+\begin{reply}
+Persons have claims that other beings lack, such as claims against paternalistic interference with their choices. These claims are grounded in capacities that only persons have, but they are not a higher degree of status. They are claims of a particular kind, available to beings with the relevant capacities, as a claim to be educated is available only to a being that can learn. Moreover, the capacities that ground them enlarge the being's capacity for welfare: autonomy, achievement and relationships are goods for those who can have them, and their loss is a harm. The constraint against using persons merely as means is a constraint on how one may treat beings with status, and ETH-21 argues that its weight lies in the word \enquote{merely}. Finally, a rational agent to which nothing matters, if there could be one, would have no claims: its choices would not be its concerns.
+\end{reply}
+
+\begin{objection}[Equality]
+On the view defended, a human being with a profound cognitive impairment may have the same degree of status as a pig and less than a normal adult. This conflicts with the basic equality of human beings.
+\end{objection}
+
+\begin{reply}
+Basic equality, as a political and legal principle, is the equality of standing of members of a political community, and it is not the same as equality of moral status in the sense of Definition~\ref{d:status}. Under equal consideration of interests, which Section~\ref{s:degrees} derives from Principle~\ref{p:interest}, equal interests count equally whoever has them, and nothing in our view permits giving less weight to the pain of an impaired person than to the equal pain of anyone else. What varies with capacity is what can be at stake. The alternative, which grounds equality in species membership, owes an account of why species should matter that does not appeal to the capacities typical of the species; Corollary~\ref{c:species} records that our principles leave no room for one.
+\end{reply}
+
+\begin{objection}[Incommensurability]
+There is no common measure of the welfare of a human being, a pig and a shrimp. Capacities for welfare cannot be compared across species, so Principles~\ref{p:sup} and \ref{p:mono} have no application.
+\end{objection}
+
+\begin{reply}
+The principles require only ordinal comparisons, and only between beings whose capacities are comparable. Many such comparisons are not in doubt: the range of welfare open to a chimpanzee is wider than that open to a shrimp, whatever the right measure. Where capacities are incomparable, the principles make no claim, and Theorem~\ref{t:ordinal} holds for every pair of beings whose capacities are comparable, since its proof applies to each pair separately. The representation of capacities by integers in the formalization is a simplification that assumes comparability throughout, and Section~\ref{s:limits} notes it as such.
+\end{reply}
+
+\begin{objection}[Relational status]
+Moral status is conferred by relationships, not by intrinsic capacities. Companion animals have a status that wild animals of the same species lack.
+\end{objection}
+
+\begin{reply}
+The relationships in question generate special obligations: a person who adopts a dog acquires duties to it that she does not have to the dogs of strangers. These obligations presuppose that the dog has status, since one cannot owe care to a being that cannot be wronged, and they vary with the relationship rather than with the being. A wild animal tortured for amusement is wronged as much as a companion animal would be. The relational view is a correct account of special obligations, and ETH-19 defends their legitimacy; it is not an account of status.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The thesis concerns the grounds of moral status. It does not settle which beings are sentient, which is an empirical question (MND-23 for animals, ETH-24 for artificial systems), nor how capacity for welfare is to be measured. It assumes that capacities are comparable for the beings in question, and its formalization represents capacity by a natural number, which assumes a total order. The ordinal uniqueness result holds pairwise and so survives the relaxation to a partial order, but the representation does not.
+
+Nor does the thesis say what is owed to beings with moral status. Status is the condition of being owed something; what is owed depends on the interests at stake and on the agent's situation. ETH-10 draws the consequences for the use of animals as food: factory farming is impermissible, and eating meat from animals raised and killed without suffering is permissible but not morally neutral. The equal consideration of interests defended in Section~\ref{s:degrees} is a principle for weighing interests, not a complete theory of right action, and it is compatible with constraints and with the special obligations discussed in Section~\ref{s:objections}.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/ETH/ETH_07.lean} formalizes Sections~2, 3 and \ref{s:degrees}. Beings form a primitive type; sentience and being a subject of welfare are primitive predicates; capacity for welfare and the degree of moral status are primitive functions to the natural numbers. Definition~\ref{d:capacity} contributes the axiom that capacity is positive exactly for subjects of welfare, and the two assumptions and three principles are axioms. Admissibility (Definition~\ref{d:admissible}) is a defined predicate on assignments. The main theorems are these.
+
+\begin{lstlisting}
+theorem threshold (x : Being) : status x > 0 ↔ Sentient x
+
+theorem ordinal_uniqueness (s t : Being → Nat)
+    (hs : Admissible s) (ht : Admissible t) (x y : Being) :
+    s x ≤ s y ↔ t x ≤ t y
+
+theorem hierarchy_admissible :
+    Admissible (fun x => capacity x * capacity x)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_07.threshold' depends on axioms:
+  [Philosophy.ETH_07.Being, Philosophy.ETH_07.Sentient,
+   Philosophy.ETH_07.WelfareSubject, Philosophy.ETH_07.experiential,
+   Philosophy.ETH_07.interest_principle, Philosophy.ETH_07.status,
+   Philosophy.ETH_07.valence_suffices]
+'Philosophy.ETH_07.ordinal_uniqueness' depends on axioms:
+  [propext, Classical.choice, Quot.sound, Philosophy.ETH_07.Being,
+   Philosophy.ETH_07.WelfareSubject, Philosophy.ETH_07.capacity]
+'Philosophy.ETH_07.hierarchy_admissible' depends on axioms:
+  [propext, Quot.sound, Philosophy.ETH_07.Being,
+   Philosophy.ETH_07.WelfareSubject, Philosophy.ETH_07.capacity,
+   Philosophy.ETH_07.capacity_pos]
+\end{lstlisting}
+
+Theorem~\ref{t:threshold} depends only on the primitives and on the axioms \texttt{interest\_principle} (Principle~\ref{p:interest}), \texttt{experiential} (Assumption~\ref{a:exp}) and \texttt{valence\_suffices} (Assumption~\ref{a:val}). Theorem~\ref{t:ordinal} depends, besides three standard axioms of Lean's logic, on no substantive axiom at all, only on the primitives that the notion of admissibility mentions: it is a fact about every admissible assignment, whatever capacities and subjects of welfare there are, and its only premises are the hypotheses that the two assignments are admissible. Proposition~\ref{p:hierarchy} depends in addition on \texttt{capacity\_pos}, the second clause of Definition~\ref{d:capacity}. Propositions~\ref{p:variation} and \ref{p:consistent} and Corollary~\ref{c:species} are also proved; the module records their dependencies. The argument of Section~\ref{s:degrees} that hierarchical assignments double-count capacity is not formalized: the formalization shows only that the principles leave the choice open.
+
+\section{Conclusion}
+
+Moral status is grounded in being a subject of welfare, and being a subject of welfare requires and is secured by sentience. Sentience is therefore necessary and sufficient for moral status, and many animals have it. The same grounding fixes the order of beings by degree of status as the order by capacity for welfare, uniquely, and the equal consideration of interests fixes how degrees enter the weighing of interests: through what is at stake for each being, not through a multiplier on its interests. Species membership, rational nature and relationship are not grounds of status, though the last two ground claims and obligations of other kinds.
+
+\begin{thebibliography}{99}\small
+\bibitem[Basl(2019)]{Basl2019} Basl, J. (2019). \emph{The Death of the Ethic of Life}. Oxford University Press.
+\bibitem[Bentham(1789)]{Bentham1789} Bentham, J. (1789). \emph{An Introduction to the Principles of Morals and Legislation}. T. Payne.
+\bibitem[Birch(2024)]{Birch2024} Birch, J. (2024). \emph{The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI}. Oxford University Press.
+\bibitem[Birch et~al.(2020)]{Birch2020} Birch, J., Schnell, A.~K. and Clayton, N.~S. (2020). Dimensions of animal consciousness. \emph{Trends in Cognitive Sciences}, 24(10), 789--801.
+\bibitem[Browning and Birch(2022)]{Browning2022} Browning, H. and Birch, J. (2022). Animal sentience. \emph{Philosophy Compass}, 17(5), e12822.
+\bibitem[Carruthers(1992)]{Carruthers1992} Carruthers, P. (1992). \emph{The Animals Issue: Moral Theory in Practice}. Cambridge University Press.
+\bibitem[Chalmers(2022)]{Chalmers2022} Chalmers, D.~J. (2022). \emph{Reality+: Virtual Worlds and the Problems of Philosophy}. W. W. Norton.
+\bibitem[Feinberg(1974)]{Feinberg1974} Feinberg, J. (1974). The rights of animals and unborn generations. In W.~T. Blackstone (ed.), \emph{Philosophy and Environmental Crisis}. University of Georgia Press.
+\bibitem[Kagan(2016)]{Kagan2016} Kagan, S. (2016). What's wrong with speciesism? \emph{Journal of Applied Philosophy}, 33(1), 1--21.
+\bibitem[Kagan(2019)]{Kagan2019} Kagan, S. (2019). \emph{How to Count Animals, More or Less}. Oxford University Press.
+\bibitem[Kammerer(2019)]{Kammerer2019} Kammerer, F. (2019). The normative challenge for illusionist views of consciousness. \emph{Ergo}, 6.
+\bibitem[Kant(1997)]{KantLectures} Kant, I. (1997). \emph{Lectures on Ethics}. Ed. P. Heath and J.~B. Schneewind. Cambridge University Press.
+\bibitem[Kittay(2005)]{Kittay2005} Kittay, E.~F. (2005). At the margins of moral personhood. \emph{Ethics}, 116(1), 100--131.
+\bibitem[Korsgaard(2018)]{Korsgaard2018} Korsgaard, C.~M. (2018). \emph{Fellow Creatures: Our Obligations to the Other Animals}. Oxford University Press.
+\bibitem[Kriegel(2019)]{Kriegel2019} Kriegel, U. (2019). The value of consciousness. \emph{Analysis}, 79(3), 503--520.
+\bibitem[Lee(2019)]{Lee2019} Lee, A.~Y. (2019). Is consciousness intrinsically valuable? \emph{Philosophical Studies}, 176, 655--671.
+\bibitem[Leopold(1949)]{Leopold1949} Leopold, A. (1949). \emph{A Sand County Almanac}. Oxford University Press.
+\bibitem[McMahan(2002)]{McMahan2002} McMahan, J. (2002). \emph{The Ethics of Killing: Problems at the Margins of Life}. Oxford University Press.
+\bibitem[Regan(1983)]{Regan1983} Regan, T. (1983). \emph{The Case for Animal Rights}. University of California Press.
+\bibitem[Scanlon(1998)]{Scanlon1998} Scanlon, T.~M. (1998). \emph{What We Owe to Each Other}. Harvard University Press.
+\bibitem[Shepherd(2018)]{Shepherd2018} Shepherd, J. (2018). \emph{Consciousness and Moral Status}. Routledge.
+\bibitem[Singer(1975)]{Singer1975} Singer, P. (1975). \emph{Animal Liberation}. New York Review/Random House.
+\bibitem[Singer(1993)]{Singer1993} Singer, P. (1993). \emph{Practical Ethics}. 2nd edn. Cambridge University Press.
+\bibitem[Taylor(1986)]{Taylor1986} Taylor, P.~W. (1986). \emph{Respect for Nature: A Theory of Environmental Ethics}. Princeton University Press.
+\bibitem[Williams(2006)]{Williams2006} Williams, B. (2006). The human prejudice. In \emph{Philosophy as a Humanistic Discipline}. Princeton University Press.
+\end{thebibliography}
+
+\end{document}

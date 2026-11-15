@@ -1,0 +1,211 @@
+\documentclass{situationist-preprint}
+
+\title{The Combination Problem Is Unsolvable}
+\msid{MND-18-a}
+\msfamily{MND-18}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_18.lean}
+\mskeywords{panpsychism; combination problem; subject-summing; Russellian monism; protophenomenal properties; ownership of experience}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Panpsychism holds that fundamental physical entities are subjects of experience and that our experience is grounded in theirs. Its central difficulty is the combination problem: how experiences of many micro-subjects could ground the experience of a further, macro-level subject. We argue that the problem cannot be solved and that panpsychism is therefore false. The argument rests on three principles about experience: that the experience of one subject can be grounded in the experiences of other subjects only if an experience of one is part of an experience of the other; that the parts of a subject's experience are that subject's; and that each experience belongs to exactly one subject. Together with the existence of non-fundamental subjects, such as ourselves, and the panpsychist's own requirement that macro-experience be grounded in fundamental natures, these principles entail that panpsychism is false. A Lean formalization confirms that the theorem depends on exactly these premises. The argument does not touch Russellian monism on which the intrinsic natures of physical entities are protophenomenal: such natures are not experiences, have no subjects, and so cannot generate the contradiction. The Russellian monism of MND-01 must be of this kind.
+\end{abstract}
+
+\section{The problem}
+
+Panpsychism is the view that mentality is fundamental and ubiquitous in the natural world. In its contemporary form it is a version of Russellian monism \citep{Russell1927}: physics describes the dispositional and structural profile of fundamental entities, the categorical natures that realize that profile are left open, and the panpsychist proposes that they are experiential, so that a quark or an electron is a subject with some extremely simple experience \citep{Strawson2006,Goff2017}. Human experience is then to be explained, not as an emergent novelty, but as a combination of the experiences of the micro-subjects that make up the brain.
+
+The difficulty was stated by \citet[ch.~VI]{James1890} against the mind-stuff theories of his day. Take a sentence of twelve words and twelve people, each of whom thinks one word: however closely they are packed, there is no consciousness of the whole sentence. Experiences do not add up to a further experience merely by being brought together. \citet{Seager1995} named the difficulty the combination problem, and \citet{Goff2009}, \citet{Coleman2014} and \citet{Chalmers2017} have distinguished several versions of it. The most fundamental is the \emph{subject-summing problem}: how can the existence of many subjects, each with its own point of view, ground the existence of a further subject with a point of view of its own?
+
+The main responses are three. Some panpsychists posit a relation, phenomenal bonding, whose obtaining among micro-subjects grounds a macro-subject, and whose nature we do not understand \citep{Goff2017}. \citet{Roelofs2019} argues that subjects can share experiences, so that a composite subject has experiences that are also the experiences of its components. Others replace micro-subjects by a single cosmic subject from which ours derive, exchanging the combination problem for a decomposition problem \citep{NagasawaWager2016}. And some accept that macro-subjects emerge from micro-subjects by brute law, which abandons the explanatory ambition that motivated panpsychism.
+
+We argue that the combination problem cannot be solved, because three principles about the ownership of experience, each well motivated and each accepted by most panpsychists, jointly exclude subject-summing; and that panpsychism, which needs subject-summing, is false. The conclusion is the one that MND-01 and MND-02 require. MND-01 argues that consciousness is the intrinsic nature of physical structure, and MND-02 counts the intrinsic natures posited by Russellian monism as physical only if they are not themselves mental. We show that a Russellian monism whose intrinsic natures are protophenomenal is untouched by our argument, and we say precisely what problem of combination it still faces.
+
+\section{Framework}
+
+\begin{definition}[Subjects and experiences]\label{d:subj}
+An \emph{experience} is a token phenomenal state: an occurrence of there being something it is like. A \emph{subject} is an entity that has experiences. We write that an experience \emph{belongs to} a subject when it is that subject's experience.
+\end{definition}
+
+\begin{definition}[Panpsychism]\label{d:pan}
+\emph{Panpsychism} is the conjunction of two theses: (a) the intrinsic natures of fundamental physical entities are experiences of those entities, which are therefore subjects; (b) the experiences of non-fundamental subjects are fully grounded in the intrinsic natures of fundamental entities.
+\end{definition}
+
+Clause (b) is what makes the view constitutive panpsychism in the sense of \citet{Chalmers2017}. A view that accepts (a) and denies (b), letting macro-experience emerge by brute law, retains the micro-experiences while giving up what they were posited to do; we consider it in Section~\ref{s:obj}.
+
+\begin{definition}[Protophenomenal]\label{d:proto}
+A property is \emph{protophenomenal} if it is not itself an experience, and does not by itself make its bearer a subject, but can, in suitable combination, ground experiences \citep{Chalmers2013}.
+\end{definition}
+
+\begin{definition}[Grounding in others]\label{d:others}
+An experience $e$ of a subject $S$ is \emph{grounded in others} if it is fully grounded in experiences belonging to subjects distinct from $S$.
+\end{definition}
+
+The argument uses three principles.
+
+\begin{principle}[Inclusion]\label{p:incl}
+If an experience of a subject $S$ is grounded in others, then there is an experience $f$ belonging to a subject distinct from $S$ such that $f$ is a part of $e$ or $e$ is a part of $f$.
+\end{principle}
+
+\begin{principle}[Ownership]\label{p:own}
+If an experience $f$ is a part of an experience $e$ that belongs to $S$, then $f$ belongs to $S$.
+\end{principle}
+
+\begin{principle}[Exclusivity]\label{p:excl}
+No experience belongs to two distinct subjects.
+\end{principle}
+
+Principle~\ref{p:incl} states what grounding of experience in experience must be like if it is to explain anything. The panpsychist's complaint against physicalism is that no arrangement of non-experiential properties makes intelligible why there should be experience at all \citep{Strawson2006}. Her proposal is that macro-experience is intelligible because it is made of micro-experience, as a chord is made of tones. If the micro-experiences were not parts of the macro-experience, nor it of a larger experience, then they would contribute to it as non-experiential grounds contribute, by a necessitation whose character is not given by the experiential character of the grounds, and the panpsychist's advantage would be lost. Grounding by inclusion is the only form of experiential grounding that is experiential in the relevant sense. The disjunct in which $e$ is part of $f$ covers views on which our experiences are grounded by being parts of the experience of a larger subject.
+
+Principle~\ref{p:own} is the claim that whatever is part of my experience is experienced by me. A tone that is part of the chord I hear is a tone I hear. The principle is the experiential counterpart of the platitude that a part of a total state of a subject is a state of that subject. Principle~\ref{p:excl} is the claim that experiences are individuated in part by their subjects: an experience is a state of a point of view, and the same token state cannot be had from two points of view. It is the claim behind James's twelve people, and \citet{Coleman2014} makes it the core of his formulation of the problem.
+
+\begin{assumption}[Macro-subjects]\label{a:macro}
+There is at least one non-fundamental subject that has an experience.
+\end{assumption}
+
+We are such subjects. A human being is not a fundamental physical entity, and she has experiences.
+
+\begin{assumption}[Panpsychist grounding]\label{a:pg}
+If panpsychism is true, then any experience of a non-fundamental subject that is fully grounded in the intrinsic natures of fundamental entities is grounded in others.
+\end{assumption}
+
+Assumption~\ref{a:pg} unpacks Definition~\ref{d:pan}: if the intrinsic natures are experiences of fundamental subjects, then grounding in those natures is grounding in experiences of subjects, and no fundamental subject is identical to a non-fundamental one.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}[No subject-summing]\label{l:nosum}
+No experience of any subject is grounded in others.
+\end{lemma}
+
+\begin{proof}
+Suppose an experience $e$ belonging to $S$ is grounded in others. By Principle~\ref{p:incl}, there is an experience $f$ belonging to some $T \neq S$ with $f$ part of $e$ or $e$ part of $f$. In the first case, $f$ is part of an experience belonging to $S$, so by Principle~\ref{p:own} $f$ belongs to $S$; it also belongs to $T$, and by Principle~\ref{p:excl} $S = T$, a contradiction. In the second case, $e$ is part of $f$, which belongs to $T$, so by Principle~\ref{p:own} $e$ belongs to $T$; it also belongs to $S$, and again $S = T$, a contradiction.
+\end{proof}
+
+Lemma~\ref{l:nosum} is the precise sense in which the combination problem cannot be solved. A solution would be an account of how some subject's experience is grounded in the experiences of others; the lemma shows that no such grounding exists, whatever relation is proposed to hold among the grounds. The argument is not that we have failed to find the combining relation, but that any relation that did the work would violate one of three principles about ownership.
+
+\begin{theorem}\label{t:main}
+Panpsychism is false.
+\end{theorem}
+
+\begin{proof}
+Suppose panpsychism is true. By Assumption~\ref{a:macro} there is an experience $e$ of a non-fundamental subject $S$. By clause (b) of Definition~\ref{d:pan}, $e$ is fully grounded in the intrinsic natures of fundamental entities, and by Assumption~\ref{a:pg} it is grounded in others. This contradicts Lemma~\ref{l:nosum}.
+\end{proof}
+
+\begin{corollary}\label{c:rm}
+If consciousness is the intrinsic nature of physical structure, as MND-01 holds, the intrinsic natures of fundamental entities are not experiences of those entities.
+\end{corollary}
+
+\begin{proof}
+If they were, clause (a) of Definition~\ref{d:pan} would hold; MND-01 holds that our experience is grounded in the intrinsic natures of physical structure, which is clause (b); and Theorem~\ref{t:main} excludes the conjunction.
+\end{proof}
+
+\section{Why protophenomenal monism escapes}\label{s:proto}
+
+On the Russellian monism required by Corollary~\ref{c:rm}, the intrinsic natures of fundamental entities are protophenomenal (Definition~\ref{d:proto}). We now show that the argument of Section~\ref{s:arg} has no application to this view and identify the weaker problem it faces.
+
+\begin{proposition}\label{p:escape}
+If the intrinsic natures of fundamental entities are protophenomenal, the grounding of a macro-subject's experience in them is not grounding in others, and Principles~\ref{p:incl}--\ref{p:excl} and Assumption~\ref{a:macro} are jointly consistent with it.
+\end{proposition}
+
+\begin{proof}
+Protophenomenal properties are not experiences and do not make their bearers subjects. Grounding in them is therefore not grounding in experiences of other subjects, and Definition~\ref{d:others} is not satisfied; Principle~\ref{p:incl} is not triggered. For consistency, consider a model with one non-fundamental subject $S$ having one experience $e$, no other subjects or experiences, the trivial parthood of $e$ to itself, and $e$ fully grounded in the protophenomenal natures of fundamental entities. Ownership and Exclusivity hold since $e$ belongs only to $S$; Inclusion holds vacuously since nothing is grounded in others. The model is formalized in Section~\ref{s:formal}.
+\end{proof}
+
+The proposition shows why the two views differ in their exposure. The panpsychist's grounds are experiences with owners; the owners are distinct from us; and Principles~\ref{p:incl}--\ref{p:excl} make it impossible for owned experiences to be the materials of a distinct owner's experience. The protophenomenal grounds have no owners, so the question whose they are, and whether they can also be ours, does not arise. What the protophenomenal monist gives up is the claim that the grounding is intelligible because it is the composition of experience from experience. She does not need that claim, since on MND-01 the explanatory gap is explained otherwise, by the two modes of presentation, structural and intrinsic, under which the same facts are given.
+
+A residual problem remains. Protophenomenal monism must say which arrangements of protophenomenal natures ground experiences, why they ground a single subject rather than several or none (the boundary problem), and how the variety of our qualities arises from what may be a small number of fundamental natures (the palette problem) \citep{Chalmers2017}. These are problems of the kind faced by any theory of grounding: they ask for the principles of a grounding relation, not whether it can exist. None of them yields a contradiction with Principles~\ref{p:incl}--\ref{p:excl}. Their treatment belongs to MND-01: MND-01-d gives a preliminary account, and Volume~IV of MND-01-a is devoted to them. The present manuscript establishes only that the problem they face is a weaker problem, one of articulation rather than impossibility.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Phenomenal bonding]
+\citet{Goff2017} proposes that micro-subjects stand in a phenomenal bonding relation whose obtaining grounds a macro-subject. We do not grasp the relation's nature, but its existence is not refuted by our ignorance of it.
+\end{objection}
+
+\begin{reply}
+Lemma~\ref{l:nosum} does not appeal to our ignorance. It holds whatever relation obtains among the micro-subjects, since it turns only on what grounding by inclusion requires and on the ownership of the grounding experiences. If phenomenal bonding grounds the macro-subject's experience by inclusion, it falls under the lemma; if it grounds it otherwise, the micro-experiences contribute as protophenomenal grounds would, and the bonded micro-subjects are idle (see the next objection).
+\end{reply}
+
+\begin{objection}[Non-inclusive grounding]
+The panpsychist can reject Principle~\ref{p:incl}. Micro-experiences might ground macro-experience without being parts of it.
+\end{objection}
+
+\begin{reply}
+Then the micro-experiences contribute nothing in virtue of being experiences. What the macro-subject experiences is not built from what the micro-subjects experience, and the grounding relation is as opaque as it is on protophenomenal monism. The view then has the costs of panpsychism, a population of micro-subjects whose experience plays no role in our own, and the explanatory resources of protophenomenal monism. It collapses into the latter with idle additions, and the theoretical choice between them is made by parsimony.
+\end{reply}
+
+\begin{objection}[Shared experiences]
+\citet{Roelofs2019} rejects Principle~\ref{p:excl}: a composite subject can share the experiences of its components, as a whole shares the location of its parts.
+\end{objection}
+
+\begin{reply}
+Sharing of location is possible because location is not individuated by occupants; experiences are individuated by points of view. If a single token experience belonged to a micro-subject and to me, then what it is like for the micro-subject would be what it is like for me, and the two points of view would coincide in that respect; but the micro-subject does not have my other experiences, which are co-conscious with it in me. The token would then be co-conscious with my other experiences and not co-conscious with them, since co-consciousness is a relation among experiences, not among experience-subject pairs. Roelofs's view requires that co-consciousness be relativized to subjects, which gives up the claim that experiences are states of points of view. MND-15, on which split-brain subjects have partially unified consciousness, does not require this relativization: partial unity is a pattern of co-consciousness within the experiences of one subject.
+\end{reply}
+
+\begin{objection}[Cosmopsychism]
+Let the fundamental subject be the cosmos, and our experiences be grounded in its experience \citep{NagasawaWager2016}. There is then no summing of subjects.
+\end{objection}
+
+\begin{reply}
+There is decomposition instead, and the second disjunct of Principle~\ref{p:incl} covers it. If my experience is grounded in the cosmic experience by being part of it, Ownership makes it the cosmic subject's experience as well as mine, and Exclusivity is violated. If it is grounded otherwise, the cosmic experience contributes as a protophenomenal ground would. Cosmopsychism is not panpsychism in the sense of Definition~\ref{d:pan}, but it falls under the same argument.
+\end{reply}
+
+\begin{objection}[Emergentist panpsychism]
+Accept clause (a) of Definition~\ref{d:pan} and deny clause (b): macro-subjects emerge from micro-subjects by fundamental laws.
+\end{objection}
+
+\begin{reply}
+The view escapes Theorem~\ref{t:main} by abandoning the explanatory project, and it is false for a different reason. It posits fundamental mentality at the micro-level and brute emergence at the macro-level, and so both the ubiquity of experience and the emergentist dualism that panpsychism was meant to avoid. MND-02 argues that physicalism is true in a sense that excludes fundamental mental properties; the emergentist view is incompatible with that result, as well as with the grounding claim of MND-01.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem does not show that protophenomenal properties exist, or that consciousness is grounded in them; that is the burden of MND-01. It does not show that the boundary and palette problems are soluble; it shows only that they are not instances of the subject-summing problem. It does not show that there cannot be composite subjects whose parts are subjects, provided the composite's experience is not grounded in theirs: a subject might have parts that are subjects, as long as their experiences are not parts of its own. Finally, the argument is only as strong as Principles~\ref{p:incl}--\ref{p:excl}. A panpsychist who rejects one of them must accept the corresponding consequence: collapse into protophenomenal monism, or experiences that belong to no one in particular.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/MND/MND_18.lean} takes subjects and experiences as types and belonging and parthood as relations. Its other primitives are the predicates \texttt{Fundamental}, \texttt{GroundedInNatures} and \texttt{GroundedInOthers} and the proposition \texttt{Panpsychism}. Principles~\ref{p:incl}--\ref{p:excl} and Assumptions~\ref{a:macro} and~\ref{a:pg} are axioms, and clause (b) of Definition~\ref{d:pan} is an axiom conditional on \texttt{Panpsychism}. The module proves Lemma~\ref{l:nosum} and Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+theorem no_subject_summing :
+    ∀ e S, Of e S → ¬ GroundedInOthers e S
+theorem panpsychism_false : ¬ Panpsychism
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_18.panpsychism_false' depends on axioms:
+  [Philosophy.MND_18.Exp, Philosophy.MND_18.Fundamental,
+   Philosophy.MND_18.GroundedInOthers, Philosophy.MND_18.Of,
+   Philosophy.MND_18.Panpsychism, Philosophy.MND_18.PartOf,
+   Philosophy.MND_18.Subj, Philosophy.MND_18.assumption_2_5,
+   Philosophy.MND_18.assumption_2_6,
+   Philosophy.MND_18.definition_2_2_b,
+   Philosophy.MND_18.principle_P1, Philosophy.MND_18.principle_P2,
+   Philosophy.MND_18.principle_P3]
+'Philosophy.MND_18.proposition_4_1' does not depend on any axioms
+\end{lstlisting}
+
+\texttt{Exp}, \texttt{Subj}, \texttt{Of}, \texttt{PartOf} and the remaining capitalized names are the primitives of Section~2 (\texttt{GroundedInNatures} occurs in the statements of two axioms but is not reported as a separate dependency). \texttt{principle\_P1} to \texttt{principle\_P3} are Principles~\ref{p:incl}--\ref{p:excl}, \texttt{assumption\_2\_5} and \texttt{assumption\_2\_6} are Assumptions~\ref{a:macro} and~\ref{a:pg}, and \texttt{definition\_2\_2\_b} is clause (b) of Definition~\ref{d:pan}. No axiom of classical logic is used: the proof is constructive. The module also proves the consistency half of Proposition~\ref{p:escape} by exhibiting, as a structure over \texttt{Unit}, a model in which the three principles hold, there is a non-fundamental subject whose experience is grounded in fundamental natures, and nothing is grounded in others; that theorem, \texttt{proposition\_4\_1}, depends on no axioms.
+
+\section{Conclusion}
+
+Panpsychism needs the experience of a macro-subject to be grounded in the experiences of micro-subjects, and grounding of experience in experience, if it is to be experiential, works by inclusion. Inclusion, ownership and exclusivity together make it impossible for one subject's experience to be grounded in the experiences of others. The combination problem therefore has no solution, and panpsychism is false. Russellian monism survives in its protophenomenal form, which faces the boundary and palette problems as problems of articulation, not the subject-summing problem; that is the form MND-01 adopts and MND-02 counts as physicalism.
+
+\begin{thebibliography}{99}\small
+\bibitem[Chalmers(2013)]{Chalmers2013} Chalmers, D.~J. (2013). Panpsychism and panprotopsychism. \emph{The Amherst Lecture in Philosophy}, 8.
+\bibitem[Chalmers(2017)]{Chalmers2017} Chalmers, D.~J. (2017). The combination problem for panpsychism. In G.~Br\"untrup and L.~Jaskolla (eds.), \emph{Panpsychism: Contemporary Perspectives}. Oxford University Press.
+\bibitem[Coleman(2014)]{Coleman2014} Coleman, S. (2014). The real combination problem: panpsychism, micro-subjects, and emergence. \emph{Erkenntnis}, 79(1), 19--44.
+\bibitem[Goff(2009)]{Goff2009} Goff, P. (2009). Why panpsychism doesn't help us explain consciousness. \emph{Dialectica}, 63(3), 289--311.
+\bibitem[Goff(2017)]{Goff2017} Goff, P. (2017). \emph{Consciousness and Fundamental Reality}. Oxford University Press.
+\bibitem[James(1890)]{James1890} James, W. (1890). \emph{The Principles of Psychology}. Henry Holt.
+\bibitem[Nagasawa and Wager(2016)]{NagasawaWager2016} Nagasawa, Y. and Wager, K. (2016). Panpsychism and priority cosmopsychism. In G.~Br\"untrup and L.~Jaskolla (eds.), \emph{Panpsychism: Contemporary Perspectives}. Oxford University Press.
+\bibitem[Roelofs(2019)]{Roelofs2019} Roelofs, L. (2019). \emph{Combining Minds: How to Think About Composite Subjectivity}. Oxford University Press.
+\bibitem[Russell(1927)]{Russell1927} Russell, B. (1927). \emph{The Analysis of Matter}. Kegan Paul.
+\bibitem[Seager(1995)]{Seager1995} Seager, W. (1995). Consciousness, information and panpsychism. \emph{Journal of Consciousness Studies}, 2(3), 272--288.
+\bibitem[Strawson(2006)]{Strawson2006} Strawson, G. (2006). Realistic monism: why physicalism entails panpsychism. \emph{Journal of Consciousness Studies}, 13(10--11), 3--31.
+\end{thebibliography}
+
+\end{document}

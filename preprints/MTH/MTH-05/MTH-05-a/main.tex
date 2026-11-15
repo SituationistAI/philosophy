@@ -1,0 +1,195 @@
+\documentclass{situationist-preprint}
+
+\title{G\"odel's Theorem and the Mechanist Thesis}
+\msid{MTH-05-a}
+\msfamily{MTH-05}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_05.lean}
+\mskeywords{incompleteness; mechanism; Lucas; Penrose; G\"odel sentence; consistency; self-knowledge}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lucas and Penrose argued that G\"odel's first incompleteness theorem shows that the human mind is not a machine: for any formal system that might model a mathematician's reasoning, the mathematician can see that the system's G\"odel sentence is true, which the system cannot prove. We argue that the theorem shows no such thing. The mathematician recognizes the truth of a G\"odel sentence only by way of the consistency of the system concerned, and if her own arithmetical knowledge were the output of a consistent system, she could know neither its G\"odel sentence nor its consistency, any more than the system can prove them. The mind and the machine are on a par with respect to their own G\"odel sentences. We prove this parity result, show that Lucas's premise that the mind knows the G\"odel sentence of every consistent system is equivalent to the denial of mechanism and so begs the question, and show that Penrose's later argument fails at the premise that the mathematician can know her own soundness. What survives is G\"odel's own disjunction. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+\citet{Godel1931} showed that every consistent, effectively axiomatized system $S$ containing elementary arithmetic leaves undecided a sentence $G_S$, which can be read as saying of itself that it is not provable in $S$. Since $G_S$ is unprovable if $S$ is consistent, and $G_S$ says that it is unprovable, $G_S$ is true if $S$ is consistent. The second incompleteness theorem adds that such an $S$ does not prove the arithmetical sentence $\mathrm{Con}_S$ expressing its own consistency.
+
+\citet{Lucas1961} argued from the first theorem that minds are not machines. A machine capable of arithmetic is, in the relevant respect, a formal system: the sentences it can be brought to assert as true are the theorems of some effectively axiomatized $S$. Given any such machine, we can construct its G\"odel sentence and see that it is true, which the machine cannot do. So no machine is an adequate model of the mind. \citet{Penrose1989,Penrose1994} defended a version of the argument at length, and in his later book gave a reformulation which he took to avoid the earlier objections: if a mathematician's reasoning were captured by a system $S$ and she knew this, then, since she knows her reasoning to be sound, she would know that $S$ is sound and hence that $G_S$ is true, which $S$ does not prove.
+
+The standard reply was stated early. \citet{Putnam1960} observed that what the mathematician can establish is the conditional that if $S$ is consistent then $G_S$ is true, which $S$ itself proves, and that the mathematician has no general means of establishing the antecedent. \citet{Benacerraf1967} turned the point into a dilemma: the argument shows at most that if I am a machine, I cannot ascertain which machine I am, or cannot establish its consistency. G\"odel himself drew only a disjunctive conclusion: either the mind infinitely surpasses any finite machine, or there are absolutely undecidable arithmetical problems \citep{Godel1951}. \citet{Feferman1995} and \citet{Shapiro1998} examined Penrose's arguments in detail and found that they rest at the critical point on an unargued claim about the mathematician's knowledge of her own soundness; \citet{Chalmers1995} showed that Penrose's reformulation, made precise, leads to contradiction from the premise that one knows one's own soundness, whatever one's nature. \citet{Franzen2005} gives a careful survey.
+
+We accept the substance of these replies and give it a precise form. The thesis is that the mind cannot recognize the truth of its own G\"odel sentence any more than a machine can. By ``its own G\"odel sentence'' we mean the G\"odel sentence of the system whose theorems are the arithmetical sentences the mind can come to know, if there is one. We prove that a mind whose arithmetical knowledge is the output of a consistent system stands to that system's G\"odel sentence exactly as the system does, and we identify the premise that each version of the anti-mechanist argument needs and cannot support. MND-08-a gives the same reply in arguing that machines can think; the present manuscript states and proves it.
+
+\section{Framework}
+
+We work with idealized knowers. A mind is credited with every arithmetical sentence it could come to know by reasoning, without limits of time or memory. The idealization favors the anti-mechanist, who claims that minds can do something machines cannot; it does not favor the mechanist.
+
+\begin{definition}\label{d:sent}
+Let $S$ range over consistent or inconsistent formal systems that are effectively axiomatized and contain elementary arithmetic. $G_S$ is a G\"odel sentence of $S$ and $\mathrm{Con}_S$ the standard arithmetical sentence expressing the consistency of $S$.
+\end{definition}
+
+\begin{assumption}[First incompleteness theorem]\label{a:goedel}
+If $S$ is consistent, $S$ does not prove $G_S$.
+\end{assumption}
+
+\begin{definition}[Mechanism]\label{d:mech}
+A mind $m$ is \emph{mechanical with respect to} $S$ if the arithmetical sentences $m$ can come to know are exactly the theorems of $S$. The \emph{mechanist hypothesis} for $m$ is that $m$ is mechanical with respect to some $S$.
+\end{definition}
+
+Definition~\ref{d:mech} is the thesis the anti-mechanist means to refute. It does not say that a mind is a computer in any architectural sense, only that its arithmetical knowledge is recursively enumerable; this is the form in which the thesis is at issue in \citet{Lucas1961} and in \citet{Benacerraf1967}.
+
+\begin{assumption}[Closure]\label{a:closure}
+For every mind $m$ and system $S$, if $m$ can come to know $\mathrm{Con}_S$, then $m$ can come to know $G_S$.
+\end{assumption}
+
+The closure assumption records the one route by which a human being is supposed to see that $G_S$ is true. The implication from $\mathrm{Con}_S$ to $G_S$ is provable in $S$ itself, indeed in a weak fragment of arithmetic, and the mathematician who knows the proof of the first theorem knows the implication; with $\mathrm{Con}_S$ she has $G_S$ by modus ponens.
+
+\begin{assumption}[Penrose's route]\label{a:penrose}
+If $m$ knows that its arithmetical knowledge is that of $S$ and that $S$ is sound, then $m$ can come to know $\mathrm{Con}_S$.
+\end{assumption}
+
+A sound system proves no falsehood and so proves no contradiction. The assumption says only that a mind which knows this of $S$ can draw the conclusion.
+
+\begin{definition}[Lucas's premise]\label{d:lucas}
+A mind $m$ is \emph{Lucasian} if, for every consistent $S$, $m$ can come to know $G_S$.
+\end{definition}
+
+\section{The argument}
+
+\begin{theorem}[Parity]\label{t:parity}
+Let $m$ be mechanical with respect to a consistent system $S$. Then $m$ can come to know $G_S$ if and only if $S$ proves $G_S$; and $m$ can come to know neither $G_S$ nor $\mathrm{Con}_S$.
+\end{theorem}
+
+\begin{proof}
+The biconditional is the instance of Definition~\ref{d:mech} for $G_S$. Since $S$ is consistent, $S$ does not prove $G_S$ by Assumption~\ref{a:goedel}, so $m$ cannot come to know $G_S$. If $m$ could come to know $\mathrm{Con}_S$, it could come to know $G_S$ by Assumption~\ref{a:closure}, which has just been excluded. So $m$ cannot come to know $\mathrm{Con}_S$.
+\end{proof}
+
+The theorem uses only the left-to-right half of Definition~\ref{d:mech}: what matters is that the mind's arithmetical knowledge is contained in the theorems of a consistent $S$. It does not use the second incompleteness theorem, whose bearing on the argument is captured by closure.
+
+Theorem~\ref{t:parity} is the precise form of the thesis. A machine whose outputs are the theorems of $S$ does not prove $G_S$; a mind whose knowledge is the theorems of $S$ does not know $G_S$. A mind can of course recognize the truth of the G\"odel sentences of other systems, namely of those it knows to be consistent. But so can a machine: a system $S'$ that proves $\mathrm{Con}_S$ proves $G_S$. The asymmetry Lucas claimed between minds and machines is in fact an asymmetry between a system's own G\"odel sentence and the G\"odel sentences of other systems, and it holds for minds and machines alike.
+
+\begin{corollary}\label{c:lucas}
+A Lucasian mind is mechanical with respect to no consistent system.
+\end{corollary}
+
+\begin{proof}
+Suppose $m$ is Lucasian and mechanical with respect to a consistent $S$. By Definition~\ref{d:lucas}, $m$ can come to know $G_S$, contrary to Theorem~\ref{t:parity}.
+\end{proof}
+
+The corollary shows that Lucas's argument is valid, and that this is the trouble with it. Its premise, that the mind can know the G\"odel sentence of every consistent system, includes the instance in which the system is the mind's own. The only support offered for the premise is the closure route of Assumption~\ref{a:closure}, which delivers $G_S$ for those $S$ whose consistency the mind can establish. To infer the Lucasian premise from it one needs the further claim that the mind can establish the consistency of every consistent system, including its own, and this is exactly what the mechanist denies. The argument assumes its conclusion at the step where it passes from ``I can see that $G_S$ is true for any $S$ I know to be consistent'' to ``I can see that $G_S$ is true for any consistent $S$''.
+
+\begin{corollary}[G\"odel's disjunction]\label{c:disj}
+For every mind $m$ and consistent system $S$, either $m$ is not mechanical with respect to $S$, or $m$ cannot come to know $G_S$.
+\end{corollary}
+
+\begin{proof}
+If $m$ is mechanical with respect to $S$, Theorem~\ref{t:parity} gives the second disjunct.
+\end{proof}
+
+Corollary~\ref{c:disj} is the form in which \citet{Godel1951} and \citet{Benacerraf1967} left the matter. Nothing in incompleteness decides between the disjuncts.
+
+\begin{corollary}\label{c:penrose}
+If $m$ is mechanical with respect to a consistent system $S$, then $m$ cannot know both that its arithmetical knowledge is that of $S$ and that $S$ is sound.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:penrose}, such knowledge would let $m$ come to know $\mathrm{Con}_S$, contrary to Theorem~\ref{t:parity}.
+\end{proof}
+
+Penrose's reformulation infers, from the premise that a mathematician knows the soundness of her own reasoning, that she cannot be any system she could know herself to be. Corollary~\ref{c:penrose} draws the opposite moral from the same structure: if she is a consistent system, she does not know both which one she is and that it is sound. Since no mathematician knows which system, if any, her competence realizes, this costs the mechanist nothing; it is the second horn of Benacerraf's dilemma.
+
+\section{Objections}
+
+\begin{objection}[Knowing one's own consistency]
+A mind can know that it is consistent by reflection: it does not accept contradictions, and if it accepted one it would notice. So the mind knows $\mathrm{Con}_S$ for whichever $S$ it is, and Theorem~\ref{t:parity} shows that it is no consistent $S$.
+\end{objection}
+
+\begin{reply}
+The reflection, if sound, yields knowledge that the mind is consistent, a fact about the mind. It does not yield knowledge of the arithmetical sentence $\mathrm{Con}_S$ for a particular $S$, unless the mind also knows that $S$ is the system its arithmetical knowledge realizes. The gap between the two is the one Corollary~\ref{c:penrose} exploits. Moreover, the confidence that one would notice a contradiction is not borne out by the history of mathematics, in which competent mathematicians, Frege among them, accepted inconsistent principles without noticing. Nothing in the reflection distinguishes a consistent mind from one that merely has not yet derived a contradiction.
+\end{reply}
+
+\begin{objection}[Unassailable soundness]
+Penrose holds that the mathematician's knowledge of the soundness of the procedures she regards as unassailably true is not a hypothesis she might be wrong about, so Assumption~\ref{a:penrose} applies to her own procedures.
+\end{objection}
+
+\begin{reply}
+Corollary~\ref{c:penrose} requires that she know two things: that her procedures are sound, and that they are the procedures of $S$. Grant the first. The second is an empirical and arithmetical claim about the extension of her competence, which no one is in a position to know, since the axioms of $S$ would have to be identified from a description of her reasoning. \citet{Shapiro1998} shows that once the notion of what is unassailably true is made precise, the set of such truths need not be one the mathematician can survey as the theorems of a known system. And \citet{Chalmers1995} shows that a mind that believes of itself that it is sound, in the strong sense Penrose requires, is driven to contradiction whether or not it is a machine, so the premise cannot be accepted by anyone.
+\end{reply}
+
+\begin{objection}[Idealization]
+Human mathematicians are finite and fallible. Treating them as idealized knowers changes the subject, and the mechanist hypothesis is false of real minds for reasons that have nothing to do with G\"odel.
+\end{objection}
+
+\begin{reply}
+The idealization is the anti-mechanist's, and the reply concedes what the objection asserts. If real minds are finite, their arithmetical knowledge is trivially contained in a finite, hence decidable, set of sentences, and they are mechanical in the sense of Definition~\ref{d:mech} with respect to many systems. If they are inconsistent, as fallible reasoners may be (a point \citet{Turing1950} made in reply to what he called the mathematical objection), Assumption~\ref{a:goedel} does not apply to their systems and nothing follows. In neither case is there an argument from incompleteness against mechanism.
+\end{reply}
+
+\begin{objection}[Transfinite progressions]
+A mind can go beyond any given system by adding its consistency statement, and can iterate this into the transfinite. A machine is bounded by a fixed system; the mind is not.
+\end{objection}
+
+\begin{reply}
+Adding $\mathrm{Con}_S$ to $S$ yields a new system $S_1$ with its own G\"odel sentence, and so on through the progressions studied by \citet{Turing1939} and \citet{Feferman1962}. A machine can be programmed to perform the same extension at every stage at which the mind can. The progressions are complete only along paths fixed by ordinal notations that cannot be effectively recognized, and a mind that could select them would already have the non-mechanical capacity in question. The extension procedure therefore does not show that the mind surpasses a machine; it presupposes what it would have to show.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:parity} does not show that the mind is a machine. It shows that G\"odel's theorems give no reason to think that it is not. The thesis of MND-08, that machines can think, is compatible with either answer, since it concerns what machines can do rather than what minds are, and MND-21 holds that the mind computes without being a single computer, which is compatible with the mind's arithmetical knowledge being recursively enumerable. Nor does the theorem show that a mind which is not mechanical can know its own consistency; Corollary~\ref{c:disj} leaves the first disjunct open, as G\"odel did. Finally, there is a sense in which a mind can know that it is \emph{some} machine without knowing which: \citet{Reinhardt1986} formulated this strong mechanistic thesis in an epistemic arithmetic, and \citet{Carlson2000} proved it consistent. Our result is compatible with this, since knowing that one's knowledge is that of some system does not yield $\mathrm{Con}_S$ for any particular $S$.
+
+\section{Formalization}
+
+Theorem~\ref{t:parity} and Corollaries~\ref{c:lucas}--\ref{c:penrose} are formalized in \nolinkurl{Philosophy/MTH/MTH_05.lean}. Systems, sentences and minds are primitive types; provability, consistency and knowability are primitive predicates; $G_S$ and $\mathrm{Con}_S$ are primitive functions of the system. Assumptions~\ref{a:goedel}, \ref{a:closure} and~\ref{a:penrose} are axioms. Mechanism and Lucas's premise are definitions. The main theorem reads:
+
+\begin{lstlisting}
+def Mechanical (m : Mind) (S : System) : Prop :=
+  ∀ p, Knows m p ↔ Prov S p
+
+theorem parity (m : Mind) (S : System) (hM : Mechanical m S)
+    (hC : Consistent S) :
+    (Knows m (godel S) ↔ Prov S (godel S)) ∧
+      ¬ Knows m (godel S) ∧ ¬ Knows m (con S)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MTH_05.parity' depends on axioms:
+ [Philosophy.MTH_05.Consistent, Philosophy.MTH_05.Knows,
+  Philosophy.MTH_05.Mind, Philosophy.MTH_05.Prov,
+  Philosophy.MTH_05.Sentence, Philosophy.MTH_05.System,
+  Philosophy.MTH_05.closure, Philosophy.MTH_05.con,
+  Philosophy.MTH_05.first_incompleteness,
+  Philosophy.MTH_05.godel]
+\end{lstlisting}
+
+Apart from the primitive types and predicates, the theorem depends on two axioms: \texttt{first\_incompleteness} (Assumption~\ref{a:goedel}) and \texttt{closure} (Assumption~\ref{a:closure}). Corollary~\ref{c:lucas} (\texttt{lucas\_premise\_denies\_mechanism}) depends on the same axioms, and Corollary~\ref{c:penrose} (\texttt{no\_self\_knowledge}) adds \texttt{self\_knowledge\_gives\_con} (Assumption~\ref{a:penrose}). The module does not prove G\"odel's theorem, which it takes as an axiom about an abstract provability predicate; the formalization checks the reasoning from incompleteness to the parity of mind and machine, which is the step in dispute.
+
+\section{Conclusion}
+
+The anti-mechanist argument needs a mind that knows the G\"odel sentence of its own system. A mind recognizes the truth of a G\"odel sentence only through the consistency of the system, and a mind whose knowledge is the output of a consistent system can no more know that system's consistency, or its G\"odel sentence, than the system can prove them. The mind and the machine are on a par. Lucas's premise is equivalent, under mechanism, to the denial of mechanism, Penrose's requires knowledge of one's own soundness that no one has, and what incompleteness leaves standing is G\"odel's disjunction.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1967)]{Benacerraf1967} Benacerraf, P. (1967). God, the devil, and G\"odel. \emph{The Monist}, 51(1), 9--32.
+\bibitem[Carlson(2000)]{Carlson2000} Carlson, T.~J. (2000). Knowledge, machines, and the consistency of Reinhardt's strong mechanistic thesis. \emph{Annals of Pure and Applied Logic}, 105, 51--82.
+\bibitem[Chalmers(1995)]{Chalmers1995} Chalmers, D.~J. (1995). Minds, machines, and mathematics: A review of \emph{Shadows of the Mind} by Roger Penrose. \emph{Psyche}, 2.
+\bibitem[Feferman(1962)]{Feferman1962} Feferman, S. (1962). Transfinite recursive progressions of axiomatic theories. \emph{The Journal of Symbolic Logic}, 27(3), 259--316.
+\bibitem[Feferman(1995)]{Feferman1995} Feferman, S. (1995). Penrose's G\"odelian argument. \emph{Psyche}, 2.
+\bibitem[Franz\'en(2005)]{Franzen2005} Franz\'en, T. (2005). \emph{G\"odel's Theorem: An Incomplete Guide to Its Use and Abuse}. A K Peters.
+\bibitem[G\"odel(1931)]{Godel1931} G\"odel, K. (1931). \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f\"ur Mathematik und Physik}, 38, 173--198.
+\bibitem[G\"odel(1951)]{Godel1951} G\"odel, K. (1951). Some basic theorems on the foundations of mathematics and their implications. Gibbs Lecture. In S. Feferman et~al. (eds.), \emph{Collected Works}, vol.~III, Oxford University Press, 1995.
+\bibitem[Lucas(1961)]{Lucas1961} Lucas, J.~R. (1961). Minds, machines and G\"odel. \emph{Philosophy}, 36(137), 112--127.
+\bibitem[Penrose(1989)]{Penrose1989} Penrose, R. (1989). \emph{The Emperor's New Mind}. Oxford University Press.
+\bibitem[Penrose(1994)]{Penrose1994} Penrose, R. (1994). \emph{Shadows of the Mind}. Oxford University Press.
+\bibitem[Putnam(1960)]{Putnam1960} Putnam, H. (1960). Minds and machines. In S. Hook (ed.), \emph{Dimensions of Mind}, New York University Press.
+\bibitem[Reinhardt(1986)]{Reinhardt1986} Reinhardt, W.~N. (1986). Epistemic theories and the interpretation of G\"odel's incompleteness theorems. \emph{Journal of Philosophical Logic}, 15(4), 427--474.
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Incompleteness, mechanism, and optimism. \emph{The Bulletin of Symbolic Logic}, 4(3), 273--302.
+\bibitem[Turing(1939)]{Turing1939} Turing, A.~M. (1939). Systems of logic based on ordinals. \emph{Proceedings of the London Mathematical Society}, 2(45), 161--228.
+\bibitem[Turing(1950)]{Turing1950} Turing, A.~M. (1950). Computing machinery and intelligence. \emph{Mind}, 59(236), 433--460.
+\end{thebibliography}
+
+\end{document}

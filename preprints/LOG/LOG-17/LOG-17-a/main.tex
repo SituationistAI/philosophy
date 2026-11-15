@@ -1,0 +1,155 @@
+\documentclass{situationist-preprint}
+
+\title{Hempel's Ravens and Bayesian Confirmation}
+\msid{LOG-17-a}
+\msfamily{LOG-17}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_17.lean}
+\mskeywords{paradox of the ravens; confirmation; Nicod's criterion; Bayesianism; likelihood ratio; sampling}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+By Nicod's criterion, a black raven confirms that all ravens are black. By the equivalence condition, whatever confirms a hypothesis confirms every logically equivalent hypothesis. Since \enquote{all ravens are black} is equivalent to \enquote{all non-black things are non-ravens}, a white shoe confirms that all ravens are black. We argue that this conclusion is true, and that the Bayesian treatment explains why it seems false. In a model in which observations are random draws from the ravens or from the non-black things, and the hypotheses compared agree on how many of each there are, a white shoe confirms the hypothesis, and a black raven confirms it more exactly when non-black non-ravens outnumber black ravens. The shoe's likelihood ratio exceeds one by at most the ratio of the non-black ravens posited by the alternative to the non-black non-ravens, which in any realistic case is negligible. The arithmetic is formalized in Lean.
+\end{abstract}
+
+\section{The paradox}
+
+\citet{Hempel1945} formulated two conditions on the relation of confirmation between an observation report and a generalization. \emph{Nicod's criterion}: an object that is $F$ and $G$ confirms \enquote{all $F$ are $G$}. The \emph{equivalence condition}: if $E$ confirms $H$ and $H$ is logically equivalent to $H'$, then $E$ confirms $H'$. \enquote{All ravens are black} is equivalent to \enquote{all non-black things are non-ravens}. By Nicod's criterion, a white shoe, which is a non-black non-raven, confirms the second, and by the equivalence condition it confirms the first.
+
+Hempel's own response was to accept the conclusion. Its appearance of absurdity, he argued, is an illusion produced by background knowledge: an object already known to be a shoe could not have been a counterexample, whereas an object known only to be non-black and then found not to be a raven plainly bears on the hypothesis. \citet{Goodman1955} accepted Hempel's conclusion and located the real difficulty for a theory of confirmation elsewhere, in the distinction between projectible and unprojectible predicates. \citet{Quine1969} took the paradox to show that the complements of natural kinds are not natural kinds. \citet{Good1967} gave a model in which a black raven \emph{dis}confirms the hypothesis, refuting Nicod's criterion as a general principle.
+
+The Bayesian treatment begins with \citet{HosiassonLindenbaum1940} and was developed by \citet{Mackie1963}; its modern forms are surveyed and refined by \citet{FitelsonHawthorne2010}. \citet{Vranas2004} showed that the standard version of the argument relies on an assumption, that the probability that an object is not black is independent of the hypothesis, which is not innocent. We give a version in which the assumption is replaced by an explicit sampling model.
+
+\section{Framework}
+
+We assume, with SCI-12, that confirmation is to be understood in Bayesian terms.
+
+\begin{definition}[Confirmation]\label{d:conf}
+Evidence $E$ \emph{confirms} hypothesis $H$, relative to a probability function $P$ representing background knowledge, iff $P(H \mid E) > P(H)$.
+\end{definition}
+
+\begin{definition}[Degree]\label{d:degree}
+The \emph{degree} to which $E$ confirms $H$ against an alternative $H'$ is the likelihood ratio $P(E \mid H) / P(E \mid H')$.
+\end{definition}
+
+The likelihood ratio is the factor by which the odds of $H$ against $H'$ are multiplied on learning $E$. Other measures of degree have been proposed, and the comparative judgements they deliver can diverge \citep{Fitelson1999}; we return to this in Objection~\ref{o:measure}.
+
+Let $H$ be the hypothesis that all ravens are black, and let $H_k$ be the alternative that exactly $k \geq 1$ ravens are not black.
+
+\begin{assumption}[Sampling]\label{a:sampling}
+$H$ and $H_k$ agree that there are $k + b$ ravens and $k + a$ non-black things. Under $H_k$, then, there are $b$ black ravens, $k$ non-black ravens and $a$ non-black non-ravens; under $H$ there are $k+b$ black ravens and $k+a$ non-black non-ravens. An observation consists in drawing an object at random either from the ravens (a \emph{raven draw}) or from the non-black things (a \emph{non-black draw}).
+\end{assumption}
+
+The agreement on the sizes of the two classes is what excludes Good's counterexample (Objection~\ref{o:good}).
+
+\section{The results}
+
+\begin{lemma}\label{l:bayes}
+Let $H$ and $H_k$ have positive prior probabilities summing to one. Then $E$ confirms $H$ iff $P(E \mid H) > P(E \mid H_k)$.
+\end{lemma}
+
+\begin{proof}
+Write the priors as proportional to $p$ and $q$ and the likelihoods as proportional to $x$ and $y$. By Bayes's theorem $P(H \mid E) = px/(px + qy)$, while $P(H) = p/(p+q)$. Cross-multiplying, the first exceeds the second iff $px(p+q) > p(px+qy)$, that is, iff $pqx > pqy$, that is, since $p, q > 0$, iff $x > y$.
+\end{proof}
+
+\begin{proposition}\label{p:lik}
+Under Assumption~\ref{a:sampling}, a raven draw yields a black raven with probability $1$ under $H$ and $b/(k+b)$ under $H_k$; a non-black draw yields a non-raven with probability $1$ under $H$ and $a/(k+a)$ under $H_k$. The likelihood ratios are $(k+b)/b$ for the black raven and $(k+a)/a$ for the white shoe.
+\end{proposition}
+
+\begin{theorem}\label{t:shoe}
+A white shoe obtained by a non-black draw confirms that all ravens are black.
+\end{theorem}
+
+\begin{proof}
+Its likelihood under $H$ is $1$ and under $H_k$ is $a/(k+a) < 1$, since $k \geq 1$ (Proposition~\ref{p:lik}). By Lemma~\ref{l:bayes} it confirms $H$.
+\end{proof}
+
+\begin{theorem}\label{t:compare}
+A black raven obtained by a raven draw confirms $H$ against $H_k$ to a greater degree than a white shoe obtained by a non-black draw iff $a > b$.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:lik} and Definition~\ref{d:degree}, we compare $(k+b)/b$ with $(k+a)/a$. Cross-multiplying, the first exceeds the second iff $(k+a)b < (k+b)a$, that is, iff $kb + ab < ka + ab$, that is, since $k \geq 1$, iff $b < a$.
+\end{proof}
+
+\begin{corollary}\label{c:negligible}
+If $a \geq Mk$, the likelihood ratio of the white shoe is at most $1 + 1/M$.
+\end{corollary}
+
+\begin{proof}
+$(k+a)/a = 1 + k/a \leq 1 + 1/M$.
+\end{proof}
+
+In any realistic case $M$ is enormous: if there are a few million ravens in the world and $k$ is a fraction of them, while the non-black non-ravens are counted in the billions of manufactured objects alone, the shoe multiplies the odds of $H$ by a factor that differs from $1$ only in the fourth or fifth decimal place or beyond. The companion LOG-17-b estimates the factor for realistic counts.
+
+\begin{remark}\label{r:mixture}
+The alternative to $H$ is not a single $H_k$ but their disjunction, $\neg H$. If each $H_k$ satisfies Assumption~\ref{a:sampling}, $P(E \mid \neg H)$ is a weighted average of the values $a_k/(k+a_k)$, each less than $1$, so Theorem~\ref{t:shoe} holds against $\neg H$; and if every $a_k \geq M k$, the bound of Corollary~\ref{c:negligible} holds for the average as well.
+\end{remark}
+
+\section{Objections}
+
+\begin{objection}[Good's counterexample]\label{o:good}
+\citet{Good1967} describes a case in which background knowledge says that either there are a hundred black ravens, no non-black ravens and a million other birds, or there are a thousand black ravens, one white raven and a million other birds. A black raven drawn at random from the birds is about ten times likelier under the second hypothesis, and so disconfirms the hypothesis that all ravens are black.
+\end{objection}
+
+\begin{reply}
+The example is correct, and it shows that Nicod's criterion is not a law of confirmation. It does not affect our result, because its two hypotheses disagree on the number of ravens, which is what Assumption~\ref{a:sampling} excludes. When they disagree, the evidence bears on the number of ravens as well as on their color, and the effect on $H$ can go either way; the paradox as Hempel posed it concerns their color.
+\end{reply}
+
+\begin{objection}[Random objects]
+Shoes are not found by drawing from the non-black things. One looks around and sees a white shoe, which is a draw from objects in general.
+\end{objection}
+
+\begin{reply}
+If the draw is from all $U$ objects, a non-black non-raven is drawn with probability $(k+a)/U$ under $H$ and $a/U$ under $H_k$, and the likelihood ratio is again $(k+a)/a$. Only a selection that makes the object's being a non-raven certain in advance, as when it is first identified as a shoe, makes the likelihoods equal; then the observation confirms nothing, which is Hempel's explanation of the intuition.
+\end{reply}
+
+\begin{objection}[Measure sensitivity]\label{o:measure}
+Theorem~\ref{t:compare} is stated for the likelihood ratio. Other measures, such as the difference $P(H \mid E) - P(H)$, may order the two observations differently.
+\end{objection}
+
+\begin{reply}
+The qualitative result, Theorem~\ref{t:shoe}, holds on every measure that is positive exactly when $P(H \mid E) > P(H)$, since by Lemma~\ref{l:bayes} it concerns confirmation itself. For the comparative result, the difference measure is a monotone function of the likelihood ratio when the prior is held fixed, and both observations are evaluated against the same prior, so it gives the same ordering. The negligibility claim holds on any measure that is continuous in the posterior and vanishes when the posterior equals the prior, because Corollary~\ref{c:negligible} makes the posterior arbitrarily close to the prior.
+\end{reply}
+
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_17.lean} proves Lemma~\ref{l:bayes}, Theorems~\ref{t:shoe} and~\ref{t:compare} and Corollary~\ref{c:negligible} in natural-number arithmetic, with inequalities between ratios stated by cross-multiplication. The comparison of Theorem~\ref{t:compare} reads:
+
+\begin{lstlisting}
+theorem raven_beats_shoe (k a b : Nat) (hk : 0 < k) :
+    (k + a) * b < (k + b) * a ↔ b < a
+\end{lstlisting}
+
+\noindent The checker reports, for the two main theorems:
+
+\begin{lstlisting}
+'Philosophy.LOG_17.shoe_confirms' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.LOG_17.raven_beats_shoe' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+\end{lstlisting}
+
+These are the standard axioms of Lean's core logic; the module adds none. Once the model is fixed the result is arithmetical; its philosophical premises, Definitions~\ref{d:conf} and~\ref{d:degree} and Assumption~\ref{a:sampling}, fix what the arithmetic is about, and the formalization does not establish them.
+
+\section{Conclusion}
+
+A white shoe confirms that all ravens are black. Given a sampling model in which the hypotheses agree on the sizes of the classes sampled, it confirms the hypothesis because it is more probable if the hypothesis is true; a black raven confirms the hypothesis more, exactly when non-black non-ravens outnumber black ravens; and the shoe's likelihood ratio exceeds one by at most the ratio of the posited non-black ravens to the non-black non-ravens. Hempel was right that the paradoxical conclusion is true. The intuition that the shoe is irrelevant does not distinguish zero from negligible: the confirmation is real but too small to register, and it is zero only when the object is identified as a non-raven before its color is noted.
+
+\begin{thebibliography}{99}\small
+\bibitem[Fitelson(1999)]{Fitelson1999} Fitelson, B. (1999). The plurality of Bayesian measures of confirmation and the problem of measure sensitivity. \emph{Philosophy of Science}, 66 (Proceedings), S362--S378.
+\bibitem[Fitelson and Hawthorne(2010)]{FitelsonHawthorne2010} Fitelson, B. and Hawthorne, J. (2010). How Bayesian confirmation theory handles the paradox of the ravens. In E. Eells and J. H. Fetzer (eds.), \emph{The Place of Probability in Science}, 247--275. Springer.
+\bibitem[Good(1967)]{Good1967} Good, I.~J. (1967). The white shoe is a red herring. \emph{The British Journal for the Philosophy of Science}, 17(4), 322.
+\bibitem[Goodman(1955)]{Goodman1955} Goodman, N. (1955). \emph{Fact, Fiction, and Forecast}. Harvard University Press.
+\bibitem[Hempel(1945)]{Hempel1945} Hempel, C.~G. (1945). Studies in the logic of confirmation. \emph{Mind}, 54(213), 1--26, and 54(214), 97--121.
+\bibitem[Hosiasson-Lindenbaum(1940)]{HosiassonLindenbaum1940} Hosiasson-Lindenbaum, J. (1940). On confirmation. \emph{The Journal of Symbolic Logic}, 5(4), 133--148.
+\bibitem[Mackie(1963)]{Mackie1963} Mackie, J.~L. (1963). The paradox of confirmation. \emph{The British Journal for the Philosophy of Science}, 13(52), 265--277.
+\bibitem[Quine(1969)]{Quine1969} Quine, W.~V. (1969). Natural kinds. In \emph{Ontological Relativity and Other Essays}, 114--138. Columbia University Press.
+\bibitem[Vranas(2004)]{Vranas2004} Vranas, P.~B.~M. (2004). Hempel's raven paradox: A lacuna in the standard Bayesian solution. \emph{The British Journal for the Philosophy of Science}, 55(3), 545--560.
+\end{thebibliography}
+
+\end{document}

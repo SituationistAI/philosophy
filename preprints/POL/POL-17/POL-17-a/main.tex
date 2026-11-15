@@ -1,0 +1,180 @@
+\documentclass{situationist-preprint}
+
+\title{The Least Bad Voting Rule}
+\msid{POL-17-a}
+\msfamily{POL-17}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mskeywords{voting rules; social choice; Arrow's theorem; approval voting; Condorcet consistency; participation; consistency}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What is the fairest voting rule? Arrow's theorem shows that no rule aggregating individual rankings into a collective ranking satisfies unrestricted domain, the Pareto condition, independence of irrelevant alternatives and non-dictatorship together. The question is therefore which desiderata to keep. We argue that approval voting, in which each voter approves as many candidates as she likes and the candidate with most approvals wins, best balances the desiderata that remain. We distinguish desiderata that protect individual voters against their own ballots (monotonicity, participation, consistency, and the guarantee that supporting one's favorite never hurts) from desiderata that concern the collective outcome (Condorcet consistency and independence of clones), and argue that the former have priority, since a rule that can turn a citizen's vote against her fails to give her an equal say. Plurality, instant-runoff and the Borda count each fail several of the desiderata; every Condorcet-consistent rule fails participation and consistency. Approval voting satisfies every desideratum except Condorcet consistency, and when preferences are dichotomous and ballots sincere, it elects the Condorcet winner whenever there is one.
+\end{abstract}
+
+\section{The problem}
+
+A voting rule takes the ballots of a set of voters and returns a winner, or a ranking of the candidates. Since Borda and Condorcet in the eighteenth century it has been known that rules which seem equally reasonable can return different winners from the same ballots, and that majority preference may be cyclical: a majority may prefer $A$ to $B$, another $B$ to $C$, and a third $C$ to $A$ \citep{Condorcet1785}. \citet{Black1948} showed that cycles cannot arise when preferences are single-peaked on a common dimension, and \citet{May1952} characterized simple majority rule for two alternatives as the only rule that is anonymous, neutral and positively responsive. With three or more alternatives, \citet{Arrow1951} proved that no rule satisfies a short list of apparently minimal conditions, and \citet{Gibbard1973} and \citet{Satterthwaite1975} showed that every non-dictatorial rule choosing among three or more alternatives on the basis of rankings is open to strategic manipulation.
+
+Two conclusions have been drawn. \citet{Riker1982} argued that since every rule is arbitrary in some cases, the outcomes of voting have no claim to express a popular will, and democracy should be understood as the power to remove officials, not as the implementation of collective preferences. \citet{Mackie2003} replied that the cycles and manipulations Riker relied on are rare in practice and that voting outcomes are meaningful in the great majority of cases. We take a third course. Arrow's theorem shows that a choice among desiderata cannot be avoided; it does not show that every choice is equally good. The question is which rule gives up the least important desideratum and keeps the rest.
+
+\section{Arrow's conditions}
+
+\begin{definition}\label{d:swf}
+A \emph{social welfare function} assigns to each profile of individual weak orderings of a set of at least three alternatives a collective weak ordering.
+\end{definition}
+
+Arrow's conditions are these: \emph{unrestricted domain} (every profile of orderings is admissible); \emph{weak Pareto} (if every voter prefers $x$ to $y$, so does the collective ordering); \emph{independence of irrelevant alternatives} (the collective ranking of $x$ and $y$ depends only on the individual rankings of $x$ and $y$); and \emph{non-dictatorship} (there is no voter whose strict preferences are always the collective's).
+
+\begin{theorem}[\citealp{Arrow1951}]\label{t:arrow}
+No social welfare function satisfies unrestricted domain, weak Pareto, independence of irrelevant alternatives and non-dictatorship.
+\end{theorem}
+
+The theorem has a judgment-aggregation analogue: no rule aggregating individual judgments on logically connected propositions, proposition by proposition, yields consistent collective judgments in general without dictatorship. ACT-10 uses that analogue to argue that groups which achieve rational unity must form attitudes that are not a function of their members' attitudes on the same proposition. Theorem~\ref{t:arrow} is the corresponding limit for preferences, and it constrains the choice of a voting rule.
+
+Approval voting does not take rankings as input, and so is not a social welfare function in Arrow's sense. This does not escape the theorem. If voters' approvals are derived from underlying rankings by a threshold, where to set the threshold depends on which candidates are on the menu, and adding or removing a candidate can then change the collective ranking of two others. Independence of irrelevant alternatives fails at the level of preferences, as Theorem~\ref{t:arrow} requires it to fail for some condition. What approval voting gains is that the failure lies in how voters translate preferences into ballots, which they control, rather than in how the rule counts ballots.
+
+\section{The remaining desiderata}
+
+Since some Arrow condition must go, we compare rules by further desiderata, of two kinds.
+
+\begin{definition}\label{d:protective}
+The \emph{protective} desiderata are those that guarantee a voter that her ballot cannot count against her:
+\begin{enumerate}[label=(P\arabic*)]
+\item \emph{Monotonicity}: raising the winner on some ballots, other things equal, does not make it lose.
+\item \emph{Participation}: a voter is never better off abstaining than casting a sincere ballot.
+\item \emph{Consistency}: if two electorates separately choose the same winner, the combined electorate chooses it too.
+\item \emph{Favorite safety}: a voter never does better by withholding support from her favorite candidate.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}\label{d:collective}
+The \emph{collective} desiderata are:
+\begin{enumerate}[label=(C\arabic*)]
+\item \emph{Condorcet consistency}: a candidate who beats every other candidate in pairwise majority comparison wins.
+\item \emph{Clone independence}: adding a candidate similar to an existing one, whom voters treat alike, does not change which of the others wins.
+\item \emph{Simplicity}: the ballot and the count are easy to understand and to verify locally.
+\end{enumerate}
+\end{definition}
+
+\begin{principle}[Priority of protection]\label{p:priority}
+The protective desiderata have priority over the collective ones: a rule that fails a protective desideratum is worse, other things equal, than one that fails a collective desideratum.
+\end{principle}
+
+The ground of Principle~\ref{p:priority} is the equal standing of voters. A democratic procedure is justified in part because it gives each citizen an equal say (POL-04). A rule that can make a voter's sincere ballot work against her, by making her favorite lose because she supported it more strongly, or by making her better off staying home, fails to give her a say at all in those cases, since her participation has the opposite of its intended effect. The collective desiderata concern the quality of the outcome, which matters, but which a rule can approximate without turning anyone's vote against her.
+
+\section{Comparison}
+
+The following table summarizes the standing of five rules. Plurality elects the candidate ranked first by most voters; instant-runoff repeatedly eliminates the candidate with fewest first places; the Borda count gives each candidate points according to its position on each ballot; the Schulze method is a representative Condorcet-consistent rule.
+
+\begin{center}\small
+\begin{tabular}{lccccc}
+\hline
+ & Plurality & Runoff & Borda & Schulze & Approval \\
+\hline
+P1 Monotonicity & yes & no & yes & yes & yes \\
+P2 Participation & yes & no & yes & no & yes \\
+P3 Consistency & yes & no & yes & no & yes \\
+P4 Favorite safety & no & no & no & no & yes \\
+C1 Condorcet & no & no & no & yes & no \\
+C2 Clones & no & yes & no & yes & yes \\
+C3 Simplicity & yes & no & no & no & yes \\
+\hline
+\end{tabular}
+\end{center}
+
+Most entries are standard \citep{BramsFishburn1983,Saari2001}. Instant-runoff's failure of monotonicity, and its spoiler effects when a centrist candidate is eliminated early, are well documented. The Borda count is vulnerable to clones, since adding a candidate similar to one's favorite pushes its rivals further down the ballots of the favorite's supporters. Two entries for Condorcet-consistent rules are general results rather than features of the Schulze method:
+
+\begin{lemma}\label{l:condorcet}
+Every Condorcet-consistent rule fails participation when there are at least four candidates, and fails consistency.
+\end{lemma}
+
+\begin{proof}
+The first part is Moulin's theorem \citep{Moulin1988}. For the second, \citet{Young1975} showed that the rules satisfying consistency, together with anonymity, neutrality and a continuity condition, are the composite scoring rules; no such rule is Condorcet-consistent, since in some profiles the Condorcet winner receives fewer points than another candidate under any assignment of decreasing scores to positions.
+\end{proof}
+
+\begin{proposition}\label{p:approval}
+Approval voting satisfies P1--P4, C2 and C3.
+\end{proposition}
+
+\begin{proof}
+Each approval adds one to its candidate's score and to no other. Hence raising a winner on some ballots, by adding approvals for it, cannot lower its score relative to others (P1). A ballot raises the score of each approved candidate by the same amount, so compared with abstention the winner either stays the same or becomes a candidate she approves, whom a sincere ballot places above every candidate she does not approve (P2), and approving her favorite never lowers that favorite's chance (P4). The total scores of a combined electorate are the sums of the separate totals, so a candidate who wins in both wins in the union (P3); \citet{Fishburn1978} characterizes approval voting by axioms including this one. A clone approved by the voters who approve its original adds nothing to and takes nothing from any other candidate's score (C2). The ballot is a set of marks, and the count is a sum that can be performed and checked at each polling station (C3).
+\end{proof}
+
+\begin{proposition}\label{p:dichotomous}
+If every voter's preferences are dichotomous, dividing the candidates into approved and unapproved, and every ballot is sincere, then the approval winner beats or ties every other candidate in pairwise majority comparison; in particular, it is the Condorcet winner whenever one exists.
+\end{proposition}
+
+\begin{proof}
+Under dichotomous preferences, a voter prefers $x$ to $y$ exactly when she approves $x$ and not $y$. The number of voters preferring $x$ to $y$ minus the number preferring $y$ to $x$ is therefore the number approving $x$ and not $y$ minus the number approving $y$ and not $x$, which equals the score of $x$ minus the score of $y$, since voters approving both or neither contribute equally to both scores. So $x$ beats $y$ pairwise exactly when $x$ has the higher score, and the approval winner is beaten by no candidate. A Condorcet winner beats every other candidate and so has the strictly highest score.
+\end{proof}
+
+Under dichotomous preferences, sincere approval is also a dominant strategy \citep{BramsFishburn1978}, so the Gibbard--Satterthwaite pressure toward misrepresentation is absent in this case.
+
+\begin{theorem}\label{t:main}
+Among the rules considered, approval voting best balances the desiderata that remain after Arrow's theorem.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:approval}, approval voting satisfies all four protective desiderata and two of the three collective ones. Every other rule in the table fails at least one protective desideratum, and so, by Principle~\ref{p:priority}, ranks below approval voting unless approval fails some protective desideratum, which it does not. The only rival that satisfies the one desideratum approval fails, Condorcet consistency, is a Condorcet-consistent rule, and by Lemma~\ref{l:condorcet} every such rule fails two protective desiderata. Moreover, by Proposition~\ref{p:dichotomous}, approval voting satisfies Condorcet consistency in the case where preferences are dichotomous and ballots sincere, so its failure of C1 is confined to profiles in which voters' preferences among their approved candidates matter.
+\end{proof}
+
+\section{Objections}
+
+\begin{objection}[Approval violates one person, one vote]
+A voter who approves three candidates casts three votes; one who approves one casts one. Approval voting gives some voters more say than others.
+\end{objection}
+
+\begin{reply}
+Every voter has the same ballot and the same options. Approving a candidate is equivalent to casting one vote for her in each pairwise contest against the candidates one does not approve; a voter who approves more candidates does not gain weight, she distributes the same comparative support differently. Approving every candidate has exactly the same effect on the outcome as abstaining.
+\end{reply}
+
+\begin{objection}[Condorcet consistency is fundamental]
+A candidate preferred by a majority to every rival has the strongest claim to win. Any rule that can defeat her overrides the majority.
+\end{objection}
+
+\begin{reply}
+The Condorcet winner's claim is strong, and Proposition~\ref{p:dichotomous} shows that approval voting respects it where voters' preferences are coarse. But by Lemma~\ref{l:condorcet} no rule can honor that claim in every profile without sometimes making a voter better off staying home or making the verdicts of two districts that agree reverse when they are combined. These failures are not losses in the quality of the outcome; they make participation itself unsafe. Principle~\ref{p:priority} says why they are worse.
+\end{reply}
+
+\begin{objection}[Strategic approval]
+Approval voting is not strategy-proof. With three or more levels of preference, a voter must decide where to set her threshold, and her best choice depends on what others do.
+\end{objection}
+
+\begin{reply}
+No non-dictatorial rule is strategy-proof \citep{Gibbard1973,Satterthwaite1975}. The question is what form strategy takes. Under approval voting, the strategic decision is only where to set the threshold, and a voter's optimal ballot always approves her favorite and never approves her least preferred candidate, and with at most three candidates every such ballot is sincere, never ranking a less preferred candidate above a more preferred one \citep{BramsFishburn1983}. Under plurality and instant-runoff, by contrast, strategic voting can require deserting one's favorite.
+\end{reply}
+
+\begin{objection}[Other cardinal rules]
+Range voting and majority judgment, which let voters grade candidates on a scale, carry more information and may do better still \citep{BalinskiLaraki2010}.
+\end{objection}
+
+\begin{reply}
+Range voting satisfies the same protective desiderata as approval voting, and its strategically optimal ballots tend to collapse into approval ballots, so it adds complexity without a corresponding gain in the conditions that matter. Majority judgment, which elects by median grade, fails participation in some profiles. We do not claim that no possible rule could match approval voting; we claim that among the rules seriously proposed for public elections, it gives up the least.
+\end{reply}
+
+\section{Conclusion}
+
+No voting rule satisfies all of Arrow's conditions, so the choice of a rule is a choice of which conditions to give up. A rule that can turn a voter's sincere ballot against her fails the equality that justifies voting in the first place; outcome-quality conditions such as Condorcet consistency matter, but less. Approval voting satisfies every condition that protects voters, keeps clone independence and simplicity, and gives up Condorcet consistency only where preferences are finer than approval ballots record. It is the least bad voting rule.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arrow(1951)]{Arrow1951} Arrow, K. J. (1951). \emph{Social Choice and Individual Values}. Wiley.
+\bibitem[Balinski and Laraki(2010)]{BalinskiLaraki2010} Balinski, M., and Laraki, R. (2010). \emph{Majority Judgment: Measuring, Ranking, and Electing}. MIT Press.
+\bibitem[Black(1948)]{Black1948} Black, D. (1948). On the rationale of group decision-making. \emph{Journal of Political Economy}, 56(1), 23--34.
+\bibitem[Brams and Fishburn(1978)]{BramsFishburn1978} Brams, S. J., and Fishburn, P. C. (1978). Approval voting. \emph{American Political Science Review}, 72(3), 831--847.
+\bibitem[Brams and Fishburn(1983)]{BramsFishburn1983} Brams, S. J., and Fishburn, P. C. (1983). \emph{Approval Voting}. Birkh\"auser.
+\bibitem[Condorcet(1785)]{Condorcet1785} Condorcet, Marquis de (1785). \emph{Essai sur l'application de l'analyse \`a la probabilit\'e des d\'ecisions rendues \`a la pluralit\'e des voix}. Imprimerie Royale.
+\bibitem[Fishburn(1978)]{Fishburn1978} Fishburn, P. C. (1978). Axioms for approval voting: Direct proof. \emph{Journal of Economic Theory}, 19(1), 180--185.
+\bibitem[Gibbard(1973)]{Gibbard1973} Gibbard, A. (1973). Manipulation of voting schemes: A general result. \emph{Econometrica}, 41(4), 587--601.
+\bibitem[Mackie(2003)]{Mackie2003} Mackie, G. (2003). \emph{Democracy Defended}. Cambridge University Press.
+\bibitem[May(1952)]{May1952} May, K. O. (1952). A set of independent necessary and sufficient conditions for simple majority decision. \emph{Econometrica}, 20(4), 680--684.
+\bibitem[Moulin(1988)]{Moulin1988} Moulin, H. (1988). Condorcet's principle implies the no show paradox. \emph{Journal of Economic Theory}, 45(1), 53--64.
+\bibitem[Riker(1982)]{Riker1982} Riker, W. H. (1982). \emph{Liberalism against Populism}. W. H. Freeman.
+\bibitem[Saari(2001)]{Saari2001} Saari, D. G. (2001). \emph{Decisions and Elections: Explaining the Unexpected}. Cambridge University Press.
+\bibitem[Satterthwaite(1975)]{Satterthwaite1975} Satterthwaite, M. A. (1975). Strategy-proofness and Arrow's conditions. \emph{Journal of Economic Theory}, 10(2), 187--217.
+\bibitem[Young(1975)]{Young1975} Young, H. P. (1975). Social choice scoring functions. \emph{SIAM Journal on Applied Mathematics}, 28(4), 824--838.
+\end{thebibliography}
+
+\end{document}

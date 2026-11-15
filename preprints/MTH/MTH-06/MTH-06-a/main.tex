@@ -1,0 +1,341 @@
+\documentclass{situationist-preprint}
+
+\title{The Continuum Hypothesis Is False}
+\msid{MTH-06-a}
+\msfamily{MTH-06}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_06.lean}
+\mskeywords{continuum hypothesis; independence; new axioms; forcing axioms; Martin's Maximum; Woodin; Ultimate-L; Freiling's axiom of symmetry; intrinsic and extrinsic justification}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Cantor's continuum hypothesis (CH) says that every infinite set of reals is either countable or of the size of the continuum. Gödel and Cohen showed that it is neither provable nor refutable from the standard axioms of set theory, and many have concluded that it has no determinate truth value, or none we could come to know. We argue that CH is false, given new axioms that are independently motivated. The argument has three parts. First, CH has a determinate truth value: the full second-order axioms of set theory fix the continuum up to isomorphism, and second-order logic is logic. Second, there are axioms motivated by considerations that make no reference to CH, intrinsic (maximality of the universe of sets) and extrinsic (fruitfulness and the resolution of other problems), which refute it: Martin's Maximum, Woodin's axiom $(*)$, which by the Asperó--Schindler theorem follows from a strengthening of Martin's Maximum, and Freiling's axiom of symmetry. Third, justification transfers from axioms to their consequences. We address Woodin's later turn toward CH through Ultimate-L, and show formally that the two programmes cannot both be justified. The logical skeleton of the argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+The continuum hypothesis was stated by \citet{Cantor1878}: every infinite set of real numbers can be put in one-to-one correspondence either with the natural numbers or with the reals. In the notation that became standard once the axiom of choice was accepted, it says that $2^{\aleph_0} = \aleph_1$: the cardinality of the continuum is the first uncountable cardinal. Cantor tried for the rest of his career to prove it, and \citet{Hilbert1900} placed it first in his list of problems for the coming century.
+
+The problem was transformed, rather than solved, by two results. \citet{Godel1938,Godel1940} showed that if the axioms of Zermelo--Fraenkel set theory with choice (ZFC) are consistent, they remain consistent when CH is added: CH holds in the constructible universe $L$. \citet{Cohen1963,Cohen1966} showed, by the method of forcing, that ZFC remains consistent when the negation of CH is added. CH is therefore independent of ZFC, the theory within which mathematicians agree to work. It was the first natural mathematical question shown to be independent, and it remains the most prominent.
+
+Three responses to independence dominate the literature. The \emph{indeterminist} holds that CH has no truth value: the concept of set is not sharp enough to settle it, and different universes of sets with different continua are equally legitimate \citep{Hamkins2012}. The \emph{quietist} holds that CH may have a truth value but that we have no means of discovering it, since any new axiom strong enough to settle it would lack the kind of evidence the standard axioms have. The \emph{programmatic realist}, following \citet{Godel1947}, holds that CH has a truth value and that it will be settled by new axioms, justified either because they are implicit in the concept of set or because their consequences are fruitful.
+
+We defend programmatic realism, and we go further than most programmatic realists have been willing to go: we hold that the evidence now available decides the question. The continuum hypothesis is false, given new axioms that are independently motivated. By \emph{independently motivated} we mean, roughly, that the axioms are supported by considerations that make no reference to CH; Definition~\ref{d:indep} makes this precise. Our conclusion is conditional in form, but the condition is satisfied: such axioms exist, and they refute CH.
+
+The plan is as follows. Section~\ref{s:history} reviews the history of the problem after Cohen, including the programme of Woodin, whose arguments are the strongest case for our conclusion and whose later work is the strongest case against it. Section~\ref{s:framework} sets out the framework. Section~\ref{s:axioms} examines three candidate axioms and their motivation. Section~\ref{s:argument} gives the argument. Section~\ref{s:cases} treats further cases, Section~\ref{s:objections} objections, and Section~\ref{s:limits} the limits of the result. Section~\ref{s:formal} describes the formalization.
+
+\section{The problem after Cohen}\label{s:history}
+
+\subsection{Gödel's programme and its first failure}
+
+\citet{Godel1947,Godel1964} drew from the then partial independence result a conclusion that has shaped the debate. If CH is undecidable from ZFC, that shows only that ZFC is incomplete as a description of the universe of sets, not that CH lacks a truth value. New axioms are needed, and Gödel distinguished two ways in which they might be justified. Some follow from the concept of set itself, as the axioms of ZFC do on the iterative conception: the axioms asserting the existence of ever larger inaccessible cardinals \enquote{only unfold the content} of that concept. Others might be justified by their success: by the fruitfulness of their consequences, including verifiable ones, as a physical theory is justified by its predictions. Gödel conjectured that CH would turn out to be false, on the ground that it has implausible consequences: it implies the existence of subsets of the line that are, in his view, too small or too large in a sense that the concept of set does not support.
+
+The first part of Gödel's programme was to settle CH by large cardinal axioms, which were then the paradigm of axioms justified by the concept of set. \citet{LevySolovay1967} showed that it cannot succeed: forcing with a small partial order changes the size of the continuum while preserving measurable cardinals, and the same argument applies to every large cardinal axiom of the usual kind. Large cardinals have since settled a great deal; under sufficiently many Woodin cardinals the theory of second-order arithmetic is generically absolute and all projective sets are Lebesgue measurable and have the perfect set property. But they leave the size of the continuum open. The perfect set property for projective sets means that CH holds for the definable sets of reals in the projective hierarchy: every uncountable projective set has a perfect subset and so has the size of the continuum. Whether it holds for all sets of reals is a question about arbitrary sets, which large cardinals do not reach. \citet{Easton1970} showed that ZFC places almost no constraint on the continuum: it can be any cardinal of uncountable cofinality.
+
+\subsection{Woodin's argument against CH}
+
+The decisive development came in the 1990s. \citet{Woodin1999} isolated an axiom, now called $(*)$, which states that the structure $H(\omega_2)$ of sets of hereditary cardinality at most $\aleph_1$ is, in a precise sense, as rich as it can be: every $\Pi_2$ sentence about it that can be forced to hold in a certain canonical model, built by the $\mathbb{P}_{\max}$ forcing over the model $L(\mathbb{R})$, already holds. Under large cardinals, the theory of $H(\omega_2)$ in the presence of $(*)$ is invariant under forcing, much as large cardinals make the theory of $H(\omega_1)$, second-order arithmetic, invariant. The axiom $(*)$ implies $2^{\aleph_0} = \aleph_2$.
+
+In \citet{Woodin2001a,Woodin2001b} Woodin turned this into an argument that CH is false. He introduced $\Omega$-logic, a strong consequence relation that is invariant under set forcing given large cardinals, and he proved that, assuming his $\Omega$-conjecture, any axiom that makes the theory of $H(\omega_2)$ $\Omega$-complete, in the way that large cardinals make the theory of $H(\omega_1)$ complete, implies the negation of CH. If that were so, CH would be false in the only sense in which we could hope to settle it: every good theory of the next level of the universe refutes it.
+
+\subsection{Forcing axioms}
+
+A second line of development reached the same value for the continuum from a different direction. \citet{MartinSolovay1970} introduced Martin's axiom, which asserts that for any partial order satisfying the countable chain condition and any family of fewer than $2^{\aleph_0}$ dense sets, there is a filter meeting them all. Martin's axiom together with $\neg$CH settled a number of problems that CH settled the other way, among them the Suslin hypothesis. Stronger principles followed: the proper forcing axiom PFA \citep{Baumgartner1984} and Martin's Maximum MM \citep{FMS1988}, which asserts the corresponding principle, for families of $\aleph_1$ dense sets, for every forcing that preserves stationary subsets of $\omega_1$, the widest class for which such a principle is consistent. \citet{FMS1988} proved that MM implies $2^{\aleph_0} = \aleph_2$; Todorcevic and Veličković showed the same for PFA \citep{Velickovic1992}, and \citet{Moore2005} derived it from a reflection principle that follows from PFA.
+
+The two lines met in 2021, when \citet{AsperoSchindler2021} proved that a strengthening of Martin's Maximum, $\mathrm{MM}^{++}$, implies Woodin's $(*)$. The axiom motivated by the maximality of forcing and the axiom motivated by the completeness of $H(\omega_2)$ are not rivals: one implies the other.
+
+\subsection{Woodin's turn and the multiverse}
+
+Woodin himself did not rest with the argument of 2001. He came to doubt that the $\Omega$-logic argument was conclusive, because it shows only that axioms of a certain form refute CH, and it leaves open that a better theory of the universe as a whole, rather than of $H(\omega_2)$ alone, settles CH the other way. In \citet{Woodin2010} and at length in \citet{Woodin2017} he proposed the axiom $V = \text{Ultimate-}L$, which says that the universe is a canonical fine-structural inner model compatible with all large cardinals, and which implies CH. The proposal depends on the Ultimate-$L$ conjecture, which is open. Woodin's present view therefore favors CH, conditionally on conjectures, and it would misrepresent him to cite his authority for our conclusion. We cite his theorems, which stand, and we argue in Section~\ref{s:ultimate} that the programme he now favors is not supported by independently motivated axioms in the sense we require.
+
+Against both programmes, \citet{Hamkins2012} defends a multiverse view: there are many universes of sets, obtained from one another by forcing and other constructions, and CH holds in some and fails in others, with no fact about which is \emph{the} universe. On this view CH is settled, in the sense that we know exactly how it behaves across the multiverse, and the question of its truth simpliciter is misconceived \citep{Hamkins2015}. \citet{Feferman1999} and the discussion in \citet{FFMS2000} express a related doubt: that CH is not a definite mathematical problem, because the concept of an arbitrary subset of an infinite set is not definite. Philosophical assessments of the whole debate are given by \citet{Maddy1988a,Maddy1988b,Maddy2011}, \citet{Koellner2006} and \citet{Steel2014}.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}\label{d:ch}
+The \emph{continuum hypothesis} (CH) is the statement that every infinite subset of $\mathbb{R}$ is either countable or equinumerous with $\mathbb{R}$. In ZFC it is equivalent to $2^{\aleph_0} = \aleph_1$. We write $\neg$CH for its negation.
+\end{definition}
+
+\begin{definition}\label{d:just}
+An axiom candidate is \emph{intrinsically justified} if it is supported by an analysis of the concept of set, in particular of the iterative conception on which sets are formed in stages, each stage containing all collections of sets formed at earlier stages \citep{Boolos1971}. It is \emph{extrinsically justified} if it is supported by its consequences: by the problems it settles, by its coherence with established results and with other well-supported axioms, and by the mathematical theories it makes possible \citep{Godel1964,Maddy1988a}.
+\end{definition}
+
+\begin{definition}\label{d:indep}
+An axiom $A$ is \emph{independently motivated} with respect to a statement $\phi$ if $A$ is intrinsically or extrinsically justified, and the considerations that justify it neither include $\phi$ or its negation nor depend for their force on the reader's antecedent opinion about $\phi$.
+\end{definition}
+
+The point of Definition~\ref{d:indep} is to exclude the trivial route: one could add $\neg$CH as an axiom and declare it justified by its consequences. An axiom independently motivated with respect to CH must be one we would have reason to accept if we had no view about CH at all. It may, and typically will, be extrinsically justified by other consequences; what it may not be is justified by the consequence at issue.
+
+\begin{principle}[Determinacy]\label{p:det}
+CH has a determinate truth value: exactly one of CH and $\neg$CH is true.
+\end{principle}
+
+\begin{principle}[Transfer]\label{p:transfer}
+An independently motivated axiom is justified, and justification is closed under consequence in ZFC: if $A$ is justified and ZFC $+ A$ proves $\phi$, then $\phi$ is justified.
+\end{principle}
+
+\begin{principle}[Coherence]\label{p:coh}
+No statement and its negation are both justified.
+\end{principle}
+
+\begin{assumption}\label{a:sound}
+ZFC is true, and so is sound: if ZFC $+ A$ proves $\phi$ and $A$ is true, then $\phi$ is true.
+\end{assumption}
+
+Principle~\ref{p:det} is the substantive metaphysical premise; we defend it in Section~\ref{s:determinacy}. Principle~\ref{p:transfer} is the principle by which axioms do their work. Its first clause states the sense in which independent motivation confers justification, and its second is the familiar closure of justification under known deductive consequence, which is uncontroversial when the deduction is a mathematical proof and the justification is that of an axiom; it is the means by which the justification of the axioms of ZFC reaches the theorems of analysis. Principle~\ref{p:coh} is a minimal rationality constraint on the notion of justification at issue: justification of the kind that warrants adopting an axiom cannot be had for both a statement and its negation. Assumption~\ref{a:sound} is the background against which the debate takes place; no party to it doubts the axioms of ZFC.
+
+\subsection{Determinacy}\label{s:determinacy}
+
+The case for Principle~\ref{p:det} rests on a theorem of \citet{Zermelo1930}. In second-order ZFC, with the separation and replacement axioms stated with second-order variables ranging over all subcollections, any two models are either isomorphic or one is isomorphic to an initial segment of the other. Any two such models agree on the power set of $\omega$, since both contain $V_{\omega+2}$ and their $V_{\omega+2}$ are isomorphic. CH is a statement about $V_{\omega+2}$, and so it has the same truth value in all of them. \citet{Kreisel1967} drew the moral: CH is decided by the second-order consequence relation, in the sense that either CH or $\neg$CH is a second-order consequence of second-order ZFC.
+
+This argument requires that the second-order quantifiers be given their standard interpretation, on which they range over all subcollections of the domain, and that this interpretation be determinate. LOG-09 argues that second-order logic, with this interpretation, is logic, and that its quantifiers are logical constants by the invariance criterion of LOG-16. If so, the quantifier \enquote{all subsets of $\omega$} has a fixed meaning, and the second-order categoricity theorem carries that fixity to the continuum. The determinacy of CH is then a consequence of the logicality of second-order logic together with Zermelo's theorem. \citet{Martin2001} gives an argument with the same conclusion that does not rely on second-order logic: whatever concept of set we have, any two universes satisfying it are isomorphic, because the concept fixes, stage by stage, which collections are formed, and a disagreement about CH would require a disagreement at the stage at which the subsets of $\omega$ are formed.
+
+The indeterminist replies that the second-order quantifier over subsets of $\omega$ inherits whatever indeterminacy the concept of an arbitrary subset has \citep{Feferman1999}. We return to this in Objection~\ref{o:indet}.
+
+\section{Three axioms}\label{s:axioms}
+
+We consider three axioms that refute CH. The mathematical results we rely on are stated as lemmas; they are theorems of set theory, proved in the works cited, and we do not reprove them.
+
+\subsection{Martin's Maximum}\label{s:mm}
+
+\begin{lemma}[\citealp{FMS1988}]\label{l:mm}
+ZFC $+$ MM proves $2^{\aleph_0} = \aleph_2$, and so proves $\neg$CH.
+\end{lemma}
+
+The intrinsic motivation for MM is maximality. The iterative conception says that at each stage all collections of previously formed sets are formed. It does not tell us how many collections that is, but it contains a directive: the universe should contain every set that it consistently could. Forcing is the method by which we show that a set of a certain kind could exist: a forcing extension adds a generic filter meeting given dense sets. A forcing axiom says that for the forcings in a given class, filters meeting $\aleph_1$ given dense sets already exist in the universe; the universe does not need to be extended to obtain them. MM states this for the widest class of forcings for which it is consistent. In this sense it is a maximality principle about width, as large cardinal axioms are maximality principles about height. \citet{Bagaria2000} made the point precise for the bounded forms of these axioms, showing that they are equivalent to principles of generic absoluteness: every $\Sigma_1$ statement about $H(\omega_2)$, with parameters, that holds in a forcing extension of the relevant kind already holds in the universe.
+
+The extrinsic motivation is the range of problems MM and its weaker relatives settle, and the character of the solutions. Under PFA, all Aronszajn trees are club-isomorphic and every automorphism of the Boolean algebra $\mathcal{P}(\omega)/\mathrm{fin}$ is trivial. In operator algebras, \citet{PhillipsWeaver2007} showed that CH implies that the Calkin algebra has outer automorphisms, and \citet{Farah2011} showed that the open colouring axiom, a consequence of PFA, implies that all its automorphisms are inner. The pattern is general. CH allows a construction of length $\omega_1$ to diagonalize against all reals one at a time, and so produces pathological objects: non-trivial automorphisms, exotic ultrafilters, counterexamples. Forcing axioms produce rigidity and classification theorems. A mathematician who wants the structures she studies to be classifiable has a reason to prefer the forcing axioms that owes nothing to an opinion about the continuum.
+
+Neither motivation mentions CH. Maximality is a principle about what sets exist, and it was formulated for forcing axioms in general, including weak ones, such as Martin's axiom for countable partial orders, that are consistent with CH and indeed follow from it. The rigidity results concern automorphisms and trees, and they are used by mathematicians who have no interest in the continuum. MM is therefore independently motivated with respect to CH in the sense of Definition~\ref{d:indep}.
+
+\begin{assumption}\label{a:mmmot}
+Martin's Maximum is independently motivated with respect to CH.
+\end{assumption}
+
+\subsection{Woodin's axiom $(*)$}\label{s:star}
+
+\begin{lemma}[\citealp{Woodin1999}]\label{l:star}
+ZFC $+ (*)$ proves $2^{\aleph_0} = \aleph_2$.
+\end{lemma}
+
+The motivation for $(*)$ is a completeness criterion. Large cardinals make the theory of $H(\omega_1)$ invariant under forcing, and thereby make the question what is true in $H(\omega_1)$ answerable: every forcing extension agrees. The axiom $(*)$ does the same for $H(\omega_2)$, the next level, and it does so in a canonical way, by making $H(\omega_2)$ as rich in $\Pi_2$ truths as the $\mathbb{P}_{\max}$ extension of $L(\mathbb{R})$. This is extrinsic justification of an unusually principled kind: the consequence that recommends the axiom is not any particular theorem but the structural property of making a level of the universe immune to forcing. It does not mention CH. By \citet{AsperoSchindler2021}, $(*)$ follows from $\mathrm{MM}^{++}$, so its motivation and that of the forcing axioms reinforce each other.
+
+\subsection{Freiling's axiom of symmetry}\label{s:freiling}
+
+\citet{Freiling1986} proposed an axiom supported by a thought experiment. Let $f$ assign to each real $x$ in $[0,1]$ a countable set $f(x)$ of reals. Two darts are thrown independently at $[0,1]$, landing at $x$ and $y$. Since $f(x)$ is countable and so of measure zero, the second dart almost surely lands outside $f(x)$: $y \notin f(x)$. The darts are thrown independently, and the situation is symmetric, so by the same reasoning the first dart almost surely lands outside $f(y)$: $x \notin f(y)$. Hence there exist $x$ and $y$ with $y \notin f(x)$ and $x \notin f(y)$. This is the axiom of symmetry $\mathrm{AX}$: for every function $f$ from reals to countable sets of reals, there are reals $x$ and $y$ such that $y \notin f(x)$ and $x \notin f(y)$.
+
+\begin{lemma}[\citealp{Sierpinski1934,Freiling1986}]\label{l:ax}
+In ZFC, $\mathrm{AX}$ is equivalent to $\neg$CH.
+\end{lemma}
+
+The direction from CH to the failure of AX is the striking one. If CH holds, the reals can be well-ordered in type $\omega_1$, and the function
+\[ f(x) = \{y : y \text{ precedes or equals } x \text{ in the well-ordering}\} \]
+assigns to each real a countable set. For any $x$ and $y$, either $y$ precedes or equals $x$, in which case $y \in f(x)$, or $x$ precedes $y$, in which case $x \in f(y)$. Under CH, then, there is a function for which the dart argument fails: whichever two points are chosen, one lies in the countable set assigned to the other. This is Sierpiński's decomposition of the plane, under CH, into a set with countable vertical sections and a set with countable horizontal sections.
+
+Freiling's argument is intrinsic in a different sense from the argument for MM: it appeals not to the concept of set but to an intuition about randomness and measure that is prior to set theory. Its motivation makes no use of CH. The argument has been criticized on the ground that it applies Fubini's theorem to a set, $\{(x,y) : y \in f(x)\}$, that need not be measurable, and that the intuition of independent darts presupposes measurability. We take the criticism to show that AX is a substantive principle, a restricted Fubini principle for sets of the form at issue, not that it is unmotivated. Its status as independent evidence is weaker than that of MM, and our argument does not depend on it.
+
+\section{The argument}\label{s:argument}
+
+\begin{theorem}\label{t:main}
+Given Principles~\ref{p:transfer} and~\ref{p:coh}, Lemma~\ref{l:mm} and Assumption~\ref{a:mmmot}, $\neg$CH is justified and CH is not.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:mmmot}, MM is independently motivated with respect to CH. By the first clause of Principle~\ref{p:transfer}, MM is justified. By Lemma~\ref{l:mm}, ZFC $+$ MM proves $\neg$CH, so by the second clause of Principle~\ref{p:transfer}, $\neg$CH is justified. If CH were also justified, both a statement and its negation would be justified, contrary to Principle~\ref{p:coh}. So CH is not justified.
+\end{proof}
+
+Theorem~\ref{t:main} concerns justification. The thesis concerns truth, and its link to the new axioms is given by soundness.
+
+\begin{corollary}\label{c:robust}
+Given Principle~\ref{p:det} and Assumption~\ref{a:sound}, if any of MM, $(*)$ and AX is true, then CH is false.
+\end{corollary}
+
+\begin{proof}
+By Lemmas~\ref{l:mm}, \ref{l:star} and~\ref{l:ax}, each of the three axioms, together with ZFC, proves $\neg$CH. By Assumption~\ref{a:sound}, if any of them is true, $\neg$CH is true. By Principle~\ref{p:det}, $\neg$CH is true exactly when CH is not, so CH is false.
+\end{proof}
+
+Corollary~\ref{c:robust} expresses the robustness of the conclusion. The three axioms are motivated in three different ways: by maximality of width, by completeness of a level of the universe, and by a probabilistic intuition. A skeptic about any one of these motivations must reject the other two as well to keep CH. This matters because the extrinsic case for any single axiom is defeasible, and the convergence of independently motivated axioms on the same value of the continuum, $\aleph_2$ in the first two cases, is itself evidence of the kind \citet{Godel1964} anticipated: a theory whose consequences are verified from several independent directions.
+
+The next corollary honors a consequence that the determinacy of CH has for logic. By the reasoning of Section~\ref{s:determinacy}, there is a sentence $\sigma_{\neg\mathrm{CH}}$ of pure second-order logic, built from the conjunction of the axioms of second-order ZFC and the statement of $\neg$CH, that is valid in the standard semantics if and only if $\neg$CH is true.
+
+\begin{corollary}\label{c:logical}
+Given the hypotheses of Corollary~\ref{c:robust}, if any of MM, $(*)$ and AX is true, then $\sigma_{\neg\mathrm{CH}}$ is a logical truth.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{c:robust}, $\neg$CH is true; by the property of $\sigma_{\neg\mathrm{CH}}$ just stated, it is valid; by LOG-09, validity in second-order logic with the standard semantics is logical truth.
+\end{proof}
+
+Corollary~\ref{c:logical} is the claim on which LOG-09 relies in replying to Quine's objection from the entanglement of second-order logic with set theory: if CH is false, as the new axioms show, the second-order sentence expressing its negation is a logical truth whose status we learn by doing set theory. We do not take this to make set theory a branch of logic. Knowing that a sentence is valid, in a logic whose consequence relation is not recursively enumerable, may require mathematics of any degree of difficulty.
+
+\subsection{The rival programme}\label{s:ultimate}
+
+Principle~\ref{p:coh} has a consequence that the argument must face. Woodin's axiom $V = \text{Ultimate-}L$ implies CH \citep{Woodin2017}. If it were independently motivated with respect to CH, it would be justified by Principle~\ref{p:transfer}, and so would CH, and the justified statements would be incoherent.
+
+\begin{proposition}\label{p:rival}
+Given Principles~\ref{p:transfer} and~\ref{p:coh}, Lemma~\ref{l:mm} and Assumption~\ref{a:mmmot}, no axiom that, together with ZFC, proves CH is justified. In particular, $V = \text{Ultimate-}L$ is not justified.
+\end{proposition}
+
+\begin{proof}
+Suppose $B$ is justified and ZFC $+ B$ proves CH. By Principle~\ref{p:transfer}, CH is justified. By Theorem~\ref{t:main}, CH is not justified. So $B$ is not justified.
+\end{proof}
+
+The proof of Proposition~\ref{p:rival} is short, and its weight lies in the comparison it forces. It does not by itself show that MM rather than Ultimate-$L$ is the axiom to keep; a defender of Ultimate-$L$ could run the same argument in reverse, from the assumption that $V = \text{Ultimate-}L$ is independently motivated to the conclusion that MM is not justified. What the proposition shows is that the debate is a debate about the comparative motivation of two axioms, not about whether CH is determinate. We give three reasons for holding that the comparison favors MM.
+
+First, the axioms differ in their relation to maximality. $V = \text{Ultimate-}L$ is, like $V = L$, a restrictive axiom: it implies that every set is ordinal definable, a property that forcing extensions typically lack, and it excludes the generic objects that forcing axioms assert to exist. It is compatible with all large cardinals, which is its great advance over $V = L$; it is maximal in height. It is minimal in width. Forcing axioms are maximal in both. The iterative conception, on which every stage contains all collections of sets formed earlier, supports maximality in width at least as directly as in height.
+
+Second, the axioms differ in their epistemic standing. MM is a precisely formulated axiom whose consistency relative to a supercompact cardinal is established \citep{FMS1988}. The formulation of $V = \text{Ultimate-}L$ and the case for it depend on the Ultimate-$L$ conjecture, which is open. An axiom whose content and whose consistency with the large cardinals that motivate it are conditional on an open conjecture is not now justified, whatever its prospects.
+
+Third, Ultimate-$L$ is motivated by the desirability of a canonical inner model whose theory is fixed. That is a reason for studying the model; it is a reason for believing that the universe is the model only if one assumes that the universe must be as canonical as possible, which is a minimality principle and not a consequence of the concept of set. \citet{Woodin2017} argues that the alternative leaves the universe undescribed above $H(\omega_2)$; we agree that forcing axioms do not settle everything, but an axiom is not justified by the incompleteness of its rivals.
+
+These reasons are defeasible, and if the Ultimate-$L$ conjecture is proved, the comparison will need to be revisited. As things stand, the independently motivated axioms that decide the continuum decide it against CH.
+
+\section{Further cases}\label{s:cases}
+
+\subsection{Gödel's own axioms}
+
+Late in his life Gödel drafted a paper proposing axioms about the existence of scales of functions from $\omega$ to $\omega$, from which he claimed to derive that $2^{\aleph_0} = \aleph_2$ \citep{Godel1995}. The proof was found to be defective, and Gödel withdrew it. The episode matters as evidence about motivation: the value $\aleph_2$ was what Gödel's own reflection on the concept of set led him to expect, decades before the forcing axioms delivered it. It does not count as a further independently motivated axiom, since the axioms did not do what Gödel claimed.
+
+\subsection{The definable continuum}
+
+Under large cardinals, CH holds for all projective sets: every uncountable projective set of reals has a perfect subset. One might take this as evidence for CH, on the ground that the sets of reals mathematicians actually encounter are definable, and that they all satisfy CH. We take the evidence to be about a different statement. The perfect set property for definable sets says that no definable set of reals has intermediate cardinality; CH says that no set does. The forcing axioms are consistent with the first, and indeed with all its strengthenings under large cardinals, and the failure of CH they imply is witnessed only by sets that are not projective. The definable CH is true and CH is false, as the regularity of definable sets and the richness of arbitrary sets lead one to expect.
+
+\subsection{The value of the continuum}
+
+The three axioms do not agree on everything. MM and $(*)$ fix the continuum at $\aleph_2$. AX says only that it exceeds $\aleph_1$, and \citet{Freiling1986} also considered variants of the axiom, involving more darts, that are inconsistent with $2^{\aleph_0} = \aleph_2$. The conclusion of this manuscript is that CH is false. Which value the continuum takes is a further question, and we regard the convergence of the two strongest programmes on $\aleph_2$ as the best current evidence on it. The strengthened forms of AX have weaker motivation, since the intuition of independent darts is less clear for many darts than for two, and we do not take them to tell against $\aleph_2$.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Indeterminacy]\label{o:indet}
+The second-order categoricity argument presupposes that the range of the second-order quantifier over subsets of $\omega$ is determinate. That presupposition is exactly what the indeterminist denies. The argument for Principle~\ref{p:det} is therefore circular \citep{Feferman1999,Hamkins2012}.
+\end{objection}
+
+\begin{reply}
+The argument relies on the logicality of the second-order quantifiers, which LOG-09 establishes on grounds that do not mention set theory: the quantifiers are invariant under all permutations of the domain, as the first-order quantifiers are. If \enquote{all} has a determinate meaning in first-order quantification over the natural numbers, invariance gives no reason to think it loses it when it is applied to conditions on them. The indeterminist must hold that the concept of an arbitrary subset of $\omega$ is vague or plural in meaning. But no one has described two candidate meanings between which the concept fails to decide: every candidate that has been proposed, such as the constructible subsets or the subsets in some countable model, is recognizably a restriction of \enquote{all subsets}, and is rejected as such by the indeterminist herself when she describes it. Indeterminacy that cannot be exhibited is not established by the existence of many models of first-order ZFC, which are what the multiverse consists of; the first-order theory has many models whatever the determinacy of its subject matter, as the first-order theory of arithmetic does.
+\end{reply}
+
+\begin{objection}[Extrinsic justification is not evidence of truth]
+That an axiom settles many problems, or settles them in an elegant way, is a pragmatic virtue. It makes the axiom convenient, not true. Principle~\ref{p:transfer} confers on extrinsically justified axioms a justification that they do not have.
+\end{objection}
+
+\begin{reply}
+The objection proves too much. The axiom of choice was accepted largely on extrinsic grounds: its consequences in algebra and analysis were indispensable, and its paradoxical consequences were judged a price worth paying \citep{Maddy1988a}. The axiom of replacement was accepted largely for its consequences, such as the existence of $\aleph_\omega$, and the case for it was strengthened when Martin showed that it is needed for Borel determinacy, a statement about sets of reals. If extrinsic justification were merely pragmatic, ZFC itself would be largely unjustified, contrary to Assumption~\ref{a:sound}, which the objector shares. Moreover, the extrinsic justification of MM is not elegance alone: it is convergence with an independently motivated axiom, $(*)$, established by a theorem, and agreement with the maximality directive of the iterative conception. Convergence of independent lines of evidence is the standard mark of truth-conduciveness in the sciences, and EPI-12 notes that knowledge so justified is not a priori, which we accept; it is knowledge nonetheless.
+\end{reply}
+
+\begin{objection}[Forcing axioms are local]
+MM is a principle about $H(\omega_2)$, a small part of the universe. It is no surprise that it fixes the continuum, since the continuum lives there; but a principle about a small part of the universe cannot claim the authority of the concept of set.
+\end{objection}
+
+\begin{reply}
+The objection mistakes the subject matter of a principle for the source of its motivation. MM concerns sets of size $\aleph_1$, but its motivation is a global principle: the universe contains whatever it consistently could. That principle, applied to the height of the universe, yields large cardinal axioms; applied to its width, at the level at which the forcing method applies uniformly, it yields MM. A local principle with a global motivation is precisely what is needed to settle a local question, and CH is a local question.
+\end{reply}
+
+\begin{objection}[Freiling's argument proves too much]
+The dart intuition does not distinguish countable sets from other null sets: if the second dart almost surely avoids a countable set, it almost surely avoids any set of measure zero. But the corresponding principle for null sets is refuted by Martin's axiom, which implies that every set of reals of cardinality less than the continuum is null. Well-order the reals in order type $2^{\aleph_0}$ and assign to each real the set of its predecessors and itself: each assigned set is null, and of any two reals one lies in the set assigned to the other. The manuscript's own preferred axioms, which imply Martin's axiom, thus refute the natural generalization of the intuition on which its third axiom rests.
+\end{objection}
+
+\begin{reply}
+We accept the argument. It shows that the intuition of independent darts must be restricted, and the natural restriction is to sets that are small in every sense: countable sets are null, meagre and of the least infinite size, and for them the various notions of smallness do not come apart. The null sets in the objection are null but large in cardinality, and the intuition gives no clear verdict about them. We grant that the restriction is not dictated by the intuition itself, and this is why we assign AX a lesser role than MM: Theorem~\ref{t:main} does not use it. Its role is corroborative, in Corollary~\ref{c:robust}, and the objection reduces but does not remove its weight.
+\end{reply}
+
+\begin{objection}[Woodin's authority]
+The leading architect of the case against CH has changed his mind. If the person best placed to assess the evidence now favors CH, the evidence cannot be as decisive as the manuscript claims.
+\end{objection}
+
+\begin{reply}
+Woodin's change of view rests on a conjecture and on a preference for a canonical universe. We have given reasons in Section~\ref{s:ultimate} for holding that neither supplies independent motivation now. His theorems, the $(*)$ analysis and the $\Omega$-logic results, stand, and the Asperó--Schindler theorem, which postdates his turn, has strengthened the case he made in 2001 by uniting it with the forcing axiom programme. Testimony is evidence, but in mathematics the evidence on which an expert's view rests is available for assessment, and here it does not support the change.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The argument does not establish that ZFC proves $\neg$CH; it does not, by Gödel's theorem. It does not establish that any new axiom is intrinsically justified in the strong sense in which the axioms of ZFC are often said to be, as unfolding the concept of set; the motivation of MM is partly intrinsic and partly extrinsic, and our conclusion depends on the extrinsic component. It does not establish the value of the continuum, though it identifies $\aleph_2$ as the value favored by the strongest current evidence. It does not exclude that future work, in particular a proof of the Ultimate-$L$ conjecture together with new reasons to accept $V = \text{Ultimate-}L$, will change the comparison of Section~\ref{s:ultimate}; the conclusion is relative to the axioms now independently motivated, as the catalogue formulation of the thesis records. Finally, it does not make set theory a part of logic, although by Corollary~\ref{c:logical} a truth of set theory settles a question of second-order validity.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/MTH/MTH_06.lean} formalizes the logical structure of the argument, not the set theory. Sentences of the language of set theory are a primitive type with a negation operation; truth, justification, independent motivation and provability in ZFC from an additional axiom are primitive predicates. Principles~\ref{p:det}, \ref{p:transfer} and~\ref{p:coh} and Assumptions~\ref{a:sound} and~\ref{a:mmmot} are axioms of the module. Lemmas~\ref{l:mm}, \ref{l:star} and~\ref{l:ax}, and the theorem that $V = \text{Ultimate-}L$ implies CH, are also axioms: they are theorems of set theory proved in the cited works, which the module does not formalize. No forcing argument is formalized. The main statements are these.
+
+\begin{lstlisting}
+theorem justified_notCH :
+    Justified (neg CH) ∧ ¬ Justified CH
+
+theorem robust (h : True' MM ∨ True' Star ∨ True' AX) :
+    ¬ True' CH
+
+theorem logical_truth (h : True' MM ∨ True' Star ∨ True' AX) :
+    Valid2 sigmaNotCH
+
+theorem rival_excluded : ¬ Justified UL
+\end{lstlisting}
+
+\noindent The checker reports the following dependencies (prefixes omitted, lists reflowed).
+
+\begin{lstlisting}
+'justified_notCH' depends on axioms:
+ [CH, Justified, MM, assumption_4_2, lemma_4_1, neg,
+  principle_P2a, principle_P2b, principle_P3]
+'robust' depends on axioms:
+ [AX, CH, MM, Star, True', assumption_3_4, lemma_4_1,
+  lemma_4_3, lemma_4_4, neg, principle_P1]
+'logical_truth' depends on axioms:
+ [AX, CH, MM, Star, True', Valid2, assumption_3_4,
+  lemma_4_1, lemma_4_3, lemma_4_4, neg, principle_P1,
+  sigmaNotCH, sigma_spec]
+'rival_excluded' depends on axioms:
+ [CH, Justified, MM, Proves, Sent, UL, assumption_4_2,
+  lemma_4_1, neg, principle_P2a, principle_P2b,
+  principle_P3, ultimate_L_CH]
+\end{lstlisting}
+
+All names are in the namespace \texttt{Philosophy.MTH\_06}. Primitive types and predicates that occur only in the statements of other axioms, such as \texttt{Sent} and \texttt{Motivated}, are not always listed separately. \texttt{principle\_P2a} and \texttt{principle\_P2b} are the two clauses of Principle~\ref{p:transfer}; \texttt{sigma\_spec} states that $\sigma_{\neg\mathrm{CH}}$ is valid exactly when $\neg$CH is true, which is the content of Zermelo's theorem as used in Section~\ref{s:determinacy}, and LOG-09 supplies the reading of \texttt{Valid2} as logical truth. The dependency lists confirm that Theorem~\ref{t:main} uses only Lemma~\ref{l:mm} among the set-theoretic results and does not use Principle~\ref{p:det}: the justification of $\neg$CH does not presuppose that CH is determinate, although its truth does. Proposition~\ref{p:rival} uses no premise beyond those of Theorem~\ref{t:main} and the implication from $V = \text{Ultimate-}L$ to CH. No large cardinal hypothesis appears: the consistency strength of MM bears on its motivation, which the module takes as given in Assumption~\ref{a:mmmot}.
+
+\section{Conclusion}
+
+CH has a determinate truth value, because the second-order axioms of set theory fix the continuum and second-order logic is logic. Martin's Maximum is motivated by the maximality of the universe of sets and by the rigidity it brings to problems remote from the continuum, and it refutes CH; Woodin's $(*)$, which follows from a strengthening of MM, and Freiling's axiom of symmetry refute it as well, on independent grounds. Justification passes from these axioms to their consequences, and coherence then excludes the rival axiom $V = \text{Ultimate-}L$ while its motivation remains conjectural. The continuum hypothesis is false, given new axioms that are independently motivated.
+
+\begin{thebibliography}{99}\small
+\bibitem[Asperó and Schindler(2021)]{AsperoSchindler2021} Asperó, D. and Schindler, R. (2021). Martin's Maximum$^{++}$ implies Woodin's axiom $(*)$. \emph{Annals of Mathematics}, 193(3), 793--835.
+\bibitem[Bagaria(2000)]{Bagaria2000} Bagaria, J. (2000). Bounded forcing axioms as principles of generic absoluteness. \emph{Archive for Mathematical Logic}, 39, 393--401.
+\bibitem[Baumgartner(1984)]{Baumgartner1984} Baumgartner, J. E. (1984). Applications of the proper forcing axiom. In K. Kunen and J. E. Vaughan (eds.), \emph{Handbook of Set-Theoretic Topology}, 913--959. North-Holland.
+\bibitem[Boolos(1971)]{Boolos1971} Boolos, G. (1971). The iterative conception of set. \emph{Journal of Philosophy}, 68, 215--231.
+\bibitem[Cantor(1878)]{Cantor1878} Cantor, G. (1878). Ein Beitrag zur Mannigfaltigkeitslehre. \emph{Journal für die reine und angewandte Mathematik}, 84, 242--258.
+\bibitem[Cohen(1963)]{Cohen1963} Cohen, P. J. (1963). The independence of the continuum hypothesis. \emph{Proceedings of the National Academy of Sciences}, 50, 1143--1148.
+\bibitem[Cohen(1966)]{Cohen1966} Cohen, P. J. (1966). \emph{Set Theory and the Continuum Hypothesis}. W. A. Benjamin.
+\bibitem[Easton(1970)]{Easton1970} Easton, W. B. (1970). Powers of regular cardinals. \emph{Annals of Mathematical Logic}, 1, 139--178.
+\bibitem[Farah(2011)]{Farah2011} Farah, I. (2011). All automorphisms of the Calkin algebra are inner. \emph{Annals of Mathematics}, 173, 619--661.
+\bibitem[Feferman(1999)]{Feferman1999} Feferman, S. (1999). Does mathematics need new axioms? \emph{American Mathematical Monthly}, 106, 99--111.
+\bibitem[Feferman et~al.(2000)]{FFMS2000} Feferman, S., Friedman, H. M., Maddy, P. and Steel, J. R. (2000). Does mathematics need new axioms? \emph{Bulletin of Symbolic Logic}, 6, 401--446.
+\bibitem[Foreman et~al.(1988)]{FMS1988} Foreman, M., Magidor, M. and Shelah, S. (1988). Martin's Maximum, saturated ideals, and non-regular ultrafilters. Part I. \emph{Annals of Mathematics}, 127, 1--47.
+\bibitem[Freiling(1986)]{Freiling1986} Freiling, C. (1986). Axioms of symmetry: throwing darts at the real number line. \emph{Journal of Symbolic Logic}, 51, 190--200.
+\bibitem[G\"odel(1938)]{Godel1938} G\"odel, K. (1938). The consistency of the axiom of choice and of the generalized continuum-hypothesis. \emph{Proceedings of the National Academy of Sciences}, 24, 556--557.
+\bibitem[G\"odel(1940)]{Godel1940} G\"odel, K. (1940). \emph{The Consistency of the Continuum Hypothesis}. Annals of Mathematics Studies 3. Princeton University Press.
+\bibitem[G\"odel(1947)]{Godel1947} G\"odel, K. (1947). What is Cantor's continuum problem? \emph{American Mathematical Monthly}, 54, 515--525.
+\bibitem[G\"odel(1964)]{Godel1964} G\"odel, K. (1964). What is Cantor's continuum problem? Revised and expanded version. In P. Benacerraf and H. Putnam (eds.), \emph{Philosophy of Mathematics: Selected Readings}, 258--273. Prentice-Hall.
+\bibitem[G\"odel(1995)]{Godel1995} G\"odel, K. (1995). \emph{Collected Works, Volume III: Unpublished Essays and Lectures}. Ed. S. Feferman et al. Oxford University Press.
+\bibitem[Hamkins(2012)]{Hamkins2012} Hamkins, J. D. (2012). The set-theoretic multiverse. \emph{Review of Symbolic Logic}, 5, 416--449.
+\bibitem[Hamkins(2015)]{Hamkins2015} Hamkins, J. D. (2015). Is the dream solution of the continuum hypothesis attainable? \emph{Notre Dame Journal of Formal Logic}, 56, 135--145.
+\bibitem[Hilbert(1900)]{Hilbert1900} Hilbert, D. (1900). Mathematische Probleme. \emph{Nachrichten von der Königlichen Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse}, 253--297.
+\bibitem[Koellner(2006)]{Koellner2006} Koellner, P. (2006). On the question of absolute undecidability. \emph{Philosophia Mathematica}, 14, 153--188.
+\bibitem[Kreisel(1967)]{Kreisel1967} Kreisel, G. (1967). Informal rigour and completeness proofs. In I. Lakatos (ed.), \emph{Problems in the Philosophy of Mathematics}, 138--186. North-Holland.
+\bibitem[Lévy and Solovay(1967)]{LevySolovay1967} Lévy, A. and Solovay, R. M. (1967). Measurable cardinals and the continuum hypothesis. \emph{Israel Journal of Mathematics}, 5, 234--248.
+\bibitem[Maddy(1988a)]{Maddy1988a} Maddy, P. (1988a). Believing the axioms. I. \emph{Journal of Symbolic Logic}, 53, 481--511.
+\bibitem[Maddy(1988b)]{Maddy1988b} Maddy, P. (1988b). Believing the axioms. II. \emph{Journal of Symbolic Logic}, 53, 736--764.
+\bibitem[Maddy(2011)]{Maddy2011} Maddy, P. (2011). \emph{Defending the Axioms: On the Philosophical Foundations of Set Theory}. Oxford University Press.
+\bibitem[Martin(2001)]{Martin2001} Martin, D. A. (2001). Multiple universes of sets and indeterminate truth values. \emph{Topoi}, 20, 5--16.
+\bibitem[Martin and Solovay(1970)]{MartinSolovay1970} Martin, D. A. and Solovay, R. M. (1970). Internal Cohen extensions. \emph{Annals of Mathematical Logic}, 2, 143--178.
+\bibitem[Moore(2005)]{Moore2005} Moore, J. T. (2005). Set mapping reflection. \emph{Journal of Mathematical Logic}, 5, 87--97.
+\bibitem[Phillips and Weaver(2007)]{PhillipsWeaver2007} Phillips, N. C. and Weaver, N. (2007). The Calkin algebra has outer automorphisms. \emph{Duke Mathematical Journal}, 139, 185--202.
+\bibitem[Sierpi\'nski(1934)]{Sierpinski1934} Sierpi\'nski, W. (1934). \emph{Hypothèse du continu}. Monografie Matematyczne 4. Warsaw.
+\bibitem[Steel(2014)]{Steel2014} Steel, J. R. (2014). Gödel's program. In J. Kennedy (ed.), \emph{Interpreting Gödel: Critical Essays}, 153--179. Cambridge University Press.
+\bibitem[Veli\v{c}kovi\'c(1992)]{Velickovic1992} Veli\v{c}kovi\'c, B. (1992). Forcing axioms and stationary sets. \emph{Advances in Mathematics}, 94, 256--284.
+\bibitem[Woodin(1999)]{Woodin1999} Woodin, W. H. (1999). \emph{The Axiom of Determinacy, Forcing Axioms, and the Nonstationary Ideal}. De Gruyter.
+\bibitem[Woodin(2001a)]{Woodin2001a} Woodin, W. H. (2001a). The continuum hypothesis, part I. \emph{Notices of the American Mathematical Society}, 48, 567--576.
+\bibitem[Woodin(2001b)]{Woodin2001b} Woodin, W. H. (2001b). The continuum hypothesis, part II. \emph{Notices of the American Mathematical Society}, 48, 681--690.
+\bibitem[Woodin(2010)]{Woodin2010} Woodin, W. H. (2010). Strong axioms of infinity and the search for V. In \emph{Proceedings of the International Congress of Mathematicians, Hyderabad 2010}, vol.~1, 504--528.
+\bibitem[Woodin(2017)]{Woodin2017} Woodin, W. H. (2017). In search of Ultimate-$L$: the 19th Midrasha Mathematicae lectures. \emph{Bulletin of Symbolic Logic}, 23, 1--109.
+\bibitem[Zermelo(1930)]{Zermelo1930} Zermelo, E. (1930). Über Grenzzahlen und Mengenbereiche. \emph{Fundamenta Mathematicae}, 16, 29--47.
+\end{thebibliography}
+
+\end{document}

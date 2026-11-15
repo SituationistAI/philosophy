@@ -1,0 +1,82 @@
+\documentclass{situationist-preprint}
+
+\title{Computer-Assisted Proofs and Explanation}
+\msid{MTH-08-b}
+\msfamily{MTH-08}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Consequence}
+\mskeywords{mathematical explanation; computer-assisted proof; four colour theorem; Kepler conjecture; formal verification; proof by cases}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-08-a argues that some proofs explain why their conclusions hold and that computer-assisted proofs generally do not. We draw the consequences for the main computer-assisted proofs and for formal verification. Where the machine's contribution is the exhaustion of cases, as in the four colour theorem, the Kepler conjecture and the Boolean Pythagorean triples problem, the proof establishes its conclusion without explaining it, and this remains so after the proof is formally verified. Where the machine checks a proof that a person devised, as in the formalization of the odd order theorem, its contribution is inessential and the proof explains if the human proof does. The verdicts leave proof-hood untouched: the proofs that do not explain are proofs.
+\end{abstract}
+
+\section{The criterion}
+
+By Definition~2.3 of MTH-08-a, a proof explains when it derives its conclusion uniformly from a feature of the objects concerned that is salient in the theorem itself (Definitions~2.1 and~2.2). Theorem~4.1 of MTH-08-a states that a proof whose essential part is the separate verification of a large number of cases does not explain why its conclusion holds, with respect to that part; Corollary~4.2 infers that computer-assisted proofs generally do not explain, because a machine is used where the reasoning divides into more cases than a person can treat. The qualifier \enquote{generally} invites the question which computer-assisted proofs fall under the theorem and which do not. We distinguish two uses of a machine.
+
+\begin{definition}
+A machine's contribution to a proof is \emph{case-exhausting} if it consists in verifying, separately, the members of a set of cases whose joint truth the human part of the proof shows to suffice for the conclusion. It is \emph{certifying} if it consists in checking, step by step, a derivation whose steps a person specified.
+\end{definition}
+
+\begin{proposition}\label{p:ce}
+A proof to which a machine's contribution is case-exhausting and essential does not explain why its conclusion holds.
+\end{proposition}
+
+\begin{proof}
+If the case-exhausting contribution is essential, no part of the proof derives the conclusion for all cases from one feature, so Theorem~4.1 of MTH-08-a applies.
+\end{proof}
+
+\begin{proposition}\label{p:cert}
+A proof to which a machine's contribution is only certifying explains if and only if the derivation it certifies explains.
+\end{proposition}
+
+\begin{proof}
+Certification adds no step to the derivation; it confirms the steps there are. Whether the derivation is uniform from a salient feature (Definition~2.2 of MTH-08-a) depends only on its steps, so certification neither confers nor removes explanatory power.
+\end{proof}
+
+\section{Cases}
+
+\paragraph{The four colour theorem.} \citet{AppelHaken1977} reduced the theorem to the reducibility of an unavoidable set of some two thousand configurations and verified the reducibility of each by computer. The human part of the proof, discharging, shows that some configuration in the set occurs in every minimal counterexample; it does not show why each is reducible. The machine's contribution is case-exhausting and essential, so by Proposition~\ref{p:ce} the proof does not explain. \citet{Gonthier2008} formalized a later version of the proof in the Coq proof assistant. The formalization certifies the case analysis, but the derivation it certifies still proceeds by cases, so by Proposition~\ref{p:cert} it does not explain either. This is the verdict that mathematicians' continued search for a conceptual proof presupposes: the theorem is known, and why it holds is not.
+
+\paragraph{The Kepler conjecture.} \citet{Hales2005} reduced the conjecture to a finite but very large set of nonlinear inequalities and linear programs, settled by computer, and \citet{HalesEtAl2017} formally verified the whole proof in the Flyspeck project. The structure is the same: the machine shows that no candidate packing in a vast finite family beats the face-centred cubic one, without a feature of that packing from which its optimality follows uniformly. The proof does not explain.
+
+\paragraph{Boolean Pythagorean triples.} \citet{HeuleEtAl2016} showed by a satisfiability solver that the integers from $1$ to $7825$ cannot be two-coloured without a monochromatic Pythagorean triple, while those up to $7824$ can. The proof is a case analysis on the order of $10^{12}$ partial colourings, recorded as a certificate checked by a separate program. Nothing in it is a feature of $7825$ salient in the theorem; the boundary falls where it does, so far as the proof shows, by coincidence (Principle~P1 of MTH-08-a). Of the three cases this is the clearest: no human part of the proof even narrows the cases to a structured family.
+
+\paragraph{The odd order theorem.} \citet{GonthierEtAl2013} formalized the Feit--Thompson theorem, that every finite group of odd order is solvable, in Coq. The machine's contribution was certifying: the derivation is the published human proof, reorganized, and the machine checked each step. By Proposition~\ref{p:cert}, the formal proof explains to the extent that the human proof does. Computer assistance of this kind is the exception the qualifier in Corollary~4.2 of MTH-08-a allows for.
+
+\section{Objections}
+
+\begin{objection}
+Once a case-exhausting proof is formally verified, it is as certain as any proof. If certainty is all a proof is for, the absence of explanation is no defect.
+\end{objection}
+
+\begin{reply}
+The conclusion is not that such proofs are defective as proofs. By Theorem~3.1 of MTH-09-a every formally verified derivation is a proof, and by Corollary~3.2 of MTH-09-a it is one whether or not it is surveyed. Being a proof and explaining are distinct properties, and the verified case-exhausting proofs have the first without the second. That mathematicians continue to seek other proofs of the four colour theorem, whose truth is not in doubt, shows that they value the second for itself.
+\end{reply}
+
+\begin{objection}
+Human proofs also divide into cases, and some are explanatory. Why should the number of cases matter?
+\end{objection}
+
+\begin{reply}
+The number does not matter; uniformity does. A proof by a few cases explains when each case is settled from the same salient feature, as in a proof that treats even and odd $n$ by one argument applied twice. The machine is needed only where the cases are settled separately and are too many for a person, and then nothing uniform settles them. Proposition~\ref{p:ce} follows the criterion of MTH-08-a, not a threshold of size.
+\end{reply}
+
+\section{Conclusion}
+
+Computer-assisted proofs that exhaust cases establish their conclusions without explaining them, and formal verification, which certifies, does not change this. Computer assistance that only certifies a human derivation preserves whatever explanatory power the derivation has. Both verdicts concern explanation only: all these proofs are proofs.
+
+\begin{thebibliography}{99}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Gonthier(2008)]{Gonthier2008} Gonthier, G. (2008). Formal proof---the four-color theorem. \emph{Notices of the American Mathematical Society}, 55(11), 1382--1393.
+\bibitem[Gonthier et~al.(2013)]{GonthierEtAl2013} Gonthier, G. et~al. (2013). A machine-checked proof of the odd order theorem. In \emph{Interactive Theorem Proving (ITP 2013)}, Lecture Notes in Computer Science 7998, 163--179. Springer.
+\bibitem[Hales(2005)]{Hales2005} Hales, T.~C. (2005). A proof of the Kepler conjecture. \emph{Annals of Mathematics}, 162(3), 1065--1185.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[Heule et~al.(2016)]{HeuleEtAl2016} Heule, M.~J.~H., Kullmann, O. and Marek, V.~W. (2016). Solving and verifying the Boolean Pythagorean triples problem via cube-and-conquer. In \emph{Theory and Applications of Satisfiability Testing (SAT 2016)}, Lecture Notes in Computer Science 9710, 228--245. Springer.
+\end{thebibliography}
+
+\end{document}

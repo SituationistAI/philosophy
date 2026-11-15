@@ -1,0 +1,90 @@
+\documentclass{situationist-preprint}
+
+\title{Independent Testimony and the Threshold of Credibility}
+\msid{REL-07-b}
+\msfamily{REL-07}
+\msdiscipline{Philosophy of Religion}
+\mstype{Consequence}
+\mskeywords{miracles; testimony; Hume; conditional independence; common cause; Bayesian confirmation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-07-a shows that, under any non-zero prior, a finite number of testimonies to a miracle that are independent conditional on the truth and on the falsity of the report, and each more likely if the report is true, makes the miracle more probable than not. We derive the threshold: the least sufficient number of witnesses is fixed by the prior odds and the likelihood ratio of a single witness, and grows only logarithmically as the prior falls. We then show what happens when conditional independence fails through a shared source of error. The likelihood ratio of many witnesses grows without bound if and only if each witness is more likely to report the miracle if it occurred than under every error state of positive probability; otherwise it is bounded, and no number of witnesses suffices for a prior below the bound.
+\end{abstract}
+
+\section{The threshold}
+
+Let $M$ be the hypothesis that a miracle occurred, with prior probability $p = P(M) > 0$, and let $T_1, \dots, T_n$ be testimonies to it. We adopt the assumptions of REL-07-a: the testimonies are independent conditional on $M$ and independent conditional on $\neg M$ (Assumption~2.1), and $P(T_i \mid M) = r$, $P(T_i \mid \neg M) = s$, with $r > s > 0$ (Assumption~2.2). By Proposition~2.3 of REL-07-a, the posterior odds on $M$ are the prior odds multiplied by $(r/s)^n$.
+
+\begin{proposition}\label{p:n}
+The least number of testimonies that makes $M$ more probable than not is the least $n$ such that
+\[
+n > \frac{\log\big((1-p)/p\big)}{\log(r/s)}.
+\]
+\end{proposition}
+
+\begin{proof}
+$M$ is more probable than not just in case the posterior odds exceed $1$, that is, $(r/s)^n > (1-p)/p$. Taking logarithms, with $\log(r/s) > 0$, gives the inequality. Theorem~2.4 of REL-07-a guarantees that such an $n$ exists.
+\end{proof}
+
+The calculation is the one at issue between Hume and Price \citep{Owen1987}, and two features of the threshold matter. First, it depends on the prior only through the logarithm of the prior odds. If the prior odds against a miracle are $10^6$ to $1$ and each witness is ten times more likely to report the miracle if it occurred than if it did not, seven witnesses suffice; if the odds are $10^{12}$ to $1$, thirteen do. Making a miracle a million times less probable in advance adds six witnesses. Hume's argument requires that the improbability of a miracle outrun every finite body of testimony, and with conditional independence it cannot, unless the prior is zero.
+
+Second, the threshold depends on the witnesses only through the ratio $r/s$, not through $r$. A witness who reports the event only rarely when it occurs is still evidence if she reports it even more rarely when it does not, and a sufficient number of such witnesses establishes the miracle. What a witness must be is discriminating, not reliable in the sense of usually reporting what occurs.
+
+\section{Why conditional, not unconditional, independence}
+
+REL-07-a states the independence assumption conditionally on $M$ and on $\neg M$, and the threshold depends on that form. Unconditional independence of the testimonies is the wrong condition.
+
+\begin{proposition}\label{p:uncond}
+If $0 < p < 1$, $r > s$, and the testimonies are independent conditional on $M$ and on $\neg M$, then any two of them are positively correlated unconditionally: $P(T_1 \wedge T_2) > P(T_1)\,P(T_2)$.
+\end{proposition}
+
+\begin{proof}
+$P(T_1 \wedge T_2) = pr^2 + (1-p)s^2$, and $P(T_1)P(T_2) = (pr + (1-p)s)^2$. The difference is $p(1-p)(r - s)^2 > 0$.
+\end{proof}
+
+Witnesses who are each evidence for the same event are correlated because of the event; that is how their testimony converges on it. Requiring unconditional independence would exclude exactly the cases in which the testimonies are evidence, and it would yield the wrong posterior. The correct requirement is that the witnesses share no source of correlation other than the event itself.
+
+\section{Shared error}
+
+The difficulty REL-07-a locates in the independence condition can be stated precisely. Suppose that, if the miracle did not occur, there may be a common source of error, such as a shared expectation, a single original report or an interested promoter. Let $Z$ indicate its presence, with $P(Z \mid \neg M) = c > 0$. Given $\neg M$ and $Z$, each witness reports the miracle independently with probability $s_1$; given $\neg M$ and not $Z$, with probability $s_0 \leq s_1$. Given $M$, witnesses report independently with probability $r$. The testimonies are then independent conditional on $M$ but not conditional on $\neg M$, so REL-07-a's Assumption~2.1 fails.
+
+\begin{theorem}\label{t:bounded}
+Let $L_n$ be the likelihood ratio of $n$ concordant testimonies. If $r > s_1$, $L_n$ grows without bound. If $r \leq s_1$, then $L_n \leq 1/c$ for every $n$.
+\end{theorem}
+
+\begin{proof}
+$L_n = r^n / (c\,s_1^n + (1-c)\,s_0^n)$. If $r > s_1$, the denominator is at most $s_1^n$, since $s_0 \leq s_1$, so $L_n \geq (r/s_1)^n$, which grows without bound. If $r \leq s_1$, the denominator is at least $c\,s_1^n$, so $L_n \leq (r/s_1)^n / c \leq 1/c$.
+\end{proof}
+
+\begin{corollary}\label{c:threshold}
+If $r \leq s_1$, no number of concordant testimonies makes $M$ more probable than not when the prior odds on $M$ are at most $c$.
+\end{corollary}
+
+\begin{proof}
+The posterior odds are the prior odds times $L_n$, which by Theorem~\ref{t:bounded} is at most $1/c$; so the posterior odds are at most $1$.
+\end{proof}
+
+Theorem~\ref{t:bounded} is the threshold of credibility. Testimony accumulates without limit only if each witness discriminates between the miracle and every error state of positive probability, including the error state in which the witnesses are most inclined to report it. A community in which, absent the event, a shared expectation makes reports as likely as the event itself would ($s_1 \geq r$) can supply any number of witnesses without exceeding a fixed bound, and the bound is set by how probable the shared source of error is. This is Hume's observation about the circumstances of miracle reports in quantitative form: what defeats testimony to miracles, when it is defeated, is not the number of witnesses but the existence of a common cause of their agreement \citep{Hume1748,Earman2000}.
+
+\begin{objection}
+Every actual body of testimony has some shared source of error, so the hypothesis of REL-07-a is never satisfied, and its result is idle.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:bounded} shows that a shared source of error defeats the accumulation of testimony only if, in its presence, witnesses report the miracle at least as readily as they would if it occurred. Where the shared error makes reports somewhat more likely but less likely than the event would, testimony still accumulates without bound. Whether a given body of testimony falls on one side or the other is an empirical question, which is the conclusion REL-07-a draws.
+\end{reply}
+
+\section{Conclusion}
+
+With testimonies independent conditional on the truth and on the falsity of the report, the number of witnesses needed to establish a miracle grows with the logarithm of the prior odds, and depends on the witnesses only through how well each discriminates. With a common source of error, testimony accumulates without limit if and only if witnesses discriminate even against that source. The threshold of credibility is fixed by the structure of the testimony, not by the improbability of the event.
+
+\begin{thebibliography}{99}\small
+\bibitem[Earman(2000)]{Earman2000} Earman, J. (2000). \emph{Hume's Abject Failure: The Argument Against Miracles}. Oxford University Press.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}, Section X.
+\bibitem[Owen(1987)]{Owen1987} Owen, D. (1987). Hume versus Price on miracles and prior probabilities: Testimony and the Bayesian calculation. \emph{The Philosophical Quarterly}, 37(147), 187--202.
+\end{thebibliography}
+
+\end{document}

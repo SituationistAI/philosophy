@@ -1,0 +1,77 @@
+\documentclass{situationist-preprint}
+
+\title{Is \enquote{Most} a Logical Constant?}
+\msid{LOG-16-b}
+\msfamily{LOG-16}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{logical constants; generalized quantifiers; most; formal validity; permutation invariance; syllogistic}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-16-a argues that the logical constants are the permutation-invariant operations and that \enquote{most} is one of them. We give a complementary argument from the side of inference. There are arguments with \enquote{most} that are valid in virtue of their form alone: from \enquote{most $A$s are $B$s} and \enquote{most $A$s are $C$s} it follows that some $A$ is both $B$ and $C$. We prove that this inference is valid on every domain, finite or infinite, using only comparisons of size and no axiom of choice. Its validity survives every substitution for $A$, $B$ and $C$, which is the traditional mark of formal validity. An expression on which formally valid inferences turn is a logical constant.
+\end{abstract}
+
+\section{A valid form}
+
+LOG-16-a answers the received view's grounds for excluding \enquote{most}, that it is not first-order definable \citep{BarwiseCooper1981} and lacks a complete proof procedure, and argues for it from the invariance criterion. Here we approach the question from the older conception of logic as the study of arguments valid in virtue of their form: the expressions held fixed when an argument remains valid under every substitution for the others are the logical constants, a conception that goes back to Bolzano and underlies the definition of consequence in \citet{Tarski1936}.
+
+Consider the argument
+\begin{quote}
+Most of the passengers were rescued. Most of the passengers were injured. So some passenger was both rescued and injured.
+\end{quote}
+Speakers recognize it as valid whatever the passengers, the rescue and the injuries, that is, they recognize the form \enquote{most $A$ are $B$; most $A$ are $C$; so some $A$ is $B$ and $C$}. With \enquote{many} or \enquote{several} in place of \enquote{most} the argument is invalid. We prove the form valid, with \enquote{most} as in Definition~3.5 of LOG-16-a: $\mathrm{most}(A, B)$ iff $|A \setminus B| \leq |A \cap B|$ and not $|A \cap B| \leq |A \setminus B|$, where $|X| \leq |Y|$ means that some function maps $X$ into $Y$ injectively (Definition~3.4 of LOG-16-a). We write $|X| < |Y|$ for $|X| \leq |Y|$ and not $|Y| \leq |X|$.
+
+\begin{lemma}\label{l:trans}
+If $|X| \leq |Y|$ and $|Y| < |Z|$, then $|X| < |Z|$. If $|X| < |Y|$ and $|Y| \leq |Z|$, then $|X| < |Z|$.
+\end{lemma}
+
+\begin{proof}
+Injections compose, so $|X| \leq |Z|$ in both cases. In the first, if $|Z| \leq |X|$ then $|Z| \leq |Y|$ by composition, contradicting $|Y| < |Z|$. In the second, if $|Z| \leq |X|$ then $|Y| \leq |X|$, contradicting $|X| < |Y|$.
+\end{proof}
+
+\begin{proposition}\label{p:syll}
+On every domain, if $\mathrm{most}(A, B)$ and $\mathrm{most}(A, C)$, then some object is in $A \cap B \cap C$.
+\end{proposition}
+
+\begin{proof}
+By Definition~3.5 of LOG-16-a, $|A \setminus B| < |A \cap B|$ and $|A \setminus C| < |A \cap C|$. Suppose that $A \cap B \cap C$ is empty. Then every $A$ that is $B$ is not $C$, so $A \cap B \subseteq A \setminus C$ and, by inclusion, $|A \cap B| \leq |A \setminus C|$; likewise $|A \cap C| \leq |A \setminus B|$. By Lemma~\ref{l:trans}, applied along the chain
+\[
+|A \setminus B| < |A \cap B| \leq |A \setminus C| < |A \cap C| \leq |A \setminus B|,
+\]
+we obtain $|A \setminus B| < |A \setminus B|$, which is impossible since the identity map is an injection.
+\end{proof}
+
+The proof holds on infinite domains and without the axiom of choice. Its validity is independent of what $A$, $B$ and $C$ are and of which objects the domain contains: by Theorem~4.4 and Corollary~4.5 of LOG-16-a, \enquote{most} depends only on cardinalities and is preserved under every bijection between domains. The form is therefore valid under every substitution and every reinterpretation of its non-logical terms, which is what LOG-06 requires of logical consequence.
+
+\section{Objections and replies}
+
+\begin{objection}[Arithmetic in disguise]
+The proof of Proposition~\ref{p:syll} compares sizes. Its validity is a fact about cardinal arithmetic, and \enquote{most} imports arithmetic into logic.
+\end{objection}
+
+\begin{reply}
+The proof uses no numbers, only the composition of injections between classes of objects. That a valid form can be described in arithmetic does not make it arithmetical, any more than the validity of a syllogism in \emph{Barbara} becomes set theory when it is proved by inclusion of sets. Whether the number operator, which takes predicates to objects, is logical is a further question, which LOG-16-a leaves to MTH-04 and which nothing here settles.
+\end{reply}
+
+\begin{objection}[No rules]
+A form is logical only if its validity can be captured by schematic rules. The logic of \enquote{most} has no complete proof system, so its valid forms cannot all be so captured.
+\end{objection}
+
+\begin{reply}
+This form is captured by a single schematic rule, and \citet{PetersWesterstahl2006} study many such patterns. What cannot be done is to capture all valid forms with \enquote{most} by finitely many rules; LOG-16-a argues that completeness is a virtue of a logic, not a criterion of logicality, and second-order logic, which LOG-09 argues is logic, is in the same position.
+\end{reply}
+
+\section{Conclusion}
+
+From \enquote{most $A$s are $B$s} and \enquote{most $A$s are $C$s} it follows, on every domain and under every substitution, that some $A$ is both $B$ and $C$. The inference is formally valid, and \enquote{most} belongs to its form. Together with the invariance argument of LOG-16-a, this shows that \enquote{most} is a logical constant on both of the conceptions of logicality that have guided the debate: the one that looks at operations and the one that looks at forms of inference.
+
+\begin{thebibliography}{99}\small
+\bibitem[Barwise and Cooper(1981)]{BarwiseCooper1981} Barwise, J. and Cooper, R. (1981). Generalized quantifiers and natural language. \emph{Linguistics and Philosophy}, 4(2), 159--219.
+\bibitem[Peters and Westerst{\aa}hl(2006)]{PetersWesterstahl2006} Peters, S. and Westerst{\aa}hl, D. (2006). \emph{Quantifiers in Language and Logic}. Oxford University Press.
+\bibitem[Tarski(1936)]{Tarski1936} Tarski, A. (1936). \"Uber den Begriff der logischen Folgerung. \emph{Actes du Congr\`es International de Philosophie Scientifique}, 7, 1--11. English translation: On the concept of logical consequence, in \emph{Logic, Semantics, Metamathematics}, Clarendon Press, 1956.
+\end{thebibliography}
+
+\end{document}

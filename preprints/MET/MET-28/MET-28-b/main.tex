@@ -1,0 +1,103 @@
+\documentclass{situationist-preprint}
+
+\title{Indiscernibility Under Permutation Symmetry}
+\msid{MET-28-b}
+\msfamily{MET-28}
+\msdiscipline{Metaphysics}
+\mstype{Alternative proof}
+\mskeywords{identity of indiscernibles; Black's spheres; automorphisms; permutation symmetry; definability; weak discernibility}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MET-28-a shows that Black's two spheres refute the identity of indiscernibles in its absolute and relative forms but not in its weak form. Its proof defines a qualitative property as one invariant under every symmetry of the world and stipulates a symmetry exchanging the spheres. A defender of the principle may object that the definition builds in the conclusion. We reach the same result without it. Qualitative properties are defined as those expressible without names in the vocabulary of the world's genuine properties and relations; the symmetry is derived from Black's description rather than stipulated; and the invariance of every expressible property, first-order or second-order, follows from the standard lemma that automorphisms preserve satisfaction. The spheres remain weakly discernible by distance, so the weak form survives, in agreement with the revised MET-28-a.
+\end{abstract}
+
+\section{The premise avoided}
+
+Definition~2.2 of MET-28-a calls a property or relation qualitative if it is invariant under every symmetry of the world, and Definition~2.1 describes Black's world as two spheres together with a symmetry that exchanges them. Given these, Theorems~3.1 and~3.2 of MET-28-a are one-line proofs. The economy has a price. A defender of the identity of indiscernibles may hold that a world containing two spheres has qualitative features that no symmetry respects, for instance one sphere's being the one on the left, and that to define \enquote{qualitative} as symmetry-invariant is to assume that there are none. The alternative proof avoids Definition~2.2. It defines qualitativeness by expressibility and proves invariance.
+
+\section{The proof}
+
+\begin{definition}[Vocabulary]\label{d:voc}
+Let $L$ be a language whose non-logical vocabulary consists of predicates for the genuine properties and relations of the world, in the sense of MET-02-a, and no individual constants. For Black's world, $L$ contains monadic predicates $P_1, \ldots, P_k$ for the spheres' intrinsic properties (mass, shape, composition, temperature) and, for each distance $r$, a binary predicate $D_r$, where $D_r(x,y)$ says that $x$ and $y$ are $r$ miles apart.
+\end{definition}
+
+\begin{definition}[Qualitative]\label{d:qual}
+A property is \emph{qualitative} if it is expressed by a formula of $L$ with one free variable; a relation is qualitative if it is expressed by a formula of $L$ with two free variables. Formulas may be first-order or second-order, with second-order quantifiers ranging over all sets and relations on the domain.
+\end{definition}
+
+Definition~\ref{d:qual} captures the usual idea: a qualitative property is one that can be stated without mentioning any particular object. It makes no reference to symmetries.
+
+\begin{assumption}[Black's description]\label{a:black}
+Black's world is possible. Its domain consists of two spheres $a$ and $b$; for each $i$, $P_i(a)$ if and only if $P_i(b)$; and $D_r(a,b)$ holds exactly for $r = 2$, while $D_r(x,x)$ holds exactly for $r = 0$, for each sphere $x$.
+\end{assumption}
+
+Assumption~\ref{a:black} is the content of \citet{Black1952}'s description: two spheres alike in every intrinsic respect, two miles apart, and nothing else.
+
+\begin{lemma}[The swap is an automorphism]\label{l:auto}
+Let $\pi$ exchange $a$ and $b$. Then $\pi$ is an automorphism of Black's world: for every predicate of $L$, it holds of some objects if and only if it holds of their images under $\pi$.
+\end{lemma}
+
+\begin{proof}
+For each monadic $P_i$, $P_i(a) \leftrightarrow P_i(b)$ by Assumption~\ref{a:black}. For each $D_r$, distance is symmetric, so $D_r(a,b) \leftrightarrow D_r(b,a)$, and $D_r(a,a) \leftrightarrow D_r(b,b)$ since both hold exactly for $r=0$.
+\end{proof}
+
+\begin{lemma}[Invariance]\label{l:inv}
+For every formula $\varphi$ of $L$, first-order or second-order, every automorphism $\pi$ and every assignment $s$, $\varphi$ is satisfied under $s$ if and only if it is satisfied under $\pi \circ s$, where $\pi$ is extended pointwise to sets and relations.
+\end{lemma}
+
+\begin{proof}
+By induction on $\varphi$. Atomic formulas are preserved because $\pi$ is an automorphism; truth-functional steps are immediate; a first-order quantifier step holds because $\pi$ is a bijection of the domain, and a second-order step because $\pi$ induces a bijection of the sets and relations on the domain. This is the standard result of model theory \citep{Hodges1997}.
+\end{proof}
+
+\begin{theorem}[Absolute and relative indiscernibility]\label{t:main}
+No qualitative property holds of one sphere and not the other, and no qualitative relation holds of $\langle a, b\rangle$ and not of $\langle b, a\rangle$.
+\end{theorem}
+
+\begin{proof}
+Let $\varphi(x)$ express a qualitative property. By Lemmas~\ref{l:auto} and~\ref{l:inv}, $\varphi(a)$ holds if and only if $\varphi(\pi(a))$, that is, $\varphi(b)$. Let $\psi(x,y)$ express a qualitative relation. Then $\psi(a,b)$ holds if and only if $\psi(\pi(a),\pi(b))$, that is, $\psi(b,a)$.
+\end{proof}
+
+\begin{corollary}\label{c:pii}
+The identity of indiscernibles fails in its absolute and relative forms.
+\end{corollary}
+
+\begin{proposition}[Weak discernibility]\label{p:weak}
+The spheres are weakly discernible: the qualitative relation expressed by $D_2(x,y)$ holds between $a$ and $b$ and between neither sphere and itself.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:black}.
+\end{proof}
+
+Proposition~\ref{p:weak} uses no identity predicate. With identity in the language, the formula $x \neq y$ would weakly discern any two distinct objects whatever, and weak discernibility would be trivial \citep{LadymanLinneboPettigrew2012}. The spheres are weakly discerned by a genuine relation, as in Proposition~4.1 of MET-28-a.
+
+\section{Comparison and generalization}
+
+The alternative proof replaces the definition of qualitativeness by symmetry-invariance with a definition by expressibility, and replaces the stipulated symmetry with one derived from Black's description. What it shares with MET-28-a is the possibility of Black's world and the claim that its genuine features are those listed. The objection of the first section is now answered. If a sphere's being on the left were a qualitative property, it would be expressible in $L$, and Theorem~\ref{t:main} shows that nothing expressible in $L$ distinguishes the spheres. If it is expressible only with a name or a demonstrative, it is not qualitative.
+
+The proof generalizes. Whenever a structure has an automorphism exchanging two objects, they are absolutely indiscernible; whenever it has an automorphism exchanging the members of an ordered pair, they are relatively indiscernible. The argument depends on Black's spheres only through Lemma~\ref{l:auto}. Permutation symmetry in quantum mechanics supplies cases of exactly this form: in states that are symmetric or antisymmetric under the exchange of particles of the same kind, the exchange is a symmetry of every physical quantity, and the particles are absolutely and relatively indiscernible \citep{FrenchKrause2006}. \citet{Saunders2006} argued that fermions in such states are nonetheless weakly discernible by irreflexive relations such as having opposite spin components, which is the quantum counterpart of Proposition~\ref{p:weak}.
+
+\begin{objection}[Stronger languages]
+Lemma~\ref{l:inv} is proved for first- and second-order formulas. A richer language might express a property that distinguishes the spheres.
+\end{objection}
+
+\begin{reply}
+The proof of Lemma~\ref{l:inv} uses only that satisfaction is defined compositionally from the interpretation of the predicates, and that every quantifier ranges over a domain on which the automorphism induces a bijection. Any language with these features, including infinitary languages and higher-order languages over the full type hierarchy, satisfies the lemma. A language that distinguishes the spheres must contain an expression whose interpretation is not fixed by the genuine properties and relations of the world, which is to say a name or something that works as one.
+\end{reply}
+
+\section{Conclusion}
+
+Without defining qualitative properties as symmetry-invariant, and without stipulating a symmetry, Black's description yields an automorphism exchanging the spheres, and every property and relation expressible without names in the vocabulary of genuine properties is invariant under it. The identity of indiscernibles therefore fails in its absolute and relative forms. The spheres are weakly discernible by their distance, so the principle survives in its weak form, as the revised MET-28-a concludes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Black(1952)]{Black1952} Black, M. (1952). The identity of indiscernibles. \emph{Mind}, 61(242), 153--164.
+\bibitem[French and Krause(2006)]{FrenchKrause2006} French, S. and Krause, D. (2006). \emph{Identity in Physics: A Historical, Philosophical, and Formal Analysis}. Oxford University Press.
+\bibitem[Hodges(1997)]{Hodges1997} Hodges, W. (1997). \emph{A Shorter Model Theory}. Cambridge University Press.
+\bibitem[Ladyman et~al.(2012)]{LadymanLinneboPettigrew2012} Ladyman, J., Linnebo, {\O}. and Pettigrew, R. (2012). Identity and discernibility in philosophy and logic. \emph{The Review of Symbolic Logic}, 5(1), 162--186.
+\bibitem[Saunders(2006)]{Saunders2006} Saunders, S. (2006). Are quantum particles objects? \emph{Analysis}, 66(1), 52--63.
+\end{thebibliography}
+
+\end{document}

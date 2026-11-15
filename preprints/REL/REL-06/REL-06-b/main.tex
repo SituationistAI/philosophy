@@ -1,0 +1,75 @@
+\documentclass{situationist-preprint}
+
+\title{The Many-Gods Objection Revisited}
+\msid{REL-06-b}
+\msfamily{REL-06}
+\msdiscipline{Philosophy of Religion}
+\mstype{Consequence}
+\mskeywords{Pascal's wager; many-gods objection; bounded utility; jealous gods; decision theory}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-06-a shows that under bounded utilities Pascal's wager is sound for agents above a credence threshold, and that rival gods are weighed by their credences rather than tied at infinity. We derive what this means for the strongest form of the many-gods objection, on which rival gods are jealous and punish commitment to another. Commitment to a given god is recommended just in case its credence-weighted gain exceeds the cost of commitment in the godless case plus the credence-weighted penalties of its rivals. Penalties from gods of total credence $\varepsilon$ are bounded by $2\varepsilon B$, so neither invented gods nor infinitely many of them can reverse a recommendation that holds with a margin above that bound.
+\end{abstract}
+
+\section{The objection in its strongest form}
+
+The many-gods objection, already in Diderot's remark that an imam could reason in the same way as Pascal, says that the wager applies equally to every god who rewards commitment, and so recommends none \citep{Diderot1746,Mackie1982}. In its strongest form the rivals are jealous: commitment to one god is penalized by another, so that the wager seems to recommend incompatible acts \citep{Cargile1966}. Under infinite utilities the objection is decisive, since every option that gives the reward positive probability has the same infinite expectation (REL-06-a, Proposition~3.2). We derive the form it takes under bounded utilities, the setting in which REL-06-a shows the wager to be sound (Theorem~4.1).
+
+\section{The decision}
+
+Let $G_1, \dots, G_n$ be mutually exclusive hypotheses about which god exists, with credences $p_1, \dots, p_n$, and let $p_0 = 1 - \sum_i p_i$ be the credence that no god exists. The options are abstention $A$ and commitment $C_j$ to god $j$. Relative to abstention, $C_j$ yields a gain $g_j \geq 0$ if $G_j$ is true, a penalty $h_{ij} \geq 0$ if a rival $G_i$, $i \neq j$, is true, and a cost $k_j \geq 0$ if no god exists. Utilities are bounded by $B$ (REL-06-a, Definition~2.3), so every gain and penalty, being a difference of two utilities, is at most $2B$.
+
+\begin{proposition}\label{p:rule}
+$C_j$ has greater expected utility than $A$ if and only if
+\[
+p_j g_j > p_0 k_j + \sum_{i \neq j} p_i h_{ij},
+\]
+and $C_j$ is better than $C_l$ if and only if the difference between the two sides is greater for $j$ than for $l$.
+\end{proposition}
+
+\begin{proof}
+The expected utility of $C_j$ minus that of $A$ is $p_j g_j - p_0 k_j - \sum_{i\neq j} p_i h_{ij}$, each term being the probability of a state times the difference the option makes in it. The comparison of $C_j$ and $C_l$ is the comparison of these differences.
+\end{proof}
+
+With a single god and no rivals, Proposition~\ref{p:rule} reduces to the threshold of REL-06-a, Theorem~4.1. With rivals, it adds one term, and the objection becomes a question about its size.
+
+\begin{corollary}\label{c:margin}
+Suppose the rivals of $G_j$ have total credence $\varepsilon$. If $p_j g_j > p_0 k_j + 2\varepsilon B$, commitment to $j$ is preferable to abstention whatever penalties the rivals impose.
+\end{corollary}
+
+\begin{proof}
+Each $h_{ij} \leq 2B$, so $\sum_{i \neq j} p_i h_{ij} \leq 2B \sum_{i\neq j} p_i = 2\varepsilon B$; apply Proposition~\ref{p:rule}.
+\end{proof}
+
+\begin{corollary}\label{c:infinite}
+The bound of Corollary~\ref{c:margin} holds for countably many rivals.
+\end{corollary}
+
+\begin{proof}
+By countable additivity the credences of the rivals sum to at most $\varepsilon$, and the series $\sum_i p_i h_{ij}$ is dominated by $2B\sum_i p_i$.
+\end{proof}
+
+\section{Consequences}
+
+Three consequences follow. First, inventing gods does not help the objector. A rival contributes to the comparison in proportion to its credence, and a god who rewards only unbelievers \citep{MouginSober1994} enters with the credence it deserves, which is small; by Corollary~\ref{c:infinite}, an unbounded supply of such gods contributes no more than their total credence allows.
+
+Second, the residual problem is real and ordinary. When an agent has comparable credence in two traditions with exclusive demands and comparable stakes, Proposition~\ref{p:rule} may favor either, or abstention, depending on the numbers. This is the case REL-06-a sets aside as the part of the objection that does not vanish, and it is now a determinate comparison rather than a paradox. In it, as \citet{Jordan2006} observes, the reasons for preferring one tradition are evidential, and they enter through $p_j$.
+
+Third, the penalties are not free parameters: a jealous god must be assigned a credence of its own, and by Corollary~\ref{c:margin} negligible credence caps its effect whatever penalty it threatens.
+
+\section{Conclusion}
+
+Under bounded utilities the many-gods objection does not refute the wager; it supplies the terms of a comparison. Commitment to a god is recommended when its weighted gain exceeds the weighted costs and penalties, and gods of small total credence, however many and however jealous, cannot reverse a recommendation that holds with a margin of $2\varepsilon B$.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cargile(1966)]{Cargile1966} Cargile, J. (1966). Pascal's wager. \emph{Philosophy}, 41(157), 250--257.
+\bibitem[Diderot(1746)]{Diderot1746} Diderot, D. (1746). \emph{Pens\'ees philosophiques}. The Hague.
+\bibitem[Jordan(2006)]{Jordan2006} Jordan, J. (2006). \emph{Pascal's Wager: Pragmatic Arguments and Belief in God}. Clarendon Press.
+\bibitem[Mackie(1982)]{Mackie1982} Mackie, J.~L. (1982). \emph{The Miracle of Theism}. Clarendon Press.
+\bibitem[Mougin and Sober(1994)]{MouginSober1994} Mougin, G. and Sober, E. (1994). Betting against Pascal's wager. \emph{No\^us}, 28(3), 382--395.
+\end{thebibliography}
+
+\end{document}

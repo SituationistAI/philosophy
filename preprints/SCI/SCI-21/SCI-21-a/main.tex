@@ -1,0 +1,130 @@
+\documentclass{situationist-preprint}
+
+\title{Survival of the Fittest Is Not a Tautology}
+\msid{SCI-21-a}
+\msfamily{SCI-21}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_21.lean}
+\mskeywords{fitness; natural selection; tautology problem; propensity interpretation; drift}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The principle of the survival of the fittest has been charged with being a tautology: if the fittest are defined as those that survive and reproduce, the principle says only that those that survive survive. We argue that the charge rests on a mistaken account of fitness. Fitness is a propensity, a disposition of an organism or type, grounded in its traits and its environment, to survive and reproduce to a certain expected degree; it is not a record of actual survival. We prove that on the record account the principle is a logical truth, that on the propensity account it is not, and that propensity fitness is not fixed by the actual record: two scenarios with the same outcome can rank the same types in opposite ways. The results are formalized in Lean. The principle is therefore an empirical claim, with the content that fitness differences grounded in heritable traits explain differences in reproductive success.
+\end{abstract}
+
+\section{The charge}
+
+Spencer coined the phrase \enquote{survival of the fittest}, and Darwin adopted it in later editions of the \emph{Origin} as a name for natural selection. The tautology charge followed once fitness came to be measured by reproductive success: if the fitter organisms are by definition those that leave more offspring, the principle that the fitter leave more offspring is empty. \citet{Popper1976} took the charge seriously enough to describe Darwinism as a metaphysical research programme rather than a testable theory, before withdrawing the claim \citep{Popper1978}.
+
+The standard reply is the propensity interpretation of fitness, due to \citet{Brandon1978} and \citet{MillsBeatty1979}. On it, the fitness of an organism is its propensity to survive and reproduce in a given environment, and the actual number of offspring is a manifestation of the propensity, subject to chance. The reply has been refined in response to difficulties about how the propensity is to be measured \citep{BeattyFinsen1989,Sober2001,PenceRamsey2013}. We defend it in its simplest form and make the logical point precise.
+
+\section{Framework}
+
+Consider a selection scenario: two types, A and B, in an environment, with finitely many possible outcomes, each having a chance and assigning a number of offspring to each type. One outcome is actual.
+
+\begin{definition}\label{d:record}
+A is \emph{record-fitter} than B if, in the actual outcome, A leaves more offspring than B.
+\end{definition}
+
+\begin{definition}\label{d:propensity}
+A is \emph{propensity-fitter} than B if A's expected number of offspring, the chance-weighted sum over all possible outcomes, exceeds B's.
+\end{definition}
+
+\begin{assumption}[Grounding]\label{a:ground}
+The chances of the outcomes are fixed by the heritable traits of the types and by the environment.
+\end{assumption}
+
+Assumption~\ref{a:ground} is what makes propensity fitness a disposition and not a mere number. The fitness of a camouflaged moth is grounded in its coloration and in the color of the bark on which it rests, and it would be the same if, by bad luck, the moth were eaten. Dispositions of this kind are real properties of their bearers, as MET-11 argues, and fitness is one of them. Expected offspring number is a first approximation; for some purposes the variance and the temporal structure of reproduction matter as well \citep{BeattyFinsen1989}, and our argument holds for any measure computed from the distribution of outcomes rather than from the actual one.
+
+The principle of the survival of the fittest, relative to a notion of fitness, says: if A is fitter than B, A leaves more offspring than B.
+
+\section{The argument}
+
+\begin{proposition}\label{p:record}
+With record fitness, the principle holds in every scenario.
+\end{proposition}
+
+\begin{proof}
+If A is record-fitter than B, then by Definition~\ref{d:record} A leaves more offspring in the actual outcome, which is what the principle asserts.
+\end{proof}
+
+\begin{proposition}\label{p:propensity}
+With propensity fitness, the principle fails in some scenario.
+\end{proposition}
+
+\begin{proof}
+Let there be two outcomes. In the first, with chance $9/10$, A leaves three offspring and B one; in the second, with chance $1/10$, A leaves none and B two. A's expected offspring number is $27/10$ and B's is $11/10$, so A is propensity-fitter. Let the second outcome be actual. Then B leaves more offspring than A.
+\end{proof}
+
+\begin{proposition}\label{p:notrecord}
+Propensity fitness is not fixed by the record: there are scenarios that agree on the actual offspring numbers but in one of which A is propensity-fitter than B and in the other not.
+\end{proposition}
+
+\begin{proof}
+Take the scenario of Proposition~\ref{p:propensity}, and a second that differs only in that the chances are reversed, $1/10$ for the first outcome and $9/10$ for the second. The actual outcome, and so the actual offspring numbers, are the same; but in the second scenario A's expected number is $3/10$ and B's is $19/10$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Understood with propensity fitness, the principle of the survival of the fittest is not a tautology, and its content is not exhausted by the record of survival.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:propensity}, the principle is false in some scenario, so it is not a logical truth. By Proposition~\ref{p:notrecord}, the fitness relation it mentions is not determined by the outcomes it concerns, so the principle relates two independently specifiable quantities. By Proposition~\ref{p:record}, the tautology charge is correct of the record account, which is the account the charge presupposes.
+\end{proof}
+
+The principle that evolutionary theory actually uses is statistical: the propensity-fitter type tends, over many generations and in large populations, to increase in frequency. Its content is that fitness differences, which by Assumption~\ref{a:ground} can be assessed from traits and environment independently of the record, are reflected in reproductive success, as when the engineering of a moth's coloration predicts its survival rate before any moth has been counted. When small populations or rare events intervene, the propensity-fitter can lose, and that is drift, which the record account cannot even describe \citep{Sober1984}.
+
+\section{Objections and replies}
+
+\begin{objection}[Expected values]
+On the propensity account, \enquote{the fitter type has the higher expected number of offspring} is itself true by definition. The tautology has only moved.
+\end{objection}
+
+\begin{reply}
+That statement is a definition, and no one claims it as the content of natural selection. The empirical claims are that the chances are grounded in heritable traits (Assumption~\ref{a:ground}), that the traits can be identified independently of reproductive outcomes, and that frequencies change as the expectations predict. Each of these could be false.
+\end{reply}
+
+\begin{objection}[Measurement]
+In practice, fitness is estimated from reproductive success, so the propensity account has no independent access to fitness \citep{MatthenAriew2002}.
+\end{objection}
+
+\begin{reply}
+Estimating a propensity from frequencies does not make it identical to them, as estimating the bias of a coin from its tosses does not make the bias a record of tosses. Proposition~\ref{p:notrecord} shows that the two come apart, and the estimate is checked by independent predictions from traits.
+\end{reply}
+
+\section{Formalization}
+
+Propositions~\ref{p:record}, \ref{p:propensity} and~\ref{p:notrecord} are formalized in \nolinkurl{Philosophy/SCI/SCI_21.lean}, with chances on a natural-number scale.
+
+\begin{lstlisting}
+theorem record_tautology (s : Scenario) :
+    SurvivalOfFittest RecordFitter s
+theorem propensity_not_tautology :
+    ∃ s, ¬ SurvivalOfFittest PropensityFitter s
+theorem propensity_not_record : ∃ s t : Scenario,
+    s.offA s.actual = t.offA t.actual ∧ s.offB s.actual = t.offB t.actual ∧
+    PropensityFitter s ∧ ¬ PropensityFitter t
+\end{lstlisting}
+
+For each of the three theorems the checker reports that it does not depend on any axioms. The results are combinatorial, and the module states Definitions~\ref{d:record} and~\ref{d:propensity} as definitions; the philosophical content lies in the choice between them, which is the thesis, and Assumption~\ref{a:ground} is not formalized.
+
+\section{Conclusion}
+
+The tautology charge is correct of an account of fitness as a record of survival, and that account is wrong. Fitness is a propensity grounded in traits and environment; it can diverge from the record, and the principle of the survival of the fittest, so understood, is an empirical claim that could have been false.
+
+\begin{thebibliography}{9}\small
+\bibitem[Beatty and Finsen(1989)]{BeattyFinsen1989} Beatty, J. and Finsen, S. (1989). Rethinking the propensity interpretation: A peek inside the Pandora's box. In M.~Ruse (ed.), \emph{What the Philosophy of Biology Is}. Kluwer.
+\bibitem[Brandon(1978)]{Brandon1978} Brandon, R.~N. (1978). Adaptation and evolutionary theory. \emph{Studies in History and Philosophy of Science}, 9(3), 181--206.
+\bibitem[Matthen and Ariew(2002)]{MatthenAriew2002} Matthen, M. and Ariew, A. (2002). Two ways of thinking about fitness and natural selection. \emph{The Journal of Philosophy}, 99(2), 55--83.
+\bibitem[Mills and Beatty(1979)]{MillsBeatty1979} Mills, S.~K. and Beatty, J.~H. (1979). The propensity interpretation of fitness. \emph{Philosophy of Science}, 46(2), 263--286.
+\bibitem[Pence and Ramsey(2013)]{PenceRamsey2013} Pence, C.~H. and Ramsey, G. (2013). A new foundation for the propensity interpretation of fitness. \emph{The British Journal for the Philosophy of Science}, 64(4), 851--881.
+\bibitem[Popper(1976)]{Popper1976} Popper, K.~R. (1976). \emph{Unended Quest: An Intellectual Autobiography}. Fontana.
+\bibitem[Popper(1978)]{Popper1978} Popper, K.~R. (1978). Natural selection and the emergence of mind. \emph{Dialectica}, 32(3--4), 339--355.
+\bibitem[Sober(1984)]{Sober1984} Sober, E. (1984). \emph{The Nature of Selection: Evolutionary Theory in Philosophical Focus}. MIT Press.
+\bibitem[Sober(2001)]{Sober2001} Sober, E. (2001). The two faces of fitness. In R.~Singh, C.~Krimbas, D.~Paul and J.~Beatty (eds.), \emph{Thinking about Evolution: Historical, Philosophical, and Political Perspectives}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

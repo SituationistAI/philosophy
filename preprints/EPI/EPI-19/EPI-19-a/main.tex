@@ -1,0 +1,186 @@
+\documentclass{situationist-preprint}
+
+\title{Phenomenal Conservatism Defended}
+\msid{EPI-19-a}
+\msfamily{EPI-19}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_19.lean}
+\mskeywords{perceptual justification; seemings; phenomenal conservatism; dogmatism; self-defeat; cognitive penetration; new evil demon}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does perceptual experience justify belief? We defend phenomenal conservatism: if it seems to a subject that $p$, she has prima facie justification for believing that $p$. The argument combines Huemer's self-defeat argument with a supervenience premise that closes its main gap. Every justified belief is ultimately grounded in seemings, and a belief is justified only if what grounds it confers justification; so if some belief is justified, some seeming confers justification. Whether a seeming confers prima facie justification depends only on its assertive character, the way it presents its content as true, which every seeming shares. Hence every seeming confers it. The denial of the principle is self-defeating: if some seeming fails to confer justification, no belief is justified, including the belief that the principle is false. We reply to the objections from cognitive penetration, from easy justification, from disjunctivism and from reliabilism, and we explain why the justification is only prima facie. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+When I look at the table and it looks to me as if there is a cup on it, I come to believe that there is a cup on it, and my belief seems justified. The question is what justifies it. It is not another belief: I do not infer that there is a cup from a belief about my experience. Nor, on most views, is it the mere fact that perception is reliable, since a subject whose experiences were produced by a deceiving demon would, it seems, be as justified as I am in believing what she believes \citep{Cohen1984}.
+
+\emph{Dogmatism} \citep{Pryor2000} answers that a perceptual experience as of $p$ gives immediate prima facie justification for believing $p$: justification that does not depend on any other justification the subject has, and that can be defeated. \emph{Phenomenal conservatism} \citep{Huemer2001,Huemer2007} generalizes the answer from perceptual experiences to seemings of every kind, including memorial, introspective and intellectual seemings. The ancestor of both is the principle of credulity of \citet{Swinburne1979}, on which, in the absence of special considerations, if it seems to a subject that $x$ is present, then probably $x$ is present; and \citet{Chisholm1966} had held that what one is \enquote{appeared to} gives one some reason to believe. Against these views, \emph{conservatives} in Wright's sense hold that perceptual justification for $p$ requires antecedent justification for background propositions, such as that one is not dreaming \citep{Wright2004}; \emph{reliabilists} hold that what matters is the reliability of the process by which the belief is formed \citep{Goldman1979,Bergmann2013}; and critics of seemings argue that seemings produced by wishful thinking or prejudice cannot justify \citep{Markie2005,Siegel2012}.
+
+We defend phenomenal conservatism in the following form.
+
+\begin{principle}[Phenomenal conservatism]\label{p:pc}
+If it seems to a subject that $p$, she has prima facie justification for believing that $p$.
+\end{principle}
+
+The question of this manuscript concerns perceptual experience, and perceptual seemings are the case that matters for it. We state the principle for all seemings because the argument for it is general, and because the restriction to perception would require an account of what is special about perception which we do not think can be given.
+
+\section{Framework}
+
+\begin{definition}[Seeming]\label{d:seeming}
+A \emph{seeming that $p$} is a state in which $p$ is presented to the subject as true. Every seeming has \emph{assertive character}: it presents its content as true, not merely as entertained, imagined or desired.
+\end{definition}
+
+A seeming is not a belief. In the Müller-Lyer illusion it seems to me that the lines differ in length while I believe that they do not. Nor is it identical with the experience that produces it. MND-16 holds that hallucinations are experiences of a different kind from veridical perceptions; that is consistent with Definition~\ref{d:seeming}, since a hallucination as of a cup and a perception of a cup can both be states in which it seems to the subject that there is a cup. Seemings are what the experiences have in common at the level of how things are presented, whatever their differences in nature.
+
+\begin{definition}[Prima facie justification]\label{d:pf}
+A seeming that $p$ \emph{confers prima facie justification} for believing $p$ if, in the absence of defeaters, the subject has justification for believing $p$ in virtue of it. A \emph{defeater} is a further state of the subject that removes the justification, either by supporting $\neg p$ (a rebutting defeater) or by undermining the connection between the seeming and the truth of $p$ (an undercutting defeater).
+\end{definition}
+
+Justification here is propositional and, in line with EPI-06, internalist: whether a subject has justification for believing $p$ depends on her mental states, not on facts about the world to which she has no access. EPI-06 holds that externalism is correct for knowledge and internalism for justification, the two notions answering to different concerns. Phenomenal conservatism is a claim about the second.
+
+\begin{assumption}[Grounding]\label{a:ground}
+Every justified belief is ultimately grounded in some seeming that confers justification.
+\end{assumption}
+
+\begin{assumption}[Non-scepticism]\label{a:nonscep}
+Some belief is justified.
+\end{assumption}
+
+\begin{assumption}[Character supervenience]\label{a:char}
+Whether a seeming confers prima facie justification depends only on its assertive character.
+\end{assumption}
+
+Assumption~\ref{a:ground} is the premise of Huemer's self-defeat argument. \citet{Huemer2007} observes that when we form beliefs, including beliefs about epistemology, we form them on the basis of how things seem to us: perceptually, in memory, on reflection. A belief formed by inference is grounded in its premises, and they in turn, if justified, in further grounds; on the structure defended in EPI-05, every chain of grounds ends in experiences, and the seemings they involve are the ultimate grounds. The second half of the assumption is a basing requirement: a belief is justified only if what it is ultimately grounded in confers justification. A belief whose every ground confers nothing has no justification to inherit.
+
+Assumption~\ref{a:char} carries the weight. It says that, once defeaters are set aside, nothing distinguishes a seeming that confers prima facie justification from one that does not except its assertive character, and since every seeming has that character, either all confer it or none does. We defend it in Section~4.
+
+\section{The argument}
+
+\begin{lemma}\label{l:some}
+If some belief is justified, some seeming confers prima facie justification.
+\end{lemma}
+
+\begin{proof}
+Let a belief be justified. By Assumption~\ref{a:ground} it is ultimately grounded in a seeming that confers justification.
+\end{proof}
+
+\begin{theorem}[Phenomenal conservatism]\label{t:pc}
+Every seeming confers prima facie justification for believing its content. Hence Principle~\ref{p:pc} holds.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:nonscep} and Lemma~\ref{l:some}, some seeming $s$ confers prima facie justification. Let $t$ be any seeming. Both $s$ and $t$ have assertive character (Definition~\ref{d:seeming}), so by Assumption~\ref{a:char} $t$ confers prima facie justification if and only if $s$ does.
+\end{proof}
+
+\begin{corollary}\label{c:undefeated}
+If it seems to a subject that $p$ and she has no defeater, she has justification for believing $p$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:pc} and Definition~\ref{d:pf}.
+\end{proof}
+
+\begin{corollary}[Self-defeat]\label{c:selfdefeat}
+If some seeming fails to confer prima facie justification, no belief is justified. In particular, no belief that Principle~\ref{p:pc} is false is justified.
+\end{corollary}
+
+\begin{proof}
+Suppose seeming $t$ confers nothing, and suppose some belief is justified. By Assumption~\ref{a:ground} it is grounded in a seeming $s$ that confers justification, and by Assumption~\ref{a:char} $t$ confers it too, a contradiction.
+\end{proof}
+
+Corollary~\ref{c:selfdefeat} does not use Assumption~\ref{a:nonscep}. It shows that the denial of phenomenal conservatism, given the other two assumptions, leads to global scepticism, and so undermines any justification its proponent could have for it. The opponent who accepts Assumption~\ref{a:ground} must therefore reject Assumption~\ref{a:char}: she must hold that some seemings confer justification and others, differing from them only in non-assertive respects, do not.
+
+\section{Why character supervenience}
+
+Huemer's original argument concluded only that the opponent's own beliefs, being grounded in seemings, would be unjustified unless some seemings justify. \citet{DePoe2011} pointed out the gap: the argument shows that seemings of some kinds confer justification, not that every seeming does, and an opponent may hold that only some kinds of seeming, such as those produced by reliable processes, justify. Assumption~\ref{a:char} closes the gap, and it needs defence. We give three considerations.
+
+\emph{Internalism.} The features that could distinguish a conferring seeming from a non-conferring one are of two kinds: internal features, accessible on reflection, and external ones, such as the reliability of the process that produced the seeming. If justification is internalist, as EPI-06 holds, external features cannot make the difference. A demon victim's seeming that there is a cup, produced by an unreliable process, is internally indiscernible from mine, and if mine confers justification, so does hers \citep{Cohen1984}.
+
+\emph{Content and relations bear on defeat.} The internal features of a seeming other than its assertive character are its content and its relations to the subject's other states. The relations are the province of defeat: a seeming that coheres badly with what else the subject has reason to believe is defeated, not deprived of prima facie force. As for content, the proposal that seemings with some contents justify while equally assertive seemings with other contents do not makes the subject's justification depend on a classification of contents to which she has no access, and which no principled account has supplied.
+
+\emph{Uniformity of starting points.} Every epistemic principle, including any restriction of phenomenal conservatism to a privileged class of seemings, is accepted because it seems true. The theorist who holds that only perceptual seemings justify accepts that view on the strength of how things seem to her on reflection, and she relies on intellectual seemings that her own principle denies any justificatory power. A restriction that cannot be held without relying on seemings it excludes is the pattern that Corollary~\ref{c:selfdefeat} generalizes.
+
+\section{Objections}
+
+\begin{objection}[Cognitive penetration]
+Jack wants Jill to be angry with him, and as a result Jill's neutral face looks angry to him. A prospector who hopes to find gold sees a pebble, and it seems to him to be a nugget. Seemings produced by wishes and prejudice cannot justify \citep{Markie2005,Siegel2012}.
+\end{objection}
+
+\begin{reply}
+Two things are true of these cases, and phenomenal conservatism respects both. The beliefs formed are epistemically defective: they are not knowledge, since they are unsafe (EPI-01), and the subject who learns how his seemings were produced acquires an undercutting defeater. But a subject who has no such information, and for whom things simply look a certain way, is not irrational to believe that they are as they look; the defect lies in his perceptual system, not in his response to it. Treating the defect as a failure of justification would make justification depend on causal facts outside the subject's view, which is what EPI-06 denies. The cases therefore illustrate why the justification is only prima facie, and why justification is not knowledge.
+\end{reply}
+
+\begin{objection}[Easy justification]
+If a seeming that there is a hand gives justification for believing that there is a hand, it gives justification, by deduction, for believing that one is not a handless brain in a vat stimulated to have that very seeming. But the seeming cannot raise the probability of that proposition, which predicts the seeming as well as the hypothesis of a real hand does \citep{White2006}.
+\end{objection}
+
+\begin{reply}
+The Bayesian premise is correct and the conclusion does not follow. Phenomenal conservatism is a principle about justification, not about the incremental confirmation that a seeming provides for each proposition. The proposition that one is not an envatted subject with this seeming may have high prior probability, and the seeming may leave it there, while one acquires justification for believing it by competent deduction from a justified belief that one has hands, as EPI-20 holds for knowledge. What is excluded is acquiring justification for it in a way that a doubter would find persuasive, a point about dialectic that EPI-02 separates from justification.
+\end{reply}
+
+\begin{objection}[Disjunctivism]
+If, as naive realists hold, the veridical perceiver is related to the cup itself while the hallucinator is not, there is no common factor for the principle to concern, and the hallucinator's justification cannot be the same as the perceiver's.
+\end{objection}
+
+\begin{reply}
+Naive realism concerns the nature of the experiences. Phenomenal conservatism concerns seemings, which, by Definition~\ref{d:seeming}, are attitudes that both experiences can produce. The perceiver and the hallucinator differ in their experiences, as MND-16 holds, and in their knowledge, since only the perceiver knows. They agree in what seems to them to be so, and phenomenal conservatism says that this agreement suffices for agreement in prima facie justification.
+\end{reply}
+
+\begin{objection}[Evidence]
+Justification is a matter of evidence. If one's evidence is one's knowledge, the hallucinator has less evidence than the perceiver, and so less justification; phenomenal conservatism, which gives them the same justification, is false.
+\end{objection}
+
+\begin{reply}
+EPI-21 holds that one's evidence is one's knowledge, and we agree that the hallucinator has less evidence. It does not follow that she has less justification, unless all justification is evidential. Seemings justify without being evidence: they are not propositions, and they confer justification by presenting propositions as true, not by being premises from which those propositions are inferred. The perceiver's perceptual knowledge becomes evidence for further beliefs; the hallucinator's seemings give her prima facie justification for the same beliefs without giving her the evidence. EPI-21 develops this division of labour.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_19.lean} represents seemings, beliefs and contents as primitive types; assertive character, conferral, defeat, justification and grounding as primitive predicates and relations; and Definitions~\ref{d:seeming} and~\ref{d:pf} and Assumptions~\ref{a:ground}--\ref{a:char} as axioms. It proves Lemma~\ref{l:some}, Theorem~\ref{t:pc} and Corollaries~\ref{c:undefeated} and~\ref{c:selfdefeat}. The main statements are:
+
+\begin{lstlisting}
+theorem phenomenal_conservatism : ∀ s : Seeming, Confers s
+
+theorem self_defeat (h : ∃ s, ¬ Confers s) :
+    ∀ b, ¬ Justified b
+\end{lstlisting}
+
+The \texttt{\#print axioms} output, with the namespace prefix omitted, is:
+
+\begin{lstlisting}
+'phenomenal_conservatism' depends on axioms:
+  [Belief, Confers, GroundedIn, Justified, Seeming, character,
+   grounding, non_scepticism, seeming_assertive]
+'self_defeat' depends on axioms:
+  [Belief, Confers, GroundedIn, Justified, Seeming, character,
+   grounding, seeming_assertive]
+\end{lstlisting}
+
+\texttt{seeming\_assertive} is the clause of Definition~\ref{d:seeming} that every seeming is assertive; \texttt{grounding}, \texttt{non\_scepticism} and \texttt{character} are Assumptions~\ref{a:ground}, \ref{a:nonscep} and~\ref{a:char}. Corollary~\ref{c:undefeated} additionally uses \texttt{prima\_facie}, which states Definition~\ref{d:pf}. The formalization makes the logical structure plain: Assumption~\ref{a:char}, together with the universality of assertive character, makes conferral uniform across seemings, and Assumption~\ref{a:ground} and Assumption~\ref{a:nonscep} fix which way the uniformity goes. Without Assumption~\ref{a:nonscep}, the remaining premises yield only the disjunction of phenomenal conservatism and global scepticism, which is Corollary~\ref{c:selfdefeat}.
+
+\section{Conclusion}
+
+Perceptual experience justifies belief. If it seems to a subject that $p$, she has prima facie justification for believing that $p$. Every justified belief rests ultimately on seemings; whether a seeming confers justification depends on its assertive character, which all seemings share; so if any belief is justified, every seeming confers prima facie justification. The justification is prima facie: it is defeated by evidence against $p$ or against the reliability of the seeming, and it is not knowledge, which requires in addition that the belief be safe.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bergmann(2013)]{Bergmann2013} Bergmann, M. (2013). Externalist justification and the role of seemings. \emph{Philosophical Studies}, 166(1), 163--184.
+\bibitem[Chisholm(1966)]{Chisholm1966} Chisholm, R.~M. (1966). \emph{Theory of Knowledge}. Prentice-Hall.
+\bibitem[Cohen(1984)]{Cohen1984} Cohen, S. (1984). Justification and truth. \emph{Philosophical Studies}, 46(3), 279--295.
+\bibitem[DePoe(2011)]{DePoe2011} DePoe, J.~M. (2011). Defeating the self-defeat argument for phenomenal conservatism. \emph{Philosophical Studies}, 152(3), 347--359.
+\bibitem[Goldman(1979)]{Goldman1979} Goldman, A.~I. (1979). What is justified belief? In G.~S. Pappas (Ed.), \emph{Justification and Knowledge} (pp.~1--23). Reidel.
+\bibitem[Huemer(2001)]{Huemer2001} Huemer, M. (2001). \emph{Skepticism and the Veil of Perception}. Rowman \& Littlefield.
+\bibitem[Huemer(2007)]{Huemer2007} Huemer, M. (2007). Compassionate phenomenal conservatism. \emph{Philosophy and Phenomenological Research}, 74(1), 30--55.
+\bibitem[Markie(2005)]{Markie2005} Markie, P.~J. (2005). The mystery of direct perceptual justification. \emph{Philosophical Studies}, 126(3), 347--373.
+\bibitem[Pryor(2000)]{Pryor2000} Pryor, J. (2000). The skeptic and the dogmatist. \emph{No\^us}, 34(4), 517--549.
+\bibitem[Siegel(2012)]{Siegel2012} Siegel, S. (2012). Cognitive penetrability and perceptual justification. \emph{No\^us}, 46(2), 201--222.
+\bibitem[Swinburne(1979)]{Swinburne1979} Swinburne, R. (1979). \emph{The Existence of God}. Oxford University Press.
+\bibitem[White(2006)]{White2006} White, R. (2006). Problems for dogmatism. \emph{Philosophical Studies}, 131(3), 525--557.
+\bibitem[Wright(2004)]{Wright2004} Wright, C. (2004). Warrant for nothing (and foundations for free)? \emph{Aristotelian Society Supplementary Volume}, 78, 167--212.
+\end{thebibliography}
+
+\end{document}

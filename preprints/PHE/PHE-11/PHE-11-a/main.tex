@@ -1,0 +1,148 @@
+\documentclass{situationist-preprint}
+
+\title{The World as Horizon of Horizons}
+\msid{PHE-11-a}
+\msfamily{PHE-11}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_11.lean}
+\mskeywords{world; horizon; Husserl; world-consciousness; object; totality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Husserl describes every perceived thing as given within an inner and an outer horizon, and the world as the horizon within which all such horizons lie. Is the world then itself a horizon, or is it the largest object, or the sum of objects? We argue that the world is a horizon, specifically the horizon of all horizons, and that it therefore has no horizon of its own. The argument rests on one structural feature of horizons, which we call excess: a horizon of something is never contained in what it is a horizon of. If the world is the horizon within which every horizon lies, a horizon of the world would lie within the world and exceed it at once. Two corollaries follow: there is at most one horizon of horizons, and the world is never given as an object, since whatever is given as an object is given against a horizon. The result explains why world-consciousness has the peculiar form Husserl ascribed to it, a certainty that accompanies every experience and is never itself the theme of one. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Every perception, Husserl observes, intends more than it presents. The seen side of a thing refers to its unseen sides, which form its \emph{inner horizon}; the thing refers to the surrounding things and the field from which it stands out, which form its \emph{outer horizon} \citep[§§27, 44]{Husserl1913}. Horizons are not further objects alongside the thing but the indeterminate yet determinable field of possible further experience in which the thing is intended. Each horizon can be explored, and exploring it opens further horizons: the room refers to the house, the house to the street, the street to the town. In \emph{Experience and Judgment} and the \emph{Crisis}, Husserl calls the open totality in which this referral comes to rest the world, and describes our consciousness of it as a \enquote{world-consciousness} that is not the consciousness of an object \citep[§§7--8]{Husserl1939}; \citep[§37]{Husserl1954}.
+
+The description raises a question that the texts leave without a proof. If the world is the horizon of all horizons, does it in turn stand within a horizon, as every horizon we explore turns out to do? Three answers have been given. On the \emph{object view}, the world is the most comprehensive thing, the totality of entities, which can be intended as a unity and so has a horizon like any other object; Kant's antinomies show what goes wrong when the world is so treated \citep[A405--A567/B432--B595]{Kant1781}. On the \emph{regress view}, horizons open without limit, so there is no horizon of all horizons and \enquote{the world} names only the indefinite iteration. On the \emph{horizon view}, which we defend, the world is a horizon, the one within which every horizon lies, and it has no horizon of its own. The view is suggested by \citet{Landgrebe1940} and developed by \citet{Held1991}, who speaks of the world as the \enquote{universal horizon}; \citet{Fink1958} drew from it the conclusion that the world is not an entity at all. We give the argument a precise form and show which premises carry it.
+
+\section{Framework}
+
+\begin{definition}\label{d:basic}
+An \emph{entity} is anything that can be intended. Among entities are \emph{horizons}. An entity $x$ \emph{lies within} a horizon $h$ if $x$ is co-intended as belonging to the field of possible experience that $h$ opens. A horizon $h$ is a \emph{horizon of} $x$ if $x$ is intended against $h$.
+\end{definition}
+
+\begin{assumption}[Excess]\label{a:excess}
+If $h$ is a horizon of $x$, then $h$ is a horizon, $x$ lies within $h$, and $h$ does not lie within $x$.
+\end{assumption}
+
+Excess records what makes a horizon a horizon: it is the \enquote{more} that an intention refers to beyond what it presents. The unseen sides of the cube are not among the seen ones; the street is not in the room. A horizon that lay within what it is the horizon of would add nothing to it and would not be a horizon of it.
+
+\begin{definition}\label{d:hoh}
+A \emph{horizon of horizons} is a horizon within which every horizon lies.
+\end{definition}
+
+\begin{assumption}[World]\label{a:world}
+The world is a horizon of horizons.
+\end{assumption}
+
+Assumption~\ref{a:world} is the substantive phenomenological claim, and it is the one the regress view denies. We accept it on Husserl's ground: every exploration of a horizon proceeds within one and the same world, so that each newly opened horizon is experienced not as leaving the world but as a further region of it \citep[§37]{Husserl1954}. The regress view confuses two things. The series of horizons opened by exploration has no last term, but the field within which the series unfolds is given, as the field of all such explorations, from the first step. The world is not the limit of the series; it is the horizon within which the series runs.
+
+\begin{assumption}\label{a:antisymm}
+Lying-within is antisymmetric: if $x$ lies within $y$ and $y$ within $x$, then $x = y$.
+\end{assumption}
+
+\begin{assumption}\label{a:object}
+Whatever is given as an object is given against some horizon of it.
+\end{assumption}
+
+Assumption~\ref{a:object} is Husserl's thesis that there is no isolated object: thematic givenness is always givenness of something standing out from a field \citep[§8]{Husserl1939}; \citep{Gurwitsch1964}.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+The world has no horizon.
+\end{theorem}
+
+\begin{proof}
+Suppose $h$ is a horizon of the world. By Assumption~\ref{a:excess}, $h$ is a horizon and does not lie within the world. By Assumption~\ref{a:world}, every horizon lies within the world, so $h$ does. Contradiction.
+\end{proof}
+
+\begin{corollary}\label{c:unique}
+There is at most one horizon of horizons.
+\end{corollary}
+
+\begin{proof}
+If $w$ and $v$ are horizons of horizons, each is a horizon and so lies within the other. By Assumption~\ref{a:antisymm}, $w = v$.
+\end{proof}
+
+\begin{corollary}\label{c:object}
+The world is not given as an object.
+\end{corollary}
+
+\begin{proof}
+If it were, by Assumption~\ref{a:object} it would have a horizon, contrary to Theorem~\ref{t:main}.
+\end{proof}
+
+\begin{remark}\label{r:general}
+The proof of Theorem~\ref{t:main} uses only that the world is a horizon of horizons. It therefore shows that no horizon of horizons has a horizon, and with Corollary~\ref{c:unique} the world is the unique horizon without a horizon of its own.
+\end{remark}
+
+Corollary~\ref{c:object} disposes of the object view: the world is not the largest thing, since a thing, however large, is given against a horizon. It also explains the form of world-consciousness. We are never conscious of the world as we are of a thing, by attending to it against a background; we are conscious of it as the background of every attending. This is why Husserl describes the belief in the world as a \enquote{passive} certainty that underlies every positing of a particular existent and is never itself one of them \citep[§7]{Husserl1939}.
+
+The result coheres with PHE-03, on which every thing is given in adumbrations whose series does not converge on complete givenness. Non-convergence is the inner-horizon side of the structure studied here: a thing is never exhausted, because each adumbration refers to further ones. Theorem~\ref{t:main} concerns the other end. The world is not the place at which the referral would converge, since it is not given as anything that could be completed; it is the horizon in which the non-convergent series is pursued.
+
+\section{Objections}
+
+\begin{objection}[Reflection objectifies the world]
+In writing this paper we make the world our theme. So the world is given as an object after all, and Corollary~\ref{c:object} is false.
+\end{objection}
+
+\begin{reply}
+What reflection makes thematic is world-consciousness and its structure, not the world as an object standing out against a further field. When we speak of \enquote{the world}, the speaking takes place within the world, and the theme is intended against the very horizon it names. The theme is therefore not the world as an object but a concept of it, which is an object within the world. This is Fink's distinction between the world and intramundane entities \citep{Fink1958}; the objection runs them together.
+\end{reply}
+
+\begin{objection}[Other worlds]
+We can imagine other possible worlds, and imagining them seems to place our world within a wider horizon of possibilities.
+\end{objection}
+
+\begin{reply}
+Imaginative variation is performed within the actual world and draws its material from it; possible worlds are intended as variants of the one world, against its horizon \citep[§87]{Husserl1939}. The space of possibilities is not a horizon outside the world but a dimension of it, and the objection gives no horizon that does not lie within it.
+\end{reply}
+
+\begin{objection}[The regress view]
+Every horizon we have explored has had a further horizon. By induction, so has every horizon, including the world.
+\end{objection}
+
+\begin{reply}
+The induction is valid only over horizons that lie within something that exceeds them, and that is just what Assumption~\ref{a:world} denies of the world. The premise of the induction is true of every horizon reached by exploration, because each is reached within the world. It gives no reason to think that the world, within which exploration proceeds, is itself reached by exploration.
+\end{reply}
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/PHE/PHE_11.lean}. Entities, horizonhood, lying-within, being-a-horizon-of and object-givenness are primitives; Assumptions~\ref{a:excess}--\ref{a:object} are axioms; Definition~\ref{d:hoh} is a definition. The main theorem is
+
+\begin{lstlisting}
+theorem world_has_no_horizon : ¬ ∃ h, HorizonOf h world
+\end{lstlisting}
+
+\noindent and \texttt{\#print axioms} reports
+
+\begin{lstlisting}
+[Entity, HorizonOf, IsHorizon, Within, excess, world,
+ world_horizon]
+\end{lstlisting}
+
+\noindent (names abbreviated by removing the namespace prefix). Besides the primitives, the theorem uses only Assumptions~\ref{a:excess} and~\ref{a:world}. Corollary~\ref{c:unique} uses only antisymmetry, and Corollary~\ref{c:object} adds Assumption~\ref{a:object}. The formalization establishes the logical skeleton; the phenomenological content lies in the assumptions.
+
+\section{Conclusion}
+
+The world is a horizon, the horizon within which every horizon lies. Since a horizon of anything exceeds what it is a horizon of, nothing can be a horizon of the world: the world is the unique horizon without a horizon, and it is never given as an object. World-consciousness is accordingly not the consciousness of a supreme object but the standing certainty against which every object appears.
+
+\begin{thebibliography}{9}\small
+\bibitem[Fink(1958)]{Fink1958} Fink, E. (1958). \emph{Sein, Wahrheit, Welt. Vor-Fragen zum Problem des Phänomen-Begriffs}. Martinus Nijhoff.
+\bibitem[Gurwitsch(1964)]{Gurwitsch1964} Gurwitsch, A. (1964). \emph{The Field of Consciousness}. Duquesne University Press.
+\bibitem[Held(1991)]{Held1991} Held, K. (1991). Heimwelt, Fremdwelt, die eine Welt. In E.~W. Orth (Ed.), \emph{Perspektiven und Probleme der Husserlschen Phänomenologie}, Phänomenologische Forschungen 24/25. Alber.
+\bibitem[Husserl(1913)]{Husserl1913} Husserl, E. (1913). \emph{Ideen zu einer reinen Phänomenologie und phänomenologischen Philosophie. Erstes Buch}. Niemeyer.
+\bibitem[Husserl(1939)]{Husserl1939} Husserl, E. (1939). \emph{Erfahrung und Urteil. Untersuchungen zur Genealogie der Logik}, ed. L.~Landgrebe. Academia.
+\bibitem[Husserl(1954)]{Husserl1954} Husserl, E. (1954). \emph{Die Krisis der europäischen Wissenschaften und die transzendentale Phänomenologie}, ed. W.~Biemel. Husserliana VI. Martinus Nijhoff.
+\bibitem[Kant(1781)]{Kant1781} Kant, I. (1781/1787). \emph{Kritik der reinen Vernunft}. Hartknoch.
+\bibitem[Landgrebe(1940)]{Landgrebe1940} Landgrebe, L. (1940). The world as a phenomenological problem. \emph{Philosophy and Phenomenological Research}, 1(1), 38--58.
+\end{thebibliography}
+
+\end{document}

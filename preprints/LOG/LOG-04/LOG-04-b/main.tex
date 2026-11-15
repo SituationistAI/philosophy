@@ -1,0 +1,64 @@
+\documentclass{situationist-preprint}
+
+\title{Contraction-Free Logics and Naive Truth}
+\msid{LOG-04-b}
+\msfamily{LOG-04}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Consequence}
+\mskeywords{Curry's paradox; contraction; naive truth; deduction theorem; validity Curry; naive set theory}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-04-a argues that contraction fails for the conditional and that Curry's sentence proves nothing. We derive what this implies for theories of naive truth built on contraction-free logics. First, such a theory cannot have the unrestricted deduction theorem: conditional proof must be restricted, and the restriction is the one Łukasiewicz logic already obeys. Second, the gain is limited to truth: the same logics do not support naive set theory with extensionality, and the continuum-valued Łukasiewicz logic does not support arithmetic with naive truth in a standard model, so the conditional of the full theory must be contraction-free without being Łukasiewicz's. Third, the validity form of Curry's paradox is blocked only if the rules for a validity predicate are not naive, which the view should accept.
+\end{abstract}
+
+\section{The deduction theorem}
+
+We use the framework of LOG-04-a: a consequence relation $\vdash$ that satisfies the rule of assumption, modus ponens and conjunction elimination (Assumption 2.4 there) and is sound for the Łukasiewicz valuations (Assumption 2.5). Corollary 4.4 of LOG-04-a shows that no such relation contains contraction. The first consequence concerns conditional proof.
+
+\begin{proposition}\label{p:dt}
+No consequence relation that satisfies Assumptions 2.4 and 2.5 of LOG-04-a satisfies the deduction theorem: if $\Gamma, A \vdash B$, then $\Gamma \vdash A \to B$.
+\end{proposition}
+
+\begin{proof}
+Let $\Gamma = \{A \to (A \to B)\}$. By assumption and modus ponens, $\Gamma, A \vdash A \to B$, and by modus ponens again, $\Gamma, A \vdash B$. The deduction theorem would give $\Gamma \vdash A \to B$, that is, $A \to (A \to B) \vdash A \to B$, which is contraction. By Corollary 4.4 of LOG-04-a, this is excluded.
+\end{proof}
+
+The natural-deduction version of Curry's paradox uses conditional proof after a premise has been used twice, and Proposition~\ref{p:dt} shows that a contraction-free theory of truth must restrict that rule. The restriction it needs is known. In the finite Łukasiewicz logics, $\Gamma, A \vdash B$ holds just when $\Gamma \vdash A^{n} \to B$ for a fixed $n$ depending on the logic, where $A^n$ is the $n$-fold strong conjunction of $A$; in the continuum-valued logic the $n$ depends on the derivation \citep{Hajek1998}. Conditional proof is valid when every use of an assumption is counted. This is the proof-theoretic form of the observation in LOG-04-a, Section 5, that using a premise twice costs more than using it once, and it marks what a contraction-free theory of truth gives up: not modus ponens, and not conditional proof for single uses of an assumption, but the free discharge of an assumption used many times.
+
+\section{Truth, sets and arithmetic}
+
+The second consequence concerns what contraction-free logics can support besides naive truth. Three results set the limits.
+
+First, rejecting contraction is enough for naive comprehension in some settings. \citet{White1979} proved that the comprehension schema is consistent in the continuum-valued Łukasiewicz predicate logic, and \citet{Brady2006} constructs models of naive comprehension in weak relevant logics without contraction. Curry's paradox for sets, which uses contraction exactly as the truth version does, is blocked in the same way.
+
+Second, extensionality reintroduces trouble. \citet{Grisin1982} showed that in a contraction-free predicate logic naive comprehension together with the axiom of extensionality yields contraction for the relevant formulas, and so restores Curry's paradox. The lesson is that naive truth and naive set theory are not on a par: the transparency of truth requires no analogue of extensionality, since two sentences with the same truth value need not be identical, while a naive set theory without extensionality is not a theory of sets as usually understood.
+
+Third, the quantifiers matter. \citet{Restall1992} showed that arithmetic with a transparent truth predicate in continuum-valued Łukasiewicz logic is $\omega$-inconsistent, and \citet{HajekEtAl2000} that it has no standard model. Since LOG-04-a uses the finite and continuum-valued Łukasiewicz logics only for the sentential fragment, this does not threaten its results, but it does constrain the full theory. The conditional of a theory of naive truth over arithmetic must fail contraction, by Corollary 4.4 of LOG-04-a, and must not be the continuum-valued Łukasiewicz conditional with infima and suprema for the quantifiers. \citet{Field2008} supplies such a conditional: it is contraction-free, it agrees with the classical conditional on sentences that do not involve truth, and the theory has a model over the standard natural numbers. The sentential Łukasiewicz logics serve, as LOG-01-a notes, as approximations that make the failure of contraction visible.
+
+\section{Validity Curry}
+
+\citet{BeallMurzi2013} showed that a version of Curry's paradox can be built from a validity predicate instead of a conditional. Let $V$ say of itself that the argument from itself to $\bot$ is valid. With the naive rules for validity, that from $\mathrm{Val}(A, B)$ and $A$ one may infer $B$, and that if $A \vdash B$ one may infer $\mathrm{Val}(A, B)$, together with structural contraction, everything follows. The derivation does not use the conditional, so rejecting contraction for the conditional does not block it.
+
+The view of LOG-04-a has two options: reject structural contraction, as \citet{Zardini2011} does, or reject one of the naive validity rules. LOG-04-a, Section 5, argues against the first: rejecting contraction as a structural rule changes how premises combine in every argument. The consequence is that the view must reject the second rule, which internalizes every valid argument as a true validity claim. \citet{Field2017} defends this: the validity predicate of a theory of truth need not satisfy the naive rules, because validity, unlike truth, is not a device of generalization that requires transparency. On the present view this is not an ad hoc retreat. The failure of contraction for the conditional is itself the failure to internalize, as a conditional, the multi-use derivations that consequence permits; it is to be expected that validity, internalized as a predicate, fails in the same place.
+
+\section{Conclusion}
+
+The resolution of Curry's paradox in LOG-04-a has three consequences for contraction-free theories of naive truth. Conditional proof holds only when the uses of an assumption are counted. The resolution extends to naive comprehension without extensionality but not with it, and to arithmetic only with a contraction-free conditional that is not the continuum-valued Łukasiewicz one, such as Field's. And the validity form of the paradox requires a non-naive validity predicate. None of these is a reason to give up the thesis: contraction fails for the conditional, and Curry's sentence proves nothing.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beall and Murzi(2013)]{BeallMurzi2013} Beall, J.~C. and Murzi, J. (2013). Two flavors of Curry's paradox. \emph{The Journal of Philosophy}, 110(3), 143--165.
+\bibitem[Brady(2006)]{Brady2006} Brady, R.~T. (2006). \emph{Universal Logic}. CSLI Publications.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[Field(2017)]{Field2017} Field, H. (2017). Disarming a paradox of validity. \emph{Notre Dame Journal of Formal Logic}, 58(1), 1--19.
+\bibitem[Gri\v{s}in(1982)]{Grisin1982} Gri\v{s}in, V.~N. (1982). Predicate and set-theoretic calculi based on logic without contractions. \emph{Mathematics of the USSR-Izvestiya}, 18(1), 41--59.
+\bibitem[H\'ajek(1998)]{Hajek1998} H\'ajek, P. (1998). \emph{Metamathematics of Fuzzy Logic}. Kluwer.
+\bibitem[H\'ajek et~al.(2000)]{HajekEtAl2000} H\'ajek, P., Paris, J. and Shepherdson, J. (2000). The liar paradox and fuzzy logic. \emph{The Journal of Symbolic Logic}, 65(1), 339--346.
+\bibitem[Restall(1992)]{Restall1992} Restall, G. (1992). Arithmetic and truth in Łukasiewicz's infinitely valued logic. \emph{Logique et Analyse}, 35(139--140), 303--312.
+\bibitem[White(1979)]{White1979} White, R.~B. (1979). The consistency of the axiom of comprehension in the infinite-valued predicate logic of Łukasiewicz. \emph{Journal of Philosophical Logic}, 8, 509--534.
+\bibitem[Zardini(2011)]{Zardini2011} Zardini, E. (2011). Truth without contra(di)ction. \emph{The Review of Symbolic Logic}, 4(4), 498--535.
+\end{thebibliography}
+
+\end{document}

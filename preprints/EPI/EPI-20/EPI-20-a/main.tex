@@ -1,0 +1,185 @@
+\documentclass{situationist-preprint}
+
+\title{Closure Holds}
+\msid{EPI-20-a}
+\msfamily{EPI-20}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_20.lean}
+\mskeywords{closure; competent deduction; safety; sensitivity; zebra case; Dretske}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Dretske argued that knowledge is not closed under known entailment: a visitor to the zoo knows that the animals in the pen are zebras, and knows that zebras are not mules cleverly disguised to look like zebras, but does not know that the animals are not cleverly disguised mules. We argue that closure holds and that the visitor knows that the animals are not disguised mules. If knowledge is justified safe belief, a belief competently deduced from a safe belief is safe on its deductive basis, and, given that justification is preserved by competent deduction, knowledge is closed under competent deduction. We show that Dretske's verdict depends on sensitivity, which is not closed: we give a model in which the belief that the animals are zebras is sensitive, the deduced belief that they are not disguised mules is insensitive, and both are safe. The appearance of a counterexample is the appearance of insensitivity, and insensitivity is not a defect of knowledge. We reply to the lottery objection, to the objection from easy knowledge and to the contextualist. The closure theorem and the model are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The closure principle says that if a subject knows that $p$, competently deduces $q$ from $p$, and thereby comes to believe $q$ while retaining her knowledge that $p$, then she knows that $q$ \citep{Williamson2000,Hawthorne2005}. It is a premise of the standard sceptical argument.
+
+\citet{Dretske1970} argued that closure fails. His example is the zoo. A visitor sees zebras in a pen marked \enquote{Zebras} and knows that they are zebras. She knows that if they are zebras, they are not mules cleverly disguised by the zoo authorities to look like zebras. Yet, Dretske held, she does not know that they are not cleverly disguised mules, since she has not checked and her evidence would be the same if they were. \citet{Nozick1981} gave the verdict a theory: knowledge requires sensitivity, that the subject would not believe $p$ if $p$ were false. The visitor's belief that the animals are zebras is sensitive, since if they were not zebras the pen would most likely contain some other animal, or none, and she would not believe they were zebras. Her belief that they are not disguised mules is insensitive, since if they were disguised mules she would still believe they were not.
+
+The cost is high. Denying closure commits one to what \citet{DeRose1995} called abominable conjunctions: \enquote{she knows that the animals are zebras, but she does not know that they are not disguised mules}. \citet{Kripke2011} showed that sensitivity fails closure in cases with no sceptical flavour at all, such as the red barn: one can know that one sees a red barn without knowing that one sees a barn. \citet{Hawthorne2005} argued that closure is too central to the use of deduction to give up. We agree with this verdict and give it a proof, building on the analysis of knowledge as justified safe belief defended in EPI-01.
+
+\section{Framework}
+
+We use the framework of EPI-01. There are worlds, a relation $C$ of closeness between them, and a subject who believes propositions on bases; $B_m(p,w)$ says that at $w$ she believes $p$ on basis $m$, and $J_m(p,w)$ that she is justified in so believing.
+
+\begin{definition}[Safety]\label{d:safety}
+The subject's belief that $p$ on basis $m$ is \emph{safe} at $w$ if $p$ is true at every world $v$ close to $w$ at which she believes $p$ on basis $m$.
+\end{definition}
+
+\begin{definition}[Knowledge]\label{d:knowledge}
+The subject knows $p$ at $w$ if, for some basis $m$, she believes $p$ on $m$ at $w$, is justified in so believing, and her belief is safe at $w$.
+\end{definition}
+
+\begin{definition}[Competent deduction]\label{d:deduction}
+A basis $m'$ for believing $q$ is a \emph{competent deduction} of $q$ from the belief that $p$ on basis $m$ if $p$ entails $q$ and, at every world at which the subject believes $q$ on $m'$, she believes $p$ on $m$.
+\end{definition}
+
+\begin{assumption}[Justification is closed]\label{a:jclosure}
+If the subject is justified in believing $p$ on $m$ at $w$, and at $w$ she believes $q$ on a basis $m'$ that is a competent deduction of $q$ from her belief that $p$ on $m$, then she is justified in believing $q$ on $m'$ at $w$.
+\end{assumption}
+
+Assumption~\ref{a:jclosure} is the premise that a competent deduction adds no defect of its own. Dretske's case against closure is directed at the conditions that make a justified belief knowledge \citep{Dretske2005}, and the zoo case gives no reason to doubt that the visitor's deduced belief is justified if her perceptual belief is.
+
+\begin{principle}[Closure]\label{p:closure}
+If the subject knows $p$ on basis $m$ at $w$ and believes $q$ at $w$ on a basis that is a competent deduction of $q$ from her belief that $p$ on $m$, she knows $q$ at $w$.
+\end{principle}
+
+\section{The argument}
+
+\begin{lemma}[Safety is closed]\label{l:safety}
+If the belief that $p$ on $m$ is safe at $w$ and $m'$ is a competent deduction of $q$ from it, the belief that $q$ on $m'$ is safe at $w$.
+\end{lemma}
+
+\begin{proof}
+Let $v$ be close to $w$ with the subject believing $q$ on $m'$ at $v$. By Definition~\ref{d:deduction} she believes $p$ on $m$ at $v$; by safety $p$ is true at $v$; since $p$ entails $q$, $q$ is true at $v$.
+\end{proof}
+
+Lemma~\ref{l:safety} is Proposition 6.1 of EPI-01.
+
+\begin{theorem}[Closure]\label{t:closure}
+Principle~\ref{p:closure} holds.
+\end{theorem}
+
+\begin{proof}
+Suppose the subject believes $p$ on $m$ at $w$, is justified, and her belief is safe; and she believes $q$ on a competent deduction $m'$. She is justified in believing $q$ on $m'$ by Assumption~\ref{a:jclosure}, and her belief is safe by Lemma~\ref{l:safety}. By Definition~\ref{d:knowledge} she knows $q$.
+\end{proof}
+
+We now apply the theorem to the zoo. Let $Z$ be the proposition that the animals in the pen are zebras and $M$ the proposition that they are cleverly disguised mules. $Z$ entails $\neg M$.
+
+\begin{assumption}[An ordinary zoo]\label{a:zoo}
+At the actual world $@$, the visitor believes $Z$ on the basis of looking, and is justified in so believing; and at every world close to $@$ at which she believes $Z$ on the basis of looking, the animals are zebras.
+\end{assumption}
+
+The second clause says that the zoo is an ordinary zoo: no one is in the business of disguising mules, and no world in which someone is is a world that could easily have obtained. This is what Dretske takes for granted when he grants that the visitor knows that the animals are zebras.
+
+\begin{corollary}[The zebra]\label{c:zebra}
+If, at $@$, the visitor believes $\neg M$ on a competent deduction from her belief that $Z$, she knows that the animals are not cleverly disguised mules.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:zoo} and Definitions~\ref{d:safety} and~\ref{d:knowledge}, she knows $Z$ on the basis of looking. Apply Theorem~\ref{t:closure}.
+\end{proof}
+
+Why, then, does Dretske's verdict seem plausible? Because the deduced belief is insensitive, and sensitivity is not closed. Following \citet{Nozick1981}, a belief that $p$ is \emph{sensitive} at $w$ if, at the nearest worlds to $w$ at which $p$ is false, the subject does not believe $p$.
+
+\begin{proposition}[Sensitivity is not closed]\label{p:model}
+There is a model with three worlds, the actual world $@$ (zebras), $e$ (an empty pen) and $d$ (disguised mules), ordered by nearness to $@$ in that sequence, in which $e$ alone is close to $@$ besides $@$ itself, and in which: (i) the visitor's belief in $Z$ by looking and her deduced belief in $\neg M$ are both safe at $@$; (ii) the belief in $Z$ is sensitive at $@$; (iii) the belief in $\neg M$ is insensitive at $@$.
+\end{proposition}
+
+\begin{proof}
+Let the visitor believe $Z$ (by looking) and $\neg M$ (by deduction) at $@$ and $d$, and neither at $e$. (i) The close worlds are $@$ and $e$; at $@$ both beliefs are true, and at $e$ neither is held. (ii) The nearest world at which $Z$ is false is $e$, where she does not believe $Z$. (iii) The nearest, and only, world at which $\neg M$ is false is $d$, where she believes $\neg M$.
+\end{proof}
+
+The model reproduces Dretske's case exactly, and it shows that his intuition tracks sensitivity: the one feature that distinguishes the deduced belief from the perceptual one is that the deduced belief would be held if it were false. On the safety analysis this feature is irrelevant, because the world at which it would be held falsely is not close. The visitor's belief that the animals are not disguised mules is as safe as her belief that they are zebras, and for the same reason.
+
+\section{Objections}
+
+\begin{objection}[She has not checked]
+The visitor has done nothing to rule out the disguise. Her evidence does not discriminate between zebras and disguised mules. Knowledge that a hypothesis is false requires evidence against it \citep{Dretske1970}.
+\end{objection}
+
+\begin{reply}
+Her evidence does discriminate in the only sense knowledge requires. If, as EPI-21 argues, one's evidence is one's knowledge, her evidence includes that the animals are zebras, which entails that they are not disguised mules. What she lacks is evidence that would discriminate in a world in which she could not tell; but that world is not close, and a requirement to rule out every remote error possibility is the sceptic's requirement, which would also deprive her of knowledge that the animals are zebras. Dretske accepts that she knows the latter, and the reply shows that he cannot consistently require more for the former.
+\end{reply}
+
+\begin{objection}[Lotteries]
+Closure, together with ordinary knowledge, yields knowledge of lottery propositions. If I know that I will be in Paris next week, and that entails that I will not win the lottery and move to the Bahamas, closure gives me knowledge that my ticket will lose, which I lack \citep{Vogel1990,Hawthorne2004}.
+\end{objection}
+
+\begin{reply}
+On the safety analysis the two verdicts stand or fall together. If winning the lottery is a close possibility, as it is for a holder of a ticket in a fair draw, there is a close world in which I believe I will be in Paris and am in the Bahamas, and I do not know that I will be in Paris. If winning is not close, I know both. The lottery case therefore confirms closure: it shows that our everyday claims about the future are sometimes weaker than we take them to be, in line with EPI-09, on which one does not know that one's ticket will lose but may rationally act as if it will.
+\end{reply}
+
+\begin{objection}[Easy knowledge]
+Closure makes knowledge too easy. The visitor acquires knowledge that a trick has not been played on her without any investigation, simply by deducing it from what she sees \citep{Cohen2002}.
+\end{objection}
+
+\begin{reply}
+The knowledge is easy because its source is easy: she knows that the animals are zebras by looking at them, and the deduction adds a consequence she can draw from the armchair. What would be objectionable is a procedure that yielded knowledge of the reliability of a source from its own outputs whether or not it was reliable; Lemma~\ref{l:safety} does not license that, since the deduced belief is safe only if the premise belief is. Whether the visitor's knowledge transmits warrant in a dialectically effective way is a separate question \citep{Wright2002}, which concerns persuading a doubter rather than knowing; EPI-02 takes it up for Moore's proof.
+\end{reply}
+
+\begin{objection}[Context]
+Once the possibility of a disguise has been raised, \enquote{she knows the animals are not disguised mules} sounds false. Closure seems to hold only by an equivocation on \enquote{know}.
+\end{objection}
+
+\begin{reply}
+EPI-13 argues that the standards for \enquote{know} shift with context. That is compatible with Theorem~\ref{t:closure}, which holds for any fixed closeness relation and therefore within each context. In a context in which disguised mules are made relevant, the world $d$ of Proposition~\ref{p:model} counts as close, and the visitor knows neither $\neg M$ nor $Z$; in the context of the zoo visit she knows both. Closure is never violated. What the contextualist cannot say, and what Dretske must, is that in a single context she knows $Z$ and fails to know $\neg M$.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem concerns single-premise closure under competent deduction. Multi-premise closure also holds for safety, by the same argument, but it raises questions about the accumulation of risk that we do not discuss; EPI-10 shows that rational belief, as distinct from knowledge, is not closed under conjunction. The result does not establish Assumption~\ref{a:zoo}: whether a given zoo is ordinary is an empirical matter, and if disguises are a live practice the visitor knows neither proposition. Nor does it establish that the sceptic's premise that one does not know that one is not a brain in a vat is false; that requires, in addition, an account of which worlds are close, given in EPI-02.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_20.lean} proves Lemma~\ref{l:safety}, Theorem~\ref{t:closure} and Corollary~\ref{c:zebra} from the primitives of Section~2, Assumption~\ref{a:jclosure} and Assumption~\ref{a:zoo}, and it verifies the model of Proposition~\ref{p:model} by computation. The main theorems are:
+
+\begin{lstlisting}
+theorem closure {p q : Proposition} {m m' : Basis} {w : World}
+    (hk : Believes p m w ∧ Justified p m w ∧ Safe p m w)
+    (hd : CompetentDeduction p m q m') (hb : Believes q m' w) :
+    Knows q w
+
+theorem zebra (hb : Believes NotMule deduction actual)
+    (hdep : ∀ v, Believes NotMule deduction v →
+        Believes Zebra looking v) :
+    Knows NotMule actual
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_20.closure' depends on axioms:
+  [Basis, Believes, Close, Justified, World, justification_closure]
+'Philosophy.EPI_20.zebra' depends on axioms:
+  [Basis, Believes, Close, Justified, NotMule, World, Zebra,
+   actual, believes_zebra, deduction, justification_closure,
+   justified_zebra, looking, ordinary_zoo, zebra_not_mule]
+'Philosophy.EPI_20.sensitivity_not_closed' does not depend
+  on any axioms
+\end{lstlisting}
+
+The primitives are the types and relations of Section~2; \texttt{justification\_closure} is Assumption~\ref{a:jclosure}, \texttt{believes\_zebra}, \texttt{justified\_zebra} and \texttt{ordinary\_zoo} are the clauses of Assumption~\ref{a:zoo}, and \texttt{zebra\_not\_mule} is the entailment from $Z$ to $\neg M$. The model of Proposition~\ref{p:model} uses no axioms.
+
+\section{Conclusion}
+
+Knowledge is closed under competent deduction, because safety is closed under it and justification is preserved by it. The visitor who knows that the animals are zebras and deduces that they are not cleverly disguised mules knows that they are not. Dretske's contrary verdict tracks the insensitivity of the deduced belief, and sensitivity, unlike safety, is neither closed nor required for knowledge.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cohen(2002)]{Cohen2002} Cohen, S. (2002). Basic knowledge and the problem of easy knowledge. \emph{Philosophy and Phenomenological Research}, 65(2), 309--329.
+\bibitem[DeRose(1995)]{DeRose1995} DeRose, K. (1995). Solving the skeptical problem. \emph{The Philosophical Review}, 104(1), 1--52.
+\bibitem[Dretske(1970)]{Dretske1970} Dretske, F. (1970). Epistemic operators. \emph{The Journal of Philosophy}, 67(24), 1007--1023.
+\bibitem[Dretske(2005)]{Dretske2005} Dretske, F. (2005). The case against closure. In M.~Steup and E.~Sosa (Eds.), \emph{Contemporary Debates in Epistemology} (pp.~13--26). Blackwell.
+\bibitem[Hawthorne(2004)]{Hawthorne2004} Hawthorne, J. (2004). \emph{Knowledge and Lotteries}. Oxford University Press.
+\bibitem[Hawthorne(2005)]{Hawthorne2005} Hawthorne, J. (2005). The case for closure. In M.~Steup and E.~Sosa (Eds.), \emph{Contemporary Debates in Epistemology} (pp.~26--43). Blackwell.
+\bibitem[Kripke(2011)]{Kripke2011} Kripke, S.~A. (2011). Nozick on knowledge. In \emph{Philosophical Troubles: Collected Papers, Volume 1} (pp.~162--224). Oxford University Press.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Vogel(1990)]{Vogel1990} Vogel, J. (1990). Are there counterexamples to the closure principle? In M.~D. Roth and G.~Ross (Eds.), \emph{Doubting: Contemporary Perspectives on Skepticism} (pp.~13--27). Kluwer.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\bibitem[Wright(2002)]{Wright2002} Wright, C. (2002). (Anti-)sceptics simple and subtle: G.~E. Moore and John McDowell. \emph{Philosophy and Phenomenological Research}, 65(2), 330--348.
+\end{thebibliography}
+
+\end{document}

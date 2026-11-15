@@ -1,0 +1,826 @@
+\documentclass{situationist-preprint}
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{needspace}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newenvironment{manualtable}{\par\footnotesize\setlength{\tabcolsep}{3pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}>{\ttfamily}P{1.1cm}P{5.0cm}P{3.75cm}P{2.25cm}P{2.95cm}@{}}
+  \toprule \normalfont\textbf{ID} & \textbf{$T_1$: term and role / token context} & \textbf{$T_2$: image / token referent} & \textbf{status} & \textbf{inferences}\\ \midrule\endhead
+  \bottomrule\endfoot}%
+  {\end{longtable}\addtocounter{table}{-1}}
+\newenvironment{inftable}{\par\footnotesize\setlength{\tabcolsep}{3pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}>{\ttfamily}P{1.05cm}P{4.75cm}P{6.15cm}>{\ttfamily\raggedright\arraybackslash}P{2.35cm}c@{}}
+  \toprule \normalfont\textbf{ID} & \textbf{inference of $T_1$} & \textbf{translation $M(I)$, or interpretation} & \normalfont\textbf{readings} & \textbf{v.}\\ \midrule\endhead}%
+  {\end{longtable}\addtocounter{table}{-1}}
+\newenvironment{crittable}{\par\footnotesize\setlength{\tabcolsep}{3pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}>{\ttfamily}P{1.2cm}P{2.0cm}cP{10.7cm}@{}}
+  \toprule \normalfont\textbf{Rev.} & \textbf{criterion} & & \textbf{documented outcome}\\ \midrule\endhead}%
+  {\end{longtable}\addtocounter{table}{-1}}
+\newenvironment{evidtable}{\par\footnotesize\setlength{\tabcolsep}{3pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}>{\ttfamily}P{1.05cm}P{8.4cm}>{\ttfamily\raggedright\arraybackslash}P{3.2cm}P{2.6cm}@{}}
+  \caption{Evidential claims behind the favourable outcomes, and the readings they use.}\label{tab:evid}\\
+  \toprule \normalfont\textbf{ID} & \textbf{evidential claim} & \normalfont\textbf{readings} & \textbf{criteria}\\ \midrule\endfirsthead
+  \toprule \normalfont\textbf{ID} & \textbf{evidential claim} & \normalfont\textbf{readings} & \textbf{criteria}\\ \midrule\endhead}%
+  {\end{longtable}}
+
+\title{Commensurability Across Paradigms\\[0.4em]\large Volume I: Translation and Theory Choice}
+\msid{SCI-06-a}
+\msfamily{SCI-06}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript, Volume I of III}
+\mskeywords{incommensurability; Kuhn; Feyerabend; translation; reference potential; partial denotation; theory choice; scientific revolutions; translation manuals}
+
+\input{gen/stats.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are the paradigms on either side of a scientific revolution incommensurable? We argue that they are not: successive paradigms are partially translatable, and theory choice remains rational across revolutions. We define a translation manual as a partial map from expressions of the earlier theory to expressions of the later one that preserves the reference of term tokens, in Kitcher's sense, and a specified set of inferential relations, and we define a translation index measuring the share of the earlier vocabulary that the manual translates, weighted by inferential role. We prove that every revolution whose untranslatable cluster is non-empty and whose vocabulary contains a referring term has an index strictly between 0 and 1, and that Kuhn's own thesis of local incommensurability entails this condition. We then show that translation is what makes disagreement possible, and that theory choice is rational when a criterion shared by both communities favours the successor on evidence stated in translatable vocabulary. Part~II gives translation manuals for ten revolutions, from phlogiston to oxygen and from Galen to Harvey, with \ntermsall{} terms, \ntokensall{} token readings and \ninfall{} inferences, and checks mechanically that each revolution satisfies both conclusions.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & Translation and Theory Choice & 1--89 \\
+II & Reference, Taxonomy and the Lexicon & 90--152 \\
+III & Values, Weighting and Consensus & 153--214 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Volume I} (the present volume) states the question, defines translation manuals and the translation index, proves that partial translatability follows from Kuhn's local thesis and holds of every revolution in a table of ten, and argues that theory choice across these revolutions was rational in a sense that does not require a neutral algorithm. Part~II of the volume contains the manuals and the computed statistics.
+
+\paragraph{Volume II: Reference, Taxonomy and the Lexicon} takes up the semantic question in the form Kuhn gave it after 1983: that a revolution changes the structured lexicon of kind terms, and that two lexicons whose taxonomies violate his no-overlap principle cannot be mapped into one another. It (i) states the no-overlap principle precisely and proves that it constrains type-level translation only, so that token-by-token translation of the kind defined in Volume~I is untouched by it; (ii) develops the theory of reference potential for natural-kind terms, comparing Kitcher's account with the causal-descriptive accounts that descend from Putnam and with Bird's naturalized treatment of incommensurability; (iii) treats partial denotation in Field's sense as a semantic relation in its own right and gives its logic; and (iv) extends the manuals of Volume~I to four further revolutions: continental drift to plate tectonics, the classical to the molecular gene, Daltonian to structural chemistry, and Maxwellian electrodynamics to quantum electrodynamics.
+
+\paragraph{Volume III: Values, Weighting and Consensus} takes up the methodological question. It (i) gives a formal theory of choice under shared criteria and answers Okasha's argument from Arrow's theorem by identifying the informational assumptions under which aggregation of the criteria is possible; (ii) compares the qualitative account of Volume~I with Bayesian reconstructions of Kuhnian choice in the line of Salmon; (iii) studies how communities converge, using the time from the first statement of a successor to its general acceptance in each revolution of Volumes~I and~II; and (iv) connects the norms that SCI-05 identifies as uniting the scientific methods with the institutions of error-correction that SCI-01 takes to distinguish science, and draws the consequences for the rationality of the community, as distinct from the individual.
+
+\section*{Preface}
+
+The thesis that scientific paradigms are incommensurable is more than sixty years old, and the arguments for and against it have reached a familiar equilibrium. Defenders point to the failure of every proposed translation of the central terms of a superseded theory; critics reply that the failure is local, that reference can be preserved where meaning is not, and that scientists in fact compare rival theories. Both sides argue from examples, and both choose the examples that suit them. What has been missing is a measure: a way of stating how much of a superseded theory can be translated into its successor, by a definite standard, across a body of cases chosen before the measuring began.
+
+This volume supplies the measure and applies it. The written part (Part~I) gives the definitions and the arguments. Part~II gives translation manuals for ten revolutions in the history of the natural sciences and medicine. The manuals are compiled by hand, from the historical record and the secondary literature; the statistics are computed from them by a program that also checks, for every revolution, the claims that the written part makes about it. The manuals are long because the vocabularies are, and because a manual that is to be checked must state, for every term and every inference, what it claims.
+
+\section{Introduction}\label{s:intro}
+
+\subsection{The question}
+
+In \emph{The Structure of Scientific Revolutions} Kuhn argued that the history of a mature science consists of long periods of normal research, governed by a paradigm, separated by revolutions in which one paradigm is replaced by another \citep{Kuhn1962}. He claimed that the paradigms on either side of a revolution are \emph{incommensurable}: there is no common measure by which they can be compared. Feyerabend, independently and in the same year, argued that the meanings of the terms of a theory are fixed by the theory as a whole, so that a change of fundamental theory changes the meaning of every term, and successive theories cannot be compared by their consequences \citep{Feyerabend1962}.
+
+If the thesis were true, the consequences would be serious. Scientists who chose the successor could not have chosen it because it was better by any standard both sides accepted, since there would be no such standard; nor because it said more truly what the predecessor said, since the predecessor's claims would not be expressible in the successor's terms. Progress through revolutions would be, at best, progress by the lights of the winners. Lakatos expressed the worry by saying that on Kuhn's account a revolution would be a matter of mob psychology \citep{Lakatos1970}. Kuhn rejected the charge, but the debate that followed did not settle whether he was entitled to reject it.
+
+We argue that paradigms are not incommensurable. Successive paradigms are partially translatable, and theory choice remains rational across revolutions. Both conjuncts are substantive. The first says more than that \emph{some} expressions are shared, which no one has denied, and less than that everything said by the predecessor can be said by the successor, which is false. The second says that the choice of the successor could be supported by reasons available to both communities; it does not say that the choice was dictated by an algorithm, or that every scientist who resisted the successor was irrational.
+
+\subsection{Three theses}
+
+\citet{HoyningenHueneSankey2001} and \citet{Sankey1994} distinguish three strands in the incommensurability literature.
+
+The \emph{semantic} thesis says that the central terms of successive theories differ in meaning, or in reference, in a way that prevents translation of the claims of one into the language of the other. It is the strand that Feyerabend emphasized and that Kuhn, after 1970, made central \citep{Kuhn1983,Kuhn1991}.
+
+The \emph{methodological} thesis says that the standards by which theories are evaluated change with the paradigm, so that there is no neutral standard by which successive paradigms can be compared. It is prominent in \emph{Structure}, where Kuhn writes of paradigms carrying their own standards and of the problems each regards as legitimate.
+
+The \emph{perceptual} thesis says that scientists working in different paradigms see the world differently, so that there is no neutral observational basis for comparison. It draws on the gestalt-switch analogy of \emph{Structure} and on Hanson's account of theory-laden observation \citep{Hanson1958}.
+
+Our first conclusion, partial translatability, answers the semantic thesis. Our second, the rationality of choice, answers the methodological thesis, and, through the requirement that the evidence for a choice be stated in translatable vocabulary, the perceptual thesis as far as it bears on choice.
+
+\subsection{The approach}
+
+The argument has three components.
+
+The first is a definition of translation that is neither too strong nor too weak. Kuhn's later thesis was that translation in the strict sense, a systematic substitution of expressions preserving meaning, fails for a local cluster of terms \citep{Kuhn1983}. We define a translation manual as a partial map from expressions of the earlier theory to expressions of the later one, preserving the reference of term tokens in the sense of \citet{Kitcher1978} and a specified set of inferential relations. A manual so defined can be applied term by term and token by token; it can say, of every term, whether it is translated exactly, partially, token by token, or not at all; and it can say, of every inference of the earlier theory, whether its translation holds in the later theory, holds in a restricted domain, is translated and denied, or cannot be translated. From the manual we define a \emph{translation index}: the share of the earlier theory's vocabulary that the manual translates, weighted by the number of inferences in which each term figures.
+
+The second is a pair of general results. The first shows that a revolution in which some readings of terms have referents in the successor and some do not has a translation index strictly between 0 and 1, and that Kuhn's own thesis of local incommensurability entails these conditions. The second shows that the choice of the successor is rational, in a sense we define, when a criterion shared by both communities favours the successor on evidence that both can state.
+
+The third is the application of the definitions to ten revolutions, chosen before the computation for the reason that they are the revolutions most discussed in the literature on incommensurability, scientific realism and theory change: phlogiston to oxygen, Ptolemy to Kepler, Newton to Einstein, caloric to thermodynamics, classical to quantum mechanics, fixed species to Darwin, Galen to Harvey, emission to wave optics, miasma to germs, and blending inheritance to Mendel. For each we give a translation manual, compute the indices, record the outcome on Kuhn's five shared criteria, and check mechanically that the index lies strictly between 0 and 1 and that at least one shared criterion favoured the successor on evidence stated in translatable vocabulary.
+
+\subsection{Relation to other work in the collection}
+
+SCI-06-b argues, from Kuhn's later texts alone, that his account of local incommensurability and of the distinction between translation and interpretation already contains the premises of our conclusion. The present volume gives that argument a definite form and tests it against the record. SCI-05-a argues that the scientific methods form a family united by four norms, answerability, public checkability, proportion and severity, and that these shared norms are part of what keeps theory choice across revolutions rational; we take that result as an assumption (Assumption~\ref{a:norms}) and show where it enters. SCI-02-a defends scientific realism and answers the pessimistic meta-induction by the retention of the essential content of past theories; we show that partial translatability is the semantic condition of that retention (Proposition~\ref{p:retention}). LNG-06 and LNG-16 argue that radical translation is constrained by more than stimulus meaning and that reference is not inscrutable; we rely on their conclusions in replying to the Quinean form of the incommensurability argument (Objection~\ref{o:quine}).
+
+\section{A history of the debate}\label{s:history}
+
+\subsection{Kuhn and Feyerabend, 1962}
+
+In \emph{Structure} incommensurability was introduced with three illustrations \citep[ch.~12]{Kuhn1970}. The proponents of competing paradigms disagree about the list of problems a candidate for paradigm must solve; they use familiar terms in new ways, as when \enquote{mass} acquires in relativity a meaning it did not have for Newton; and they practise their trades in different worlds, seeing different things when they look from the same point in the same direction. Kuhn drew from the illustrations the conclusion that the transition between paradigms cannot be made a step at a time, forced by logic and neutral experience, and that it must occur all at once, like a gestalt switch, or not at all.
+
+Feyerabend's version was narrower and more radical \citep{Feyerabend1962}. He attacked the account of reduction and explanation according to which a later theory explains an earlier one by entailing it, or entailing an approximation to it. Newton's theory does not entail Galileo's law of free fall, which says that the acceleration of a falling body is constant, since on Newton's theory it increases as the body approaches the Earth. More generally, the meanings of the descriptive terms of a theory depend on the theory, so that when the fundamental theory changes, the meanings change, and the earlier and later theories do not share the terms in which entailment, or contradiction, could be stated. In \emph{Against Method} he extended the argument to observational terms and drew the conclusion that no methodological rule survives the history of science unviolated \citep{Feyerabend1975}.
+
+\subsection{The first replies}
+
+The first replies attacked the meaning-variance premise. \citet{Shapere1966} argued that if every change of theory changes the meanings of all its terms, then no two theories can be compared, rivals included, and the history of science, which records theories competing to explain the same phenomena, becomes unintelligible; Kuhn's own historical narratives presuppose that the competitors were addressing a common subject matter. \citet{Scheffler1967} argued that sameness of reference, not of meaning, is what comparison needs: two theories that use terms with different meanings can still conflict if the terms pick out the same things, as \enquote{the morning star} and \enquote{the evening star} do. Scheffler's point anticipated the causal theory of reference, which supplied a mechanism by which reference could be preserved through changes of belief.
+
+\citet{Davidson1974} attacked the idea of a conceptual scheme. If incommensurability is the impossibility of translation, then to recognize another theory as incommensurable with ours we must recognize it as a language that we cannot translate. But the only evidence that something is a language is that it can be translated. A totally untranslatable scheme is therefore not one we could identify, and the thesis of total incommensurability has no content. Davidson's argument tells against total incommensurability, which few held; it leaves open partial untranslatability, which is the thesis we must address.
+
+\subsection{Reference}
+
+The causal theory of reference, developed by \citet{Putnam1975} among others, held that the reference of a natural-kind term is fixed not by the descriptions its users associate with it but by its causal connection to samples of the kind, through an original baptism and a chain of transmission. If this were right, the reference of \enquote{electron} or \enquote{gene} would be preserved through large changes in theory, and incommensurability of meaning would not imply incommensurability of reference. \citet{Putnam1981} drew the further conclusion that the incommensurability thesis is self-refuting: if Kuhn could not translate the phlogiston theorists, he could not tell us what they believed, yet his histories do just that.
+
+The causal theory has a defect for the cases that matter. It assigns a referent to \enquote{phlogiston} only if something was baptized, and if nothing was, it assigns none; it cannot explain how a theorist who used \enquote{dephlogisticated air} could on some occasions have referred to oxygen, which is what the historical record suggests. Two proposals addressed the defect.
+
+\citet{Field1973} argued that a term of a superseded theory may \emph{partially denote} several entities of the later theory, without determinately denoting any. His example was Newtonian \enquote{mass}, which partially denotes relativistic rest mass and relativistic mass (total energy divided by the square of the speed of light). Some Newtonian claims about mass are true of the one and false of the other: the claim that mass is invariant is true of rest mass, and the claim that momentum is the product of mass and velocity is true of relativistic mass. Field's semantics assigns truth to a sentence if it is true on every admissible assignment, falsity if false on every one, and neither otherwise.
+
+\citet{Kitcher1978} argued that a term has a \emph{reference potential}: a set of ways in which its tokens can have their reference fixed. A token of \enquote{dephlogisticated air} in Priestley's description of the gas he had just prepared from the red calx of mercury refers to what he had in his apparatus, which was oxygen. A token in a statement of the theory, saying that dephlogisticated air is air from which phlogiston has been removed, refers through the description, and since nothing satisfies it, refers to nothing. The term is heterogeneous: its tokens are fixed in different ways and some succeed where others fail. Translation is then possible token by token, by substituting for each token an expression of the later theory with the same referent; what fails is a single substitution for the type. Kitcher developed the account in \emph{The Advancement of Science}, where it underwrites a notion of conceptual progress \citep{Kitcher1993}. \citet{Devitt1979} argued on similar lines that incommensurability theses confuse meaning with reference and that the comparison of theories needs only the latter.
+
+\subsection{Kuhn's later account}
+
+Kuhn responded by restating incommensurability as a thesis about translation and narrowing its scope \citep{Kuhn1983}. Two theories are incommensurable if there is no language into which both can be translated without residue or loss. The incommensurability is \emph{local}: most of the terms shared by the two theories function in the same way in both, and only a small group of interdefined terms resists translation. Kuhn's examples were the Newtonian cluster \enquote{mass}, \enquote{force} and \enquote{weight}, and the eighteenth-century cluster \enquote{phlogiston}, \enquote{element} and \enquote{principle}.
+
+Against Kitcher, Kuhn argued that token-by-token reference is not translation \citep{Kuhn1983}. A translation substitutes, systematically, words for words; Kitcher's technique renders one term by different expressions on different occasions, and when it renders a passage it does not tell the reader why the author said what he said, since it obliterates the unity of the term in the author's usage. What Kitcher describes is interpretation: the historian's learning of the old language, which is possible even where translation is not. Kuhn's distinction between translation and interpretation is the hinge on which the later debate turned. If interpretation is possible, then the claims of the earlier theory can be understood, and the scientists who learned both languages could evaluate both theories, even if the evaluation could not be conducted in a single language.
+
+In the 1990s Kuhn developed the local thesis into an account of the lexicon \citep{Kuhn1991,Kuhn1993}. Kind terms are organized into taxonomies governed by a \emph{no-overlap principle}: two kind terms of the same lexicon may not overlap in their referents unless one is subordinate to the other. A revolution changes the taxonomy so that the kinds of the new lexicon overlap those of the old without being nested in them, and no translation can respect both taxonomies. \citet{Hacking1993} called this the taxonomic solution and argued that it captures the sense in which, after a revolution, the scientist works in a new world. Volume~II takes up the taxonomic account in detail; here we note that it constrains the translation of types and leaves untouched the translation of tokens.
+
+On the methodological side, \citet{Kuhn1977} named five characteristics of a good scientific theory: accuracy, consistency (internal and with other accepted theories), broad scope, simplicity and fruitfulness. These are, he held, shared by the scientists on both sides of a revolution and provide the shared basis for theory choice; what is not shared is a rule for applying and weighing them. Two scientists may agree on the criteria and differ on the choice, because the criteria are imprecise and because they may conflict. Kuhn took this to show that theory choice is not algorithmic; he denied that it showed choice to be irrational. \citet{McMullin1983} and \citet{Laudan1984} developed the point in different directions, Laudan arguing that the aims and methods of science, too, change, but piecemeal and by reasons, so that rational comparison is possible across changes of each.
+
+\subsection{Reconstructions and recent work}
+
+\citet{HoyningenHuene1993} reconstructed Kuhn's philosophy as a form of Kantianism with a dynamic, historically changing set of categories, and gave the authoritative account of the development of the incommensurability thesis. \citet{Sankey1994,Sankey1997} argued that the semantic thesis is either too strong to be true or too weak to threaten rational comparison, and that the referential approach of Scheffler, Putnam, Kitcher and Devitt shows how comparison survives meaning change. \citet{Bird2000} argued that Kuhn's views are best understood as a naturalistic account of scientific cognition, and later that incommensurability is a phenomenon of the psychology of trained perception and judgment, real but not a threat to rationality \citep{Bird2008}. \citet{AndersenBarkerChen2006} studied the cognitive structure of revolutions with frame models of concepts and argued that the incommensurability of conceptual structures is local and graded. \citet{Thagard1992} treated conceptual revolutions as changes in networks of concepts and propositions and evaluated them by explanatory coherence. \citet{Chang2012} reopened the chemical revolution, arguing that the phlogiston theory was abandoned prematurely and had resources the oxygen theory lacked, and drew a pluralist conclusion. \citet{Okasha2011} argued that Kuhn's account of theory choice as the weighing of several criteria falls under Arrow's impossibility theorem, so that no rule of choice satisfies minimal conditions of rationality.
+
+\subsection{Research programmes and research traditions}
+
+Two rivals of Kuhn's account bear on the question. \citet{Lakatos1970} proposed that the unit of appraisal is a research programme, a succession of theories sharing a hard core, and that a programme is progressive if its successive theories predict novel facts, some of which are corroborated, and degenerating if they only accommodate. On Lakatos's account the rationality of choice between programmes is retrospective: one programme is to be preferred when it has been progressive and its rival degenerating. \citet{Musgrave1976} applied the account to the chemical revolution and argued that the oxygen programme was progressive in the 1770s and 1780s while the phlogiston programme degenerated. Lakatos's account presupposes that the predictions of rival programmes can be compared, which is what partial translatability secures: a novel fact predicted by one programme is a fact the other can state and fail to predict. \citet{Laudan1977} replaced programmes by research traditions, evaluated by their problem-solving effectiveness, and in \citet{Laudan1984} argued that theories, methods and aims change at different times, so that each can be rationally evaluated by the others that are held fixed. Laudan's \enquote{reticulated} model is close to ours in spirit: it makes rational comparison possible across change by finding, at each moment, something shared. The present account specifies what is shared in the vocabulary: the referring readings, which are the medium in which problems and their solutions are stated.
+
+\subsection{Recent assessments}
+
+Recent assessments of the incommensurability debate tend to agree on its outcome while disagreeing about its lessons. \citet{Sankey1997} and \citet{HoyningenHuene1993} concur that incommensurability, in Kuhn's later sense, is local and does not entail the impossibility of rational comparison; Hoyningen-Huene emphasizes that Kuhn never held otherwise, and that the received image of Kuhn as an irrationalist is a misreading. \citet{Bird2000,Bird2008} accepts the phenomenon but relocates it in the cognitive habits of trained scientists, so that what is incommensurable is the way two communities see and judge, not the content of what they say. \citet{AndersenBarkerChen2006} offer a cognitive model on which concepts are represented by frames with attributes and values, and incommensurability is a mismatch between frames that can be partial and graded. \citet{Chang2012} accepts that the chemical revolution was a comparison of theories, but argues that the comparison was made on incomplete grounds and that the elimination of phlogiston lost a valuable line of inquiry. The present volume adds to this literature a definite measure and a body of cases; it agrees with Hoyningen-Huene and Sankey on the outcome, and with Andersen, Barker and Chen that incommensurability is graded, and it locates the grade in a quantity, the translation index, that can be computed from a manual.
+
+
+\subsection{Lessons}
+
+Each defeated proposal teaches something we must respect. The meaning-variance thesis of \citet{Feyerabend1962} fails by proving too much, as Shapere saw; a criterion of commensurability must make rival theories in the same domain comparable. Davidson's argument shows that total untranslatability is not a coherent possibility; a criterion must leave room for partial failure. The causal theory shows that reference can be preserved through changes of belief, but by itself it cannot handle heterogeneous terms; a criterion must assign reference by token. Field shows that some terms are indeterminate between several successors; a criterion must allow a term to be translated by more than one expression. Kuhn's reply to Kitcher shows that token reference is not translation of the type, and a criterion must state what kind of translation it measures and not trade on the ambiguity. Kuhn's account of values shows that shared criteria need not determine a unique choice; a criterion of rationality must not require that they do. And Okasha shows that the weighing of criteria is formally delicate; a criterion of rationality must say what it requires of the weighing.
+
+\section{Framework}\label{s:framework}
+
+\subsection{Theories, terms and readings}
+
+\begin{definition}[Vocabulary, token, reading]\label{d:reading}
+The \emph{vocabulary} of a theory $T$ is the set of its descriptive terms. A \emph{token} of a term is a use of it on an occasion, in a context. A \emph{reading} of a term is a class of tokens whose reference is fixed in the same way: for example, the tokens of \enquote{dephlogisticated air} in Priestley's reports of the gas obtained from the red calx of mercury form one reading, and the tokens in statements of the definition of the term form another.
+\end{definition}
+
+Readings, rather than individual tokens, are the units of the manuals in Part~II. Two tokens belong to the same reading when the same mode of reference-fixing applies to both: the same sample, the same experimental procedure, or the same description.
+
+\begin{definition}[Reference potential]\label{d:refpot}
+The \emph{reference potential} of a term is the set of its readings, each paired with the mode in which the reference of its tokens is fixed \citep{Kitcher1978}. A term is \emph{homogeneous} if all its readings have the same referent, and \emph{heterogeneous} otherwise.
+\end{definition}
+
+\begin{assumption}[Token reference]\label{a:token}
+The referent of a token is fixed by the mode of its reading: by the sample or apparatus at hand when the reading is fixed by ostension or experiment, and by the satisfier of the description when it is fixed by description. Where a description is satisfied by nothing, the token refers to nothing. Where the evidence does not decide between two referents in the successor theory, the token \emph{partially denotes} both \citep{Field1973}. Referents are identified in the vocabulary of the successor theory, as since developed.
+\end{assumption}
+
+The assumption combines Kitcher's reference potential with Field's partial denotation. It is the semantic assumption on which the manuals rest, and it is the assumption Kuhn contested, not as a theory of reference but as a theory of translation. We accept the contest: what Assumption~\ref{a:token} delivers is a token-level translation, and we measure that, distinguishing it throughout from type-level translation (Definition~\ref{d:status}).
+
+The identification of referents in the vocabulary of the successor, as since developed, is not a bias in favour of the successor. It is what the question requires. To ask whether a claim of Priestley's can be translated into Lavoisier's language is to ask whether something in Lavoisier's ontology is what Priestley was talking about; that question is answered by the best account we have of what there was in Priestley's apparatus, which is the account of the successor theory and its continuation. Where the successor's vocabulary at the time lacked a term for something its continuation names (methane, Vibrio cholerae), we use the later term and say so.
+
+\subsection{Translation manuals}
+
+\begin{definition}[Translation manual]\label{d:manual}
+Let $T_1$ and $T_2$ be theories and let $\mathcal{I}$ be a specified set of inferences of $T_1$, each an inference that $T_1$ licenses and that is stated with readings of terms of $T_1$. A \emph{translation manual} from $T_1$ to $T_2$ with respect to $\mathcal{I}$ is a partial map $M$ from readings of terms of $T_1$ to expressions of $T_2$, together with its extension to the inferences in $\mathcal{I}$, such that:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{(referential preservation)} for every reading $r$ in the domain of $M$, the referent of $M(r)$ in $T_2$ is the referent of $r$ under Assumption~\ref{a:token} (or, for a reading that partially denotes several entities, $M(r)$ is the list of expressions for them);
+\item \emph{(domain)} a reading is in the domain of $M$ if and only if it has a referent in $T_2$;
+\item \emph{(inferential extension)} an inference $I \in \mathcal{I}$ is translated, $M(I)$, if and only if every reading in it is in the domain of $M$, and $M(I)$ is the result of replacing each reading $r$ by $M(r)$ and rephrasing in the idiom of $T_2$.
+\end{enumerate}
+A manual has a \emph{type-level image} for a term $t$ if it maps all readings of $t$ to one expression of $T_2$ (or one list, under partial denotation).
+\end{definition}
+
+A manual is a partial map. It is not required to translate everything, and the measure of its partiality is the object of study. It preserves two kinds of relation. Reference is preserved by condition~(i), which is a constraint on the map. Inferential relations are not guaranteed to be preserved; whether they are is a fact about $T_2$, recorded by the verdicts of the next definition.
+
+\begin{definition}[Verdicts]\label{d:verdict}
+For each inference $I \in \mathcal{I}$, exactly one of the following holds.
+\begin{description}
+\item[H] $I$ is translated and $M(I)$ holds in $T_2$.
+\item[R] $I$ is translated and $M(I)$ holds in $T_2$ only within a restricted domain of parameter values (such as $v \ll c$, or $h\nu \ll kT$) or on one of the readings of a partially denoting term.
+\item[X] $I$ is translated and $T_2$ denies $M(I)$.
+\item[U] $I$ is not translated: some reading in it has no referent in $T_2$.
+\end{description}
+An inference is \emph{preserved} if its verdict is H or R, \emph{comparable} if it is H, R or X.
+\end{definition}
+
+The verdict X is the one on which the argument of Section~\ref{s:rational} turns. An inference with verdict X is a claim of $T_1$ that $T_2$ can state and denies. It is a disagreement. Where the verdict is U there is no disagreement, since the successor cannot state what the predecessor claimed; there is only abandonment.
+
+\begin{definition}[Translation status]\label{d:status}
+A term $t$ of $T_1$ is translated
+\begin{description}
+\item[exactly] if $M$ has a type-level image for $t$ consisting of a single expression, and every inference of $\mathcal{I}$ in which $t$ figures has verdict H;
+\item[partially] if $M$ has a type-level image for $t$ and either the image is a list (partial denotation) or some inference in which $t$ figures has verdict R, X or U;
+\item[token by token] (\emph{token-dependent}) if $M$ has no type-level image for $t$ but some reading of $t$ is in the domain of $M$;
+\item[not at all] (\emph{none}) if no reading of $t$ is in the domain of $M$.
+\end{description}
+\end{definition}
+
+A term translated partially may still be translated, at the type level, with preservation of reference. What fails is the preservation of some of its inferential role. \enquote{Calx} is translated by \enquote{metallic oxide}, and every token of \enquote{calx} refers to an oxide; but the phlogistic inference that a metal is its calx plus phlogiston cannot be translated, so the inferential role of \enquote{calx} is not wholly preserved. The four statuses distinguish what Kuhn ran together under \enquote{untranslatable}: a term may resist translation of its type while every one of its tokens refers (\enquote{inflammable air}, entry CH04), or some of its tokens refer and others do not (\enquote{dephlogisticated air}, CH02), or none does (\enquote{primum mobile}, AS03).
+
+\begin{definition}[Weight and score]\label{d:score}
+The \emph{inferential weight} $w(t)$ of a term $t$ is the number of inferences of $\mathcal{I}$ in which some reading of $t$ figures. The \emph{translation score} $s(t)$ is 1 if $t$ is translated exactly or partially, $n_{\mathrm{ref}}(t)/n(t)$ if it is translated token by token, where $n(t)$ is the number of its readings and $n_{\mathrm{ref}}(t)$ the number of these with a referent in $T_2$, and 0 if it is not translated.
+\end{definition}
+
+\begin{definition}[Indices]\label{d:index}
+The \emph{translation index} of a manual $M$ is
+\[
+\tau(M) \;=\; \frac{\sum_{t} w(t)\, s(t)}{\sum_t w(t)},
+\]
+the sum running over the vocabulary of $T_1$ covered by $M$. The \emph{comparability index} $\kappa(M)$ is the share of inferences in $\mathcal{I}$ that are comparable, and the \emph{preservation index} $\pi(M)$ the share that are preserved.
+\end{definition}
+
+The translation index is the share of the vocabulary with full or partial translation, weighted by inferential role. Terms that figure in many inferences count for more, which reflects the holism Kuhn and Feyerabend emphasized: a term central to the theory's inferences matters more to its translatability than a peripheral one. The index counts a token-dependent term in proportion to its referring readings, so that it measures the token-level translation Kitcher defended without pretending that it is type-level translation. Alternative scorings are considered in Proposition~\ref{p:robust}.
+
+\begin{definition}[Partial translatability]\label{d:partial}
+$T_1$ is \emph{partially translatable} into $T_2$ with respect to $\mathcal{I}$ if there is a manual $M$ from $T_1$ to $T_2$ with $0 < \tau(M) < 1$.
+\end{definition}
+
+\begin{definition}[Untranslatable cluster]\label{d:cluster}
+The \emph{untranslatable cluster} $C(M)$ of a manual is the set of terms of $T_1$ at least one of whose readings has no referent in $T_2$.
+\end{definition}
+
+The cluster is the precise counterpart of the local group of interdefined terms of \citet{Kuhn1983}. Kuhn's thesis of local incommensurability is that, for every revolution, the cluster is non-empty and small. We test the second part, which is not needed for our result, as well as the first.
+
+\subsection{Why this definition of translation}
+
+The term \enquote{translation manual} is Quine's \citep{Quine1960}, and the choice is deliberate: a manual in our sense, like Quine's, is a systematic correlation of expressions of one language with expressions of another, judged by its fit with the evidence about how the expressions are used. It differs from Quine's in three respects. It is partial, where Quine's manuals were total; it is constrained by reference, fixed under Assumption~\ref{a:token}, where Quine's were constrained only by dispositions to assent and dissent; and it is relativized to a specified set of inferences, whose preservation it records rather than requires.
+
+Each difference answers a lesson of Section~\ref{s:history}. Partiality is required by Davidson's argument, which shows that total failure is not an intelligible possibility, and by Kuhn's local thesis, which says that partial failure is actual. The referential constraint is required by the cases of heterogeneous terms, which no assignment of a single meaning to a type can handle. And the relativization to inferences is required by the holism that Kuhn and Feyerabend emphasized: whether a term \enquote{means the same} in two theories is, on any view that takes holism seriously, a matter of how much of its inferential role survives, and the verdicts record exactly that.
+
+Two stronger definitions were available and rejected. On the first, a translation must preserve meaning, in the sense of preserving every inference in which a term figures. On that definition, almost nothing is translatable across a revolution: of the \ntermsall{} terms of Part~II, only the \nstatE{} translated exactly would count, and of these several (\enquote{fixed air}, \enquote{nitrous air}) would fail if the inference set were extended to the theory of their composition. The definition makes incommensurability trivially true and uninteresting, since it makes every pair of theories that differ in any inference incommensurable, rivals in normal science included; this was Shapere's objection to Feyerabend. On the second, a translation must be a type-level map, but need not preserve inferences. That is the definition Kuhn used against Kitcher, and we report the index it yields as scheme S1 (Proposition~\ref{p:robust}). It too gives indices strictly between 0 and 1 in every case. The conclusion of partial translatability therefore does not depend on choosing the weakest of the available definitions.
+
+\subsection{Criteria, norms and rational choice}
+
+\begin{assumption}[Shared criteria]\label{a:criteria}
+The scientific communities on both sides of each revolution accept accuracy, consistency, scope, simplicity and fruitfulness as criteria for the evaluation of theories \citep{Kuhn1977}, though they may differ in how they apply and weigh them.
+\end{assumption}
+
+\begin{assumption}[Shared norms]\label{a:norms}
+The communities on both sides of each revolution accept the norms of answerability to evidence, public checkability, proportioning confidence to evidence and severity of testing, which unite the scientific methods (SCI-05-a).
+\end{assumption}
+
+The two assumptions do different work. Assumption~\ref{a:criteria} supplies the dimensions on which theories are compared. Assumption~\ref{a:norms} constrains how the comparison may be conducted: the evidence on which a criterion is applied must be public and checkable, the confidence placed in the outcome must be proportioned to the evidence, and the outcome must be answerable to evidence that could have gone the other way. Kuhn's criteria without the norms could be applied by private judgment, and a choice made by such judgment would be rational only by courtesy; the norms are what make the application of the criteria a matter of reasons that the other side can check. This is the sense in which, as SCI-05-a holds, the shared norms are part of what keeps theory choice across revolutions rational.
+
+\begin{definition}[Outcome]\label{d:favour}
+A criterion \emph{favoured} $T_2$ over $T_1$ in a revolution if the historical record documents that, on the evidence available to the communities at the time of the choice, $T_2$ did better than $T_1$ by that criterion. It favoured $T_1$ if the record documents the converse, and the outcome was \emph{mixed} if it documents respects in which each did better.
+\end{definition}
+
+\begin{definition}[Evidential base]\label{d:evbase}
+An \emph{evidential claim} for an outcome is a claim about observations or experiments on which the outcome rests. It is \emph{stated in translatable readings} if every reading of a term of $T_1$ that it uses has a referent in $T_2$.
+\end{definition}
+
+\begin{principle}[Disagreement presupposes translation]\label{p:disagree}
+A claim of $T_1$ conflicts with $T_2$ only if it can be stated in the vocabulary of $T_2$ and $T_2$ denies it.
+\end{principle}
+
+\begin{principle}[Interpretation]\label{p:interp}
+A reading with no referent in $T_2$ can be learned by a speaker of $T_2$, who can then understand the claims of $T_1$ that contain it \citep{Kuhn1983}.
+\end{principle}
+
+\begin{principle}[Shared reasons]\label{p:reasons}
+The choice of one theory over another is supported by a reason available to both communities if a criterion that both accept favours the chosen theory on an evidential base that both can state and check.
+\end{principle}
+
+Principle~\ref{p:disagree} is a logical point: to deny what another says, one must be able to say it. It is the premise of the arguments of \citet{Davidson1974} and \citet{Putnam1981}, and Kuhn accepted it, which is why he insisted that incommensurability is not incompatibility. Principle~\ref{p:interp} is Kuhn's own; we use it only to note that the untranslatable remainder is not unintelligible. Principle~\ref{p:reasons} states a sufficient condition for a reason to be shared; it does not say that only such reasons count.
+
+\begin{definition}[Rational choice across a revolution]\label{d:rational}
+The choice of $T_2$ over $T_1$ is \emph{rational across the revolution} if (i) some criterion of Assumption~\ref{a:criteria} favoured $T_2$, (ii) an evidential base for that outcome is stated in translatable readings, so that the outcome rests on claims that both communities could state, and (iii) the comparison was conducted under the norms of Assumption~\ref{a:norms}. The support is \emph{dominant} if, in addition, no criterion favoured $T_1$.
+\end{definition}
+
+The definition is deliberately modest. It does not require that the choice be dictated by the criteria, that every scientist make it, or that it be made at once. It requires that there be a reason for it that a member of the losing community could recognize as a reason by his own standards, stated in terms he could use. That is what the methodological incommensurability thesis denies, and what we assert.
+
+\section{Partial translatability}\label{s:partial}
+
+\begin{lemma}[Bounds]\label{l:bounds}
+For any manual $M$: $\tau(M) > 0$ if and only if some term of $T_1$ has a reading with a referent in $T_2$; and $\tau(M) < 1$ if and only if the untranslatable cluster $C(M)$ is non-empty.
+\end{lemma}
+
+\begin{proof}
+Every term covered by $M$ figures in at least one inference, so every weight is positive. The index is a weighted mean of scores in $[0,1]$ with positive weights, so it is positive if and only if some score is positive, and less than 1 if and only if some score is less than 1. A score is positive if and only if the term is translated exactly or partially (score 1) or token by token (score $n_{\mathrm{ref}}/n > 0$); in each case some reading has a referent, and conversely a term with a referring reading has one of these statuses by Definition~\ref{d:status}. A score is less than 1 if and only if the term is translated token by token with some non-referring reading, or not at all. By Definition~\ref{d:manual}(ii) and Definition~\ref{d:status}, a term with a type-level image has all its readings in the domain of $M$, so these are exactly the terms with a non-referring reading, that is, the members of $C(M)$.
+\end{proof}
+
+\begin{lemma}[Disagreement]\label{l:disagree}
+Every inference of $T_1$ that $T_2$ denies is translated by $M$. Hence, if $T_2$ denies any inference of $T_1$, then $\kappa(M) > 0$.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:disagree}, $T_2$ denies a claim only if it can state it, that is, only if every reading in it has a referent in $T_2$. By Definition~\ref{d:manual}(iii) such an inference is translated, and its verdict is X, which is comparable.
+\end{proof}
+
+The lemma turns the usual argument around. The incommensurability theorist points to the depth of the disagreement between the parties to a revolution as evidence that they cannot understand each other. But the depth of a disagreement is measured by what is denied, and what is denied must be stated. The inference CH.I19, that water is an element, was denied by the oxygen chemists; the denial was a disagreement about water, which both sides could identify, and about the predicate \enquote{simple substance}, which both sides could apply. By contrast the inference CH.I01, that combustion releases phlogiston, was not denied in the same sense; it was dropped, since the successor had nothing to say about phlogiston.
+
+\begin{proposition}[Kuhn's local thesis]\label{p:local}
+If incommensurability across a revolution is local in Kuhn's sense, that is, if there is a non-empty group of terms of $T_1$ some of whose uses cannot be rendered in $T_2$, while other terms of $T_1$ function in $T_2$ as they did in $T_1$, then every manual from $T_1$ to $T_2$ that covers both groups has $0 < \tau < 1$.
+\end{proposition}
+
+\begin{proof}
+A term some of whose uses cannot be rendered in $T_2$ has, under Assumption~\ref{a:token}, some reading with no referent in $T_2$: if every reading had a referent, each use could be rendered by an expression for that referent, which is what a token-level rendering is. So $C(M) \neq \emptyset$. A term that functions in $T_2$ as it did in $T_1$ has its readings referring to what the corresponding term of $T_2$ refers to. By Lemma~\ref{l:bounds}, $0<\tau<1$.
+\end{proof}
+
+Proposition~\ref{p:local} is the analytic core of the first conclusion. Kuhn's later account says exactly what its antecedent says: incommensurability is confined to a small group of interdefined terms and most terms function the same way in both theories \citep{Kuhn1983}. The proposition shows that this account, taken at its word, entails partial translatability in the sense of Definition~\ref{d:partial}. Kuhn would have objected that what $\tau$ measures is not translation; we take up the objection in Section~\ref{s:objections} (Objection~\ref{o:tokens}).
+
+\begin{theorem}[Partial translatability]\label{t:partial}
+Let $R$ be a revolution and $M$ a manual for it satisfying Definition~\ref{d:manual} under Assumption~\ref{a:token}. If $C(M)$ is non-empty and some term of $T_1$ has a reading with a referent in $T_2$, then $T_1$ is partially translatable into $T_2$. In particular, for each of the \nrevs{} revolutions of Part~II, $0 < \tau < 1$; the indices range from \timin{} to \timax{}.
+\end{theorem}
+
+\begin{proof}
+The general claim is Lemma~\ref{l:bounds} with Definition~\ref{d:partial}. For the revolutions of Part~II, the program computes $C(M)$ and the scores from the manuals and verifies that the cluster is non-empty and that some term has a referring reading (check C6, and check C4 for the inequalities); Table~\ref{tab:stats} gives the values.
+\end{proof}
+
+The first conclusion of the volume, that successive paradigms are partially translatable, is the general claim that the hypothesis of Theorem~\ref{t:partial} holds of every revolution. It is supported in two ways. The first is Proposition~\ref{p:local}: anyone who accepts Kuhn's later account must accept it. The second is inductive: the ten revolutions of Part~II include the cases on which the incommensurability thesis was founded (the chemical, Copernican, relativistic and quantum revolutions), and the hypothesis holds of each. The hypothesis has two parts. That the cluster is non-empty is the part of incommensurability that is true. That some readings refer is guaranteed for any successor that replaces its predecessor in the same domain: the two theories must at least share the means of identifying the phenomena both claim to explain, and the terms for these refer in both. Proposition~\ref{p:nototal} makes this exact.
+
+\begin{corollary}[Locality]\label{c:local}
+In each revolution of Part~II the cluster is a proper part of the vocabulary. Over all ten, \nclusterall{} of \ntermsall{} terms belong to clusters; the largest share in any one revolution is that of MIAS, with 7 of 21 terms.
+\end{corollary}
+
+\begin{proof}
+Computed (check C6 and Table~\ref{tab:further}).
+\end{proof}
+
+The corollary confirms the second part of Kuhn's local thesis, which our argument does not need: the cluster is small. It also corrects Kuhn's examples in one respect. In the chemical revolution the cluster computed from the manual is \{phlogiston, dephlogisticated air, phlogisticated air\}, not \{phlogiston, element, principle\}. \enquote{Element} is translated, partially, by Lavoisier's \enquote{simple substance}: the extension changed (water and air ceased to be elements), but tokens of \enquote{element} applied to particular substances are tokens of a predicate that the successor could state, and the phlogistic claim that water is an element (CH.I19) is a disagreement, not an untranslatability. Kuhn's own diagnosis confused the two, which Lemma~\ref{l:disagree} separates. In the relativistic revolution the computed cluster includes \enquote{force} and \enquote{weight}, as Kuhn said, but not \enquote{mass}, which partially denotes two successors and is translated partially (entry ME01).
+
+\begin{proposition}[No total incommensurability]\label{p:nototal}
+If $T_2$ supersedes $T_1$ by explaining phenomena that $T_1$ also explained, then some term of $T_1$ has a reading with a referent in $T_2$, and $\tau(M) > 0$ for every manual.
+\end{proposition}
+
+\begin{proof}
+For $T_2$ to explain a phenomenon that $T_1$ explained, it must be the same phenomenon. So there is a description of the phenomenon, available to the community of $T_1$, which picks out something that $T_2$ also explains. The terms of that description, in the readings in which they are used to identify the phenomenon, refer to what $T_2$ refers to. By Lemma~\ref{l:bounds}, $\tau>0$.
+\end{proof}
+
+This is Shapere's point, made precise. A theory that shared no referring vocabulary with its predecessor would not be its successor, but a theory of something else.
+
+\begin{proposition}[Robustness]\label{p:robust}
+For each revolution of Part~II, $0<\tau<1$ also under the scoring schemes S1 (token-dependent terms scored 0, so that only type-level translation counts), S3 (partially translated terms scored $1/2$) and S4 (all weights equal to 1). The values range from \sensmin{} to \sensmax{}.
+\end{proposition}
+
+\begin{proof}
+Computed (check C8, Table~\ref{tab:sens}).
+\end{proof}
+
+The robustness matters for the objection that the index is an artefact of our choices. S1 is the scheme that Kuhn's criticism of Kitcher recommends: count a term as translated only if its type is. Under S1 the indices fall, most for ASTR (to 0.560) and MIAS (to 0.556), whose heterogeneous terms (\enquote{planet}, \enquote{deferent}, \enquote{epicycle}; \enquote{miasma}, \enquote{contagium}, \enquote{ferment}) are many; but they stay well above 0, because most of the vocabulary of every revolution is translated at the type level. S3 penalizes partial translation; the indices fall to between \sensmin{} and 0.667 but none reaches 0 or 1.
+
+\begin{remark}\label{r:s2}
+Under the most generous scheme, S2, which scores a token-dependent term 1 if any of its readings refers, the index of CHEM and of QUAN is exactly 1. Every term of phlogistic chemistry in the manual has at least one referring reading: even \enquote{phlogiston} refers, in Kirwan's identification of it with inflammable air, to hydrogen (CH01c). The scheme therefore loses the information that matters, namely that some \emph{readings} of the term have no referent. This is why Definition~\ref{d:score} scores token-dependent terms by the share of referring readings, and why the untranslatable cluster is defined by readings. Untranslatability, the computation shows, is a property of readings, not of terms.
+\end{remark}
+
+\subsection{A worked computation}
+
+To show how the index is computed and what it is sensitive to, we compute it for CHEM by hand from the entries of Part~II. The manual has 23 terms. Their weights, the numbers of inferences in which they figure, sum to 81: \enquote{phlogiston} (CH01) and \enquote{combustion} (CH08) have weight 10 each, \enquote{metal} (CH07) 7, \enquote{calx} (CH06) and \enquote{common air} (CH11) 6 each, \enquote{inflammable air} (CH04) and \enquote{charcoal} (CH20) 5 each, \enquote{dephlogisticated air} (CH02) 4, and the remaining fifteen terms between 1 and 3. Nineteen terms are translated exactly or partially and score 1. The four token-dependent terms score by the share of their referring readings: \enquote{phlogiston} has four readings of which one (CH01c, Kirwan's identification with inflammable air) refers, and scores $1/4$; \enquote{dephlogisticated air} scores $2/3$; \enquote{phlogisticated air} $1/2$; \enquote{inflammable air}, all of whose three readings refer, to hydrogen, methane and carbon monoxide, scores 1. The weighted shortfall from 1 is therefore
+\[
+10\cdot\tfrac34 + 4\cdot\tfrac13 + 2\cdot\tfrac12 \;=\; 7.5 + 1.333 + 1 \;=\; 9.833,
+\]
+and $\tau = (81 - 9.833)/81 = 0.879$, the value in Table~\ref{tab:stats}. Three features of the computation deserve comment. First, three quarters of the shortfall comes from \enquote{phlogiston} alone, because it is both the most heterogeneous and among the most heavily weighted terms: the weighting by inferential role does what it was designed to do, which is to make the central term of the cluster count for more than a peripheral one. Secondly, if \enquote{phlogiston} had no referring reading at all, if Kirwan's identification were set aside, its score would be 0 and $\tau$ would fall to $0.848$; the conclusion would be unchanged. Thirdly, the term \enquote{combustion}, which has the same weight as \enquote{phlogiston}, contributes nothing to the shortfall, because every one of its readings refers: the phlogistonists and the oxygen chemists burned the same candles.
+
+\subsection{Revolutionary and cumulative change}
+
+The index also yields a characterization of revolutionary change. Kuhn distinguished revolutions from the cumulative growth of normal science, in which new results are added without revising the vocabulary of the old \citep{Kuhn1970}. The distinction has been criticized as too sharp, and Kuhn himself later allowed that there are small revolutions, affecting a specialty, as well as large ones.
+
+\begin{proposition}[Cumulative and revolutionary change]\label{p:cumulative}
+Let $T_2$ succeed $T_1$ in a domain, in the sense of Proposition~\ref{p:nototal}. Then exactly one of the following holds for any manual $M$ that covers the vocabulary of $T_1$: $\tau(M) = 1$ and the cluster is empty, in which case every reading of every term of $T_1$ refers in $T_2$; or $0<\tau(M)<1$ and the cluster is non-empty.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{p:nototal}, $\tau(M) > 0$. By Lemma~\ref{l:bounds}, $\tau(M)<1$ if and only if the cluster is non-empty, and $\tau(M)=1$ otherwise; when the cluster is empty, no term has a non-referring reading by Definition~\ref{d:cluster}.
+\end{proof}
+
+We may call a succession \emph{cumulative} if its cluster is empty and \emph{revolutionary} if it is not. On this definition, the defining mark of a revolution is not the falsification of the predecessor, which happens in cumulative change too (an X verdict is compatible with an empty cluster), but the loss of reference by some reading of its vocabulary: the discovery that something the predecessor talked about does not exist. This captures what is right in Kuhn's idea that revolutions change the world the scientist works in. After the chemical revolution there was no phlogiston, after the relativistic revolution no absolute space, after the Harveian revolution no vital spirit. The size of a revolution can then be measured by the size and weight of its cluster, and the distinction between small and large revolutions becomes a matter of degree, as Kuhn later held it to be. What the characterization rules out is a revolution with $\tau = 0$: a change in which nothing the predecessor talked about survives would not be a succession in a domain at all.
+
+The characterization also explains why revolutions are recognized retrospectively. Whether a reading refers is settled by the successor, so that the cluster of a change can be computed only when the successor is established. While a revolution is in progress, the parties disagree about which readings refer, which is one reason, beyond the weighing of criteria, why the choice is contested at the time and clear in retrospect.
+
+\section{Interpretation and the untranslatable remainder}\label{s:interp}
+
+Theorem~\ref{t:partial} says that the untranslatable remainder is non-empty. What is its status? Kuhn's answer was that it is accessible to interpretation: a historian, or a scientist trained in the successor, can learn the old language and understand what was said in it, though he cannot say it in his own \citep{Kuhn1983}. We make the answer precise and examine what it implies for comparison.
+
+\begin{definition}[Interpretive extension]\label{d:interp}
+An \emph{interpretive extension} of $T_2$ for a manual $M$ from $T_1$ is the language obtained by adding to the vocabulary of $T_2$ every term of the cluster $C(M)$, with its non-referring readings governed by the inferences of $T_1$ in which they figure. A sentence of $T_1$ is \emph{interpretable} in $T_2$ if it is a sentence of an interpretive extension.
+\end{definition}
+
+Every sentence of $T_1$ is interpretable in $T_2$ by construction: the extension simply adds what was missing. This is the formal content of Principle~\ref{p:interp}. What the extension does not do is assign referents to the added readings; they remain, from the standpoint of $T_2$, terms that purport to refer and do not. A chemist who has learned the phlogistic language can say, in his extended language, that phlogiston is released in combustion; he cannot believe it, because he believes that there is no phlogiston, and so he takes the sentence to be either false or without truth value, according as he treats empty terms.
+
+\begin{proposition}[Interpretation and assessment]\label{p:assess}
+Every untranslatable inference of $T_1$ is interpretable in $T_2$, and the speaker of the interpretive extension who accepts $T_2$ assigns it a definite status: he rejects it, or treats it as resting on a false presupposition of existence.
+\end{proposition}
+
+\begin{proof}
+The first claim is immediate from Definition~\ref{d:interp}. For the second, an untranslatable inference contains a reading with no referent in $T_2$, that is, a reading whose mode of reference-fixing picks out nothing by the lights of $T_2$. By Assumption~\ref{a:token}, a speaker who accepts $T_2$ holds that nothing satisfies the reading's description, or that the sample it was fixed by does not exist. He therefore holds the existential presupposition of the inference false, and on either standard treatment of empty terms he does not accept the inference.
+\end{proof}
+
+The proposition shows that untranslatability does not prevent assessment; it changes the form of the assessment. A translated disagreement (verdict X) is a disagreement over a claim both sides can state: the oxygen chemist says that water is not an element, and the phlogiston chemist understands him. An untranslatable claim is assessed by the denial of its presupposition: the oxygen chemist says that there is no phlogiston, and the phlogiston chemist understands that too. What the two cannot do is conduct the argument over the presupposition in the successor's vocabulary alone, since that vocabulary has no term for what is denied to exist. They conduct it in the interpretive extension, which is to say in a language that both sides of the revolution came, by the time it ended, to share.
+
+This is why the record of revolutions is not a record of incomprehension. The participants were bilingual, or became so. Lavoisier had been trained in the phlogistic chemistry; Kirwan, the last major defender of phlogiston, published his \emph{Essay on Phlogiston} in 1787, and its French translation of 1788 appeared with a commentary by Lavoisier and his colleagues refuting it section by section; Kirwan answered the notes in an English second edition of 1789 and later conceded. Darwin had read Paley closely enough to be able to say what each of Paley's contrivances would be on his own theory. Harvey's teacher was Fabricius, whose account of the venous valves Harvey reinterpreted. In each case the successor's advocate could state the predecessor's claims, in the predecessor's terms, and say what was wrong with them.
+
+\begin{remark}\label{r:presupposition}
+The distinction between translated denial and presupposition failure corresponds to the distinction, within the cluster, between the readings of a heterogeneous term. When Priestley said that dephlogisticated air supports combustion better than common air (CH.I11), the oxygen chemist translated and agreed. When he said that dephlogisticated air is air deprived of phlogiston (CH.I12), the oxygen chemist could only interpret and deny the presupposition. The same term, in the same author, was the vehicle of both claims. The heterogeneity that Kitcher identified is thus the reason why a revolution can be at once a disagreement over shared claims and the abandonment of a theory.
+\end{remark}
+
+\section{The rationality of theory choice}\label{s:rational}
+
+\begin{lemma}[Evidence]\label{l:evidence}
+For each revolution of Part~II and each criterion recorded as favouring the successor, there is an evidential claim for that outcome stated in translatable readings.
+\end{lemma}
+
+\begin{proof}
+Computed (check C9). The \nevidall{} evidential claims are listed in Table~\ref{tab:evid}, with the readings they use; the program verifies that every reading used has a referent in the successor and that every favourable outcome has at least one claim.
+\end{proof}
+
+The lemma is the heart of the answer to the methodological and perceptual theses. The evidence on which the successor won was not stated in the successor's untranslatable vocabulary, which would beg the question, nor in the predecessor's, which the successor could not assess. It was stated in vocabulary that both could use: the weight of a metal and of its calx (CHEM.E1), the position of Mars (ASTR.E1), the speed of light in water (OPTI.E4), the number of beats of the heart in half an hour (PHYS.E1). That the evidence was so stated is not surprising; evidence that is to persuade the other side must be stated in terms the other side understands, and scientists who are trying to persuade know this.
+
+\begin{proposition}[Shared criteria are applied under shared norms]\label{p:shared}
+Under Assumptions~\ref{a:criteria} and~\ref{a:norms}, if a criterion favoured $T_2$ on an evidential base stated in translatable readings, then the outcome is one that the community of $T_1$ could check by its own standards.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:criteria} the criterion is one the community of $T_1$ accepts. By Definition~\ref{d:evbase} the evidential claims use only readings with referents in $T_2$; by Definition~\ref{d:manual} these readings belong to the vocabulary of $T_1$, which its community can use. By the norm of public checkability in Assumption~\ref{a:norms}, the evidence and the reasoning from it were made available in a form that others could check; by the norm of answerability, the evidence was such as could have told against $T_2$. So the community of $T_1$ could repeat the observations, state their results and apply the criterion to them.
+\end{proof}
+
+\begin{theorem}[Rationality]\label{t:rational}
+For each of the \nrevs{} revolutions of Part~II, the choice of the successor was rational across the revolution in the sense of Definition~\ref{d:rational}. In \ndominant{} of them the support was dominant.
+\end{theorem}
+
+\begin{proof}
+Clause~(i) of Definition~\ref{d:rational}: in each revolution at least one criterion is recorded as favouring the successor (check C5, Table~\ref{tab:crit}). Clause~(ii): Lemma~\ref{l:evidence}. Clause~(iii): Assumption~\ref{a:norms}, with Proposition~\ref{p:shared}. Dominance: in all revolutions except ASTR and BIOL no criterion is recorded as favouring the predecessor (Table~\ref{tab:crit}).
+\end{proof}
+
+The second conclusion, that theory choice remains rational across revolutions, is the general claim that the conditions of Definition~\ref{d:rational} hold in every revolution. As with the first, the support is partly analytic and partly inductive. The analytic part is that the conditions are of a kind that revolutions tend to satisfy: a successor that did better by no criterion its rivals accepted, on no evidence they could state, would not win converts among them, and the history of science records revolutions in which the converts came, over a generation, from the old community as well as from the young. The inductive part is Theorem~\ref{t:rational}.
+
+\subsection{How the outcomes on the criteria were assigned}
+
+The outcomes of Table~\ref{tab:crit} are historical judgments, and their reliability matters to Theorem~\ref{t:rational}. We assigned an outcome only where three conditions held: the outcome is attested in the standard histories cited in Part~II and is not, to our knowledge, disputed in them; it rests on an identifiable episode, recorded in the note for the entry, in which evidence bearing on the criterion was produced and discussed by members of both communities; and the evidence can be stated, as Table~\ref{tab:evid} states it, in translatable readings. Where any condition failed we recorded \enquote{?} and made no claim. As a result, simplicity is recorded for only three revolutions, since judgments of simplicity in the record are rarely attested without dispute, and consistency for five.
+
+The conservative policy has a cost and a benefit. The cost is that the table understates the reasons available: no doubt Harvey's circulation was found simpler than the Galenic system by some, and the kinetic theory more consistent with mechanics than the caloric theory. The benefit is that Theorem~\ref{t:rational} does not depend on contested judgments. Check C5 requires only one favourable outcome per revolution, and every revolution has at least two, accuracy or scope together with fruitfulness; no single disputed judgment could overturn the theorem for any revolution.
+
+It should be noted that fruitfulness, as Kuhn defined it, is a criterion whose outcome is often known only after the choice: a theory is fruitful if it discloses new phenomena or new relations among known ones. Where the fruitfulness of the successor was manifest only later, it cannot have been a reason for the original choice. We have recorded fruitfulness for all ten revolutions, but Theorem~\ref{t:rational} would hold in each without it, since in each revolution accuracy or scope was also recorded as favouring the successor on evidence available at the time of the choice.
+
+\begin{proposition}[Rational dissent]\label{p:dissent}
+Where a criterion favoured the predecessor, adherence to the predecessor for a time was also rational in the sense of Definition~\ref{d:rational}, with the roles of the theories reversed.
+\end{proposition}
+
+\begin{proof}
+In ASTR, consistency with the accepted physics favoured the geocentric system until the new mechanics was available \citep{Kuhn1957,Kuhn1977}; the evidence (the absence of observed stellar parallax, the behaviour of falling bodies on a supposedly moving Earth) was stated in vocabulary both sides shared. In BIOL, consistency with Kelvin's estimates of the age of the Earth and with Jenkin's argument from blending favoured the fixity of species, or at least told against natural selection as Darwin stated it \citep{Ruse1979}; the evidence was again stated in shared vocabulary. The clauses of Definition~\ref{d:rational} hold with $T_1$ and $T_2$ exchanged.
+\end{proof}
+
+Proposition~\ref{p:dissent} expresses what Kuhn meant in saying that the criteria function as values rather than rules \citep{Kuhn1977}: they can favour different theories, and scientists who weigh them differently can make different choices, each with reasons. It is not an embarrassment for the rationality of science that Tycho had reasons to reject the motion of the Earth, or that Darwin's critics had reasons to doubt natural selection. Kuhn held that this distribution of judgment is good for science, since it spreads the risk of a community's commitment \citep{Kuhn1977}. What Definition~\ref{d:rational} adds is that the reasons on each side were stated in the shared, translatable vocabulary, and so were reasons the other side could weigh. And the dissent was resolved, in both cases, by evidence of the same kind: by the new mechanics, which removed the inconsistency, and by the extension of the age of the Earth and Mendelian inheritance, which removed the objections to selection.
+
+\begin{proposition}[Translation and retention]\label{p:retention}
+If $S$ retains the essential content of $P$ in the sense of SCI-02-a, then every essential posit of $P$ is stated in readings with referents in $S$. Hence the untranslatable cluster of a revolution contains no term all of whose readings are needed to state the essential posits of the predecessor.
+\end{proposition}
+
+\begin{proof}
+Retention, as SCI-02-a defines it, requires that for each essential posit $c$ of $P$ there be an essential posit $d$ of $S$ whose truth implies the truth of $c$. For the truth of $d$ to imply the truth of $c$, $c$ must be a claim whose truth conditions $S$ can state; so $c$ must be translatable into the vocabulary of $S$, and every reading in it must have a referent in $S$. A term all of whose readings would be needed to state the essential posits would then have all its readings referring and would not belong to the cluster.
+\end{proof}
+
+The proposition shows how the present results fit the realism of SCI-02. Partial translatability is the semantic face of the retention of essential content: what is retained is stated in the translated part of the vocabulary, and what is lost is the untranslatable cluster, whose readings, when they figure in the predecessor's successes at all, figure idly. The manuals bear this out. In HEAT, the inferences on which Laplace's correction of the speed of sound depended (HE.I09, HE.I10, HE.I27) are all preserved, and the untranslatable readings of \enquote{caloric} (HE01a, HE01c) figure only in inferences about the nature of heat that the derivation did not use, in agreement with the analysis of the caloric case in SCI-02-a. In MECH the predictions that made Newton's theory mature, the return of comets and the perturbations of planets, rest on inferences recorded R, preserved in the weak-field limit (ME.I08, ME.I21). SCI-02-a counts the phlogiston theory as borderline in maturity; on either verdict the manual is consistent with it, since the inferences recording the reversibility of calcination and reduction (CH.I05--CH.I07, CH.I10) are preserved.
+
+\section{Choice, consensus and the community}\label{s:community}
+
+Theorem~\ref{t:rational} concerns the existence of shared reasons. A complete account of theory choice across revolutions must also say how the reasons of individuals become the choice of a community, and how long it takes. We do not give that account here; Volume~III does. But the present results constrain it, and we record the constraints.
+
+\subsection{Individual and collective rationality}
+
+Kuhn insisted that the criteria do not determine the choice of an individual scientist, since individuals weigh them differently, and that the community nonetheless converges \citep{Kuhn1977}. The convergence is not explained by an algorithm that every individual applies, but by the accumulation of evidence that bears on several criteria at once, so that individuals with different weightings come, one by one, to the same choice. Definition~\ref{d:rational} fits this picture. It does not say that every individual who chose the successor did so for the same reason, or that every individual who resisted was irrational. It says that there was, at the time, a reason for the choice that both communities could recognize. As the evidence accumulates, the reasons multiply: in MECH, the Michelson--Morley experiment (MECH.E3), the velocity-dependence of electron mass (MECH.E4), the perihelion of Mercury (MECH.E1) and the deflection of light (MECH.E2) bear on different criteria and were obtained over three decades.
+
+The constraint that Theorem~\ref{t:rational} places on a theory of consensus is that the evidence on which consensus forms is stated in translatable readings. A theory of consensus on which the community converged because the young were trained in the new vocabulary and the old died out, Planck's famous remark, which Kuhn quoted, would be compatible with Theorem~\ref{t:rational} only if the training were also training in the evaluation of the shared evidence. The record supports this: converts came from the old community as well as from the young, and the arguments addressed to them were stated in the old community's terms.
+
+\subsection{Bayesian reconstruction}
+
+\citet{Salmon1990} argued that Kuhn's account of choice can be reconstructed in Bayesian terms: the shared criteria enter as factors bearing on prior probabilities (simplicity, consistency with accepted theories) and on likelihoods (accuracy, scope), while the individual differences that Kuhn emphasized appear as differences in priors that are washed out by accumulating evidence. SCI-12 defends Bayesian confirmation as the right account of confirmation. The Bayesian reconstruction presupposes that the evidence is a proposition to which both parties assign probabilities, and that the hypotheses are propositions over which they have probability distributions. The first presupposition is Lemma~\ref{l:evidence}: the evidence is stated in readings both communities can use. The second requires that the hypotheses be stated in a common language; where they contain untranslatable readings, the common language is the interpretive extension of Section~\ref{s:interp}. Partial translatability is thus a precondition of the Bayesian account as well as of the qualitative one.
+
+\subsection{Underdetermination and the timing of choice}
+
+SCI-04 argues that theories are underdetermined by evidence only by empirically equivalent rivals that lack independent motivation. The rivals in a revolution are not of this kind. They differ empirically, as the X verdicts and the evidential claims show, and each has independent motivation. A revolution is therefore not a case of underdetermination; it is a case in which the evidence, at a given time, may not yet decide between rivals that it will eventually decide between. That is the situation Proposition~\ref{p:dissent} describes. SCI-19 argues that science is self-correcting but slowly, with a substantial delay between the appearance of contrary evidence and the correction of the record; the delay between the first statement of a successor and its general acceptance in a revolution is an instance of that delay, and the present account explains why it is a delay and not a failure: the evidence was there to be assessed by both sides, and assessing it took time.
+
+\subsection{The role of institutions}
+
+SCI-01 argues that what distinguishes science from non-science is institutionalized error-correction: peer review, replication and the public criticism of results. The norm of public checkability in Assumption~\ref{a:norms} is the norm these institutions implement. The evidential claims of Table~\ref{tab:evid} are, almost without exception, claims that were published, repeated and criticized: Lavoisier's experiments were repeated in England and Germany; Joule's measurements were repeated and refined; Snow's comparison of the water companies was examined by the medical authorities; the eclipse results of 1919 were disputed and confirmed by later expeditions. Theory choice across revolutions is rational in part because the evidence passes through institutions that make it public and checkable on both sides, and the shared norms of SCI-05 are what these institutions serve.
+
+\section{The ten revolutions}\label{s:revolutions}
+
+This section reads each manual of Part~II as a whole. For each revolution we say where the untranslatable cluster lies, which inferences of the predecessor survive translation, which are translated and denied, and how the evidence on which the successor won was stated. The statistics are those of Tables~\ref{tab:stats} and~\ref{tab:further}.
+
+\subsection{CHEM: phlogiston to oxygen}
+
+The manual covers 23 terms and 31 inferences; $\tau = \tiChem$, $\kappa = \kappaChem$. The cluster has three members, \enquote{phlogiston} (CH01), \enquote{dephlogisticated air} (CH02) and \enquote{phlogisticated air} (CH03), and every one of them has a referring reading as well as a non-referring one. This is the pattern of heterogeneity that \citet{Kitcher1978} described: the terms of the cluster were used both to name what was in the chemist's vessel and to express a theory of what it was. The names succeeded; the theory failed. Nine of the 31 inferences are untranslatable, and every one of them contains a descriptive reading of \enquote{phlogiston} or of one of the airs defined from it.
+
+The rest of the vocabulary translates, most of it at the type level. The gases isolated by the pneumatic chemists, fixed air, nitrous air, marine acid air, alkaline air (CH05, CH13, CH15, CH17), translate exactly: their identification depended on preparation and properties, not on phlogistic theory, and the oxygen chemists took them over under new names. The terms for processes and kinds that the phlogistic theory explained, \enquote{calx}, \enquote{metal}, \enquote{combustion}, \enquote{calcination}, \enquote{reduction} (CH06--CH10), translate partially: their referents are preserved, and so are the experimental inferences in which they figure (CH.I03, CH.I05--CH.I07), but the inferences that state the phlogistic account of the processes are lost. Only two inferences are translated and denied: that water is an element (CH.I19) and that air is an element (CH.I27). Both are claims that Lavoisier's chemistry could state and refute, and both were refuted by experiments, the synthesis and analysis of water and the analysis of air, that the phlogistonists themselves performed or accepted.
+
+The chemical revolution is often presented as the paradigm of incommensurability, since the two sides described the same experiments in incompatible terms: what one called the loss of phlogiston the other called the gain of oxygen. The manual shows how much of this incompatibility was a matter of the cluster. The experiments were described by both sides in shared terms (CHEM.E1--E4), and the phlogistic descriptions in terms of the cluster added a theory to the description. When Lavoisier weighed the tin and the retort, both sides could read the balance. The criteria outcome is correspondingly clear on accuracy, where the gravimetric evidence decided, and mixed on scope, where Chang's point about the properties of metals holds.
+
+\subsection{ASTR: Ptolemy to Kepler}
+
+The manual covers 25 terms and 34 inferences; $\tau = \tiAstr$, $\kappa = \kappaAstr$. The cluster has five members: the primum mobile, the planetary orbs, the aether of which they were made, the equant (in its physical reading) and the centre of the universe (in its cosmological reading). All of them belong to the cosmology that Ptolemaic astronomy shared with Aristotelian physics, not to its mathematical models. The models themselves, deferents, epicycles, eccentrics and equants, are translated: exactly or partially where one expression of the successor serves, and token by token where, as with the deferent and the epicycle, different planets require different expressions.
+
+The revolution has the highest number of R verdicts outside physics (six). They mark the inferences of the Ptolemaic models that hold, in the successor, to first order in the eccentricities: the composition of epicycle and deferent (AS.I01), the uniform motion about the equant (AS.I15), the bisection of the eccentricity (AS.I16), the eccentric circle of the Sun (AS.I25). These are the content of the Ptolemaic theory that Kepler retained, and the manual records the retention precisely: what was retained was a mathematical structure, preserved as an approximation, and not the cosmology in which it was embedded. The six X verdicts include the two central disagreements, the immobility of the Earth (AS.I06) and the reality of retrograde motion (AS.I30), and both are disagreements about bodies and motions that both sides could identify.
+
+ASTR is one of the two revolutions in which a criterion favoured the predecessor. Consistency with Aristotelian physics was on Ptolemy's side until Galileo and Newton supplied a physics of a moving Earth \citep{Kuhn1957}. The successor won on accuracy, with Kepler's tables, and on scope and simplicity, with the determination of planetary distances and the replacement of compounded circles by ellipses. All the evidence (ASTR.E1--E5) concerns the positions and periods of the planets, which both sides observed with the same instruments and recorded in the same coordinates.
+
+\subsection{MECH: Newton to Einstein}
+
+The manual covers 23 terms and 35 inferences; $\tau = \tiMech$, $\kappa = \kappaMech$. The cluster is the largest of the physical revolutions, with seven members: \enquote{force} and \enquote{weight} in their gravitational readings, absolute space and absolute time in their metaphysical readings, the ether as a mechanical medium and a privileged frame, perfect rigidity, and action at a distance. Kuhn's cluster of mass, force and weight is partly confirmed: force and weight are there, mass is not, being partially denoting rather than empty (Section~\ref{s:cases}).
+
+The striking feature of MECH is the number of R verdicts: 13 of 35. Most Newtonian inferences are preserved in the domain of low velocities and weak fields, which was the domain in which all the evidence for Newton's theory was gathered. Relativity does not deny that velocities add; it says that they add to an approximation that is excellent for $v \ll c$. It does not deny that a planet describes a fixed ellipse; it says that the ellipse precesses by an amount that, for Mercury, is 43 seconds of arc per century. Only one inference is translated and denied outright: that the measured speed of light depends on the observer's motion (ME.I19). This is the disagreement on which special relativity was founded, and it was decided by experiments, culminating in that of Michelson and Morley, that both sides designed and interpreted in shared terms (MECH.E3).
+
+The untranslatable inferences concern gravitation as a force (ME.I07, ME.I28) and the structure of space and time (ME.I13, ME.I15, ME.I35). In these the Newtonian claims are not denied but replaced: general relativity has no gravitational force to make claims about, and no absolute space. Yet even here the Newtonian law of gravitation is recovered in the weak-field limit as a law about the metric (ME.I08). The relativistic revolution is thus the clearest case of a pattern that the record shows repeatedly in physics: an untranslatable ontology over a translatable mathematics.
+
+\subsection{HEAT: caloric to energy}
+
+The manual covers 23 terms and 30 inferences; $\tau = \tiHeat$, $\kappa = \kappaHeat$. The cluster consists of \enquote{caloric} (HE01) and the two terms derived from it, free and combined caloric (HE06, HE07). Its structure matches the analysis that SCI-02-a gives of the caloric case. The readings of \enquote{caloric} in which it named a quantity measured by calorimetry (HE01b) refer to heat; the readings in which it named a fluid with properties (HE01a) or a conserved stuff (HE01c) refer to nothing. The inferences that made the theory successful, the method of mixtures (HE.I03), latent heat (HE.I05), Laplace's adiabatic correction (HE.I09, HE.I10, HE.I27) and Carnot's principle (HE.I12), are preserved, and none of them requires an untranslatable reading.
+
+Two disagreements stand out. The claim that in a cycle the heat given to the cold reservoir equals that taken from the hot (HE.I13) is translated and denied: it is false by the first law. The claim that heat cannot be generated without limit from a finite body (HE.I28) is denied by Rumford's and Joule's experiments, which are the evidence on which the revolution turned (HEAT.E1, E2). Both experiments were described, by their authors and by their critics, in the vocabulary of heat, work and temperature, which both theories shared.
+
+\subsection{QUAN: classical to quantum}
+
+The manual covers 21 terms and 30 inferences; $\tau = \tiQuan$, the highest of the ten, and $\kappa = \kappaQuan$. The cluster consists of three terms: the trajectory and the orbit of an electron inside an atom (QU01, QU02), and the classical state as a point in phase space (QU18). It is small because the vocabulary of classical physics, position, momentum, energy, angular momentum, charge, is taken over by quantum mechanics as the vocabulary of observables. What changes is the inferential role of these terms: the claims that they always have definite values (QU.I06), that they can be measured together (QU.I07), that energy and angular momentum vary continuously (QU.I10, QU.I22), are translated and denied. QUAN has seven X verdicts, and more X than U: quantum mechanics contradicts classical physics more than it abandons it.
+
+This finding cuts against a common view, on which the quantum revolution is the paradigm of conceptual discontinuity. The discontinuity is real, but it is a discontinuity of laws stated in a shared vocabulary, which is why the experiments that forced the revolution, on black-body radiation, specific heats, the photoelectric effect and the Stern--Gerlach splitting (QUAN.E1--E5), could be described in classical terms and could refute classical predictions. The verdicts of QU.I06 and QU.I07 are given for the standard formulation of quantum mechanics; on the Everett interpretation, which SCI-09 defends, the denial of definite values holds relative to branches, and the verdicts are unchanged.
+
+\subsection{BIOL: fixed species to descent}
+
+The manual covers 24 terms and 31 inferences; $\tau = \tiBiol$, $\kappa = \kappaBiol$. The cluster consists of the plan of creation (BI05), the archetype (BI06) in its idealist reading, the centre of creation (BI10) in its creationist reading, and the chain of being (BI16). As in the chemical case, three of the four have referring readings: the unity of plan is the pattern of shared ancestral structure, the archetype is the ancestor, the single centre of creation is the area of origin. Darwin's own procedure, as we noted in Section~\ref{s:cases}, was to give these readings referents in his theory and to drop the rest.
+
+BIOL has the largest number of X verdicts, eight: the immutability of species (BI.I01), the permanence of the species--variety distinction (BI.I02), the fixed limits of variation (BI.I03), perfect adaptation (BI.I14), catastrophic extinction (BI.I18), the designed purpose of hybrid sterility (BI.I24), the designed balance of nature (BI.I26), the fixity of instinct (BI.I27). These are the claims the \emph{Origin} argued against, chapter by chapter, and that it could argue against because they were stated in a vocabulary of species, varieties, organs and instincts that Darwin and his opponents shared. The revolution was fought over claims both sides could state; that is why it was fought in print, in the reviews of the \emph{Origin}, with arguments each side answered.
+
+Consistency favoured the predecessor, through Kelvin's age of the Earth and Jenkin's swamping argument; the second appears in HERE as the inference HR.I03, translated and denied by Mendelian genetics. The successor won on scope: one hypothesis explained the natural system, homology, rudimentary organs, embryology, succession and distribution (BIOL.E1--E5), each a domain the predecessor described in the same terms.
+
+\subsection{PHYS: Galen to Harvey}
+
+The manual covers 26 terms and 30 inferences; $\tau = \tiPhys$, the lowest of the ten, and $\kappa = \kappaPhys$, also the lowest. The cluster is the largest, eight terms: the three spirits (GA03--GA05), the septal pores (GA08), innate heat (GA14), sooty vapours (GA15), the faculties (GA18) and the rete mirabile (GA26). Eleven inferences are untranslatable, more than in any other revolution. Galenic physiology explained the functions of the body by agents, spirits and faculties, that the successor does not recognize, and the inferences that state these explanations cannot be translated.
+
+Yet the anatomy translates almost completely. The vessels, the chambers of the heart, the valves, the lungs, the liver and the blood are identified by dissection, and their names translate at the type level: the arterial vein is the pulmonary artery (GA09), the venous artery the pulmonary vein (GA10). The six X verdicts are disagreements about the anatomy and its motions: whether blood is made continuously in the liver (GA.I01), whether it is consumed in the parts (GA.I02), whether the venous artery carries air (GA.I05), whether the valves retard flow to the extremities (GA.I12). Harvey's arguments in \emph{De motu cordis} \citep{French1994} are addressed to exactly these claims, by vivisection, ligature and calculation (PHYS.E1--E3), and his readers could repeat his procedures.
+
+PHYS shows that a low translation index is compatible with a decisive comparison. The cluster was large, but it lay in the explanatory superstructure; the comparison was conducted in the anatomical base.
+
+\subsection{OPTI: particles to waves}
+
+The manual covers 18 terms and 25 inferences; $\tau = \tiOpti$, $\kappa = \kappaOpti$. The cluster consists of the light corpuscle (OP02), the fits (OP03) in their reading as dispositions of corpuscles, and the sides of rays (OP08) in their reading as properties of corpuscles. Newton's measurements of the fits (OP03b) and his description of the sides (OP08b) refer to wavelength and polarization, as Young and Fresnel showed by using Newton's data \citep{Buchwald1989}. The emission theory had a rich phenomenology, of refraction, dispersion, thin-film colours, inflection and double refraction, and the wave theory took over the whole of it; seven untranslatable inferences explain these phenomena by forces on corpuscles, and these the wave theory replaced.
+
+The two denied inferences are the two crucial ones: that light does not bend into the geometrical shadow (OP.I12), denied by the bright spot in the shadow of a disk, and that light travels faster in water than in air (OP.I04), denied by Foucault's measurement of 1850. Both experiments were proposed as tests that would discriminate between the theories, and both were described in the vocabulary of shadows and speeds that both theories used.
+
+\subsection{MIAS: miasma to germs}
+
+The manual covers 21 terms and 31 inferences; $\tau = \tiMias$, $\kappa = \kappaMias$. The cluster is large, seven terms: miasma (MI01), ferment (MI03) and contagium (MI05) in their chemical readings, spontaneous generation (MI07), epidemic constitution (MI08), sewer gas (MI12) and the soil-borne cholera poison (MI13b). Eleven inferences are untranslatable. The miasmatic theory, like Galenic physiology, explained by agents the successor does not recognize.
+
+But MIAS also shows token-level translation most vividly. The miasma of the marshes refers to malarial infection (MI01b); the miasma of cholera districts refers to Vibrio cholerae carried in water (MI01c); Snow's morbid matter refers to the same organism (MI13a); Henle's contagium animatum refers to pathogenic microorganisms (MI05b). The sanitary reformers who acted on the miasmatic theory, by draining marshes and removing filth, did what the germ theory would also have recommended, and the inferences on which they acted (MI.I02, MI.I13) are preserved. The evidence that decided the revolution, Pasteur's flasks, Koch's cultures, Snow's water companies, Lister's dressings (MIAS.E1--E5), was stated in terms of broths, blood, deaths and wounds that both sides used.
+
+\subsection{HERE: blending to Mendel}
+
+The manual covers 17 terms and 23 inferences; $\tau = \tiHere$, $\kappa = \kappaHere$. The cluster consists of gemmules (HR01) in their reading as particles shed by the body, use-inheritance (HR05), telegony (HR06) and Galton's ancestral law (HR13) in its reading as a law of germinal contributions. Of these, gemmules and ancestral heredity have referring readings: dormant gemmules are recessive alleles, and Galton's regressions are what the additive polygenic model predicts \citep{Fisher1918}.
+
+The revolution has five X verdicts, among them the blending of characters (HR.I02), the swamping of rare variants (HR.I03, HR.I23), the uniform intermediacy of hybrid offspring (HR.I11), and the efficacy of selection within a pure line (HR.I14). These are the disagreements on which the Mendelians and the biometricians argued after 1900, and Fisher's reconciliation of 1918 shows how much of the biometricians' vocabulary, regression, correlation, variation, survived translation into Mendelian terms.
+
+\subsection{Patterns}
+
+Three patterns emerge from the ten manuals.
+
+First, in every revolution the untranslatable cluster lies in the predecessor's explanatory posits, not in its descriptive vocabulary. The terms that resist translation are names for agents and mechanisms (phlogiston, spirits, miasmata, caloric, gemmules, orbs) or for frameworks (absolute space, the plan of creation). The terms by which the phenomena were identified translate. This is what makes Proposition~\ref{p:nototal} true of the record and not merely of the logic.
+
+Secondly, the cluster terms are typically heterogeneous: of the \nclusterall{} cluster terms, most have at least one referring reading alongside the non-referring ones. The predecessor's names for its posits were often used to refer to things the successor recognizes, and the untranslatability is confined to the descriptive readings that express the predecessor's theory of those things.
+
+Thirdly, the relation between translated disagreement and untranslatable abandonment differs between the sciences. In physics, where the predecessor survives as a limiting case, R verdicts are frequent and the disagreements are quantitative. In physiology and medicine, where the predecessor posited agents, U verdicts are frequent. In biology and genetics, X verdicts are frequent: the revolutions turned on claims both sides could state. None of these patterns supports incommensurability; each shows a different way in which comparison survived the loss of part of the vocabulary.
+
+\section{Further formal results}\label{s:formal}
+
+We record three structural results about manuals, which bear on the robustness of the conclusions and prepare the ground for Volume~II.
+
+\begin{proposition}[Refinement of readings]\label{p:refine}
+Let $M'$ be obtained from $M$ by splitting a reading of a term $t$ into two readings with the same referent status (both referring or both not). Then $\tau(M') = \tau(M)$ if $t$ is translated exactly, partially or not at all; if $t$ is token-dependent the score of $t$ changes, but $\tau(M')$ lies strictly between 0 and 1 if and only if $\tau(M)$ does.
+\end{proposition}
+
+\begin{proof}
+The status of $t$ depends only on whether it has a type-level image and whether some reading refers, both of which are unchanged by the split. If $t$ is not token-dependent, its score is 1 or 0 and unchanged; the weights are unchanged, since the inferences are. If $t$ is token-dependent, its score $n_{\mathrm{ref}}/n$ changes to $(n_{\mathrm{ref}}+1)/(n+1)$ or $n_{\mathrm{ref}}/(n+1)$, which lies in $(0,1)$ if and only if $n_{\mathrm{ref}}/n$ does, since $0 < n_{\mathrm{ref}} < n$ is preserved by both changes when the split reading has the referent status of the original. The cluster is unchanged, so by Lemma~\ref{l:bounds} the strict inequalities are preserved.
+\end{proof}
+
+The proposition answers a natural worry about the manuals: that the index depends on how finely readings are individuated. It does, but the conclusion of Theorem~\ref{t:partial} does not.
+
+\begin{proposition}[Composition]\label{p:compose}
+Let $M_1$ be a manual from $T_1$ to $T_2$ and $M_2$ a manual from $T_2$ to $T_3$, where every expression in the range of $M_1$ is a reading in the domain or the cluster of $M_2$. Then the composite $M_2 \circ M_1$ is a manual from $T_1$ to $T_3$, and its cluster contains the cluster of $M_1$. In particular, if $T_1$ is partially translatable into $T_2$ by $M_1$ and the composite has a referring reading, then $T_1$ is partially translatable into $T_3$.
+\end{proposition}
+
+\begin{proof}
+Reference is transitive along the composite: if $r$ refers in $T_2$ to what $M_1(r)$ refers to, and $M_1(r)$ refers in $T_3$ to what $M_2(M_1(r))$ refers to, then $r$ refers to what $M_2(M_1(r))$ refers to. A reading of $T_1$ not in the domain of $M_1$ is not in the domain of the composite, so the cluster of $M_1$ is contained in that of the composite. The last claim follows by Lemma~\ref{l:bounds}.
+\end{proof}
+
+Composition explains why partial translatability does not decay into incommensurability over a sequence of revolutions. The cluster grows along a sequence, since what one revolution abandons is not recovered by the next; but a referring reading of $T_1$ that is translated by the composite remains translated. The descriptive vocabulary of the phenomena, which by Proposition~\ref{p:nototal} each successor shares with its predecessor, is carried along the sequence. This is the semantic counterpart of the corollary of SCI-02-a on chains of theories, on which the retention of essential content propagates backward along a chain of theories.
+
+\begin{proposition}[No overlap constrains types only]\label{p:overlap}
+Suppose the kind terms $k$ of $T_1$ and $k'_1, k'_2$ of $T_2$ are such that the extension of $k$ overlaps those of $k'_1$ and $k'_2$ without being included in either, so that no translation of the type $k$ respects the taxonomy of $T_2$ (Kuhn's no-overlap principle). Then $M$ has no single-expression type-level image for $k$; but every reading of $k$ whose tokens are applied to members of the extension of $k'_1$ or of $k'_2$ is in the domain of $M$.
+\end{proposition}
+
+\begin{proof}
+A single-expression type-level image of $k$ would be a kind term of $T_2$ with the extension of $k$, which the taxonomy of $T_2$ excludes, or a disjunction, which is a list in the sense of Definition~\ref{d:manual}(i). A reading of $k$ applied to members of $k'_1$ refers, under Assumption~\ref{a:token}, to the things it is applied to, which $T_2$ classifies as $k'_1$; so it is in the domain of $M$.
+\end{proof}
+
+Kuhn's \enquote{planet} is the example \citep{Kuhn1991}. Its extension in Ptolemaic astronomy included the Sun and the Moon and excluded the Earth; in the Copernican taxonomy the Sun is a star, the Moon a satellite and the Earth a planet. No Copernican kind term has the Ptolemaic extension. The manual records exactly this: \enquote{planet} (AS01) has no type-level image, and each of its four readings refers. Proposition~\ref{p:overlap} shows that this is the general case: the no-overlap principle, which Kuhn made the basis of his later thesis, blocks type-level translation and leaves token-level translation intact. Volume~II develops the point for the taxonomic account as a whole.
+
+\section{Cases}\label{s:cases}
+
+We discuss six entries of Part~II in detail. Each illustrates a different way in which a term can resist type-level translation while the claims containing it remain comparable.
+
+\paragraph{Dephlogisticated air (CH02).} The term has three readings. CH02a is Priestley's description of the air obtained by heating the red calx of mercury, in which a candle burned with a vigorous flame; its tokens refer to what was in his vessel, which was oxygen. CH02c is Cavendish's air exploded with inflammable air in his synthesis of water, which was also oxygen. CH02b is the type description, common air deprived of phlogiston; nothing satisfies it. The manual therefore has no type-level image, and the term is token-dependent with score $2/3$. The inferences in which it figures show what this means in practice. CH.I10 (the calx yields the metal and dephlogisticated air) and CH.I11 (dephlogisticated air supports combustion longer than common air) are preserved; they were the claims on which Priestley and Lavoisier agreed. CH.I12 (dephlogisticated air is avid of phlogiston because deprived of it) is untranslatable; it was the claim on which they differed, and their difference was not a disagreement that either could state in the other's terms, but a difference in what they took the air to be. This is the case on which \citet{Kitcher1978} built the theory of reference potential, and the manual confirms his analysis while recording Kuhn's point that the type is not translated.
+
+\paragraph{Mass (ME01).} Field's example. The term is given a type-level image that is a list, rest mass and relativistic mass, and is translated partially. Three of its inferences are recorded R, preserved on one reading only: invariance (ME.I01) on the rest-mass reading, additivity (ME.I02) and conservation (ME.I03) on the relativistic-mass reading. The proportionality of gravitational and inertial mass (ME.I22) is preserved outright, as the equivalence principle. Field's semantics says that a sentence true on one reading and false on the other is neither true nor false; the verdict R records the same fact without committing us to Field's truth-value gaps. That \enquote{mass} is translated partially, while \enquote{force} and \enquote{weight} are token-dependent with non-referring gravitational readings (ME02b, ME19a), locates the untranslatability of Newtonian mechanics where general relativity places it: in the treatment of gravitation as a force.
+
+\paragraph{Deferent and epicycle (AS05, AS06).} These are the clearest cases of heterogeneity in which every reading refers. The deferent of a superior planet corresponds to the planet's heliocentric orbit (AS05a), while the deferent of Venus or Mercury corresponds to the Earth's orbit (AS05b); the main epicycle stands in the inverse relation (AS06a, AS06b). Both terms are token-dependent with score 1. No single expression of the Copernican vocabulary translates \enquote{epicycle}, because the role the epicycle played was played by different orbits for different planets; but every token refers. The Copernican scope advantage recorded for ASTR rests on exactly this fact: when the epicycles and deferents are translated token by token, the ratios of their radii yield the relative distances of the planets (ASTR.E3), which the Ptolemaic system left undetermined. Here translation, token by token, is not merely compatible with the comparison of the theories; it is the comparison.
+
+\paragraph{Carnot's caloric (HE01d).} The reading in which Carnot speaks of the caloric that falls from the hot to the cold body in a reversible engine has been given two referents. Kelvin read it as heat, on which reading Carnot's claim that the caloric is conserved through the cycle is false. \citet{Callendar1911} read it as what Clausius later called entropy, on which reading the claim is true for a reversible cycle, and the waterwheel analogy (HE.I14) becomes the relation $W = S(T_1-T_2)$. We record the reading as partially denoting both, and the inference as R. The case shows that the assignment of referents is sometimes contested, and that the manual can record the contest rather than settle it. Either way, the reading is in the domain of the manual and the inference is comparable: the question whether Carnot was right about the conservation of what falls was one that his successors could ask and answer, and the answer depends on which quantity is meant.
+
+\paragraph{Rete mirabile (GA26).} Galen described a network of arteries at the base of the brain in which vital spirit was elaborated into animal spirit. The network exists in the ox, which he dissected (GA26b); it does not exist in humans, as Berengario and Vesalius pointed out, and the human reading (GA26a) has no referent. The term is token-dependent with score $1/2$. The case is instructive because the untranslatability has nothing to do with theory-ladenness or meaning change. It arises from an error of extrapolation between species, which the successor can describe exactly. What cannot be translated is the claim about the human brain; what can be translated is the claim about the ox, and the comparison of the two is the comparison of anatomy with anatomy.
+
+\paragraph{Archetype (BI06).} Owen's archetype was the ideal pattern of which every vertebrate skeleton is a modification. On the reading in which it is an idea in the divine mind (BI06a) it has no referent in Darwinian biology. On the reading in which it is the generalized pattern that Owen drew (BI06b), Darwin himself supplied a referent: the structure of the common ancestor of the vertebrates \citep[ch.~13]{Darwin1859}. The inference BI.I08, that all vertebrate skeletons are modifications of one pattern, is preserved under that reading. The case shows a successor theorist doing exactly what the manuals do: taking a term of his predecessor's, distinguishing its readings, and giving one of them a referent in his own theory. Darwin's reinterpretation of the archetype was an act of token-level translation, and he used it to argue that his theory explained what Owen's described.
+
+Two further entries deserve mention. The miasma of the marshes (MI01b) refers to malarial infection by Plasmodium, carried by mosquitoes breeding in the marshes, so that the miasmatists' claim that draining the marshes reduces intermittent fever (MI.I02) is preserved, though their claim that fevers are caused by the emanations of decay (MI.I01) is not. And Darwin's dormant gemmules (HR01b), to which he ascribed reversion, refer to recessive alleles transmitted unexpressed; the inference that reversion is due to them (HR.I06) is preserved in the cases of reversion by recessives.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Token reference is not translation]\label{o:tokens}
+Kuhn's reply to Kitcher applies to the translation index. A translation must render a term uniformly; a manual that renders \enquote{dephlogisticated air} as \enquote{oxygen} here and as nothing there is not a translation but a commentary, and the index measures the commentary. What Kuhn denied, the existence of a translation of the cluster, the index does not touch.
+\end{objection}
+
+\begin{reply}
+The objection is right about what Kuhn denied and wrong about what the conclusion requires. The manuals distinguish type-level from token-level translation (Definition~\ref{d:status}), and Proposition~\ref{p:robust} reports the index computed by type-level translation alone (scheme S1). It lies strictly between 0 and 1 for every revolution: even by Kuhn's standard of translation, most of the vocabulary of each predecessor is translated, and some is not. What remains of the objection is the claim that the comparison of theories requires type-level translation of the cluster. It does not. The comparison requires that the evidence be stated in shared vocabulary (Lemma~\ref{l:evidence}) and that the claims at issue be either stated in it or understood by interpretation (Principle~\ref{p:interp}). Kuhn conceded both \citep{Kuhn1983}. The untranslatability of the type of \enquote{phlogiston} prevented a phlogistic chemist from saying in Lavoisier's language what he believed; it did not prevent him from weighing the calx.
+\end{reply}
+
+\begin{objection}[The index is arbitrary]
+The value of $\tau$ depends on the choice of terms, readings and inferences. Another investigator, choosing differently, would obtain other values; a defender of incommensurability could choose the theoretical core of each predecessor and obtain values near 0.
+\end{objection}
+
+\begin{reply}
+The values depend on the choices; the conclusions do not, within wide limits. The conclusions are that $\tau$ lies strictly between 0 and 1 and that some shared criterion favoured the successor on translatable evidence. The first holds whenever the chosen vocabulary includes one term with a non-referring reading and one with a referring reading, and Proposition~\ref{p:nototal} shows that a vocabulary that described the predecessor's evidence would include the second. A defender of incommensurability who restricted the vocabulary to the untranslatable cluster would obtain $\tau=0$, but would then have measured the cluster, not the theory, and would have no vocabulary in which to state what the theory was a theory of. Within the vocabulary actually chosen, the alternative scorings of Proposition~\ref{p:robust} move the indices by as much as a third without moving any of them to a bound. The choice of terms and inferences followed a stated procedure (Part~II, preface), and the manuals are published so that it can be checked.
+\end{reply}
+
+\begin{objection}[Methodological incommensurability]
+The criteria were not shared. Feyerabend argued that every methodological rule has been violated by the successful science of its day \citep{Feyerabend1975}; the Galenists and Harvey disagreed about the weight to be given to vivisection and to quantity, and the Ptolemaic astronomers did not demand of an astronomical model that it be physically true. Kuhn's list of five is an abstraction that conceals these differences.
+\end{objection}
+
+\begin{reply}
+Kuhn's list is an abstraction, and Assumption~\ref{a:criteria} claims only what it states: that the criteria are accepted on both sides, not that they are weighed or applied in the same way. The objection's examples concern application and weight. Galenists accepted that a physiology must agree with what dissection shows, and the debate over Harvey turned on what dissection showed; Harvey's quantitative argument (PHYS.E1) used a measure of the ventricle's capacity and a count of the heart's beats, which his opponents could check and some did. The Ptolemaic astronomers sought accuracy above all, and Kepler's tables won on accuracy (ASTR.E1, ASTR.E2). Feyerabend's examples show that particular rules of method were violated by successful science; SCI-05-a argues that his examples violate rules but not the norms of Assumption~\ref{a:norms}, and that conclusion is what we need.
+\end{reply}
+
+\begin{objection}[Arrow's theorem]
+\citet{Okasha2011} showed that Kuhn's account of theory choice, as an aggregation of rankings by several criteria, falls under Arrow's theorem: if the criteria yield only ordinal rankings, no aggregation rule satisfies unrestricted domain, weak Pareto, independence of irrelevant alternatives and non-dictatorship. So either one criterion dictates, or the choice is not rational.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:rational} does not require an aggregation rule. It requires that a criterion favour the successor on shared evidence; it is a condition on the existence of a shared reason, not on the existence of a function from profiles of criteria to choices. Where the support was dominant, as in eight of the ten revolutions, the Pareto condition alone, which every rule Arrow considers must satisfy, selects the successor among the two theories compared; the impossibility concerns the consistency of a rule over all possible profiles and all sets of alternatives, not the verdict on a profile in which no criterion opposes. Where support was not dominant, as in ASTR and BIOL, the choice depended on weighing, and Proposition~\ref{p:dissent} records that dissent was rational for a time. Okasha himself discusses ways of escaping the theorem by enriching the information the criteria provide; Volume~III takes them up.
+\end{reply}
+
+\begin{objection}[Indeterminacy of translation]\label{o:quine}
+Quine argued that translation is indeterminate: incompatible manuals fit all the evidence of a speaker's dispositions \citep{Quine1960}. If so, there is no fact about whether a token of \enquote{dephlogisticated air} refers to oxygen, and the manuals record one choice among many.
+\end{objection}
+
+\begin{reply}
+If the Quinean thesis were true, it would undermine translation between contemporaries as much as between paradigms, and the incommensurability theorist could not use it to mark revolutions out. LNG-06 argues that radical translation is constrained by more than stimulus meaning and that the constraints select determinate translations, and LNG-16 that reference is fixed by the same constraints. On those conclusions, which we accept, the referential assignments of the manuals are determinate where the historical evidence is, and where it is not, as with Carnot's caloric (HE01d) or the continued fever of the London physicians (MI10), the manuals record partial denotation rather than an arbitrary choice.
+\end{reply}
+
+\begin{objection}[Theory-laden observation]
+The evidential claims are not neutral. \citet{Hanson1958} and \citet{Kuhn1962} argued that observation is laden with theory, so that the phlogistic chemist and the oxygen chemist did not observe the same thing when they watched a metal calcine. The vocabulary that Lemma~\ref{l:evidence} calls translatable is itself the vocabulary of a theory, and its sharing presupposes what is in question.
+\end{objection}
+
+\begin{reply}
+The evidential claims of Table~\ref{tab:evid} are laden with theory, but not with the theories at issue. The weight of a calx is laden with the theory of the balance, the position of Mars with the theory of the instruments and of refraction, the speed of light in water with the theory of Foucault's rotating mirror; these theories were accepted on both sides of the revolutions in question. What Lemma~\ref{l:evidence} requires, and what check C9 verifies, is that the readings used in stating the evidence have referents in the successor, so that the successor can state the evidence; and, since these readings belong to the predecessor's vocabulary, the predecessor can state it too. Theory-ladenness by a third theory shared by both is no obstacle to comparison.
+\end{reply}
+
+\begin{objection}[Whig history]
+The manuals identify referents by the successor theory as since developed. This is Whig history: it judges the past by the present and reads into it what the present knows. The phlogistic chemists did not refer to oxygen, since they had no concept of oxygen; to say that they did is to impose our categories on them.
+\end{objection}
+
+\begin{reply}
+The objection confuses reference with conception. That Priestley had no concept of oxygen does not show that he did not refer to it, any more than the fact that the first observers of a disease lacked the concept of its pathogen shows that they did not refer to the disease. Reference is fixed by the samples and procedures a term is used with, and Priestley's \enquote{dephlogisticated air}, in the reading in which it named the gas in his vessel, was used with oxygen. The manuals do not say that Priestley believed what Lavoisier believed; they record, in the predecessor's own terms, the role each term played, and they record separately what the successor takes it to have referred to. A history that refused to say what the past referred to could not say whether its claims were true, which is what the historian of science, as distinct from the historian of opinion, wants to know.
+\end{reply}
+
+\begin{objection}[Holism of meaning]
+Feyerabend's argument was that meanings are fixed by the whole theory. If so, a change anywhere in the theory changes the meaning of every term, and the type-level translations that the manuals record, such as \enquote{fixed air} by \enquote{carbon dioxide}, are as illegitimate as the token-level ones.
+\end{objection}
+
+\begin{reply}
+The manuals preserve reference, not meaning, and holism of meaning, if true, is compatible with preservation of reference; this is the point of \citet{Scheffler1967} and \citet{Devitt1979}. Where the holist objects that comparison needs sameness of meaning, the reply is that it needs only that the claims compared be about the same things, and that disagreements be stated (Principle~\ref{p:disagree}). The manuals also record the residue of holism that is real: the inferential role of a term is not wholly preserved when an inference in which it figures is untranslatable, and Definition~\ref{d:status} makes such a term partially translated. The large number of partial translations (\nstatP{} of \ntermsall{} terms) is the measure of how much holism is true.
+\end{reply}
+
+\begin{objection}[Premature abandonment]
+\citet{Chang2012} argued that the phlogiston theory was abandoned prematurely: it had explanatory resources, such as the account of the common properties of metals, that the oxygen theory lacked and that were later recovered in the theory of electrons. A choice that discarded these resources was not rational.
+\end{objection}
+
+\begin{reply}
+The manual records Chang's point: scope is marked as mixed for CHEM, with the common properties of metals on the phlogistic side, and the inference CH.I26, that metals resemble one another because they contain phlogiston, is untranslatable, so that the explanation it offered was lost with the term. But Chang's argument concerns whether it would have been better to keep both theories in play, not whether the reasons for preferring the oxygen theory were shared reasons. They were: the gravimetric evidence (CHEM.E1--E4) was stated in vocabulary the phlogistonists used, and several of them, including Kirwan, were persuaded by it. A rational choice may lose something of value. Whether the loss could have been avoided by a more pluralist policy is a question about the organization of inquiry, on which our conclusion takes no position.
+\end{reply}
+
+\section{Consequences}\label{s:consequences}
+
+\paragraph{For scientific realism.} SCI-02 argues that mature theories are approximately true and that the pessimistic meta-induction fails because past theories were partially true. Partial translatability is the semantic precondition of the second claim. If past theories were wholly untranslatable into present ones, the question whether they were partially true by present lights could not be asked. The manuals show that it can be asked and, for most of the vocabulary of each predecessor, answered: the H and R verdicts (\nverdH{} and \nverdR{} of \ninfall{}) record inferences of past theories that hold, outright or in a domain, by the lights of their successors. The realist's selective claim, that the essential content of mature theories is retained, can now be tested against a vocabulary-wide record and not only against the cases realists choose; Proposition~\ref{p:retention} says what the test must find, and the manuals of HEAT and MECH find it.
+
+\paragraph{For relativism.} The incommensurability thesis has been used to support a relativism on which the truth of scientific claims is relative to paradigms. Theorem~\ref{t:partial} removes the support: the claims of a predecessor are, for the most part, claims the successor can state, and where it denies them it denies what the predecessor asserted. A claim that is denied across a revolution is not true relative to one paradigm and false relative to another; it is a claim about water, or Mars, or the speed of light in water, about which one side was right.
+
+\paragraph{For the history of science.} The manuals suggest a method for writing the history of a revolution that is neither Whiggish nor relativist: state, for each term, its role in the old theory, and separately, for each reading, its referent in the new. The first part is the historian's reconstruction of the past in its own terms; the second is the scientist's assessment of it. Keeping them apart, as Definition~\ref{d:manual} does, allows both to be stated without either distorting the other.
+
+\paragraph{For science education.} If successive paradigms were incommensurable, the history of a science could not be taught in the vocabulary of its present, and students would have to learn each past theory as a foreign language. Partial translatability means that most of the history can be taught in present terms, with the cluster taught by interpretation. The manuals indicate what the cluster is in each case, and so what must be taught as a foreign language: in chemistry, three terms; in physiology, eight.
+
+\section{What the result does not establish}\label{s:not}
+
+The result does not establish that every choice made in a revolution was correct, or that the successor was in every respect better than the predecessor. ASTR and BIOL show criteria favouring the predecessor, and CHEM, PHYS and the remaining entries marked mixed show respects in which the predecessor did better.
+
+It does not provide an algorithm of theory choice. Definition~\ref{d:rational} states a condition that rational choices satisfy, not a procedure that generates them, and it is compatible with Kuhn's view that individual scientists weigh the criteria differently.
+
+It does not establish that the translation index measures closeness to truth, or progress. A successor with a higher index relative to its predecessor is one that says more of what its predecessor said, not one that is truer; the relation between the two is the subject of SCI-02.
+
+It does not establish partial translatability for revolutions not in the table, except through Proposition~\ref{p:local}, whose antecedent must then be established case by case, and through the inductive support the table provides. In particular, we have not examined revolutions in the social sciences, where the conditions for Proposition~\ref{p:nototal} may fail.
+
+Finally, the manuals are compiled from the historical record by judgment. The judgments are stated entry by entry, and each can be contested; what the program checks is that the conclusions follow from the judgments, not that the judgments are right. The most contestable are flagged in the manuals by partial denotation (HE01d, MI10, HR10) and in the criteria table by the outcome \enquote{?}, which marks a criterion on which we make no claim.
+
+\section{Conclusion}\label{s:conclusion}
+
+Successive paradigms are partially translatable: a translation manual that preserves the reference of term tokens and records which inferences of the predecessor survive translation yields, in every revolution examined, a translation index strictly between 0 and 1, and Kuhn's thesis of local incommensurability entails that it must. Theory choice remains rational across revolutions: in every revolution examined, a criterion that both communities accepted favoured the successor, on evidence both could state, under norms both observed. Incommensurability, in the only form in which it is true, is the existence of an untranslatable cluster of readings; it marks what was abandoned, not what was compared.
+
+\clearpage
+\appendix
+\section*{Part II: Translation manuals for ten revolutions}\label{s:appendix}
+\addcontentsline{toc}{section}{Part II: Translation manuals for ten revolutions}
+
+\section{Preface to the manuals}\label{s:preface}
+
+\paragraph{What the manuals contain.} For each of ten revolutions, identified as CHEM (phlogistic to oxygen chemistry), ASTR (Ptolemaic to Copernican--Keplerian astronomy), MECH (Newtonian mechanics to relativity), HEAT (caloric theory to thermodynamics and kinetic theory), QUAN (classical to quantum mechanics), BIOL (fixed species to Darwinian descent), PHYS (Galenic physiology to the circulation), OPTI (emission to wave optics), MIAS (miasmatic to germ theory) and HERE (blending inheritance and pangenesis to Mendelian genetics), Section~\ref{s:manuals} gives a translation manual in the sense of Definition~\ref{d:manual}. Each term of the predecessor $T_1$ has an identifier (CH01, AS05, \ldots), its role in $T_1$, its type-level image in $T_2$ (a single expression; a list marked (pd) for partial denotation; or a dash for none), its status, weight $w$ and score $s$, and the inferences in which it figures, grouped by verdict. Under it are its readings (CH02a, CH02b, \ldots), each with the context of use that fixes it and its referent in $T_2$. For terms without a type-level image the inferences are listed by reading. Section~\ref{s:inferences} lists the inferences of each predecessor (CH.I01, \ldots), each with its translation $M(I)$ or, for verdict U, an interpretation in Kuhn's sense, prefixed \enquote{Interpretation}; the readings it uses, with $^{\ast}$ marking a non-referring reading and $^{\circ}$ a term translated other than exactly; and its verdict. Section~\ref{s:criteria} gives the outcome on the five shared criteria and the evidential claims behind every favourable outcome. Section~\ref{s:stats} gives the computed statistics.
+
+\paragraph{How the manuals were compiled.} The predecessor vocabulary of each revolution consists of the terms that figure in the central claims of the predecessor as presented in the primary sources and the standard histories cited in the written part \citep{Kuhn1957,Fox1971,Buchwald1989,Jammer1966,Ruse1979,French1994,Musgrave1976}. Readings were distinguished where the historical record shows a term's reference fixed in more than one way. The inferences are the claims of the predecessor that its textbooks and its critics treated as characteristic, together with the inferences needed to give every term at least one inferential role. Referents and verdicts were assigned by the standard of Assumption~\ref{a:token}. Every criterion outcome recorded as $+$, $-$ or $\pm$ rests on a documented episode named in the table; where we were not confident of the outcome we recorded \enquote{?} and made no claim.
+
+\paragraph{The program.} The generator (\texttt{gen/generate.py}, Python standard library only) reads the hand-curated data and computes, for every term, its status by Definition~\ref{d:status}, its weight and score by Definition~\ref{d:score}, and, for every revolution, $\tau$, $\kappa$, $\pi$, the untranslatable cluster, the \emph{neutral core} (inferences all of whose terms are translated exactly), and $\tau$ under the scoring schemes S1--S4 of Proposition~\ref{p:robust}. It asserts nine checks, and the tables are written only if all succeed:
+\begin{description}[leftmargin=2.2em,style=sameline]
+\item[C1] integrity: identifiers unique; a token reading is cited for a term exactly when the term lacks a type-level image; every reading of a term with an image has a referent; every non-referring reading figures in some inference; every inference has a rendering, which is an interpretation exactly when the verdict is U;
+\item[C2] the verdict U is recorded exactly for inferences containing a reading with no referent;
+\item[C3] every term figures in at least one inference;
+\item[C4] $0<\tau<1$ for every revolution (Theorem~\ref{t:partial});
+\item[C5] in every revolution at least one shared criterion favoured the successor;
+\item[C6] the cluster is non-empty and a proper part of the vocabulary;
+\item[C7] every revolution contains at least one inference translated and denied (verdict X);
+\item[C8] $0<\tau<1$ under S1, S3 and S4;
+\item[C9] every favourable outcome is supported by an evidential claim stated in referring readings, and every claim is cited only for outcomes recorded as favourable (Lemma~\ref{l:evidence}).
+\end{description}
+Check C2 is the mechanical counterpart of Lemma~\ref{l:disagree}: since the verdict X is recorded only for inferences all of whose readings refer, every recorded disagreement is a translated one.
+
+\paragraph{Scope and exhaustiveness.} The manuals are not enumerations of all possible structures, and nothing in them is exhaustive in the sense of a combinatorial search. What is exhaustive is the checking: every entry of every manual is checked by the program against the definitions, and every claim the written part makes about a revolution is computed from the entries. The number of revolutions is limited by our confidence in the historical record; Volume~II extends the table.
+
+\paragraph{Summary.} The manuals contain \ntermsall{} terms with \ntokensall{} readings, of which \nrefall{} have a referent in the successor, and \ninfall{} inferences. Of the terms, \nstatE{} are translated exactly, \nstatP{} partially, \nstatT{} token by token and \nstatN{} not at all. Of the inferences, \nverdH{} are preserved outright (H), \nverdR{} in a restricted domain or on one reading (R), \nverdX{} are translated and denied (X), and \nverdU{} are untranslatable (U). The translation indices range from \timin{} (PHYS) to \timax{} (QUAN), the comparability indices from \kappamin{} (PHYS) to \kappamax{} (BIOL). The clusters together contain \nclusterall{} terms. All checks C1--C9 succeed: the conclusions of Theorems~\ref{t:partial} and~\ref{t:rational} hold in every revolution of the table, with dominant support in \ndominant{} of the ten. The philosophically interesting entries are discussed in Section~\ref{s:cases}; we note here two patterns the statistics reveal. First, the revolutions with the lowest indices, PHYS and MIAS, are those whose predecessors posited the most occult agents (spirits and faculties; miasmata and catalytic poisons); the revolutions in physics, where the predecessor is retained as a limiting case, have many R verdicts (13 of 35 in MECH) and few untranslatable terms. Second, the number of X verdicts, translated disagreements, exceeds the number of U verdicts in QUAN, BIOL and HERE, and is largest in BIOL: in these revolutions the successor contradicted its predecessor more than it abandoned it.
+
+\section{Computed statistics}\label{s:stats}
+
+\input{gen/summary.tex}
+\clearpage
+
+\section{Evidential claims}\label{s:criteria}
+
+Table~\ref{tab:evid} lists the evidential claims behind the favourable outcomes of Table~\ref{tab:crit}, with the readings each uses; check C9 verifies that every reading refers.
+
+\input{gen/evidence.tex}
+
+\section{The manuals}\label{s:manuals}
+
+\input{gen/manuals.tex}
+
+\section{Inferences, translations and verdicts}\label{s:inferences}
+
+\input{gen/inferences.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Andersen et~al.(2006)]{AndersenBarkerChen2006} Andersen, H., Barker, P. and Chen, X. (2006). \emph{The Cognitive Structure of Scientific Revolutions}. Cambridge University Press.
+\bibitem[Bird(2000)]{Bird2000} Bird, A. (2000). \emph{Thomas Kuhn}. Acumen.
+\bibitem[Bird(2008)]{Bird2008} Bird, A. (2008). Incommensurability naturalized. In L. Soler, H. Sankey and P. Hoyningen-Huene (eds.), \emph{Rethinking Scientific Change and Theory Comparison: Stabilities, Ruptures, Incommensurabilities?}, 21--39. Springer.
+\bibitem[Buchwald(1989)]{Buchwald1989} Buchwald, J.~Z. (1989). \emph{The Rise of the Wave Theory of Light}. University of Chicago Press.
+\bibitem[Callendar(1911)]{Callendar1911} Callendar, H.~L. (1911). The caloric theory of heat and Carnot's principle. \emph{Proceedings of the Physical Society of London}, 23.
+\bibitem[Chang(2012)]{Chang2012} Chang, H. (2012). \emph{Is Water H$_2$O? Evidence, Realism and Pluralism}. Springer.
+\bibitem[Darwin(1859)]{Darwin1859} Darwin, C. (1859). \emph{On the Origin of Species by Means of Natural Selection}. John Murray.
+\bibitem[Davidson(1974)]{Davidson1974} Davidson, D. (1974). On the very idea of a conceptual scheme. \emph{Proceedings and Addresses of the American Philosophical Association}, 47, 5--20.
+\bibitem[Devitt(1979)]{Devitt1979} Devitt, M. (1979). Against incommensurability. \emph{Australasian Journal of Philosophy}, 57(1), 29--50.
+\bibitem[Feyerabend(1962)]{Feyerabend1962} Feyerabend, P.~K. (1962). Explanation, reduction, and empiricism. In H. Feigl and G. Maxwell (eds.), \emph{Scientific Explanation, Space, and Time}, Minnesota Studies in the Philosophy of Science 3, 28--97. University of Minnesota Press.
+\bibitem[Feyerabend(1975)]{Feyerabend1975} Feyerabend, P.~K. (1975). \emph{Against Method}. New Left Books.
+\bibitem[Field(1973)]{Field1973} Field, H. (1973). Theory change and the indeterminacy of reference. \emph{The Journal of Philosophy}, 70(14), 462--481.
+\bibitem[Fox(1971)]{Fox1971} Fox, R. (1971). \emph{The Caloric Theory of Gases from Lavoisier to Regnault}. Clarendon Press.
+\bibitem[French(1994)]{French1994} French, R. (1994). \emph{William Harvey's Natural Philosophy}. Cambridge University Press.
+\bibitem[Fisher(1918)]{Fisher1918} Fisher, R.~A. (1918). The correlation between relatives on the supposition of Mendelian inheritance. \emph{Transactions of the Royal Society of Edinburgh}, 52, 399--433.
+\bibitem[Hacking(1993)]{Hacking1993} Hacking, I. (1993). Working in a new world: the taxonomic solution. In P. Horwich (ed.), \emph{World Changes: Thomas Kuhn and the Nature of Science}. MIT Press.
+\bibitem[Hanson(1958)]{Hanson1958} Hanson, N.~R. (1958). \emph{Patterns of Discovery}. Cambridge University Press.
+\bibitem[Hoyningen-Huene(1993)]{HoyningenHuene1993} Hoyningen-Huene, P. (1993). \emph{Reconstructing Scientific Revolutions: Thomas S. Kuhn's Philosophy of Science}. University of Chicago Press.
+\bibitem[Hoyningen-Huene and Sankey(2001)]{HoyningenHueneSankey2001} Hoyningen-Huene, P. and Sankey, H. (eds.) (2001). \emph{Incommensurability and Related Matters}. Kluwer.
+\bibitem[Jammer(1966)]{Jammer1966} Jammer, M. (1966). \emph{The Conceptual Development of Quantum Mechanics}. McGraw-Hill.
+\bibitem[Kitcher(1978)]{Kitcher1978} Kitcher, P. (1978). Theories, theorists and theoretical change. \emph{The Philosophical Review}, 87(4), 519--547.
+\bibitem[Kitcher(1993)]{Kitcher1993} Kitcher, P. (1993). \emph{The Advancement of Science: Science without Legend, Objectivity without Illusions}. Oxford University Press.
+\bibitem[Kuhn(1957)]{Kuhn1957} Kuhn, T.~S. (1957). \emph{The Copernican Revolution}. Harvard University Press.
+\bibitem[Kuhn(1962)]{Kuhn1962} Kuhn, T.~S. (1962). \emph{The Structure of Scientific Revolutions}. University of Chicago Press.
+\bibitem[Kuhn(1970)]{Kuhn1970} Kuhn, T.~S. (1970). \emph{The Structure of Scientific Revolutions}. 2nd edition. University of Chicago Press.
+\bibitem[Kuhn(1977)]{Kuhn1977} Kuhn, T.~S. (1977). Objectivity, value judgment, and theory choice. In \emph{The Essential Tension: Selected Studies in Scientific Tradition and Change}, 320--339. University of Chicago Press.
+\bibitem[Kuhn(1983)]{Kuhn1983} Kuhn, T.~S. (1983). Commensurability, comparability, communicability. In P.~D. Asquith and T. Nickles (eds.), \emph{PSA 1982}, vol.~2, 669--688. Philosophy of Science Association.
+\bibitem[Kuhn(1991)]{Kuhn1991} Kuhn, T.~S. (1991). The road since \emph{Structure}. In A. Fine, M. Forbes and L. Wessels (eds.), \emph{PSA 1990}, vol.~2, 3--13. Philosophy of Science Association.
+\bibitem[Kuhn(1993)]{Kuhn1993} Kuhn, T.~S. (1993). Afterwords. In P. Horwich (ed.), \emph{World Changes: Thomas Kuhn and the Nature of Science}, 311--341. MIT Press.
+\bibitem[Lakatos(1970)]{Lakatos1970} Lakatos, I. (1970). Falsification and the methodology of scientific research programmes. In I. Lakatos and A. Musgrave (eds.), \emph{Criticism and the Growth of Knowledge}, 91--196. Cambridge University Press.
+\bibitem[Laudan(1977)]{Laudan1977} Laudan, L. (1977). \emph{Progress and Its Problems: Towards a Theory of Scientific Growth}. University of California Press.
+\bibitem[Laudan(1984)]{Laudan1984} Laudan, L. (1984). \emph{Science and Values: The Aims of Science and Their Role in Scientific Debate}. University of California Press.
+\bibitem[McMullin(1983)]{McMullin1983} McMullin, E. (1983). Values in science. In P.~D. Asquith and T. Nickles (eds.), \emph{PSA 1982}, vol.~2, 3--28. Philosophy of Science Association.
+\bibitem[Musgrave(1976)]{Musgrave1976} Musgrave, A. (1976). Why did oxygen supplant phlogiston? Research programmes in the chemical revolution. In C. Howson (ed.), \emph{Method and Appraisal in the Physical Sciences}. Cambridge University Press.
+\bibitem[Okasha(2011)]{Okasha2011} Okasha, S. (2011). Theory choice and social choice: Kuhn versus Arrow. \emph{Mind}, 120(477), 83--115.
+\bibitem[Putnam(1975)]{Putnam1975} Putnam, H. (1975). The meaning of \enquote{meaning}. In K. Gunderson (ed.), \emph{Language, Mind, and Knowledge}, Minnesota Studies in the Philosophy of Science 7, 131--193. University of Minnesota Press.
+\bibitem[Putnam(1981)]{Putnam1981} Putnam, H. (1981). \emph{Reason, Truth and History}. Cambridge University Press.
+\bibitem[Quine(1960)]{Quine1960} Quine, W.~V.~O. (1960). \emph{Word and Object}. MIT Press.
+\bibitem[Ruse(1979)]{Ruse1979} Ruse, M. (1979). \emph{The Darwinian Revolution}. University of Chicago Press.
+\bibitem[Salmon(1990)]{Salmon1990} Salmon, W.~C. (1990). Rationality and objectivity in science, or Tom Kuhn meets Tom Bayes. In C.~W. Savage (ed.), \emph{Scientific Theories}, Minnesota Studies in the Philosophy of Science 14, 175--204. University of Minnesota Press.
+\bibitem[Sankey(1994)]{Sankey1994} Sankey, H. (1994). \emph{The Incommensurability Thesis}. Avebury.
+\bibitem[Sankey(1997)]{Sankey1997} Sankey, H. (1997). \emph{Rationality, Relativism and Incommensurability}. Ashgate.
+\bibitem[Scheffler(1967)]{Scheffler1967} Scheffler, I. (1967). \emph{Science and Subjectivity}. Bobbs-Merrill.
+\bibitem[Shapere(1966)]{Shapere1966} Shapere, D. (1966). Meaning and scientific change. In R.~G. Colodny (ed.), \emph{Mind and Cosmos: Essays in Contemporary Science and Philosophy}, 41--85. University of Pittsburgh Press.
+\bibitem[Thagard(1992)]{Thagard1992} Thagard, P. (1992). \emph{Conceptual Revolutions}. Princeton University Press.
+\end{thebibliography}
+
+\end{document}

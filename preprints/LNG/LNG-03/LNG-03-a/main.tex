@@ -1,0 +1,107 @@
+\documentclass{situationist-preprint}
+
+\title{The Present King of France Is Not Bald}
+\msid{LNG-03-a}
+\msfamily{LNG-03}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_03.lean}
+\mskeywords{definite descriptions; Russell; Strawson; presupposition; scope; truth-value gaps}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is the present King of France bald? Russell held that \enquote{The present King of France is bald} is false, since it says that there is exactly one present King of France and that he is bald. Strawson held that it is neither true nor false, since its use presupposes, without asserting, that there is a king, and the presupposition fails. We defend Russell. On his analysis the sentence is false, its narrow-scope negation is false, and its wide-scope negation is true; these verdicts are proved and formalized in Lean. Strawson's objection is correct about something, but what it concerns is use, not content: it describes what a speaker takes for granted in using the sentence and why the use is defective, and this is compatible with the proposition expressed being false. Judgements of falsity in sentences whose description is not the topic confirm that the content is false.
+\end{abstract}
+
+\section{The question}
+
+\citet{Russell1905} analysed \enquote{The F is G} as saying that there is exactly one F and that every F is G. \enquote{The present King of France is bald} then says that there is one and only one present King of France and that he is bald, which is false, since France has no king. Its negation is ambiguous: read with wide scope, \enquote{it is not the case that the present King of France is bald} is true; read with narrow scope, \enquote{the present King of France is non-bald} is false, for the same reason as the original. The law of excluded middle is preserved without a bald or hirsute king.
+
+\citet{Strawson1950} objected that a speaker who uses the sentence does not assert that there is a king of France; she presupposes it, and when the presupposition fails, her use makes no statement and the question of truth or falsity \enquote{does not arise}. The objection is the ancestor of the semantic treatment of presupposition. We argue that Russell's theory is correct, and that Strawson's objection concerns use, not content.
+
+\section{The analysis}
+
+\begin{definition}[Russell]\label{d:russell}
+\enquote{The F is G} is true if and only if there is an $x$ such that $x$ is F, every F is identical to $x$, and $x$ is G.
+\end{definition}
+
+\begin{assumption}\label{a:noking}
+Nothing is presently king of France.
+\end{assumption}
+
+\section{The results}
+
+\begin{lemma}\label{l:empty}
+If nothing is F, then \enquote{The F is G} is false, for every G.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:russell}, the sentence requires something that is F.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+\enquote{The present King of France is bald} is false.
+\end{theorem}
+
+\begin{proof}
+From Lemma~\ref{l:empty} and Assumption~\ref{a:noking}.
+\end{proof}
+
+\begin{corollary}\label{c:scope}
+The narrow-scope negation, \enquote{The present King of France is non-bald}, is false, and the wide-scope negation, \enquote{It is not the case that the present King of France is bald}, is true.
+\end{corollary}
+
+\begin{proof}
+The first by Lemma~\ref{l:empty} with G as non-baldness; the second is the negation of a falsehood by Theorem~\ref{t:main}.
+\end{proof}
+
+Corollary~\ref{c:scope} gives the title its sense. Read as the denial of the original, \enquote{The present King of France is not bald} is true; read as an ascription of hair to a king, it is false.
+
+\section{Strawson's objection}
+
+Strawson distinguished a sentence, its use, and an utterance, and his claim is that a \emph{use} of the sentence, in the circumstances, fails to make a true or false statement. We accept a version of the observation: something goes wrong with the use. A speaker who says, today, that the present King of France is bald takes for granted something false, and the hearer's natural response is not \enquote{that's false} but \enquote{there is no king of France}. The question is whether this shows that the content lacks a truth value.
+
+It does not. What a speaker takes for granted in making an assertion is a fact about her speech act, and the defect Strawson describes is a defect of that act: the speaker has failed to secure the common ground her assertion requires \citep{Stalnaker1974}. The proposition she expresses, which is the content Definition~\ref{d:russell} gives, is false. That the hearer's natural response targets the presupposition rather than the claim is explained by the conversational status of the existence claim: it is not at issue, so the hearer corrects it directly rather than by denying the whole. This is what we mean by saying that the objection concerns use, not content. The companion LNG-03-b develops the point.
+
+\begin{objection}[Intuitions]
+Speakers do not judge the sentence false; they are squeamish about assigning it any truth value. Semantic theory should respect this.
+\end{objection}
+
+\begin{reply}
+Squeamishness varies with topic, as \citet{Strawson1964} himself noticed. \enquote{The King of France is sitting in that chair}, said of an empty chair, or \enquote{My friend went for a drive with the King of France last week}, is judged plainly false \citep{vonFintel2004}. If the existence claim were a presupposition whose failure produced a truth-value gap, these sentences would be gappy too. The variation is explained by what the sentence is about: when the description is the topic, the hearer addresses the existence claim; when it is not, she evaluates the claim about the chair or the friend and finds it false. The content is false throughout; what varies is the conversational response.
+\end{reply}
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/LNG/LNG_03.lean}. Definition~\ref{d:russell} is a definition, and Assumption~\ref{a:noking} is an axiom.
+
+\begin{lstlisting}
+def The (F G : Individual → Prop) : Prop :=
+  ∃ x, F x ∧ (∀ y, F y → y = x) ∧ G x
+
+theorem king_not_bald : ¬ The KingOfFrance Bald
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LNG_03.king_not_bald' depends on axioms:
+ [Philosophy.LNG_03.Bald, Philosophy.LNG_03.Individual,
+  Philosophy.LNG_03.KingOfFrance, Philosophy.LNG_03.no_king]
+\end{lstlisting}
+
+The first three are primitives: individuals, being presently king of France, being bald. \lstinline{no_king} is Assumption~\ref{a:noking}. Corollary~\ref{c:scope} (\lstinline{scopes}) depends on the same axioms.
+
+\section{Conclusion}
+
+The present King of France is not bald, in the sense that it is false that he is: there is no such king. Russell's theory of descriptions gives the content of the sentence, and Strawson's objection correctly describes a defect in its use.
+
+\begin{thebibliography}{9}\small
+\bibitem[Russell(1905)]{Russell1905} Russell, B. (1905). On denoting. \emph{Mind}, 14(56), 479--493.
+\bibitem[Stalnaker(1974)]{Stalnaker1974} Stalnaker, R. (1974). Pragmatic presuppositions. In M.~K. Munitz and P.~K. Unger (eds.), \emph{Semantics and Philosophy}, 197--213. New York University Press.
+\bibitem[Strawson(1950)]{Strawson1950} Strawson, P.~F. (1950). On referring. \emph{Mind}, 59(235), 320--344.
+\bibitem[Strawson(1964)]{Strawson1964} Strawson, P.~F. (1964). Identifying reference and truth-values. \emph{Theoria}, 30(2), 96--118.
+\bibitem[von Fintel(2004)]{vonFintel2004} von Fintel, K. (2004). Would you believe it? The King of France is back! (Presuppositions and truth-value intuitions). In M. Reimer and A. Bezuidenhout (eds.), \emph{Descriptions and Beyond}, 315--341. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

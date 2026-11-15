@@ -1,0 +1,338 @@
+\documentclass{situationist-preprint}
+
+\title{The Frege--Geach Problem Solved}
+\msid{MTE-03-a}
+\msfamily{MTE-03}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_03.lean}
+\mskeywords{expressivism; Frege--Geach problem; negation problem; being for; logic of plans; hyperplans; inconsistency; quasi-realism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Expressivists hold that moral sentences express desire-like states of mind rather than beliefs. The Frege--Geach problem is that moral sentences occur unasserted, in conditionals, disjunctions and negations, where they express no attitude, and yet they contribute the same meaning there as when asserted, so that arguments such as moral modus ponens are valid. We argue that expressivism can solve the problem. Following Schroeder, we take every sentence to express a single attitude, being for, whose contents are sets of Gibbard's fact-plan worlds, and we assume that states of being for are inconsistent exactly when their contents have no world in common. We prove that validity, defined as the inconsistency of accepting the premises while accepting the negation of the conclusion, coincides with consequence in the logic of plans. Negation, disjunction and the conditional then behave as they should: \enquote{lying is wrong} and \enquote{lying is not wrong} are inconsistent, Geach's argument is valid, and the three positions that the negation problem distinguishes receive three distinct states. The proofs are formalized in Lean. We record the price of the solution, which is that descriptive belief must be treated as being for as well, and we explain why, as MTE-17 argues, a solution with this price leaves expressivism indistinguishable from realism.
+\end{abstract}
+
+\section{The problem}
+
+Expressivism about moral language is the view that the meaning of a moral sentence is to be explained by the state of mind it is conventionally used to express, and that this state is not a belief representing the world as being some way but a non-cognitive state: an attitude of approval or disapproval, the acceptance of a norm, or a plan \citep{Ayer1936,Stevenson1944,Hare1952,Blackburn1984,Gibbard1990,Gibbard2003}. The view offers an attractive explanation of the practicality of moral judgment, since an agent who sincerely judges that lying is wrong is thereby in a state that disposes her against lying, and of the absence, from the scientific picture of the world, of anything for moral sentences to describe.
+
+The Frege--Geach problem, named by \citet{Geach1965} after the observation in \citet{Frege1919} that a thought may be the content of a sentence without being asserted, is that moral sentences occur in contexts in which no attitude is expressed by them. Someone who says
+\begin{enumerate}[label=(\arabic*)]
+\item\label{e:cond} If lying is wrong, then getting your little brother to lie is wrong,
+\end{enumerate}
+does not express disapproval of lying; she may have no view about whether lying is wrong. Yet the sentence \enquote{lying is wrong} must mean in \ref{e:cond} what it means when asserted on its own, since otherwise the argument
+\begin{enumerate}[label=(\arabic*),resume]
+\item\label{e:prem} Lying is wrong.
+\item\label{e:concl} So getting your little brother to lie is wrong,
+\end{enumerate}
+from \ref{e:prem} and \ref{e:cond} would commit the fallacy of equivocation, and it plainly does not \citep{Geach1960,Geach1965,Searle1962}. The problem is not confined to conditionals. Moral sentences occur negated, disjoined, in the antecedents of conditionals, under attitude verbs and quantifiers, and in mixed constructions with descriptive sentences. In each case the expressivist owes an account of the meaning of the complex sentence in terms of the state of mind it expresses, and of why the logical relations among such sentences hold.
+
+We state the demand as three requirements.
+\begin{enumerate}[label=(R\arabic*)]
+\item\label{r:comp} \emph{Compositionality.} The state expressed by a complex sentence is determined by the states expressed by its parts and by its mode of composition, and a moral sentence contributes the same semantic value embedded as unembedded.
+\item\label{r:incons} \emph{Inconsistency.} The states expressed by \enquote{lying is wrong} and \enquote{lying is not wrong} are inconsistent, and the account explains why.
+\item\label{r:valid} \emph{Validity.} Valid arguments are valid on the account, and their validity is explained by the states expressed: in particular modus ponens and disjunctive syllogism, with premises that are moral, descriptive or mixed.
+\end{enumerate}
+\ref{r:incons} is not a special case of \ref{r:valid} only in name. An account may assign states to every sentence and still have no account of why some combinations of states are inconsistent; inconsistency is the notion in terms of which the expressivist must define validity, since she cannot define it as truth preservation without presupposing that moral sentences are truth-apt in a sense that her explanation of their meaning does not supply.
+
+We argue that the three requirements can be met. The account we defend is not new: its components are due to \citet{Gibbard1990,Gibbard2003} and \citet{Schroeder2008book,Schroeder2008nous}. What we add is a precise statement of the assumptions on which it rests, a proof that under these assumptions validity coincides with consequence in the logic of plans, and an assessment of the price. Schroeder, who formulated the central construction, concluded that the price was too high for expressivism to pay. We conclude that the price is payable and that the solution succeeds; but the price is the subject of MTE-17, which argues that once the explanatory commitments of the resulting view are made explicit, it is indistinguishable from realism. The two manuscripts are meant to be read together. The present one establishes the technical success of the semantics; MTE-17 shows that this success, made explicit, collapses into the realism that MTE-01 defends.
+
+\section{A history of the problem}
+
+The history of the problem is a history of proposals for the attitude expressed by complex sentences, each defeated by a case. We set out the main stages, since each case is a constraint that any solution must meet.
+
+\subsection{Emotivism and the original objection}
+
+\citet{Ayer1936} held that the sentence \enquote{stealing money is wrong} has no factual meaning and expresses the speaker's disapproval, as if one said \enquote{stealing money!!} in a peculiar tone of horror. \citet{Stevenson1944} gave a richer account, on which moral sentences combine descriptive meaning with an emotive meaning that expresses the speaker's attitude and seeks to influence the hearer's. Neither offered an account of embedded occurrences. \citet{Hare1952}, who took moral sentences to be universalizable prescriptions, offered the most developed early account of their logic: he distinguished a phrastic, common to the indicative and the imperative, from a neustic that marks the mood, and argued that the logical relations among prescriptions hold in virtue of their phrastics. The proposal anticipates the solution we defend, in that it locates logical relations in contents of a non-descriptive kind, but it does not explain what it is to accept a disjunction of prescriptions, or why the acceptance of incompatible prescriptions is a failure of the same kind as the acceptance of incompatible beliefs.
+
+\citet{Geach1960,Geach1965} and \citet{Searle1962} pressed the objection against all speech-act analyses: against the view that \enquote{true} is used to endorse, that \enquote{good} is used to commend, that \enquote{voluntary} is used to ascribe responsibility. In each case the analysis explains the meaning of the term by a speech act that the speaker performs when she uses it in an unembedded assertion, and in each case the term occurs, with the same meaning, in contexts in which the act is not performed. Geach's verdict was that the expressivist cannot explain why \ref{e:prem} and \ref{e:cond} entail \ref{e:concl}.
+
+\subsection{Higher-order attitudes}
+
+\citet{Blackburn1984} proposed that \ref{e:cond} expresses a higher-order attitude: disapproval of the combination of disapproving of lying and not disapproving of getting one's little brother to lie. Someone who accepts \ref{e:prem} and \ref{e:cond} but not \ref{e:concl} then has a sensibility of which she herself disapproves, and the validity of the argument consists in the fact that rejecting its conclusion while accepting its premises involves such a clash.
+
+\citet{Hale1993} objected that this explains the wrong thing. A person whose attitudes clash in this way is guilty of a moral failing by her own lights: she has an attitude she disapproves of having. She is not guilty of a logical failing. Someone who believes that if it rains the street is wet, believes that it rains, and does not believe that the street is wet, is not merely in a state of which she disapproves; she is inconsistent, and her inconsistency is independent of what she thinks of it. The higher-order account also gives the wrong verdict on the modus ponens of an agent who approves of fractured sensibilities: she may accept the premises and reject the conclusion without any clash. \citet{Blackburn1988} replied with a logic of commitment, on which accepting a conditional ties one to a tree of attitudes that one must accept on pain of incoherence, but the notion of incoherence remained unexplained, and Hale's objection applied to it with only a change of words.
+
+\subsection{The negation problem}
+
+\citet{Unwin1999,Unwin2001} identified a deeper difficulty. Consider three sentences.
+\begin{enumerate}[label=(\arabic*),resume]
+\item\label{e:n1} Jon thinks that murdering is not wrong.
+\item\label{e:n2} Jon does not think that murdering is wrong.
+\item\label{e:n3} Jon thinks that not murdering is wrong.
+\end{enumerate}
+These ascribe three different states, or the absence of one. If \enquote{murdering is wrong} expresses disapproval of murdering, the expressivist can say that \ref{e:n2} denies that Jon disapproves of murdering and that \ref{e:n3} ascribes disapproval of not murdering. Nothing is left for \ref{e:n1}. There is only one place for negation to go in \enquote{Jon disapproves of murdering}, namely in front of the act, and it is occupied by \ref{e:n3}; the other available negation, in front of the ascription, is \ref{e:n2}. The expressivist with a single attitude of disapproval has two places for negation and three things to say.
+
+One response is to add a second attitude, toleration, so that \ref{e:n1} ascribes toleration of murdering. But then the inconsistency between disapproving of murdering and tolerating it must be stipulated: it is inconsistency between two distinct attitudes towards one content, which \citet{Schroeder2008nous} calls B-type inconsistency, and nothing in the nature of the attitudes explains it. Belief and disbelief stand in the same relation, but the cognitivist can explain the inconsistency of believing $p$ and disbelieving $p$ by identifying disbelief in $p$ with belief in the negation of $p$, so that the inconsistency is between one attitude towards inconsistent contents, A-type inconsistency, which is explained by the contents. The expressivist with two attitudes cannot make this move, since the content of the toleration expressed by \enquote{murdering is not wrong} is not the negation of anything. \citet{Dreier2006} surveyed the options and argued that the problem is general: any expressivist semantics that takes the attitudes of unembedded moral sentences as basic, and builds complex sentences from them, will face it.
+
+\subsection{Norms and plans}
+
+\citet{Gibbard1990} took a different route. Normative judgments express the acceptance of systems of norms, and the content of a normative judgment is a set of factual--normative worlds: pairs of a possible world and a system of norms. Accepting a judgment is ruling out the pairs at which it fails; a judgment that is partly factual and partly normative rules out pairs on both dimensions. Logical relations are then defined over these pairs, and negation, disjunction and the conditional receive the usual Boolean treatment. \citet{Gibbard2003} recast the account in terms of plans. A hyperplan is a maximally decided contingency plan: it settles, for every possible circumstance, what to do in it. A fact-plan world is a pair of a possible world and a hyperplan. To think that an act is the thing to do in a circumstance is to rule out the hyperplans that do not prescribe it, and a planning state is represented by the set of fact-plan worlds that it leaves open. Disagreement in plan is like disagreement in belief: the two states leave open no common fact-plan world.
+
+The Gibbardian semantics has the formal structure the problem requires, since it gives every sentence a content in a Boolean algebra. What it did not settle, in the view of its critics, is what attitude a person is in when her state is represented by a set of fact-plan worlds that is neither purely factual nor purely practical: what is it, psychologically, to rule out the pairs at which the street is dry and lying is not to be blamed, while leaving open the others? Unwin's objection to Gibbard was that his notion of ruling out a pair presupposes, at the practical level, the very attitude of rejection that the negation problem shows the expressivist cannot have \citep{Unwin2001}.
+
+\subsection{Being for}
+
+\citet{Schroeder2008book,Schroeder2008nous} answered Unwin. The negation problem arises because the expressivist has only one place for the negation in \ref{e:n1} to go. The solution is to add a place. Let the attitude expressed by moral sentences be a single, general non-cognitive attitude, \emph{being for}, and let its contents be properties of agents, such as blaming for murdering. Then
+\begin{itemize}
+\item \enquote{murdering is wrong} expresses being for blaming for murdering;
+\item \enquote{murdering is not wrong} expresses being for not blaming for murdering;
+\item \enquote{not murdering is wrong} expresses being for blaming for not murdering.
+\end{itemize}
+There are now three places for negation: in front of the ascription, in front of \enquote{blaming}, and in front of \enquote{murdering}. Sentences \ref{e:n1}, \ref{e:n2} and \ref{e:n3} occupy them. Being for blaming for murdering and being for not blaming for murdering are inconsistent in the way that intending to do something and intending not to do it are inconsistent: A-type inconsistency, explained by the inconsistency of their contents. Disjunction is handled inside the content: \enquote{murdering is wrong or stealing is wrong} expresses being for blaming for murdering or blaming for stealing.
+
+Schroeder then showed that the construction extends to mixed sentences only if descriptive sentences, too, express being for. The disjunction \enquote{grass is green or murdering is wrong} must express a single state, since accepting a disjunction is not being in one of two states; if its content is to be the disjunction of the contents of its disjuncts, the descriptive disjunct must contribute a content of the same kind as \enquote{blaming for murdering}. Schroeder's proposal is that believing that grass is green is being for proceeding as if grass is green. He regarded this as a significant cost, and argued that the further extensions required by tense, quantification and degrees of confidence imposed further costs, so that the expressivist program, though not refuted, was shown to be much more expensive than its proponents had supposed \citep{Schroeder2008book}.
+
+The account of Section~\ref{s:framework} combines Schroeder's attitude with Gibbard's contents. It takes from Schroeder the single attitude and the explanation of inconsistency as A-type, and from Gibbard the representation of contents as sets of fact-plan worlds. The combination is natural: Schroeder's contents, properties such as blaming for murdering, determine sets of hyperplans, and Gibbard's fact-plan worlds are the points at which both descriptive and practical contents are evaluated.
+
+\section{Framework}\label{s:framework}
+
+We consider a language with two kinds of atomic sentence, descriptive atoms $p, q, \ldots$ and moral atoms $\mathsf{W}a$, read \enquote{doing $a$ is wrong}, where $a$ ranges over act types. Negation of an act type, \enquote{not murdering}, is itself an act type, so that \enquote{not murdering is wrong} is the moral atom $\mathsf{W}\bar a$ where $\bar a$ is the act of refraining from $a$.
+
+\begin{definition}[Fact-plan worlds]\label{d:world}
+A \emph{fact-plan world} $w$ settles, for every descriptive atom $p$, whether $p$ holds at $w$, and, for every act type $a$, whether $w$ blames for doing $a$. The first component is the fact part of $w$, the second its plan part.
+\end{definition}
+
+The plan part of a fact-plan world is a hyperplan restricted to the activity that matters for moral sentences, namely blaming. We follow \citet{Gibbard1990} and \citet{Schroeder2008book} in taking the practical content of \enquote{wrong} to concern blame: to think an act wrong is to be for blaming for it. Nothing in the logic depends on the choice of blame rather than another reactive response, or on whether blame is directed at others or also at oneself.
+
+\begin{definition}[Sentences]\label{d:sent}
+Sentences are built from descriptive atoms and moral atoms by negation $\neg$ and disjunction $\vee$. Conjunction and the conditional are defined: $\varphi\wedge\psi$ is $\neg(\neg\varphi\vee\neg\psi)$ and $\varphi\to\psi$ is $\neg\varphi\vee\psi$.
+\end{definition}
+
+\begin{definition}[Content]\label{d:content}
+The \emph{content} $[\varphi]$ of a sentence is the set of fact-plan worlds defined by: $w\in[p]$ if $p$ holds at $w$; $w\in[\mathsf{W}a]$ if $w$ blames for doing $a$; $w\in[\neg\varphi]$ if $w\notin[\varphi]$; $w\in[\varphi\vee\psi]$ if $w\in[\varphi]$ or $w\in[\psi]$.
+\end{definition}
+
+The content of a sentence is defined compositionally, and the moral atom $\mathsf{W}a$ contributes the same content wherever it occurs. Requirement \ref{r:comp} is therefore met at the level of contents. The assumptions say how contents are related to states of mind.
+
+\begin{assumption}[Expression]\label{a:expr}
+There is a single attitude, being for, and every sentence, descriptive, moral or mixed, conventionally expresses being for its content: the state $\mathrm{FOR}([\varphi])$.
+\end{assumption}
+
+\begin{assumption}[Inheritance]\label{a:inh}
+States of being for whose contents have no fact-plan world in common are jointly inconsistent.
+\end{assumption}
+
+\begin{assumption}[Only inheritance]\label{a:only}
+States of being for are jointly inconsistent only if their contents have no fact-plan world in common.
+\end{assumption}
+
+Assumption~\ref{a:expr} is Schroeder's construction with Gibbard's contents: to accept \enquote{murdering is wrong} is to be for blaming for murdering, which is to be for the set of fact-plan worlds whose plan part blames for murdering; to accept \enquote{grass is green} is to be for proceeding as if grass is green, which is to be for the set of fact-plan worlds whose fact part makes grass green. Assumption~\ref{a:inh} says that the inconsistency of being for is A-type, as the inconsistency of intention is: one cannot coherently be for each of several things that cannot all be realized together. Assumption~\ref{a:only} says that being for has no further source of inconsistency: there is no B-type inconsistency, since there is only one attitude. Together, the two assumptions say that the consistency of a set of states of being for is the joint satisfiability of their contents.
+
+\begin{definition}[Validity]\label{d:valid}
+An argument from premises $\Gamma$ to conclusion $\varphi$ is \emph{valid} if the states expressed by the members of $\Gamma$ and the state expressed by $\neg\varphi$ are jointly inconsistent.
+\end{definition}
+
+Definition~\ref{d:valid} is the definition an expressivist must give, since it does not presuppose that sentences have truth conditions. It is also the definition a cognitivist can accept: an argument is valid if and only if believing its premises while believing the negation of its conclusion is inconsistent. The two definitions differ only in the attitude.
+
+\begin{remark}\label{r:model}
+Assumptions~\ref{a:expr}, \ref{a:inh} and \ref{a:only} are jointly consistent. Interpret states as sets of fact-plan worlds, let $\mathrm{FOR}$ be the identity, and call a list of states inconsistent when they have no common member. All three assumptions then hold. The assumptions are not idle, however: they are substantive claims about a psychological attitude, and the interpretation shows only that they do not contradict one another.
+\end{remark}
+
+\section{The solution}\label{s:solution}
+
+Say that $\varphi$ is a \emph{plan consequence} of $\Gamma$ if every fact-plan world in the content of every member of $\Gamma$ is in the content of $\varphi$. This is consequence in Gibbard's logic of plans, restricted to our language.
+
+\begin{theorem}\label{t:main}
+Under Assumptions~\ref{a:expr}, \ref{a:inh} and \ref{a:only}, an argument from $\Gamma$ to $\varphi$ is valid if and only if $\varphi$ is a plan consequence of $\Gamma$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:expr}, the states expressed by the members of $\Gamma$ and by $\neg\varphi$ are the states of being for their contents.
+
+Suppose the argument is valid. By Assumption~\ref{a:only}, the contents of the members of $\Gamma$ and the content of $\neg\varphi$ have no fact-plan world in common. Let $w$ be a fact-plan world in the content of every member of $\Gamma$. If $w$ were not in $[\varphi]$, it would be in $[\neg\varphi]$ by Definition~\ref{d:content}, and so would be common to all the contents, which is impossible. So $w\in[\varphi]$, and $\varphi$ is a plan consequence of $\Gamma$.
+
+Conversely, suppose $\varphi$ is a plan consequence of $\Gamma$. If some fact-plan world $w$ were in the content of every member of $\Gamma$ and in $[\neg\varphi]$, it would be in $[\varphi]$ by hypothesis and not in $[\varphi]$ by Definition~\ref{d:content}. So the contents have no world in common, and by Assumption~\ref{a:inh} the states are jointly inconsistent: the argument is valid.
+\end{proof}
+
+Theorem~\ref{t:main} is the precise sense in which states of being for compose according to the logic of plans. Its consequences for the three requirements are immediate.
+
+\begin{corollary}\label{c:incons}
+For every act type $a$, the states expressed by \enquote{doing $a$ is wrong} and \enquote{doing $a$ is not wrong} are inconsistent.
+\end{corollary}
+
+\begin{proof}
+Their contents are $[\mathsf{W}a]$ and its complement, which have no fact-plan world in common. Apply Assumption~\ref{a:inh}.
+\end{proof}
+
+\begin{corollary}\label{c:mp}
+Modus ponens, from $\varphi$ and $\varphi\to\psi$ to $\psi$, and disjunctive syllogism, from $\varphi\vee\psi$ and $\neg\varphi$ to $\psi$, are valid for all sentences $\varphi$ and $\psi$, whether descriptive, moral or mixed. In particular Geach's argument from \ref{e:prem} and \ref{e:cond} to \ref{e:concl} is valid.
+\end{corollary}
+
+\begin{proof}
+A fact-plan world in $[\varphi]$ and in $[\neg\varphi\vee\psi]$ is not in $[\neg\varphi]$ and so is in $[\psi]$; a fact-plan world in $[\varphi\vee\psi]$ and in $[\neg\varphi]$ is not in $[\varphi]$ and so is in $[\psi]$. In both cases $\psi$ is a plan consequence of the premises, and the arguments are valid by Theorem~\ref{t:main}. Geach's argument is the instance of modus ponens in which $\varphi$ is $\mathsf{W}a$ for $a$ lying and $\psi$ is $\mathsf{W}b$ for $b$ getting one's little brother to lie.
+\end{proof}
+
+\begin{proposition}\label{p:neg}
+Let $a$ be an act type and $\bar a$ the act of refraining from $a$, distinct from $a$ as an object of blame. Then the state expressed by \enquote{$a$ is wrong} is inconsistent with the state expressed by \enquote{$a$ is not wrong} but consistent with the state expressed by \enquote{$\bar a$ is wrong}; and the contents of \enquote{$a$ is not wrong} and \enquote{$\bar a$ is wrong} are distinct.
+\end{proposition}
+
+\begin{proof}
+The first claim is Corollary~\ref{c:incons}. For the second, consider the fact-plan world that blames for every act. It belongs to $[\mathsf{W}a]$ and to $[\mathsf{W}\bar a]$, so by Assumption~\ref{a:only} the two states are not inconsistent. The same world belongs to $[\mathsf{W}\bar a]$ and not to $[\neg\mathsf{W}a]$, so the two contents are distinct.
+\end{proof}
+
+Proposition~\ref{p:neg} is the solution to the negation problem. Sentence \ref{e:n1} ascribes to Jon the state $\mathrm{FOR}([\neg\mathsf{W}a])$, being for not blaming for murdering; \ref{e:n3} ascribes $\mathrm{FOR}([\mathsf{W}\bar a])$, being for blaming for not murdering; \ref{e:n2} denies that Jon is in $\mathrm{FOR}([\mathsf{W}a])$. The three are distinct, and only the first is inconsistent with judging murder wrong. The consistency of the second with judging murder wrong is the consistency of judging both murdering and refraining from murder wrong: the judgment that one faces a moral dilemma. Whether dilemmas are possible is a first-order question, and the semantics rightly leaves it open. A theorist who holds that they are not may add the plan-theoretic constraint that no hyperplan blames for both an act and its omission; Corollary~\ref{c:incons} and Theorem~\ref{t:main} are unaffected, and Proposition~\ref{p:neg} then holds with \enquote{consistent} replaced by \enquote{distinct in content}.
+
+The three requirements are met. \ref{r:comp} holds because the content of each sentence is defined compositionally and each sentence expresses being for its content; the atom \enquote{lying is wrong} contributes $[\mathsf{W}a]$ in \ref{e:prem} and in \ref{e:cond} alike. What differs between the occurrences is not the meaning of the atom but the state expressed by the whole sentence in which it occurs: in \ref{e:prem}, being for the worlds that blame for lying; in \ref{e:cond}, being for the worlds that either do not blame for lying or blame for getting one's brother to lie. \ref{r:incons} holds by Corollary~\ref{c:incons}, and the inconsistency is explained by Assumption~\ref{a:inh}: it is the inconsistency of being for two things that cannot both be realized. \ref{r:valid} holds by Corollary~\ref{c:mp}, and more generally by Theorem~\ref{t:main}.
+
+\section{Cases}\label{s:cases}
+
+The adequacy of a semantics is tested by cases beyond those it was built for. We consider five.
+
+\paragraph{Mixed modus ponens.} \enquote{If the vaccine is safe, refusing it is wrong; the vaccine is safe; so refusing it is wrong.} The first premise has a descriptive antecedent and a moral consequent; it expresses being for the fact-plan worlds that either make the vaccine unsafe or blame for refusing it. The argument is an instance of Corollary~\ref{c:mp}. Hale's objection to the higher-order account has no purchase: an agent who accepts the premises and rejects the conclusion is for three things that no fact-plan world realizes together, and her failing is of the same kind as that of an agent who accepts \enquote{if it rains the street is wet}, \enquote{it rains} and \enquote{the street is not wet}. The failing is not that she disapproves of her own state, and it is present whatever she thinks of it.
+
+\paragraph{Moral antecedents with descriptive consequents.} \enquote{If lying is wrong, then Kant was right about something; lying is wrong; so Kant was right about something.} The conclusion is descriptive and one premise is purely moral. Theorem~\ref{t:main} makes the argument valid. \citet{Dorr2002} argued that expressivism makes the acceptance of such conclusions on the basis of such premises a form of wishful thinking: a belief formed on the basis of a non-cognitive attitude. We return to the objection in Section~\ref{s:obj}.
+
+\paragraph{Attitude ascriptions.} \enquote{Jon thinks that murdering is not wrong} and its two neighbors are treated in Proposition~\ref{p:neg}. Ascriptions with embedded disjunctions, such as \enquote{Jon thinks that murdering is wrong or stealing is wrong}, ascribe being for the union of two sets of fact-plan worlds, which is not the same as being for either: Jon may be for the worlds that blame for at least one of the two acts without being for the worlds that blame for murdering. This is the correct verdict, since a person may be sure that one of two acts is wrong without being sure which.
+
+\paragraph{Contraposition and the moral conditional.} \enquote{If lying is wrong, getting your brother to lie is wrong; getting your brother to lie is not wrong; so lying is not wrong.} Modus tollens is a plan consequence and so valid. The case matters because the higher-order account of \citet{Blackburn1984} had difficulty with it: the conditional was supposed to express disapproval of a combination of attitudes, and it was unclear how it combined with the negated consequent to yield anything at all. On the present account the conditional and the negated consequent express states whose contents jointly exclude the worlds that blame for lying.
+
+\paragraph{The conditional in the antecedent.} \enquote{If, if lying is wrong then getting your brother to lie is wrong, then Geach was right.} The antecedent is itself a moral conditional, and the whole expresses being for the worlds that either realize the content of \ref{e:cond}'s negation or make Geach right. No special treatment is required for any depth of embedding. This is the point at which approaches that build complex states from attitudes rather than from contents fail: they require a new attitude for each pattern of embedding, and no finite stock suffices.
+
+\section{A further development: mixed contents and the uniformity of the attitude}\label{s:further}
+
+Theorem~\ref{t:main} makes the logic of the language the classical logic of its contents. We state the general form and then the formal reason why the solution requires descriptive sentences to express being for.
+
+\begin{proposition}\label{p:classical}
+Every argument valid in classical propositional logic, with the descriptive and moral atoms treated as propositional variables, is valid.
+\end{proposition}
+
+\begin{proof}
+A fact-plan world determines a classical valuation of the atoms, assigning truth to $p$ if $p$ holds at it and to $\mathsf{W}a$ if it blames for $a$, and by Definition~\ref{d:content} a world is in the content of a sentence exactly when the valuation it determines makes the sentence true. A classically valid argument therefore has the property that every world in the contents of its premises is in the content of its conclusion. By Theorem~\ref{t:main} it is valid.
+\end{proof}
+
+The converse also holds when the atoms are logically independent, that is, when every valuation of the atoms is determined by some fact-plan world, as it is under Definition~\ref{d:world}. The logic of the language is then exactly classical propositional logic. This is the right result: the logical behavior of moral sentences is not different from that of descriptive sentences, and a semantics that delivered a non-classical logic for them would have changed the subject.
+
+Say that a content is \emph{descriptive} if it depends only on the fact part of fact-plan worlds, so that two worlds with the same fact part are both in it or both outside it, and \emph{practical} if it depends only on the plan part.
+
+\begin{proposition}\label{p:mixed}
+For every descriptive atom $p$ and act type $a$, the content of the mixed disjunction $p\vee\mathsf{W}a$ is not the intersection of a descriptive content and a practical content.
+\end{proposition}
+
+\begin{proof}
+Suppose $[p\vee\mathsf{W}a]=D\cap E$ with $D$ descriptive and $E$ practical. Let $w_1$ be a world at which every descriptive atom holds and nothing is blamed, $w_2$ a world at which no descriptive atom holds and everything is blamed, and $w_3$ a world at which no descriptive atom holds and nothing is blamed. Then $w_1$ and $w_2$ are in $[p\vee\mathsf{W}a]$ and $w_3$ is not. Since $w_2\in D$ and $w_3$ has the fact part of $w_2$, $w_3\in D$; since $w_1\in E$ and $w_3$ has the plan part of $w_1$, $w_3\in E$. So $w_3\in D\cap E$, a contradiction.
+\end{proof}
+
+Proposition~\ref{p:mixed} is the formal kernel of Schroeder's argument for the uniformity of the attitude. Suppose descriptive sentences expressed beliefs, a separate attitude whose objects are descriptive contents, and moral sentences expressed being for, an attitude whose objects are practical contents. A state of accepting a mixed sentence would then have to be a combination of a belief and a state of being for, and the content of the combination would be the intersection of a descriptive and a practical content. By Proposition~\ref{p:mixed}, no such combination has the content of the mixed disjunction. Nor can accepting the disjunction be being in one or other of two states: someone who accepts \enquote{grass is green or murder is wrong} need be in neither the state of believing that grass is green nor the state of being for blaming for murder. So the state expressed by a mixed disjunction must be a single state with a content that is neither descriptive nor practical, and the attitude it involves must be one that can take such contents. If moral sentences express being for, the attitude is being for, and descriptive sentences, whose contents combine with practical contents in mixed sentences, must express being for as well. Assumption~\ref{a:expr} is therefore not an optional simplification of the account. It is forced.
+
+The proposition also bears on thick concepts. MTE-15 argues that thick concepts such as \enquote{lewd} cannot be factored into a descriptive and an evaluative component. Proposition~\ref{p:mixed} shows that the semantics defended here has room for contents of exactly the non-factorable kind: sets of fact-plan worlds that are not intersections of descriptive and practical sets. An expressivist who accepts the present solution may therefore accept the conclusion of MTE-15, assigning to \enquote{$x$ is lewd} a mixed content that is not the intersection of a descriptive content and a practical content. What she cannot do is retain the traditional expressivist explanation of thick terms as descriptive predicates with an attitude attached, since that explanation is a factoring.
+
+\section{Recent work}\label{s:recent}
+
+The last fifteen years have seen the problem restated and the solution space mapped. We locate the present account in it.
+
+\citet{Schroeder2008compass} distinguished the Frege--Geach problem proper, the demand for a compositional semantics for complex sentences, from the demand to explain the logical relations of the sentences so treated. His own construction met the first demand, and his assessment of its costs concerned the second only indirectly: the costs lay in what the construction required of the theory of descriptive belief and in the extensions to quantifiers, tense and degrees of confidence. Theorem~\ref{t:main} meets both demands within the propositional fragment, and Proposition~\ref{p:mixed} shows that the cost of the uniform attitude is not an artefact of Schroeder's particular construction.
+
+\citet{Charlow2014} argued that the problem is a problem about the semantics of attitudes, and that expressivists should give a compositional semantics whose values are properties of states of mind rather than contents in the traditional sense. The present account can be read in this way, since the semantic value of a sentence determines a property of states, that of being for its content. The difference is one of presentation: the properties of states that Charlow's framework assigns can be recovered from contents when, as Assumptions~\ref{a:inh} and \ref{a:only} require, the consistency of states is the satisfiability of their contents.
+
+\citet{BakerWoods2015} argued that the expressivist's obligation to explain inconsistency is no heavier than the cognitivist's. The cognitivist does not explain why believing $p$ and believing not-$p$ is inconsistent, beyond pointing out that the contents cannot both be true; the expressivist may equally point out that the contents of the states she posits cannot both be realized. Assumption~\ref{a:inh} is in this spirit. It does not explain the inconsistency of being for in terms of anything more basic, and it does not need to: the inconsistency of intention is not explained by anything more basic either, and no one doubts that intending to be in Paris at noon and intending to be in London at noon are inconsistent.
+
+\citet{Ridge2014} defended an ecumenical expressivism on which a normative judgment is a hybrid of a belief and a normative perspective. Ecumenical views were designed in part to ease the Frege--Geach problem by giving moral sentences a belief component with ordinary truth conditions. Proposition~\ref{p:mixed} indicates the limits of the strategy for mixed sentences: if the belief component is descriptive and the perspective component practical, their combination has a content of the factored kind, and mixed disjunctions require something more.
+
+\citet{Yalcin2012} developed a Bayesian expressivism for epistemic modals, on which the states expressed are properties of credal states. The framework suggests how the present account extends to degrees of confidence, one of the extensions Schroeder judged costly: a state of partial being for can be represented by a probability function over fact-plan worlds, as Gibbard's own discussion of normative uncertainty anticipated \citep{Gibbard2003}. MTE-16 assumes that the degrees of settledness of an expressivist agent can play the role of credences in its theory of moral uncertainty; the representation over fact-plan worlds is what makes the assumption available.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Being for is not a real attitude]
+Being for is defined by its role in the semantics. There is no independent reason to believe that people are in a state of being for proceeding as if grass is green whenever they believe that grass is green. The attitude is posited to make the logic come out right, and its psychology is a fiction.
+\end{objection}
+
+\begin{reply}
+The attitude has an independent characterization: it is the attitude of which intention, preference and plan are species, a state with a world-to-mind direction of fit whose consistency conditions are given by the joint realizability of its objects. That descriptive belief should also be a species of it is a substantive and surprising claim, and it is the price that Section~\ref{s:further} identifies. But the claim that belief has the functional profile of being for proceeding as if $p$ has a tradition behind it in the pragmatist view of belief as a disposition to act as if $p$, and it is not a fiction introduced for the occasion. The objection is better put as a demand for argument that people are in fact in such states; that demand is legitimate, but it is not the Frege--Geach problem, which asks whether an expressivist semantics can be compositional and can explain validity. Theorem~\ref{t:main} shows that it can.
+\end{reply}
+
+\begin{objection}[Inconsistency is stipulated]
+Assumptions~\ref{a:inh} and \ref{a:only} stipulate that being for is inconsistent when its contents cannot be jointly realized. This is exactly what Hale demanded be explained, and the account explains it by assuming it.
+\end{objection}
+
+\begin{reply}
+Hale's demand was that the expressivist explain the inconsistency of states of mind as a failing of the same kind as inconsistency of belief rather than as a moral failing. Assumption~\ref{a:inh} meets the demand: the failing it describes is the failing of being for things that cannot all be realized, which is of the same kind as believing things that cannot all be true and intending things that cannot all be done. That the assumption is not derived from anything more basic is not a defect peculiar to expressivism, as \citet{BakerWoods2015} argue: the cognitivist takes the inconsistency of belief in contradictory contents as basic in the same way. What was objectionable in the earlier accounts was not that they took something as basic but that what they took as basic, the clash of first-order and higher-order attitudes or the inconsistency of disapproval and toleration, was not a failing of the right kind. Assumption~\ref{a:inh} is A-type, and A-type inconsistency is the kind that belief exhibits.
+\end{reply}
+
+\begin{objection}[Wishful thinking]
+If \enquote{lying is wrong} expresses a non-cognitive state, then the inference from \enquote{lying is wrong} and \enquote{if lying is wrong, then Kant was right about something} to \enquote{Kant was right about something} forms a belief on the basis of a non-cognitive state. That is wishful thinking, and its validity is a reductio of expressivism \citep{Dorr2002}.
+\end{objection}
+
+\begin{reply}
+The inference is valid by Theorem~\ref{t:main}, and the objection does not dispute this; it disputes whether the conclusion is thereby justified. On the present account the conditional premise is a mixed state, being for the fact-plan worlds that either do not blame for lying or make Kant right about something, and a person who accepts it has already connected her planning with her view of the facts. If her acceptance of the conditional is justified, her conclusion inherits justification from her premises in the way that conclusions of valid arguments in general do; if it is not, her conclusion is unjustified, but then so is the conclusion of any argument with an unjustified premise. The question whether a non-cognitive state can confer justification on a descriptive conclusion is a question in moral epistemology, and it arises for the realist too, who must say how a moral belief formed by intuition can support a descriptive conclusion. It does not bear on whether expressivism has a compositional semantics with the right logic.
+\end{reply}
+
+\begin{objection}[The semantics has abandoned expressivism]
+A view on which every sentence expresses the same attitude towards a set of worlds is not expressivism but a notational variant of truth-conditional semantics. If descriptive and moral sentences alike express being for sets of fact-plan worlds, the contrast between them that expressivism exists to draw has disappeared \citep{Dreier2004}.
+\end{objection}
+
+\begin{reply}
+The objection is correct in its premises and it is the subject of MTE-17. The contrast that the semantics preserves is the contrast between the fact part and the plan part of fact-plan worlds: descriptive atoms constrain the first and moral atoms the second, and the explanation of what it is to accept a moral sentence goes through planning rather than through representing. Whether this contrast suffices to distinguish expressivism from realism, once the commitments needed to explain moral error and mind-independence are made explicit, is a further question, and MTE-17 argues that it does not. But the further question is not the Frege--Geach problem. The question of this manuscript is whether an expressivist semantics can meet requirements \ref{r:comp}, \ref{r:incons} and \ref{r:valid}, and it can. If the resulting view turns out to be a form of realism, that is a discovery about expressivism, not a failure of the solution.
+\end{reply}
+
+\begin{objection}[Beyond the propositional fragment]
+The result is proved for a propositional language. Quantifiers, tense, modals and attitude verbs raise problems that Schroeder argued the being-for account cannot meet without further cost.
+\end{objection}
+
+\begin{reply}
+The extension to quantifiers is standard: let act types be indexed by objects, so that \enquote{everything he did was wrong} expresses being for the worlds that blame for each of his acts, and let contents of quantified sentences be intersections and unions of contents of instances. Theorem~\ref{t:main} does not depend on the finiteness of the language, and its proof carries over. Tense and modality require indexing fact-plan worlds by times and circumstances, which is how Gibbard's hyperplans are defined in the first place, since a hyperplan settles what to do in every circumstance. Degrees of confidence were discussed in Section~\ref{s:recent}. We grant that each extension must be carried out, and that Schroeder's assessment of their individual difficulty deserves an answer case by case. The problem that Geach posed, however, is the problem of the propositional fragment: of negation, disjunction and the conditional. That problem is solved.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+Theorem~\ref{t:main} is conditional on Assumptions~\ref{a:expr}, \ref{a:inh} and \ref{a:only}. It does not establish that moral sentences express states of being for, or that people are in such states; it establishes that if they are, and if being for has the consistency conditions stated, expressivism has a semantics that meets the requirements of the Frege--Geach problem. Nor does it establish that expressivism is true. It removes the objection that has been thought most damaging to the view, and it leaves the remaining objections, from the explanation of moral error, from the mind-independence of moral facts and from the apparent truth-aptness of moral sentences, where they were.
+
+Nor does the result establish that expressivism, so understood, is distinct from realism. The solution has three commitments that, once made explicit, threaten the distinction. Every sentence expresses the same attitude towards a content in a single Boolean algebra (Assumption~\ref{a:expr}). The consistency of states is the satisfiability of their contents (Assumptions~\ref{a:inh} and \ref{a:only}). And, as Section~\ref{s:further} shows, descriptive belief is assimilated to being for. A theory on which moral sentences have contents that are sets of worlds, which combine with descriptive contents under the Boolean operations and whose consistency is joint satisfiability, has given moral sentences everything that a truth-conditional semantics gives them except the word \enquote{truth}; and given deflationism about truth (LNG-10) the word comes free. MTE-17 argues that the remaining difference, the claim that moral judgment is explained by attitudes rather than by facts, cannot be stated once the quasi-realist's account of moral error is made explicit, and that quasi-realism is indistinguishable from realism. MTE-01 defends the realism into which it collapses, on which moral facts are natural facts about idealized reactions. The present manuscript is the first half of that argument: it shows that the expressivist semantics succeeds. The success is real; its consequences are drawn in MTE-17.
+
+\section{Formalization}\label{s:formal}
+
+Theorem~\ref{t:main}, Corollaries~\ref{c:incons} and \ref{c:mp}, and Propositions~\ref{p:neg} and \ref{p:mixed} are formalized in the module \nolinkurl{Philosophy/MTE/MTE_03.lean}. Act types and descriptive atoms are primitive types. A fact-plan world is a structure with two fields, which descriptive atoms hold and which acts are blamed for (Definition~\ref{d:world}); sentences form an inductive type (Definition~\ref{d:sent}), and contents are defined by recursion (Definition~\ref{d:content}). States, the attitude of being for, the state a sentence expresses, and joint inconsistency are primitives, and Assumptions~\ref{a:expr}, \ref{a:inh} and \ref{a:only} are axioms about them. Validity is defined as in Definition~\ref{d:valid}. The main theorem reads:
+
+\begin{lstlisting}
+theorem valid_iff_plan_consequence (G : List Sentence) (phi : Sentence) :
+    Valid G phi ↔ PlanConsequence G phi
+\end{lstlisting}
+
+The checker reports for it:
+
+\begin{lstlisting}
+'Philosophy.MTE_03.valid_iff_plan_consequence' depends on axioms:
+ [propext, Classical.choice, Quot.sound,
+  Philosophy.MTE_03.Act, Philosophy.MTE_03.Fact, Philosophy.MTE_03.For,
+  Philosophy.MTE_03.Inconsistent, Philosophy.MTE_03.State,
+  Philosophy.MTE_03.expresses, Philosophy.MTE_03.expression,
+  Philosophy.MTE_03.inheritance, Philosophy.MTE_03.only_inheritance]
+\end{lstlisting}
+
+The first three axioms are those of Lean's classical logic; \texttt{Classical.choice} enters through the proof by contradiction in the left-to-right direction. \texttt{Act}, \texttt{Fact}, \texttt{State}, \texttt{For}, \texttt{expresses} and \texttt{Inconsistent} are the primitives. The three remaining axioms are the philosophical premises: \texttt{expression} is Assumption~\ref{a:expr}, \texttt{inheritance} is Assumption~\ref{a:inh}, and \texttt{only\_inheritance} is Assumption~\ref{a:only}. The module also proves Geach's argument as an instance of modus ponens. The proof of Proposition~\ref{p:mixed} uses no philosophical premise: its axioms are only the primitives \texttt{Act} and \texttt{Fact}, since it is a fact about contents, not about states. Proposition~\ref{p:classical} is not stated separately in the module. The interpretation of Remark~\ref{r:model} is not formalized; it is the reason to think that the axioms are consistent.
+
+\section{Conclusion}
+
+Expressivism can solve the Frege--Geach problem. If every sentence expresses being for its content, a set of fact-plan worlds, and if states of being for are inconsistent exactly when their contents cannot be jointly realized, then validity is consequence in the logic of plans: \enquote{lying is wrong} and \enquote{lying is not wrong} are inconsistent, Geach's modus ponens is valid, and the three positions of the negation problem are distinct. The solution requires that descriptive belief be a form of being for, because mixed contents cannot be factored into descriptive and practical parts. That requirement is the solution's price, and MTE-17 shows what it buys: an expressivism whose commitments, once explicit, are those of the realism of MTE-01.
+
+\begin{thebibliography}{99}\small
+\bibitem[Ayer(1936)]{Ayer1936} Ayer, A.~J. (1936). \emph{Language, Truth and Logic}. Victor Gollancz.
+\bibitem[Baker and Woods(2015)]{BakerWoods2015} Baker, D. and Woods, J. (2015). How expressivists can and should explain inconsistency. \emph{Ethics}, 125(2), 391--424.
+\bibitem[Blackburn(1984)]{Blackburn1984} Blackburn, S. (1984). \emph{Spreading the Word: Groundings in the Philosophy of Language}. Clarendon Press.
+\bibitem[Blackburn(1988)]{Blackburn1988} Blackburn, S. (1988). Attitudes and contents. \emph{Ethics}, 98(3), 501--517.
+\bibitem[Charlow(2014)]{Charlow2014} Charlow, N. (2014). The problem with the Frege--Geach problem. \emph{Philosophical Studies}, 167(3), 635--665.
+\bibitem[Dorr(2002)]{Dorr2002} Dorr, C. (2002). Non-cognitivism and wishful thinking. \emph{No\^us}, 36(1), 97--103.
+\bibitem[Dreier(2004)]{Dreier2004} Dreier, J. (2004). Meta-ethics and the problem of creeping minimalism. \emph{Philosophical Perspectives}, 18, 23--44.
+\bibitem[Dreier(2006)]{Dreier2006} Dreier, J. (2006). Negation for expressivists: A collection of problems with a suggestion for their solution. \emph{Oxford Studies in Metaethics}, 1, 217--233.
+\bibitem[Frege(1919)]{Frege1919} Frege, G. (1919). Die Verneinung: Eine logische Untersuchung. \emph{Beitr\"age zur Philosophie des deutschen Idealismus}, 1, 143--157.
+\bibitem[Geach(1960)]{Geach1960} Geach, P.~T. (1960). Ascriptivism. \emph{The Philosophical Review}, 69(2), 221--225.
+\bibitem[Geach(1965)]{Geach1965} Geach, P.~T. (1965). Assertion. \emph{The Philosophical Review}, 74(4), 449--465.
+\bibitem[Gibbard(1990)]{Gibbard1990} Gibbard, A. (1990). \emph{Wise Choices, Apt Feelings: A Theory of Normative Judgment}. Harvard University Press.
+\bibitem[Gibbard(2003)]{Gibbard2003} Gibbard, A. (2003). \emph{Thinking How to Live}. Harvard University Press.
+\bibitem[Hale(1993)]{Hale1993} Hale, B. (1993). Can there be a logic of attitudes? In J. Haldane and C. Wright (eds.), \emph{Reality, Representation, and Projection}. Oxford University Press.
+\bibitem[Hare(1952)]{Hare1952} Hare, R.~M. (1952). \emph{The Language of Morals}. Clarendon Press.
+\bibitem[Ridge(2014)]{Ridge2014} Ridge, M. (2014). \emph{Impassioned Belief}. Oxford University Press.
+\bibitem[Schroeder(2008a)]{Schroeder2008book} Schroeder, M. (2008a). \emph{Being For: Evaluating the Semantic Program of Expressivism}. Oxford University Press.
+\bibitem[Schroeder(2008b)]{Schroeder2008nous} Schroeder, M. (2008b). How expressivists can and should solve their problems with negation. \emph{No\^us}, 42(4), 573--599.
+\bibitem[Schroeder(2008c)]{Schroeder2008compass} Schroeder, M. (2008c). What is the Frege--Geach problem? \emph{Philosophy Compass}, 3(4), 703--720.
+\bibitem[Searle(1962)]{Searle1962} Searle, J.~R. (1962). Meaning and speech acts. \emph{The Philosophical Review}, 71(4), 423--432.
+\bibitem[Stevenson(1944)]{Stevenson1944} Stevenson, C.~L. (1944). \emph{Ethics and Language}. Yale University Press.
+\bibitem[Unwin(1999)]{Unwin1999} Unwin, N. (1999). Quasi-realism, negation and the Frege--Geach problem. \emph{The Philosophical Quarterly}, 49(196), 337--352.
+\bibitem[Unwin(2001)]{Unwin2001} Unwin, N. (2001). Norms and negation: A problem for Gibbard's logic. \emph{The Philosophical Quarterly}, 51(202), 60--75.
+\bibitem[Yalcin(2012)]{Yalcin2012} Yalcin, S. (2012). Bayesian expressivism. \emph{Proceedings of the Aristotelian Society}, 112(2), 123--160.
+\end{thebibliography}
+
+\end{document}

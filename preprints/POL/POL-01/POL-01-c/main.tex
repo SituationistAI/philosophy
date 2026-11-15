@@ -1,0 +1,316 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+
+\title{Justice as Entitlement and Its Equivalence Under Lump-Sum Transfers}
+\msid{POL-01-c}
+\msfamily{POL-01}
+\msdiscipline{Political Philosophy}
+\mstype{Alternative proof}
+\mskeywords{justice; entitlement theory; Nozick; second welfare theorem; lump-sum transfers; difference principle; maximin; self-ownership; exchange economy}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+POL-01 concludes that justice is fairness, with the difference principle modified so that the worst-off level is maximized and ties on it are broken by the total. POL-01-a reaches the modification by conceding to Gustafsson that the parties in the original position care about gains above the minimum once the minimum is fixed. We reach the same principle without that concession, from the other side of the debate. Start from Nozick's entitlement theory: holdings that arise by voluntary exchange from just holdings are just. Let the parties choose only the principle of justice in holdings, ranking holdings rules by the worst-off level of the outcomes that exchange will produce from them. The first welfare theorem makes every such outcome efficient, and the second makes every efficient allocation reachable by lump-sum transfers. We prove that the allocation the parties choose is then exactly the one the modified difference principle selects among all feasible allocations; that the tie-breaking clause, whose characteristic effect is to secure the Pareto principle, is supplied by Nozick's principle of justice in transfer; and that where self-ownership restricts the transfers, the equivalence holds relative to the restricted set. An appendix solves 36 exchange economies with Cobb--Douglas preferences and verifies each claim in 60-digit arithmetic.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{Two theories and a theorem}
+
+POL-01 holds that justice is fairness: the principles of justice for the basic structure are those that would be chosen behind a veil of ignorance, and they include a difference principle in a modified form. The modification, stated in POL-01-a (Definition~5.1) and compactly in POL-01-d, ranks distributions by the level of the worst-off position and breaks ties on that level by the total. POL-01-a argues for the modification by accepting the premise of an objection of \citet{Gustafsson2018}: that the parties would not choose a principle insensitive to gains above the minimum, and that the principle should therefore be sensitive to such gains when the minimum is fixed.
+
+The principal rival to justice as fairness in the last half-century has been the entitlement theory of \citet{Nozick1974}. On that theory, justice is historical, not patterned. A distribution is just if it arose from a just distribution by just steps; the steps are voluntary transfers, and the first distribution is just if it satisfies a principle of justice in acquisition. Nozick's argument against patterned principles, of which the difference principle is the main example, is that liberty upsets patterns: if a just pattern is established and people then exchange as they wish, the pattern will be disturbed, and it can be maintained only by continual interference with voluntary exchange \citep[ch.~7]{Nozick1974}.
+
+Between the two theories stands a pair of theorems of welfare economics. The first says that, under mild conditions, a competitive equilibrium allocation is Pareto efficient. The second says that, under further conditions, mainly convexity, every Pareto-efficient allocation is a competitive equilibrium after suitable lump-sum transfers of initial holdings \citep{Arrow1951,Debreu1959}. POL-12-a notes that these theorems locate markets within the theory of justice, and that the relation between entitlement theory and lump-sum transfers is the subject of the present manuscript.
+
+\subsection{Thesis}
+
+We argue that the entitlement framework, combined with the second welfare theorem, gives an alternative proof of the conclusion of POL-01. Suppose that the parties in the original position are asked to choose not a pattern of final holdings but only a principle of justice in initial holdings, and that they know, as a general fact of economics, that whatever holdings they establish will be followed by voluntary exchange. Suppose that they rank holdings rules by the worst-off level of the outcome that exchange will produce, for the reasons POL-01-a gives in its fourth chapter. Then the outcome they choose is exactly the allocation that the modified difference principle selects among all feasible allocations (Theorem~\ref{t:equiv}). The tie-breaking clause is not needed as a premise: its characteristic consequence, the strong Pareto principle (POL-01-d, Proposition~2.1), is supplied by the entitlement theorist's own principle of justice in transfer (Corollary~\ref{c:redundant}).
+
+The alternative proof avoids one premise of POL-01-a: the premise, conceded to Gustafsson in the fourth and fifth chapters of that volume, that the parties care about the total once the worst-off level is fixed. This is the premise of POL-01-a that sits least comfortably with the rest of its argument. The thick veil of Assumption~3.1 of POL-01-a is defended there precisely on the ground that a principle should not be chosen because the chooser is likely to do well under it on average; a concern with the total, even as a tie-breaker, is a concern of that kind. The present proof shows that the parties need not have it. It keeps the other premises of POL-01-a: the original position, Assumptions~3.1 to~3.3, and the argument from them for maximin reasoning in the choice of holdings rules.
+
+Two further results qualify the equivalence. Where self-ownership forbids the transfer of personal endowments, the reachable outcomes form a proper subset of the efficient ones, and the parties' choice coincides with the modified difference principle applied to that subset, not to all feasible allocations (Proposition~\ref{p:restricted}). And where the parties choose patterns directly and exchange is forbidden, strict maximin can select allocations that the modified principle ranks strictly lower, which is the Pareto failure that Nozick's Wilt Chamberlain argument exploits (Proposition~\ref{p:wilt}).
+
+\subsection{Plan}
+
+Section~\ref{s:lit} reviews the debate between the entitlement theory and justice as fairness and the use of the welfare theorems in it. Section~\ref{s:frame} sets out the framework. Section~\ref{s:proof} proves the equivalence. Section~\ref{s:premise} explains what the avoided premise did and why its avoidance matters. Section~\ref{s:cases} discusses six of the economies solved in the appendix. Section~\ref{s:obj} answers five objections, and Section~\ref{s:not} states what the result does not establish. The appendix contains the computations.
+
+\section{The debate}\label{s:lit}
+
+\paragraph{Entitlement.} \citet[ch.~7]{Nozick1974} states the entitlement theory in three principles: a principle of justice in acquisition, which governs the appropriation of unheld things; a principle of justice in transfer, which governs the passage of holdings from one person to another; and a principle of rectification, which governs the repair of past violations of the first two. A distribution is just if everyone is entitled to the holdings they possess under these principles. Nozick does not state the principle of acquisition in full. He discusses Locke's theory of appropriation and defends a version of the Lockean proviso, on which an appropriation is illegitimate if it worsens the situation of others relative to a baseline, but he leaves the content of the principle largely open. He also suggests that, in the absence of detailed historical information, a patterned principle might serve as a rough rule of thumb for rectification, and that the rule might resemble a principle that maximizes the position of the least well-off group \citep[ch.~7]{Nozick1974}. The suggestion is the first sign, in Nozick's own text, that the two theories may coincide in their verdicts on some distributions while differing in their grounds.
+
+\paragraph{Patterns and liberty.} The Wilt Chamberlain argument begins with a distribution $D_1$ that is just by the lights of any patterned principle one likes. Many people freely pay a basketball player to watch him play, and a new distribution $D_2$ results that departs from the pattern. Since each transfer was voluntary and each person was entitled to what he paid, $D_2$ is just; so justice is not a matter of patterns. Rawls's answer, given in \citet{Rawls1977} and repeated in \citet{Rawls2001}, is that the principles of justice apply to the basic structure, not to particular transactions, and that within a just basic structure the outcomes of voluntary exchange are just as a matter of background procedural justice; the background institutions, including taxation, maintain the conditions under which this holds. \citet{Cohen1995} replied to Nozick on different grounds, arguing that the principle of self-ownership on which the entitlement theory rests does not deliver the inequalities Nozick defended once the initial appropriation of external resources is examined. Left-libertarians, notably \citet{Steiner1994} and \citet{Otsuka2003}, accept self-ownership and hold that external resources are initially owned in some egalitarian manner, so that entitlement theory is compatible with extensive redistribution of the value of natural resources. The present argument belongs to this family of reconciliations, but it does not assume an egalitarian initial ownership. It leaves the principle of justice in acquisition to be chosen behind the veil.
+
+\paragraph{The welfare theorems.} The first welfare theorem was proved in its modern form by \citet{Arrow1951} and \citet{Debreu1959}; the second requires convexity of preferences and a condition ensuring that each consumer can afford something cheaper than her equilibrium bundle, conditions that hold in the economies considered here \citep[ch.~16]{MasColell1995}. The second theorem has long been read as separating efficiency from distribution: a society can choose any efficient allocation it likes and reach it by markets, provided it can redistribute initial holdings by transfers that do not depend on behavior. That proviso is demanding. \citet{Mirrlees1971} showed that when abilities are private information, transfers based on ability are not available, and the redistribution that can be achieved is constrained by incentives. POL-12-a draws the same distinction, and we return to it in Section~\ref{s:not}.
+
+\paragraph{Rawls on transfers.} Rawls himself assigned redistribution to the background institutions rather than to the market. In \citet[\S 43]{Rawls1971} the government is divided into branches: an allocation branch that keeps markets workably competitive, a stabilization branch, a transfer branch that guarantees a social minimum, and a distribution branch that adjusts the background by taxation of bequests and of consumption. The market itself is left to determine prices and wages, and the justice of the outcome is secured by the conditions under which it operates. This division of labor is what the second welfare theorem would recommend if lump-sum transfers were available, and the assignment of the social minimum to a transfer branch, with prices and wages left to the market, has the same structure as the theorem's separation of distribution from efficiency. What Rawls did not do was ask whether the entitlement theory, with its own principle of transfer, could be fitted to the same division of labor. The present argument answers that it can, provided the principle of justice in acquisition is supplied by the original position.
+
+\paragraph{Fairness in allocation.} A different tradition in economics asks which allocations are fair without appeal to interpersonal comparison. \citet{Foley1967} defined an allocation to be envy-free if no one prefers another's bundle to her own, and \citet{Varian1974} showed that a competitive equilibrium from equal division of resources is envy-free and efficient. The equal-division equilibrium is the natural egalitarian benchmark for an exchange economy, and the appendix computes it for every economy. The modified difference principle does not coincide with it, and the comparison shows concretely that the principle is not egalitarian in resources (Section~\ref{s:cases}).
+
+\paragraph{Maximin and its critics.} \citet{Harsanyi1975} argued that the parties would maximize expected utility; \citet{Arrow1973} raised the problem of interpersonal comparison for the difference principle; \citet{Buchak2017} defended strong priority for the worst-off position from a risk-weighted theory of choice; and \citet{Gustafsson2018} argued that the difference principle would not be chosen because it ignores gains above the minimum. POL-01-a uses Buchak's argument to answer Harsanyi and Gustafsson's premise to modify the principle. The present manuscript uses the first and not the second.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:economy}
+An \emph{exchange economy} has agents $i = 1, \ldots, I$ and goods $1, \ldots, L$. Agent $i$ has a utility function $u_i$ on non-negative bundles and an endowment $e_i$, a non-negative bundle; the aggregate endowment is $E = \sum_i e_i$. The utility levels are the levels of the index by which the parties in the original position assess positions, and they are assumed comparable across agents.
+\end{definition}
+
+\begin{definition}\label{d:alloc}
+An \emph{allocation} is an assignment $x = (x_1, \ldots, x_I)$ of bundles; it is \emph{feasible} if $\sum_i x_i = E$. $X$ is the set of feasible allocations. A feasible allocation $x$ is \emph{Pareto efficient} if no feasible allocation gives every agent at least as much utility and some agent more. $P$ is the set of Pareto-efficient allocations. For an allocation $x$, $m(x) = \min_i u_i(x_i)$ is its \emph{worst-off level} and $t(x) = \sum_i u_i(x_i)$ its \emph{total}.
+\end{definition}
+
+\begin{definition}\label{d:eq}
+A \emph{holdings} profile is a feasible allocation $\omega$, understood as the initial holdings from which exchange starts. A pair $(x, p)$ of a feasible allocation and a price vector is a \emph{competitive equilibrium from $\omega$} if each $x_i$ maximizes $u_i$ over the bundles $y$ with $p \cdot y \leq p \cdot \omega_i$. A \emph{lump-sum transfer} from the endowment is a profile $\tau = (\tau_1, \ldots, \tau_I)$ with $\sum_i \tau_i = 0$ and $e_i + \tau_i \geq 0$, fixed independently of anyone's choices; $T$ is the set of such transfers. $O$ is the set of allocations $x$ for which there are $\tau \in T$ and $p$ with $(x, p)$ an equilibrium from $e + \tau$: the \emph{post-transfer equilibria}. For a subset $T' \subseteq T$, $O_{T'}$ is defined in the same way with $T'$ in place of $T$.
+\end{definition}
+
+Since every feasible allocation is $e + \tau$ for some $\tau \in T$, the choice of a transfer is the choice of a holdings profile, and we use the two descriptions interchangeably.
+
+\begin{definition}[Modified difference principle]\label{d:mdp}
+For allocations $x, y$: $x$ is \emph{more just} than $y$ if $m(x) > m(y)$, or $m(x) = m(y)$ and $t(x) > t(y)$. For a set $Y$ of allocations, $\mathrm{MDP}(Y)$ is the set of $x \in Y$ than which no member of $Y$ is more just, and $\mathrm{Maximin}(Y)$ the set of $x \in Y$ with $m(x) \geq m(y)$ for every $y \in Y$.
+\end{definition}
+
+Definition~\ref{d:mdp} is Definition~5.1 of POL-01-a applied to allocations, with the agents as the representative positions. The entitlement framework contributes two principles, and the original position a third.
+
+\begin{principle}[Justice in transfer]\label{p:transfer}
+An allocation that arises by voluntary exchange from just holdings is just. In particular, if the holdings $\omega$ are just and $(x, p)$ is a competitive equilibrium from $\omega$, then $x$ is just.
+\end{principle}
+
+\begin{principle}[Justice in holdings as the object of choice]\label{p:holdings}
+The principle of justice in holdings is the principle that would be chosen in the original position. The parties choose among holdings rules, each of which fixes a lump-sum transfer from the endowment; they do not choose final allocations.
+\end{principle}
+
+\begin{principle}[Maximin over holdings rules]\label{p:maximin}
+The parties know that exchange will follow the establishment of holdings, and they rank holdings rules by the worst-off level of the resulting equilibrium allocation, choosing a rule whose resulting worst-off level is greatest.
+\end{principle}
+
+Principle~\ref{p:transfer} is Nozick's principle of justice in transfer, restricted to the case of competitive exchange. Principle~\ref{p:holdings} is the point at which the entitlement theory is joined to the original position. Nozick does not supply the content of the principle of acquisition, and nothing in the entitlement theory says where it is to come from; Principle~\ref{p:holdings} says that it comes from the choice of the parties. Principle~\ref{p:maximin} is the maximin rule of POL-01-a, Chapter~4, applied to holdings rules rather than to distributions. It is justified, as there, by Assumptions~3.1 to~3.3 of POL-01-a, and the parties' knowledge of the general facts of economics, which those assumptions allow, includes the knowledge that exchange will follow and what it will produce. Principle~\ref{p:maximin} contains no reference to the total.
+
+\begin{assumption}[Regularity]\label{a:reg}
+Each $u_i$ is continuous, strictly increasing on the interior of the consumption set, zero on its boundary, and strictly quasi-concave where positive; the aggregate endowment $E$ is strictly positive in every good; and from every holdings profile there is exactly one equilibrium allocation.
+\end{assumption}
+
+The Cobb--Douglas utilities $u_i(x) = x_1^{a_i} x_2^{1 - a_i}$ with $0 < a_i < 1$ satisfy Assumption~\ref{a:reg}: they are continuous, strictly increasing in both goods where both are positive, zero when either good is absent, and strictly quasi-concave where positive; and in a Cobb--Douglas exchange economy with two goods the equilibrium price of good~1, with good~2 as numeraire, is uniquely $p = \sum_i a_i \omega_{i2} / \sum_i (1 - a_i)\omega_{i1}$, which fixes the equilibrium allocation. The equilibrium is reached from holdings in which an agent has nothing as well: her demand is then zero.
+
+\section{The equivalence}\label{s:proof}
+
+\begin{lemma}[First welfare theorem]\label{l:fwt}
+If utilities are strictly increasing where positive and continuous, every equilibrium allocation from any holdings profile with a positive aggregate is Pareto efficient. Hence $O \subseteq P$, and $O_{T'} \subseteq P$ for every $T' \subseteq T$.
+\end{lemma}
+
+\begin{proof}
+Suppose $(x, p)$ is an equilibrium from $\omega$ and $y$ is feasible with $u_i(y_i) \geq u_i(x_i)$ for all $i$ and $u_j(y_j) > u_j(x_j)$ for some $j$. By utility maximization, $p \cdot y_j > p \cdot \omega_j$; and for each $i$, $p \cdot y_i \geq p \cdot \omega_i$, since a cheaper bundle at least as good as $x_i$ would permit, by monotonicity and continuity, a strictly better affordable one. Summing, $p \cdot \sum_i y_i > p \cdot \sum_i \omega_i$, contradicting $\sum_i y_i = E = \sum_i \omega_i$. This is the standard argument \citep{Arrow1951,Debreu1959}.
+\end{proof}
+
+\begin{lemma}[Second welfare theorem]\label{l:swt}
+Under Assumption~\ref{a:reg}, every Pareto-efficient allocation $x$ with each $x_i$ strictly positive is an equilibrium allocation from some holdings profile; in particular, from the profile $\omega = x$, at a price vector that supports every agent's upper contour set at $x_i$. Hence every such allocation belongs to $O$.
+\end{lemma}
+
+\begin{proof}
+This is the second welfare theorem for an exchange economy with convex preferences and interior allocations \citep{Arrow1951,Debreu1959}; see \citet[ch.~16]{MasColell1995}. The holdings $\omega = x$ are $e + \tau$ for $\tau = x - e$, which belongs to $T$ because $x$ is feasible.
+\end{proof}
+
+In practice the transfer that reaches $x$ need not be $x - e$: any $\tau$ with $p \cdot (e_i + \tau_i) = p \cdot x_i$ for each $i$ will do, and the appendix uses transfers made as far as possible in the numeraire good.
+
+\begin{lemma}\label{l:mdpx}
+Under Assumption~\ref{a:reg}, $\mathrm{MDP}(X)$ is non-empty, every member of it is Pareto efficient, and its members have the worst-off level $m^* = \max_{x \in X} m(x) > 0$.
+\end{lemma}
+
+\begin{proof}
+$X$ is compact and $m$ and $t$ are continuous, so $m$ attains a maximum $m^*$ on $X$, the set of maximizers is compact, and $t$ attains a maximum on it; the maximizer is in $\mathrm{MDP}(X)$. Since $E$ is strictly positive, equal division gives every agent a positive level, so $m^* > 0$. A member of $\mathrm{MDP}(X)$ is Pareto efficient by the strong Pareto property of the modified principle (POL-01-d, Proposition~2.1): an allocation that Pareto-dominates it would be more just.
+\end{proof}
+
+\begin{proposition}[Uniqueness and equal levels]\label{p:unique}
+Under Assumption~\ref{a:reg}, there is exactly one feasible allocation $x^*$ with $m(x^*) = m^*$; every agent's level at $x^*$ is $m^*$, and each $x^*_i$ is strictly positive.
+\end{proposition}
+
+\begin{proof}
+Let $x$ and $y$ be feasible with $m(x) = m(y) = m^*$, and suppose $x \neq y$. Let $z = (x + y)/2$, which is feasible. For each $i$, $u_i(x_i) \geq m^* > 0$ and $u_i(y_i) \geq m^*$, so both bundles are positive and, by strict quasi-concavity, $u_i(z_i) \geq m^*$, with strict inequality whenever $x_i \neq y_i$. Some agent $j$ has $x_j \neq y_j$ and so $u_j(z_j) > m^*$. By continuity, a small positive amount of each good can be taken from $z_j$ while keeping $j$ above $m^*$, and divided among the agents at level $m^*$; by strict monotonicity this raises each of them above $m^*$. The result is feasible and has a worst-off level above $m^*$, which is impossible. So the allocation is unique. If some agent were strictly above $m^*$ at $x^*$, the same transfer from her to the agents at $m^*$ would raise the worst-off level; so every level equals $m^*$. Each bundle is positive because each level is positive.
+\end{proof}
+
+\begin{theorem}[Equivalence]\label{t:equiv}
+Under Principles~\ref{p:transfer} to~\ref{p:maximin}:
+\begin{enumerate}[label=(\alph*)]
+\item the allocations the parties choose are the members of $\mathrm{Maximin}(O)$, and each of them is just;
+\item in general, $\mathrm{MDP}(X) \cap O \subseteq \mathrm{MDP}(O) \subseteq \mathrm{Maximin}(O)$, and if $\mathrm{MDP}(X) \cap O$ is non-empty then $\mathrm{MDP}(O) = \mathrm{MDP}(X) \cap O$;
+\item under Assumption~\ref{a:reg}, $\mathrm{Maximin}(O) = \mathrm{MDP}(O) = \mathrm{MDP}(X) = \mathrm{Maximin}(X) = \{x^*\}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(a) By Principle~\ref{p:holdings} the parties choose a transfer $\tau \in T$; by the general facts they know, the outcome of $\tau$ is the equilibrium allocation from $e + \tau$, which belongs to $O$, and every member of $O$ is the outcome of some $\tau$. By Principle~\ref{p:maximin} they choose a $\tau$ whose outcome has the greatest worst-off level among the members of $O$, so the chosen outcomes are the members of $\mathrm{Maximin}(O)$. The holdings $e + \tau$ are just by Principle~\ref{p:holdings}, and the outcome is just by Principle~\ref{p:transfer}.
+
+(b) A member of $\mathrm{MDP}(X)$ that lies in $O$ is not less just than any member of $X$, hence of $O$, so it is in $\mathrm{MDP}(O)$. Every member of $\mathrm{MDP}(O)$ has the greatest worst-off level in $O$, since an allocation with a greater one would be more just; so $\mathrm{MDP}(O) \subseteq \mathrm{Maximin}(O)$. Now let $y \in \mathrm{MDP}(X) \cap O$ and $z \in \mathrm{MDP}(O)$. Neither is more just than the other, since $y$ is best in $X \supseteq O$ and $z$ is best in $O \ni y$. The modified principle is a strict weak order whose indifference classes are the pairs $(m, t)$ (POL-01-a, Propositions~5.2 and~5.3), so $z$ has the pair $(m, t)$ of $y$ and is therefore best in $X$ as well: $z \in \mathrm{MDP}(X) \cap O$.
+
+(c) By Lemma~\ref{l:mdpx} and Proposition~\ref{p:unique}, $\mathrm{Maximin}(X) = \{x^*\}$ and $\mathrm{MDP}(X) = \{x^*\}$, since every member of $\mathrm{MDP}(X)$ attains $m^*$. By Lemma~\ref{l:mdpx}, $x^*$ is Pareto efficient, and it is interior, so by Lemma~\ref{l:swt} it belongs to $O$. Since $O \subseteq X$ and $x^* \in O$, the greatest worst-off level in $O$ is $m^*$, attained only at $x^*$; so $\mathrm{Maximin}(O) = \{x^*\}$, and by (b), $\mathrm{MDP}(O) = \{x^*\}$.
+\end{proof}
+
+Theorem~\ref{t:equiv}(c) is the alternative proof. The parties, choosing only a rule of initial holdings by the worst-off level of what exchange will make of it, choose the allocation that the modified difference principle selects among all feasible allocations; and the rule that reaches it is a lump-sum transfer, after which the allocation is reached by voluntary exchange and is just by the entitlement theory's own lights.
+
+\begin{corollary}[Redundancy of the tie-breaker]\label{c:redundant}
+Under Principles~\ref{p:transfer} to~\ref{p:maximin}, the outcomes chosen satisfy the strong Pareto principle relative to $X$, although Principle~\ref{p:maximin} makes no reference to the total. Under Assumption~\ref{a:reg}, replacing the modified difference principle by strict maximin in Definition~\ref{d:mdp} changes no choice from $O$.
+\end{corollary}
+
+\begin{proof}
+The first claim is Theorem~\ref{t:equiv}(a) with Lemma~\ref{l:fwt}: chosen outcomes are in $O \subseteq P$. The second is Theorem~\ref{t:equiv}(c).
+\end{proof}
+
+The next two propositions mark the limits of the equivalence. The first concerns what happens without Principle~\ref{p:transfer}.
+
+\begin{proposition}[Exchange forbidden]\label{p:wilt}
+Suppose $I \geq 3$, let $(x, p)$ be an equilibrium from some holdings with $x$ interior, and suppose that the agent $w$ with the lowest level at $x$ is strictly below two other agents $j$ and $k$. Then there is a feasible allocation $\bar{x}$ with $\bar{x}_w = x_w$ and $m(\bar{x}) = m(x)$, $t(\bar{x}) < t(x)$, from which $(x, p)$ is again an equilibrium. Strict maximin does not distinguish $\bar{x}$ from $x$; the modified difference principle ranks $x$ above $\bar{x}$; and under Principle~\ref{p:transfer}, $\bar{x}$ is not a resting point, since exchange from it leads to $x$.
+\end{proposition}
+
+\begin{proof}
+Let $d$ be a non-zero bundle with $p \cdot d = 0$ and set $\bar{x}_j = x_j + \delta d$, $\bar{x}_k = x_k - \delta d$, and $\bar{x}_i = x_i$ otherwise. For small $\delta > 0$, $\bar{x}$ is feasible, every income at $p$ is unchanged, and by continuity $j$ and $k$ remain above $u_w(x_w)$, so $m(\bar{x}) = m(x)$. Since the incomes at $p$ are those at $x$, each agent's demand at $p$ is $x_i$, so $(x, p)$ is an equilibrium from $\bar{x}$. By strict quasi-concavity and the uniqueness of demand, $u_j(\bar{x}_j) < u_j(x_j)$ and $u_k(\bar{x}_k) < u_k(x_k)$, so $t(\bar{x}) < t(x)$, and $x$ Pareto-dominates $\bar{x}$.
+\end{proof}
+
+Proposition~\ref{p:wilt} is the formal core of the Wilt Chamberlain argument as it bears on the difference principle. A patterned principle applied to final allocations with exchange forbidden must either accept $\bar{x}$ when the pattern is strict maximin, which violates the Pareto principle, or rank $x$ above $\bar{x}$, which the modified principle does by its tie-breaker. The entitlement theorist reaches the same verdict by a different route: $\bar{x}$ is not where voluntary exchange will leave things. The appendix constructs such an $\bar{x}$ for 25 of the 26 economies with at least three agents; in the remaining one, E27, only one agent is above the worst-off level, and the hypothesis of the proposition fails.
+
+\begin{proposition}[Restricted transfers]\label{p:restricted}
+Let $T' \subseteq T$ be a set of permitted transfers, for instance those that redistribute only external goods. Under Principles~\ref{p:transfer} to~\ref{p:maximin} with $T'$ in place of $T$, the parties choose the members of $\mathrm{Maximin}(O_{T'})$; every chosen outcome is Pareto efficient; $\mathrm{MDP}(O_{T'}) \subseteq \mathrm{Maximin}(O_{T'})$, with equality whenever $\mathrm{Maximin}(O_{T'})$ is a singleton; and the chosen worst-off level is at most $m^*$, with equality if and only if $x^* \in O_{T'}$.
+\end{proposition}
+
+\begin{proof}
+The first three claims follow as in Theorem~\ref{t:equiv}(a) and~(b), with Lemma~\ref{l:fwt} for efficiency. The last holds because $O_{T'} \subseteq X$ and $x^*$ is the only feasible allocation with worst-off level $m^*$ (Proposition~\ref{p:unique}).
+\end{proof}
+
+When personal endowments may not be transferred, which is how self-ownership constrains a holdings rule, Proposition~\ref{p:restricted} says that the parties' choice is the modified difference principle applied to the restricted set of outcomes. The equivalence of Theorem~\ref{t:equiv} is then an equivalence relative to the feasible set, which is what POL-01-a's Theorem~5.4 presupposes in any case: the modified principle selects from what is feasible. Whether self-ownership is a constraint the parties would accept is a further question, which we discuss in Section~\ref{s:obj}. The appendix computes, for each economy, the best worst-off level reachable when only good~1 is redistributed and each agent keeps her endowment of good~2; in twenty of the thirty-six economies it falls short of $m^*$, and in exactly those twenty the chosen outcome gives some agents more than the worst-off level.
+
+\begin{remark}[Equal levels are not egalitarianism]\label{r:equal}
+Proposition~\ref{p:unique} says that, with unrestricted lump-sum transfers, the chosen allocation gives every agent the same level of the index. This is not a commitment to equality. It follows from the absence, in an exchange economy with lump-sum transfers, of any way of raising the worst-off level by allowing others to gain; where such ways exist, as under restricted transfers or with incentive effects, the modified principle permits and requires inequality (Proposition~\ref{p:restricted}). The principle ranks every levelling down below the status quo (POL-01-d, Corollary~2.2), and it is not equality of resources: the equal levels are reached with unequal bundles and unequal incomes, and in ten of the economies of the appendix with some envy in Foley's sense, whereas the egalitarian benchmark, the equilibrium from equal division, is envy-free in all of them \citep{Varian1974}.
+\end{remark}
+
+\subsection{Menus of institutional options}
+
+POL-01-a states its main theorem about choice for finite feasible sets: choosing by the modified principle over any finite set of feasible distributions yields one than which none is better (Theorem~5.4 of POL-01-a). Actual institutional choice is of this kind. The parties do not choose from a continuum of transfers but from a finite list of schemes: a levy on land at one of a few rates, an endowment for each citizen at one of a few levels. In the entitlement framework the list is a finite set $H \subseteq T$ of holdings rules, and the outcomes are the equilibria $O_H$. The results above apply without change. By Lemma~\ref{l:fwt}, every member of $O_H$ is Pareto efficient, so no option in the menu can be tied on the worst-off level with another option that Pareto-dominates it; by Proposition~\ref{p:restricted}, with $H$ in place of $T'$, the parties' choice is $\mathrm{Maximin}(O_H)$, and $\mathrm{MDP}(O_H)$ coincides with it when the maximin option is unique. What a finite menu adds is the possibility of exact ties between Pareto-incomparable options, which a continuum under Assumption~\ref{a:reg} excludes.
+
+The appendix computes such menus for every economy. In each, good~1 is divided among the agents in multiples of a fixed fraction of the aggregate, and each agent keeps her good~2, so that the menu is a finite subset of the restricted transfers of Proposition~\ref{p:restricted}. By continuity, the menu's choice approaches the continuous optimum as the lattice is refined; with the lattices used, the shortfall is small for two and three agents and larger for four and five, as in E19, where the menu reaches $3.47211$ against the continuous $3.80638$. In no menu are two options tied on the greatest worst-off level, so that in every menu computed, strict maximin over holdings rules and the modified difference principle make the same choice.
+
+\section{What the avoided premise did}\label{s:premise}
+
+POL-01-a modifies the difference principle because strict maximin violates the strong Pareto principle: it is indifferent between two distributions with the same worst-off level even when one is better for everyone else. Gustafsson's argument that the parties would not choose the difference principle turns on this insensitivity, and POL-01-a meets it by building sensitivity to the total into the principle, on the premise that the parties care about the total once the minimum is fixed.
+
+The premise does two jobs. Its first job is to secure Pareto: among distributions tied on the minimum, the principle must prefer one that is better for some and worse for none. Its second job is to rank Pareto-incomparable distributions tied on the minimum, by their totals. Theorem~\ref{t:equiv} and Corollary~\ref{c:redundant} show that in the entitlement framework the first job is done by the principle of justice in transfer, and that under Assumption~\ref{a:reg} the second job does not arise, because the maximin allocation is unique. The parties therefore need not care about the total. They need only care about the worst-off level and know that exchange will follow.
+
+This matters in three ways. First, the premise is in tension with the thick veil. POL-01-a defends Assumption~3.1 by arguing that a principle chosen because the chooser is likely to do well under it on average is not justifiable to the person who does badly. A concern with the total is a concern with how well things go on average, and although POL-01-a confines it to ties, a defender of the thick veil should prefer a proof that does without it. Second, the premise requires more interpersonal comparability than maximin. Maximin needs only the comparability of levels: one must be able to say whose level is lowest. The total requires the comparability of units: one must be able to add gains to one person and losses to another. \citet{Arrow1973} pressed the difficulty of interpersonal comparison against the difference principle; the present proof needs only the weaker kind. Third, the proof shows that the modified principle is the form the difference principle takes when it is combined with the entitlement theorist's own principle of transfer. The modification is not a concession to utilitarianism; it is what the Pareto principle, delivered by voluntary exchange, makes of maximin.
+
+What the avoided premise still does, beyond the reach of the present proof, is to break ties among Pareto-incomparable allocations with the same worst-off level when such ties exist. They do not exist under Assumption~\ref{a:reg}. They can exist in economies with non-convex preferences, with production subject to incentive constraints, and in finite menus of institutional options in which ties are exact. In the restricted menus of the appendix, no such tie occurs: in each of the 36 menus, of between 49 and 495 options, exactly one option attains the greatest worst-off level.
+
+\section{Particular cases}\label{s:cases}
+
+We discuss six of the 36 economies of the appendix, by identifier. Utility levels are given to six significant digits; the appendix states the verified precision.
+
+\emph{E01.} Two agents with the same preferences and the same endowment. The equilibrium without transfers already gives both the level $4$; the transfers are zero, and the self-ownership restriction costs nothing. The entitlement theorist and the difference principle agree without any redistribution. E03 has the same property for a less obvious reason: mirror-image preferences and endowments make the no-transfer equilibrium symmetric in levels.
+
+\emph{E05.} Agent~1 owns ten units of good~2 and nothing of good~1; agent~2 owns five units of good~1. Without transfers, agent~2 is worst off, at $3.38851$. The modified difference principle raises her to $3.95063$, at the cost of a lower total, $7.90126$ against $8.18058$, by a transfer of $1.27443$ units of good~2 from agent~1. If good~2 is a personal endowment that may not be transferred, nothing can be done: all of good~1 already belongs to agent~2, and the best reachable worst-off level is the no-transfer level. Here self-ownership blocks the difference principle completely, and the outcome is unequal, with agent~1 at $4.79207$.
+
+\emph{E11.} Three agents with identical preferences; agent~1 owns ten units of good~1, agent~2 ten units of good~2, agent~3 nothing. Without transfers, agent~3 has nothing and the worst-off level is $0$. The modified difference principle gives every agent $(10/3, 10/3)$ and the level $3.33333$, which in this symmetric case coincides with the equal-division equilibrium. Under the self-ownership restriction, good~1 can be divided between agents~1 and~3 but agent~2 keeps her ten units of good~2, and the best reachable worst-off level is $2.5$, with agent~2 at $5$. The case shows the dependence of the verdict on which holdings count as external. When exchange is forbidden, rearranging the bundles of agents~1 and~2 at the equilibrium price lowers the total from $10$ to $8.66025$ and leaves agent~3 at $0$, which strict maximin cannot distinguish from the market outcome (Proposition~\ref{p:wilt}).
+
+\emph{E14.} A rich agent and two poor ones with different tastes. The equal-division equilibrium gives the worst-off $4.34067$ and is envy-free; the modified difference principle gives every agent $4.43530$ and leaves one agent envying another. The parties prefer the higher worst-off level to the absence of envy, as POL-01-a's assumption that they are not moved by envy requires. The total under the modified principle, $13.3059$, is slightly lower than under equal division, $13.3094$; neither benchmark dominates the other.
+
+\emph{E16.} Three agents with equal endowments and different preferences ($a = 1/2, 3/4, 1/4$). The equilibrium without transfers is the equal-division equilibrium, and it is envy-free; but agent~1, whose tastes are balanced, ends at $3$, below the others at $3.41926$, because the equilibrium price favors the specialized tastes of the others. The modified difference principle transfers $0.534$ units of value to agent~1 and equalizes levels at $3.26707$, at a small cost in the total. Equality of resources is therefore not what the principle requires, and in this case it is not what the egalitarian benchmark delivers either.
+
+\emph{E19.} Four agents, one with nothing at all. Without transfers her level is $0$. The modified difference principle gives every agent $5.39862$, above the equal-division worst-off level of $5.25$, with unequal bundles: the agents with balanced tastes receive $(5.39862, 5.39862)$, the others bundles tilted toward the good they value more. Under the self-ownership restriction, agent~2, who owns all of good~2, keeps it, and the best reachable worst-off level is $3.80638$, with agent~2 at $10$.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Nozick would not let the parties choose]
+The entitlement theory is historical. Holdings are just because of how they came about, not because anyone would choose them. To let the original position fix the principle of acquisition is to replace the entitlement theory with an end-state theory under another name.
+\end{objection}
+
+\begin{reply}
+The objection would succeed against a proposal to let the parties choose final holdings. Principle~\ref{p:holdings} lets them choose only initial holdings, and leaves the passage from initial to final holdings entirely to the principle of justice in transfer. Nozick himself does not derive the principle of acquisition from history, since it governs the first entry into history; he states a proviso and leaves the rest open \citep[ch.~7]{Nozick1974}. Some account of where the principle comes from is needed, and the original position is one. The left-libertarian theories of \citet{Steiner1994} and \citet{Otsuka2003} also supply the principle of acquisition from a theory of the fair division of external resources; we differ from them in letting the parties choose the division rather than assuming an equal one, and the appendix shows that the two answers differ. Nozick's own remark that a principle maximizing the position of the least well-off might serve as a rule of thumb for rectification shows that he did not regard such a principle as alien to the entitlement theory when the relevant history is unknown; behind the veil, all history is unknown.
+\end{reply}
+
+\begin{objection}[Lump-sum transfers are a fiction]
+The second welfare theorem requires transfers that do not depend on behavior. Actual transfers are taxes on income or wealth, which change behavior and destroy the efficiency the theorem promises. An equivalence that holds only under lump-sum transfers holds nowhere.
+\end{objection}
+
+\begin{reply}
+In an exchange economy, a transfer of initial holdings is lump-sum, because there is no behavior on which it could depend: the holdings exist before any choice. The objection has force in economies with production and private information about ability, where, as \citet{Mirrlees1971} showed, the transfers that would be lump-sum would have to depend on ability, which cannot be observed. There the feasible set shrinks, and the equivalence becomes, as in Proposition~\ref{p:restricted}, an equivalence relative to what is feasible. We claim no more. The point of the result is not that actual policy can use lump-sum transfers, but that the difference between entitlement theory and the difference principle is not where it was thought to be: it is not a disagreement about markets, or about patterns, but about the feasible set of initial holdings.
+\end{reply}
+
+\begin{objection}[Self-ownership]
+The entitlement theory rests on self-ownership \citep{Cohen1995}. Most of what people bring to exchange is their own labor and talent, which may not be transferred. The second welfare theorem therefore never applies in the form the argument needs.
+\end{objection}
+
+\begin{reply}
+Proposition~\ref{p:restricted} addresses exactly this case, and the appendix computes it: good~2 is treated as a personal endowment that may be exchanged but not transferred. The parties' choice is then the modified difference principle applied to the restricted outcomes, which is still the conclusion of POL-01, since that conclusion concerns the principle and not the feasible set to which it is applied. What the restriction changes is the outcome: in twenty of the thirty-six economies computed the worst-off level falls short of $m^*$, by as much as $2.17$ in E27, and the outcome is unequal. Whether the parties would accept the restriction is a question about the content of the first principle of justice, equal basic liberty, and about which holdings count as personal; the present argument does not settle it, and Volume~II of POL-01 treats the institutional question.
+\end{reply}
+
+\begin{objection}[Comparability]
+The argument compares Cobb--Douglas utility levels across agents. Utility functions represent preferences only up to increasing transformations, so the comparison, and with it the worst-off agent, is arbitrary.
+\end{objection}
+
+\begin{reply}
+The difference principle compares positions by an index of primary goods, not by preference satisfaction, and Definition~\ref{d:economy} takes the utility levels to be levels of that index, which are comparable by construction. The computed economies use Cobb--Douglas functions homogeneous of degree one because they are the simplest index functions with the required properties, not because they measure welfare. The argument of Section~\ref{s:proof} does not depend on the choice: Theorem~\ref{t:equiv} holds for any index satisfying Assumption~\ref{a:reg}. And, as Section~\ref{s:premise} notes, it needs only the comparability of levels, not of units, which is less than POL-01-a's own argument needs.
+\end{reply}
+
+\begin{objection}[Patterns are upset again]
+Even if the chosen allocation is reached by exchange, it will be upset by further exchange, gifts and production in the next period. The entitlement theorist will then say that the new distribution is just, and the difference principle that it is not. The equivalence lasts for one period.
+\end{objection}
+
+\begin{reply}
+In the exchange economy, the chosen allocation is an equilibrium, and no further exchange from it is mutually beneficial, so it is not upset within the economy. In a dynamic setting, new endowments arise each period, and the holdings rule applies to them: the parties choose a rule of initial holdings for each generation of resources, not a single redistribution. That the holdings rule is applied repeatedly is what \citet{Rawls1977} meant by maintaining background justice, and it involves no interference with exchange within a period. POL-12-a argues that this is the right account of the justice of markets; the present result shows that it is also an account an entitlement theorist can accept, once the principle of acquisition is fixed by the parties.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result does not establish that the parties would choose maximin over holdings rules; that is Principle~\ref{p:maximin}, which depends on the argument of POL-01-a from its Assumptions~3.1 to~3.3. It does not establish the first principle of justice, equal basic liberty, which POL-01-a argues for separately. It does not establish the equivalence for economies with production, incentives or non-convexities, where Assumption~\ref{a:reg} may fail and the tie-breaker of POL-01-a may have work to do; there the alternative proof yields only the inclusion of Theorem~\ref{t:equiv}(b). It does not settle which holdings are external and which personal, and so does not settle the size of the feasible set; Proposition~\ref{p:restricted} and the appendix show that the size matters greatly. And it does not settle which institutional regime realizes the principle; the choice among property-owning democracy, liberal socialism and reformed welfare-state capitalism belongs to Volume~II of POL-01.
+
+\section{Conclusion}
+
+The modified difference principle can be reached from the entitlement side. If the original position chooses only the rule of initial holdings, by the worst-off level of what voluntary exchange will make of them, the first welfare theorem makes every outcome efficient, the second makes every efficient allocation reachable, and the outcome chosen is exactly the allocation the modified difference principle selects among all feasible ones. The tie-breaking clause, which POL-01-a adopted on a premise about the parties' concern for the total, is supplied by the principle of justice in transfer. Where self-ownership restricts the transfers, the equivalence holds relative to the restricted set. Justice as fairness and justice as entitlement differ, on this showing, not about markets or patterns but about the feasible set of initial holdings.
+
+\appendix
+
+\section{Solved exchange economies}\label{app:econ}
+
+\paragraph{What is computed.} The appendix solves 36 exchange economies with two goods and Cobb--Douglas utilities $u_i(x) = x_1^{a_i} x_2^{1 - a_i}$: ten with two agents (E01--E08, E25, E26), eleven with three (E09--E16, E27--E29), ten with four (E17--E24, E30, E31) and five with five (E32--E36). The parameters $a_i$ and endowments $e_i$ are stated in each block; they were chosen to include symmetric economies, agents with no endowment, agents endowed with a single good, a single very rich agent, identical and opposed tastes, and equal endowments with different tastes. Good~2 is the numeraire and $p$ is the price of good~1. For each economy the program computes:
+\begin{enumerate}[label=(\roman*),itemsep=0pt]
+\item the competitive equilibrium without transfers: price $p^0$ (an exact rational), bundles $x^0_i$ and levels $u^0_i$;
+\item the allocation $x^*$ selected by the modified difference principle among all feasible allocations. By Proposition~\ref{p:unique} it equalizes levels, and with incomes $m_i$ at price $p$ the level of agent $i$ is $c_i m_i p^{-a_i}$, $c_i = a_i^{a_i}(1-a_i)^{1-a_i}$. The program finds the unique price $p^*$ at which incomes proportional to $p^{a_i}/c_i$ clear the market, by bisection to $60$ digits, and derives incomes, bundles and levels;
+\item the lump-sum transfers $\tau_i = m_i - p^* \cdot e_i$, in value, and holdings $\omega_i$ that realize them: an agent who pays gives good~2 first and good~1 only if her good~2 is exhausted, and the receivers share the pool in proportion to what they receive;
+\item the equilibrium from equal division, and the number of ordered pairs $(i, j)$ in which $i$ prefers $j$'s bundle to her own (\enquote{envy pairs}), both at the equal-division equilibrium and at $x^*$;
+\item the self-ownership menu: every redistribution of good~1 in which each agent's holding is a multiple of $E_1/K$ ($K = 48$, $24$, $12$, $8$ for two, three, four, five agents) and each agent keeps her endowment of good~2. For each option the program computes the equilibrium (exact price) and its worst-off level and total, and selects by the modified difference principle; it records the number of options tied on the greatest worst-off level and the option with the greatest total;
+\item the self-ownership optimum over all redistributions of good~1, not only the lattice: for each price $p$, a level $t$ is reachable if the least holdings of good~1 that give each agent level $t$ at $p$ fit into the polytope of holdings that support $p$ as the equilibrium price, a test with a closed form; the program maximizes $t$ over $p$ by a grid followed by golden-section search, and certifies the result by computing the equilibrium from the holdings found;
+\item for three or more agents, the allocation $\bar{x}$ of Proposition~\ref{p:wilt}, obtained from $x^0$ by moving value-neutrally along the budget line between the two best-off agents, with the check that the equilibrium price from $\bar{x}$ is exactly $p^0$.
+\end{enumerate}
+
+\paragraph{Arithmetic.} Prices of equilibria from given holdings are exact rationals, computed with Python's \texttt{fractions} module. Levels, and everything that involves the price $p^*$, are computed with the \texttt{decimal} module at $60$ significant digits; residuals are reported as upper bounds such as $<10^{-58}$. Tables show six significant digits, and the worst-off level and total under the modified principle ten.
+
+\paragraph{Checks.} For each economy the program checks: that the transfers sum to zero; that the holdings $\omega$ are non-negative, sum to the aggregate endowment and are worth $m_i$ at $p^*$; that the demands at $p^*$ clear both markets; that every marginal rate of substitution equals $p^*$, which with convex preferences and interior bundles is the condition for Pareto efficiency; that the levels are equal; that moving along each agent's budget line in either direction lowers her utility; and, as an independent check of the maximin property, that no equilibrium after lump-sum transfers on a lattice of income shares (step $1/400$, $1/40$, $1/16$, $1/10$ for two, three, four, five agents; $28{,}176$ points in all) has a greater worst-off level. It also checks that the menu choice is undominated in the menu (POL-01-a, Theorem~5.4), that the self-ownership optimum lies between the menu choice and $m^*$, and the equilibrium property of $\bar{x}$. Every check is an assertion, and the program halts on any failure.
+
+\paragraph{Summary.} All checks pass in all 36 economies: in each, the allocation selected by the modified difference principle is Pareto efficient and is a competitive equilibrium after the lump-sum transfers shown. In E01, E03 and E26 no transfer is needed. The modified principle lowers the total relative to the no-transfer equilibrium in thirteen economies, raises it in eleven, and leaves it unchanged in the remaining twelve, those in which the transfers are zero or move value only between agents with the same tastes, so that neither the price nor the total changes. Its worst-off level is strictly above that of the equal-division equilibrium in twenty-three economies and equal to it in thirteen. The equal-division equilibrium is envy-free in all 36, as Varian's theorem requires; the allocation of the modified principle has envy in ten (E06, E07, E14, E18, E20, E21, E24, E31, E33, E34). The self-ownership restriction lowers the attainable worst-off level in twenty economies (E05, E07, E10, E11, E12, E14, E15, E17, E19, E21, E22, E24, E25, E27, E29, E30, E31, E32, E34, E36), and in exactly these the outcome gives some agents more than the worst-off level. No menu contains two options tied on the greatest worst-off level; in 23 of the 36 menus some option has a strictly greater total than the one the modified principle selects, and every such option has a lower worst-off level, as Theorem~5.4 of POL-01-a requires of an undominated choice. Of the 26 economies with three or more agents, 25 admit the allocation $\bar{x}$ of Proposition~\ref{p:wilt}, and in each of them $\bar{x}$ has the same worst-off level as the market outcome and a lower total; the exception is E27, in which the two poorer agents share the worst-off level and only one agent is above it. Table~A.1 summarizes the results; the blocks that follow give each economy in full.
+
+\begin{center}
+\textbf{Table A.1.} Summary. \enquote{Self-own.} is the continuous self-ownership optimum; \enquote{Gap} is $m^*$ minus that optimum.
+\end{center}
+\input{gen/tab_summary.tex}
+
+\input{gen/tab_economies.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Arrow(1951)]{Arrow1951} Arrow, K.~J. (1951). An extension of the basic theorems of classical welfare economics. In J. Neyman (ed.), \emph{Proceedings of the Second Berkeley Symposium on Mathematical Statistics and Probability}. University of California Press.
+\bibitem[Arrow(1973)]{Arrow1973} Arrow, K.~J. (1973). Some ordinalist-utilitarian notes on Rawls's theory of justice. \emph{The Journal of Philosophy}, 70(9), 245--263.
+\bibitem[Buchak(2017)]{Buchak2017} Buchak, L. (2017). Taking risks behind the veil of ignorance. \emph{Ethics}, 127(3), 610--644.
+\bibitem[Cohen(1995)]{Cohen1995} Cohen, G.~A. (1995). \emph{Self-Ownership, Freedom, and Equality}. Cambridge University Press.
+\bibitem[Debreu(1959)]{Debreu1959} Debreu, G. (1959). \emph{Theory of Value: An Axiomatic Analysis of Economic Equilibrium}. New York: Wiley.
+\bibitem[Foley(1967)]{Foley1967} Foley, D.~K. (1967). Resource allocation and the public sector. \emph{Yale Economic Essays}, 7, 45--98.
+\bibitem[Gustafsson(2018)]{Gustafsson2018} Gustafsson, J.~E. (2018). The difference principle would not be chosen behind the veil of ignorance. \emph{The Journal of Philosophy}, 115(11), 588--604.
+\bibitem[Harsanyi(1975)]{Harsanyi1975} Harsanyi, J.~C. (1975). Can the maximin principle serve as a basis for morality? A critique of John Rawls's theory. \emph{American Political Science Review}, 69(2), 594--606.
+\bibitem[Mas-Colell et~al.(1995)]{MasColell1995} Mas-Colell, A., Whinston, M.~D. and Green, J.~R. (1995). \emph{Microeconomic Theory}. Oxford University Press.
+\bibitem[Mirrlees(1971)]{Mirrlees1971} Mirrlees, J.~A. (1971). An exploration in the theory of optimum income taxation. \emph{Review of Economic Studies}, 38(2), 175--208.
+\bibitem[Nozick(1974)]{Nozick1974} Nozick, R. (1974). \emph{Anarchy, State, and Utopia}. New York: Basic Books.
+\bibitem[Otsuka(2003)]{Otsuka2003} Otsuka, M. (2003). \emph{Libertarianism without Inequality}. Oxford University Press.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\bibitem[Rawls(1977)]{Rawls1977} Rawls, J. (1977). The basic structure as subject. \emph{American Philosophical Quarterly}, 14(2), 159--165.
+\bibitem[Rawls(2001)]{Rawls2001} Rawls, J. (2001). \emph{Justice as Fairness: A Restatement}. Ed. E. Kelly. Harvard University Press.
+\bibitem[Steiner(1994)]{Steiner1994} Steiner, H. (1994). \emph{An Essay on Rights}. Oxford: Blackwell.
+\bibitem[Varian(1974)]{Varian1974} Varian, H.~R. (1974). Equity, envy, and efficiency. \emph{Journal of Economic Theory}, 9(1), 63--91.
+\end{thebibliography}
+
+\end{document}

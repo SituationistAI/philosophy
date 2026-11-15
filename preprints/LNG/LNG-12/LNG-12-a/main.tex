@@ -1,0 +1,186 @@
+\documentclass{situationist-preprint}
+
+\title{The Sorites and Sharp Boundaries}
+\msid{LNG-12-a}
+\msfamily{LNG-12}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_12.lean}
+\mskeywords{vagueness; sorites paradox; heap; epistemicism; semantic plasticity; tolerance; safety}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+One grain of sand is not a heap; ten thousand grains are; and adding or removing a single grain seems never to make the difference. Is there a sharp boundary for \enquote{heap}? We argue that there is, and that it cannot be known. Given classical logic and the clear cases, the sorites argument proves that its tolerance premise is false: under every interpretation that the use of \enquote{heap} could fix, there is exactly one number of grains that is not a heap while one more grain is. The boundary cannot be known because the meaning of \enquote{heap} is plastic: patterns of use too close to ours to be told apart would have fixed it one grain over, and a belief about where it lies is not safe from such small differences. We prove that speakers know that the boundary exists and of no number know that it lies there. The result is the linguistic counterpart of MET-18's epistemicism, and it is formalized in Lean.
+\end{abstract}
+
+\section{The paradox}
+
+The sorites, attributed to Eubulides, runs as follows. One grain of sand is not a heap. If $n$ grains are not a heap, then $n+1$ grains are not a heap. Therefore ten thousand grains are not a heap. The premises seem true, the reasoning is a chain of modus ponens, and the conclusion is false. Equivalently, in the descending form: ten thousand grains are a heap; removing one grain from a heap leaves a heap; so one grain is a heap. We call the second premise in either form the \emph{tolerance} premise.
+
+The main responses differ on what they give up. Epistemicism keeps classical logic and semantics and denies tolerance: there is a last number of grains that is not a heap, and we cannot know which it is \citep{Williamson1994,Sorensen2001}. Supervaluationism holds that \enquote{heap} can be made precise in many admissible ways, and that a sentence is true if true on all of them; the negation of tolerance is then true although no instance of it is \citep{Fine1975,Keefe2000}. Degree theories give \enquote{$n$ grains are a heap} a degree of truth that rises gradually, so that each instance of tolerance is nearly true and their conjunction false \citep{Smith2008}. Contextualists hold that the boundary shifts as attention moves along the series, so that it is never where one is looking \citep{Raffman1994,Graff2000}. Tolerant logics keep tolerance and weaken the inference from it \citep{Zardini2008,CobrerosEtAl2012}. Nihilists accept the argument and conclude that nothing is a heap \citep{Unger1979}.
+
+We defend the epistemic response. MET-18-a argues that vagueness is a matter of language and knowledge rather than of the world, and LOG-15-a that the logic of vague predicates is classical and that three-valued semantics fail on higher-order vagueness. Here we give the argument for the word \enquote{heap} itself: why there is a boundary, why it is unique, and why we cannot know it. The model of first-order knowledge by a margin for error is in MET-18-a; our model concerns the speaker's knowledge of what her word means.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:use}
+A \emph{pattern of use} of \enquote{heap} is the totality of the dispositions of a linguistic community to apply and withhold the word, together with whatever else fixes its meaning. Each pattern of use determines an \emph{extension}: for each number $n$, $n$ grains are a heap under the pattern or are not.
+\end{definition}
+
+\begin{assumption}[Bivalence]\label{a:biv}
+Under every pattern of use, for every $n$, either $n$ grains are a heap or they are not.
+\end{assumption}
+
+\begin{assumption}[Clear cases]\label{a:clear}
+Under every pattern of use that could be ours, one grain is not a heap and ten thousand grains are.
+\end{assumption}
+
+\begin{assumption}[Monotonicity]\label{a:mono}
+Under every pattern of use, if $n$ grains are a heap, so are $n+1$.
+\end{assumption}
+
+We ignore arrangement: the grains are piled in the most favorable way. Monotonicity is part of the meaning of \enquote{heap}; nothing that is a heap stops being one when sand is added.
+
+\begin{definition}\label{d:bound}
+The \emph{boundary} of \enquote{heap} under a pattern of use is a number $n$ such that $n$ grains are not a heap and $n+1$ grains are.
+\end{definition}
+
+\begin{definition}\label{d:close}
+Two patterns of use are \emph{close} if they differ so slightly that no speaker could discriminate them from the distribution of applications, for instance by the dispositions of a few speakers in a few marginal cases. Every pattern is close to itself.
+\end{definition}
+
+\begin{definition}\label{d:know}
+A speaker whose community's pattern of use is $u$ \emph{knows} a claim about the extension of \enquote{heap} only if the claim holds under every pattern close to $u$.
+\end{definition}
+
+\begin{assumption}[Semantic plasticity]\label{a:plastic}
+For every pattern of use and every number at which it draws the boundary, some close pattern does not draw the boundary there.
+\end{assumption}
+
+Definition~\ref{d:know} is a safety condition on knowledge \citep[ch.~5]{Williamson2000}. A belief about what \enquote{heap} applies to is formed from the speaker's grasp of the community's use. Had the use been slightly different, in ways the speaker could not detect, the same belief-forming process would have issued in the same belief, and the belief must be true in those circumstances too if it is to be knowledge. Assumption~\ref{a:plastic} is \citet[ch.~7]{Williamson1994}'s observation that the meaning of a vague word supervenes on use too diffuse to be stable under the smallest changes: had a few speakers been slightly more liberal, \enquote{heap} would have had a boundary one grain lower. The two together say that the speaker's evidence about meaning is coarser than meaning itself.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:last}
+If a property of numbers fails at $a$ and holds at some larger number, then there is a number at which it fails and at whose successor it holds.
+\end{lemma}
+
+\begin{proof}
+By induction on the distance $k$ from $a$ to the larger number. If $k = 0$ the hypotheses contradict each other. If the property holds at $a + k + 1$, then either it holds at $a + k$, and the induction hypothesis applies, or it fails there, and $a + k$ is the number required.
+\end{proof}
+
+\begin{theorem}[Sharp boundary]\label{t:sharp}
+Under every pattern of use, \enquote{heap} has exactly one boundary.
+\end{theorem}
+
+\begin{proof}
+Existence: by Assumption~\ref{a:clear}, being a heap fails at $1$ and holds at $10\,000$, and by Lemma~\ref{l:last} there is a boundary. The case distinction in the proof of the lemma uses Assumption~\ref{a:biv}. Uniqueness: suppose $n < m$ are both boundaries. Since $n+1$ grains are a heap, by Assumption~\ref{a:mono} so are $m$ grains, which contradicts $m$'s being a boundary.
+\end{proof}
+
+\begin{theorem}\label{t:tol}
+The tolerance premise is false: under every pattern of use, it is not the case that removing a grain from a heap always leaves a heap.
+\end{theorem}
+
+\begin{proof}
+At the boundary $n$ of Theorem~\ref{t:sharp}, $n+1$ grains are a heap and $n$ grains are not.
+\end{proof}
+
+\begin{corollary}\label{c:knowsharp}
+Every speaker knows that \enquote{heap} has a sharp boundary.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:sharp}, every pattern of use, and in particular every pattern close to the speaker's, gives \enquote{heap} a boundary.
+\end{proof}
+
+\begin{theorem}[Unknowability]\label{t:unknow}
+Of no number does any speaker know that the boundary of \enquote{heap} lies there.
+\end{theorem}
+
+\begin{proof}
+Suppose a speaker whose pattern of use is $u$ knows that the boundary lies at $n$. Since $u$ is close to itself, the boundary lies at $n$ under $u$. By Assumption~\ref{a:plastic}, some pattern $v$ close to $u$ does not draw the boundary at $n$; by Definition~\ref{d:know}, the boundary lies at $n$ under $v$. Contradiction.
+\end{proof}
+
+Corollary~\ref{c:knowsharp} and Theorem~\ref{t:unknow} together give the characteristic structure of epistemicism: a known existential with no known instance. The speaker knows that there is a number such that it is not a heap and its successor is, and of each number she does not know that it is that number. There is nothing incoherent in the combination, which is the ordinary situation of anyone who knows that a lottery has a winner. The difference is that in the case of \enquote{heap} the ignorance is not remediable by investigation: no further observation of use reduces it, since the facts that would settle the boundary are differences of use below the threshold of discrimination.
+
+The sorites is therefore a valid argument with a false premise. The premise is attractive because a nearby claim is true. Speakers can never know, of a number of grains that is a heap, that it is a heap while being unable to know that one fewer grains are; for whatever they know about the extension holds under every close pattern of use, and close patterns differ by a grain. The knowledge version of tolerance, which MET-18-a proves in its margin model, is what speakers correctly sense, and they mistake it for tolerance itself. The companion manuscript LNG-12-b develops the margins for error that this involves, and LNG-12-c applies the account to the bald man.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[What fixes the boundary?]
+Nothing in our use of \enquote{heap} singles out $4\,317$ grains rather than $4\,318$. A boundary that nothing fixes is not there.
+\end{objection}
+
+\begin{reply}
+The objection assumes that what fixes a meaning must be surveyable. The extension of \enquote{heap} is fixed by the whole pattern of use, including dispositions never manifested and the way the community would resolve cases under pressure, as the extension of a natural kind term is fixed by facts about the kind that no speaker knows. That the fixing is not surveyable is what Assumption~\ref{a:plastic} records, and it explains why the boundary cannot be known, not that it does not exist. The alternative, that use fixes no boundary, requires giving up Assumption~\ref{a:biv}, and LOG-15-a argues that the non-classical semantics this requires reintroduces sharp boundaries one level up.
+\end{reply}
+
+\begin{objection}[Supervaluationism]
+The supervaluationist also accepts that \enquote{there is a boundary} is true, while denying that any number is the boundary. She thereby explains the appeal of tolerance without positing a fact that no one can know.
+\end{objection}
+
+\begin{reply}
+The supervaluationist accepts the existential and denies every instance, so that her \enquote{true} does not distribute over \enquote{or}: \enquote{$n$ is the boundary or $n+1$ is the boundary or \ldots} is true while no disjunct is. On our view the existential is true and some instance is true, and what fails is knowledge of which, which is how existentials ordinarily behave. The supervaluationist's apparatus remains useful as a model of what speakers can know: the admissible precisifications are the interpretations that speakers cannot exclude, and supertruth is close to known truth \citep{Williamson1994}. The epistemic view therefore keeps what is right in supervaluationism without a non-standard notion of truth.
+\end{reply}
+
+\begin{objection}[Tolerance is constitutive]
+\citet{Wright1975} argued that observational predicates are tolerant by their nature: a predicate whose application is decided by casual observation cannot be sensitive to a difference that observation cannot detect. Denying tolerance changes the subject.
+\end{objection}
+
+\begin{reply}
+What is constitutive is that a speaker's competent judgments are insensitive to such differences, which is a fact about knowledge and judgment and is captured by the safety condition of Definition~\ref{d:know}. Wright's argument shows that no one can know, of adjacent cases, that one is a heap and the other not; it does not show that one is not a heap and the other is. The inference from the first to the second assumes that the extension of a predicate cannot outrun what competent speakers can discriminate, which is the assumption the sorites refutes.
+\end{reply}
+
+\begin{objection}[Higher-order vagueness]
+\enquote{Clearly a heap} is vague too, and so is \enquote{clearly clearly a heap}. The epistemic view must say that each of these has a sharp boundary, which multiplies unknowable facts.
+\end{objection}
+
+\begin{reply}
+It does, and the multiplication is harmless: if \enquote{clearly} means \enquote{known by a competent speaker to be}, then the boundary of \enquote{clearly a heap} is fixed by the boundary of \enquote{heap} together with the width of the margin, and both are fixed by use. A predicate that is vague because its meaning outruns discrimination yields predicates of higher order with the same feature. LOG-15-b develops the bivalent treatment of higher-order vagueness.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LNG/LNG_12.lean} states the primitives and assumptions of Section~\ref{s:frame} as axioms: a type of patterns of use, the extension of \enquote{heap} under each (Definition~\ref{d:use}, with Assumption~\ref{a:biv} supplied by Lean's classical logic), the clear cases (Assumption~\ref{a:clear}), monotonicity (Assumption~\ref{a:mono}), closeness with its reflexivity (Definition~\ref{d:close}) and plasticity (Assumption~\ref{a:plastic}). Boundaries and knowledge are defined as in Definitions~\ref{d:bound} and~\ref{d:know}. The module proves Lemma~\ref{l:last}, Theorems~\ref{t:sharp}, \ref{t:tol} and~\ref{t:unknow} and Corollary~\ref{c:knowsharp}.
+
+\begin{lstlisting}
+theorem sharp (u : Use) :
+    (∃ n, Boundary u n) ∧ ∀ n m, Boundary u n → Boundary u m → n = m
+
+theorem unknowable (u : Use) (n : Nat) : ¬ Knows u (fun v => Boundary v n)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LNG_12.sharp' depends on axioms: [propext, Classical.choice,
+ Quot.sound, Philosophy.LNG_12.Heap, Philosophy.LNG_12.Use,
+ Philosophy.LNG_12.monotone, Philosophy.LNG_12.one_not_heap,
+ Philosophy.LNG_12.ten_thousand_heap]
+'Philosophy.LNG_12.unknowable' depends on axioms: [Philosophy.LNG_12.Close,
+ Philosophy.LNG_12.Heap, Philosophy.LNG_12.Use,
+ Philosophy.LNG_12.close_refl, Philosophy.LNG_12.plasticity]
+\end{lstlisting}
+
+\texttt{Classical.choice} enters through excluded middle in Lemma~\ref{l:last} and in the uniqueness proof, and is the formal counterpart of Assumption~\ref{a:biv}. The sharp boundary depends only on bivalence, the clear cases and monotonicity; unknowability depends only on closeness and plasticity. The assumptions are jointly consistent: patterns of use can be identified with cut-off points between $1$ and $9\,999$, with close patterns differing by at most one.
+
+\section{Conclusion}
+
+The sorites for \enquote{heap} is valid, and its tolerance premise is false. Under every pattern of use there is exactly one number of grains that is not a heap while one more is. Speakers know that there is such a number and cannot know which it is, because the meaning of the word is plastic under differences of use they cannot discriminate. Vague predicates have sharp boundaries that cannot be known, as MET-18 holds of vagueness in general.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cobreros et~al.(2012)]{CobrerosEtAl2012} Cobreros, P., \'Egr\'e, P., Ripley, D. and van Rooij, R. (2012). Tolerant, classical, strict. \emph{Journal of Philosophical Logic}, 41(2), 347--385.
+\bibitem[Fine(1975)]{Fine1975} Fine, K. (1975). Vagueness, truth and logic. \emph{Synthese}, 30(3--4), 265--300.
+\bibitem[Graff(2000)]{Graff2000} Graff, D. (2000). Shifting sands: An interest-relative theory of vagueness. \emph{Philosophical Topics}, 28(1), 45--81.
+\bibitem[Keefe(2000)]{Keefe2000} Keefe, R. (2000). \emph{Theories of Vagueness}. Cambridge University Press.
+\bibitem[Raffman(1994)]{Raffman1994} Raffman, D. (1994). Vagueness without paradox. \emph{The Philosophical Review}, 103(1), 41--74.
+\bibitem[Smith(2008)]{Smith2008} Smith, N.~J.~J. (2008). \emph{Vagueness and Degrees of Truth}. Oxford University Press.
+\bibitem[Sorensen(2001)]{Sorensen2001} Sorensen, R. (2001). \emph{Vagueness and Contradiction}. Oxford University Press.
+\bibitem[Unger(1979)]{Unger1979} Unger, P. (1979). There are no ordinary things. \emph{Synthese}, 41(2), 117--154.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and its Limits}. Oxford University Press.
+\bibitem[Wright(1975)]{Wright1975} Wright, C. (1975). On the coherence of vague predicates. \emph{Synthese}, 30(3--4), 325--365.
+\bibitem[Zardini(2008)]{Zardini2008} Zardini, E. (2008). A model of tolerance. \emph{Studia Logica}, 90(3), 337--368.
+\end{thebibliography}
+
+\end{document}

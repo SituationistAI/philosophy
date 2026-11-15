@@ -1,0 +1,86 @@
+\documentclass{situationist-preprint}
+
+\title{Ross's Paradox}
+\msid{LOG-14-b}
+\msfamily{LOG-14}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Consequence}
+\mskeywords{imperative logic; Ross's paradox; satisfaction; compliance; partial compliance; contrary-to-duty imperatives; free choice}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-14-a defines imperative validity by satisfaction-preservation and blocks Ross's paradox by proving that adding an entailed imperative to those in force leaves the set of compliant courses of action unchanged. We examine the paradox and its variants in more detail. In each variant the inference is valid and adds nothing to what compliance requires. The variant in which mailing becomes impossible is an instance of the explosion of unsatisfiable commands. The variant that ranks outcomes by partial compliance revives the paradox only for measures that count imperatives, and such measures violate the principle that sets of imperatives with the same compliance set make the same demands; every measure that respects it gives burning no credit. Permission variants fall outside the logic of satisfaction.
+\end{abstract}
+
+\section{The paradox and its form}
+
+\citet{Ross1941} observed that, on a logic of satisfaction, \enquote{Mail the letter} ($!m$) entails \enquote{Mail the letter or burn it} ($!(m \vee b)$), and that the conclusion seems to allow the addressee to burn the letter. Corollary~3.3 of LOG-14-a grants the validity and denies the permission: by Theorem~3.2 of LOG-14-a, $C_\Gamma(\{!m, !(m \vee b)\}) = C_\Gamma(\{!m\})$, and by Principle~P1 of LOG-14-a, what is demanded is compliance with everything in force. The derived imperative is binding but idle.
+
+Every variant of the paradox has the same structure. There is a valid inference to an imperative $!\psi$, and an argument that $!\psi$ makes some course of action acceptable that the premises did not. The argument always needs a bridge from validity to acceptability, and the question in each case is what the bridge is. We consider four.
+
+\section{Variants}
+
+\paragraph{The replacement variant.} The simplest bridge is that a derived imperative may be complied with on its own: having inferred $!(m \vee b)$, the addressee complies with it by burning. This bridge treats the conclusion as replacing the premise. LOG-14-a rejects it: the premise remains in force, and burning without mailing violates it. Nothing further is needed for this variant, which is Ross's own.
+
+\paragraph{The impossibility variant.} Suppose the post office is closed for the week, so that the background $\Gamma$ entails $\neg m$. It may seem that $!(m \vee b)$, still entailed by $!m$, now demands burning, since burning is the only way left to satisfy it. But if no $\Gamma$-outcome satisfies $!m$, then by Proposition~3.4 of LOG-14-a every imperative is entailed, including $!(m \vee \neg b)$, and $C_\Gamma(\{!m\})$ is empty. The derived imperatives single out no course of action, burning included. The addressee who cannot comply faces a practical question, how to act when compliance is impossible, which the logic of satisfaction does not answer and should not be expected to answer. The structure resembles that of contrary-to-duty obligations \citep{Chisholm1963}, and the moral is the same: what one should do once a demand cannot be met is not settled by the consequences of the demand.
+
+\paragraph{The partial-compliance variant.} The strongest version of the paradox does not claim that burning complies, but that it complies \emph{better} than doing nothing. If outcomes are ranked by the number of imperatives in force that they satisfy, then once $!(m \vee b)$ is added, burning satisfies one imperative and doing nothing satisfies none. Burning would then be second best, which is absurd.
+
+\begin{definition}\label{d:measure}
+A \emph{partial-compliance measure} assigns to each set $\Delta$ of imperatives and each $\Gamma$-outcome $w$ a value $\mu_\Delta(w)$ in an ordered set, representing how well conduct at $w$ complies with $\Delta$. It is \emph{demand-based} if $\mu_\Delta = \mu_{\Delta^*}$ whenever $C_\Gamma(\Delta) = C_\Gamma(\Delta^*)$.
+\end{definition}
+
+A demand-based measure is one that respects Principle~P1 of LOG-14-a: two sets of imperatives with the same compliance set make the same demands, and so should rank conduct in the same way.
+
+\begin{proposition}\label{p:counting}
+The counting measure, $\mu_\Delta(w) =$ the number of members of $\Delta$ satisfied at $w$, is not demand-based.
+\end{proposition}
+
+\begin{proof}
+Let $\Delta = \{!m\}$ and $\Delta^* = \{!m, !(m \vee b)\}$. By Theorem~3.2 of LOG-14-a, $C_\Gamma(\Delta) = C_\Gamma(\Delta^*)$. At an outcome $w$ at which the letter is burned and not mailed, $\mu_\Delta(w) = 0$ and $\mu_{\Delta^*}(w) = 1$.
+\end{proof}
+
+\begin{proposition}\label{p:demand}
+If $\mu$ is demand-based and $\Gamma; \Delta \models\, !\psi$, then $\mu_{\Delta \cup \{!\psi\}} = \mu_\Delta$. In particular, adding $!(m \vee b)$ to $\{!m\}$ does not improve the standing of any outcome, and burning gains no credit from it.
+\end{proposition}
+
+\begin{proof}
+By Theorem~3.2 of LOG-14-a the compliance sets are equal, and $\mu$ is demand-based.
+\end{proof}
+
+The partial-compliance variant thus revives Ross's paradox only for a measure that is sensitive to the way demands are formulated rather than to the demands themselves. The counting measure gives a different verdict for $\{!m\}$ and for $\{!m, !(m \vee b)\}$, which make the same demands; it would equally rank outcomes differently for $\{!(m \wedge n)\}$ and $\{!m, !n\}$. Measures that depend only on the compliance set, for instance the distance from $w$ to the nearest compliant outcome in some ordering of outcomes by similarity, are demand-based. Whether burning is closer to compliance than doing nothing is then a question about the similarity of outcomes, not about the disjunction $m \vee b$, and on any natural ordering the letter that was neither mailed nor burned is the closer to having been mailed.
+
+\paragraph{The permission variant.} \enquote{You may mail the letter} seems to entail \enquote{You may mail the letter or burn it}, and the conclusion, on its free-choice reading, permits burning \citep{Kamp1973}. This is not a variant of Ross's paradox within the logic of satisfaction, because permissions are not imperatives and have no satisfaction conditions; as LOG-14-a states, its logic is not a logic of permission. The permission variant is a problem for the logic of permission, and it is generated by the free-choice reading, on which the inference from \enquote{may $m$} to \enquote{may ($m$ or $b$)} is not valid. Either way, nothing in the satisfaction logic licenses it.
+
+\section{Objections and replies}
+
+\begin{objection}[Violation conditions]
+\citet{Vranas2008} identifies an imperative by its satisfaction and its violation conditions. On such a view, an imperative can be partly complied with in a way the compliance set does not register, and demand-based measures lose information.
+\end{objection}
+
+\begin{reply}
+For the unconditional imperatives at issue in Ross's paradox, violation is non-satisfaction, and the two-condition view agrees with Definition~2.1 of LOG-14-a. For conditional imperatives the views may differ, as LOG-14-a notes in its reply to Objection~3; but the partial-compliance variant does not involve conditional imperatives, and the information the counting measure adds is information about how the demands were written down.
+\end{reply}
+
+\begin{objection}[Issued imperatives]
+Count only the imperatives actually issued. Then $!(m \vee b)$, which was derived and not issued, adds nothing to the count, and the paradox does not arise.
+\end{objection}
+
+\begin{reply}
+The restriction blocks the variant when the disjunction is derived, but not when it is issued. A superior who says \enquote{Mail the letter} and then, redundantly, \enquote{Mail it or burn it} has made no further demand, by Theorem~3.2 of LOG-14-a; a count of issued imperatives would nonetheless credit burning. Counting issued imperatives is a measure of what was said, not of what is demanded. Only demand-based measures avoid both cases.
+\end{reply}
+
+\section{Conclusion}
+
+In every variant of Ross's paradox the inference is valid, and the appearance of paradox requires a bridge from validity to acceptability. The replacement bridge treats a conclusion as superseding its premise; the impossibility bridge mistakes the explosion of unsatisfiable commands for a demand; the partial-compliance bridge relies on measures that count formulations instead of demands, and every demand-based measure gives burning no credit; the permission bridge belongs to another logic. Ross's inference is valid and adds nothing to what compliance requires.
+
+\begin{thebibliography}{99}\small
+\bibitem[Chisholm(1963)]{Chisholm1963} Chisholm, R.~M. (1963). Contrary-to-duty imperatives and deontic logic. \emph{Analysis}, 24(2), 33--36.
+\bibitem[Kamp(1973)]{Kamp1973} Kamp, H. (1973). Free choice permission. \emph{Proceedings of the Aristotelian Society}, 74, 57--74.
+\bibitem[Ross(1941)]{Ross1941} Ross, A. (1941). Imperatives and logic. \emph{Theoria}, 7(1), 53--71.
+\bibitem[Vranas(2008)]{Vranas2008} Vranas, P.~B.~M. (2008). New foundations for imperative logic I: Logical connectives, consistency, and quantifiers. \emph{Noûs}, 42(4), 529--572.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,169 @@
+\documentclass{situationist-preprint}
+
+\title{Uniqueness Defended}
+\msid{EPI-17-a}
+\msfamily{EPI-17}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_17.lean}
+\mskeywords{uniqueness; permissivism; credence; accuracy; scoring rules; immodesty}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is rationality permissive? Permissivists hold that a single body of evidence can make more than one credence in a proposition rational; the uniqueness thesis denies it. We argue for uniqueness: for any body of evidence and any proposition, there is at most one rational credence. The argument has two premises. The first is that rational credences are immodest: measured by any strictly proper measure of accuracy, a credence expects itself to be more accurate than any alternative. The second is that rationality is endorsed by rationality: a credence that is rational on some evidence expects any credence rational on the same evidence to do no worse, in accuracy, than itself. Together they entail that two rational credences on the same evidence coincide. We defend the second premise as what is needed for rationality to be a guide to truth rather than a mere licence, and reply to the permissivist appeals to epistemic standards, to Jamesian trade-offs, to imprecise evidence, to the absence of a privileged prior and to reasonable disagreement. The theorem, and the strict propriety of the Brier measure on which the first premise relies, are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The uniqueness thesis, in the form we defend, says that for any body of evidence $E$ and proposition $p$, there is at most one credence in $p$ that is rational on $E$ \citep{White2005,Feldman2007}. Permissivism denies this: there are cases in which the evidence leaves rational agents latitude, so that two agents with the same evidence may rationally adopt different credences \citep{Rosen2001,Kelly2014,Schoenfield2014}.
+
+The question matters beyond its intrinsic interest. If permissivism is true, much reasonable disagreement is no evidence of error, since peers who share their evidence may both be rational; REL-11-a uses uniqueness to show that at most one party to a peer disagreement can be rationally steadfast, and EPI-07 builds its account of disagreement on it. And if permissivism is true, there is a question why one should care about being rational: if the evidence permits both $0.4$ and $0.7$, an agent at $0.4$ who learned she could take a pill to move to $0.7$ would have no evidential reason to refuse it, and her credence would appear arbitrary from her own point of view \citep{White2005}.
+
+The leading permissivist responses relativize rationality to epistemic standards: a credence is rational relative to standards, and different reasonable standards issue different verdicts on the same evidence \citep{Schoenfield2014}. \citet{Horowitz2014} argued that such views are in tension with immodesty, the feature of rational credence that it regards itself as the best estimate of the truth. We develop this line into an argument for uniqueness and defend its weakest premise.
+
+\section{Framework}
+
+We fix a proposition $p$ and consider credences in it.
+
+\begin{definition}[Rational credence]\label{d:rational}
+$R(E,c)$ says that credence $c$ in $p$ is rational for an agent whose total evidence is $E$.
+\end{definition}
+
+\begin{definition}[Expected inaccuracy]\label{d:ei}
+For credences $c$ and $d$, $\mathit{EI}(c,d)$ is the expected inaccuracy of $d$, computed with the probabilities given by $c$: if $I(d,1)$ and $I(d,0)$ are the inaccuracies of $d$ when $p$ is true and when it is false, $\mathit{EI}(c,d) = c\,I(d,1) + (1-c)\,I(d,0)$.
+\end{definition}
+
+\begin{principle}[Strict propriety]\label{p:proper}
+Inaccuracy is measured by a strictly proper measure: for all credences $c \neq d$, $\mathit{EI}(c,c) < \mathit{EI}(c,d)$.
+\end{principle}
+
+\begin{principle}[Rational endorsement]\label{p:endorse}
+If $c$ and $d$ are both rational on $E$, then $\mathit{EI}(c,d) \leq \mathit{EI}(c,c)$: a credence rational on $E$ does not expect a credence that is rational on $E$ to be less accurate than itself.
+\end{principle}
+
+Principle~\ref{p:proper} is standard in accuracy-first epistemology \citep{Joyce1998,GreavesWallace2006,Pettigrew2016}. It is the formal counterpart of immodesty \citep{Lewis1971}: a credence that expected some other credence to be more accurate would, by its own lights, be a worse estimate of the truth than an available alternative, and so could not be one's considered estimate. The Brier measure, on which $I(d,1) = (1-d)^2$ and $I(d,0) = d^2$, is strictly proper, as is the logarithmic measure. Principle~\ref{p:proper} need not assume that all agents use the same measure: the argument below uses only the measure of the agent whose credence is $c$.
+
+Principle~\ref{p:endorse} is the premise the permissivist will dispute. We defend it in Section~4.
+
+\section{The argument}
+
+\begin{theorem}[Uniqueness]\label{t:unique}
+For any body of evidence $E$, if $R(E,c)$ and $R(E,d)$, then $c = d$.
+\end{theorem}
+
+\begin{proof}
+Suppose $c$ and $d$ are rational on $E$ and $c \neq d$. By Principle~\ref{p:proper}, $\mathit{EI}(c,c) < \mathit{EI}(c,d)$. By Principle~\ref{p:endorse}, $\mathit{EI}(c,d) \leq \mathit{EI}(c,c)$. Together these give $\mathit{EI}(c,c) < \mathit{EI}(c,c)$, a contradiction.
+\end{proof}
+
+\begin{corollary}\label{c:noperm}
+There is no permissive case: no body of evidence on which two distinct credences in the same proposition are rational.
+\end{corollary}
+
+\begin{proposition}[Brier is strictly proper]\label{p:brier}
+On the grid of credences $0, \frac{1}{10}, \ldots, 1$, the Brier measure satisfies Principle~\ref{p:proper}.
+\end{proposition}
+
+\begin{proof}
+For the Brier measure, $\mathit{EI}(c,d) = c(1-d)^2 + (1-c)d^2 = (d-c)^2 + c(1-c)$, which exceeds $\mathit{EI}(c,c) = c(1-c)$ whenever $d \neq c$. The formalization checks the grid case by computation.
+\end{proof}
+
+Proposition~\ref{p:brier} shows that Principle~\ref{p:proper} is satisfiable and holds for the most widely used measure. Theorem~\ref{t:unique} asserts at most one rational credence on each body of evidence; that there is at least one is a further claim, which we take to be part of the thesis that evidence bears on credence at all and do not argue for here.
+
+\section{Rational endorsement}
+
+Why accept Principle~\ref{p:endorse}? Its denial says that there could be an agent whose credence $c$ is rational on $E$, who recognizes that $d$ is also rational on $E$, and who expects $d$ to be strictly less accurate than $c$. By Principle~\ref{p:proper}, every rational agent in a permissive case is in this position with respect to every other rational credence. We argue that this undermines the point of the permission.
+
+Rationality, as a property of credences, is supposed to be a guide to truth: to learn that a credence is rational on one's evidence is to learn something in its favour as an estimate of how things are. If permissivism is true, this connection fails. The agent at $c$ who learns that $d$ is rational on her evidence learns nothing that makes $d$ a better or even an equally good estimate by her lights; she continues to expect it to be worse. The status \enquote{rational on $E$} then marks a credence as permitted without marking it as good, by the lights of any other credence that bears the same status. This is the complaint of \citet{Horowitz2014}, and it explains White's pill: an agent at $c$ should refuse a pill that would move her to $d$, since she expects $d$ to be less accurate, and yet, by the permissivist's lights, the pill would leave her rational. Permissivism makes the distinction between rational and irrational credences one that a rational agent has no accuracy-based reason to care about within the permitted range.
+
+Principle~\ref{p:endorse} restores the connection in the weakest form available: it does not require that a rational agent defer to every rational credence, only that she not expect one to be worse than her own. The permissivist who rejects it must say that rationality is a licence rather than a guide, and that what makes credences within the permitted range rational is something other than their expected accuracy by rational lights.
+
+\section{Objections}
+
+\begin{objection}[Standards]
+Rationality is relative to epistemic standards. By my standards, $c$ is the best response to $E$; by yours, $d$ is. Each of us thinks the other's credence rational, in the sense that it is the output of reasonable standards, and expects it to be less accurate. Principle~\ref{p:endorse} fails, and harmlessly \citep{Schoenfield2014}.
+\end{objection}
+
+\begin{reply}
+The reply concedes the point at issue. If \enquote{rational} means \enquote{the output of some reasonable standards}, then the claim that $d$ is rational carries no information that bears on $d$'s accuracy by my lights, and the question becomes whether the standards themselves are rationally evaluable. If they are, uniqueness reappears at the level of standards, since a standard is a function from evidence to credences and Theorem~\ref{t:unique} applies to its outputs. If they are not, their choice is arbitrary, and the agent who adopts them has no evidential reason for her credence beyond the evidence that both standards share; this is the arbitrariness that EPI-17-b examines.
+\end{reply}
+
+\begin{objection}[James's two goals]
+Agents may weight the goal of believing truths and the goal of avoiding error differently, and different weightings make different responses to the same evidence rational \citep{Kelly2014}.
+\end{objection}
+
+\begin{reply}
+The weighting of the two Jamesian goals bears on full belief, not on credence: a strictly proper measure scores a credence for its closeness to the truth, and every strictly proper measure, whatever weight it gives to the two kinds of error, is maximized in expectation by one's own credence. Different weightings may correspond to different Lockean thresholds for belief, in the sense of LOG-05. For a fixed threshold, uniqueness of credence yields uniqueness of belief; whether the threshold itself may vary with the agent's practical situation is a question about the norms of belief that Theorem~\ref{t:unique} does not address.
+\end{reply}
+
+\begin{objection}[Imprecise evidence]
+Sparse or unspecific evidence does not single out a sharp credence. Rationality then requires an imprecise state, or permits any of a range of sharp ones \citep{Joyce2005}.
+\end{objection}
+
+\begin{reply}
+The first option is consistent with uniqueness: if sparse evidence requires a set of credences, it requires a unique set, and Theorem~\ref{t:unique} applies to the state rather than to its members. The second option is permissivism, and it is subject to the argument of Section~4: if each sharp credence in the range is rational, each expects the others to be less accurate, and the range is a range of permitted estimates none of which is endorsed by the others.
+\end{reply}
+
+\begin{objection}[No privileged prior]
+Uniqueness requires a unique rational prior from which credences on each body of evidence are obtained by conditionalization. Carnap's search for such a prior failed, and the choice among candidates looks arbitrary \citep{Meacham2014}.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:unique} asserts that the rational credence is unique, not that it can be computed from a formula. Its existence is constrained by principles that are independently defended: the Principal Principle; indifference among subjectively indistinguishable centres, used in EPI-18; and the projection of natural rather than gerrymandered predicates, which EPI-04 shows is what distinguishes \enquote{green} from \enquote{grue}. That we cannot write down the prior that satisfies all these constraints does not show that there is more than one.
+\end{reply}
+
+\begin{objection}[Reasonable disagreement]
+Thoughtful people who share their evidence disagree, and it is implausible that at most one of them is rational \citep{Rosen2001}.
+\end{objection}
+
+\begin{reply}
+The implausibility diminishes once it is seen what follows. REL-11-a shows, given uniqueness, that neither party to such a disagreement is in a position to know which of them, if either, is rational, and EPI-07 draws the consequence that each should conciliate. What uniqueness denies is that both may stay where they are with full rational credit; it does not condemn either party as careless, and it is compatible with both having reasoned as well as can be expected.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem is a claim about propositional rationality: which credence the evidence supports. It does not say that agents can always determine that credence, nor that an agent whose credence deviates slightly from it is blameworthy. It does not establish that some credence is rational on every body of evidence. And it rests on Principle~\ref{p:endorse}, which a permissivist who regards rationality as a licence rather than a guide can deny; the argument shows the cost of that denial rather than its incoherence.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_17.lean} takes bodies of evidence, credences, the rationality relation and expected inaccuracy as primitives, and Principles~\ref{p:proper} and~\ref{p:endorse} as axioms. It proves Theorem~\ref{t:unique} and Corollary~\ref{c:noperm}, and checks Proposition~\ref{p:brier} by computation on a grid scaled by ten.
+
+\begin{lstlisting}
+theorem uniqueness (E : Evidence) (c d : Credence)
+    (hc : Rational E c) (hd : Rational E d) : c = d
+
+theorem brier_strictly_proper :
+    ∀ c d : Fin 11, c ≠ d → brier c c < brier c d
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_17.uniqueness' depends on axioms:
+  [propext, Classical.choice, Quot.sound, Credence, EI,
+   Evidence, Rational, endorsement, strict_propriety]
+'Philosophy.EPI_17.brier_strictly_proper' does not depend
+  on any axioms
+\end{lstlisting}
+
+The axioms \texttt{strict\_propriety} and \texttt{endorsement} are Principles~\ref{p:proper} and~\ref{p:endorse}; the others are the primitives of Definitions~\ref{d:rational} and~\ref{d:ei}, together with Lean's classical logic, used for the proof by contradiction.
+
+\section{Conclusion}
+
+If accuracy is measured by a strictly proper measure, and if a credence rational on some evidence does not expect another credence rational on the same evidence to be less accurate, then for each body of evidence there is a unique rational credence in each proposition. The second premise is what it takes for rationality to be a guide to truth. Permissivism can be maintained only by giving it up, and with it the reason to care, within the permitted range, about being rational.
+
+\begin{thebibliography}{99}\small
+\bibitem[Feldman(2007)]{Feldman2007} Feldman, R. (2007). Reasonable religious disagreements. In L.~M. Antony (Ed.), \emph{Philosophers Without Gods: Meditations on Atheism and the Secular Life} (pp.~194--214). Oxford University Press.
+\bibitem[Greaves and Wallace(2006)]{GreavesWallace2006} Greaves, H. and Wallace, D. (2006). Justifying conditionalization: Conditionalization maximizes expected epistemic utility. \emph{Mind}, 115(459), 607--632.
+\bibitem[Horowitz(2014)]{Horowitz2014} Horowitz, S. (2014). Immoderately rational. \emph{Philosophical Studies}, 167(1), 41--56.
+\bibitem[Joyce(1998)]{Joyce1998} Joyce, J.~M. (1998). A nonpragmatic vindication of probabilism. \emph{Philosophy of Science}, 65(4), 575--603.
+\bibitem[Joyce(2005)]{Joyce2005} Joyce, J.~M. (2005). How probabilities reflect evidence. \emph{Philosophical Perspectives}, 19, 153--178.
+\bibitem[Kelly(2014)]{Kelly2014} Kelly, T. (2014). Evidence can be permissive. In M.~Steup, J.~Turri and E.~Sosa (Eds.), \emph{Contemporary Debates in Epistemology} (2nd ed., pp.~298--312). Wiley-Blackwell.
+\bibitem[Lewis(1971)]{Lewis1971} Lewis, D. (1971). Immodest inductive methods. \emph{Philosophy of Science}, 38(1), 54--63.
+\bibitem[Meacham(2014)]{Meacham2014} Meacham, C.~J.~G. (2014). Impermissive Bayesianism. \emph{Erkenntnis}, 79(S6), 1185--1217.
+\bibitem[Pettigrew(2016)]{Pettigrew2016} Pettigrew, R. (2016). \emph{Accuracy and the Laws of Credence}. Oxford University Press.
+\bibitem[Rosen(2001)]{Rosen2001} Rosen, G. (2001). Nominalism, naturalism, epistemic relativism. \emph{Philosophical Perspectives}, 15, 69--91.
+\bibitem[Schoenfield(2014)]{Schoenfield2014} Schoenfield, M. (2014). Permission to believe: Why permissivism is so true and why it's (also) misleading. \emph{No\^us}, 48(2), 193--218.
+\bibitem[White(2005)]{White2005} White, R. (2005). Epistemic permissiveness. \emph{Philosophical Perspectives}, 19, 445--459.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass{situationist-preprint}
+
+\title{A Correspondence Between Kantian and Consequentialist Theories}
+\msid{ETH-02-b}
+\msfamily{ETH-02}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Companion manuscript}
+\mskeywords{Kantian ethics; consequentializing; maxims; perfect and imperfect duties; agent-relative value; formula of universal law}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Kantian ethics is often taken to be the clearest case of a theory that cannot be consequentialized, because its verdicts depend on the agent's maxim rather than on what she brings about. We show that the consequentializing equivalence of ETH-02-a applies to Kantian theories once options are individuated by maxims, as Kantian ethics itself requires. A Kantian theory satisfies the two conditions of the equivalence, admissibility and the absence of dilemmas, the second by Kant's own denial that duties can collide. We describe its consequentialist counterpart: perfect duties become finite agent-relative penalties and imperfect duties become ties among permissible options. The correspondence runs in both directions and leaves every first-order Kantian question where it was.
+\end{abstract}
+
+\section{Kantian theories as deontic theories}
+
+ETH-02-a proves that, on a finite choice structure with act-inclusive outcomes, a deontic theory is extensionally equivalent to a consequentialist theory with an agent-relative value function if and only if it permits only available options and generates no dilemmas (Theorem~3.5 of ETH-02-a). We apply the result to theories built on the formula of universal law.
+
+The Kantian evaluates not bodily movements but actions done on maxims. ETH-04-a takes a maxim to have the form \enquote{in circumstances $C$, to do $A$, in order to bring about $E$} (Definition~2.1 of ETH-04-a), and individuates it by the features the agent treats as reasons (Principle~P1 of ETH-04-a). Two agents who make the same false statement, one to conceal a friend from a murderer and one to obtain money, act on different maxims and may receive different verdicts. A Kantian choice structure must therefore take as options pairs of an act and a maxim. This is not an imposition by the consequentializer; it is the Kantian's own account of what is being evaluated.
+
+\begin{definition}\label{d:kantian}
+A \emph{Kantian theory} is a deontic theory, in the sense of Definition~2.2 of ETH-02-a, on a choice structure whose options are act--maxim pairs, which permits an option $(A, M)$ to an agent in a situation if and only if the option is available and $M$, individuated as in ETH-04-a, passes both the contradiction in conception test and the contradiction in the will test (Definition~2.3 of ETH-04-a).
+\end{definition}
+
+Definition~\ref{d:kantian} abstracts from much that matters to Kant, including moral worth, which concerns the motive from which a permissible act is done and not its permissibility. Its scope is the deontic verdicts, which is all the equivalence concerns.
+
+\begin{lemma}\label{l:admissible}
+Every Kantian theory is admissible.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:kantian}, it permits only available options.
+\end{proof}
+
+The second condition is substantive. A Kantian theory has a dilemma if some situation offers no option whose maxim passes both tests. Kant denied that this can happen: in the introduction to the \emph{Metaphysics of Morals} he holds that a collision of duties is inconceivable, since two opposed rules cannot both be necessary, and that what appears as a conflict is a conflict between grounds of obligation, of which the stronger prevails \citep{Kant1797}. The same conclusion follows from Assumption~2.7 of ETH-02-a, which is the conclusion of ETH-15, and from the observation that refraining on a maxim of non-interference is available in nearly every situation and is a maxim that typically passes both tests.
+
+\begin{proposition}\label{p:kantcons}
+Every Kantian theory without dilemmas is extensionally equivalent to a consequentialist theory whose value function is agent-relative and defined on outcomes that record the agent's maxim.
+\end{proposition}
+
+\begin{proof}
+Outcomes in a Kantian choice structure are act-inclusive in the sense of Definition~2.5 of ETH-02-a when they record the situation and the option, and the option includes the maxim. By Lemma~\ref{l:admissible} and the absence of dilemmas, Theorem~3.3 of ETH-02-a applies: the theory is equivalent to the consequentialist theory of its indicator value function, which assigns to each agent the value $1$ to outcomes of options permitted to her and $0$ otherwise.
+\end{proof}
+
+\section{An informative counterpart}
+
+The indicator function is the least informative representation. A more illuminating counterpart follows Kant's division of duties. Perfect duties, such as the duty not to make a lying promise, forbid acting on certain maxims whatever the end; imperfect duties, such as beneficence, require adopting an end while leaving latitude in how and when to pursue it \citep{ONeill1975,Herman1993}.
+
+\begin{proposition}\label{p:perfect}
+Suppose that, in a Kantian choice structure, the options permitted are exactly those that minimize the number of violations of perfect duty and, among these, those that do not fail the contradiction in the will test. Then the theory is equivalent to the consequentialist theory whose value for agent $i$ of an outcome is $-\bigl(2\,c_i + w_i\bigr)$, where $c_i$ is the number of perfect-duty violations committed by $i$ in that outcome and $w_i$ is $1$ if $i$'s maxim fails the contradiction in the will test and $0$ otherwise.
+\end{proposition}
+
+\begin{proof}
+This is Proposition~4.6 of ETH-02-a with the bound $B = 1$ and with the good $g$ equal to $1 - w_i$. A penalty of $B + 1 = 2$ per violation makes any reduction in perfect-duty violations outweigh any difference in $w_i$, and among options with equal violations the value is maximal exactly when $w_i = 0$.
+\end{proof}
+
+The counterpart is agent-relative in exactly the way the Kantian constraint is agent-centered: each agent's value counts her own violations, not the violations of others. By Proposition~4.4 of ETH-02-a, no agent-neutral value function could do the same, since the Kantian may not lie to prevent two lies by others. Imperfect duties appear in the counterpart as ties. Every option whose maxim passes both tests receives the same value, so the latitude of imperfect duty is the set of maximal options, and the consequentialist counterpart is silent, as the Kantian is, on which of them to choose.
+
+\begin{proposition}\label{p:converse}
+Every consequentialist theory corresponds to a deontic theory with a single rule, and the rule can be stated as a maxim: \enquote{in any situation, to take an option whose outcome is ranked highest by $V_i$, in order to bring about what is best by $V_i$.}
+\end{proposition}
+
+\begin{proof}
+By Theorem~3.4 of ETH-02-a, the consequentialist theory $C_V$ is admissible and without dilemmas, and it permits exactly the maximal options; the stated maxim describes them.
+\end{proof}
+
+Whether that maxim passes the Kantian tests is a first-order question, and the correspondence does not settle it. \citet{Hare1993} argued that a Kantian willing of universal law yields a form of utilitarianism, \citet{Cummiskey1996} that Kantian premises support a consequentialist normative theory, and \citet{Parfit2011} that the best version of the formula of universal law converges with rule consequentialism. Our result is weaker and more secure than any of these: whatever the correct Kantian theory is, it has a consequentialist counterpart, and whatever the correct consequentialist theory is, it has a rule form.
+
+\begin{objection}
+Maxims are inner states. Outcomes that record them are not outcomes in any sense a consequentialist should accept, and the correspondence is therefore a trick of individuation.
+\end{objection}
+
+\begin{reply}
+Outcomes in the sense of ETH-02-a are whatever an option brings about in the situation, and an agent's acting for certain reasons is part of what happens when she acts. Assumption~2.6 of ETH-02-a requires only that outcomes be rich enough to record the option; the Kantian has already individuated options by maxims. The value function then depends on maxims exactly as the Kantian verdicts do, and on nothing else. If this makes the value function unilluminating, it is unilluminating in the same respect as the Kantian theory it represents, which is the content of the claim that the two are notational variants (Corollary~3.6 of ETH-02-a).
+\end{reply}
+
+\section{Conclusion}
+
+Kantian theories satisfy the conditions of the consequentializing equivalence, and their counterparts have a perspicuous form: lexical but finite penalties for one's own violations of perfect duty, and ties representing the latitude of imperfect duty. The correspondence runs in both directions. It does not decide whether one may lie to the murderer at the door, which ETH-04 answers on Kantian grounds, and it does not favor either framework.
+
+\begin{thebibliography}{9}\small
+\bibitem[Cummiskey(1996)]{Cummiskey1996} Cummiskey, D. (1996). \emph{Kantian Consequentialism}. Oxford University Press.
+\bibitem[Hare(1993)]{Hare1993} Hare, R.~M. (1993). Could Kant have been a utilitarian? \emph{Utilitas}, 5(1), 1--16.
+\bibitem[Herman(1993)]{Herman1993} Herman, B. (1993). \emph{The Practice of Moral Judgment}. Harvard University Press.
+\bibitem[Kant(1797)]{Kant1797} Kant, I. (1797). \emph{The Metaphysics of Morals}. In \emph{Practical Philosophy}, trans. M.~J. Gregor, Cambridge University Press, 1996. Introduction, Ak.~6:224.
+\bibitem[O'Neill(1975)]{ONeill1975} O'Neill, O. (1975). \emph{Acting on Principle: An Essay on Kantian Ethics}. Columbia University Press.
+\bibitem[Parfit(2011)]{Parfit2011} Parfit, D. (2011). \emph{On What Matters}, Vol.~1. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

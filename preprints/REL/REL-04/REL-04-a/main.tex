@@ -1,0 +1,160 @@
+\documentclass{situationist-preprint}
+
+\title{The Paradox of the Stone and Stratified Ability}
+\msid{REL-04-a}
+\msfamily{REL-04}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_04.lean}
+\mskeywords{omnipotence; paradox of the stone; self-reference; ability; stratification; divine attributes}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can an omnipotent being make a stone it cannot lift? If it can, there is a stone it cannot lift; if it cannot, there is something it cannot do. Either way, the paradox concludes, it is not omnipotent. We argue that omnipotence is coherent once it is restricted to tasks whose description does not quantify over the agent's own powers. Stratifying descriptions by whether they refer to the agent's own powers, we prove three results: the paradox is valid against unrestricted omnipotence; a being that is omnipotent in the stratified sense at every world cannot make a stone it cannot lift, and this inability is no counterexample to its omnipotence; and every task such a being cannot perform is either impossible or self-referential. The assumptions of the paradox are consistent with essential stratified omnipotence. The proofs are formalized in Lean.
+\end{abstract}
+
+\section{The paradox}
+
+The paradox of the stone asks whether an omnipotent being can create a stone so heavy that it cannot lift it. \citet{Mackie1955} stated the general form, which he called the paradox of omnipotence: can an omnipotent being make things it cannot subsequently control? The dilemma is short. If the being can make such a stone, there is a possible stone it cannot lift, and so a task it cannot perform; if it cannot make one, there is a task it cannot perform. In both cases it fails to be able to do everything.
+
+Three replies dominate the literature. The first, going back to Aquinas, holds that omnipotence is the power to do whatever is logically possible, and that making a stone an omnipotent being cannot lift is not a possible task \citep[I, q.~25, a.~3]{Aquinas}. \citet{Mavrodes1963} gave it its modern form, but the task is self-contradictory only on the hypothesis that the agent is omnipotent, which seems to presuppose what is in question \citep{Savage1967}. The second reply \citep{Frankfurt1964} grants that the being can make the stone and holds that it can then also lift it; this gives up the restriction to the possible. The third \citep{Savage1967} argues that the only inability entailed is inability to lift some stone, which an omnipotent being does not have; it does not say which tasks an omnipotent being must be able to perform. The literature on maximal power \citep{FlintFreddoso1983,Wierenga1989} answers that question in terms of the states of affairs an agent can actualize given the actual history.
+
+We give a definition that accounts for the stone without appeal to history. The description \enquote{a stone $x$ cannot lift} quantifies over the powers of $x$. Tasks so described are not harder than lifting stones; their success condition consists in the agent's lacking some power. Restricting omnipotence to tasks whose description does not quantify over the agent's own powers removes exactly these tasks.
+
+\section{Framework}
+
+\begin{definition}\label{d:ability}
+A \emph{task} is individuated by a description, which states a success condition. $x$ \emph{can do} $t$ at $w$ if, at $w$, $x$ has the ability to bring it about that the success condition of $t$ is met. A task is \emph{possible} if its success condition is consistently satisfiable by some agent.
+\end{definition}
+
+\begin{definition}\label{d:level}
+The description of a task is of \emph{level $0$ relative to $x$} if it does not quantify over the powers of $x$. It is of \emph{level $n+1$} relative to $x$ if it quantifies over powers of $x$ to perform tasks of level at most $n$, and not over higher powers. A task is \emph{self-referential for $x$} if its description is of level $1$ or higher relative to $x$.
+\end{definition}
+
+Lifting a given stone or making a stone of a given mass is of level $0$ relative to any agent. Making a stone that $x$ cannot lift is of level $1$ relative to $x$, and of level $0$ relative to everyone else. The hierarchy is the familiar one from the theory of types and from Tarski's treatment of truth, applied to ability.
+
+\begin{definition}\label{d:omni}
+(i) $x$ is \emph{unrestrictedly omnipotent} at $w$ if $x$ can do at $w$ every possible task. (ii) $x$ is \emph{omnipotent} at $w$ if $x$ can do at $w$ every possible task that is not self-referential for $x$.
+\end{definition}
+
+Clause (ii) makes omnipotence a level-$0$ property; the being's powers at higher levels are whatever its level-$0$ powers make them.
+
+\section{Results}
+
+The paradox uses three assumptions.
+
+\begin{assumption}\label{a:possible}
+For every agent $x$, the task of making a stone $x$ cannot lift is possible; for every stone $s$, the task of lifting $s$ is possible.
+\end{assumption}
+
+\begin{assumption}\label{a:outcome}
+If $x$ can, at $w$, make a stone $x$ cannot lift, then at some world there is a stone that $x$ is unable to lift.
+\end{assumption}
+
+\begin{assumption}\label{a:class}
+For every $x$, making a stone $x$ cannot lift is self-referential for $x$; lifting a given stone is not.
+\end{assumption}
+
+Assumption~\ref{a:possible} grants the critic that the stone task is possible, since an agent of limited strength could perform it. Assumption~\ref{a:class} applies Definition~\ref{d:level}.
+
+\begin{theorem}\label{t:paradox}
+No being is unrestrictedly omnipotent at every world.
+\end{theorem}
+
+\begin{proof}
+Suppose $x$ is unrestrictedly omnipotent at every world. By Assumption~\ref{a:possible}, $x$ can make a stone it cannot lift. By Assumption~\ref{a:outcome}, at some world $w'$ there is a stone $s$ that $x$ cannot lift. By Assumption~\ref{a:possible} again, lifting $s$ is possible, so $x$, being unrestrictedly omnipotent at $w'$, can lift $s$ there, a contradiction.
+\end{proof}
+
+Theorem~\ref{t:paradox} vindicates the critic against the unrestricted definition without assuming that the stone task is impossible.
+
+\begin{theorem}\label{t:stone}
+If $x$ is omnipotent at every world, then at every world $x$ cannot make a stone it cannot lift, and $x$ remains omnipotent there, since the task is self-referential for $x$.
+\end{theorem}
+
+\begin{proof}
+Suppose $x$ could make such a stone at $w$. By Assumption~\ref{a:outcome}, at some $w'$ there is a stone $s$ that $x$ cannot lift. Lifting $s$ is possible (Assumption~\ref{a:possible}) and not self-referential for $x$ (Assumption~\ref{a:class}), so by Definition~\ref{d:omni}(ii) $x$ can lift $s$ at $w'$, a contradiction. That $x$ is omnipotent at $w$ is the hypothesis; that the task is self-referential for $x$ is Assumption~\ref{a:class}.
+\end{proof}
+
+\begin{proposition}\label{p:nolimit}
+If $x$ is omnipotent at $w$, every task $x$ cannot do at $w$ is either impossible or self-referential for $x$.
+\end{proposition}
+
+\begin{proof}
+Immediate from Definition~\ref{d:omni}(ii) by contraposition.
+\end{proof}
+
+\begin{proposition}\label{p:consistent}
+Assumptions~\ref{a:possible}--\ref{a:class} are jointly consistent with the existence of a being that is omnipotent at every world.
+\end{proposition}
+
+\begin{proof}
+Take one world, one being, one stone and two tasks, making a stone the being cannot lift and lifting the stone. Let the being be able to lift the stone and unable to make an unliftable stone; let both tasks be possible, and let only the first be self-referential for the being. Assumption~\ref{a:outcome} holds vacuously, and the being can do every possible task that is not self-referential for it.
+\end{proof}
+
+Proposition~\ref{p:nolimit} answers the question Savage left open. The tasks an omnipotent being cannot perform are either impossible for every agent or defined by the agent's own lack of power. For an agent with no level-$0$ limitations, a task of the second kind has an unsatisfiable success condition, so that Mavrodes was right, but the stratification explains why without assuming omnipotence in specifying the task.
+
+The definition coheres with REL-15-a, whose uniqueness theorem assumes that an omnipotent being can thwart the will of any distinct being. Thwarting another's will is of level $0$ relative to the thwarter and so falls within Definition~\ref{d:omni}(ii); and a being whose will can be thwarted lacks a level-$0$ power, so it is not omnipotent in our sense either.
+
+\section{Objections}
+
+\begin{objection}[Ad hoc restriction]
+The restriction is tailored to the paradox. Any troublesome task can be excluded by a suitably chosen condition.
+\end{objection}
+
+\begin{reply}
+It excludes the whole class of tasks whose success condition refers to the agent's own powers, and it is motivated independently: such a task asks the agent to exercise a power whose exercise would refute its having another, which is the structure of the liar. There the accepted remedy is to stratify, not to declare truth incoherent. Every task specifiable without mentioning the agent's powers remains within the scope of omnipotence.
+\end{reply}
+
+\begin{objection}[Reformulation]
+Describe the stone without mentioning the agent: \enquote{a stone of mass $m$}, for a mass $m$ beyond the agent's strength. The task is now of level $0$, and the paradox returns.
+\end{objection}
+
+\begin{reply}
+For an omnipotent agent there is no mass beyond its strength, so for each $m$ the task of making a stone of mass $m$ is of level $0$ and within its power, as is lifting the result. To pick out a mass \enquote{beyond the agent's strength} is to quantify over its powers again, and the task returns to level $1$. The reformulation either succeeds in being level $0$, in which case the agent can perform it, or fails, in which case Theorem~\ref{t:stone} applies.
+\end{reply}
+
+\begin{objection}[Self-limitation]
+A perfect being should be able to limit itself, by making creatures it will not control. Stratification forbids this.
+\end{objection}
+
+\begin{reply}
+It forbids only the loss of power, not its non-exercise. Making a stone one will never lift, or creatures one will never coerce, is of level $0$, since these tasks concern what the agent will do, not what it is able to do. What the agent cannot do is make itself unable, and this is what the paradox needs.
+\end{reply}
+
+\section{Formalization}
+
+Theorems~\ref{t:paradox} and~\ref{t:stone} and Propositions~\ref{p:nolimit} and~\ref{p:consistent} are formalized in \nolinkurl{Philosophy/REL/REL_04.lean}. Worlds, beings, tasks, stones, ability, possibility and self-reference are primitive constants; Assumptions~\ref{a:possible}--\ref{a:class} are axioms; the two notions of omnipotence are defined. The second main theorem reads:
+
+\begin{lstlisting}
+theorem stone_no_limitation (x : Being) (hx : ∀ w, Omni x w) (w : World) :
+    ¬ CanDo x (stone x) w ∧ Omni x w ∧ SelfRef x (stone x)
+\end{lstlisting}
+
+The checker reports the following dependencies.
+
+\begin{lstlisting}
+'Philosophy.REL_04.stone_no_limitation' depends on axioms:
+  [Being, CanDo, Possible, SelfRef, Stone, Task, World, lift,
+   lift_not_selfref, lift_possible, stone, stone_outcome, stone_selfref]
+'Philosophy.REL_04.Model.consistent' does not depend on any axioms
+\end{lstlisting}
+
+The names \texttt{stone\_possible} and \texttt{lift\_possible} are the two clauses of Assumption~\ref{a:possible}, \texttt{stone\_outcome} is Assumption~\ref{a:outcome}, and \texttt{stone\_selfref} and \texttt{lift\_not\_selfref} are the two clauses of Assumption~\ref{a:class}; the rest are primitive constants. (Namespace prefixes are omitted.) Theorem~\ref{t:paradox} depends on the same axioms except the two classification clauses, together with the constant \texttt{actual}. Proposition~\ref{p:consistent} is proved in a concrete model and depends on no axioms. The formalization does not establish that anything is omnipotent, nor that Definition~\ref{d:level} classifies descriptions correctly.
+
+\section{Conclusion}
+
+The paradox of the stone is valid against a definition of omnipotence as the ability to perform every possible task. It is not valid against the definition on which omnipotence is the ability to perform every possible task whose description does not quantify over the agent's own powers. On that definition, an essentially omnipotent being cannot make a stone it cannot lift, but every task it cannot perform is impossible or defined by the agent's own lack of power, and the paradox imposes no genuine limitation. Omnipotence, so understood, is coherent.
+
+\begin{thebibliography}{9}\small
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Flint and Freddoso(1983)]{FlintFreddoso1983} Flint, T.~P. and Freddoso, A.~J. (1983). Maximal power. In A.~J. Freddoso (Ed.), \emph{The Existence and Nature of God} (pp.~81--113). University of Notre Dame Press.
+\bibitem[Frankfurt(1964)]{Frankfurt1964} Frankfurt, H.~G. (1964). The logic of omnipotence. \emph{The Philosophical Review}, 73(2), 262--263.
+\bibitem[Mackie(1955)]{Mackie1955} Mackie, J.~L. (1955). Evil and omnipotence. \emph{Mind}, 64(254), 200--212.
+\bibitem[Mavrodes(1963)]{Mavrodes1963} Mavrodes, G.~I. (1963). Some puzzles concerning omnipotence. \emph{The Philosophical Review}, 72(2), 221--223.
+\bibitem[Savage(1967)]{Savage1967} Savage, C.~W. (1967). The paradox of the stone. \emph{The Philosophical Review}, 76(1), 74--79.
+\bibitem[Wierenga(1989)]{Wierenga1989} Wierenga, E.~R. (1989). \emph{The Nature of God: An Inquiry into Divine Attributes}. Cornell University Press.
+\end{thebibliography}
+
+\end{document}

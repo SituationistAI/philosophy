@@ -1,0 +1,198 @@
+\documentclass{situationist-preprint}
+
+\title{Timeless Omniscience and Indexical Knowledge}
+\msid{REL-19-a}
+\msfamily{REL-19}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_19.lean}
+\mskeywords{divine eternity; timelessness; omniscience; indexical knowledge; centered propositions; relativity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is God in time? We argue that God is timeless, by two routes. A temporal God, present to the whole of space, would have a present that is an objective, frame-independent now, and there is no such now. And a temporal God would know free choices at times before they are made, which is incompatible with their freedom. It follows that God lacks indexical knowledge of what time it is now: knowledge of a centered proposition requires a center, and a timeless being occupies no temporal center. We argue that this is no defect in omniscience properly defined, as knowledge of every true tenseless proposition together with every centered truth at the knower's own center. A timeless God satisfies this definition. Everything a temporal subject knows de nunc corresponds to a tenseless truth God knows, so nothing about the world is hidden from God; and the stronger requirement, that an omniscient being know every centered truth, is one that no being can meet. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The classical doctrine of divine eternity holds that God is without temporal location or succession. Boethius defined eternity as the complete, simultaneous and perfect possession of illimitable life (\emph{Consolation of Philosophy} V.6), and Aquinas held that God is eternal in this sense \citep[I, q.~10]{Aquinas}. \citet{StumpKretzmann1981} gave the doctrine its modern defense, and \citet{Leftow1991} its most detailed metaphysical development. Against it, \citet{Wolterstorff1975} argued that God is everlasting rather than timeless, since a God who acts in history must act at times, and \citet{Padgett1992} and \citet{Craig2001} developed versions of the view that God is temporal at least since creation.
+
+One of the strongest arguments against timelessness comes from omniscience. \citet{Prior1962} observed that a being whose knowledge consists of tenseless truths, such as that an examination ends on a certain date, does not thereby know that the examination is now over, which is what we are glad to know when it is. \citet{Kretzmann1966} turned the point into an argument: an omniscient being knows what time it is; knowing what time it is requires being in time and changing with it; so an omniscient being is neither timeless nor immutable. \citet{Castaneda1967} replied that a being could know everything that a temporal knower knows by knowing it under a different, non-indexical guise. The subsequent theory of indexical attitudes \citep{Perry1979,Lewis1979} showed that this reply is not enough: what one knows when one knows that the meeting starts now is not captured by any non-indexical proposition, since one can know every such proposition and still not know that it is now.
+
+We argue that God is timeless, that a timeless God lacks indexical knowledge of what time it is now, and that this is no defect in omniscience properly defined. The first claim is the conclusion that REL-05-a reaches from the other direction, from freedom and the fixity of the past; we give it a second, independent ground. The second is Prior's and Kretzmann's point, which we accept. The third answers Kretzmann: omniscience does not require knowledge of every centered truth, and could not.
+
+\section{Framework}
+
+\begin{definition}\label{d:props}
+A \emph{tenseless proposition} is a set of worlds. A \emph{centered proposition} is a set of centers, where a center is a triple of a world, a subject and a time \citep{Lewis1979}. \enquote{Socrates sits at $t$} expresses a tenseless proposition; \enquote{it is now $t$} and \enquote{I am sitting} express centered ones.
+\end{definition}
+
+\begin{definition}\label{d:loc}
+A being is \emph{located} at a time if it exists at that time. A being is \emph{timeless} if it is located at no time.
+\end{definition}
+
+\begin{definition}\label{d:know}
+A subject may know a tenseless proposition. A subject may also know, at a time $t$, a centered proposition, de se and de nunc: that it holds of the subject's own situation at $t$. A subject's knowledge of a tenseless proposition may be held at a time.
+\end{definition}
+
+\begin{assumption}[Factivity]\label{a:fact}
+What is known is true.
+\end{assumption}
+
+\begin{assumption}[Centered factivity]\label{a:cfact}
+If a subject knows at $t$ a centered proposition, the subject is located at $t$ and the proposition is true at the subject's center at $t$.
+\end{assumption}
+
+\begin{definition}\label{d:omni}
+A being is \emph{omniscient} if it knows every true tenseless proposition, and if, at each time at which it is located, it knows every centered proposition that is true at its own center at that time.
+\end{definition}
+
+Assumption~\ref{a:cfact} states what is distinctive of indexical knowledge on the account of \citet{Perry1979} and \citet{Lewis1979}: to know that it is now noon is to locate oneself in time, and only a subject that has a location can locate itself. Definition~\ref{d:omni} is the definition we defend. Its first clause covers every fact about the world, including the contingent facts about what happens when, such as that Socrates sits at $t$; REL-05-a and REL-16-a rely on the claim that a timeless God knows such truths, and our definition requires it. Its second clause requires an omniscient being to know every indexical truth about its own situation; it does not require knowledge of indexical truths about the situations of others.
+
+\section{God is timeless}
+
+\begin{assumption}[Omnipresence]\label{a:omnipresent}
+If God were located at a time, God's present at that time, which embraces the whole of space, would be an objective now: a frame-independent present.
+\end{assumption}
+
+\begin{assumption}\label{a:nonow}
+There is no objective now.
+\end{assumption}
+
+\begin{theorem}\label{t:timeless}
+God is timeless.
+\end{theorem}
+
+\begin{proof}
+If God were located at $t$, by Assumption~\ref{a:omnipresent} there would be an objective now at $t$, contrary to Assumption~\ref{a:nonow}.
+\end{proof}
+
+Assumption~\ref{a:nonow} is the conclusion of TSM-16: simultaneity is frame-relative, and the present is a local rather than a global notion. Assumption~\ref{a:omnipresent} says that a God present to every region of space at a single time would single out a privileged simultaneity class, and so a privileged frame. \citet{Craig2001} accepts this inference and concludes, on neo-Lorentzian grounds, that there is such a frame; we accept the inference and, with TSM-16, reject its consequent.
+
+The second route to the same conclusion is the one taken in REL-05-a.
+
+\begin{assumption}[A temporal God]\label{a:everlasting}
+If God is located at some time, God is located at every time and knows, at each time, every true tenseless proposition.
+\end{assumption}
+
+\begin{assumption}\label{a:choice}
+There is a true tenseless proposition about a free choice made at a time $t_c$; there is a time before $t_c$; and no one knows that proposition at a time before $t_c$.
+\end{assumption}
+
+\begin{proposition}\label{p:second}
+God is timeless.
+\end{proposition}
+
+\begin{proof}
+If God were located at some time, by Assumption~\ref{a:everlasting} God would be located at a time before $t_c$ and would know there the proposition about the choice, contrary to Assumption~\ref{a:choice}.
+\end{proof}
+
+Assumption~\ref{a:everlasting} describes the everlasting God of \citet{Wolterstorff1975}, whose knowledge is complete at each time. Assumption~\ref{a:choice} is what REL-05-a establishes: given the fixity of the past, God's knowledge can covary with a free choice only if it is not a fact about a time before the choice, and the agent's ability ensures that it covaries. The two routes are independent: the first uses physics and omnipresence, the second freedom and omniscience.
+
+\section{Timeless omniscience}
+
+\begin{assumption}[Tenseless omniscience]\label{a:tenseless}
+God knows every true tenseless proposition.
+\end{assumption}
+
+\begin{corollary}\label{c:noindex}
+God knows no centered proposition. In particular, God does not know what time it is now.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:cfact}, knowing a centered proposition at $t$ requires being located at $t$; by Theorem~\ref{t:timeless}, God is located at no time.
+\end{proof}
+
+\begin{theorem}\label{t:omni}
+God is omniscient in the sense of Definition~\ref{d:omni}.
+\end{theorem}
+
+\begin{proof}
+The first clause is Assumption~\ref{a:tenseless}. The second requires knowledge of centered truths at each time at which God is located, and there is no such time.
+\end{proof}
+
+Theorem~\ref{t:omni} would be a hollow victory if Definition~\ref{d:omni} were tailored to exclude what a timeless being cannot know. Two results show that it is not.
+
+\begin{proposition}\label{p:gap}
+Whatever any temporal subject knows de nunc, God knows the corresponding tenseless truth: if a subject $y$ knows at $t$ the centered proposition $p$, God knows the tenseless proposition that $p$ holds of $y$ at $t$.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:cfact}, $p$ is true at the center $y$, $t$ of the actual world; so the tenseless proposition that $p$ holds of $y$ at $t$ is true, and by Assumption~\ref{a:tenseless} God knows it.
+\end{proof}
+
+\begin{proposition}\label{p:strong}
+No being knows every centered truth. If $x$ and $y$ are distinct and $y$ is located at $t$, there is a centered proposition true at $y$'s center at $t$ that $x$ knows at no time.
+\end{proposition}
+
+\begin{proof}
+Take the centered proposition \enquote{I am $y$}, true at a center just when its subject is $y$. It is true at $y$'s center. If $x$ knew it at some time, then by Assumption~\ref{a:cfact} it would be true at $x$'s center, and $x$ would be $y$.
+\end{proof}
+
+Proposition~\ref{p:gap} shows that a timeless God is ignorant of no fact about the world. When I know that it is now noon, I locate myself; the world-involving content of my knowledge, that I am at noon, is a tenseless truth God knows. What God lacks is a location, not information: in the terms of \citet{Lewis1979}, God's knowledge excludes every world that any temporal knower's knowledge excludes, and it fails to self-locate only because there is no temporal position to self-locate in. Proposition~\ref{p:strong} shows that the stronger requirement, that an omniscient being know every centered truth, cannot be met by anyone. Only Socrates can know, de se, that he is Socrates; an omniscient being other than Socrates does not know this, and \citet{Grim1985} drew from such cases the conclusion that omniscience is impossible. We draw the opposite conclusion: a definition of omniscience that no being could satisfy is not the right definition, and the right one requires centered knowledge only at the knower's own centers. Since a timeless being has no temporal centers, its lack of knowledge of what time it is now is not a failure to meet any requirement that applies to it. This agrees with TSM-18: \enquote{now} is an indexical, and there is no fact of what time it is now, apart from a standpoint, for anyone to be ignorant of.
+
+\section{Objections and replies}
+
+\begin{objection}[Kretzmann]
+A being that does not know what time it is now does not know something that every temporal being knows. It is therefore less knowledgeable than we are, and not omniscient.
+\end{objection}
+
+\begin{reply}
+By Proposition~\ref{p:gap}, there is no fact that we know and God does not. What we know and God does not know is where we are in time, which God could not know without being in time, and which is not a fact about the world over and above the tenseless facts. A temporal being that does not know the time is ignorant of where it is; a timeless being is not anywhere in time to be ignorant of.
+\end{reply}
+
+\begin{objection}
+The definition of omniscience is ad hoc. If God is timeless, the second clause of Definition~\ref{d:omni} is vacuous, and the definition reduces to tenseless omniscience by stipulation.
+\end{objection}
+
+\begin{reply}
+The second clause is not vacuous in general: it applies to temporal beings and is the clause a temporal omniscient being would have to meet. It is vacuous for God because of Theorem~\ref{t:timeless}, not by stipulation. The alternative, that omniscience require every centered truth, is impossible by Proposition~\ref{p:strong}, and the alternative of requiring only tenseless truths would allow a temporal being to count as omniscient while ignorant of its own situation. Definition~\ref{d:omni} is the one definition that applies uniformly to temporal and timeless beings and that some being can satisfy.
+\end{reply}
+
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/REL/REL_19.lean} takes worlds, subjects, times, location and the knowledge relations of Definitions~\ref{d:props} to~\ref{d:know} as primitives, and states Assumptions~\ref{a:fact}, \ref{a:cfact}, \ref{a:omnipresent}, \ref{a:nonow}, \ref{a:everlasting}, \ref{a:choice} and~\ref{a:tenseless} as axioms. It proves Theorem~\ref{t:timeless}, Proposition~\ref{p:second}, Corollary~\ref{c:noindex}, Theorem~\ref{t:omni} and Propositions~\ref{p:gap} and~\ref{p:strong}.
+
+\begin{lstlisting}
+theorem god_omniscient : Omniscient god
+
+'Philosophy.REL_19.god_omniscient' depends on axioms:
+ [Philosophy.REL_19.Being, Philosophy.REL_19.K,
+ Philosophy.REL_19.Kc, Philosophy.REL_19.Located,
+ Philosophy.REL_19.Time, Philosophy.REL_19.World,
+ Philosophy.REL_19.actual, Philosophy.REL_19.god,
+ Philosophy.REL_19.knows_tenseless,
+ Philosophy.REL_19.no_objective_now,
+ Philosophy.REL_19.omnipresent_now]
+'Philosophy.REL_19.strong_omniscience_impossible' depends on
+ axioms: [Philosophy.REL_19.Being, Philosophy.REL_19.Kc,
+ Philosophy.REL_19.Located, Philosophy.REL_19.Time,
+ Philosophy.REL_19.World, Philosophy.REL_19.actual,
+ Philosophy.REL_19.centered_factive]
+\end{lstlisting}
+
+{\sloppy In these lists, Assumptions~\ref{a:omnipresent} and~\ref{a:nonow} appear as \texttt{omnipresent\_now} and \texttt{no\_objective\_now}, Assumption~\ref{a:tenseless} as \texttt{knows\_tenseless}, and Assumption~\ref{a:cfact} as \texttt{centered\_factive}; the other names are primitives.\par} Proposition~\ref{p:strong} depends on no premise about God.
+
+\section{Conclusion}
+
+God is timeless, since a temporal God's present would be an objective now and there is none, and since a temporal God would know free choices before they are made. A timeless God therefore lacks indexical knowledge of what time it is now. This is no defect. God knows every tenseless truth, including every truth about what happens when; everything a temporal subject knows de nunc has a tenseless counterpart that God knows; and no being could know every centered truth. Omniscience, properly defined, requires centered knowledge only at the knower's own centers, and a timeless God has none.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Casta{\~n}eda(1967)]{Castaneda1967} Casta{\~n}eda, H.-N. (1967). Omniscience and indexical reference. \emph{The Journal of Philosophy}, 64(7), 203--210.
+\bibitem[Craig(2001)]{Craig2001} Craig, W.~L. (2001). \emph{Time and Eternity: Exploring God's Relationship to Time}. Crossway.
+\bibitem[Grim(1985)]{Grim1985} Grim, P. (1985). Against omniscience: the case from essential indexicals. \emph{No{\^u}s}, 19(2), 151--180.
+\bibitem[Kretzmann(1966)]{Kretzmann1966} Kretzmann, N. (1966). Omniscience and immutability. \emph{The Journal of Philosophy}, 63(14), 409--421.
+\bibitem[Leftow(1991)]{Leftow1991} Leftow, B. (1991). \emph{Time and Eternity}. Cornell University Press.
+\bibitem[Lewis(1979)]{Lewis1979} Lewis, D. (1979). Attitudes de dicto and de se. \emph{The Philosophical Review}, 88(4), 513--543.
+\bibitem[Padgett(1992)]{Padgett1992} Padgett, A.~G. (1992). \emph{God, Eternity and the Nature of Time}. Macmillan.
+\bibitem[Perry(1979)]{Perry1979} Perry, J. (1979). The problem of the essential indexical. \emph{No{\^u}s}, 13(1), 3--21.
+\bibitem[Prior(1962)]{Prior1962} Prior, A.~N. (1962). The formalities of omniscience. \emph{Philosophy}, 37(140), 114--129.
+\bibitem[Stump and Kretzmann(1981)]{StumpKretzmann1981} Stump, E. and Kretzmann, N. (1981). Eternity. \emph{The Journal of Philosophy}, 78(8), 429--458.
+\bibitem[Wolterstorff(1975)]{Wolterstorff1975} Wolterstorff, N. (1975). God everlasting. In C.~J. Orlebeke and L.~B. Smedes (eds.), \emph{God and the Good}, Eerdmans.
+\end{thebibliography}
+
+\end{document}

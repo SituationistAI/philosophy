@@ -1,0 +1,685 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[scaled=0.88]{helvet}
+
+\title{On the Existence of Numbers}
+\msid{MTH-01-a}
+\msfamily{MTH-01}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_01.lean}
+\mskeywords{indispensability argument; abstract objects; confirmational holism; nominalization; mathematical explanation; applied mathematics; real numbers}
+
+% layout of the computed inventory (Appendices A--E)
+\newenvironment{lawentry}[3]{\par\noindent\begin{minipage}{\linewidth}\footnotesize\textbf{#1}\enspace #2\hfill{\scriptsize ref.\ \citealt{#3}}\par}{\end{minipage}\par\vspace{5pt}}
+\newenvironment{structentry}[2]{\par\noindent\begin{minipage}{\linewidth}\footnotesize\textbf{#1}\enspace #2\par}{\end{minipage}\par\vspace{5pt}}
+\newcommand{\lawEq}[1]{{\centering$#1$\par}}
+\newcommand{\lawRow}[2]{{\hangindent=5.5em\hangafter=1\noindent\makebox[5.5em][l]{\textit{#1}}#2\par}}
+\input{gen/summary.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do numbers exist? We argue that they do, that they are abstract objects, and that the indispensability argument establishes their existence. The argument has two premises: a weak form of confirmational holism, on which an ineliminable part of a theory confirmed against its rivals is believed with justification no lower than the theory's, and the claim that our best physical theories quantify ineliminably over numbers. We defend the first against the objections of Sober, Maddy, Melia and Leng, and we give the second a checkable basis: an inventory of \nLaws{} laws from \nTheories{} physical theories, recording for each law the mathematical structures it quantifies over, their dependency closure, the cardinality of its domain, the number systems it commits to, and whether a known nominalization eliminates them. The inventory shows that every law that quantifies over mathematics commits to the natural numbers, that \nNumR{} commit to the reals, that the complex numbers survive every admissible reduction in exactly the quantum laws, and that the laws no nominalization reaches carry every number system from $\mathbb N$ to $\mathbb C$. The conclusion is that numbers exist, at least $2^{\aleph_0}$ of them. The skeleton of the argument and a fragment of the dependency computation are formalized in Lean.
+\end{abstract}
+
+\tableofcontents
+
+\section{The question}\label{s:intro}
+
+The sentence \enquote{there is a prime number between 10 and 20} is true if anything is. Taken at face value it says that there is an object, a number, that is prime and lies between 10 and 20. The question whether numbers exist is the question whether to take such sentences at face value. A platonist says that we should: there are numbers, they are not located in space or time, and they stand in no causal relations; they are abstract objects. A nominalist says that there are no such objects, and must then say either that the sentence is false, as the fictionalist does, or that it does not mean what it appears to mean, as the various reinterpretations of mathematics propose.
+
+We argue that numbers exist and that they are abstract objects, and that the reason to believe this is the indispensability argument. Our physical theories, the best descriptions of the concrete world we possess, are formulated in terms that quantify over numbers; they cannot be reformulated so as to avoid doing so while keeping their empirical and explanatory virtues; and the justification we have for believing those theories extends to their ineliminable parts. The argument goes back to Quine and Putnam, and its standard modern statement is Colyvan's. The companion manuscript MTH-01-b gives it in compact form, with weak holism as its epistemic premise and Baker's explanatory version as a second, independent route. The present manuscript gives the full argument and adds what the debate has mostly lacked: a checkable basis for the indispensability premise.
+
+That basis is an inventory. For each of \nLaws{} established laws drawn from \nTheories{} physical theories, from Newton's second law to the anomaly-cancellation conditions of the Standard Model, we record the law in standard form, the variables it binds and their sorts, the mathematical structures it quantifies over, the closure of those structures under the relation of presupposition (the reals presuppose the rationals, Hilbert spaces presuppose the complex numbers, and so on), the cardinality of the domain quantified over, the number systems the law commits to, and whether a known nominalization removes the commitment. The inventory is produced by a program from a hand-curated table and is printed in Appendices~A--E. Its summary statistics are computed, not estimated, and every claim the written part makes about them is checked by the program.
+
+The structure of the manuscript is as follows. Section~\ref{s:history} sets out the debate from Quine to the present. Section~\ref{s:abstract} says what it is for numbers to be abstract. Section~\ref{s:frame} gives the framework: definitions, the principle of weak holism, and the assumptions. Section~\ref{s:arg} gives the argument, its corollaries and the explanatory route. Section~\ref{s:inv} explains what the inventory shows and discusses particular entries; Section~\ref{s:nom} explains what the known methods of nominalization reach and why; Section~\ref{s:cases} discusses further entries; Section~\ref{s:cons} draws consequences for neighbouring questions; Section~\ref{s:wh} defends weak holism in a probabilistic form; Section~\ref{s:complex} examines the complex numbers. Section~\ref{s:obj} answers eight objections. Section~\ref{s:not} records what the result does not establish, and Section~\ref{s:formal} describes the formalization.
+
+\section{The debate}\label{s:history}
+
+\subsection{Before Quine: Mill and Frege}
+
+The question whether numbers exist was posed in its modern form by the contrast between Mill and Frege. \citet[book~II, ch.~6]{Mill1843} held that the truths of arithmetic are empirical generalizations about aggregates of physical things: that two and one make three records the observed fact that any collection of the form ${\circ}{\circ}\,{\circ}$ can be rearranged as ${\circ}{\circ}{\circ}$. On this view there are no numbers over and above the aggregates, and arithmetic is as fallible as any induction. \citet{Frege1884} answered that number is not a property of aggregates at all, since the same aggregate is one deck, fifty-two cards and four suits; it is a property of concepts, and statements of number are about the concepts under which things fall. Frege concluded that numbers are objects, since number words function as singular terms in identity statements, and that they are not physical or mental objects; they are what we now call abstract objects.
+
+The indispensability argument inherits something from each. From Mill it takes the thought that mathematics is justified, at least in part, by its role in our knowledge of the physical world; from Frege it takes the conclusion that the objects so justified are abstract. It rejects Mill's view that arithmetic is about physical aggregates, because the mathematics of physics quantifies over structures, such as the complete ordered field of reals, that no aggregate instantiates; and it does not depend on Frege's logicism, though, as Remark~\ref{r:emp} records, it is compatible with the neo-Fregean route MTH-04-a defends.
+
+\subsection{Reinterpretation: Hellman, Burgess and Rosen, Balaguer}
+
+Between outright nominalism and platonism lie views on which mathematical sentences are true but do not mean what they appear to. \citet{Hellman1989} developed a modal structuralism on which an arithmetical sentence $S$ is to be read as the claim that, necessarily, any progression that there might be satisfies $S$, together with the claim that a progression is possible. The view requires no actual numbers but a primitive modality and the possibility of infinite structures; physics is to be reinterpreted accordingly, with possible structures of the right size doing the work of the reals. \citet{BurgessRosen1997} surveyed the nominalist reconstructions then available and distinguished hermeneutic nominalism, the claim that mathematical discourse, properly understood, never was committed to abstract objects, from revolutionary nominalism, the claim that it should be reformed so as not to be. They argued that the hermeneutic claim is linguistically implausible and that the revolutionary one lacks a motive scientists could accept, since the reconstructions are not better science by any standard science uses. \citet{Balaguer1998} argued that the choice between platonism and fictionalism is not determined by any fact: a full-blooded platonism, on which every consistent mathematical theory truly describes some part of the mathematical realm, and fictionalism are equally defensible, and the question is without a determinate answer.
+
+We do not discuss these views separately. Modal structuralism is not a denial of Theorem~\ref{t:main} but a reinterpretation of it; MTH-14-a discusses it, and Section~\ref{s:not} records that we do not refute it. Burgess and Rosen's assessment is the one we adopt for revolutionary nominalism: the reformed theories, so far as they exist, do not retain the virtues of the originals in the sense of Definition~\ref{d:reform}. Balaguer's symmetry thesis is answered by the argument as a whole: if the indispensability argument is sound, the fictionalist who accepts physics is not entitled to her fictionalism, and MTH-16-a argues the same from the side of quantum mechanics.
+
+\subsection{Applicability: Wigner and Steiner}
+
+A neighbouring debate concerns not the existence of mathematical objects but the applicability of mathematics. \citet{Wigner1960} called the effectiveness of mathematics in the natural sciences unreasonable, and \citet{Steiner1998} argued that the discovery of physical laws by mathematical analogy, especially in quantum mechanics, is anthropocentric: physicists were guided by formal analogies that have no basis in nature unless nature is in some way \enquote{user-friendly}. The debates are connected but distinct. The indispensability argument does not need the effectiveness of mathematics to be surprising; it needs only that mathematics be part of the theories we accept. SCI-17 argues that the effectiveness is not unreasonable, because scientists select the mathematics that fits; we take that account up in Objection~\ref{o:sel}, where we argue that selection presupposes the stock it selects from.
+
+\subsection{Quine: commitment and holism}
+
+The indispensability argument rests on two theses of Quine's. The first is a criterion of ontological commitment: a theory is committed to those entities that must be counted among the values of its bound variables if the theory is to be true \citep{Quine1948}. The criterion does not say what there is; it says what a theory says there is. Its point is that commitment is incurred by quantification, not by naming: a theory can use the word \enquote{Pegasus} without being committed to Pegasus, but it cannot say that there is something that is a winged horse without being committed to winged horses. A physical theory that says that for every time there is a real number that is the position of the particle at that time is committed to real numbers.
+
+The second thesis is confirmational holism. In \enquote{Two Dogmas of Empiricism} Quine argued that our statements about the external world face the tribunal of sense experience not individually but as a corporate body \citep{Quine1951}. An observation that conflicts with a prediction shows that something in the body of theory used to derive the prediction is false, but does not say what; and correspondingly, the success of the predictions confirms the body as a whole. Mathematics is part of the body. Quine later stated the consequence directly: the mathematics that is applied in science shares in the empirical confirmation of the science, and so is justified in the way the science is, while unapplied mathematics, beyond what is needed to round out the applied part, has no such justification \citep{Quine1981,Quine1986}.
+
+Put together, the two theses yield an argument. We are justified in believing our best scientific theories. Those theories quantify over mathematical objects. By holism, the justification extends to the mathematical parts. By the criterion, those parts are committed to mathematical objects. So we are justified in believing that mathematical objects exist. Quine accepted the conclusion with reluctance: he had earlier tried, with Goodman, to do without abstract objects, and he came to accept sets as the minimum the sciences require \citep{Quine1960}.
+
+\subsection{Putnam: the argument made explicit}
+
+\citet{Putnam1971} gave the argument the shape it has had since. Quantification over mathematical entities is indispensable for science, both formal and physical; therefore we should accept such quantification; but this commits us to accepting the existence of the mathematical entities in question. Putnam's examples were the law of universal gravitation, which states a relation between masses and distances that are measured by real numbers, and the general practice of measurement, which presupposes the existence of functions from physical magnitudes to reals. He added a point that is often overlooked: it is intellectually dishonest to use the mathematics in the formulation of physical theories while denying the existence of the entities the mathematics presupposes. In \enquote{What is mathematical truth?} he connected the argument to scientific realism: the success of science would be a miracle if its theories, mathematics included, were not approximately true \citep{Putnam1975}.
+
+Putnam's version differs from Quine's in one respect that matters for what follows. Putnam did not rely on holism in its strong form. His argument is that we cannot accept the physics without accepting the mathematics, because the physics cannot be stated without it; the epistemic premise is a principle about the parts of a theory that cannot be removed, not a claim that every part of a theory receives the same confirmation from every observation. The weak holism of Section~\ref{s:frame} is in this tradition.
+
+\subsection{Field: nominalizing physics}
+
+The most serious response to the argument is to deny its second premise. \citet{Field1980} undertook to show that mathematics is dispensable: that physical theories can be reformulated without quantifying over mathematical objects, and that mathematics is useful because it is \emph{conservative} over such nominalistic theories. A mathematical theory $M$ is conservative if, for every nominalistic assertion $A$ and every body of nominalistic assertions $N$, $A$ follows from $N + M$ only if it follows from $N$ alone. If mathematics is conservative, it is a convenient means of deriving nominalistic conclusions from nominalistic premises, and its truth is not needed.
+
+Field's demonstration concerned Newtonian gravitation. He replaced quantification over real numbers and real-valued functions with quantification over space-time points and regions, together with primitive relations of betweenness and congruence among points and comparative relations among the values of physical quantities at points, in the manner of Hilbert's synthetic axiomatization of Euclidean geometry \citep{Hilbert1899}. Representation theorems then show that any model of the nominalistic theory can be mapped into the reals in such a way that the nominalistic relations correspond to numerical relations, uniquely up to a choice of scale; so that the standard, numerical theory and the nominalistic theory agree on everything nominalistic. The gravitational potential and the mass density become scalar fields described by comparative relations, and Poisson's equation is recovered as a statement about those relations. The achievement is real, and the inventory records it: the entries for Poisson's equation and the gravitational equation of motion (NM.05, NM.06), the inverse-square law and the $n$-body equations (NM.04, NM.23) have status F.
+
+The program met two kinds of difficulty. The first was logical. \citet{Shapiro1983} showed that Field's nominalistic theory, if formulated in first-order logic, is not complete with respect to the representation theorems in the way Field needed, and if formulated in second-order logic, the conservativeness claim requires a notion of consequence that is not deductive; either way, the conservativeness of mathematics is either false in the sense Field needs or relies on a notion as abstract as the mathematics it replaces. The second was the extension to other theories. \citet{Malament1982} observed that Field's method depends on the theory being formulated in terms of quantities that take values at the points of space-time, so that the points can serve as the concrete substrate of the representation; theories whose basic objects are spaces of \emph{possible} states, such as Hamiltonian mechanics, statistical mechanics and quantum mechanics, offer no such substrate, since the points of a phase space or the vectors of a Hilbert space are not occupied by anything concrete. \citet{Balaguer1996} proposed to nominalize quantum mechanics by taking propensities of physical systems as the concrete correlates of quantum states; \citet{Bueno2003} argued that the proposal fails, since the propensities must be individuated by the mathematical structure they were meant to replace. MTH-16-a argues that the program cannot be completed because the predictions of quantum mechanics are computed from states that no system is in, and that fictionalism fails with it. The most developed extension of Field's method since 1980 is the work of \citet{ArntzeniusDorr2012}, who show how the differential geometry of fields on manifolds can be given a synthetic formulation; their method applies, by its own design, to theories whose fundamental quantities are fields on space-time, and so leaves Malament's class of theories untouched.
+
+\subsection{Maddy and Sober: against holism}
+
+The other response is to deny the first premise. \citet{Maddy1992} argued from scientific practice. Scientists do not treat all parts of their theories alike: they accept atoms after Perrin's experiments and not before, though atomic theory was indispensable to chemistry long before; they use continuous models of fluids while believing fluids to be discrete; they treat infinite domains as idealizations. If scientists do not regard indispensability as sufficient for belief in the case of physical posits, the philosopher who defers to science should not regard it as sufficient for mathematical ones. In \citet{Maddy1997} she developed the point into a naturalism on which the methods of mathematics, not those of physics, determine the standing of mathematical claims, and on which the question of the existence of mathematical objects is not one that mathematical practice requires us to answer.
+
+\citet{Sober1993} argued from the theory of confirmation. On a contrastive account, an observation confirms a hypothesis only relative to a rival hypothesis that made the observation less probable. All the serious rivals in physics share the same mathematics. So no observation confirms the mathematics over any rival, and the mathematics receives no empirical confirmation at all; holism, so understood, is false of mathematics.
+
+\subsection{Melia, Yablo, Azzouni, Leng: the easy road}
+
+A third family of responses accepts that the mathematics cannot be removed from physics but denies that this commits us to mathematical objects. \citet{Melia2000} argued that one may assert a theory and then retract its mathematical consequences, as one may say that everyone in the room is a spy and then add \enquote{except the one I am talking to}; this \enquote{weaseling} is legitimate if the mathematics plays no role in the theory's account of the concrete world beyond making that account expressible. \citet{Yablo2005} argued that mathematical statements as used in science have a representational content that does not require the existence of mathematical objects, as the content of \enquote{the average family has 2.4 children} does not require an average family. \citet{Azzouni2004} denied the Quinean criterion itself: existential quantification in natural language and in science is ontologically neutral, and commitment is incurred only by assertions of existence backed by appropriate epistemic access. \citet{Leng2010} gave the most careful development of fictionalism in this tradition: scientists' use of mathematical hypotheses is consistent with their regarding them as useful fictions, and a confirmed theory's mathematical parts need not be believed if their role is to represent the concrete world, not to describe the mathematical one. \citet{Colyvan2010} called these views \enquote{easy road} nominalism, because they avoid the labour of Field's program, and argued that they owe an account of how mathematics represents that does not presuppose its truth.
+
+\subsection{Baker and the explanatory argument}
+
+The most important development of the last two decades is the explanatory version of the argument. \citet{Baker2005,Baker2009} argued that some physical phenomena are explained by mathematical facts: the life cycles of periodical cicadas, thirteen or seventeen years in the species studied, are explained by the fact that prime periods minimize intersection with the periods of predators and of other broods, and this explanation turns on a number-theoretic property. If inference to the best explanation is warranted in science, and the best explanation of a physical phenomenon contains a mathematical fact essentially, we are warranted in believing that fact. The version does not depend on holism. It has been discussed extensively. \citet{Lyon2008} gave further cases, in which the structure of phase space explains physical regularities; \citet{Bangu2008} argued that the argument begs the question, since the explanandum is itself stated mathematically; \citet{Saatsi2011} argued that the mathematics plays a representational rather than an explanatory role; \citet{Lange2013} characterized distinctively mathematical explanations as those whose explanans has a modal strength exceeding that of any causal law; and \citet{Baron2017} proposed counterfactual accounts of how a mathematical fact can make a difference to a physical one. \citet{Pincock2012} placed the issue within a general account of mathematical representation in science.
+
+\subsection{Recent work}
+
+The literature of the last fifteen years has concentrated on three questions. The first is whether the explanatory version of the argument is sound, and in particular whether mathematical facts can explain physical ones in a sense that requires their truth. \citet{Baker2009} answered critics by distinguishing the explanatory role of a mathematical fact from the role of the mathematical language in which the explanandum is described; \citet{Saatsi2011} replied that the role of mathematics in the cicada case is to represent the relevant physical facts, so that what explains is the physical fact represented; \citet{Lange2013} argued that distinctively mathematical explanations work by showing that the explanandum is more necessary than any causal law could make it, which supports the view that the mathematics is doing explanatory work; and \citet{Baron2017} developed an account on which counterfactuals with mathematically impossible antecedents capture the dependence of physical facts on mathematical ones. The second question is whether \enquote{easy road} nominalism can account for the representational role of mathematics; \citet{Colyvan2010} argued that it cannot, since it owes an account of representation that does not presuppose the truth of what represents, and \citet{Leng2010} attempted to supply one. The third is the extent of nominalization: \citet{ArntzeniusDorr2012} extended Field's methods to differential geometry, and MTH-16-a argues that the extension cannot reach quantum mechanics. \citet{Pincock2012} gave a systematic account of the varieties of mathematical representation in science, distinguishing, among others, mathematical contributions that are abstract (concerning structure shared by many systems) from those that are concrete (concerning the causal structure of one), which bears on which uses of mathematics a nominalist could hope to paraphrase. The present manuscript takes up the third question, and the inventory is intended as the systematic survey of the extent of nominalization that the debate has lacked.
+
+\subsection{Where the debate stands}
+
+Three results of this history frame the argument below. First, the indispensability premise is open to test, and Field's program was the test: if physics can be nominalized, the argument fails. The test succeeded for Newtonian gravitation and has not succeeded for the theories that now constitute our best physics. Second, the epistemic premise in its strong Quinean form is open to Sober's and Maddy's objections, but a weaker premise suffices and is not. Third, the explanatory version gives an independent route. What has been missing is a systematic account of the first point: which laws use which mathematics, which number systems each commits to, and which of these commitments any known method removes. The inventory supplies it.
+
+\section{What \enquote{abstract} means}\label{s:abstract}
+
+The thesis is that numbers are abstract objects. The distinction between abstract and concrete objects has no standard definition, and \citet[\S1.7]{Lewis1986} distinguished four ways of drawing it: by example (numbers and sets are abstract, tables and electrons are concrete), by conflation with other distinctions (between sets and individuals, or between universals and particulars), by negation (abstract objects lack spatiotemporal location and causal powers), and by abstraction (abstract objects are what we refer to with terms introduced by abstraction from an equivalence relation, as directions are abstracted from parallel lines). We use the third and the fourth, and we show that numbers, as they figure in physical theories, satisfy both.
+
+\begin{definition}[Way of negation]\label{d:abs}
+An object is \emph{abstract} if it has no location in space or time and enters into no causal relations. An object is \emph{concrete} if it is not abstract.
+\end{definition}
+
+The definition has known imperfections. Some objects that are usually counted as abstract, such as a game of chess or the English language, are arguably located where and when they are played or spoken; impure sets, such as the singleton of a particular electron, are sometimes said to be located where their members are; and the notion of causal relations is itself contested. None of the imperfections affects numbers, which are the paradigm on which the definition is calibrated. A theory of the abstract that does not count the number seven as abstract has failed at its central case.
+
+\begin{definition}[Way of abstraction]\label{d:abstraction}
+An object is \emph{an abstract of} an equivalence relation $E$ on a domain $D$ if it is the value, for some $d \in D$, of a function $\sigma$ satisfying $\sigma(a) = \sigma(b) \leftrightarrow E(a,b)$ for all $a, b \in D$.
+\end{definition}
+
+Frege's analysis of cardinal number takes numbers to be abstracts of equinumerosity on concepts: the number of $F$s is the number of $G$s if and only if the $F$s and the $G$s can be put in one-one correspondence \citep[\S\S62--69]{Frege1884}. The principle, Hume's principle, is the basis of the neo-Fregean program \citep{HaleWright2001}, which MTH-04-a defends; on that view the natural numbers are abstracts in the sense of Definition~\ref{d:abstraction}. \citet{Dummett1973} and \citet{Hale1987} made the way of abstraction the basis of a general account of abstract objects. Definitions~\ref{d:abs} and~\ref{d:abstraction} do not coincide in extension, but they agree on numbers, and they explain each other: an object introduced by abstraction from an equivalence relation on concepts is individuated by a relation that holds in virtue of how many things fall under the concepts, not in virtue of where those things are, and so has no location of its own.
+
+\begin{proposition}\label{p:abs-phys}
+If numbers exist with the properties our physical theories ascribe to them, they are abstract in the sense of Definition~\ref{d:abs}.
+\end{proposition}
+
+\begin{proof}
+In every law of the inventory, the variables that range over concrete things (particles, bodies, fields' points of application, systems, regions) are distinguished in sort from the variables that range over numbers and over structures built from them; the variables column of each entry in Appendix~A records the sorts. Location in space-time is ascribed only to concrete things: a particle has a position at a time, which is a point of space; the position is represented by a triple of real numbers relative to a coordinate system, but it is the particle, not the triple, that is located there, and the triple changes with the coordinate system while the location does not. No law ascribes a location to a number. Causal relations are likewise ascribed only to concrete things: forces act on bodies, charges produce fields, measurements disturb systems; the numbers that measure the forces, the charges and the outcomes are related by the laws, but no law says that a number acts on anything or is acted on. A number moreover plays the same role in the description of every system whatever: the real number $2$ is the mass in kilograms of some bodies, the charge in microcoulombs of others, and the ratio of two lengths in a third, and there is no one place or causal nexus that it occupies in all these roles. So the numbers the theories describe are not located and are not causes.
+\end{proof}
+
+\begin{remark}\label{r:struct}
+Proposition~\ref{p:abs-phys} is compatible with structuralism. MTH-14-a holds that numbers are positions in structures, with no properties beyond their structural ones. A position in the natural-number structure is not located in space or time and enters into no causal relations; so it is abstract by Definition~\ref{d:abs}. The two theses answer different questions: MTH-14 says what kind of abstract object a number is, and the present manuscript says that there are such objects. The inventory is neutral between them: what it records is that laws quantify over the natural numbers, the reals and the complex numbers, and these are structures whether their elements are sui generis objects or positions.
+\end{remark}
+
+\begin{remark}\label{r:impure}
+The proposition concerns numbers, not every mathematical object a physical theory mentions. Some mathematical objects are impure, in that they are constructed from concrete things: the set of particles in a box, or the function that assigns to each particle its mass. Whether such objects are located is a question we leave aside, since MTH-01's conclusion concerns numbers. Numbers are pure: no number has a concrete object among the things it is built from or individuated by.
+\end{remark}
+
+\section{Framework}\label{s:frame}
+
+\subsection{Theories, quantification and reformulation}
+
+\begin{definition}[Regimentation and quantification]\label{d:regim}
+A \emph{regimentation} of a theory is a formulation of it in a many-sorted first-order language whose sorts and primitive predicates are fixed. A regimented theory \emph{quantifies over} a kind $K$ if some of its theorems contain a bound variable whose sort is $K$ or a sort that presupposes $K$.
+\end{definition}
+
+The clause \enquote{or a sort that presupposes $K$} records a fact the inventory uses throughout. A theory that quantifies over the vectors of a complex Hilbert space quantifies, through the scalars, over the complex numbers, and through their real and imaginary parts over the reals; it cannot be true unless there are complex numbers and reals, even if no variable of the regimentation is sorted as \enquote{real}. Presupposition is the relation between structures by which one is defined from or constructed out of another in standard mathematics; Appendix~B lists, for each of the \nStructures{} structures of the inventory, the structures it directly presupposes.
+
+\begin{definition}[Reformulation retaining virtues]\label{d:reform}
+A theory $T'$ is a \emph{reformulation of $T$ retaining its virtues} if $T'$ entails the same observation sentences as $T$, explains whatever $T$ explains, and is not less simple, unified or fruitful than $T$ by the standards scientists apply in choosing between theories.
+\end{definition}
+
+\begin{definition}[Indispensability]\label{d:indisp}
+A kind $K$ is \emph{indispensable} to a theory $T$ if $T$ quantifies over $K$ and there is no reformulation of $T$ retaining its virtues that does not quantify over $K$. A kind is \emph{dispensable} to $T$ if it is not indispensable to it.
+\end{definition}
+
+Definition~\ref{d:indisp} makes indispensability relative to a theory and to the standards of scientific choice. Two features deserve comment. First, the definition counts a theory as dispensing with $K$ only if the reformulation retains the theory's virtues, not merely its observational consequences. A Craig reformulation that axiomatizes the observational consequences of a theory does without its theoretical vocabulary, mathematical and physical alike, but at the cost of every explanatory virtue; it shows nothing about numbers that it does not equally show about electrons. Second, the definition makes indispensability an empirical and contingent matter. It could turn out that a nominalistic reformulation of quantum mechanics is found. The argument below depends on the premise that none exists, and the premise is supported by the inventory and by MTH-16, not assumed a priori.
+
+\subsection{Weak holism}
+
+\begin{definition}[Ineliminable part]\label{d:part}
+A hypothesis $h$ is an \emph{ineliminable part} of a theory $T$ if $T$ entails $h$ and no reformulation of $T$ retaining its virtues fails to entail $h$.
+\end{definition}
+
+\begin{principle}[Weak holism]\label{p:wh}
+If $T$ is confirmed relative to its available rivals and $h$ is an ineliminable part of $T$, then belief in $h$ is justified to a degree not less than belief in $T$.
+\end{principle}
+
+Principle~\ref{p:wh} is the thesis that MTH-01-b calls weak holism. It does not say that the evidence for a theory raises the probability of each of its parts; it does not say that mathematics is tested along with the physics, or that a failed prediction could lead to the revision of arithmetic. It says only that we cannot rationally believe a theory and withhold belief from what any acceptable version of the theory says. The justification is the elementary probabilistic fact that a proposition is at least as probable as anything that entails it: if every acceptable formulation of $T$ entails $h$, then believing $T$ to degree $x$ commits one to believing $h$ to a degree at least $x$, and the only way to avoid the commitment is to find a formulation of $T$ that does not entail $h$. Strong holism adds that the confirmation of $T$ is confirmation of each of its parts; we do not need the addition.
+
+\begin{principle}[Regimentation]\label{p:reg}
+If $K$ is indispensable to $T$, then the hypothesis that $K$s exist is an ineliminable part of $T$.
+\end{principle}
+
+Principle~\ref{p:reg} is Quine's criterion stated for kinds. If every reformulation of $T$ retaining its virtues quantifies over $K$, then every such reformulation entails, given that it is true, that there are things of kind $K$: a theorem with a bound variable of sort $K$ that is true in a model is true only if the domain of that sort is non-empty, and in the cases of interest the theorem is a universally quantified law with an existential consequence, such as the law that for every time there is a position of the particle, which entails that there are positions. Azzouni's denial of the criterion is discussed in Section~\ref{s:obj}.
+
+\subsection{Assumptions}
+
+\begin{assumption}[Confirmation]\label{a:conf}
+Our best physical theories are confirmed relative to their available rivals.
+\end{assumption}
+
+Assumption~\ref{a:conf} is the scientific realism of SCI-02: mature, predictively successful theories are approximately true. The theories of the inventory are mature in this sense. Approximate truth complicates the argument without changing it: an approximately true theory whose every acceptable formulation quantifies over numbers is one whose approximate truth requires that there be numbers, since approximation is a relation between the theory's claims and the world that the theory's quantifiers must succeed in describing. We return to the point in Objection~\ref{o:maddy}.
+
+\begin{assumption}[Indispensability of numbers]\label{a:indisp}
+The natural, integer, rational, real and complex numbers are indispensable to our best physical theories.
+\end{assumption}
+
+Assumption~\ref{a:indisp} is the premise Field's program attacked. Its support is twofold. MTH-16-a argues that quantum mechanics cannot be nominalized, because its predictions are computed from states that no system is in. The inventory shows what follows: the quantum laws, together with the laws of state-space and variational form to which Malament's objection applies, commit to every one of the five number systems, and the commitment to the complex numbers survives the reduction of $\mathbb C$ to $\mathbb R^2$ exactly in the quantum laws (Section~\ref{s:inv}).
+
+\begin{assumption}[Non-location]\label{a:noloc}
+In every regimentation of our best physical theories retaining their virtues, numbers are assigned no spatiotemporal location and no causal role.
+\end{assumption}
+
+Assumption~\ref{a:noloc} is the content of the proof of Proposition~\ref{p:abs-phys}, stated as a premise about the theories so that the formal reconstruction in Section~\ref{s:formal} can use it.
+
+\section{The argument}\label{s:arg}
+
+\subsection{The main theorem}
+
+\begin{lemma}[Commitment]\label{l:commit}
+If $T$ is confirmed relative to its available rivals and $K$ is indispensable to $T$, then belief that $K$s exist is justified to a degree not less than belief in $T$.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:reg}, the hypothesis that $K$s exist is an ineliminable part of $T$. By Principle~\ref{p:wh}, since $T$ is confirmed relative to its rivals, belief in that hypothesis is justified to a degree not less than belief in $T$.
+\end{proof}
+
+Lemma~\ref{l:commit} is the principle that MTH-01-b states as its first principle (Commitment), derived here from weak holism and Quine's criterion. Its antecedent is demanding: it requires that \emph{no} reformulation retaining the theory's virtues dispenses with $K$. It is therefore not refuted by the existence of formulations of a theory that use less mathematics than others, and it does not license belief in whatever mathematics happens to appear in a textbook presentation. The Lagrangian formulation of mechanics quantifies over the tangent bundle of configuration space; the Newtonian formulation does not; so the tangent bundle is not, on the basis of Lagrangian mechanics alone, shown indispensable. The inventory records both formulations, and the argument below relies only on commitments shared by every formulation of the theories concerned.
+
+\begin{theorem}[Existence of numbers]\label{t:main}
+We are justified in believing that the natural, integer, rational, real and complex numbers exist.
+\end{theorem}
+
+\begin{proof}
+Let $T$ be the conjunction of our best physical theories. By Assumption~\ref{a:conf}, $T$ is confirmed relative to its available rivals. By Assumption~\ref{a:indisp}, each of the five number systems is indispensable to $T$. By Lemma~\ref{l:commit}, applied to each of them, belief that its members exist is justified to a degree not less than belief in $T$. Since belief in $T$ is justified, so is belief in the existence of the numbers.
+\end{proof}
+
+\begin{proposition}[Abstractness]\label{p:abstract}
+We are justified in believing that numbers are abstract objects.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{t:main} we are justified in believing that numbers exist. The justification is that numbers are indispensable to the theories, and what is indispensable is the theories' quantification over numbers, together with whatever the theories say about them. By Assumption~\ref{a:noloc}, every acceptable regimentation of the theories assigns numbers no location and no causal role, and so represents them as abstract in the sense of Definition~\ref{d:abs}; Proposition~\ref{p:abs-phys} verifies this for the regimentations of the inventory. A theory that represented numbers as located or causally active would add a claim found in no acceptable formulation, and so would not be supported by the confirmation of the physics. The same justification that supports their existence therefore supports their being abstract.
+\end{proof}
+
+Theorem~\ref{t:main} and Proposition~\ref{p:abstract} together are the conclusion of MTH-01: numbers exist, they are abstract objects, and the indispensability argument establishes their existence.
+
+\subsection{Corollaries: the reals and completed totalities}
+
+\begin{corollary}[The reals]\label{c:reals}
+The real numbers exist, and there are at least $2^{\aleph_0}$ numbers.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main} the real numbers exist. The laws that commit to them quantify not over some reals but over all: the second law holds for every time $t \in \mathbb R$, the field equations hold at every point of a manifold whose charts take values in $\mathbb R^4$, and the Schr\"odinger equation holds for every $t \in \mathbb R$. The domain of the quantifier is the whole field of reals, which by \citet{Cantor1874} is uncountable and has cardinality $2^{\aleph_0}$. Each real is a number; so there are at least $2^{\aleph_0}$ numbers.
+\end{proof}
+
+The bound is sharp for the number systems: the naturals, integers and rationals are countable, and the complex numbers, as pairs of reals, add nothing to the cardinality. MTH-01-c draws the further consequences: given MTH-06, there are more than $\aleph_1$ numbers, the argument sets no upper bound, and if the transfinite ordinals are numbers the numbers form no set.
+
+\begin{corollary}[Completed totalities]\label{c:complete}
+The completed infinite sets used in science exist: in particular the set $\mathbb N$ of natural numbers and the set $\mathbb R$ of real numbers.
+\end{corollary}
+
+\begin{proof}
+The laws of the inventory quantify over the natural numbers and the reals by single variables whose range is the whole system: a law of the form \enquote{for every $n \in \mathbb N$, $E_n = \hbar\omega(n + \frac12)$} (QM.12) or \enquote{for every $t \in \mathbb R$} states a fact about all members of a totality at once, not a rule for producing members one after another. The truth of the law requires that the domain of its variable be given as a whole; and the structure the law ascribes to the domain, the completeness of the reals in particular, is a property of the totality, not of any finite part of it. Since by Theorem~\ref{t:main} the theories are true, so are these laws, and their domains exist as completed totalities. These are infinite sets in the sense of set theory.
+\end{proof}
+
+Corollary~\ref{c:complete} is the claim on which MTH-10-a relies in arguing that actual infinities exist: indispensability establishes the existence of the completed infinite sets used in science. The potentialist, who holds that infinite totalities exist only as processes that can always be continued, cannot accept the completeness axiom of the reals, which says that every bounded set of reals has a least upper bound, without accepting the sets of reals it quantifies over; and the completeness axiom is used in every law that involves a limit, a derivative or an integral, which is to say in \nDomC{} of the \nLaws{} laws of the inventory.
+
+\subsection{Scope: numbers, not functions or fields}
+
+\begin{remark}[Scope]\label{r:scope}
+The conclusion concerns numbers. The theories of the inventory also quantify over functions (trajectories, potentials, wave functions), over spaces of functions ($L^2$, the test-function spaces of quantum field theory), over tensor fields on manifolds, and over groups and algebras. Lemma~\ref{l:commit} applies to these as to numbers, and the argument therefore also supports belief in many such objects, so far as they are indispensable; but the thesis of MTH-01 is about numbers, and we do not defend a thesis about functions or fields here. One difference is worth recording. The number systems used in physics have together the cardinality $2^{\aleph_0}$. Some of the function classes are larger: the continuous and the smooth functions on $\mathbb R^n$ have cardinality $2^{\aleph_0}$, but the Lebesgue-measurable functions, of which the elements of $L^2$ are equivalence classes, have cardinality $2^{2^{\aleph_0}}$. The inventory records this as the cardinality of the dependency closure: it is $2^{\mathfrak c}$ for exactly \nClosTwoC{} laws (\listTwoC), all of which reach it through $L^2$.
+\end{remark}
+
+\subsection{A second route: explanation}
+
+\begin{proposition}[Explanatory route]\label{p:expl}
+Given inference to the best explanation, there is a justification for belief in the natural numbers that does not depend on Principle~\ref{p:wh}.
+\end{proposition}
+
+\begin{proof}
+The periodical cicadas of the genus \emph{Magicicada} emerge after thirteen or seventeen years. The best available explanation, as \citet{Baker2005} reconstructs it, has three parts: an ecological premise, that a life cycle minimizing intersection with the cycles of periodical predators or of other cicada broods is favored; a number-theoretic fact, that for periods in the ecologically possible range a prime period minimizes the frequency of intersection with other periods, since two periods $m$ and $n$ coincide every $\operatorname{lcm}(m,n)$ years and $\operatorname{lcm}(m,n)$ is maximal, for fixed $n$, when $m$ and $n$ are coprime; and the conclusion that the cycles are prime. The number-theoretic fact is general: it concerns all periods, actual and possible, and its explanatory force lies in this generality, since what explains why the cycles are thirteen and seventeen is that no other length in the range would do as well. A paraphrase that mentions only the actual cicadas and the actual years does not state the fact. By inference to the best explanation we are warranted in believing the explanation, and it quantifies over natural numbers; by Principle~\ref{p:reg}, it is committed to them. No premise about the distribution of confirmation over the parts of a theory was used.
+\end{proof}
+
+The explanatory route reaches the natural numbers directly. It reaches the reals through explanations of the same kind in continuous physics: \citet{Lyon2008} discuss explanations whose explanans is a fact about phase space, and the inventory shows how pervasive such facts are, since the laws of status P (\nStatP{} of them) are facts about spaces of possible states, which are manifolds modelled on $\mathbb R^n$.
+
+\subsection{The status of the support}
+
+\begin{remark}[Empirical and independent]\label{r:emp}
+The justification Theorem~\ref{t:main} provides is empirical: it is the justification of our best physics, transmitted to its ineliminable parts. It is independent of the a priori route on which arithmetic is known from Hume's principle, which MTH-04-a defends and which EPI-12-a counts among the a priori knowledge we possess. The two routes support each other. As EPI-12-a notes, a proposition may be knowable on more than one basis; the constitutive rules of the concept of number do not show that the concept is not defective, as the naive concept of set was, and the indispensability of number to physics supplies independent, empirical support for the claim that it is not. Conversely, the a priori route explains why the mathematics physics needs was available before physics needed it.
+\end{remark}
+
+\begin{proposition}[Modal status]\label{p:nec}
+Suppose that whether abstract objects of a given mathematical kind exist does not depend on which contingent concrete circumstances obtain. Then numbers exist necessarily.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{t:main} and Proposition~\ref{p:abstract}, numbers exist and are abstract. If they failed to exist in some possible world, their existence would depend on something that varies between worlds. What varies between worlds, apart from the abstract, is the concrete; by the supposition, the existence of numbers does not depend on it. So there is no world in which they fail to exist.
+\end{proof}
+
+The supposition of Proposition~\ref{p:nec} is the standard view that the existence of pure abstract objects is not hostage to the contingencies of the concrete world; it is needed because the indispensability argument itself establishes only actual existence. With it, numbers exist necessarily, and the question why there is something rather than nothing, restricted as MET-01 restricts it, concerns concrete objects.
+
+\section{What the inventory shows}\label{s:inv}
+
+\subsection{Construction}
+
+The inventory in Appendices~A--E is generated by a program (\texttt{gen/generate.py}, Python standard library, deterministic) from two hand-curated tables. The first is a register of \nStructures{} mathematical structures: the five number systems and the quaternions; finite sets and symmetric groups; coordinate spaces, real and complex vector spaces, linear maps, Euclidean, Galilean and Minkowski space-time; topology, differentiable functions, complex analysis, manifolds, tangent bundles, tensor fields, Lorentzian manifolds, state spaces and symplectic manifolds; Lie groups and algebras, rotation, unitary and Poincar\'e groups, principal bundles, Clifford and Grassmann algebras; Borel and Lebesgue $\sigma$-algebras, measures, probability measures, stochastic processes and measurable functions; Hilbert spaces, $L^2$ spaces, operators, trace-class operators, Fock spaces, distributions, operator-valued distributions and Fourier analysis. For each structure the register records the cardinality of its standard carrier and the structures it directly presupposes. The second table lists \nLaws{} laws from \nTheories{} theories. For each law it records the equation in standard form, the variables the law binds with their sorts, the structures the law quantifies over directly, a reference to a standard text, and, where they apply, the laws it is standardly derived from and whether $\mathbb C$ enters only in a form reducible to $\mathbb R^2$. Only established laws and equations of standard form are included; no numerical constant appears that is not exact.
+
+From these the program computes, for each law: the closure of its structures under presupposition; the largest cardinality among the structures it quantifies over directly (its \emph{domain}) and among those in the closure; the number systems in the closure (the law's \emph{numbers}); the numbers after admissible reduction (its \emph{minimal numbers}); and its nominalization status, by the rule of Definition~\ref{d:status}.
+
+\begin{definition}[Nominalization status]\label{d:status}
+Each law receives one of eight statuses. A law has status \textbf{O} if it quantifies over no mathematical structure; \textbf{S} if synthetic geometry states it \citep{Hilbert1899,Field1980,Robb1914}; \textbf{F} if it is nominalized in \citet{Field1980}; \textbf{K} if it concerns only counts, so that each instance is expressible with numerically definite quantifiers. These four statuses are the \emph{nominalized} ones. Otherwise a law has status \textbf{Q} if it quantifies over a Hilbert space, operators on one, Fock space, operator-valued distributions, or Clifford or Grassmann algebras, or if it is a consequence of quantum theory that has no derivation outside it; \textbf{V} if it is a variational principle, quantifying over varied, non-actual histories; \textbf{P} if it quantifies over a space of possible states or over probability measures; and \textbf{A} otherwise, which is to say that it is a local relation among scalar, vector or tensor quantities on space or space-time, of the kind to which Field's method and its extension by \citet{ArntzeniusDorr2012} apply in principle. Statuses V, P and Q are the \emph{resistant} ones: for them no nominalization is known, and Malament's argument (V, P) or MTH-16-a's (Q) explains why.
+\end{definition}
+
+The statuses S, F, K and O are assigned by hand, with the source stated in the entry; Q is assigned by hand for the laws, such as the Planck--Einstein relation (AN.12), that are stated in real numbers but derived only within quantum theory; the others follow from the rule. The rule is conservative in the nominalist's favor in one respect: status A credits a law with nominalizability in principle although for almost none of the \nStatA{} laws of that status has a nominalization been carried out.
+
+\subsection{The computed results}
+
+\begin{proposition}[Inventory]\label{p:inv}
+In the inventory of Appendices~A--E:
+\begin{enumerate}[label=(\roman*)]
+\item every law that quantifies over some mathematical structure commits to $\mathbb N$; this is all laws but TD.01;
+\item \nNumR{} of the \nLaws{} laws commit to $\mathbb R$; the exceptions are \listNoR;
+\item \nNumC{} laws commit to $\mathbb C$ in their standard formulation and \nMinC{} after admissible reduction, and every law that commits to $\mathbb C$ after reduction has status Q;
+\item no law commits to the quaternions $\mathbb H$;
+\item \nResistant{} laws are resistant, distributed over \nResTheories{} of the \nTheories{} theories (all but \listInPrinciple); only \nNominalized{} laws are nominalized;
+\item each of $\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$ and $\mathbb C$ is among the minimal numbers of some resistant law; indeed the laws of status Q alone carry all five;
+\item no law quantifies directly over a domain larger than $2^{\aleph_0}$; the closure reaches $2^{2^{\aleph_0}}$ for exactly \nClosTwoC{} laws, in every case through $L^2$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By computation. The program evaluates each claim over the whole table and halts if any fails; the figures in the statement are written by the program into the manuscript. Appendix~C gives the cross-tabulations from which (ii)--(vi) can be read, Appendix~D the lists for each number system, and Appendix~E the presupposition chains.
+\end{proof}
+
+The proposition supports Assumption~\ref{a:indisp} as follows. Clause (vi) shows that the resistant laws carry every number system; clause (v) shows that they are not confined to a corner of physics but occur in fourteen of the sixteen theories; and clause (iii) shows that the most contested of the five systems, $\mathbb C$, is carried by the quantum laws, which MTH-16-a argues cannot be nominalized. The theories in which every law is at worst of status A, Newtonian mechanics and the continuum mechanics of solids, are precisely the theories for which Field's method was designed; the inventory confirms that it is these, and only these, that the method reaches in principle.
+
+\subsection{Domains and their sizes}
+
+Proposition~\ref{p:inv}(vii) concerns the sizes of the domains the laws quantify over, and it is worth separating three quantities the inventory records for each law. The first is the cardinality of the numbers the law commits to: $\aleph_0$ for the five laws without reals, $2^{\aleph_0}$ for all others. The second is the cardinality of the domain the law quantifies over directly, which is the largest carrier among its directly quantified structures. For \nDomC{} laws this is $2^{\aleph_0}$, and for none is it larger: the trajectories, fields, wave functions and operators of physics are all determined by countably many real parameters (a continuous function by its values on a countable dense set, an element of a separable Hilbert space by its coordinates in a countable basis, a self-adjoint operator by its matrix elements in such a basis), and so form sets of cardinality $2^{\aleph_0}$. The third is the cardinality of the largest structure in the law's closure. This exceeds $2^{\aleph_0}$ only for the \nClosTwoC{} laws whose closure contains $L^2$: the elements of $L^2$ are equivalence classes of Lebesgue-measurable functions, and there are $2^{2^{\aleph_0}}$ such functions, since every function that vanishes outside a null set is measurable and the Cantor set is a null set of cardinality $2^{\aleph_0}$.
+
+\begin{proposition}\label{p:card}
+The numbers that the inventory's laws commit to form a set of cardinality exactly $2^{\aleph_0}$. The objects the laws quantify over directly form sets of cardinality at most $2^{\aleph_0}$. The structures from which some of those objects are constructed have cardinality $2^{2^{\aleph_0}}$.
+\end{proposition}
+
+\begin{proof}
+The first claim holds because the union of $\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$ and $\mathbb C$ has the cardinality of $\mathbb R$. The second and third are the computed clauses (vii) of Proposition~\ref{p:inv}, given the cardinalities of the carriers in Appendix~B, which are those just justified.
+\end{proof}
+
+Proposition~\ref{p:card} sharpens Corollary~\ref{c:reals} and is consistent with MTH-01-c: the indispensability argument fixes a lower bound of $2^{\aleph_0}$ on the numbers and no upper bound, and the functions and sets of functions it also supports can be more numerous than the numbers, though, as Remark~\ref{r:scope} records, the conclusion of MTH-01 concerns numbers only.
+
+\subsection{Particular entries}
+
+\paragraph{NM.05: Poisson's equation.} Poisson's equation for the gravitational potential, $\nabla^2\phi = 4\pi G\rho$, is the centerpiece of Field's nominalization, and has status F. Its domain is $\mathfrak c$, its closure contains $\mathbb N$, $\mathbb Z$, $\mathbb Q$ and $\mathbb R$, and its derived consequence NM.06 shares its status. The electrostatic Poisson equation EM.27 has the same form, and the entry records that Field's construction transfers to it in principle, though it has not been carried out for it in the literature; it therefore has status A, not F. The pair shows the honesty of the rule: mathematical form is not enough for status F.
+
+\paragraph{TD.01 and TD.13: laws without reals.} The zeroth law of thermodynamics says that thermal equilibrium is transitive; it quantifies over systems and one relation, and over no mathematical structure (status O). The Gibbs phase rule $F = C - P + 2$ relates three counts and quantifies only over $\mathbb N$ (status K): each instance can be stated with numerically definite quantifiers, as \enquote{there are exactly $n$ $F$s} can be stated in first-order logic without numbers. These two are the cases nominalism handles without effort, and they are two of \nLaws. The other three laws without reals, QF.23, QF.30 and QF.31, are arithmetical conditions on rational quantum numbers (the anomaly-cancellation conditions, baryon number and charge quantization); they commit to $\mathbb Q$, are derived within quantum field theory and have status Q.
+
+\paragraph{FD.15 and EM.24: reducible complex numbers.} The Kutta--Joukowski theorem gives the lift per unit span on an aerofoil as $\rho V\Gamma$, a real quantity; its standard proof evaluates a contour integral of the complex potential (Blasius' theorem, FD.16). The complex impedance of an alternating-current circuit, $Z = R + i\omega L + 1/(i\omega C)$, is the engineer's standard device. In both, as in all \nRed{} such laws of classical physics in the inventory (\listRedC), $\mathbb C$ enters only as $\mathbb R^2$ with multiplication by $i$ as a linear map, and the program verifies that replacing it removes $\mathbb C$ from the closure. In these laws the complex numbers are dispensable in the sense of Definition~\ref{d:indisp}, though the reals that replace them are not.
+
+\paragraph{QM.01: the Schr\"odinger equation.} The Schr\"odinger equation $i\hbar\,\frac{d}{dt}\psi(t) = \hat H\psi(t)$ quantifies over a complex Hilbert space and a self-adjoint operator. Its closure has fourteen structures, its longest presupposition chain runs from the operators through the spectral measures, the Borel sets and the topology of the reals down to $\mathbb N$, and its status is Q. Here the reduction of $\mathbb C$ to $\mathbb R^2$ is not admissible. Quantum mechanics can be formulated on real Hilbert spaces with an operator playing the role of $i$ \citep{Stueckelberg1960}, but the real formulation, if composite systems are described by the tensor product of the component spaces as in QM.16, makes predictions that differ from those of the complex theory in network scenarios with independent sources, and the difference is experimentally testable \citep{Renou2021}. So the complex numbers are not, for quantum theory with its standard composition rule, a convenient packaging of pairs of reals; they are part of what the theory says.
+
+\paragraph{QM.20 and the measurable functions.} The momentum representation\[\tilde\psi(p) = (2\pi\hbar)^{-1/2}\int e^{-ipx/\hbar}\psi(x)\,dx\]quantifies over $L^2(\mathbb R)$, whose elements are classes of Lebesgue-measurable functions; through them its closure contains the Lebesgue $\sigma$-algebra and so reaches cardinality $2^{\mathfrak c}$. This is one of the \nClosTwoC{} laws of Remark~\ref{r:scope}. The domain it quantifies over directly, $L^2(\mathbb R)$, has cardinality $\mathfrak c$; it is the construction of that domain from the measurable functions that reaches $2^{\mathfrak c}$.
+
+\paragraph{LM.02 and SM.03: variational and statistical laws.} Hamilton's principle says that the actual motion makes the action stationary among all varied motions with the same endpoints; it quantifies over motions that do not occur, and so offers no concrete substrate for a Field-style representation. The canonical distribution $p_i = e^{-E_i/k_BT}/Z$ assigns probabilities to all the microstates of a system, of which at any time it occupies one. These are the cases Malament identified, and the inventory counts \nStatV{} laws of the first kind and \nStatP{} of the second.
+
+\section{What nominalization reaches}\label{s:nom}
+
+The status rule of Definition~\ref{d:status} sorts the laws by the methods available to a nominalist. This section explains the methods and why they reach what they reach, since the force of Assumption~\ref{a:indisp} depends on it.
+
+\subsection{Representation theorems}
+
+The basic tool is the representation theorem of measurement theory. Given a domain of concrete objects and a set of qualitative relations among them, such as \enquote{$a$ is at least as long as $b$} and \enquote{$c$ is a concatenation of $a$ and $b$}, a representation theorem shows that, if the relations satisfy certain axioms, there is a function from the objects into the positive reals that turns the qualitative relations into numerical ones (the order into $\geq$, concatenation into addition); a uniqueness theorem shows that any two such functions differ by a permissible transformation, such as multiplication by a positive constant. The classical treatment is \citet{KrantzEtAl1971}. Field's insight was that representation theorems can be used in reverse. If the qualitative relations are taken as primitive and the numerical theory is shown to be a conservative extension of the qualitative one, then the numbers are dispensable: whatever the numerical theory says about the objects, the qualitative theory says already.
+
+For Newtonian gravitation the objects are the points of space-time, and the qualitative relations are betweenness and congruence among points, which yield the geometry by Hilbert's representation theorem, together with relations comparing the values of the gravitational potential and of the mass density at different points: for instance, the relation that holds of four points when the potential difference between the first two equals that between the second two. Field showed that the axioms governing these relations admit a representation by real-valued fields unique up to positive linear transformation, and that Poisson's equation and the equation of motion can be stated as constraints on the qualitative relations, using the fact that the Laplacian at a point is determined by the values of the field in small neighbourhoods of the point. The resulting theory has as many points as there are reals, since space-time is assumed to be continuous; Field accepted this, since points are concrete. The nominalized theory is not, therefore, a theory with fewer objects; it is a theory whose objects are all physical.
+
+\subsection{Why the method is local}
+
+The method works when three conditions hold. The quantities of the theory take values at the points of a concrete continuum. The laws relate the values of the quantities at a point to their values at nearby points, so that they can be stated as constraints on the qualitative relations among points in small regions. And the theory's claims are about the actual values of the quantities. Theories of status A in the inventory meet the first two conditions, and \citet{ArntzeniusDorr2012} extend the method from scalar fields on flat space to vector and tensor fields on manifolds, which is what the second condition requires for general relativity and gauge theory. We therefore credit all such laws with nominalizability in principle, although Field carried out the construction only for gravitation and the extension has been carried out in detail for few other laws.
+
+The third condition is the one that fails for the resistant laws. A Hamiltonian $H$ is a function on phase space, and Hamilton's equations (HM.01) relate its derivatives at the actual state to the rate of change of the state; but the derivatives of $H$ at a point depend on its values at other points of phase space, which are states the system is not in. The phase space has no concrete substrate: its points are not occupied, as the points of space-time are occupied by the values of fields. This is Malament's objection, and it applies equally to the Lagrangian on the tangent bundle (LM.01), to the distributions of statistical mechanics (SM.03, SM.05), and to the thermodynamic state space over which the differentials of the first law are taken (TD.02). Variational principles (LM.02, OP.03, GR.13) quantify over varied histories explicitly. The quantum laws are a special case of the same failure, made sharper by the Born rule: the probability of an outcome is the squared norm of the projection of the actual state onto the eigenspace of the outcome (QM.03), and the eigenstate is not a state the system is in, nor, for continuous observables, a physical state at all. This is the argument of MTH-16-a.
+
+\subsection{Can the substrate be supplied?}
+
+The nominalist has three ways to supply a substrate for the resistant laws, and each has been tried. The first is to take possible states as concrete, by identifying them with dispositions or propensities of actual systems \citep{Balaguer1996}. The difficulty is that the propensities must stand in relations isomorphic to those of the Hilbert space: they must be closed under superposition with complex coefficients, have inner products, and so on, and these relations among propensities are as mathematical as the space they replace \citep{Bueno2003}. The second is to take the possibilities as modal facts about actual systems, stated with a primitive modal operator, in the manner of \citet{Hellman1989}. This exchanges the commitment to numbers for a commitment to a primitive modality strong enough to express the possibility of continuum-sized structures, and it is a reinterpretation rather than a nominalization; we take no position on it here. The third is to restrict physics to what can be stated with actual values, giving up the state-space formulations; but the resistant laws are not optional: statistical mechanics without its distributions does not predict the thermodynamic behavior of matter, and quantum mechanics without its Hilbert space does not predict anything.
+
+The rule is conservative in the nominalist's favor in a second respect. Status A is assigned to every law that meets the first two conditions, even where a law quantifies over a space of functions in a way that strains them. The gauge transformations of electromagnetism (EM.09) assert that the fields are unchanged under every smooth gauge function; the law quantifies over a function space, not merely over values at points, and it is not obvious that the synthetic methods can state it. We have nonetheless given it status A. A stricter rule would increase the number of resistant laws; it could not decrease it.
+
+\section{Further cases}\label{s:cases}
+
+We discuss ten further entries, chosen to illustrate the range of the inventory and the points at which its classifications could be contested.
+
+\paragraph{HM.01: Hamilton's equations.} Hamilton's equations have status P and depth \depthMax, the greatest in the inventory: their longest presupposition chain runs from the symplectic manifold through the tensor fields, the tangent bundle, the manifold, the differentiable functions, the topology of the reals and the reals themselves to $\mathbb N$. Depth is not a measure of indispensability, but it shows how much mathematics stands between the law and the natural numbers, and so how much a nominalization must replace. The Newtonian formulation of the same mechanics (NM.02) has depth 6 and status A. The pair illustrates the point of Lemma~\ref{l:commit}: the Hamiltonian formulation's commitment to phase space is not shown indispensable by mechanics alone, since the Newtonian formulation does without it. What makes phase space indispensable is statistical mechanics, whose distributions (SM.05) are defined on it, and quantum mechanics, whose canonical quantization starts from it.
+
+\paragraph{SM.21: Birkhoff's ergodic theorem.} The theorem states that for an ergodic flow the time average of an integrable function along almost every trajectory equals its phase average. It quantifies over a measure on phase space and over all integrable functions, and it holds only \enquote{almost everywhere}, that is, outside a set of measure zero. The qualification has no nominalistic analogue: a set of measure zero of states is not a set of anything concrete, and the claim that the exceptions form such a set is a claim about the measure, not about the actual system. The theorem has status P.
+
+\paragraph{TD.02: the first law.} Classifying the first law as status P may seem severe, since the law is often stated as a balance of energy in a process. But the standard form, $dU = \delta Q - \delta W$, is a relation between differential forms on the space of equilibrium states, and the distinction between $dU$, which is exact, and $\delta Q$, which is not, is a fact about the integrals of the forms along all paths in that space, most of which no system traverses. The integral form of the law, the balance of energy for a given process, is close to the energy balance of continuum mechanics (CM.12), which has status A. Table~C1 shows that even if every thermodynamic law of status P were reclassified, the number of resistant laws would remain well above a hundred and the number systems they carry would be unchanged.
+
+\paragraph{AN.01: radioactive decay.} The decay law $N(t) = N_0e^{-\lambda t}$ looks like a deterministic law about a magnitude, and the activity law AN.02, which is its differential form, has status A. But what the law states is that each nucleus has a constant probability per unit time of decaying, and $N(t)$ is the expected number of undecayed nuclei, a magnitude defined by a probability measure over the possible histories of the sample. The entry has status P. The pair shows that the status of a law depends on its content, not on its notation.
+
+\paragraph{GR.01: the Einstein field equations.} The field equations relate the curvature of a Lorentzian manifold to its stress-energy tensor; they are local tensor equations and have status A. General relativity is therefore, apart from its action principle (GR.13), within the reach of the synthetic methods in principle. Two caveats are recorded in the entries. The manifold structure itself is not given by a single concrete continuum with a fixed geometry, since the geometry is dynamical, so that the representation theorem must recover a metric from qualitative relations that themselves vary from model to model; and the global solutions of cosmology (GR.07, GR.08) quantify over the scale factor as a function of time, which is a real-valued function of a single variable and is unproblematic. The inventory's verdict on general relativity, that it is nominalizable in principle except for its variational formulation, is the most favorable to the nominalist that the evidence permits.
+
+\paragraph{QM.26: the CHSH inequality.} The inequality bounds a combination of correlations by $2$ in any local hidden-variable theory, and quantum mechanics allows the bound $2\sqrt2$ \citep{CHSH1969,Cirelson1980}. The law is about correlations, which are expectations over probability measures, and its quantum bound is computed by optimizing over states and operators on a Hilbert space. It commits to $\mathbb C$ through the Hilbert space, and the reduction to $\mathbb R^2$ is inadmissible for it as for the other quantum laws. The entry is significant for a second reason: it is a law whose empirical confirmation is among the most precise in physics, and whose content is irreducibly about a space of possible measurement settings, most of which are not chosen in any given run.
+
+\paragraph{QF.23 and QF.31: rational numbers in the Standard Model.} Most laws reach $\mathbb Q$ only through $\mathbb R$. The anomaly-cancellation conditions (QF.23) and charge quantization (QF.31) commit to the rationals directly: the hypercharges and charges of the fermions of one generation are rational multiples of a unit, and the conditions that the sums of their cubes and of the charges themselves vanish are arithmetical identities over $\mathbb Q$. These are among the five laws of the inventory that do not commit to $\mathbb R$. They are derived within quantum field theory, as conditions for the consistency of the quantized gauge theory, and so have status Q, although as arithmetical statements each instance could be stated with numerically definite quantifiers if the charges were counted in units of a third. They show that the rationals are not a mere stage on the way to the reals: some laws need them as such.
+
+\paragraph{OP.02 and SR.02: synthetic geometry.} The law of reflection says that the angle of reflection equals the angle of incidence. Stated with numbers, it relates two real-valued angles; stated synthetically, it says that two angles are congruent, and congruence of angles is a primitive of Hilbert's geometry. The invariance of the space-time interval (SR.02) is similarly statable in Robb's axiomatization of Minkowski space-time by the relation \enquote{after}, which recovers the geometry up to a choice of unit \citep{Robb1914}. These entries have status S. They are the cases in which the mathematics serves only to describe the geometry of space-time, and they show that where it does only that, it is dispensable.
+
+\paragraph{SS.12: the integer quantum Hall effect.} The Hall conductivity of a two-dimensional electron system in a strong magnetic field takes the values $\nu e^2/h$ with $\nu$ an integer, to a precision that has made the effect a resistance standard. The law commits to $\mathbb Z$ directly: what is quantized is the conductivity, and what quantizes it is an integer that the theory identifies with a topological invariant of the occupied bands. The entry has status Q, since the explanation is quantum-mechanical. It is a case of the explanatory route at work in condensed matter: the integrality of $\nu$ is explained by a mathematical fact about the topology of a space of states, and no nominalistic paraphrase that speaks only of the actual sample states that fact.
+
+\paragraph{QF.06: Fock space and the natural numbers.} Fock space is the direct sum, over all natural numbers $n$, of the symmetrized or antisymmetrized $n$-fold tensor powers of a one-particle Hilbert space. The law quantifies over $\mathbb N$ directly, as the index of particle number, and over all of it at once, since the states of quantum field theory are not confined to any bounded number of particles. It is a clear instance of Corollary~\ref{c:complete}: the completed totality of the natural numbers is part of the structure of the state space of our most fundamental physical theory.
+
+\section{Consequences for neighbouring questions}\label{s:cons}
+
+The result bears on several other questions in the philosophy of mathematics and beyond.
+
+Knowledge of numbers. If numbers exist and are abstract, they enter into no causal relations, and Benacerraf's problem arises: how can we know them? MTH-02-a argues that knowledge of abstract objects is acquired by reliable methods, of which derivation from true axioms is one, and that the causal requirement on knowledge is too strong. Theorem~\ref{t:main} supplies one of the premises that argument needs, that the axioms are true; and it supplies a second, empirical route to knowledge of them.
+
+Discovery. MTH-03 holds that mathematical truths are discovered while notations and axiomatizations are invented. The inventory illustrates the distinction. The notation in which a law is written varies (vector, tensor and differential-form versions of Maxwell's equations, EM.02--EM.05, EM.21, EM.22), as does the formulation of a theory (Newtonian, Lagrangian, Hamiltonian); what does not vary is the number systems the formulations commit to.
+
+Infinity. Corollary~\ref{c:complete} is the premise MTH-10-a uses to argue that actual infinities exist. The inventory makes the premise specific: the laws quantify over completed totalities of cardinality $\aleph_0$ and $2^{\aleph_0}$, and their closures reach $2^{2^{\aleph_0}}$ through the measurable functions.
+
+Structuralism. MTH-14 holds that numbers are positions in structures. The inventory is organized by structures, and the dependency closure is a relation among structures; nothing in the argument requires that numbers have properties beyond their positions.
+
+Fictionalism. MTH-16 holds that fictionalism fails because physics cannot be nominalized. The inventory gives the extent of the failure: the resistant laws are not a few exotic cases but \nResistant{} of \nLaws, in \nResTheories{} of \nTheories{} theories. MTE-05 argues that Mackie's argument from queerness would make mathematics false; the inventory shows what that would cost, namely the falsity of every law that commits to numbers, which is every law but one.
+
+Metaphysics. If, as Proposition~\ref{p:nec} argues under its stated supposition, numbers exist necessarily, then there is no possible world in which nothing at all exists, and the question why there is something rather than nothing concerns the concrete world, as MET-01 takes it to.
+
+\section{Weak holism defended}\label{s:wh}
+
+Principle~\ref{p:wh} carries the epistemic weight of the argument, and it is worth stating precisely why it is weaker than the holism Sober and Maddy attack, and why it is nonetheless enough.
+
+\subsection{A probabilistic form}
+
+Let a credence function $P$ represent the degrees of belief of a rational agent, and let $\mathcal F(T)$ be the set of formulations of a theory $T$ that retain its virtues in the sense of Definition~\ref{d:reform}. Write $T^*$ for the proposition that some member of $\mathcal F(T)$ is true; this is the proposition one accepts in accepting the theory, as opposed to a particular presentation of it.
+
+\begin{proposition}\label{p:prob}
+If $h$ is entailed by every member of $\mathcal F(T)$, then $P(h) \geq P(T^*)$ for every probability function $P$ that respects entailment.
+\end{proposition}
+
+\begin{proof}
+$T^*$ is the disjunction of the members of $\mathcal F(T)$, and each disjunct entails $h$; so $T^*$ entails $h$. A probability function that respects entailment assigns to a proposition at least the probability of anything that entails it.
+\end{proof}
+
+Proposition~\ref{p:prob} is the content of Principle~\ref{p:wh} for degrees of belief: an ineliminable part of a theory, in the sense of Definition~\ref{d:part}, cannot rationally be believed less than the theory. It uses no premise about confirmation. In particular it does not say that evidence for $T$ raises the probability of $h$: if $h$ is the existence of real numbers, and every rival of $T$ entails $h$ too, then no evidence that discriminates among the rivals changes $P(h)$. That is Sober's point, and it is correct. What Proposition~\ref{p:prob} adds is that $P(h)$ is nonetheless bounded below by the probability of the best physical theory. If that probability is high, as Assumption~\ref{a:conf} says it is for mature theories, so is the probability that there are real numbers.
+
+\subsection{What strong holism adds, and why we do not need it}
+
+Strong holism, in the form Quine sometimes gave it, says that the evidence for a theory confirms each of its parts, and that any part may be revised in the light of recalcitrant experience. The first clause is what Sober denies; the second is what Maddy finds unfaithful to practice, since no scientist has proposed to revise arithmetic in response to a failed prediction. Weak holism accepts both criticisms. It does not say that mathematics is confirmed by observation, and it does not say that mathematics is revisable in response to observation. It says only that a rational agent cannot coherently believe the physics and disbelieve the mathematics, which is a constraint of consistency, not a thesis about the flow of evidential support.
+
+The difference matters for the epistemology of mathematics. On strong holism, mathematical knowledge would be empirical in the same way as knowledge of electrons, and the mathematician's proofs would be idle. On weak holism, the indispensability argument supplies a lower bound on the justification of mathematical belief, and the bound is empirical in origin; but it leaves room for the mathematician's own methods to supply more, and for the a priori route of MTH-04-a and EPI-12 to supply an independent justification, as Remark~\ref{r:emp} records.
+
+\subsection{An objection from approximate truth}
+
+It may be objected that the best physical theories are believed to be only approximately true, so that $P(T^*)$ is low, perhaps zero, and Proposition~\ref{p:prob} gives no useful lower bound. The reply is that approximate truth must itself be stated, and its statement inherits the theory's commitments. The proposition that $T$ is approximately true is the proposition that the world is close, in a respect and to a degree the theory specifies, to some model of $T$; and closeness is a relation measured with numbers. Let $T^{\approx}$ be that proposition. Every formulation of $T^{\approx}$ that retains its virtues quantifies over numbers, both because it quantifies over the models of $T$ and because it states the degree of approximation; so Proposition~\ref{p:prob} applies to $T^{\approx}$ in place of $T^*$, and $T^{\approx}$ is what scientific realism, as SCI-02 holds it, says is probable.
+
+\section{The case of the complex numbers}\label{s:complex}
+
+Of the five number systems the argument establishes, the complex numbers are the most contested. They entered mathematics as an algebraic device, were accepted as numbers only in the nineteenth century, and have often been regarded as a convenient way of handling pairs of reals. The inventory records two facts about them that bear on the question.
+
+The first is that their use in classical physics is reducible. In the \nRed{} classical laws that use them (Proposition~\ref{p:inv}(iii) and Appendix~D), from the complex potential of plane flow to the Jones calculus of polarization, the complex numbers can be replaced by pairs of reals with a fixed linear map playing the role of multiplication by $i$, without loss of content or of virtue. The program verifies, for each such law, that the replacement removes $\mathbb C$ from the closure. In classical physics the complex numbers are therefore dispensable in the sense of Definition~\ref{d:indisp}: they make calculations shorter, but they are not part of what the theories say.
+
+The second is that their use in quantum theory is not reducible in the same way. Every law that commits to $\mathbb C$ after admissible reduction has status Q; there are \nMinC{} of them. The question whether quantum theory could be formulated over the reals is old. \citet{Stueckelberg1960} showed that the quantum mechanics of a single system can be formulated on a real Hilbert space equipped with an operator $J$ satisfying $J^2 = -1$ that commutes with all observables; such a theory reproduces the predictions of complex quantum mechanics for that system. The difficulty arises with composite systems. If the state space of a composite system is the tensor product of the state spaces of its components (QM.16), real quantum theory and complex quantum theory make different predictions for certain experiments involving independent sources in a network, and \citet{Renou2021} showed that the difference is large enough to be tested experimentally. A real formulation can be maintained only by abandoning the tensor-product rule for composition, which is a change in what the theory says about composite systems and not a reformulation that retains its virtues.
+
+The result for the argument is that $\mathbb C$ is indispensable to quantum theory in the sense of Definition~\ref{d:indisp}, and that it is so for a reason that is itself empirical. This gives the indispensability of the complex numbers a status that the indispensability of the reals does not have in the same form: there is an experiment that discriminates between the theory that uses them and the best available rival that does not. In the terms of Sober's objection, the complex numbers are open to contrastive confirmation. Proposition~\ref{p:prob} does not need this, but it is a striking fact that the most recently accepted of the five number systems is the one whose indispensability is most directly open to experimental test.
+
+The quaternions provide the contrast. They are a number system in the same sense as the complex numbers, a normed division algebra over the reals, and they were proposed as the natural algebra of physics by their discoverer. Quantum mechanics over the quaternions has been studied. No law of the inventory commits to them, and their uses in physics, chiefly in the representation of rotations, are reducible to the real matrices of $SO(3)$ or the complex matrices of $SU(2)$. The indispensability argument therefore does not establish their existence. That is not evidence that they do not exist (MTH-01-c, Section~2), but it marks the boundary of what the argument, as an argument from physics, establishes.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Sober: no contrastive confirmation]\label{o:sober}
+Confirmation is contrastive: an observation confirms a hypothesis only relative to a rival under which the observation was less probable. Every empirically serious rival in physics uses the same mathematics, so no observation favors the mathematics over anything, and the mathematics is not confirmed \citep{Sober1993}.
+\end{objection}
+
+\begin{reply}
+The objection is correct about strong holism and does not touch Principle~\ref{p:wh}. Weak holism does not claim that observations raise the probability of the mathematics. It claims that the mathematics cannot rationally be believed to a lower degree than the physics of which it is an ineliminable part, and the claim rests on the fact that a proposition is at least as probable as anything that entails it. Sober's observation, that the rivals share the mathematics, is in fact a premise of our argument rather than an objection to it: it is because every serious rival quantifies over the reals that there is no theory, however poorly confirmed, that would allow us to believe the physics and disbelieve in the reals. The inventory makes the observation precise. Across \nTheories{} theories and \nLaws{} laws, the rival formulations recorded (Newtonian, Lagrangian and Hamiltonian mechanics; the vector, tensor and differential-form formulations of electromagnetism) all commit to $\mathbb R$. Sober explains why mathematical belief is not revised in response to failed predictions. He does not supply a reason to withhold it.
+\end{reply}
+
+\begin{objection}[Maddy: idealization and practice]\label{o:maddy}
+Scientists do not believe everything their indispensable theories say. They use continuous models of fluids while believing fluids to be made of molecules, treat infinite domains as idealizations, and accepted atoms only after Perrin, though atomic theory was indispensable before. The parts of a theory that scientists treat as useful idealizations do not carry commitment, and the mathematics is among them \citep{Maddy1992,Maddy1997}.
+\end{objection}
+
+\begin{reply}
+The examples show that some \emph{physical} hypotheses are held as idealizations: that the fluid is continuous, that the plane is frictionless, that the system is infinite. What is treated as an idealization is a claim about the concrete system, and the mathematics is what describes the ideal system with which the actual one is compared. To say that an actual fluid is approximately described by the Navier--Stokes equations (FD.03) is to say that the actual velocities are close, in a specified norm, to the values of a real-valued vector field satisfying the equations; the comparison quantifies over the vector fields and the reals. Practice therefore relocates the commitment; it does not remove it. The Perrin episode is different: there, an alternative formulation without atoms was available and was taken seriously, so atomic theory was not indispensable in the sense of Definition~\ref{d:indisp}. Nothing comparable exists for the reals. The inventory contains no theory with a formulation that does without them, and the only laws without them are the five listed in Proposition~\ref{p:inv}(ii).
+\end{reply}
+
+\begin{objection}[Melia: weaseling]\label{o:melia}
+One can assert a theory and then take back its mathematical commitments, as one may say \enquote{everyone in the room is a spy, except the one I am talking to}. If the weaseled theory is as good as the original, its mathematics is not indispensable in the sense that matters \citep{Melia2000}.
+\end{objection}
+
+\begin{reply}
+The weaseled theory is not a reformulation retaining the virtues of the original. Its content about the concrete world is given only as \enquote{whatever the mathematical theory says about concrete things}, and that content has no specification independent of the mathematics it disclaims. The point is not merely that the weaseler must use mathematical language to state his view; it is that the concrete content he wishes to keep is fixed by the mathematical theory's truth conditions. Consider the canonical distribution SM.03: its concrete content concerns the frequencies with which a system in thermal contact with a reservoir is found in its microstates, and these frequencies are fixed only by the claim that they approximate the values of a function from microstates to reals. A theory that says \enquote{the frequencies are as SM.03 says, but there are no reals} has not dispensed with the reals; it has used them to fix its content and then denied them. A theory whose concrete content can be specified only by reference to abstract objects it denies is parasitic on the theory that affirms them, and parasitism is not the retention of virtues.
+\end{reply}
+
+\begin{objection}[Leng: representation without truth]\label{o:leng}
+The mathematics in physics plays a representational role: it provides a structure that concrete systems approximately instantiate, and represents them by their relation to it. Representation by a fiction does not require the fiction's truth, as a map of an imaginary island can represent the shape of a real coastline. So the mathematics can be indispensable to physics without being true \citep{Leng2010,Yablo2005}.
+\end{objection}
+
+\begin{reply}
+The analogy fails at the point that matters. A map of an imaginary island represents a coastline only if the map exists; the map is a concrete object with a shape. When mathematics represents, what plays the role of the map is a mathematical structure, and the representation consists in a mapping from concrete systems into it, as Field's representation theorems make explicit. If there is no structure, there is no mapping, and nothing that represents. The fictionalist must therefore say that the representation holds in the fiction: that, according to the fiction of mathematics, there is a mapping from the actual system into the reals with such and such properties. This is a claim about what the fiction says, and it is a claim about the concrete world only if the fiction's content about the concrete world can be extracted from it. For theories of status A, the extraction is possible in principle by the representation theorems of Field and of Arntzenius and Dorr, which state the concrete content intrinsically. For theories of status V, P and Q it is not, because the structure into which the system is mapped is a space of possible states, most of which correspond to nothing concrete. The fictionalist then has a content she cannot state, and a representational account of applied mathematics that cannot say what is represented. This is the argument of MTH-16-a, and the inventory shows that its scope is not a single theory: \nResistant{} laws in fourteen theories have resistant status.
+\end{reply}
+
+\begin{objection}[Azzouni: quantifier neutrality]\label{o:azz}
+Existential quantification is ontologically neutral. Scientists quantify over centers of mass, fictional ideal gases and possible states without committing to them; commitment is incurred only by an explicit assertion of existence backed by suitable epistemic access, and mathematical objects lack such access \citep{Azzouni2004}.
+\end{objection}
+
+\begin{reply}
+The examples do not show that quantification is neutral. A center of mass exists, as a point of space determined by the distribution of mass, and the laws that quantify over it (NM.18) are true of it. An ideal gas is an idealization in the sense discussed in the reply to Objection~\ref{o:maddy}: the laws that quantify over it (TD.08) are approximately true of real gases, and the approximation is a relation between the real gas and the values of real-valued functions. And the possible states of statistical mechanics and quantum mechanics are not concrete possibilities but points of mathematical spaces, which is why the laws that quantify over them resist nominalization. The criterion of Principle~\ref{p:reg} thus survives the examples. The further demand, that existence be backed by epistemic access, is the demand Benacerraf made \citep{Benacerraf1973}; MTH-02-a argues that it is met, since mathematical knowledge is acquired by methods whose reliability is explained without causal contact. To deny that the reals exist on the ground that we have no causal access to them is to presuppose the causal requirement MTH-02-a rejects.
+\end{reply}
+
+\begin{objection}[Selection and the effectiveness of mathematics]\label{o:sel}
+Scientists select, from a large stock of mathematical structures, those that fit the phenomena (SCI-17). If the fit of the mathematics in use is explained by selection, its presence in our theories is no evidence that it describes anything, and its indispensability is an artefact of the selection.
+\end{objection}
+
+\begin{reply}
+Selection explains why the mathematics in use fits; it does not explain the mathematics away. As SCI-17-a argues, selection presupposes that mathematical structures can be instantiated by physical systems, and it is compatible with the indispensability of mathematics to physics. The indispensability argument asks a different question: not why this mathematics rather than another, but whether the theories that result from the selection can be believed while the mathematics they contain is disbelieved. Selection from a stock of structures is selection among existing structures; the stock is presupposed, not eliminated, by the explanation. The inventory illustrates the point. Of the six number systems in the register, physics has selected five; the quaternions, which have been available since 1843, are presupposed by no law (Proposition~\ref{p:inv}(iv)). That is selection. But the five selected systems are each carried by laws no nominalization reaches, and the selection does not change that.
+\end{reply}
+
+\begin{objection}[The inventory is selective]\label{o:bias}
+The inventory is a hand-curated table. Its author chose the laws, the structures, the presupposition relation and the status rule, and each choice favors the conclusion: the laws are given in their most mathematical textbook forms, the presupposition relation follows set-theoretic constructions a nominalist rejects, and the rule assigns resistant status liberally. A computation from biased data proves nothing.
+\end{objection}
+
+\begin{reply}
+Each choice can be checked, and each was made, where there was a choice, against the conclusion. The laws are given in the forms of the standard texts cited, and wherever a theory has a formulation with less mathematics the inventory records it too (Newtonian beside Lagrangian and Hamiltonian mechanics; the vector form of Maxwell's equations beside the tensor and differential-form versions; the integral energy balance beside the first law), so that Lemma~\ref{l:commit} is applied to what the formulations share. The presupposition relation affects which structures appear in a closure but not which number systems do, since every standard construction of the reals passes through the rationals and every construction of a complex vector space through the complex numbers. The status rule, as Section~\ref{s:nom} explains, credits the nominalist with every law that meets the conditions of the synthetic methods, including laws, such as EM.09, for which this is doubtful; and the reduction of $\mathbb C$ to $\mathbb R^2$ is applied wherever it is admissible. Finally, the qualitative result is robust under large changes to the counts: the argument needs only that each number system be carried by some resistant law that is part of accepted physics, and the quantum laws alone carry all five (Proposition~\ref{p:inv}(vi)). To overturn that, one would have to nominalize quantum mechanics.
+\end{reply}
+
+\begin{objection}[Overgeneration]\label{o:over}
+If indispensability establishes existence, it establishes too much. Physics uses idealizations that no one believes: infinite systems in the thermodynamic limit, point particles, perfectly rigid bodies. It uses mathematics that is not true of anything physical, such as the infinitely differentiable functions of a theory that is only approximately true. If the argument does not establish the existence of infinitely large systems, it cannot establish the existence of the reals.
+\end{objection}
+
+\begin{reply}
+The objection conflates two things the argument keeps apart: the physical claims of a theory, which may be idealizations, and the mathematical structures used to state them, which are what Lemma~\ref{l:commit} concerns. The thermodynamic limit is not the claim that there is an infinite system; it is the claim that the properties of large finite systems are approximated by the limits of certain sequences of real numbers as the number of particles goes to infinity. The claim is about the sequences and their limits, and it is true. Point particles are a physical idealization; the claim that a body's motion is approximated by that of a point mass is a claim about the distance, in a space of functions, between two trajectories. In each case the idealization is a false physical claim that is approximately true of the world, and its approximate truth is stated with the mathematics, not denied by it. Indispensability therefore establishes the existence of the structures in which approximations are measured, not of the idealized physical systems. This is the point already made in reply to Objection~\ref{o:maddy}, applied generally. Quine drew a different line, admitting the applied mathematics and what is needed to round it out \citep{Quine1986}; MTH-01-c argues that the rounding-out has no principled stopping point, which is a reason to think that the argument establishes less than all that exists, not more.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result does not establish that every mathematical object exists. The argument supports the existence of what is indispensable to physics; MTH-01-c shows that it sets no upper bound, and that the minimalist reading on which nothing else exists is unstable, but the existence of the higher reaches of set theory is not established here. It does not establish that numbers are sui generis objects rather than positions in structures; MTH-14 argues for the latter, and Remark~\ref{r:struct} shows that the two theses are compatible. It does not establish how numbers are known; MTH-02 answers that question. It does not establish the existence of functions, fields, Hilbert spaces or groups as a thesis of MTH-01, though, as Remark~\ref{r:scope} notes, the same argument bears on them.
+
+Nor does the inventory establish that nominalization is impossible. It records the state of the art: which laws known methods reach, and in principle reach, and which they do not. Status A is a concession to the nominalist; status V, P or Q records the absence of a method, which MTH-16-a and Malament's argument explain, but which a future method could remedy. The inventory is also not exhaustive of physics. It contains \nLaws{} laws, chosen as the standard laws of the theories covered, and omits much: quantum chemistry, general relativistic hydrodynamics, string theory, the formal path integral (which is not, for interacting theories in real time, a well-defined mathematical structure and so has no place in a register of structures). The omissions could change the counts but not the qualitative result, since every omitted theory of which we are aware quantifies over real or complex numbers in a state-space or Hilbert-space formulation.
+
+Finally, the result is conditional on Assumption~\ref{a:conf}. A theorist who rejects scientific realism about mature physics will reject the argument at its first step, and the argument offers no independent reply; SCI-02 provides one.
+
+\section{Formalization}\label{s:formal}
+
+The logical skeleton of the argument is formalized in \nolinkurl{Philosophy/MTH/MTH_01.lean} (Lean~4, core library only). The primitives are a type of theories, a type of kinds of entity, and a type of hypotheses; predicates for confirmation relative to rivals, quantification, dispensability, being an ineliminable part, location, causal role and justified belief; and constants for our best physics and for the kinds \enquote{number} and \enquote{real number}. Definition~\ref{d:indisp} is a definition in the module; Principles~\ref{p:wh} and~\ref{p:reg} and Assumptions~\ref{a:conf}--\ref{a:noloc} are axioms. The main theorem formalizes Theorem~\ref{t:main} together with Proposition~\ref{p:abstract}:
+
+\begin{lstlisting}
+theorem numbers_exist_and_abstract :
+    Justified (exists_ numbers) ∧ Justified (abstract_ numbers)
+\end{lstlisting}
+
+The checker reports the following axioms for it (reflowed):
+
+\begin{lstlisting}
+'Philosophy.MTH_01.numbers_exist_and_abstract' depends on axioms:
+[Philosophy.MTH_01.Confirmed, Philosophy.MTH_01.Dispensable,
+ Philosophy.MTH_01.Justified, Philosophy.MTH_01.Kind,
+ Philosophy.MTH_01.Theory, Philosophy.MTH_01.abstract_,
+ Philosophy.MTH_01.abstract_transfer,
+ Philosophy.MTH_01.assumption_confirmation,
+ Philosophy.MTH_01.assumption_indispensability,
+ Philosophy.MTH_01.assumption_nonlocation,
+ Philosophy.MTH_01.exists_, Philosophy.MTH_01.numbers,
+ Philosophy.MTH_01.physics,
+ Philosophy.MTH_01.principle_regimentation,
+ Philosophy.MTH_01.principle_weak_holism,
+ Philosophy.MTH_01.quantifies, Philosophy.MTH_01.reals]
+\end{lstlisting}
+
+The axioms fall into two groups. {\raggedright The primitive types, constants and predicates (\texttt{Theory}, \texttt{Kind}, \texttt{Confirmed}, \texttt{quantifies}, \texttt{Dispensable}, \texttt{Justified}, \texttt{exists\_}, \texttt{abstract\_}, \texttt{physics}, \texttt{numbers}, \texttt{reals}) carry no content; \texttt{reals} appears because Assumption~\ref{a:indisp} is stated as one axiom covering numbers and reals.\par} The philosophical premises are the following.
+\begin{itemize}
+\item \texttt{principle\_weak\_holism}: Principle~\ref{p:wh}.
+\item \texttt{principle\_regimentation}: Principle~\ref{p:reg}.
+\item \texttt{assumption\_confirmation}: Assumption~\ref{a:conf}.
+\item \texttt{assumption\_indispensability}: Assumption~\ref{a:indisp}.
+\item \texttt{assumption\_nonlocation}: Assumption~\ref{a:noloc}.
+\item \texttt{abstract\_transfer}: the step of the proof of Proposition~\ref{p:abstract} from indispensability and non-location to justified belief in abstractness.
+\end{itemize}
+The module also proves Lemma~\ref{l:commit} and Corollary~\ref{c:reals} (for the existence of the reals; the cardinality is Cantor's theorem, which is not formalized), and Proposition~\ref{p:expl}. For the latter the checker reports the axioms \texttt{Justified}, \texttt{exists\_}, \texttt{naturals}, \texttt{cicada}, \texttt{ibe}, \texttt{baker\_best} and \texttt{baker\_essential}: inference to the best explanation and Baker's two premises, and neither weak holism nor any assumption about physics. The explanatory route is therefore independent of Principle~\ref{p:wh} in the formal sense.
+
+The module also verifies a fragment of the computation of Appendix~E by \texttt{decide} (theorems \texttt{l2\_numbers}, \texttt{lebesgue\_via\_l2} and \texttt{op\_closure}, which depend on no axioms): for the sixteen structures of the chain from $\mathbb N$ to $L^2$, with the presupposition relation of Appendix~B, it computes the closures and proves that the number systems presupposed by $L^2$ are exactly $\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$ and $\mathbb C$, that the Lebesgue $\sigma$-algebra lies in the closure of $L^2$ but not of the abstract Hilbert space or of its operators, and that the closure of the operators is the stated set of twelve structures. These are the facts on which Remark~\ref{r:scope} and Proposition~\ref{p:inv}(vii) rest for that fragment.
+
+\section{Conclusion}\label{s:concl}
+
+Numbers exist and are abstract objects. The indispensability argument establishes their existence: our best physical theories, confirmed against their rivals, quantify ineliminably over the natural, integer, rational, real and complex numbers, and by weak holism the justification of the theories extends to that quantification. The inventory of \nLaws{} laws shows the premise to be no slogan: the commitment to $\mathbb N$ and $\mathbb R$ is all but universal, the commitment to $\mathbb C$ is irreducible exactly where quantum theory is used, and the laws no known nominalization reaches carry every one of the five systems. The explanatory version of the argument reaches the same conclusion without holism. There are therefore at least $2^{\aleph_0}$ numbers, and the completed infinite totalities in which physics locates them exist.
+
+\appendix
+
+\section{The inventory of laws}\label{app:a}
+
+\paragraph{What is listed.} Appendix~A lists the \nLaws{} laws of the inventory, grouped by theory, in the order of the generator's table. Each entry gives an identifier (theory code and serial number), the law's name and a standard reference; the law in standard form; the variables it binds, with their sorts, which is its regimented quantifier prefix; the structures it quantifies over directly and those its closure adds; the cardinality of its domain (the largest carrier among the structures quantified over directly) and of its closure; its numbers; and its status (Definition~\ref{d:status}), with a gloss and the sources on which the status rests. Remarks record the reduction $\mathbb C \to \mathbb R^2$ where admissible, the laws from which a law is standardly derived, and notes on particular entries.
+
+\paragraph{Encoding and sources.} Structure codes are those of Appendix~B. Cardinalities are written fin, $\aleph_0$, $\mathfrak c = 2^{\aleph_0}$ and $2^{\mathfrak c}$. The status sources are abbreviated: F80 \citep{Field1980}; Robb \citep{Robb1914}; AD12 \citep{ArntzeniusDorr2012}; M82 \citep{Malament1982}; B96 \citep{Balaguer1996}, a proposal for quantum mechanics; Bu03 \citep{Bueno2003}, its criticism. Status Q for quantum laws also rests on MTH-16-a. The references for the laws are standard texts: \citet{GoldsteinPooleSafko2002} and \citet{Arnold1989} for mechanics, \citet{Gurtin1981} for continuum mechanics, \citet{LandauLifshitz1987} for fluids, \citet{Callen1985} for thermodynamics, \citet{Huang1987} and \citet{Reif1965} for statistical mechanics, \citet{Jackson1999} for electromagnetism and special relativity, \citet{Chen1984} for plasmas, \citet{BornWolf1999} for optics, \citet{Wald1984} and \citet{MisnerThorneWheeler1973} for general relativity, \citet{SakuraiNapolitano2011}, \citet{vonNeumann1932} and \citet{ReedSimon1980} for quantum mechanics, \citet{Krane1988} for nuclear physics, \citet{AshcroftMermin1976} for condensed matter, and \citet{PeskinSchroeder1995}, \citet{Weinberg1995} and \citet{StreaterWightman1964} for quantum field theory; individual theorems are referred to their original papers \citep{CHSH1969,Cirelson1980,Gleason1957,KochenSpecker1967,WoottersZurek1982}.
+
+\paragraph{How each entry is checked.} Equations and attributions were included only where they are standard and the form is certain; sign conventions are stated where they vary, and numerical constants appear only where exact (as $\frac{12\pi^4}{5}$ in SM.22, $\zeta(3/2)$ in SM.24, or $j_{1,1}/\pi$ in OP.10, where the familiar $1.22$ is its rounding). The computed fields are produced by the program from the structure register; the program asserts that every structure code exists, that the presupposition graph is acyclic, that every derivation source exists, that each reduction removes $\mathbb C$ from the closure, and the claims of Proposition~\ref{p:inv}.
+
+\paragraph{Summary.} Of \nLaws{} laws, \nNominalized{} are nominalized (status O \nStatO, S \nStatS, F \nStatF, K \nStatK), \nStatA{} have status A, and \nResistant{} are resistant (V \nStatV, P \nStatP, Q \nStatQ). \nDerived{} laws are recorded as derived from others. The nominalized laws are \listNominalized. Every law with mathematical structure commits to $\mathbb N$; \nNumR{} commit to $\mathbb R$; \nNumC{} to $\mathbb C$, \nMinC{} after reduction, all of status Q; none to $\mathbb H$. The main theorem's indispensability premise is borne out in every theory except NM and CM, whose laws are all of status S, F or A.
+
+\input{gen/tab_a.tex}
+
+\section{The structure register}\label{app:b}
+
+\paragraph{What is listed.} The \nStructures{} structures, with a gloss, the cardinality of the standard carrier, the structures each directly presupposes, its closure under presupposition (computed by depth-first search; the program asserts the graph acyclic), the number systems and the largest cardinality in that closure, and the laws that use it directly. The presupposition relation follows the standard constructions: $\mathbb Z$ from $\mathbb N$, $\mathbb Q$ from $\mathbb Z$, $\mathbb R$ from $\mathbb Q$ by Cauchy sequences, $\mathbb C$ from $\mathbb R$; Hilbert spaces from complex scalars, sequences (for completeness) and topology; $L^2$ from the measurable functions and the Lebesgue $\sigma$-algebra, whose carrier, containing every subset of a null set such as the Cantor set, has cardinality $2^{\mathfrak c}$. Where a structure admits more than one construction, the register uses the one standard in the physics texts cited; a different choice would change some chains in Appendix~E but none of the number systems in any closure, since every construction of the reals passes through the rationals.
+
+\paragraph{Summary.} The quaternions are the only number system no law uses. The largest closures are those of Fourier analysis (twenty structures) and of the operator-valued distributions (eighteen), which contain every number system used; the former also contains the Lebesgue $\sigma$-algebra.
+
+\input{gen/tab_b.tex}
+
+\section{Cross-tabulations}\label{app:c}
+
+\paragraph{What is tabulated.} Table C1 counts statuses by theory; C2 counts the laws committing to each number system, before and after the admissible reduction; C3 counts domain and closure cardinalities; C4 states, for each theory as a whole, its number commitments and whether it is nominalized, nominalizable in principle, or resistant; C5 gives the incidence of structures in theories; C6 the closure matrix of structures against number systems. All figures are computed from the tables of Appendices~A and~B.
+
+\paragraph{Summary.} Table C1 shows the concentration of resistant laws in the theories built on state spaces and Hilbert spaces (LM, HM, SM, QM, QF) and their presence, in smaller numbers, in nearly all others. Table C2 shows that $\mathbb C$ is reduced away in classical fluid dynamics, electromagnetism and optics and remains in quantum mechanics, atomic physics, condensed matter and quantum field theory. Table C4 shows that only Newtonian mechanics and the continuum mechanics of solids are nominalizable in principle as wholes.
+
+\input{gen/tab_c.tex}
+
+\section{Number systems: lists and derivations}\label{app:d}
+
+\paragraph{What is listed.} For each number system, the laws that commit to it, by theory; where the committing laws are the majority of a theory, the table lists the laws that do not, so that each row is the shorter of the two lists. Then the routes by which each law committing to $\mathbb C$ reaches it, with its status and the admissibility of the reduction; and, for each law derived from others, the relation between its numbers and those of its sources.
+
+\paragraph{Summary.} The derivation table shows that derivation preserves commitment. Derived laws are often stated with fewer structures than their sources (Kepler's third law, NM.12, quantifies only over $\mathbb R$, while its sources use Euclidean space), but their numbers are those of the sources. Exactly one derived law commits to a number system its sources do not: the Helmholtz equation OP.12, whose complex amplitude introduces $\mathbb C$ into a law derived from the real wave equation EM.10, and there the reduction $\mathbb C\to\mathbb R^2$ removes it again. The program asserts this.
+
+\input{gen/tab_d.tex}
+
+\section{Presupposition chains}\label{app:e}
+
+\paragraph{What is listed.} For each law, the \emph{top} structures it quantifies over (those not presupposed by another structure it quantifies over directly), the longest presupposition chain from one of them down to $\mathbb N$, the chain's length (the law's \emph{depth}), and the size of the law's closure. The longest chain is computed by memoized recursion on the acyclic graph, with ties broken deterministically.
+
+\paragraph{Summary.} The depths are distributed as follows: \depthDist. The maximum depth, \depthMax, is attained by laws of Hamiltonian mechanics, general relativity, quantum mechanics and gauge theory: \depthMaxLaws. Every chain ends in $\mathbb N$ and passes through $\mathbb R$ wherever the law commits to it, which is the computational form of the observation that the mathematics of physics is built on the reals and they on the natural numbers.
+
+\input{gen/tab_e.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Arnold(1989)]{Arnold1989} Arnold, V.~I. (1989). \emph{Mathematical Methods of Classical Mechanics}. 2nd ed. Springer.
+\bibitem[Arntzenius and Dorr(2012)]{ArntzeniusDorr2012} Arntzenius, F. and Dorr, C. (2012). Calculus as geometry. In F. Arntzenius, \emph{Space, Time, and Stuff}, Oxford University Press.
+\bibitem[Ashcroft and Mermin(1976)]{AshcroftMermin1976} Ashcroft, N.~W. and Mermin, N.~D. (1976). \emph{Solid State Physics}. Holt, Rinehart and Winston.
+\bibitem[Azzouni(2004)]{Azzouni2004} Azzouni, J. (2004). \emph{Deflating Existential Consequence: A Case for Nominalism}. Oxford University Press.
+\bibitem[Baker(2005)]{Baker2005} Baker, A. (2005). Are there genuine mathematical explanations of physical phenomena? \emph{Mind}, 114(454), 223--238.
+\bibitem[Baker(2009)]{Baker2009} Baker, A. (2009). Mathematical explanation in science. \emph{The British Journal for the Philosophy of Science}, 60(3), 611--633.
+\bibitem[Balaguer(1996)]{Balaguer1996} Balaguer, M. (1996). Towards a nominalization of quantum mechanics. \emph{Mind}, 105(418), 209--226.
+\bibitem[Balaguer(1998)]{Balaguer1998} Balaguer, M. (1998). \emph{Platonism and Anti-Platonism in Mathematics}. Oxford University Press.
+\bibitem[Bangu(2008)]{Bangu2008} Bangu, S. (2008). Inference to the best explanation and mathematical realism. \emph{Synthese}, 160(1), 13--20.
+\bibitem[Baron et~al.(2017)]{Baron2017} Baron, S., Colyvan, M. and Ripley, D. (2017). How mathematics can make a difference. \emph{Philosophers' Imprint}, 17(3).
+\bibitem[Benacerraf(1973)]{Benacerraf1973} Benacerraf, P. (1973). Mathematical truth. \emph{The Journal of Philosophy}, 70(19), 661--679.
+\bibitem[Born and Wolf(1999)]{BornWolf1999} Born, M. and Wolf, E. (1999). \emph{Principles of Optics}. 7th ed. Cambridge University Press.
+\bibitem[Bueno(2003)]{Bueno2003} Bueno, O. (2003). Is it possible to nominalize quantum mechanics? \emph{Philosophy of Science}, 70(5), 1424--1436.
+\bibitem[Burgess and Rosen(1997)]{BurgessRosen1997} Burgess, J.~P. and Rosen, G. (1997). \emph{A Subject with No Object: Strategies for Nominalistic Interpretation of Mathematics}. Oxford University Press.
+\bibitem[Callen(1985)]{Callen1985} Callen, H.~B. (1985). \emph{Thermodynamics and an Introduction to Thermostatistics}. 2nd ed. Wiley.
+\bibitem[Cantor(1874)]{Cantor1874} Cantor, G. (1874). Ueber eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen. \emph{Journal f\"ur die reine und angewandte Mathematik}, 77, 258--262.
+\bibitem[Chen(1984)]{Chen1984} Chen, F.~F. (1984). \emph{Introduction to Plasma Physics and Controlled Fusion}. 2nd ed. Plenum.
+\bibitem[Cirel'son(1980)]{Cirelson1980} Cirel'son, B.~S. (1980). Quantum generalizations of Bell's inequality. \emph{Letters in Mathematical Physics}, 4(2), 93--100.
+\bibitem[Clauser et~al.(1969)]{CHSH1969} Clauser, J.~F., Horne, M.~A., Shimony, A. and Holt, R.~A. (1969). Proposed experiment to test local hidden-variable theories. \emph{Physical Review Letters}, 23(15), 880--884.
+\bibitem[Colyvan(2001)]{Colyvan2001} Colyvan, M. (2001). \emph{The Indispensability of Mathematics}. Oxford University Press.
+\bibitem[Colyvan(2010)]{Colyvan2010} Colyvan, M. (2010). There is no easy road to nominalism. \emph{Mind}, 119(474), 285--306.
+\bibitem[Dummett(1973)]{Dummett1973} Dummett, M. (1973). \emph{Frege: Philosophy of Language}. Duckworth.
+\bibitem[Field(1980)]{Field1980} Field, H. (1980). \emph{Science Without Numbers: A Defence of Nominalism}. Blackwell.
+\bibitem[Frege(1884)]{Frege1884} Frege, G. (1884). \emph{Die Grundlagen der Arithmetik}. Koebner.
+\bibitem[Gleason(1957)]{Gleason1957} Gleason, A.~M. (1957). Measures on the closed subspaces of a Hilbert space. \emph{Journal of Mathematics and Mechanics}, 6(6), 885--893.
+\bibitem[Goldstein et~al.(2002)]{GoldsteinPooleSafko2002} Goldstein, H., Poole, C. and Safko, J. (2002). \emph{Classical Mechanics}. 3rd ed. Addison-Wesley.
+\bibitem[Gurtin(1981)]{Gurtin1981} Gurtin, M.~E. (1981). \emph{An Introduction to Continuum Mechanics}. Academic Press.
+\bibitem[Hale(1987)]{Hale1987} Hale, B. (1987). \emph{Abstract Objects}. Blackwell.
+\bibitem[Hale and Wright(2001)]{HaleWright2001} Hale, B. and Wright, C. (2001). \emph{The Reason's Proper Study: Essays towards a Neo-Fregean Philosophy of Mathematics}. Oxford University Press.
+\bibitem[Hellman(1989)]{Hellman1989} Hellman, G. (1989). \emph{Mathematics without Numbers: Towards a Modal-Structural Interpretation}. Oxford University Press.
+\bibitem[Hilbert(1899)]{Hilbert1899} Hilbert, D. (1899). \emph{Grundlagen der Geometrie}. Teubner.
+\bibitem[Huang(1987)]{Huang1987} Huang, K. (1987). \emph{Statistical Mechanics}. 2nd ed. Wiley.
+\bibitem[Jackson(1999)]{Jackson1999} Jackson, J.~D. (1999). \emph{Classical Electrodynamics}. 3rd ed. Wiley.
+\bibitem[Kochen and Specker(1967)]{KochenSpecker1967} Kochen, S. and Specker, E.~P. (1967). The problem of hidden variables in quantum mechanics. \emph{Journal of Mathematics and Mechanics}, 17(1), 59--87.
+\bibitem[Krantz et~al.(1971)]{KrantzEtAl1971} Krantz, D.~H., Luce, R.~D., Suppes, P. and Tversky, A. (1971). \emph{Foundations of Measurement}, vol.~1. Academic Press.
+\bibitem[Krane(1988)]{Krane1988} Krane, K.~S. (1988). \emph{Introductory Nuclear Physics}. Wiley.
+\bibitem[Landau and Lifshitz(1987)]{LandauLifshitz1987} Landau, L.~D. and Lifshitz, E.~M. (1987). \emph{Fluid Mechanics}. 2nd ed. Pergamon.
+\bibitem[Lange(2013)]{Lange2013} Lange, M. (2013). What makes a scientific explanation distinctively mathematical? \emph{The British Journal for the Philosophy of Science}, 64(3), 485--511.
+\bibitem[Leng(2010)]{Leng2010} Leng, M. (2010). \emph{Mathematics and Reality}. Oxford University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Lyon and Colyvan(2008)]{Lyon2008} Lyon, A. and Colyvan, M. (2008). The explanatory power of phase spaces. \emph{Philosophia Mathematica}, 16(2), 227--243.
+\bibitem[Maddy(1992)]{Maddy1992} Maddy, P. (1992). Indispensability and practice. \emph{The Journal of Philosophy}, 89(6), 275--289.
+\bibitem[Maddy(1997)]{Maddy1997} Maddy, P. (1997). \emph{Naturalism in Mathematics}. Oxford University Press.
+\bibitem[Malament(1982)]{Malament1982} Malament, D. (1982). Review of Hartry Field, \emph{Science Without Numbers}. \emph{The Journal of Philosophy}, 79(9), 523--534.
+\bibitem[Melia(2000)]{Melia2000} Melia, J. (2000). Weaseling away the indispensability argument. \emph{Mind}, 109(435), 455--479.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}. John W. Parker.
+\bibitem[Misner et~al.(1973)]{MisnerThorneWheeler1973} Misner, C.~W., Thorne, K.~S. and Wheeler, J.~A. (1973). \emph{Gravitation}. Freeman.
+\bibitem[Peskin and Schroeder(1995)]{PeskinSchroeder1995} Peskin, M.~E. and Schroeder, D.~V. (1995). \emph{An Introduction to Quantum Field Theory}. Addison-Wesley.
+\bibitem[Pincock(2012)]{Pincock2012} Pincock, C. (2012). \emph{Mathematics and Scientific Representation}. Oxford University Press.
+\bibitem[Putnam(1971)]{Putnam1971} Putnam, H. (1971). \emph{Philosophy of Logic}. Harper and Row.
+\bibitem[Putnam(1975)]{Putnam1975} Putnam, H. (1975). What is mathematical truth? In \emph{Mathematics, Matter and Method: Philosophical Papers}, vol.~1, 60--78. Cambridge University Press.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Quine(1951)]{Quine1951} Quine, W.~V. (1951). Two dogmas of empiricism. \emph{The Philosophical Review}, 60(1), 20--43.
+\bibitem[Quine(1960)]{Quine1960} Quine, W.~V. (1960). \emph{Word and Object}. MIT Press.
+\bibitem[Quine(1981)]{Quine1981} Quine, W.~V. (1981). Success and limits of mathematization. In \emph{Theories and Things}, 148--155. Harvard University Press.
+\bibitem[Quine(1986)]{Quine1986} Quine, W.~V. (1986). Reply to Charles Parsons. In L.~E. Hahn and P.~A. Schilpp (eds.), \emph{The Philosophy of W.~V. Quine}, 396--403. Open Court.
+\bibitem[Reed and Simon(1980)]{ReedSimon1980} Reed, M. and Simon, B. (1980). \emph{Methods of Modern Mathematical Physics I: Functional Analysis}. Revised ed. Academic Press.
+\bibitem[Reif(1965)]{Reif1965} Reif, F. (1965). \emph{Fundamentals of Statistical and Thermal Physics}. McGraw-Hill.
+\bibitem[Renou et~al.(2021)]{Renou2021} Renou, M.-O., Trillo, D., Weilenmann, M., et~al. (2021). Quantum theory based on real numbers can be experimentally falsified. \emph{Nature}, 600, 625--629.
+\bibitem[Robb(1914)]{Robb1914} Robb, A.~A. (1914). \emph{A Theory of Time and Space}. Cambridge University Press.
+\bibitem[Saatsi(2011)]{Saatsi2011} Saatsi, J. (2011). The enhanced indispensability argument: representational versus explanatory role of mathematics in science. \emph{The British Journal for the Philosophy of Science}, 62(1), 143--154.
+\bibitem[Sakurai and Napolitano(2011)]{SakuraiNapolitano2011} Sakurai, J.~J. and Napolitano, J. (2011). \emph{Modern Quantum Mechanics}. 2nd ed. Addison-Wesley.
+\bibitem[Shapiro(1983)]{Shapiro1983} Shapiro, S. (1983). Conservativeness and incompleteness. \emph{The Journal of Philosophy}, 80(9), 521--531.
+\bibitem[Sober(1993)]{Sober1993} Sober, E. (1993). Mathematics and indispensability. \emph{The Philosophical Review}, 102(1), 35--57.
+\bibitem[Streater and Wightman(1964)]{StreaterWightman1964} Streater, R.~F. and Wightman, A.~S. (1964). \emph{PCT, Spin and Statistics, and All That}. Benjamin.
+\bibitem[Steiner(1998)]{Steiner1998} Steiner, M. (1998). \emph{The Applicability of Mathematics as a Philosophical Problem}. Harvard University Press.
+\bibitem[Stueckelberg(1960)]{Stueckelberg1960} Stueckelberg, E.~C.~G. (1960). Quantum theory in real Hilbert space. \emph{Helvetica Physica Acta}, 33, 727--752.
+\bibitem[von Neumann(1932)]{vonNeumann1932} von Neumann, J. (1932). \emph{Mathematische Grundlagen der Quantenmechanik}. Springer.
+\bibitem[Wald(1984)]{Wald1984} Wald, R.~M. (1984). \emph{General Relativity}. University of Chicago Press.
+\bibitem[Weinberg(1995)]{Weinberg1995} Weinberg, S. (1995). \emph{The Quantum Theory of Fields}, vol.~1. Cambridge University Press.
+\bibitem[Wigner(1960)]{Wigner1960} Wigner, E.~P. (1960). The unreasonable effectiveness of mathematics in the natural sciences. \emph{Communications on Pure and Applied Mathematics}, 13(1), 1--14.
+\bibitem[Wootters and Zurek(1982)]{WoottersZurek1982} Wootters, W.~K. and Zurek, W.~H. (1982). A single quantum cannot be cloned. \emph{Nature}, 299, 802--803.
+\bibitem[Yablo(2005)]{Yablo2005} Yablo, S. (2005). The myth of the seven. In M.~E. Kalderon (ed.), \emph{Fictionalism in Metaphysics}, Clarendon Press.
+\end{thebibliography}
+
+\end{document}

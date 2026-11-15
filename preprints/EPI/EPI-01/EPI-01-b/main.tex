@@ -1,0 +1,490 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{needspace}
+
+\title{A Classification of Gettier Cases}
+\msid{EPI-01-b}
+\msfamily{EPI-01}
+\msdiscipline{Epistemology}
+\mstype{Companion manuscript}
+\mskeywords{Gettier problem; safety; epistemic luck; veritic luck; false lemmas; fake barns; lotteries; testimony; case models}
+
+\input{gen/stats.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EPI-01-a analyses knowledge as safe, justified belief and proves that a justified true belief fails to be knowledge exactly when it is unsafe, that is, exactly when it is a Gettier case. The cases from which the post-Gettier literature was built are, however, of visibly different kinds: some turn on a false lemma and some do not, some on a deceptive environment and some on a fact that intervenes between the evidence and the truth, some on time, chance, testimony or the limits of discrimination. We give a typology of these cases by the source of their luck, prove for each class a theorem connecting it to safety, and show that the classes partition the unsafe justified true beliefs. The typology is then applied to a catalogue of \stnlit{} cases from the literature and \stnschem{} schematic cases, each encoded as a finite case model, and to \stnvariants{} systematic variants obtained by changing one feature of a case. A program computes, for each of the \stnmodels{} models, whether the belief is justified, true, safe and known, and its class; it checks every theorem on every model. Every case the literature presents as a Gettier case is computed to be a justified true unsafe belief. The six cases in which the computed verdict departs from the source's are listed and discussed; each is one on which the literature is itself divided or whose verdict depends on how its basis is individuated.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The problem}
+
+\citet{Gettier1963} gave two cases in which a subject has a justified true belief that is not knowledge. In the six decades since, the cases have multiplied, and so have the diagnoses. The first diagnosis was that Gettier's subjects reason from a false belief, and that knowledge requires that one's justification not depend on a falsehood \citep{Clark1963,Harman1973}. Fake barns \citep{Goldman1976} involve no inference at all; the stopped clock of \citet{Russell1948}, which predates Gettier, involves a false background belief but no premise; lotteries involve neither; and \citet{Feldman1974} showed that the inference in Gettier's cases can be rerouted through true intermediate beliefs without restoring knowledge. A second family of diagnoses appealed to defeat \citep{LehrerPaxson1969}, a third to causation \citep{Goldman1967}, a fourth to sensitivity \citep{Nozick1981}. Each fitted a subset of the cases. The impression this history leaves, and which \citet{Shope1983} documented, is that \enquote{Gettier case} names a heterogeneous family whose members share nothing beyond the fact that they defeat the tripartite analysis.
+
+EPI-01 holds the opposite: knowledge is safe, justified true belief, and Gettier cases are exactly those in which a justified true belief is unsafe. EPI-01-a states the analysis and proves the characterization (its Theorem~3.3 and Corollary~3.4), and EPI-01-c reaches the same biconditional from knowledge-first premises. EPI-01-d shows, for Gettier's own two cases, that the false lemma is incidental: what makes them failures of knowledge is that the subject's basis could easily have produced the same belief while it was false. The principal manuscript checks seven standard cases in prose. A thesis of the form \enquote{exactly those} invites a more systematic test. If the Gettier cases are a single phenomenon, their visible differences must be differences in how a belief comes to be unsafe, and a classification by source of luck should be a classification of the ways in which safety fails. If they are not, there should be a class of cases, recognized in the literature, which the classification cannot place.
+
+This manuscript carries out the test. We give a typology of Gettier cases by the source of the luck that makes the belief true; we prove, for each class, a theorem stating how its members fail to be safe and what feature of the case would restore safety; and we show that the classes partition the unsafe justified true beliefs. We then encode the cases of the literature, together with systematically generated variants, as finite case models, and compute every verdict.
+
+\subsection{The typologies in the literature}
+
+Classifications of epistemic luck are older than the safety analysis. \citet{Unger1968} proposed that knowledge excludes its being an accident that the subject is right. \citet{Pritchard2005} distinguished veritic luck, the luck that a belief is true given its basis, from evidential luck, the luck that one has the basis at all, and from content and capacity luck, and argued that only veritic luck is incompatible with knowledge; he later distinguished, within veritic luck, intervening luck, in which something comes between the subject's basis and the fact (Chisholm's sheep), from environmental luck, in which the basis connects with the fact in the normal way but the environment makes error easy (fake barns) \citep{Pritchard2012}. Reflective luck, the luck that, from the subject's own point of view, her belief is true, was separated from veritic luck by \citet{Pritchard2005} and corresponds to the distinction \citet{Sosa2007} draws between animal and reflective knowledge. \citet{Zagzebski1994} showed how to manufacture Gettier cases: take a justified false belief and add a stroke of good luck that makes it true without touching the basis.
+
+These distinctions are sound, and we use them. What they leave open is the connection that EPI-01 asserts: that every kind of luck which defeats knowledge is a way in which safety fails, and that every way in which safety fails is a kind of luck which defeats knowledge. We supply that connection, kind by kind.
+
+\subsection{Plan}
+
+Section~\ref{s:frame} defines case models and recalls the analysis. Section~\ref{s:typ} gives the typology. Section~\ref{s:thm} proves the theorems connecting each class to safety and the partition theorem. Section~\ref{s:cat} describes the catalogue and the mechanical check and discusses particular entries. Section~\ref{s:obj} answers objections, and Section~\ref{s:not} records what the classification does not establish. Appendices~A to~E contain the computed material: the catalogue of cases with their models and verdicts, the systematic variants, the safety profiles and rival verdicts of every model, the incidence tables of the typology, and an exhaustive check of the theorems on all case models up to a bound.
+
+\section{Case models}\label{s:frame}
+
+\subsection{Definitions}
+
+EPI-01-a works with possible worlds, a closeness relation subject only to centring (its Assumption~2.1), bases, and a primitive notion of justification. To compute verdicts we need finite representations of cases. We use the following.
+
+\begin{definition}[Case model]\label{d:model}
+A \emph{case model} consists of a subject $S$, a proposition $p$, a basis $m$, a justification value $J \in \{0,1\}$, and a finite set of worlds containing an actual world $w_0$. Each world $v$ carries a distance $d(v) \in \{0,1,2,3,4\}$, with $d(v) = 0$ exactly when $v = w_0$; a belief value $B(v)$, which is $1$ when $S$ believes $p$ on basis $m$ at $v$; a truth value $p(v)$; and a tag recording what differs between $v$ and $w_0$. Optionally a world carries the truth value of a weaker proposition $q$ entailed by $p$, and a value $\mathrm{alt}(v) = 0$ when, at $v$, $S$ believes on basis $m$ some other proposition, which is false there. The model also carries a threshold $\theta \geq 0$, fixed by the context of the case, and descriptive features: the route of the basis, the false lemma it relies on if any, whether the fact that makes $p$ true is causally connected to the basis in the normal way, whether there is a defeater, and whether the subject has reflective access to the reliability of her basis. In every model $B(w_0) = 1$.
+\end{definition}
+
+\begin{definition}[Closeness in a model]\label{d:close}
+In a model with threshold $\theta$, $v$ is close to $w_0$ when $d(v) \leq \theta$.
+\end{definition}
+
+Since $d(w_0) = 0$, Definition~\ref{d:close} satisfies centring for every $\theta$. Distances are ordinal: $1$ marks what could very easily have happened given the case as described, $2$ what could easily have happened, $3$ what could have happened only with some change in the circumstances, and $4$ what is remote. The default threshold is $2$. Raising $\theta$ makes more worlds close, which is the model counterpart of the contextualist thesis of EPI-13 that attending to a possibility makes it close; the bank cases (BKL, BKH) are encoded this way.
+
+\begin{definition}[Safety, knowledge and Gettier cases in a model]\label{d:safe}
+The belief is \emph{locally safe} at $\theta$ when $p(v) = 1$ for every close $v$ with $B(v) = 1$; this is Definition~2.2 of EPI-01-a. It is \emph{basis-wide safe} when, in addition, $\mathrm{alt}(v) \neq 0$ for every close $v$; this is the amendment for necessary truths which EPI-01-a accepts in reply to its third objection. The subject \emph{knows} when $J = 1$ and the belief is basis-wide safe (Definition~2.3 of EPI-01-a with the amendment). The model is a \emph{Gettier case} when $J = 1$, $p(w_0) = 1$, and the belief is not basis-wide safe (Definition~2.4 of EPI-01-a with the same amendment).
+\end{definition}
+
+The amendment changes nothing for contingent propositions in the catalogue: the value $\mathrm{alt}$ is encoded only in the two schematic cases about arithmetic, SNC and SNS, and in all other models local and basis-wide safety coincide.
+
+\begin{definition}[Error distance]\label{d:delta}
+The \emph{error distance} $\delta$ of a model is the least $d(v)$ over the worlds $v$ at which $B(v) = 1$ and $p(v) = 0$, or $\mathrm{alt}(v) = 0$; it is $\infty$ if there is no such world.
+\end{definition}
+
+\begin{lemma}\label{l:delta}
+A belief in a case model is basis-wide safe at $\theta$ if and only if $\delta > \theta$. In particular, a model with a justified true belief is a Gettier case if and only if $\delta \leq \theta$.
+\end{lemma}
+
+\begin{proof}
+The belief fails to be basis-wide safe exactly when some close world is an error world, that is, when some error world has distance at most $\theta$, which is to say that the least such distance is at most $\theta$. The second claim follows by Definition~\ref{d:safe}.
+\end{proof}
+
+Lemma~\ref{l:delta} reduces every verdict to a single number. Its corollary, which the computations make vivid, is that knowledge comes in a profile: as $\theta$ ranges over $0, \ldots, 4$, a belief is safe at every threshold below $\delta$ and unsafe at every threshold from $\delta$ on. Appendix~C prints this profile for every model as a string of five letters, \texttt{S} for safe and \texttt{u} for unsafe.
+
+\begin{assumption}[Faithful encoding]\label{a:faithful}
+For each case of the catalogue, the encoded model contains, at the stated distances, the variations of the actual situation which the case description presents as easy (or not easy), with the belief and truth values that the description fixes for them; and the justification value is the one the source assigns.
+\end{assumption}
+
+Assumption~\ref{a:faithful} is where the philosophical judgment enters, and we return to it in Section~\ref{s:obj}. It does not assume the analysis: the encodings record what could easily have happened and whether the subject would then have believed truly, which is what the case descriptions say, and the source's verdict on knowledge is recorded separately and compared with the computed one.
+
+\subsection{Kinds of luck}
+
+\begin{definition}[Luck]\label{d:luck}
+In a model with $J = 1$ and $p(w_0) = 1$:
+\begin{enumerate}[label=(\alph*)]
+\item the belief is \emph{veritically lucky} if there is a close error world;
+\item it is \emph{evidentially lucky} if there is a close world at which the subject lacks the basis (tag \texttt{basis});
+\item it is \emph{reflectively lucky} if the subject has no reflective access to the reliability of her basis;
+\item it is \emph{content-lucky} if the truth of $p$ is itself a matter of chance, the basis bearing on the outcome after the fact.
+\end{enumerate}
+\end{definition}
+
+These are the distinctions of \citet{Pritchard2005}, restated for finite models. Clause~(a) is the luck the Gettier literature is about; clauses (b) to (d) are the kinds which, on Pritchard's view and on the analysis of EPI-01-a (its section on the taxonomy of luck), are compatible with knowledge.
+
+\section{The typology}\label{s:typ}
+
+A Gettier case is unsafe because of some close error world. The typology classifies Gettier cases by what differs in the nearest error worlds, that is, by the tag of the worlds at distance $\delta$, and, among cases in which the truth-maker varies, by the route of the basis. The tags are as follows. \texttt{tm}: the fact that makes $p$ true is absent or different, while the basis is held fixed. \texttt{env}: a look-alike, a trick or a faulty device presents the subject with the same appearance. \texttt{time}: the moment at which the subject consults her source differs. \texttt{draw}: the outcome of a chance process differs. \texttt{marg}: a magnitude differs by less than the subject can discriminate. \texttt{src}: the testimonial source differs or is insincere. Two further tags mark worlds that are not error worlds: \texttt{basis}, where the subject lacks the basis, and \texttt{def}, where she meets a defeater and suspends judgment; \texttt{ok} marks a variation in which the belief remains true.
+
+\begin{definition}[Gettier classes]\label{d:classes}
+Let a Gettier case have error distance $\delta$ and let $\Sigma$ be the set of tags of its error worlds at distance $\delta$. Its class is fixed by the first applicable clause:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{G-nec} (necessary content): the belief is locally safe, so that only the basis-wide condition fails;
+\item \textbf{G-tmp} (temporal): $\texttt{time} \in \Sigma$;
+\item \textbf{G-lot} (lottery): $\texttt{draw} \in \Sigma$;
+\item \textbf{G-mrg} (margin): $\texttt{marg} \in \Sigma$;
+\item \textbf{G-tst} (testimonial): $\texttt{src} \in \Sigma$;
+\item \textbf{G-env} (environmental): $\texttt{env} \in \Sigma$;
+\item \textbf{G-fl} (false lemma): $\texttt{tm} \in \Sigma$, the route is inferential (inference, induction or deduction), and the basis relies on a false lemma;
+\item \textbf{G-nfl} (no false lemma): $\texttt{tm} \in \Sigma$, the route is inferential, and there is no false lemma;
+\item \textbf{G-int} (intervening): $\texttt{tm} \in \Sigma$ and the route is not inferential.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Locus]\label{d:locus}
+A Gettier case is \emph{connected} if the fact that makes $p$ true is causally connected to the basis in the normal way, and \emph{disconnected} otherwise. We write the locus after the class, as in G-env/c.
+\end{definition}
+
+Connected Gettier cases are those that \citet{Pritchard2012} calls cases of environmental luck: the subject's faculties make contact with the fact, and the danger lies in what surrounds the contact. Disconnected cases are cases of intervening luck: something other than what the basis bears on makes the belief true. The locus is a separate dimension from the class: a testimonial case may be connected (HLC, where the director knows where the party is) or disconnected (STL, where the liar is right by mistake).
+
+\begin{definition}[Non-Gettier outcomes]\label{d:other}
+A model that is not a Gettier case is classed \textbf{U} if $J = 0$, \textbf{F} if $J = 1$ and $p(w_0) = 0$, and \textbf{K} otherwise. A K model is annotated with the kinds of luck it exhibits that are compatible with knowledge: \texttt{ev} (evidential), \texttt{rf} (reflective), \texttt{ct} (content), \texttt{md} (a misleading defeater exists), \texttt{fx} (the truth is secured by another agent's intervention).
+\end{definition}
+
+\begin{remark}\label{r:priority}
+The order of the clauses in Definition~\ref{d:classes} settles the label when the nearest error worlds differ in more than one way. It has no effect on any verdict: whether a model is a Gettier case depends only on $\delta$ and $\theta$ (Lemma~\ref{l:delta}). The order puts the more specific descriptions first: a stopped clock is also a case in which the truth-maker varies, but the temporal description says how. Among the \stnmodels{} models, \stnmulti{} have nearest error worlds with more than one tag.
+\end{remark}
+
+The typology answers to the distinctions listed in the brief history of the problem. The inferential classes G-fl and G-nfl separate Gettier's cases and Lehrer's Nogot case from Feldman's version. G-env and G-int are Pritchard's environmental and intervening luck, refined by route. G-tmp, G-lot, G-tst and G-mrg are the classes that the literature treats under separate headings: the stopped clock, the lottery, testimony, and Williamson's margins for error. G-nec is the class of necessary truths reached on a defective basis, which a safety theorist must treat by the amendment. Reflective luck does not appear among the Gettier classes, because, as Proposition~\ref{p:reflective} shows, it is not a way of being unsafe.
+
+\section{Theorems}\label{s:thm}
+
+Each of the following is proved in prose from the definitions and checked by the program on every model to which it applies; the checks are assertions, and the program halts if one fails.
+
+\begin{proposition}[Veritic luck]\label{p:veritic}
+In a model with a justified true belief, the belief is veritically lucky if and only if it is not basis-wide safe. Hence the Gettier cases are exactly the models with a justified true belief that is veritically lucky.
+\end{proposition}
+
+\begin{proof}
+Veritic luck is the existence of a close error world (Definition~\ref{d:luck}(a)); failure of basis-wide safety is the same condition (Definition~\ref{d:safe}). The second sentence follows from Definition~\ref{d:safe}.
+\end{proof}
+
+Proposition~\ref{p:veritic} is the model form of the reading of EPI-01-a's characterization theorem on which knowledge excludes veritic luck and no other kind. The remaining propositions show how each class realizes veritic luck.
+
+\begin{proposition}[Evidential luck]\label{p:evidential}
+Evidential luck neither entails nor excludes safety. A justified true belief that is evidentially lucky and not veritically lucky is knowledge.
+\end{proposition}
+
+\begin{proof}
+At a world tagged \texttt{basis}, $B(v) = 0$, so such a world is not an error world and does not bear on safety. Whether a model has close \texttt{basis} worlds is therefore independent of whether it has close error worlds. The second sentence follows from Proposition~\ref{p:veritic} and Definition~\ref{d:safe}.
+\end{proof}
+
+Among the justified true models of the catalogue and variants, \stevsafe{} are evidentially lucky and safe, and \stevunsafe{} evidentially lucky and unsafe; SEV (the witness at the window) and GRN (Nozick's grandmother) are examples of the first kind, the mistaken liar (STL), who hears from a liar who could easily have lied about another train and not to him, is an example of the second.
+
+\begin{proposition}[False lemmas]\label{p:lemma}
+Adding or removing a false lemma while leaving the worlds of a model unchanged leaves its safety, and so its status as a Gettier case, unchanged. Consequently, relying on a false lemma is neither necessary nor sufficient for a justified true belief to be a Gettier case.
+\end{proposition}
+
+\begin{proof}
+Safety is computed from the distances, belief values and truth values of the worlds alone (Definition~\ref{d:safe}); the lemma is not among them. For the second sentence, Feldman's version of the Nogot case (FEL) is a Gettier case without a false lemma, and Warfield's handout case (WAR) is a justified true belief relying on a false lemma whose model is safe.
+\end{proof}
+
+The proposition presupposes that removing the lemma does not change the worlds, and the presupposition is the substance of the matter. In Gettier's cases it holds because the falsity of the lemma and the truth of $p$ are independent: the error worlds of GE1 are worlds in which Smith's own pocket holds nine coins, and nothing about the route from the evidence about Jones to the conclusion bears on them. That is the observation of EPI-01-d, and the variants GE1.nfl, GE2.nfl, NOG.nfl and their kind confirm it model by model. In WAR the false belief that there are 53 people present is within the margin by which the conclusion, that 100 handouts suffice, is robust; the worlds in which the count is off by one or two are worlds in which the conclusion is still true. The no-false-lemmas condition fails in both directions for the same reason: it inspects the route of the inference, while knowledge depends on the modal profile of its conclusion.
+
+\begin{proposition}[Environment and truth-maker]\label{p:env}
+\begin{enumerate}[label=(\alph*)]
+\item If every nearest error world of a Gettier case is tagged \texttt{tm}, \texttt{draw} or \texttt{time}, and no other close error world exists, then securing the truth-maker, so that at those worlds the subject would lack the basis, makes the belief safe.
+\item If every close error world is tagged \texttt{env} or \texttt{src}, then normalizing the environment, by removing the look-alikes and the bad sources, makes the belief safe.
+\item Placing a look-alike at distance $1$ makes any belief formed by perception, instrument or testimony unsafe; if the belief was safe, justified and true, the result is a case of class G-env.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Securing the truth-maker sets $B(v) = 0$ at the worlds in which the truth-maker varies, so they are no longer error worlds; if no other close error world exists, the belief is safe by Lemma~\ref{l:delta}. (b) Similarly, removing the worlds tagged \texttt{env} or \texttt{src} removes all close error worlds. (c) The added world is close at every $\theta \geq 1$ and is an error world. If the belief was safe, it had no close error world, so the new nearest error world is the added one and its tag is \texttt{env}.
+\end{proof}
+
+Proposition~\ref{p:env} explains why the two loci call for different remedies. Intervening luck is removed by connecting the basis to the truth-maker: Smith would know that the man who will get the job has ten coins if his evidence concerned his own pocket. Environmental luck is removed only by changing the environment: nothing Henry could do with his eyes from the road would make his belief safe in a district of facades. The variants marked \texttt{sec}, \texttt{nor} and \texttt{hos} in Appendix~B carry out these operations on every case to which they apply.
+
+\begin{proposition}[Causal connection]\label{p:causal}
+Among justified true beliefs, causal connection between the truth-maker and the basis is neither necessary nor sufficient for safety.
+\end{proposition}
+
+\begin{proof}
+All four combinations are realized among the models (Table~\ref{tab:combos} in Appendix~D): BRN is causally connected and unsafe; TMP is not causally connected and safe; RED and GE1 realize the remaining two combinations.
+\end{proof}
+
+The connected and unsafe models are exactly the connected Gettier cases (G-$x$/c), \stlocc{} of the \stnG{} Gettier cases among all models; the remaining \stlocd{} are disconnected. A causal theory of knowledge in the manner of \citet{Goldman1967} therefore classifies the disconnected cases correctly and the connected ones incorrectly, which is the pattern Goldman himself recognized when he introduced the fake-barn case.
+
+\begin{proposition}[Temporal cases]\label{p:temporal}
+Let a belief about the time be formed by reading an instrument that has stopped. The belief is safe at $\theta$ if and only if no consultation at a different moment lies within distance $\theta$. If the instrument is going and accurate, the belief is safe whatever moment of consultation is close.
+\end{proposition}
+
+\begin{proof}
+At a consultation at a different moment, a stopped instrument shows the same reading, the subject believes on the same basis that it is the time shown, and the belief is false; such a world is an error world, and safety requires that none be close. A going and accurate instrument shows the time at each moment, so at each consultation world the belief formed is true.
+\end{proof}
+
+\begin{proposition}[Necessary truths]\label{p:nec}
+If $p$ is true at every world of a model, the belief that $p$ is locally safe at every threshold, and no such model is a Gettier case in the sense of Definition~2.4 of EPI-01-a. It is a Gettier case in the basis-wide sense exactly when, at some close world, the same basis yields a false belief in another proposition.
+\end{proposition}
+
+\begin{proof}
+Local safety requires $p(v) = 1$ at close worlds where $B(v) = 1$, which holds when $p$ is true everywhere. The second sentence is Definition~\ref{d:safe} with $p$ true everywhere.
+\end{proof}
+
+The pupil of SNC, whose procedure gives the right product for $12 \times 13$ and wrong products for its neighbors, is the schematic case; SNS, with a sound procedure, is its control. The proposition records why the amendment of EPI-01-a is needed and what it costs: nothing, since in contingent cases the amended and unamended conditions agree in every model of the catalogue.
+
+\begin{proposition}[Testimony]\label{p:testimony}
+Suppose a hearer believes $p$ on the testimony of a speaker, at exactly the worlds at which the speaker believes $p$ on her own basis and sincerely asserts it, and suppose the speaker's sincerity is modally robust (no close world at which she asserts $p$ without believing it). Then the hearer's belief is safe if and only if the speaker's is. If instead there is a close world at which the speaker asserts $p$ while $p$ is false, the hearer's belief is unsafe, whatever the safety of the speaker's.
+\end{proposition}
+
+\begin{proof}
+Under the first supposition the hearer's belief worlds and truth values coincide with the speaker's, so the two beliefs have the same close error worlds. Under the second, the world described is a close world at which the hearer believes $p$ on the same testimonial basis and $p$ is false.
+\end{proof}
+
+The first half is the model form of the thesis of EPI-08 that testimony transmits knowledge but does not generate it: a hearer's safety is borrowed from the speaker's. (In the relay variants the hearer's justification is likewise taken over from the speaker, as transmission requires.) The second half is the structure of the Halloween case on its coarse individuation (HLC) and of the mistaken liar (STL), the testimonial Gettier cases of class G-tst. Every case of the catalogue whose belief is true has two testimonial variants, \texttt{rel} and \texttt{lie}, and the program checks the proposition on all of them.
+
+\begin{proposition}[Lotteries]\label{p:lottery}
+In a fair lottery in which the draw of each ticket is as close as the draw of any other, the belief, formed on the odds, that one's ticket will lose is unsafe whatever the number of tickets. The belief, formed on a reliable report of the result, that one's ticket has lost is safe unless a misreport is close.
+\end{proposition}
+
+\begin{proof}
+The draw of one's own ticket is a world at which one believes, on the odds, that it will lose, and in which it wins. Since it is as close as the actual draw, which is close by centring, it is close at every $\theta \geq d$, where $d$ is the common distance of the draws; the number of tickets does not enter. On the report basis, at the world in which one's ticket is drawn the report says so, and one does not believe that it lost; only a misreport would be an error world.
+\end{proof}
+
+This is the asymmetry between the odds and the newspaper (LOT and LTN). On the analysis it is the asymmetry between a Gettier case of class G-lot and knowledge, in agreement with EPI-09's conclusion that one does not know that one's ticket will lose, though one may rationally act as if it will.
+
+\begin{proposition}[Margins and thresholds]\label{p:margin}
+\begin{enumerate}[label=(\alph*)]
+\item If a belief is safe at $\theta$, it is safe at every $\theta' \leq \theta$.
+\item Moving every error world of a model to distance $4$ makes the belief safe at every $\theta \leq 3$ and unsafe at $\theta = 4$.
+\item A belief that a magnitude is not $x$, formed by an estimate that cannot discriminate $x$ from the actual magnitude, is unsafe at every $\theta \geq 1$ when the world in which the magnitude is $x$ is at distance $1$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) The close worlds at $\theta'$ are among those at $\theta$. (b) By Lemma~\ref{l:delta}, since $\delta$ becomes $4$. (c) The world in which the magnitude is $x$ looks the same, so the subject believes on the same basis that it is not $x$, falsely; it is an error world at distance $1$.
+\end{proof}
+
+Clause~(c) is Williamson's margin-for-error principle in model form, and Proposition~8.1 of EPI-01-a is its general statement; MAG and MGW are the cases. Clause~(a) is what makes the contextualism of EPI-13 coherent with the analysis: raising the standards can turn knowledge into its absence, never the reverse, and a belief known in a demanding context is known in every less demanding one. The bank cases BKL and BKH are a single model at two thresholds.
+
+\begin{proposition}[Reflective luck]\label{p:reflective}
+Whether the subject has reflective access to the reliability of her basis does not enter into safety. A justified, safe belief that is reflectively lucky is knowledge.
+\end{proposition}
+
+\begin{proof}
+Reflective access is a descriptive feature of the model, not a component of any world (Definition~\ref{d:model}); safety and knowledge are defined without it (Definition~\ref{d:safe}).
+\end{proof}
+
+The unreflective birder (SRF) is the schematic case. Norman (CLV) and Truetemp (TTP) are reflectively lucky too, but they are not justified by their sources' lights, and fail to know for that reason: their class is U, not a Gettier class. Whether a subject who lacks reflective access can be justified is a question for the theory of justification, which, by EPI-06, is internalist; the analysis of knowledge takes its verdict as given.
+
+\begin{proposition}[Deduction]\label{p:deduction}
+If the belief that $p$ is safe and $q$ is believed by competent deduction from it, the belief that $q$ is safe. The belief that $q$ may be safe when the belief that $p$ is not.
+\end{proposition}
+
+\begin{proof}
+The first sentence is Proposition~6.1 of EPI-01-a: at every close world where the subject believes $q$ by deduction she believes $p$, which is true there, and $q$ is entailed by $p$. For the second, the variant BRN.ded is safe: Henry's belief that there is a barn in the district, deduced from his unsafe belief that what he is looking at is a barn, is true in every world of the model.
+\end{proof}
+
+The second sentence is less familiar than the first and worth noting. A Gettier case does not contaminate everything deduced from it: a weaker conclusion whose truth does not depend on the luck can be known. Smith knows, by deduction from his Gettiered belief, that someone will get the job (GE1.ded). Kripke's observation about the red barn is an instance of the first sentence: Henry's safe belief that he sees a red barn yields, by deduction, a safe belief that he sees a barn (RED.ded), while his perceptual belief that he sees a barn, formed on shape alone, is a Gettier case of class G-env (RDP).
+
+We can now state the partition result.
+
+\begin{theorem}[Partition]\label{t:partition}
+Every case model falls under exactly one of the classes G-nec, G-tmp, G-lot, G-mrg, G-tst, G-env, G-fl, G-nfl, G-int, K, U and F. A model falls under one of the nine Gettier classes if and only if it has a justified true belief that is not basis-wide safe.
+\end{theorem}
+
+\begin{proof}
+If $J = 0$ the model is U, and if $J = 1$ and $p(w_0) = 0$ it is F. Suppose $J = 1$ and $p(w_0) = 1$. If the belief is basis-wide safe, the model is K. Otherwise it is a Gettier case, and either it is locally safe, and then G-nec, or there is a close error world for $p$, so that $\delta \leq \theta$ and the set $\Sigma$ of tags at distance $\delta$ is non-empty. Error worlds carry one of the six tags \texttt{time}, \texttt{draw}, \texttt{marg}, \texttt{src}, \texttt{env} and \texttt{tm} (the remaining tags mark worlds at which the belief is true or absent), so one of the clauses (ii) to (ix) of Definition~\ref{d:classes} applies, and the first applicable one fixes the class. The classes are exclusive because the clauses are applied in order and U, F and K are separated by $J$, truth and safety. The second sentence is the case distinction just made.
+\end{proof}
+
+\begin{corollary}\label{c:exactly}
+In case models, the Gettier cases of every class are exactly the justified true beliefs that are unsafe; and each class is a way of being unsafe, specified by what varies in the nearest error worlds.
+\end{corollary}
+
+Corollary~\ref{c:exactly} is the conclusion of EPI-01 stated for the classification. It says that the heterogeneity of the Gettier cases is real, and that it is a heterogeneity of mechanisms, not of kinds: what differs from class to class is what could easily have been otherwise, while what makes each member a failure of knowledge is the same.
+
+\section{The catalogue and the check}\label{s:cat}
+
+\subsection{What is encoded}
+
+Appendix~A gives \stnsources{} case models. \stnlit{} encode cases from the literature whose source we can name with confidence: Gettier's two cases; Lehrer's Nogot case and Feldman's version without a false lemma; Russell's stopped clock; the fake barns of \citet{Goldman1976}, which Goldman credits to Carl Ginet, and Kripke's red barn; Chisholm's sheep; Zagzebski's two cases; Skyrms's pyromaniac; Tom Grabit; Harman's assassination case; BonJour's Norman and Lehrer's Truetemp; Sosa's rubbish chute and kaleidoscope; Pritchard's Temp; Lackey's Morris; Hawthorne's lottery and newspaper; Williamson's Mr Magoo; Dretske's zebras; Nozick's grandmother; Comesa\~na's Halloween party and Bogardus's atomic clock, each on two individuations of the basis; Warfield's handouts; DeRose's bank cases; Sosa's belief that one is not a brain in a vat, Nozick's Jesse James, and Vogel's ice cubes \citep{Vogel1987}; and, as the oldest entry, the jury of Plato's \emph{Theaetetus} (201a--c), brought to a true judgment by persuasion \citep{PlatoTht}. The remaining \stnschem{} are schematic cases constructed to fill classes that the literature discusses in general terms (necessary truths, evidential luck, content luck, reflective luck, the mistaken liar). Each entry gives the source, a description in our words, the proposition, the basis and its route, the descriptive features, the worlds of the model in a table, and the computed verdicts.
+
+Appendix~B applies to every case each of eleven operations that changes one feature: removing or adding a false lemma (\texttt{nfl}, \texttt{fl}); securing the truth-maker (\texttt{sec}); normalizing the environment (\texttt{nor}) or making it hostile (\texttt{hos}); moving the error worlds to distance $4$ (\texttt{rem}); making the belief false (\texttt{fal}); removing justification (\texttt{unj}); relaying the belief by sincere testimony (\texttt{rel}) or by a speaker who could easily have lied (\texttt{lie}); and competent deduction of a weaker proposition (\texttt{ded}). An operation is applied where it makes sense, which yields \stnvariants{} variants. For each, the program checks the prediction of the proposition that governs it. Appendix~C gives, for all \stnmodels{} models, the error distance, the safety profile, and the verdicts of four rival conditions added to justified true belief: no false lemmas (NFL), causal connection (CAU), sensitivity (SEN) and the absence of defeaters (UND), next to safety (SAF). Appendix~D gives the incidence of the classes and the summary of the check.
+
+\subsection{The check}
+
+The program verifies three things about the catalogue, besides the propositions of Section~\ref{s:thm}.
+
+First, every case that its source presents as a Gettier case, a counterexample to the sufficiency of justified true belief, is computed to be a justified true belief that is unsafe. There are \stnGrows{} such cases, and the check holds in all of them; each has error distance $1$, so that the verdict holds at every threshold from $1$ upward.
+
+Second, among the \stnundisputed{} literature cases that carry no dispute record of kind \texttt{dep} or \texttt{bas}, the source's verdict on knowledge coincides with the computed one in every case: the source says \enquote{not knowledge} of a justified true belief exactly when the belief is computed to be unsafe.
+
+Third, the cases in which the computed verdict departs from the source's are listed with a reason (Table~\ref{tab:departures} in Appendix~D). There are \stndepart{}: HAR, KAL, TMP, ZBM, HLC and ATC. We discuss them below. In each, either the literature is divided on the verdict, or the verdict turns on the individuation of the basis, so that another row of the catalogue, with the basis individuated differently, agrees with the source.
+
+Among the rival conditions, safety is the only one that classifies every undisputed literature case correctly (Table~\ref{tab:rivals}); the others err on between three and eight cases each. On the variants, where no literature verdict exists, the table records how often each rival agrees with safety. Sensitivity agrees most often, which is what one would expect of a condition that, in ordinary cases, consults the same worlds.
+
+\subsection{Particular entries}
+
+\paragraph{GE1, FEL and the false lemma.} Gettier's first case (GE1) is of class G-fl/d: its nearest error world is the one in which Smith's pocket holds nine coins, tagged \texttt{tm}, and the truth-maker is disconnected from the evidence about Jones. Its variant GE1.nfl, in which the same evidence reaches the conclusion through true intermediates, has the same worlds and the same error distance, and is of class G-nfl/d; Feldman's case (FEL) is the literature's instance of that class. The variant GE1.sec, in which Smith's evidence concerns his own pocket, is knowledge, although it keeps the false lemma; so is GE1.ded, Smith's belief that someone will get the job. The four rows together show the false lemma to be neither necessary nor sufficient, as Proposition~\ref{p:lemma} says, and locate the defect where EPI-01-d locates it.
+
+\paragraph{BRN, RDP and RED.ded.} The fake-barn case is G-env/c, the paradigm of connected luck: Henry's belief is caused by the barn and is unsafe because facades are a glance away. Its variant BRN.nor, with the facades removed, is knowledge, and BRN.sec does not exist, since there is no truth-maker to secure. Kripke's red barn (RED) is safe, because a glance at a blue facade does not produce the belief that one sees a red barn; RDP, the belief formed on shape alone in the same district, is G-env/c; and RED.ded, the deduced belief that one sees a barn, is safe. The three rows are the formal content of the reply that EPI-01-a gives to Kripke.
+
+\paragraph{HLF and HLC.} Comesa\~na's Halloween case appears twice. On the fine individuation of the basis (HLF), the guest believes on the testimony of a director disposed to tell him the truth; at the world in which the circumstances obtain, the director's disposition and so the basis differ, the guest does not believe on that basis, and the belief is safe: knowledge, as Comesa\~na holds. On the coarse individuation (HLC), the same world is an error world, and the case is G-tst/c. Bogardus's atomic clock (ATF, ATC) has the same structure with an instrument in place of a speaker. The analysis does not choose between the individuations; Assumption~\ref{a:faithful} is silent on it. What the pair shows is that the dispute about these cases is a dispute about bases, not about safety, which is the reply of EPI-01-a.
+
+\paragraph{TMP and MOR.} Pritchard's Temp is the one case of the catalogue in which the computed verdict is knowledge and the source's verdict is not, by reason of how the truth is secured: by another agent who adjusts the world to the belief. The belief is justified on internalist standards, being formed by reading an instrument Temp has no reason to distrust, and it is safe. We accept the verdict that Temp knows, for a reason the catalogue makes visible. Lackey's Morris (MOR), who believes the directions of a passer-by, is another case of a safe belief whose safety is owed to another person rather than to the subject's own competence, and the source's verdict is that Morris knows. The difference between the cases lies in the direction of fit of the helper's contribution: the passer-by makes Morris's belief fit the world, while Temp's helper makes the world fit Temp's belief. That difference bears on whether the subject deserves credit for the truth of his belief. It does not bear on whether the belief could easily have been false, and on the analysis it is the latter that knowledge requires. TMP carries the annotation \texttt{fx} for this reason.
+
+\paragraph{LOT and LTN.} The lottery belief (LOT) is G-lot/d, with error distance $1$ in any fair lottery (Proposition~\ref{p:lottery}); the newspaper belief (LTN) is knowledge, with error distance $3$, the distance of a misprint. Its profile \texttt{SSSuu} records that in a context in which misprints are attended to, it ceases to be knowledge, which is the contextualist's account of the sceptical pressure that lottery propositions exert (EPI-13).
+
+\paragraph{The departures.} Harman's assassination case (HAR) is computed to be knowledge: Jill's belief is true at every close world at which she believes on the basis of the report, since at the worlds in which she hears the denials she does not believe at all. Harman's verdict is that she does not know. The structure of the case is that of Tom Grabit (GRB), whose source's verdict is knowledge: in both, a misleading defeater exists which the subject does not possess, and the existence of the defeater makes no difference to whether her belief could easily have been false. A verdict that is to be consistent across the two cases must treat them alike, and the analysis does so. Sosa's kaleidoscope (KAL) is computed to be a Gettier case of class G-env/c, where Sosa holds that the perceiver has animal but not reflective knowledge; on the analysis, the jokester's easy alternative makes the belief unsafe, and the case is a fake-barn case with a person in place of the facades. Dretske's disguised mules (ZBM) are computed to be known, against Dretske, because the belief is insensitive but safe; this is the conclusion of EPI-20, and the catalogue shows why the two verdicts part: SEN and SAF differ on ZBM as they do on the rubbish chute (CHU), the ice cubes (ICE), the brain in a vat (BIV), the zebras themselves (ZBP) and Tom Grabit (GRB): in each, the nearest world in which the belief is false is one in which the subject would still hold it, but that world is remote. TMP was discussed above, and HLC and ATC are the coarse individuations of cases whose fine individuations agree with their sources.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[The encodings decide the verdicts]\label{o:encode}
+The program computes safety from distances and truth values which we chose. If one wanted a different verdict, one could choose different distances. The agreement between the computed verdicts and the literature is manufactured.
+\end{objection}
+
+\begin{reply}
+The distances encode what the case descriptions say could easily have happened: that Smith could easily have had nine coins, that Henry's glance could easily have fallen on a facade, that the clock could easily have been consulted five minutes later. These are not verdicts about knowledge, and Assumption~\ref{a:faithful} makes explicit that the encoding is answerable to the descriptions, not to the analysis. Two features of the computed material limit the room for manipulation. First, every case presented as a Gettier case has error distance $1$: the verdict holds at every positive threshold, and no choice of threshold short of $0$ would reverse it. Of the \stnjtsrc{} justified true source beliefs, only \stnnonrobust{} have verdicts that change as $\theta$ ranges over $1$ to $3$, and they are RED, TMP, MOR, LTN and the bank cases BKL and BKH, which are the cases whose descriptions mention a remote or context-dependent possibility. Second, the variants are generated by fixed operations from the source encodings, and their verdicts are predicted by the propositions of Section~\ref{s:thm} before being computed; an encoding tuned to one verdict would not, without luck, produce correct predictions for the eleven operations.
+\end{reply}
+
+\begin{objection}[The classes are arbitrary]\label{o:arbitrary}
+The order of the clauses in Definition~\ref{d:classes} is stipulated. A different order would yield a different classification, and nothing in the analysis privileges this one.
+\end{objection}
+
+\begin{reply}
+The order matters only to the label of a model whose nearest error worlds differ in more than one way (Remark~\ref{r:priority}), which happens in \stnmulti{} of \stnmodels{} models, and never to its verdict. The order puts specific descriptions before general ones: every temporal, lottery, margin, testimonial and environmental error world is also, in a broad sense, one in which what makes the belief true is absent, and the clause for \texttt{tm} is the residual case. A typology must make some such choice; what Theorem~\ref{t:partition} establishes is that any order yields a partition of the unsafe justified true beliefs, because the verdict depends only on $\delta$ and $\theta$.
+\end{reply}
+
+\begin{objection}[The basis is gerrymandered]\label{o:basis}
+The catalogue lists the Halloween and atomic-clock cases twice, once with each individuation of the basis, and counts the fine individuation as agreeing with the source. This is the generality problem in another dress: by choosing the basis one can make any belief safe or unsafe.
+\end{objection}
+
+\begin{reply}
+We agree that safety is relative to a basis and that the analysis does not reduce bases to anything else; EPI-01-a accepts this in its reply to the objection from generality. The catalogue does not hide the relativity; it displays it, and it displays its limits. Of the \stnlit{} literature rows only five carry a dispute about individuation: the two cases encoded twice, and RDP, whose deductive counterpart RED.ded agrees with Kripke; and in none of the cases presented as Gettier cases is there an individuation, respecting the description, on which the belief is safe: Smith's basis is his evidence about Jones under any description, and Henry's basis is the look of a barn from the road. The generality problem is a problem about where the boundaries of a basis lie in hard cases, not a licence to redraw them in easy ones.
+\end{reply}
+
+\begin{objection}[Safety is not sufficient]\label{o:sufficient}
+Temp shows that a justified and safe belief can fail to be knowledge. The catalogue concedes that the analysis departs from the source's verdict, which is to concede a counterexample.
+\end{objection}
+
+\begin{reply}
+Temp is not a Gettier case on any account, since the belief is safe; the characterization of the Gettier cases is untouched. The objection concerns the sufficiency of justified safe belief, and our reply was given with the entry: the feature that distinguishes Temp from Morris is the direction of fit of the helper's contribution, which bears on credit and not on the modal relation between belief and truth. \citet{Pritchard2012} adds an ability condition to safety in order to deny Temp knowledge; EPI-01-a holds that the justification condition does the work of such a condition where it needs doing, and Temp, unlike a subject whose beliefs are made true by a demon without grounds, has grounds. The cost of the verdict is that Temp knows something for which he deserves little credit; Morris shows that this cost is one any view must pay.
+\end{reply}
+
+\begin{objection}[Intuitions vary]\label{o:xphi}
+Experimental work suggests that intuitions about Gettier cases are not uniform. \citet{WeinbergNicholsStich2001} reported differences between cultural groups; \citet{StarmansFriedman2012} found that lay participants attribute knowledge in some Gettier cases; and \citet{Colaco2014} found that many attribute knowledge in fake-barn cases. A classification calibrated to the verdicts of philosophers may be calibrated to a parochial concept.
+\end{objection}
+
+\begin{reply}
+The findings are mixed in a way that the typology helps to sort. A large cross-cultural study found the core Gettier intuition to be robust across languages and cultures \citep{Machery2017}, while the instability reported for fake barns \citep{GendlerHawthorne2005,Colaco2014} concerns a case of the connected class G-env/c, in which the subject's faculties make normal contact with the fact. It is to be expected that intuitions should be least firm where the actual causal route is normal and the danger lies in alternatives the subject never confronts. The analysis does not predict that every speaker will apply \enquote{knows} in accordance with it; it predicts that the cases in which competent judges withhold knowledge from justified true belief are the unsafe ones, and that disagreement will concentrate where unsafety is least visible. The catalogue records the fake-barn dispute and retains the source's verdict.
+\end{reply}
+
+\begin{objection}[Not all of these are Gettier cases]\label{o:extension}
+Lotteries, margins for error and the bank cases are not usually called Gettier cases. Counting them as such inflates the thesis.
+\end{objection}
+
+\begin{reply}
+The catalogue records the role each case plays in its source, and the check that every case presented as a Gettier case is a justified true unsafe belief is restricted to those so presented. That lottery beliefs and margin beliefs are justified, true and not knowledge is the reason they appear in the literature at all; the thesis of EPI-01 is that they fail for the same reason as Gettier's cases, and Definition~2.4 of EPI-01-a accordingly counts them as Gettier cases in its technical sense. The typology gives them their own classes, G-lot and G-mrg, so that nothing is lost by the extension, and Proposition~\ref{p:lottery} and Proposition~\ref{p:margin} say how each class is unsafe.
+\end{reply}
+
+\section{What the classification does not establish}\label{s:not}
+
+The classification shows that the cases of the catalogue, as encoded, are classified correctly by safety and that the classes partition the unsafe justified true beliefs. It does not establish four things.
+
+It does not establish that the encodings are the only faithful ones. Assumption~\ref{a:faithful} is a substantive premise, and a reader who thinks that, say, Russell's clock could not easily have been consulted at another moment will compute a different verdict from our tables. The tables make such disagreements precise, which is their use.
+
+It does not settle the individuation of bases. The paired rows show where the verdict depends on it, and the paired rows are few, but the analysis inherits the generality problem in the form EPI-01-a states.
+
+It does not show that the catalogue exhausts the literature. We have encoded only cases whose source we can identify with confidence, and the schematic cases are ours. The theorems of Section~\ref{s:thm} hold for all case models, not only for the catalogued ones; what the catalogue adds is that the literature's cases are case models of the kinds the theorems describe.
+
+It does not adjudicate the experimental findings. Objection~\ref{o:xphi} explains how the typology bears on them; it does not show that the concept the analysis captures is shared by every speaker.
+
+\section{Conclusion}
+
+The Gettier cases are of many kinds, and the typology of Section~\ref{s:typ} sorts them by what varies in the nearest worlds in which the subject, on the same basis, believes falsely: the truth-maker, behind an inference with or without a false lemma or in perception; the environment; the time of consultation; the outcome of a chance; the source of testimony; a magnitude within the margin of discrimination; or, for necessary truths, the outputs of the basis on neighboring questions. For each kind a theorem states how safety fails and what would restore it, and the kinds together partition the unsafe justified true beliefs. Applied to the literature, the classification places every case presented as a Gettier case among them, and the cases in which its verdict departs from a source's are cases on which the literature is divided or whose basis admits two individuations. Gettier cases are exactly those in which a justified true belief is unsafe.
+
+\appendix
+
+\section{Catalogue of cases}\label{app:a}
+
+\paragraph{What is encoded.} Each entry is one case model (Definition~\ref{d:model}). The header gives the identifier, the source, the route and the basis; then a description of the case in our words; then the proposition $p$, the weaker proposition $q$ where one is used for the deduction variant, and the descriptive features. The table lists the worlds of the model: the actual world first, then each other world with a short statement of how it differs, its distance $d$, whether it is close at the case's threshold $\theta$, whether the subject believes $p$ on the same basis there ($B$), whether $p$ is true there, its tag, and where used the truth of $q$ and the value \enquote{alt} of Definition~\ref{d:model}.
+
+\paragraph{What is computed.} For each model the program computes justification and truth (read from the encoding), the error distance $\delta$, local and basis-wide safety at the case's threshold, whether the model is a Gettier case, whether the subject knows, the safety profile over $\theta = 0, \ldots, 4$, and the class (Definitions~\ref{d:classes} to \ref{d:other}). Where the source gives a verdict on knowledge, the entry records it, with the role the case plays in the source and whether the computed verdict agrees. Disputes are recorded with their kind: \texttt{int} (intuitions disputed, verdict retained), \texttt{dep} (computed verdict departs from the source's) or \texttt{bas} (verdict depends on the individuation of the basis).
+
+\paragraph{Summary.} Of the \stnsources{} models, \stnlit{} are from the literature and \stnschem{} schematic. In \stnagree{} of the \stnlit{} literature cases the computed verdict agrees with the source's; the \stndepart{} departures are listed in Table~\ref{tab:departures}.
+
+\input{gen/catalogue.tex}
+
+\section{Systematic variants}\label{app:b}
+
+\paragraph{What is computed.} For each case of Appendix~A, the program applies each of the eleven operations of Section~\ref{s:cat} that is applicable: \texttt{nfl} where the basis relies on a false lemma, \texttt{fl} where the route is inferential and it does not; \texttt{sec} where the model has an error world tagged \texttt{tm}, \texttt{draw} or \texttt{time}, setting $B = 0$ at those error worlds and marking the truth-maker as connected; \texttt{nor} where it has an error world tagged \texttt{env} or \texttt{src}, removing those worlds; \texttt{hos} where the route is perception, instrument or testimony and there is no close error world of those tags, adding a look-alike at distance $1$; \texttt{rem} where the belief is true and unsafe, moving every error world to distance $4$; \texttt{fal} where the belief is true, making it false at the actual world; \texttt{unj} where it is justified, removing justification; \texttt{rel} and \texttt{lie} where it is true, making the belief a hearer's, on sincere testimony, or on testimony from a speaker who could easily have asserted it falsely (an added error world at distance $1$, tagged \texttt{src}); and \texttt{ded} where the case specifies a weaker proposition $q$, replacing $p$ by $q$ at every world. The table gives the variant's justification, truth, error distance, safety and knowledge, its class and the parent's, and the prediction checked. The predictions are those of Propositions~\ref{p:lemma} (\texttt{nfl}, \texttt{fl}: safety unchanged), \ref{p:env} (\texttt{sec}, \texttt{nor}: safe when no other error remains; \texttt{hos}: unsafe), \ref{p:margin} (\texttt{rem}: safe below $4$), \ref{p:testimony} (\texttt{rel}: safety transmitted; \texttt{lie}: unsafe) and \ref{p:deduction} (\texttt{ded}: safe whenever the parent is), together with the definitional predictions for \texttt{fal} (not a Gettier case) and \texttt{unj} (not knowledge).
+
+\paragraph{Summary.} The program generates \stnvariants{} variants. Every prediction holds; the program would halt otherwise. Each variant is also checked against Theorem~\ref{t:partition} and Lemma~\ref{l:delta}.
+
+\input{gen/variants.tex}
+
+\section{Profiles and rival conditions}\label{app:c}
+
+\paragraph{What is computed.} For each of the \stnmodels{} models (cases and variants), the table gives the route, the threshold of the case, the error distance, and the profile: for $\theta = 0, 1, 2, 3, 4$ in turn, \texttt{S} if the belief is basis-wide safe at that threshold and \texttt{u} if not. The program checks that every profile has the form $\texttt{S}^k\texttt{u}^{5-k}$ with $k = \min(\delta, 5)$ (Lemma~\ref{l:delta} and Proposition~\ref{p:margin}(a)). It then gives the verdict on knowledge of justified true belief with each of four added conditions and with safety: NFL (the basis relies on no false lemma), CAU (the truth-maker is causally connected to the basis), SEN (in the nearest worlds in which $p$ is false, the subject does not believe it on the same basis; vacuously satisfied if $p$ is false at no world of the model), UND (no defeater exists), and SAF (justified and basis-wide safe, the analysis). The last columns give the source's verdict where there is one, and the class.
+
+\input{gen/profiles.tex}
+
+\paragraph{Classes across thresholds.} The second table gives, for each case of Appendix~A, its class at each threshold $\theta = 0, \ldots, 4$, with the threshold at which the case is assessed. At $\theta = 0$ only the actual world is close, and every justified true belief is classed as knowledge; this is the limiting context in which no error possibility is attended to. A Gettier case of the literature enters its class at $\theta = \delta$ and keeps it at every higher threshold, by Proposition~\ref{p:margin}(a). The rows of RED, LTN and the bank cases show knowledge that is lost only at thresholds at which a remote possibility, a red facade, a misprint, a change of hours, has been made close.
+
+\input{gen/thresholds.tex}
+
+\section{The typology: incidence and check}\label{app:d}
+
+\paragraph{Classes.} Table~\ref{tab:classes} gives, for each class of Theorem~\ref{t:partition}, the number of literature and schematic cases and the number of all models that fall under it, with the first witnesses in the order of the catalogue. Every class is realized by at least one source case. G-nfl, G-int, G-tmp, G-lot, G-tst, G-mrg and G-nec are realized by one or two source cases each, the remainder of their members being variants; G-tst, the largest Gettier class among all models, owes its size to the relay variants \texttt{lie}, one for every case whose belief is true.
+
+\begin{table}[h]\caption{Classes of the typology.}\label{tab:classes}
+\input{gen/classes.tex}
+\end{table}
+
+\paragraph{Classes by route.} Table~\ref{tab:matrix} gives the number of Gettier models of each class by route of the basis. The inferential classes occur only with inferential routes, by definition; G-env occurs with perception, instruments and testimony, and the testimonial column is filled in every class reachable by relay (Proposition~\ref{p:testimony}).
+
+\begin{table}[h]\caption{Gettier models by class and route.}\label{tab:matrix}
+\input{gen/matrix.tex}
+\end{table}
+
+\paragraph{Causal connection and false lemmas.} Table~\ref{tab:combos} gives, among the justified true models, the number with and without a causal connection, and with and without a false lemma, that are safe and unsafe. All eight cells are non-empty, which verifies Propositions~\ref{p:lemma} and \ref{p:causal}.
+
+\begin{table}[h]\caption{Causal connection, false lemmas and safety among justified true models.}\label{tab:combos}
+\input{gen/combos.tex}
+\end{table}
+
+\paragraph{Rival conditions.} Table~\ref{tab:rivals} gives, for each condition of Appendix~C, the number of the \stnundisputed{} undisputed literature cases on which it delivers the source's verdict, and the number of variants on which it agrees with safety.
+
+\begin{table}[h]\caption{Rival conditions against the literature and against safety.}\label{tab:rivals}
+\input{gen/rivals.tex}
+\end{table}
+
+\paragraph{Departures.} Table~\ref{tab:departures} lists the literature cases on which the computed verdict differs from the source's, with the kind of dispute and its note. Every departure carries a dispute record of kind \texttt{dep} or \texttt{bas}; the program asserts this.
+
+\begin{table}[h]\caption{Departures from the sources' verdicts.}\label{tab:departures}
+\input{gen/departures.tex}
+\end{table}
+
+\section{Exhaustive check on small models}\label{app:e}
+
+\paragraph{What is enumerated.} The propositions of Section~\ref{s:thm} are stated for all case models, and the catalogue tests them only on the models it contains. To test them independently of the encodings, the program enumerates every case model in a bounded space: at most two non-actual worlds; each world at a distance from $1$ to $4$, with one of the four combinations of belief and truth values, and, if it is an error world, one of the six error tags (otherwise the tag \texttt{ok}, or \texttt{basis} when the subject lacks the basis and $p$ is true); justification and actual truth each $0$ or $1$; route inference (with or without a false lemma), perception or testimony; and causal connection present or absent. There are \stcnconfigs{} configurations of worlds (ordered, so that each unordered configuration with two distinct worlds occurs twice) and \stcnmodels{} models. The value alt is not varied, so the class G-nec does not occur in the census; Proposition~\ref{p:nec} is checked on the catalogue.
+
+\paragraph{What is checked.} For every model and every threshold $\theta = 0, \ldots, 4$, the program checks Lemma~\ref{l:delta}, Theorem~\ref{t:partition} (the class is unique, and it is a Gettier class exactly when the belief is justified, true and unsafe), Proposition~\ref{p:veritic}, the monotonicity of Proposition~\ref{p:margin}(a), and the characterization of EPI-01-a (Theorem~3.3 and Corollary~3.4) in the form \enquote{a justified true belief is knowledge if and only if it is not a Gettier case}; for inferential models it checks Proposition~\ref{p:lemma} by toggling the lemma, and for perceptual and testimonial models Proposition~\ref{p:env}(c) by adding a look-alike. In all, \stcnchecks{} model checks are performed and every one succeeds. The enumeration is exhaustive within the bound because it ranges over the product of the finite sets just listed. The table gives the distribution of the classes at the default threshold.
+
+\input{gen/census.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[BonJour(1980)]{BonJour1980} BonJour, L. (1980). Externalist theories of empirical knowledge. \emph{Midwest Studies in Philosophy}, 5, 53--73.
+\bibitem[Bogardus(2014)]{Bogardus2014} Bogardus, T. (2014). Knowledge under threat. \emph{Philosophy and Phenomenological Research}, 88(2), 289--313.
+\bibitem[Chisholm(1966)]{Chisholm1966} Chisholm, R.~M. (1966). \emph{Theory of Knowledge}. Prentice-Hall.
+\bibitem[Clark(1963)]{Clark1963} Clark, M. (1963). Knowledge and grounds: A comment on Mr. Gettier's paper. \emph{Analysis}, 24(2), 46--48.
+\bibitem[Cola{\c c}o et~al.(2014)]{Colaco2014} Cola{\c c}o, D., Buckwalter, W., Stich, S. and Machery, E. (2014). Epistemic intuitions in fake-barn thought experiments. \emph{Episteme}, 11(2), 199--212.
+\bibitem[Comesa{\~n}a(2005)]{Comesana2005} Comesa{\~n}a, J. (2005). Unsafe knowledge. \emph{Synthese}, 146(3), 395--404.
+\bibitem[DeRose(1992)]{DeRose1992} DeRose, K. (1992). Contextualism and knowledge attributions. \emph{Philosophy and Phenomenological Research}, 52(4), 913--929.
+\bibitem[Dretske(1970)]{Dretske1970} Dretske, F. (1970). Epistemic operators. \emph{The Journal of Philosophy}, 67(24), 1007--1023.
+\bibitem[Feldman(1974)]{Feldman1974} Feldman, R. (1974). An alleged defect in Gettier counter-examples. \emph{Australasian Journal of Philosophy}, 52(1), 68--69.
+\bibitem[Gendler and Hawthorne(2005)]{GendlerHawthorne2005} Gendler, T.~S. and Hawthorne, J. (2005). The real guide to fake barns: A catalogue of gifts for your epistemic enemies. \emph{Philosophical Studies}, 124(3), 331--352.
+\bibitem[Gettier(1963)]{Gettier1963} Gettier, E.~L. (1963). Is justified true belief knowledge? \emph{Analysis}, 23(6), 121--123.
+\bibitem[Goldman(1967)]{Goldman1967} Goldman, A.~I. (1967). A causal theory of knowing. \emph{The Journal of Philosophy}, 64(12), 357--372.
+\bibitem[Goldman(1976)]{Goldman1976} Goldman, A.~I. (1976). Discrimination and perceptual knowledge. \emph{The Journal of Philosophy}, 73(20), 771--791.
+\bibitem[Harman(1973)]{Harman1973} Harman, G. (1973). \emph{Thought}. Princeton University Press.
+\bibitem[Hawthorne(2004)]{Hawthorne2004} Hawthorne, J. (2004). \emph{Knowledge and Lotteries}. Oxford University Press.
+\bibitem[Klein(2008)]{Klein2008} Klein, P. (2008). Useful false beliefs. In Q. Smith (Ed.), \emph{Epistemology: New Essays}. Oxford University Press.
+\bibitem[Kripke(2011)]{Kripke2011} Kripke, S.~A. (2011). Nozick on knowledge. In \emph{Philosophical Troubles: Collected Papers, Volume 1} (pp.~162--224). Oxford University Press.
+\bibitem[Lackey(2007)]{Lackey2007} Lackey, J. (2007). Why we don't deserve credit for everything we know. \emph{Synthese}, 158(3), 345--361.
+\bibitem[Lehrer(1965)]{Lehrer1965} Lehrer, K. (1965). Knowledge, truth and evidence. \emph{Analysis}, 25(5), 168--175.
+\bibitem[Lehrer(1990)]{Lehrer1990} Lehrer, K. (1990). \emph{Theory of Knowledge}. Westview Press.
+\bibitem[Lehrer and Paxson(1969)]{LehrerPaxson1969} Lehrer, K. and Paxson, T. (1969). Knowledge: Undefeated justified true belief. \emph{The Journal of Philosophy}, 66(8), 225--237.
+\bibitem[Machery et~al.(2017)]{Machery2017} Machery, E., Stich, S., Rose, D., Chatterjee, A., Karasawa, K., Struchiner, N., Sirker, S., Usui, N. and Hashimoto, T. (2017). Gettier across cultures. \emph{No\^us}, 51(3), 645--664.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Plato(1997)]{PlatoTht} Plato (1997). \emph{Theaetetus}. Trans. M.~J. Levett, rev. M. Burnyeat. In J.~M. Cooper (Ed.), \emph{Plato: Complete Works}. Hackett.
+\bibitem[Pritchard(2005)]{Pritchard2005} Pritchard, D. (2005). \emph{Epistemic Luck}. Oxford University Press.
+\bibitem[Pritchard(2012)]{Pritchard2012} Pritchard, D. (2012). Anti-luck virtue epistemology. \emph{The Journal of Philosophy}, 109(3), 247--279.
+\bibitem[Russell(1948)]{Russell1948} Russell, B. (1948). \emph{Human Knowledge: Its Scope and Limits}. George Allen \& Unwin.
+\bibitem[Shope(1983)]{Shope1983} Shope, R.~K. (1983). \emph{The Analysis of Knowing: A Decade of Research}. Princeton University Press.
+\bibitem[Skyrms(1967)]{Skyrms1967} Skyrms, B. (1967). The explication of \enquote{X knows that p}. \emph{The Journal of Philosophy}, 64(12), 373--389.
+\bibitem[Sosa(1999)]{Sosa1999} Sosa, E. (1999). How to defeat opposition to Moore. \emph{Philosophical Perspectives}, 13, 141--153.
+\bibitem[Sosa(2007)]{Sosa2007} Sosa, E. (2007). \emph{A Virtue Epistemology: Apt Belief and Reflective Knowledge, Volume I}. Oxford University Press.
+\bibitem[Starmans and Friedman(2012)]{StarmansFriedman2012} Starmans, C. and Friedman, O. (2012). The folk conception of knowledge. \emph{Cognition}, 124(3), 272--283.
+\bibitem[Unger(1968)]{Unger1968} Unger, P. (1968). An analysis of factual knowledge. \emph{The Journal of Philosophy}, 65(6), 157--170.
+\bibitem[Vogel(1987)]{Vogel1987} Vogel, J. (1987). Tracking, closure, and inductive knowledge. In S. Luper-Foy (Ed.), \emph{The Possibility of Knowledge: Nozick and His Critics}. Rowman \& Littlefield.
+\bibitem[Warfield(2005)]{Warfield2005} Warfield, T.~A. (2005). Knowledge from falsehood. \emph{Philosophical Perspectives}, 19, 405--416.
+\bibitem[Weinberg et~al.(2001)]{WeinbergNicholsStich2001} Weinberg, J.~M., Nichols, S. and Stich, S. (2001). Normativity and epistemic intuitions. \emph{Philosophical Topics}, 29(1--2), 429--460.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\bibitem[Zagzebski(1994)]{Zagzebski1994} Zagzebski, L. (1994). The inescapability of Gettier problems. \emph{The Philosophical Quarterly}, 44(174), 65--73.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,216 @@
+\documentclass{situationist-preprint}
+
+\title{Sleeping Beauty: The Thirder Solution}
+\msid{EPI-18-a}
+\msfamily{EPI-18}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/EPI/EPI\_18.lean}
+\mskeywords{Sleeping Beauty; self-locating belief; centered worlds; Principal Principle; indifference; conditionalization}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Sleeping Beauty is put to sleep on Sunday. A fair coin is tossed. If it lands heads, she is woken on Monday only; if tails, she is woken on Monday and on Tuesday, and her memory of the Monday waking is erased before Tuesday. On waking, what should her credence be that the coin landed heads? We defend the answer one third, for the standard protocol in which her awakenings are subjectively indistinguishable. The argument uses two principles, a restricted Principal Principle and a principle of indifference among indistinguishable centres within a world, and shows that the halfer answer violates the first. We then show that the residual disagreement between thirders and halfers does not concern credences about the coin but the content of self-locating belief, and that once this content is fixed the halfer position has no remaining support. The main result is formalized in Lean.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 stated the main result without restriction. The present version states it for the standard protocol, in which Beauty's awakenings are subjectively indistinguishable (Assumption~\ref{a:indist}), and adds Section~5 on protocols in which this condition fails. The argument for the standard protocol is unchanged.
+
+\section{The problem}
+
+The Sleeping Beauty problem was introduced into the philosophical literature by \citet{Elga2000}, who argued that Beauty's credence in heads on waking should be one third. \citet{Lewis2001} replied that it should be one half, on the ground that Beauty learns nothing on waking that she did not know on Sunday, when her credence in heads was one half. The exchange produced a large literature, which has not converged. Thirders include \citet{Dorr2002} and \citet{Titelbaum2013}; halfers include \citet{Lewis2001} and, in a modified form, \citet{Bostrom2007}; \citet{Meacham2008} defends a third position, the double-halfer view, on which Beauty's credence in heads is one half both on waking and after she learns that it is Monday.
+
+The problem is philosophically important because it is the simplest case in which an agent's uncertainty is partly self-locating: Beauty is uncertain not only about which world she is in (heads or tails) but about where she is within it (Monday or Tuesday). Standard Bayesian epistemology was developed for uncertainty about worlds, and the Sleeping Beauty problem tests whether it extends to uncertainty about location. The answer one gives to the problem constrains, and is constrained by, one's account of how self-locating evidence bears on non-self-locating hypotheses \citep{Elga2004,Titelbaum2013}.
+
+\subsection{Origins}
+
+The problem has a precursor in decision theory. \citet{PiccioneRubinstein1997} introduced the absent-minded driver, who must take the second of two identical exits to get home and who cannot remember, at an exit, whether he has passed one already. They showed that the driver's optimal plan, chosen in advance, and the action that seems optimal at an exit, given his beliefs there, can come apart, and that the divergence depends on how the driver assigns probabilities to being at each exit. The paradox was taken up in a symposium in the same journal, and the question of how to assign credence to indistinguishable situations within a single history, which is the question of the Sleeping Beauty problem, emerged there as the crux. The Sleeping Beauty problem isolates that question by removing the decision: Beauty has nothing to do but form a credence.
+
+The problem is now a standard test case not only for theories of self-locating belief but for anthropic reasoning in cosmology (Section~7) and for decision theory under imperfect recall (Section~9). Its persistence as a disputed case owes something to the fact that it can be posed in a few sentences, and something to the fact that the two answers each have a simple and apparently compelling argument.
+
+We distinguish three possible centred situations in which Beauty may find herself on waking:
+\begin{itemize}
+\item $H_1$: the coin landed heads and it is Monday;
+\item $T_1$: the coin landed tails and it is Monday;
+\item $T_2$: the coin landed tails and it is Tuesday.
+\end{itemize}
+Her credence in heads on waking is her credence in $H_1$. The thirder holds that $P(H_1) = P(T_1) = P(T_2) = 1/3$; the halfer that $P(H_1) = 1/2$ and $P(T_1) = P(T_2) = 1/4$.
+
+\section{Framework}
+
+We model self-locating belief with centred worlds, following \citet{Lewis1979}. A centred world is a pair $\langle w, c\rangle$ consisting of a possible world and a centre, here a time at which the subject is awake. A credence function on waking assigns probabilities to sets of centred worlds. Hypotheses about the coin, such as \emph{heads}, are sets of centred worlds that contain every centre of the worlds they contain.
+
+\begin{assumption}[Indistinguishability]\label{a:indist}
+Beauty's evidence at each of her awakenings is the same. In particular, nothing in her experience on waking allows her to tell a Monday waking from a Tuesday waking.
+\end{assumption}
+
+Assumption~\ref{a:indist} is part of the standard description of the protocol, and is secured by the memory erasure. Section~5 considers what happens when it fails.
+
+\begin{principle}[Restricted Principal Principle]\label{p:pp}
+If an agent knows that the objective chance of a proposition $A$ at a time $t$ is $x$, and has no inadmissible evidence about $A$, then her credence in $A$, conditional on her being located at a time at which that chance is current, is $x$ \citep{Lewis1980}.
+\end{principle}
+
+\begin{principle}[Restricted indifference]\label{p:ind}
+If two centres in the same possible world are subjectively indistinguishable for an agent, then her credence that she is located at the first equals her credence that she is located at the second \citep{Elga2004}.
+\end{principle}
+
+Principle~\ref{p:ind} is restricted in two ways. It applies only within a world, so it says nothing about how credence is to be divided between worlds; and it applies only to centres that are indistinguishable, so it is silent whenever the subject has evidence that bears differently on the two locations.
+
+\section{The argument}
+
+\begin{lemma}\label{l:monday}
+$P(H_1 \mid H_1 \vee T_1) = 1/2$.
+\end{lemma}
+
+\begin{proof}
+Suppose Beauty is told, on waking, that it is Monday, so that she is located at $H_1$ or $T_1$. The protocol allows the coin to be tossed on Monday evening, after her Monday waking, without changing anything else. If it is so tossed, then on Monday the chance of heads is one half and the toss has not yet occurred, so that Beauty has no inadmissible evidence about it. By Principle~\ref{p:pp}, her credence in heads conditional on its being Monday is one half. Since the timing of the toss makes no difference to Beauty's evidence, the same conditional credence is required when the coin is tossed on Sunday.
+\end{proof}
+
+\begin{lemma}\label{l:tails}
+$P(T_1) = P(T_2)$.
+\end{lemma}
+
+\begin{proof}
+$T_1$ and $T_2$ are centres of the same world, and by Assumption~\ref{a:indist} they are subjectively indistinguishable. By Principle~\ref{p:ind}, Beauty's credence that she is located at $T_1$ equals her credence that she is located at $T_2$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Under the standard protocol, Beauty's credence in heads on waking is $1/3$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:monday}, $P(H_1) = P(T_1)$. By Lemma~\ref{l:tails}, $P(T_1) = P(T_2)$. Since $H_1$, $T_1$ and $T_2$ are exclusive and exhaustive, their credences sum to $1$, so each is $1/3$. Beauty's credence in heads is $P(H_1) = 1/3$.
+\end{proof}
+
+\subsection{Formalization}
+
+The algebraic core of the argument is formalized in \nolinkurl{Philosophy/EPI/EPI_18.lean}. Credences are represented by natural-number weights $h_1, t_1, t_2$ proportional to $P(H_1)$, $P(T_1)$ and $P(T_2)$, so that no real arithmetic is needed. Lemmas~\ref{l:monday} and \ref{l:tails} enter as hypotheses $h_1 = t_1$ and $t_1 = t_2$, and the theorem states that $3h_1 = h_1 + t_1 + t_2$, that is, that the normalized credence in $H_1$ is one third.
+
+\begin{lstlisting}
+theorem thirder (h1 t1 t2 : Nat)
+    (monday : h1 = t1) (indifference : t1 = t2) :
+    3 * h1 = h1 + t1 + t2 := by omega
+\end{lstlisting}
+
+The formalization certifies the step from the two lemmas to the theorem. The lemmas themselves depend on Principles~\ref{p:pp} and \ref{p:ind}, which are philosophical premises and are discussed in the next section.
+
+\section{Against the halfer}
+
+The halfer accepts Principle~\ref{p:ind} in the form of Lemma~\ref{l:tails}: there is no reason to think it more likely that it is Monday than Tuesday, given tails. Halfers therefore assign $P(H_1) = 1/2$ and $P(T_1) = P(T_2) = 1/4$. It follows that $P(H_1 \mid H_1 \vee T_1) = (1/2)/(3/4) = 2/3$. On being told that it is Monday, a halfer Beauty who conditionalizes should have credence $2/3$ in heads.
+
+\begin{proposition}\label{p:halfer}
+A halfer who conditionalizes on the information that it is Monday violates Principle~\ref{p:pp}.
+\end{proposition}
+
+\begin{proof}
+By the argument of Lemma~\ref{l:monday}, Principle~\ref{p:pp} requires credence $1/2$ in heads conditional on its being Monday, when the coin is tossed on Monday evening and therefore has a current chance of one half. The halfer's credence is $2/3$.
+\end{proof}
+
+\citet{Lewis2001} accepted this consequence and concluded that Beauty has inadmissible evidence on Monday: she knows that the coin, if tossed later, will be tossed in a world in which she has a Monday waking. This is ad hoc. Her evidence about the future toss is the same as that of any agent who knows the protocol, and no other agent is thought to have inadmissible evidence about a fair coin that has not yet been tossed.
+
+\begin{objection}
+The double halfer avoids Proposition~\ref{p:halfer} by denying that Beauty should conditionalize: her credence in heads is one half on waking and remains one half when she learns that it is Monday \citep{Meacham2008}.
+\end{objection}
+
+\begin{reply}
+The double halfer gives up conditionalization for self-locating information. This is a serious cost, since conditionalization is the main dynamical principle of Bayesian epistemology, and the only motivation for abandoning it here is to preserve the halfer's answer. Moreover, the double halfer's credences on waking and on learning that it is Monday cannot both be represented by a single probability function over $\{H_1, T_1, T_2\}$ updated by any standard rule, which leaves the view without an account of what Beauty's credences on waking are credences about.
+\end{reply}
+
+\begin{objection}
+Beauty learns nothing new on waking. Her credence in heads on Sunday was one half; she has acquired no evidence about the coin since; so it should still be one half.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the only evidence relevant to heads is evidence about the coin. But on waking Beauty acquires self-locating evidence: she learns that she is now awake, and the proportion of awake-centres that are heads-centres is one third. Self-locating evidence can bear on non-self-locating hypotheses whenever the number of centres at which the evidence is had differs between the hypotheses \citep{Elga2004,Titelbaum2013}. This is precisely the case here.
+\end{reply}
+
+\begin{objection}
+Betting considerations favour the thirder only because tails-bets are settled twice. They show nothing about credence.
+\end{objection}
+
+\begin{reply}
+We agree that betting arguments are inconclusive in this case, because the payoff structure depends on how bets at different awakenings are counted \citep{Hitchcock2004}. The argument of Section~3 makes no appeal to betting.
+\end{reply}
+
+\section{Protocols in which indistinguishability fails}
+
+The main result depends on Assumption~\ref{a:indist}. Two kinds of variation show why.
+
+In the first, Beauty can tell Monday from Tuesday, for example because a calendar is visible on waking. Then her credence is not divided among $H_1$, $T_1$ and $T_2$ at all: on a Monday waking she knows she is at $H_1$ or $T_1$, and her credence in heads is one half by Lemma~\ref{l:monday}; on a Tuesday waking she knows the coin landed tails. The problem disappears.
+
+In the second, the awakenings differ in a way that does not reveal the day. In the \enquote{technicolor} variant, the room is painted red on one day and blue on the other, the assignment being random and unknown to Beauty \citep{Titelbaum2013}. Assumption~\ref{a:indist} fails, since Beauty's evidence on waking differs between awakenings, but the difference is uninformative about the day. The argument of Section~3 can then be run conditional on the colour she sees, and yields credence one third in heads. The thirder answer is therefore robust under variations that preserve the absence of evidence about the day, which is the role Assumption~\ref{a:indist} plays in the main argument.
+
+Protocols with imperfect memory erasure, in which Beauty may or may not remember the Monday waking, fall between these cases. The credence in heads then depends on the probability of erasure failure, and ranges between one third and one half. We do not pursue these protocols here.
+
+\section{Generalization}
+
+The argument does not depend on the number of awakenings. Consider the protocol in which Beauty is woken once on heads and $n$ times on tails, with memory erasure between tails awakenings. Write $H_1$ for the heads waking and $T_1, \dots, T_n$ for the tails wakings.
+
+\begin{theorem}\label{t:general}
+Under the $n$-awakening protocol with indistinguishable awakenings, Beauty's credence in heads on waking is $1/(n+1)$.
+\end{theorem}
+
+\begin{proof}
+The argument of Lemma~\ref{l:monday} applies to the first waking: conditional on its being the first day, credence in heads is one half, so $P(H_1) = P(T_1)$. Principle~\ref{p:ind} applies to every pair of tails wakings, so $P(T_1) = \dots = P(T_n)$. The $n+1$ centres are exclusive and exhaustive, so each has credence $1/(n+1)$.
+\end{proof}
+
+Theorem~\ref{t:general} makes vivid a feature of the thirder answer that many find counterintuitive: as $n$ grows, Beauty becomes nearly certain on waking that the coin landed tails, although she knows the coin is fair. This is sometimes presented as a reductio \citep{Bostrom2007}. We do not think it is one. The case is structurally the same as one in which a fair coin decides whether one or $n$ people are created in indistinguishable rooms, and a person who finds herself in a room asks how the coin landed. Most people who consider this case judge that she should favour tails, and the judgement is correct for the same reason: the hypothesis on which there are more observers in her epistemic situation is, other things equal, the one more likely to be true of her. Theorem~\ref{t:general} is also formalized in the module.
+
+\begin{lstlisting}
+theorem general (n h : Nat) (t : Nat → Nat)
+    (monday : h = t 0) (indifference : ∀ i, i < n → t i = t 0) :
+    (n + 1) * h = h + tailsTotal t n
+\end{lstlisting}
+
+\section{Relation to anthropic reasoning}
+
+The connection just noted is not accidental. The thirder answer to the Sleeping Beauty problem is the answer recommended by what \citet{Bostrom2002} calls the Self-Indication Assumption, on which one's existence as an observer is evidence for hypotheses on which there are more observers. The halfer answer is the one recommended by the Self-Sampling Assumption without self-indication, on which one should reason as if one were randomly selected from the observers who actually exist, given the hypothesis.
+
+The two assumptions are known to have uncomfortable consequences in cosmological applications. Self-indication favours hypotheses on which the universe contains vast numbers of observers, which some regard as an objection; self-sampling without self-indication supports the Doomsday argument, which most regard as a stronger objection. Our argument does not depend on either assumption in its general form. It uses only Principle~\ref{p:ind}, which concerns centres within a single world, and a restricted Principal Principle, which concerns chances. Neither licenses inferences about how many observers there are in worlds the agent has no chance-based reason to favour. The thirder answer to the Sleeping Beauty problem is therefore compatible with a cautious view of anthropic reasoning in cosmology, and should not be rejected on the ground that self-indication, applied without restriction, has implausible consequences.
+
+\section{Diachronic coherence}
+
+A final objection concerns Beauty's credences over time. On Sunday her credence in heads is one half; on waking it is one third; on being told that it is Monday it returns to one half. Some find this pattern incoherent: credence falls without any evidence against heads, and rises again on evidence that seems irrelevant to the coin.
+
+The pattern is coherent once self-locating information is taken into account. Between Sunday and her waking, Beauty does not acquire evidence about the coin, but she does lose information about her location: on Sunday she knew what day it was; on waking she does not. Loss of self-locating information is not a case to which conditionalization applies, and there is no requirement that credence about the world remain constant through it \citep{Arntzenius2003}. When she is told that it is Monday, she regains self-locating information, and conditionalizes on it in the ordinary way, which takes her credence in heads from $1/3$ to $1/2$:
+\[
+P(H_1 \mid H_1 \vee T_1) = \frac{1/3}{1/3 + 1/3} = \frac{1}{2}.
+\]
+The thirder's credences thus obey conditionalization wherever conditionalization applies, and change in the only other way available, through the loss of self-locating information. The halfer, by contrast, must either violate the Principal Principle on Monday (Proposition~\ref{p:halfer}) or, in the double-halfer version, refuse to conditionalize on information that is gained in the ordinary way.
+
+\section{Decision-theoretic consequences}
+
+Credences guide action, and one may test the thirder answer by asking what Beauty should do on waking. Suppose she is offered, at each waking, a bet that pays one unit if the coin landed heads and costs $c$ units otherwise. With credence $1/3$ in heads, the bet has positive expected value at a waking if and only if $c < 1/2$.
+
+The halfer may object that this verdict reflects the payoff structure rather than Beauty's credence: the bet is offered twice on tails and once on heads, so an agent who accepts it at every waking pays $2c$ on tails and gains $1$ on heads, and accepting is a good policy if and only if $c < 1/2$, whatever her credence. \citet{Briggs2010} examined the diachronic betting arguments in detail and showed that each answer can be paired with a decision theory under which Beauty's betting dispositions are coherent, so that neither answer exposes her to a guaranteed loss when it is combined with the right theory of choice. The betting behaviour therefore does not by itself decide between the answers, and we do not rest the case for the thirder answer on it.
+
+What the betting considerations do show is that the choice between the answers cannot be made independently of a choice in decision theory, and that a complete theory of self-locating belief must be paired with an account of how an agent should act when she knows that she may face the same choice at several indistinguishable times. The thirder answer, which treats each waking as a separate occasion with its own credences, fits naturally with a decision theory that evaluates acts at the occasion at which they are performed; the halfer answer fits with one that evaluates policies across occasions. We regard the first pairing as the more natural, but we offer this as a consideration of fit, not as an argument, and the case for the thirder answer remains that of Sections~3 and 4.
+
+\section{What the disagreement is about}
+
+If Lemmas~\ref{l:monday} and \ref{l:tails} hold, the thirder answer follows by arithmetic, as the formalization confirms. A halfer must therefore reject one of the two lemmas, and in practice halfers reject Lemma~\ref{l:monday}, on the ground that the Principal Principle does not apply to self-locating credences in the way assumed. The disagreement is then about the content of Beauty's credence on waking: whether it is a credence about which world she is in, which should match the chance of heads, or a credence about which centre she occupies, which should be distributed over centres. The view defended here is that it is the latter, since Beauty's question on waking is \enquote{where am I?} as much as \enquote{which world is this?}; and once this is granted, Principle~\ref{p:pp} applies to the conditional credence of Lemma~\ref{l:monday}, and the thirder answer follows.
+
+\section{Conclusion}
+
+Under the standard protocol, Beauty's credence in heads on waking should be one third. The argument requires a restricted Principal Principle and a principle of indifference within worlds, both of which halfers accept in other contexts; the halfer answer is consistent with them only at the cost of abandoning conditionalization or positing inadmissible evidence. The residual disagreement concerns the content of self-locating belief, and the case for treating that content as centred is, we have argued, decisive.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arntzenius(2003)]{Arntzenius2003} Arntzenius, F. (2003). Some problems for conditionalization and reflection. \emph{The Journal of Philosophy}, 100(7), 356--370.
+\bibitem[Bostrom(2002)]{Bostrom2002} Bostrom, N. (2002). \emph{Anthropic Bias: Observation Selection Effects in Science and Philosophy}. Routledge.
+\bibitem[Bostrom(2007)]{Bostrom2007} Bostrom, N. (2007). Sleeping Beauty and self-location: A hybrid model. \emph{Synthese}, 157(1), 59--78.
+\bibitem[Briggs(2010)]{Briggs2010} Briggs, R. (2010). Putting a value on Beauty. In T.~S. Gendler and J. Hawthorne (Eds.), \emph{Oxford Studies in Epistemology}, Vol.~3 (pp.~3--34). Oxford University Press.
+\bibitem[Dorr(2002)]{Dorr2002} Dorr, C. (2002). Sleeping Beauty: In defence of Elga. \emph{Analysis}, 62(4), 292--296.
+\bibitem[Elga(2000)]{Elga2000} Elga, A. (2000). Self-locating belief and the Sleeping Beauty problem. \emph{Analysis}, 60(2), 143--147.
+\bibitem[Elga(2004)]{Elga2004} Elga, A. (2004). Defeating Dr. Evil with self-locating belief. \emph{Philosophy and Phenomenological Research}, 69(2), 383--396.
+\bibitem[Hitchcock(2004)]{Hitchcock2004} Hitchcock, C. (2004). Beauty and the bets. \emph{Synthese}, 139(3), 405--420.
+\bibitem[Lewis(1979)]{Lewis1979} Lewis, D. (1979). Attitudes de dicto and de se. \emph{The Philosophical Review}, 88(4), 513--543.
+\bibitem[Lewis(1980)]{Lewis1980} Lewis, D. (1980). A subjectivist's guide to objective chance. In R.~C. Jeffrey (Ed.), \emph{Studies in Inductive Logic and Probability}, Vol.~II (pp.~263--293). University of California Press.
+\bibitem[Lewis(2001)]{Lewis2001} Lewis, D. (2001). Sleeping Beauty: Reply to Elga. \emph{Analysis}, 61(3), 171--176.
+\bibitem[Meacham(2008)]{Meacham2008} Meacham, C.~J.~G. (2008). Sleeping Beauty and the dynamics of de se beliefs. \emph{Philosophical Studies}, 138(2), 245--269.
+\bibitem[Piccione and Rubinstein(1997)]{PiccioneRubinstein1997} Piccione, M. and Rubinstein, A. (1997). On the interpretation of decision problems with imperfect recall. \emph{Games and Economic Behavior}, 20(1), 3--24.
+\bibitem[Titelbaum(2013)]{Titelbaum2013} Titelbaum, M.~G. (2013). \emph{Quitting Certainties: A Bayesian Framework Modeling Degrees of Belief}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

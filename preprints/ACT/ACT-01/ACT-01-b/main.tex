@@ -1,0 +1,108 @@
+\documentclass{situationist-preprint}
+
+\title{The Consequence Argument Fails at Rule Beta}
+\msid{ACT-01-b}
+\msfamily{ACT-01}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Companion manuscript}
+\mskeywords{consequence argument; Rule Beta; transfer principles; agglomeration; compatibilism; determinism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The consequence argument concludes that if determinism is true, no one has any choice about anything. Its premises, that no one has a choice about the remote past or the laws of nature, are hard to deny; its weight rests on a transfer rule, Rule Beta, which carries the absence of choice from the past and the laws to their consequences. We argue that the argument fails at this rule. The original rule entails an agglomeration principle that has clear counterexamples. Repaired rules avoid those counterexamples, but on every reading of \enquote{no choice} on which the premises are compelling, their validity is equivalent, given those premises, to the incompatibilism they are meant to establish. The argument therefore gives no independent support to its conclusion.
+\end{abstract}
+
+\section{The argument and its rule}
+
+ACT-01-a argues that free will is compatible with determinism and with indeterminism, and it locates the defence of the first claim in the reply to the consequence argument. In van Inwagen's modal formulation \citep{vanInwagen1983}, let $Np$ abbreviate \enquote{$p$, and no one has, or ever had, any choice about whether $p$}. Let $H$ be a proposition describing the state of the world at a time before any agent existed, $L$ the conjunction of the laws of nature, and $A$ any true proposition about an action. Determinism gives $\nec((H \wedge L) \to A)$. The argument uses two rules:
+\begin{description}
+\item[Rule Alpha:] from $\nec p$ infer $Np$;
+\item[Rule Beta:] from $Np$ and $N(p \to q)$ infer $Nq$.
+\end{description}
+With the premise $N(H \wedge L)$, Rule Alpha yields $N((H \wedge L) \to A)$, and Rule Beta yields $NA$. The premise $N(H \wedge L)$ is the only substantive input besides determinism, and almost everyone grants it. If the argument fails, it fails at a rule, and Rule Alpha is not in dispute. The issue is Rule Beta.
+
+\section{The original rule}
+
+\begin{definition}\label{d:agg}
+\emph{Agglomeration} is the rule: from $Np$ and $Nq$ infer $N(p \wedge q)$.
+\end{definition}
+
+\begin{proposition}\label{p:betaagg}
+Rule Alpha and Rule Beta jointly entail Agglomeration.
+\end{proposition}
+
+\begin{proof}
+Suppose $Np$ and $Nq$. Since $\nec(p \to (q \to (p \wedge q)))$, Rule Alpha gives $N(p \to (q \to (p \wedge q)))$. Rule Beta applied to $Np$ gives $N(q \to (p \wedge q))$, and applied again with $Nq$ gives $N(p \wedge q)$.
+\end{proof}
+
+\begin{proposition}\label{p:aggfails}
+Agglomeration is invalid.
+\end{proposition}
+
+\begin{proof}
+The counterexample is due to \citet{McKayJohnson1996}. An agent could have tossed a fair coin at $t$ but did not. Let $p$ be \enquote{the coin does not land heads at $t$} and $q$ \enquote{the coin does not land tails at $t$}. Both are true. She has no choice about $p$: had she tossed, whether the coin landed heads would have been a matter of chance, not of anything she could do. For the same reason she has no choice about $q$. But she had a choice about $p \wedge q$, the coin's landing neither way, since she could have tossed it, and its landing one way or the other is then guaranteed.
+\end{proof}
+
+\begin{corollary}\label{c:beta}
+Rule Beta is invalid.
+\end{corollary}
+
+\begin{proof}
+Rule Alpha is valid on any reading of $N$, since no one has a choice about a necessary truth. By Propositions~\ref{p:betaagg} and~\ref{p:aggfails}, Rule Beta is not.
+\end{proof}
+
+The counterexample uses no premise about determinism, and it does not assume compatibilism: it turns only on the platitude that one has no choice about the outcome of a fair chance process one does not control. This is what makes Corollary~\ref{c:beta} the decisive first step. The original argument is invalid on grounds every party accepts.
+
+\section{Repaired rules}
+
+Several strengthened or modified transfer principles have been discussed in the literature \citep{Widerker1987, Huemer2000}. The simplest repair replaces the second premise of Rule Beta with strict implication, which blocks the derivation in Proposition~\ref{p:betaagg}:
+\begin{description}
+\item[Rule Beta$\,\Box$:] from $Np$ and $\nec(p \to q)$ infer $Nq$.
+\end{description}
+This rule is not subject to the coin counterexample, since $p \wedge q$ is not entailed by either conjunct. It suffices for the consequence argument, which needs only $N(H \wedge L)$ and $\nec((H \wedge L) \to A)$. The question is whether it is valid. We argue that it cannot be shown valid without assuming the conclusion.
+
+\begin{proposition}\label{p:equiv}
+Given the premise that $N(H \wedge L)$ is true for every deterministic world and every choice of $H$ before the existence of agents, Rule Beta$\,\Box$ restricted to deterministic worlds holds if and only if no one in a deterministic world has a choice about anything.
+\end{proposition}
+
+\begin{proof}
+If the restricted rule holds, then for any truth $A$ of a deterministic world, $N(H \wedge L)$ and $\nec((H \wedge L) \to A)$ give $NA$. Conversely, if no one in a deterministic world has a choice about anything, then $Nq$ holds for every truth $q$ of such a world, and the rule, whose conclusion is of this form, never leads from truths to a falsehood there.
+\end{proof}
+
+Proposition~\ref{p:equiv} does not show that Rule Beta$\,\Box$ is invalid. It shows that, once the premise about the past and the laws is granted, the rule and incompatibilism stand or fall together within the deterministic worlds, which are the only ones in which the argument is applied. An argument whose only contested step is equivalent to its conclusion relative to its uncontested premises gives the conclusion no support. Whatever reason one has to accept the rule must be a reason to accept incompatibilism directly.
+
+\paragraph{Readings of \enquote{no choice}.} The point can be sharpened by distinguishing readings of $N$, following \citet{Lewis1981}. On the \emph{causal} reading, one has a choice about $p$ if one can do something that would cause or constitute $p$'s being false. On this reading $N(H \wedge L)$ is plainly true: no one can cause a law to be broken or the remote past to be different. On the \emph{counterfactual} reading, one has a choice about $p$ if one can do something such that, were one to do it, $p$ would be false. On this reading, an agent in a deterministic world who can act otherwise in the sense of ACT-01-a (Definition~2.2) can do something such that, had she done it, $H \wedge L$ would have been false; so $N(H \wedge L)$ is precisely what the compatibilist denies, and the argument begs the question at its premise. On the causal reading the premise is true, but the conclusion that the agent cannot cause her action to be otherwise does not follow: her action is something she causes, and the counterfactual dependence of her action on her reasons, which is what reasons-responsiveness requires, is untouched by the fact that she does not cause the laws to be broken. On that reading, Rule Beta$\,\Box$ transfers the absence of choice from what the agent does not cause to what she does, and the transfer fails. The argument has a reading on which its premise is true and a reading on which its rule is valid, but no reading on which both are.
+
+\section{Objections and replies}
+
+\begin{objection}[Intuitive support]
+Rule Beta$\,\Box$ is intuitively compelling. If I can do nothing about $p$, and $p$ guarantees $q$, how could I do anything about $q$?
+\end{objection}
+
+\begin{reply}
+The intuition is strongest where $q$ is causally downstream of $p$ without passing through the agent, as when an asteroid's path guarantees an impact. It is weakest, and no longer neutral, where the route from $p$ to $q$ passes through the agent's own deliberation. Intuitions about transfer in cases of the first kind cannot support the rule in cases of the second kind, which are the only ones at issue, without assuming that deliberation is no different from an asteroid's flight. That assumption is the incompatibilist thesis.
+\end{reply}
+
+\begin{objection}[Other formulations]
+The consequence argument can be stated without modal operators, as an argument about the ability to render propositions false, and that version needs no Rule Beta.
+\end{objection}
+
+\begin{reply}
+Van Inwagen's non-modal versions rely on principles that play Beta's role: that if one cannot render the past and the laws false, and they entail $A$, one cannot render $A$ false \citep{vanInwagen1983}. These are transfer principles under another name, and the dilemma of the previous section applies to them unchanged.
+\end{reply}
+
+\section{Conclusion}
+
+The consequence argument fails at its transfer rule. The original Rule Beta is invalid by a counterexample that uses no premise about determinism. Its repaired versions are equivalent, given the argument's uncontested premises, to the incompatibilism the argument is meant to prove, and on no single reading of \enquote{no choice} are both the premise and the rule acceptable. This removes the main argument against the first half of the independence assumption on which the compatibility thesis of ACT-01-a rests (Assumption~3.1 and Theorem~3.2 there), and so supports the family's conclusion that free will is compatible with determinism.
+
+\begin{thebibliography}{9}
+\bibitem[Huemer(2000)]{Huemer2000} Huemer, M. (2000). Van Inwagen's consequence argument. \emph{The Philosophical Review}, 109(4), 525--544.
+\bibitem[Lewis(1981)]{Lewis1981} Lewis, D. (1981). Are we free to break the laws? \emph{Theoria}, 47(3), 113--121.
+\bibitem[McKay and Johnson(1996)]{McKayJohnson1996} McKay, T.~J. and Johnson, D. (1996). A reconsideration of an argument against compatibilism. \emph{Philosophical Topics}, 24(2), 113--122.
+\bibitem[van Inwagen(1983)]{vanInwagen1983} van Inwagen, P. (1983). \emph{An Essay on Free Will}. Clarendon Press.
+\bibitem[Widerker(1987)]{Widerker1987} Widerker, D. (1987). On an argument for incompatibilism. \emph{Analysis}, 47(1), 37--41.
+\end{thebibliography}
+
+\end{document}

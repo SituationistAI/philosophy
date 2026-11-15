@@ -1,0 +1,345 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+
+\title{Toward an Inventory of Fundamental Universals}
+\msid{MET-02-b}
+\msfamily{MET-02}
+\msdiscipline{Metaphysics}
+\mstype{Companion manuscript}
+\mskeywords{sparse universals; fundamental quantities; determinables; Standard Model; gauge symmetry; spacetime interval; dimensional analysis; anomaly cancellation; conservation laws}
+
+\input{gen/summary.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MET-02-a proves that there are few genuine universals and that every other local qualitative property is constructed from them, but leaves open which properties are genuine. We settle the question for the quantities of current physics, provisionally where physics itself is unsettled. From the principles of MET-02-a we derive four tests: invariance under the symmetries of the laws, a role in the fundamental laws, instantiation by distinct objects, and independence from other candidates. Applied to \vvNK{} candidates, the tests find \vvNKgenuine{} genuine entries: the metric, spin, chirality, weak hypercharge and its gauge field, the weak isospin and colour representations, electric charge and the electromagnetic field. Mass and the couplings are among \vvNKprovisional{} provisional entries, and \vvNKconstructed{} are constructed, among them spatial distance, duration, energy and every SI base quantity but mass. The computed volumes check the Standard Model's charges exactly, verify anomaly cancellation, search exhaustively for anomaly-free hypercharges, enumerate gauge-invariant operators to dimension \vvDmaxC{}, and analyze the dimensions of \vvNF{} SI quantities and \vvNG{} laws.
+\end{abstract}
+
+\section{Introduction}\label{s:intro}
+
+\subsection{The question left open}
+
+MET-02 holds that universals exist and are sparse: there are few genuine universals, and all other properties are constructed from them. The principal manuscript, MET-02-a, argues for this from four principles about resemblance and proves that a local qualitative property supervenes on the genuine properties exactly when it is constructed from them by negation, conjunction, disjunction and projection along genuine relations (MET-02-a, Theorems~5.5 and~5.6). It does not say which properties are genuine. Its Section~9 assigns that question to physics and to the theory of space and time, and it supplies a test that any proposed inventory must pass: the inventory must ground resemblance in the way its Principles~P2 and~P3 require, and it must be complete in the sense of its Principle~P4.
+
+The present manuscript applies that test. The task is not to do physics. We take the content of current physics as given: the Standard Model of particle physics \citep{Glashow1961,Weinberg1967} and general relativity, both approximately true in the sense defended in SCI-02. The task is to read off from that content which of its quantities are genuine universals in the sense of MET-02-a, Definition~3.1, which are constructed in the sense of its Definition~3.4, and which cannot yet be classified. The result is an inventory: a table of candidates with a verdict for each, a construction for each constructed entry, and a statement of the open question for each provisional one.
+
+The project is old in outline. \citet{Armstrong1978} held that the identification of universals is a task for total science, and \citet{Lewis1983} that physics has the job of providing an inventory of the perfectly natural properties. Neither carried it out, and the literature since has mostly discussed whether the inventory contains determinables \citep{Wilson2012}, whether it contains magnitudes as such or only relations among their values \citep{Mundy1987,Dasgupta2013,Eddon2013}, whether its members are pointlike \citep{Butterfield2006}, and whether gauge potentials belong in it \citep{Healey2007,Maudlin2007}. These questions recur below, but they recur as questions about particular entries, where the formal structure of the physics constrains the answer.
+
+\subsection{Thesis and plan}
+
+We argue for three claims. First, the principles of MET-02-a yield four operational tests for physical quantities, which we state in Section~\ref{s:tests}. Second, applied to current physics, the tests deliver a short list of genuine entries: the spacetime metric, the Lorentz representation labels (spin and chirality), the labels of the gauge representations (weak hypercharge, weak isospin multiplet, colour representation), electric charge, and the field strengths of the two abelian gauge fields, hypercharge and electromagnetism. Everything else in a list of \vvNK{} candidates is constructed from these, from the provisional entries, and from physical and logical parameters, or it is not a qualitative property at all; and the constructions never pass through the non-qualitative entries, as MET-02-a's Theorem~5.1 requires. Third, the entries whose status the tests cannot settle are few and identifiable, and the reasons are open questions in physics: chiefly whether mass is a genuine magnitude or is constructed from couplings to the Higgs field, and what the gauge-invariant content of the non-abelian gauge fields is.
+
+The argument is in Sections~\ref{s:tests} to~\ref{s:provisional}: the tests (Section~\ref{s:tests}), quantities and their dimensions (Section~\ref{s:quantities}), spacetime (Section~\ref{s:spacetime}), matter (Section~\ref{s:matter}), symmetry and conservation (Section~\ref{s:conservation}), the inventory theorem (Section~\ref{s:theorem}) and the provisional entries (Section~\ref{s:provisional}). Section~\ref{s:entries} discusses particular entries of the computed volumes, Section~\ref{s:objections} answers objections and Section~\ref{s:limits} states what the result does not establish. The computed volumes, Appendices~A to~K, contain the inventory and the checks on which it rests; each opens with a preface stating what is computed and how it is checked.
+
+\section{From the principles to tests}\label{s:tests}
+
+MET-02-a defines a genuine property as a respect in which things resemble one another by their own nature (Definition~3.1), and constrains the class by four principles: resemblance discriminates (P1), it is preserved by every reshuffle (P2), it requires a shared genuine property (P3), and the genuine properties fix every local qualitative property (P4). A universal is a genuine property instantiated by at least two distinct objects. The principles do not mention physics. To apply them we need a bridge from the formal features of physical theories to the features the principles constrain.
+
+\begin{definition}\label{d:candidate}
+A \emph{candidate} is a quantity, relation or kind that figures in current physics or in ordinary description of physical things. A \emph{determinable} candidate is a family of mutually exclusive \emph{determinates}, one of which is had by each bearer, such as the family of determinate charges. A candidate is \emph{genuine} if its determinates are genuine properties or relations in the sense of MET-02-a, Definition~3.1.
+\end{definition}
+
+\begin{assumption}[Redescription]\label{a:redescription}
+Two descriptions related by a symmetry of the fundamental laws (a Poincar\'e transformation, a diffeomorphism or a gauge transformation) represent the same physical situation.
+\end{assumption}
+
+Assumption~\ref{a:redescription} is the standard reading of the passive symmetries of a theory. For gauge transformations it is the view that gauge freedom is descriptive redundancy, which \citet{Earman2004} defends and which Elitzur's theorem that local gauge symmetries cannot be spontaneously broken supports \citep{Elitzur1975}; for diffeomorphisms it is the moral most authors draw from the hole argument \citep{EarmanNorton1987}. Nothing in the inventory requires the stronger claim that symmetry-related \emph{worlds} are identical; Assumption~\ref{a:redescription} concerns descriptions.
+
+\begin{definition}[The four tests]\label{d:tests}
+A candidate passes the test of
+\begin{enumerate}[label=(\roman*),nosep]
+\item \emph{invariance} if its determinate for a given bearer is the same in all descriptions related by a symmetry of the fundamental laws;
+\item \emph{nomic role} if it figures in the fundamental dynamical laws, that is, in the Lagrangian or field equations of current physics, and not merely in derived laws;
+\item \emph{instantiation} if its determinates are had by distinct objects;
+\item \emph{independence} if it is not expressed by a construction, in the sense of MET-02-a, Definition~3.4, from other candidates and from the parameters of Definition~\ref{d:param}.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}\label{d:param}
+A \emph{parameter} of a construction is one of the following: a physical reference body, given by its worldline or a congruence of worldlines, to which the bearer is related (FRAME); the relations of a spacetime point to its neighbours, along which derivatives are constructed by projection and infinitary Boolean combination (NBHD); a numerical quantifier, which is logical (COUNT); a relation to perceivers (PERC).
+\end{definition}
+
+The parameters are not additions to the inventory. A reference body is an object, and to construct the energy of a particle relative to a body is to project along the genuine relation that holds between the particle's worldline and the body's. A numerical quantifier is permutation invariant and therefore logical, in the sense of LOG-16 that MET-02-a adopts. Derivatives raise a question about locality to which we return in Section~\ref{s:spacetime}.
+
+\begin{lemma}[Invariance is necessary]\label{l:invariance}
+A candidate that fails the test of invariance is not genuine. If its determinates are fixed relative to a physical reference body, the relativized candidate is constructed by projection; if no physical relatum fixes them, the candidate is not a qualitative property.
+\end{lemma}
+
+\begin{proof}
+Suppose a candidate $C$ fails the test, so that some bearer $x$ has determinate $c_1$ in one description and $c_2 \neq c_1$ in another, related to the first by a symmetry of the laws. By Assumption~\ref{a:redescription} the descriptions represent the same situation, in which $x$ has whatever genuine properties it has. A genuine property is had or not had by $x$ in a situation, so the two descriptions cannot disagree about it; hence neither \enquote{$x$ has $c_1$} nor \enquote{$x$ has $c_2$} attributes a genuine property, and $C$ is not genuine. Suppose next that the determinate is fixed once a physical reference body $b$ is given, as the energy of a particle is fixed once an observer's worldline is given. Then the property of having $c_1$ relative to $b$ is preserved by every symmetry of the laws, which carry $b$ along with $x$, and it is expressed by projection along the relation between $x$ and $b$; it is constructed, in the extrinsic form of MET-02-a, Remark~5.7. If no physical body fixes the determinate, as nothing physical fixes the colour index of a quark, the candidate varies with the description alone, and by MET-02-a, Theorem~5.1, it is not constructed, since constructions are preserved by every symmetry.
+\end{proof}
+
+\begin{assumption}[Nomic evidence]\label{a:nomic}
+Genuine candidates figure in the fundamental laws, and a candidate that passes the four tests of Definition~\ref{d:tests} is genuine unless current physics leaves an open question about its status.
+\end{assumption}
+
+The first half of Assumption~\ref{a:nomic} is the half of Lewis's theory of naturalness that MET-12 relies on: the best system is stated in the vocabulary of the genuine properties, so that the genuine properties are among those the laws are stated in. It is the commitment, recorded in MET-12, that the best system's vocabulary consists of the genuine properties and relations MET-02 supplies. The second half is defeasible and inductive. It says that, once descriptive redundancy (invariance), derivative status (independence) and mere non-instantiation have been removed, the vocabulary of the fundamental laws is the best evidence we have of what grounds resemblance. Where the physics itself is unsettled, the verdict is \emph{provisional}, and the inventory records the open question.
+
+\begin{proposition}[Interdefinability]\label{p:interdef}
+If candidates $C_1, \dots, C_k$ are related by an invertible relation, so that each is constructed from the others, independence cannot select among them; at most a generating subset is genuine, and the choice of subset is made by the tests of invariance and nomic role.
+\end{proposition}
+
+\begin{proof}
+If each $C_i$ is constructed from the rest, every $C_i$ fails the test of independence relative to the full set, and a set of genuine candidates from which the others are constructed must be a generating set. If a candidate in the set fails invariance, it is not genuine by Lemma~\ref{l:invariance}, whichever generating set is chosen; if two generating sets both pass invariance and nomic role, nothing in MET-02-a's principles selects between them, and the verdict is provisional.
+\end{proof}
+
+Proposition~\ref{p:interdef} matters for the gauge charges, where $Q = T_3 + Y/2$ relates electric charge, weak isospin component and hypercharge (Section~\ref{s:matter}), and for the determinables, where a determinable and its determinates are interdefinable only with infinitary means (Section~\ref{s:quantities}).
+
+\section{Quantities, determinables and dimensions}\label{s:quantities}
+
+\subsection{Determinates genuine, determinables constructed}
+
+MET-02-a, Section~6, takes the view that best fits physics: the determinates of a fundamental quantity are genuine and the determinable is the disjunction of its determinates, with the resemblance among determinates grounded in genuine relations among them. We adopt the view for every determinable in the inventory (Appendix~J). \citet{Johnson1921} introduced the terminology; \citet{Funkhouser2006} gives the modern account of determination dimensions, and \citet{Wilson2012} argues that some determinables are fundamental, an argument we answer in Objection~\ref{o:determinables}.
+
+The view has a consequence that the computed volumes make concrete. For a discrete determinable, the determinates that occur are few and structured: the elementary electric charges in Appendix~A take only the seven values $-1$, $-2/3$, $-1/3$, $0$, $1/3$, $2/3$ and $1$, and the hypercharges are fixed up to an overall scale by the requirement that the gauge theory be anomaly-free (Appendix~B). For a continuous determinable such as the metric interval, the determinates are uncountably many but organized by a single quantity. In both cases the determinates are \enquote{few} in the sense MET-02-a gives the word: they fall under few quantities, and their pattern is rigid.
+
+\subsection{Magnitudes, units and ratios}
+
+A determinate mass is not a number. The number $2$ attaches to a mass only relative to a unit, and the unit is a conventional choice; what does not depend on the choice are the ratios between determinates and the relations among quantities of different kinds that the laws express. Whether determinate magnitudes are genuine monadic properties, as the absolutist holds, or are constructed from genuine relations of ratio among their bearers, as the comparativist holds, is a live dispute \citep{Mundy1987,Dasgupta2013,Eddon2013}. The inventory does not settle it, and need not: on either view the \emph{quantity} is genuine or not as a whole, and the unit-relative numerical value is constructed. The Buckingham $\Pi$ theorem \citep{Buckingham1914,Bridgman1922} gives the precise sense in which physical relations are independent of units: every dimensionally homogeneous relation among $k$ quantities whose dimension matrix has rank $r$ can be restated as a relation among $k-r$ dimensionless products. Appendix~H computes these products for \vvNH{} physical problems, and Appendix~G verifies the dimensional homogeneity of \vvNG{} laws, the condition under which the theorem applies.
+
+\subsection{Dimension does not track genuineness}\label{ss:si}
+
+The International System of Units distinguishes seven base quantities from the derived ones \citep{BIPM2019}. The distinction is not a distinction between genuine and constructed quantities, and the computed volumes show this in both directions. Of the seven SI base quantities, none is genuine: length and time are constructed from the metric and a reference body (entries K.06 and K.07), electric current from charge, duration and counting (K.69), temperature from energy and entropy (K.61), amount of substance from counting alone (K.68), luminous intensity from radiant power and a relation to human perceivers (K.67), and mass is provisional (K.24). Conversely, electric charge, which the SI derives from current and time, is genuine (F.101 and K.35). The SI base quantities were chosen for the convenience and stability of measurement, not to mark the joints of nature, and since 2019 the system itself has been defined by fixing the numerical values of seven constants rather than by choosing base units (Appendix~F, Table~F.0).
+
+Dimensions are also too coarse to individuate quantities. Appendix~I groups the \vvNF{} SI quantities of Appendix~F into \vvNIclasses{} dimension classes, of which \vvNImulti{} contain more than one quantity; torque and energy share a dimension (I.06), as do frequency, angular velocity, activity and the Hubble parameter (I.07). A dimension is a homomorphic image of the quantity, not the quantity, and the inventory is an inventory of quantities.
+
+\section{Spacetime}\label{s:spacetime}
+
+\subsection{The metric and the interval}
+
+Special relativity replaced two quantities, spatial distance and temporal duration, by one, the interval, and general relativity replaced the interval between distant events by the metric field, which assigns an interval to infinitesimally separated events. The tests apply directly. The metric passes invariance (it is a tensor; its components are description-relative but the field is not), nomic role (it is the dynamical variable of the Einstein field equations), instantiation and independence. It is genuine (K.01). The interval between finitely separated events in a curved spacetime is constructed from the metric along connecting geodesics (K.02); in flat spacetime it is the familiar $s^2 = c^2\Delta t^2 - |\Delta\vec x|^2$.
+
+Spatial distance and temporal duration fail invariance (Appendix~E, Table~E.2: under each of \vvNEboosts{} exact rational boosts, $s^2$ is preserved while $\Delta t$ ranges widely, and for every spacelike pair with $\Delta t > 0$ some boost below light speed reverses the temporal order). By Lemma~\ref{l:invariance} they are not genuine; relativized to a physical reference body, they are constructed by projection (K.06, K.07). The same holds of distant simultaneity (K.08). This bears on MET-02-a's treatment of Black's spheres, whose discerning relation, being two miles apart, is described there as a genuine relation whose reality MET-22-a defends. The verdict here refines that description without retracting it: the spheres share a rest frame, and the distance between them is the interval between simultaneous events in that frame, a construction from the metric and from the spheres' own worldlines. No frame external to the spheres enters, and the relation remains irreflexive, symmetric and qualitative, which is all that MET-28-a's weak discernibility requires. The genuine relation underlying it is the metric.
+
+\subsection{Curvature and the problem of pointillisme}
+
+Curvature is constructed from the metric, but by differentiation, which is not among the operations of MET-02-a, Definition~3.4. The Riemann tensor at a point is fixed by the metric in every neighbourhood of the point, so it is not local in the strict sense of MET-02-a's Principle~P4; it is extrinsic, involving relations to neighbouring points. MET-02-a, Remark~5.7, covers such properties: they are constructed by projection along genuine relations together with infinitary conjunction and disjunction. The parameter NBHD of Definition~\ref{d:param} records this. \citet{Butterfield2006} argues against \enquote{pointillisme}, the view that the fundamental quantities are all intrinsic to points, on the ground that velocity, and with it much of mechanics, involves neighbourhoods. The inventory agrees with Butterfield's diagnosis and locates the non-pointlike element in a single genuine relation: the metric relates neighbouring points, and the derivative quantities are constructed by projection along it (K.10 to K.13, K.25, K.28).
+
+Two candidates are not qualitative. Christoffel symbols are not tensors and vanish in suitable coordinates at any point (K.09), and coordinate position (K.14) varies with the coordinate system; neither has a physical relatum, so by Lemma~\ref{l:invariance} neither is a property. The time orientation of spacetime is provisional (K.04): physics does not settle whether the distinction between past and future light cones is genuine or is constructed from entropy gradients, and the inventory records the question rather than answering it.
+
+\section{Matter}\label{s:matter}
+
+\subsection{Representation labels}
+
+Wigner's classification of the unitary representations of the Poincar\'e group \citep{Wigner1939} makes mass and spin the labels of elementary particle types: they are the values of the invariant Casimir operators. Spin passes all four tests and is genuine (K.20), as is chirality, the label of the Weyl representation on which the electroweak interaction acts differently (K.21). Helicity and spin components along an axis are constructed by projection on a momentum or an axis (K.22, K.23). Mass is provisional, for a reason given in Section~\ref{s:provisional}.
+
+The gauge group of the Standard Model is $SU(3)\times SU(2)\times U(1)$, and its fields are given by their representations (Appendix~A, Table~A.1). The representation labels pass invariance, since a gauge transformation does not change the representation a field carries; they figure in the Lagrangian; they are instantiated by many particles; and none is constructed from the others. Weak hypercharge, the weak isospin multiplet and the colour representation are genuine (K.30 to K.32). The component labels within a representation are another matter. The colour index of a quark, red, green or blue, is changed by an $SU(3)$ gauge transformation and has no physical relatum; it is not a qualitative property (K.33). The same holds of the components of the non-abelian field strengths and of the Higgs doublet (K.41, K.43).
+
+\subsection{Electric charge}
+
+The convention adopted throughout is $Q = T_3 + Y/2$, on which the left-handed quark doublet has $Y = 1/3$ and the right-handed electron $Y = -2$. Appendix~A checks the relation for all \vvNQcheck{} listed states against independently entered charges. By Proposition~\ref{p:interdef}, the relation does not by itself say which of $Q$, $T_3$ and $Y$ is genuine. Invariance decides. Hypercharge is the charge of a factor of the gauge group and commutes with the whole group. Electric charge is the charge of the electromagnetic $U(1)$, the gauge symmetry that remains exact in the actual vacuum; it is conserved, it is had by every gauge-invariant state of the theory below the electroweak scale, and it figures in the laws of every level of composition from quarks to crystals. The isospin component $T_3$ of a state, by contrast, is meaningful only relative to the direction the vacuum selects, and is constructed as $Q - Y/2$ (K.34). Our verdict is that $Q$ and $Y$ are both genuine, with the weak isospin multiplet label, and that $T_3$ is constructed. The verdict on $Q$ assumes that the unbroken electromagnetic symmetry and its charge are well defined in the broken phase, as the standard treatments assume; we return to the assumption in Section~\ref{s:provisional}. The same reasoning applies to the gauge fields. The electromagnetic field tensor is the field strength of the exact symmetry and is gauge invariant; in the electroweak theory it is a combination, fixed by the vacuum, of the hypercharge field strength and a component of the weak isospin field strength. The hypercharge field strength is gauge invariant as well, and figures in the Lagrangian. Both are genuine (K.36, K.44), and the third member of the relation, the neutral component of the weak field, is constructed from them or, as a component of a non-abelian field strength, is not qualitative (K.41).
+
+Two exact regularities among these labels appear in Appendix~A. Every listed state satisfies $Y/2 + t/3 + n/2 \in \mathbb{Z}$, where $t$ is the triality of its colour representation and $n$ is $1$ for an $SU(2)$ doublet and $0$ otherwise; this is the condition under which a $\mathbb{Z}_6$ subgroup acts trivially on all fields, so that the gauge group is really $(SU(3)\times SU(2)\times U(1))/\mathbb{Z}_6$ \citep{BaezHuerta2010}. Every state's charge is congruent to $2t/3$ modulo $1$, so that every colour singlet has integer charge, which Appendix~D confirms for all \vvNDbaryons{} three-quark, \vvNDmesons{} quark--antiquark and \vvNDtwo{} four- and five-constituent contents. These are relations among genuine determinates, of the kind MET-02-a says ground the resemblance among determinates: they make the determinate charges a rigid system rather than a list.
+
+\subsection{Kinds and generations}
+
+The Standard Model's fermions come in three generations with identical gauge representations (Appendix~A, Table~A.3). The program groups the \vvNKinds{} listed kinds by their genuine determinates other than mass and finds that every fermion kind lies in a class of exactly three, one from each generation: the electron, muon and tau share every gauge and Lorentz label and differ only in mass. On the view of MET-27 adopted in MET-02-a, a natural kind is a cluster of co-instantiated genuine determinates and is constructed as their conjunction. The electron kind is so constructed (K.81), and so is the proton, from its constituents' charges and baryon number and the colour-singlet condition (K.82). The generation label is constructed from the mass determinates, or from the Yukawa couplings that fix them (K.48). Whether the electron and the muon differ in a genuine respect thus depends on the status of mass, which is provisional.
+
+\section{Symmetry and conservation}\label{s:conservation}
+
+Noether's theorem associates a conserved quantity with each continuous symmetry of a Lagrangian, and it is tempting to take conservation as a mark of genuineness. The inventory shows that it is not. Energy is conserved and constructed (K.26); electric charge is conserved and genuine (K.35); baryon number and lepton number are conserved by every process in the renormalizable part of the Standard Model and are constructed by counting fields (K.49, K.50). Conservation is a fact about the laws, and on the account of MET-12 laws are theorems of the best system; a quantity conserved by the laws need be no more genuine than any other theorem's subject matter.
+
+Appendix~C makes the point precise for baryon and lepton number. It enumerates every field content without derivatives, built from one generation of Standard Model fields and the Higgs doublet, that admits a singlet under the gauge and Lorentz groups, up to mass dimension \vvDmaxC{}. Of the \vvNCtested{} candidate contents examined, \vvNCfound{} admit a singlet, \vvNCreps{} up to hermitian conjugation. Every content of dimension at most $4$ conserves $B$ and $L$; the single content of dimension $5$, the Weinberg operator $L^2H^2$, violates $L$ by two units \citep{Weinberg1979}; every content of dimension $6$ conserves $B-L$ \citep{Weinberg1979,WilczekZee1979}; and every content satisfies $(\Delta B - \Delta L)/2 \equiv d \pmod 2$, the relation that \citet{Kobach2016} proved in general. Conservation of $B$ and $L$ is therefore \emph{accidental}: it follows from the genuine gauge charges together with the restriction to renormalizable interactions, and fails as soon as higher-dimensional terms are admitted. Appendix~B adds that $B+L$ has a mixed anomaly with $SU(2)$, so that it is violated non-perturbatively even at dimension $4$ \citep{tHooft1976}, while $B-L$ is free of mixed gauge anomalies, and free of all anomalies once a right-handed neutrino is added. These results bear on the verdicts only by confirming them: $B$, $L$ and $B-L$ are constructed, and their conservation, exact or approximate, is explained by the genuine inventory together with the form of the laws.
+
+Symmetry plays a second role. Gauge invariance requires that the anomaly coefficients vanish \citep{GrossJackiw1972,BouchiatEtAl1972}, and Witten's global anomaly requires an even number of $SU(2)$ doublets \citep{Witten1982}. Appendix~B verifies the cancellation exactly for one and for three generations, and then reverses the question: it searches all assignments of hypercharges to the five multiplets of one generation in a grid of \vvNBthreeSpace{} assignments and finds that every anomaly-free assignment is either proportional to the Standard Model's (up to the relabelling of $u^c$ and $d^c$) or belongs to a degenerate family with $y_Q = 0$, as \citet{GengMarshak1989} showed. The hypercharge determinates are not an arbitrary list: given the representation content, the symmetry of the theory fixes them up to scale. With a right-handed neutrino the constraint loosens, and within the grid of Table~B.4 every solution with $y_Q \neq 0$ is a combination of $Y$ and $B-L$. That is one reason the existence of the right-handed neutrino is provisional in the inventory and not a detail (K.57).
+
+\section{The inventory theorem}\label{s:theorem}
+
+We can now state the result. The verdict on each candidate is computed from four recorded features: whether it passes invariance (Y), fails it with a physical relatum (F) or without one (N); whether it figures in the fundamental laws; whether its determinates are instantiated by distinct objects; and whether a construction or an open question is recorded. The verdict rule is: provisional if an open question is recorded; otherwise constructed if a construction is given; otherwise not qualitative if invariance fails; otherwise genuine, in which case the program checks that the three remaining tests are passed.
+
+\begin{theorem}[Inventory]\label{t:inventory}
+Given Assumptions~\ref{a:redescription} and~\ref{a:nomic} and the physics recorded in Appendices~A to~E, the \vvNK{} candidates of Appendix~K divide as follows: \vvNKgenuine{} are genuine, namely the metric (K.01), spin (K.20), chirality (K.21), weak hypercharge (K.30), the weak isospin multiplet (K.31), the colour representation (K.32), electric charge (K.35), the electromagnetic field tensor (K.36) and the hypercharge field strength (K.44); \vvNKprovisional{} are provisional; \vvNKconstructed{} are constructed; and \vvNKnonqual{} are not qualitative properties. Every constructed candidate has a construction whose basic ingredients are genuine or provisional candidates and parameters of Definition~\ref{d:param}, and no construction passes through a non-qualitative candidate.
+\end{theorem}
+
+\begin{proof}
+The genuine entries pass the four tests: invariance and nomic role are argued in Sections~\ref{s:spacetime} and~\ref{s:matter}, instantiation is evident from Appendices~A and~E, and independence holds because no construction of them from the other candidates is available, the only candidate relations among them, $Q = T_3 + Y/2$ and the corresponding relation among the field strengths, having been resolved in favour of $Q$ and $Y$, and of their fields, by Proposition~\ref{p:interdef}. By Assumption~\ref{a:nomic} they are genuine. Each constructed entry is given a construction in Appendix~K, and Lemma~\ref{l:invariance} applies to those that fail invariance. The program checks that the construction graph is acyclic, that every ingredient is an entry or a parameter, that the support of every constructed entry consists of genuine and provisional entries and parameters, and that no ingredient is non-qualitative. The non-qualitative entries fail invariance without a physical relatum, so Lemma~\ref{l:invariance} applies.
+\end{proof}
+
+\begin{corollary}\label{c:si}
+No SI base quantity is genuine, and some SI derived quantities are.
+\end{corollary}
+
+\begin{proof}
+Appendix~F maps each of the \vvNF{} SI quantities either to an entry of Appendix~K or to its SI defining relation, and computes its verdict and support. The seven base quantities map to K.06, K.07, K.24, K.69, K.61, K.68 and K.67, of which six are constructed and one, mass, is provisional; electric charge, the elementary charge and spin angular momentum, which are derived quantities, map to genuine entries.
+\end{proof}
+
+The sense in which the genuine universals are few is the sense MET-02-a gives: they fall under few quantities. Nine entries, of which three are fields and six are labels with a handful of determinates each, generate, with the provisional entries and the parameters, every constructed entry in the inventory. The maximal depth of a construction in Appendix~K is \vvNKmaxdepth{}, and \vvNKframe{} constructed entries require a reference body. The relative naturalness of a constructed property, which MET-02-a measures by the complexity of its shortest construction and on which EPI-04 rests the projectibility of \enquote{green}, can be read off in outline from the depth and support columns: energy is one projection away from four-momentum, grue (K.74) passes through perceived colour, a frame and a time.
+
+\section{What remains provisional}\label{s:provisional}
+
+\vvNKprovisional{} entries are provisional, and the reasons fall into four groups.
+
+\emph{Mass and the couplings.} Mass is a Casimir label of the Poincar\'e group and enters every dynamical law, which would make it genuine (K.24). But in the Standard Model the masses of the charged fermions and of the weak bosons are products of couplings and the vacuum value of the Higgs field, which would make each determinate mass constructed from a coupling (K.46) and a field magnitude (K.45). Which reading is correct depends on whether the couplings are themselves genuine relations among fields or are, as a Humean reading of MET-12 suggests, parameters of the best system that are fixed by the whole mosaic; and the gauge couplings vary with the energy scale at which they are defined (K.47). The neutrino masses add a further question, whether they are of Dirac or Majorana type (K.56), and the mixing among generations is fixed by the Yukawa matrices (K.55). We record all of these as provisional. Nothing else in the inventory depends on the outcome except the constructed entries whose support contains K.24, which are listed as such in Appendix~F.
+
+\emph{The gauge-invariant content of gauge fields.} The electromagnetic potential is not qualitative (K.39), but whether the genuine content of electromagnetism is exhausted by the field tensor or includes non-local holonomies, as the Aharonov--Bohm effect has suggested to some, is disputed \citep{Healey2007}; we record the holonomy as provisional (K.40). For the non-abelian fields the components of the field strength are not qualitative, and the gauge-invariant quantities, such as Wilson loops, are the natural candidates for their genuine content (K.42). Whether the scalar sector is elementary or composite is open (K.45). Our verdict on electric charge also assumes that the unbroken electromagnetic symmetry and its charge are well defined in the broken phase; the assumption is standard, but the gauge-invariant description of the Higgs mechanism raises questions about it that the inventory does not settle.
+
+\emph{Possible additions.} Right-handed neutrinos (K.57) and the graviton (K.58) are candidates whose existence is not established, and the cosmological constant may be a constant of law or an energy density of the vacuum (K.60).
+
+\emph{Global structure.} The time orientation (K.04) and intrinsic parity (K.54) remain open for the reasons given above.
+
+The provisional entries are not evidence against the sparse theory. They are points at which current physics does not yet say what the genuine magnitudes are. SCI-20 argues that a final theory, a complete set of laws stated in the vocabulary of the genuine magnitudes, probably exists, on the evidence that the stock of magnitudes has been stable across scales; the provisional entries are where that stock is still being determined.
+
+\section{Entries discussed}\label{s:entries}
+
+\emph{K.35 and K.34: electric charge and isospin component.} The two are interdefinable through hypercharge, and the verdict that one is genuine and the other constructed rests on invariance and on the vacuum: $Q$ is the charge of the exact symmetry, $T_3$ the projection of a weak isospin multiplet on the direction the vacuum selects. Table~A.2 verifies $Q = T_3 + Y/2$ for every listed state, including the conjugate states, the $W$ bosons and the four Higgs states, so the construction $T_3 := Q - Y/2$ is exact on the whole spectrum.
+
+\emph{A.3.07 and its class.} The electron's construction in Table~A.3 conjoins spin $1/2$, charge $-1$, the colour singlet, the doublet label $(1/2,-1)$, the singlet hypercharge $-2$ and a determinate mass. Its indiscernibility class under the genuine labels has three members, the electron, muon and tau. The case shows how much weight the provisional status of mass carries: if mass were constructed from couplings to the Higgs field, the three kinds would differ only in a relational respect, their coupling to one field.
+
+\emph{B.3 and B.4.} The \vvNBthree{} anomaly-free assignments found among \vvNBthreeSpace{} candidates in Table~B.3 are, apart from the trivial one, of two kinds: \vvNBthreeSM{} proportional to the Standard Model's, up to the exchange of $u^c$ and $d^c$, and a degenerate family in which quarks of the doublet and leptons carry no hypercharge. The degenerate family gives the electron no charge and is excluded by observation; the Standard Model family is fixed up to scale. Table~B.4 shows how this rigidity is lost when a right-handed neutrino is added: \vvNBfour{} solutions in a grid of \vvNBfourSpace{} assignments, of which \vvNBfourLin{} are combinations of $Y$ and $B-L$.
+
+\emph{C.006 and C.007.} The Weinberg content $L^2 H^2$ is the only content of dimension $5$ and violates lepton number by two units; $Q^3 L$ is the first of the four baryon-number-violating contents of dimension $6$, all of which conserve $B-L$. The entries illustrate the claim of Section~\ref{s:conservation}: the quantities whose conservation they violate are constructed, and their conservation at low dimension is a consequence of the genuine charges.
+
+\emph{E.2 and F.004.} Every spacelike entry of Table~E.2 with $\Delta t > 0$ lists the minimal squared speed $v^2_{\min} = \Delta t^2/|\Delta \vec x|^2$ of a frame in which the pair is simultaneous; beyond it the temporal order reverses. Table~F, entry F.004, shows electric current, an SI base quantity, constructed from charge, duration, distance and counting, with a support that includes a reference body.
+
+\emph{H.13.} The fine-structure constant appears as the single dimensionless group of $e$, $\varepsilon_0$, $\hbar$ and $c$, computed as $\varepsilon_0\hbar c/e^2$, which is $1/(4\pi\alpha)$. Since its value does not depend on units, it is the kind of fact on which absolutists and comparativists about quantity agree: a ratio among determinates, fixed by nature.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Fundamental determinables]\label{o:determinables}
+\citet{Wilson2012} argues that physics treats some determinables, such as mass and charge, as fundamental: the laws quantify over determinates without naming them, and the determinable is what the law is about. If so, the determinables, not the determinates, should be in the inventory.
+\end{objection}
+
+\begin{reply}
+The laws quantify over determinates, and a law that holds for every determinate charge is a law about the structure of the charge determinates: their order, their additivity and the relations among them. MET-02-a grounds resemblance among determinates in exactly those genuine relations, so the content Wilson finds in the determinable is present in the genuine structure of the determinates. The determinable adds the disjunction, which is constructed. The inventory therefore lists quantities, and its verdict on a quantity is a verdict on its determinates and their relations (Appendix~J); calling the quantity \enquote{fundamental} is compatible with this, provided it does not mean that the disjunction itself grounds resemblance.
+\end{reply}
+
+\begin{objection}[The verdict on length is absurd]
+Length is the paradigm of a physical magnitude. A theory on which it is constructed, while an internal label such as hypercharge is genuine, has turned the ordinary order of explanation upside down.
+\end{objection}
+
+\begin{reply}
+The ordinary order is the order of acquaintance, and relativity reversed it for length a century ago. Spatial distance is relative to a frame (Table~E.2), and the frame-independent relation from which it is constructed is the interval. Nothing is lost: the distance between two bodies at rest relative to each other is constructed from the interval and their own worldlines alone, and it is real, qualitative and as projectible as before. What changes is only its place in the order of construction. That hypercharge is genuine is no stranger than that spin is: both are labels of representations of symmetry groups of the laws.
+\end{reply}
+
+\begin{objection}[Theory-relativity]
+The inventory is relative to the Standard Model and general relativity, which are known to be incomplete. A list of universals indexed to a theory is a list of a theory's predicates, not of nature's joints.
+\end{objection}
+
+\begin{reply}
+The inventory is relative to current physics in the way any empirical result is relative to current evidence. Its verdicts are justified by the tests of Definition~\ref{d:tests}, which are theory-neutral, applied to the best available theories, which SCI-02 argues are approximately true; where the theories themselves are unsettled, the verdict is provisional. It is also robust in a specific way: the genuine entries are representation labels and fields that have survived every change of the dynamical laws since their introduction, and a successor theory that embeds the present gauge group in a larger one would typically construct the present labels as projections of its own, which the inventory's method would register as a revision of verdicts, not of method.
+\end{reply}
+
+\begin{objection}[A bottom level after all]
+An inventory of fundamental universals seems to describe a fundamental level, contrary to MET-10, which holds that every level is grounded in a lower one.
+\end{objection}
+
+\begin{reply}
+The inventory lists quantities, not objects or levels. MET-10 concerns the grounding of wholes in their parts and is, as its principal states, compatible with a fixed stock of genuine properties instantiated at every level. The quantities of the inventory are instantiated by quarks and by crystals, by fields and by the bodies they compose; nothing in the inventory says that the quarks have no parts. SCI-20 draws the same distinction for laws: a final theory is a complete set of laws about the genuine magnitudes, not a description of a bottom level of objects.
+\end{reply}
+
+\begin{objection}[Dispositions]
+Charge is plausibly a power, a disposition to accelerate in fields. If the genuine properties are dispositional, the distinction between genuine and constructed collapses into the distinction between powers and their manifestations.
+\end{objection}
+
+\begin{reply}
+MET-11 holds that dispositions are real and irreducible properties, and MET-02-a states that the sparse theory is neutral on whether the genuine properties are categorical or dispositional. The inventory is neutral in the same way: nothing in the four tests asks whether charge is a power. Construction is supervenience together with definability, not reduction to a categorical base, so that a constructed disposition such as solubility (K.75) remains irreducible in MET-11's sense while being constructed in ours.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The inventory does not establish that the list of genuine universals is complete. Completeness, in the sense of MET-02-a's Principle~P4, requires that every local qualitative property supervene on the genuine ones, and the inventory checks only that each candidate we have listed is genuine, provisional, constructed or non-qualitative. Phenomena that current physics does not describe, such as dark matter, may require further genuine quantities. Nor does the inventory settle the dispute between absolutism and comparativism about quantity, or the dispute between categorical and dispositional readings of the genuine properties. It does not decide the provisional entries, and in particular it does not decide whether mass is genuine. Finally, the verdicts depend on Assumptions~\ref{a:redescription} and~\ref{a:nomic}; a reader who rejects the reading of gauge freedom as redundancy will count some non-qualitative entries as genuine, and a reader who rejects nomic evidence will need another route from physics to metaphysics.
+
+\section{Conclusion}
+
+Applied to current physics, the principles of MET-02-a select a short list of genuine universals: the metric, spin and chirality, weak hypercharge and its field, the weak isospin and colour representations, electric charge and the electromagnetic field. Every other candidate in an inventory of \vvNK{} is constructed from these, from a small set of provisional entries and from physical and logical parameters, or is an artefact of description. Distance, duration, energy, temperature and every SI base quantity but mass are constructed; mass and the couplings are provisional. The computed volumes check the physics on which these verdicts rest and confirm that the genuine determinates form a rigid system. The universals are few, and the rest are constructed from them.
+
+\begin{thebibliography}{99}
+
+\bibitem[Armstrong(1978)]{Armstrong1978}
+Armstrong, D.~M. (1978). \emph{Universals and Scientific Realism}. 2 vols. Cambridge: Cambridge University Press.
+
+\bibitem[Baez and Huerta(2010)]{BaezHuerta2010}
+Baez, J. and Huerta, J. (2010). The algebra of grand unified theories. \emph{Bulletin of the American Mathematical Society} 47: 483--552.
+
+\bibitem[BIPM(2019)]{BIPM2019}
+Bureau International des Poids et Mesures (2019). \emph{The International System of Units (SI)}. 9th edition. S\`evres: BIPM.
+
+\bibitem[Bouchiat et~al.(1972)]{BouchiatEtAl1972}
+Bouchiat, C., Iliopoulos, J. and Meyer, Ph. (1972). An anomaly-free version of Weinberg's model. \emph{Physics Letters B} 38: 519--523.
+
+\bibitem[Bridgman(1922)]{Bridgman1922}
+Bridgman, P.~W. (1922). \emph{Dimensional Analysis}. New Haven: Yale University Press.
+
+\bibitem[Buckingham(1914)]{Buckingham1914}
+Buckingham, E. (1914). On physically similar systems; illustrations of the use of dimensional equations. \emph{Physical Review} 4: 345--376.
+
+\bibitem[Butterfield(2006)]{Butterfield2006}
+Butterfield, J. (2006). Against pointillisme about mechanics. \emph{British Journal for the Philosophy of Science} 57: 709--753.
+
+\bibitem[Dasgupta(2013)]{Dasgupta2013}
+Dasgupta, S. (2013). Absolutism vs comparativism about quantity. \emph{Oxford Studies in Metaphysics} 8.
+
+\bibitem[Earman(2004)]{Earman2004}
+Earman, J. (2004). Laws, symmetry, and symmetry breaking: invariance, conservation principles, and objectivity. \emph{Philosophy of Science} 71: 1227--1241.
+
+\bibitem[Earman and Norton(1987)]{EarmanNorton1987}
+Earman, J. and Norton, J. (1987). What price spacetime substantivalism? The hole story. \emph{British Journal for the Philosophy of Science} 38: 515--525.
+
+\bibitem[Eddon(2013)]{Eddon2013}
+Eddon, M. (2013). Fundamental properties of fundamental properties. \emph{Oxford Studies in Metaphysics} 8.
+
+\bibitem[Elitzur(1975)]{Elitzur1975}
+Elitzur, S. (1975). Impossibility of spontaneously breaking local symmetries. \emph{Physical Review D} 12: 3978--3982.
+
+\bibitem[Funkhouser(2006)]{Funkhouser2006}
+Funkhouser, E. (2006). The determinable--determinate relation. \emph{No\^us} 40.
+
+\bibitem[Geng and Marshak(1989)]{GengMarshak1989}
+Geng, C.~Q. and Marshak, R.~E. (1989). Uniqueness of quark and lepton representations in the standard model from the anomalies viewpoint. \emph{Physical Review D} 39.
+
+\bibitem[Glashow(1961)]{Glashow1961}
+Glashow, S.~L. (1961). Partial-symmetries of weak interactions. \emph{Nuclear Physics} 22: 579--588.
+
+\bibitem[Gross and Jackiw(1972)]{GrossJackiw1972}
+Gross, D.~J. and Jackiw, R. (1972). Effect of anomalies on quasi-renormalizable theories. \emph{Physical Review D} 6: 477--493.
+
+\bibitem[Healey(2007)]{Healey2007}
+Healey, R. (2007). \emph{Gauging What's Real: The Conceptual Foundations of Contemporary Gauge Theories}. Oxford: Oxford University Press.
+
+\bibitem[Johnson(1921)]{Johnson1921}
+Johnson, W.~E. (1921). \emph{Logic, Part I}. Cambridge: Cambridge University Press.
+
+\bibitem[Kobach(2016)]{Kobach2016}
+Kobach, A. (2016). Baryon number, lepton number, and operator dimension in the Standard Model. \emph{Physics Letters B} 758.
+
+\bibitem[Lewis(1983)]{Lewis1983}
+Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy} 61: 343--377.
+
+\bibitem[Maudlin(2007)]{Maudlin2007}
+Maudlin, T. (2007). \emph{The Metaphysics Within Physics}. Oxford: Oxford University Press.
+
+\bibitem[Mundy(1987)]{Mundy1987}
+Mundy, B. (1987). The metaphysics of quantity. \emph{Philosophical Studies} 51: 29--54.
+
+\bibitem[{'t Hooft}(1976)]{tHooft1976}
+'t~Hooft, G. (1976). Symmetry breaking through Bell--Jackiw anomalies. \emph{Physical Review Letters} 37: 8--11.
+
+\bibitem[Weinberg(1967)]{Weinberg1967}
+Weinberg, S. (1967). A model of leptons. \emph{Physical Review Letters} 19: 1264--1266.
+
+\bibitem[Weinberg(1979)]{Weinberg1979}
+Weinberg, S. (1979). Baryon- and lepton-nonconserving processes. \emph{Physical Review Letters} 43: 1566--1570.
+
+\bibitem[Wigner(1939)]{Wigner1939}
+Wigner, E. (1939). On unitary representations of the inhomogeneous Lorentz group. \emph{Annals of Mathematics} 40: 149--204.
+
+\bibitem[Wilczek and Zee(1979)]{WilczekZee1979}
+Wilczek, F. and Zee, A. (1979). Operator analysis of nucleon decay. \emph{Physical Review Letters} 43: 1571--1573.
+
+\bibitem[Wilson(2012)]{Wilson2012}
+Wilson, J.~M. (2012). Fundamental determinables. \emph{Philosophers' Imprint} 12.
+
+\bibitem[Witten(1982)]{Witten1982}
+Witten, E. (1982). An SU(2) anomaly. \emph{Physics Letters B} 117: 324--328.
+
+\end{thebibliography}
+
+\clearpage
+\appendix
+
+\input{volumes.tex}
+
+\end{document}

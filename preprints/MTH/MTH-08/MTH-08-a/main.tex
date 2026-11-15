@@ -1,0 +1,136 @@
+\documentclass{situationist-preprint}
+
+\title{Explanatory Proofs}
+\msid{MTH-08-a}
+\msfamily{MTH-08}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{mathematical explanation; explanatory proof; coincidence; proof by cases; computer-assisted proof; four colour theorem}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Mathematicians distinguish proofs that merely establish a theorem from proofs that show why it holds. Sceptics reply that the distinction is psychological: a proof explains to someone, given her background, and there is no further fact. We argue that some proofs explain why their conclusions hold, and that computer-assisted proofs generally do not. A proof explains when it derives its conclusion uniformly from a feature of the objects the theorem is about, a feature salient in the theorem itself, so that the conclusion is shown not to be a coincidence. A proof that proceeds by exhausting many cases, each settled by a separate verification, establishes that no case fails without showing why. Computer-assisted proofs, in the sense in which the computer's contribution is essential, are of this kind: the machine is used precisely where the reasoning divides into more cases than a person can treat. The thesis concerns explanation, not proof-hood, and is compatible with the view that a formally verified derivation is a proof whether or not anyone surveys it.
+\end{abstract}
+
+\section{The problem}
+
+Some proofs leave mathematicians satisfied that they know why a theorem is true; others leave them convinced that it is true and still asking why. The contrast is a commonplace of practice, and philosophers have tried to say what it consists in. \citet{Steiner1978} proposed that an explanatory proof makes reference to a \emph{characterizing property} of an entity or structure mentioned in the theorem, such that from the proof it is evident that the result depends on the property, and that the proof can be deformed into proofs of related results about related entities by varying the property. \citet{ResnikKushner1987} denied that there is any objective distinction to be drawn, holding that whether a proof explains depends on the interests and background of those to whom it is offered. \citet{HafnerMancosu2005} tested Steiner's account against cases from real analysis and found that it misclassified some of them; \citet{Mancosu2008} argued that the topic matters for the philosophy of mathematics as a whole.
+
+The most developed recent account is that of \citet{Lange2014,Lange2017}. Lange observes that a demand for explanation in mathematics typically arises when a result exhibits some striking feature, such as a symmetry or the same outcome in apparently unrelated cases, and that an explanatory proof is one that exploits that same feature. He also gives an account of mathematical coincidence: a result whose components have no common proof, but must be established separately, is a coincidence, and has no explanation. \citet{Lange2009} argued on related grounds that proofs by mathematical induction are generally not explanatory.
+
+The present manuscript defends two claims. Some proofs explain why their conclusions hold, so the sceptic is wrong. And computer-assisted proofs generally do not, for a reason that follows from what makes the explanatory ones explain. The second claim needs care, because computers are used in mathematics in several ways and because computer-assisted proofs are proofs. MTH-09 argues that a formally verified derivation is a proof whether or not it is surveyed; the present question is a different one, whether a proof shows why its conclusion holds.
+
+\section{Framework}
+
+\begin{definition}[Salient feature]\label{d:salient}
+A feature $F$ of the objects a theorem $T$ is about is \emph{salient in} $T$ if $F$ is mentioned in, or is part of the content of a concept used in, the statement of $T$.
+\end{definition}
+
+\begin{definition}[Uniform derivation]\label{d:uniform}
+A proof $P$ of $T$ derives $T$ \emph{uniformly from} $F$ if every case falling under $T$ is established by one and the same argument from $F$, and $P$ does not divide the cases into subclasses settled by arguments that share no premise beyond the general background.
+\end{definition}
+
+\begin{definition}[Explanatory proof]\label{d:expl}
+A proof $P$ of $T$ \emph{explains why} $T$ holds if $P$ derives $T$ uniformly from a feature salient in $T$.
+\end{definition}
+
+\begin{principle}[Coincidence]\label{p:coinc}
+If a result holds in each of a range of cases for reasons that differ from case to case, its holding across the range is a coincidence, and a proof that establishes the cases separately shows that the result holds without showing why it holds across the range.
+\end{principle}
+
+Definition~\ref{d:expl} combines Steiner's dependence on a characterizing property with Lange's requirement that the explanation exploit what is striking in the result; Principle~\ref{p:coinc} is Lange's account of coincidence. Explanatoriness is thus a property of a proof's structure, not of anyone's response to it. The uniformity condition does not exclude every division into cases, only a division whose parts have nothing in common but the conclusion.
+
+\section{Explanatory proofs exist}
+
+\begin{proposition}\label{p:exist}
+Some proofs explain why their conclusions hold.
+\end{proposition}
+
+\begin{proof}
+Consider the theorem that in every finite graph the number of vertices of odd degree is even. One proof proceeds by induction on the number of edges: the empty graph has no vertices of odd degree, and adding an edge changes the parity of the degrees of exactly two vertices, or of none if it is a loop, so it changes the number of odd vertices by $-2$, $0$ or $+2$. A second proof observes that the sum of the degrees counts every edge twice and is therefore even, so that the number of odd terms in it is even. The second proof derives the theorem from a single feature salient in it, namely that degree is a count of edge-ends and each edge has two ends, and it does so uniformly for every graph. By Definition~\ref{d:expl} it explains why the theorem holds. The induction establishes the theorem by tracking the parity along a sequence of constructions; it uses the same fact locally at each step, but presents the result as the outcome of a history that the theorem does not mention.
+\end{proof}
+
+Mathematicians regard the double-counting proof as the one that shows why. The same pattern is found in Gauss's pairing proof that $1 + 2 + \dots + n = n(n+1)/2$, which exhibits the sum as $n$ copies of the constant pair-sum $n+1$ counted twice, and which \citet{Lange2009} contrasts with the inductive proof of the same formula. In each case the explanatory proof exploits the feature that makes the result striking: the factor $2$ in the graph theorem, the symmetry of the sum.
+
+\section{Computer-assisted proofs}
+
+By a \emph{computer-assisted proof} we mean a proof in which a computer performs an essential part of the reasoning that a human mathematician does not, or could not in practice, perform: typically the verification of a large number of cases, or the search through a large space for a configuration or a certificate. We distinguish this from \emph{formal verification} of a proof that was constructed independently, in which the computer checks a proof without contributing to its content. The formalizations of the four colour theorem by \citet{Gonthier2008} and of the Kepler conjecture by \citet{HalesEtAl2017} are both, but the distinction is clear in principle.
+
+\begin{theorem}\label{t:cap}
+A proof whose essential part is the separate verification of a large number of cases does not explain why its conclusion holds, with respect to that part.
+\end{theorem}
+
+\begin{proof}
+If the verification of the cases is essential, then the proof contains no argument that establishes the conclusion for all cases from one feature; otherwise that argument would make the case verification inessential. So the proof does not derive the conclusion uniformly from any feature in the sense of Definition~\ref{d:uniform}, and by Definition~\ref{d:expl} it does not explain. By Principle~\ref{p:coinc}, so far as the proof shows, the conclusion holds across the cases by coincidence.
+\end{proof}
+
+\begin{corollary}\label{c:cap}
+Computer-assisted proofs generally do not explain why their conclusions hold.
+\end{corollary}
+
+\begin{proof}
+A computer is used where the reasoning to be performed exceeds what a person can do, and in mathematics this is almost always because it divides into more cases, or ranges over a larger space, than a person can treat. Such proofs fall under Theorem~\ref{t:cap}.
+\end{proof}
+
+The proof of the four colour theorem by \citet{AppelHaken1977}, and its simplification by \citet{RobertsonEtAl1997}, have a conceptual part and a mechanical part. The conceptual part, the discharging argument, shows that every planar triangulation contains one of a finite set of configurations, and it does explain something: why a minimal counterexample would have to contain one of them. The mechanical part verifies that each configuration in the set is reducible, and each of more than six hundred verifications succeeds by its own computation. The theorem that four colours suffice is thereby established, but the proof does not show why every configuration in the set is reducible, and so does not show why four colours suffice. The same is true of the solution of the Boolean Pythagorean triples problem by \citet{HeuleEtAl2016}, which showed by an exhaustive search, whose certificate ran to some two hundred terabytes, that the integers up to $7825$ cannot be two-coloured without a monochromatic Pythagorean triple, and of the proof by \citet{KonevLisitsa2014} that every $\pm 1$ sequence of length $1161$ has discrepancy greater than $2$.
+
+The last example shows what the explanatory alternative looks like. \citet{Tao2016} proved the Erd\H{o}s discrepancy conjecture in full, that every $\pm 1$ sequence has unbounded discrepancy, by an argument that reduces the problem to a statement about multiplicative functions and settles that by analytic number theory. Tao's proof derives the result for every bound from one feature of the problem; the SAT computation establishes one bound by exhausting cases. The conclusion of the computation is an instance of Tao's theorem, and Tao's proof shows why it holds, which the computation does not.
+
+The word ``generally'' in Corollary~\ref{c:cap} is not a hedge. There are computer-assisted proofs whose computation is a single uniform calculation, as when a computer evaluates an algebraic identity that a human could verify with patience. And a formal verification of an explanatory proof, such as the formalization of the odd order theorem by \citet{GonthierEtAl2013}, inherits the structure of the proof it verifies and with it its explanatory character. The corollary concerns the large class in which the computer does what a human could not, and that class is the one at issue in the debate since \citet{Tymoczko1979}.
+
+\section{Objections}
+
+\begin{objection}[Relativity]
+Whether a proof explains depends on the audience. The induction proof may be illuminating to a student who knows induction and not the handshake argument \citep{ResnikKushner1987}.
+\end{objection}
+
+\begin{reply}
+What a proof conveys to a reader depends on the reader; whether it derives its conclusion uniformly from a salient feature does not. The student who finds the induction illuminating has learned that the theorem holds and how the parity propagates; she has not been shown the feature that makes it hold for every graph at once, and when she is shown it she recognizes the difference. Definition~\ref{d:expl} gives a criterion on which reports of understanding can be corrected, which is what the practice requires.
+\end{reply}
+
+\begin{objection}[The program is uniform]
+A computer-assisted proof is uniform after all: one program, written once, checks every case by the same procedure. The proof therefore derives its conclusion uniformly from the feature the program tests.
+\end{objection}
+
+\begin{reply}
+The uniformity of the checking procedure is not the uniformity of the ground. The program for reducibility applies the same test to every configuration, but each configuration passes the test because of its own structure, and the program records that it passes, not why. In the sense of Definition~\ref{d:uniform}, the cases are settled by arguments that share nothing but the method of checking them. A uniform procedure for verifying each entry of a multiplication table does not explain why the table has the patterns it has.
+\end{reply}
+
+\begin{objection}[Human exhaustion]
+Many human proofs proceed by cases, among them the classification of the finite simple groups. If they do not explain, the thesis has nothing to do with computers.
+\end{objection}
+
+\begin{reply}
+We accept the premise. Theorem~\ref{t:cap} concerns the structure of a proof, and human proofs by exhaustion are non-explanatory for the same reason. Computers are used where exhaustion outruns human capacity, so computer-assisted proofs are disproportionately of this kind; hence ``generally''.
+\end{reply}
+
+\section{What the result does not establish}
+
+Corollary~\ref{c:cap} does not say that computer-assisted proofs are not proofs. Proof-hood and explanatoriness are different properties: a derivation acceptable to a competent community is a proof (MTH-09), and a proof can be acceptable without explaining anything. Nor does the corollary say that the theorems so proved have no explanation; another proof may supply one, as Tao's did. It does not say that machines cannot find explanatory proofs. Machines can produce new mathematical results (MTH-17), and nothing in Theorem~\ref{t:cap} prevents a machine from finding a uniform derivation from a salient feature. The thesis concerns the use of computers to exhaust cases, not the source of a proof. Finally, explanation in the present sense is related to, but not the same as, mathematical beauty, which MTH-13 identifies with the combination of surprise and inevitability; a proof that makes a result inevitable typically does so by exhibiting the feature from which it uniformly follows.
+
+\section{Conclusion}
+
+Some proofs explain why their conclusions hold: those that derive the conclusion uniformly from a feature salient in the theorem, so that the result is shown not to be a coincidence. Proofs whose essential part is the verification of many cases separately do not explain, with respect to that part, and computer-assisted proofs are generally of this kind. They establish that their theorems are true and leave open why.
+
+\begin{thebibliography}{99}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Gonthier(2008)]{Gonthier2008} Gonthier, G. (2008). Formal proof---the four-color theorem. \emph{Notices of the American Mathematical Society}, 55(11), 1382--1393.
+\bibitem[Gonthier et~al.(2013)]{GonthierEtAl2013} Gonthier, G. et~al. (2013). A machine-checked proof of the odd order theorem. In \emph{Interactive Theorem Proving (ITP 2013)}, Lecture Notes in Computer Science 7998, Springer.
+\bibitem[Hafner and Mancosu(2005)]{HafnerMancosu2005} Hafner, J. and Mancosu, P. (2005). The varieties of mathematical explanation. In P. Mancosu, K.~F. J{\o}rgensen and S.~A. Pedersen (eds.), \emph{Visualization, Explanation and Reasoning Styles in Mathematics}, Springer.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[Heule et~al.(2016)]{HeuleEtAl2016} Heule, M.~J.~H., Kullmann, O. and Marek, V.~W. (2016). Solving and verifying the Boolean Pythagorean triples problem via cube-and-conquer. In \emph{Theory and Applications of Satisfiability Testing (SAT 2016)}, Lecture Notes in Computer Science 9710, Springer.
+\bibitem[Konev and Lisitsa(2014)]{KonevLisitsa2014} Konev, B. and Lisitsa, A. (2014). A SAT attack on the Erd\H{o}s discrepancy conjecture. In \emph{Theory and Applications of Satisfiability Testing (SAT 2014)}, Lecture Notes in Computer Science 8561, Springer.
+\bibitem[Lange(2009)]{Lange2009} Lange, M. (2009). Why proofs by mathematical induction are generally not explanatory. \emph{Analysis}, 69(2), 203--211.
+\bibitem[Lange(2014)]{Lange2014} Lange, M. (2014). Aspects of mathematical explanation: Symmetry, unity, and salience. \emph{The Philosophical Review}, 123(4), 485--531.
+\bibitem[Lange(2017)]{Lange2017} Lange, M. (2017). \emph{Because Without Cause: Non-Causal Explanations in Science and Mathematics}. Oxford University Press.
+\bibitem[Mancosu(2008)]{Mancosu2008} Mancosu, P. (2008). Mathematical explanation: Why it matters. In P. Mancosu (ed.), \emph{The Philosophy of Mathematical Practice}, Oxford University Press.
+\bibitem[Resnik and Kushner(1987)]{ResnikKushner1987} Resnik, M.~D. and Kushner, D. (1987). Explanation, independence and realism in mathematics. \emph{The British Journal for the Philosophy of Science}, 38(2), 141--158.
+\bibitem[Robertson et~al.(1997)]{RobertsonEtAl1997} Robertson, N., Sanders, D., Seymour, P. and Thomas, R. (1997). The four-colour theorem. \emph{Journal of Combinatorial Theory, Series B}, 70(1), 2--44.
+\bibitem[Steiner(1978)]{Steiner1978} Steiner, M. (1978). Mathematical explanation. \emph{Philosophical Studies}, 34(2), 135--151.
+\bibitem[Tao(2016)]{Tao2016} Tao, T. (2016). The Erd\H{o}s discrepancy problem. \emph{Discrete Analysis}, 2016:1.
+\bibitem[Tymoczko(1979)]{Tymoczko1979} Tymoczko, T. (1979). The four-color problem and its philosophical significance. \emph{The Journal of Philosophy}, 76(2), 57--83.
+\end{thebibliography}
+
+\end{document}

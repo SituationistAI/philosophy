@@ -1,0 +1,75 @@
+\documentclass{situationist-preprint}
+
+\title{The Scientific Status of Machine-Generated Results}
+\msid{SCI-22-a}
+\msfamily{SCI-22}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_22.lean}
+\mskeywords{machine-generated results; verification; reliability; peer review; formal proof; demarcation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do machine-generated results count as science? SCI-01 locates the distinguishing mark of science in institutionalized error-correction: peer review, replication and public criticism. We argue that machine-generated results count as science when, and only when, they are independently verified, and that verification can take the place of trust in the producer. We prove that if a check is sound, every result that passes it is true whatever process generated the candidates, and that a sound check need not be complete. The reliability of the generator then matters for efficiency, not for the status of the accepted results. Formal proof is the clearest case of a sound check; replication and review are fallible approximations to it. A result that has not been independently checked has the status that SCI-22-b describes.
+\end{abstract}
+
+\section{The problem}
+
+Scientific results have traditionally been credited in part because of who produced them: researchers whose training, reputation and accountability give others reason to trust their reports. Machine-generated results lack this basis. A system that produces many candidate results, some correct and some not, cannot be held accountable in the usual way, and its reliability may be unknown or variable across domains. If the scientific status of a result depended on the credibility of its producer, machine-generated results would have a doubtful status.
+
+SCI-01 argues that what distinguishes science is not the credibility of producers but institutionalized error-correction, a view with antecedents in social accounts of scientific objectivity \citep{Longino1990}. On this view, a result is scientific in virtue of having been exposed to, and survived, procedures designed to catch errors. The question for machine-generated results is whether such procedures can be applied to them, and what follows when they are.
+
+\section{The model}
+
+\begin{definition}\label{d:result}
+A \emph{body of candidate results} is a finite list of claims, each of which is true or false, together with the outcome, pass or fail, of a check applied to each.
+\end{definition}
+
+\begin{definition}\label{d:sound}
+A check is \emph{sound} on a body of results if every result that passes it is true. It is \emph{complete} if every true result passes it.
+\end{definition}
+
+\section{Results}
+
+\begin{proposition}\label{p:accept}
+If a check is sound, every accepted result is true, whatever process generated the candidates.
+\end{proposition}
+
+\begin{proposition}\label{p:incomplete}
+A sound check need not be complete.
+\end{proposition}
+
+Proposition~\ref{p:accept} is elementary, and its significance lies in what does not appear in it: the generator. Under a sound check, the reliability of the process that produced the candidates affects how many candidates pass, and so the efficiency of the enterprise, but not the truth of those that do. Trust is transferred from the producer to the check. Proposition~\ref{p:incomplete} records the cost: a sound check may reject true results, and a body of results accepted by a sound but incomplete check is a true but partial picture.
+
+\begin{theorem}\label{t:main}
+A machine-generated result counts as science if it has passed an independent check that is sound or, for empirical results, that approximates soundness to the degree required of human results.
+\end{theorem}
+
+\begin{proof}
+By SCI-01, a result is scientific if it has survived institutionalized error-correction. A sound check is error-correction in its ideal form, and by Proposition~\ref{p:accept} it confers on accepted results a status independent of their producer.
+\end{proof}
+
+Formal proof is the clearest sound check available, subject to the soundness of the proof-checking kernel and the correctness of the formal statement. For empirical results there is no sound check, and replication, review and public criticism are fallible approximations. Theorem~\ref{t:main} holds machine-generated results to the same standard as human ones in that case: they count as science if they have been exposed to the procedures that human results must survive, and the identity of the producer does not lower the bar or raise it.
+
+The present collection illustrates the point and its limits. About forty per cent of its principal results are formally verified. The verification is sound for the inference from premises to conclusion, but the premises are themselves claims, often philosophical, that no proof checker can verify (MTH-18). The verified part of each result is the entailment; the rest has the status of the unverified results discussed in SCI-22-b.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/SCI/SCI_22.lean} proves Propositions~\ref{p:accept} and~\ref{p:incomplete}.
+
+\begin{lstlisting}
+theorem accepted_true (rs : List Result) (h : Sound rs) :
+    ∀ r ∈ rs.filter (fun r => r.passes), r.isTrue = true
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.SCI_22.accepted_true' depends on axioms: [propext]
+\end{lstlisting}
+
+\begin{thebibliography}{9}\small
+\bibitem[Longino(1990)]{Longino1990} Longino, H.~E. (1990). \emph{Science as Social Knowledge}. Princeton University Press.
+\end{thebibliography}
+
+\end{document}

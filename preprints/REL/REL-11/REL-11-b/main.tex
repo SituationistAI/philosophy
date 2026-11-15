@@ -1,0 +1,73 @@
+\documentclass{situationist-preprint}
+
+\title{Who Should Concede? A Negative Result}
+\msid{REL-11-b}
+\msfamily{REL-11}
+\msdiscipline{Philosophy of Religion}
+\mstype{Companion manuscript}
+\mskeywords{peer disagreement; religious disagreement; concession; uniqueness; symmetry; steadfastness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-11-a shows that in a peer disagreement steadfastness is rational for at most one party, and that neither party is in a position to know which. One might hope for a rule that settles the matter in practice: the more confident party concedes, the party in the minority concedes, the party who believes the more extraordinary claim concedes. We prove that no rule identifies which party should concede. A rule whose verdict the parties can know to be correct must, in a peer disagreement, either designate neither party or designate both; it cannot single out one. The result holds for rules that depend on the content of the parties' credences as well as for rules that ignore it.
+\end{abstract}
+
+\section{Concession rules}
+
+We use the framework of REL-11-a: two parties $A$ and $B$ in a peer disagreement about $G$ (its Definition~2.1), the uniqueness thesis (Principle~P1), and the propositions $R_A$ and $R_B$ that $A$'s, respectively $B$'s, credence is the rational one on the shared evidence. A party \emph{should concede} if her steadfastness is not rational, that is, if $\neg R_i$.
+
+\begin{definition}\label{d:rule}
+A \emph{concession rule} maps a description of a disagreement, including the parties' credences and whatever else they both have access to, to a verdict: the set of parties it designates as the ones who should concede. A rule \emph{identifies who should concede} in a disagreement if its verdict there is a set containing exactly one party. A rule is \emph{usable} in a disagreement if each party is in a position to know its verdict and in a position to know that the verdict is correct, where a verdict is correct if it designates exactly the parties who should concede.
+\end{definition}
+
+Usability is what the hope for a rule requires.
+
+In addition to REL-11-a's Assumptions~2.3 to~2.5 we need a symmetry assumption for negative verdicts, which has the same source as REL-11-a's Assumption~2.5: whatever evidence is independent of the disputed reasoning, and so admissible in settling who has erred, does not favor either peer \citep{Elga2007,Christensen2007}.
+
+\begin{assumption}[Negative symmetry]\label{a:negsym}
+For each party $i$, $K_i\,\neg R_A$ holds if and only if $K_i\,\neg R_B$ holds.
+\end{assumption}
+
+\section{The result}
+
+\begin{theorem}\label{t:neg}
+In a peer disagreement, no usable concession rule identifies who should concede.
+\end{theorem}
+
+\begin{proof}
+Suppose a rule is usable and designates exactly one party, say $A$. Then a party $i$ is in a position to know that the verdict is $\{A\}$ and that it is correct, and so is in a position to know that $A$ should concede and $B$ should not, that is, $\neg R_A$ and $R_B$. But by Theorem~3.2 of REL-11-a no party is in a position to know $R_B$. The case of $B$ is the same.
+\end{proof}
+
+\begin{corollary}\label{c:both}
+A usable concession rule designates both parties or neither; and if it designates neither, it is not correct.
+\end{corollary}
+
+\begin{proof}
+The first clause is Theorem~\ref{t:neg}. If a correct verdict designates neither party, then $R_A$ and $R_B$ both hold, and by Principle~P1 of REL-11-a the two credences are equal, contrary to the definition of peer disagreement. So a usable verdict, being known to be correct, designates both.
+\end{proof}
+
+Theorem~\ref{t:neg} does not depend on Assumption~\ref{a:negsym}, and needs only Theorem~3.2 of REL-11-a. Assumption~\ref{a:negsym} explains why weaker rules fare no better. A rule that designated one party without claiming that the other should remain, giving the party a position to know only $\neg R_A$, would by Assumption~\ref{a:negsym} give her equally a position to know $\neg R_B$, and so would designate both.
+
+The steadfast view that the party who has in fact responded correctly may remain steadfast \citep{Kelly2005} is compatible with Theorem~\ref{t:neg}, but it states a fact about the case, not a usable rule. The rules commonly proposed fail in instructive ways. \enquote{The more confident party concedes} is well defined and asymmetric, since the credences differ; but its correctness would let both parties know which credence is the rational one, and by Theorem~\ref{t:neg} they cannot be in a position to know that. \enquote{The party who believes the more extraordinary claim concedes} presupposes a verdict on how probable the claim is on the shared evidence, which is the point in dispute.
+
+\begin{objection}
+The result is too strong: a rule may be correct in most disagreements without the parties' knowing it to be correct in this one, and that suffices for guidance.
+\end{objection}
+
+\begin{reply}
+Since the parties share all evidence about the rule's reliability, by Theorem~3.2 of REL-11-a it cannot put either in a position to know its verdict here; a rule so followed is a policy, not an identification of who should concede. Whether a policy of conceding is rational is the question of conciliationism, which REL-11-a leaves open and on which this result is neutral.
+\end{reply}
+
+\section{Conclusion}
+
+In a peer disagreement, no rule the parties can know to be correct singles out one of them as the one who should concede. A usable rule can only say that both should concede, in the cases in which they can know that neither credence is rational. Which party, if either, has responded correctly to the shared evidence is a question that the disagreement itself puts beyond their reach.
+
+\begin{thebibliography}{99}\small
+\bibitem[Christensen(2007)]{Christensen2007} Christensen, D. (2007). Epistemology of disagreement: The good news. \emph{The Philosophical Review}, 116(2), 187--217.
+\bibitem[Elga(2007)]{Elga2007} Elga, A. (2007). Reflection and disagreement. \emph{No\^us}, 41(3), 478--502.
+\bibitem[Kelly(2005)]{Kelly2005} Kelly, T. (2005). The epistemic significance of disagreement. \emph{Oxford Studies in Epistemology}, 1, 167--196.
+\end{thebibliography}
+
+\end{document}

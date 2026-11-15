@@ -1,0 +1,331 @@
+\documentclass{situationist-preprint}
+
+\title{Meaning as Inferential Role}
+\msid{LNG-01-c}
+\msfamily{LNG-01}
+\msdiscipline{Philosophy of Language}
+\mstype{Alternative proof}
+\mskeywords{meaning; inferentialism; inferential role; incompatibility; truth-conditions; Sellars; Brandom; tonk; Carnap's problem; conservativeness; compositionality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LNG-01 concludes that meaning is use constrained by truth-conditions, and that use-based and truth-conditional theories are reconciled. LNG-01-a reaches the conclusion from three principles, of which the second, the truth-conditional constraint, requires that a use confer meaning only if some compositional assignment of truth-conditions makes its rules truth-preserving. We reach the same conclusion without assuming that constraint. Following Sellars and Brandom, we take the inferential role of an expression to be its contribution to the incompatibility of positions, define consequence from incompatibility, and identify circumstances of evaluation with maximal coherent positions. We prove that every consequence licensed by a role preserves truth at every circumstance, that the incompatibility conditions for the connectives make them classical truth functions at every circumstance, that tonk collapses the space of circumstances, that Carnap's non-normal valuations are not induced by any circumstance, and that a conservative extension is one that preserves every circumstance. The truth-conditional constraint is thus a theorem of inferentialism rather than a premise added to it. We answer the objections of Fodor and Lepore from compositionality and holism and Boghossian's objection from defective concepts.
+\end{abstract}
+
+\section{Introduction}\label{s:intro}
+
+\subsection{The principal's route}
+
+LNG-01 holds that meaning is use, constrained by truth-conditions, and that the use-based and truth-conditional traditions in the theory of meaning are reconciled. LNG-01-a states the thesis as the conjunction of three principles. Principle~P1 says that what an expression means is fixed by its use, understood as the rules that govern it in a practice (Definition~2.1 of LNG-01-a). Principle~P2, the truth-conditional constraint, says that an expression contributes a semantic value to the truth-conditions of sentences only if the value belongs to a compositional assignment that is sound for the expression's rules, and that a use for which no such assignment exists confers no meaning. Principle~P3 says that where all admissible assignments agree on an expression's value, the expression contributes that value. From these principles and the soundness conditions of Definition~3.1, LNG-01-a proves that tonk has no admissible truth function (Proposition~3.2), that the standard rules for the connectives determine their classical truth functions (Theorem~3.3), and that the connectives therefore contribute those functions (Theorem~3.6 and Corollary~3.7).
+
+The proof is clean, but its second principle is a premise, and it is the premise on which a thoroughgoing use theorist will balk. Principle~P2 brings truth into the theory of meaning from outside: it presupposes a notion of a compositional assignment of truth-values, defined independently of use, against which uses are then measured. The inferentialist tradition of \citet{Sellars1953,Sellars1954} and \citet{Brandom1994,Brandom2000} holds that the order of explanation should run the other way. Representational notions, truth and reference among them, are to be explained in terms of inferential practice, not presupposed by it. A use theorist of this kind can accept the conclusions of LNG-01-a while rejecting its route: she can agree that tonk confers no meaning and that the connectives have classical truth-conditions, but she will want those facts to fall out of the account of inferential role, not to be imposed on it by an independent constraint.
+
+A second feature of the principal's route is also contestable. The soundness conditions for rules that discharge assumptions, such as conditional introduction and disjunction elimination, are read locally in LNG-01-a: a subsidiary derivation of $B$ from $A$ is treated as truth-preserving in the valuation at hand. LNG-01-a defends this reading as the one Principle~P2 requires, and the local reading is what allows Theorem~3.3 to deliver classical truth functions. But it is a choice, and on the global reading, which treats a derivation as truth-preserving across all valuations, the rules determine less.
+
+\subsection{Thesis}
+
+We give a proof of the conclusion of LNG-01 that does not assume Principle~P2 or Principle~P3, and does not use the local reading of discharging rules. We start from inferential role alone, in the form that Brandom gives it: the role of a sentence is fixed by which positions it is incompatible with, and consequence is defined from incompatibility, so that a set of sentences entails a sentence if everything incompatible with the sentence is incompatible with the set \citep[ch.~5]{Brandom2008}. We add a single bridge principle, that the circumstances relative to which sentences are evaluated are maximal coherent positions. From these premises we prove the following.
+
+\begin{enumerate}[label=(\roman*)]
+\item Every consequence licensed by an inferential role preserves truth at every circumstance (Lemma~\ref{l:pres}). This is the soundness half of Principle~P2, derived rather than assumed.
+\item If the connectives satisfy the natural incompatibility conditions, they are classical truth functions at every circumstance (Theorem~\ref{t:class}). This is the content of Theorem~3.3 of LNG-01-a, reached without the local reading.
+\item If a language contains a connective governed by Prior's tonk rules and any position at all is incoherent, then every non-empty position is incoherent, so that no circumstance makes any sentence true (Proposition~\ref{p:tonk}). Tonk confers no truth-conditional contribution, as Proposition~3.2 of LNG-01-a concludes, but here the verdict follows from its role.
+\item The non-normal valuations of Carnap's problem are induced by no circumstance (Proposition~\ref{p:carnap}).
+\item An extension of a language is conservative if and only if every circumstance of the old language survives as the restriction of a circumstance of the new one (Proposition~\ref{p:cons}).
+\end{enumerate}
+
+The conclusion is that the truth-conditional constraint is not an external condition on inferential role but a consequence of it: a role determines a space of circumstances, sentences have truth-conditions relative to that space, and the role is sound with respect to those truth-conditions by construction. Meaning is use, and the use constrains itself truth-conditionally. That is the conclusion of LNG-01, reached by the route the inferentialist prefers.
+
+\subsection{Plan}
+
+Section~\ref{s:history} reviews inferentialism and the objections to it. Section~\ref{s:frame} sets out the framework. Section~\ref{s:results} proves the results. Section~\ref{s:beyond} extends the account beyond the logical constants. Section~\ref{s:premise} states precisely which premises of LNG-01-a are avoided and what replaces them. Section~\ref{s:obj} answers objections, and Section~\ref{s:not} states what the result does not establish.
+
+\section{Inferentialism and its critics}\label{s:history}
+
+\paragraph{Sellars.} The modern form of the view that meaning is inferential role begins with \citet{Sellars1953}, who argued that the material inferences of a language, such as that from \enquote{it is raining} to \enquote{the streets will be wet}, are not enthymemes awaiting a suppressed logical premise but are constitutive of the concepts involved. \citet{Sellars1954} described a language as governed by rules of three kinds: language-entry transitions, from perception to judgment; intra-linguistic moves, from judgment to judgment; and language-exit transitions, from judgment to action. To know the meaning of a word is to be able to make its moves correctly, and the correctness is a matter of norms, not of regularities. LNG-01-a adopts this structure in its Definition~2.1.
+
+\paragraph{Brandom.} \citet{Brandom1994} developed Sellars's view into a systematic account of discursive practice. Speakers undertake commitments by making assertions, and are entitled or not to them; the content of a sentence is its role in the practice of giving and asking for reasons, and is articulated by three relations: commitment-preserving inference, entitlement-preserving inference, and incompatibility, the relation that holds between two claims when commitment to one precludes entitlement to the other. Representational vocabulary, including the vocabulary of truth and reference, is explained by the role it plays in making explicit the attitudes of speakers toward one another's commitments. \citet{Brandom2000} presents the view in brief. In later work \citet[ch.~5]{Brandom2008} took incompatibility as the basic notion and defined entailment from it: a premise set entails a conclusion if everything incompatible with the conclusion is incompatible with the premise set. On natural definitions of negation as the minimal incompatible and of conjunction, the resulting semantics validates exactly classical propositional logic, and with a suitable modal operator it yields the modal logic S5.
+
+\paragraph{Peregrin.} \citet{Peregrin2014} defends a normative inferentialism on which meanings are the roles that rules confer, in the way the role of a chess piece is conferred by the rules of chess. He argues that inferential structure determines a semantics in the model-theoretic sense, provided the rules are taken to constrain not only what follows from what but also what is incompatible with what, and that the classical truth-functional semantics of the connectives emerges from their inferential roles under this condition. The present manuscript is in the same spirit, and its Theorem~\ref{t:class} is a version of that claim.
+
+\paragraph{Proof-theoretic semantics.} The parallel tradition descending from \citet{Gentzen1935}, \citet{Prawitz1965} and \citet{Dummett1991} identifies the meaning of a logical constant with its introduction rules and requires harmony between introduction and elimination. LNG-01-a reads harmony as the condition under which a rule set is determinate (its Proposition~3.4). The incompatibility framework does not distinguish introduction from elimination; it characterizes each connective by a single condition on incoherence, which plays both roles.
+
+\paragraph{The critics.} Inferential role semantics has faced three main objections. \citet{FodorLepore1991,FodorLepore1992} argued that inferential roles do not compose, since the role of a complex expression includes inferences that depend on collateral beliefs about its subject matter, and that the attempt to separate constitutive from collateral inferences leads to holism, on which no two speakers share any meaning. \citet{FodorLepore2001} pressed the compositionality objection against Brandom specifically, and \citet{Brandom2007} replied that inferential roles are compositional in the sense that matters, that of a recursive specification, though not in the sense of a simple function from parts to wholes; \citet{FodorLepore2007} responded. The second objection concerns tonk. \citet{Prior1960} showed that if any rules whatever could confer meaning, a connective with an introduction rule from $A$ to $A$ tonk $B$ and an elimination rule from $A$ tonk $B$ to $B$ would have a meaning and make every inference valid. \citet{Belnap1962} replied that a definition by rules must be conservative, and \citet{Dummett1973} connected conservativeness with harmony and gave the example of the pejorative \enquote{Boche}, whose rules lead from a claim that someone is German to a claim that he is cruel. \citet{Boghossian2003} used tonk and \enquote{Boche} to argue that meaning-constituting rules can be defective, so that grasping a concept by its constitutive rules does not by itself entitle a thinker to the inferences the rules license. The third objection is Carnap's problem: \citet{Carnap1943} observed that the consequence relation of classical logic is satisfied by non-normal valuations, on which a sentence and its negation are both true or both false, so that the classical rules, taken as a consequence relation, do not fix the classical truth tables. \citet{Raatikainen2008} pressed the point against inferentialism; \citet{MurziHjortland2009} replied by appeal to richer rule formats, and \citet{BonnayWesterstahl2016} by appeal to compositionality. Bilateralists \citep{Smiley1996,Rumfitt2000} had already argued that rejection must be taken as primitive alongside assertion, and that with rules for rejection the classical meanings are fixed.
+
+A fourth objection, from \citet{Williamson2003}, holds that no particular inference is required for understanding, since competent speakers may reject any of them. LNG-01-a answers it by distinguishing the rules of the practice from the dispositions of each speaker, and the same reply serves here.
+
+\section{Framework}\label{s:frame}
+
+We consider a language $L$ with a countable set of sentences, built from atomic sentences by connectives. A \emph{position} is a finite set of sentences, thought of as the commitments a speaker has undertaken.
+
+\begin{definition}[Incoherence]\label{d:inc}
+An \emph{incoherence relation} for $L$ is a set $\mathcal{I}$ of positions, the \emph{incoherent} positions, such that every finite superset of an incoherent position is incoherent. A position not in $\mathcal{I}$ is \emph{coherent}. Positions $X$ and $Y$ are \emph{incompatible} if $X \cup Y$ is incoherent. An arbitrary set of sentences is coherent if every position included in it is coherent.
+\end{definition}
+
+That an incoherent position stays incoherent when commitments are added is the persistence condition of \citet[ch.~5]{Brandom2008}. The extension of coherence to infinite sets builds in finite character: a set is incoherent just in case some finite part of it is.
+
+\begin{definition}[Entailment]\label{d:ent}
+A position $X$ \emph{entails} a sentence $A$, written $X \models A$, if every position incompatible with $\{A\}$ is incompatible with $X$.
+\end{definition}
+
+Entailment so defined is reflexive and monotone, since a position incompatible with $A$ is incompatible with any position containing $A$, and it is transitive, since if $X \models A$ and $\{A\} \models B$, every position incompatible with $B$ is incompatible with $A$ and hence with $X$.
+
+\begin{assumption}[Inferential role]\label{pr:role}
+The inferential part of the use of a sentence is its role in the incoherence relation of the practice: which positions it is incompatible with. What a sentence entails, and what entails it, is fixed by this role.
+\end{assumption}
+
+Assumption~\ref{pr:role} is the inferentialist's specification of Principle~P1 of LNG-01-a for intra-linguistic moves. The incoherence relation is normative: an incoherent position is one a speaker ought not occupy, not one that speakers do not in fact occupy. Language-entry and language-exit rules are considered in Section~\ref{s:beyond}.
+
+\begin{definition}[Circumstance]\label{d:circ}
+A \emph{circumstance} for $L$ is a maximal coherent set of sentences: a coherent set $w$ such that $w \cup \{A\}$ is incoherent for every sentence $A \notin w$. A sentence is \emph{true at} $w$ if it belongs to $w$, and the \emph{truth-condition} of a sentence is the set of circumstances at which it is true.
+\end{definition}
+
+\begin{assumption}[Circumstances]\label{pr:circ}
+The circumstances relative to which the sentences of a language are evaluated are its maximal coherent sets.
+\end{assumption}
+
+Assumption~\ref{pr:circ} is the bridge between inferential role and truth-conditions. It says that a way things could be, as far as a language can describe it, is a complete and coherent set of commitments in that language: a story that settles every question the language can ask and that no one could coherently add to. The idea that possible worlds can be represented by maximal consistent sets of sentences is familiar from Carnap's state descriptions and from the canonical models of modal logic; Assumption~\ref{pr:circ} adopts it with consistency replaced by the use-theoretic notion of coherence. Section~\ref{s:premise} discusses what the principle contributes.
+
+\begin{lemma}[Lindenbaum]\label{l:lind}
+Every coherent set of sentences is included in a circumstance.
+\end{lemma}
+
+\begin{proof}
+Enumerate the sentences of $L$ as $A_1, A_2, \ldots$. Starting from a coherent set $w_0$, let $w_{n} = w_{n-1} \cup \{A_n\}$ if that set is coherent, and $w_n = w_{n-1}$ otherwise. Each $w_n$ is coherent, and so is their union $w$, since any position included in it is included in some $w_n$. If $A_n \notin w$, then $w_{n-1} \cup \{A_n\}$ is incoherent, so $w \cup \{A_n\}$ is incoherent; hence $w$ is maximal.
+\end{proof}
+
+\begin{definition}[Incompatibility conditions]\label{d:conds}
+An incoherence relation \emph{satisfies the conditions} for the connectives $\neg$, $\wedge$, $\vee$ and $\to$ if, for all positions $Y$ and sentences $A$ and $B$:
+\begin{enumerate}[label=(\alph*)]
+\item $Y \cup \{\neg A\}$ is incoherent if and only if $Y \models A$;
+\item $Y \cup \{A \wedge B\}$ is incoherent if and only if $Y \cup \{A, B\}$ is incoherent;
+\item $Y \cup \{A \vee B\}$ is incoherent if and only if both $Y \cup \{A\}$ and $Y \cup \{B\}$ are incoherent;
+\item $Y \cup \{A \to B\}$ is incoherent if and only if $Y \models A$ and $Y \cup \{B\}$ is incoherent.
+\end{enumerate}
+\end{definition}
+
+Each condition specifies the role of a complex sentence, its incompatibilities, in terms of the roles of its constituents. Condition~(a) makes $\neg A$ the minimal incompatible of $A$: what is incompatible with $\neg A$ is exactly what commits one to $A$ \citep[ch.~5]{Brandom2008}. Condition~(b) says that committing oneself to a conjunction is the same as committing oneself to both conjuncts. Condition~(c) says that a disjunction is ruled out exactly when each disjunct is. Condition~(d) says that a conditional is ruled out exactly when one is committed to its antecedent and ruled out from its consequent. No condition mentions truth. The classical incoherence relation, on which a position is incoherent just in case no classical valuation makes all its members true, satisfies all four conditions, so the conditions are jointly satisfiable; and since entailment in the sense of Definition~\ref{d:ent} then coincides with classical consequence, the framework reproduces classical logic, in agreement with LOG-02.
+
+\section{Results}\label{s:results}
+
+\subsection{Truth-preservation}
+
+\begin{lemma}[Preservation]\label{l:pres}
+If $X \models A$ and $X \subseteq w$ for a circumstance $w$, then $A \in w$.
+\end{lemma}
+
+\begin{proof}
+Suppose $A \notin w$. By maximality $w \cup \{A\}$ is incoherent, so some position included in it is incoherent; that position contains $A$, since $w$ is coherent, and so has the form $Y \cup \{A\}$ with $Y$ a position included in $w$. Then $Y$ is incompatible with $\{A\}$, and since $X \models A$, $Y$ is incompatible with $X$: the position $Y \cup X$ is incoherent. But $Y \cup X \subseteq w$, which is coherent.
+\end{proof}
+
+\begin{lemma}[Coherence]\label{l:coh}
+A position is coherent if and only if it is included in some circumstance.
+\end{lemma}
+
+\begin{proof}
+A position included in a circumstance is coherent, since circumstances are coherent. A coherent position is included in a circumstance by Lemma~\ref{l:lind}.
+\end{proof}
+
+Lemma~\ref{l:pres} says that every entailment licensed by an inferential role is truth-preserving at every circumstance the role determines. Lemma~\ref{l:coh} says that incoherence is joint unsatisfiability over those circumstances. Together they show that the incoherence relation and the truth-conditions it induces fit each other exactly: a position is incoherent just in case no circumstance makes all its members true, and a position entails a sentence just in case, as the next corollary shows, every circumstance that makes the position true makes the sentence true.
+
+\begin{corollary}\label{c:ent}
+$X \models A$ if and only if $A$ is true at every circumstance at which every member of $X$ is true.
+\end{corollary}
+
+\begin{proof}
+The forward direction is Lemma~\ref{l:pres}. Conversely, suppose $X \not\models A$. Then some position $Y$ is incompatible with $\{A\}$ but compatible with $X$. By Lemma~\ref{l:coh} the coherent position $Y \cup X$ is included in a circumstance $w$. Since $Y \subseteq w$ and $Y \cup \{A\}$ is incoherent, $A \notin w$. So $w$ makes every member of $X$ true and $A$ untrue.
+\end{proof}
+
+\subsection{The connectives}
+
+\begin{theorem}[Classical determination]\label{t:class}
+Let the incoherence relation satisfy the conditions of Definition~\ref{d:conds}. Then at every circumstance $w$, and for all sentences $A$ and $B$:
+\begin{enumerate}[label=(\alph*)]
+\item $\neg A$ is true at $w$ if and only if $A$ is not;
+\item $A \wedge B$ is true at $w$ if and only if $A$ and $B$ both are;
+\item $A \vee B$ is true at $w$ if and only if at least one of $A$ and $B$ is;
+\item $A \to B$ is true at $w$ if and only if $A$ is not true at $w$ or $B$ is.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We use repeatedly the fact, from the proof of Lemma~\ref{l:pres}, that if a sentence $C$ is not in $w$, there is a position $Y \subseteq w$ with $Y \cup \{C\}$ incoherent; and the fact that if $Y \subseteq w$, then $Y \cup \{C\}$ is coherent for every $C \in w$.
+
+(a) Since $\{A\} \models A$, condition~(a) makes $\{A, \neg A\}$ incoherent, so $A$ and $\neg A$ are not both in $w$. Suppose neither is. Then there are positions $Y, Z \subseteq w$ with $Y \cup \{A\}$ incoherent and $Z \cup \{\neg A\}$ incoherent. By condition~(a), $Z \models A$, so $Y$, being incompatible with $\{A\}$, is incompatible with $Z$; but $Y \cup Z \subseteq w$.
+
+(b) If $A, B \in w$ and $A \wedge B \notin w$, there is $Y \subseteq w$ with $Y \cup \{A \wedge B\}$ incoherent, hence by condition~(b) $Y \cup \{A, B\}$ incoherent, though included in $w$. If $A \wedge B \in w$ and, say, $A \notin w$, there is $Y \subseteq w$ with $Y \cup \{A\}$ incoherent; by persistence $Y \cup \{A, B\}$ is incoherent, so by condition~(b) $Y \cup \{A \wedge B\}$ is incoherent, though included in $w$.
+
+(c) If $A \in w$ and $A \vee B \notin w$, there is $Y \subseteq w$ with $Y \cup \{A \vee B\}$ incoherent, so by condition~(c) $Y \cup \{A\}$ is incoherent, though included in $w$; similarly for $B$. If $A \vee B \in w$ and neither $A$ nor $B$ is, there are $Y_1, Y_2 \subseteq w$ with $Y_1 \cup \{A\}$ and $Y_2 \cup \{B\}$ incoherent. Let $Y = Y_1 \cup Y_2$; by persistence both $Y \cup \{A\}$ and $Y \cup \{B\}$ are incoherent, so by condition~(c) $Y \cup \{A \vee B\}$ is incoherent, though included in $w$.
+
+(d) Suppose $A \in w$ and $B \notin w$. There is $Y_1 \subseteq w$ with $Y_1 \cup \{B\}$ incoherent. Let $Y = Y_1 \cup \{A\}$. Then $Y \models A$, since any position incompatible with $\{A\}$ is incompatible with $Y$; and $Y \cup \{B\}$ is incoherent by persistence. By condition~(d), $Y \cup \{A \to B\}$ is incoherent, and since $Y \subseteq w$, $A \to B \notin w$. Conversely, suppose $A \to B \notin w$. There is $Y \subseteq w$ with $Y \cup \{A \to B\}$ incoherent, so by condition~(d) $Y \models A$ and $Y \cup \{B\}$ is incoherent. By Lemma~\ref{l:pres}, $A \in w$; and $B \notin w$, since otherwise $Y \cup \{B\} \subseteq w$.
+\end{proof}
+
+Theorem~\ref{t:class} says that each connective is, at every circumstance, the classical truth function of LNG-01-a's Theorem~3.3. In the terms of Definition~2.2 of LNG-01-a, the assignment that gives each connective its classical truth function is a compositional truth-conditional assignment; by Lemma~\ref{l:pres} it is sound for every entailment of the role, with circumstances as the circumstances of evaluation; and it is the only assignment of truth functions that agrees with truth at circumstances on every combination of truth values that some circumstance realizes. No discharging rule has been read, locally or globally, since the conditional has been characterized by its incompatibilities, not by a rule of introduction.
+
+The theorem holds whatever the material incoherences among atomic sentences are. Whether \enquote{this is red} and \enquote{this is green} are incompatible, or \enquote{it is raining} and \enquote{the streets are dry}, affects which circumstances there are, not how the connectives behave at them.
+
+\begin{corollary}[Invariance]\label{c:inv}
+Two incoherence relations that satisfy the conditions of Definition~\ref{d:conds} assign the same truth function to each connective, however they differ in the incompatibilities among atomic sentences.
+\end{corollary}
+
+\subsection{Tonk}
+
+\begin{proposition}[Tonk]\label{p:tonk}
+Suppose $L$ contains a connective \emph{tonk} whose role makes $\{A\} \models A$ tonk $B$ and $\{A \text{ tonk } B\} \models B$ for all sentences $A$ and $B$, and suppose some position is incoherent. Then every non-empty position is incoherent, and no circumstance makes any sentence true.
+\end{proposition}
+
+\begin{proof}
+By transitivity of entailment, $\{A\} \models B$ for all $A$ and $B$. Hence, for any position $Y$ and sentences $A$ and $D$, if $Y \cup \{D\}$ is incoherent then so is $Y \cup \{A\}$: $Y$ is incompatible with $\{D\}$, and since $\{A\} \models D$, it is incompatible with $\{A\}$. Let $Z$ be an incoherent position. If $Z$ is empty, every position is incoherent by persistence. Otherwise, replace the members of $Z$ by $A$ one at a time: each replacement preserves incoherence, by what was just shown, and the result is $\{A\}$. So $\{A\}$ is incoherent for every $A$, and by persistence so is every non-empty position. A circumstance is coherent, and so contains no sentence.
+\end{proof}
+
+The hypothesis that some position is incoherent is minimal: a practice in which nothing is incompatible with anything places no constraint on what may be asserted, and its sentences have no content to lose. In a language with negation satisfying condition~(a), the hypothesis holds, since $\{p, \neg p\}$ is incoherent. Under that hypothesis, adding tonk leaves either no circumstance at all, if the empty position is incoherent, or a single circumstance, the empty set, at which every sentence is untrue, including both $p$ and $\neg p$. In the second case condition~(a) fails, since $\{\neg p\}$ is incoherent although the empty position does not entail $p$; in the first, the conditions hold only vacuously. Either way, no sentence is true at any circumstance. Proposition~3.2 of LNG-01-a concluded that no truth function is admissible for tonk, and Principle~P2 inferred that tonk confers no meaning. Here the same verdict follows from the role of tonk alone: a role that makes everything entail everything induces no truth-conditions, because it leaves no ways for things to be.
+
+\subsection{Carnap's problem}
+
+\begin{proposition}[Carnap's non-normal valuations]\label{p:carnap}
+Let the incoherence relation satisfy the conditions of Definition~\ref{d:conds}, and let $p$ be an atomic sentence that belongs to some circumstance and is excluded by some circumstance. Neither the valuation that makes every sentence true nor the valuation that makes true exactly the sentences true at every circumstance is the valuation induced by a circumstance.
+\end{proposition}
+
+\begin{proof}
+The set of all sentences contains $\{p, \neg p\}$, which is incoherent, so it is not a circumstance. The set $T$ of sentences true at every circumstance contains $p \vee \neg p$, by Theorem~\ref{t:class}, but neither $p$ nor $\neg p$, by the hypothesis on $p$ and Theorem~\ref{t:class}(a); by Theorem~\ref{t:class}(c), no circumstance contains a disjunction without a disjunct, so $T$ is not a circumstance.
+\end{proof}
+
+Carnap's problem arises when the role of the connectives is identified with a consequence relation among single conclusions. Such a relation is satisfied by the trivial valuation, since every conclusion is true in it, and by the valuation that makes true only the theorems, since every rule leads from theorems to theorems. The incoherence relation carries more information: it records which positions are ruled out, and a position $Y \cup \{A\}$ being ruled out is the counterpart, in a single-premise-set framework, of a sequent with $Y$ and $A$ on the left and nothing on the right. This is the information that multiple-conclusion and bilateral formulations add \citep{Smiley1996,Rumfitt2000,MurziHjortland2009}, and it is what LNG-01-a's Proposition~3.5 locates in the requirement of compositionality. On the present route, the requirement is not added: maximal coherent sets are the circumstances, and maximality together with conditions~(a) and~(c) excludes both non-normal valuations.
+
+\subsection{Conservativeness}
+
+Let $L \subseteq L'$, with incoherence relations $\mathcal{I}$ for $L$ and $\mathcal{I}'$ for $L'$, and suppose $\mathcal{I}'$ \emph{extends} $\mathcal{I}$: every position of $L$ incoherent by $\mathcal{I}$ is incoherent by $\mathcal{I}'$. The extension is \emph{conservative} if, conversely, every position of $L$ coherent by $\mathcal{I}$ remains coherent by $\mathcal{I}'$.
+
+\begin{proposition}[Conservativeness]\label{p:cons}
+An extension is conservative if and only if every circumstance for $L$ is the restriction to $L$ of some circumstance for $L'$.
+\end{proposition}
+
+\begin{proof}
+Suppose the extension is conservative, and let $w$ be a circumstance for $L$. Every position included in $w$ is coherent by $\mathcal{I}$, hence by $\mathcal{I}'$, so $w$ is coherent in $L'$, and by Lemma~\ref{l:lind} it is included in a circumstance $w'$ for $L'$. The restriction $w' \cap L$ includes $w$, and it is coherent by $\mathcal{I}$, since a position of $L$ incoherent by $\mathcal{I}$ would be incoherent by $\mathcal{I}'$; by the maximality of $w$, $w' \cap L = w$. Conversely, suppose every circumstance for $L$ is such a restriction, and let $X$ be a position of $L$ coherent by $\mathcal{I}$. By Lemma~\ref{l:lind}, $X$ is included in a circumstance $w$ for $L$, which is $w' \cap L$ for some circumstance $w'$ for $L'$, so $X \subseteq w'$ and $X$ is coherent by $\mathcal{I}'$.
+\end{proof}
+
+Belnap's requirement that a definition by rules be conservative becomes, in the present framework, the requirement that introducing an expression not abolish any way for things to be that the old language could describe. Dummett's \enquote{Boche} illustrates the failure. If the rules of \enquote{Boche} lead from \enquote{$a$ is German} to \enquote{$a$ is Boche} and from \enquote{$a$ is Boche} to \enquote{$a$ is cruel}, then in the extended language \enquote{$a$ is German} entails \enquote{$a$ is cruel}, and the old position $\{$\enquote{$a$ is German}, \enquote{$a$ is not cruel}$\}$, coherent before, is incoherent after. By Proposition~\ref{p:cons}, some circumstance of the old language, one in which a German is kind, has no counterpart in the new. The rules of \enquote{Boche} do confer a role, and the role determines truth-conditions: unlike tonk, \enquote{Boche} leaves a non-trivial space of circumstances. What is defective is the relation of that space to the old one: the new expression comes with a commitment about how things are in the old vocabulary, and the commitment is false if, as is the case, some Germans are not cruel.
+
+\subsection{Reconciliation}
+
+The results combine into the inferentialist form of the reconciliation theorem of LNG-01-a.
+
+\begin{theorem}[Reconciliation from role]\label{t:recon}
+Given Assumptions~\ref{pr:role} and~\ref{pr:circ}: (a) every sentence of a language with an incoherence relation has a truth-condition, and every entailment of its role preserves truth at every circumstance; (b) if the incoherence relation satisfies the conditions of Definition~\ref{d:conds}, each connective contributes its classical truth function; (c) a connective whose role makes every sentence entail every other, in a language in which some position is incoherent, leaves no circumstance at which any sentence is true, and so contributes no truth function.
+\end{theorem}
+
+\begin{proof}
+(a) The truth-condition of a sentence is defined from the role by Definition~\ref{d:circ} and Assumption~\ref{pr:circ}; preservation is Lemma~\ref{l:pres}. (b) is Theorem~\ref{t:class}. (c) is Proposition~\ref{p:tonk}: where no circumstance makes any sentence true, every sentence has the same, empty, truth-condition, and nothing distinguishes the contribution of one connective from that of another, or from none.
+\end{proof}
+
+Parts (a) to (c) are the counterparts of Principle~P2, Principle~P3 together with Theorem~3.3, and Proposition~3.2 of LNG-01-a. They are proved here from inferential role and the identification of circumstances; none of them is assumed.
+
+\section{Beyond the logical constants}\label{s:beyond}
+
+The logical constants are the case in which proofs are available. For the rest of the vocabulary the structure is the same, and the account needs two additions.
+
+\paragraph{Material incompatibility.} The incompatibilities among non-logical sentences are material, in Sellars's sense: \enquote{this is red} is incompatible with \enquote{this is green}, and \enquote{this is red} entails \enquote{this is colored} because everything incompatible with being colored is incompatible with being red. These incompatibilities fix which circumstances there are. Corollary~\ref{c:inv} shows that they do not affect the contributions of the connectives, which is the precise sense in which the logical vocabulary is topic-neutral. Which expressions are logical constants is a further question, answered in LOG-16 by permutation invariance; the present framework says only that the connectives characterized by Definition~\ref{d:conds} make the same contribution whatever the material incompatibilities.
+
+\paragraph{Entry and exit.} The incoherence relation fixes the space of circumstances, and thereby the truth-conditions of sentences. It does not fix which circumstance is actual. That is fixed by the world, through the language-entry rules of \citet{Sellars1954}: a speaker reliably disposed to respond to red things by saying \enquote{red} undertakes commitments that are correct in the actual circumstance, and \citet[ch.~4]{Brandom1994} treats such reliable differential responsive dispositions as the point at which the practice is answerable to its environment. Truth-conditions are the inferentialist's contribution; truth, at the actual circumstance, is the world's.
+
+\paragraph{Theoretical terms.} Terms such as \enquote{electron} have no entry rules of their own and are applied only through their inferential connections with other terms. On the present route they have roles, since they enter into incompatibilities with other sentences, and so they have truth-conditions over the circumstances those roles determine. This is the inferentialist counterpart of the Ramsey--Lewis treatment that LNG-01-a adopts \citep{Lewis1970}: the role of a theoretical term is given by the theory's sentences, and the circumstances in which the theory is true are those in which something occupies that role. It is also the structure REL-18-a relies on, with LNG-01-a, for religious discourse: expressions applied through inferential connections rather than observation have meaning in use and truth-conditions that may outrun verification.
+
+\paragraph{Reference.} The circumstances of Definition~\ref{d:circ} are sets of sentences, and the truth-conditions they induce are intensions over them. To pass from these to the objects and properties expressions refer to, the non-logical vocabulary needs more. LNG-01-a requires admissible assignments to assign eligible values \citep{Lewis1983}, and the requirement is needed here as well: two assignments of properties to \enquote{red} may agree on every circumstance the practice can distinguish and differ on which property is meant. On LNG-05, which property a speaker means is a primitive fact, and the inferentialist route, like the principal's, does not reduce it.
+
+\section{Which premises are avoided}\label{s:premise}
+
+The present proof avoids three premises of LNG-01-a.
+
+\paragraph{Principle~P2.} The truth-conditional constraint is the principal premise avoided. In LNG-01-a it is an independent necessary condition on meaning: an expression contributes a value only if the value belongs to a compositional assignment sound for its rules. In the present proof, every inferential role determines a space of circumstances and truth-conditions over it, and its entailments are sound with respect to them (Lemma~\ref{l:pres}). The role that fails, tonk, fails because its space of circumstances collapses (Proposition~\ref{p:tonk}), not because it violates a constraint imposed from outside.
+
+\paragraph{Principle~P3.} Determination is also avoided. In LNG-01-a, P3 is needed to pass from the fact that only one truth function is admissible for a connective's rules to the conclusion that the connective contributes it. Here the connective is a classical truth function at every circumstance (Theorem~\ref{t:class}), so the contribution is not selected among admissible candidates; it is read off the role.
+
+\paragraph{The local reading.} The soundness conditions of Definition~3.1 of LNG-01-a for discharging rules are read locally. The present proof characterizes the conditional and disjunction by conditions on incoherence and involves no discharge.
+
+\paragraph{What replaces them.} One assumption replaces them: Assumption~\ref{pr:circ}, that circumstances are maximal coherent positions. It is a substantive premise, and the truth-conditional theorist will say that it is where truth enters the proof. That is correct, and it is the reconciliation in another form. The difference between the two routes is the order of explanation. On the principal's route, the notion of a compositional truth-conditional assignment is given, and use is measured against it. On the present route, the notion of a circumstance is defined from use, and compositional truth-conditions emerge (Theorem~\ref{t:class}). The use theorist is right that nothing beyond the practice is needed to fix truth-conditions; the truth-conditional theorist is right that the practice cannot confer meaning without determining truth-conditions, and that a practice which determines none, like the practice of tonk, confers none. Both routes end at the conclusion of LNG-01, and LNG-01-b argues that the same reconciliation is implicit in Wittgenstein and Davidson.
+
+Assumption~\ref{pr:circ} is not equivalent to Principle~P2 of LNG-01-a. It says nothing about which roles confer meaning; it says what circumstances are, given a role. That a role which leaves no circumstances confers no truth-conditional contribution is then a theorem. And it is weaker than P2 in a second respect: it does not presuppose that sentences are bivalent, since bivalence at circumstances is a consequence of maximality, and the classical behavior of negation is a consequence of condition~(a), which is a condition on use.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Compositionality]\label{o:comp}
+Inferential roles do not compose. The role of \enquote{brown cow} includes the inference to \enquote{dangerous} for a speaker who believes brown cows dangerous, and this is not fixed by the roles of \enquote{brown} and \enquote{cow} \citep{FodorLepore1991,FodorLepore2001}.
+\end{objection}
+
+\begin{reply}
+Two replies are available, and the framework supplies both. First, the role that constitutes meaning is the incoherence relation of the practice, not the set of inferences a particular speaker would draw. The belief that brown cows are dangerous is a commitment a speaker undertakes, not a feature of the incoherence relation: a speaker who denies it occupies a coherent position. Second, where roles are constitutive, they compose: each condition of Definition~\ref{d:conds} specifies the incompatibilities of a complex sentence in terms of those of its constituents, and Theorem~\ref{t:class} shows that the result is a compositional assignment of truth functions. This is the sense of compositionality \citet{Brandom2007} claims for inferential roles, a recursive specification of the role of the whole from the roles of the parts, and Theorem~\ref{t:class} shows that it yields compositionality in the truth-conditional sense \citet{FodorLepore2007} demand. For adjectival modification, the corresponding condition, for intersective adjectives, is that a position is incompatible with \enquote{$a$ is a brown cow} just in case it is incompatible with the pair \enquote{$a$ is brown}, \enquote{$a$ is a cow}, which is condition~(b) applied to a predicate.
+\end{reply}
+
+\begin{objection}[Holism]\label{o:hol}
+If the role of a sentence is its place in the incoherence relation, every sentence's role depends on every other's, and two speakers whose incoherence relations differ anywhere share no meanings \citep{FodorLepore1992}.
+\end{objection}
+
+\begin{reply}
+The dependence is real for the space of circumstances, and harmless for meaning. Corollary~\ref{c:inv} shows that the contribution of each connective is invariant under every variation in the material incompatibilities: two speakers who disagree about whether anything can be both red and green, or about the dangers of cows, still mean the same by \enquote{not} and \enquote{or}. For non-logical vocabulary the invariance is partial, and \citet{Boghossian1993} argued that the inferentialist need not identify meaning with total role, only with the constitutive part of it. LNG-01-a holds, with LNG-04, that the boundary of the constitutive part is vague, and a vague boundary is enough to separate the constitutive incompatibility of \enquote{red} with \enquote{green} from collateral beliefs.
+\end{reply}
+
+\begin{objection}[Defective concepts]\label{o:bog}
+\citet{Boghossian2003} argues that tonk and \enquote{Boche} show that meaning-constituting rules can be defective. A thinker who grasps \enquote{Boche} by its constitutive rules is not thereby entitled to infer that a German is cruel. So the inferentialist cannot hold both that rules constitute meaning and that grasping the meaning entitles one to the rules; and if she drops the second claim, the truth-conditional constraint must be imposed to separate good rules from bad.
+\end{objection}
+
+\begin{reply}
+The present account distinguishes the two cases Boghossian groups together, and neither requires an imposed constraint. Tonk's role collapses the space of circumstances (Proposition~\ref{p:tonk}): it confers no truth-conditional contribution, and there is nothing for a thinker to grasp. \enquote{Boche} confers a role and truth-conditions, but its introduction is not conservative, and by Proposition~\ref{p:cons} it abolishes circumstances the old language could describe. A thinker who grasps \enquote{Boche} grasps a concept whose application commits her to a claim in the old vocabulary, and whether she is entitled to that commitment depends on whether it is true. The account does not claim that grasping a meaning entitles one to every inference the meaning-constituting rules license; it claims that the rules determine truth-conditions, with respect to which their entailments are sound. Entitlement to a non-conservative rule depends on the truth of the commitment it carries, which is the diagnosis \citet{Dummett1973} gave and Boghossian accepts.
+\end{reply}
+
+\begin{objection}[Circularity]\label{o:circ}
+Assumption~\ref{pr:circ} is the truth-conditional constraint in disguise. Calling maximal coherent sets \enquote{circumstances} and membership \enquote{truth} presupposes that coherence tracks the possibility of joint truth, and that is the substantive notion of truth the proof claims not to need.
+\end{objection}
+
+\begin{reply}
+The objection would be correct if coherence were defined as the possibility of joint truth. It is not: an incoherent position is one a speaker ought not occupy, by the norms of the practice (Assumption~\ref{pr:role}). Assumption~\ref{pr:circ} identifies the possibilities a language can describe with complete coherent stories, and the results show that this identification is stable: incoherence coincides with joint untruth at every circumstance (Lemma~\ref{l:coh}), entailment with truth-preservation (Corollary~\ref{c:ent}), and the connectives with truth functions (Theorem~\ref{t:class}). The notion of truth used is the one LNG-10's deflationism allows: a sentence is true at a circumstance if the circumstance includes it, and nothing is assumed about truth as a substantive property. What is assumed is that the ways things could be are, so far as a language can say, its complete coherent stories. That is where the representational dimension enters, and Section~\ref{s:premise} concedes it.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+First, the result is not a naturalistic reduction. The incoherence relation is normative, and which relation a community's practice instantiates is not fixed by its members' dispositions (LNG-05; \citealt{Kripke1982}).
+
+Second, the classical determination result depends on the incompatibility conditions of Definition~\ref{d:conds}. A practice that governed \enquote{not} differently, for instance by an incoherence relation on which $Y \cup \{\neg A\}$ is incoherent only when $Y$ entails $A$ by a constructive standard, would determine a different space of circumstances, and the results would have to be proved again. That the conditions are the right ones for the connectives of natural language is supported by LOG-02, on which classical logic is the one true logic.
+
+Third, the construction of circumstances uses the countability of the language. For uncountable languages the Lindenbaum construction requires a form of the axiom of choice, which we have not examined.
+
+Fourth, the passage from truth-conditions over circumstances to reference for non-logical vocabulary requires the eligibility constraint of LNG-01-a, which the present route does not avoid (Section~\ref{s:beyond}).
+
+\section{Conclusion}
+
+Starting from inferential role, understood as the place of sentences in a normative incoherence relation, and from the identification of circumstances with maximal coherent positions, the conclusion of LNG-01 follows without the truth-conditional constraint as a premise. Every entailment of a role preserves truth at the circumstances the role determines; the connectives are classical truth functions at every circumstance; tonk collapses the space of circumstances and so contributes nothing; Carnap's non-normal valuations are not circumstances; and conservativeness is the preservation of circumstances. Meaning is use, and the constraint by truth-conditions is a consequence of use rather than an addition to it.
+
+\begin{thebibliography}{99}\small
+\bibitem[Belnap(1962)]{Belnap1962} Belnap, N.~D. (1962). Tonk, plonk and plink. \emph{Analysis}, 22(6), 130--134.
+\bibitem[Boghossian(1993)]{Boghossian1993} Boghossian, P.~A. (1993). Does an inferential role semantics rest upon a mistake? \emph{Mind \& Language}, 8(1), 27--40.
+\bibitem[Boghossian(2003)]{Boghossian2003} Boghossian, P.~A. (2003). Blind reasoning. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 77, 225--248.
+\bibitem[Bonnay and Westerst{\aa}hl(2016)]{BonnayWesterstahl2016} Bonnay, D. and Westerst{\aa}hl, D. (2016). Compositionality solves Carnap's problem. \emph{Erkenntnis}, 81, 721--739.
+\bibitem[Brandom(1994)]{Brandom1994} Brandom, R. (1994). \emph{Making It Explicit: Reasoning, Representing, and Discursive Commitment}. Harvard University Press.
+\bibitem[Brandom(2000)]{Brandom2000} Brandom, R. (2000). \emph{Articulating Reasons: An Introduction to Inferentialism}. Harvard University Press.
+\bibitem[Brandom(2007)]{Brandom2007} Brandom, R. (2007). Inferentialism and some of its challenges. \emph{Philosophy and Phenomenological Research}, 74(3), 651--676.
+\bibitem[Brandom(2008)]{Brandom2008} Brandom, R. (2008). \emph{Between Saying and Doing: Towards an Analytic Pragmatism}. Oxford University Press.
+\bibitem[Carnap(1943)]{Carnap1943} Carnap, R. (1943). \emph{Formalization of Logic}. Harvard University Press.
+\bibitem[Dummett(1973)]{Dummett1973} Dummett, M. (1973). \emph{Frege: Philosophy of Language}. Duckworth.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{The Logical Basis of Metaphysics}. Harvard University Press.
+\bibitem[Fodor and Lepore(1991)]{FodorLepore1991} Fodor, J. and Lepore, E. (1991). Why meaning (probably) isn't conceptual role. \emph{Mind \& Language}, 6(4), 328--343.
+\bibitem[Fodor and Lepore(1992)]{FodorLepore1992} Fodor, J. and Lepore, E. (1992). \emph{Holism: A Shopper's Guide}. Blackwell.
+\bibitem[Fodor and Lepore(2001)]{FodorLepore2001} Fodor, J. and Lepore, E. (2001). Brandom's burdens: Compositionality and inferentialism. \emph{Philosophy and Phenomenological Research}, 63(2), 465--481.
+\bibitem[Fodor and Lepore(2007)]{FodorLepore2007} Fodor, J. and Lepore, E. (2007). Brandom beleaguered. \emph{Philosophy and Phenomenological Research}, 74(3), 677--691.
+\bibitem[Gentzen(1935)]{Gentzen1935} Gentzen, G. (1935). Untersuchungen {\"u}ber das logische Schlie{\ss}en. \emph{Mathematische Zeitschrift}, 39, 176--210, 405--431.
+\bibitem[Kripke(1982)]{Kripke1982} Kripke, S.~A. (1982). \emph{Wittgenstein on Rules and Private Language}. Harvard University Press.
+\bibitem[Lewis(1970)]{Lewis1970} Lewis, D. (1970). How to define theoretical terms. \emph{Journal of Philosophy}, 67(13), 427--446.
+\bibitem[Lewis(1983)]{Lewis1983} Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy}, 61(4), 343--377.
+\bibitem[Murzi and Hjortland(2009)]{MurziHjortland2009} Murzi, J. and Hjortland, O.~T. (2009). Inferentialism and the categoricity problem: Reply to Raatikainen. \emph{Analysis}, 69(3), 480--488.
+\bibitem[Peregrin(2014)]{Peregrin2014} Peregrin, J. (2014). \emph{Inferentialism: Why Rules Matter}. Palgrave Macmillan.
+\bibitem[Prawitz(1965)]{Prawitz1965} Prawitz, D. (1965). \emph{Natural Deduction: A Proof-Theoretical Study}. Almqvist \& Wiksell.
+\bibitem[Prior(1960)]{Prior1960} Prior, A.~N. (1960). The runabout inference-ticket. \emph{Analysis}, 21(2), 38--39.
+\bibitem[Raatikainen(2008)]{Raatikainen2008} Raatikainen, P. (2008). On rules of inference and the meanings of logical constants. \emph{Analysis}, 68(4), 282--287.
+\bibitem[Rumfitt(2000)]{Rumfitt2000} Rumfitt, I. (2000). \enquote{Yes} and \enquote{no}. \emph{Mind}, 109(436), 781--823.
+\bibitem[Sellars(1953)]{Sellars1953} Sellars, W. (1953). Inference and meaning. \emph{Mind}, 62(247), 313--338.
+\bibitem[Sellars(1954)]{Sellars1954} Sellars, W. (1954). Some reflections on language games. \emph{Philosophy of Science}, 21(3), 204--228.
+\bibitem[Smiley(1996)]{Smiley1996} Smiley, T. (1996). Rejection. \emph{Analysis}, 56(1), 1--9.
+\bibitem[Williamson(2003)]{Williamson2003} Williamson, T. (2003). Understanding and inference. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 77, 249--273.
+\end{thebibliography}
+
+\end{document}

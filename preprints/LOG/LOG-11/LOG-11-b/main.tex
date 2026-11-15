@@ -1,0 +1,86 @@
+\documentclass{situationist-preprint}
+
+\title{Backward Induction and Knowledge}
+\msid{LOG-11-b}
+\msfamily{LOG-11}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{surprise examination; backward induction; knowledge retention; KK principle; blindspots; factivity; closure}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-11-a, in its revised form, shows that the surprise examination can take place on any day but the last, because the students' backward induction fails at its second step: on the morning of the penultimate day they cannot know the announcement. The proof uses only factivity and closure. We make explicit the premise about future knowledge that the second step requires when the students reason in advance, and show that it is true only if the examination takes place before the penultimate day; a student who knew it would already know what the step was meant to establish. The later steps of the induction need iterated premises of the same kind, which is where earlier treatments invoked the KK principle. Since the induction fails before any iteration is needed, the diagnosis is neutral on KK.
+\end{abstract}
+
+\section{The second step made explicit}
+
+We keep the notation of LOG-11-a. The days are $1, \ldots, n$, with $n \geq 2$; $E_d$ is the proposition that the examination is on day $d$; $A$ is the announcement; and $K_d$ is the students' knowledge on the morning of day $d$. The students reason before the week begins, and the question is what they must assume about their own later knowledge.
+
+The first step, Theorem~2.1 of LOG-11-a, needs no such assumption: if $A$ is true, the examination is not on day $n$, because on the morning of day $n$ the students would know from the calendar that it was that day. The second step excludes day $n-1$, and it needs more. Its reasoning is this: if the examination is on day $n-1$, then on the morning of that day the students will know $A$, hence by the first step that it is not on day $n$, hence that it is on day $n-1$; so they will not be surprised, and $A$ will be false. The premise about future knowledge is
+\begin{enumerate}[label=(R)]
+\item if the examination has not taken place before day $n-1$, then $K_{n-1} A$.
+\end{enumerate}
+(R) is a principle of retention: knowledge of the announcement, had at the start of the week, is still had on the morning of day $n-1$ if the examination has not yet taken place. Without (R), or some premise that implies its consequent in the relevant case, the second step does not go through.
+
+\begin{proposition}\label{p:R}
+Assume, as in LOG-11-a, that the students' knowledge on the morning of day $n-1$ is factive and closed, and that if the examination has not taken place before day $n-1$, they then know that it is on day $n-1$ or day $n$. Then (R) is true only if the examination takes place before day $n-1$.
+\end{proposition}
+
+\begin{proof}
+Suppose (R) is true and the examination has not taken place before day $n-1$. By (R), $K_{n-1} A$. Under the stated assumptions, Theorem~3.1 of LOG-11-a shows that on the morning of day $n-1$ the students do not know $A$. This is a contradiction, so the examination takes place before day $n-1$.
+\end{proof}
+
+\begin{corollary}\label{c:beg}
+If the students know (R) at the start of the week and know Proposition~\ref{p:R}, then by closure they know at the start of the week that the examination takes place before day $n-1$.
+\end{corollary}
+
+Corollary~\ref{c:beg} shows that the second step, run in advance, cannot be both sound and informative. If (R) is false, the step rests on a false premise. If (R) is true, it is true only because the examination takes place before day $n-1$, and a student who knows (R), and has understood the first two steps, already knows that days $n-1$ and $n$ are excluded. The step does not discover that the examination is not on day $n-1$; knowledge of its premise presupposes it.
+
+\section{Iteration, and why it is not needed}
+
+The third step excludes day $n-2$, and it requires that on the morning of day $n-2$ the students know $A$ \emph{and} know the conclusion of the second step, that is, know that if the examination has not taken place before day $n-1$ they will know $A$ on that morning. The $k$-th step requires knowledge, on the morning of day $n-k+1$, of the retention premises of all the later steps. The backward induction therefore needs, at its later stages, knowledge about future knowledge about future knowledge, iterated to a depth that grows with the number of days.
+
+This is where earlier treatments placed the difficulty. \citet{Binkley1968} formalized the puzzle in a modal logic of the students' beliefs, with principles about what they will believe on later days, and located the paradox in the interaction of those principles with the announcement. \citet[ch.~6]{Williamson2000} treats the surprise examination as an application of margin-for-error principles, on which iterations of knowledge fail and the KK principle, that whoever knows knows that she knows, is false. On such treatments, whether the induction can be carried through turns on how far iterated knowledge reaches.
+
+The revised proof of LOG-11-a shows that this question need not be answered. The chain of retention premises fails at its first link: (R) is the base case of the iteration, and by Proposition~\ref{p:R} it cannot be known except by someone who already knows the conclusion it was meant to support. No assumption about KK enters. If KK is true, Theorem~3.1 of LOG-11-a still holds, since its proof uses only factivity, closure and the calendar; if KK is false, it holds for the same reason. The diagnosis is therefore available to defenders and opponents of KK alike, which was the purpose of the revision.
+
+\section{Objections and replies}
+
+\begin{objection}[Testimony]
+The teacher is reliable and the students trust her. On being told, they know the announcement, and knowledge so acquired is not lost overnight. So (R) is true.
+\end{objection}
+
+\begin{reply}
+Nothing in LOG-11-a or here denies that the students may know $A$ when it is announced. What Theorem~3.1 of LOG-11-a denies is that they know it on the morning of day $n-1$ if the examination has not yet taken place. Knowledge of $A$ at the start of the week is therefore not retained into that situation, whatever its source. This is not forgetting. $A$ is a blindspot for the students on that morning in the sense of \citet{Sorensen1988}: it may be true, but their knowing it then would make it false. A proposition can be knowable at one time and a blindspot at a later one, and knowledge of it cannot be carried into the time at which it becomes one.
+\end{reply}
+
+\begin{objection}[Quine's diagnosis]
+\citet{Quine1953} held that the student's error lies in failing to consider that the announcement might be false. That diagnosis is simpler and makes no use of knowledge on particular mornings.
+\end{objection}
+
+\begin{reply}
+Quine's diagnosis is correct as far as it goes, and ours makes it precise. The students may consider the falsity of $A$ at the start of the week and rightly dismiss it; what they cannot do is take $A$ to be known on the morning of day $n-1$, where, by Proposition~\ref{p:R}, any warrant for doing so presupposes that the examination has already taken place. The error lies not in trusting the announcement but in assuming that trust in it survives into the one situation in which it cannot be knowledge.
+\end{reply}
+
+\begin{objection}[Closure]
+The argument relies on closure. A theorist who rejects closure can accept (R) without contradiction.
+\end{objection}
+
+\begin{reply}
+Without closure the first step fails too, since it requires the students to combine their knowledge of the calendar with their knowledge of what has happened. A theorist who rejects closure therefore cannot reconstruct the backward induction at all, and the paradox does not arise for her. Closure is defended in EPI-20, and LOG-10-a keeps it in its treatment of the knower; the present diagnosis uses it only in the elementary form in which the paradox itself requires it.
+\end{reply}
+
+\section{Conclusion}
+
+Run in advance, the second step of the students' backward induction rests on a premise about their future knowledge of the announcement. That premise is true only if the examination takes place before the penultimate day, so knowledge of it presupposes the conclusion of the step. The later steps need iterated premises of the same kind, and earlier treatments located the paradox in the failure of such iterations and of the KK principle. Since the induction fails at the first link of the chain, by factivity and closure alone, the diagnosis of LOG-11-a does not depend on the fate of KK. The examination can take place, with surprise, on any day but the last.
+
+\begin{thebibliography}{99}\small
+\bibitem[Binkley(1968)]{Binkley1968} Binkley, R. (1968). The surprise examination in modal logic. \emph{The Journal of Philosophy}, 65(5), 127--136.
+\bibitem[Quine(1953)]{Quine1953} Quine, W.~V. (1953). On a so-called paradox. \emph{Mind}, 62(245), 65--67.
+\bibitem[Sorensen(1988)]{Sorensen1988} Sorensen, R.~A. (1988). \emph{Blindspots}. Clarendon Press.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

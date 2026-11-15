@@ -1,0 +1,207 @@
+\documentclass{situationist-preprint}
+
+\title{Second-Order Logic Is Logic}
+\msid{LOG-09-a}
+\msfamily{LOG-09}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_09.lean}
+\mskeywords{second-order logic; Quine; set theory in sheep's clothing; plural quantification; logical constants; permutation invariance; Leibniz's Law; ancestral}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Quine held that second-order logic is set theory in sheep's clothing: its quantifiers range over sets, it carries the ontological commitments of set theory, and it lacks the completeness that marks genuine logic. We argue that second-order logic is logic. The argument has a positive and a negative part. Positively, the second-order quantifiers are invariant under all permutations of the domain of individuals, and so, by the invariance criterion defended in LOG-16, are logical constants; second-order logic defines identity, as Leibniz's Law requires, and Frege's ancestral, by quantifying over all properties. Negatively, we prove that second-order quantification cannot be first-order quantification over sets in the same domain: on any domain, some condition is coded by no object, so a reduction to sets requires sets outside the domain, which is impossible when the domain is absolutely everything (LOG-08). Quine's further objections, from incompleteness and from entanglement with the continuum hypothesis, show that second-order consequence outruns proof and is hard to know, not that it is not logical. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Frege's logic was higher-order: his Begriffsschrift quantified over concepts as well as objects, and he used this to define the ancestral of a relation and to derive the principle of mathematical induction \citep{Frege1879}. Dedekind's characterization of the natural numbers up to isomorphism is likewise a second-order result \citep{Dedekind1888}. In the twentieth century, logic came to mean first-order logic. The decisive argument was Quine's. In \citet{Quine1970} he described second-order logic as \enquote{set theory in sheep's clothing}: a predicate variable in quantified position is a variable ranging over sets or attributes, so second-order logic carries the ontology of set theory; and it lacks the properties, a complete proof procedure above all, that distinguish logic from mathematics.
+
+The opposing case was made by \citet{Boolos1975,Boolos1984} and by \citet{Shapiro1991}. Boolos argued that monadic second-order quantification can be read as plural quantification, \enquote{there are some things such that \ldots}, which carries no commitment to sets, and that the second-order sentences that seem to say that sets exist say only that there are some things of a certain kind. Shapiro argued that the standard semantics of second-order logic is required to capture mathematical practice, and that incompleteness is the price of expressive power, not a mark of non-logicality. The debate continued in \citet{Resnik1988}, \citet{Jane1993} and \citet{Vaananen2001}, who doubted that second-order logic avoids the indeterminacies of set theory, and in \citet{Linnebo2003}, who questioned the ontological innocence of plural quantification. A different line, from \citet{Prior1971} to \citet{Williamson2003} and \citet{Wright2007}, takes higher-order quantification to be sui generis: neither plural nor quantification over objects of any kind.
+
+We argue that second-order logic is logic and not set theory in disguise. Section~\ref{s:frame} states what it would take for a system to be logic, and what the disguise thesis claims. Section~\ref{s:arg} gives the positive argument, from invariance and definability, and proves that the disguise thesis fails. Section~\ref{s:obj} answers Quine's objections.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:sol}
+The language of second-order logic adds to first-order logic variables for properties and relations of individuals, with quantifiers binding them. On the \emph{standard semantics}, the property variables range over all conditions on the domain of individuals: whatever the individuals, every way of dividing them into those that satisfy a condition and those that do not is in the range.
+\end{definition}
+
+\begin{definition}\label{d:action}
+A permutation $\pi$ of the individuals acts on conditions by sending $X$ to its image $\pi[X]$, and on operations on conditions by transport. An operation $Q$ on conditions is \emph{permutation invariant} if $Q$ takes the same value on a second-order condition $\Phi$ as on its transport by any permutation.
+\end{definition}
+
+\begin{principle}[Invariance criterion]\label{p:crit}
+An operation is a logical constant if it is invariant under all permutations of the domain of individuals.
+\end{principle}
+
+Principle~\ref{p:crit} is the sufficiency half of the criterion that LOG-16 defends, where the logical constants are identified with the permutation-invariant operations. It is the precise form of the thought that logic is topic-neutral: an invariant operation does not distinguish between objects.
+
+\begin{definition}\label{d:logic}
+A system is \emph{logic} if its constants are logical constants and its consequence relation is truth-preservation under all reinterpretations of its non-logical vocabulary over all domains.
+\end{definition}
+
+Definition~\ref{d:logic} is the model-theoretic account of consequence; LOG-06 adds the proviso that the domains include one isomorphic to the actual world, which the standard semantics satisfies when the domain of individuals is absolutely everything. The point to note is that only the non-logical vocabulary is reinterpreted. If the second-order quantifiers are logical constants, their meaning is held fixed across interpretations, and on the standard semantics that meaning is \enquote{all conditions on the domain}.
+
+\begin{definition}\label{d:disguise}
+The \emph{disguise thesis} for a domain holds if some objects of the domain, the sets, and a membership relation provide, for every condition on the domain, a set whose members are exactly the objects satisfying it. Second-order quantification over the domain is then first-order quantification over those sets.
+\end{definition}
+
+Definition~\ref{d:disguise} states Quine's thesis in its strongest form: the second-order quantifiers are first-order quantifiers restricted to the sets, and \enquote{$X$ applies to $a$} is \enquote{$a$ is a member of $X$}.
+
+\section{The argument}\label{s:arg}
+
+\begin{theorem}\label{t:inv}
+The second-order universal and existential quantifiers are permutation invariant.
+\end{theorem}
+
+\begin{proof}
+Let $\pi$ be a permutation of the individuals. Every condition on the domain is the image under $\pi$ of some condition, namely its image under $\pi^{-1}$, and the image of a condition under $\pi$ is a condition. So $\pi$ induces a permutation of the conditions. A second-order condition $\Phi$ holds of every condition if and only if its transport holds of every condition, since the two quantifications range over the same conditions in a different order; likewise for \enquote{some condition}.
+\end{proof}
+
+\begin{corollary}\label{c:logical}
+Given Principle~\ref{p:crit}, the second-order quantifiers are logical constants, and second-order logic, with its standard semantics, is logic in the sense of Definition~\ref{d:logic}.
+\end{corollary}
+
+\begin{proof}
+The first-order constants are invariant (LOG-16), and by Theorem~\ref{t:inv} so are the second-order quantifiers. The consequence relation of the standard semantics reinterprets the non-logical vocabulary over all domains and holds the second-order quantifiers fixed.
+\end{proof}
+
+The proof of Theorem~\ref{t:inv} uses only the fact that the range of the second-order variables is closed under images by permutations, which holds because it contains \emph{all} conditions. It fails on a Henkin semantics, where the range is an arbitrary subcollection of conditions \citep{Henkin1950}: a subcollection need not be closed under images, and a quantifier over it may distinguish between individuals. This is the first sign that the standard semantics, and not the Henkin semantics, gives the logical meaning of the second-order quantifiers.
+
+Second-order logic defines notions that first-order logic must take as primitive or cannot express. Two are basic.
+
+\begin{proposition}[Leibniz]\label{p:leibniz}
+Identity is second-order definable: $a = b$ if and only if every property of $a$ is a property of $b$.
+\end{proposition}
+
+\begin{proof}
+If $a = b$, whatever holds of $a$ holds of $b$. Conversely, the property of being identical to $a$ holds of $a$, so it holds of $b$.
+\end{proof}
+
+Proposition~\ref{p:leibniz} is the definition of identity that LOG-12 relies on in its reply to the objection that absolute identity is inexpressible: no first-order theory pins identity down, since the strongest first-order definable relation is indiscernibility with respect to the theory's predicates, but second-order logic defines it outright by quantifying over all properties. The definition requires the standard semantics. On a Henkin semantics that omits the property of being identical to $a$, two distinct objects may share every property in the range, and the defined relation is indiscernibility again.
+
+\begin{definition}[Frege]\label{d:anc}
+The \emph{ancestral} of a relation $R$ holds between $a$ and $b$ if $b$ has every property that belongs to every $R$-successor of $a$ and is hereditary under $R$, that is, passes from any object that has it to the objects to which that object bears $R$.
+\end{definition}
+
+\begin{proposition}\label{p:anc}
+The ancestral of $R$ contains $R$ and is transitive.
+\end{proposition}
+
+\begin{proof}
+If $R(a, b)$, then $b$ is an $R$-successor of $a$ and so has every property that belongs to all of them. For transitivity, suppose the ancestral holds between $a$ and $b$ and between $b$ and $c$, and let $X$ be hereditary and belong to every $R$-successor of $a$. Then $b$ has $X$. Since $X$ is hereditary, every $R$-successor of $b$ has $X$; so, by the ancestral between $b$ and $c$, $c$ has $X$.
+\end{proof}
+
+Proposition~\ref{p:anc} is Frege's result in the Begriffsschrift, and the ancestral is what allows the natural numbers to be defined as the objects that follow zero in the successor series, and induction to be proved rather than postulated. No first-order formula defines the ancestral of an arbitrary relation: by compactness, any first-order theory that implies, for each $n$, that $b$ is not reached from $a$ in $n$ steps, is consistent with the claim that $b$ is reached from $a$.
+
+We now turn to the disguise thesis.
+
+\begin{theorem}\label{t:nodisguise}
+The disguise thesis fails for every domain: on any domain, and for any choice of sets and membership relation among its objects, some condition on the domain is not the membership condition of any of its objects.
+\end{theorem}
+
+\begin{proof}
+Consider the condition of not being a member of oneself. If some object $y$ of the domain had as members exactly the objects satisfying it, then $y$ would be a member of itself if and only if it was not.
+\end{proof}
+
+Theorem~\ref{t:nodisguise} is Russell's lemma in the form in which LOG-08 uses it, and its consequence for the present question is direct. If second-order quantification over a domain were first-order quantification over sets, the sets coding all the conditions on the domain would have to lie outside the domain. When the domain is restricted, this is possible: second-order quantification over the natural numbers can be simulated by first-order quantification over sets of natural numbers, which are not natural numbers. When the domain is absolutely everything, which LOG-08 argues is a coherent domain of quantification, there is nothing outside it. Second-order quantification over everything therefore cannot be first-order quantification over sets, and since it is intelligible, by Principle~\ref{p:crit} and Theorem~\ref{t:inv}, it is something else: plural quantification in the monadic case \citep{Boolos1984}, and sui generis higher-order quantification in general \citep{Williamson2003,Wright2007}.
+
+The thesis that second-order logic is set theory in disguise is therefore false in the case that matters most. Set theory can model second-order logic over a set-sized domain, as it can model first-order logic, arithmetic or anything else; that is a fact about the expressive power of set theory, not about the subject matter of the theory modeled.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Ontological commitment]
+To be is to be the value of a variable. A sentence of the form $\exists X\, \phi(X)$ is true only if there is something, a set or an attribute, over which $X$ ranges. Second-order logic is therefore committed to sets or attributes, and its \enquote{logical truths} include existence claims for them \citep{Quine1970}.
+\end{objection}
+
+\begin{reply}
+The objection assumes that every quantifier ranges over objects, which is what is in question. \citet{Boolos1984} showed that monadic second-order sentences can be read plurally: $\exists X\, \phi(X)$ says that there are some things such that $\phi$ of them, or that $\phi$ holds of nothing; and \enquote{there are some critics who admire only one another} is not about a set of critics. Theorem~\ref{t:nodisguise} shows that the reading in terms of objects is not merely optional but unavailable for the domain of everything. \citet{Linnebo2003} argues that plural quantification carries commitments of its own; we agree that it carries commitment to the things it is plural over, and to nothing more, which is what the thesis that second-order logic is logic requires.
+\end{reply}
+
+\begin{objection}[Incompleteness]
+Logic has a complete proof procedure. First-order logic does (LOG-20); second-order logic does not, since by G\"odel's incompleteness theorem and the categoricity of second-order arithmetic its validities are not recursively enumerable \citep{Godel1931}. So second-order logic is not logic.
+\end{objection}
+
+\begin{reply}
+Completeness is a property of the relation between a consequence relation and a proof system, and Definition~\ref{d:logic} does not require it. That first-order logic is complete is a theorem about first-order logic, as LOG-20 holds, not a definition of logic. Second-order consequence outruns any proof system because second-order logic can characterize infinite structures up to isomorphism \citep{Dedekind1888,Shapiro1991}, and this is the expressive power that makes it useful. A logic that can say \enquote{there are finitely many $F$s} must have non-recursively enumerable validities, and that is a feature of finiteness, not a defect of the logic that expresses it.
+\end{reply}
+
+\begin{objection}[Entanglement]
+There is a sentence of pure second-order logic that is valid if and only if the continuum hypothesis is true, and another that is valid if and only if it is false. Which second-order sentences are logical truths thus depends on set theory, and on questions set theory cannot settle \citep{Jane1993,Vaananen2001}.
+\end{objection}
+
+\begin{reply}
+The dependence is real, but its direction is the reverse of the one the objection needs. The continuum hypothesis concerns how many conditions there are on an infinite domain, which is a question about the range of the second-order quantifiers. That a question about the range of the logical constants is hard does not make the constants non-logical; first-order validity is undecidable, and no one concludes that the first-order quantifiers are non-logical. If, as MTH-06 argues, the continuum hypothesis is false given independently motivated new axioms, then the corresponding second-order sentence is a logical truth whose status we learn by doing set theory, as we may learn a first-order validity by doing number theory. The epistemic route to a logical truth does not determine its subject matter.
+\end{reply}
+
+\begin{objection}[Henkin semantics]
+With the Henkin semantics, second-order logic is complete and compact, and is in effect a many-sorted first-order theory. The standard semantics is an optional choice, and it is the choice that brings in set theory.
+\end{objection}
+
+\begin{reply}
+The Henkin semantics reinterprets the second-order quantifiers from model to model, by letting their range be any subcollection of the conditions. By Definition~\ref{d:logic}, a logical constant is held fixed across interpretations, so on the Henkin semantics the second-order quantifiers are treated as non-logical, and the resulting system is indeed a first-order theory. That is a different system, not a rival interpretation of the same one. The remarks after Theorem~\ref{t:inv} and Proposition~\ref{p:leibniz} show what the Henkin semantics loses: invariance, and the definition of identity.
+\end{reply}
+
+\begin{objection}[Polyadic quantification]
+The plural reading covers monadic second-order logic only. Quantification over relations requires either ordered pairs, which are set-theoretic objects, or a primitive notion of relation, which is no better than the attributes Quine rejected.
+\end{objection}
+
+\begin{reply}
+Pairs are needed only if relation variables are reduced to monadic ones, and the reduction is optional. The proof of Theorem~\ref{t:inv} applies to relation variables as to property variables: a permutation of the individuals induces a permutation of the relations. Polyadic second-order quantification is therefore invariant, and on Principle~\ref{p:crit} logical, whether or not it is read plurally. That it is not reducible to plural quantification shows only that higher-order quantification is a sui generis form of generality \citep{Prior1971,Williamson2003}.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument establishes that second-order logic, with the standard semantics, is logic, given the invariance criterion. It does not establish the criterion, which is the burden of LOG-16. It does not establish that mathematics reduces to second-order logic: second-order logic does not prove the existence of infinitely many objects, and the claim of MTH-04, that arithmetic reduces to logic plus Hume's principle, requires a separate argument that Hume's principle is logical. Nor does it establish that the metatheory of second-order logic can be developed without set theory; it may be convenient to study second-order logic set-theoretically, as it is convenient to study arithmetic set-theoretically, and this no more makes the logic set theory than it makes arithmetic set theory.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_09.lean} takes the domain of individuals as a primitive axiom (Definition~\ref{d:sol}) and represents the standard semantics by quantification over all predicates of type \texttt{D → Prop}. Permutations and invariance are as in Definition~\ref{d:action}; Principle~\ref{p:crit} is an axiom about a primitive predicate of logical constancy. The module proves Theorem~\ref{t:inv}, Corollary~\ref{c:logical}, Propositions~\ref{p:leibniz} and~\ref{p:anc}, and Theorem~\ref{t:nodisguise}, with the disguise thesis stated as in Definition~\ref{d:disguise}. The main statements are these.
+
+\begin{lstlisting}
+theorem second_order_logical :
+    LogicalConstant2 forall2 ∧ LogicalConstant2 exists2
+
+theorem identity_definable (a b : D) :
+    a = b ↔ ∀ X : D → Prop, X a → X b
+
+theorem no_disguise (E : Type) : ¬ Disguise E
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_09.second_order_logical' depends on axioms:
+ [Quot.sound, Philosophy.LOG_09.D,
+  Philosophy.LOG_09.LogicalConstant2, Philosophy.LOG_09.criterion]
+'Philosophy.LOG_09.identity_definable' depends on axioms:
+ [Philosophy.LOG_09.D]
+'Philosophy.LOG_09.no_disguise' does not depend on any axioms
+\end{lstlisting}
+
+\texttt{Quot.sound} enters through function extensionality, used to identify a condition with its double transport. The axioms specific to the problem are the domain, the primitive predicate of logical constancy and Principle~\ref{p:crit}. Theorem~\ref{t:nodisguise} holds for every domain and uses no axioms.
+
+\section{Conclusion}
+
+The second-order quantifiers are invariant under all permutations of the individuals, and so are logical constants by the criterion of LOG-16. Second-order logic defines identity and the ancestral by quantifying over all properties. It cannot be first-order quantification over sets in the same domain, and over the domain of everything there is no other domain for the sets to occupy. Its incompleteness and its sensitivity to the size of the continuum reflect its expressive power, not a change of subject. Second-order logic is logic.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boolos(1975)]{Boolos1975} Boolos, G. (1975). On second-order logic. \emph{The Journal of Philosophy}, 72(16), 509--527.
+\bibitem[Boolos(1984)]{Boolos1984} Boolos, G. (1984). To be is to be a value of a variable (or to be some values of some variables). \emph{The Journal of Philosophy}, 81(8), 430--449.
+\bibitem[Dedekind(1888)]{Dedekind1888} Dedekind, R. (1888). \emph{Was sind und was sollen die Zahlen?} Vieweg.
+\bibitem[Frege(1879)]{Frege1879} Frege, G. (1879). \emph{Begriffsschrift, eine der arithmetischen nachgebildete Formelsprache des reinen Denkens}. Louis Nebert.
+\bibitem[G\"odel(1931)]{Godel1931} G\"odel, K. (1931). \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f\"ur Mathematik und Physik}, 38, 173--198.
+\bibitem[Henkin(1950)]{Henkin1950} Henkin, L. (1950). Completeness in the theory of types. \emph{The Journal of Symbolic Logic}, 15(2), 81--91.
+\bibitem[Jan\'e(1993)]{Jane1993} Jan\'e, I. (1993). A critical appraisal of second-order logic. \emph{History and Philosophy of Logic}, 14(1), 67--86.
+\bibitem[Linnebo(2003)]{Linnebo2003} Linnebo, {\O}. (2003). Plural quantification exposed. \emph{No\^us}, 37(1), 71--92.
+\bibitem[Prior(1971)]{Prior1971} Prior, A.~N. (1971). \emph{Objects of Thought}. Clarendon Press.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V.~O. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\bibitem[Resnik(1988)]{Resnik1988} Resnik, M.~D. (1988). Second-order logic still wild. \emph{The Journal of Philosophy}, 85(2), 75--87.
+\bibitem[Shapiro(1991)]{Shapiro1991} Shapiro, S. (1991). \emph{Foundations without Foundationalism: A Case for Second-Order Logic}. Clarendon Press.
+\bibitem[V\"a\"an\"anen(2001)]{Vaananen2001} V\"a\"an\"anen, J. (2001). Second-order logic and foundations of mathematics. \emph{Bulletin of Symbolic Logic}, 7(4), 504--520.
+\bibitem[Williamson(2003)]{Williamson2003} Williamson, T. (2003). Everything. \emph{Philosophical Perspectives}, 17, 415--465.
+\bibitem[Wright(2007)]{Wright2007} Wright, C. (2007). On quantifying into predicate position: Steps towards a new(tralist) perspective. In M.~Leng, A.~Paseau and M.~Potter (eds), \emph{Mathematical Knowledge}, Oxford University Press.
+\end{thebibliography}
+
+\end{document}

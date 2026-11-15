@@ -1,0 +1,77 @@
+\documentclass{situationist-preprint}
+
+\title{Quine's Objection Revisited}
+\msid{LOG-09-b}
+\msfamily{LOG-09}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Consequence}
+\mskeywords{second-order logic; Quine; ontological commitment; set theory in sheep's clothing; canonical notation; completeness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Quine's objection to second-order logic combines three claims: that its predicate variables range over sets or attributes, that a theory is committed to whatever its variables range over, and that genuine logic has a complete proof procedure. LOG-09-a argues that second-order logic is logic and not set theory in disguise. We draw the consequences for Quine's objection taken as a whole. Its ontological part depends on the disguise thesis, which fails over the domain of everything; its criterion of ontological commitment survives, restricted to first-order variables; and its demarcation by completeness becomes a reason to prefer first-order notation for some purposes, not a boundary of logic. What remains of the objection is methodological.
+\end{abstract}
+
+\section{The objection as an argument}
+
+\citet{Quine1970} gives no single argument against second-order logic, but his remarks can be set out as two arguments with a common conclusion.
+\begin{enumerate}[label=(Q\arabic*)]
+\item A variable in quantified position ranges over objects, and a predicate variable in quantified position ranges over sets or attributes.
+\item A theory is committed to the objects its bound variables must range over for the theory to be true \citep{Quine1948}.
+\item Hence second-order logic is committed to sets or attributes, and it is a part of mathematics: set theory in sheep's clothing.
+\item Logic has a complete proof procedure; second-order logic has none. Hence it is not logic.
+\end{enumerate}
+The first argument runs from (Q1) and (Q2) to (Q3); the second is (Q4). LOG-09-a replies to each objection in turn. Here we ask what its conclusion, that second-order logic is logic, implies for the premises themselves: which must be rejected, which can be kept, and in what form.
+
+\section{Consequences}
+
+\paragraph{(Q1) is false.} Premise (Q1), applied to the domain of everything, is the disguise thesis of Definition~2.4 of LOG-09-a: that some objects of the domain code, by membership, every condition on it. Theorem~3.6 of LOG-09-a shows that the disguise thesis fails on every domain, and when the domain is absolutely everything, which LOG-08 argues is a coherent domain of quantification, there is nowhere else for the coding sets to lie. So (Q1) is not merely contestable; for the case in which second-order logic is used without restriction, it is false. Second-order quantification over everything is plural quantification in the monadic case \citep{Boolos1984} and sui generis higher-order quantification in general.
+
+\paragraph{(Q2) survives, restricted.} Nothing in LOG-09-a requires giving up Quine's criterion of ontological commitment as a criterion for first-order variables. It requires only that it not be extended to variables whose values are not objects. We can state the consequence as follows.
+
+\begin{proposition}\label{p:commit}
+A theory regimented in second-order logic with the standard semantics is committed, by its quantifiers, to the objects in the range of its first-order variables and to no further objects.
+\end{proposition}
+
+\begin{proof}
+By (Q2), restricted to first-order variables, the theory is committed to what its first-order variables must range over. Its second-order variables range over conditions on that domain (Definition~2.1 of LOG-09-a), and by Theorem~3.6 of LOG-09-a these cannot in general be identified with objects of the domain. A condition on objects is not a further object unless some object codes it, and the theory does not assert that one does. So the second-order quantifiers add no objects to the commitments of the first-order ones.
+\end{proof}
+
+Proposition~\ref{p:commit} is what \citet{Boolos1984} argued for monadic second-order logic, and it is the precise sense in which second-order logic is ontologically innocent: it is committed to the things it quantifies over plurally and to nothing more. It does not say that second-order quantification is idle. A second-order theory can say more about its objects than any first-order theory: second-order arithmetic fixes the natural numbers up to isomorphism \citep{Dedekind1888}, and it does so without positing anything beyond the numbers.
+
+\paragraph{(Q3) fails, and its second clause with it.} With (Q1) false, (Q3) is not established. Its second clause, that second-order logic is a part of mathematics, faces a further difficulty. By Corollary~3.2 of LOG-09-a, the second-order quantifiers are invariant under all permutations of the domain and so are logical constants by the criterion that LOG-16 defends. A discipline whose only constants are invariant is topic-neutral, which mathematics, on Quine's own view, is not: set theory is a theory of sets. That set theory can model second-order logic over a set-sized domain shows the expressive power of set theory, as LOG-09-a observes, not the subject matter of second-order logic.
+
+\paragraph{(Q4) becomes a methodological preference.} Completeness is a property of the relation between a consequence relation and a proof system. LOG-06 defines consequence as truth-preservation over models, and LOG-20 treats the completeness of first-order logic as a theorem about first-order logic, not as a definition of logic. Given these, (Q4) cannot be a criterion of logicality. It can, however, be a reason for choosing a notation. If one wants a notation in which every valid inference can be checked by a proof, first-order logic is the right choice, and Quine's preference for it as canonical notation for science is defensible on those grounds. But the preference is then comparative and purpose-relative. It weighs completeness and compactness against the expressive power that second-order logic has and first-order logic lacks, such as the ability to characterize finiteness and the natural numbers; it does not declare one side of the balance to be outside logic.
+
+\section{Objections and replies}
+
+\begin{objection}[Quine's criterion is all-purpose]
+For Quine, (Q2) is not a criterion for some variables only: any variable in quantified position is a variable ranging over something. Restricting it to first-order variables abandons Quine's view rather than revising it.
+\end{objection}
+
+\begin{reply}
+The criterion's motivation is that the quantifier \enquote{there is something such that} commits the speaker to there being something. That motivation applies to first-order quantification, where \enquote{something} means \enquote{some object}. It does not apply to \enquote{there are some things such that}, whose truth requires that there be the things, and nothing in addition \citep{Boolos1984}. The restriction keeps the motivation and drops an extension that it does not support. Since, by Theorem~3.6 of LOG-09-a, the extension cannot even be carried out over the domain of everything, it is not an optional generalization of the criterion but a false one.
+\end{reply}
+
+\begin{objection}[Commitment to conditions]
+Even if conditions are not objects, a second-order theory is committed to conditions, and conditions are as obscure as Quine's attributes.
+\end{objection}
+
+\begin{reply}
+To say that a theory is committed to conditions is to use a first-order noun for what second-order quantifiers express; the noun invites the question what kind of object a condition is, and the question has no answer because conditions are not objects. What the theory requires is that its second-order generalizations be true, and their truth requires only facts about the objects in the domain and which of them are thus and so. This is the view of higher-order quantification as sui generis that LOG-09-a adopts, and it is no more obscure than the predicates of first-order logic, to which Quine himself attributed no ontological weight.
+\end{reply}
+
+\section{Conclusion}
+
+Quine's objection depends on the identification of second-order quantification with quantification over sets, and that identification is the disguise thesis, which fails over the domain of everything. The criterion of ontological commitment survives as a criterion for first-order variables, and a theory regimented in second-order logic is committed only to the objects of its first-order domain. The demand for completeness survives as a reason to prefer first-order notation where proof-checkability matters most. Neither surviving part gives a reason to deny that second-order logic is logic.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boolos(1984)]{Boolos1984} Boolos, G. (1984). To be is to be a value of a variable (or to be some values of some variables). \emph{The Journal of Philosophy}, 81(8), 430--449.
+\bibitem[Dedekind(1888)]{Dedekind1888} Dedekind, R. (1888). \emph{Was sind und was sollen die Zahlen?} Vieweg.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V.~O. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V.~O. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\end{thebibliography}
+
+\end{document}

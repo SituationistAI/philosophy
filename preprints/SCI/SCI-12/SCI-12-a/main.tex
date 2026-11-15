@@ -1,0 +1,301 @@
+\documentclass{situationist-preprint}
+
+\title{Bayesian Confirmation and Old Evidence}
+\msid{SCI-12-a}
+\msfamily{SCI-12}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_12.lean}
+\mskeywords{confirmation; Bayesianism; problem of old evidence; counterfactual credence; uniqueness; measures of confirmation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Bayesian confirmation theory holds that evidence confirms a hypothesis when it raises the hypothesis's rational probability. Its most serious difficulty is Glymour's problem of old evidence: once a proposition is known, its probability is one, and conditioning on it changes nothing, so evidence known before a theory was formulated, such as the anomalous perihelion of Mercury for general relativity, can never confirm it. We argue that Bayesianism is the right account of confirmation and that the problem is solved by evaluating confirmation relative to counterfactual credences: the credence that would be rational on the agent's evidence with the evidence in question removed. Two premises make this determinate. Evidence is a base of propositions rather than a deductively closed theory, so removal is well defined; and, as EPI-17 argues, each body of evidence fixes a unique rational credence. We prove that on this account old evidence confirms a hypothesis exactly when the actual rational credence in the hypothesis exceeds the counterfactual one, that the account agrees with the standard criterion for new evidence, and that the Christensen--Joyce measure presupposes it. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+\subsection{Bayesian confirmation}
+
+A theory of confirmation says when, and to what degree, a body of evidence supports a hypothesis. The Bayesian theory represents a rational agent's degrees of belief by a probability function and says that evidence $E$ confirms hypothesis $H$ when $P(H \mid E) > P(H)$: learning $E$ would raise the probability of $H$. This is confirmation in the sense of increase in firmness, which \citet{Carnap1950} distinguished, in the preface to the second edition of his book, from confirmation in the sense of firmness, the high probability of $H$ on the total evidence. The incremental notion is the one at issue in debates about whether an observation is evidence for a theory, and it is the one we defend.
+
+The record of the theory is strong. It explains why a variety of evidence confirms more than a repetition of the same observation, why surprising predictions confirm more than expected ones, and how a failed prediction can be blamed on an auxiliary hypothesis rather than on the theory under test \citep{Dorling1979,HowsonUrbach2006}. It resolves Hempel's paradox of the ravens: LOG-17 shows that, in a sampling model, a white shoe confirms that all ravens are black, but only to a negligible degree. It separates what earlier qualitative theories ran together. Hempel's conditions of adequacy for confirmation \citep{Hempel1945}, which included the consequence condition and Nicod's criterion, cannot all hold of a single relation, and the probabilistic treatment says which hold and why. Other manuscripts in this collection use the theory as a working tool: REL-08 applies it to evidence for survival of death.
+
+\subsection{The problem of old evidence}
+
+\citet[ch.~III]{Glymour1980} raised the objection that has come to be regarded as the theory's most serious difficulty. The anomalous advance of the perihelion of Mercury, some 43 seconds of arc per century beyond what Newtonian theory predicts from the perturbations of the other planets, had been known since the middle of the nineteenth century. When \citet{Einstein1915} showed that general relativity entails it, the result was taken by Einstein and by the physics community as strong evidence for the theory, and it remains among the classical tests. But a Bayesian agent who knows $E$ assigns it probability one; and if $P(E) = 1$, then $P(H \mid E) = P(H \wedge E)/P(E) = P(H)$ for every $H$. So $E$ confirms nothing. The same holds for every piece of evidence that is known when the hypothesis is assessed, which, once the evidence is in, is all of it.
+
+Glymour drew the conclusion that the probabilistic relation is not the relation of confirmation. \citet{Eells1985} distinguished several versions of the problem, and the subsequent literature keeps two of them apart. The \emph{historical} or \emph{dynamic} problem asks how Einstein's credence in general relativity could have been raised in 1915 by evidence he already knew: something he learned must have done the raising, and it was not $E$. The \emph{ahistorical} or \emph{static} problem asks how $E$ can now be evidence for general relativity at all, given that it is part of what we know. The static problem is the more fundamental, since an answer to the dynamic problem that leaves the static one standing would explain a change in Einstein's credence without explaining why the perihelion supports the theory, which is what the physicists claimed.
+
+\subsection{A short history of the responses}\label{s:history}
+
+\paragraph{Logical learning.} \citet{Garber1983}, \citet{Jeffrey1983} and \citet{Niiniluoto1983} proposed that what Einstein learned in 1915 was not $E$ but the logical fact that $H$ entails $E$. A Bayesian agent who is not logically omniscient may assign that fact a probability below one, and conditioning on it can raise the probability of $H$. Garber showed how to model this by treating the sentence \enquote{$H \vdash E$} as an atomic sentence of the agent's language, constrained by the requirement that the agent be certain that $H$ and \enquote{$H \vdash E$} together imply $E$. The approach addresses the dynamic problem. It was criticized on two grounds: it does not show that the logical discovery raises the probability of $H$ rather than lowering it without further assumptions \citep[ch.~5]{Earman1992}, and it leaves the static problem untouched, since the perihelion's being evidence for the theory is not the same as the theory's entailing it. Recent work has strengthened the formal side. \citet{HartmannFitelson2015} gave weaker sufficient conditions for the discovery that $H$ entails $E$ to confirm $H$, \citet{Sprenger2015} gave a further solution in the same framework under different conditions, and \citet{EvaHartmann2020} proposed a further account of how the confirmation arises in learning. \citet{Howson2017} argued that solutions of this style do not succeed.
+
+\paragraph{Counterfactual credence.} \citet{Howson1991} and \citet{HowsonUrbach2006} proposed that confirmation by known evidence is to be assessed relative to the probability function the agent would have had if she had not known $E$: relative to background knowledge $K$ with $E$ removed. On this proposal the perihelion confirms general relativity because, on $K - E$, it is more probable given the theory than otherwise. The proposal had been considered and set aside by \citet{Glymour1980} himself, on the ground that there is no determinate way to remove $E$ from $K$, and the objection was pressed by \citet{Chihara1987} and \citet[ch.~5]{Earman1992}. If $K$ is deductively closed, it contains, along with $E$, the disjunction of $E$ with each other member, and removing $E$ while keeping these leaves $E$ derivable; which of them should go has no unique answer. There is also the problem that an agent's credences in other propositions might have been different had she not learned $E$, in ways that no rule fixes. Earman concluded that the counterfactual proposal makes confirmation depend on imaginary credences that cannot be recovered from anything actual.
+
+\paragraph{Measures.} \citet{Christensen1999} and \citet{Joyce1999} observed that some measures of the degree of confirmation are insensitive to the probability of the evidence. The measure $s(H, E) = P(H \mid E) - P(H \mid \neg E)$ is unchanged when the probability of $E$ shifts by Jeffrey conditionalization, and they proposed that confirmation by old evidence be measured by it. But $s$ is undefined when $P(E) = 1$, so it cannot be computed on the agent's actual credence; it must be evaluated on some credence on which $E$ is uncertain, which reopens the question of which. We show in Section~\ref{s:measures} that the $s$-measure, so evaluated, is a rescaling of the counterfactual criterion.
+
+\paragraph{Other approaches.} \citet{WenmackersRomeijn2016} treat the problem as one of new theories: a hypothesis not previously formulated has no prior, and the agent's credence must be extended to it, which can be done so that $E$ confirms it. Some have accepted Glymour's conclusion and given up the incremental notion for old evidence, holding that the perihelion supports general relativity only in the sense of firmness. \citet{SprengerHartmann2019} survey these responses and conclude that none commands consensus.
+
+We defend the counterfactual proposal. Its difficulties are two: the indeterminacy of removal and the indeterminacy of the resulting credence. We meet the first by treating evidence as a base and the second by the uniqueness of rational credence.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Evidence base]\label{d:base}
+An agent's \emph{evidence base} $B$ is the finite set of propositions that are her evidence. Removing an item $E$ from $B$ yields the base $B \setminus \{E\}$; removing from $B$ the items $E_1, \dots, E_n$ that are her evidence only in virtue of $E$ is part of removing $E$.
+\end{definition}
+
+The base is a set of propositions, not a deductively closed theory. The distinction is the one drawn in the theory of belief change between belief sets and belief bases \citep{AGM1985,Hansson1999}. Contracting a belief set by a proposition is underdetermined, because the closure contains many propositions that, together with others, entail it; contracting a base by one of its elements is not, because the element is removed and the consequences are recomputed from what remains. On the view of EPI-21, one's evidence is exactly one's knowledge, and the base is then the set of propositions known, not closed under consequence; the account does not depend on that identification, only on the evidence's being a set of items. The second clause of the definition handles evidence that depends on $E$: if the agent knows that the measured advance agrees with the theory's prediction to two decimal places only because she knows the measured value, the former goes with the latter.
+
+\begin{assumption}[Uniqueness]\label{a:unique}
+For each evidence base $B$ there is a unique rational credence function $C_B$.
+\end{assumption}
+
+Assumption~\ref{a:unique} is the thesis of EPI-17, which argues that rationality is not permissive: for any body of evidence there is a unique rational credence for each proposition. We rely on it to make the counterfactual credence determinate, and we consider in Objection~\ref{o:perm} what remains of the account without it.
+
+\begin{assumption}[Conditionalization]\label{a:cond}
+If $E \notin B$ and $C_B(E) > 0$, then $C_{B \cup \{E\}}(\cdot) = C_B(\cdot \mid E)$.
+\end{assumption}
+
+Assumption~\ref{a:cond} says that the rational credence on a larger base is the rational credence on the smaller one conditioned on the added item. It is the synchronic counterpart of the rule of conditionalization: it relates the credences rational on two bodies of evidence, not an agent's credences at two times.
+
+\begin{definition}[Counterfactual credence]\label{d:cf}
+Let $E \in B$. The \emph{counterfactual credence} for $E$ is $C_{B \setminus \{E\}}$, the credence that would be rational if the agent's evidence were $B$ with $E$ removed.
+\end{definition}
+
+The counterfactual credence is not the credence the agent would in fact have had, in the nearest world in which she did not learn $E$. In that world she might have learned other things, or have been less careful. It is the credence rational on a specified body of evidence, and by Assumption~\ref{a:unique} it is determinate once the body is.
+
+\begin{principle}[Counterfactual confirmation]\label{p:cf}
+Let $B$ be the agent's evidence base and $B' = B \setminus \{E\}$. Then $E$ \emph{confirms} $H$ iff $C_{B'}(H \mid E) > C_{B'}(H)$, \emph{disconfirms} $H$ iff $C_{B'}(H \mid E) < C_{B'}(H)$, and is \emph{neutral} otherwise.
+\end{principle}
+
+When $E \notin B$, $B' = B$, and the principle is the standard criterion. It is stated uniformly so that it applies to evidence whether or not it is already in the base.
+
+\begin{definition}[Degree]\label{d:degree}
+The \emph{degree} of confirmation of $H$ by $E$ is $d(H, E) = C_{B'}(H \mid E) - C_{B'}(H)$, with $B'$ as in Principle~\ref{p:cf}.
+\end{definition}
+
+The difference measure is chosen for definiteness. The qualitative verdicts of Principle~\ref{p:cf} do not depend on the choice, as Remark~\ref{r:sign} records.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}[Glymour]\label{l:glymour}
+If $P(E) = 1$, then $P(H \mid E) = P(H)$ for every $H$. Hence, relative to any credence on which $E$ is certain, $E$ is neutral for every hypothesis.
+\end{lemma}
+
+\begin{proof}
+$P(H) = P(H \wedge E) + P(H \wedge \neg E)$, and $P(H \wedge \neg E) \leq P(\neg E) = 0$. So $P(H \mid E) = P(H \wedge E)/P(E) = P(H \wedge E) = P(H)$.
+\end{proof}
+
+Lemma~\ref{l:glymour} is the problem. Since $E \in B$ implies $C_B(E) = 1$, the standard criterion applied to the actual rational credence makes every item of evidence neutral.
+
+\begin{proposition}[Conservativeness]\label{p:conservative}
+For evidence not in the base, Principle~\ref{p:cf} agrees with the standard criterion applied to the actual rational credence.
+\end{proposition}
+
+\begin{proof}
+If $E \notin B$, then $B \setminus \{E\} = B$, and the condition of Principle~\ref{p:cf} is $C_B(H \mid E) > C_B(H)$.
+\end{proof}
+
+So the account changes nothing where the Bayesian theory was not in difficulty. It extends the theory to the one class of cases where the standard criterion gives the wrong answer.
+
+\begin{theorem}[Difference]\label{t:diff}
+Let $E \in B$, $B' = B \setminus \{E\}$, and $C_{B'}(E) > 0$. Then $E$ confirms $H$ iff $C_B(H) > C_{B'}(H)$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:cond}, applied to $B'$ and $E$, $C_B(H) = C_{B'}(H \mid E)$. Substituting in Principle~\ref{p:cf} gives the claim.
+\end{proof}
+
+Theorem~\ref{t:diff} gives the account its content. Evidence confirms a hypothesis when the hypothesis is more credible, rationally, on the evidence with it than on the evidence without it: when the item makes a difference to rational credence. The comparison is between two credences each fixed by a body of evidence, and neither is an imaginary state of the agent. This is the analogue, for evidential support, of the counterfactual conception of causation defended in MET-04: a cause is a difference-maker, and a confirming item of evidence is a difference-maker for rational credence.
+
+To compute verdicts we use a model with four cells.
+
+\begin{theorem}[Four-cell criterion]\label{t:four}
+Let $c_1, c_2, c_3, c_4$ be the counterfactual credences of $H \wedge E$, $H \wedge \neg E$, $\neg H \wedge E$ and $\neg H \wedge \neg E$, with $c_1 + c_3 > 0$. Then $E$ confirms $H$ iff $c_2 c_3 < c_1 c_4$.
+\end{theorem}
+
+\begin{proof}
+$C_{B'}(H \mid E) = c_1/(c_1 + c_3)$ and $C_{B'}(H) = c_1 + c_2$, with $c_1 + c_2 + c_3 + c_4 = 1$. The first exceeds the second iff $(c_1 + c_2)(c_1 + c_3) < c_1(c_1 + c_2 + c_3 + c_4)$. Expanding, the terms $c_1^2$, $c_1 c_2$ and $c_1 c_3$ occur on both sides, and what remains is $c_2 c_3 < c_1 c_4$.
+\end{proof}
+
+The criterion says that $E$ confirms $H$ when $H$ and $E$ are positively correlated on the counterfactual credence. Applied to the actual credence, on which $c_2 = c_4 = 0$, both sides vanish, which is Lemma~\ref{l:glymour} again.
+
+\begin{proposition}[Mercury]\label{p:mercury}
+Suppose that on the evidence available to physicists in 1915 without the perihelion observations, the rational credence in general relativity was $0.3$, the probability of the observed advance given the theory $0.9$, and its probability given the negation of the theory $0.1$. Then the perihelion confirms general relativity, raising its rational probability from $0.3$ to about $0.79$, although its actual probability is one.
+\end{proposition}
+
+\begin{proof}
+The counterfactual credences of the four cells are $0.27$, $0.03$, $0.07$ and $0.63$. Since $0.03 \times 0.07 < 0.27 \times 0.63$, Theorem~\ref{t:four} gives confirmation. By Theorem~\ref{t:diff} the actual rational credence is $0.27/0.34 \approx 0.79$. That the actual probability of the evidence is one is Definition~\ref{d:base} together with the fact that rational credence gives each item of the base probability one.
+\end{proof}
+
+The numbers are illustrative. What matters is the structure they share with the historical case. The likelihood of the advance on the negation of the theory is low because the Newtonian explanations available, an intra-Mercurial planet, a ring of matter near the Sun, a modification of the inverse-square law, had been investigated and found either unsupported or ad hoc; its likelihood on general relativity is high because the theory entails the observed value within the errors of measurement.
+
+\begin{proposition}[Order invariance]\label{p:order}
+Whether $E$ confirms $H$, and to what degree, depends only on the base $B$, not on the order in which its items were acquired, nor on whether $H$ was formulated before or after $E$ was known.
+\end{proposition}
+
+\begin{proof}
+The condition of Principle~\ref{p:cf} and the quantity of Definition~\ref{d:degree} are functions of $C_{B \setminus \{E\}}$, which by Assumption~\ref{a:unique} is a function of $B \setminus \{E\}$ alone.
+\end{proof}
+
+Proposition~\ref{p:order} answers a question that the dynamic problem invites. The perihelion confirms general relativity to the same degree as it would have if the observations had been made after 1915 as a test of a prediction. The historical sequence matters to what Einstein learned and when, which is a fact about him; it does not matter to the evidential relation between the observations and the theory.
+
+\begin{proposition}[Redundancy]\label{p:redundant}
+If $B \setminus \{E\}$ entails $E$, then $E$ is neutral for every hypothesis.
+\end{proposition}
+
+\begin{proof}
+Rational credence gives probability one to what the evidence entails, so $C_{B \setminus \{E\}}(E) = 1$, and Lemma~\ref{l:glymour} applies to the counterfactual credence.
+\end{proof}
+
+This is the right verdict. If the agent's evidence contains the raw positional data from which the anomalous advance is computed, then the advance, stated as a summary, adds nothing to them, and what confirms the theory is the data. The confirmation is not lost; it is assigned to the items that carry it.
+
+\section{The measures}\label{s:measures}
+
+\begin{proposition}[Decomposition]\label{p:decomp}
+For any probability function $P$ with $0 < P(E) < 1$,
+\[
+P(H \mid E) - P(H) = P(\neg E)\,\bigl(P(H \mid E) - P(H \mid \neg E)\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+By total probability, $P(H) = P(E)P(H \mid E) + P(\neg E) P(H \mid \neg E)$. Hence $P(H \mid E) - P(H) = (1 - P(E)) P(H \mid E) - P(\neg E) P(H \mid \neg E) = P(\neg E)(P(H \mid E) - P(H \mid \neg E))$.
+\end{proof}
+
+\begin{corollary}\label{c:s}
+The measure $s(H, E) = P(H \mid E) - P(H \mid \neg E)$ is defined at the counterfactual credence whenever $0 < C_{B'}(E) < 1$, and it is positive there iff $E$ confirms $H$ by Principle~\ref{p:cf}. At the actual credence it is undefined.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{p:decomp}, applied to $C_{B'}$, $d(H, E) = C_{B'}(\neg E)\, s(H, E)$, and $C_{B'}(\neg E) > 0$. At the actual credence $C_B(\neg E) = 0$, so $P(H \mid \neg E)$ is undefined.
+\end{proof}
+
+Corollary~\ref{c:s} settles the relation between the Christensen--Joyce proposal and ours. The $s$-measure is attractive for old evidence because, by Proposition~\ref{p:decomp}, it is the difference measure with the factor $P(\neg E)$ removed: it does not shrink as $E$ becomes more probable. But a measure that is undefined at probability one cannot be evaluated at the actual credence, and the credence at which it is evaluated must be one on which $E$ is uncertain. The counterfactual credence is the natural candidate and, by Assumption~\ref{a:unique}, a determinate one. The proposal that confirmation by old evidence be measured by $s$ is therefore not an alternative to the counterfactual account but a version of it with a different measure. The two agree in sign, and the $s$-value at $C_{B'}$ exceeds the $d$-value by the factor $1/C_{B'}(\neg E)$, which records how surprising $E$ would have been.
+
+\begin{remark}\label{r:sign}
+The standard measures of incremental confirmation, the difference measure, the log-ratio measure $\log(P(H \mid E)/P(H))$, the log-likelihood measure $\log(P(E \mid H)/P(E \mid \neg H))$ and the measure $s$, disagree in their orderings of pairs of hypotheses and evidence \citep{Fitelson1999}, but agree in sign: each is positive exactly when $P(H \mid E) > P(H)$. The qualitative verdicts of Principle~\ref{p:cf}, and hence Theorem~\ref{t:diff}, Proposition~\ref{p:mercury} and Proposition~\ref{p:redundant}, hold on every one of them when evaluated at the counterfactual credence. Proposition~\ref{p:order} holds for degrees on any measure that is a function of a single probability function, as all four are.
+\end{remark}
+
+\section{Further cases}\label{s:cases}
+
+\paragraph{The dynamic problem.} Einstein in November 1915 was not a logically omniscient agent, and the discovery that his field equations entail the observed advance was a discovery. The counterfactual account does not deny this. The rational credence $C_B$ is the credence of an ideal agent, for whom the entailment is already reflected in the probabilities, and it is relative to such credences that Principle~\ref{p:cf} states what confirms what. Einstein's increase in confidence was the correction of a non-ideal credence towards the rational one, prompted by a calculation. The logical-learning approaches of \citet{Garber1983} and \citet{Jeffrey1983} model that correction. The two accounts therefore answer different questions, and they are compatible: the counterfactual account says why the perihelion is evidence for the theory; logical learning says how a bounded agent comes to appreciate that it is. The criticism that logical learning leaves the static problem standing is a criticism of it only as a complete solution.
+
+\paragraph{Evidence used in constructing the theory.} A hypothesis may be devised with $E$ in view, as when a curve is fitted to data points. Proposition~\ref{p:order} implies that the use of $E$ in the construction does not by itself lessen its confirming power. It does not imply that accommodated and predicted evidence always confirm equally. A hypothesis constructed to fit $E$ is often one that would have had a low counterfactual credence, because it was selected from a large family by the very data it fits and has many adjustable parameters; a hypothesis that predicted $E$ has typically been formulated on independent grounds. The difference between prediction and accommodation then appears where \citet{HitchcockSober2004} locate it, in the risk of overfitting, which is reflected in the counterfactual prior and in the likelihood of $E$ on the rival hypotheses, not in the order of discovery.
+
+\paragraph{Forgotten sources.} An agent may know $E$ without remembering how she learned it. Definition~\ref{d:base} concerns what her evidence is, not its history, and removing $E$ removes it whatever its source. If she also knows propositions about the source, such as that a reliable instrument reported $E$, those propositions remain in $B \setminus \{E\}$ and may entail or strongly support $E$; then by Proposition~\ref{p:redundant}, or its probabilistic analogue, $E$ confirms little beyond what the report confirms. This is correct: the report is evidence, and $E$ is evidence only as the content of the report.
+
+\paragraph{Old evidence and new hypotheses.} \citet{WenmackersRomeijn2016} emphasize that general relativity was not formulated before 1915, so there was no prior for it. The counterfactual credence of Definition~\ref{d:cf} is a function on a fixed algebra of propositions, which includes the hypothesis whether or not anyone has formulated it; the rational credence of an ideal agent is defined on propositions, not on the theories some scientist has written down. The problem of new theories is a problem about how bounded agents extend their credences to new propositions, and like the dynamic problem it concerns the approach to rational credence rather than the relation of confirmation.
+
+\paragraph{Total and partial removal.} Removing all the evidence for $H$ at once and adding it back yields the total confirmation of $H$, the difference between its credence on the full base and on the base without that evidence. Removing items one at a time, the degrees of Definition~\ref{d:degree} need not sum to the total, because the confirming power of an item depends on what else is in the base. This is a feature of evidential support, not a defect of the account: two independent measurements of the same quantity each confirm a theory less in the presence of the other than alone, and neither is the redundant one.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Indeterminacy of removal]\label{o:indet}
+There is no determinate way to remove $E$ from background knowledge. Background knowledge is closed under consequence, and the many sets of its members that entail $E$ leave many ways to remove it \citep{Glymour1980,Chihara1987}.
+\end{objection}
+
+\begin{reply}
+The objection applies to removal from a deductively closed set, and Definition~\ref{d:base} does not remove from such a set. The evidence base is the set of items that are the agent's evidence; it is not closed under consequence, and removing one of its items is a set-theoretic operation with a unique result. Where the remaining items entail $E$, the account does not try to remove $E$ from their consequences; it says, by Proposition~\ref{p:redundant}, that $E$ is redundant, and that the confirmation belongs to the items that entail it. The objection assumed that the counterfactual account must determine a unique contraction of a theory; it needs only the difference between one set of propositions and another.
+\end{reply}
+
+\begin{objection}[Indeterminacy of credence]\label{o:perm}
+Even if the reduced body of evidence is determinate, the credence that would be rational on it may not be. Many priors are rational, and the verdict of Principle~\ref{p:cf} may vary with the choice.
+\end{objection}
+
+\begin{reply}
+EPI-17 argues that rationality is not permissive, and we have adopted its conclusion as Assumption~\ref{a:unique}; on it the objection lapses. For a reader who rejects uniqueness, the account survives in relativized form. Let the agent's standards of reasoning be represented by a function from bodies of evidence to credences, as permissivists such as \citet{Schoenfield2014} propose; then the counterfactual credence is the value of her own function at $B \setminus \{E\}$, and Principle~\ref{p:cf} says what confirms what by her standards. The problem of old evidence is solved in that form too, since her function is determinate even if others are permitted. What uniqueness adds is that verdicts of confirmation are not relative to standards, and the agreement of the physics community about the perihelion, across physicists with different temperaments, is some evidence that they are not \citep{White2005}.
+\end{reply}
+
+\begin{objection}[Imaginary credences]
+Confirmation should be a relation in the agent's actual epistemic state. The counterfactual account makes it depend on credences that nobody has \citep[ch.~5]{Earman1992}.
+\end{objection}
+
+\begin{reply}
+On Assumption~\ref{a:unique}, rational credence on a body of evidence is not a psychological state of anyone; it is what the evidence supports, and $C_{B \setminus \{E\}}$ is as actual as $C_B$. Both are facts about evidential support. An agent's actual degrees of belief enter the account only as approximations to these, and the account is no more committed to imaginary states than is the claim that a theorem would still have been true had nobody proved it. The objection has force against versions of the counterfactual proposal that define the relevant credence as the one the agent would in fact have had, which is fixed by contingent facts about her history and is indeed often indeterminate. Definition~\ref{d:cf} is not such a version.
+\end{reply}
+
+\begin{objection}[Entanglement]
+Had the physicists not known the perihelion advance, they would not have known much else: the observational methods, the reliability of the instruments and the failure of the rival explanations were established partly by the same observations. Removing $E$ alone yields a body of evidence that no one could have had.
+\end{objection}
+
+\begin{reply}
+The second clause of Definition~\ref{d:base} removes, with $E$, the items that are evidence only in virtue of $E$, which handles the cases where the dependence is evidential. Where the dependence is causal or historical, as when the observations were the occasion on which an instrument was calibrated, the calibration is evidence in its own right and remains in the reduced base. Whether anyone could have had that reduced base is not relevant. Rational credence is defined for every body of evidence, including those no agent could have assembled, as conditional probability is defined for propositions no one will ever learn.
+\end{reply}
+
+\begin{objection}[The problem is logical learning]
+The interesting phenomenon was Einstein's discovery, and the counterfactual account says nothing about it.
+\end{objection}
+
+\begin{reply}
+It says that the discovery was the recognition of a confirmation relation that held already, which is what the physicists took themselves to have found. Section~\ref{s:cases} explains how the account and the logical-learning models divide the labor. An account of confirmation is an account of what supports what; how bounded agents come to see that something supports something is a question for the theory of non-ideal reasoning, and the Bayesian theory of confirmation does not have to answer it.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The argument does not establish Assumption~\ref{a:unique}; it inherits it from EPI-17, and in the relativized form of the reply to Objection~\ref{o:perm} it does without it. It does not say what the rational priors are, so it does not by itself fix the degree to which the perihelion confirms general relativity; Proposition~\ref{p:mercury} uses illustrative numbers. It does not settle which measure of degree is correct for comparative purposes, and Remark~\ref{r:sign} claims only agreement in sign. It does not establish that prediction and accommodation never differ in confirming power, only that the difference does not lie in the order of discovery. Nor does it show that Bayesianism is the only adequate theory of confirmation; it removes the objection that has been taken to show that it is inadequate, and the case for it rests on that removal together with the successes listed in Section~\ref{s:problem}.
+
+\section{Formalization}\label{s:formal}
+
+Lemma~\ref{l:glymour}, Theorems~\ref{t:diff} and~\ref{t:four} and Propositions~\ref{p:mercury} and~\ref{p:redundant} are formalized in \nolinkurl{Philosophy/SCI/SCI_12.lean}, for credence functions over the four cells generated by $H$ and $E$. A credence function is represented by four natural-number weights, and inequalities between probabilities are stated by cross-multiplication. An agent's situation is a primitive type. The counterfactual credence (Definition~\ref{d:cf}), the actual credence and the relation of confirmation are primitives; Assumption~\ref{a:cond} is an axiom saying that the actual credence is the counterfactual credence conditioned on $E$, and Principle~\ref{p:cf} is an axiom saying that $E$ confirms $H$ iff $E$ raises the probability of $H$ on the counterfactual credence. The Mercury model uses the weights $27, 3, 7, 63$. The main theorem reads:
+
+\begin{lstlisting}
+theorem mercury_confirms (s : Situation) (h : cf s = mercury) :
+    Confirms s ∧ Certain (actual s) ∧ ¬ IncConfirms (actual s)
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.SCI_12.glymour' does not depend on any axioms
+'Philosophy.SCI_12.confirms_iff_product' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.SCI_12.Confirms, Philosophy.SCI_12.Situation,
+   Philosophy.SCI_12.cf, Philosophy.SCI_12.principle_P1]
+'Philosophy.SCI_12.mercury_confirms' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.SCI_12.Confirms, Philosophy.SCI_12.Situation,
+   Philosophy.SCI_12.actual, Philosophy.SCI_12.assumption_2_3,
+   Philosophy.SCI_12.cf, Philosophy.SCI_12.principle_P1]
+\end{lstlisting}
+
+The first three axioms in each list are those of Lean's core logic. \texttt{Situation}, \texttt{cf}, \texttt{actual} and \texttt{Confirms} are the primitives; \texttt{principle\_P1} is Principle~\ref{p:cf} and \texttt{assumption\_2\_3} is Assumption~\ref{a:cond}. Lemma~\ref{l:glymour} depends on nothing: it is arithmetic. The four-cell criterion depends on Principle~\ref{p:cf} but not on conditionalization; the Mercury result depends on both, since it concerns the actual credence as well as the counterfactual one. Assumption~\ref{a:unique} does not appear, because the module takes the counterfactual credence as given; uniqueness is what makes that primitive a function of the reduced evidence base, and the formalization does not establish it.
+
+\section{Conclusion}\label{s:conclusion}
+
+The problem of old evidence shows that confirmation cannot be measured on the actual rational credence, on which every item of evidence is certain. It does not show that confirmation is not probabilistic. Evaluated on the credence rational on the evidence with the item removed, the Bayesian criterion says that old evidence confirms a hypothesis exactly when the item raises the hypothesis's rational credence, it agrees with the standard criterion for new evidence, and it subsumes the measure-based proposals. The two objections to counterfactual credences, the indeterminacy of removal and the indeterminacy of the resulting credence, are met by treating evidence as a base and by the uniqueness of rational credence. With the problem solved, Bayesianism is the right account of confirmation.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alchourr\'on et~al.(1985)]{AGM1985} Alchourr\'on, C.~E., G\"ardenfors, P., and Makinson, D. (1985). On the logic of theory change: partial meet contraction and revision functions. \emph{Journal of Symbolic Logic}, 50, 510--530.
+\bibitem[Carnap(1950)]{Carnap1950} Carnap, R. (1950). \emph{Logical Foundations of Probability}. University of Chicago Press. 2nd ed.\ 1962.
+\bibitem[Chihara(1987)]{Chihara1987} Chihara, C.~S. (1987). Some problems for Bayesian confirmation theory. \emph{British Journal for the Philosophy of Science}, 38.
+\bibitem[Christensen(1999)]{Christensen1999} Christensen, D. (1999). Measuring confirmation. \emph{Journal of Philosophy}, 96, 437--461.
+\bibitem[Dorling(1979)]{Dorling1979} Dorling, J. (1979). Bayesian personalism, the methodology of scientific research programmes, and Duhem's problem. \emph{Studies in History and Philosophy of Science}, 10, 177--187.
+\bibitem[Earman(1992)]{Earman1992} Earman, J. (1992). \emph{Bayes or Bust? A Critical Examination of Bayesian Confirmation Theory}. MIT Press.
+\bibitem[Eells(1985)]{Eells1985} Eells, E. (1985). Problems of old evidence. \emph{Pacific Philosophical Quarterly}, 66, 283--302.
+\bibitem[Einstein(1915)]{Einstein1915} Einstein, A. (1915). Erkl\"arung der Perihelbewegung des Merkur aus der allgemeinen Relativit\"atstheorie. \emph{Sitzungsberichte der K\"oniglich Preu{\ss}ischen Akademie der Wissenschaften}, 831--839.
+\bibitem[Eva and Hartmann(2020)]{EvaHartmann2020} Eva, B., and Hartmann, S. (2020). On the origins of old evidence. \emph{Australasian Journal of Philosophy}, 98.
+\bibitem[Fitelson(1999)]{Fitelson1999} Fitelson, B. (1999). The plurality of Bayesian measures of confirmation and the problem of measure sensitivity. \emph{Philosophy of Science}, 66, S362--S378.
+\bibitem[Garber(1983)]{Garber1983} Garber, D. (1983). Old evidence and logical omniscience in Bayesian confirmation theory. In J.~Earman (ed.), \emph{Testing Scientific Theories}, Minnesota Studies in the Philosophy of Science 10. University of Minnesota Press.
+\bibitem[Glymour(1980)]{Glymour1980} Glymour, C. (1980). \emph{Theory and Evidence}. Princeton University Press.
+\bibitem[Hansson(1999)]{Hansson1999} Hansson, S.~O. (1999). \emph{A Textbook of Belief Dynamics: Theory Change and Database Updating}. Kluwer.
+\bibitem[Hartmann and Fitelson(2015)]{HartmannFitelson2015} Hartmann, S., and Fitelson, B. (2015). A new Garber-style solution to the problem of old evidence. \emph{Philosophy of Science}, 82, 712--717.
+\bibitem[Hempel(1945)]{Hempel1945} Hempel, C.~G. (1945). Studies in the logic of confirmation. \emph{Mind}, 54, 1--26 and 97--121.
+\bibitem[Hitchcock and Sober(2004)]{HitchcockSober2004} Hitchcock, C., and Sober, E. (2004). Prediction versus accommodation and the risk of overfitting. \emph{British Journal for the Philosophy of Science}, 55, 1--34.
+\bibitem[Howson(1991)]{Howson1991} Howson, C. (1991). The `old evidence' problem. \emph{British Journal for the Philosophy of Science}, 42.
+\bibitem[Howson(2017)]{Howson2017} Howson, C. (2017). Putting on the Garber style? Better not. \emph{Philosophy of Science}, 84.
+\bibitem[Howson and Urbach(2006)]{HowsonUrbach2006} Howson, C., and Urbach, P. (2006). \emph{Scientific Reasoning: The Bayesian Approach}. 3rd ed. Open Court.
+\bibitem[Jeffrey(1983)]{Jeffrey1983} Jeffrey, R. (1983). Bayesianism with a human face. In J.~Earman (ed.), \emph{Testing Scientific Theories}, Minnesota Studies in the Philosophy of Science 10. University of Minnesota Press.
+\bibitem[Joyce(1999)]{Joyce1999} Joyce, J.~M. (1999). \emph{The Foundations of Causal Decision Theory}. Cambridge University Press.
+\bibitem[Niiniluoto(1983)]{Niiniluoto1983} Niiniluoto, I. (1983). Novel facts and Bayesianism. \emph{British Journal for the Philosophy of Science}, 34.
+\bibitem[Schoenfield(2014)]{Schoenfield2014} Schoenfield, M. (2014). Permission to believe: why permissivism is true and what it tells us about irrelevant influences on belief. \emph{No\^us}, 48, 193--218.
+\bibitem[Sprenger(2015)]{Sprenger2015} Sprenger, J. (2015). A novel solution to the problem of old evidence. \emph{Philosophy of Science}, 82, 383--401.
+\bibitem[Sprenger and Hartmann(2019)]{SprengerHartmann2019} Sprenger, J., and Hartmann, S. (2019). \emph{Bayesian Philosophy of Science}. Oxford University Press.
+\bibitem[Wenmackers and Romeijn(2016)]{WenmackersRomeijn2016} Wenmackers, S., and Romeijn, J.-W. (2016). New theory about old evidence: a framework for open-minded Bayesianism. \emph{Synthese}, 193.
+\bibitem[White(2005)]{White2005} White, R. (2005). Epistemic permissiveness. \emph{Philosophical Perspectives}, 19, 445--459.
+\end{thebibliography}
+
+\end{document}

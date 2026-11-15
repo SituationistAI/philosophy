@@ -1,0 +1,80 @@
+\documentclass{situationist-preprint}
+
+\title{Preemption, Overdetermination and Late Assassins}
+\msid{MET-04-b}
+\msfamily{MET-04}
+\msdiscipline{Metaphysics}
+\mstype{Companion manuscript}
+\mskeywords{causation; late preemption; overdetermination; desert traveller; defaults; structural equations}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MET-04-a argues that a cause is a counterfactual difference-maker selected by norms of normality. A natural worry is that the verdicts it gives in preemption cases depend on the defaults assigned to the agents, so that a backup assassin who is a licensed executioner, or a poisoner whose victim dies of thirst, would be judged differently from his lawless counterparts. We prove that in late preemption the preempted agent is never part of a cause, whatever defaults the agents carry, and we extend the result to the desert traveller. Defaults select in omission cases; in preemption, dependence alone does the selecting. Overdetermination, where neither component suffices, is the case in which the two components divide the labor.
+\end{abstract}
+
+\section{The worry}
+
+The account of MET-04-a has two components. A set $C$ of variables is a \emph{normal difference-maker} for the actual value of $Y$ if, holding some set $H$ of other variables at their actual values, setting the members of $C$ to their non-actual values changes $Y$ in a witness world at least as normal as the actual world, and no proper subset of $C$ does the same (MET-04-a, Definition~2.7). Principles~P1 and~P2 of MET-04-a identify causes with normal difference-makers in apt models. Normality is fixed by defaults attached to some variables (Definition~2.4), and Lemma~3.2 shows that a variable at its default is never a cause.
+
+In the late preemption model, Suzy's throw and Billy's throw both carry the default $0$, since throwing rocks at bottles is a deviation, and Theorem~3.3 of MET-04-a counts Suzy's throw as a cause and Billy's as neither a cause nor part of one. Change the story. Two assassins aim at the same victim. The first fires and kills; the second, a moment late, fires at a body already falling, and his bullet misses its mark only because the victim is no longer where he was. Suppose the late assassin is the lawful executioner, for whom firing at the appointed hour is the norm. His firing is then at its default. Does the verdict change? If it did, the account would make the preempted agent's causal status turn on the legal standing of his act, which would be the instability \citet{BlanchardSchaffer2017} charge against defaults.
+
+\section{Late preemption is default-invariant}
+
+The late assassin case has the structure of the late preemption model: $F_1$ (the first assassin fires), $F_2$ (the second fires), $H_1 = F_1$ (the first bullet hits), $H_2 = F_2 \wedge \neg H_1$ (the second bullet hits), $D = H_1 \vee H_2$ (the victim dies), with actual values $F_1 = F_2 = H_1 = D = 1$ and $H_2 = 0$. As in MET-04-a, derived variables carry no defaults.
+
+\begin{proposition}\label{p:invariant}
+In the late preemption model, for every assignment of defaults to $F_1$ and $F_2$, the second assassin's firing is neither a cause nor part of a cause of the death. If the first assassin's firing is not at its default, it is a cause of the death.
+\end{proposition}
+
+\begin{proof}
+Suppose a set $C$ containing $F_2$ is a cause. By P1 of MET-04-a, $C$ is a normal difference-maker, so for some $H$ the witness world for $(C, H)$ gives $D = 0$, and hence $H_1 = 0$. Since $H_1 = F_1$ and $F_1$ is actually $1$, $H_1$ can be $0$ in the witness world only if $F_1 \in C$ or $H_1 \in C$. If $H_1 \in C$, consider $\{H_1\}$ with $H_2$ held fixed: the witness world has $H_1 = 0$, $H_2 = 0$ and $D = 0$, and it changes no variable that carries a default, so it is at least as normal as the actual world; $\{H_1\}$ is then a normal difference-maker and a proper subset of $C$, since $F_2 \in C$, and $C$ is not minimal. If $F_1 \in C$ and $F_1$ is at its default, $C$ is not a cause, by Lemma~3.2 of MET-04-a. If $F_1 \in C$ and $F_1$ is not at its default, $\{F_1\}$ is a normal difference-maker by the argument that follows, and again a proper subset of $C$. Every case contradicts the supposition. For the second claim, the witness world for $\{F_1\}$ with $H_2$ held fixed has $F_1 = 0$, $H_1 = 0$, $H_2 = 0$ and $D = 0$; it changes only $F_1$ among the variables that may carry defaults, and since the actual value of $F_1$ is not its default, the change does not move the world away from any norm. By Definition~2.5 of MET-04-a it is at least as normal as the actual world, and $\{F_1\}$, being a singleton, is minimal.
+\end{proof}
+
+The proof never consults the default of $F_2$. The executioner and the hired killer are treated alike: neither is part of a cause of the death, because the death depends on neither, holding fixed that the second bullet did not hit. The default of $F_1$ matters only to whether the death is ascribed to the first firing or, if that firing is itself at its default, to the hit it produced; it never matters to the status of the second firing. This is the sense in which preemption is a case for the dependence component of the account, as Proposition~3.8 of MET-04-a records for the original model: the preempted agent is screened off by the de facto dependence of the effect on the process that actually completed, and no assignment of norms can bring him back.
+
+\section{The desert traveller}
+
+A traveller sets out across the desert. One enemy poisons the water in his canteen; a second, not knowing this, punctures the canteen, so that the water drains away before he drinks; the traveller dies of thirst \citep{McLaughlin1925,HartHonore1985}. The case is harder than the late assassin's, because each enemy's act would have killed the traveller had the other not acted, and because the poisoner's act was not interrupted in its course by the other's: it was made idle by it.
+
+Variables: $P$ (the canteen is poisoned), $Q$ (the canteen is punctured), $R = P \wedge \neg Q$ (the traveller drinks poison), $T = Q$ (the traveller is without water), $D = R \vee T$ (the traveller dies). Actual values: $P = Q = T = D = 1$, $R = 0$.
+
+\begin{proposition}\label{p:desert}
+In the desert traveller model, for every assignment of defaults to $P$ and $Q$, the poisoning is neither a cause nor part of a cause of the death, and the lack of water is a cause of it. If the puncturing is not at its default, it is a cause of the death.
+\end{proposition}
+
+\begin{proof}
+The witness world for $\{T\}$ with $R$ held fixed has $T = 0$, $R = 0$ and $D = 0$, and changes no variable that carries a default; so $\{T\}$ is a normal difference-maker, and a cause by P2 of MET-04-a. Suppose a set $C$ containing $P$ is a cause. In its witness world $D = 0$, so $T = 0$, which requires $Q \in C$ or $T \in C$, since $T = Q$ and $Q$ is actually $1$. If $T \in C$, $\{T\}$ is a proper subset of $C$ that is a normal difference-maker, and $C$ is not minimal. If $Q \in C$ and $Q$ is at its default, $C$ is not a cause, by Lemma~3.2 of MET-04-a. If $Q \in C$ and $Q$ is not at its default, the singleton $\{Q\}$ with $R$ held fixed gives $Q = 0$, $T = 0$, $R = 0$ and $D = 0$, in a witness world that changes only $Q$ among the variables that may carry defaults and moves it away from a deviation; it is at least as normal as the actual world, so $\{Q\}$ is a normal difference-maker and a proper subset of $C$. Every case contradicts the supposition. The last claim is the case $C = \{Q\}$ just treated.
+\end{proof}
+
+The verdict that the puncturer, and not the poisoner, caused the death agrees with \citet{HartHonore1985} and with the law's treatment of the case. It is reached by dependence: the death depends on the puncture, holding fixed that the traveller drank no poison, and it does not depend on the poison, whatever is held fixed. That the puncturer, by his act, also saved the traveller from poisoning is no objection: his act made a difference to how the traveller died and when, and it made the difference that, in the circumstances, the death occurred.
+
+\section{Overdetermination}
+
+When both assassins fire together and either bullet suffices, the account counts neither firing as a cause and each as part of a cause (MET-04-a, Theorem~3.4). Here defaults do matter. In the model of Theorem~3.4, the pair of firings is a normal difference-maker only if the witness world in which neither fires is at least as normal as the actual world. If the second assassin is the executioner, his not firing is a deviation, and the pair does not qualify. In a model that also represents the hits, $H_1 = F_1$, $H_2 = F_2$ and $D = H_1 \vee H_2$, the set $\{F_1, H_2\}$ is a normal difference-maker: with both set to $0$ the victim survives, the witness world removes the assassin's deviation and leaves the executioner firing, and neither member suffices alone. So the assassin's firing is part of a cause, together with the executioner's bullet's hitting, while the executioner's firing, being at its default, is part of no cause, by Lemma~3.2 of MET-04-a.
+
+\begin{objection}[The executioner's exemption]
+That the joint firing ceases to be a cause when one of the firers is an executioner is the instability that defaults introduce.
+\end{objection}
+
+\begin{reply}
+The verdict is correct in its setting. Where an execution is lawfully carried out and an assassin fires at the same moment, the question what caused the death is answered by citing the assassin's intrusion together with the bullets that struck, and not by citing the executioner's act, which is what the situation as the norms define it required. The executioner's firing is then a condition of the death in the sense of Lemma~3.2 of MET-04-a, like the oxygen in the room where a match is struck. The point of Propositions~\ref{p:invariant} and~\ref{p:desert} is that this sensitivity is confined to cases in which dependence fails to select, as in symmetric overdetermination; in preemption, where it selects, the defaults are idle.
+\end{reply}
+
+\begin{objection}[Fragility]
+Had the first assassin not fired, the victim would have died a moment later, by a different bullet. If the effect is the death as it actually occurred, with its exact time and manner, it depends on the first firing without holding anything fixed, and also, in the desert case, on the poisoning, which altered the circumstances of the death \citep{Lewis2000}.
+\end{objection}
+
+\begin{reply}
+An apt model chooses its effect variable so that its values are the alternatives the inquiry treats as serious (MET-04-a, Assumption~2.8). If the inquiry concerns the death, the variable records whether the victim died, and the verdicts above follow. If it concerns the time of death, the variable records the time, and both assassins may make a difference to it. Neither choice makes the preempted agent a cause of the death simpliciter, and Lewis's own later account, which counts influence on the manner and timing of the effect, agrees that the preempting cause has much more influence than the preempted one.
+\end{reply}
+
+\begin{thebibliography}{9}\small
+\bibitem[Blanchard and Schaffer(2017)]{BlanchardSchaffer2017} Blanchard, T. and Schaffer, J. (2017). Cause without default. In H.~Beebee, C.~Hitchcock and H.~Price (eds.), \emph{Making a Difference}. Oxford University Press.
+\bibitem[Hart and Honor\'e(1985)]{HartHonore1985} Hart, H.~L.~A. and Honor\'e, T. (1985). \emph{Causation in the Law}, 2nd edition. Clarendon Press.
+\bibitem[Lewis(2000)]{Lewis2000} Lewis, D. (2000). Causation as influence. \emph{Journal of Philosophy}, 97(4), 182--197.
+\bibitem[McLaughlin(1925)]{McLaughlin1925} McLaughlin, J.~A. (1925). Proximate cause. \emph{Harvard Law Review}, 39, 149--199.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,56 @@
+\documentclass{situationist-preprint}
+
+\title{A Uniqueness Theorem for Maximal Greatness}
+\msid{REL-15-a}
+\msfamily{REL-15}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/REL/REL\_15.lean}
+\mskeywords{monotheism; maximal greatness; omnipotence; uniqueness; conflict of wills}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Could there be more than one maximally great being? We prove that there could not, given that maximal greatness entails omnipotence and that an omnipotent being can thwart the will of any being distinct from it. The argument is a version of the classical argument from the conflict of omnipotent wills. Its formalization revealed that the published version used the entailment from maximal greatness to omnipotence without stating it; the premise is now explicit.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 inferred, at the step corresponding to Theorem~\ref{t:main}, that a maximally great being can thwart any other, without stating that maximal greatness entails omnipotence. The formalization could not be completed without this premise, which is now Assumption~\ref{a:omni}. The proof is otherwise unchanged.
+
+\section{The question}
+
+The argument that there can be at most one omnipotent being goes back to the medieval discussion of the unity of God \citep[I, q.~11, a.~3]{Aquinas} and was revived by \citet{Swinburne1994}, who argued, on the contrary, that a plurality of divine persons is possible if their wills are necessarily in agreement. We give the argument in a form that makes its premises explicit.
+
+\section{Assumptions}
+
+\begin{assumption}\label{a:omni}
+Maximal greatness entails omnipotence.
+\end{assumption}
+
+\begin{assumption}\label{a:thwart}
+An omnipotent being can thwart the will of any being distinct from it.
+\end{assumption}
+
+\begin{assumption}\label{a:not}
+A being whose will can be thwarted by another is not omnipotent.
+\end{assumption}
+
+\section{The theorem}
+
+\begin{theorem}\label{t:main}
+There is at most one maximally great being.
+\end{theorem}
+
+\begin{proof}
+Suppose $x$ and $y$ are maximally great and distinct. By Assumption~\ref{a:omni}, both are omnipotent. By Assumption~\ref{a:thwart}, $x$ can thwart the will of $y$. By Assumption~\ref{a:not}, $y$ is not omnipotent, a contradiction.
+\end{proof}
+
+The formalization in \nolinkurl{Philosophy/REL/REL_15.lean} confirms that the theorem depends on exactly these three assumptions. Swinburne's view is compatible with the theorem if divine persons are not distinct beings, which is the position of REL-13, on which the doctrine of the Trinity is consistent in a logic of relative identity: there is one God, and three persons are the same God.
+
+\begin{thebibliography}{9}\small
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Swinburne(1994)]{Swinburne1994} Swinburne, R. (1994). \emph{The Christian God}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

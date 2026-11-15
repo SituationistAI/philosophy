@@ -1,0 +1,173 @@
+\documentclass{situationist-preprint}
+
+\title{Anticipatory Resoluteness as a Limit Concept}
+\msid{PHE-07-a}
+\msfamily{PHE-07}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_07.lean}
+\mskeywords{Heidegger; being-towards-death; anticipation; resoluteness; the \enquote{they}; public time; anxiety; authenticity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Heidegger holds that Dasein can exist authentically towards its death by anticipating it as its ownmost, non-relational, certain and indefinite possibility, and that anticipation, joined to resoluteness, discloses existence as a whole. Critics have argued that such a relation is impossible, since death is not a possibility one can relate to, or that it is trivially available, since everyone knows that they will die. We argue for an intermediate thesis: authentic being-towards-death is possible as an orientation, but not as a stable achievement. The argument rests on two features of Heidegger's own analysis. Falling into the \enquote{they} is an existential structure, not an accident, and the time in which concern lives is public, datable time, in which death appears as an event that will happen to someone at some date. Anticipation is therefore constantly drawn back into public time. But it can be retrieved after every lapse, and the mood that makes retrieval possible is anxiety, which we examine. The logical skeleton is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+In the second division of \emph{Being and Time}, Heidegger argues that Dasein can be grasped as a whole only in its being towards death, and that the authentic relation to death is \emph{anticipation} (Vorlaufen): not expecting death as an event, nor brooding over it, but understanding one's existence in the light of the possibility of its impossibility \citep[\S\S 46--53]{Heidegger1927}. Death, so understood, is Dasein's ownmost possibility, since no one can die for another; it is non-relational, since it individualizes Dasein down to itself; it is certain; and it is indefinite as to its when. Anticipation joined with resoluteness, the readiness to be called to one's own guilt, constitutes anticipatory resoluteness, the authentic mode of existence \citep[\S\S 61--62]{Heidegger1927}.
+
+Everyday Dasein, by contrast, relates to death in the manner of the \enquote{they} \citep[\S 51]{Heidegger1927}. \enquote{One dies}: death is a case that occurs, an event in the world that happens to others and will one day happen to me, but not yet. The \enquote{they} provides a constant tranquillization about death and does not permit the courage for anxiety in the face of it.
+
+Two lines of criticism converge on the question whether authentic being-towards-death is possible. The first holds that it is not, because there is nothing for it to be. \citet{Edwards1975} argued that Heidegger's talk of death as a possibility is either the platitude that we will die or unintelligible, and \citet[pt.~IV, ch.~1]{Sartre1943} that death, far from being my ownmost possibility, is the nihilation of all my possibilities, which comes to me from outside and is not mine at all. The second holds that it is possible only too easily: if anticipation were simply the knowledge that one will die, everyone would be authentic. Interpreters have answered the first line by reading death not as demise but as the structural possibility that Dasein's possibilities can collapse \citep{Haugeland2000, Blattner1999, Thomson2013}, and the second by stressing that anticipation is a way of existing, not a belief \citep{Carman2003}. Neither answer settles whether the authentic way of existing can be held.
+
+We argue that it can be held only as an orientation. Section~\ref{s:frame} states the framework, Section~\ref{s:arg} the argument, Section~\ref{s:anx} the role of anxiety, and Section~\ref{s:obj} objections.
+
+\section{Framework}\label{s:frame}
+
+We describe an agent's relation to death over time by a history, recording at each time whether the agent then exists in anticipation or has fallen back into the everyday relation of the \enquote{they}.
+
+\begin{definition}[History]\label{d:hist}
+A \emph{history} assigns to each time whether the agent is then authentically anticipating death, in the sense that her current understanding of her possibilities is shaped by their finitude as her own, or is relating to death as a case of \enquote{one dies}, an event at an undetermined date in public time. We call a time of the second kind a \emph{lapse}.
+\end{definition}
+
+\begin{definition}[Orientation]\label{d:or}
+A history is authentic \emph{as an orientation} if, after every time, the agent returns to anticipation: every lapse is followed by a retrieval.
+\end{definition}
+
+\begin{definition}[Stable achievement]\label{d:ach}
+A history is authentic \emph{as a stable achievement} if, from some time on, the agent anticipates at every time.
+\end{definition}
+
+The distinction tracks two readings of Heidegger's phrase \enquote{authentic being-a-whole}. On the achievement reading, anticipation is a condition reached by a decisive act, after which existence is held in the light of death. On the orientation reading, it is a direction of concern that must be renewed. Which histories are open to an agent is constrained by two features of her existence.
+
+\begin{assumption}[Falling into public time]\label{a:fall}
+For every history open to a finite, thrown agent, every time is followed by a lapse.
+\end{assumption}
+
+\begin{assumption}[Retrieval]\label{a:retr}
+Some history open to such an agent returns to anticipation after every time.
+\end{assumption}
+
+Assumption~\ref{a:fall} has two sources in Heidegger's text. The first is that falling is an existential, a structure of Dasein's being, not a contingent failing that could be eliminated \citep[\S 38]{Heidegger1927}; authentic existence is not a detachment from the \enquote{they} but an existentiell modification of it \citep[\S 27]{Heidegger1927}. The second is the analysis of public time \citep[\S\S 79--81]{Heidegger1927}. The time of concern is datable (\enquote{then, when the train leaves}), spanned, significant and public: it is the time in which one arranges things with others, and which the clock measures for everyone alike. Every project of an embodied agent is carried out in this time, and in this time death can appear only as an event at some date, the death that happens to someone, not yet. To act at all, the anticipating agent must plan, and to plan is to reckon with time as public. Anticipation, which understands death as indefinite as to its when, is drawn back into a time in which everything has its when. This does not show that anticipation is impossible at any time; it shows that it cannot remain undisturbed across the times in which the agent must act.
+
+Assumption~\ref{a:retr} is the possibility of retrieval. Heidegger describes resoluteness as holding itself free for taking back its decision, and as certain of itself only in repetition \citep[\S\S 60, 62, 68]{Heidegger1927}; it is not a state into which one enters once. That retrieval is possible at every time follows from the structure of death as Heidegger analyses it: death is certain and indefinite, so it is possible at every moment, and the call of conscience, which summons Dasein from its lostness in the \enquote{they}, can come at any time \citep[\S 57]{Heidegger1927}. The assumption claims only that some agent can live a history of repeated return; it does not claim that any agent does.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:nostable}
+No history open to a finite, thrown agent is authentic as a stable achievement.
+\end{lemma}
+
+\begin{proof}
+Suppose a history were stable from $t_0$ on. By Assumption~\ref{a:fall}, some time after $t_0$ is a lapse, at which the agent does not anticipate, contradicting stability.
+\end{proof}
+
+\begin{lemma}\label{l:or}
+Some history open to such an agent is authentic as an orientation.
+\end{lemma}
+
+\begin{proof}
+This is Assumption~\ref{a:retr}, read through Definition~\ref{d:or}.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Authentic being-towards-death is possible as an orientation, but not as a stable achievement.
+\end{theorem}
+
+\begin{proof}
+By Lemmas~\ref{l:or} and~\ref{l:nostable}.
+\end{proof}
+
+The proofs are short because the work is done by the assumptions; the philosophical content of the result lies in the claim that both are consequences of Heidegger's own analysis, and in the reading of anticipatory resoluteness that they force. The two assumptions are consistent: an oriented history is one in which anticipation and lapse alternate without end, and Assumption~\ref{a:fall} requires only that lapses recur. Anticipatory resoluteness is therefore a limit concept: it names the direction in which the oriented agent repeatedly turns, which no history open to her reaches and holds.
+
+\begin{remark}\label{r:repetition}
+The result gives content to Heidegger's insistence that authentic existence is constituted in repetition. If anticipation were an achievement, repetition would be redundant; on the orientation reading, repetition is what authenticity consists in. The authentic agent is not the one who has escaped public time but the one who, drawn back into it, returns. EXI-08 generalizes the result to authenticity as such: the pull of the \enquote{they} is a standing condition, and authenticity is the standing response to it, so authenticity in general is possible as an orientation rather than an achievement. Anticipation of death is the occasion Heidegger privileges; the structure is the same.
+\end{remark}
+
+\section{Anxiety}\label{s:anx}
+
+Heidegger holds that the attunement in which being towards death is held open is anxiety \citep[\S\S 40, 53]{Heidegger1927}. Anxiety differs from fear in having no determinate object: what one is anxious about is being-in-the-world as such, and what it discloses is that the world, with its involvements, has nothing more to offer, so that Dasein is thrown back on its own possibility of being. PHE-16 argues that anxiety discloses the nothing as the withdrawal of beings as a whole, a genuine disclosure that does not reveal a further entity. In being towards death, this withdrawal takes a particular form: the public significance of one's projects, the way they are what \enquote{one} does, falls away, and what remains is the bare possibility of one's not being.
+
+Anxiety bears on our thesis in two ways. First, it explains retrieval. The call of conscience and the anticipation it makes possible are not produced at will by reflection on the fact that one will die; they are disclosed in a mood, and the mood can arise at any time, since its occasion is not an event in the world but one's being-in-the-world as such \citep[\S 40]{Heidegger1927}. Assumption~\ref{a:retr} is in this sense grounded in the possibility of anxiety. Second, anxiety supports Assumption~\ref{a:fall}. Anxiety is not a mood that can be sustained. Heidegger himself notes that genuine anxiety is rare, and that the \enquote{they} converts it into fear in the face of an oncoming event, which it then declares a weakness \citep[\S 51]{Heidegger1927}. In \enquote{What Is Metaphysics?} he describes anxiety as passing, after which one says that it was \enquote{really nothing} \citep{Heidegger1929}. If authentic anticipation depends on anxiety, and anxiety passes, anticipation lapses with it.
+
+Anxiety about one's being towards death must be distinguished from fear of death. EXI-05 argues that fear of death is not rational, since fear is fitting only towards an uncertain evil, and death is certain; regret at the prospect of death may be rational. Anxiety in Heidegger's sense is not fear: it is not directed at death as an oncoming harmful event at all, but at one's being-in-the-world as finite. The verdict of EXI-05 on fear therefore does not touch it, and nothing in our argument requires that anxiety be a reaction to a future harm. Nor does anything require denying that death is bad for the one who dies: EXI-02 argues that death deprives its subject of goods, and that claim concerns death as demise, the end of a life, whereas anticipation concerns the way the possibility of that end shapes one's existence while one lives. EXI-19 argues that death has no meaning in itself but gives life a shape by limiting it; anticipation, on our reading, is the orientation in which that shape is lived as one's own rather than as the shape of a life that \enquote{one} leads.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Death is not a possibility]
+Following \citet{Edwards1975} and \citet{Sartre1943}: death is not a possibility of mine but the end of all my possibilities. There is no such thing as relating to it authentically, and the question of whether the relation can be stable does not arise.
+\end{objection}
+
+\begin{reply}
+The objection treats death as demise, an event at the end of a life. Heidegger distinguishes demise from dying, the way of being in which Dasein is towards its end \citep[\S\S 49--50]{Heidegger1927}. On the readings of \citet{Haugeland2000} and \citet{Thomson2013}, the possibility at issue is that one's projects and self-understanding can collapse, which is a standing possibility of existence and is not deferred to its end. To understand one's possibilities as mortal in this sense is a way of existing, not the prediction of an event. Theorem~\ref{t:main} needs only that this way of existing can sometimes obtain, which the objection does not show to be impossible.
+\end{reply}
+
+\begin{objection}[Resoluteness is a decision]
+Heidegger speaks of resoluteness as a choice, and of anticipation as freedom towards death. A choice, once made, is made; the authentic agent is one who has chosen, and so the achievement reading is the correct one.
+\end{objection}
+
+\begin{reply}
+A choice of this kind is a choice of a way of existing, and a way of existing must be carried out at every time. Heidegger says that resoluteness holds itself free for taking back, and that its certainty consists in repetition \citep[\S 62]{Heidegger1927}. A decision that had to be repeated to remain in force is not a state reached once. The objection would succeed only if the decision could exempt the agent from acting in public time, which Assumption~\ref{a:fall} denies on Heidegger's own grounds.
+\end{reply}
+
+\begin{objection}[Lapse is not inauthenticity]
+An authentic agent who reads a train timetable has not fallen into the \enquote{they}. Concern with public time is compatible with anticipation, so Assumption~\ref{a:fall} confuses being in public time with being lost in it.
+\end{objection}
+
+\begin{reply}
+We grant the distinction, and Assumption~\ref{a:fall} respects it. The assumption is not that every act in public time is a lapse but that lapses recur. Its ground is that concern absorbs: in coping with what is at hand, Dasein understands itself in terms of what it is doing, as \enquote{one} does it, and its death in terms of the datable time of that coping \citep{Dreyfus1991}. Absorption is not a fault but the condition of skilled activity. An agent who never became absorbed would not be authentic but unable to act. The recurrence of lapses is therefore not a contingent weakness but the price of acting at all.
+\end{reply}
+
+\begin{objection}[Triviality]
+If anticipation is an orientation that can be resumed after every lapse, the distinction between authentic and inauthentic agents collapses: everyone sometimes thinks of death.
+\end{objection}
+
+\begin{reply}
+Orientation requires return after every time, not occasional thought of death. An agent who thinks of death occasionally, in the mode of \enquote{one dies, but not yet}, has not anticipated even once: she has represented an event in public time. An agent who anticipates once and then settles into tranquillization has a history that is not oriented. Definition~\ref{d:or} is demanding: it requires that each lapse be followed by a return to an understanding of one's possibilities as one's own and finite.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not show that anyone lives an oriented history, only that such a history is open to a finite agent. It does not establish that anticipation discloses Dasein as a whole in Heidegger's sense. It does not decide between Heidegger's account of the meaning of death and the account of EXI-19, on which death gives life a shape by limiting it; the two are compatible. And it does not claim that the lapses must be frequent or long; Assumption~\ref{a:fall} says only that none is the last.
+
+\section{Formalization}\label{s:formal}
+
+Theorem~\ref{t:main} is formalized in \nolinkurl{Philosophy/PHE/PHE_07.lean}. A history is a function from times (natural numbers) to Booleans; \texttt{Admissible} is a primitive predicate of histories, and Assumptions~\ref{a:fall} and~\ref{a:retr} are the axioms \texttt{lapse\_recurs} and \texttt{retrieval}. The main theorem reads:
+
+\begin{lstlisting}
+theorem main :
+    (∃ h, Admissible h ∧ Orientation h) ∧
+    ¬ ∃ h, Admissible h ∧ StableAchievement h
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.PHE_07.main' depends on axioms:
+ [Philosophy.PHE_07.Admissible,
+  Philosophy.PHE_07.lapse_recurs,
+  Philosophy.PHE_07.retrieval]
+\end{lstlisting}
+
+\texttt{Admissible} is the primitive of histories open to a finite, thrown agent; \texttt{lapse\_recurs} is Assumption~\ref{a:fall}; \texttt{retrieval} is Assumption~\ref{a:retr}. No axiom of Lean's core logic is used. The formalization confirms that the theorem depends on exactly the two assumptions, and that the anxiety of Section~\ref{s:anx} enters only as a ground for them.
+
+\section{Conclusion}
+
+Heidegger's own analysis of falling and of public time implies that anticipation of death is drawn back, again and again, into the time in which death is an event at some date that happens to someone. His analysis of resoluteness, repetition and anxiety implies that it can be retrieved after every lapse. Authentic being-towards-death is therefore possible as an orientation, but not as a stable achievement, and anticipatory resoluteness is best understood as a limit concept: the direction of a repeated return, not a state that is reached and held.
+
+\begin{thebibliography}{99}\small
+\bibitem[Blattner(1999)]{Blattner1999} Blattner, W.~D. (1999). \emph{Heidegger's Temporal Idealism}. Cambridge University Press.
+\bibitem[Carman(2003)]{Carman2003} Carman, T. (2003). \emph{Heidegger's Analytic: Interpretation, Discourse, and Authenticity in Being and Time}. Cambridge University Press.
+\bibitem[Dreyfus(1991)]{Dreyfus1991} Dreyfus, H.~L. (1991). \emph{Being-in-the-World: A Commentary on Heidegger's Being and Time, Division I}. MIT Press.
+\bibitem[Edwards(1975)]{Edwards1975} Edwards, P. (1975). Heidegger and death as \enquote{possibility}. \emph{Mind}, 84, 548--566.
+\bibitem[Haugeland(2000)]{Haugeland2000} Haugeland, J. (2000). Truth and finitude: Heidegger's transcendental existentialism. In M. Wrathall and J. Malpas (eds.), \emph{Heidegger, Authenticity, and Modernity}. MIT Press.
+\bibitem[Heidegger(1927)]{Heidegger1927} Heidegger, M. (1927). \emph{Sein und Zeit}. Niemeyer. Trans. J. Macquarrie and E. Robinson, \emph{Being and Time}, Harper \& Row, 1962.
+\bibitem[Heidegger(1929)]{Heidegger1929} Heidegger, M. (1929). \emph{Was ist Metaphysik?} Cohen.
+\bibitem[Sartre(1943)]{Sartre1943} Sartre, J.-P. (1943). \emph{L'\^etre et le n\'eant}. Gallimard.
+\bibitem[Thomson(2013)]{Thomson2013} Thomson, I. (2013). Death and demise in \emph{Being and Time}. In M. Wrathall (ed.), \emph{The Cambridge Companion to Heidegger's Being and Time}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

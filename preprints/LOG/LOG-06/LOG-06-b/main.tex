@@ -1,0 +1,71 @@
+\documentclass{situationist-preprint}
+
+\title{Tarski's Overgeneration Problem}
+\msid{LOG-06-b}
+\msfamily{LOG-06}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{logical consequence; overgeneration; Tarski; Etchemendy; fixed domain; logical constants}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The model-theoretic account of consequence overgenerates if it counts as valid arguments that are not. LOG-06-a argues that consequence is truth-preservation in all models, provided the class of models includes one isomorphic to the actual world, and treats Etchemendy's cardinality argument as a failure of that proviso. Tarski already faced two further forms of overgeneration: the collapse of logical into material consequence when too many terms are treated as logical, and the validation of cardinality claims on a reading with a fixed domain. We show that each form of overgeneration is a case in which the class of models is too small, that the proviso fixes its lower bound, and that the requirement to range over all models with the logical constants held fixed removes the remainder.
+\end{abstract}
+
+\section{Three forms of overgeneration}
+
+\citet{Tarski1936} defined consequence as the preservation of satisfaction under all reinterpretations of the non-logical vocabulary, and he noted at once a limit of the definition: if every term of the language were counted as logical, consequence would coincide with material consequence, so that an argument would be valid whenever its conclusion is true or one of its premises false. Overgeneration in this sense is built into the account. Two further forms were identified later. \citet{Etchemendy1990} argued that if the models available are too few, sentences about the size of the world come out valid, and that on a reading of Tarski with a single fixed domain, which he attributed to Tarski, cardinality claims about the actual domain come out logically true. Whether Tarski intended a fixed domain is disputed \citep{GomezTorrente1996,Bays2001,Mancosu2006}; we treat the fixed-domain account as a view to be assessed on its merits.
+
+We use the framework of LOG-06-a: models, satisfaction, the structure $S_@$ of the actual world, Assumption 3.2 (isomorphism invariance), $K$-validity (Definition 3.4) and anchoring (Definition 3.5). Proposition 4.3 there records the structural fact that governs all three forms: the smaller the class $K$, the more arguments it validates.
+
+\section{Their common source}
+
+\begin{proposition}\label{p:material}
+If every model in $K$ is isomorphic to $S_@$, then an argument is $K$-valid if and only if it is truth-preserving at the actual world.
+\end{proposition}
+
+\begin{proof}
+By Assumption 3.2 of LOG-06-a, every model in $K$ satisfies exactly the sentences true at $@$. So every model in $K$ that satisfies the premises satisfies the conclusion if and only if, whenever the premises are true at $@$, so is the conclusion.
+\end{proof}
+
+Proposition~\ref{p:material} is Tarski's observation in structural form. Treating every term as logical leaves no reinterpretations, and the class of models shrinks to copies of the intended interpretation, on which validity is material truth-preservation. The class is anchored, and by Theorem 4.1 of LOG-06-a every argument it validates preserves actual truth. What it lacks is not anchoring but breadth. The proviso of LOG-06-a sets a lower bound on the class; Principle P1 of LOG-06-a also requires that the class contain \emph{all} models of the language with the logical constants fixed, and the choice of constants determines how much the class contains. LOG-16 holds that the logical constants are the permutation-invariant operations. A predicate such as \enquote{horse} is not invariant, so it must be reinterpreted, and the class cannot shrink to the intended model.
+
+\begin{proposition}\label{p:fixed}
+Let $K_@$ be the class of models whose domain is the actual domain, with the non-logical vocabulary reinterpreted freely. If the actual domain is infinite, every sentence \enquote{there are at least $n$ things} is $K_@$-valid; if some possible world has exactly $m$ things, then \enquote{there are at least $m+1$ things} is not true at that world.
+\end{proposition}
+
+\begin{proof}
+Every model in $K_@$ has the actual domain, which has at least $n$ members for each $n$. The second claim is immediate.
+\end{proof}
+
+The fixed-domain class $K_@$ is anchored, since $S_@$ is in it, and so by Theorem 4.1 of LOG-06-a it validates no actual falsehood. Its overgeneration is modal: it validates sentences that are actually true and possibly false. By Corollary 4.2 of LOG-06-a, a class that is modally anchored validates no sentence false at any world; $K_@$ is not modally anchored if there could have been finitely many things. The account of LOG-06-a, which ranges over models of all sizes, one-element models included, does not validate \enquote{there are at least two things}. Etchemendy's cardinality argument, finally, is Proposition 4.4 of LOG-06-a: a class of domains smaller than the actual one is not anchored and validates an actual falsehood.
+
+The three forms are therefore three ways for $K$ to be too small: too few interpretations of the vocabulary (Proposition~\ref{p:material}), too few domains (Proposition~\ref{p:fixed}), too few large domains (Etchemendy's case). The proviso excludes the third. The requirement to range over all models with only the permutation-invariant constants fixed excludes the first two.
+
+\section{Objection and reply}
+
+\begin{objection}
+\citet{McGee1992} argues that whether some second-order sentences are valid depends on what sets there are, so that the account makes logical truth hostage to set theory. Enlarging the class cannot help if the class is limited by the set-theoretic universe.
+\end{objection}
+
+\begin{reply}
+The dependence McGee identifies is a dependence on whether the class of models is large enough to contain a copy of the actual world, and LOG-06-a accepts it as a condition of adequacy. For second-order languages, LOG-06-a meets the condition by interpreting the second-order quantifiers plurally over the domain of everything \citep{RayoUzquiano1999}, so that the actual world's structure is itself among the interpretations; LOG-08 argues that quantification over absolutely everything is coherent. Once the class contains the actual structure, the validity of a second-order sentence no longer turns on the size of a set-theoretic universe that might fall short of the world.
+\end{reply}
+
+\section{Conclusion}
+
+Tarski's overgeneration problem has three forms: the collapse into material consequence, the cardinality claims of a fixed domain, and the actual falsehoods validated by too few large domains. Each is a case of a class of models that is too small. The actual-world proviso of LOG-06-a sets the lower bound that excludes actual falsehoods, and the requirement to reinterpret everything but the permutation-invariant constants, over domains of every size, excludes the rest. Logical consequence is truth-preservation in all models, provided the class of models includes one isomorphic to the actual world.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bays(2001)]{Bays2001} Bays, T. (2001). On Tarski on models. \emph{The Journal of Symbolic Logic}, 66(4), 1701--1726.
+\bibitem[Etchemendy(1990)]{Etchemendy1990} Etchemendy, J. (1990). \emph{The Concept of Logical Consequence}. Harvard University Press.
+\bibitem[G\'omez-Torrente(1996)]{GomezTorrente1996} G\'omez-Torrente, M. (1996). Tarski on logical consequence. \emph{Notre Dame Journal of Formal Logic}, 37(1), 125--151.
+\bibitem[Mancosu(2006)]{Mancosu2006} Mancosu, P. (2006). Tarski on models and logical consequence. In J. Ferreir\'os and J.~J. Gray (eds.), \emph{The Architecture of Modern Mathematics}, Oxford University Press.
+\bibitem[McGee(1992)]{McGee1992} McGee, V. (1992). Two problems with Tarski's theory of consequence. \emph{Proceedings of the Aristotelian Society}, 92, 273--292.
+\bibitem[Rayo and Uzquiano(1999)]{RayoUzquiano1999} Rayo, A. and Uzquiano, G. (1999). Toward a theory of second-order consequence. \emph{Notre Dame Journal of Formal Logic}, 40(3), 315--325.
+\bibitem[Tarski(1936)]{Tarski1936} Tarski, A. (1936). On the concept of logical consequence. English translation in \emph{Logic, Semantics, Metamathematics} (1956), trans. J.~H. Woodger, Clarendon Press.
+\end{thebibliography}
+
+\end{document}

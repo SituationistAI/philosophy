@@ -1,0 +1,66 @@
+\documentclass{situationist-preprint}
+
+\title{The Convergence of Ideal Critics}
+\msid{AES-03-b}
+\msfamily{AES-03}
+\msdiscipline{Aesthetics}
+\mstype{Consequence}
+\mskeywords{standard of taste; ideal critic; convergence; critical disagreement; aesthetic testimony}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+AES-03-a argues that Hume's standard of taste is satisfiable because the verdicts of ideal critics converge, and proves a bound on the disagreement of imperfect critics. We derive three consequences for the practice of criticism. Disagreement in verdict between two critics on works whose merit differs widely shows that at least one of them is deficient. Persistent disagreement among the best available critics is evidence that the works compared are close in merit. And deference to the convergent verdicts of good critics is warranted for verdicts but not for preferences. Each consequence follows from the convergence theorem together with the agreement bound.
+\end{abstract}
+
+\section{Consequences}
+
+We use the framework of AES-03-a, which reconstructs the standard of \citet{Hume1757}: verdicts and preferences (Definitions~3.1 and~3.2), the ideal critic (Definition~3.3), the convergence theorem (Theorem~4.5) and the agreement of imperfect critics (Proposition~5.2), which under Assumption~5.1 guarantees that every observer of total deficiency at most $\delta$ ranks $x$ above $y$ whenever $m(x)-m(y)>2(L\delta+\tau)$.
+
+\begin{proposition}[Diagnosis]\label{p:diag}
+If two critics issue opposed comparative verdicts on works $x$ and $y$ in the same category, then either $|m(x)-m(y)|\le 2(L\delta+\tau)$, where $\delta$ is the larger of their total deficiencies, or at least one of them is not a critic of total deficiency at most $\delta$.
+\end{proposition}
+
+\begin{proof}
+Suppose $|m(x)-m(y)|>2(L\delta+\tau)$ and both critics have total deficiency at most $\delta$. By Proposition~5.2 of AES-03-a both rank the better work above the worse, so their verdicts are not opposed. The contrapositive is the claim.
+\end{proof}
+
+The proposition gives disagreement a diagnostic use. Where critics diverge sharply about works that differ greatly in merit, the divergence is not a standoff between equally valid sensibilities but evidence of a defect in delicacy, practice, comparison, freedom from prejudice or good sense, and the list of Principle~P2 of AES-03-a says where to look.
+
+\begin{proposition}[Disagreement as evidence of closeness]\label{p:close}
+If critics of small total deficiency persistently disagree about the comparative merit of two works, the merit of the works differs by little.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{p:diag} with $\delta$ small, their disagreement is possible only if $|m(x)-m(y)|\le 2(L\delta+\tau)$. This is Corollary~5.3 of AES-03-a read in the evidential direction: given good reason to think the critics nearly ideal, their disagreement is evidence that the bound is not exceeded.
+\end{proof}
+
+A familiar pattern in the history of criticism fits this consequence: the contested rankings are those within the canon, of works already agreed to be excellent, and not between the canon and what lies far below it.
+
+\begin{proposition}[Deference]\label{p:defer}
+A judge who has good reason to believe that a group of critics approximates ideal critics, and that their verdicts agree, has reason to accept their verdict; she has no corresponding reason to adopt their preferences.
+\end{proposition}
+
+\begin{proof}
+By Corollary~4.7 of AES-03-a, a verdict that agrees with the joint verdict is true. By Corollary~5.3, agreement among nearly ideal critics on a question is reliable evidence that their verdict is the joint verdict. Preferences carry no claim to correctness (Definition~3.2), and by Lemma~4.4 they may diverge among ideal critics; hence the agreement of good critics in preference is no evidence of anything that the judge's own preference could be wrong about.
+\end{proof}
+
+\begin{objection}[Testimony]
+Many hold that aesthetic judgment cannot be based on testimony: one must see for oneself \citep{Hopkins2011}. Proposition~\ref{p:defer} conflicts with this.
+\end{objection}
+
+\begin{reply}
+The proposition concerns what a judge has reason to believe, not what she is entitled to assert as her own aesthetic judgment. It is consistent with the view that an aesthetic judgment fully one's own requires acquaintance, and with the norm that one should not claim to find a work beautiful on hearsay. What it excludes is the stronger view that the convergent verdict of good critics gives no reason at all to believe that a work is good. That view would be correct only if there were no facts about taste, which AES-03-a denies.
+\end{reply}
+
+\section{Conclusion}
+
+The convergence of ideal critics has consequences for actual criticism: sharp disagreement across wide differences of merit is a sign of deficiency, persistent disagreement among good critics is a sign of near parity, and good critics' agreement is a reason for belief about merit though not for preference.
+
+\begin{thebibliography}{99}\small
+\bibitem[Hopkins(2011)]{Hopkins2011} Hopkins, R. (2011). How to be a pessimist about aesthetic testimony. \emph{The Journal of Philosophy}, 108(3), 138--157.
+\bibitem[Hume(1757)]{Hume1757} Hume, D. (1757). Of the standard of taste. In \emph{Four Dissertations}. A. Millar.
+\end{thebibliography}
+
+\end{document}

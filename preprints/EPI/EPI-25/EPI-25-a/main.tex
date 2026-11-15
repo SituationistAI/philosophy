@@ -1,0 +1,136 @@
+\documentclass{situationist-preprint}
+
+\title{Knowledge of the Future}
+\msid{EPI-25-a}
+\msfamily{EPI-25}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mskeywords{future; prediction; laws of nature; future contingents; branching time; safety; induction}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can we know what will happen? Two arguments suggest not. The first is Humean: predictions rest on induction, and induction gives no guarantee. The second is Aristotelian: if the future is open, propositions about it have no truth value yet, and there is nothing to know. We argue that the future is partially knowable. Some future events are known, by inference from laws and present conditions, and these are exactly the events that are settled at the present moment: those that occur on every lawful continuation of the present. Such predictions are true now even on the view that future contingents lack a truth value, and the beliefs formed by inferring them from known laws and known conditions are safe. Future contingents, including the outcomes of free choices and of chancy processes, are not known, however high their probability, because there is not yet a fact for a belief to be safe with respect to. The boundary between the knowable and the unknowable future is therefore the boundary between the settled and the open, and it is drawn by the laws.
+\end{abstract}
+
+\section{The problem}
+
+We say that we know that there will be a total solar eclipse visible from Luxor on 2 August 2027, and that no one knows who will win the next election. The question is whether the first claim is literally true, and if so what distinguishes it from the second.
+
+Two lines of thought threaten the first claim. Hume's argument concludes that inferences from the observed to the unobserved, and so all predictions, lack rational support \citep[\S IV]{Hume1748}. And Aristotle's discussion of the sea battle suggests that a statement about a contingent future event is not yet true or false \citep[ch.~9]{AristotleDeInt}. If it is not yet true, it cannot be known. The modern development of Aristotle's idea in branching-time semantics \citep{Prior1967,Thomason1970} makes the second threat precise, and it is the view of ACT-17 that future contingents lack a truth value.
+
+We argue that neither threat removes all knowledge of the future. The Humean threat is answered by EPI-03: induction is justified, inductively, by a benign rule-circularity. The Aristotelian threat applies only to future contingents, and not every future event is contingent at the present moment.
+
+\section{Framework}
+
+We use the branching-time framework in which ACT-17 is stated \citep{Belnap2001}. Moments are partially ordered by temporal precedence, and the order branches toward the future but not toward the past. A \emph{history} is a maximal linearly ordered set of moments. A future-tensed sentence is evaluated at a moment $m$ relative to a history $h$ through $m$.
+
+\begin{definition}[Settledness]\label{d:settled}
+A future-tensed sentence $\phi$ is \emph{settled true} at $m$ if it is true at $m$ relative to every history through $m$, \emph{settled false} if false relative to every history through $m$, and \emph{open} at $m$ otherwise.
+\end{definition}
+
+\begin{assumption}[Truth at a moment]\label{a:truth}
+A future-tensed sentence is true at $m$ if and only if it is settled true at $m$, false at $m$ if and only if it is settled false, and lacks a truth value at $m$ if it is open.
+\end{assumption}
+
+Assumption~\ref{a:truth} is the supervaluationist reading of the thesis of ACT-17: future contingents, the sentences open at the present moment, lack a truth value. We adopt it because it makes knowledge of the future hardest to obtain; the argument goes through a fortiori on views on which future contingents are true or false.
+
+\begin{assumption}[Lawful branching]\label{a:lawful}
+The histories through $m$ are the continuations of the course of events up to $m$ that satisfy the laws of nature.
+\end{assumption}
+
+The laws in question are, as MET-12 argues, the axioms of the best system summarizing the mosaic of events. Such laws depend on the whole mosaic, including its future. But the histories through $m$ differ in the outcomes of free choices and chancy processes, and differences of this scale do not change which system is best; the laws are shared by the histories through any moment, and Assumption~\ref{a:lawful} is well defined.
+
+\begin{definition}[Nomic determination]\label{d:det}
+A future event $e$ is \emph{nomically determined} at $m$ if the laws together with the conditions obtaining at $m$ entail that $e$ will occur.
+\end{definition}
+
+Knowledge is safe, justified true belief (EPI-01): a subject knows that $p$ if she believes $p$ on a basis, justifiably, and in every close world in which she believes $p$ on that basis, $p$ is true.
+
+\section{The argument}
+
+\begin{lemma}\label{l:settled}
+If $e$ is nomically determined at $m$, then \enquote{$e$ will occur} is settled true, and therefore true, at $m$.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:lawful}, every history through $m$ contains the conditions obtaining at $m$ and satisfies the laws. By Definition~\ref{d:det}, the laws and those conditions entail that $e$ will occur. So $e$ occurs after $m$ on every history through $m$, and \enquote{$e$ will occur} is settled true at $m$ (Definition~\ref{d:settled}). By Assumption~\ref{a:truth}, it is true at $m$.
+\end{proof}
+
+Lemma~\ref{l:settled} is the sense in which the known future events are not contingent: they are not contingent given the laws and the present. They are not necessary, but at $m$ there is no history on which they fail to occur, and this is all that the openness of the future, as ACT-17 understands it, concerns.
+
+\begin{assumption}[Knowable determination]\label{a:islands}
+There are events nomically determined at the present moment by laws and conditions that we know, and whose determination we can derive.
+\end{assumption}
+
+Assumption~\ref{a:islands} is empirical. The positions of the bodies of the solar system over the coming centuries are determined, to the precision relevant to eclipses, by the laws of gravitation and their present positions and velocities, which are known by observation; the derivation is carried out in published eclipse tables. The assumption does not require deterministic fundamental laws, only that some coarse-grained features of some systems be fixed by the laws and present conditions.
+
+\begin{theorem}\label{t:know}
+If $e$ is nomically determined at $m$, and at $m$ a subject knows the relevant laws and conditions and competently infers that $e$ will occur, then she knows at $m$ that $e$ will occur.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:settled}, the proposition that $e$ will occur is true at $m$. The subject believes it on the basis of competent deduction from premises she knows; the belief is justified, since justification is transmitted by good inference from justified premises. It remains to show safety. Consider a close world in which she believes that $e$ will occur on the same basis, that is, by the same inference from the same laws and the same conditions, which she knows. Since knowledge is factive and safe, in close worlds in which she believes those premises on the same bases they are true; so in such a world the laws and conditions hold and entail that $e$ will occur, and by Lemma~\ref{l:settled} applied at that world, \enquote{$e$ will occur} is true there. The belief is safe, and by the analysis of EPI-01 she knows. Since laws and conditions are known only approximately, the conclusion is correspondingly coarse (an eclipse total along a band of given width), and it follows from any premises within the margin for error of what is known, which is the margin that safety requires \citep{Williamson2000}.
+\end{proof}
+
+By Assumption~\ref{a:islands}, the antecedent of Theorem~\ref{t:know} is satisfied for some events. Knowledge of the laws is inductive (EPI-03); the inference from laws to future events is deductive and adds no further inductive risk.
+
+\begin{proposition}\label{p:open}
+If \enquote{$e$ will occur} is open at $m$, no one knows at $m$ that $e$ will occur, whatever the probability of $e$.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:truth}, an open sentence lacks a truth value at $m$. Knowledge entails truth. So the sentence is not known at $m$.
+\end{proof}
+
+Proposition~\ref{p:open} covers free choices, which ACT-17 takes to be open until they are made, and chancy events. If there is a history through $m$ on which a cup set on a table spontaneously tips over, however low the chance, then \enquote{the cup will stay on the table} is open at $m$ and not known. This agrees with the verdict of EPI-09 that one does not know that one's lottery ticket will lose, though one may rationally act as if it will: high probability is not knowledge. Ordinary claims to know chancy futures are loose talk, or claims about present tendencies, which are knowable now.
+
+\begin{corollary}\label{c:partial}
+Knowledge of the future is partial: some future events are known at the present moment, and others, however probable, are not; the former are exactly the events settled at the present moment.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:know} and Assumption~\ref{a:islands}, some are known. By Proposition~\ref{p:open}, open events are not known. Any known future-tensed proposition is true at the present moment, and so, by Assumption~\ref{a:truth}, settled.
+\end{proof}
+
+\section{Objections and replies}
+
+\begin{objection}[Humean laws are not yet fixed]\label{o:hume}
+On the Humean view of MET-12, the laws depend on the whole mosaic, including the part of it that lies in the future. Inferring future events from the laws is then circular, and the laws themselves are not settled at the present moment.
+\end{objection}
+
+\begin{reply}
+The inference is not circular in any vicious sense. The subject knows the laws by induction from the observed part of the mosaic and infers from them; that the laws are partly grounded in future events is a metaphysical fact about what makes them laws, not a premise of her inference. MET-12-a distinguishes in the same way between the grounding of laws by their instances and the explanation of instances by laws. As for settledness, the laws are settled at the present moment if every history through it has the same best system, and we have argued that the differences between histories are too small to change the best system. If some history through $m$ had different laws, it would be one on which the mosaic differs on a large scale, and the sentences in question would be open; Theorem~\ref{t:know} would then not apply to them.
+\end{reply}
+
+\begin{objection}[Self-knowledge of action]\label{o:intention}
+I know that I will be at my desk tomorrow morning, because I intend to be. My future action is a free choice, so by ACT-17 the sentence is open; but it seems absurd to deny that I know it.
+\end{objection}
+
+\begin{reply}
+What one knows in such a case is that one now intends to be at one's desk, that one's intentions of this kind are reliably carried out, and that being at one's desk is now highly probable. These are facts about the present, and they are what licenses planning and assurance to others. The future action itself, if it is a free choice not yet made, is open, and the claim to know it is of a piece with the claim to know that one's ticket will lose. Where the action is settled because the choice has in effect been made and nothing remains to be decided, the sentence is settled and can be known.
+\end{reply}
+
+\begin{objection}[Fatalism]\label{o:fat}
+If the eclipse is settled now, it was settled before anyone existed to choose otherwise; the argument concedes the fatalism that ACT-17 rejects.
+\end{objection}
+
+\begin{reply}
+ACT-17 rejects fatalism about future contingents, the claim that what anyone will choose is already settled. Lemma~\ref{l:settled} concerns events that no choice now available can affect. That such events are settled is not fatalism; it is what makes them predictable.
+\end{reply}
+
+\section{Conclusion}
+
+Some future events are known, and they are known by inference from laws and present conditions. They are the events that occur on every lawful continuation of the present, and so are settled and true now even if future contingents have no truth value. Beliefs inferred from known laws and known conditions in these cases are safe. The outcomes of free choices and chancy processes are open at the present moment and are not known, however probable they are. The future is knowable in the part of it that the laws and the present have already fixed.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(De Int.)]{AristotleDeInt} Aristotle. \emph{De Interpretatione}. Trans. J.~L. Ackrill, in \emph{Categories and De Interpretatione}. Clarendon Press, 1963.
+\bibitem[Belnap et~al.(2001)]{Belnap2001} Belnap, N., Perloff, M. and Xu, M. (2001). \emph{Facing the Future: Agents and Choices in Our Indeterminist World}. Oxford University Press.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}.
+\bibitem[Prior(1967)]{Prior1967} Prior, A.~N. (1967). \emph{Past, Present and Future}. Clarendon Press.
+\bibitem[Thomason(1970)]{Thomason1970} Thomason, R.~H. (1970). Indeterminist time and truth-value gaps. \emph{Theoria}, 36(3), 264--281.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

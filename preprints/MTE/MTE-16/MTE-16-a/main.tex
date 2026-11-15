@@ -1,0 +1,260 @@
+\documentclass{situationist-preprint}
+
+\title{Expected Choiceworthiness, Variance-Normalized}
+\msid{MTE-16-a}
+\msfamily{MTE-16}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/MTE/MTE\_16.lean}
+\mskeywords{moral uncertainty; expected choiceworthiness; intertheoretic comparisons; variance normalization; deontology; fanaticism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What should an agent do when she is uncertain which moral theory is true? We defend the view that she should maximize expected choiceworthiness, weighting each theory's assessment of her options by her credence in the theory, after normalizing each theory's choiceworthiness function to have mean zero and unit variance over the options available. We show that this procedure is well defined for every theory that is not indifferent among all the options, that indifferent theories can be excluded without loss, and that in choices between two options it reduces to credence-weighted majority voting among the theories. We then draw a consequence that deontologists may find unwelcome: under variance normalization, a deontological theory has no veto, and is outvoted by a rival theory in which the agent has greater credence. We defend the view against the main objections: that moral uncertainty is irrelevant to what one ought to do, that one should follow one's favourite theory, that intertheoretic comparisons are meaningless, and that expected value reasoning leads to fanaticism. The main results for two-option choices are formalized in Lean.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 applied variance normalization to every theory. Variance normalization is undefined for a theory that assigns the same choiceworthiness to all options, since such a theory has zero variance. Such theories are now excluded explicitly (Definition~\ref{d:vn}), and Proposition~\ref{p:indiff} shows that the exclusion does not affect any verdict. The main results are unchanged for all other theories.
+
+\section{The problem}
+
+An agent who is uncertain about the empirical consequences of her actions can use expected value reasoning to decide what to do. An agent who is uncertain about which moral theory is true faces a harder problem. She may be fairly confident that consequentialism is correct, while giving some credence to a deontological theory on which one of her options is forbidden. Should she do what the theory she finds most plausible recommends, or what does best across the theories in which she has credence? And if the latter, how can the assessments of different theories be compared?
+
+The question has a long history. Catholic moral theology of the sixteenth and seventeenth centuries developed rival doctrines about what to do under doubt as to whether an act is permitted. \emph{Tutiorism} required the safer course, the one that avoided the risk of sin; \emph{probabiliorism} required following the more probable opinion; \emph{probabilism} permitted following any probable opinion, even if a more probable one pointed the other way. Pascal's attack on the casuistry of the Jesuits in the \emph{Provincial Letters} was in large part an attack on probabilism. The modern debate was revived by \citet{Lockhart2000}, who proposed that agents should maximize the expected degree of moral rightness of their acts, and developed by \citet{Sepielli2009}, \citet{Ross2006} and, most systematically, by \citet{MacAskillBykvistOrd2020}.
+
+The main positions are three.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Irrelevance}: what one ought to do depends only on which moral theory is true, not on one's credences about it, and moral uncertainty generates no further normative requirements \citep{Weatherson2014,Harman2015}.
+\item \emph{My favourite theory}: one should act on the theory in which one has the highest credence \citep{GustafssonTorpman2014}.
+\item \emph{Maximize expected choiceworthiness} (MEC): one should choose the option whose choiceworthiness, averaged across theories and weighted by credence, is highest \citep{Lockhart2000,MacAskillBykvistOrd2020}.
+\end{enumerate}
+
+MEC faces the problem of intertheoretic comparisons. Choiceworthiness is, for most theories, measured on an interval scale, determined only up to positive affine transformation. Averaging across theories requires choosing a common scale, and different choices give different verdicts. Some have concluded that intertheoretic comparisons are meaningless and that MEC is therefore not well defined \citep{Hedden2016}. Our proposal is a principled solution to this problem, building on the statistical normalization methods studied by \citet{CottonBarrattMacAskillOrd2020}.
+
+\section{Framework}
+
+Let $O = \{o_1, \dots, o_k\}$ be the finite set of options available in a choice situation, with $k \geq 2$. The agent has credences $c_1, \dots, c_m$, summing to $1$, in theories $T_1, \dots, T_m$. Each theory $T_i$ assigns a choiceworthiness $\mathrm{CW}_i(o)$ to each option, determined up to positive affine transformation.
+
+\begin{definition}\label{d:indiff}
+A theory is \emph{indifferent} in a choice situation if it assigns the same choiceworthiness to every option.
+\end{definition}
+
+\begin{definition}[Variance normalization]\label{d:vn}
+For a theory $T_i$ that is not indifferent, let $\mu_i$ and $\sigma_i^2$ be the mean and the variance of $\mathrm{CW}_i$ over $O$. The \emph{normalized choiceworthiness} of option $o$ according to $T_i$ is
+\[
+\widehat{\mathrm{CW}}_i(o) = \frac{\mathrm{CW}_i(o) - \mu_i}{\sigma_i}.
+\]
+Indifferent theories are not normalized.
+\end{definition}
+
+\begin{definition}[VN-MEC]\label{d:vnmec}
+An option is permissible under moral uncertainty if it maximizes
+\[
+\mathrm{EC}(o) = \sum_{i \,:\, T_i \text{ not indifferent}} c_i \, \widehat{\mathrm{CW}}_i(o).
+\]
+\end{definition}
+
+\section{Basic results}
+
+\begin{proposition}\label{p:welldef}
+$\widehat{\mathrm{CW}}_i$ is well defined for every theory that is not indifferent, and it is invariant under positive affine transformations of $\mathrm{CW}_i$.
+\end{proposition}
+
+\begin{proof}
+If $T_i$ is not indifferent, $\mathrm{CW}_i$ takes at least two values, so $\sigma_i > 0$. If $\mathrm{CW}_i$ is replaced by $a\,\mathrm{CW}_i + b$ with $a > 0$, the mean becomes $a\mu_i + b$ and the standard deviation $a\sigma_i$, and the normalized value is unchanged.
+\end{proof}
+
+\begin{proposition}\label{p:indiff}
+Excluding indifferent theories does not change the ranking of options under VN-MEC, whatever value is assigned to them.
+\end{proposition}
+
+\begin{proof}
+An indifferent theory assigns the same value to every option. Under any normalization that maps it to a constant, its contribution to $\mathrm{EC}$ is the same for every option, and adding a constant to every option's expected choiceworthiness does not change their ranking.
+\end{proof}
+
+Proposition~\ref{p:indiff} is the justification for the revision. It also has a philosophical consequence. Moral nihilism, the view that no option is more choiceworthy than any other, is an indifferent theory in every choice situation. By Proposition~\ref{p:indiff}, credence in nihilism never affects what one should do under moral uncertainty. This is the correct result: a theory that gives no reasons cannot tip the balance between theories that do.
+
+\begin{theorem}[Two options]\label{t:two}
+When $k = 2$, VN-MEC recommends $o_1$ over $o_2$ if and only if
+\[
+\sum_{i} c_i \,\mathrm{sgn}\big(\mathrm{CW}_i(o_1) - \mathrm{CW}_i(o_2)\big) > 0,
+\]
+where $\mathrm{sgn}$ is the sign function and the sum ranges over all theories.
+\end{theorem}
+
+\begin{proof}
+For a non-indifferent theory with two options, the mean is the midpoint of the two values and the standard deviation is half their distance, so the normalized values are $+1$ for the option the theory prefers and $-1$ for the other. Hence $\widehat{\mathrm{CW}}_i(o_1) - \widehat{\mathrm{CW}}_i(o_2) = 2\,\mathrm{sgn}(\mathrm{CW}_i(o_1) - \mathrm{CW}_i(o_2))$. Indifferent theories contribute $\mathrm{sgn}(0) = 0$, in agreement with Proposition~\ref{p:indiff}.
+\end{proof}
+
+Theorem~\ref{t:two} shows that, in binary choices, VN-MEC is credence-weighted majority voting among theories. Each theory has a say proportional to the agent's credence in it, and the strength of a theory's preference plays no role. In choices among more than two options, the strength of preference matters through its distribution across options, but each theory's total influence is fixed by the normalization: no theory can amplify its say by inflating its scale. This is the \enquote{principle of equal say} that \citet{CottonBarrattMacAskillOrd2020} identify as the rationale for variance normalization.
+
+\section{Deontology loses on points}
+
+\begin{proposition}\label{p:outvote}
+In a choice between two options, if two theories disagree, and every other theory is indifferent, VN-MEC recommends the option preferred by the theory in which the agent has greater credence.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{t:two}, the sum reduces to $c_1 - c_2$ or $c_2 - c_1$, depending on which theory prefers $o_1$.
+\end{proof}
+
+Consider an agent who must decide whether to break a promise to prevent a moderate harm to others. She gives credence $0.6$ to a consequentialist theory on which breaking the promise is better, and $0.4$ to a deontological theory on which breaking it is forbidden. By Proposition~\ref{p:outvote}, VN-MEC recommends breaking the promise.
+
+Many deontologists would expect a different result. On their view, the prohibition on breaking promises is not one consideration to be weighed against others; it constrains the pursuit of good outcomes. It is natural to think that this should give the deontological theory special weight under uncertainty: that even a moderate credence in a theory on which an act is forbidden should make one reluctant to perform it. This is the intuition behind tutiorism, and behind the more recent suggestion that uncertainty about whether an act is wrong should be treated asymmetrically.
+
+Variance normalization does not respect this intuition, and we think it is right not to. A theory's say under uncertainty should depend on the agent's credence in it, not on how strongly the theory expresses its verdicts. If the strength of a prohibition could amplify a theory's influence, then a theory that expressed its prohibitions in more absolute terms would dominate decisions under uncertainty whatever the agent's credence in it. This is the problem of fanaticism, and the deontologist's demand for a veto is a version of it.
+
+The deontologist may reply that her theory's verdicts are not stronger but different in kind: they concern what is permitted, not what is better, and cannot be represented by choiceworthiness at all. If so, MEC does not apply to her theory, and the question of how to act under uncertainty between consequentialism and deontology must be answered in some other way. We note that every proposal for doing so that we know of either reduces to a form of MEC, or gives the deontological theory a veto, with the consequences just described.
+
+\section{More than two options}
+
+With more than two options, the strength of a theory's preferences matters, but only through their relative distribution. The following proposition makes precise the sense in which every theory has the same total influence.
+
+\begin{proposition}\label{p:equalsay}
+For every non-indifferent theory $T_i$, $\sum_{o \in O} \widehat{\mathrm{CW}}_i(o) = 0$ and $\sum_{o \in O} \widehat{\mathrm{CW}}_i(o)^2 = k$.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{d:vn}, $\widehat{\mathrm{CW}}_i$ has mean $0$ and variance $1$ over the $k$ options, using the population variance.
+\end{proof}
+
+Proposition~\ref{p:equalsay} says that, after normalization, every theory's choiceworthiness vector lies on the same sphere in $\mathbb{R}^k$, centred on the origin and restricted to the hyperplane of vectors summing to zero. A theory can concentrate its influence on a few options, by ranking one far above or below the others, or spread it across many, but it cannot increase its total influence. This is the formal content of the principle of equal say.
+
+An example illustrates the procedure. An agent considers three options: to keep a promise ($o_1$), to break it to prevent a moderate harm ($o_2$), and to break it to secure a small benefit ($o_3$). She gives credence $0.5$ to a consequentialist theory with choiceworthiness $(0, 3, 1)$, $0.3$ to a deontological theory with $(1, 0, 0)$, and $0.2$ to a virtue theory with $(2, 2, 0)$.
+
+\begin{center}\small
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Theory & Credence & $\widehat{\mathrm{CW}}(o_1)$ & $\widehat{\mathrm{CW}}(o_2)$ & $\widehat{\mathrm{CW}}(o_3)$ \\
+\midrule
+Consequentialist & 0.5 & $-1.07$ & $1.34$ & $-0.27$ \\
+Deontological & 0.3 & $1.41$ & $-0.71$ & $-0.71$ \\
+Virtue & 0.2 & $0.71$ & $0.71$ & $-1.41$ \\
+\midrule
+Expected & & $0.03$ & $0.60$ & $-0.63$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+VN-MEC recommends breaking the promise to prevent the harm. Two features of the example are worth noting. First, the deontological theory's strong preference for keeping the promise is fully represented: its normalized value for $o_1$ is the largest entry in the table. Second, it is outweighed, because the consequentialist and virtue theories both prefer $o_2$ to $o_1$ and the agent's combined credence in them is greater. The deontological theory is heard, but it is not decisive.
+
+\section{Alternative normalizations}
+
+Variance normalization is not the only way to put theories on a common scale. Two alternatives have been discussed.
+
+\emph{Range normalization} rescales each theory so that its best option has choiceworthiness $1$ and its worst $0$. It is simple, but it makes a theory's influence depend on its most extreme options. Adding to the choice situation an option that one theory regards as catastrophic compresses that theory's assessment of all the other options, and so reduces its influence on choices among them, even though the new option is never chosen. Variance normalization is affected by added options too, but less: an extreme option increases the variance, and so compresses the other values, only in proportion to its distance from the mean relative to the spread of the other options.
+
+\emph{Borda normalization} replaces each theory's choiceworthiness by the rank of each option in that theory's ordering, and treats the problem as a voting problem \citep{MacAskill2016}. Borda normalization applies even to theories that provide only an ordinal ranking, which is an advantage. It discards information about the strength of preferences, which is a disadvantage when that information is available: a theory on which two options are nearly equal and a theory on which one is far worse than the other receive the same weight.
+
+We prefer variance normalization because it uses all the cardinal information that theories provide, while bounding each theory's total influence. Where theories provide only ordinal information, Borda normalization is a reasonable fallback, and the two coincide in the binary case of Theorem~\ref{t:two}.
+
+\section{Fanaticism}
+
+A theory may assign enormous choiceworthiness differences to some options, for instance because it holds that an action affects the welfare of vast numbers of future beings, or that it has infinite value. If such differences entered expected choiceworthiness on a common scale, a small credence in such a theory could dominate every decision. This is the problem of fanaticism, of which Pascal's wager is the most famous instance (REL-06).
+
+Variance normalization solves the problem by construction. A theory's normalized choiceworthiness is bounded by Proposition~\ref{p:equalsay}, however large its raw differences. A theory that assigns astronomical value to one option has, after normalization, a large value for that option and small values for the others, but its total influence is the same as that of any other theory. The agent's credence in the theory, not the size of its stakes, determines how much it counts. The same reasoning underlies the bounded-utility treatment of Pascal's wager in REL-06, which we take to be the correct resolution of fanaticism in both the empirical and the moral case.
+
+\section{An application}
+
+ETH-10 argues that factory farming is impermissible and that eating meat from animals raised and killed without suffering is permissible but not morally neutral. Consider an agent who is uncertain about the moral status of animals, and who must choose between eating factory-farmed meat ($o_1$) and a vegetarian alternative ($o_2$) at a modest additional cost to herself. She gives credence $0.7$ to a theory on which animals have no moral status, which prefers $o_1$ slightly because of the cost, and $0.3$ to a theory on which animals have significant moral status, which strongly prefers $o_2$.
+
+By Theorem~\ref{t:two}, VN-MEC recommends $o_1$: the first theory has greater credence, and in a binary choice the strength of the second theory's preference does not count. This verdict differs from the one usually drawn in the literature on moral uncertainty, which holds that a modest credence in animals' moral status suffices to make vegetarianism the reasonable choice, because the stakes on that theory are much greater than the cost on the other \citep{MacAskillBykvistOrd2020}. The difference is a direct consequence of variance normalization's refusal to let stakes amplify credence. We think the verdict is correct for this agent; the case for vegetarianism, if it is to persuade her, must raise her credence in the second theory rather than appeal to its stakes. ETH-10 aims to do precisely that.
+
+\section{When comparisons are available}
+
+Variance normalization is a default, to be used when the agent has no further information about how the theories in which she has credence compare. Sometimes she has such information. Two theories that agree about what is valuable but disagree about how to aggregate it, for instance two forms of consequentialism that differ only in their treatment of population, share a common currency: a unit of well-being means the same on both, and their assessments can be compared directly \citep{Tarsney2018}. In such cases the direct comparison should be used, and variance normalization applies only to the comparison between groups of theories that share no currency.
+
+The resulting procedure is a two-stage one. Theories are first grouped into classes within which direct comparisons are available; within each class, choiceworthiness is compared directly; and the classes are then put on a common scale by variance normalization. Every result of Sections~3 to 7 holds for this procedure, with \enquote{theory} read as \enquote{class of directly comparable theories}. The procedure respects whatever comparative information is available and fills the remaining gaps by the principle of equal say.
+
+\section{Dependence on the menu}
+
+Variance normalization depends on the set of options. Adding an option to a choice situation changes each theory's mean and variance, and can therefore change the ranking of the options that were already available. VN-MEC thus violates the independence of irrelevant alternatives.
+
+We accept this consequence, for two reasons. First, every procedure that aggregates the cardinal assessments of several theories while giving each an equal say violates independence in some cases. This is the moral-uncertainty counterpart of Arrow's theorem, discussed for voting rules in POL-17, and it applies to range and Borda normalization as well as to variance normalization \citep{MacAskill2016}. Second, the dependence is mild in the cases that matter. An added option affects the ranking only if it shifts some theory's mean or variance substantially, which requires that the option be assessed very differently from the others by that theory. When the agent's real choice is among a few options that the theories assess in comparable ways, adding remote options to the menu makes little difference, and an agent may reasonably restrict the menu to the options she is seriously considering.
+
+\section{What are credences in moral theories?}
+
+The framework presupposes that agents have credences in moral theories, and that these credences behave like credences in empirical hypotheses. This is natural for moral realists (MTE-01), for whom moral theories are true or false and credence in them is credence in their truth. It is harder to accommodate for expressivists, who hold that moral judgements express non-cognitive attitudes, and who must explain what it is to be uncertain whether a moral claim is true \citep{Smith2002,BykvistOlson2009}.
+
+We do not need to settle the question here. On the expressivist account defended in MTE-03, moral judgements express states of being for, which compose according to the logic of plans. An agent can be more or less settled in such states, and can have degrees of settledness that obey the probability calculus when her plans are coherent. If degrees of settledness can play the role of credences, VN-MEC applies to expressivists as well as to realists. If they cannot, the question of how expressivists should act under moral uncertainty is a challenge for expressivism, not for VN-MEC.
+
+\section{Formalization}
+
+The two-option case is formalized in \nolinkurl{Philosophy/MTE/MTE_16.lean}. Theories are represented by integer triples: credence and the choiceworthiness of the two options. The module defines each theory's normalized vote as its credence times the sign of its preference, as in Theorem~\ref{t:two}, and proves Propositions~\ref{p:indiff} and \ref{p:outvote}.
+
+\begin{lstlisting}
+theorem indifferent_irrelevant (ts : List Theory) (c x : Int) :
+    score ((c, x, x) :: ts) = score ts
+
+theorem outvote (c1 c2 x1 y1 x2 y2 : Int)
+    (hc : c1 > c2) (h1 : x1 > y1) (h2 : x2 < y2) :
+    score [(c1, x1, y1), (c2, x2, y2)] > 0
+\end{lstlisting}
+
+The module uses no axioms beyond those of Lean's core logic. The derivation of Theorem~\ref{t:two} from Definition~\ref{d:vn}, which requires real arithmetic, is not formalized.
+
+\section{Relation to other results}
+
+ETH-02 argues that every deontological theory is extensionally equivalent to a consequentialist theory with a suitable value function, so that the dispute between them is notational. If that is right, the deontologist's complaint in Section~4 cannot be that her theory is of a different kind and cannot be represented by choiceworthiness: it can, by its consequentialized counterpart. Uncertainty between consequentialism and deontology then becomes uncertainty between value functions, and VN-MEC applies without qualification. The deontologist's prohibitions appear as very large differences in the value of options involving promise-breaking or killing, and variance normalization bounds their influence as it bounds every theory's.
+
+MTE-14 argues that metaethics cannot be neutral between moral theories. The present manuscript illustrates a related point: a theory of moral uncertainty cannot be neutral between first-order theories either. Any procedure for acting under uncertainty must decide how much say each theory has, and this decision favours some theories over others. Variance normalization favours none, in the sense of Proposition~\ref{p:equalsay}, but it thereby disfavours theories that claim more than equal say, and deontological theories, as Section~4 shows, are among them.
+
+Finally, the treatment of indifferent theories bears on moral nihilism and error theory (MTE-05). An agent who gives some credence to the error theory, on which all moral claims are false, should not be paralysed by it. By Proposition~\ref{p:indiff}, an error theory that assigns no choiceworthiness differences makes no difference to what she should do, and she should act on the remaining theories as if her credence in them were all there is.
+
+\section{Objections}
+
+\begin{objection}[Irrelevance]
+What one ought to do depends on what is right, not on what one believes is right. A consequentialist who is uncertain about consequentialism should still do what consequentialism requires, if it is true \citep{Weatherson2014,Harman2015}.
+\end{objection}
+
+\begin{reply}
+We agree that what one ought to do in the objective sense depends on the true moral theory. But agents also need guidance in the subjective sense: an account of what it is reasonable to do given their epistemic situation. The analogous distinction for empirical uncertainty is uncontroversial: a doctor who prescribes the drug that is most likely to help acts reasonably even if, as it turns out, another drug would have been better. MEC is an account of reasonable action under moral uncertainty, not a rival to first-order moral theories.
+\end{reply}
+
+\begin{objection}[My favourite theory]
+The agent should simply act on the theory she finds most plausible \citep{GustafssonTorpman2014}.
+\end{objection}
+
+\begin{reply}
+My favourite theory ignores the stakes on other theories. If an agent has credence $0.51$ in a theory on which two options are nearly equal, and $0.49$ in a theory on which one of them is catastrophic, my favourite theory requires her to ignore the catastrophe. It also violates a dominance principle: an option that is no worse on any theory and better on some may be rejected. VN-MEC respects dominance.
+\end{reply}
+
+\begin{objection}[Meaninglessness]
+Intertheoretic comparisons of choiceworthiness are meaningless, because there is no fact about how the units of different theories compare \citep{Hedden2016}.
+\end{objection}
+
+\begin{reply}
+Variance normalization does not presuppose that there is such a fact. It is a principled convention, justified by the principle of equal say: absent any further information about how theories compare, each theory should have the same influence over the agent's decisions, scaled by her credence in it. \citet{Tarsney2018} argues that some intertheoretic comparisons are meaningful; where they are, they can override the convention. Where they are not, the convention fills the gap.
+\end{reply}
+
+\begin{objection}[Regress]
+An agent may be uncertain not only about moral theories but about how to handle moral uncertainty. A theory of moral uncertainty therefore generates a regress.
+\end{objection}
+
+\begin{reply}
+The regress is real but not vicious. An agent who is uncertain about how to handle moral uncertainty can apply VN-MEC at the next level, treating theories of moral uncertainty as options to be weighed. Whether the regress converges depends on the agent's credences, but there is no general reason to think that it does not; and at some level agents must act on the method they find most reasonable, as they must with every norm of reasoning.
+\end{reply}
+
+\section{Conclusion}
+
+Under moral uncertainty, agents should maximize expected choiceworthiness after normalizing each non-indifferent theory to unit variance. The procedure is well defined, invariant under rescaling of each theory, unaffected by credence in indifferent theories such as nihilism, and equivalent in binary choices to credence-weighted majority voting among theories. It gives no theory a veto, and in particular gives deontological theories less weight than their proponents expect. We have argued that this is a virtue, since the alternative is a form of fanaticism.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cotton-Barratt et~al.(2020)]{CottonBarrattMacAskillOrd2020} Cotton-Barratt, O., MacAskill, W. and Ord, T. (2020). Statistical normalization methods in interpersonal and intertheoretic comparisons. \emph{The Journal of Philosophy}, 117(2), 61--95.
+\bibitem[Bykvist and Olson(2009)]{BykvistOlson2009} Bykvist, K. and Olson, J. (2009). Expressivism and moral certitude. \emph{The Philosophical Quarterly}, 59(235), 202--215.
+\bibitem[Gustafsson and Torpman(2014)]{GustafssonTorpman2014} Gustafsson, J.~E. and Torpman, O. (2014). In defence of My Favourite Theory. \emph{Pacific Philosophical Quarterly}, 95(2), 159--174.
+\bibitem[Harman(2015)]{Harman2015} Harman, E. (2015). The irrelevance of moral uncertainty. In R. Shafer-Landau (Ed.), \emph{Oxford Studies in Metaethics}, Vol.~10 (pp.~53--79). Oxford University Press.
+\bibitem[Hedden(2016)]{Hedden2016} Hedden, B. (2016). Does MITE make right? On decision-making under normative uncertainty. In R. Shafer-Landau (Ed.), \emph{Oxford Studies in Metaethics}, Vol.~11 (pp.~102--128). Oxford University Press.
+\bibitem[Lockhart(2000)]{Lockhart2000} Lockhart, T. (2000). \emph{Moral Uncertainty and Its Consequences}. Oxford University Press.
+\bibitem[MacAskill(2016)]{MacAskill2016} MacAskill, W. (2016). Normative uncertainty as a voting problem. \emph{Mind}, 125(500), 967--1004.
+\bibitem[MacAskill et~al.(2020)]{MacAskillBykvistOrd2020} MacAskill, W., Bykvist, K. and Ord, T. (2020). \emph{Moral Uncertainty}. Oxford University Press.
+\bibitem[Ross(2006)]{Ross2006} Ross, J. (2006). Rejecting ethical deflationism. \emph{Ethics}, 116(4), 742--768.
+\bibitem[Sepielli(2009)]{Sepielli2009} Sepielli, A. (2009). What to do when you don't know what to do. In R. Shafer-Landau (Ed.), \emph{Oxford Studies in Metaethics}, Vol.~4 (pp.~5--28). Oxford University Press.
+\bibitem[Smith(2002)]{Smith2002} Smith, M. (2002). Evaluation, uncertainty and motivation. \emph{Ethical Theory and Moral Practice}, 5(3), 305--320.
+\bibitem[Tarsney(2018)]{Tarsney2018} Tarsney, C. (2018). Intertheoretic value comparison: A modest proposal. \emph{Journal of Moral Philosophy}, 15(3), 324--344.
+\bibitem[Weatherson(2014)]{Weatherson2014} Weatherson, B. (2014). Running risks morally. \emph{Philosophical Studies}, 167(1), 141--163.
+\end{thebibliography}
+
+\end{document}

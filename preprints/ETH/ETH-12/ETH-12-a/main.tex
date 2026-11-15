@@ -1,0 +1,886 @@
+\documentclass{situationist-preprint}
+
+\usepackage{longtable}
+\usepackage{array}
+
+\title{Virtue Ethics Made Action-Guiding\\[0.4em]\large Volume I: The Criterion of Right Action and the Characterization of the Virtuous Agent}
+\msid{ETH-12-a}
+\msfamily{ETH-12}
+\msdiscipline{Ethics}
+\mstype{Principal manuscript, Volume I of IV}
+\mskeywords{virtue ethics; right action; action guidance; v-rules; practical wisdom; codifiability; circularity; non-ideal agents; supererogation; moral dilemmas; concordance of virtues}
+
+\input{gen/stats.tex}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash\hspace{0pt}}p{#1}}
+\newenvironment{casetable}{\par\scriptsize\setlength{\tabcolsep}{2pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}>{\ttfamily}P{0.95cm} P{2.2cm} >{\ttfamily}P{4.15cm} P{1.75cm} P{1.6cm} P{1.3cm} P{1.3cm} P{1.7cm}@{}}
+  \normalfont\textbf{ID} & \textbf{case} & \normalfont\textbf{profile} & \textbf{values ($\lambda=1$)} & \textbf{ETH-12} & \textbf{cons.} & \textbf{deont.} & \textbf{flags}\\ \midrule\endhead}%
+  {\end{longtable}}
+\newenvironment{mistable}{\par\scriptsize\setlength{\tabcolsep}{3pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}lllP{3.6cm}P{2.6cm}P{2.6cm}l@{}}
+  \textbf{ID} & \textbf{case} & \textbf{option} & \textbf{effect not perceived} & \textbf{$C(s)$} & \textbf{choice on perceived profile} & \textbf{in $C(s)$}\\ \midrule\endhead}%
+  {\end{longtable}}
+\newenvironment{conctable}{\par\scriptsize\setlength{\tabcolsep}{1.5pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}lP{1.65cm}P{1.75cm}P{2.65cm}P{1.8cm}>{\ttfamily}P{1.95cm}>{\ttfamily}lP{1.3cm}lP{1.4cm}@{}}
+  \textbf{ID} & \textbf{source} & \textbf{virtue} & \textbf{source's characterization} & \textbf{excess / deficiency} & \normalfont\textbf{sphere tags} & \normalfont\textbf{goods} & \textbf{modes} & \textbf{flags} & \textbf{note}\\ \midrule\endhead}%
+  {\end{longtable}}
+\newenvironment{codtable}{\par\scriptsize\setlength{\tabcolsep}{4pt}\setlength{\LTleft}{0pt}\setlength{\LTright}{0pt}%
+  \begin{longtable}{@{}llP{3.2cm}P{3.0cm}P{3.0cm}r@{}}
+  \textbf{ID} & \textbf{priority order} & \textbf{first witness} & \textbf{lexical verdict} & \textbf{$C(s)$} & \textbf{failures}\\ \midrule\endhead}%
+  {\end{longtable}}
+
+\newcommand{\Good}{\mathcal{G}}
+\newcommand{\Ch}{C}
+\newcommand{\lot}{\mathrm{lot}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Virtue ethics is often said to offer no criterion of right action, or only a circular one: the right act is what the virtuous agent would do, and the virtuous agent is the one who does what is right. We argue that virtue ethics can guide action. The right action is what the virtuous agent would characteristically do, and the virtuous agent can be characterized without mentioning right action: a virtue is a reliable sensitivity, in a sphere of feeling and action, to one or more of the seven components of the good, responding to them in a mode (promoting, respecting, honoring, appreciating, measuring), and practical wisdom is reliable perception of what is at stake. We state the criterion exactly, prove that its definitional base is acyclic and free of deontic vocabulary, that it yields a verdict in every situation and a unique one in every apparent dilemma, that it agrees with the doctrine of the redirected threat, and that no priority ordering of Hursthouse's v-rules reproduces it. A transposition clause answers Johnson's objection from non-ideal agents. Appendices give a computed concordance of \stnconc{} virtues from Aristotle, Aquinas, Hume and recent authors, and verdicts on \stncases{} test cases with mechanical checks of every theorem.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rp{0.62\textwidth}r@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Criterion of Right Action and the Characterization of the Virtuous Agent & 1--92 \\
+II & The Virtues Severally: Fields, Modes and Calibration & 93--186 \\
+III & Practical Wisdom: Perception, Reliability and Deliberation & 187--254 \\
+IV & Hard Cases: Tragic Choice, Remainder and the Non-Ideal Agent & 255--312 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\emph{Volume I} states the criterion of right action, characterizes the virtuous agent without appeal to right action, proves the structural theorems (independence, determinacy, uniqueness in apparent dilemmas, the relation to the doctrine of the redirected threat, the uncodifiability of v-rules, the bounds of the prerogative, and the coincidence of the transposed criterion with the plain one for virtuous agents), and records in its appendices the concordance of virtues and the computed test cases on which every theorem is checked.
+
+\noindent\emph{Volume II} takes the virtues of the concordance one at a time. For each it fixes the sphere, the field of goods and the mode of response, and it defends the calibration of the response weights that Volume~I treats as parameters: the respect multiplier for justice, honesty and fidelity, the partiality multiplier for friendship and love, and the decency bound of proper self-regard. It argues that the theological virtues, whose objects lie partly outside the seven goods, are not required by the criterion and are compatible with it, and that Driver's virtues of ignorance are not virtues on the present characterization.
+
+\noindent\emph{Volume III} develops the model of practical wisdom as a reliable sensitivity. It treats moral perception, the measurement of reliability over classes of situations, the role of deliberation where perception is incomplete, verdicts under risk and under moral uncertainty, and the empirical challenge from situationist social psychology to the existence of reliable traits.
+
+\noindent\emph{Volume IV} applies the criterion to the cases that have been taken to defeat virtue ethics: tragic choices and the remainder they leave, the agent whose earlier wrongdoing has made every option bad, moral luck, and the education of non-ideal agents. It extends the transposition clause from individuals to agents acting within institutions.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+& & Page \\
+\midrule
+1 & The question & \pageref{s:intro} \\
+2 & The debate & \pageref{s:history} \\
+3 & Framework: goods, virtues and the criterion & \pageref{s:framework} \\
+4 & Independence & \pageref{s:independence} \\
+5 & Action guidance & \pageref{s:guidance} \\
+6 & The characteristically clause & \pageref{s:characteristically} \\
+7 & The non-ideal agent & \pageref{s:nonideal} \\
+8 & Selected entries & \pageref{s:entries} \\
+9 & Consequences for neighbouring questions & \pageref{s:consequences} \\
+10 & Objections and replies & \pageref{s:objections} \\
+11 & What the result does not establish & \pageref{s:limits} \\
+12 & Conclusion & \pageref{s:conclusion} \\
+A & A concordance of virtues & \pageref{s:appA} \\
+B & Action-guidance test cases & \pageref{s:appB} \\
+C & Mechanical checks & \pageref{s:appC} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{The question}\label{s:intro}
+
+\subsection{Whether virtue ethics can guide action}
+
+A moral theory guides action if an agent who accepts it, and who knows the facts of her situation, can find out from the theory what she ought to do. Consequentialism and deontology are usually granted this property, whatever else is said against them. The consequentialist tells the agent to bring about the best outcome; the deontologist gives her a list of duties and a procedure, or at least a habit, for resolving conflicts among them. Virtue ethics has been denied it. Its critics say that the virtue ethicist, asked what to do, can answer only \enquote{do what the virtuous person would do}, and that this is either empty, because the agent asking is not virtuous and does not know what the virtuous person would do, or circular, because the virtuous person is defined as the person who does the right thing.
+
+The charge matters because virtue ethics claims to be a rival to the other two families, and a rival must answer the question they answer. Some virtue ethicists have declined the task, holding that the theory of right action is not the business of an ethics of character, or that the demand for a criterion is a symptom of the modern moral philosophy that virtue ethics was meant to replace. We think the task can be done, and that doing it reveals what is distinctive about virtue ethics rather than assimilating it to its rivals. This work argues for the following thesis.
+
+\begin{quote}
+\emph{Virtue ethics can guide action. The right action is what the virtuous agent would characteristically do, and the virtuous agent can be characterized independently of right action.}
+\end{quote}
+
+The first conjunct is Hursthouse's criterion of right action, with her \enquote{characteristically} clause \citep[28]{Hursthouse1999}. The second is what her critics have doubted. We supply it by characterizing the virtues as reliable sensitivities to the components of the good, which ETH-01 identifies, independently of any deontic notion, as what idealized reflective endorsement converges on: well-being, knowledge, achievement, relationships, fairness, beauty and autonomy.
+
+\subsection{Three demands}
+
+An account of right action that is to guide action must meet three demands, which the literature has pressed against virtue ethics separately.
+
+\emph{The demand for a criterion.} The account must assign to every option in every situation a deontic status: right (permissible), required, or wrong. It must do so determinately, so that there is a fact about the status, though the agent may not know it. And it must not generate dilemmas in which every option is wrong, since an account that does so fails to guide precisely where guidance is most needed.
+
+\emph{The demand for independence.} The terms in which the criterion is stated must not themselves be defined in terms of right action. If \enquote{virtuous agent} means \enquote{agent disposed to act rightly}, the criterion says only that right action is what an agent disposed to act rightly would do, which is true and empty.
+
+\emph{The demand for applicability.} An agent who is not virtuous must be able to use the criterion. This has two parts. She must be able to find out, at least in principle and at least approximately, what the virtuous agent would do; and the criterion must give the right verdict for her, though her situation, shaped by her own defects, is one the virtuous agent would never be in.
+
+We argue that the criterion of Section~\ref{s:framework} meets all three. The proofs are of two kinds. Some are general and short: they turn on the structure of the definitions and hold whatever the calibration of the response weights. Others concern particular classes of cases, and are checked mechanically on the \stncases{} cases of Appendix~B, which include the classic cases of the literature and systematically generated variants of them.
+
+\subsection{Plan of Volume I}
+
+Section~\ref{s:history} reviews the debate since Anscombe and extracts five desiderata. Section~\ref{s:framework} states the framework: the goods, situations and their profiles of effects, the virtues and their modes of response, practical wisdom as reliable sensitivity, the virtuous agent, the characteristic choice and the criterion. Section~\ref{s:independence} proves that the criterion is not circular. Section~\ref{s:guidance} proves that it guides: it is determinate, it has no dilemmas, it agrees with the doctrine of the redirected threat of ETH-03, it explains why Hursthouse's v-rules guide only when combined by practical wisdom, and it fixes the bounds of the agent's prerogative. Section~\ref{s:characteristically} explains the work done by the \enquote{characteristically} clause, and Section~\ref{s:nonideal} the treatment of the non-ideal agent. Section~\ref{s:entries} discusses entries of the appendices, and Section~\ref{s:consequences} the bearing of the result on neighbouring questions. Section~\ref{s:objections} answers objections, and Section~\ref{s:limits} records what the result does not establish. Appendix~A is a concordance of virtues across Aristotle, Aquinas, Hume and recent authors, with the goods to which each is, on the present account, a sensitivity. Appendix~B lists the test cases and their computed verdicts, with those of a simple consequentialist and a simple deontological rule for comparison. Appendix~C records the mechanical checks.
+
+\section{The debate}\label{s:history}
+
+\subsection{The circle in the tradition}
+
+The circularity objection is older than the modern debate. It is present, as a difficulty the authors saw and tried to meet, in each of the three historical sources of the concordance.
+
+Aristotle defines virtue of character as a state concerned with choice, lying in a mean relative to us, determined by reason, and by the reason by which the person of practical wisdom would determine it (\emph{NE}~II.6). The mean is then characterized, sphere by sphere, by feeling and acting at the right times, about the right things, toward the right people, for the right end and in the right way. Practical wisdom in turn is a true and reasoned state of capacity to act concerning the things that are good or bad for human beings (\emph{NE}~VI.5), and Aristotle holds that one cannot be practically wise without being good, nor fully good without practical wisdom (\emph{NE}~VI.13). Each of the three notions, virtue, the mean and practical wisdom, is characterized partly by the others. Aristotle's way out is the distinction between natural virtue, a tendency present from birth or habituation, and virtue in the strict sense, which involves practical wisdom; and the content of practical wisdom is fixed, in the end, by what is good for human beings, which his ethics treats as given by an account of the human function. The present account follows the same route with a different terminus: what practical wisdom perceives is fixed by the components of the good, and these are identified by endorsement rather than by function. What we add is that the route can be followed to the end without returning to \enquote{right}: the formula of \emph{NE}~II.6 can be replaced, sphere by sphere, by a field of goods and a mode, as the concordance shows.
+
+Aquinas inherits the structure and makes the dependence explicit in the other direction. Prudence is right reason about things to be done, and it requires that the agent be rightly disposed toward ends, which is the work of the moral virtues; the moral virtues in turn cannot exist without prudence, since the choice of means requires it (\emph{ST} I-II q.58 a.5; q.65 a.1). The connection of the virtues is thus a mutual dependence of prudence and moral virtue. Aquinas does not regard this as a vicious circle, because the ends to which the moral virtues dispose are fixed by natural law, whose first principles are known by synderesis, and are not defined by what prudence chooses. The ground is deontic, a law, and the concordance flags Aquinas's prudence and justice for that reason. Our characterization takes the place of natural law with the goods: the ends to which the virtues dispose are the seven components, and they are fixed by endorsement of outcomes.
+
+Hume states a circle of a different kind and uses it as an argument. A virtuous action, he argues, is virtuous because of the motive from which it springs; so the first virtuous motive of any action cannot be a regard to the virtue of that action, since this would presuppose that the action is already virtuous, and \enquote{to reason in a circle} (\emph{Treatise} 3.2.1). There must be some motive other than the sense of its morality. For the natural virtues the motive is benevolence or some other natural affection; for justice Hume finds none in human nature prior to the convention of property, and concludes that justice is an artificial virtue, whose motive is a regard to the public interest that the convention serves. Hume's argument bears directly on our thesis. It shows that a virtue cannot be characterized as a disposition to do what is virtuous, or right, without regress; it requires a motive that is not itself a regard for rightness. The present account supplies one for every virtue, justice included: the respect mode is a form of concern for the fairness and autonomy of others, which is an affection directed at goods, not at the rightness of acts. The convention that Hume found necessary for justice enters, on our account, as part of the profile: where a convention of property exists, taking what another holds under it sets back her autonomy and the fairness of the distribution, and it is these setbacks to which the just person responds.
+
+\subsection{Anscombe and the return of the virtues}
+
+\citet{Anscombe1958} argued that the concepts of moral obligation and moral duty, and the moral sense of \enquote{ought}, are survivals from a law conception of ethics that no longer has the belief in a divine lawgiver to sustain it, and that philosophers should stop doing moral philosophy until they have an adequate philosophy of psychology. She suggested that the notions of a virtue and of human flourishing might replace the moral \enquote{ought}: instead of asking whether an act is morally wrong, one might ask whether it is unjust, and the answer would sometimes be clear at once. Anscombe did not claim that this would yield a criterion of right action in the sense the modern theories offered. She claimed that the concept such criteria were criteria of was defective.
+
+Two features of her paper set the terms of the later debate. The first is that she did not abandon verdicts. She held that some acts, such as the judicial execution of the innocent, are excluded whatever the consequences, and that a person who thinks it open to question whether such an act should be done shows a corrupt mind \citep{Anscombe1958}. She applied the same view to the bombing of cities in war, arguing that those who chose to kill the inhabitants of Hiroshima and Nagasaki as a means to ending the war were murderers \citep{Anscombe1981}. A virtue ethics in Anscombe's spirit is therefore not a theory without verdicts; it is a theory on which verdicts are expressed in the vocabulary of the virtues, \enquote{unjust}, \enquote{cowardly}, \enquote{dishonest}, rather than in the vocabulary of obligation. The second feature is that she gave the notion of justice a central place, and justice is the virtue whose characterization seems most to require deontic notions, since what is unjust is commonly explained as a failure to render what is due. We return to this in Section~\ref{s:independence}, where it reappears as the circularity objection in its strongest form.
+
+\subsection{McDowell: virtue as perception}
+
+\citet{McDowell1979} gave the most influential account of what a virtue is. A virtue is a reliable sensitivity to a certain kind of requirement that situations impose on behavior; the kind person reliably perceives that the feelings of others make a certain demand. All the virtues are specifications of one sensitivity, the capacity to recognize what a situation requires, and this capacity is a kind of knowledge. McDowell argued that the knowledge is not codifiable: there is no set of universal principles from which the virtuous person's verdicts could be derived by someone who lacked the sensitivity. Any attempt to codify it would meet cases in which the mechanical application of the rule struck the virtuous person as wrong. He also held that in the virtuous person the requirement perceived does not outweigh competing considerations but silences them: considerations that would otherwise be reasons are not, in that situation, reasons at all.
+
+Two of McDowell's ideas are central to what follows. The idea that a virtue is a reliable sensitivity is our starting point, with one change: we take what the virtue is sensitive to to be the goods at stake, not requirements, because a sensitivity to requirements cannot be characterized independently of right action. The idea of silencing appears in the criterion as a lexical clause for grave impositions (Definition~\ref{d:silence}). The thesis of uncodifiability we accept in a restricted form: Theorem~\ref{t:uncod} shows that the v-rules cannot be combined by any priority ordering, while Section~\ref{s:objections} explains why a criterion stated over profiles of effects does not codify the sensitivity, which consists in perceiving the profile.
+
+\subsection{Hursthouse: the criterion and the v-rules}
+
+\citet{Hursthouse1991} first stated, and \citet{Hursthouse1999} developed, the account of right action that our thesis adopts. In its canonical form: an action is right if and only if it is what a virtuous agent would characteristically, that is, acting in character, do in the circumstances. The criterion is supplemented by a specification of the virtuous agent, as one who has and exercises the virtues, and of a virtue, as a character trait that a human being needs for eudaimonia, to flourish or live well \citep[ch.~1]{Hursthouse1999}.
+
+Hursthouse answered the charge that the criterion gives no guidance by pointing to the v-rules. Every virtue generates a prescription, \enquote{do what is honest}, \enquote{do what is charitable}, and every vice a prohibition, \enquote{do not do what is dishonest, uncharitable, mean}. The v-rules are numerous and they are not empty: a person who knows that an act would be dishonest knows something that counts decisively against it in a great many cases. Where the v-rules conflict, Hursthouse argued, the conflict is either apparent, resolvable by a more careful understanding of what the virtues require, or it is a real dilemma. Real dilemmas are resolvable or irresolvable; in irresolvable dilemmas the virtuous agent may act, but the action is not one that can be called good, and in tragic dilemmas the virtuous agent emerges with her life marred \citep[ch.~3]{Hursthouse1999}. She distinguished action guidance, which the criterion provides through the v-rules and through the example of virtuous people, from action assessment, which in tragic cases does not issue in the verdict that the act was well done.
+
+The \enquote{characteristically} clause does two pieces of work in Hursthouse's account. It excludes acts a virtuous agent might do out of character, under the influence of illness, deception or exhaustion; and it registers that a virtuous agent would do some things, such as some acts of reparation, with a characteristic attitude of regret or reluctance. We keep the clause and give it a precise sense (Definition~\ref{d:char}, Section~\ref{s:characteristically}).
+
+Our account departs from Hursthouse's in two places. We do not accept that there are tragic dilemmas in which no option is right; ETH-15 argues that every apparent dilemma has exactly one permissible option, and the criterion of Section~\ref{s:framework} delivers this (Theorem~\ref{t:uniq}). The marring of the agent's life we explain, with ETH-11 and ETH-15, as a remainder that does not require a wrong act. And we characterize the virtues not by what a human being needs to flourish, which invites the circularity objection when flourishing is itself understood as virtuous activity, but by the goods to which each virtue is a sensitivity.
+
+\subsection{Foot: natural goodness}
+
+\citet{Foot1978} treated the virtues as beneficial dispositions that correct temptations or deficiencies of motivation common to human beings: courage corrects a temptation to fear, temperance a temptation to pleasure, and charity, the virtue of attachment to the good of others, corrects the narrowness of self-concern. In \citet{Foot2001} she grounded the virtues in natural normativity. Goodness and defect in living things are assessed relative to the life form of the species: an oak with shallow roots is defective, and so is a wolf that does not hunt with the pack. Human beings need the virtues as bees need their stings; the evaluation of the will, she argued, has the same logical structure as the evaluation of roots and stings, though its content is fixed by the specifically human form of life, in which reason and cooperation are central. Promise-keeping is her example of a practice whose point lies in what human beings need.
+
+Foot's naturalism offers a characterization of the virtues that does not mention right action, since what a species needs is a natural fact. Its difficulty, for our purposes, is not circularity but indeterminacy and parochialism: what human beings need underdetermines which of two acts, each compatible with a flourishing human life, is right in a particular situation. We use Foot's insight in a different form. The goods of ETH-01 are not facts about the species but what idealized reflective endorsement converges on; they include the needs that Foot identified, and their plurality explains why the virtues are many.
+
+\subsection{Swanton: targets, fields and modes}
+
+\citet{Swanton2001} criticized Hursthouse's criterion on the ground that a virtuous agent may do things that are not right, because she may fail to hit the target of the virtue, and that a non-virtuous agent may do the right thing. She proposed a target-centered account: an act is virtuous in respect of a virtue if it hits the target of that virtue, and right if it is overall virtuous. \citet{Swanton2003} developed a pluralistic account in which each virtue has a field, the items to which it responds, and a mode or modes of response: promoting, respecting, honoring, loving, appreciating, creating. Different virtues respond to the same items in different modes; benevolence promotes the good of others, respect respects their standing, and so on.
+
+The idea of fields and modes is the second element of our characterization. The modes explain what distinguishes a virtue-theoretic response to the goods from a consequentialist one: a consequentialist promotes every good, while the virtuous agent promotes some goods, respects others' possession of them, honors her relationships and appreciates beauty, and these modes of response are not reducible to promotion with different weights. In the model of Section~\ref{s:framework} the modes appear as multipliers on the weights with which changes in the goods enter the virtuous agent's response; Section~\ref{s:objections} answers the objection that this makes the account consequentialist after all.
+
+\subsection{Annas and Russell: skill and practical intelligence}
+
+\citet{Annas2011} modelled virtue on practical skill. A skill is acquired by learning from others, but the learner aspires to understand what she is doing well enough to do it herself, and an expert's performance is not the application of rules but an intelligent responsiveness to the particulars of the situation that can be articulated and taught. Virtue is like skill in these respects, and unlike it in that it involves a commitment to the goodness of its ends. On this view, the question how a non-virtuous agent can be guided has the same answer as the question how an apprentice can be guided: by models, by rules of thumb that the expert can explain, and by the growing capacity to see the situation as the expert sees it.
+
+\citet{Russell2009} argued that practical intelligence, phronesis, is part of every virtue, and that the virtues must be individuated with reference to it. A virtue without practical intelligence is at best a natural or habitual tendency that may misfire. His account supports the unity thesis in a moderate form: one cannot have a virtue fully without the practical intelligence that every virtue needs. Our Definition~\ref{d:va} builds this in: the virtuous agent has the virtues together with practical wisdom, and practical wisdom is characterized as a sensitivity whose reliability can be stated without mentioning what is right.
+
+\subsection{Driver, Slote and Zagzebski}
+
+Not every virtue ethics takes the virtuous agent's choices as the standard of right. \citet{Driver2001} defended a consequentialist account of virtue: a virtue is a character trait that systematically produces more good than not. On her account rightness is a matter of consequences, and virtue is evaluated by its consequences too; the virtues are defined independently of right action, but right action is not defined in terms of virtue. \citet{Driver1989} argued that some virtues, modesty among them, require ignorance: the modest person underestimates her own worth. \citet{Slote2001} defended an agent-based ethics on which the rightness of acts derives from the admirability of the motives from which they spring, with admirable motives, such as caring, taken as fundamental. \citet{Zagzebski2017} developed an exemplarist theory in which moral concepts are defined by direct reference to exemplars identified by admiration, as natural kind terms are fixed by reference to samples.
+
+Each of these is a possible structure for a virtue ethics, and Appendix~C compares their definitional graphs with ours. Driver's consequentialism has no circularity, but it is not an answer to our question, since it makes virtue derivative of good consequences and right action independent of virtue. Slote's agent-based view has no circularity either, at the cost of making the admirability of motives primitive. Zagzebski's exemplarism fixes reference to the virtuous agent by admiration, and so meets the demand for independence, but leaves open what the exemplar would do in a situation no exemplar has faced. Our account is closest to Hursthouse's in structure and to Swanton's and McDowell's in its account of the virtues.
+
+\subsection{The objections}
+
+\paragraph{Application.} \citet{Louden1984} argued that virtue ethics, focused on being rather than doing, cannot tell us what to do in particular cases and has nothing to offer on quandaries, especially those that arise in applied ethics. Hursthouse's application of her criterion to abortion \citep{Hursthouse1991} was in part a reply: the virtue terms, she showed, yield substantive conclusions when applied with the details of the situation in view. The application objection survives in a sharper form: even if the virtue terms yield verdicts one by one, nothing in virtue ethics tells us how to combine them when they conflict. Theorem~\ref{t:uncod} confirms that no fixed priority among the v-rules does it. Section~\ref{s:guidance} shows that the criterion combines them nonetheless.
+
+\paragraph{Circularity.} The criterion says that right action is what the virtuous agent would characteristically do. If the virtuous agent is characterized as the agent who reliably does what is right, the criterion is circular. If she is characterized as the agent with the virtues, and a virtue is characterized as a disposition to act rightly in a sphere, the circle is only longer. Hursthouse's own characterization, via what human beings need to live well, avoids the circle only if living well is not itself characterized as living virtuously, and on some readings of the eudaimonist tradition it is. Appendix~C computes the cycles in the definitional graphs of several schemes, and Section~\ref{s:independence} proves that ours has none.
+
+\paragraph{Virtue and right.} \citet{Johnson2003} argued that the criterion is extensionally inadequate. Some actions are right for an agent who is not virtuous precisely because she is not virtuous: the person who knows she is prone to lie may be right to take measures against her own tendency, the person who has wronged another may be right to apologize, and a virtuous agent would never characteristically do the first and might never be in the position to do the second. A criterion that ties rightness to what the virtuous agent would do in the circumstances seems to give the wrong verdict for every agent whose circumstances include her own defects. Johnson's argument is the strongest objection to the first conjunct of our thesis. Section~\ref{s:nonideal} answers it with a transposition clause and proves that the clause leaves the verdicts for virtuous agents unchanged (Theorem~\ref{t:coinc}).
+
+\paragraph{The non-ideal agent.} A related objection concerns guidance rather than extension. The agent who is not virtuous does not know what the virtuous agent would do; if she knew, she would be well on the way to virtue. The objection is answered by the decomposition of practical wisdom into perception and response in Section~\ref{s:framework}: the response is stated by a definite rule over the goods at stake, so that what the non-ideal agent lacks is accurate perception of what is at stake, and the criterion tells her what to attend to.
+
+\paragraph{Situationism.} \citet{Harman1999} and \citet{Doris2002} argued from social psychology that few people possess robust character traits, and that behavior is better predicted by features of situations than by traits. If no one is virtuous, the criterion refers to a merely possible agent. \citet{Kamtekar2004} and \citet{Sreenivasan2002} replied that the experiments do not test for virtues as virtue ethicists understand them, which are integrated with practical wisdom rather than isolated behavioral dispositions. The objection bears on applicability; Section~\ref{s:objections} replies to it, and Volume~III treats it in full.
+
+\subsection{Desiderata}
+
+From the debate we extract five desiderata for an account of right action in virtue ethics.
+
+\begin{enumerate}[label=(D\arabic*)]
+\item \emph{Criterion.} Every option in every situation has a determinate status: right, required or wrong.
+\item \emph{Independence.} The virtuous agent and the virtues are characterized without the notion of right action or any notion defined from it.
+\item \emph{No dilemmas.} In every situation some option is right, and in every apparent dilemma exactly one option is right.
+\item \emph{Combination.} The account says how the considerations to which the several virtues respond combine when they conflict.
+\item \emph{Non-ideal agents.} The account gives the correct verdicts for agents who are not virtuous, including verdicts that recommend remedies for their defects.
+\end{enumerate}
+
+Hursthouse's account meets (D1) in intention, (D2) on the naturalist reading of her account of the virtues, and (D4) through practical wisdom left uncharacterized; it rejects (D3) and is challenged by Johnson on (D5). Swanton's target-centered account meets (D5) more easily but gives up the first conjunct of our thesis. Driver's and Slote's views meet (D2) but do not take the virtuous agent's choice as the standard of right. The account of the next section is designed to meet all five.
+
+\section{Framework: goods, virtues and the criterion}\label{s:framework}
+
+\subsection{Goods and situations}
+
+\begin{definition}[Goods]\label{d:goods}
+$\Good = \{W, K, A, R, F, B, U\}$ is the set of the seven components of the good identified by ETH-01: well-being ($W$), knowledge ($K$), achievement ($A$), relationships ($R$), fairness ($F$), beauty ($B$) and autonomy ($U$). The good is what idealized reflective endorsement converges on (Definition~3.2 of ETH-01-a); the endorsement in question is of outcomes, considered by an agent who is fully informed, imagines each outcome vividly, reasons without error and gives equal weight to everyone affected (Definition~3.1 of ETH-01-a).
+\end{definition}
+
+The definition imports from ETH-01 only two things: that the good has these seven components, and that the good is fixed by endorsement of outcomes. Nothing in the definition of endorsement mentions right action, permission, obligation or any notion defined from them. This is the root of the independence of the virtuous agent (Lemma~\ref{l:goods}).
+
+\begin{definition}[Situation]\label{d:situation}
+A \emph{situation} is a tuple $s=\langle a, P, \mathit{rel}, O, E\rangle$ where $a$ is the agent; $P$ is a finite set of persons with $a\in P$; $\mathit{rel}$ assigns to each person one of the relations \emph{self} (to $a$ only), \emph{close}, \emph{stranger} or \emph{aggressor}; $O$ is a finite nonempty set of options; and $E$ assigns to each option $o$ a finite set $E(o)$ of \emph{effects}. An effect is a tuple $e=\langle g, p, \delta, \kappa, c\rangle$ of a good $g\in\Good$, a person $p\in P$ (or a group of $n$ persons standing in the same relation and affected alike), a nonzero rational change $\delta$ in the expected level of $g$ for $p$ relative to the state before the choice, a causal role $\kappa$ (Definition~\ref{d:role}), and a flag $c$ recording whether $p$ consents. The \emph{profile} of $s$ is $E$.
+\end{definition}
+
+A person is an \emph{aggressor} in $s$ if he is the agent of a threat to another that some option of $s$ averts. The relation is descriptive: it records who is the source of a threat, not who deserves what. Changes are expected changes, so that risk is represented by the product of probability and magnitude; Volume~III treats risk and uncertainty in their own right.
+
+\begin{definition}[Causal role]\label{d:role}
+An effect of an option is \emph{imposed} ($\kappa=\mathsf{i}$) if the option introduces the threat or benefit that brings it about; \emph{redirected} ($\kappa=\mathsf{r}$) if the option alters the course of a threat that exists independently of it so that the threat falls on the person; and \emph{allowed} ($\kappa=\mathsf{a}$) if it comes about through causes the option does not initiate or redirect.
+\end{definition}
+
+The distinction between imposing and redirecting is that of ETH-03, which argues that it is redirection of an existing threat, and not the distinction between killing and letting die or the doctrine of double effect, that explains the trolley cases. We take it as part of the description of situations, not of their evaluation.
+
+\subsection{Virtues}
+
+\begin{definition}[Spheres and modes]\label{d:mode}
+A \emph{sphere} is a domain of feeling and action: danger, bodily pleasure, giving and taking of wealth, honor, anger, self-presentation, amusement, social intercourse, shame, the fortunes of others, distribution and exchange, speech, the needs of others, commitments, deliberation, and so on. A \emph{mode} is a way of responding to a good: \emph{promoting} it, \emph{respecting} another's possession of it, \emph{honoring} it in a relationship, \emph{appreciating} or \emph{creating} it, \emph{measuring} one's own feeling by it, or \emph{perceiving} it.
+\end{definition}
+
+\begin{definition}[Virtue]\label{d:virtue}
+A \emph{virtue} is a stable disposition of reliable sensitivity, in a sphere $\sigma$, to a set $G_v\subseteq\Good$ of goods (its \emph{field}), in one or more modes. An agent has the virtue if, in situations within $\sigma$, the changes in the goods of $G_v$ enter her motivation with the weights fixed by the modes (Definition~\ref{d:weights}), and her perception of those changes is reliable (Definition~\ref{d:pw}).
+\end{definition}
+
+The definition is an analysis of the virtue concept, not a list of virtues. Appendix~A applies it to the virtues of Aristotle, Aquinas, Hume and recent authors: each source virtue is assigned its sphere tags, and the field and modes are computed from the tags by the rules of Table~A.1. The rules are few, and they are stated in terms of goods and modes alone.
+
+The criterion does not require that every virtue of the concordance be modelled separately. For the purposes of action guidance, the virtues contribute to the virtuous agent's response through a small number of modes, and we model them by the virtues that carry those modes in the situations of Appendix~B: benevolence, which promotes the goods of others; justice, honesty and fidelity, which respect what others have and are owed nothing beyond it; the virtues of friendship and love, which honor relationships; and proper self-regard, the virtue Aristotle discusses as self-love (\emph{NE}~IX.8), which gives the agent's own goods their due weight. (\enquote{Due} here is our gloss; the weight is fixed in Definition~\ref{d:weights}.)
+
+\begin{definition}[Response weights]\label{d:weights}
+Let $\rho>1$, $\pi>1$, $M\geq 1$ and $\lambda\in[1,M]$. The weight with which an effect $e=\langle g,p,\delta,\kappa,c\rangle$ enters the response of an agent with self-weight $\lambda$ is
+\[
+w_\lambda(e)=\begin{cases}
+\lambda & \text{if } p=a,\\
+1 & \text{if } \mathit{rel}(p)=\text{aggressor},\\
+\pi^{[\mathit{rel}(p)=\text{close}]}\cdot\rho^{[\delta<0,\ \kappa=\mathsf{i},\ \neg c]} & \text{otherwise,}
+\end{cases}
+\]
+where the exponent $[\phi]$ is $1$ if the condition $\phi$ holds and $0$ if it does not. The \emph{value} of an option at $\lambda$ is $V_\lambda(o)=\sum_{e\in E(o)} n_e\,w_\lambda(e)\,\delta_e$, where $n_e$ is the number of persons the effect covers.
+\end{definition}
+
+Each clause of the definition is the contribution of a mode. Benevolence promotes the goods of others, and so gives every change in another's good the base weight $1$. Justice, honesty and fidelity respect: a setback that the agent imposes on another without consent counts $\rho$ times as much as the same change otherwise brought about. Friendship and love honor relationships: changes in the goods of those close to the agent count $\pi$ times as much. Proper self-regard fixes the weight of the agent's own goods at a value $\lambda$ between impartiality, $\lambda=1$, below which self-sacrifice becomes the servility that \citet{Hill1973} identified as a failure of self-respect, and a decency bound $M$, above which concern for oneself crowds out the concern for others that decency demands. The interval is the agent-centered prerogative of \citet{Scheffler1982}, in the bounded form that ETH-14 defends. A person who is the source of a threat to others does not engage the respect or honor modes in respect of setbacks to that threat; his losses count, but only with the base weight.
+
+\begin{assumption}[Calibration]\label{a:calib}
+In the computations of Appendices~B and~C, $\rho=3$, $\pi=2$, $M=3$, and the gravity threshold of Definition~\ref{d:silence} is $\gamma=8$, on a scale on which death is a change of $-10$ in well-being.
+\end{assumption}
+
+The structural theorems of Sections~\ref{s:independence} and~\ref{s:guidance} hold for every choice of constants with $\rho>1$, $\pi>1$, $M\geq 1$ and $\gamma>0$; their proofs use no particular values. The verdicts on the parametrized families of Appendix~B depend on the constants, and the tables show exactly where: in each family the threshold at which the verdict changes is a function of $\rho$, $\pi$, $M$ or $\gamma$. Volume~II defends the calibration. Here it serves to make the criterion computable and its verdicts checkable.
+
+\subsection{Practical wisdom and the virtuous agent}
+
+\begin{definition}[Perception, reliability, practical wisdom]\label{d:pw}
+A \emph{perception} of an agent is a function $\mathit{per}_A$ that assigns to each situation $s$ the profile $\mathit{per}_A(s)$ that $A$ takes $s$ to have. $A$ is \emph{reliable} on a class $\mathcal{S}$ of situations to degree $r$ if the proportion of situations $s\in\mathcal{S}$ with $\mathit{per}_A(s)=E(s)$ is at least $r$. \emph{Practical wisdom} is reliability to degree $1$ on the class of situations in which some good is at stake, under normal conditions: conditions in which the agent's perception is not defeated by deception, illness, exhaustion or duress.
+\end{definition}
+
+Practical wisdom so defined is a perceptual and cognitive excellence. It is not defined by the agent's tendency to choose rightly; it is defined by the agreement of what she takes to be at stake with what is at stake. The definition is idealized, as the definition of a virtuous agent must be; Volume~III treats degrees of reliability and the relation of the idealized agent to actual people. It follows MTE-08 in modelling moral knowledge on perception under conditions that may be imperfect.
+
+\begin{definition}[Virtuous agent]\label{d:va}
+A \emph{virtuous agent} is an agent who (i) has the virtues of Definition~\ref{d:weights}, so that her motivation weighs the goods at stake by $w_\lambda$ for some $\lambda\in[1,M]$; (ii) has practical wisdom; and (iii) is \emph{harmonious}, in that she has no strong contrary motivation toward options she does not choose.
+\end{definition}
+
+Clause (iii) distinguishes the virtuous agent from the merely continent one, who chooses as the virtuous agent does but against contrary desire. It plays no part in the verdicts, which depend only on what is chosen; it matters for the evaluation of agents and for the remainder (Section~\ref{s:characteristically}).
+
+\subsection{The characteristic choice}
+
+\begin{definition}[Doing and silencing]\label{d:silence}
+Let $\gamma>0$. The \emph{doing count} $D(o)$ of an option is the number of persons other than the agent, not aggressors, whom $o$ sets back by an imposed or redirected effect. An effect of $o$ is a \emph{grave imposition} on $p$ if $p$ is neither the agent nor an aggressor, $\kappa=\mathsf{i}$, $g\in\{W,U\}$, $\delta\leq-\gamma$, $p$ does not consent, and $p$'s total change on some other option is greater than on $o$. The \emph{silencing count} $S(o)$ is the number of persons on whom $o$ makes a grave imposition.
+\end{definition}
+
+The last condition on a grave imposition, which we call the \emph{Pareto clause}, excludes impositions on a person who would suffer at least as much on every alternative. Its role is shown by Williams's case of Jim and the villagers (entry \texttt{C05}, Section~\ref{s:entries}).
+
+\begin{definition}[Infringement and apparent dilemma]\label{d:ad}
+An option \emph{infringes} if (i) it sets back a person other than the agent, not an aggressor, by an imposed or redirected effect without consent, or (ii) it allows a setback of at least $\gamma$ to such a person whose total change is greater on some other option. A situation is an \emph{apparent dilemma} if every option in it infringes.
+\end{definition}
+
+Definition~\ref{d:ad} is the counterpart, in the vocabulary of goods, of ETH-15's definition of an apparent dilemma as a situation in which each option infringes some requirement (Definition~2.3 of ETH-15-a). The requirements of ETH-15 are, on our account, what the v-rules express; an option infringes when it does what some virtue's v-rule counts against.
+
+\begin{assumption}[Impartial selection]\label{a:lottery}
+In every situation the agent can select among any set of options by an impartial procedure, such as a fair lottery, and selecting in this way is itself an available option.
+\end{assumption}
+
+\begin{definition}[Characteristic choice]\label{d:char}
+Let $O^\ast$ be the set of options with least silencing count. Let $\Lambda(s)=\{1\}$ if $s$ is an apparent dilemma or some option of $s$ satisfies clause (i) of Definition~\ref{d:ad}, and $\Lambda(s)=[1,M]$ otherwise. For $\lambda\in\Lambda(s)$, let $A_\lambda$ be the set of options in $O^\ast$ of greatest value $V_\lambda$, and $A'_\lambda$ the set of options in $A_\lambda$ of least doing count. Put $X_\lambda=\{\lot(A'_\lambda)\}$ if $s$ is an apparent dilemma and $A'_\lambda$ has more than one member, where $\lot(A'_\lambda)$ is impartial selection among $A'_\lambda$; otherwise $X_\lambda=A'_\lambda$. The \emph{characteristic set} of $s$ is $\Ch(s)=\bigcup_{\lambda\in\Lambda(s)}X_\lambda$, and the \emph{decency set} $\Ch_M(s)$ is $X_M$ if $\Lambda(s)=[1,M]$ and $X_1$ otherwise.
+\end{definition}
+
+The definition says what a virtuous agent, acting in character and under normal conditions, chooses. Under normal conditions her perception is the true profile, so her choice is computed on $E(s)$. In character, her motivation weighs the goods by $w_\lambda$. The silencing clause is McDowell's: a grave imposition on an innocent person who could be spared is not a consideration that outweighs others for her; it removes the option from consideration unless every option involves as many. The doing count breaks ties in value in favor of options in which the agent does not herself set others back. The prerogative is idle in an apparent dilemma and wherever some option would set back another by the agent's imposition or redirection, since the prerogative concerns whether to help, as ETH-14 has it, and is not a license to impose costs on others for one's own sake or to choose whom to infringe. In an apparent dilemma an exact tie is broken by impartial selection, as Assumption~2.7 of ETH-15-a requires. Different virtuous agents may weight their own goods differently within $[1,M]$, and what any of them would characteristically choose is in $\Ch(s)$.
+
+\begin{definition}[Transposition]\label{d:transp}
+The options of a situation are courses of action, described on the supposition that the agent's own later choices within them are characteristic. The \emph{agent profile} of $A$ is the set of expected effects of $A$'s own later conduct on each option, given $A$'s actual dispositions. The \emph{transposition} $s^A$ of $s$ for $A$ is the situation obtained from $s$ by replacing, on each option, the effects of characteristic later conduct by the effects in $A$'s agent profile, each with the causal role that $A$'s later conduct would give it.
+\end{definition}
+
+\begin{principle}[The criterion]\label{p:criterion}
+An option $o$ is \emph{right} (permissible) for an agent $A$ in a situation $s$ if and only if $o\in\Ch(s^A)$; it is \emph{required} if and only if $\Ch(s^A)=\{o\}$; and it is \emph{wrong} if and only if it is not right.
+\end{principle}
+
+\begin{definition}[Supererogation]\label{d:sup}
+An option is \emph{supererogatory} for $A$ in $s$ if it is right and not in the decency set $\Ch_M(s^A)$.
+\end{definition}
+
+\begin{remark}\label{r:hursthouse}
+Principle~\ref{p:criterion} is Hursthouse's criterion with three refinements. The circumstances are those of the transposed situation, which coincide with the agent's actual circumstances when the agent is virtuous (Theorem~\ref{t:coinc}). \enquote{Would characteristically do} is defined by Definition~\ref{d:char}: what a virtuous agent would choose under normal conditions, acting in character, for some admissible self-weight. And the virtuous agent is characterized by Definitions~\ref{d:goods}--\ref{d:va}, none of which mentions right action. When $\Ch(s)$ has more than one member, each is right and none is required; this is the latitude that Hursthouse allows when she observes that two virtuous agents may act differently in the same situation without either acting wrongly.
+\end{remark}
+
+\begin{principle}[Priority of character]\label{p:priority}
+When an option is right, it is right because a virtuous agent would characteristically choose it, and not conversely.
+\end{principle}
+
+Principle~\ref{p:priority} is an explanatory claim. The theorems below do not depend on it; they concern the extension of Principle~\ref{p:criterion}. We record it because it is what makes the theory a virtue ethics rather than a deontic theory stated in virtue vocabulary. Section~\ref{s:objections} discusses what it adds to the extensional claims, in view of the consequentializing equivalence of ETH-02-a.
+
+\section{Independence}\label{s:independence}
+
+\subsection{The definitional base}
+
+The circularity objection is a claim about the order of definition. To assess it we make the order explicit.
+
+\begin{definition}[Definitional dependency graph]\label{d:graph}
+The \emph{dependency graph} of an account is the directed graph whose nodes are the notions the account defines or takes as primitive, with an edge from $x$ to $y$ when the definition of $x$ mentions $y$. A notion $y$ is \emph{upstream} of $x$ if there is a path from $x$ to $y$. An account is \emph{circular} at $x$ if $x$ is upstream of itself.
+\end{definition}
+
+The dependency graph of the present account, read off Definitions~\ref{d:goods}--\ref{d:sup} and Principle~\ref{p:criterion}, has \stngraphnodes{} nodes. Its primitives are the descriptive notions of person, option, causal role, sphere and harmony, together with idealized endorsement, which ETH-01 defines. Appendix~C lists every node with the nodes it depends on and its depth, the length of the longest path from it to a primitive; the greatest depth is \stngraphdepth{}, attained by supererogation.
+
+\begin{lemma}[The goods do not presuppose right action]\label{l:goods}
+No notion upstream of \emph{good} in the dependency graph is, or is defined from, right action, permission, requirement or wrongness.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:goods}, the good is what idealized reflective endorsement converges on, and by Definition~3.1 of ETH-01-a, the endorsement of an outcome is the attitude an agent would take toward it if fully informed, imagining it vividly, reasoning without error and giving equal weight to everyone affected. The notions mentioned are an outcome, an attitude toward it, information, imagination, error in reasoning and equal weight. None is deontic. The endorsement is of outcomes, not of acts; an outcome is endorsed or not whatever anyone has done to produce it. The seven components are identified by the method of isolation (ETH-01-a, Section~4), which compares pairs of outcomes, and again mentions no deontic notion.
+\end{proof}
+
+A doubt arises about fairness. Fairness is listed among the goods, but fairness seems to be a matter of who is entitled to what, and entitlement is deontic. The doubt is answered by the way ETH-01 identifies the component. Fairness is a feature of outcomes: two outcomes alike in the total and distribution of every other good differ in value when, in one, the distribution results from a procedure everyone could accept and, in the other, from a procedure that favored some arbitrarily. That one outcome is better than the other is a verdict of endorsement, not of entitlement. Fairness as a good is therefore not the same as justice as a virtue, and justice as a virtue is not defined by entitlements: it is a sensitivity to fairness and autonomy in the respect mode (Appendix~A, entries \texttt{Ar13}, \texttt{Aq02}, \texttt{Hu01}). We return to the point in Objection~\ref{o:circ}.
+
+\begin{theorem}[Independence]\label{t:indep}
+The dependency graph of the account is acyclic, and right action is upstream neither of virtue nor of the virtuous agent.
+\end{theorem}
+
+\begin{proof}
+Order the definitions as in Section~\ref{s:framework}. Each definition mentions only notions that are primitive or were defined earlier: goods (Definition~\ref{d:goods}) mention endorsement; situations (Definition~\ref{d:situation}) mention goods, persons, options and causal roles; causal roles (Definition~\ref{d:role}) mention threats and their courses; spheres and modes (Definition~\ref{d:mode}) mention domains of feeling and ways of responding to goods; virtues (Definition~\ref{d:virtue}) mention spheres, goods, modes, weights and reliability; weights (Definition~\ref{d:weights}) mention the relation, the causal role, consent and the sign of a change; perception and practical wisdom (Definition~\ref{d:pw}) mention profiles and their agreement; the virtuous agent (Definition~\ref{d:va}) mentions virtues, practical wisdom and harmony; doing and silencing, infringement and apparent dilemma, and the characteristic choice (Definitions~\ref{d:silence}--\ref{d:char}) mention effects, weights, options and the earlier notions; transposition (Definition~\ref{d:transp}) mentions effects and dispositions. Right action is introduced only in Principle~\ref{p:criterion}, and is mentioned afterwards only in Definition~\ref{d:sup}. A graph in which every edge goes from a later to an earlier item of a linear order is acyclic. Since right action enters at the end of the order and only supererogation depends on it, it is upstream of no earlier notion, in particular of neither virtue nor the virtuous agent. By Lemma~\ref{l:goods}, the notions imported from ETH-01 do not reintroduce it.
+\end{proof}
+
+The proof is short because the definitions were written in order. What makes it informative is that the order is possible: every notion the virtue ethicist needs to state the criterion can be introduced before the notion of right action. Appendix~C checks the theorem mechanically, by a depth-first search for cycles in the graph and a computation of the set of notions upstream of virtue and of the virtuous agent.
+
+\begin{proposition}[Vocabulary]\label{p:vocab}
+No definition among Definitions~\ref{d:goods}--\ref{d:transp}, and no reconstructed characterization of a virtue in Appendix~A, contains a deontic term: \enquote{right}, \enquote{wrong}, \enquote{due}, \enquote{duty}, \enquote{ought}, \enquote{should}, \enquote{must}, \enquote{obligation}, \enquote{permissible}, \enquote{forbidden}, \enquote{required}, \enquote{law}, \enquote{rule} or \enquote{obedience}.
+\end{proposition}
+
+\begin{proof}
+By inspection of the definitions as stated; Appendix~C records a mechanical scan of their glosses and of the \stnconc{} reconstructed characterizations of Appendix~A for these terms and their inflections, which finds none.
+\end{proof}
+
+Proposition~\ref{p:vocab} is weaker than Theorem~\ref{t:indep}, since a definition can avoid deontic words and still depend on a deontic notion; but it is a useful check, because it is exactly here that historical characterizations of the virtues fail. The same scan, applied to the characterizations the sources themselves give, flags \stnconcD{} of the \stnconc{} entries of the concordance. All thirteen of Aristotle's virtues of character are flagged, because Aristotle characterizes the mean in each sphere by feeling and acting at the right times, about the right things, toward the right people, for the right end and in the right way (\emph{NE}~II.6), and determines it as the person of practical wisdom would determine it. Aquinas's prudence is flagged because it is right reason about things to be done, his justice because it renders to each what is due, and the potential parts of justice because they render what is due without the strict equality or strict debt of justice proper. Hume's justice, allegiance and laws of nations are flagged because they are characterized by rules or obedience, and three entries are flagged as convention-dependent. The concordance shows that what the circularity objection targets is a feature of the historical formulations, not of the virtues: in each flagged entry, the reconstructed characterization in terms of sphere, goods and modes covers the same ground without the deontic term.
+
+\begin{corollary}[Non-circularity]\label{c:noncirc}
+Principle~\ref{p:criterion} is not circular: the notion of the virtuous agent it employs is defined without right action.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:indep}.
+\end{proof}
+
+\begin{remark}\label{r:readings}
+Appendix~C computes the graphs of six other schemes. The naive scheme, on which a virtue is a disposition to act rightly, has the cycle right action $\to$ virtuous agent $\to$ virtue $\to$ right action. Hursthouse's account read in the eudaimonist way, on which a virtue is a trait needed for eudaimonia and eudaimonia is a life of virtuous activity, has a cycle through virtue and eudaimonia, though not through right action. Read in the naturalist way, on which what human beings need is fixed by the four ends of the species, individual survival, the continuance of the species, characteristic freedom from pain and characteristic enjoyment, and the good functioning of the social group, together with the rationality of the species \citep[ch.~9]{Hursthouse1999}, it is acyclic. The target-centered, agent-based and consequentialist schemes are acyclic. Acyclicity is therefore not peculiar to the present account; what is peculiar to it is acyclicity together with the identification of right action with the virtuous agent's characteristic choice and a characterization of the virtues fine enough to compute that choice.
+\end{remark}
+
+\section{Action guidance}\label{s:guidance}
+
+\subsection{Determinacy and the absence of dilemmas}
+
+The characteristic set is defined as a union over a continuum of self-weights. The first lemma shows that it is nonetheless finitely computable.
+
+\begin{lemma}[Finite computation]\label{l:finite}
+For every situation $s$ there is a finite set $L\subseteq\Lambda(s)$, containing $1$ and $M$, such that $\Ch(s)=\bigcup_{\lambda\in L}X_\lambda$. One such set consists of $1$, $M$, the points in $(1,M)$ at which the values of two options of $O^\ast$ are equal, and the midpoints between consecutive such points.
+\end{lemma}
+
+\begin{proof}
+If $\Lambda(s)=\{1\}$ there is nothing to prove. Otherwise, write $V_\lambda(o)=X(o)+\lambda Y(o)$, where $Y(o)$ is the sum of the changes in the agent's own goods and $X(o)$ the weighted sum of the rest. Each $V_\lambda(o)$ is affine in $\lambda$. Two distinct affine functions are equal at at most one point, so the points in $(1,M)$ at which two options exchange order are finitely many, and between consecutive such points the order of the values, and hence $A_\lambda$, $A'_\lambda$ and $X_\lambda$, is constant. The union over $[1,M]$ is therefore the union over the breakpoints, the endpoints, and one point in each open interval between them.
+\end{proof}
+
+\begin{theorem}[Determinacy]\label{t:det}
+For every situation $s$, $\Ch(s)$ is nonempty. Hence every agent has a right option in every situation.
+\end{theorem}
+
+\begin{proof}
+$O$ is finite and nonempty, so $O^\ast$ is nonempty; $\Lambda(s)$ is nonempty; for each $\lambda$, $A_\lambda$ is the set of maxima of a function on a finite nonempty set and is nonempty, and so is $A'_\lambda$ and therefore $X_\lambda$. Applied to $s^A$, which is a situation, this gives a right option for $A$.
+\end{proof}
+
+\begin{theorem}[Uniqueness in apparent dilemmas]\label{t:uniq}
+If $s$ is an apparent dilemma, $\Ch(s)$ has exactly one member. In particular, there are no genuine dilemmas, and every apparent dilemma has exactly one right option.
+\end{theorem}
+
+\begin{proof}
+In an apparent dilemma $\Lambda(s)=\{1\}$, so $\Ch(s)=X_1$. If $A'_1$ is a singleton, $X_1=A'_1$; otherwise $X_1=\{\lot(A'_1)\}$. In both cases $X_1$ has one member. A genuine dilemma would be a situation with no right option, which Theorem~\ref{t:det} excludes.
+\end{proof}
+
+Theorem~\ref{t:uniq} is the conclusion of ETH-15, reached by a different route. ETH-15-a derives it from three premises about the balance of reasons; here it follows from the structure of the virtuous agent's choice. The two routes agree on what the unique option is in the cases both treat. In Sophie's choice with the claims of the children exactly balanced (entry \texttt{C10}, and entries \texttt{S11}, \texttt{S22}, \texttt{S33}, \texttt{S44}), the characteristic choice is to select without preference, which is ETH-15-b's verdict; where one child has the better prospect of survival, it is to save that child (entries \texttt{S12} to \texttt{S43}), which is also ETH-15-b's verdict. The \stnad{} apparent dilemmas of Appendix~B have exactly one right option each, and \stnlot{} of them are resolved by impartial selection.
+
+The theorem does not say that the agent who takes the right option in an apparent dilemma has nothing to regret. The right option infringes, by the definition of an apparent dilemma, and what it infringes is something to which a virtue is a sensitivity. The virtuous agent feels this: her sensitivity to the good she sets back does not switch off because the setback was the least bad course. Section~\ref{s:characteristically} returns to the remainder.
+
+\begin{corollary}[Consequentializability]\label{c:conseq}
+The deontic theory given by Principle~\ref{p:criterion} is extensionally equivalent to a consequentialist theory with an agent-relative value function.
+\end{corollary}
+
+\begin{proof}
+By Theorems~\ref{t:det} and~\ref{t:uniq}, the theory forbids nothing it does not also leave an alternative to, permits only available options, and has no dilemmas. By Theorem~3.5 of ETH-02-a, a deontic theory with these properties is consequentializable, given act-inclusive outcomes.
+\end{proof}
+
+Corollary~\ref{c:conseq} is the first direction of the argument of ETH-02-c, which holds that virtue ethics, considered as a theory of right action, is a further notation for verdicts that the other families can also express. We accept this. What distinguishes the theory is Principle~\ref{p:priority}, the explanatory claim, and the characterization of the virtuous agent that makes the verdicts computable; Objection~\ref{o:conseq} discusses what this leaves to virtue ethics.
+
+\subsection{The redirected threat}
+
+\begin{proposition}[The redirected threat]\label{p:drt}
+Let $s$ be a trolley case in the sense of ETH-03: the agent can act or refrain; refraining allows the deaths of $n$ strangers; acting averts them and causes the deaths of $k$ strangers who do not consent and who would survive if the agent refrained, either by redirecting the existing threat or by introducing a new one. Then acting is right if and only if it redirects the existing threat and $k<n$; and in every such case exactly one option is right.
+\end{proposition}
+
+\begin{proof}
+Both options infringe: acting sets back the $k$ by an imposed or redirected effect, and refraining allows a setback of $10\geq\gamma$ to each of the $n$, who would survive if the agent acted. So $s$ is an apparent dilemma, $\lambda=1$, and by Theorem~\ref{t:uniq} exactly one option is right. If the act introduces a new threat, each of the $k$ suffers a grave imposition, since the setback is imposed, unconsented, at least $\gamma$, and avoidable on the alternative; so $S(\text{act})=k>0=S(\text{refrain})$, and refraining is the unique member of $O^\ast$. If the act redirects the threat, $S$ is $0$ on both options. The weights of all the effects are $1$, since the effects of acting are redirected, not imposed, and those of refraining are allowed. So $V_1(\text{act})=-10k$ and $V_1(\text{refrain})=-10n$. If $k<n$ acting has the greater value; if $k>n$ refraining has; if $k=n$ the values are equal and the doing count, which is $k>0$ for acting and $0$ for refraining, selects refraining.
+\end{proof}
+
+The proposition says that the criterion agrees, on every trolley case, with the doctrine of the redirected threat, which ETH-03-a proves to be the only rule satisfying its three adequacy conditions. The agreement is not built in: the criterion contains no clause about trolleys or redirection as such. It arises from two general features, the respect mode, which distinguishes imposing from redirecting and allowing, and the silencing of grave impositions. Appendix~B checks the proposition on the \stnschone{} cases of schema S1 and the $100$ cases of schema S2 with a new threat, together with the classic cases \texttt{C01} (Switch), \texttt{C02} (Footbridge) and \texttt{C03} (Transplant).
+
+\subsection{V-rules and their combination}
+
+Hursthouse's v-rules are prescriptions derived from the virtues. In the model, each effect of an option falls within the field of one of five v-rules, by the following assignment: an effect on the agent herself falls under the self-regarding virtues (\texttt{Se}); an effect tagged as deception under honesty (\texttt{Ho}); an effect tagged as the breaking of a commitment under fidelity (\texttt{Fi}); any other setback to another that the option imposes or redirects under justice (\texttt{Ju}); and every other effect, benefits and allowed setbacks to others, under benevolence (\texttt{Be}). The \emph{score} of an option under a v-rule is the weighted sum of the effects assigned to it, at $\lambda=1$; for justice the score is the pair of the negated silencing count and the weighted sum, ordered lexically. A v-rule \emph{selects} the options of greatest score.
+
+\begin{proposition}[Single v-rules]\label{p:vrules}
+If every effect in $s$ falls under the same v-rule, then $\Ch(s)$ is the set of options that the v-rule selects, with ties broken by the doing count and, in an apparent dilemma, by impartial selection.
+\end{proposition}
+
+\begin{proof}
+If the v-rule is not \texttt{Se}, no effect is on the agent and $V_\lambda$ does not depend on $\lambda$; it equals the score, and the silencing clause of Definition~\ref{d:char} is the first component of the justice score. If it is \texttt{Se}, every effect is on the agent, so $V_\lambda=\lambda\cdot V_1$, and multiplication by a positive constant does not change the set of maxima; no option silences or does anything to another.
+\end{proof}
+
+The proposition explains why the v-rules guide. In situations in which one virtue is engaged, which are the great majority of the situations in which a person asks what honesty, or courage, or generosity requires, the v-rule of that virtue gives the verdict of the criterion. Appendix~B contains \stnsingle{} such cases, and in each the verdicts coincide. The difficulty lies in the situations in which several virtues are engaged.
+
+\begin{definition}[V-rule code]\label{d:code}
+A \emph{v-rule code} is a strict priority ordering of the five v-rules. It selects in a situation the options that are lexically greatest in the scores of the v-rules taken in its order, with ties broken by the doing count and, in an apparent dilemma, by impartial selection.
+\end{definition}
+
+\begin{theorem}[Uncodifiability of the v-rules]\label{t:uncod}
+No v-rule code selects $\Ch(s)$ in every situation.
+\end{theorem}
+
+\begin{proof}
+Consider two situations of schema S3, \texttt{P108ss} and \texttt{P102ss}. In each, the agent has made a trivial promise to a stranger, and can keep it or break it to help a stranger who has suffered an accident; breaking the promise is a setback of $1$ in the promisee's relationship good, imposed; keeping it allows the victim a setback of $8$ in \texttt{P108ss} and of $2$ in \texttt{P102ss}. Only fidelity and benevolence are engaged. The values are $V(\text{help})=-\rho=-3$ in both, and $V(\text{keep})=-8$ and $-2$ respectively, so $\Ch(\texttt{P108ss})=\{\text{help}\}$ and $\Ch(\texttt{P102ss})=\{\text{keep}\}$. A code that ranks fidelity above benevolence selects keeping in both, since keeping scores $0$ under fidelity and helping $-3$; it fails on \texttt{P108ss}. A code that ranks benevolence above fidelity selects helping in both, since helping scores $0$ under benevolence and keeping less; it fails on \texttt{P102ss}. Every code ranks one of the two above the other.
+\end{proof}
+
+The proof uses only the fact that the weight of a broken trivial promise lies between the weights of a minor and a serious harm; it does not depend on the calibration. Appendix~C shows more: each of the \stnorders{} codes fails on many of the \stnnoself{} cases of Appendix~B without effects on the agent, and for every code that ranks benevolence above justice the first failure is the Footbridge case \texttt{C02}, on which such a code selects pushing. Theorem~\ref{t:uncod} is a precise form of McDowell's thesis that virtue is not codifiable, restricted to codification by v-rules. It is also a precise form of the application objection: the v-rules alone do not tell the agent what to do when they conflict. What the criterion adds is the combination: the virtuous agent weighs what each virtue is sensitive to by the weights its mode assigns, and lets silencing and the doing count settle the rest. We return in Objection~\ref{o:mcdowell} to the question whether this combination is itself a codification.
+
+\subsection{The prerogative and its bounds}
+
+\begin{proposition}[Rescue]\label{p:prerog}
+Let $s$ be a situation in which the agent can intervene, at an expected cost $r>0$ to her own well-being, to avert an expected loss $b>0$ in the well-being of a stranger, or hold back. Then intervening is right if and only if $b\geq r$; it is required if and only if $b>Mr$; it is supererogatory if and only if $r\leq b<Mr$; and holding back is right if and only if $b\leq Mr$.
+\end{proposition}
+
+\begin{proof}
+Intervening infringes nothing, since its only effect is on the agent, and holding back imposes and redirects nothing; so $s$ is not an apparent dilemma, no option satisfies clause (i) of Definition~\ref{d:ad}, and $\Lambda(s)=[1,M]$. No option silences, and both have doing count $0$. $V_\lambda(\text{intervene})=-\lambda r$ and $V_\lambda(\text{hold})=-b$. Intervening is in $X_\lambda$ if and only if $\lambda r\leq b$, which holds for some $\lambda\in[1,M]$ if and only if $r\leq b$, and for $\lambda=M$ if and only if $Mr\leq b$. Holding back is in $X_\lambda$ if and only if $b\leq\lambda r$, which holds for some $\lambda$ if and only if $b\leq Mr$. Intervening is the only member of $\Ch(s)$ if and only if holding back is in no $X_\lambda$, that is, $b>Mr$, and it is supererogatory if and only if it is right and not in $X_M$, that is, $r\leq b<Mr$.
+\end{proof}
+
+Proposition~\ref{p:prerog} reproduces the structure that ETH-14 and ETH-18 defend. Rescue is required up to a moderate cost, here a cost up to $1/M$ of the loss averted; beyond that it is supererogatory, up to the point at which the agent's sacrifice equals the loss averted; and beyond that point it is not right, because a sacrifice greater than the good it does for others is the waste or self-abasement that ETH-14 places beyond the upper bound of sainthood. The lower bound, decency, is the virtuous agent who gives her own goods the greatest admissible weight; the upper bound, sainthood, is the virtuous agent who gives them exactly impartial weight. Both are virtuous agents, and the latitude between them is the room the criterion leaves for the agent's own projects. Appendix~B checks the proposition on all \stnschsix{} cases of schema S6. The classic cases are Singer's child in the pond \citep{Singer1972}, entry \texttt{C17}, in which rescue is required, and a risky rescue of the kind Urmson took as the paradigm of heroism \citep{Urmson1958}, entry \texttt{C18}, in which it is supererogatory.
+
+\subsection{Thresholds}
+
+In the parametrized families of Appendix~B the verdict changes at a threshold, and the threshold can be given in closed form. We state three, which together show how the modes of the virtues fix where one consideration gives way to another. Write $\pi_p$ for the honor factor of a person $p$, equal to $\pi$ if $p$ is close to the agent and to $1$ otherwise.
+
+\begin{proposition}[Thresholds]\label{p:thresholds}
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Promise and aid.} If the agent can keep a commitment, allowing a setback $m$ in the well-being of a victim $v$, or break it, imposing setbacks totalling $R$ on the promisee $p$ and nothing else, then breaking is right if and only if $\pi_v m>\rho\,\pi_p R$, and whichever option is right is required.
+\item \emph{Protective deception.} If an aggressor asks for information that would expose a third party $t$ to a loss $h$ in well-being, the agent can tell the truth, lie at a cost of $1$ to the aggressor's knowledge, or (in some cases) evade with probability of success $e$, and $e^\ast$ is the best available probability of evasion ($0$ if there is none), then lying is right if and only if $\pi_t h(1-e^\ast)\geq 1$, and required if the inequality is strict. If the inquirer is innocent, and the lie sets back his knowledge and autonomy by $2$ each, lying is right if and only if $\pi_t h(1-e^\ast)>4\rho$.
+\item \emph{Giving.} If the agent can give $g\in\{0,\dots,G\}$ units at a cost of $g$ to herself, each unit up to the recipient's need $N\leq G$ benefiting the recipient $r$ at the rate $\beta$ and further units not at all, then giving $N$ is required if $\pi_r\beta>M$; giving nothing is required if $\pi_r\beta<1$; and otherwise every amount from $0$ to $N$ is right.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Breaking imposes a setback on another, so $\Lambda(s)=\{1\}$; no one is silenced, since the setbacks are not grave imposition in well-being or autonomy of the required size, or if the victim's loss is grave it is allowed, not imposed. $V(\text{break})=-\rho\pi_pR$ and $V(\text{keep})=-\pi_vm$. If the first is greater, breaking is the unique member of $A_1$. If the second is greater, keeping is. If they are equal, the doing count, $1$ for breaking and $0$ for keeping, selects keeping before any lottery is considered. (b) The lie sets back only the aggressor, which is not an infringement; telling the truth and evading allow setbacks but impose nothing; so $\Lambda(s)=[1,M]$, but no option affects the agent and the values do not depend on $\lambda$. $V(\text{lie})=-1$, and the best of the other options has value $-\pi_th(1-e^\ast)$. No doing count is positive, since the aggressor is not counted. So lying is in $\Ch(s)$ if and only if $-1\geq-\pi_th(1-e^\ast)$, and alone in it if the inequality is strict. With an innocent inquirer the lie is an imposition, $\Lambda(s)=\{1\}$, $V(\text{lie})=-4\rho$, and at equality the doing count excludes the lie. (c) No option imposes, and no setback is grave, so $\Lambda(s)=[1,M]$. For $g\leq N$, $V_\lambda(g)=(\pi_r\beta-\lambda)g$, and for $g>N$ the value decreases in $g$. If $\pi_r\beta>M$, the value increases up to $N$ for every $\lambda\in[1,M]$, so $N$ is the unique maximum throughout. If $\pi_r\beta<1$, it decreases from $0$ for every $\lambda$. Otherwise $\lambda=\pi_r\beta$ lies in $[1,M]$, at that $\lambda$ every amount from $0$ to $N$ has value $0$ and all are maximal, and at no $\lambda$ is an amount above $N$ maximal.
+\end{proof}
+
+Part (a) states the content of Ross's verdict on the trivial promise in the vocabulary of the virtues: fidelity's respect for the promisee yields to benevolence when the harm averted exceeds $\rho$ times the setback to the promisee, adjusted for the relations of each to the agent. Part (b) shows why lying to the murderer is right on every version of the case in which the danger to the third party is real, and why lying to an innocent inquirer is right only when much more is at stake; it also shows that a reliable evasion displaces the lie, which is the verdict of those who hold that one should evade where one can. Part (c) is a version of Aristotle's doctrine that the mean is relative to us (\emph{NE}~II.6): the liberal amount is not a fixed sum but depends on the recipient's need, the good a gift does, and the giver's relation to the recipient; and between the bounds where giving is required and where it is pointless, liberality leaves the amount to the giver, which is the latitude of the prerogative. Entries \texttt{L48c}, \texttt{L31s} and \texttt{L44s} illustrate the three cases.
+
+\subsection{Agreement and disagreement with the other families}
+
+\begin{proposition}[Impartial cases]\label{p:impartial}
+Suppose that no person in $s$ is close to the agent, that no option sets back a person other than the agent and not an aggressor by an imposed or redirected effect, and that $s$ is not an apparent dilemma. Then every option that maximizes the unweighted sum of changes is in $\Ch(s)$.
+\end{proposition}
+
+\begin{proof}
+No option silences, every doing count is $0$, every weight is $1$ except the self-weight, and $\Lambda(s)=[1,M]$. At $\lambda=1$ the value of an option is its unweighted sum, so $A'_1=A_1$ is the set of maximizers of the unweighted sum, and it is contained in $\Ch(s)$.
+\end{proof}
+
+In such situations the virtuous agent may always do what an impartial maximizing consequentialist requires, though she is not required to: the prerogative lets her give her own goods more weight. Appendix~B contains \stnweak{} cases that satisfy the hypotheses, and in each the proposition holds. Outside them the criterion and the consequentialist part company in three ways, each traceable to a mode: through the respect mode, as in Footbridge and the Transplant case, where the consequentialist kills; through the honor mode, as in the case of the drowning spouse \citep{Williams1981}, entry \texttt{C11}, where the consequentialist is indifferent between the spouse and the stranger and the criterion requires saving the spouse, without the \enquote{one thought too many} Williams objected to, since what the agent responds to is the person, weighted as close; and through the prerogative, as in \texttt{C18}. Over the whole of Appendix~B the criterion agrees with the consequentialist rule on \stnconsagree{} cases and differs on \stnconsdis{}.
+
+The simple deontological rule of Appendix~B forbids deception, the breaking of commitments and the imposition of harm on non-aggressors, and otherwise maximizes the unweighted sum. It agrees with the criterion on \stndeoagree{} cases and differs on \stndeodis{}. The disagreements fall into two groups. The rule forbids lying to the murderer, and forbids breaking a trivial promise to prevent an accident; the criterion permits both. And the rule is indifferent to the relation between the agent and those affected, where the criterion is not.
+
+\begin{corollary}[The murderer at the door]\label{c:murderer}
+In Kant's case, in which a friend has taken refuge in the agent's house, a would-be murderer asks where he is, and the agent can only answer truly or lie, lying is right.
+\end{corollary}
+
+\begin{proof}
+The murderer is an aggressor, so the setback to his knowledge that the lie imposes has weight $1$; the friend is close, so his death, allowed if the agent answers truly, has weight $\pi$. $V(\text{lie})=-1>-10\pi=V(\text{truth})$. Neither option silences. No option infringes, since the setback the lie imposes is to an aggressor and the friend's death is not allowed on the lie; so $\Lambda(s)=[1,M]$, the agent's own goods are not affected, lying is in $X_\lambda$ for every $\lambda$, and it is the only member of $\Ch(s)$.
+\end{proof}
+
+The corollary agrees with ETH-04, which argues that one may lie to the murderer at the door because Kant's argument individuates the maxim too coarsely \citep{Kant1797}. Our route is different: the criterion does not consider maxims, but the honesty of the virtuous agent is a sensitivity to the knowledge and autonomy of the deceived, and a person whose project is the murder of another does not engage that sensitivity in respect of the frustration of that project. Entries \texttt{D10cax} and \texttt{D10sax} are the general forms with a close and with a stranger as the third party; in both lying is right. Where the inquirer is innocent, so that the lie imposes a setback on someone who does engage the respect mode, the verdict depends on what is at stake for the third party: in \texttt{D01cix}, where the harm the truth would allow is minor, the truth is required, and in \texttt{D10cix}, where it is death, the lie.
+
+\section{The characteristically clause}\label{s:characteristically}
+
+\subsection{What a virtuous agent would do out of character}
+
+Hursthouse's criterion speaks of what a virtuous agent would \emph{characteristically} do, and the qualification has sometimes been thought to be an evasion, added to protect the criterion from counterexamples by making its content vague. In the present account it has a precise content: the characteristic choice is the choice computed on the true profile, by the weights of the virtues, at an admissible self-weight. A virtuous agent can fail to make it in two ways. Her perception can be defeated, so that she acts on a profile other than the true one; or something other than her character can determine what she does. Only the first is represented in the model, and it is enough to show that the clause is needed.
+
+\begin{proposition}[The clause is needed]\label{p:clause}
+There are situations in which a virtuous agent whose perception of a single effect is defeated chooses an option outside $\Ch(s)$.
+\end{proposition}
+
+\begin{proof}
+Entry \texttt{X003} of Appendix~B: in the Footbridge case, an agent who does not perceive that pushing the man will kill him perceives pushing as an option with no effects and chooses it, since its value $0$ exceeds the value $-50$ of standing by. But $\Ch(\texttt{C02})=\{\text{stay}\}$.
+\end{proof}
+
+The misperception table of Appendix~B lists, for each of the \stnclassic{} classic cases, each option and each effect, what a virtuous agent would choose if that effect alone were not perceived. Of the \stnmis{} variants, \stnmisout{} lead to a choice outside the characteristic set. Without the clause, the criterion would make these choices right, since a virtuous agent would make them. With it, they are what a virtuous agent would do, but not characteristically, and they are not right. The agent who makes them is not to blame, if the defeater was not her fault; the evaluation of agents and the evaluation of acts come apart, as ETH-13's account of moral luck requires.
+
+\subsection{Latitude}
+
+\begin{proposition}[Latitude]\label{p:latitude}
+There are situations in which two virtuous agents, differing only in their self-weights, make different choices, and both choices are right.
+\end{proposition}
+
+\begin{proof}
+Entry \texttt{C18}: an agent who can rescue a stranger at an expected cost of $6$ to herself, from a loss of $10$, rescues at $\lambda=1$ and holds back at $\lambda=3$. By Proposition~\ref{p:prerog} both options are right.
+\end{proof}
+
+Of the \stncases{} cases of Appendix~B, \stnunique{} have a single right option and \stnlatitude{} have more than one. Latitude arises from the prerogative, as in \texttt{C18}, and from exact ties outside apparent dilemmas, as in some cases of schema S7, where giving a little and giving nothing are both right. It never arises in an apparent dilemma (Theorem~\ref{t:uniq}).
+
+\subsection{Vices}
+
+The virtues are characterized by weights, and a vice is a departure from the weights. Aristotle's table of the means in \emph{NE}~II.7 pairs each virtue with an excess and a deficiency. In the spheres in which the model represents the agent's own goods, a vice of excess or deficiency is a self-weight, or a weight on a particular kind of effect on oneself, outside the range of the virtue. We model six: the coward, who weighs danger to himself at $9$; the rash person, who weighs it at $0$; the prodigal, who weighs his expenditure at $0$; the mean person, who weighs it at $9$; the self-indulgent person, who weighs bodily pleasure at $3$; and the insensible person, who weighs it at $0$.
+
+\begin{proposition}[Vices are action-revealing]\label{p:vices}
+For each of the six vices there is a situation in which the vicious agent chooses an option that is not right.
+\end{proposition}
+
+\begin{proof}
+By computation (Appendix~B, schemas S6, S7 and S11). The first witnesses are: for cowardice \texttt{\stfirstvicecoward}, where the coward holds back from a rescue that is required; for rashness \texttt{\stfirstvicerash}, where the rash person intervenes at a cost greater than the good done; for prodigality \texttt{\stfirstviceprodigal}, where the prodigal gives beyond the recipient's need; for meanness \texttt{\stfirstvicemean}, where the mean person gives nothing to a close friend whose need makes giving required; for self-indulgence \texttt{\stfirstviceselfindulgent}, where the self-indulgent person takes a pleasure whose cost to his health is greater; and for insensibility \texttt{\stfirstviceinsensible}, where the insensible person is indifferent between a harmless pleasure and abstaining, and so may abstain when abstaining is not right.
+\end{proof}
+
+The coward deviates in \stnvicecoward{} of the \stnschsix{} cases of schema S6 and the rash person in \stnvicerash{}; the prodigal in \stnviceprodigal{} and the mean person in \stnvicemean{} of the \stnschseven{} cases of S7; the self-indulgent person in \stnviceselfindulgent{} and the insensible person in \stnviceinsensible{} of the \stnscheleven{} cases of S11. The asymmetries are informative. Rashness deviates more often than cowardice because the decency bound already allows the virtuous agent considerable self-concern, so that much of what the coward does is within the latitude of virtue; the rash person, who gives his own safety no weight, deviates whenever the danger exceeds the good to be done. Aristotle held that it is cowardice, not rashness, that is more opposed to courage, because rashness bears more likeness to courage (\emph{NE}~II.8). The model measures something different, the frequency with which each vice leads to an act that is not right, and on that measure the order is reversed.
+
+\subsection{Remainder}
+
+The characteristic choice in an apparent dilemma infringes. ETH-15 holds that the infringed requirement does not vanish and explains the remainder by it (Corollary~3.5 of ETH-15-a). The present account explains it by the virtues: the virtuous agent remains sensitive to the good she has set back, and the appropriate expression of the sensitivity, after the choice, is regret, and where possible reparation. Hursthouse's observation that a virtuous agent may emerge from a tragic situation with her life marred is thus preserved without the claim that she acted wrongly. That her life is marred is the conclusion of ETH-11: virtue is necessary but not sufficient for happiness, and the case of Priam, a virtuous man whose sons and city were destroyed, shows that the goods of a life can be lost by a virtuous agent through no fault of her own. The virtuous agent in a tragic choice loses some of them by her own right action.
+
+\section{The non-ideal agent}\label{s:nonideal}
+
+\subsection{Johnson's objection}
+
+\citet{Johnson2003} argued that the criterion of right action as what the virtuous agent would characteristically do in the circumstances gives the wrong verdicts for agents who are not virtuous. His central examples concern self-improvement. An agent who knows that she is prone to some vice can be right to take measures against it: to avoid occasions of temptation, to adopt a discipline, to bind herself in advance. A virtuous agent would not characteristically do these things, because she has no such tendency to guard against. So either the measures are not right, which is false, or the criterion is.
+
+The objection generalizes. Professor Procrastinate is invited to review a manuscript, and is the best qualified to do so. The best course is to accept and write the review; but if he accepts, he will not in fact write it, and the worst outcome is that he accepts and does not write \citep{JacksonPargetter1986}. A virtuous agent in his position would accept and write; but for Procrastinate, many judge, accepting is not right. The question whether what an agent ought now to do depends on what she will in fact do later, or on what she could do, is the dispute between actualism and possibilism. A virtue-ethical criterion that consults only what the virtuous agent would do seems committed to possibilism, and so to the verdict that Procrastinate ought to accept.
+
+\subsection{Transposition}
+
+The answer lies in what the circumstances are. Options are courses of action, and a course of action extends over time; its effects depend on the agent's later choices within it. When we describe a situation and ask what a virtuous agent would do in it, we describe the options on the supposition that her later choices will be characteristic. For a non-ideal agent this supposition is false, and the situation she is in is not the situation so described. Definition~\ref{d:transp} replaces the supposition by the facts: in $s^A$, the effects of each option include the expected effects of $A$'s own later conduct, given $A$'s dispositions, with the causal role that conduct would have. The virtuous agent is then asked what she would characteristically do in that situation: a situation in which, among the facts she must reckon with, are the dispositions of the person whose later conduct the option commits.
+
+\begin{definition}[Agent profile]\label{d:profile}
+An agent's dispositions are represented, for a course of action, by the probabilities with which she would make each of her later choices within it. The agent profile of Definition~\ref{d:transp} is the set of expected effects these probabilities determine. An agent's profile is \emph{ideal} on a situation if, on every option, her later choices within it are characteristic with probability $1$.
+\end{definition}
+
+\begin{theorem}[Coincidence]\label{t:coinc}
+If $A$'s profile is ideal on $s$, then $s^A=s$, and an option is right for $A$ in $s$ if and only if it is in $\Ch(s)$. In particular, for a virtuous agent the transposed criterion and Hursthouse's criterion coincide.
+\end{theorem}
+
+\begin{proof}
+If $A$'s later choices on each option are characteristic with probability $1$, the effects of $A$'s later conduct are the effects of characteristic later conduct, so the replacement in Definition~\ref{d:transp} changes nothing and $s^A=s$. By Principle~\ref{p:criterion}, $o$ is right for $A$ if and only if $o\in\Ch(s)$. A virtuous agent's later choices are characteristic, so her profile is ideal on every situation.
+\end{proof}
+
+The theorem shows that transposition is not an ad hoc repair. It changes no verdict for any agent whose later conduct would be what the virtuous agent's would be, and it changes the verdict for others only through facts about them that any reasonable account of their circumstances must include. The virtuous agent is still the standard; she is asked about a situation that contains the non-ideal agent's dispositions as facts, much as a wise guardian is asked what to do for a ward whose weaknesses she knows.
+
+\begin{proposition}[Self-improvement]\label{p:selfimp}
+There are situations $s$ and agents $A$ such that an option that is not in $\Ch(s)$ is required for $A$ in $s$.
+\end{proposition}
+
+\begin{proof}
+Entry \texttt{J42} of Appendix~B. The agent is disposed to tell, with probability $1/2$ on each of two occasions in the coming period, lies that set back the knowledge and autonomy of the persons deceived. She can carry on as usual, adopt a regimen of attention to her own speech that halves the probability at a small cost to herself, or avoid the occasions of temptation at a greater cost to herself and to her relationships. In $s$ itself, described with characteristic later conduct, no lies are told, and carrying on as usual is the unique characteristic choice, since the other options cost the agent something for nothing. In $s^A$ the expected lies enter with the respect weight, and the values at $\lambda=1$ are $-12$ for carrying on, $-7$ for the regimen and $-3$ for avoidance; avoidance is the unique member of $\Ch(s^A)$ and is required.
+\end{proof}
+
+Of the \stnnonideal{} non-ideal cases of schema S9, the transposed criterion differs from the untransposed one in \stnnaivediff{}; in the twelve cases in which the agent's profile is ideal ($q=0$) it agrees, as Theorem~\ref{t:coinc} requires. In the Procrastinate cases, the transposed verdict is to decline whenever the probability of failure is at least $1/4$ (entries \texttt{V122} to \texttt{V466}), while the untransposed verdict is always to accept. The criterion therefore sides with actualism about the agent's present options, but not with every actualist verdict: an agent who can bind herself, by an option that lowers the probability of her later failure, has that option to consider, and whether it is better than declining depends on what declining leaves undone. In schema S9 binding (option \texttt{bind}) is never characteristic, because another reviewer is always available at a small loss; Volume~IV treats the cases in which no one else can do what the agent declines, and in some of which the transposed criterion requires the agent to bind herself. The possibilist's insight, that the agent could do better, is preserved in the evaluation of the agent: Procrastinate, who declines because of a defect of his own, is not virtuous, and the right option for him is right only because of that defect.
+
+\subsection{Two alternatives to transposition}
+
+Two other repairs have been proposed for the problem of the non-ideal agent, and the comparison clarifies what transposition does.
+
+The first is the \emph{advice model}: the right act for an agent is not what the virtuous agent would do in her circumstances but what the virtuous agent would advise her to do. The model gives the right verdicts in Johnson's cases, since a wise adviser would recommend measures against a known weakness. But it changes the subject of the criterion from what the virtuous agent does to what she says, and advice is itself an act, done in the adviser's circumstances, so that the model needs a criterion for the adviser's act before it can use her advice. Transposition keeps the subject: what is consulted is the virtuous agent's choice of a course of action. The adviser of the advice model and the guardian of our reply to Objection~\ref{o:johnson} are related, since an adviser's recommendation is what she would choose if the choice were hers to make for the advisee; transposition makes this explicit by building the advisee's dispositions into the situation, and Theorem~\ref{t:coinc} shows that nothing is changed when there are no defects to build in.
+
+The second is Swanton's target-centered account \citep{Swanton2001}, on which an act is right if it hits the targets of the virtues relevant to the situation, whoever does it. On that account a non-ideal agent's measures against her weakness are right if they hit the target of a virtue, for instance of the virtue of self-improvement, and the virtuous agent is not consulted at all. The account handles Johnson's cases easily, and Swanton's insistence that a virtuous agent may miss a target is honored, on our account, by the \enquote{characteristically} clause (Proposition~\ref{p:clause}). The cost is the first conjunct of our thesis. A target-centered account needs a specification of each virtue's target, and of how the targets of several virtues combine when they conflict, which in effect is a specification of the characteristic choice; our account gives that specification directly, as what the virtuous agent would choose, and so keeps the connection between right action and the virtuous agent that Hursthouse's criterion asserts.
+
+\subsection{Guidance for the non-ideal agent}
+
+Johnson's objection concerns extension. The non-ideal agent objection proper concerns guidance: how can an agent who is not virtuous know what the virtuous agent would do? The account answers by dividing practical wisdom into two parts. The response is fixed by Definitions~\ref{d:weights} and~\ref{d:char}: given the profile, the characteristic choice is computed by a rule the agent can learn. What the non-ideal agent lacks, insofar as she lacks practical wisdom, is the profile: she misperceives what is at stake. The criterion tells her where to look. She should ask who is affected, in which goods, by how much, whether she would be imposing, redirecting or allowing, who is close to her, and whether anyone would suffer a grave imposition who could be spared. These are questions about the facts, not about what is right, and they can be answered, imperfectly, by agents who are not virtuous. This is the respect in which virtue resembles a skill, as \citet{Annas2011} argued: the learner is guided by what the expert attends to, and gradually comes to see it herself.
+
+\section{Selected entries}\label{s:entries}
+
+The appendices are not illustrations of the theorems; they are where the theorems are checked, and where the criterion's verdicts on particular cases can be inspected. We discuss six groups of entries.
+
+\paragraph{\texttt{C05}: Jim and the villagers.} In Williams's case, Jim is offered the choice of shooting one of twenty villagers, in which case the other nineteen will be released, or refusing, in which case Pedro will have all twenty shot \citep{Williams1973}. Williams used the case to argue that utilitarianism cannot make sense of integrity; he did not deny that Jim should probably shoot. The criterion's verdict is that Jim should shoot, and the reason is the Pareto clause of Definition~\ref{d:silence}. Shooting imposes a grave setback on the one villager, which would ordinarily silence the option; but the villager dies on every option, so the imposition does not make him worse off than any alternative would, and the option is not silenced. The values at $\lambda=1$ are $-30$ for shooting, where the villager's death counts with the respect weight because Jim imposes it, and $-200$ for refusing. The case is an apparent dilemma, so exactly one option is right. Without the Pareto clause, the criterion would require Jim to refuse, and the virtuous agent would let twenty die rather than kill one who would die anyway. The case is not a trolley case in the sense of ETH-03, since the act does not cause the death of anyone who would otherwise survive, and the verdict does not conflict with the doctrine of the redirected threat. The deontological rule of Appendix~B, which forbids every imposition of harm, requires refusal; the consequentialist rule agrees with the criterion. The remainder is real: Jim has killed a man, and his regret is fitting.
+
+\paragraph{\texttt{C10} and schema S10: tragic choice.} Sophie's choice \citep{Styron1979} in its balanced form is entry \texttt{C10}: the mother can give up one child or the other, or refuse, in which case both are killed. Giving up a child is a redirection of the officer's threat, so the options of giving up either child have value $-20$, since the child is close, and refusing has value $-40$. The two options of giving up a child tie in value and in doing count, the situation is an apparent dilemma, and the characteristic choice is $\lot(\text{giveA},\text{giveB})$: to select without preference. The sixteen cases of schema S10 vary the prospects of survival of the child saved. When the prospects are equal (\texttt{S11}, \texttt{S22}, \texttt{S33}, \texttt{S44}) the verdict is impartial selection; when they differ, it is to save the child with the better prospect. These are ETH-15-b's verdicts, here derived from the virtuous agent's sensitivity to the children's well-being and from the impartial procedure that her sensitivity to fairness selects.
+
+\paragraph{\texttt{Q01} to \texttt{Q06}: partiality.} Schema S5 sets an agent who can save either a person close to her or a number of strangers. With one stranger the verdict is to save the person close (\texttt{Q01}); with three or more, the strangers (\texttt{Q03} to \texttt{Q06}); with two (\texttt{Q02}), the values tie and the situation, an apparent dilemma, is resolved by impartial selection. We draw attention to \texttt{Q02} because it shows how the calibration enters. The threshold at which partiality yields to numbers is $\pi$; with $\pi=2$ it falls exactly at two strangers, and there the criterion recommends a lottery. Many will find that verdict strange, and so do we; but the strangeness is located in the calibration, not in the structure. Any $\pi$ produces a threshold, and at an integral threshold, a tie. Whether the threshold should be two strangers or ten is the question of how much weight the honor mode gives to those close to us, which Volume~II addresses. The structural claim of Volume~I is only that there is such a threshold and that at an exact tie impartial selection is right.
+
+\paragraph{\texttt{P108ss} and \texttt{P102ss}: the uncodifiability witnesses.} These are the two cases in the proof of Theorem~\ref{t:uncod}. They are Ross's case of the trivial promise and the accident \citep[ch.~2]{Ross1930} in two sizes. Ross held that one may break a trivial promise to relieve the victims of an accident; the criterion agrees when the harm averted is serious (\texttt{P108ss}, and the classic entry \texttt{C08}) and disagrees when it is minor (\texttt{P102ss}). The full schema S3 varies the importance of the promise, the size of the harm averted, and whether the promisee and the victim are close to the agent; the verdicts in its \stnschthree{} cases show the threshold moving with the weights, from a harm of $3$ for a trivial promise to a stranger to a harm of $24$ for an important promise to a friend. Throughout, the simple deontological rule requires keeping the promise.
+
+\paragraph{\texttt{J42} and the \texttt{V} entries: non-ideal agents.} These were discussed in Section~\ref{s:nonideal}. We note here how the verdict moves with the probability of lapse. With no lapses expected (\texttt{J01}, \texttt{J02}, \texttt{J04}) and with a probability of $1/8$ on a single occasion (\texttt{J11}), carrying on as usual is required, since the measures cost something and achieve little. As the expected number of lies grows, the regimen becomes required (\texttt{J12}, \texttt{J21}), and beyond that avoidance (\texttt{J14}, \texttt{J22} and every later entry). Since carrying on as usual imposes an expected setback on others, the prerogative is idle in these cases: the agent may not give her own convenience extra weight against the expected costs of her own lies.
+
+\paragraph{\texttt{X003}, \texttt{X013} and \texttt{X050}: misperception.} \texttt{X003} is the proof of Proposition~\ref{p:clause}. \texttt{X013} is the murderer at the door, misperceived: an agent who does not see that telling the truth will lead to her friend's death tells the truth, as her honesty, unopposed, inclines her to. \texttt{X050} is the hurtful truth to a friend (\texttt{C19}): an agent who does not perceive the distress that a blunt statement will cause speaks bluntly, where the characteristic choice is the tactful truth. In none of these is the agent's response at fault; what fails is the profile.
+
+\paragraph{\texttt{C16} and \texttt{Q051} to \texttt{Q403}: Sartre's student.} Sartre's student \citep{Sartre1946} must choose between staying with his mother, whose only consolation he is, and leaving to join the Free French. Sartre used the case to argue that no doctrine can decide it. The criterion decides it, but its verdict depends on the expected contribution the student would make: in \texttt{C16} it is to stay, and the family \texttt{Q051} to \texttt{Q403} of schema S5 shows the verdict change from staying to leaving as the contribution grows relative to the setback to his mother. Because leaving imposes a setback on the mother, the prerogative is idle, and the student may not weigh his own wish to act against her loss. What no doctrine can do, on our account, is supply the profile. That is the work of perception, and Sartre's student, who could not tell how much his going would matter, lacked not a principle but information.
+
+\paragraph{\texttt{NP01} to \texttt{NP10} and \texttt{NC01} to \texttt{NC10}: the Pareto clause and consent.} The two families of schema S2 that follow the hundred new-threat cases vary the two conditions under which an imposition is not silenced. In the \texttt{NP} family, as in Jim's case, the person on whom the threat is imposed would die on every option. The imposition is then not silenced, but it still counts with the respect weight, so the verdict is not the consequentialist's: imposing is right only when it saves at least three (\texttt{NP03}), since the death imposed counts $\rho=3$ times the deaths of the others, and the case of one saved (\texttt{NP01}) and the tie at two (\texttt{NP02}) are resolved against imposing. Jim's case, with nineteen saved, lies far above the threshold. In the \texttt{NC} family the person consents, as a volunteer for a fatal task consents. Consent removes both the silencing and the respect multiplier, since it is the overriding of the person's will that the respect mode responds to, and imposing is right as soon as it saves more than it costs (\texttt{NC02} onward); at equality (\texttt{NC01}) the doing count prefers not to impose. The two families show that the criterion's resistance to imposition is graded: absolute (within the bound of the computation) when the imposition is grave, unconsented and avoidable, weighted when it is unavoidable, and neutral when it is consented to.
+
+\paragraph{\texttt{C04}, \texttt{C09}, \texttt{C12}, \texttt{C13} and \texttt{C15}: imposition and its limits.} Foot's judge, who can frame an innocent man to prevent a riot in which five will die \citep{Foot1967}, is the Transplant case in another setting, and the verdict is the same: framing is a grave imposition on someone who could be spared, and it is silenced (\texttt{C04}). Anscombe's case is structurally identical (\texttt{C15}): the bombing of a city imposes death on non-combatants who would otherwise survive, and is silenced however many the alternative would cost, within the bound of the computation; the consequentialist rule selects bombing, and both the criterion and the deontological rule select the invasion. By contrast, an imposition that is not grave is weighed. Socrates' friend who has gone mad (\texttt{C09}) suffers a small setback to his autonomy and to the fairness of possession if the weapons are withheld, and these count with the respect weight and with the weight of friendship; but the expected harms of returning them are greater, and withholding is right. Aristotle's ship's captain (\texttt{C12}) imposes a loss on the merchants whose cargo he jettisons, which counts three times, and saves the lives of those aboard from an even risk of drowning; jettisoning is right, as Aristotle says that any sensible person would do it, though he describes the act as mixed, voluntary in the circumstances and not something anyone would choose in itself (\emph{NE}~III.1). The mixed character is the remainder: the captain's sensitivity to the merchants' loss does not vanish. Hume's case (\texttt{C13}) shows the respect weight at work against benevolence: withholding a fortune from a miser in order to relieve four poor people does more good by the unweighted sum, which leaves the consequentialist rule indifferent, but it imposes setbacks to fairness and autonomy on the miser, and the criterion, like Hume's just man, restores it. Hume took the case to show that justice is artificial, since a single act of justice may be contrary to the public interest; on our account it shows that justice responds to what is imposed, and that this response is not a calculation of the public interest at all.
+
+\paragraph{\texttt{T} entries: honesty and kindness.} Schema S8 crosses the hearer's need to know with the distress a truth would cause. When the hearer has no need to know, silence is required (\texttt{T01c} to \texttt{T04s}): to volunteer a hurtful truth no one needs is not honesty but its counterfeit, which Aristotle's table would place among the forms of boorishness. When the need is great, the tactful truth is required (\texttt{T41c} to \texttt{T44s}). The white lie is never right in the schema, because it imposes setbacks to the hearer's knowledge and autonomy, weighted by respect, for the sake of sparing a distress that tact can spare more cheaply. Where the need to know and the distress are both moderate (\texttt{T22c}, \texttt{T22s}) the verdict depends on whether the hearer is close: with a friend, the tactful truth; with a stranger, silence. This is the honest and kind response that Hursthouse's v-rules require jointly, computed.
+
+\paragraph{\texttt{M} entries: temperance.} Schema S11 is the only schema in which all the effects of some cases fall on the agent herself, and it is where Proposition~\ref{p:vrules} does the most work: when there is no risk to others, the verdict is the self-regarding v-rule's, indulgence when the pleasure exceeds the cost to health and abstention when it does not, with both right at equality. When indulgence imposes a risk on others, as drinking before driving does, the prerogative is idle and the risk counts with the respect weight; within the grid of the schema abstention is then always required. The self-indulgent agent, who triples the weight of pleasure, deviates in \stnviceselfindulgent{} cases, and the insensible agent, who gives it no weight, in \stnviceinsensible{}. Aristotle's remark that insensibility is rare, since it is not human to take no pleasure in anything (\emph{NE}~III.11), has a counterpart here: the insensible agent's deviations are all cases in which a pleasure worth more than its cost is available and he forgoes it or is indifferent to it, so that his error is one of omission, which in this schema costs only himself.
+
+\paragraph{Concordance entries \texttt{Ar13}, \texttt{Aq02}, \texttt{Hu01}, \texttt{Dr01}.} Justice appears in the concordance in four characterizations: Aristotle's mean in distribution and rectification, with injustice the taking of too much (\texttt{Ar13}); Aquinas's rendering to each his due (\texttt{Aq02}); Hume's observance of the conventions of property (\texttt{Hu01}); and Foot's and Hursthouse's (\texttt{Ft04}, \texttt{Hs04}). The first three are flagged by the vocabulary scan. The reconstruction assigns all of them the sphere tags of distribution and exchange, and computes the field $\{F,U\}$ in the respect mode. This is the claim that justice is a sensitivity to fairness and autonomy that takes the form of respecting what others have, and it does not mention what they are owed. Entry \texttt{Dr01}, Driver's modesty, is the one entry flagged as conflicting with the characterization: a virtue that requires the agent to underestimate her own worth cannot be a reliable sensitivity to knowledge, since it requires a false belief. On the present account modesty is either the accurate self-assessment that Aristotle's truthfulness (\texttt{Ar08}) already covers, or it is not a virtue. The theological virtues (\texttt{Aq05} to \texttt{Aq07}) and religion (\texttt{Aq16}) are marked with a dagger: their objects lie partly outside the seven goods. The criterion does not require them, and nothing in it excludes them; Volume~II discusses whether a virtue can be a sensitivity to something other than a component of the good, and EXI-15's account of hope as a virtue when proportioned to probability suggests that at least one of them has a secular counterpart that the present characterization admits.
+
+\section{Consequences for neighbouring questions}\label{s:consequences}
+
+The criterion bears on several questions treated elsewhere, and the bearing runs in both directions: the conclusions of those families constrain the criterion, and the criterion offers them a derivation from a theory of character. We record the points of contact.
+
+\paragraph{The consequentializing equivalence (ETH-02).} Corollary~\ref{c:conseq} places the criterion within the scope of ETH-02-a's equivalence, as ETH-02-c anticipated. The value function of the consequentialist counterpart is agent-relative: it weights impositions by the agent more than allowings, those close to the agent more than strangers, and the agent's own goods within a range. ETH-02-a shows that agent-relative value functions are needed to represent the classical agent-centered constraints (its Proposition~4.4), and that lexical constraints, such as our silencing clause, are represented by finite penalties when the good is bounded (its Proposition~4.6). The silencing clause is lexical, but on any finite family of situations, such as Appendix~B, it is represented by a penalty larger than any difference in value that occurs. What the equivalence does not supply is the derivation of the weights from the modes of the virtues, which is what the second conjunct of our thesis provides.
+
+\paragraph{The trolley problem (ETH-03).} Proposition~\ref{p:drt} shows that the criterion agrees with the doctrine of the redirected threat on every trolley case. ETH-03-a proves that this doctrine is the only rule satisfying its adequacy conditions; the criterion satisfies them, so the agreement was to be expected if the criterion is adequate. The criterion also says something the doctrine does not: why redirection differs from imposition. A redirected threat is not something the agent introduces, so the respect mode is not engaged by it in the way it is by a new threat, and the gravity of what is introduced triggers silencing. The Pareto clause marks the boundary of the class of trolley cases, as the \texttt{NP} entries show.
+
+\paragraph{Lying to the murderer (ETH-04).} Corollary~\ref{c:murderer} and Proposition~\ref{p:thresholds}(b) agree with ETH-04 that one may lie to the murderer at the door. The criterion's explanation is not ETH-04's, which concerns the individuation of maxims, but the two are compatible: a maxim individuated finely enough to mention that the hearer is an aggressor is, in our terms, a description of the profile that includes his relation to the agent.
+
+\paragraph{Moral luck (ETH-13).} The criterion makes rightness depend on the true profile, which the agent may not know. An agent who acts on her best perception and chooses an option outside the characteristic set does wrong, without fault; an agent who chooses carelessly and lands in the characteristic set does right, without credit. This is the structure of moral luck that ETH-13 argues is real and compatible with responsibility: the evaluation of the act and the evaluation of the agent come apart, and the misperception table of Appendix~B lists \stnmisout{} cases in which they would.
+
+\paragraph{Supererogation, rescue and demandingness (ETH-14, ETH-18, ETH-28).} Proposition~\ref{p:prerog} yields the bounded structure of ETH-14 and the duty to rescue up to moderate cost of ETH-18, and the prerogative's restriction to helping, which Definition~\ref{d:char} builds in, matches ETH-14's statement of it. The moderate demandingness of ETH-28 follows: within the interval $[1,M]$ the agent may favor her own good, and beyond it she may not. ETH-06's fixed share of income is a different kind of claim, about a standing policy rather than a single choice; Volume~II discusses how the decency bound relates to it.
+
+\paragraph{Dilemmas (ETH-15).} Theorem~\ref{t:uniq} is ETH-15's conclusion, and the verdicts of schema S10 are ETH-15-b's. The two derivations support each other: ETH-15-a's premises about the balance of reasons are, in our framework, consequences of the structure of the virtuous agent's response.
+
+\paragraph{Virtue and happiness (ETH-11).} The criterion says nothing about whether right action makes the agent happy, and ETH-11 shows that it need not: virtue is necessary but not sufficient for happiness. The virtuous agent who makes the characteristic choice in a tragic situation may lose goods that her life needed, and this is what Hursthouse's marring and Aristotle's Priam describe.
+
+\paragraph{Moral knowledge and thick concepts (MTE-08, MTE-15).} Practical wisdom as reliable sensitivity is a form of the view, defended in MTE-08, that moral knowledge is acquired by a fallible but generally reliable faculty comparable to perception. The tags by which Appendix~B assigns effects to v-rules are not analyses of the thick concepts that the v-rules use. MTE-15 argues that thick concepts such as \enquote{lewd} cannot be factored into a description and an evaluation, and nothing in our account requires that they can: to recognize that a remark is dishonest or a gift condescending is part of perceiving the profile, which the account does not codify (Objection~\ref{o:mcdowell}).
+
+\paragraph{Epistemic virtue and hope (EPI-22, EXI-15).} The characterization of a virtue as a reliable sensitivity to goods applies to the epistemic virtues, with knowledge as the field. EPI-22's conclusion that curiosity is a virtue when directed at significant questions fits it: indiscriminate curiosity is not a reliable sensitivity to the good of knowledge, which is greater for some questions than for others. EXI-15's hope proportioned to probability is a candidate secular counterpart of Aquinas's theological hope (\texttt{Aq06}).
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Circularity through the goods]\label{o:circ}
+The virtuous agent is characterized by her sensitivity to the goods, and the goods include fairness and autonomy. But fairness is a matter of what people are entitled to, and autonomy is a matter of rights of self-determination. The deontic notions have been put into the goods, and the circle has been moved, not removed.
+\end{objection}
+
+\begin{reply}
+The objection would succeed if fairness and autonomy were defined by entitlements and rights. They are not. ETH-01 identifies each component of the good by isolation: two outcomes that differ only in the component and are ranked differently on idealized reflection. For fairness, the outcomes differ in whether a distribution results from a procedure that everyone affected could accept or from one that favors some arbitrarily; for autonomy, in whether a person's life is shaped by her own choices or by others' manipulation. These are differences in outcomes, ranked by endorsement (Lemma~\ref{l:goods}). Nothing in them says what anyone may or must do. The virtue of justice is then a sensitivity to these goods in the respect mode, and the respect mode is defined by the weight it gives to setbacks the agent imposes. The deontic notion of entitlement can be recovered downstream, as what the criterion protects, but it is not upstream. Theorem~\ref{t:indep} and its mechanical check in Appendix~C state precisely what this reply claims.
+\end{reply}
+
+\begin{objection}[Virtue and right]\label{o:johnson}
+Transposition changes the question. Johnson's objection was that the right act for a non-ideal agent is not what the virtuous agent would do in her circumstances. The reply is to change the circumstances: to ask what the virtuous agent would do if she had to reckon with the non-ideal agent's dispositions. But a virtuous agent cannot have those dispositions, and a situation in which she must reckon with them as her own is not one she could be in. The transposed criterion is no longer the claim that right action is what the virtuous agent would characteristically do.
+\end{objection}
+
+\begin{reply}
+The transposed situation does not ask the virtuous agent to have the non-ideal agent's dispositions, nor to reckon with them as her own. It is a situation whose options are courses of action, and whose profile includes, as facts, the probabilities with which the person who would carry out those courses will act in certain ways. A virtuous agent can be in such a situation: a parent deciding whether to let a child undertake a task the child is likely to abandon, or an employer deciding whether to give a responsibility to an employee known to be unreliable, is in one. What the virtuous agent would characteristically do there is well defined, and it is what Principle~\ref{p:criterion} consults. Theorem~\ref{t:coinc} shows that nothing is lost: for an agent whose later conduct is characteristic, the transposed situation is the actual one. The first conjunct of our thesis is therefore preserved in its intended sense. The circumstances to which the criterion refers are the agent's circumstances, and an agent's circumstances include facts about the agent.
+\end{reply}
+
+\begin{objection}[The model is a codification]\label{o:mcdowell}
+McDowell argued that virtue cannot be codified. The criterion is a codification: it is a formula that takes a situation as input and returns the right options. If the formula is correct, McDowell was wrong; if McDowell was right, the formula is incorrect. Either way, the account is not the virtue ethics it claims to vindicate.
+\end{objection}
+
+\begin{reply}
+The formula takes as input not a situation but a profile: who is affected, in which goods, by how much, in which causal role, with what relation to the agent. McDowell's thesis was that the virtuous person's knowledge cannot be captured in universal principles that could be applied by someone without the sensitivity, and the sensitivity, on our account, is what produces the profile. Producing the profile is not codified by anything in this volume, and we doubt it can be: it requires seeing that this remark would humiliate, that this silence would be taken as consent, that this gift would be felt as condescension. What is codified is the combination of the considerations once seen, and Theorem~\ref{t:uncod} shows that even this cannot be done by ordering the v-rules; it requires weighing them by modes, with silencing and tie-breaking. McDowell's thesis, restricted to the perceptual part of practical wisdom, is consistent with the account. His further claim that the virtuous person's perception silences competing considerations is built into the criterion. We concede that if the combination too were uncodifiable, the account would fail; but no argument that we know of shows this, and the computed cases show that the combination yields the verdicts virtue ethicists have defended in the cases where they agree.
+\end{reply}
+
+\begin{objection}[Consequentialism in disguise]\label{o:conseq}
+The criterion maximizes a weighted sum of changes in the goods, with lexical side-constraints. That is a consequentialist theory with an agent-relative value function, as Corollary~\ref{c:conseq} concedes. Virtue ethics has been vindicated by being abolished.
+\end{objection}
+
+\begin{reply}
+Corollary~\ref{c:conseq} says that the criterion is extensionally equivalent to such a theory, and ETH-02 shows that the same holds of every deontological theory without dilemmas. If extensional equivalence abolished a family, it would abolish deontology too, and ETH-02 concludes instead that the dispute between the families, as a dispute about which acts are right, is notational. What remains is the explanatory order, and here virtue ethics makes a distinctive claim, Principle~\ref{p:priority}: acts are right because a virtuous agent would choose them, and the weights are not values of outcomes but the forms of the virtues' responses. The difference shows in what the account explains. It explains why the weights take the forms they do, by the modes of the virtues: why setbacks one imposes count more than those one allows (respect), why those close to us count more (honor), why there is a prerogative with a lower and an upper bound (proper self-regard, between servility and selfishness). A consequentialist with the same value function has these features as stipulations. It also explains why rightness is accessible to perception, since the inputs to the criterion are what practical wisdom perceives. Whether these explanations are better than their rivals is a question about the grounding of the right, not about its extension, and the extensional result of this volume is neutral on it.
+\end{reply}
+
+\begin{objection}[Arbitrary constants]\label{o:constants}
+The criterion's verdicts depend on $\rho$, $\pi$, $M$ and $\gamma$, and the values chosen are arbitrary. A virtue ethics that needs a parameter file has not answered the demand for guidance; it has hidden the answer in the parameters.
+\end{objection}
+
+\begin{reply}
+Every theory that weighs plural considerations has constants of this kind; the Rossian who weighs the duty of fidelity against the duty of beneficence, and the consequentialist who weighs the components of the good, use them whether or not they write them down. Writing them down has two advantages. It locates disagreement, as entry \texttt{Q02} shows. And it separates what depends on the constants from what does not. The structural theorems, independence, determinacy, uniqueness in apparent dilemmas, the agreement with the doctrine of the redirected threat, the uncodifiability of the v-rules, the form of the prerogative and the coincidence theorem, hold for all admissible constants. The demand for guidance is the demand that there be a fact about what is right and a route by which an agent can come to know it; it is not the demand that the fact be independent of how much one good weighs against another. Volume~II argues for the calibration. The thesis of Volume~I needs only that there is one.
+\end{reply}
+
+\begin{objection}[No one is virtuous]\label{o:situationism}
+The situationist experiments show that robust character traits are rare. If there are no virtuous agents, the criterion refers to a merely possible being, and the agent who is to be guided by it has no one to imitate.
+\end{objection}
+
+\begin{reply}
+The criterion requires that the virtuous agent be characterized, not that she exist. Her characterization is given by Definitions~\ref{d:virtue}--\ref{d:va}, and what she would characteristically do is computed from it; the agent who wishes to know what is right needs the characterization and the profile, not an exemplar. The situationist findings, if they are as \citet{Doris2002} and \citet{Harman1999} read them, show that actual agents are unreliable in the sense of Definition~\ref{d:pw}, which is a claim our account accommodates: unreliability is a deficiency in perception, and it is one of the facts that transposition enters into the situation. \citet{Kamtekar2004} argued that the experiments test isolated behavioral dispositions rather than virtues integrated with practical wisdom, and \citet{Sreenivasan2002} that the inference from the experiments to the rarity of traits is weaker than it appears. If they are right, there are more virtuous people than the situationists suppose; if not, the criterion is unaffected. Volume~III considers what the findings imply for moral education, which is where they bear most directly.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The result does not establish that the calibration of Assumption~\ref{a:calib} is correct. It establishes that, for any admissible calibration, the criterion is non-circular, determinate and free of dilemmas, and that it has the structural features proved in Section~\ref{s:guidance}. The verdicts on the parametrized families depend on the calibration in the ways the tables show.
+
+It does not establish that the list of goods is complete. The characterization of the virtues uses the seven components identified by ETH-01, and if there were further components, the virtues would be sensitivities to them too; the structure of the account would be unchanged. Volume~VI of ETH-01 argues that the list is closed.
+
+It does not settle the explanatory dispute between virtue ethics and its rivals. Principle~\ref{p:priority} is stated, not proved; Corollary~\ref{c:conseq} shows that the extension of the criterion does not decide it.
+
+It does not establish that the perception of profiles can be made reliable by any procedure of education, nor that actual agents are reliable to any degree. These are the questions of Volume~III.
+
+It does not treat situations in which the agent is uncertain which of several profiles is the true one, beyond representing risk by expected changes. Under such uncertainty the agent may be unable to identify the right option until afterwards, as ETH-15 observes of apparent dilemmas. What she should do in the meantime is a question about decision under uncertainty, on which, for uncertainty about moral theories, MTE-16 defends maximizing expected choiceworthiness.
+
+And it does not establish that the theological virtues, or any virtue whose object lies outside the seven goods, are or are not virtues. The concordance marks them; Volume~II discusses them.
+
+\section{Conclusion}\label{s:conclusion}
+
+Virtue ethics can guide action. The right action is what the virtuous agent would characteristically do: what an agent who has the virtues, practical wisdom and harmony would choose, under normal conditions, acting in character, in the situation as it is, including the dispositions of the agent who is to act. The virtuous agent can be characterized without mentioning right action, as an agent whose sensitivity to the seven components of the good is reliable and whose responses take the forms of the virtues' modes. So characterized, the criterion is non-circular, gives a verdict in every situation and a unique one in every apparent dilemma, agrees with the doctrine of the redirected threat, shows why the v-rules cannot be combined by priority and how the virtues combine them instead, fixes the bounds within which the agent may favor her own good, and gives the correct verdicts for agents who are not virtuous.
+
+\begin{thebibliography}{99}\small
+
+\bibitem[Annas(2011)]{Annas2011} Annas, J. (2011). \emph{Intelligent Virtue}. Oxford: Oxford University Press.
+
+\bibitem[Anscombe(1958)]{Anscombe1958} Anscombe, G.~E.~M. (1958). Modern moral philosophy. \emph{Philosophy}, 33(124), 1--19.
+
+\bibitem[Anscombe(1981)]{Anscombe1981} Anscombe, G.~E.~M. (1981). \emph{Ethics, Religion and Politics: Collected Philosophical Papers}, Vol.~III. Oxford: Blackwell. Includes \enquote{Mr Truman's Degree} (1956).
+
+\bibitem[Aquinas(ST)]{AquinasST} Aquinas, T. \emph{Summa Theologiae}. Cited by part, question and article.
+
+\bibitem[Aristotle(NE)]{AristotleNE} Aristotle. \emph{Nicomachean Ethics}. Cited by book and chapter.
+
+\bibitem[Doris(2002)]{Doris2002} Doris, J.~M. (2002). \emph{Lack of Character: Personality and Moral Behavior}. Cambridge: Cambridge University Press.
+
+\bibitem[Driver(1989)]{Driver1989} Driver, J. (1989). The virtues of ignorance. \emph{Journal of Philosophy}, 86(7), 373--384.
+
+\bibitem[Driver(2001)]{Driver2001} Driver, J. (2001). \emph{Uneasy Virtue}. Cambridge: Cambridge University Press.
+
+\bibitem[Foot(1967)]{Foot1967} Foot, P. (1967). The problem of abortion and the doctrine of the double effect. \emph{Oxford Review}, 5, 5--15.
+
+\bibitem[Foot(1978)]{Foot1978} Foot, P. (1978). Virtues and vices. In \emph{Virtues and Vices and Other Essays in Moral Philosophy}. Oxford: Blackwell.
+
+\bibitem[Foot(2001)]{Foot2001} Foot, P. (2001). \emph{Natural Goodness}. Oxford: Clarendon Press.
+
+\bibitem[Geach(1977)]{Geach1977} Geach, P.~T. (1977). \emph{The Virtues}. Cambridge: Cambridge University Press.
+
+\bibitem[Harman(1999)]{Harman1999} Harman, G. (1999). Moral philosophy meets social psychology: Virtue ethics and the fundamental attribution error. \emph{Proceedings of the Aristotelian Society}, 99, 315--331.
+
+\bibitem[Hill(1973)]{Hill1973} Hill, T.~E., Jr. (1973). Servility and self-respect. \emph{The Monist}, 57(1), 87--104.
+
+\bibitem[Hume(1739--40)]{Hume1739} Hume, D. (1739--40). \emph{A Treatise of Human Nature}. London. Cited by book, part and section.
+
+\bibitem[Hursthouse(1991)]{Hursthouse1991} Hursthouse, R. (1991). Virtue theory and abortion. \emph{Philosophy \& Public Affairs}, 20(3), 223--246.
+
+\bibitem[Hursthouse(1999)]{Hursthouse1999} Hursthouse, R. (1999). \emph{On Virtue Ethics}. Oxford: Oxford University Press.
+
+\bibitem[Jackson and Pargetter(1986)]{JacksonPargetter1986} Jackson, F., and Pargetter, R. (1986). Oughts, options, and actualism. \emph{Philosophical Review}, 95(2), 233--255.
+
+\bibitem[Johnson(2003)]{Johnson2003} Johnson, R.~N. (2003). Virtue and right. \emph{Ethics}, 113(4), 810--834.
+
+\bibitem[Kamtekar(2004)]{Kamtekar2004} Kamtekar, R. (2004). Situationism and virtue ethics on the content of our character. \emph{Ethics}, 114(3), 458--491.
+
+\bibitem[Kant(1785)]{Kant1785} Kant, I. (1785). \emph{Groundwork of the Metaphysics of Morals}. Cited by Akademie volume and page.
+
+\bibitem[Kant(1797)]{Kant1797} Kant, I. (1797). On a supposed right to lie from philanthropy. Cited by Akademie volume and page (8:425--430).
+
+\bibitem[Louden(1984)]{Louden1984} Louden, R.~B. (1984). On some vices of virtue ethics. \emph{American Philosophical Quarterly}, 21(3), 227--236.
+
+\bibitem[McDowell(1979)]{McDowell1979} McDowell, J. (1979). Virtue and reason. \emph{The Monist}, 62(3), 331--350.
+
+\bibitem[Plato(Rep.)]{PlatoRep} Plato. \emph{Republic}. Cited by Stephanus page.
+
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Oxford: Clarendon Press.
+
+\bibitem[Russell(2009)]{Russell2009} Russell, D.~C. (2009). \emph{Practical Intelligence and the Virtues}. Oxford: Clarendon Press.
+
+\bibitem[Sartre(1946)]{Sartre1946} Sartre, J.-P. (1946). \emph{L'existentialisme est un humanisme}. Paris: Nagel.
+
+\bibitem[Scheffler(1982)]{Scheffler1982} Scheffler, S. (1982). \emph{The Rejection of Consequentialism}. Oxford: Clarendon Press.
+
+\bibitem[Singer(1972)]{Singer1972} Singer, P. (1972). Famine, affluence, and morality. \emph{Philosophy \& Public Affairs}, 1(3), 229--243.
+
+\bibitem[Slote(2001)]{Slote2001} Slote, M. (2001). \emph{Morals from Motives}. Oxford: Oxford University Press.
+
+\bibitem[Sreenivasan(2002)]{Sreenivasan2002} Sreenivasan, G. (2002). Errors about errors: Virtue theory and trait attribution. \emph{Mind}, 111(441), 47--68.
+
+\bibitem[Styron(1979)]{Styron1979} Styron, W. (1979). \emph{Sophie's Choice}. New York: Random House.
+
+\bibitem[Swanton(2001)]{Swanton2001} Swanton, C. (2001). A virtue ethical account of right action. \emph{Ethics}, 112(1), 32--52.
+
+\bibitem[Swanton(2003)]{Swanton2003} Swanton, C. (2003). \emph{Virtue Ethics: A Pluralistic View}. Oxford: Oxford University Press.
+
+\bibitem[Thomson(1976)]{Thomson1976} Thomson, J.~J. (1976). Killing, letting die, and the trolley problem. \emph{The Monist}, 59(2), 204--217.
+
+\bibitem[Thomson(1985)]{Thomson1985} Thomson, J.~J. (1985). The trolley problem. \emph{Yale Law Journal}, 94(6), 1395--1415.
+
+\bibitem[Urmson(1958)]{Urmson1958} Urmson, J.~O. (1958). Saints and heroes. In A.~I. Melden (ed.), \emph{Essays in Moral Philosophy}. Seattle: University of Washington Press.
+
+\bibitem[Williams(1973)]{Williams1973} Williams, B. (1973). A critique of utilitarianism. In J.~J.~C. Smart and B. Williams, \emph{Utilitarianism: For and Against}. Cambridge: Cambridge University Press.
+
+\bibitem[Williams(1981)]{Williams1981} Williams, B. (1981). Persons, character and morality. In \emph{Moral Luck}. Cambridge: Cambridge University Press.
+
+\bibitem[Zagzebski(2017)]{Zagzebski2017} Zagzebski, L. (2017). \emph{Exemplarist Moral Theory}. New York: Oxford University Press.
+
+\end{thebibliography}
+
+\clearpage
+\appendix
+
+\section{A concordance of virtues}\label{s:appA}
+
+\subsection*{What is listed}
+
+The concordance lists \stnconc{} virtues from nine sources: the virtues of character of Aristotle's table of means in \emph{Nicomachean Ethics} II.7, with justice from Book~V and practical wisdom from Book~VI \citep{AristotleNE}, entries \texttt{Ar01} to \texttt{Ar14}; the cardinal and theological virtues of Aquinas and the parts of prudence, justice, fortitude and temperance that he distinguishes in the \emph{Secunda Secundae} \citep{AquinasST}, entries \texttt{Aq01} to \texttt{Aq36}; the artificial virtues of Book~3, Part~2, and the natural virtues of Book~3, Part~3, of Hume's \emph{Treatise} \citep{Hume1739}, entries \texttt{Hu01} to \texttt{Hu15}; the virtues that serve as examples in Hursthouse's statement of the v-rules and her naturalist account, entries \texttt{Hs01} to \texttt{Hs04}; Foot's virtues in \citet{Foot1978} and her example of fidelity in \citet{Foot2001}, where she takes over Geach's remark that human beings need the virtues as bees need stings \citep{Geach1977}, entries \texttt{Ft01} to \texttt{Ft06}; Annas's examples of virtue on the model of skill, \texttt{An01} and \texttt{An02}; Swanton's virtues of distinct modes, \texttt{Sw01} to \texttt{Sw05}; Russell's practical intelligence, \texttt{Ru01}; and Driver's modesty and her consequentialist account of virtue in general, \texttt{Dr01} and \texttt{Dr02}.
+
+The column \enquote{source's characterization} gives a brief paraphrase of how the source characterizes the virtue, not a quotation. For Aristotle's virtues of character the column gives the sphere; the vocabulary scan is applied to the sphere together with the general characterization of the mean in \emph{NE}~II.6, which applies to every virtue of the table, and which the column omits to save space. The column \enquote{excess / deficiency} gives the two vices of Aristotle's table. For justice Aristotle names no vice of deficiency, since being treated unjustly is not a vice (\emph{NE}~V.5); for modesty and righteous indignation he says that they are means in feelings, not virtues in the strict sense (\emph{NE}~II.7, IV.9).
+
+\subsection*{What is computed}
+
+Each entry is assigned by hand one or more \emph{sphere tags}, which record the sphere of feeling and action in which the source places the virtue. Everything else is computed from the tags by the rules of Table~A.1, which assign to each tag a set of goods and a mode. The \emph{goods} of an entry are the union of the goods of its tags, written in the order $W,K,A,R,F,B,U$; the \emph{modes} are the union of their modes. The tag \texttt{divine}, used for the theological virtues and for religion, has no goods and the mode $\dagger$: its object lies outside the seven goods. The \emph{flags} are computed as follows: \texttt{D} if the source's characterization (for Aristotle, together with the formula of \emph{NE}~II.6) contains a deontic term in the list of Proposition~\ref{p:vocab}; \texttt{C} if it makes the virtue depend on a convention; $\dagger$ if a tag has an object outside the goods; and \texttt{X} if the source's characterization requires a false belief, and so conflicts with the definition of a virtue as a reliable sensitivity. The program also forms, for each entry, the reconstructed characterization \enquote{reliable sensitivity, in the sphere of $\sigma$, to $G$ in the mode of $m$}, and asserts that it contains no deontic term.
+
+\subsection*{Summary}
+
+Of the \stnconc{} entries, \stnconcD{} are flagged \texttt{D}, \stnconcC{} are flagged \texttt{C}, \stnconcR{} carry the dagger and \stnconcX{} is flagged \texttt{X}. Every reconstructed characterization is free of deontic terms. Every component of the good is in the field of some virtue: well-being of \stngoodwellbeing{} entries, knowledge of \stngoodknowledge{}, achievement of \stngoodachievement{}, relationships of \stngoodrelationships{}, fairness of \stngoodfairness{}, beauty of \stngoodbeauty{} and autonomy of \stngoodautonomy{}. Beauty is the least represented, reached only through practical wisdom and its parts, magnificence and Swanton's creativity; this reflects the sources, which treat the response to beauty as a matter of taste rather than of character, and Volume~II asks whether they were right to.
+
+\begin{center}\small\textbf{Table A.1.} Rules assigning goods and modes to sphere tags.\end{center}
+\input{gen/rules.tex}
+
+\begin{center}\small\textbf{Table A.2.} The concordance.\end{center}
+\input{gen/concordance.tex}
+
+\clearpage
+\section{Action-guidance test cases}\label{s:appB}
+
+\subsection*{What is listed}
+
+The tables list \stncases{} situations: \stnclassic{} classic cases from the literature and \stngenerated{} cases in eleven parametrized schemas. The classic cases are Switch \citep{Foot1967,Thomson1985} (\texttt{C01}); Footbridge and Transplant \citep{Thomson1976,Thomson1985} (\texttt{C02}, \texttt{C03}); Foot's judge and the mob \citep{Foot1967} (\texttt{C04}); Williams's Jim \citep{Williams1973} (\texttt{C05}); Kant's murderer at the door \citep{Kant1797}, without and with the possibility of evasion (\texttt{C06}, \texttt{C07}); Ross's trivial promise and accident \citep{Ross1930} (\texttt{C08}); Socrates' example of returning weapons to a friend who has gone mad (Plato, \emph{Republic} I, 331c) \citep{PlatoRep} (\texttt{C09}); Sophie's choice \citep{Styron1979} (\texttt{C10}); the drowning spouse \citep{Williams1981} (\texttt{C11}); Aristotle's example of throwing cargo overboard in a storm (\emph{NE}~III.1) (\texttt{C12}); Hume's example of restoring a fortune to a miser (\emph{Treatise} 3.2.2) (\texttt{C13}); Kant's lying promise (\emph{Groundwork} 4:422) \citep{Kant1785} (\texttt{C14}); the bombing of a city, after Anscombe's case against the bombing of Hiroshima and Nagasaki \citep{Anscombe1981} (\texttt{C15}); Sartre's student \citep{Sartre1946} (\texttt{C16}); Singer's child in the pond \citep{Singer1972} (\texttt{C17}); a risky rescue of the kind Urmson discussed \citep{Urmson1958} (\texttt{C18}); and the hurtful truth to a friend (\texttt{C19}), a standard illustration of the conflict between honesty and kindness. The magnitudes in the classic cases are ours; the sources fix the structure of each case, not its numbers.
+
+The schemas are full products of the parameter grids stated in the case column of each table, so that each schema is exhaustive up to its grid. S1: an existing threat to $n$ strangers can be redirected onto $k$, for $1\leq k,n\leq 10$. S2: a new threat can be introduced to $k$ strangers to save $n$, for the same ranges, with ten further cases in which the one would die on every option and ten in which he consents. S3: a promise of importance $1$, $2$ or $3$ can be broken to avert a harm of $1$ to $10$ to a victim, with the promisee and the victim each close or a stranger. S4: a lie can protect a third party from a harm of $1$, $2$, $4$, $6$, $8$ or $10$, the third party close or a stranger, the inquirer an aggressor or an innocent, with no evasion or an evasion that succeeds with probability $1/4$, $1/2$ or $3/4$. S5: a person close to the agent or one to six strangers can be saved; and Sartre's student, with a contribution of $5$, $10$, $20$ or $40$ and a setback to his mother of $1$, $2$ or $3$ in each of two goods. S6: a rescue costs the agent $1$ to $10$ and averts a loss of $1$ to $10$. S7: the agent can give $0$ to $4$ units to a recipient whose need is $1$ to $4$ units, each unit up to the need benefiting the recipient at the rate $1/2$, $2$ or $4$, the recipient close or a stranger. S8: a hurtful truth, with the hearer's need to know $0$, $1$, $2$ or $4$, the distress $1$, $2$ or $4$, the hearer close or a stranger. S9: Professor Procrastinate, with probability of failure $0$, $1/4$, $1/2$, $3/4$ or $1$, benefit $2$, $4$ or $6$ and cost of failure $2$, $4$ or $6$; and Johnson's agent prone to lie, with probability $0$, $1/8$, $1/4$, $1/2$ or $3/4$ and one, two or four occasions. S10: Sophie's choice with each child's probability of survival $1/4$, $1/2$, $3/4$ or $1$. S11: a bodily pleasure of $1$ to $5$, a cost to health of $0$ to $5$, and a risk to others of $0$ or $2$.
+
+\subsection*{Encoding}
+
+The profile column begins with the persons of the case and their relation to the agent, \texttt{c} close, \texttt{s} stranger and \texttt{g} aggressor; the agent is \texttt{a}. It then lists the options, each with its effects. An effect is written \texttt{p$n$:G$\delta$$\kappa$}, optionally followed by a tag and a consent mark: \texttt{f5:W-10a} is an allowed change of $-10$ in the well-being of each of five persons \texttt{f}; \texttt{m:K-1i.dec} is an imposed change of $-1$ in the knowledge of \texttt{m}, tagged as deception; a final \texttt{c} records consent. The tags are \texttt{dec} (deception), \texttt{prm} (breaking a commitment), \texttt{harm} (injury, killing or taking), \texttt{danger}, \texttt{money}, \texttt{pleasure} and \texttt{health}. Tags matter to the criterion only through the assignment of effects to v-rules and of self-regarding effects to the vices; they are used by the deontological rule.
+
+\subsection*{What is computed}
+
+The column \enquote{values} gives $V_1(o)$ for each option. The column \enquote{ETH-12} gives $\Ch(s)$ (Definition~\ref{d:char}), in bold. The column \enquote{cons.} gives the options that maximize the unweighted sum of changes, the verdict of a simple agent-neutral maximizing consequentialism. The column \enquote{deont.} gives the verdict of a simple deontological rule: an option is forbidden if it imposes, without consent, a deception, the breaking of a commitment, or a harm on someone other than an aggressor; among the options not forbidden, those that maximize the unweighted sum are permitted; if every option is forbidden, the rule yields no permitted option. The column \enquote{flags} gives \texttt{AD} if the situation is an apparent dilemma; \texttt{sil:} with the options that silence; \texttt{sup:} with the supererogatory options; \texttt{v:} with the v-rules engaged; in schema S9, \texttt{naive:} with $\Ch$ of the untransposed situation; and in schemas S6, S7 and S11, the choices of the two vicious agents of the schema.
+
+\subsection*{The program and the checks}
+
+The program \texttt{gen/generate.py} uses only the Python standard library, computes with exact rational arithmetic, and is deterministic. It computes $\Ch(s)$ by Lemma~\ref{l:finite}. For every case it asserts: (1) $\Ch(s)$ is nonempty (Theorem~\ref{t:det}); (2) in every apparent dilemma it has one member (Theorem~\ref{t:uniq}); (3) no member of $\Ch(s)$ silences more than the least silencing option; (4) the decency set is contained in $\Ch(s)$; (5) in every case with a single v-rule engaged, $\Ch(s)$ is what the v-rule selects (Proposition~\ref{p:vrules}); (6) in every case satisfying the hypotheses of Proposition~\ref{p:impartial}, the consequentialist's options are in $\Ch(s)$. On particular schemas it asserts: (7) the verdicts of Proposition~\ref{p:drt} in S1 and S2 and in \texttt{C01} and \texttt{C02}; (8) that lying is right in the murderer cases of S4 without evasion and in \texttt{C06} (Corollary~\ref{c:murderer}); (9) the verdicts of ETH-15-b in S10; (10) the verdicts of Proposition~\ref{p:prerog} in S6; (11) that in S9 the transposed and untransposed verdicts coincide when the agent's profile is ideal (Theorem~\ref{t:coinc}); and (12) that each modelled vice deviates from $\Ch(s)$ in some case (Proposition~\ref{p:vices}). The misperception table is generated by removing, in each classic case, one effect at a time from the profile the agent perceives, and computing her choice on the perceived profile.
+
+\subsection*{Summary}
+
+Assertions (1), (3) and (4) hold in all \stncases{} cases; (2) in all \stnad{} apparent dilemmas, \stnlot{} of them resolved by impartial selection; (5) in all \stnsingle{} single-rule cases; (6) in all \stnweak{} impartial cases; (7) in all \stndrt{} checks; (8) in all \stneth{}; (9) in all \stnethfifteen{}; (10) in all \stnetheighteen{}; (11) in all \stntransp{}. In all, the program makes \stnchecks{} assertions about the cases, and none fails. The characteristic set is a singleton in \stnunique{} cases and has several members in \stnlatitude{}; \stnsup{} cases have a supererogatory option and \stnsil{} have an option that silences. The criterion agrees with the consequentialist rule in \stnconsagree{} cases and with the deontological rule in \stndeoagree{}; the deontological rule leaves no option permitted in \stndeodilemma{} cases. The transposed verdict differs from the untransposed one in \stnnaivediff{} of the \stnnonideal{} non-ideal cases. Of the \stnmis{} misperception variants, \stnmisout{} lead outside the characteristic set. The entries discussed in the text are \texttt{C02}, \texttt{C05}, \texttt{C06}, \texttt{C08}, \texttt{C10}, \texttt{C11}, \texttt{C16}, \texttt{C17}, \texttt{C18}, \texttt{D10cax}, \texttt{D10sax}, \texttt{D01cix}, \texttt{D10cix}, \texttt{P108ss}, \texttt{P102ss}, \texttt{Q01} to \texttt{Q06}, \texttt{Q051} to \texttt{Q403}, the \texttt{J} entries, the \texttt{V} entries, the schema S10, \texttt{X003}, \texttt{X013} and \texttt{X050}.
+
+\input{gen/cases.tex}
+
+\subsection*{Misperception variants (\stnmis{} variants)}
+\input{gen/misperception.tex}
+
+\clearpage
+\section{Mechanical checks}\label{s:appC}
+
+\subsection*{The dependency graph}
+
+The first table lists the \stngraphnodes{} nodes of the dependency graph of the present account (Definition~\ref{d:graph}), each with the nodes its definition mentions and its depth. The program finds no cycle by depth-first search, and computes that right action is upstream neither of virtue nor of the virtuous agent (Theorem~\ref{t:indep}). It also scans the glosses of the \stndefs{} definitions for the deontic terms of Proposition~\ref{p:vocab}, and finds none.
+
+\input{gen/graphs.tex}
+
+The second table gives the result of the same search on six other schemes, each reduced to the nodes that matter for circularity. The encodings are our reconstructions, made as charitable as the sources allow: the naive scheme is the target of the circularity objection, not a view anyone holds; Hursthouse's account is given in the two readings of Remark~\ref{r:readings}; Swanton's, Slote's and Driver's accounts are reduced to the order of definition of right action and virtue. Only the naive scheme makes right action upstream of virtue.
+
+\subsection*{The v-rule codes}
+
+The last table lists the \stnorders{} v-rule codes of Definition~\ref{d:code}, with the first case in the order of Appendix~B, among the \stnnoself{} cases without effects on the agent, on which the code's selection differs from $\Ch(s)$; the code's selection there; $\Ch(s)$; and the number of cases among the \stnnoself{} on which the code fails. The restriction to cases without effects on the agent makes the comparison independent of the prerogative, since codes are evaluated at $\lambda=1$. Every code fails (Theorem~\ref{t:uncod}). The first witnesses are only \stnwitnesses{}: \texttt{\sttopwitness} for the \stntopwitness{} codes that rank benevolence above justice, and the Switch case \texttt{C01} for the others, all of which rank justice first or above benevolence and so refuse to redirect the trolley. The program also asserts that every code that ranks fidelity above benevolence selects keeping the promise in \texttt{P108ss}, and every other code selects helping in \texttt{P102ss}, which is the proof of Theorem~\ref{t:uncod}.
+
+\input{gen/codify.tex}
+
+\label{LastPageVolI}
+\end{document}

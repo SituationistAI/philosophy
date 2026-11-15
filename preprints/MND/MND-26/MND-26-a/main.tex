@@ -1,0 +1,127 @@
+\documentclass{situationist-preprint}
+
+\title{The Mind-Body Problem: A Synthesis}
+\msid{MND-26-a}
+\msfamily{MND-26}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_26.lean}
+\mskeywords{mind-body problem; physicalism; Russellian monism; mental causation; intentionality; synthesis}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is the mind-body problem solved? We argue that it is, in outline. The problem is not one question but a cluster of seven: how consciousness fits into the physical world, why there is an explanatory gap, how the mental can cause the physical, whether and how mental states have content, what kind of organization a mind has, how far consciousness extends and what its structure is, and how we know of other minds. The results of MND-01 to MND-25 give each of these a definite answer, and the answers are mutually consistent: consciousness is the intrinsic nature of physical structure, protophenomenal at the fundamental level; the gap is a gap between modes of presentation; mental causes are proportional causes; aboutness is primitive but distributed by teleosemantics; thinking is functional, distributed and extensible; qualia are intrinsic with relational structure; other minds are known by inference to the best explanation. A short Lean formalization records that the outline answer depends on exactly these results and not on the detailed account of how intrinsic natures ground particular experiences, which is deferred to MND-01.
+\end{abstract}
+
+\section{The problem}
+
+The mind-body problem received its modern form from \citet{Descartes1641}, who held that mind and body are distinct substances, and from the objection pressed by Princess Elisabeth of Bohemia in 1643: how can an unextended thinking substance move an extended body \citep{Shapiro2007}? Two further questions were later separated from the question of interaction. One is the question of consciousness: why physical processes are accompanied by experience at all, which \citet{Chalmers1995} called the hard problem. The other is the question of content: how a physical state can be about anything. The physicalism of the twentieth century answered the first question of ontology in its own favor, and found itself with the questions of consciousness, content and causation left over \citep{Kim2005}.
+
+A solution of the problem, if there is one, must therefore answer a cluster of questions, and the answers must fit. We argue that the results of MND-01 to MND-25 do this. The present manuscript adds no new argument for any of them; it states the cluster, assigns each question its answer, and checks that the answers are consistent. The details, above all the account of which arrangements of intrinsic natures ground which experiences, are the business of MND-01.
+
+\section{Framework}
+
+\begin{definition}\label{d:cluster}
+The \emph{mind-body problem} is the conjunction of seven questions: (Q1) the place of consciousness in the physical world; (Q2) the explanatory gap; (Q3) mental causation; (Q4) content; (Q5) the organization of mind; (Q6) the extent and structure of consciousness; (Q7) other minds.
+\end{definition}
+
+\begin{definition}\label{d:outline}
+The problem is \emph{solved in outline} if each of (Q1)--(Q7) has a definite answer and the answers are jointly consistent. It is \emph{solved in detail} if, in addition, there is an account of which physical arrangements ground which experiences.
+\end{definition}
+
+\begin{assumption}\label{a:results}
+The results of MND-01 to MND-25 hold. Grouped by question, they are:
+\begin{enumerate}[label=(\alph*)]
+\item (Q1) physicalism is true, with \enquote{physical} defined by current physics and its foreseeable extensions (MND-02); consciousness is the intrinsic nature of physical structure (MND-01); panpsychism is false and the intrinsic natures are protophenomenal (MND-18);
+\item (Q2) the explanatory gap arises from two modes of presentation of the same facts (MND-01); Mary acquires abilities and concepts, not facts (MND-04); zombies are conceivable but impossible (MND-05);
+\item (Q3) mental causes are proportional causes (MND-11);
+\item (Q4) aboutness is primitive and its distribution is explained by teleosemantics (MND-12); beliefs exist (MND-13); emotions represent evaluative properties (MND-17);
+\item (Q5) thinking is a functional property that machines can have (MND-08); in the Chinese Room the system understands (MND-07); the mind computes without being a single computer (MND-21); cognition extends into reliably coupled resources (MND-09);
+\item (Q6) qualia exist and are intrinsic (MND-10); the inverted spectrum is possible, undetectable and without consequence for functionalism (MND-22); the bat's experience is largely, not wholly, structurally specifiable (MND-03); higher-order theories fail (MND-14); consciousness is unified, partially in split-brain cases (MND-15); perception is direct (MND-16); there is cognitive phenomenology (MND-19); introspection is reliable about current phenomenal states and not about their causes (MND-20); consciousness extends beyond attention (MND-24); dreams are experiences (MND-25);
+\item (Q7) other minds are known by inference to the best explanation (MND-06); mammals and birds are conscious, cephalopods probably, insects undetermined (MND-23).
+\end{enumerate}
+\end{assumption}
+
+\section{The synthesis}
+
+\begin{theorem}\label{t:main}
+The mind-body problem is solved in outline.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:results}, each of (Q1)--(Q7) has a definite answer, given by clauses (a)--(g). It remains to check consistency, which we do at the points where the answers could conflict. (i) Physicalism and consciousness: MND-02 counts intrinsic natures as physical only if they are not mental, and MND-18 shows that the intrinsic natures in which MND-01 grounds consciousness must be protophenomenal, which satisfies that condition. (ii) Physicalism and causation: MND-11 makes mental properties causes without making them fundamental, so mental causation adds no non-physical causes. (iii) Physicalism and content: MND-12 makes aboutness primitive in analysis and explanation, not fundamental, and so consistent with MND-02. (iv) Functionalism and qualia: MND-08 individuates thinking functionally, MND-10 makes qualia intrinsic, and MND-22 shows that the resulting possibility of inversion does not affect functional individuation. (v) Functionalism and organization: MND-21 restricts which organizations realize thinking without restricting what can realize them, and MND-09 applies the same functional criterion to resources outside the head. (vi) Zombies and Russellian monism: MND-05 denies that physical duplicates can lack consciousness, which follows if the physical includes the intrinsic natures in which, by MND-01, consciousness is grounded. No pair of answers conflicts, so the problem is solved in outline by Definition~\ref{d:outline}.
+\end{proof}
+
+The answer to the problem in its Cartesian form follows. The mind is not a separate substance; it is the system of functional states of a physical organism, extended where its coupling extends, whose experiences are the intrinsic nature of part of the organism's physical structure presented from within. Elisabeth's question has the answer that MND-11 gives: mental properties cause bodily movements as proportional causes, without competing with their realizers.
+
+\begin{corollary}\label{c:details}
+The outline answer does not depend on the account of how particular arrangements of protophenomenal natures ground particular experiences.
+\end{corollary}
+
+\begin{proof}
+None of the clauses of Assumption~\ref{a:results} used in the proof of Theorem~\ref{t:main} states such an account. MND-18 shows that the protophenomenal view faces only problems of articulation (the boundary and palette problems), not a problem of impossibility; these, and the full theory of modes of presentation, are developed in MND-01, whose fourth volume and MND-01-d address the problem of combination.
+\end{proof}
+
+\section{Objections and replies}
+
+\begin{objection}[Relocation]
+The synthesis relocates the hard problem rather than solving it: instead of asking why physical processes are conscious, we now ask why protophenomenal natures ground experience.
+\end{objection}
+
+\begin{reply}
+The hard problem asked why there is a gap between physical and phenomenal truths. MND-01 answers that the gap is between two modes of presentation of the same facts, and that answer stands whatever the detailed principles of grounding turn out to be. What remains is a question of the same type as questions in any science, about the laws or principles connecting one level of description to another. That is the sense in which details are deferred, not the problem.
+\end{reply}
+
+\begin{objection}[Aggregation]
+A list of answers to separate questions is not a solution to one problem.
+\end{objection}
+
+\begin{reply}
+The answers are not independent. MND-18 is what makes MND-01 consistent with MND-02; MND-11 and MND-12 depend on the distinction between what is fundamental and what is primitive in explanation; MND-22 depends on MND-10 and MND-08 together. The synthesis is a single view, physicalist Russellian monism with functionalism about thought, of which the answers are parts.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_26.lean} represents each family result of Assumption~\ref{a:results} as an axiom asserting a primitive proposition (\texttt{R01} to \texttt{R25}), defines the answer to each of (Q1)--(Q7) as the conjunction of the results listed for it, and defines \texttt{SolvedInOutline} as the conjunction of the seven answers. A further primitive proposition, \texttt{Details}, stands for the detailed account of grounding; it is declared but not assumed. The main theorem is Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+theorem theorem_3_1 : SolvedInOutline
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_26.theorem_3_1' depends on axioms:
+  [Philosophy.MND_26.R01, Philosophy.MND_26.R02, Philosophy.MND_26.R03,
+   Philosophy.MND_26.R04, Philosophy.MND_26.R05, Philosophy.MND_26.R06,
+   Philosophy.MND_26.R07, Philosophy.MND_26.R08, Philosophy.MND_26.R09,
+   Philosophy.MND_26.R10, Philosophy.MND_26.R11, Philosophy.MND_26.R12,
+   Philosophy.MND_26.R13, Philosophy.MND_26.R14, Philosophy.MND_26.R15,
+   Philosophy.MND_26.R16, Philosophy.MND_26.R17, Philosophy.MND_26.R18,
+   Philosophy.MND_26.R19, Philosophy.MND_26.R20, Philosophy.MND_26.R21,
+   Philosophy.MND_26.R22, Philosophy.MND_26.R23, Philosophy.MND_26.R24,
+   Philosophy.MND_26.R25, Philosophy.MND_26.r01, Philosophy.MND_26.r02,
+   Philosophy.MND_26.r03, Philosophy.MND_26.r04, Philosophy.MND_26.r05,
+   Philosophy.MND_26.r06, Philosophy.MND_26.r07, Philosophy.MND_26.r08,
+   Philosophy.MND_26.r09, Philosophy.MND_26.r10, Philosophy.MND_26.r11,
+   Philosophy.MND_26.r12, Philosophy.MND_26.r13, Philosophy.MND_26.r14,
+   Philosophy.MND_26.r15, Philosophy.MND_26.r16, Philosophy.MND_26.r17,
+   Philosophy.MND_26.r18, Philosophy.MND_26.r19, Philosophy.MND_26.r20,
+   Philosophy.MND_26.r21, Philosophy.MND_26.r22, Philosophy.MND_26.r23,
+   Philosophy.MND_26.r24, Philosophy.MND_26.r25]
+\end{lstlisting}
+
+The list consists of the twenty-five propositions \texttt{R01}--\texttt{R25} and the twenty-five axioms \texttt{r01}--\texttt{r25} asserting them; it contains neither \texttt{Details} nor any axiom of classical logic. This is the formal content of Corollary~\ref{c:details}. The consistency checks in the proof of Theorem~\ref{t:main} are not formalized: they depend on the content of the results, which the module treats as atomic. The logical work of the module is conjunction introduction; its use is to record exactly which results the outline answer rests on.
+
+\section{Conclusion}
+
+The mind-body problem is a cluster of seven questions, and the results of MND-01 to MND-25 answer each of them consistently: the mind is a functionally organized, distributed and extensible system whose experiences are the intrinsic nature of physical structure, whose properties cause as proportional causes, and whose states have a primitive aboutness distributed by function. The problem is solved in outline. How particular arrangements of protophenomenal natures ground particular experiences is the remaining detail, and it belongs to MND-01.
+
+\begin{thebibliography}{9}\small
+\bibitem[Chalmers(1995)]{Chalmers1995} Chalmers, D.~J. (1995). Facing up to the problem of consciousness. \emph{Journal of Consciousness Studies}, 2(3), 200--219.
+\bibitem[Descartes(1641)]{Descartes1641} Descartes, R. (1641). \emph{Meditationes de prima philosophia}. Michel Soly.
+\bibitem[Kim(2005)]{Kim2005} Kim, J. (2005). \emph{Physicalism, or Something Near Enough}. Princeton University Press.
+\bibitem[Shapiro(2007)]{Shapiro2007} Shapiro, L. (ed. and trans.) (2007). \emph{The Correspondence between Princess Elisabeth of Bohemia and Ren\'e Descartes}. University of Chicago Press.
+\end{thebibliography}
+
+\end{document}

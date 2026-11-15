@@ -1,0 +1,363 @@
+\documentclass{situationist-preprint}
+
+\title{Objectivity Without Absoluteness}
+\msid{MTE-02-a}
+\msfamily{MTE-02}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_02.lean}
+\mskeywords{moral objectivity; absolutism; relativism; rational agency; natures; ideal observer; universalizability; natural normativity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is morality objective? The question is usually treated as a choice between two packages. Absolutists hold that moral truths are the same for every rational agent and that their content is fixed by rational agency as such; relativists hold that moral truths vary, and conclude that they are relative to the standpoint of those who judge. We argue that the packages should be broken up. Morality is objective: every rational agent, judging under idealized conditions, reaches the same verdict on every moral claim. But it is not absolute: what is required of an agent in a given situation depends on the nature of the agents concerned, so that one possible rational agent may be required to do what another, of a different nature and in the same situation, is not. We prove, from four premises, that the moral requirements factor through natures by a unique standard; that the standard is not absolute; that all variation in requirement is variation in nature; and that morality is absolute within each kind. We show that nature-relativity is not relativism: it involves no disagreement between standpoints and is untouched by the argument from meta-disagreement. The results, including a consistency proof for the premises, are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Two theses are often run together under the name of moral objectivity. The first concerns the standpoint from which moral claims are assessed: a moral claim is objective if its truth does not depend on who assesses it, so that a rational agent who judges it falsely is mistaken rather than differently placed. The second concerns the content of moral claims: morality is absolute if what is required of an agent in a situation does not depend on what kind of agent she is, so that the same requirements bind every rational agent, human or not, in the same situation. We use \enquote{objective} for the first thesis and \enquote{absolute} for the second.
+
+The terminology is not universal. \citet{Firth1952} called a theory \enquote{absolutist} when it holds that moral statements are not relative to the speaker, and in that sense our thesis is absolutist. What matters is the distinction, not the words. A morality may be objective without being absolute, if its truths hold for every assessor but concern agents of different natures differently; and it is natural to think, though we shall not need the point, that it cannot be absolute without being objective.
+
+We argue that morality is objective but not absolute. Moral truths hold for all rational agents: every rational agent who judges under idealized conditions judges them true. But their content is relative to the nature of the agents concerned: an act required of one rational agent in a situation may fail to be required of another rational agent, of a different nature, in the same situation. The thesis is a middle position, and its interest lies in showing that the middle is stable. The absolutist thinks that once content varies with the agent, objectivity is lost; the relativist thinks that once content varies, there is no ground for objectivity left. Both are wrong, and the argument shows exactly why.
+
+\subsection{A history of the debate}
+
+The debate can be told as a sequence of positions, each of which ran together the two theses and was refuted, or rendered unattractive, by a case that separated them.
+
+\paragraph{Protagoras and the Callatians.} The first relativist on record is Protagoras, whose doctrine that man is the measure of all things Plato reports and examines in the \emph{Theaetetus} \citep[152a]{Theaetetus}. On the reading Socrates develops, what seems to each person is true for that person, and what seems right to each city is right for it so long as it seems so. Herodotus had told the story that gives the view its emotional force: Darius asked the Greeks at his court what they would take to eat their dead fathers, and they said nothing would induce them; he asked the Callatians, who ate their dead, what they would take to burn them, and they cried out at the impiety \citep[III.38]{Herodotus}. The story shows variation in moral belief. It does not show variation in moral truth, and still less variation in standpoint-relative truth; but the step from the first to the third has been taken ever since. Plato's reply, the \emph{peritrope}, turns Protagoras's doctrine against itself: if what seems true to each is true for him, then the doctrine is false for those to whom it seems false, and Protagoras must concede that his opponents are right \citep[170e--171c]{Theaetetus}. MTE-06 develops the reply at the level of meta-disagreement.
+
+\paragraph{Kant: all rational beings.} The classical absolutist position is Kant's. In the preface to the \emph{Groundwork}, Kant argues that a law that is to hold morally must carry absolute necessity, and that the command not to lie holds not merely for human beings but for all rational beings; the ground of obligation is therefore to be sought not in the nature of the human being or in the circumstances in which he is placed, but a priori in concepts of pure reason \citep[4:389]{KantGroundwork}. The passage combines the two theses. Moral law holds for every rational being, which is objectivity; and its content is fixed without reference to the nature of any particular kind of rational being, which is absoluteness. Kant's view is that the second is required for the first: if the content of morality borrowed anything from human nature, it would hold only for human beings and only contingently. That inference is the target of the present manuscript. Kant himself allowed that the application of the moral law to human beings requires knowledge of human nature, which he assigned to a practical anthropology \citep{KantMetaphysicsMorals}; the question is whether what varies with nature is merely the application of an invariant content or the content itself.
+
+\paragraph{Hume: the constitution of our nature.} Hume took the opposite view of the source of morality. Moral distinctions are not derived from reason, he argued, but from a moral sense, and the standard of morality is founded on the internal frame and constitution of human beings \citep[3.1.1]{HumeTreatise}; in the second \emph{Enquiry}, the sentiments of humanity on which moral approbation rests are common to all human beings, so that the standard is general without being rational \citep[App.~I]{HumeEnquiryMorals}. Hume thus combined generality across human beings with relativity to human nature. His view leaves open whether a rational agent of a different constitution would be mistaken in judging differently, or merely different; and the natural reading is the second. Hume's position is therefore relative to nature at the level of the standpoint, not merely at the level of content.
+
+\paragraph{Darwin's bees.} Darwin pressed the point with an example that has become the standard case. If human beings had been reared under the same conditions as hive-bees, he suggested, unmarried females would think it a sacred duty to kill their brothers, and mothers would strive to kill their fertile daughters, and no one would think of interfering \citep{Darwin1871}. Darwin drew a cautious conclusion: a social animal with sufficiently developed intellect would acquire a moral sense, but not necessarily the same moral sense as ours. The case has been read as supporting relativism. Read carefully, it supports the thesis of this manuscript. The bees' conscience would represent requirements suited to their nature, and the question whether the requirements it represents are correct for them is a question that a human being could also ask and answer. That a human being who reflected on the bees' situation would not conclude that the bees must behave as human beings do is not a sign that human and bee standpoints diverge; it is a sign that both standpoints recognize that requirements depend on nature.
+
+\paragraph{The ideal observer and its critics.} In the twentieth century the question of objectivity was recast as a question about the idealized reactions of judges. \citet{Firth1952} proposed that moral statements are statements about the reactions of an ideal observer, omniscient with respect to non-moral facts, disinterested, dispassionate and otherwise normal, and argued that such a theory secures the non-relativity of moral claims. Its critics asked whether ideal observers would agree, and whether their reactions would vary with their constitutions. \citet{Railton1986} defended a naturalist realism on which an individual's good is what her fully informed self would want her to want, and the moral rightness of an act is a matter of what would be rationally approved from a social point of view. \citet{Smith1994} argued that rightness is what we would desire ourselves to do if fully rational, and that the objectivity of morality turns on whether fully rational agents converge. On these views the question of objectivity becomes a question about convergence, and the question of absoluteness becomes a question about what the convergent reactions are reactions to. MTE-01 takes this line: moral facts are natural facts about idealized reactions. The present manuscript argues that, so understood, objectivity and absoluteness come apart.
+
+\paragraph{Relativism defended.} \citet{Harman1975} argued that moral judgments of the form \enquote{it is wrong of $A$ to do $D$} are relative to agreements, or to motivating attitudes, that the agent shares with the speaker, so that it is not true that Hitler ought not to have done what he did, in the inner sense of \enquote{ought}, if he shared no relevant attitudes with us. \citet{Wong1984} defended a relativism on which there is no single true morality but a range of adequate ones, constrained by the functions of morality in human life, and later developed it as a pluralistic relativism grounded in human nature \citep{Wong2006}. \citet{Williams1985} argued for a relativism of distance: when the confrontation between two outlooks is merely notional, judgments of appraisal lose their point. These views are more careful than Protagoras's, but each makes the truth or the point of a moral claim depend on the standpoint of an appraiser. We return to them in Section~\ref{s:recent}.
+
+\paragraph{Natural normativity.} A different tradition has revived the idea that the good of a living thing is relative to its life form. \citet{Foot2001}, drawing on \citet{Thompson2008}, argued that moral evaluation is a species of the natural evaluation by which we judge a wolf defective if it does not hunt with the pack, and that human virtues are what human beings need in the way that bees need stings. \citet{Hursthouse1999} developed the view into a naturalistic virtue ethics. On these views the content of morality is relative to the nature of the species, and the evaluation is objective. They are the nearest predecessors of the thesis defended here. What they leave unclear is whether the standard by which a rational agent of another species would be judged is the same as ours, and whether that standard is accessible to every rational agent. We argue that it is, and that its sameness is what makes morality objective.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Rational agents and natures]\label{d:agents}
+The \emph{rational agents} are the actual and possible agents capable of acting for reasons and of assessing claims about what they and others are required to do. Each rational agent $x$ has a \emph{nature} $\nu(x)$: the constitutive capacities, needs and vulnerabilities stated by the real definition of its kind.
+\end{definition}
+
+We take natures to be fixed by real definitions in the sense of MET-13, on which every object has a real definition stating what it is. The nature of a human being includes that she is mortal, that she sleeps, that she is born helpless and grows slowly, that she can be deceived and can feel pain, and that she depends on others for most of what makes her life go well. Individual differences among human beings, in strength, wealth, skill or temperament, are not part of the nature of the kind, and we count them as features of the situation in which an agent acts.
+
+\begin{definition}[Moral claims]\label{d:claims}
+A \emph{moral claim} has the form \enquote{$x$ is required to do $a$ in $s$}, where $x$ is a rational agent, $a$ an act-type and $s$ a situation specified without reference to the nature of $x$. We write $\mathrm{Req}(x,s,a)$ when the claim is true.
+\end{definition}
+
+The restriction on situations is what gives the question of absoluteness its bite. A situation may specify that a child of the agent's kind is in danger and that the agent can save it by entering a burning building; it does not specify what the fire will do to the agent, which depends on what the agent is. Claims about permissibility and about what an agent has most reason to do can be treated in the same way; we use requirement for definiteness.
+
+\begin{definition}[Idealized verdicts]\label{d:ideal}
+For each rational agent $x$, situation $s$ and act $a$, let $I(x,s,a)$ be the \emph{complete information} about $x$'s doing $a$ in $s$: every non-moral fact about the act, its circumstances, its effects on everyone it concerns and the natures of all of them. An evaluator $e$'s \emph{idealized reaction} to a body of complete information is the reaction she would have if she possessed it, attended to it vividly, reasoned without error and gave equal weight to everyone concerned. We write $\mathrm{Ideal}_e(x,s,a)$ when $e$'s idealized reaction to $I(x,s,a)$ is one of requiring $a$ of $x$ in $s$.
+\end{definition}
+
+The idealization is the one of ETH-01-a, Definition~3.1, extended from the good of outcomes to requirements on action.
+
+\begin{definition}[Objectivity]\label{d:objective}
+Morality is \emph{objective} if, for every rational agent $e$ and every moral claim, $\mathrm{Ideal}_e(x,s,a)$ holds exactly when $\mathrm{Req}(x,s,a)$ does.
+\end{definition}
+
+Objectivity is the claim that moral truths hold for all rational agents: each of them, judging under idealized conditions, judges every true moral claim true and every false one false. It is a claim about the standpoint of assessment. It says nothing about whether the claims assessed are the same for every agent assessed.
+
+\begin{definition}[Absoluteness]\label{d:absolute}
+Morality is \emph{absolute} if, for all rational agents $x$ and $y$, every situation $s$ and every act $a$, $\mathrm{Req}(x,s,a)$ holds exactly when $\mathrm{Req}(y,s,a)$ does.
+\end{definition}
+
+\begin{definition}[Nature-relativity]\label{d:relative}
+A \emph{standard} is a relation $R$ between natures, situations and acts. A standard $R$ \emph{fixes the requirements} if, for every agent $x$, situation $s$ and act $a$, $\mathrm{Req}(x,s,a)$ holds exactly when $R(\nu(x),s,a)$ does. Morality is \emph{nature-relative} if some standard fixes the requirements.
+\end{definition}
+
+\begin{definition}[Relativism]\label{d:relativism}
+\emph{Relativism} is the thesis that some moral claim is true relative to one rational standpoint and not relative to another: for some evaluators $e$ and $e'$ and some claim, $\mathrm{Ideal}_e(x,s,a)$ holds and $\mathrm{Ideal}_{e'}(x,s,a)$ does not.
+\end{definition}
+
+Definition~\ref{d:relativism} gives the relativist the most favourable reading of \enquote{true relative to a standpoint}: truth relative to $e$ is what $e$ would judge under idealized conditions. A relativism on which truth relative to $e$ is what $e$ actually judges is weaker still, since it makes every error impossible, and is refuted by the same argument. Two theses are thus distinguished that the debate has run together. Nature-relativity concerns the claims assessed; relativism concerns the standpoints of assessment.
+
+The argument uses five assumptions.
+
+\begin{assumption}[Common information]\label{a:info}
+The complete information about an agent's doing an act in a situation is the same whoever considers it.
+\end{assumption}
+
+\begin{assumption}[Common rationality]\label{a:common}
+Any two rational agents have the same idealized reaction to the same complete information.
+\end{assumption}
+
+\begin{assumption}[Identification]\label{a:ident}
+An agent is required to do an act in a situation just in case every rational agent's idealized reaction to the complete information requires it.
+\end{assumption}
+
+\begin{assumption}[Universalizability over natures]\label{a:univ}
+If $x$ and $y$ have the same nature, then every evaluator's idealized verdict that $x$ is required to do $a$ in $s$ agrees with her idealized verdict that $y$ is.
+\end{assumption}
+
+\begin{assumption}[Diversity]\label{a:div}
+There are rational agents $x$ and $y$, a situation $s$ and an act $a$ such that $x$ is required to do $a$ in $s$ and $y$ is not.
+\end{assumption}
+
+Assumption~\ref{a:info} is close to analytic: complete information is complete, and the facts do not change with the person considering them. Assumption~\ref{a:common} is the substantive claim of convergence. Assumption~\ref{a:ident} is the thesis of MTE-01, that moral facts are natural facts about idealized reactions, in the form needed here. Assumption~\ref{a:univ} is the familiar requirement that moral verdicts not distinguish cases that differ only numerically, strengthened to say that, once the situation is fixed, the only features of the agent that matter are those of her nature. Assumption~\ref{a:div} is a claim about possible rational agents. Section~\ref{s:premises} defends Assumptions~\ref{a:common}, \ref{a:univ} and~\ref{a:div}, and Section~\ref{s:cases} gives cases for the last.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}[Standpoint invariance]\label{l:inv}
+For all evaluators $e$ and $e'$ and every moral claim, $\mathrm{Ideal}_e(x,s,a)$ holds exactly when $\mathrm{Ideal}_{e'}(x,s,a)$ does.
+\end{lemma}
+
+\begin{proof}
+Both verdicts are idealized reactions to $I(x,s,a)$, which is the same for $e$ and $e'$ by Assumption~\ref{a:info}. By Assumption~\ref{a:common}, the two reactions are the same.
+\end{proof}
+
+\begin{theorem}[Objectivity]\label{t:obj}
+Morality is objective.
+\end{theorem}
+
+\begin{proof}
+Let $e$ be a rational agent. If $\mathrm{Req}(x,s,a)$, then every idealized reaction requires $a$ of $x$ in $s$, by Assumption~\ref{a:ident}, and in particular $e$'s does. Conversely, if $\mathrm{Ideal}_e(x,s,a)$, then by Lemma~\ref{l:inv} every evaluator's idealized reaction requires $a$ of $x$ in $s$, and so $\mathrm{Req}(x,s,a)$ by Assumption~\ref{a:ident}.
+\end{proof}
+
+\begin{proposition}[Factorization]\label{p:factor}
+Morality is nature-relative. In particular, the standard $R^*$ defined by: $R^*(n,s,a)$ if and only if some rational agent of nature $n$ is required to do $a$ in $s$, fixes the requirements.
+\end{proposition}
+
+\begin{proof}
+If $\mathrm{Req}(x,s,a)$, then $x$ is an agent of nature $\nu(x)$ required to do $a$ in $s$, so $R^*(\nu(x),s,a)$. Conversely, suppose $R^*(\nu(x),s,a)$: some $y$ with $\nu(y) = \nu(x)$ is required to do $a$ in $s$. By Assumption~\ref{a:ident}, every evaluator's idealized reaction requires $a$ of $y$ in $s$; by Assumption~\ref{a:univ}, every evaluator's idealized reaction requires $a$ of $x$ in $s$; by Assumption~\ref{a:ident} again, $\mathrm{Req}(x,s,a)$.
+\end{proof}
+
+\begin{proposition}[Uniqueness of the standard]\label{p:unique}
+Any two standards that fix the requirements agree on every nature that some rational agent has.
+\end{proposition}
+
+\begin{proof}
+If $R$ and $R'$ both fix the requirements and $n = \nu(x)$, then $R(n,s,a)$ holds exactly when $\mathrm{Req}(x,s,a)$ does, and so exactly when $R'(n,s,a)$ does.
+\end{proof}
+
+Proposition~\ref{p:unique} says that there is one morality. The standard that fixes the requirements may be described in different ways, but on every nature that a possible rational agent has it is the same relation, and since the rational agents include the possible ones, standards that differ only on natures no rational agent could have do not differ in anything that bears on any agent.
+
+\begin{proposition}[Non-absoluteness]\label{p:nonabs}
+Morality is not absolute.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:div}, some $x$ is required to do $a$ in $s$ and some $y$ is not. If morality were absolute, $y$ would be required to do $a$ in $s$ because $x$ is.
+\end{proof}
+
+\begin{theorem}[Objectivity without absoluteness]\label{t:main}
+Morality is objective and nature-relative, and it is not absolute.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{t:obj} and Propositions~\ref{p:factor} and~\ref{p:nonabs}.
+\end{proof}
+
+\begin{corollary}[Variation is variation in nature]\label{c:nature}
+If $x$ is required to do $a$ in $s$ and $y$ is not, then $x$ and $y$ differ in nature.
+\end{corollary}
+
+\begin{proof}
+If $\nu(x) = \nu(y)$, then, by Assumptions~\ref{a:ident} and~\ref{a:univ} as in the proof of Proposition~\ref{p:factor}, $y$ would be required to do $a$ in $s$.
+\end{proof}
+
+\begin{corollary}[Absoluteness within a kind]\label{c:kind}
+Among rational agents of the same nature, morality is absolute: if $\nu(x) = \nu(y)$, then $x$ is required to do $a$ in $s$ exactly when $y$ is.
+\end{corollary}
+
+\begin{proof}
+Each direction follows from Corollary~\ref{c:nature}.
+\end{proof}
+
+Corollary~\ref{c:kind} explains why absolutism has seemed so plausible. The moral claims that human beings make and assess concern, almost without exception, agents of human nature. Restricted to them, morality is absolute: what is required of one human being in a situation is required of every human being in that situation. The absolutist generalizes from the human case to every rational being, and the generalization is the error. It is invisible as long as the only rational agents in view are human.
+
+\section{Defending the premises}\label{s:premises}
+
+\paragraph{Common rationality.} Assumption~\ref{a:common} says that idealization removes every difference between evaluators that could affect their verdicts. The idealized evaluator is fully informed, reasons without error and gives equal weight to everyone concerned. What is left to differ? Two things might be thought to remain: the evaluator's own nature, and her basic evaluative dispositions. The first is not left to differ, because the evaluator's nature enters her reaction only as a source of information or of partiality. As a source of information it is superseded by complete information, which includes the natures of everyone concerned; as a source of partiality it is excluded by the requirement of equal weight. A rational agent of another kind, considering a human being's situation, considers it with full knowledge of what it is to be human, and gives the human being's interests the weight she would give her own. The second, basic evaluative dispositions, is where the relativist locates divergence, and it is the place where the question of convergence is decided. We do not claim that every pair of actual agents would converge after idealization. We claim that the dispositions that would survive idealization are the same for every rational agent, because they are dispositions to respond to reasons, and reasons, as MTE-11 argues, are primitive features of situations, not projections of the evaluator. An evaluator whose idealized reaction diverged from another's on the same complete information would be responding to something other than the reasons it contains, and that is a failure of rationality, which the idealization excludes. This argument is not a proof of convergence. It is an argument that divergence after idealization is not a possibility the relativist can describe without describing a defect.
+
+\paragraph{Universalizability over natures.} Assumption~\ref{a:univ} combines two claims. The first is ordinary universalizability: two agents who differ only in which individuals they are cannot differ in what is required of them. The second is that the features of an agent that matter, once the situation is fixed, are features of her nature. The second claim depends on the division between nature and situation in Definitions~\ref{d:agents} and~\ref{d:claims}. Individual features that are not part of the nature of the kind, such as an agent's wealth, her skill, her promises and her relations to others, are assigned to the situation. What is left in the agent is her nature, and since requirements on action concern what the agent can do, what it costs her and what it does to others, and these are fixed by her nature together with her situation, nothing else remains to make a difference.
+
+\paragraph{Diversity.} Assumption~\ref{a:div} is the point of disagreement with the absolutist, and Section~\ref{s:cases} argues for it by cases. Its general ground is the following. A requirement on action depends on what the act would do to the agent and to others, on what the agent can do and on what she needs. All three vary with the nature of the agent. The cost of an act to its agent, which bounds what she may be required to do for others, depends on what injuries she can suffer and how she recovers from them. The benefits an act confers on its patients depend on the natures of the patients, which may be the same as the agent's, as in the case of duties to one's own offspring. And many practices that generate requirements, such as promising and the division of labour between parents, exist because of features of the nature of the agents who engage in them. An absolutist who holds that no act-type in any nature-neutrally specified situation is required of one rational agent and not of another must hold that none of these variations ever makes a difference to a requirement. That is implausible in each case, as we now argue, and incredible in all of them together.
+
+\section{Nature-relativity is not relativism}\label{s:notrel}
+
+\begin{proposition}\label{p:notrel}
+Relativism is false.
+\end{proposition}
+
+\begin{proof}
+If $\mathrm{Ideal}_e(x,s,a)$ held and $\mathrm{Ideal}_{e'}(x,s,a)$ did not, Lemma~\ref{l:inv} would be violated.
+\end{proof}
+
+\begin{proposition}[Diversity without disagreement]\label{p:nodis}
+There are rational agents $x$ and $y$ of different natures, a situation $s$ and an act $a$ such that every rational agent's idealized verdicts are that $x$ is required to do $a$ in $s$ and that $y$ is not.
+\end{proposition}
+
+\begin{proof}
+Take $x$, $y$, $s$ and $a$ as in Assumption~\ref{a:div}. They differ in nature by Corollary~\ref{c:nature}. By Theorem~\ref{t:obj}, every evaluator's idealized verdict is that $x$ is required and that $y$ is not.
+\end{proof}
+
+Proposition~\ref{p:nodis} states the difference between nature-relativity and relativism. Where the relativist sees two standpoints that disagree, we see two claims on which every standpoint agrees. A human being and a rational agent of another kind, considering what each of them is required to do in the same situation, reach the same pair of verdicts: that the act is required of the one and not of the other. There is variation in what is required, and no variation in what is judged. In the vocabulary of MTE-06, there is no first-order disagreement for a meta-disagreement to be about, and so the argument by which MTE-06 refutes relativism does not touch the present view. Relativism is self-refuting at the level of meta-disagreement because the relativist must say, of the disagreement between her own view and an absolutist framework, either that it too is relative, in which case relativism is true only relative to relativist frameworks, or that it is not, in which case some moral claim is true simpliciter. Nature-relativity faces no such choice, since it holds every claim to be true or false simpliciter. The claim that an act is required of agents of a given nature in a given situation is true for every assessor, and so is the claim that it is not required of agents of another nature.
+
+The analogy with nutrition is exact in the respect that matters. What is nutritious is relative to the organism: grass nourishes a cow and not a human being. But the claim that grass nourishes cows is not true for cows and false for human beings; it is true, and a human dietician knows it. Nutrition is relative in content and objective in assessment, and \citet{Bloomfield2001} has argued that moral properties are relevantly like health and nutrition. The analogy breaks down elsewhere, since moral requirements, unlike nutritional facts, bind and are assessed by the agents they concern, but it does not break down in the respect at issue.
+
+The two remaining propositions concern the premises themselves.
+
+\begin{proposition}[Consistency]\label{p:cons}
+Assumptions~\ref{a:info} to~\ref{a:div} are jointly satisfiable, and in any interpretation that satisfies them morality is objective and not absolute.
+\end{proposition}
+
+\begin{proof}
+Take two rational agents of different natures, one situation and one act; let the complete information about an agent's doing the act be the identity of the agent's nature, let every evaluator react to it by requiring the act exactly when the nature is the first, and let the act be required of the first agent and not of the second. All five assumptions hold. The second claim is Theorem~\ref{t:main}.
+\end{proof}
+
+\begin{proposition}[The work of common rationality]\label{p:work}
+Without Assumption~\ref{a:common}, Assumptions~\ref{a:info}, \ref{a:ident} and~\ref{a:univ} do not exclude relativism.
+\end{proposition}
+
+\begin{proof}
+Take two rational agents of different natures, one situation and one act, and let each evaluator's idealized reaction require the act of an agent exactly when that agent is the evaluator herself. Then each agent's verdict on her own case differs from the other's, so relativism holds, and common rationality fails. No agent is required to do the act, since not every reaction requires it of anyone, so Assumption~\ref{a:ident} holds; and since the two agents differ in nature, Assumption~\ref{a:univ} holds trivially.
+\end{proof}
+
+Proposition~\ref{p:cons} answers the absolutist who holds that objectivity without absoluteness is incoherent: the premises have a model, and in it both conclusions hold. Proposition~\ref{p:work} locates the burden of the argument against relativism precisely. It is carried by the convergence of idealized reactions, not by the identification of moral facts with such reactions or by universalizability. A theory of idealized reactions without convergence is compatible with relativism, as Harman's and Wong's views illustrate in different ways; MTE-01 needs convergence to be a realism, and the present argument needs it to be an objectivism.
+
+\section{Cases}\label{s:cases}
+
+The following cases support Assumption~\ref{a:div}. Each describes a situation in nature-neutral terms, an act, and two possible rational agents of different natures, one of whom is required to do the act and the other not. We take the verdicts to be those that an idealized human evaluator would reach, which is the only test available to us; by Theorem~\ref{t:obj}, if the premises are true, they are the verdicts every idealized evaluator reaches.
+
+\paragraph{The cost of rescue.} A stranger is in pain that the agent can relieve only by plunging her arm into fire for some minutes. A human being is not required to do this; the injury would maim her, and ETH-14 argues that acts of beneficence above the level of decency are supererogatory. A rational agent of a kind whose tissues regenerate within the hour, and for whom the burn is a passing pain, is required to do it, since refusing would be the refusal of a modest sacrifice to relieve great suffering. The situation, the act and the patient are the same. What differs is what the act does to the agent, and that is fixed by her nature. The absolutist may say that the same principle, \enquote{relieve great suffering at modest cost}, governs both. We take up this reply in Objection~\ref{o:principle}.
+
+\paragraph{Parental duties.} An infant of the agent's kind has been left in the agent's care. For a human being the care required is long and demanding, because human infants are helpless for years. Consider a rational kind whose young are born able to fend for themselves and who suffer no loss from being left to do so. A member of that kind who leaves the newborn to its own devices after seeing it safely born does nothing wrong; a human being who did the same would commit a grave wrong. The situation is specified in the same terms, \enquote{an infant of the agent's kind is in her care}, and the verdicts differ because the natures of agent and patient differ together.
+
+\paragraph{Sleep and the division of labour.} Two colleagues have agreed to take turns watching over a sick patient through the night. For human beings, who must sleep, the agreement requires each to relieve the other at the agreed hour, and a colleague who does not is in breach. For a rational kind that does not sleep and does not tire, there is no hardship in the other's continuing, and the requirement to relieve at the hour, if there is one, is a matter of the terms of their agreement, not of the hardship the agreement exists to prevent. Here the variation is in what the requirement rests on, and with it in its stringency.
+
+\paragraph{Promising.} Promising is a practice that serves agents who need to rely on one another's future conduct and cannot otherwise know it. Consider a rational kind whose intentions are reliably perceived by others, so that each knows what the others will do as soon as they have settled on it. Such agents have little use for promises, and the requirement not to make lying promises, which Kant treated as holding for every rational being, has nothing to apply to among them, since a lying promise is impossible where intentions are transparent. The requirement is not violated by such agents, and it is not required of them; it is a requirement whose content presupposes a nature that they lack.
+
+\paragraph{Patients of different natures.} The cases so far vary the agent's nature. Variation in the nature of patients is more familiar, and less contested. ETH-07 argues that sentience is necessary and sufficient for moral status and that the degree of a being's status varies with its capacity for welfare, which depends on its nature. What an agent owes a being depends on what can go well or badly for it, and so on its nature: a rational agent who could cause a non-sentient system any state she liked would wrong no one, while a rational agent who caused a sentient being distress would wrong it. Since our situations may specify patients by their natures, this variation does not by itself bear on Assumption~\ref{a:div}; the absolutist accepts it as part of the situation. It is nonetheless the clearest instance of the general point that requirements depend on natures, and the agent-relative cases above extend the point from the patients of an act to its agent.
+
+\paragraph{Invariant requirements.} Some requirements may hold for every possible rational agent, such as the requirement not to destroy rational agency for no reason. The existence of such requirements is compatible with Theorem~\ref{t:main}, which denies only that every requirement is invariant. It is worth noting why they hold. They hold, if they do, because every rational nature includes the features the requirement concerns: every rational agent has rational agency to lose. Their invariance is a consequence of what every rational nature shares, not of independence from natures, and a requirement that holds for every rational agent for this reason is still fixed by the standard $R^*$ of Proposition~\ref{p:factor}, which happens to give it the same value on every rational nature.
+
+\section{Recent work}\label{s:recent}
+
+The relativist programmes of the last two decades have been more sophisticated than Harman's, and they illustrate both the attraction of the view and the place where it fails.
+
+\citet{Wong2006} argues that there is no single true morality, but a plurality of adequate moralities, each constrained by universal features of human nature and by the function of morality in promoting cooperation and regulating conflict. Two of Wong's claims are close to ours: that human nature constrains the content of morality, and that the constraint is objective. He adds that within the constraints several moralities are equally adequate, and that the truth of a moral judgment is relative to the adequate morality of the speaker's community. The addition is where we part company. On Wong's view, two communities with different adequate moralities disagree about whether, for instance, individual rights take priority over the good of the community, and neither is mistaken. On ours, if the members of both communities are human, Corollary~\ref{c:kind} implies that the same requirements bind them, and their disagreement is a disagreement in which at least one is mistaken, though perhaps excusably and about a hard question. Wong's evidence for plurality, the persistence of reasonable disagreement between moral traditions, is evidence of difficulty, not of the absence of a fact; MTE-12 argues that moral disagreement is no deeper than disagreement in other theoretical domains.
+
+\citet{Prinz2007} defends a sentimentalist relativism: moral judgments express emotional dispositions acquired through enculturation, and their truth is relative to the dispositions of the judge. \citet{Velleman2013} argues, from the ethnographic record, that there is no universal morality, and that the reasons of a community depend on its shared practices of mutual interpretation. Both rest the case for relativism on variation in actual moral sentiment. Both face the question that Assumption~\ref{a:common} answers: whether the variation would survive idealization. Our argument does not depend on a conjecture about the outcome of idealization in particular cases. It depends on the claim, defended in Section~\ref{s:premises}, that variation that survived full information, error-free reasoning and equal weight would be variation in responsiveness to reasons, which is a failure of rationality.
+
+A different form of relativism has been developed in the philosophy of language. \citet{Kolbel2004} argued for the possibility of faultless disagreement, in which two thinkers disagree and neither is at fault, and \citet{MacFarlane2014} has developed a semantics on which the truth of some assertions is relative to a context of assessment. These theories give the relativist a precise account of what it would be for a moral claim to be true relative to a standpoint. They do not supply an argument that moral claims are of this kind, and Proposition~\ref{p:notrel} shows that, if Assumptions~\ref{a:info} to~\ref{a:ident} hold, they are not. The assessment-sensitive semantics is a candidate semantics for claims about which idealized assessors would diverge, and moral claims are not among them.
+
+On the other side, the robust realists \citet{Enoch2011} and \citet{Parfit2011} defend moral truths that are objective in our sense, and both tend to describe them as holding for all rational beings without qualification. Their arguments for objectivity are compatible with Theorem~\ref{t:main}, since nothing in them requires that the content of moral truths be fixed without reference to natures, and Parfit's own examples of normative truths, such as the truth that we have reasons to avoid agony, concern features of beings that can suffer agony. The neo-Aristotelian programme of \citet{Foot2001}, \citet{Thompson2008} and \citet{Hursthouse1999} supplies what the robust realists leave implicit: an account of how the content of evaluation depends on the life form evaluated. Our contribution to that programme is to show how objectivity is secured across life forms, which the neo-Aristotelians have not addressed, since their evaluations are internal to the life form and they have not asked whether a rational being of one form would recognize the standard of another.
+
+Finally, Korsgaard's constructivism holds that moral requirements derive from the standpoint of rational agency and from the requirement that one value one's own humanity \citep{Korsgaard1996}. Korsgaard is an absolutist about the form of morality and allows that its content is shaped by the practical identities agents adopt. MTE-18 examines constructivism; for present purposes we note that the standard $R^*$ plays the role of a procedure that is the same for every rational agent and yields different outputs for agents of different natures, and that it is in this sense that a constructivist could accept our conclusion.
+
+\section{Objections}
+
+\begin{objection}[Application, not content]\label{o:principle}
+The cases show that the same principles apply differently to agents of different natures. The principle of beneficence, \enquote{relieve great suffering at modest cost to yourself}, holds for every rational agent; it requires the regenerating agent to burn her arm and not the human being, because the cost differs. The content of morality is the principle, and the principle is absolute.
+\end{objection}
+
+\begin{reply}
+We accept the description and deny that it supports absoluteness. The principle quantifies over costs, and costs are costs to an agent of a given nature. So stated, it is a component of the standard $R^*$ of Proposition~\ref{p:factor}: a function from natures and situations to requirements. That this function is the same for every rational agent is Proposition~\ref{p:unique}, and it is part of our view. What the objection calls content we call the standard; what we call content, the verdict that a given act is required of a given agent in a given situation, varies with nature, which is what absoluteness denies. The objector can retain the word \enquote{absolute} for the standard, but then her absolutism is our objectivity, and her view is ours. Kant's absolutism is not of this kind, since Kant held that the content of the moral law, and not merely its form, is to be derived without reference to the nature of any kind of rational being; and the promising case shows that his own example of an invariant requirement presupposes a nature that some rational beings lack.
+\end{reply}
+
+\begin{objection}[Nature is just more situation]
+The distinction between the agent's nature and her situation is arbitrary. Include the nature in the situation, and morality becomes absolute: every agent in a situation that includes being a regenerating agent is required to burn her arm.
+\end{objection}
+
+\begin{reply}
+The redescription is available, and it shows that absoluteness so understood is trivial. If situations may include every feature of the agent, then any variation in requirement whatever, including variation by personal identity, can be absorbed into the situation, and absoluteness holds on every theory, relativism included. A thesis that no theory could violate is not the thesis absolutists have held. Kant's claim was that moral requirements can be derived for every rational being from rational agency alone; it is false if requirements depend on features of agents that rational agency does not fix, and the redescription conceals this dependence rather than removing it. Definition~\ref{d:claims} draws the line where the substantive question lies: at the features of an agent that are fixed by her kind but not by her rationality.
+\end{reply}
+
+\begin{objection}[Parochial idealization]
+The idealized reactions are those of an evaluator who gives equal weight to everyone concerned and reasons without error. These are human ideals. A rational agent of another kind might idealize differently, and Assumption~\ref{a:common} begs the question by building human ideals into rationality.
+\end{objection}
+
+\begin{reply}
+The conditions of Definition~\ref{d:ideal} are not specifically human. Full information, attention, error-free reasoning and impartiality are conditions on judging well that any agent capable of assessing claims about what others are required to do must recognize, since an agent who did not recognize that ignorance, inattention, error and partiality distort judgment would not be assessing such claims at all. What might differ between kinds is the content of their unidealized reactions, and that difference is what the idealization is designed to remove. An evaluator of another kind who, fully informed and impartial, reacted to a human being's agony with indifference would not be exhibiting a different idealization; she would be failing to respond to the reasons that the information contains.
+\end{reply}
+
+\begin{objection}[Darwin's bees]
+If human beings had evolved as hive-bees, they would have held it a sacred duty to kill their brothers. By the argument of the manuscript, the requirement would then be true of them. But the requirement is monstrous; a theory that makes it true is refuted.
+\end{objection}
+
+\begin{reply}
+The theory does not make Darwin's requirement true. Darwin described the beliefs a bee-like conscience would contain, and those beliefs, like any beliefs, may be false. Whether rational agents with the nature of hive-bees would be required to kill their brothers depends on whether idealized reactions to the complete information about their situation, including the brothers' capacity for welfare and the alternatives open to the colony, would require it. We doubt that they would, since the brothers are sentient and their killing would be required only if no less harmful arrangement could serve the colony. What the theory implies is that the question is open in a way that the corresponding question about human beings is not, since it concerns a different nature. Our moral horror at the description is a reaction to the killing of brothers by agents of our nature, and its authority for agents of another nature is precisely what is in question. MTE-09 argues that evolution selected for tracking reasons; it follows that an evolved conscience is not thereby correct, and it does not follow that every evolved conscience tracks the same reasons, since the reasons depend on the nature.
+\end{reply}
+
+\begin{objection}[Possibility of the cases]
+The cases describe rational agents of kinds that do not exist and perhaps could not. Rationality may require a nature much like ours: mortality, vulnerability, dependence. If every possible rational agent shares our nature in the respects that matter, Assumption~\ref{a:div} is false.
+\end{objection}
+
+\begin{reply}
+The conditions under which rationality is possible are an empirical and partly a priori question, but nothing we know suggests that rationality requires helpless infancy, sleep or a particular rate of tissue repair, and the cases vary only such features. Even if the actual rational agents were all human, the thesis concerns the possible ones, as Kant's thesis did: his claim was that the moral law holds for all rational beings as such. If, contrary to what we believe, every possible rational nature agreed in every respect that bears on requirement, then Corollary~\ref{c:kind} would make morality absolute in fact; but it would still not be absolute in Kant's sense, since its invariance would be due to the uniformity of rational natures and not to the independence of content from nature.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} is conditional on its premises, and the most substantive of them, the convergence of idealized reactions, is defended here only by argument, not proved. If idealized human evaluators would not converge on hard questions, as ETH-01-a allows when it predicts incomparability where idealized endorsement diverges, then on those questions there is no requirement either way, by Assumption~\ref{a:ident}; objectivity survives, since there is nothing for evaluators to disagree about, but the domain of moral truth is smaller. The result does not say what the standard $R^*$ requires of any nature, which is the task of normative ethics. It does not establish that there are rational agents of natures other than ours, actual or possible; it requires only that some possible rational natures differ in the ways described in Section~\ref{s:cases}. And it does not decide whether every moral truth that holds for human beings holds for every rational agent of human nature in every possible world; that depends on whether natures, as fixed by real definitions, are modally stable, which is a question for MET-13.
+
+The companion manuscript MTE-02-b applies the framework to rational agents that are not human.
+
+\section{Formalization}\label{s:formal}
+
+The results of Sections~\ref{s:argument} and~\ref{s:notrel} are formalized in \nolinkurl{Philosophy/MTE/MTE_02.lean}. Agents, natures, situations, acts and bodies of complete information are primitive types; the nature of an agent, the complete information about an act, requirement and the idealized reaction of an evaluator are primitive constants. Assumption~\ref{a:info} is built into the type of the information function, which takes no evaluator as argument; Assumptions~\ref{a:common} to~\ref{a:div} are axioms. Definitions~\ref{d:ideal} to~\ref{d:relativism} are definitions. The main theorem reads:
+
+\begin{lstlisting}
+theorem objective_not_absolute :
+    Objective ∧ NatureRelative ∧ ¬ Absolute
+\end{lstlisting}
+
+\noindent The checker reports, for Theorem~\ref{t:main}, Proposition~\ref{p:notrel} (\texttt{not\_relativism}) and Propositions~\ref{p:cons} and~\ref{p:work} (\texttt{consistency}, \texttt{relativism\_without\_common}):
+
+\begin{lstlisting}
+'Philosophy.MTE_02.objective_not_absolute' depends on axioms:
+  [Act, Agent, Nature, Required, Resp, Sit, common_rationality,
+   diversity, identification, info, nature, universalizability]
+'Philosophy.MTE_02.not_relativism' depends on axioms:
+  [Act, Agent, Resp, Sit, common_rationality, info]
+'Philosophy.MTE_02.consistency' does not depend on any axioms
+'Philosophy.MTE_02.relativism_without_common' does not depend
+  on any axioms
+\end{lstlisting}
+
+\begin{sloppypar}\noindent (Namespace prefixes omitted.) Here \texttt{common\_rationality}, \texttt{identification}, \texttt{universalizability} and \texttt{diversity} are Assumptions~\ref{a:common}, \ref{a:ident}, \ref{a:univ} and~\ref{a:div}; the remaining names are the primitive types and constants. Proposition~\ref{p:notrel} depends on common rationality alone among the philosophical premises, which is the formal counterpart of Proposition~\ref{p:work}. Propositions~\ref{p:cons} and~\ref{p:work} are proved in concrete two-agent models, defined as instances of a structure that interprets the primitives, and depend on no axioms at all; the first shows that the axioms of the module are jointly satisfiable. Lemma~\ref{l:inv}, Theorem~\ref{t:obj}, Propositions~\ref{p:factor}, \ref{p:unique}, \ref{p:nonabs} and~\ref{p:nodis} and Corollaries~\ref{c:nature} and~\ref{c:kind} are formalized as \texttt{standpoint\_invariance}, \texttt{objectivity}, \texttt{factorization}, \texttt{standard\_unique}, \texttt{not\_absolute}, \texttt{diversity\_without\_disagreement}, \texttt{variation\_is\_in\_nature} and \texttt{absolute\_within\_kind}. The formalization does not cover the defence of the premises or the cases of Section~\ref{s:cases}.
+\end{sloppypar}
+
+\section{Conclusion}
+
+Objectivity concerns the standpoint from which moral claims are assessed, absoluteness the content of the claims assessed. Given that moral facts are facts about idealized reactions, that idealized reactions converge, that requirements are universalizable over natures, and that some possible rational agents differ in nature in ways that bear on what they are required to do, morality is objective, its requirements are fixed by a unique standard on natures, and it is not absolute; all variation in requirement is variation in nature, and within each kind morality is absolute. The variation involves no disagreement between standpoints, and so is not relativism. Moral truths hold for all rational agents; what they say depends on the nature of the agents concerned.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bloomfield(2001)]{Bloomfield2001} Bloomfield, P. (2001). \emph{Moral Reality}. Oxford University Press.
+\bibitem[Darwin(1871)]{Darwin1871} Darwin, C. (1871). \emph{The Descent of Man, and Selection in Relation to Sex}. John Murray.
+\bibitem[Enoch(2011)]{Enoch2011} Enoch, D. (2011). \emph{Taking Morality Seriously: A Defense of Robust Realism}. Oxford University Press.
+\bibitem[Firth(1952)]{Firth1952} Firth, R. (1952). Ethical absolutism and the ideal observer. \emph{Philosophy and Phenomenological Research}, 12(3), 317--345.
+\bibitem[Foot(2001)]{Foot2001} Foot, P. (2001). \emph{Natural Goodness}. Clarendon Press.
+\bibitem[Harman(1975)]{Harman1975} Harman, G. (1975). Moral relativism defended. \emph{The Philosophical Review}, 84(1), 3--22.
+\bibitem[Herodotus()]{Herodotus} Herodotus. \emph{Histories}.
+\bibitem[Hume(1739--40)]{HumeTreatise} Hume, D. (1739--40). \emph{A Treatise of Human Nature}.
+\bibitem[Hume(1751)]{HumeEnquiryMorals} Hume, D. (1751). \emph{An Enquiry Concerning the Principles of Morals}.
+\bibitem[Hursthouse(1999)]{Hursthouse1999} Hursthouse, R. (1999). \emph{On Virtue Ethics}. Oxford University Press.
+\bibitem[Kant(1785)]{KantGroundwork} Kant, I. (1785). \emph{Grundlegung zur Metaphysik der Sitten}. Cited by the pagination of the Akademie edition.
+\bibitem[Kant(1797)]{KantMetaphysicsMorals} Kant, I. (1797). \emph{Die Metaphysik der Sitten}.
+\bibitem[K\"olbel(2004)]{Kolbel2004} K\"olbel, M. (2004). Faultless disagreement. \emph{Proceedings of the Aristotelian Society}, 104, 53--73.
+\bibitem[Korsgaard(1996)]{Korsgaard1996} Korsgaard, C.~M. (1996). \emph{The Sources of Normativity}. Cambridge University Press.
+\bibitem[MacFarlane(2014)]{MacFarlane2014} MacFarlane, J. (2014). \emph{Assessment Sensitivity: Relative Truth and Its Applications}. Oxford University Press.
+\bibitem[Parfit(2011)]{Parfit2011} Parfit, D. (2011). \emph{On What Matters}. Oxford University Press.
+\bibitem[Plato()]{Theaetetus} Plato. \emph{Theaetetus}.
+\bibitem[Prinz(2007)]{Prinz2007} Prinz, J.~J. (2007). \emph{The Emotional Construction of Morals}. Oxford University Press.
+\bibitem[Railton(1986)]{Railton1986} Railton, P. (1986). Moral realism. \emph{The Philosophical Review}, 95(2), 163--207.
+\bibitem[Smith(1994)]{Smith1994} Smith, M. (1994). \emph{The Moral Problem}. Blackwell.
+\bibitem[Thompson(2008)]{Thompson2008} Thompson, M. (2008). \emph{Life and Action: Elementary Structures of Practice and Practical Thought}. Harvard University Press.
+\bibitem[Velleman(2013)]{Velleman2013} Velleman, J.~D. (2013). \emph{Foundations for Moral Relativism}. Open Book Publishers.
+\bibitem[Williams(1985)]{Williams1985} Williams, B. (1985). \emph{Ethics and the Limits of Philosophy}. Harvard University Press.
+\bibitem[Wong(1984)]{Wong1984} Wong, D.~B. (1984). \emph{Moral Relativity}. University of California Press.
+\bibitem[Wong(2006)]{Wong2006} Wong, D.~B. (2006). \emph{Natural Moralities: A Defense of Pluralistic Relativism}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

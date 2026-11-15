@@ -1,0 +1,187 @@
+\documentclass{situationist-preprint}
+
+\title{Parmenides and the Two Senses of \enquote{Is}}
+\msid{MET-21-a}
+\msfamily{MET-21}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_21.lean}
+\mskeywords{Parmenides; change; being; not-being; existential and predicative \enquote{is}; equivocation; Eleatic ontology}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Parmenides argued that change is impossible: whatever changes must come to be from what is not, and what is not cannot be. We argue that change is possible and that the argument fails because it equivocates between the existential and the predicative uses of \enquote{is}. On the predicative reading, the first premise is true, since what becomes $F$ was not $F$, but the second is false, since there are many things that are not $F$. On the existential reading, the second premise is true, since everything exists, but the first is false, since change requires no non-existent thing. The argument is valid only if the two readings are bridged by a collapse principle, on which whatever is not $F$ does not exist. We prove that this principle entails that nothing exists, since everything fails to be something, and that it is therefore false given that anything exists. We also exhibit a model in which everything exists and something changes. The proofs are formalized in Lean. The diagnosis follows Plato and Aristotle in substance, and it relies on the thesis of MET-24 that existence is a first-order property had by everything.
+\end{abstract}
+
+\section{The argument}
+
+In the poem of Parmenides, the goddess sets out two routes of inquiry, that it is and that it is not, and declares the second wholly unlearnable, since what is not can neither be known nor spoken of (DK 28 B2, B6). From this she derives, in fragment B8, that what is is ungenerated and imperishable, whole, unmoved and complete. The argument against generation runs, in paraphrase, as follows: what is could not have come to be from what is not, since what is not can neither be said nor thought; and nothing could have prompted it to come to be later rather than earlier \citep{Barnes1979}. Later tradition generalized the argument from generation to every kind of change. Aristotle reports that the earliest philosophers were led by it to deny coming to be altogether, on the ground that whatever comes to be must come either from what is or from what is not, and both are impossible (\emph{Physics} I.8, 191a23--33).
+
+In its general form, the argument has two premises and a conclusion.
+\begin{enumerate}[label=(\arabic*)]
+\item If something changes, it comes to be what it is from what is not.
+\item What is not, is not: there is nothing that is not.
+\item Therefore nothing changes.
+\end{enumerate}
+
+We argue that the argument equivocates on \enquote{is not}, and that once the equivocation is removed, no reading makes both premises true. This is in substance the diagnosis of Plato, who in the \emph{Sophist} distinguished not-being as difference from not-being as the contrary of being (\emph{Sophist} 256d--259b), and of Aristotle, who held that what comes to be comes from what is not $F$ \emph{per accidens}, from a subject that is but is not yet $F$ (\emph{Physics} I.8, 191b13--27). Both diagnoses are developed in the texts cited \citep{PlatoSoph,AristotlePhys}. Our contribution is to state the diagnosis in terms of the modern distinction between the existential and the predicative uses of \enquote{is}, to identify the principle on which the argument's validity depends, and to prove that this principle is not merely unsupported but inconsistent with the existence of anything.
+
+The interpretation of Parmenides' \emph{esti} is contested. \citet{Owen1960} read it as existential; \citet{Kahn1966,Kahn1973} argued that the dominant Greek use of the verb is predicative or veridical, and that the existential use is not separately marked; \citet{Mourelatos1970} proposed a predicative reading on which \enquote{what is} is what is something or other in its own nature; and \citet{Furth1968} proposed that Parmenides' \enquote{is} fuses the existential and predicative uses. We do not need to decide which reading is historically correct. Our thesis is that on every reading the argument fails, and the fused reading is exactly the collapse principle whose consequences we derive.
+
+\section{Framework}
+
+\begin{definition}[Predicative \enquote{is}]\label{d:pred}
+A \emph{predicative} use of \enquote{is} attributes a property to an object at a time: \enquote{$x$ is $F$ at $t$}. Its negation, \enquote{$x$ is not $F$ at $t$}, says that $x$ lacks $F$ at $t$.
+\end{definition}
+
+\begin{definition}[Change]\label{d:change}
+An object $x$ \emph{changes} with respect to $F$ if there are times $t$ and $t'$ such that $x$ is $F$ at $t$ and $x$ is not $F$ at $t'$. \emph{Change occurs} if some object changes with respect to some property.
+\end{definition}
+
+\begin{assumption}\label{a:exist}
+The existential use of \enquote{is} expresses a first-order property, existence, and everything has it.
+\end{assumption}
+
+Assumption~\ref{a:exist} is the conclusion of MET-24, on which existence is a first-order property had by everything, and Meinongian objects do not exist and are not in the domain of quantification. It entails that \enquote{$x$ is not}, in the existential sense, is false of every $x$, which is one way of stating the second premise of Parmenides' argument.
+
+\begin{definition}[Collapse]\label{d:collapse}
+The \emph{collapse principle} states that, for every property $F$, object $x$ and time $t$, if $x$ is not $F$ at $t$, then $x$ does not exist.
+\end{definition}
+
+The collapse principle is the bridge that would allow the predicative \enquote{is not}, which occurs in the first premise on its true reading, to be replaced by the existential \enquote{is not}, which occurs in the second premise on its true reading. It is what one asserts if one holds, with Furth's Parmenides, that to be is to be something, and to fail to be something is to fail to be.
+
+\section{The diagnosis}
+
+\begin{lemma}\label{l:pred}
+On the predicative reading, premise (1) is true: if $x$ changes with respect to $F$, then at some time $x$ is not $F$.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:change}, if $x$ changes with respect to $F$, there is a time $t'$ at which $x$ is not $F$.
+\end{proof}
+
+\begin{lemma}\label{l:exist}
+On the existential reading, premise (2) is true: there is nothing that does not exist.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:exist}, everything exists.
+\end{proof}
+
+\begin{proposition}\label{p:valid}
+Given the collapse principle and Assumption~\ref{a:exist}, change does not occur.
+\end{proposition}
+
+\begin{proof}
+Suppose $x$ changes with respect to $F$. Then $x$ is not $F$ at some time $t'$, by Lemma~\ref{l:pred}. By the collapse principle, $x$ does not exist. By Assumption~\ref{a:exist}, $x$ exists, a contradiction.
+\end{proof}
+
+Proposition~\ref{p:valid} shows that the argument is valid when its premises are read as Lemma~\ref{l:pred} and Lemma~\ref{l:exist} read them, provided the collapse principle is added. The collapse principle is therefore the hidden premise of the argument, and the equivocation consists in treating it as if it were a truism about \enquote{is not}. It is not a truism. It is false, and it is false in a way that leaves no room for repair.
+
+\begin{theorem}\label{t:annihilate}
+The collapse principle entails that nothing exists.
+\end{theorem}
+
+\begin{proof}
+Let $x$ be any object and $t$ any time. Let $F$ be the property of being a round square, which nothing has. Then $x$ is not $F$ at $t$, and by the collapse principle $x$ does not exist.
+\end{proof}
+
+The proof uses a property that nothing has, but it does not depend on the choice. For any property $F$ whatever, each object either lacks $F$ or lacks its complement, and so, by the collapse principle, fails to exist. A principle that takes the lack of any property to be the lack of existence leaves nothing in existence, since every object lacks some property.
+
+\begin{corollary}\label{c:false}
+Given Assumption~\ref{a:exist}, if there is any object, the collapse principle is false.
+\end{corollary}
+
+\begin{proof}
+If there is an object, it exists by Assumption~\ref{a:exist}, and by Theorem~\ref{t:annihilate} it does not, if the collapse principle holds.
+\end{proof}
+
+\begin{proposition}\label{p:possible}
+On the existential reading, premise (1) is false if change occurs. Moreover, change is consistent with the thesis that everything exists: there is a model in which everything exists and something changes.
+\end{proposition}
+
+\begin{proof}
+On the existential reading, premise (1) says that whatever changes comes from something that does not exist. If something changes, this would require a non-existent thing, contrary to Lemma~\ref{l:exist}; so if change occurs, premise (1) on this reading is false. For the second claim, take a model with one object, two times $t_1$ and $t_2$, and a property that the object has at $t_1$ and lacks at $t_2$, and let existence hold of the object. In the model, everything exists and the object changes.
+\end{proof}
+
+The four readings of the argument can now be tabulated. On the uniform predicative reading, premise (1) is true and premise (2), which then says that nothing lacks any property, is false. On the uniform existential reading, premise (2) is true and premise (1), which then says that change requires a non-existent source, is false whenever change occurs; and Proposition~\ref{p:possible} shows that nothing in the existential premise excludes change. On the mixed reading, with predicative \enquote{is not} in (1) and existential \enquote{is not} in (2), both premises are true, but the argument is invalid unless the collapse principle is added, and the collapse principle is false by Corollary~\ref{c:false}. The fused reading is the collapse principle itself. On no reading is the argument both valid and sound.
+
+\section{Objections}
+
+\begin{objection}[The veridical reading]
+\citet{Kahn1966} argues that Parmenides' \emph{esti} is veridical: \enquote{it is} means \enquote{it is the case}. The diagnosis in terms of existential and predicative uses misses the argument.
+\end{objection}
+
+\begin{reply}
+On the veridical reading, premise (2) says that what is not the case is not the case, which is true; premise (1) says that whatever changes comes to be from what is not the case. If this means that the state of affairs of $x$'s being $F$ at $t'$ was not the case at $t$, it is true and harmless, since a state of affairs that does not obtain at one time may obtain at another. If it means that the changing thing comes from something that is not the case \emph{simpliciter}, it is false for the reasons given in Proposition~\ref{p:possible}. The veridical reading reproduces the equivocation, with \enquote{not the case at a time} in place of the predicative \enquote{is not}.
+\end{reply}
+
+\begin{objection}[Thinkability]
+Parmenides' premise is not that what is not does not exist, but that it cannot be thought or spoken of (B2, B6). Change requires that we think of what is not yet, and this is impossible.
+\end{objection}
+
+\begin{reply}
+To think that the leaf, now green, will be red is to think of the leaf, which exists, that it will have a property it now lacks. The thought is about an existing object and a property, and requires no object that does not exist. The premise that one cannot think of what is not is true on the existential reading, given MET-24, since there are no non-existent objects to think about; it does not prevent us from thinking of existing objects that they are not $F$.
+\end{reply}
+
+\begin{objection}[Coming to be]
+The argument in B8 concerns generation, not alteration. A thing that comes into existence does come from what is not, in the existential sense, since before its generation it did not exist.
+\end{objection}
+
+\begin{reply}
+Before the generation of a statue, there was no statue; there was bronze, which existed. Generation is change in what there is at a time, and it requires that at an earlier time there be nothing that is the later object, not that there be a non-existent object from which it comes. Aristotle's analysis of generation as a change in a persisting substratum (\emph{Physics} I.7) makes the point for the cases he considered, and it extends to generation in general: what comes to be comes from things that exist and are not yet arranged as it is.
+\end{reply}
+
+\begin{objection}[Begging the question]
+Assumption~\ref{a:exist} assumes that everything exists, which Parmenides would grant; but it also presupposes that existence is a property that might be absent, which is what he denies.
+\end{objection}
+
+\begin{reply}
+The diagnosis does not require that existence be absent from anything. On the view of MET-24, existence is a first-order property that everything has, and the existential \enquote{is not} is false of everything. This is exactly Parmenides' second premise, which we accept. What we deny is that the predicative \enquote{is not} entails the existential one, and Theorem~\ref{t:annihilate} shows that Parmenides himself could not accept that entailment without denying that what is, is.
+\end{reply}
+
+\section{Formalization}
+
+Lemmas~\ref{l:pred} and~\ref{l:exist}, Proposition~\ref{p:valid}, Theorem~\ref{t:annihilate}, Corollary~\ref{c:false} and Proposition~\ref{p:possible} are formalized in \nolinkurl{Philosophy/MET/MET_21.lean}. Objects and times are primitive types; existence is a primitive predicate of objects, and Assumption~\ref{a:exist} is the axiom that it holds of everything. The collapse principle is a definition. The main results read as follows.
+
+\begin{lstlisting}
+theorem parmenides_valid (hC : Collapse) : ¬ ChangeOccurs
+theorem collapse_false (x : Obj) : ¬ Collapse
+theorem change_consistent :
+    ∃ (O T : Type) (E : O → Prop) (F : O → T → Prop),
+      (∀ x, E x) ∧ ∃ x t t', F x t ∧ ¬ F x t'
+\end{lstlisting}
+
+The output of \texttt{\#print axioms} is:
+
+\begin{lstlisting}
+'Philosophy.MET_21.parmenides_valid' depends on axioms:
+ [Philosophy.MET_21.Exists, Philosophy.MET_21.Obj,
+  Philosophy.MET_21.Time, Philosophy.MET_21.existence_universal]
+'Philosophy.MET_21.collapse_false' depends on axioms:
+ [Philosophy.MET_21.Exists, Philosophy.MET_21.Obj,
+  Philosophy.MET_21.Time, Philosophy.MET_21.existence_universal,
+  Philosophy.MET_21.t0]
+'Philosophy.MET_21.change_consistent' does not depend on any axioms
+\end{lstlisting}
+
+\texttt{Obj}, \texttt{Time} and \texttt{Exists} introduce the primitives; \texttt{existence\_universal} is Assumption~\ref{a:exist}; \texttt{t0} states that there is at least one time, which Theorem~\ref{t:annihilate} uses to evaluate the collapse principle. The consistency of change is established by an explicit model and depends on no axiom.
+
+\section{Conclusion}
+
+Change is possible. Parmenides' argument against it is valid only with a premise that takes \enquote{$x$ is not $F$} to entail \enquote{$x$ is not}, and that premise entails that nothing exists, since everything is not something. Read without it, the argument equivocates: its first premise is true of the predicative \enquote{is}, its second of the existential \enquote{is}, and no single reading makes both true. Everything exists, as Parmenides held and as MET-24 argues, and some of the things that exist are not now what they were. The companion manuscript MET-21-b takes up Zeno's arguments against motion, which do not rest on the equivocation.
+
+\begin{thebibliography}{9}\small
+\bibitem[Aristotle(Physics)]{AristotlePhys} Aristotle. \emph{Physics}, Book I.
+\bibitem[Barnes(1979)]{Barnes1979} Barnes, J. (1979). \emph{The Presocratic Philosophers}. Routledge \& Kegan Paul.
+\bibitem[Furth(1968)]{Furth1968} Furth, M. (1968). Elements of Eleatic ontology. \emph{Journal of the History of Philosophy}, 6, 111--132.
+\bibitem[Kahn(1966)]{Kahn1966} Kahn, C.~H. (1966). The Greek verb \enquote{to be} and the concept of being. \emph{Foundations of Language}, 2, 245--265.
+\bibitem[Kahn(1973)]{Kahn1973} Kahn, C.~H. (1973). \emph{The Verb \enquote{Be} in Ancient Greek}. Reidel.
+\bibitem[Mourelatos(1970)]{Mourelatos1970} Mourelatos, A.~P.~D. (1970). \emph{The Route of Parmenides}. Yale University Press.
+\bibitem[Owen(1960)]{Owen1960} Owen, G.~E.~L. (1960). Eleatic questions. \emph{The Classical Quarterly}, 10(1), 84--102.
+\bibitem[Plato(Sophist)]{PlatoSoph} Plato. \emph{Sophist}.
+\end{thebibliography}
+
+\end{document}

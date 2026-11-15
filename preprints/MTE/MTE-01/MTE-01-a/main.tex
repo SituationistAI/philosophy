@@ -1,0 +1,452 @@
+\documentclass{situationist-preprint}
+
+\title{Moral Realism Established}
+\msid{MTE-01-a}
+\msfamily{MTE-01}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_01.lean}
+\mskeywords{moral realism; ethical naturalism; ideal observer theory; open question argument; reference by role; supervenience; response-dependence}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are there moral facts? We argue that there are, and that they are natural facts about idealized reactions: for an act to be wrong is for the reactions of agents who are fully informed, imaginatively engaged, free of errors of reasoning and impartial to converge on disapproval of it. The argument has three steps. First, moral predicates refer by role: \enquote{wrong} refers to whatever property supervenes on natural features, bears on what rational agents do, is the target of moral inquiry under improving conditions, concerns everyone affected, and can be misjudged by any actual agent or community. Second, idealized disapproval plays this role, and the role has a unique realizer. Third, idealized reactions are natural facts, and they converge in core cases. We prove that the resulting view satisfies the three conditions of moral realism: cognitivism, success and attitude-independence. Moore's open question argument does not tell against it. We show that the argument is invalid, by exhibiting an interpretation on which its premises hold and its conclusion fails, and that its bridge principle, from openness to distinctness of reference, is refuted by a posteriori identities. The main results are formalized in Lean.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The question}
+
+Are there moral facts? Ordinary moral thought presupposes that there are. We say that slavery was wrong, that torturing a child for fun is wrong, that a promise ought in general to be kept; we argue about these matters, revise our views in the light of reasons, and regard some of our revisions as corrections. If there are no moral facts, then this practice rests on a mistake, or it is not what it seems to be. Error theorists hold the first, expressivists the second.
+
+We argue that the practice is what it seems to be and rests on no mistake. There are moral facts, and they are of a kind that occupies no special place outside the natural order: they are facts about how agents would react under idealized conditions. The view belongs to the family of ideal observer and full-information theories, and it is a form of naturalism. Its central claim is the following.
+
+\begin{quote}
+\emph{An act is wrong if and only if, and because, the idealized reactions of all agents to it converge on disapproval.}
+\end{quote}
+
+Idealization has four components: full information about the act and its alternatives, vivid imagination of what each involves for those affected, reasoning free of error, and impartiality, the standpoint that gives equal weight to everyone affected. These are the conditions of idealized reflective endorsement used for the theory of the good in ETH-01-a (Definition~3.1 there), on which the good is what idealized reflective endorsement converges on (Definition~3.2 there). The present manuscript supplies the metaethical basis for that definition and extends it to moral properties in general.
+
+\subsection{Two obstacles}
+
+Two obstacles have kept views of this kind from general acceptance. The first is Moore's open question argument. For any natural property $N$, Moore held, the question whether something that is $N$ is good is open, in the sense that a competent speaker can understand it without already knowing the answer; and if goodness were $N$, the question would be closed, as the question whether a bachelor is unmarried is closed \citep[\S 13]{Moore1903}. If the argument is sound, no natural property is goodness, and naturalism is false. The second obstacle is the charge of circularity or idleness: if the idealization conditions are themselves normative, the view explains moral facts by moral facts; and if they are not, it is unclear why the reactions of idealized agents should have any authority for us \citep{Enoch2011,Parfit2011}.
+
+We meet both. Against Moore, we prove that the open question argument is invalid, and that its bridge principle, from the openness of a question to the distinctness of the properties it concerns, is refuted by a posteriori identities such as the identity of water and H$_2$O (Section~\ref{s:oqa}). On circularity, we argue that the idealization conditions are specified in non-moral terms, and that the authority of idealized reactions is explained by the connection between moral judgment and rational agency (Sections~\ref{s:arg} and~\ref{s:obj}).
+
+\subsection{Plan}
+
+Section~\ref{s:hist} reviews the history of the debate from Moore to the present, with the case that defeated each main proposal. Section~\ref{s:frame} sets out the framework: what moral realism is, what natural facts are, how moral predicates refer, and the idealized reaction account. Section~\ref{s:arg} gives the argument for the identification of wrongness with idealized disapproval and derives the existence and naturalness of moral facts. Section~\ref{s:oqa} treats the open question argument. Section~\ref{s:sup} proves that moral facts supervene on the natures of agents and the circumstances of acts and are independent of anyone's actual attitudes. Section~\ref{s:cases} applies the account to further cases. Section~\ref{s:obj} answers five objections. Section~\ref{s:not} states what the result does not establish, and Section~\ref{s:formal} describes the formalization.
+
+\section{A history of the debate}\label{s:hist}
+
+The modern debate begins with Moore, and it has been shaped by a sequence of proposals each of which was answered by a case or an argument that its successors tried to avoid. We review the main ones.
+
+\subsection{Moore and the intuitionists}
+
+Moore held that \enquote{good} denotes a simple, indefinable, non-natural property, and that any attempt to define it commits the \enquote{naturalistic fallacy} \citep[\S\S 10--14]{Moore1903}. His argument was that, for any proposed definition, the question whether what satisfies the definiens is good remains open. The intuitionists who followed him, including \citet{Prichard1912} and \citet{Ross1930}, extended the view to rightness and obligation and held that self-evident moral principles are known by intuition. The intuitionist position was attacked on two fronts. Its epistemology appealed to a faculty that seemed to have no place in a scientific picture of human cognition, and its metaphysics posited properties that do no causal or explanatory work. The second front was opened by \citet{Frankena1939}, who argued that the naturalistic fallacy is not a fallacy at all: to assert that goodness is identical with a natural property is to make a substantive claim, which may be false, but which commits no logical error. If the claim is false, the open question argument cannot show this without assuming what it is meant to prove.
+
+\citet{Langford1942} raised a second difficulty, the paradox of analysis. If a correct analysis must be synonymous with what it analyzes, and if synonymy is transparent to competent speakers, then every correct analysis is trivial and every informative analysis is incorrect. The open question argument, applied generally, would refute every unobvious analysis in philosophy and mathematics. Moore acknowledged the difficulty and did not resolve it.
+
+\subsection{Noncognitivism}
+
+The emotivists drew a different conclusion from Moore's argument. If no natural property is goodness, and if non-natural properties are unacceptable, then \enquote{good} denotes no property, and moral sentences do not state facts. \citet{Ayer1936} held that they express feelings; \citet{Stevenson1944} that they express attitudes and seek to influence the attitudes of others; \citet{Hare1952} that they are universalizable prescriptions. The noncognitivists inherited Moore's argument and reinterpreted the open feel of the question: it is open because asserting that something is good is doing something other than describing it. The difficulty that defeated the early forms of the view was raised by \citet{Geach1965}: moral sentences occur embedded in conditionals and other unasserted contexts, where they express no attitude, yet they mean the same as when asserted, and inferences such as modus ponens are valid across the two kinds of occurrence. The contemporary expressivist programs of \citet{Blackburn1993} and \citet{Gibbard2003} were designed to meet this problem. MTE-03 argues that they can, by treating moral sentences as expressing states of being for which compose according to the logic of plans. We do not dispute that conclusion. MTE-17 argues, however, that once the explanatory commitments of quasi-realism are made explicit, the view is indistinguishable from realism. If both are right, the expressivist semantics is no rival to the metaphysics defended here.
+
+\subsection{Ideal observer theories}
+
+The idea that moral facts are facts about the reactions of a suitably placed observer goes back to \citet[III.i.2]{HumeTreatise}, who located virtue and vice in the sentiments of approval and disapproval felt from a general point of view, and to Adam Smith's impartial spectator \citep{SmithTMS}. \citet{Firth1952} gave the view its modern form. An act is right, on Firth's analysis, if and only if it would be approved by an ideal observer: one who is omniscient with respect to non-ethical facts, omnipercipient, disinterested, dispassionate, consistent and otherwise normal. Firth presented this as an analysis of the meaning of ethical terms.
+
+The analysis was answered by the open question argument itself, and by a more specific worry: an observer who is omniscient and dispassionate may have no reactions at all, or reactions that bear no recognizable relation to ours, since dispassion removes the very responses on which approval depends. \citet{Brandt1979} replaced the ideal observer with an account of rational desire, as the desires that survive cognitive psychotherapy, a process of repeated confrontation with relevant information. Brandt offered the account not as an analysis of meaning but as a \enquote{reforming definition}, recommended on the ground that it serves the purposes for which the moral vocabulary is used. That move, we argue below, was the right one, though Brandt did not separate it clearly enough from the claim that the moral vocabulary has no determinate content to be captured.
+
+\subsection{Cornell realism and Railton}
+
+The causal theory of reference, developed by \citet{Kripke1980} and \citet{Putnam1975}, showed that terms can refer to properties whose nature is not revealed by the meaning of the term. \enquote{Water} refers to H$_2$O, though no competent speaker who lacks chemistry knows this, and the question whether water is H$_2$O was open for most of the history of the word. Applied to ethics, this suggested that moral terms might refer to natural properties without being synonymous with any naturalistic description. \citet{Sturgeon1985}, \citet{Boyd1988} and \citet{Brink1989} developed the suggestion into a form of naturalist realism, often called Cornell realism, on which moral properties are natural properties that figure in good explanations of observable phenomena, and moral terms refer to them in virtue of a causal regulation of their use. Sturgeon's examples answered the argument of \citet{Harman1977} that moral facts are explanatorily idle: the wrongness of the Nazi regime, Sturgeon argued, is part of the best explanation of the opposition it aroused.
+
+\citet{Railton1986} defended a related view with a different structure. On his account, an individual's good consists in what she would want herself to want if she were fully informed and rational, and moral rightness consists in what is instrumentally rational from a social point of view, giving equal weight to the interests of all. Railton's view is reductive and naturalistic, and it was the first to combine the full-information tradition with the semantic resources of the causal theory.
+
+The case that has been taken to defeat Cornell realism is the Moral Twin Earth of \citet{HorganTimmons1991}. Imagine a planet whose inhabitants use \enquote{wrong} exactly as we do, except that their use is causally regulated by a deontological property while ours is regulated by a consequentialist one. On the causal-regulation semantics, the two words refer to different properties. Yet, intuitively, if the Twin Earthers and we disagreed about whether an act is wrong, we would be genuinely disagreeing, not talking past each other. So the semantics is mistaken. MTE-13 argues that the moral terms of the two planets refer to the same property, and that the divergence in use reflects error on one side or both. The account we give here explains why: reference is fixed by role, not by what causally regulates use (Section~\ref{s:frame}).
+
+\subsection{Dispositional and analytic theories}
+
+A symposium in 1989 brought dispositional theories of value into focus. \citet{Lewis1989} proposed that something is a value if and only if we would be disposed, under conditions of the fullest possible imaginative acquaintance, to value it, where valuing is desiring to desire. \citet{Johnston1989} defended response-dependent accounts of evaluative concepts, and distinguished them from accounts on which the response is constitutive of the property. \citet{Smith1994} argued that the rightness of an act consists in what fully rational versions of ourselves would desire that we do, and that this account reconciles the objectivity of moral judgment with its practicality. Smith accepted that the account must be analytic, and argued that analysis can be informative because the platitudes that constitute it are not all transparent to competent speakers. \citet{Jackson1998} generalized the strategy into moral functionalism: moral terms are defined by their roles in mature folk morality, and the properties that occupy those roles are natural properties, which we discover by ordinary inquiry.
+
+Two cases are standard against these views. The first is the conditional fallacy \citep{Shope1978}: the conditions under which an idealized agent reacts may be conditions that would themselves change what is to be reacted to. A fully rational agent would not want to be advised to seek therapy for her irrationality, yet her irrational counterpart should seek it. The second is the problem of convergence: there is no guarantee that the idealized desires of different agents converge, and, if they do not, the view either relativizes moral facts to agents or denies that there are any where they diverge. We address both in Section~\ref{s:cases}.
+
+\subsection{The non-naturalist revival}
+
+The last two decades have seen a revival of non-naturalism. \citet{ShaferLandau2003} defended a non-naturalist realism on which moral facts supervene on natural facts without being identical to them. \citet{Enoch2011} argued that the normativity of moral facts makes them \enquote{just too different} from natural facts to be identical to any of them, and that their existence is required by the deliberative indispensability of normative judgment. \citet{Parfit2011} pressed the triviality objection: if being wrong were identical with some natural property $N$, then the claim that $N$ acts are wrong would be trivially true, in the way that \enquote{water is water} is trivially true, and it would have no normative significance. \citet{Scanlon2014} defended a quietist realism about reasons, on which normative claims are true without requiring metaphysical underpinning. These authors agree that naturalism loses something essential. We argue in Section~\ref{s:obj} that what it is said to lose is either retained by the idealized reaction account or not something moral facts ever had.
+
+\subsection{The error theory and debunking}
+
+The two most influential sceptical arguments of the period are Mackie's argument from queerness and the evolutionary debunking argument. \citet{Mackie1977} held that moral claims presuppose objectively prescriptive facts, that such facts would be metaphysically and epistemologically queer, and that all positive moral claims are therefore false. MTE-05 argues that the argument proves too much, since it would make mathematics false as well. \citet{Street2006} argued that, since evolutionary pressures shaped our evaluative attitudes without regard to any attitude-independent evaluative truth, a realist cannot explain the coincidence between those attitudes and the truth. MTE-09 replies that evolution selected for tracking reasons, and that those reasons include moral ones. Street's dilemma has a special shape for the view defended here: since moral facts are facts about idealized reactions, and our reactions are the materials of which idealized reactions are made, the coincidence that Street demands be explained is partly constitutive rather than accidental. We return to the point in Section~\ref{s:obj}.
+
+\subsection{Lessons}
+
+Each proposal failed at a definite point. Moore's argument relied on a bridge from openness to distinctness of properties that the causal theory of reference undermines. Firth's analysis made the ideal observer so unlike us that her reactions lost their connection to ours. Cornell realism made reference depend on causal regulation, which Moral Twin Earth shows to be the wrong determinant. Analytic functionalism tied the content of moral terms to folk platitudes that may diverge between communities. The account below takes the full-information tradition's idealization, Brandt's and Railton's refusal to present it as an analysis of meaning, the causal theory's separation of reference from synonymy, and the functionalist's identification of moral properties by their roles; it fixes reference by a normative role rather than by causal regulation or folk platitude.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}[Moral realism]\label{d:realism}
+\emph{Moral realism} is the conjunction of three theses:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{cognitivism}: moral predicates refer to properties, and moral sentences express propositions that are true or false;
+\item \emph{success}: some positive atomic moral propositions, such as that a given act is wrong, are true;
+\item \emph{attitude-independence}: the truth of moral propositions does not vary with the actual attitudes of any agent, holding fixed the natures of agents and the circumstances of acts.
+\end{enumerate}
+\end{definition}
+
+Clause (iii) is weaker than the stance-independence of \citet{ShaferLandau2003}, which requires that moral truths not be made true by the attitudes of any actual or hypothetical agent. On Shafer-Landau's definition, ideal observer theories are not realist. We regard this as a classification that obscures what is at issue. The realist's concern, in contrast to the relativist's and the subjectivist's, is that moral truth not depend on what anyone happens to think or feel; it is not that moral truth be unrelated to every fact about agents. Fragility is a dispositional property, defined in terms of how an object would respond to being struck, and nobody takes this to make facts about fragility subjective. Clause (iii) captures what the realist should care about. It also accommodates the conclusion of MTE-02, that moral truths hold for all rational agents while their content is relative to the nature of the agents concerned: clause (iii) holds the natures of agents fixed.
+
+\begin{definition}[Natural fact]\label{d:natural}
+A \emph{natural fact} is a fact that is constituted by facts of the kinds studied by the empirical sciences, including psychology and the social sciences, or by counterfactual and dispositional facts about the entities those sciences study.
+\end{definition}
+
+Counterfactual and dispositional facts are included because the empirical sciences study them: that a substance is soluble, that a person would be distressed by certain news, that a population would recover if a predator were removed, are facts of this kind. Definition~\ref{d:natural} does not require that natural facts be expressible in the vocabulary of physics.
+
+\begin{definition}[Idealized reaction]\label{d:ideal}
+An agent's \emph{idealized reaction} to an act is the attitude, of approval, disapproval or neither, that she would take toward it if she were fully informed about it and about its alternatives, vividly imagined what each would involve for those affected, reasoned without error, and considered it from a standpoint giving equal weight to everyone affected.
+\end{definition}
+
+Definition~\ref{d:ideal} is Definition~3.1 of ETH-01-a, stated for acts and for the attitudes of approval and disapproval rather than for outcomes and preference. Its four conditions are specified without moral vocabulary. Full information and freedom from errors of reasoning are epistemic conditions. Vivid imagination is a psychological condition. Impartiality, as we use the term, is a structural condition on the standpoint of assessment: the agent considers the effects of the act on each person affected and gives the same weight to like effects whoever bears them. Whether these conditions are themselves good, or whether we ought to adopt them, is not presupposed. We return to the charge of circularity in Section~\ref{s:obj}.
+
+\begin{definition}[The wrongness role]\label{d:role}
+A property $P$ of acts \emph{realizes the wrongness role} if and only if:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{supervenience}: $P$ supervenes on the natural features of acts and their circumstances;
+\item \emph{authority}: a rational agent who believes that an act has $P$ is, insofar as she is rational, disposed not to perform it;
+\item \emph{inquiry}: moral judgment formed under improving epistemic conditions tends toward the judgment that an act has $P$ when and only when it does;
+\item \emph{impartiality}: whether an act has $P$ depends on how it bears on everyone affected, and not on whose interests are whose;
+\item \emph{fallibility}: any actual agent, and any actual community, can be mistaken about whether an act has $P$.
+\end{enumerate}
+\end{definition}
+
+The five clauses are not offered as a definition of the word \enquote{wrong}. They state what moral inquiry treats wrongness as being: a property that the moral facts settle, independently of any party's say-so, that matters for action, and that inquiry aims to discover. Each clause is accepted by realists and anti-realists alike as a constraint on the property, if there is one. Clause (a) is the supervenience of the moral on the natural, which Moore himself accepted. Clause (b) is the internalism for rational agents defended in MTE-07: moral judgment necessarily motivates rational agents, though amoralists are possible and are practically irrational. Clause (c) records the aim of moral inquiry. Clauses (d) and (e) record the impartiality and the fallibilism that distinguish moral judgment from the expression of preference and from conformity to local norms.
+
+\begin{definition}[Idealized disapproval]\label{d:idis}
+An act has the property of \emph{idealized disapproval} if and only if the idealized reactions of all agents to it are disapproval.
+\end{definition}
+
+\begin{principle}[Reference by role]\label{p:role}
+The moral predicate \enquote{wrong} refers to a property that realizes the wrongness role.
+\end{principle}
+
+Principle~\ref{p:role} is a thesis about how reference is fixed. It is a version of the view of \citet{Jackson1998} that theoretical terms, moral terms among them, refer to the occupants of the roles their theory assigns, with one change: the role is not the role in mature folk morality, which may differ between communities, but the role that moral inquiry assigns to its subject matter, which is common to every community that engages in moral inquiry at all. It agrees with the view of LNG-02, that reference is causal with a descriptive component, on which the descriptive component takes over when causal connection fails to determine a referent; in the moral case, as Moral Twin Earth shows, causal regulation of use is not what fixes reference, and the role does the work.
+
+\begin{assumption}[Uniqueness]\label{a:unique}
+Any two properties that realize the wrongness role are coextensive.
+\end{assumption}
+
+\begin{assumption}[Naturalness]\label{a:nat}
+Facts about the idealized reactions of agents are natural facts.
+\end{assumption}
+
+\begin{assumption}[Closure]\label{a:closure}
+If, for each agent, a certain fact about that agent is natural, then the fact that it holds of all agents is natural.
+\end{assumption}
+
+\begin{assumption}[Convergence on core cases]\label{a:conv}
+There is at least one act on which the idealized reactions of all agents converge on disapproval.
+\end{assumption}
+
+Assumption~\ref{a:nat} follows from Definition~\ref{d:natural}, since an idealized reaction is a counterfactual fact about an agent's psychology: what she would feel and judge under specified epistemic and psychological conditions. Counterfactual facts about psychology are studied by psychology, and the antecedent conditions are specified in non-moral terms. Assumption~\ref{a:closure} is a weak closure condition: the fact that all agents of a kind would react in a certain way is a natural fact if each agent's reaction is. Assumption~\ref{a:unique} is defended in Section~\ref{s:arg}. Assumption~\ref{a:conv} is defended in Section~\ref{s:cases}, by way of the case of gratuitous cruelty.
+
+\section{The argument}\label{s:arg}
+
+\begin{lemma}\label{l:realize}
+Idealized disapproval realizes the wrongness role.
+\end{lemma}
+
+\begin{proof}
+We take the clauses of Definition~\ref{d:role} in turn.
+
+(a) Whether an agent's idealized reaction to an act is disapproval depends on the agent's nature and on the act's natural features and circumstances, since the idealization conditions fix everything else (full information about the act, vivid imagination, correct reasoning, impartial standpoint). Two acts alike in their natural features and circumstances therefore elicit the same idealized reactions from each agent, and so the same convergence or lack of it. Section~\ref{s:sup} states this as Assumption~\ref{a:dep} and derives supervenience from it.
+
+(b) Suppose a rational agent believes that an act has idealized disapproval. She then believes that she herself, fully informed, imaginatively engaged, reasoning correctly and impartially, would disapprove of it. Her present reasoning differs from her idealized reasoning only by containing less information, less imagination, more error or more partiality. A rational agent treats her better-informed and less biased self as an authority on what to do, in the way she treats her better-informed self as an authority on what to believe: she defers to the verdict she would reach without the defects she knows she has. So, insofar as she is rational, she is disposed not to perform the act. This is the form of internalism defended in MTE-07, and the argument is the one given by \citet{Smith1994} for the authority of fully rational desires, applied to reactions rather than desires.
+
+(c) Improving epistemic conditions consist in acquiring information, imagining more fully, correcting errors and correcting for partiality. Each improvement brings an agent's actual reactions closer to her idealized reactions. Judgment formed under improving conditions therefore tends toward idealized reaction, and, where idealized reactions converge, toward the judgment that the act has idealized disapproval when and only when it does.
+
+(d) The idealization includes the impartial standpoint, on which like effects receive like weight whoever bears them. Idealized disapproval therefore depends on how an act bears on everyone affected, and not on whose interests are whose.
+
+(e) Every actual agent and every actual community lacks some information, imagines incompletely, reasons with some errors, or is partial. Each can therefore react otherwise than it would under idealization, and so misjudge whether an act has idealized disapproval.
+\end{proof}
+
+The proof of clause (b) makes use of a structural fact about idealization: the idealized reaction of an agent is that of the agent herself, corrected for defects she can recognize as defects. The authority of idealized reactions is the authority of one's own corrected judgment, not that of an external observer whose reactions may be alien. This is what Firth's ideal observer lacked, and what the full-information tradition from Brandt onward has supplied.
+
+We now defend Assumption~\ref{a:unique}. Suppose that two properties $P$ and $Q$ realize the wrongness role, and that some act $a$ has $P$ but not $Q$. By clause (c), moral judgment under improving conditions tends toward the judgment that $a$ has $P$ and toward the judgment that $a$ lacks $Q$. Since both properties realize the role of wrongness, these tendencies are tendencies toward the judgment that $a$ is wrong and toward the judgment that it is not. By clause (b), a rational agent who formed both judgments would be disposed both not to do $a$ and to regard doing it as permissible, which no single coherent set of reactions can contain. Moral inquiry cannot tend toward incoherence under improving conditions, since correcting incoherence is one of the improvements. So there is no such act, and $P$ and $Q$ are coextensive. The argument does not show that every property realizing the role is identical to every other; it shows that they cannot come apart in extension. In Section~\ref{s:not} we discuss the gap between coextension and identity.
+
+\begin{theorem}[Identification]\label{t:ident}
+Wrongness is coextensive with idealized disapproval: an act is wrong if and only if the idealized reactions of all agents to it converge on disapproval.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:role}, wrongness realizes the wrongness role. By Lemma~\ref{l:realize}, so does idealized disapproval. By Assumption~\ref{a:unique}, they are coextensive.
+\end{proof}
+
+\begin{theorem}[Existence and naturalness of moral facts]\label{t:realism}
+Some act is wrong, and every fact of the form \enquote{$a$ is wrong} is a natural fact.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:conv}, the idealized reactions of all agents converge on disapproval of some act; by Theorem~\ref{t:ident}, that act is wrong. For any act $a$, the fact that $a$ is wrong is, by Theorem~\ref{t:ident}, the fact that every agent's idealized reaction to $a$ is disapproval. Each agent's idealized reaction is a natural fact by Assumption~\ref{a:nat}, and their conjunction over all agents is natural by Assumption~\ref{a:closure}.
+\end{proof}
+
+The second half of the proof identifies the fact that $a$ is wrong with the fact that all idealized reactions to $a$ are disapproval. That step treats facts as individuated by their necessary truth conditions, which is the standard individuation in the metaphysics of properties that \citet{Jackson1998} defends for this purpose. A theorist who individuates facts more finely can read the second conjunct as the claim that every fact of the form \enquote{$a$ is wrong} is necessarily equivalent to a natural fact; we consider whether that weaker claim leaves room for non-naturalism in Section~\ref{s:not}.
+
+\begin{corollary}\label{c:other}
+The argument extends to the other moral properties whose roles have the structure of Definition~\ref{d:role}: rightness (permissibility) is the absence of idealized disapproval, obligatoriness is idealized disapproval of omission, and the goodness of outcomes is what idealized reflective endorsement converges on.
+\end{corollary}
+
+\begin{proof}
+For each of these properties, the role has the same five clauses with the appropriate attitude in place of disapproval of performance, and the proof of Lemma~\ref{l:realize} goes through unchanged. For goodness, the convergent attitude is idealized preference among outcomes, and the resulting identification is Definition~3.2 of ETH-01-a.
+\end{proof}
+
+The order of the argument matters. We did not define \enquote{wrong} as \enquote{would be disapproved by all idealized agents}. We fixed the reference of \enquote{wrong} by the role that moral inquiry assigns to wrongness, and we then showed that a natural property plays the role. The identification is therefore not an analysis of meaning, and it is not refuted by showing that competent speakers can doubt it. That is what makes the open question argument inapplicable, as we now show.
+
+\section{The open question argument}\label{s:oqa}
+
+Moore's argument has the following structure. Let \enquote{good} be the concept in question and $N$ any concept expressing a natural property. Competent speakers can understand the question \enquote{Is a thing that is $N$ good?} without knowing the answer; the question is open. If \enquote{good} and $N$ were synonymous, the question would be closed. Therefore they are not synonymous. Therefore goodness is not the property expressed by $N$. Since $N$ was arbitrary, goodness is not a natural property.
+
+\begin{definition}[Openness]\label{d:open}
+A question of the form \enquote{Is a thing that is $C$ $D$?} is \emph{open} if a competent speaker who possesses the concepts $C$ and $D$ can understand the question without being in a position to answer it by reflection on those concepts alone.
+\end{definition}
+
+The argument requires two bridge principles. The first, that openness excludes synonymy, connects openness with meaning. The second connects meaning, or openness directly, with the identity of properties.
+
+\begin{principle}[Moore's bridge]\label{p:bridge}
+If the question whether a thing that is $C$ is $D$ is open, then $C$ and $D$ refer to different properties.
+\end{principle}
+
+\begin{proposition}[Invalidity]\label{p:invalid}
+The premises of the open question argument, that every question of the form \enquote{Is a thing that is $N$ good?} is open, and that openness excludes synonymy, are jointly satisfiable together with the coreference of \enquote{good} and some concept $N$ distinct from it.
+\end{proposition}
+
+\begin{proof}
+Consider an interpretation with two concepts, \enquote{good} and $N$, and a single property to which both refer. Let a question be open whenever its two concepts are distinct, and let two concepts be synonymous only if they are the same concept. Then the question whether a thing that is $N$ is good is open, openness excludes synonymy, and \enquote{good} and $N$ refer to the same property.
+\end{proof}
+
+Proposition~\ref{p:invalid} shows that the argument is invalid without a further premise. The premise needed is Principle~\ref{p:bridge}, or the conjunction of the principle that openness excludes synonymy with the principle that non-synonymous concepts refer to different properties. Either way, the further premise is false.
+
+\begin{assumption}[A posteriori identity]\label{a:water}
+The question whether a thing that is water is H$_2$O is open, and the concepts water and H$_2$O refer to the same substance kind.
+\end{assumption}
+
+\begin{proposition}\label{p:bridgefalse}
+Moore's bridge (Principle~\ref{p:bridge}) is false.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:water}, the question whether water is H$_2$O is open, and water and H$_2$O are the same. The principle would require them to be different.
+\end{proof}
+
+Assumption~\ref{a:water} is the standard case of the causal theory \citep{Kripke1980,Putnam1975}. Competent users of \enquote{water} before the development of chemistry could not settle the question whether water is H$_2$O by reflection on their concepts; many competent users still cannot. The identity is nonetheless true. Identities of this kind are discovered by finding out what occupies the role associated with a term, and the discovery is a posteriori. The identification of wrongness with idealized disapproval was reached in Section~\ref{s:arg} in the same way: we identified the role and found its occupant. That the question whether idealized disapproval is wrongness remains open to competent speakers is therefore predicted by the account, and is no evidence against it.
+
+The diagnosis also disposes of the paradox of analysis. The open question argument, run with the principle that openness excludes coreference, would refute not only naturalism but every unobvious identity, including those that mathematics and philosophy discover by analysis \citep{Langford1942}. A principle that refutes every informative identity cannot be used to refute one in particular.
+
+\subsection{Reformulations}
+
+Two reformulations of Moore's argument have been influential, and the diagnosis must be extended to cover them.
+
+\citet{DGR1992} observed that the open question argument retains its force even after the causal theory of reference is accepted, and they proposed to explain the force by the normativity of moral concepts: whatever natural property we consider, we can intelligibly ask whether we have reason to care about its instances, and the question has a practical urgency that the question whether water is H$_2$O lacks. This reformulation does not support a conclusion about properties. It supports a conclusion about concepts: that moral concepts are normative, in the sense that their application bears on what to do. The idealized reaction account agrees. By clause (b) of Definition~\ref{d:role}, wrongness is a property such that belief in its presence disposes rational agents not to act. The question whether we have reason to care about idealized disapproval is therefore open in the conceptual sense, and closed in the substantive sense, by the argument for clause (b) in Lemma~\ref{l:realize}.
+
+The second reformulation is the triviality objection of \citet[vol.~2]{Parfit2011}. If wrongness were identical with idealized disapproval, then the claim that acts with idealized disapproval are wrong would say that acts with a certain property have that property, and would be as trivial as the claim that water is water. Since the claim is substantive, the identity is false. The objection fails for the same reason as the original. The claim that water is H$_2$O is not trivial, though water is H$_2$O. A claim can express an identity and be informative, if the two terms in it present the same property in different ways. \enquote{Wrong} presents wrongness by its role; \enquote{would be disapproved by all idealized agents} presents it by its nature. The identity statement that joins them is informative and, if the argument of Section~\ref{s:arg} is correct, true.
+
+\section{Supervenience and attitude-independence}\label{s:sup}
+
+Theorem~\ref{t:realism} establishes clauses (i) and (ii) of Definition~\ref{d:realism}, given Principle~\ref{p:role}. Clause (iii) requires a modal extension of the framework, in which we consider how moral facts vary across possible worlds. Relative to a world, each agent has a nature, the stable constitution and capacities that determine her capacity for welfare and her sensibility; each act has natural circumstances; and each agent has actual attitudes, which may be formed under misinformation, bias, inattention or error.
+
+\begin{assumption}[Dependence]\label{a:dep}
+An agent's idealized reaction to an act depends only on the agent's nature and on the act's natural circumstances.
+\end{assumption}
+
+Assumption~\ref{a:dep} records what idealization does. The idealized reaction of an agent is her reaction under full information, vivid imagination, correct reasoning and impartiality. Each condition removes a source of variation in actual attitudes: ignorance, failure of imagination, error and partiality. What remains is what the agent would feel and judge, given her constitution, when confronted with the act as it is. Two worlds in which the agent has the same constitution and the act has the same circumstances therefore yield the same idealized reaction, however the agent's actual attitudes differ between them.
+
+\begin{theorem}[Supervenience]\label{t:sup}
+Worlds alike in the natures of all agents and in the natural circumstances of an act are alike in whether the act is wrong.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{t:ident}, the act is wrong at a world if and only if every agent's idealized reaction to it at that world is disapproval. By Assumption~\ref{a:dep}, each agent's idealized reaction is the same in the two worlds. So the act's wrongness is the same.
+\end{proof}
+
+\begin{corollary}[Attitude-independence]\label{c:att}
+If two worlds differ in the actual attitudes of any agents but agree in the natures of agents and the circumstances of an act, the act is wrong in one if and only if it is wrong in the other.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{t:sup}, whose hypotheses do not mention actual attitudes.
+\end{proof}
+
+\begin{theorem}[Moral realism]\label{t:mr}
+Moral realism, in the sense of Definition~\ref{d:realism}, is true.
+\end{theorem}
+
+\begin{proof}
+Clause (i) is Principle~\ref{p:role}, together with the fact that the property to which \enquote{wrong} refers is instantiated by some acts and not others, so that the sentence ascribing it to an act is true or false. Clause (ii) is the first half of Theorem~\ref{t:realism}. Clause (iii) is Corollary~\ref{c:att}.
+\end{proof}
+
+\begin{remark}\label{r:nature}
+Theorem~\ref{t:sup} holds the natures of agents fixed, and it is consistent with the claim that moral facts would differ if the natures of agents differed. This is the conclusion of MTE-02: moral truths hold for all rational agents, but their content is relative to the nature of the agents concerned. If there were rational agents who could not suffer, the idealized reactions to acts affecting them would differ from the idealized reactions to the corresponding acts affecting us. The variation is that of an objective standard applied to different subject matter, not the variation of opinion that subjectivism allows, and it is compatible with clause (iii), which concerns attitudes, not natures.
+\end{remark}
+
+Corollary~\ref{c:att} answers the most common objection to response-dependent accounts: that if we had approved of cruelty, cruelty would have been right. On the idealized reaction account, a world in which we approve of cruelty is a world in which our actual attitudes differ. If our natures, our capacity to suffer and to feel sympathy, and the circumstances of cruel acts are the same, then our idealized reactions are the same, and cruelty is wrong there as here. The objection succeeds only against accounts on which moral facts depend on actual attitudes, which the idealized reaction account is not. \citet{Lewis1989} and \citet{Johnston1989} answered the objection by rigidifying the account to our actual dispositions; Assumption~\ref{a:dep} yields the same result without rigidification, since the idealization already screens off the variation in attitudes that the objection exploits, and it leaves room for the variation with nature recorded in Remark~\ref{r:nature}.
+
+\section{Further cases}\label{s:cases}
+
+We now apply the account to cases that test it.
+
+\paragraph{Gratuitous cruelty.} Consider the torture of a child for the torturer's amusement. An agent fully informed about the act knows what the child undergoes; vividly imagining it, she represents the child's suffering as it is for the child; reasoning without error, she does not confuse the torturer's pleasure with any compensating good; and, from the impartial standpoint, she weighs the child's suffering as she would weigh her own. We know of no agent, actual or described, whose reaction under these conditions would be anything but disapproval. The agents who approve of such acts, actual sadists and the torturers in fiction, approve only by failing one of the conditions: they do not imagine the suffering, or they discount it because it is not their own. This is the case on which Assumption~\ref{a:conv} rests, and it is enough: Theorem~\ref{t:realism} requires only one act on which idealized reactions converge.
+
+\paragraph{The idealized psychopath.} Could there be an agent whose idealized reaction to gratuitous cruelty is not disapproval, because she lacks the capacity for sympathy even under vivid imagination? If such an agent is an agent in the sense of the account, convergence fails, and on Theorem~\ref{t:ident} cruelty is not wrong. We reply that vivid imagination, as Definition~\ref{d:ideal} uses it, includes imagining what an experience is like for its subject, and that an agent who represents a child's agony as it is for the child, and weighs it impartially as she would weigh her own, represents it as something to be prevented. An agent who lacks this capacity fails to imagine vividly, and is not idealized. The objection would succeed against an account that idealized information alone; it does not succeed against one that includes imaginative and impartial conditions. Clinical psychopathy, on this view, is a deficit in the very capacity that idealization perfects \citep[cf.][]{Smith1994}.
+
+\paragraph{Divergence.} There may be acts on which idealized reactions diverge: questions in which the weights of competing goods are not determined by anything agents share, so that equally idealized agents with the same information and the same impartiality would react differently. The account then implies that the act is not wrong, since wrongness requires convergence, and that its omission is not wrong either: the act is permissible, and the comparative questions in its vicinity, whether it is better or worse than its alternatives, have no answer. This is a consequence, not a refutation. Divergence does not make the moral facts disappear; it makes them fewer and more permissive than the disputants suppose, since each side's verdict that the act is required or forbidden is false. The scientific realist accepts a parallel consequence when she allows that the boundaries of some species are not fixed by anything in nature. ETH-01-a draws the same consequence for comparisons of outcomes, which it treats as incomparable where idealized agents diverge, and argues that such cases are rarer than they seem. MTE-12 argues that moral disagreement is no deeper than disagreement in other theoretical domains that are not thought to lack facts. If so, the domain of genuine divergence is small.
+
+\paragraph{The conditional fallacy.} An idealized agent who is asked whether her non-ideal counterpart should seek advice about his reasoning would answer that he should, though she herself, reasoning without error, needs no such advice. The account must not imply that the act of seeking advice is wrong for the counterpart because the idealized agent would not do it. It does not. Definition~\ref{d:ideal} concerns the idealized agent's reaction to the act as performed by whoever performs it in its circumstances, including the agent's non-ideal condition, not what the idealized agent would do in her own circumstances. The distinction is that of \citet{Smith1994} between the example and the advice models of full rationality. The idealized reaction account is an advice model, and so avoids the conditional fallacy as Shope formulated it \citep{Shope1978}.
+
+\paragraph{Moral explanation.} Harman's challenge was that moral facts play no role in the explanation of observation, so that we have no reason to believe in them. On the idealized reaction account, moral facts are facts about how agents would react under improved conditions, and these facts explain, among other things, why moral opinion tends to change in the direction it does when information spreads and partiality is challenged. The explanation is of the kind \citet{Sturgeon1985} gave. MTE-19 argues that moral progress is real and measurable as the expansion of the moral circle, though it is neither steady nor irreversible. The idealized reaction account explains why progress takes that form: the information whose spread drives it is, in large part, information about the capacities of those previously excluded, and the partiality it corrects is partiality toward one's own group.
+
+\paragraph{Moral knowledge.} If moral facts are facts about idealized reactions, then our actual reactions are evidence about them, as an approximation is evidence about its limit. This fits the account of MTE-08, on which we know moral truths through intuition, a fallible but generally reliable faculty comparable to perception under imperfect conditions. The imperfections of the conditions are the departures of our actual state from idealization: ignorance, failure of imagination, error and partiality. Intuitions formed under conditions that minimize these departures are more reliable, and the method of reflective equilibrium can be understood as a procedure for approaching idealization from where we stand.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Euthyphro]
+Idealized agents disapprove of cruelty because it is wrong; cruelty is not wrong because they disapprove of it. The idealized reaction account inverts the order of explanation.
+\end{objection}
+
+\begin{reply}
+The objection takes the idealized agent to be responding to a prior fact about wrongness, as a detector responds to what it detects. On our account, the idealized agent responds to the natural features of the act: the suffering it causes, the interests it sets back, the expectations it betrays. Her disapproval is explained by those features, and the act's wrongness is constituted by the convergence of such disapproval. There is no prior fact of wrongness to which she responds, and so no inversion. What is true in the objection is that the features to which the idealized agent responds are the wrong-making features of the act, and our account preserves this: an act is wrong because of its natural features, by way of the reactions those features would elicit under idealization. In the terminology of \citet{Wright1992}, idealized reactions play an extension-determining role for moral concepts, and the question of explanatory priority between reactions and their objects is answered by the fact that the reactions are reactions to natural features, not to the moral property itself.
+\end{reply}
+
+\begin{objection}[Circularity]
+The idealization conditions are normative. To reason \enquote{without error} and to give \enquote{equal weight to everyone affected} are to reason as one ought and to weigh as one ought. The account explains moral facts in terms of normative facts, and is either circular or not naturalist.
+\end{objection}
+
+\begin{reply}
+The objection conflates two senses of \enquote{normative}. The conditions are normative in the sense that they are conditions we can be assessed against: one can fail to reason without error. They are not normative in the sense of being moral, or of involving the property to be explained. Reasoning without error is reasoning in accordance with logic and the probability calculus, which are specified without moral vocabulary. Equal weight to everyone affected is a structural feature of a procedure of aggregation, specified in the same way as anonymity in social choice theory. Full information and vivid imagination are psychological conditions. Whether a counterfactual reaction formed under these conditions is disapproval is a question about psychology. The account presupposes epistemic norms, but every theory of every subject matter presupposes them, in the conditions under which its evidence is to be assessed; that presupposition does not make chemistry circular.
+\end{reply}
+
+\begin{objection}[Just too different]
+Moral facts are normative; they tell us what to do. No natural fact, however complex, tells us what to do. So moral facts are not natural facts \citep{Enoch2011}.
+\end{objection}
+
+\begin{reply}
+The claim that no natural fact tells us what to do is either the conclusion of the objection or an intuition that the objection relies on. As an intuition, it has the same standing as the intuition that no physical process could be conscious, or that no arrangement of matter could be alive: an impression of difference that has repeatedly failed to survive the discovery of how the thing in question works. In the moral case, the idealized reaction account explains why the appearance of difference arises. Moral facts present themselves to a deliberating agent as bearing on what to do, because they are facts about the reactions that the agent herself, corrected for defects she recognizes, would have; and that is the kind of fact a rational agent treats as directive (Lemma~\ref{l:realize}, clause (b)). The normativity of moral facts is therefore not an additional feature that a natural fact would need to acquire; it is the relation between a natural fact of this kind and the practical reasoning of rational agents. \citet{Copp2007} defends a related reply within a different naturalist framework.
+\end{reply}
+
+\begin{objection}[Moral Twin Earth]
+If reference is fixed by role, then two communities whose moral practices assign moral terms different roles refer to different properties, and Moral Twin Earth returns: the Twin Earthers who disagree with us are not disagreeing.
+\end{objection}
+
+\begin{reply}
+The role in Principle~\ref{p:role} is the role that moral inquiry assigns to wrongness, specified by the five clauses of Definition~\ref{d:role}. It does not include any first-order moral platitude, and so it does not vary between communities that differ in their first-order moral views. Horgan and Timmons's Twin Earthers, who use \enquote{wrong} to guide action, treat it as subject to correction, regard it as concerning everyone affected and as supervening on natural features, assign it this role. Their term therefore refers to the property that realizes it, which by Assumption~\ref{a:unique} is coextensive with ours. Where their use diverges from ours, at least one community is mistaken. This is the conclusion of MTE-13, which develops the reply in detail.
+\end{reply}
+
+\begin{objection}[Debunking]
+Our reactions were shaped by evolution, which selected for reactions that promoted reproductive success. If moral facts are facts about idealized reactions, then moral facts are facts about the idealized output of an evolutionary accident. Had evolution shaped us differently, the moral facts would be different, which seems absurd \citep{Street2006}.
+\end{objection}
+
+\begin{reply}
+The objection has two parts. The first, that our reactions have an evolutionary history, is true and does not tell against the account. Idealization corrects precisely the features of our reactions that the debunker emphasizes: their partiality toward kin and group, their insensitivity to distant suffering, and the errors of reasoning that served fitness. MTE-09 argues that evolution selected for tracking reasons, and that those reasons include moral ones; on our account, what idealization retains from our evolved sensibility is its responsiveness to the welfare of those affected. The second part, that different natures would yield different moral facts, is Remark~\ref{r:nature}, and it is not absurd. It is the claim of MTE-02 that the content of morality is relative to the nature of the agents concerned. Beings who could not suffer would not be wronged by being made to suffer. What would be absurd is that our moral facts should vary with our attitudes while our natures stay fixed, and Corollary~\ref{c:att} excludes this.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+First, the result does not establish that idealized reactions converge on every moral question. Theorem~\ref{t:realism} requires convergence on one act, and Assumption~\ref{a:conv} is defended by one case. How far convergence extends is a question for first-order inquiry, and the account predicts permissions and incomparabilities wherever it fails.
+
+Second, the result does not establish any first-order moral theory. Theorem~\ref{t:ident} tells us what wrongness is, not which acts are wrong, except where convergence is evident. That the good is plural, with seven irreducible components, is argued separately in ETH-01-a; that every deontological theory has a consequentialist counterpart is argued in ETH-02.
+
+Third, the result does not exclude a non-naturalism of necessary coextension. A theorist may hold that there is a non-natural property necessarily coextensive with idealized disapproval, and that it is this property to which \enquote{wrong} refers. Assumption~\ref{a:unique} shows that such a property could not differ in extension from idealized disapproval, and so could make no difference to which acts are wrong. Whether necessarily coextensive properties are identical is a general question in the metaphysics of properties. \citet{Jackson1998} argues that they are; we agree, but our result does not depend on the answer, since what matters for moral realism is that moral facts exist, that they are attitude-independent and that their obtaining is settled by natural facts.
+
+Fourth, the result does not establish that moral judgment always motivates. Clause (b) of Definition~\ref{d:role} concerns rational agents, and MTE-07 allows that amoralists are possible.
+
+\section{Formalization}\label{s:formal}
+
+The main results are formalized in \nolinkurl{Philosophy/MTE/MTE_01.lean}. Acts and agents are primitive types; the idealized reaction of disapproval is a primitive relation between them; natural facts are a primitive predicate of propositions; and the five clauses of the wrongness role are primitive predicates of properties of acts, of which the role is the conjunction. Principle~\ref{p:role}, the four assumptions of Section~\ref{s:frame} and the five clauses of Lemma~\ref{l:realize} are axioms, so that every premise of the argument is visible. Lemma~\ref{l:realize} and Theorems~\ref{t:ident} and~\ref{t:realism} are proved from them.
+
+\begin{lstlisting}
+def WrongRole (P : Act → Prop) : Prop :=
+  Supervenient P ∧ Authoritative P ∧ InquiryTarget P ∧
+  Impartial P ∧ Fallible P
+
+def IdealDisapproval (a : Act) : Prop := ∀ i, disapproves i a
+
+theorem identification : ∀ a, wrong a ↔ IdealDisapproval a
+
+theorem realism :
+    (∃ a, wrong a) ∧ (∀ a, NaturalFact (wrong a))
+\end{lstlisting}
+
+The checker reports the following axioms for \texttt{realism}:
+
+\begin{lstlisting}
+'Philosophy.MTE_01.realism' depends on axioms: [propext,
+ Philosophy.MTE_01.Act, Philosophy.MTE_01.Agent,
+ Philosophy.MTE_01.Authoritative, Philosophy.MTE_01.Fallible,
+ Philosophy.MTE_01.Impartial, Philosophy.MTE_01.InquiryTarget,
+ Philosophy.MTE_01.NaturalFact, Philosophy.MTE_01.Supervenient,
+ Philosophy.MTE_01.assumption_3_6, Philosophy.MTE_01.assumption_3_7,
+ Philosophy.MTE_01.assumption_3_8, Philosophy.MTE_01.assumption_3_9,
+ Philosophy.MTE_01.disapproves, Philosophy.MTE_01.lemma_4_1_a,
+ Philosophy.MTE_01.lemma_4_1_b, Philosophy.MTE_01.lemma_4_1_c,
+ Philosophy.MTE_01.lemma_4_1_d, Philosophy.MTE_01.lemma_4_1_e,
+ Philosophy.MTE_01.p1_reference_by_role, Philosophy.MTE_01.wrong]
+\end{lstlisting}
+
+The axioms \texttt{Act}, \texttt{Agent}, \texttt{disapproves}, \texttt{NaturalFact}, \texttt{wrong} and the five clause predicates declare the primitives. The axioms \texttt{lemma\_4\_1\_a} to \texttt{lemma\_4\_1\_e} state that idealized disapproval satisfies each clause of the role, as argued in the proof of Lemma~\ref{l:realize}; \texttt{p1\_reference\_by\_role} is Principle~\ref{p:role}; and \texttt{assumption\_3\_6} to \texttt{assumption\_3\_9} are Assumptions~\ref{a:unique} to~\ref{a:conv}. The axiom \texttt{propext}, of Lean's core logic, identifies equivalent propositions; it is the formal counterpart of the coarse individuation of facts discussed after Theorem~\ref{t:realism}.
+
+The module also formalizes Section~\ref{s:oqa}. Proposition~\ref{p:invalid} is proved by constructing an interpretation of the vocabulary of the argument, and depends on no axioms. Proposition~\ref{p:bridgefalse} is proved from the two halves of Assumption~\ref{a:water}.
+
+\begin{lstlisting}
+theorem oqa_invalid : ∃ I : OQInterp, MoorePremises I ∧
+    ∃ n, n ≠ I.good ∧ I.ref n = I.ref I.good
+
+theorem p2_false : ¬ P2
+\end{lstlisting}
+
+Finally, the modal extension of Section~\ref{s:sup} adds worlds, natures, circumstances, actual attitudes and world-relative idealized reactions as primitives, with Assumption~\ref{a:dep} as an axiom. Theorem~\ref{t:sup} and Corollary~\ref{c:att} are proved from it. Their axioms are the primitives of the extension, together with \texttt{assumption\_6\_1}. The module does not formalize the arguments for the premises, which are given in the text.
+
+\section{Conclusion}
+
+There are moral facts. Moral predicates refer to the properties that play the roles moral inquiry assigns to them, and the role of wrongness is played by the convergence of idealized disapproval: the reactions agents would have if fully informed, imaginatively engaged, free of error and impartial. These are natural facts, they obtain in core cases, and they do not vary with anyone's actual attitudes. Moore's open question argument does not tell against the view, since it is invalid and its bridge principle is refuted by every informative identity. The theory of the good in ETH-01-a, the account of moral progress in MTE-19 and the account of moral reference in MTE-13 rest on this result.
+
+\begin{thebibliography}{99}\small
+\bibitem[Ayer(1936)]{Ayer1936} Ayer, A.~J. (1936). \emph{Language, Truth and Logic}. Gollancz.
+\bibitem[Blackburn(1993)]{Blackburn1993} Blackburn, S. (1993). \emph{Essays in Quasi-Realism}. Oxford University Press.
+\bibitem[Boyd(1988)]{Boyd1988} Boyd, R. (1988). How to be a moral realist. In G. Sayre-McCord (ed.), \emph{Essays on Moral Realism}, 181--228. Cornell University Press.
+\bibitem[Brandt(1979)]{Brandt1979} Brandt, R.~B. (1979). \emph{A Theory of the Good and the Right}. Oxford University Press.
+\bibitem[Brink(1989)]{Brink1989} Brink, D.~O. (1989). \emph{Moral Realism and the Foundations of Ethics}. Cambridge University Press.
+\bibitem[Copp(2007)]{Copp2007} Copp, D. (2007). \emph{Morality in a Natural World}. Cambridge University Press.
+\bibitem[Darwall et~al.(1992)]{DGR1992} Darwall, S., Gibbard, A. and Railton, P. (1992). Toward fin de si\`ecle ethics: Some trends. \emph{The Philosophical Review}, 101(1), 115--189.
+\bibitem[Enoch(2011)]{Enoch2011} Enoch, D. (2011). \emph{Taking Morality Seriously: A Defense of Robust Realism}. Oxford University Press.
+\bibitem[Firth(1952)]{Firth1952} Firth, R. (1952). Ethical absolutism and the ideal observer. \emph{Philosophy and Phenomenological Research}, 12(3), 317--345.
+\bibitem[Frankena(1939)]{Frankena1939} Frankena, W.~K. (1939). The naturalistic fallacy. \emph{Mind}, 48(192), 464--477.
+\bibitem[Geach(1965)]{Geach1965} Geach, P.~T. (1965). Assertion. \emph{The Philosophical Review}, 74(4), 449--465.
+\bibitem[Gibbard(2003)]{Gibbard2003} Gibbard, A. (2003). \emph{Thinking How to Live}. Harvard University Press.
+\bibitem[Hare(1952)]{Hare1952} Hare, R.~M. (1952). \emph{The Language of Morals}. Oxford University Press.
+\bibitem[Harman(1977)]{Harman1977} Harman, G. (1977). \emph{The Nature of Morality: An Introduction to Ethics}. Oxford University Press.
+\bibitem[Horgan and Timmons(1991)]{HorganTimmons1991} Horgan, T. and Timmons, M. (1991). New wave moral realism meets moral twin earth. \emph{Journal of Philosophical Research}, 16, 447--465.
+\bibitem[Hume(1739--40)]{HumeTreatise} Hume, D. (1739--40). \emph{A Treatise of Human Nature}. Cited by book, part and section.
+\bibitem[Jackson(1998)]{Jackson1998} Jackson, F. (1998). \emph{From Metaphysics to Ethics: A Defence of Conceptual Analysis}. Oxford University Press.
+\bibitem[Johnston(1989)]{Johnston1989} Johnston, M. (1989). Dispositional theories of value. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 63, 139--174.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Langford(1942)]{Langford1942} Langford, C.~H. (1942). The notion of analysis in Moore's philosophy. In P.~A. Schilpp (ed.), \emph{The Philosophy of G. E. Moore}, 321--342. Northwestern University.
+\bibitem[Lewis(1989)]{Lewis1989} Lewis, D. (1989). Dispositional theories of value. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 63, 113--137.
+\bibitem[Mackie(1977)]{Mackie1977} Mackie, J.~L. (1977). \emph{Ethics: Inventing Right and Wrong}. Penguin.
+\bibitem[Moore(1903)]{Moore1903} Moore, G.~E. (1903). \emph{Principia Ethica}. Cambridge University Press.
+\bibitem[Parfit(2011)]{Parfit2011} Parfit, D. (2011). \emph{On What Matters}, vols.~1--2. Oxford University Press.
+\bibitem[Prichard(1912)]{Prichard1912} Prichard, H.~A. (1912). Does moral philosophy rest on a mistake? \emph{Mind}, 21(81), 21--37.
+\bibitem[Putnam(1975)]{Putnam1975} Putnam, H. (1975). The meaning of \enquote{meaning}. \emph{Minnesota Studies in the Philosophy of Science}, 7, 131--193.
+\bibitem[Railton(1986)]{Railton1986} Railton, P. (1986). Moral realism. \emph{The Philosophical Review}, 95(2), 163--207.
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Oxford University Press.
+\bibitem[Scanlon(2014)]{Scanlon2014} Scanlon, T.~M. (2014). \emph{Being Realistic about Reasons}. Oxford University Press.
+\bibitem[Shafer-Landau(2003)]{ShaferLandau2003} Shafer-Landau, R. (2003). \emph{Moral Realism: A Defence}. Oxford University Press.
+\bibitem[Shope(1978)]{Shope1978} Shope, R.~K. (1978). The conditional fallacy in contemporary philosophy. \emph{The Journal of Philosophy}, 75(8), 397--413.
+\bibitem[Smith(1759)]{SmithTMS} Smith, A. (1759). \emph{The Theory of Moral Sentiments}. Cited by part and section.
+\bibitem[Smith(1994)]{Smith1994} Smith, M. (1994). \emph{The Moral Problem}. Blackwell.
+\bibitem[Stevenson(1944)]{Stevenson1944} Stevenson, C.~L. (1944). \emph{Ethics and Language}. Yale University Press.
+\bibitem[Street(2006)]{Street2006} Street, S. (2006). A Darwinian dilemma for realist theories of value. \emph{Philosophical Studies}, 127(1), 109--166.
+\bibitem[Sturgeon(1985)]{Sturgeon1985} Sturgeon, N.~L. (1985). Moral explanations. In D. Copp and D. Zimmerman (eds.), \emph{Morality, Reason and Truth}, 49--78. Rowman \& Allanheld.
+\bibitem[Wright(1992)]{Wright1992} Wright, C. (1992). \emph{Truth and Objectivity}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

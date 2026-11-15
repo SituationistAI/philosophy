@@ -1,0 +1,89 @@
+\documentclass{situationist-preprint}
+
+\title{Putnam's Argument Reconsidered}
+\msid{LOG-13-b}
+\msfamily{LOG-13}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{quantum logic; Putnam; distributive law; truth-functionality; valuations; Kochen--Specker theorem}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Putnam argued that quantum mechanics refutes the distributive law while leaving every physical quantity with a definite value, so that adopting quantum logic dissolves the paradoxes of the theory. LOG-13-a argues that quantum mechanics revises probability theory, not logic. We reconsider Putnam's argument on its own terms. We prove that already in the two-dimensional lattice of a single spin, no assignment of truth values respects both quantum meet and quantum join, without appeal to the Kochen--Specker theorem. A realist quantum logician, who holds that every quantity has a value, must therefore treat conjunction as non-truth-functional for incompatible propositions. The distributive law then fails only for an operation that is not classical conjunction, and Putnam's conclusion does not follow.
+\end{abstract}
+
+\section{The argument}
+
+\citet{Putnam1968} argued as follows. The propositions about a quantum system are represented by the closed subspaces of its Hilbert space, and \enquote{and}, \enquote{or} and \enquote{not}, applied to them, are the lattice operations of meet, join and orthocomplement (Definition~2.2 of LOG-13-a). In that lattice the distributive law fails (Proposition~3.3 of LOG-13-a). Hence the distributive law is false of physical propositions, and logic has been revised on empirical grounds, as geometry was by general relativity. Moreover, the revision is a gain: once distributivity is given up, we may hold that every physical quantity has a definite value at all times, and the apparent paradoxes, such as the two-slit experiment, are seen to rest on a classical law that fails.
+
+The argument has two components that must hold together. The first is the identification of the lattice operations with the logical connectives. The second is realism about values: each quantum proposition is true or false, and true just in case the quantity has the corresponding value. LOG-13-a distinguishes two readings of the identification and shows that neither yields a reason to revise classical logic. We add a precise result that shows why the two components cannot be combined, even in the simplest case.
+
+\section{Valuations on $\mathrm{MO}_2$}
+
+Let $\mathrm{MO}_2$ be the six-element lattice of Definition~3.2 of LOG-13-a: $0$, $1$, two rays $a$ and $b$ that are neither equal nor orthogonal, and their orthocomplements $a'$ and $b'$. It is the lattice of propositions about spin along two axes of a spin-$\frac12$ particle: $a$ and $a'$ are spin-$z$ up and down, $b$ and $b'$ spin-$x$ up and down.
+
+\begin{definition}\label{d:val}
+A \emph{realist valuation} on a lattice of quantum propositions assigns to each proposition one of the values true and false, so that $0$ is false and $1$ is true, a proposition and its orthocomplement have opposite values, and
+\begin{enumerate}[label=(\alph*)]
+\item a join is true if and only if at least one of its terms is true;
+\item a meet is true if and only if both of its terms are true.
+\end{enumerate}
+\end{definition}
+
+Clause~(a) is the truth condition of disjunction and clause~(b) that of conjunction. A realist valuation is what Putnam's reading requires if the lattice operations are the connectives and every proposition has a truth value.
+
+\begin{proposition}\label{p:noval}
+There is no realist valuation on $\mathrm{MO}_2$.
+\end{proposition}
+
+\begin{proof}
+Since $a \vee a' = 1$ is true, by~(a) one of $a$, $a'$ is true; likewise one of $b$, $b'$. Let $p$ be the true one among $a, a'$ and $q$ the true one among $b, b'$. By~(b), $p \wedge q$ is true. But $p$ and $q$ are distinct rays, so their meet is $0$, which is false.
+\end{proof}
+
+Proposition~\ref{p:noval} needs no appeal to the Kochen--Specker theorem \citep{KochenSpecker1967}, which concerns valuations that respect the lattice operations only on compatible propositions and holds only in dimension three or more. The present result concerns valuations that respect them on all propositions, which is what Putnam's identification of the operations with the connectives demands, and it holds in dimension two. Physically, it says that the realist cannot hold all three of the following: that spin-$z$ has a value, that spin-$x$ has a value, and that \enquote{and} applied to these propositions is the quantum meet with the truth condition of conjunction.
+
+\begin{corollary}\label{c:choice}
+An assignment of truth values to the propositions of $\mathrm{MO}_2$ that meets the conditions of Definition~\ref{d:val} on $0$, $1$ and orthocomplements and satisfies clause~(a) for the join of each proposition with its orthocomplement violates clause~(b) for some pair of incompatible propositions.
+\end{corollary}
+
+\begin{proof}
+The proof of Proposition~\ref{p:noval} uses clause~(a) only for the joins $a \vee a'$ and $b \vee b'$, and clause~(b) only for the meet of a proposition from $\{a, a'\}$ with one from $\{b, b'\}$, which are incompatible.
+\end{proof}
+
+Realism about values is the claim that each quantity has a value, so that the spin along $x$ is either up or down; it is exactly clause~(a) for $b \vee b'$, and likewise for $a \vee a'$. The realist therefore cannot give up~(a) in the cases the proof uses, and must give up~(b). This was Putnam's position: he held that the spin along $x$ is up or down, and denied that the conjunction of spin-$z$ up with either value of spin-$x$ could be true. Corollary~\ref{c:choice} shows that the position is forced, and what it costs. The operation for which distributivity fails, on this reading, is a meet that can be false when both its terms are true. That is not conjunction. The distributive law of classical logic concerns conjunction and disjunction (Theorem~3.1 of LOG-13-a), and a failure of the law for an operation with a different truth condition is no failure of the classical law. The dispute is not, as Putnam presented it, about whether \enquote{and} distributes over \enquote{or}; it is about whether quantum meet is \enquote{and}, and Proposition~\ref{p:noval} shows that, for a realist, it is not.
+
+\section{What survives}
+
+The argument contains a correct observation, which LOG-13-a accepts. Quantum mechanics shows that the event structure of a physical system is not a single Boolean algebra but a pasting of Boolean blocks, and that the probabilities of outcomes of incompatible measurements are not the marginals of a single joint distribution (Theorem~4.4 of LOG-13-a). This is a revision of a structure attributed to a domain, of the same kind as the revision of physical geometry that Putnam invoked. What it does not show is that the laws of consequence for the connectives change. \citet{Putnam2005} himself later abandoned the realist quantum logic, and \citet{Maudlin2005} gives a history of the view and its difficulties.
+
+\begin{objection}[Non-truth-functional connectives]
+Truth-functionality is a classical prejudice. Quantum logic simply has a conjunction that is not truth-functional, and the classical logician begs the question by insisting on clause~(b).
+\end{objection}
+
+\begin{reply}
+Clause~(b) is not a classical theorem but the truth condition that fixes what conjunction is. An operation that can be false when both its arguments are true may be important, and quantum meet is, but a disagreement about whether it obeys the distributive law is not a disagreement with anyone who uses \enquote{and} for the operation with the truth condition~(b). This is the point of \citet{Dummett1976} that the quantum logician changes the meaning of the connectives, made precise: Proposition~\ref{p:noval} shows that, given realism, the change of meaning is forced.
+\end{reply}
+
+\begin{objection}[Give up realism]
+Then let the quantum logician give up definite values. Without realism, no valuation is required, and the lattice operations can be read as connectives in a non-bivalent logic.
+\end{objection}
+
+\begin{reply}
+Without realism, Putnam's argument loses the gain it claimed: the paradoxes were to be dissolved by holding that every quantity has a value. A non-bivalent reading of the lattice is the first reading distinguished in LOG-13-a, on which a join can be true in a state while neither term is, so that join is not classical disjunction. On either horn, the lattice describes the event structure of quantum systems and not the consequence relation of the connectives.
+\end{reply}
+
+\section{Conclusion}
+
+Putnam's argument requires that quantum propositions have truth values and that quantum meet and join be conjunction and disjunction. Already for a single spin measured along two axes, no assignment of truth values respects both. The realist must therefore give up the truth condition of conjunction for incompatible propositions, and the operation whose distributivity fails is not conjunction. Putnam's argument shows that quantum mechanics revises the event structure of physical systems, as LOG-13-a holds; it does not show that the distributive law is false.
+
+\begin{thebibliography}{99}\small
+\bibitem[Dummett(1976)]{Dummett1976} Dummett, M. (1976). Is logic empirical? In H.~D. Lewis (ed.), \emph{Contemporary British Philosophy}, 4th series, Allen and Unwin. Reprinted in \emph{Truth and Other Enigmas}, Duckworth, 1978.
+\bibitem[Kochen and Specker(1967)]{KochenSpecker1967} Kochen, S. and Specker, E.~P. (1967). The problem of hidden variables in quantum mechanics. \emph{Journal of Mathematics and Mechanics}, 17(1), 59--87.
+\bibitem[Maudlin(2005)]{Maudlin2005} Maudlin, T. (2005). The tale of quantum logic. In Y. Ben-Menahem (ed.), \emph{Hilary Putnam}, Cambridge University Press.
+\bibitem[Putnam(1968)]{Putnam1968} Putnam, H. (1968). Is logic empirical? In R.~S. Cohen and M.~W. Wartofsky (eds.), \emph{Boston Studies in the Philosophy of Science}, vol.~5, Reidel.
+\bibitem[Putnam(2005)]{Putnam2005} Putnam, H. (2005). A philosopher looks at quantum mechanics (again). \emph{The British Journal for the Philosophy of Science}, 56(4), 615--634.
+\end{thebibliography}
+
+\end{document}

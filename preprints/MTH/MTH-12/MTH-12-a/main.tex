@@ -1,0 +1,118 @@
+\documentclass{situationist-preprint}
+
+\title{Unknowable Mathematical Truths}
+\msid{MTH-12-a}
+\msfamily{MTH-12}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_12.lean}
+\mskeywords{unknowability; incompleteness; Gödel's disjunction; mechanism; absolutely undecidable sentences; Fitch's paradox}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are there mathematical truths that no one could know? Fitch's argument, accepted in LOG-19, shows that some truths are unknowable, but only conjunctions of a truth with the claim that it is unknown, which knowing would falsify. We argue that some mathematical truths are unknowable in principle for a different reason. A knower of our kind, idealized in time and memory but not in the nature of her methods, can know only a recursively enumerable set of arithmetical sentences; the set is consistent, since knowledge is factive; and by Gödel's first incompleteness theorem any such set omits a true arithmetical sentence. That sentence is unknowable, and since it is purely arithmetical it is not of Fitch's form: knowing it would falsify nothing. We defend the premise that our arithmetical knowledge is recursively enumerable with MTH-05's rejection of the Lucas--Penrose argument. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+LOG-19 argues that Fitch's argument is sound: if every truth were knowable, every truth would be known \citep{Fitch1963}. The unknowable truths it identifies have the form $p \wedge \neg Kp$ and are unknowable because knowing them would make them false. LOG-19 leaves open whether there are truths that are unknowable for other reasons. We argue that there are, and that mathematics supplies them.
+
+\citet{Goedel1995} argued in his Gibbs lecture of 1951 that incompleteness yields a disjunction: either the human mind infinitely surpasses the powers of any finite machine, or there exist absolutely undecidable arithmetical problems, problems no human mind could solve. Gödel inclined to the first disjunct. \citet{Lucas1961} and \citet{Penrose1989} argued for it outright; \citet{Benacerraf1967} and \citet{Shapiro1998} replied that their argument requires the mathematician to know her own consistency \citep[see also][]{Feferman2006}. We argue for the second disjunct.
+
+\section{Framework}
+
+\begin{definition}\label{d:basic}
+A sentence is \emph{arithmetical} if it belongs to the language of first-order arithmetic. A set of sentences is \emph{recursively enumerable} if some algorithm lists exactly its members. A set \emph{extends Robinson arithmetic} if it contains the axioms of Robinson's system $Q$ and is closed under first-order consequence. A sentence is \emph{knowable} if some knower of our kind, idealized in time and memory, could know it.
+\end{definition}
+
+\begin{assumption}[Incompleteness]\label{a:goedel}
+Every recursively enumerable set of true sentences that extends Robinson arithmetic omits some true arithmetical sentence.
+\end{assumption}
+
+\begin{assumption}[Finitary knowledge]\label{a:fin}
+The set of knowable arithmetical sentences is recursively enumerable and extends Robinson arithmetic.
+\end{assumption}
+
+\begin{assumption}[Factivity]\label{a:fact}
+Every knowable sentence is true.
+\end{assumption}
+
+\begin{definition}\label{d:fitch}
+A sentence is of \emph{Fitch's form} if it is a conjunction $p \wedge \neg Kp$ of a sentence and the claim that it is not known. Every sentence of Fitch's form contains the knowledge operator and so is not arithmetical.
+\end{definition}
+
+Assumption~\ref{a:goedel} is Gödel's first incompleteness theorem in its semantic form \citep{Goedel1931}. Assumption~\ref{a:fin} carries the weight of the argument. Its second clause is the idealization: an idealized knower knows the axioms of $Q$ and can follow any finite derivation. Its first clause says that the methods by which a finite knower of our kind acquires arithmetical knowledge are effective. The case for it is the analysis of human calculation by \citet{Turing1936}, extended to the finitely many methods by which a finite knower forms beliefs. The case against it is the claim of Lucas and Penrose that mathematical insight can see the truth of the Gödel sentence of any machine. MTH-05 rejects that claim: to see the truth of a machine's Gödel sentence one must know the machine to be consistent, and the mind is in no better position with respect to its own consistency than a machine is.
+
+\section{The argument}
+
+\begin{theorem}[Unknowable truth]\label{t:main}
+Some true arithmetical sentence is not knowable.
+\end{theorem}
+
+\begin{proof}
+Let $K$ be the set of knowable arithmetical sentences. By Assumption~\ref{a:fin}, $K$ is recursively enumerable and extends Robinson arithmetic; by Assumption~\ref{a:fact}, its members are true. By Assumption~\ref{a:goedel}, some true arithmetical sentence $G$ is not in $K$. Since $G$ is arithmetical and not in $K$, it is not knowable.
+\end{proof}
+
+\begin{corollary}\label{c:fitch}
+Some true sentence is unknowable and is not of Fitch's form.
+\end{corollary}
+
+\begin{proof}
+The sentence $G$ of Theorem~\ref{t:main} is arithmetical, and by Definition~\ref{d:fitch} no sentence of Fitch's form is arithmetical.
+\end{proof}
+
+The unknowability of $G$ differs from that of Fitch's conjunctions. Its truth does not depend on what anyone knows, so knowing it would falsify nothing; it is unknowable because of the nature of our methods, not the logic of knowledge; and it is unknowable in principle, since the idealization removes every limitation except the effectiveness of the methods.
+
+The result has limits. It does not identify the unknowable sentence, and it does not show that the sentence is unknowable by every possible being, but only by knowers whose methods are effective. It depends on Assumption~\ref{a:fin}; if MTH-05 is wrong and the mind is not effective, the conclusion is not established by this route.
+
+\section{Objections and replies}
+
+\begin{objection}[Open-endedness]
+We can always add a reflection principle asserting the consistency of what we already know, and so come to know the Gödel sentence of any system we have accepted.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:fin} concerns the whole set of what could ever be known, including all reflections. Iterating reflection along any effectively given sequence remains within a recursively enumerable set, and the theorem applies to it.
+\end{reply}
+
+\begin{objection}[The disjunction cuts both ways]
+The argument assumes what Lucas and Penrose deny.
+\end{objection}
+
+\begin{reply}
+The argument shows that denying unknowable mathematical truths commits one to the non-effectiveness of human mathematical knowledge. The only argument offered for non-effectiveness is the Lucas--Penrose argument, which MTH-05 rejects. Absent a new argument, the second disjunct is the better supported.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTH/MTH_12.lean} formalizes Definitions~\ref{d:basic} and~\ref{d:fitch}, Assumptions~\ref{a:goedel}--\ref{a:fact}, Theorem~\ref{t:main} and Corollary~\ref{c:fitch}. Gödel's theorem is an axiom stated in terms of primitive predicates of sets of sentences.
+
+The main theorem and its axioms (prefix \texttt{Philosophy.MTH\_12.} omitted) are:
+
+\begin{lstlisting}
+theorem unknowable_truth : ∃ G, Arith G ∧ Tr G ∧ ¬ Knowable G
+'unknowable_truth' depends on axioms: [Arith, Knowable,
+  Sent, Tr, factive, goedel, knowable_q, knowable_re]
+\end{lstlisting}
+
+\texttt{goedel} is Assumption~\ref{a:goedel}, \texttt{knowable\_re} and \texttt{knowable\_q} are the two clauses of Assumption~\ref{a:fin}, and \texttt{factive} is Assumption~\ref{a:fact}. Corollary~\ref{c:fitch} (\texttt{not\_fitch}) depends in addition on \texttt{FitchForm} and \texttt{fitch\_not\_arith}, the content of Definition~\ref{d:fitch}.
+
+\section{Conclusion}
+
+Some mathematical truths are unknowable in principle. The arithmetical knowledge available to knowers of our kind forms a sound, recursively enumerable set, and every such set omits an arithmetical truth, whose unknowability derives not from Fitch's form but from the effectiveness of the methods by which finite minds know.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1967)]{Benacerraf1967} Benacerraf, P. (1967). God, the devil, and Gödel. \emph{The Monist}, 51(1), 9--32.
+\bibitem[Feferman(2006)]{Feferman2006} Feferman, S. (2006). Are there absolutely unsolvable problems? Gödel's dichotomy. \emph{Philosophia Mathematica}, 14(2), 134--152.
+\bibitem[Fitch(1963)]{Fitch1963} Fitch, F.~B. (1963). A logical analysis of some value concepts. \emph{The Journal of Symbolic Logic}, 28(2), 135--142.
+\bibitem[G{\"o}del(1931)]{Goedel1931} G{\"o}del, K. (1931). {\"U}ber formal unentscheidbare S{\"a}tze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f{\"u}r Mathematik und Physik}, 38, 173--198.
+\bibitem[G{\"o}del(1995)]{Goedel1995} G{\"o}del, K. (1995). Some basic theorems on the foundations of mathematics and their implications. In S. Feferman et~al. (eds.), \emph{Collected Works}, vol.~III, Oxford University Press. (Gibbs lecture, 1951.)
+\bibitem[Lucas(1961)]{Lucas1961} Lucas, J.~R. (1961). Minds, machines and Gödel. \emph{Philosophy}, 36(137), 112--127.
+\bibitem[Penrose(1989)]{Penrose1989} Penrose, R. (1989). \emph{The Emperor's New Mind}. Oxford University Press.
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Incompleteness, mechanism, and optimism. \emph{The Bulletin of Symbolic Logic}, 4(3), 273--302.
+\bibitem[Turing(1936)]{Turing1936} Turing, A.~M. (1936). On computable numbers, with an application to the Entscheidungsproblem. \emph{Proceedings of the London Mathematical Society}, s2-42, 230--265.
+\end{thebibliography}
+
+\end{document}

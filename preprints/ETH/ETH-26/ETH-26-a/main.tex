@@ -1,0 +1,236 @@
+\documentclass{situationist-preprint}
+
+\title{Punishment as Communication}
+\msid{ETH-26-a}
+\msfamily{ETH-26}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_26.lean}
+\mskeywords{punishment; censure; communicative theory; expressive theory; proportionality; hard treatment; reconciliation; retributivism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Punishment imposes hard treatment on offenders, intentionally and in response to their offences. It needs a justification, and the standard ones are incomplete: deterrence justifies too much, since it sets no upper limit drawn from the offence, and retribution justifies too little, since it does not explain why the infliction of suffering should answer to wrongdoing. We argue that punishment is justified as a form of communication. It expresses to the offender a censure of what she has done, and it is justified when the censure is one she has reason to accept: when it represents her wrong accurately and addresses her as a member of a normative community to which she can return. From this account we derive, as consequences rather than independent side-constraints, a proportionality band and a termination condition. Justified punishment reaches the seriousness of the wrong and never exceeds a fixed multiple of it; its cumulative hard treatment is therefore bounded, and a bounded punishment has a last period, after which reconciliation is possible. Endless punishment is never justified. The derivation is formalized in Lean, with the communicative premises stated as axioms.
+\end{abstract}
+
+\section{The problem}
+
+Punishment is the intentional imposition of hard treatment, by an authority, on an offender, for an offence. Each element raises a question of justification. Hard treatment is ordinarily wrong to impose; to impose it intentionally is worse; and to impose it because of something already done, which can no longer be changed, requires an explanation of how the past can make the infliction of a present harm permissible.
+
+The classical answers are two. \emph{Consequentialist} theories justify punishment by its effects, chiefly deterrence and incapacitation \citep{Bentham1789}. They face the familiar objection that, in principle, they license punishing the innocent, or punishing the guilty far beyond their desert, whenever that would produce better effects. \emph{Retributive} theories hold that wrongdoers deserve to suffer in proportion to their wrongs and that the fact of desert justifies punishment \citep{Kant1797,Moore1997}. They explain the link between punishment and the past offence, but they have difficulty explaining why the suffering of the guilty is good, and why it is the state's business to bring it about. Mixed theories, such as those of \citet{Rawls1955} and \citet{Hart1968}, justify the institution by its consequences and its distribution by desert; they inherit the problem of explaining why desert should constrain the pursuit of good consequences, if consequences are what justify.
+
+A third family of theories takes as central the fact that punishment says something. \citet{Feinberg1965} argued that punishment is distinguished from mere penalties by its expressive function: it expresses resentment and indignation and a judgment of disapproval. \citet{Hampton1984} argued that punishment aims at the moral education of the offender, and \citet{Nozick1981} that it connects the wrongdoer with the values from which he has disconnected himself. \citet{Duff1986,Duff2001} developed the most complete version, on which punishment is a communication, addressed to the offender as a rational agent and member of the political community, of the censure her offence deserves, and an attempt to persuade her to repent, reform and reconcile herself with those she has wronged. \citet{vonHirsch1993} accepted that censure is central but held that hard treatment is a prudential supplement, needed to give citizens reason to comply, rather than part of the communication itself.
+
+Expressive and communicative theories face two problems. The first is \emph{why hard treatment}: if the point is to express censure, a formal denunciation would seem to suffice. The second is \emph{whose acceptance}: a communication is addressed to someone, and if the offender rejects the censure, as many do, it is unclear what the communication accomplishes or why it is justified. \citet{Boonin2008} argues that no theory, communicative or other, meets the burden of justifying the intentional harm that punishment involves.
+
+We argue that punishment is justified as communication, and we address both problems. The answer to the second is the key to the account: punishment is justified when it expresses a censure that the offender has \emph{reason} to accept, whether or not she accepts it. We show that this condition imposes structure on justified punishment. It entails proportionality, which on other accounts is an independent side-constraint, and it entails that justified punishment ends.
+
+\section{Framework}
+
+We represent a punishment by the amount of hard treatment it imposes in each period. Periods may be thought of as days or months; nothing depends on their length.
+
+\begin{definition}[Profile]\label{d:profile}
+A \emph{punishment profile} is a function $p$ from periods $0,1,2,\ldots$ to non-negative integers, $p(i)$ being the hard treatment imposed in period $i$. Its \emph{cumulative hard treatment} up to period $n$ is $T_p(n) = \sum_{i<n} p(i)$.
+\end{definition}
+
+\begin{definition}[Termination]\label{d:term}
+A profile $p$ \emph{terminates} if there is a period $N$ such that $p(i)=0$ for every $i\ge N$.
+\end{definition}
+
+\begin{definition}[Endless punishment]\label{d:endless}
+A profile $p$ is \emph{endless} if $p(i)\ge 1$ for every period $i$.
+\end{definition}
+
+Each offence $o$ has a seriousness $w(o)$, a non-negative integer measuring the wrong done. The integer scale is an idealization; what matters below is only that the seriousness of a wrong done in a finite life by a finite agent is finite.
+
+\begin{definition}[Communicative justification]\label{d:just}
+A punishment with profile $p$ for offence $o$ is \emph{justified} if (i) it communicates to the offender censure of $o$, and (ii) the offender has reason to accept the censure it expresses.
+\end{definition}
+
+Definition~\ref{d:just} is the communicative account in the form we defend. Clause (i) says what punishment is for; clause (ii) says when it is justified. The two assumptions that follow state what each clause requires of the amount of hard treatment.
+
+\begin{assumption}[Accuracy]\label{a:acc}
+There is a scale $k$ such that, if the offender has reason to accept the censure that $p$ expresses for $o$, then $T_p(n)\le k\cdot w(o)$ for every $n$.
+\end{assumption}
+
+\begin{assumption}[Seriousness]\label{a:ser}
+If $p$ communicates censure of $o$, then $w(o)\le T_p(n)$ for some $n$.
+\end{assumption}
+
+\begin{assumption}[Scale]\label{a:scale}
+$k\ge 1$.
+\end{assumption}
+
+Assumption~\ref{a:acc} is the central premise. Censure is a judgment about a wrong, and hard treatment is the medium in which a society expresses how serious it judges the wrong to be. A censure that expresses more condemnation than the wrong warrants misrepresents the wrong, and a person has reason to reject a misrepresentation of what she has done, however guilty she is of something. The offender may have reason to accept a censure that is somewhat severe, since the scale on which hard treatment expresses condemnation is conventional and imprecise, and the factor $k$ allows for this; but she has no reason to accept a censure that represents her wrong as unboundedly worse than it is. The assumption therefore states proportionality as an upper limit, and it does so as a consequence of what it is for censure to be acceptable, not as a separate constraint on the pursuit of other aims. It is close to the principle of ordinal and cardinal proportionality defended by \citet{vonHirsch1993}, whose rationale it shares: severity conveys blame, so disproportionate severity conveys false blame.
+
+Assumption~\ref{a:ser} states the corresponding lower limit for communication. A response to a serious wrong that imposes trivial hard treatment communicates that the wrong was trivial; it does not censure the wrong but excuses it. The assumption does not require that every offence be punished: authorities may decline to punish, for reasons of mercy or of policy. It states what a punishment must do if it is to communicate censure of the offence.
+
+Assumption~\ref{a:scale} says that the scale is not so low that the band defined by the two assumptions is empty.
+
+\section{The structure of justified punishment}
+
+\begin{lemma}\label{l:mono}
+For every profile $p$, cumulative hard treatment is monotone: if $m\le n$ then $T_p(m)\le T_p(n)$.
+\end{lemma}
+
+\begin{proof}
+Each period adds a non-negative amount.
+\end{proof}
+
+\begin{lemma}\label{l:bounded}
+If the cumulative hard treatment of a profile is bounded, the profile terminates.
+\end{lemma}
+
+\begin{proof}
+Suppose $T_p(n)\le B$ for every $n$, and suppose for contradiction that $p$ does not terminate. Then for every period $N$ there is a later period $i\ge N$ with $p(i)\ge 1$. We show by induction that for every $m$ there is an $n$ with $T_p(n)\ge m$. For $m=0$ take $n=0$. If $T_p(n)\ge m$, choose $i\ge n$ with $p(i)\ge 1$; by Lemma~\ref{l:mono}, $T_p(i+1)=T_p(i)+p(i)\ge T_p(n)+1\ge m+1$. Taking $m=B+1$ contradicts the bound.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+If a punishment with profile $p$ for offence $o$ is justified, then
+\begin{enumerate}[label=(\alph*)]
+\item its cumulative hard treatment never exceeds $k\cdot w(o)$;
+\item its cumulative hard treatment reaches $w(o)$ at some period;
+\item it terminates.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By clause (ii) of Definition~\ref{d:just}, the offender has reason to accept the censure $p$ expresses, and (a) follows by Assumption~\ref{a:acc}. By clause (i), $p$ communicates censure of $o$, and (b) follows by Assumption~\ref{a:ser}. By (a), cumulative hard treatment is bounded by $k\cdot w(o)$, and (c) follows by Lemma~\ref{l:bounded}.
+\end{proof}
+
+\begin{corollary}\label{c:endless}
+Endless punishment expresses no censure the offender has reason to accept. It is therefore never justified, whatever the offence.
+\end{corollary}
+
+\begin{proof}
+If the offender had reason to accept the censure expressed by an endless profile, then by Assumption~\ref{a:acc} and Lemma~\ref{l:bounded} the profile would terminate, so that $p(N)=0$ for some $N$; but an endless profile has $p(N)\ge 1$. Since justification requires reason to accept, the endless profile is not justified.
+\end{proof}
+
+\begin{corollary}\label{c:zero}
+If an act wrongs no one, so that $w(o)=0$, a justified punishment for it imposes no hard treatment in any period.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main}(a), $T_p(n)\le k\cdot 0 = 0$ for every $n$, so every $p(i)$, being bounded by $T_p(i+1)$, is $0$.
+\end{proof}
+
+\begin{proposition}\label{p:band}
+For every offence $o$, there is a terminating profile whose cumulative hard treatment reaches $w(o)$ and never exceeds $k\cdot w(o)$.
+\end{proposition}
+
+\begin{proof}
+Impose $w(o)$ in period $0$ and nothing thereafter. The profile terminates at period $1$, its cumulative hard treatment is $w(o)$ from period $1$ onwards, and $w(o)\le k\cdot w(o)$ by Assumption~\ref{a:scale}.
+\end{proof}
+
+Theorem~\ref{t:main} says what justified punishment must be like; Proposition~\ref{p:band} says that the conditions can be met. Corollary~\ref{c:zero} is the communicative counterpart of the retributivist principle that the innocent may not be punished: where there is no wrong, there is nothing to censure, and the account gives no warrant for hard treatment. Consequentialist theories must add this principle as a side-constraint; the communicative account derives it.
+
+\section{Why the offender has reason to accept}
+
+Theorem~\ref{t:main} constrains justified punishment but does not by itself show that any punishment is justified. For that we need to show that, when the conditions of the theorem are satisfied and the punishment is imposed through a fair procedure by an authority with standing to censure, the offender has reason to accept the censure. We give three considerations.
+
+First, the censure is true. A punishment within the band of Theorem~\ref{t:main} represents the offender as having done a wrong of the seriousness she has in fact done. A rational agent has reason to accept true judgments about herself, including unwelcome ones, since the alternative is to persist in a false view of her own conduct.
+
+Second, the censure appeals to values the offender shares, or has reason to share. Censure for a wrong done to another appeals to that person's standing, which the offender claims for herself whenever she resents wrongs done to her. ACT-09 argues that resentment is a fitting response to wrongdoing. An offender who would fittingly resent the same wrong done to her has reason to accept the corresponding censure when she does it, since she cannot consistently hold that the wrong merits resentment when she suffers it and no censure when she does it. In a political community whose laws are just, the offender also shares a reason grounded in fairness: POL-03 argues for a weak, defeasible duty to obey just laws, grounded in fairness, and an offender who has violated such a duty has reason to accept censure for the violation.
+
+Third, the censure is addressed to her as someone who can return. A punishment that terminates, as Theorem~\ref{t:main}(c) requires, has an end after which the offender stands again as a full member of the community. The communication is directed at reconciliation: at the offender's coming to see the wrong as a wrong, and at her restoration to relations of mutual recognition \citep{Duff2001,Bennett2008}. This is what makes hard treatment fitting as a vehicle of censure. It is a burden that the offender bears for the wrong, and that she can come to take on as a penance would be taken on, a way of attending to the wrong and of showing that she takes it seriously. A merely verbal denunciation would not require the offender to attend to the wrong for any time, and would not mark the seriousness of grave wrongs in a form that the community, the victim and the offender can all recognize.
+
+These considerations are reasons. An offender who rejects the censure is not thereby given a justification for rejecting it, any more than a person who rejects a sound argument is given a reason to doubt its conclusion. ACT-12 argues that there are external reasons, which an agent may have although no sound deliberation from her present motivations would reveal them. The offender's reason to accept justified censure is of this kind when she is unrepentant: it is a reason she has, which her present motivations do not track.
+
+\section{Endless punishment and reconciliation}
+
+Corollary~\ref{c:endless} rules out endless punishment on the communicative account. It does so from Assumption~\ref{a:acc} alone, without appeal to the communicative clause of Definition~\ref{d:just}, and so it holds whatever one thinks about what endless punishment communicates. Its import is clearest when the third consideration of the previous section is recalled. Communicative punishment aims at reconciliation, and reconciliation requires a time after which the offender is no longer being punished. A punishment that never ends forecloses the reconciliation at which the communication aims; it addresses the offender as someone who can never return, and that is a censure no one has reason to accept. REL-20 argues on related grounds that no finite wrong merits infinite punishment and that eternal punishment is unjust. The present result shows that the communicative account reaches the same verdict by its own route, which does not depend on a retributive measure of desert: the upper bound comes from what makes censure acceptable.
+
+The same reasoning applies, with less force, to punishments that are finite but whose effects persist indefinitely, such as the permanent exclusion of former offenders from civic life. Where these collateral consequences are imposed as part of the censure, they extend the profile beyond any termination point, and Corollary~\ref{c:endless} bears on them. Where they are not part of the censure, they are not punishment in the sense of Definition~\ref{d:profile}, and they require some other justification, which in many cases is not available.
+
+\section{Objections and replies}
+
+\begin{objection}[Why hard treatment]\label{o:hard}
+If punishment is communication, a solemn denunciation would communicate the same censure without the harm. Hard treatment is either unnecessary or justified on other grounds, such as deterrence \citep{vonHirsch1993}.
+\end{objection}
+
+\begin{reply}
+The objection treats hard treatment as an addition to a message that could be sent without it. On the account defended here, hard treatment is the medium in which the seriousness of a wrong is expressed, and Assumption~\ref{a:ser} requires that the seriousness be expressed. Verbal denunciations do not scale with the gravity of wrongs in a way that offender, victim and community can read; burdens do. And hard treatment gives the offender something to do with the censure, namely to undergo it as a penance, which a denunciation does not. We do not deny that hard treatment also deters; deterrence is a welcome side effect of a practice justified on other grounds, and it does not license exceeding the upper bound of Theorem~\ref{t:main}(a). The companion manuscript ETH-26-b takes up the relation between censure and hard treatment in more detail.
+\end{reply}
+
+\begin{objection}[The unrepentant]\label{o:unrep}
+Many offenders reject the censure addressed to them. If punishment is justified only when the offender has reason to accept it, and many do not accept it, the justification is idle in most real cases.
+\end{objection}
+
+\begin{reply}
+The condition is that the offender has reason to accept the censure, not that she accepts it. A communication can be justified, and appropriate, even when it is not heard: a teacher who corrects a student's error is justified though the student persists in it. The unrepentant offender has the reasons given in Section~4, and punishment addresses her as someone who can come to recognize them. What the communicative account rules out is punishment of a kind that no one in the offender's position could have reason to accept, such as disproportionate or endless punishment.
+\end{reply}
+
+\begin{objection}[Standing]\label{o:standing}
+A state that is itself unjust to the offender, or that has denied her the goods of membership, lacks the standing to censure her in the name of a community from which it has excluded her \citep{Duff2001}.
+\end{objection}
+
+\begin{reply}
+We accept this. The account justifies punishment imposed by an authority with standing to address the offender as a member of the community whose values the law expresses, and where that standing is lacking or diminished, the justification is weakened accordingly. This is a condition on the application of the account, and an important one in practice, not an objection to it. It also explains a feature of considered judgment that consequentialist and retributive theories find hard to explain: that the punishment of members of persistently excluded groups by the state that excludes them is troubling even when they are guilty.
+\end{reply}
+
+\begin{objection}[Abolition]\label{o:boonin}
+Punishment involves intentionally harming people, and the burden of justifying intentional harm is not met by showing that the harm expresses a true judgment. True judgments can be expressed without harming anyone \citep{Boonin2008}.
+\end{objection}
+
+\begin{reply}
+The reply to Objection~\ref{o:hard} answers the second sentence. As to the first, the communicative account does not justify harm as a means to the expression of a judgment, which would invite the objection that the end could be reached otherwise. It justifies hard treatment as a burden the offender has reason to accept, and so as a burden she could take on herself if she saw her wrong for what it is. A burden of this kind is imposed on her in a way she has no reasonable ground to reject, which is why it does not wrong her.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not fix the scale $k$ or the measure of seriousness, and so does not yield a sentencing table; it establishes that, whatever the scale, justified punishment lies within a band fixed by the seriousness of the wrong and ends. It does not establish that any existing system of punishment is justified, since many fail the conditions of standing and of fair procedure discussed above, and many impose sentences above any defensible band. It does not establish that every offence must be punished, since Assumption~\ref{a:ser} constrains what punishment communicates, not whether punishment is imposed. And it does not establish the communicative account itself; Theorem~\ref{t:main} derives its structural consequences from it.
+
+\section{Formalization}
+
+Theorem~\ref{t:main} and its corollaries are formalized in \nolinkurl{Philosophy/ETH/ETH_26.lean}. Offences, the seriousness function, the scale and the two predicates of Definition~\ref{d:just} are primitives, introduced as axioms; Assumptions~\ref{a:acc}, \ref{a:ser} and~\ref{a:scale} are axioms with those names in their docstrings. Profiles, cumulative hard treatment, termination and endlessness are defined, and Lemmas~\ref{l:mono} and~\ref{l:bounded} are proved by induction. The main theorem reads:
+
+\begin{lstlisting}
+theorem justified_bounded (o : Offence) (p : Profile) (h : Justified o p) :
+    (∀ n, total p n ≤ scale * wrong o) ∧
+    (∃ n, wrong o ≤ total p n) ∧
+    Terminates p
+\end{lstlisting}
+
+\noindent and Corollary~\ref{c:endless}:
+
+\begin{lstlisting}
+theorem endless_unjustified (o : Offence) (p : Profile) (hE : Endless p) :
+    ¬ ReasonToAccept o p ∧ ¬ Justified o p
+\end{lstlisting}
+
+\noindent The command \texttt{\#print axioms} reports, for the main theorem:
+
+\begin{lstlisting}
+'Philosophy.ETH_26.justified_bounded' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.ETH_26.Communicates, Philosophy.ETH_26.Offence,
+   Philosophy.ETH_26.ReasonToAccept, Philosophy.ETH_26.accuracy,
+   Philosophy.ETH_26.scale, Philosophy.ETH_26.seriousness,
+   Philosophy.ETH_26.wrong]
+\end{lstlisting}
+
+\noindent and for the corollary the same list without \texttt{seriousness}. The first three are the standard axioms of Lean's classical logic; \texttt{Classical.choice} enters through the proof by contradiction in Lemma~\ref{l:bounded}. \texttt{Offence}, \texttt{wrong}, \texttt{scale}, \texttt{Communicates} and \texttt{ReasonToAccept} are the primitives of the framework, and \texttt{accuracy} and \texttt{seriousness} are Assumptions~\ref{a:acc} and~\ref{a:ser}. That the corollary does not depend on \texttt{seriousness} confirms the remark of Section~5: endless punishment is excluded by the accuracy condition alone. Assumption~\ref{a:scale} is used only in Proposition~\ref{p:band}. The formalization establishes that the consequences follow from the assumptions; it does not establish the assumptions.
+
+\section{Conclusion}
+
+Punishment is justified as communication: it expresses a censure of the offender's wrong that she has reason to accept, because it is true, because it appeals to values she shares, and because it addresses her as someone who can return. Censure is acceptable only if it does not represent the wrong as worse than it is, and from this it follows that justified punishment is proportionate, that its cumulative hard treatment is bounded, and that it ends. Endless punishment is never justified, and where there is no wrong there is nothing to punish.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bennett(2008)]{Bennett2008} Bennett, C. (2008). \emph{The Apology Ritual: A Philosophical Theory of Punishment}. Cambridge University Press.
+\bibitem[Bentham(1789)]{Bentham1789} Bentham, J. (1789). \emph{An Introduction to the Principles of Morals and Legislation}. London: T. Payne.
+\bibitem[Boonin(2008)]{Boonin2008} Boonin, D. (2008). \emph{The Problem of Punishment}. Cambridge University Press.
+\bibitem[Duff(1986)]{Duff1986} Duff, R.~A. (1986). \emph{Trials and Punishments}. Cambridge University Press.
+\bibitem[Duff(2001)]{Duff2001} Duff, R.~A. (2001). \emph{Punishment, Communication, and Community}. Oxford University Press.
+\bibitem[Feinberg(1965)]{Feinberg1965} Feinberg, J. (1965). The expressive function of punishment. \emph{The Monist}, 49(3), 397--423.
+\bibitem[Hampton(1984)]{Hampton1984} Hampton, J. (1984). The moral education theory of punishment. \emph{Philosophy \& Public Affairs}, 13(3), 208--238.
+\bibitem[Hart(1968)]{Hart1968} Hart, H.~L.~A. (1968). \emph{Punishment and Responsibility: Essays in the Philosophy of Law}. Oxford University Press.
+\bibitem[Kant(1797)]{Kant1797} Kant, I. (1797). \emph{The Metaphysics of Morals}. In \emph{Practical Philosophy}, trans. M.~J. Gregor, Cambridge University Press, 1996. Doctrine of Right, General Remark E.
+\bibitem[Moore(1997)]{Moore1997} Moore, M.~S. (1997). \emph{Placing Blame: A Theory of Criminal Law}. Oxford University Press.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Rawls(1955)]{Rawls1955} Rawls, J. (1955). Two concepts of rules. \emph{The Philosophical Review}, 64(1), 3--32.
+\bibitem[von Hirsch(1993)]{vonHirsch1993} von Hirsch, A. (1993). \emph{Censure and Sanctions}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

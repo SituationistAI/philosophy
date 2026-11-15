@@ -1,0 +1,38 @@
+\documentclass{situationist-preprint}
+
+\title{Restricted Knowability Principles}
+\msid{LOG-19-b}
+\msfamily{LOG-19}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{knowability; Fitch's paradox; Cartesian restriction; Tennant; anti-realism; unknowable truths}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-19-a argues that not every truth is knowable and that restricted knowability principles concede this. Every truth entailing a Fitch conjunction is unknowable, and a true restriction must exclude them all, as Tennant's Cartesian restriction does. But if, as MTH-12 argues, some arithmetical truths are unknowable for other reasons, the Cartesian principle is false too.
+\end{abstract}
+
+We use the framework in which LOG-19-a states Fitch's argument \citep{Fitch1963}: propositions are sets of worlds, $K$ is a factive operator that distributes over conjunction (Assumptions~2.3 and~2.4 of LOG-19-a). Since propositions are sets, if $q$ entails $r$ then $q$ is the conjunction $q \wedge r$.
+
+\begin{proposition}\label{p:entail}
+If $q$ entails a Fitch conjunction $p \wedge \neg Kp$, then $Kq$ is true at no world.
+\end{proposition}
+
+\begin{proof}
+If $Kq$ is true at $v$, then, since $q = q \wedge (p \wedge \neg Kp)$, Assumption~2.4 of LOG-19-a gives $K(p \wedge \neg Kp)$ at $v$, contrary to Lemma~3.1 of LOG-19-a.
+\end{proof}
+
+A restricted knowability principle can be true only if it excludes all such $q$, for instance $s \wedge p \wedge \neg Kp$ for any truth $s$ and unknown truth $p$. \citet{Tennant1997} restricts the principle to Cartesian propositions, those $p$ for which $Kp$ is consistent; by Proposition~\ref{p:entail}, this excludes them all. Fitch's argument and its extensions of this kind do not refute it.
+
+\paragraph{A test.} The Cartesian principle is refuted by any truth $p$ such that $Kp$ is consistent but $p$ cannot be known. MTH-12 argues that there are such truths in arithmetic: by Gödel's first incompleteness theorem, some true arithmetical sentence $G$ lies outside the recursively enumerable set of sentences an effective knower can know. Knowing $G$ would falsify nothing, so $KG$ is consistent and $G$ is Cartesian. If MTH-12 is right, the Cartesian principle is false. The test is conditional on MTH-12's premise that our arithmetical knowledge is effective, but it shows what LOG-19-a claimed: a restricted principle must be defended case by case, and the restriction that avoids Fitch's conjunctions gives no protection against truths unknowable for other reasons.
+
+\paragraph{Conclusion.} The Cartesian restriction excludes every truth that entails a Fitch conjunction, but it is refuted if some arithmetical truths are unknowable in principle, as MTH-12 argues. Either way, not every truth is knowable.
+
+\begin{thebibliography}{99}\small
+\bibitem[Fitch(1963)]{Fitch1963} Fitch, F.~B. (1963). A logical analysis of some value concepts. \emph{The Journal of Symbolic Logic}, 28(2), 135--142.
+\bibitem[Tennant(1997)]{Tennant1997} Tennant, N. (1997). \emph{The Taming of the True}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

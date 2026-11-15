@@ -1,0 +1,255 @@
+\documentclass{situationist-preprint}
+
+\title{Foundations Without Sets}
+\msid{MTH-11-a}
+\msfamily{MTH-11}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{foundations of mathematics; category theory; ETCS; Lawvere; Mac Lane; topos theory; structuralism; univalent foundations; autonomy}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Set theory is widely regarded as the foundation of mathematics: every mathematical object can be represented as a set, and every theorem proved from the axioms of ZFC. We argue that set theory is not \emph{the} foundation, because category theory provides an alternative foundation at least as adequate. We distinguish the roles a foundation plays: interpreting mathematics, providing a shared standard of proof and a metamathematical arena, being intelligible without prior appeal to another foundation, and guiding mathematical practice. We then show that Lawvere's Elementary Theory of the Category of Sets, extended by a replacement axiom, matches ZFC in the first two roles, since the two theories are mutually interpretable in a way that preserves the sets up to isomorphism; that it meets the autonomy condition, against the objections of Feferman and Hellman; and that it does at least as well in guiding practice, where its structural character fits the mathematics of the last seventy years. Univalent foundations are a further case. Questions such as the continuum hypothesis, and the existence of actual infinities, arise identically in either foundation.
+\end{abstract}
+
+\section{The question}\label{s:question}
+
+Since \citet{Zermelo1908} axiomatized set theory and the Bourbaki group wrote its treatise on the assumption that all mathematical structures are sets equipped with relations and operations, it has been usual to describe set theory as the foundation of mathematics. The description has two parts. Every mathematical object can be represented as a set: the natural numbers as the finite von Neumann ordinals, the reals as Dedekind cuts, functions as sets of ordered pairs. And every theorem of ordinary mathematics can be proved, so represented, from the axioms of ZFC. Mathematicians rarely do this, but the possibility of doing it is taken to settle questions of rigor and consistency.
+
+From the 1960s a rival proposal has been developed. \citet{Lawvere1964,Lawvere1966} formulated axioms for the category of sets and for the category of categories, in which the primitive notions are objects, arrows and composition, not membership. \citet{MacLane1986} argued that the categorical description of mathematics, in which structures are characterized by their relations to other structures through structure-preserving maps, captures what mathematicians actually do better than the representation of everything as sets of sets. Topos theory provided a family of universes, generalizing the category of sets, in which mathematics can be developed \citep{MacLaneMoerdijk1992}. More recently, univalent foundations have proposed a type-theoretic foundation with a categorical, indeed homotopical, semantics \citep{UFP2013}.
+
+The question is whether set theory is the foundation of mathematics. We argue that it is not, because category theory provides an alternative foundation at least as adequate. The thesis is comparative and modest in one respect: we do not argue that set theory is inadequate, or that category theory is superior. It is immodest in another: we deny that set theory has a privileged status that category theory lacks, and so deny the definite article in \enquote{the foundation}.
+
+\section{History of the debate}\label{s:history}
+
+\subsection{From Zermelo to Bourbaki}
+
+Zermelo's axioms were introduced to secure the well-ordering theorem against the criticism its first proof had received, and to avoid the paradoxes by restricting the formation of sets \citep{Zermelo1908}. With Fraenkel's and Skolem's addition of replacement, they became ZF, and with the axiom of choice ZFC. The iterative conception, on which sets are formed in stages from previously formed sets, came to be seen as the intuitive picture behind the axioms. By the middle of the twentieth century it was standard to say that a mathematical object is a set and that a mathematical theorem is a theorem of ZFC, read through the appropriate definitions.
+
+The standard view faced an early difficulty, set out by \citet{Benacerraf1965}. The natural numbers can be represented as von Neumann ordinals or as Zermelo ordinals, and the two representations disagree on questions such as whether $1 \in 3$. Nothing in arithmetic decides between them, and so neither can be what the numbers are. Benacerraf concluded that numbers are not objects but positions in a structure, the view MTH-14 defends. The difficulty bears on set-theoretic foundations because it shows that the representation of mathematics in set theory carries information, such as whether $1 \in 3$, that mathematics does not contain.
+
+\subsection{Lawvere and Mac Lane}
+
+\citet{Lawvere1964} proposed the Elementary Theory of the Category of Sets (ETCS), a first-order theory whose models are categories that behave like the category of sets and functions. Its axioms say, in categorical language, that there are finite limits and colimits, function sets, a subset classifier, a natural numbers object and a choice principle, and that functions are determined by their values at elements. A set in ETCS is an object of the category, and it has no members in the sense of ZFC: an element of a set $X$ is an arrow from the terminal object $1$ to $X$, and two sets are not compared by their elements but by the arrows between them. Lawvere called these sets \emph{abstract}: a set is a bare collection of featureless points, with no internal structure beyond its cardinality, and structure is given by arrows \citep{LawvereRosebrugh2003}.
+
+\citet{Lawvere1966} went further, proposing the category of categories as a foundation in which categories, not sets, are the basic objects. Mac Lane developed the philosophical case. In \citet{MacLane1986} he argued that mathematics studies forms that arise from human activities and are abstracted into structures, that the same structure appears in many places, and that the relations between structures, given by functors and natural transformations, are what mathematical understanding consists in. He also advocated, as a set-theoretic base adequate for mathematics, a weak set theory now called Mac Lane set theory, bounded Zermelo set theory with choice, which is equivalent in strength to ETCS.
+
+\subsection{Topos theory}
+
+The axioms of ETCS, minus those that make a category resemble the category of sets in particular, define an elementary topos. Lawvere and Tierney showed that elementary toposes are universes in which a large part of mathematics can be developed, with the logic of each topos being in general intuitionistic. The category of sheaves on a topological space is a topos, and so are categories of sets varying in time or depending on a parameter. Topos theory thereby gave a new perspective on independence results: Cohen's forcing models of the negation of the continuum hypothesis can be described as toposes of sheaves on a suitable site \citep{MacLaneMoerdijk1992}. The category of sets is one topos among many, distinguished by being well-pointed and satisfying choice.
+
+\subsection{The philosophical debate}
+
+The philosophical discussion began with \citet{Feferman1977}, who argued that category theory cannot serve as a foundation because its basic notions presuppose those of collection and operation, which are prior and are the subject of set theory. \citet{Bell1981} replied that topos theory reveals the absolute universe of sets as one model among many, and that a foundation should be local rather than absolute. \citet{Hellman2003} posed a question that framed the next stage: if category theory is a foundation, what is it about? The axioms of ETCS, or of the category of categories, describe structures; but what are the structures, and what guarantees that there are any? He argued that categorical foundations either presuppose a background set theory or make existence assumptions as strong as set theory's without its intuitive support. \citet{Awodey2004} answered that categorical foundations are schematic, not assertory: they do not claim that a unique universe of categories exists, but describe what holds in any structure of a given kind, as mathematicians do. \citet{McLarty2004,McLarty2005} argued that ETCS, read as an assertory theory, is as well motivated as ZFC, and stronger than its critics allowed once replacement is added.
+
+\citet{LinneboPettigrew2011} gave the most careful analysis of the autonomy question. They distinguished logical autonomy, the ability to state the theory without presupposing another; conceptual autonomy, the ability to understand its primitives without prior grasp of another theory's; and justificatory autonomy, the ability to justify its axioms without appeal to another theory. They argued that ETCS has the first two and lacks the third, because the best justification of its axioms appeals to the iterative conception of set. \citet{Maddy2017,Maddy2019} took a different approach, asking what roles a foundation is meant to play, and argued that set theory plays several of them well and that category theory is a serious competitor in one, which she calls essential guidance. Our framework follows Maddy's in method, and our conclusion is that the competition extends to every role.
+
+\subsection{Univalent foundations}
+
+Univalent foundations, developed by Voevodsky and others, are based on a dependent type theory in which types are interpreted as spaces up to homotopy and the univalence axiom identifies equivalent types \citep{UFP2013}. Their motivation was in part the formal verification of proofs, and in part the structuralist principle that isomorphic structures should be indistinguishable. \citet{Awodey2014} argued that univalence makes this principle a theorem of the foundation rather than a convention of practice. The type-theoretic foundations are not categorical in the narrow sense of taking categories as primitive, but their semantics is categorical, in higher toposes, and they share the structural character of the categorical approach. We treat them in Section~\ref{s:univalent}.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}\label{d:foundation}
+A \emph{foundation} for mathematics is a formal theory $T$ together with a systematic way of interpreting mathematical theories in $T$, such that the theorems of those theories, as interpreted, are theorems of $T$.
+\end{definition}
+
+\begin{definition}\label{d:roles}
+The \emph{roles} of a foundation are the following.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Generous arena}: $T$ interprets all of ordinary mathematics, and the interpretation preserves the structure mathematicians study.
+\item \emph{Shared standard}: proofs in different fields can be checked against a single set of axioms.
+\item \emph{Metamathematical corral}: the consistency strength of mathematical theories, and their independence, can be measured within $T$.
+\item \emph{Autonomy}: $T$ can be stated, understood and justified without prior appeal to another foundation.
+\item \emph{Guidance}: the concepts of $T$ fit the practice of mathematics and suggest the right definitions and questions.
+\end{enumerate}
+\end{definition}
+
+Roles (a), (b), (c) and (e) are taken from \citet{Maddy2017}, who also lists risk assessment, the measurement of the risk that a new axiom introduces inconsistency, which we fold into (c). Role (d) is the condition of \citet{LinneboPettigrew2011}.
+
+\begin{principle}[Comparative adequacy]\label{p:comp}
+A foundation $T$ is at least as adequate as a foundation $S$ if, for each role in Definition~\ref{d:roles}, $T$ plays it at least as well as $S$.
+\end{principle}
+
+\begin{principle}[Interpretive equivalence]\label{p:equiv}
+If $T$ and $S$ are mutually interpretable, with interpretations that compose to maps preserving the objects of each up to isomorphism, then $T$ plays roles (a), (b) and (c) at least as well as $S$, and conversely.
+\end{principle}
+
+Principle~\ref{p:comp} is a dominance principle and is weak: it does not say how to weigh one role against another, and so it cannot rank foundations that each do better in some role. Principle~\ref{p:equiv} expresses the fact that roles (a)--(c) depend only on what can be represented and proved. If every theorem of $S$ translates into a theorem of $T$ and back, and the translation preserves the mathematical objects up to the isomorphisms mathematics cares about, then whatever ordinary mathematics $S$ interprets, $T$ interprets, whatever proof $S$ certifies, $T$ certifies, and the consistency strength of any extension of $S$ is matched by an extension of $T$.
+
+\section{The theory ETCS}\label{s:etcs}
+
+We state the axioms of ETCS informally, following \citet{Leinster2014}. The language is that of categories: objects, arrows, sources and targets, identities and composition.
+
+\begin{definition}\label{d:etcs}
+ETCS is the first-order theory of a category satisfying these axioms.
+\begin{enumerate}[label=(\roman*)]
+\item Composition is associative and has identities.
+\item There is a terminal object $1$, an initial object, and finite products and coproducts; more generally, finite limits and colimits exist.
+\item For any objects $X$ and $Y$ there is an object $Y^X$ of arrows from $X$ to $Y$, with an evaluation arrow, satisfying the universal property of exponentials.
+\item There is a subobject classifier: an object $\Omega$ with an arrow $1 \to \Omega$ such that subobjects of any $X$ correspond to arrows $X \to \Omega$.
+\item There is a natural numbers object: an object $N$ with arrows $1 \to N$ and $N \to N$, initial among such structures.
+\item Well-pointedness: if two arrows $f, g\colon X \to Y$ agree on every element $1 \to X$, they are equal.
+\item The terminal object is not initial.
+\item Choice: every surjection has a section.
+\end{enumerate}
+\end{definition}
+
+The theory is first-order and makes no reference to membership. Sets in its sense are objects, elements of a set $X$ are arrows $1 \to X$, and subsets of $X$ are subobjects, that is, monomorphisms into $X$ up to isomorphism. The axioms say nothing about the internal nature of a set, and the theory cannot distinguish isomorphic objects: any property expressible in its language is invariant under isomorphism.
+
+\begin{proposition}[\citealp{Osius1974,Mathias2001}]\label{p:bz}
+ETCS and bounded Zermelo set theory with choice are mutually interpretable, and equiconsistent.
+\end{proposition}
+
+ETCS is therefore weaker than ZFC, as \citet{Mathias2001} emphasized: it does not prove the existence of $\aleph_\omega$, nor of the set $\{N, \mathcal{P}(N), \mathcal{P}\mathcal{P}(N), \dots\}$, nor does it prove Borel determinacy. The deficiency is the absence of replacement, and it is remedied by adding a categorical form of replacement: for any formula that assigns to each element of an object $I$ an object $X_i$, determined up to isomorphism, there is an arrow $X \to I$ whose fibers are the $X_i$.
+
+\begin{proposition}[\citealp{Osius1974,McLarty2004,Shulman2019}]\label{p:zfc}
+ETCS with replacement (ETCS$+$R) and ZFC are mutually interpretable. The interpretation of ETCS$+$R in ZFC takes a model of ZFC to its category of sets; the interpretation of ZFC in ETCS$+$R takes a model of ETCS$+$R to the universe of well-founded extensional relations, represented as pointed graphs, modulo isomorphism. Composing the two interpretations returns each model up to isomorphism of its sets.
+\end{proposition}
+
+The construction behind the second interpretation is worth describing. In ZFC, every set is determined by its membership tree: the set, its members, their members, and so on, with the membership relation among them. Such a tree is a well-founded extensional relation with a distinguished top element. ETCS$+$R can define such relations as structures on its objects, and identifying isomorphic ones yields a universe in which a membership relation is defined and the axioms of ZFC hold. Membership is thereby reconstructed from structure, as one structure among others, rather than taken as primitive \citep{Shulman2019}.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:abc}
+ETCS$+$R plays roles (a), (b) and (c) at least as well as ZFC.
+\end{lemma}
+
+\begin{proof}
+By Proposition~\ref{p:zfc}, ETCS$+$R and ZFC are mutually interpretable, and the composite interpretations preserve each theory's sets up to isomorphism. By Principle~\ref{p:equiv}, ETCS$+$R plays roles (a), (b) and (c) at least as well as ZFC.
+\end{proof}
+
+The content of Lemma~\ref{l:abc} can be put concretely. Any theorem of ordinary mathematics, as formalized in ZFC, translates into a theorem of ETCS$+$R; large cardinal axioms translate into statements about objects of the category, and their consistency strengths are preserved; independence results transfer in both directions. For the generous arena, the categorical interpretation is in one respect better: since ETCS cannot distinguish isomorphic sets, it does not represent the natural numbers as one particular system of sets among many, and it is untroubled by Benacerraf's problem.
+
+\begin{lemma}\label{l:autonomy}
+ETCS$+$R is autonomous: it can be stated, understood and justified without prior appeal to set theory.
+\end{lemma}
+
+\begin{proof}[Argument]
+It can be stated: Definition~\ref{d:etcs} uses only the language of categories, a first-order language with sorts for objects and arrows. It can be understood: the primitive notions, function and composition, are as basic as membership, and arguably more basic in the practice of mathematics, where a function is understood by what it does to its arguments and not as a set of ordered pairs. A student can grasp that functions compose before she has been told what a set of ordered pairs is. It can be justified: each axiom of ETCS expresses a closure condition on the universe of abstract sets and functions that is as intuitive as the corresponding axiom of ZFC. Exponentials say that the functions from $X$ to $Y$ form a set; the subobject classifier says that the subsets of $X$ correspond to the functions from $X$ to a two-element set of truth values, which is the power set axiom; the natural numbers object says that there is an infinite set on which one can define functions by recursion; well-pointedness says that a function is determined by its values. The justification of these closure conditions appeals to the conception of a universe of sets and functions in which one can form function sets, power sets and an infinite set; this is the content of the iterative conception, but it is not the property of set theory with membership as primitive. It is a conception of collections and operations on them, which both theories articulate.
+\end{proof}
+
+The argument for justificatory autonomy is where we part company with \citet{LinneboPettigrew2011}. They held that the justification of ETCS borrows from the iterative conception and so depends on set theory. We hold that the iterative conception is a conception of collections formed in stages, and that it supports ETCS$+$R as directly as ZFC: at each stage the collections formed include the function sets and the subsets of earlier collections, which is what the axioms of ETCS say. The conception does not tell us that the primitive relation of the theory must be membership rather than function application. The membership relation of ZFC is one way of encoding that a collection has been formed from given elements; the arrows $1 \to X$ of ETCS are another.
+
+\begin{lemma}\label{l:guidance}
+ETCS$+$R, and the categorical framework of which it is a part, plays role (e) at least as well as ZFC.
+\end{lemma}
+
+\begin{proof}[Argument]
+The mathematics of the last seventy years has been organized increasingly in categorical terms. Algebraic topology works with functors from spaces to algebraic structures; algebraic geometry since Grothendieck works with schemes, sheaves and toposes; homological algebra, representation theory and parts of logic itself are developed categorically. In these fields the questions that guide research, such as whether a construction is functorial, whether a functor has an adjoint, what the universal property of an object is, are categorical questions, and the right definitions are those that are invariant under isomorphism. A foundation that characterizes sets by their arrows and cannot state properties that are not invariant under isomorphism provides guidance of the right kind: it tells the mathematician that any property she wishes to define should be expressible in structural terms. \citet{Maddy2017} grants that category theory has the advantage in this role. The set-theoretic foundation offers guidance in other parts of mathematics, notably in set theory itself, in descriptive set theory and in parts of analysis, where the cumulative hierarchy and the ordinals organize the subject. In these parts ETCS$+$R provides the same guidance through the interpretation of Proposition~\ref{p:zfc}, since the cumulative hierarchy is definable in it. Taken over mathematics as a whole, the guidance of the categorical framework is at least as good.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Category theory, in the form of ETCS$+$R, provides a foundation of mathematics at least as adequate as ZFC. Hence set theory is not the foundation of mathematics.
+\end{theorem}
+
+\begin{proof}
+ETCS$+$R is a foundation in the sense of Definition~\ref{d:foundation}, by Proposition~\ref{p:zfc}. By Lemmas~\ref{l:abc}, \ref{l:autonomy} and~\ref{l:guidance}, it plays each role of Definition~\ref{d:roles} at least as well as ZFC, the autonomy role being one that ZFC also plays. By Principle~\ref{p:comp}, it is at least as adequate as ZFC. If set theory were \emph{the} foundation, it would have a foundational status that an alternative at least as adequate lacks; there is no such status, so set theory is not the foundation.
+\end{proof}
+
+The second part of the theorem relies on the thought that being \emph{the} foundation is a matter of adequacy. A defender of set theory might hold that it is the foundation for historical reasons, because it was the first or is the most widely taught. That is a fact about the sociology of mathematics, not about foundations, and we set it aside.
+
+\section{Univalent foundations}\label{s:univalent}
+
+Univalent foundations provide a second categorical, or at least structural, alternative. The theory is a dependent type theory with a hierarchy of universes, identity types and the univalence axiom, which says that the identity type between two types in a universe is equivalent to the type of equivalences between them. Isomorphic structures are then identical in the sense of the theory, and every property definable in it is invariant under isomorphism, as it is in ETCS but with a stronger reason: the invariance is a theorem rather than a consequence of the poverty of the language \citep{Awodey2014}.
+
+On the roles of Definition~\ref{d:roles}, univalent foundations do well on (a), since the HoTT book constructs within the theory a cumulative hierarchy of sets satisfying the axioms of set theory, given choice \citep{UFP2013}; very well on (b), since the theory is implemented in proof assistants in which large parts of mathematics have been formally verified; and well on (e) in homotopy theory and higher category theory, where its primitive notions are those of the practice. On (c) the situation is less settled, and the consistency strength of the theory with various universe hierarchies and axioms is a subject of ongoing research. On (d), the theory is autonomous in the sense of \citet{LinneboPettigrew2011}, but its intended interpretation, in terms of spaces up to homotopy, is less familiar than the conception of sets and functions, and it is not yet clear that its justification is independent of the simplicial models in which its consistency was first established.
+
+We therefore do not rest Theorem~\ref{t:main} on univalent foundations. They are evidence that the structural approach is fruitful beyond ETCS, and they bear on MTH-09: a formally verified derivation in a univalent proof assistant is a proof whether or not it has been surveyed. Whether they are at least as adequate as ZFC on every role is a question we leave open.
+
+\section{Consequences for set-theoretic questions}\label{s:consequences}
+
+Several families in the philosophy of mathematics state their conclusions in set-theoretic terms. MTH-06 argues that the continuum hypothesis is false given independently motivated new axioms; MTH-10 that actual infinities exist, as set theory requires. Theorem~\ref{t:main} might seem to threaten these conclusions: if set theory is not the foundation, questions posed in its terms might seem parochial. They are not, and the reason is Proposition~\ref{p:zfc}.
+
+\begin{corollary}\label{c:ch}
+The continuum hypothesis is expressible in ETCS$+$R, is independent of it, and is decided there by the same new axioms that decide it in ZFC, in the same way.
+\end{corollary}
+
+\begin{proof}
+In ETCS, CH is the statement that every subobject of $\Omega^N$ is either isomorphic to a subobject of $N$ or isomorphic to $\Omega^N$; that is, every set of reals is countable or of the size of the continuum. Under the interpretations of Proposition~\ref{p:zfc} this statement corresponds to CH in ZFC. Since the interpretations preserve provability in both directions, CH is independent of ETCS$+$R if and only if it is independent of ZFC, which it is. A new axiom of ZFC, such as Martin's Maximum, translates into an axiom of ETCS$+$R, which proves the translation of $\neg$CH if and only if the original proves $\neg$CH.
+\end{proof}
+
+Corollary~\ref{c:ch} shows that MTH-06's thesis transfers. The argument of MTH-06 concerns the truth value of CH and the justification of new axioms, and these are matters on which the two foundations agree: they agree on what CH says, on its independence, and on what follows from each new axiom. The motivations MTH-06 gives for Martin's Maximum, maximality and fruitfulness, are motivations about the universe of sets and functions that both theories describe. A categorical foundation even makes one of them more natural: forcing, in topos theory, is the construction of a topos of sheaves, and forcing axioms say that the category of sets already contains the generic objects that such constructions would add.
+
+The case of MTH-10 is simpler. ETCS asserts, in Definition~\ref{d:etcs}(v), the existence of a natural numbers object, which is an object of the category, a single set, with infinitely many elements; it is actually infinite. The categorical foundation requires actual infinities exactly as set theory does. What MTH-10 says about set theory holds of any foundation adequate to analysis.
+
+The case of MTH-14 is a point of agreement. MTH-14 holds that numbers are positions in structures with no properties beyond their structural ones. ETCS is the foundation in which this is built into the language: its natural numbers object is characterized only up to isomorphism, and no question of the form \enquote{is $1 \in 3$?} can be asked of it. Theorem~\ref{t:main} and MTH-14 support each other: if numbers are positions in structures, a foundation that represents them structurally is at least as faithful as one that represents them as particular sets.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Logical priority]
+Category theory presupposes the notions of collection and operation: a category is a collection of objects and arrows with an operation of composition. Those notions are the subject of set theory, which is therefore prior \citep{Feferman1977}.
+\end{objection}
+
+\begin{reply}
+The objection conflates the informal notions of collection and operation, which every mathematical theory uses, with the formal theory ZFC. ZFC presupposes them too: its axiom of separation presupposes the notion of a property, its axiom of replacement the notion of an operation, and its quantifiers range over a collection of sets. Neither theory is prior to the informal notions, and each articulates them. ETCS, being a first-order theory, presupposes only what any first-order theory presupposes, a domain of quantification and the interpretation of its primitive symbols. If the objection shows that ETCS is not autonomous, it shows the same of ZFC.
+\end{reply}
+
+\begin{objection}[What is it about?]
+The axioms of ETCS describe a kind of category. They do not say that there is such a category, or which one is meant. A foundation must be assertory: it must say what exists. ETCS either borrows existence from a background set theory or asserts the existence of a category of sets as strongly as ZFC asserts the existence of the cumulative hierarchy, without the intuitive picture that supports the latter \citep{Hellman2003}.
+\end{objection}
+
+\begin{reply}
+ETCS can be read assertorically, as a theory of the category of abstract sets and functions, as ZFC is read as a theory of the cumulative hierarchy \citep{McLarty2004}. Read in this way, it asserts the existence of a universe of sets and functions; the intuitive picture that supports it is the picture of collections and operations on them, closed under the formation of function sets and power sets, which is no less intuitive than the cumulative hierarchy and, by the reply to the previous objection, is in large part the same picture. Read schematically, as \citet{Awodey2004} proposes, it describes what holds in any such universe, and the question of existence is the question of consistency, which is the same for ETCS$+$R as for ZFC by Proposition~\ref{p:zfc}. On either reading, the existence question is answered as well for ETCS$+$R as for ZFC.
+\end{reply}
+
+\begin{objection}[Weakness]
+ETCS is equivalent to bounded Zermelo set theory and so is much weaker than ZFC. It cannot prove the existence of $\aleph_\omega$ or Borel determinacy. Its proponents have been content with a foundation for the mathematics they practice, which is not all of mathematics \citep{Mathias2001}.
+\end{objection}
+
+\begin{reply}
+The objection is correct about ETCS and does not apply to ETCS$+$R, which is equivalent to ZFC by Proposition~\ref{p:zfc}. Replacement is not alien to the categorical framework: it says that a family of sets indexed by a set, given by a definable condition, can be assembled into a single set over the index, which is a natural closure condition on a category of sets. That Mac Lane thought it rarely needed is a judgement about mathematical practice that one may reject without rejecting categorical foundations.
+\end{reply}
+
+\begin{objection}[Large categories]
+Category theory, as practiced, uses large categories: the category of all sets, of all groups, of all categories. These are not objects of ETCS, and a categorical foundation that cannot represent the categories it studies is not a foundation for category theory.
+\end{objection}
+
+\begin{reply}
+The difficulty is real and is shared. ZFC cannot represent the category of all sets as a set either; in practice, both foundations handle large categories by Grothendieck universes, which are inaccessible cardinals in set-theoretic terms and corresponding universe objects in categorical terms, or by a theory of classes. The question of the foundation of category theory, which \citet{Feferman1977} rightly distinguished from that of categorical foundations, is therefore not a point of difference between the two.
+\end{reply}
+
+\begin{objection}[Membership is needed]
+Some mathematics is irreducibly about membership: the theory of the cumulative hierarchy, of ordinals and of large cardinals, which is what set theorists study. A foundation that lacks membership as a primitive cannot be adequate to that mathematics.
+\end{objection}
+
+\begin{reply}
+By Proposition~\ref{p:zfc}, membership is definable in ETCS$+$R as a relation on well-founded extensional trees, and the cumulative hierarchy is reconstructed in it. Set theory is then a branch of mathematics studied within the categorical foundation, as group theory is studied within the set-theoretic one, and its theorems are theorems of the categorical foundation under the interpretation. That set theory is about membership does not make membership foundational, any more than the fact that topology is about open sets makes open sets foundational.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+Theorem~\ref{t:main} does not establish that category theory is a better foundation than set theory, only that it is at least as adequate. On our account the two are on a par in roles (a)--(d), and the categorical framework is at least as good in role (e); a defender of set theory who weighs guidance in set theory and descriptive set theory more heavily may hold that they are on a par in that role too, which is consistent with our conclusion. The theorem does not establish that the category of categories, as opposed to the category of sets, is an adequate foundation, nor that univalent foundations are; Section~\ref{s:univalent} leaves the latter open. It does not establish that there is no foundation of mathematics: there are at least two, and the result is that neither is \emph{the} foundation. Finally, it does not touch the questions MTH-06 and MTH-10 answer, which, by Section~\ref{s:consequences}, arise and are answered alike in either foundation.
+
+\section{Conclusion}
+
+A foundation for mathematics plays several roles: it interprets mathematics, provides a shared standard of proof, measures consistency strength, can be understood and justified on its own terms, and guides practice. Lawvere's theory of the category of sets, extended by replacement, is mutually interpretable with ZFC in a way that preserves sets up to isomorphism, and so matches it in the first three roles; it is autonomous, because function and composition are no less basic than membership and the conception of collections closed under the formation of function sets and power sets supports its axioms as directly as ZFC's; and its structural character fits the practice of modern mathematics at least as well. Set theory is a foundation of mathematics, but category theory provides an alternative foundation at least as adequate, and so set theory is not the foundation.
+
+\begin{thebibliography}{99}\small
+\bibitem[Awodey(2004)]{Awodey2004} Awodey, S. (2004). An answer to Hellman's question: \enquote{Does category theory provide a framework for mathematical structuralism?} \emph{Philosophia Mathematica}, 12, 54--64.
+\bibitem[Awodey(2014)]{Awodey2014} Awodey, S. (2014). Structuralism, invariance, and univalence. \emph{Philosophia Mathematica}, 22, 1--11.
+\bibitem[Bell(1981)]{Bell1981} Bell, J. L. (1981). Category theory and the foundations of mathematics. \emph{British Journal for the Philosophy of Science}, 32, 349--358.
+\bibitem[Benacerraf(1965)]{Benacerraf1965} Benacerraf, P. (1965). What numbers could not be. \emph{Philosophical Review}, 74, 47--73.
+\bibitem[Feferman(1977)]{Feferman1977} Feferman, S. (1977). Categorical foundations and foundations of category theory. In R. E. Butts and J. Hintikka (eds.), \emph{Logic, Foundations of Mathematics, and Computability Theory}, 149--169. Reidel.
+\bibitem[Hellman(2003)]{Hellman2003} Hellman, G. (2003). Does category theory provide a framework for mathematical structuralism? \emph{Philosophia Mathematica}, 11, 129--157.
+\bibitem[Lawvere(1964)]{Lawvere1964} Lawvere, F. W. (1964). An elementary theory of the category of sets. \emph{Proceedings of the National Academy of Sciences}, 52, 1506--1511.
+\bibitem[Lawvere(1966)]{Lawvere1966} Lawvere, F. W. (1966). The category of categories as a foundation for mathematics. In S. Eilenberg et al. (eds.), \emph{Proceedings of the Conference on Categorical Algebra, La Jolla 1965}, 1--20. Springer.
+\bibitem[Lawvere and Rosebrugh(2003)]{LawvereRosebrugh2003} Lawvere, F. W. and Rosebrugh, R. (2003). \emph{Sets for Mathematics}. Cambridge University Press.
+\bibitem[Leinster(2014)]{Leinster2014} Leinster, T. (2014). Rethinking set theory. \emph{American Mathematical Monthly}, 121, 403--415.
+\bibitem[Linnebo and Pettigrew(2011)]{LinneboPettigrew2011} Linnebo, Ø. and Pettigrew, R. (2011). Category theory as an autonomous foundation. \emph{Philosophia Mathematica}, 19, 227--254.
+\bibitem[Mac Lane(1986)]{MacLane1986} Mac Lane, S. (1986). \emph{Mathematics, Form and Function}. Springer.
+\bibitem[Mac Lane and Moerdijk(1992)]{MacLaneMoerdijk1992} Mac Lane, S. and Moerdijk, I. (1992). \emph{Sheaves in Geometry and Logic: A First Introduction to Topos Theory}. Springer.
+\bibitem[Maddy(2017)]{Maddy2017} Maddy, P. (2017). Set-theoretic foundations. In A. E. Caicedo et al. (eds.), \emph{Foundations of Mathematics}, Contemporary Mathematics 690. American Mathematical Society.
+\bibitem[Maddy(2019)]{Maddy2019} Maddy, P. (2019). What do we want a foundation to do? In S. Centrone, D. Kant and D. Sarikaya (eds.), \emph{Reflections on the Foundations of Mathematics}. Springer.
+\bibitem[Mathias(2001)]{Mathias2001} Mathias, A. R. D. (2001). The strength of Mac Lane set theory. \emph{Annals of Pure and Applied Logic}, 110, 107--234.
+\bibitem[McLarty(2004)]{McLarty2004} McLarty, C. (2004). Exploring categorical structuralism. \emph{Philosophia Mathematica}, 12, 37--53.
+\bibitem[McLarty(2005)]{McLarty2005} McLarty, C. (2005). Learning from questions on categorical foundations. \emph{Philosophia Mathematica}, 13, 44--60.
+\bibitem[Osius(1974)]{Osius1974} Osius, G. (1974). Categorical set theory: a characterization of the category of sets. \emph{Journal of Pure and Applied Algebra}, 4, 79--119.
+\bibitem[Shulman(2019)]{Shulman2019} Shulman, M. (2019). Comparing material and structural set theories. \emph{Annals of Pure and Applied Logic}, 170, 465--504.
+\bibitem[Univalent Foundations Program(2013)]{UFP2013} The Univalent Foundations Program (2013). \emph{Homotopy Type Theory: Univalent Foundations of Mathematics}. Institute for Advanced Study.
+\bibitem[Zermelo(1908)]{Zermelo1908} Zermelo, E. (1908). Untersuchungen über die Grundlagen der Mengenlehre I. \emph{Mathematische Annalen}, 65, 261--281.
+\end{thebibliography}
+
+\end{document}

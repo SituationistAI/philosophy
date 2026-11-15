@@ -1,0 +1,162 @@
+\documentclass{situationist-preprint}
+
+\title{Explanation and Why-Questions}
+\msid{SCI-03-a}
+\msfamily{SCI-03}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mskeywords{explanation; why-questions; contrast; counterfactual dependence; invariance; asymmetry; non-causal explanation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What is an explanation? We argue that an explanation is an answer to a why-question that locates the explanandum in a pattern of dependence: it cites factors and a generalization relating them to the explanandum, such that the generalization would continue to hold under some changes in the factors, and under some such change the explanandum would have been one of the alternatives with which the question contrasts it. The account combines van Fraassen's analysis of why-questions, which supplies the contrast, with Woodward's analysis of explanatory generalizations, which supplies the relevance relation that van Fraassen left unconstrained. We show that it handles the classical counterexamples to the deductive-nomological model, the flagpole, the barometer, the hexed salt and paresis, and that it extends to constitutive and mathematical explanations, in which the dependence is not causal. We defend it against the objections that explanatory relevance is context-relative, that unification rather than dependence is what explains, and that equilibrium explanations cite no dependence.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+The deductive-nomological model of \citet{HempelOppenheim1948} held that an explanation is an argument whose premises include at least one law of nature and whose conclusion is the explanandum. The model was refuted by counterexamples of two kinds. In the first, the model is too permissive. The length of a flagpole's shadow, together with the angle of the sun and the laws of optics, entails the height of the pole, but does not explain it \citep{Bromberger1966}. A falling barometer reading, together with a law-like correlation, entails an approaching storm, but does not explain it. That a sample of salt has been hexed and placed in water, together with the true generalization that all hexed salt dissolves in water, entails that it dissolves, but the hexing explains nothing \citep{Kyburg1965}. In the second kind, the model is too strict: paresis is explained by untreated latent syphilis, though only a minority of syphilitics develop paresis, so that no law entails the explanandum or even makes it probable \citep{Scriven1959}.
+
+Three accounts replaced the model. On the causal-mechanical account of \citet{Salmon1984}, to explain an event is to locate it in the causal structure of the world, by tracing the causal processes and interactions that produced it. On the unification account of \citet{Kitcher1989}, to explain is to derive the explanandum by an argument pattern belonging to the set that derives the largest number of accepted truths from the fewest patterns. On the pragmatic account of \citet[ch.~5]{vanFraassen1980}, an explanation is an answer to a why-question, and what counts as an answer depends on a relevance relation supplied by the context of the question.
+
+Each faced a decisive difficulty. Salmon's account does not apply to explanations that cite no process, such as explanations by omission and by the absence of a preventer, or to the many explanations in the special sciences that cite no traceable process at all. Kitcher's account makes explanatory status depend on the best systematization of all accepted beliefs, which no explainer consults, and it struggles with asymmetries when the derivations in both directions belong to equally unifying patterns. Van Fraassen's account was shown by \citet{KitcherSalmon1987} to make anything an explanation of anything, since, without constraints on the relevance relation, any proposition counts as relevant relative to some relation.
+
+The counterfactual approach of \citet{Woodward2003}, developed with \citet{WoodwardHitchcock2003}, takes an explanation to exhibit how the explanandum depends on the factors cited: it answers what-if-things-had-been-different questions, saying how the explanandum would have changed had the factors changed. \citet{Strevens2008} gave a related kairetic account, on which an explanation cites only the difference-makers in a causal model. \citet{Reutlinger2016} and \citet{Lange2017} pressed the question whether the counterfactual approach extends to non-causal explanations. We defend a version of the counterfactual approach, stated so that it completes van Fraassen's analysis of why-questions and covers non-causal dependence.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Why-question]\label{d:question}
+A \emph{why-question} is determined by a \emph{topic} $P$, a true proposition, and a \emph{contrast class} $\{P, P_1, \dots, P_n\}$ of mutually exclusive alternatives to it. It asks why $P$ rather than any of the $P_i$.
+\end{definition}
+
+The definition is van Fraassen's, without his third element, the relevance relation. Contrast classes are often left implicit, and the same sentence can express different questions: \enquote{Why did Adam eat the apple?} asks, in different contexts, why Adam rather than Eve ate it, why he ate it rather than refusing, or why the apple rather than another fruit. A question with a different contrast class has different answers.
+
+\begin{definition}[Variables and generalizations]\label{d:gen}
+A \emph{variable} is a determinable whose values are mutually exclusive ways a feature of the system can be. A \emph{generalization} relating variables $F_1, \dots, F_k$ to a variable $E$ is a function, possibly probabilistic, from values of the $F_j$ to values of $E$ or to probability distributions over them.
+\end{definition}
+
+\begin{definition}[Invariance]\label{d:inv}
+A generalization $G$ is \emph{invariant} under a change in the values of $F_1, \dots, F_k$ if $G$ would continue to correctly describe the relation between the variables were their values so changed. The \emph{range of invariance} of $G$ is the set of changes under which it is invariant.
+\end{definition}
+
+Invariance is Woodward's notion. For causal generalizations, the relevant changes are interventions: changes in the value of a variable brought about in a way that affects the explanandum only through that variable \citep{Woodward2003}. For non-causal generalizations, as we argue in Section~\ref{s:noncausal}, the relevant changes are counterfactual variations in the values of variables representing structural or constitutive features.
+
+\begin{principle}[Explanation]\label{p:expl}
+An answer to the question why $P$ rather than $P_1, \dots, P_n$ is an \emph{explanation} iff it cites actual values of variables $F_1, \dots, F_k$ and a generalization $G$ such that:
+\begin{enumerate}[label=(\alph*)]
+\item $G$ is true of the actual values and assigns the actual value of $E$, the value that makes $P$ true, to them, or makes it more probable than it would be under some alternative values;
+\item $G$ is invariant under some range of changes in the values of the $F_j$;
+\item under some change in that range, $G$ assigns to $E$ a value that makes one of the $P_i$ true, or raises the probability of one of them.
+\end{enumerate}
+\end{principle}
+
+\begin{definition}[Pattern of dependence]\label{d:pattern}
+The \emph{pattern of dependence} exhibited by an explanation is the set of counterfactuals of the form \enquote{had the $F_j$ taken values $f'$ within the range of invariance of $G$, $E$ would have taken the value (or distribution) $G(f')$}.
+\end{definition}
+
+Principle~\ref{p:expl} is the thesis of this manuscript stated exactly. Clause (a) locates the explanandum in the pattern; clause (b) requires that there be a pattern, a range of counterfactual situations over which the generalization holds; clause (c) requires that the pattern connect the explanandum to its contrast, so that the answer says why $P$ rather than the alternatives. The relevance relation that van Fraassen left to context is fixed: it is dependence, as specified by (b) and (c). What context contributes is the topic, the contrast class and the choice of variables.
+
+\section{The argument}\label{s:argument}
+
+We argue that Principle~\ref{p:expl} is extensionally correct on the cases that defeated its predecessors and that it explains why those cases come out as they do.
+
+\begin{proposition}[Asymmetry]\label{p:flag}
+The height of the flagpole and the angle of the sun explain the length of the shadow; the length of the shadow and the angle of the sun do not explain the height of the flagpole.
+\end{proposition}
+
+\begin{proof}
+The generalization relating height and angle to shadow length, the trigonometric law of rectilinear propagation, is invariant under changes in the height of the pole and the angle of the sun: had the pole been taller, the shadow would have been longer as the law says. So the first answer satisfies clauses (a)--(c), with contrast class the alternative lengths of the shadow. For the second answer, the generalization relating shadow and angle to height is not invariant under changes in the length of the shadow: had the shadow been lengthened, by moving a light source or by casting another shadow over it, the height of the pole would have been the same. Clause (b) fails, and so does clause (c).
+\end{proof}
+
+The barometer is the same case. The generalization from barometer reading to storm is not invariant under changes in the reading: setting the needle by hand does not alter the weather. The reading and the storm depend on a common factor, the atmospheric pressure, and the pressure explains both.
+
+\begin{proposition}[Irrelevance]\label{p:hex}
+That the salt was hexed does not explain why it dissolved rather than remaining undissolved.
+\end{proposition}
+
+\begin{proof}
+The generalization that hexed salt dissolves in water gives the same value, dissolution, for both values of the variable \emph{hexed}: unhexed salt dissolves too. No change in the hexing yields the contrast, and clause (c) fails. What explains the dissolution is the salt's being placed in water, since under the change in which it is not, it does not dissolve.
+\end{proof}
+
+\begin{proposition}[Low probability]\label{p:paresis}
+Untreated latent syphilis explains why a patient developed paresis rather than not.
+\end{proposition}
+
+\begin{proof}
+The generalization is probabilistic: paresis has a probability of perhaps a quarter among untreated syphilitics and nearly zero otherwise. It is invariant under changes in whether a patient has untreated syphilis, as treatment trials show. Under the change to the patient's not having it, the probability of the alternative, not developing paresis, rises to near certainty. So clauses (a)--(c) hold in their probabilistic form.
+\end{proof}
+
+Proposition~\ref{p:paresis} shows that the account requires neither entailment nor high probability. It requires that the explanandum depend on the factors cited, and dependence can be probabilistic. It also gives the right verdict on the contrastive question why this syphilitic, rather than another, developed paresis: the syphilis does not answer it, since both have it, and no available factor may answer it, in which case the question has no answer \citep{Hitchcock1999}.
+
+\subsection{Non-causal dependence}\label{s:noncausal}
+
+The account is not restricted to causal explanation. A generalization can be invariant under counterfactual changes that are not interventions, and the dependence it exhibits need not be causal.
+
+\paragraph{Constitutive explanation.} The generation of an action potential is explained by the opening and closing of voltage-gated ion channels in the membrane. The channels do not cause the action potential; their activity, suitably organized, constitutes it. The explanation exhibits a dependence of the higher-level phenomenon on the components and their organization, and it answers what-if questions: had the sodium channels been blocked, there would have been no action potential \citep{Craver2007}.
+
+\paragraph{Mathematical explanation.} No one could walk across the bridges of K\"onigsberg crossing each exactly once, and the explanation is that more than two land masses were met by an odd number of bridges. The generalization, Euler's theorem that a connected graph has such a walk iff it has zero or two vertices of odd degree, is necessary, and the dependence it exhibits is not causal. But it is a pattern of dependence in the sense of Definition~\ref{d:pattern}: had the arrangement of bridges been different, with zero or two odd vertices, the walk would have been possible. \citet{Reutlinger2016} argues that the counterfactual theory covers such cases, and \citet{JanssonSaatsi2019} that what such explanations cite is an abstract feature on which the explanandum counterfactually depends. \citet{Lange2017} holds that distinctively mathematical explanations work by showing the explanandum to be necessary in a stronger sense than any causal law; we agree that they do so, and add that the necessity is displayed by the dependence of the explanandum on the structural features the theorem relates.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Context]
+Whether a factor explains depends on the interests of the questioner: a physician, a sociologist and a moralist give different explanations of the same death. Explanatory relevance is therefore context-relative, as van Fraassen held.
+\end{objection}
+
+\begin{reply}
+The interests fix the contrast class and the variables. The physician asks why the patient died rather than recovered, and cites the infection; the sociologist asks why people of this class die at this rate rather than at a lower one, and cites the conditions of work. Given the question, whether an answer explains is not context-relative: it depends on whether the generalization cited is invariant and connects the topic to its contrast. Principle~\ref{p:expl} thus locates the context-sensitivity where it belongs, in the question, and blocks the trivialization that \citet{KitcherSalmon1987} derived from an unconstrained relevance relation.
+\end{reply}
+
+\begin{objection}[Unification]
+What makes a generalization explanatory is that it unifies: Newton's laws explain because they derive the motions of planets, tides and projectiles from a single pattern \citep{Kitcher1989}. Dependence is incidental.
+\end{objection}
+
+\begin{reply}
+Unification and dependence often coincide, because a generalization invariant over a wide range of changes covers many cases. But they come apart, and when they do, dependence decides. The generalization that hexed salt dissolves is as unifying as the generalization that salt dissolves, if derivations from the first are counted in the systematization; what disqualifies it is the absence of dependence. Conversely, a generalization of narrow scope, such as one describing a single gene regulatory network, explains the expression pattern of that network, though it unifies little. Range of invariance is the property that unification approximates.
+\end{reply}
+
+\begin{objection}[Equilibrium explanation]
+\citet{Sober1983} observed that equilibrium explanations, such as Fisher's explanation of the even sex ratio, show that the explanandum would have occurred whatever the initial conditions. They explain by citing independence, not dependence.
+\end{objection}
+
+\begin{reply}
+They show independence of the outcome from initial conditions, and dependence on structural parameters. The sex ratio is even because the fitness of producing a son or a daughter depends on the population ratio, and the equilibrium is where they are equal; had the costs of raising sons and daughters differed, the equilibrium ratio would have differed as well. The explanation cites a pattern of dependence of the equilibrium on the cost structure, and its robustness to initial conditions is part of what the pattern says.
+\end{reply}
+
+\begin{objection}[Regress]
+An explanation cites a generalization, which can itself be questioned: why does the generalization hold? If explanation requires an answer to that question, explanation regresses; if it does not, the explanation rests on something unexplained.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:expl} requires that the generalization be true and invariant, not that it be explained. Whether it is explained is a further why-question with its own topic and contrast, and an answer to the first question is complete as an answer to that question. That there is always a further question is the fact SCI-18 records in arguing that science cannot explain the existence of the conditions that make science possible; it does not make answers to the questions it can answer incomplete.
+\end{reply}
+
+\section{Consequences}\label{s:consequences}
+
+The account fits the treatment of causation in MET-04, on which a cause is a counterfactual difference-maker selected by norms of normality. Explanation requires dependence but not the selection: the presence of oxygen explains why the match lit rather than not, if the question is posed against a contrast in which oxygen is absent, as it would be in a vacuum chamber. When the contrast is with the normal course of events, the factors that satisfy clause (c) are the deviations from default, and the explanatory factors coincide with the causes MET-04 selects. The account also underwrites the analysis of understanding in EPI-24, on which to understand why $p$ is to grasp an explanation of it, the ability to answer what-if-things-had-been-different questions about $p$; Definition~\ref{d:pattern} specifies what those questions are about. And it accommodates SCI-10, on which idealized models explain: a model that is false in its periphery but exhibits the right pattern of dependence satisfies Principle~\ref{p:expl}, since what the principle requires to be true is the generalization over the range of invariance, not the idealizing assumptions used to state it.
+
+\section{Conclusion}\label{s:conclusion}
+
+An explanation answers a why-question, and the question fixes a topic, a contrast class and the variables in play. What makes an answer explanatory is that it locates the topic in a pattern of dependence: a generalization, invariant under some range of changes in the factors it relates, under which the topic would have been one of its alternatives had the factors been different. This fixes the relevance relation that van Fraassen left to context, yields the asymmetries and irrelevances that defeated the deductive-nomological model, allows low-probability explanation, and covers constitutive and mathematical explanation as well as causal.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bromberger(1966)]{Bromberger1966} Bromberger, S. (1966). Why-questions. In R.~G. Colodny (ed.), \emph{Mind and Cosmos}. University of Pittsburgh Press.
+\bibitem[Craver(2007)]{Craver2007} Craver, C.~F. (2007). \emph{Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience}. Oxford University Press.
+\bibitem[Hempel and Oppenheim(1948)]{HempelOppenheim1948} Hempel, C.~G., and Oppenheim, P. (1948). Studies in the logic of explanation. \emph{Philosophy of Science}, 15, 135--175.
+\bibitem[Hitchcock(1999)]{Hitchcock1999} Hitchcock, C. (1999). Contrastive explanation and the demons of determinism. \emph{British Journal for the Philosophy of Science}, 50, 585--612.
+\bibitem[Jansson and Saatsi(2019)]{JanssonSaatsi2019} Jansson, L., and Saatsi, J. (2019). Explanatory abstractions. \emph{British Journal for the Philosophy of Science}, 70.
+\bibitem[Kitcher(1989)]{Kitcher1989} Kitcher, P. (1989). Explanatory unification and the causal structure of the world. In P.~Kitcher and W.~Salmon (eds.), \emph{Scientific Explanation}, Minnesota Studies in the Philosophy of Science 13. University of Minnesota Press.
+\bibitem[Kitcher and Salmon(1987)]{KitcherSalmon1987} Kitcher, P., and Salmon, W. (1987). Van Fraassen on explanation. \emph{Journal of Philosophy}, 84, 315--330.
+\bibitem[Kyburg(1965)]{Kyburg1965} Kyburg, H.~E. (1965). Comment. \emph{Philosophy of Science}, 32, 147--151.
+\bibitem[Lange(2017)]{Lange2017} Lange, M. (2017). \emph{Because Without Cause: Non-Causal Explanations in Science and Mathematics}. Oxford University Press.
+\bibitem[Reutlinger(2016)]{Reutlinger2016} Reutlinger, A. (2016). Is there a monist theory of causal and noncausal explanations? The counterfactual theory of scientific explanation. \emph{Philosophy of Science}, 83, 733--745.
+\bibitem[Salmon(1984)]{Salmon1984} Salmon, W.~C. (1984). \emph{Scientific Explanation and the Causal Structure of the World}. Princeton University Press.
+\bibitem[Scriven(1959)]{Scriven1959} Scriven, M. (1959). Explanation and prediction in evolutionary theory. \emph{Science}, 130, 477--482.
+\bibitem[Sober(1983)]{Sober1983} Sober, E. (1983). Equilibrium explanation. \emph{Philosophical Studies}, 43, 201--210.
+\bibitem[Strevens(2008)]{Strevens2008} Strevens, M. (2008). \emph{Depth: An Account of Scientific Explanation}. Harvard University Press.
+\bibitem[van Fraassen(1980)]{vanFraassen1980} van Fraassen, B.~C. (1980). \emph{The Scientific Image}. Oxford University Press.
+\bibitem[Woodward(2003)]{Woodward2003} Woodward, J. (2003). \emph{Making Things Happen: A Theory of Causal Explanation}. Oxford University Press.
+\bibitem[Woodward and Hitchcock(2003)]{WoodwardHitchcock2003} Woodward, J., and Hitchcock, C. (2003). Explanatory generalizations, part I: a counterfactual account. \emph{No\^us}, 37, 1--24.
+\end{thebibliography}
+
+\end{document}

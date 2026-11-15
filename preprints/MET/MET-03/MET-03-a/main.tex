@@ -1,0 +1,233 @@
+\documentclass{situationist-preprint}
+
+\title{Realism by Parsimony}
+\msid{MET-03-a}
+\msfamily{MET-03}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_03.lean}
+\mskeywords{external world; realism; idealism; Berkeley; parsimony; ideology; primitive notions; phenomenalism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does the external world exist? Moore's proof shows that there are hands, but the idealist accepts that there are hands and denies only that they exist independently of mind. We argue that the external world exists, in the sense that the structure responsible for the order of our experience does not depend on being conceived by any mind, and that the case against idealism is one of parsimony rather than of inconsistency. We first show that Berkeleyan idealism is consistent, by exhibiting a model of its theses. We then compare the ideology of realism and idealism, that is, the primitive notions each needs to explain the order of experience. Any adequate theory needs notions of experience, of a structure that is not itself a pattern in experience, and of the production of experience by that structure. Realism needs nothing more. Idealism needs, in addition, a primitive notion of conception, by which structure depends on a mind that does not perceive it by sense. Since the two theories are otherwise equal in explanatory power, a principle of parsimony of ideology eliminates idealism, and no adequate theory improves on realism. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Moore proved that there are external things by showing his hands \citep{Moore1939}. EPI-02 argues that the proof is sound and that Moore knew its premise, and we take that result as given. But the proof leaves a question open. Moore defined external things as things \enquote{to be met with in space}, and Berkeley never denied that there are such things. On Berkeley's view a hand is a collection of ideas, and ideas are met with in space in the only sense in which anything is; what he denied is that anything exists that is neither a mind nor dependent on a mind \citep[\S\S 1--7]{BerkeleyPrinciples}. The question of this manuscript is whether the external world exists in this stronger sense: whether the things we perceive, or what is responsible for their order, exist independently of being perceived or conceived by any mind.
+
+The question is not the sceptic's. The sceptic doubts that we know there are hands; the idealist grants that we know it and offers an account of what hands are. Moore's proof, which answers the sceptic, does not touch the idealist, since both of its premises and its conclusion are true on Berkeley's account.
+
+Three responses to idealism are prominent. The first holds that idealism is incoherent: that the notion of an idea existing in a mind cannot carry the weight Berkeley puts on it, or that the argument from the mind-dependence of sensible qualities to the mind-dependence of objects equivocates between the act and the object of perception \citep{Moore1903}. These objections tell against Berkeley's arguments for idealism, not against idealism itself, which survives the loss of a bad argument. The second response is that realism is the best explanation of the order of experience \citep[ch.~2]{Russell1912}. Russell argued that the hypothesis of physical objects is simpler than the hypothesis that our experiences have no external source; \citet{Vogel1990} developed the argument against sceptical alternatives. The idealist has a reply: her theory does not deny that experience has an external source in the sense of a source outside the finite mind, since the source is God, and God's will is as good an explanation of the order of experience as matter is. The third response is to accept idealism, which some recent philosophers have done in sophisticated forms \citep{Foster1982,Foster2008}.
+
+We accept the conclusion of the first response's critics: idealism is consistent. We develop the second response in a form that meets the idealist's reply. The comparison between realism and idealism should be made not in terms of what each theory says exists, since the idealist's God and his ideas are as numerous as the realist's physical states, but in terms of the primitive notions each theory needs, its \emph{ideology} in the sense of \citet{Quine1951}. We show that idealism needs exactly one primitive notion that realism lacks, and that realism needs none that idealism lacks. Given a principle of parsimony for ideology of the kind defended by \citet[\S 7.11]{Sider2011}, idealism is eliminated.
+
+\section{Framework}
+
+\begin{definition}[Ideology]\label{d:ideology}
+The \emph{ideology} of a theory is the set of notions it takes as primitive, that is, the notions it uses in its explanations and does not define in terms of others.
+\end{definition}
+
+\begin{definition}[Four notions]\label{d:notions}
+The following notions are in play.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Experience}: a mind's having an experience with a given character.
+\item \emph{Structure}: a system of states with lawlike relations among them, not identical to any pattern among experiences.
+\item \emph{Production}: a state's bringing it about that a mind has an experience.
+\item \emph{Conception}: a mind's conceiving a state, in a way that does not consist in having a sensory experience of it.
+\end{enumerate}
+\end{definition}
+
+The explanandum is the order of experience: experiences come in regular and intersubjectively coordinated patterns, and these patterns support counterfactuals about what would be experienced by an observer in places where there is none. Explaining this order requires a structure whose states are not themselves experiences, since the counterfactuals concern states of affairs that nobody experiences; it requires experience, since experience is what is explained; and it requires a relation between the two.
+
+\begin{assumption}[Adequacy]\label{a:adequacy}
+Every explanatorily adequate theory of the order of experience has experience, structure and production among its primitives.
+\end{assumption}
+
+Assumption~\ref{a:adequacy} does not say that these notions must be indefinable in every language. It says that an adequate theory uses them, and that none of them can be defined in terms of the others: experience is not definable in terms of structure and production without an analysis of experience that both parties reject; structure is, by Definition~\ref{d:notions}, not a pattern in experience; and production is a relation between the two, which neither relatum fixes.
+
+\begin{definition}[Realism]\label{d:realism}
+\emph{Realism} is the theory whose ideology consists of experience, structure and production. Its distinctive thesis is that some structural states produce no experience in any mind.
+\end{definition}
+
+\begin{definition}[Idealism]\label{d:idealism}
+\emph{Idealism} is the theory whose ideology consists of experience, structure, production and conception. Its distinctive thesis is that every structural state is conceived by some mind, and that there is a mind, God, which conceives every structural state and has no sensory experience.
+\end{definition}
+
+Definition~\ref{d:idealism} follows Berkeley closely. On his account the order of our ideas of sense is explained by the will of God, who excites ideas in us according to the fixed rules that we call the laws of nature \citep[\S\S 29--33]{BerkeleyPrinciples}. The persistence of unperceived things is secured by their existence in the mind of God, in which the archetypes of sensible things exist, though God perceives nothing by sense as we do \citep[third dialogue]{BerkeleyDialogues}. In our terms: the archetypes in God's mind are the structure, God's volition is production, and the relation in which God stands to the archetypes is conception. Production is not a new primitive for the idealist, since the realist also needs a relation by which states bring about experiences; that Berkeley takes all production to be volition is a thesis about the nature of production, not an addition to the ideology.
+
+The distinctive thesis of realism is stated in the shared vocabulary of experience, structure and production. The distinctive thesis of idealism is not: it says that structural states are conceived. This asymmetry is the core of the argument.
+
+\begin{assumption}[Indefinability of conception]\label{a:indef}
+A theory that asserts that every structural state depends on being conceived by a mind has conception among its primitives.
+\end{assumption}
+
+The idealist cannot define conception as a kind of experience, since God has no sensory experience and the unperceived tree is experienced by no finite mind. She cannot define it as production, since God's conception of an archetype is not his producing an experience of it; nor can she define it in terms of structure, since the dependence of structure on conception is precisely what her theory adds. These are the only resources available.
+
+\begin{assumption}[Adequacy of both theories]\label{a:both}
+Realism and idealism are both explanatorily adequate.
+\end{assumption}
+
+Assumption~\ref{a:both} is a concession to the idealist. Every regularity in experience that the realist explains by the structure of the physical world and its production of experience, the idealist explains by the same structure, conceived in God's mind and producing experience through his will. We grant that the explanations are equally good in every respect other than their ideology.
+
+\begin{principle}[Parsimony of ideology]\label{p:parsimony}
+Of two adequate theories, a theory whose ideology properly includes the ideology of the other is eliminated.
+\end{principle}
+
+Principle~\ref{p:parsimony} is a weak principle of parsimony. It does not weigh primitives against explanatory power, since it applies only between adequate theories, and it does not compare theories whose ideologies are not nested. It is an instance of the methodological maxim, defended by \citet{Sider2011}, that ideology counts against a theory as much as ontology does. \citet[87]{Lewis1973} distinguished qualitative from quantitative parsimony and held that only the former matters; an extra primitive notion is a qualitative cost of the plainest kind.
+
+\section{Results}
+
+\begin{proposition}[Consistency of idealism]\label{p:consistent}
+The theses of idealism are jointly consistent.
+\end{proposition}
+
+\begin{proof}
+Take two minds, $g$ and $m$, two structural states, $s_1$ and $s_0$, and one experience $e$. Let $g$ conceive both states and have no experience; let $m$ have $e$; let $s_1$ produce $e$ and $s_0$ produce nothing. Then every state is conceived by a mind, $g$ conceives every state and has no sensory experience, every experience had by a mind is produced by some state, some state ($s_0$) produces no experience in any mind, and some finite mind has an experience.
+\end{proof}
+
+The model is trivial, and that is the point: the idealist's theses impose no conditions that conflict with each other or with the existence of an order of experience. Arguments that idealism is incoherent must therefore locate the incoherence in some further thesis, and the theses of Definition~\ref{d:idealism} are all the idealist needs.
+
+\begin{lemma}[One more primitive]\label{l:one}
+The ideology of realism is included in that of idealism, and conception is the only notion in the ideology of idealism that is not in the ideology of realism.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:both} idealism is adequate, so by Assumption~\ref{a:adequacy} its ideology contains experience, structure and production, which by Definition~\ref{d:realism} make up the ideology of realism. By Definition~\ref{d:idealism} the ideology of idealism contains these three notions and conception, and by Definition~\ref{d:realism} conception is not in the ideology of realism.
+\end{proof}
+
+\begin{theorem}[Realism by parsimony]\label{t:main}
+Idealism is eliminated by parsimony.
+\end{theorem}
+
+\begin{proof}
+This is the case $T = $ idealism of Theorem~\ref{t:general}, since idealism is adequate (Assumption~\ref{a:both}) and asserts the mind-dependence of structure (Definition~\ref{d:idealism}).
+\end{proof}
+
+\begin{theorem}[Generalization]\label{t:general}
+Every adequate theory that asserts that every structural state depends on being conceived by a mind is eliminated by parsimony.
+\end{theorem}
+
+\begin{proof}
+Let $T$ be such a theory. By Assumption~\ref{a:adequacy}, the ideology of $T$ contains experience, structure and production, and so includes the ideology of realism. By Assumption~\ref{a:indef}, it contains conception, which the ideology of realism does not. So the ideology of $T$ properly includes the ideology of realism, which is adequate by Assumption~\ref{a:both}, and $T$ is eliminated by Principle~\ref{p:parsimony}.
+\end{proof}
+
+Theorem~\ref{t:general} matters because it does not depend on the details of Berkeley's theory. An idealist who replaces God by a collective mind, or by a cosmic consciousness of which finite minds are aspects, still asserts that structure depends on being conceived and still needs the notion of conception to say so. The count in Lemma~\ref{l:one} is specific to Berkeley's theory; the elimination is not.
+
+\begin{proposition}[Minimality of realism]\label{p:minimal}
+No adequate theory has an ideology properly included in that of realism.
+\end{proposition}
+
+\begin{proof}
+If $T$ is adequate, its ideology contains experience, structure and production by Assumption~\ref{a:adequacy}, and so includes the whole ideology of realism.
+\end{proof}
+
+\begin{corollary}\label{c:undominated}
+Realism is not eliminated by Principle~\ref{p:parsimony}, and every adequate theory asserting the mind-dependence of structure is eliminated by it.
+\end{corollary}
+
+\begin{proof}
+The first part follows from Proposition~\ref{p:minimal}, since Principle~\ref{p:parsimony} eliminates a theory only in favor of an adequate theory with a properly smaller ideology. The second part is Theorem~\ref{t:general}.
+\end{proof}
+
+It follows that the external world exists in the sense set out in Section~1. The structure responsible for the order of experience is not conceived by any mind, and some of its states, such as those of the unperceived tree, produce no experience at all.
+
+\section{Objections and replies}
+
+\begin{objection}[Ontological economy]
+Idealism is the more economical theory. It posits minds and ideas, and the realist posits these and matter as well.
+\end{objection}
+
+\begin{reply}
+This is Berkeley's own boast, and it rests on a miscount. The idealist does not dispense with the structure that the realist calls matter; she relocates it in God's mind, as archetypes whose relations mirror those of the realist's physical states state for state. The ontologies are equinumerous in structural states. What the idealist adds is an infinite mind and the relation of conception between it and the structure. If one counts kinds, she has the same kinds as the realist plus one; if one counts primitive notions, she has one more. On neither count is she more economical.
+\end{reply}
+
+\begin{objection}[Material substance]
+Realism needs a primitive that idealism lacks: the notion of material substance, a substratum in which physical qualities inhere. This is the notion Berkeley attacked, and the count of Lemma~\ref{l:one} omits it.
+\end{objection}
+
+\begin{reply}
+Realism as defined needs no substratum. Its structure is a system of states and lawlike relations, and nothing in the explanation of experience requires that the states inhere in something beyond them. The view that objects need a bare substratum to bear their properties is false on independent grounds: an object stripped of its properties is nothing at all, and bare substrata are explanatorily idle (MET-23). Berkeley's attack on material substance is therefore an attack on a thesis the realist need not hold.
+\end{reply}
+
+\begin{objection}[Phenomenalism]
+A phenomenalist idealist dispenses with God and with structure. Physical objects are permanent possibilities of sensation \citep[ch.~11]{Mill1865}: to say that the tree exists unperceived is to say that an observer would have certain experiences in certain conditions. The phenomenalist's ideology contains experience and a primitive counterfactual conditional, and is smaller than realism's.
+\end{objection}
+
+\begin{reply}
+The phenomenalist's theory is not adequate in the sense of Assumption~\ref{a:adequacy}. The counterfactuals she takes as primitive are the regularities to be explained, and a theory that takes the explanandum as brute does not explain it. Phenomenalism also faces the familiar problem that the conditions under which an observer would have the experiences cannot be specified in purely experiential terms \citep{Chisholm1948}. Principle~\ref{p:parsimony} compares adequate theories only, and so does not reward a theory for declining to explain.
+\end{reply}
+
+\begin{objection}[Parsimony and truth]
+Parsimony is a pragmatic virtue. Nothing guarantees that the world is economical, so the elimination of idealism by parsimony is a reason to prefer realism for convenience, not to believe it.
+\end{objection}
+
+\begin{reply}
+Whether simplicity is a guide to truth is a general question about theory choice, which arises for every scientific theory as much as for realism; on several accounts the preference for simpler theories is justified by its connection with predictive accuracy or likelihood \citep{Sober2015}. In the present case the connection is direct. The two theories agree on every prediction about experience, and they differ only in that idealism adds a further fact, that structure is conceived. A theory that adds a further fact without further support is less probable than the theory without it, since the conjunction of a hypothesis with a further claim can be no more probable than the hypothesis alone \citep{Huemer2009}. Parsimony of ideology is here an instance of that elementary point.
+\end{reply}
+
+\begin{objection}[Begging the question]
+The idealist will deny Assumption~\ref{a:indef}. For her, conception is not an addition but the primitive in terms of which structure is to be understood: to be a structural state is to be an object of conception.
+\end{objection}
+
+\begin{reply}
+If structure is defined in terms of conception, then the idealist has replaced one primitive by another, and the replacement must still do the explanatory work of structure: the states conceived must stand in lawlike relations that are not patterns in experience. She then needs conception and the lawlike relations among its objects, which is structure under another name. The count of primitives is unchanged; only the labels differ. Assumption~\ref{a:indef} records this, and the idealist who denies it owes a definition of the mind-dependence of structure that uses no notion beyond experience, structure and production.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that idealism is incoherent: Proposition~\ref{p:consistent} shows that it is not. It does not refute the sceptic, which is the task of EPI-02, and it does not establish that we know that the world is mind-independent in a sense stronger than that in which we know the results of other comparisons between adequate theories. It says nothing about the nature of structure beyond its independence of conception, and in particular it does not settle whether physical structure is fundamental or whether some of its states are themselves mental. Nor does it settle whether there are minds other than finite ones: it shows only that no such mind is needed to sustain the existence of the world.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MET/MET_03.lean} formalizes Proposition~\ref{p:consistent} by an explicit model, and Lemma~\ref{l:one}, Theorems~\ref{t:main} and~\ref{t:general}, Proposition~\ref{p:minimal} and Corollary~\ref{c:undominated} from axioms corresponding to the definitions and assumptions of Section~2. Notions form an inductive type with four constructors; theories, ideology, adequacy, mind-dependence and elimination are primitive. The main statements are:
+
+\begin{lstlisting}
+theorem idealism_consistent : Nonempty IdealistModel
+
+theorem idealism_eliminated : Eliminated idealism
+
+theorem realism_undominated :
+    (∀ T, Adequate T → ¬ ∃ n, ideology realism n ∧ ¬ ideology T n) ∧
+    (∀ T, Adequate T → MindDependent T → Eliminated T)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MET_03.idealism_consistent' does not depend on any axioms
+'Philosophy.MET_03.idealism_eliminated' depends on axioms:
+  [Adequate, Eliminated, MindDependent, Theory, adequacy_requires,
+   idealism, idealism_adequate, idealism_mind_dependent, ideology,
+   mind_dependence_needs_conception, parsimony, realism,
+   realism_adequate, realism_ideology]
+\end{lstlisting}
+
+\begin{sloppypar}
+Namespace prefixes are omitted. \texttt{adequacy\_requires} is Assumption~\ref{a:adequacy}; \texttt{realism\_ideology} is Definition~\ref{d:realism}; \texttt{idealism\_mind\_dependent} is the distinctive thesis of Definition~\ref{d:idealism}; \texttt{mind\_dependence\_needs\_conception} is Assumption~\ref{a:indef}; \texttt{realism\_adequate} and \texttt{idealism\_adequate} are Assumption~\ref{a:both}; \texttt{parsimony} is Principle~\ref{p:parsimony}. The consistency result uses no axioms, since it is witnessed by a model built from Lean's booleans. The formalization makes one feature of the argument visible: Theorem~\ref{t:main} does not use the axiom \texttt{idealism\_ideology}, which fixes the exact ideology of Berkeley's theory. The elimination depends only on the fact that idealism asserts the mind-dependence of structure, which is why it extends to every theory that does (Theorem~\ref{t:general}). The exact count of one more primitive (Lemma~\ref{l:one}) is the only result that uses it.
+\end{sloppypar}
+
+\section{Conclusion}
+
+The external world exists. Idealism is consistent, and it explains the order of experience as well as realism does, but it does so with the same structure and the same relation of production, together with a primitive notion of conception that realism does without. Parsimony of ideology therefore eliminates idealism, together with every theory that makes structure depend on a mind, and no adequate theory improves on realism. Moore's proof shows that there are external things; parsimony shows that they do not owe their existence to being conceived.
+
+\begin{thebibliography}{99}\small
+\bibitem[Berkeley(1710)]{BerkeleyPrinciples} Berkeley, G. (1710). \emph{A Treatise Concerning the Principles of Human Knowledge}. Dublin.
+\bibitem[Berkeley(1713)]{BerkeleyDialogues} Berkeley, G. (1713). \emph{Three Dialogues between Hylas and Philonous}. London.
+\bibitem[Chisholm(1948)]{Chisholm1948} Chisholm, R. M. (1948). The problem of empiricism. \emph{Journal of Philosophy}, 45, 512--517.
+\bibitem[Foster(1982)]{Foster1982} Foster, J. (1982). \emph{The Case for Idealism}. Routledge \& Kegan Paul.
+\bibitem[Foster(2008)]{Foster2008} Foster, J. (2008). \emph{A World for Us: The Case for Phenomenalistic Idealism}. Oxford University Press.
+\bibitem[Huemer(2009)]{Huemer2009} Huemer, M. (2009). When is parsimony a virtue? \emph{Philosophical Quarterly}, 59, 216--236.
+\bibitem[Lewis(1973)]{Lewis1973} Lewis, D. (1973). \emph{Counterfactuals}. Blackwell.
+\bibitem[Mill(1865)]{Mill1865} Mill, J. S. (1865). \emph{An Examination of Sir William Hamilton's Philosophy}. Longmans.
+\bibitem[Moore(1903)]{Moore1903} Moore, G. E. (1903). The refutation of idealism. \emph{Mind}, 12, 433--453.
+\bibitem[Moore(1939)]{Moore1939} Moore, G. E. (1939). Proof of an external world. \emph{Proceedings of the British Academy}, 25, 273--300.
+\bibitem[Quine(1951)]{Quine1951} Quine, W. V. (1951). Ontology and ideology. \emph{Philosophical Studies}, 2, 11--15.
+\bibitem[Russell(1912)]{Russell1912} Russell, B. (1912). \emph{The Problems of Philosophy}. Williams and Norgate.
+\bibitem[Sider(2011)]{Sider2011} Sider, T. (2011). \emph{Writing the Book of the World}. Oxford University Press.
+\bibitem[Sober(2015)]{Sober2015} Sober, E. (2015). \emph{Ockham's Razors: A User's Manual}. Cambridge University Press.
+\bibitem[Vogel(1990)]{Vogel1990} Vogel, J. (1990). Cartesian skepticism and inference to the best explanation. \emph{Journal of Philosophy}, 87, 658--666.
+\end{thebibliography}
+
+\end{document}

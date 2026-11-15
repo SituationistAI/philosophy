@@ -1,0 +1,110 @@
+\documentclass{situationist-preprint}
+
+\title{Against Three-Valued Logics of Vagueness}
+\msid{LOG-15-a}
+\msfamily{LOG-15}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mskeywords{vagueness; three-valued logic; strong Kleene; higher-order vagueness; bivalence; epistemicism; definitely}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A natural response to vagueness is to give borderline cases a third truth value: \enquote{Harry is bald} is neither true nor false when Harry is a borderline case. We argue that vague predicates are not three-valued but bivalent, and that the decisive objection to three-valued logics comes from higher-order vagueness. In a three-valued semantics with the strong Kleene connectives, the natural definiteness operator yields only bivalent sentences, so that every case is definitely a case, definitely a borderline case, or definitely a non-case. The semantics replaces the sharp boundary it was meant to remove with two, and can avoid this only by holding them unknowable, which concedes the epistemic account at the second level while denying it at the first. We conclude, with MET-18 and LNG-12, that vague predicates have sharp boundaries that cannot be known.
+\end{abstract}
+
+\section{The problem}
+
+A sorites series for \enquote{bald} runs from a man with no hair to a man with a hundred thousand, one hair at a time. Classical logic and bivalence imply that there is a last bald man in the series, and many have found this incredible. One response, going back to \citet{Hallden1949} and \citet{Korner1960}, gives the borderline cases a third value, so that the series passes from true through indeterminate to false. \citet{Tye1994} defends a version based on the strong Kleene connectives \citep{Kleene1952}, on which the sorites premises are not all true and the conclusion is not true either, and on which the metalanguage in which the semantics is stated is itself vague. Degree theories extend the idea to a continuum of values \citep{Smith2008}.
+
+The epistemic view holds instead that vague predicates have sharp boundaries that we cannot know \citep{Williamson1994}. MET-18 argues that vagueness lies in language and knowledge rather than in the world, and LNG-12 that \enquote{heap} has a sharp boundary that cannot be known. Here we argue for the corresponding thesis in the philosophy of logic: the logic of vague predicates is classical, and the three-valued alternative fails on the phenomenon it should handle best, higher-order vagueness. The main idea is due to \citet{Williamson1994} and \citet{Keefe2000}; we state it precisely.
+
+\section{Framework}
+
+\begin{definition}[Strong Kleene]\label{d:k3}
+A \emph{three-valued valuation} assigns each atomic sentence a value in $\{1, \tfrac12, 0\}$, and computes $v(\neg A) = 1 - v(A)$, $v(A \wedge B) = \min(v(A), v(B))$, $v(A \vee B) = \max(v(A), v(B))$. A sentence is a \emph{borderline} sentence under $v$ iff $v(A) = \tfrac12$.
+\end{definition}
+
+\begin{definition}[Definiteness]\label{d:D}
+$v(DA) = 1$ if $v(A) = 1$, and $v(DA) = 0$ otherwise.
+\end{definition}
+
+\begin{principle}[Higher-order vagueness]\label{p:hov}
+There are cases that are borderline cases of \enquote{definitely bald}: men of whom it is unclear whether they are definitely bald or borderline bald. Moving along a sorites series, there is no sharp point at which clear cases give way to borderline cases.
+\end{principle}
+
+Principle~\ref{p:hov} is accepted on all sides, including by the three-valued theorists cited above, who take it to be part of what they must explain \citep{Tye1994,Keefe2000}. \citet{Sainsbury1991} argues that it is not well described by an iterated hierarchy of boundaries; we need only the weaker claim stated in the principle.
+
+\section{The argument}
+
+\begin{lemma}\label{l:bivalent}
+For every sentence $A$ and three-valued valuation $v$, $v(DA) \in \{0, 1\}$, and $v(DDA) = v(DA)$.
+\end{lemma}
+
+\begin{proof}
+The first claim is immediate from Definition~\ref{d:D}. For the second, if $v(DA) = 1$ then $v(DDA) = 1$, and if $v(DA) = 0$ then $v(DDA) = 0$.
+\end{proof}
+
+\begin{theorem}\label{t:sharp}
+In a three-valued semantics there are no borderline cases of \enquote{definitely $F$}. Along any sorites series for $F$, there is a first case $x$ such that $v(F a_x) < 1$, and the transition from definite cases to borderline cases occurs sharply at $x$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:bivalent}, $D F a$ is never borderline, so no object is a borderline case of \enquote{definitely $F$}. A sorites series is finite and begins with a case of value $1$; if it contains any case of value less than $1$, there is a first such case, and $DFa$ is true of every earlier member and false of it.
+\end{proof}
+
+Theorem~\ref{t:sharp} contradicts Principle~\ref{p:hov}. The three-valued semantics was motivated by the incredibility of a last bald man; it implies that there is a last definitely bald man, and a last borderline-bald man, with nothing indefinite about either. It replaces one sharp boundary with two.
+
+\begin{corollary}\label{c:dilemma}
+A three-valued theorist must either deny higher-order vagueness or hold that the boundaries between the values are sharp but unknowable.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:sharp} the semantics draws sharp boundaries between values, and by Lemma~\ref{l:bivalent} no further value is available to blur them. If Principle~\ref{p:hov} is to be respected, the appearance of a gradual transition must be explained by our inability to know where the boundaries lie.
+\end{proof}
+
+The second horn is the epistemic account of vagueness, applied to the boundary between $1$ and $\tfrac12$ instead of the boundary between true and false. If the epistemic account is acceptable at the second level, nothing prevents it at the first, where it explains everything the third value was introduced to explain, keeps classical logic, and keeps the penumbral truths, such as \enquote{either Harry is bald or he is not}, that strong Kleene makes borderline. Margin-for-error principles \citep{Williamson1994} explain why boundaries of either kind cannot be known, and do not favor a three-valued boundary over a bivalent one.
+
+\section{Objections}
+
+\begin{objection}[More values]
+The difficulty is an artefact of having three values. A degree theory with a continuum of values has no last case of value~$1$ followed by an abrupt drop.
+\end{objection}
+
+\begin{reply}
+It still has a sharp boundary of the relevant kind, between the cases of value exactly $1$ and the rest, and its definiteness operator is bivalent in the same way. Moreover, every assignment of precise real numbers to borderline cases draws boundaries that are no less sharp than the classical one \citep{Keefe2000}. The objection of Theorem~\ref{t:sharp} recurs one level up for any semantics in which the claim that a sentence has a given value is itself bivalent.
+\end{reply}
+
+\begin{objection}[Vague metalanguage]
+\citet{Tye1994} denies that the claim \enquote{$A$ has value $\tfrac12$} is bivalent: the metalanguage is vague too, so the boundaries between values are not sharp.
+\end{objection}
+
+\begin{reply}
+Then the theory owes an account of the vagueness of its metalanguage. If that account is three-valued, Lemma~\ref{l:bivalent} applies to the metalanguage, and the sharp boundary reappears there. If it is not, the semantics of vague predicates is not in the end three-valued; and if the boundaries are sharp but unknown, the theory is epistemicist in all but the object language.
+\end{reply}
+
+\begin{objection}[Intermediate values elsewhere]
+The liar is resolved in LOG-01 by assigning it an intermediate value in Łukasiewicz logic, with a hierarchy of determinateness operators that does not collapse. If intermediate values are acceptable there, the argument against them here proves too much.
+\end{objection}
+
+\begin{reply}
+The two uses are different. In LOG-01 the intermediate values are produced by self-reference: the liar has no value that the truth schema can consistently assign, and nothing about it is unknown. There is no series passing gradually from clear to unclear cases, and so no higher-order vagueness to misdescribe. Our argument concerns borderline cases, and three-valued semantics specifically, in which by Lemma~\ref{l:bivalent} the determinateness hierarchy collapses at the first step. LOG-01 takes no position on extending its operator to vagueness, and nothing here bears on its claims about truth.
+\end{reply}
+
+\section{Conclusion}
+
+A three-valued semantics for vague predicates makes \enquote{definitely} bivalent, and so draws two sharp boundaries where it promised none. It can describe higher-order vagueness only by holding those boundaries to be unknowable, which concedes the epistemic account. Vague predicates are therefore better treated as bivalent, with sharp boundaries that cannot be known, as MET-18 and LNG-12 hold. The companion LOG-15-b develops the treatment of higher-order vagueness on the bivalent view.
+
+\begin{thebibliography}{99}\small
+\bibitem[Halldén(1949)]{Hallden1949} Halldén, S. (1949). \emph{The Logic of Nonsense}. Uppsala Universitets Årsskrift.
+\bibitem[Keefe(2000)]{Keefe2000} Keefe, R. (2000). \emph{Theories of Vagueness}. Cambridge University Press.
+\bibitem[Kleene(1952)]{Kleene1952} Kleene, S.~C. (1952). \emph{Introduction to Metamathematics}. North-Holland.
+\bibitem[Körner(1960)]{Korner1960} Körner, S. (1960). \emph{The Philosophy of Mathematics}. Hutchinson.
+\bibitem[Sainsbury(1991)]{Sainsbury1991} Sainsbury, R.~M. (1991). Is there higher-order vagueness? \emph{The Philosophical Quarterly}, 41(163), 167--182.
+\bibitem[Smith(2008)]{Smith2008} Smith, N.~J.~J. (2008). \emph{Vagueness and Degrees of Truth}. Oxford University Press.
+\bibitem[Tye(1994)]{Tye1994} Tye, M. (1994). Sorites paradoxes and the semantics of vagueness. \emph{Philosophical Perspectives}, 8, 189--206.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\end{thebibliography}
+
+\end{document}

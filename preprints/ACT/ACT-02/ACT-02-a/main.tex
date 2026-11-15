@@ -1,0 +1,158 @@
+\documentclass{situationist-preprint}
+
+\title{Frankfurt Cases Vindicated}
+\msid{ACT-02-a}
+\msfamily{ACT-02}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ACT/ACT\_02.lean}
+\mskeywords{moral responsibility; alternative possibilities; Frankfurt cases; actual sequence; dilemma defence; buffer cases}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The principle of alternative possibilities says that an agent is morally responsible for what she has done only if she could have done otherwise. Frankfurt's counterexamples describe an agent who acts on her own while a counterfactual intervener stands ready to ensure that she acts in the same way if she shows signs of doing otherwise. We argue that these cases show that responsibility does not require alternative possibilities. The argument rests on two premises: that responsibility depends only on the actual sequence of deliberation, decision and action, and that for any ordinary case of responsible action there is a case with the same actual sequence in which every robust alternative has been removed by an intervener who plays no part in what happens. We defend the second premise against the dilemma objection of Widerker, Kane and Ginet by means of buffer cases, in which the intervener's trigger is a necessary condition of the decision rather than a sign that predicts it. The derivation is formalized in Lean; the principle of alternative possibilities fails if the two premises hold and some agent is ever responsible.
+\end{abstract}
+
+\section{The problem}
+
+It has long been taken for granted that an agent is morally responsible for what she has done only if she could have done otherwise. \citet{Frankfurt1969} called this the \emph{principle of alternative possibilities} (PAP) and argued that it is false. His case, in a familiar form, runs as follows. Black wants Jones to perform a certain action and is prepared to intervene if Jones shows that he is about to decide otherwise; Black can tell what Jones is about to decide from some reliable sign, and has the means to make him decide as Black wishes. Jones, as it happens, decides to perform the action for reasons of his own, and Black never intervenes. Jones could not have done otherwise, since Black would have prevented it. Yet Jones seems as responsible as he would have been had Black not existed, since Black played no part in what Jones did.
+
+If Frankfurt is right, the dispute about free will changes its shape. The consequence argument purports to show that determinism removes alternative possibilities; if responsibility does not require them, its conclusion, even if sound, does not show that determinism removes responsibility. This is why ACT-01-a defines free action by a property of the actual mechanism, reasons-responsiveness and ownership, rather than by the availability of alternatives, and why it notes that Frankfurt cases do not threaten that definition. The present manuscript supplies the argument on which ACT-01-a there relies.
+
+The literature since 1969 divides into three responses. The first, the \emph{flicker of freedom} strategy, notes that Jones retains some alternative even in Frankfurt's case: he could have shown the sign that triggers Black, and perhaps responsibility requires no more than this \citep{Fischer1994}. The second, the \emph{dilemma defence}, asks how the sign is related to the decision \citep{Widerker1995,Ginet1996,Kane1996}. If the sign is deterministically connected to the decision, the case presupposes determinism and cannot be used against an incompatibilist without begging the question; if it is not, then after the sign appears Jones can still decide otherwise, and the case contains an alternative after all. The third, which we defend, holds that the dilemma can be met by cases in which the intervener's trigger is not a sign that predicts the decision but a condition necessary for making the contrary decision \citep{MeleRobb1998,Hunt2000,Pereboom2001}. The flicker strategy is examined in the companion manuscript ACT-02-b; here we answer it briefly and concentrate on the dilemma.
+
+\section{Framework}
+
+\begin{definition}[Actual sequence]\label{d:seq}
+The \emph{actual sequence} of an action is the course of the agent's deliberation, decision and bodily movement as it in fact unfolds, together with the causes that operate in it.
+\end{definition}
+
+A factor that would have operated only had things gone otherwise, such as Black's readiness to intervene, is not part of the actual sequence, though it is part of the agent's situation.
+
+\begin{definition}[Robust alternative]\label{d:alt}
+An agent has a \emph{robust alternative} to what she did if she could, holding fixed the past, have voluntarily done something else, and her doing it would have been relevant to her responsibility: it would, at least, have been something she could be expected to do in order to avoid responsibility for what she did.
+\end{definition}
+
+Definition~\ref{d:alt} follows \citet{Fischer1994} and \citet{Pereboom2001}. Its point is that an alternative matters to responsibility only if it is an alternative the agent could have taken; an involuntary twitch, a blush or a passing thought that would have triggered an intervener is not a way in which she could have avoided anything. PAP is plausible only with robust alternatives, and we state it accordingly: an agent is responsible for what she did only if she had a robust alternative to it.
+
+\begin{principle}[Actual sequence]\label{p:seq}
+Whether an agent is responsible for an action depends only on its actual sequence. Two cases that agree in their actual sequence agree in whether the agent is responsible.
+\end{principle}
+
+\begin{assumption}[Frankfurt construction]\label{a:frank}
+For every case of action there is a case with the same actual sequence in which the agent has no robust alternative, because a counterfactual intervener would have ensured that she acted as she did if she had begun to act otherwise.
+\end{assumption}
+
+\begin{assumption}[Responsibility]\label{a:ord}
+Some agent is responsible for some action.
+\end{assumption}
+
+Principle~\ref{p:seq} expresses the thought that responsibility is a matter of how the agent's action came about. It is the principle on which compatibilists have built since \citet{FischerRavizza1998}, but it is not a compatibilist principle: an incompatibilist may hold that the actual sequence must be indeterministic for the agent to be responsible, and accept the principle. Assumption~\ref{a:ord} is accepted by everyone in the debate except the hard incompatibilist, and the PAP is a thesis about what responsibility requires, not about whether there is any. Assumption~\ref{a:frank} carries the controversy, and Section~\ref{s:dilemma} is devoted to it.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+Some agent is responsible for an action although she had no robust alternative to it.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:ord}, some agent is responsible for an action in some case $w$. By Assumption~\ref{a:frank}, there is a case $v$ with the same actual sequence as $w$ in which the agent has no robust alternative. By Principle~\ref{p:seq}, since $v$ and $w$ agree in their actual sequence, the agent is responsible in $v$. So in $v$ she is responsible and has no robust alternative.
+\end{proof}
+
+\begin{corollary}\label{c:pap}
+The principle of alternative possibilities is false.
+\end{corollary}
+
+\begin{proof}
+The PAP says that every responsible agent had a robust alternative; Theorem~\ref{t:main} gives one who did not.
+\end{proof}
+
+The argument does not say that alternatives never bear on responsibility. In ordinary cases, the presence of alternatives is evidence that the agent's mechanism is responsive to reasons, since a mechanism that would have acted otherwise had the reasons been otherwise usually could have. What Frankfurt cases show is that the evidence and what it is evidence of can come apart. In Jones's case, the mechanism that actually operates, his own deliberation, would have responded to sufficient reasons to act otherwise; it is a different mechanism, Black's, that would have overridden it. This is why Jones satisfies the definition of free action of ACT-01-a, which concerns the mechanism that actually operates. It is also why the case of the blessed, as REL-14-a argues, is stronger still: there the alternative is removed not by an idle intervener but by the agent's own character, which is part of the actual sequence.
+
+\section{The dilemma and buffer cases}\label{s:dilemma}
+
+The dilemma defence targets Assumption~\ref{a:frank}. In Frankfurt's case the intervener relies on a prior sign: a blush, a neural pattern, that reliably indicates what Jones will decide. Suppose the sign is deterministically connected to the decision. Then the case is deterministic, and an incompatibilist, who holds that agents in deterministic cases are not responsible, will deny that Jones is responsible; the case begs the question \citep{Widerker1995}. Suppose instead that the sign is not deterministically connected to the decision. Then after the sign has appeared, and before the decision, it remains possible for Jones to decide otherwise, and Black will be too late \citep{Kane1996,Ginet1996}. Either way, there is no case in which the actual sequence is that of a responsible agent and every robust alternative is gone.
+
+The dilemma fails because Frankfurt's intervener need not rely on a predictive sign. \citet{Pereboom2001} describes Joe, who is considering whether to claim a deduction on his tax return that he knows to be illegal. Joe's character is such that he will decide not to claim it only if he first attends to a moral reason of a certain strength; attending to such a reason is a necessary condition, not a sufficient one, of his deciding not to claim it. A neuroscientist monitors Joe and will intervene to make him claim the deduction if, and only if, Joe attends to a moral reason of that strength. Joe, in fact, does not attend to it, and decides on his own, indeterministically, to claim the deduction. The neuroscientist does nothing.
+
+The case is built to avoid both horns. It is indeterministic: nothing in the past determines that Joe will claim the deduction, and the first horn does not apply. And after the time of the trigger, there is no time at which Joe could still decide otherwise: deciding otherwise requires first attending to the moral reason, and attending to it would bring the intervention. Joe's only alternative is the attention itself, and attending to a reason is not something he could do voluntarily in order to avoid responsibility, since whether a consideration strikes one with a certain force is not under voluntary control. The alternative is not robust in the sense of Definition~\ref{d:alt}. So Joe is in a case in which every robust alternative has been removed, his actual sequence is the indeterministic sequence of a responsible tax evader, and the intervener plays no part in it.
+
+Similar results are obtained by \citet{MeleRobb1998}, whose intervener initiates a deterministic process that would produce the same decision, and which is preempted in the actual sequence by the agent's own indeterministic decision, and by \citet{Hunt2000}, whose blockage cases remove alternatives by closing every neural pathway except the one the agent in fact uses. The constructions differ, but each produces, from an arbitrary actual sequence, a case that shares it and lacks robust alternatives. That is what Assumption~\ref{a:frank} requires.
+
+\section{Objections and replies}
+
+\begin{objection}[Flicker of freedom]
+Even in the buffer case, Joe has an alternative: he could have attended to the moral reason, and then he would not have been responsible for claiming the deduction, since the neuroscientist would have made him claim it. Responsibility may require only this flicker.
+\end{objection}
+
+\begin{reply}
+The flicker is not something Joe could have done in order to avoid responsibility, and so it cannot be what responsibility requires. If responsibility depended on the availability of alternatives because one must be able to avoid blame, it would depend on alternatives that one could take with that aim; the flicker is not of that kind \citep{Fischer1994}. ACT-02-b develops the reply.
+\end{reply}
+
+\begin{objection}[Begging the question]
+Principle~\ref{p:seq} is just the denial of PAP in another form. The defender of PAP holds that alternatives are a condition of responsibility, and so denies that the actual sequence alone settles it.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:seq} does not mention alternatives, and it is not equivalent to the denial of PAP: it is compatible with PAP if every actual sequence of responsible action necessarily comes with robust alternatives. What the Frankfurt construction adds is that this is not so. The principle itself is supported by a consideration independent of the debate: a factor that makes no difference to what happens, and would have made one only had things gone otherwise, cannot make the agent more or less the author of what she did. Those who reject the principle must hold that Jones would become responsible if Black died during the deliberation, although nothing in Jones changed.
+\end{reply}
+
+\begin{objection}[What is the agent responsible for?]
+\citet{vanInwagen1978} distinguishes responsibility for an event particular, Jones's actual decision, from responsibility for a state of affairs, that the decision was made. Jones could not have avoided the state of affairs, and perhaps he is not responsible for it; he is responsible only for the particular, which has its own causal history.
+\end{objection}
+
+\begin{reply}
+We grant that the theorem is most naturally read as concerning the particular decision. But the distinction does not save PAP. Jones is blamed for deciding as he did, and the decision for which he is blamed is the one that occurred. If he is responsible for the particular, he is responsible for something he could not have avoided in the robust sense, since no voluntary course of action open to him would have prevented a decision of that kind and his responsibility for it.
+\end{reply}
+
+\begin{objection}[Unreliable intuitions]
+Intuitions about responsibility in bizarre cases with neuroscientists and implanted devices are not to be trusted.
+\end{objection}
+
+\begin{reply}
+The argument does not rely on a bare intuition about the bizarre case. It derives the verdict about that case from a verdict about an ordinary case, which is not bizarre, together with Principle~\ref{p:seq}. The bizarre features are confined to the counterfactual part of the case, which the principle says is irrelevant.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} does not establish compatibilism. That responsibility does not require alternative possibilities leaves open whether it requires indeterminism in the actual sequence, and the buffer case is indeterministic. The case for compatibility rests on the independence of reasons-responsiveness from determinism, which ACT-01-a defends. Nor does the result concern omissions. Whether an agent is responsible for failing to act depends, as ACT-07 argues, on whether she could and should have acted; Frankfurt cases for omissions do not support the same conclusion, since an agent who could not have acted cannot be blamed for failing to. Finally, the result does not show that responsibility requires nothing beyond a good actual sequence of the sort described here; whether the agent must be the ultimate source of her action is a separate question, which ACT-08 answers negatively.
+
+\section{Formalization}
+
+Theorem~\ref{t:main} and Corollary~\ref{c:pap} are formalized in \nolinkurl{Philosophy/ACT/ACT_02.lean}. Scenarios, actual sequences, responsibility and robust alternatives are primitives; Principle~\ref{p:seq} and Assumptions~\ref{a:frank} and~\ref{a:ord} are axioms.
+
+\begin{lstlisting}
+theorem pap_false : ¬ (∀ w, Responsible w → Alternatives w)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ACT_02.pap_false' depends on axioms:
+  [Philosophy.ACT_02.Alternatives, Philosophy.ACT_02.Responsible,
+   Philosophy.ACT_02.Scenario, Philosophy.ACT_02.Sequence,
+   Philosophy.ACT_02.actual_sequence,
+   Philosophy.ACT_02.frankfurt_construction,
+   Philosophy.ACT_02.ordinary_case, Philosophy.ACT_02.seq]
+\end{lstlisting}
+
+The first four and the last are the primitives. The substantive axioms are \texttt{actual\_sequence} (Principle~\ref{p:seq}), \texttt{frankfurt\_construction} (Assumption~\ref{a:frank}) and \texttt{ordinary\_case} (Assumption~\ref{a:ord}). The formalization confirms that the derivation is valid and that the dilemma defence, which accepts the principle and the ordinary case, must deny the construction; it does not, of course, show that the buffer cases succeed.
+
+\section{Conclusion}
+
+Responsibility depends on how an action came about, and a counterfactual intervener who removes an agent's alternatives without touching the actual sequence changes nothing about how it came about. The dilemma defence shows that Frankfurt's original case relied on a predictive sign; buffer cases do without one, and remove every robust alternative while leaving an indeterministic actual sequence intact. Responsibility does not require alternative possibilities.
+
+\begin{thebibliography}{99}\small
+\bibitem[Fischer(1994)]{Fischer1994} Fischer, J.~M. (1994). \emph{The Metaphysics of Free Will: An Essay on Control}. Blackwell.
+\bibitem[Fischer and Ravizza(1998)]{FischerRavizza1998} Fischer, J.~M. and Ravizza, M. (1998). \emph{Responsibility and Control: A Theory of Moral Responsibility}. Cambridge University Press.
+\bibitem[Frankfurt(1969)]{Frankfurt1969} Frankfurt, H.~G. (1969). Alternate possibilities and moral responsibility. \emph{The Journal of Philosophy}, 66(23), 829--839.
+\bibitem[Ginet(1996)]{Ginet1996} Ginet, C. (1996). In defense of the principle of alternative possibilities: why I don't find Frankfurt's argument convincing. \emph{Philosophical Perspectives}, 10, 403--417.
+\bibitem[Hunt(2000)]{Hunt2000} Hunt, D.~P. (2000). Moral responsibility and unavoidable action. \emph{Philosophical Studies}, 97(2), 195--227.
+\bibitem[Kane(1996)]{Kane1996} Kane, R. (1996). \emph{The Significance of Free Will}. Oxford University Press.
+\bibitem[Mele and Robb(1998)]{MeleRobb1998} Mele, A.~R. and Robb, D. (1998). Rescuing Frankfurt-style cases. \emph{The Philosophical Review}, 107(1), 97--112.
+\bibitem[Pereboom(2001)]{Pereboom2001} Pereboom, D. (2001). \emph{Living Without Free Will}. Cambridge University Press.
+\bibitem[van Inwagen(1978)]{vanInwagen1978} van Inwagen, P. (1978). Ability and responsibility. \emph{The Philosophical Review}, 87(2), 201--224.
+\bibitem[Widerker(1995)]{Widerker1995} Widerker, D. (1995). Libertarianism and Frankfurt's attack on the principle of alternative possibilities. \emph{The Philosophical Review}, 104(2), 247--261.
+\end{thebibliography}
+
+\end{document}

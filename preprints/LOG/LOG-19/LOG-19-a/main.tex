@@ -1,0 +1,199 @@
+\documentclass{situationist-preprint}
+
+\title{Fitch's Paradox Accepted}
+\msid{LOG-19-a}
+\msfamily{LOG-19}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_19.lean}
+\mskeywords{knowability; Fitch's paradox; verificationism; anti-realism; epistemic logic; non-omniscience}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The knowability principle says that every truth can be known. Fitch showed that, if knowledge is factive and distributes over conjunction, the principle implies that every truth is known. Since some truths are not known, the principle is false. Many have treated this result as a paradox, to be avoided by restricting the principle, weakening the logic or reinterpreting the modality. We argue that it is not a paradox but a sound argument with a true conclusion: not every truth is knowable. The argument uses knowledge as an operator, involves no self-reference, and depends on two minimal principles about knowledge and on the existence of an unknown truth; we show that the premises are jointly consistent, so that what fails is the knowability principle. We reply to the intuitionistic response, to the actuality-operator restriction, and to the charge that the argument trades on a modal fallacy. The principal results, including the intuitionistic variant, are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet[Theorem~5]{Fitch1963} proved that if there is a truth that no one knows, there is a truth that no one can know. Fitch credited the result to an anonymous referee, whose reports, written by Alonzo Church, were later published in the volume edited by \citet{Salerno2009}. The theorem attracted little attention until \citet{HartMcGinn1976} observed that it refutes a principle that verificationists and anti-realists had treated as harmless: that every truth is knowable. Contrapositively, Fitch's theorem says that if every truth is knowable, every truth is known; and since it is not the case that every truth is known, not every truth is knowable.
+
+The principle at stake is central to semantic anti-realism. \citet{Dummett1976} held that the meaning of a sentence is given by the conditions under which it can be recognized as true, and that a truth that transcends all possible recognition is unintelligible. If that is right, every truth is knowable, and Fitch's theorem threatens the view with the conclusion that every truth is known, which no anti-realist accepts. The literature since \citet{Williamson1982} and \citet{Edgington1985} has accordingly treated Fitch's argument as a paradox: a valid argument from apparently acceptable premises to an unacceptable conclusion, to be blocked somewhere. The surveys of \citet{Kvanvig2006} and the essays collected by \citet{Salerno2009} catalogue the options: restrict the knowability principle \citep{Tennant1997,Dummett2001}, weaken the logic to intuitionistic logic \citep{Williamson1982}, reinterpret the principle with an actuality operator \citep{Edgington1985}, or diagnose a modal fallacy in the substitution of the Fitch conjunction \citep{Kvanvig2006}.
+
+We argue that Fitch's argument is sound. Its premises are true, its logic is correct, and its conclusion, that not every truth is knowable, is a discovery rather than an absurdity. The argument has the form of a paradox only for someone antecedently committed to the knowability principle. LOG-10-a distinguishes it from the paradox of the knower, which requires a knowledge predicate applied to sentences about themselves; Fitch's argument uses an operator and involves no self-reference, and what it shows is that a principle of knowability fails. We give the argument in a form that makes this structure visible.
+
+\section{Framework}
+
+\begin{definition}\label{d:K}
+Propositions are sets of possible worlds. $K$ is an operator on propositions: $Kp$ is true at a world if, at that world, it is known by someone at some time that $p$.
+\end{definition}
+
+\begin{definition}\label{d:pos}
+$\pos p$ is true at a world $w$ if $p$ is true at some world accessible from $w$. No condition is imposed on accessibility.
+\end{definition}
+
+\begin{assumption}[Factivity]\label{a:fact}
+If $Kp$ is true at a world, $p$ is true at that world.
+\end{assumption}
+
+\begin{assumption}[Distribution]\label{a:dist}
+If $K(p \wedge q)$ is true at a world, $Kp$ and $Kq$ are true at that world.
+\end{assumption}
+
+\begin{definition}\label{d:kp}
+The \emph{knowability principle} is the claim that, at every world, every truth is knowable: if $p$ is true at $w$, then $\pos Kp$ is true at $w$.
+\end{definition}
+
+\begin{assumption}[Non-omniscience]\label{a:nonomni}
+At the actual world, some truth is not known.
+\end{assumption}
+
+Assumption~\ref{a:fact} is constitutive of knowledge. Assumption~\ref{a:dist} is much weaker than closure under logical consequence: it says only that whoever knows a conjunction knows each conjunct. Since $K$ quantifies over knowers and times, it says that if the conjunction is known by someone at some time, each conjunct is known by someone at some time, which is true even if no single knower draws the inference. Definition~\ref{d:pos} leaves the modality as weak as possible: the argument goes through for any notion of possibility, metaphysical, nomological or epistemic, whose accessibility relation is arbitrary. Assumption~\ref{a:nonomni} is a datum: there are truths about the number of grains of sand on a given beach at a given moment, or about the parity of the number of hairs on Julius Caesar's head on the morning of the Ides of March, that no one has known or will know.
+
+\section{The argument}
+
+\begin{lemma}\label{l:fitch}
+No Fitch conjunction is known: at no world is $K(p \wedge \neg Kp)$ true.
+\end{lemma}
+
+\begin{proof}
+Suppose $K(p \wedge \neg Kp)$ is true at $v$. By Assumption~\ref{a:dist}, $Kp$ and $K\neg Kp$ are true at $v$. By Assumption~\ref{a:fact} applied to the second, $\neg Kp$ is true at $v$, contradicting the first.
+\end{proof}
+
+\begin{theorem}[Fitch]\label{t:fitch}
+Given Assumptions~\ref{a:fact} and~\ref{a:dist}, if the knowability principle holds, every truth is known: at every world $w$, if $p$ is true at $w$ then $Kp$ is true at $w$.
+\end{theorem}
+
+\begin{proof}
+Suppose $p$ is true at $w$ and $Kp$ is not. Then $p \wedge \neg Kp$ is true at $w$, and by the knowability principle there is an accessible world $v$ at which $K(p \wedge \neg Kp)$ is true. This contradicts Lemma~\ref{l:fitch}.
+\end{proof}
+
+\begin{corollary}\label{c:fails}
+Given Assumption~\ref{a:nonomni}, the knowability principle is false.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:nonomni} some truth is unknown at the actual world, which by Theorem~\ref{t:fitch} would be impossible if the principle held.
+\end{proof}
+
+\begin{corollary}\label{c:witness}
+Given Assumption~\ref{a:nonomni}, there is a truth that is not knowable at the actual world: if $p$ is an unknown truth, $p \wedge \neg Kp$ is such a truth.
+\end{corollary}
+
+\begin{proof}
+$p \wedge \neg Kp$ is true at the actual world, and by Lemma~\ref{l:fitch} it is known at no world, and so at no accessible world.
+\end{proof}
+
+Corollary~\ref{c:witness} identifies the unknowable truths. They are not exotic: for every unknown truth $p$, the truth that $p$ and no one knows it is unknowable, since knowing it would require knowing $p$, which would make it false. The proof uses no self-reference. The Fitch conjunction does not say anything about itself; it says something about $p$, a different proposition. The knowledge operator is applied to propositions, not to sentences, and nothing in the framework permits a proposition to contain itself. This is the contrast with the paradox of the knower drawn in LOG-10-a: there, contradiction follows from factivity and closure for a knowledge predicate that applies to a sentence saying of itself that it is not known; here, no contradiction follows from the premises at all, as the next proposition shows, and what follows is the falsity of an additional principle.
+
+\begin{proposition}\label{p:intuit}
+Without classical reasoning, the knowability principle implies that no truth is unknown: if $p$ is true at $w$, then it is not the case that $Kp$ is false at $w$.
+\end{proposition}
+
+\begin{proof}
+The proof of Theorem~\ref{t:fitch} derives a contradiction from the supposition that $p$ is true and $Kp$ is not; this is an intuitionistically valid proof of $\neg\neg Kp$. Only the final step to $Kp$ uses double negation elimination.
+\end{proof}
+
+\begin{proposition}\label{p:consistent}
+Assumptions~\ref{a:fact}, \ref{a:dist} and~\ref{a:nonomni} are jointly consistent.
+\end{proposition}
+
+\begin{proof}
+Take two worlds, and let a proposition be known at either world just when it is true at both. Knowledge so defined is factive and distributes over conjunction. The proposition true at the first world only is true at the first world and not known there.
+\end{proof}
+
+Proposition~\ref{p:consistent} settles the question of where the fault lies. Fitch's argument derives a contradiction from four claims: factivity, distribution, non-omniscience and the knowability principle. The first three are consistent with one another, and each is independently compelling. The fourth is the claim that should go, and the argument shows that it does go. To call the argument a paradox is to treat the knowability principle as having the same standing as the other three; it does not.
+
+\section{Objections and replies}
+
+\begin{objection}[The intuitionistic response]
+The proof of Theorem~\ref{t:fitch} uses double negation elimination. An anti-realist who accepts the knowability principle should reason intuitionistically, and then the argument yields only that no truth is unknown, not that every truth is known.
+\end{objection}
+
+\begin{reply}
+There are two replies. First, intuitionistic logic is not the correct logic of propositions: LOG-02 argues that classical logic is the one true logic, and that intuitionistic logic correctly describes a different relation, provability. Second, the intuitionistic conclusion is already unacceptable. Proposition~\ref{p:intuit} shows that the knowability principle intuitionistically implies that, for every proposition, it is not the case that it is true and unknown; as \citet{Williamson1982} observed, this commits the intuitionistic anti-realist to denying, of every proposition, that it is an unknown truth. Applied to the proposition about Caesar's hairs, she must deny that the parity is even and unknown and deny that it is odd and unknown. She thereby refuses to assert what everyone else regards as obvious, that one of these is an unknown truth.
+\end{reply}
+
+\begin{objection}[Restriction]
+The knowability principle was never meant to apply to every proposition. \citet{Tennant1997} restricts it to Cartesian propositions, those $p$ for which $Kp$ is consistent; \citet{Dummett2001} restricts it to basic statements, from which the others are built by logical operations under intuitionistic truth conditions. The Fitch conjunction falls outside both restrictions.
+\end{objection}
+
+\begin{reply}
+The restrictions concede our thesis. The family's question is whether every truth is knowable, and the restricted principles say that some truths, the Fitch conjunctions at least, are not. What remains open is whether some restricted principle is true and interesting, and that is a separate question. We note only that the restrictions are motivated by the need to avoid Fitch's argument rather than by the anti-realist theory of meaning, which, if it supported knowability at all, supported it for every meaningful proposition. A restricted principle is a thesis about which truths are knowable, and its defense must proceed case by case; it cannot inherit the a priori standing that the unrestricted principle was supposed to derive from the theory of meaning.
+\end{reply}
+
+\begin{objection}[The actuality operator]
+\citet{Edgington1985} proposed that the knowability principle should say that if $p$ is actually true, it is possible to know that $p$ is actually true. With an actuality operator, the Fitch conjunction \enquote{actually $p$ and actually not known} can be known in a counterfactual situation without contradiction, since its knowledge there does not make it false at the actual world.
+\end{objection}
+
+\begin{reply}
+Edgington's principle requires that a knower in a non-actual situation know a proposition about the actual world, identified as actual. \citet{Williamson2000} argued that such knowledge is not generally available: a counterfactual knower cannot single out the actual world among the many that agree with her own on everything she can investigate, and so cannot know, of the actual world, that $p$ is unknown in it. In any case Edgington's proposal is a reinterpretation, not a defense, of the principle under discussion. It replaces knowability of the truth by knowability of a different proposition, and it concedes that the truth $p \wedge \neg Kp$ itself is unknowable.
+\end{reply}
+
+\begin{objection}[Modal fallacy]
+\citet{Kvanvig2006} argued that the argument trades on substituting a non-rigid expression into a modal context: \enquote{$K$} quantifies over knowers and times in the actual world, and the proposition $p \wedge \neg Kp$, evaluated at another world, concerns knowledge there rather than here. The knowability principle, properly understood, asks whether the proposition expressed here could be known, and the argument does not show that it could not.
+\end{objection}
+
+\begin{reply}
+In our framework, propositions are sets of worlds and $K$ is an operator from propositions to propositions; the proposition $p \wedge \neg Kp$ is a fixed set of worlds, and the question whether it is known at an accessible world $v$ is the question whether $K(p \wedge \neg Kp)$ contains $v$. Lemma~\ref{l:fitch} shows that it contains no world. There is no substitution of a non-rigid term into a modal context, since there are no terms: the argument is about propositions and an operator on them. If the objection is that the knowability principle should concern a proposition indexed to the actual world, it becomes Edgington's proposal and receives the same reply.
+\end{reply}
+
+\begin{objection}[Fitch as a knower paradox]
+Fitch's argument belongs with the liar and the knower; its conclusion should be blocked by whatever blocks them, for instance a hierarchy of knowledge operators \citep{Beall2000}.
+\end{objection}
+
+\begin{reply}
+The paradoxes of self-reference derive a contradiction from principles that seem individually and jointly compelling. Fitch's argument derives no contradiction from its premises (Proposition~\ref{p:consistent}); it derives the falsity of an extra principle. As LOG-10-a argues, the knower depends on a predicate applied to a sentence that says of itself that it is not known, and the operator treatment, which is ours, cannot form such a sentence. A typing of knowledge is not needed to keep Fitch's premises consistent, and imposing one in order to save knowability would treat the knowability principle as if it were itself a law of logic.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that there are truths that are unknowable for reasons other than their form. The unknowable truths it identifies are Fitch conjunctions, unknowable because knowing them would falsify them. Whether there are truths of other kinds that no possible knower could know, for instance in mathematics, as MTH-12 holds, or in physics, is a different question, and Fitch's argument neither settles nor depends on it. Nor does the result refute semantic anti-realism as such. It refutes the knowability principle, and with it any version of anti-realism that entails that principle; an anti-realism that ties meaning to verifiability without entailing that every truth can be known is untouched. Finally, the result does not show that no restricted knowability principle is true; it shows that if one is, it is not the principle that every truth is knowable.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_19.lean} models propositions as sets of worlds, takes worlds, the operator $K$ (Definition~\ref{d:K}), the accessibility relation (Definition~\ref{d:pos}) and the actual world as primitive axioms, and states Assumptions~\ref{a:fact}, \ref{a:dist} and~\ref{a:nonomni} as axioms. The knowability principle (Definition~\ref{d:kp}) is a hypothesis of Theorem~\ref{t:fitch}, not an axiom. The module proves Lemma~\ref{l:fitch}, Theorem~\ref{t:fitch}, Corollaries~\ref{c:fails} and~\ref{c:witness}, Proposition~\ref{p:intuit} without classical axioms, and Proposition~\ref{p:consistent} in a concrete two-world model with no axioms.
+
+\begin{lstlisting}
+theorem fitch (kp : Knowability) :
+    ∀ (p : Pr) (w : World), p w → K p w
+
+'Philosophy.LOG_19.fitch' depends on axioms: [propext,
+ Classical.choice, Quot.sound, Philosophy.LOG_19.K,
+ Philosophy.LOG_19.R, Philosophy.LOG_19.World,
+ Philosophy.LOG_19.distrib, Philosophy.LOG_19.factive]
+'Philosophy.LOG_19.knowability_fails' depends on axioms: [propext,
+ Classical.choice, Quot.sound, Philosophy.LOG_19.K,
+ Philosophy.LOG_19.R, Philosophy.LOG_19.World,
+ Philosophy.LOG_19.actual, Philosophy.LOG_19.distrib,
+ Philosophy.LOG_19.factive, Philosophy.LOG_19.nonomniscience]
+'Philosophy.LOG_19.fitch_intuitionistic' depends on axioms:
+ [Philosophy.LOG_19.K, Philosophy.LOG_19.R,
+ Philosophy.LOG_19.World, Philosophy.LOG_19.distrib,
+ Philosophy.LOG_19.factive]
+'Philosophy.LOG_19.premises_consistent' does not depend on any
+ axioms
+\end{lstlisting}
+
+\texttt{factive} and \texttt{distrib} are Assumptions~\ref{a:fact} and~\ref{a:dist}, and \texttt{nonomniscience} is Assumption~\ref{a:nonomni}; \texttt{World}, \texttt{K}, \texttt{R} and \texttt{actual} are the primitives. \texttt{Classical.choice}, \texttt{propext} and \texttt{Quot.sound} are Lean's classical axioms, used for the double negation step; their absence from \texttt{fitch\_intuitionistic} confirms that Proposition~\ref{p:intuit} is intuitionistically valid.
+
+\section{Conclusion}
+
+If knowledge is factive and distributes over conjunction, the principle that every truth is knowable implies that every truth is known. Some truths are not known; so not every truth is knowable, and for every unknown truth $p$, the truth that $p$ and no one knows it is an example. The premises of the argument are consistent with one another, the argument uses an operator and no self-reference, and the replies that would restore knowability either concede the thesis, reinterpret the principle, or adopt a logic that yields a conclusion no less unacceptable. Fitch's argument is sound, and its conclusion should be accepted.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beall(2000)]{Beall2000} Beall, J.~C. (2000). Fitch's proof, verificationism, and the knower paradox. \emph{Australasian Journal of Philosophy}, 78(2), 241--247.
+\bibitem[Dummett(1976)]{Dummett1976} Dummett, M. (1976). What is a theory of meaning? (II). In G. Evans and J. McDowell (eds.), \emph{Truth and Meaning}, Clarendon Press.
+\bibitem[Dummett(2001)]{Dummett2001} Dummett, M. (2001). Victor's error. \emph{Analysis}, 61(1), 1--2.
+\bibitem[Edgington(1985)]{Edgington1985} Edgington, D. (1985). The paradox of knowability. \emph{Mind}, 94(376), 557--568.
+\bibitem[Fitch(1963)]{Fitch1963} Fitch, F.~B. (1963). A logical analysis of some value concepts. \emph{The Journal of Symbolic Logic}, 28(2), 135--142.
+\bibitem[Hart and McGinn(1976)]{HartMcGinn1976} Hart, W.~D. and McGinn, C. (1976). Knowledge and necessity. \emph{Journal of Philosophical Logic}, 5(2), 205--208.
+\bibitem[Kvanvig(2006)]{Kvanvig2006} Kvanvig, J.~L. (2006). \emph{The Knowability Paradox}. Oxford University Press.
+\bibitem[Salerno(2009)]{Salerno2009} Salerno, J. (ed.) (2009). \emph{New Essays on the Knowability Paradox}. Oxford University Press.
+\bibitem[Tennant(1997)]{Tennant1997} Tennant, N. (1997). \emph{The Taming of the True}. Clarendon Press.
+\bibitem[Williamson(1982)]{Williamson1982} Williamson, T. (1982). Intuitionism disproved? \emph{Analysis}, 42(4), 203--207.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

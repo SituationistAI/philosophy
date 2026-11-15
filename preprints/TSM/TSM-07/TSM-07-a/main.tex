@@ -1,0 +1,220 @@
+\documentclass{situationist-preprint}
+
+\title{Possible Worlds as Abstract Objects}
+\msid{TSM-07-a}
+\msfamily{TSM-07}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/TSM/TSM\_07.lean}
+\mskeywords{possible worlds; ersatzism; actualism; propositions; actuality; concreteness; modal realism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What are possible worlds? Modal realists answer that they are concrete universes like our own, spatiotemporally isolated from it; ersatzists answer that they are abstract representations of how a universe might be. We defend a propositional ersatzism: a possible world is a maximal consistent set of propositions, where consistency is compossibility, and the actual world is the one world that is concretely realized. We prove, from bivalence, noncontradiction and two principles linking concreteness to truth, that the set of truths is a world, that it is the only world all of whose members are true, and that a world is concretely realized if and only if it is that world. Uniqueness does not depend on bivalence; existence does, and we explain how the result fares if the future is open. We then answer Lewis's objections to ersatzism and the Cantorian objection that there is no set of all truths. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Talk of possible worlds is indispensable in the semantics of modal and conditional languages and convenient almost everywhere else in philosophy. Since \citet{Kripke1980} and the model theory that preceded it, a proposition is said to be necessary if it is true in all possible worlds and possible if it is true in some. The question is what the worlds are.
+
+\citet{Lewis1986} gave the boldest answer. A possible world is a maximal spatiotemporally interrelated sum of concrete things; our world is one of them, and the others are just as real, differing from ours not in their manner of existence but only in their location in logical space. \enquote{Actual} is an indexical: the actual world is the world we are in. The reward is a reductive analysis of modality: a proposition is possible if it is true at some world, and nothing modal is left unanalysed. TSM-08 argues that the reward is illusory and the ontology idle.
+
+The alternative is ersatzism, the view that worlds are abstract objects that represent ways a universe might be. Ersatzists differ on what the abstract objects are. \citet{Adams1974} took worlds to be maximal consistent sets of propositions, which he called world-stories, and the actual world to be the world-story all of whose members are true. \citet{Plantinga1974,Plantinga1976} took worlds to be maximal possible states of affairs, abstract entities that obtain or fail to obtain, with exactly one obtaining. \citet{Stalnaker1976} took them to be ways the world might have been, properties that the universe might have instantiated, and argued that an actualist may accept the existence of such ways without accepting the existence of merely possible concrete universes. \citet{Fine1977} constructed worlds from propositions, \citet{Armstrong1989} from recombinations of actual particulars and universals, and \citet{Sider2002} from sentences of a \enquote{worldmaking language}.
+
+We defend the propositional version. A possible world is a maximal consistent set of propositions. The actual world is the world all of whose members are true, and it is the only world that is concretely realized, because the only concrete totality there is, the cosmos, realizes it and nothing else. In the sense we define, the actual world is the only concrete world. The theses are those of \citet{Adams1974}; we add the principles on which they rest, a proof, an account of concreteness for ersatz worlds, and replies to the objections thought decisive.
+
+\section{Framework}
+
+\begin{definition}[Propositions]\label{d:prop}
+There are \emph{propositions}, the objects of belief and assertion and the bearers of truth. Each proposition $p$ has a negation $\neg p$, true exactly when $p$ is false, and a proposition is \emph{true} simpliciter when it is true at actuality.
+\end{definition}
+
+\begin{definition}[Consistency]\label{d:cons}
+A set of propositions is \emph{consistent} if its members are compossible: they could all be true together.
+\end{definition}
+
+Definition~\ref{d:cons} uses a modal notion, and the account is not a reduction of modality to something non-modal. It is not meant to be. TSM-10 says what consistency in this sense is: a set is consistent when it is logically consistent with the propositions true in virtue of the essences of things. On the view of MET-13, essence is prior to modality, so that the modal primitive in Definition~\ref{d:cons} is not modal at bottom. Here consistency is left unanalysed, and nothing in the present argument depends on how it is analysed.
+
+\begin{definition}[World]\label{d:world}
+A \emph{world} is a maximal consistent set of propositions: a consistent set $W$ such that, for every proposition $p$, either $p\in W$ or $\neg p\in W$.
+\end{definition}
+
+\begin{definition}[Truth at a world; possibility]\label{d:poss}
+A proposition is \emph{true at} a world if it belongs to it, and \emph{possible} if it is true at some world. It is \emph{necessary} if it is true at every world.
+\end{definition}
+
+\begin{definition}[Actuality]\label{d:actual}
+A world is \emph{actual} if every proposition true at it is true.
+\end{definition}
+
+\begin{definition}[Concreteness]\label{d:concrete}
+A set of propositions is \emph{concretely realized} if there is a concrete totality of things that is as its members represent things to be. A world is \emph{concrete} if it is concretely realized.
+\end{definition}
+
+Definition~\ref{d:concrete} is the crux of the account. A world, being a set, is an abstract object: no world, the actual one included, has a location or causal powers. But worlds differ in whether anything concrete answers to them. To call the actual world concrete is to say that there is a concrete totality, the cosmos, of which it is the complete and correct description; to deny that other worlds are concrete is to say that nothing concrete answers to them. The disagreement with modal realism is therefore not verbal: we and Lewis agree on what it would be for another world to be concrete, and we deny what he affirms.
+
+\begin{assumption}[Bivalence]\label{a:biv}
+For every proposition $p$, either $p$ or $\neg p$ is true.
+\end{assumption}
+
+\begin{assumption}[Noncontradiction]\label{a:nc}
+No proposition is true together with its negation.
+\end{assumption}
+
+\begin{assumption}[Consistency of truth]\label{a:tc}
+The set of true propositions is consistent.
+\end{assumption}
+
+\begin{assumption}[Actualism about the concrete]\label{a:act}
+Whatever is concretely realized is true: if a concrete totality is as the members of a set of propositions represent, those members are true.
+\end{assumption}
+
+\begin{assumption}[Realization of the truths]\label{a:cosmos}
+The cosmos, the totality of concrete things, concretely realizes the set of true propositions.
+\end{assumption}
+
+Assumption~\ref{a:tc} is the weakest of modal principles. Assumption~\ref{a:act} is where the ersatzist parts company with the modal realist: a concrete totality realizing a falsehood would be a Lewisian world. Assumption~\ref{a:cosmos} says that the cosmos makes true whatever is true. It does not say that every truth is made true by a particular concrete thing.
+
+\section{The argument}
+
+\begin{lemma}\label{l:truthworld}
+The set of true propositions is a world.
+\end{lemma}
+
+\begin{proof}
+The set is consistent by Assumption~\ref{a:tc} and maximal by Assumption~\ref{a:biv}.
+\end{proof}
+
+\begin{theorem}[The actual world]\label{t:actual}
+There is exactly one actual world, namely the set of true propositions. Its uniqueness does not depend on Assumption~\ref{a:biv}.
+\end{theorem}
+
+\begin{proof}
+Existence: by Lemma~\ref{l:truthworld}, the set of truths is a world, and each of its members is true, so it is actual. Uniqueness: let $W$ be an actual world. Every member of $W$ is true by Definition~\ref{d:actual}. Conversely, let $p$ be true. Since $W$ is maximal, either $p\in W$ or $\neg p\in W$. In the second case $\neg p$ is true, since $W$ is actual, and $p$ and $\neg p$ are both true, contrary to Assumption~\ref{a:nc}. So $p\in W$. Hence $W$ is the set of truths. The uniqueness argument used Assumption~\ref{a:nc} and the maximality of $W$, but not Assumption~\ref{a:biv}.
+\end{proof}
+
+\begin{theorem}[Only the actual world is concrete]\label{t:concrete}
+A world is concrete if and only if it is the actual world.
+\end{theorem}
+
+\begin{proof}
+Let $W$ be a concrete world. By Assumption~\ref{a:act}, every member of $W$ is true, so $W$ is actual, and by Theorem~\ref{t:actual} it is the set of truths. Conversely, the set of truths is concrete by Assumption~\ref{a:cosmos}.
+\end{proof}
+
+\begin{corollary}\label{c:poss}
+Whatever is true is possible.
+\end{corollary}
+
+\begin{proof}
+A truth belongs to the set of truths, which is a world by Lemma~\ref{l:truthworld}.
+\end{proof}
+
+The theorems state the thesis of the manuscript. Worlds are maximal consistent sets of propositions by Definition~\ref{d:world}, and Theorem~\ref{t:concrete} says that exactly one of them, the actual world, is concrete. They also give the ersatzist an account of actuality that is not indexical. For Lewis, every world is actual at itself, and the actual world is distinguished only by containing us. For the ersatzist, actuality is an absolute property: a world is actual when its members are true, and truth is not relative to the speaker's location in logical space. By Theorem~\ref{t:concrete}, there are no inhabitants of other worlds to call their worlds actual.
+
+\begin{remark}\label{r:open}
+TSM-12 holds that the future is open: future contingents are neither true nor false until they are settled. If so, Assumption~\ref{a:biv} fails for them, and no maximal set of propositions has only true members, since any such set contains a future contingent or its negation. Theorem~\ref{t:actual} then holds in a divided form. Its uniqueness half holds unconditionally, so that at most one world is actual. Its existence half holds as the history of the cosmos settles the propositions: until the future contingents are settled, it is indeterminate which of the worlds agreeing with the settled truths is actual, and that indeterminacy is the openness of the future, described in terms of worlds.
+\end{remark}
+
+\subsection{Why propositions}
+
+Of the ersatz constructions, the propositional one has three advantages.
+
+First, its materials are already required: no theory of thought or language does without propositions, whereas states of affairs, if distinct from propositions, are an additional category.
+
+Second, truth at a world is membership, and truth simpliciter is membership in the actual world; no further relation of representation is needed.
+
+Third, it is the construction that extends to impossible worlds. TSM-09 argues that hyperintensional content requires impossible worlds; on the present account, impossible worlds are sets of propositions that are not consistent, constructed from the same materials as the possible ones, and they are not possibilities, since Definition~\ref{d:poss} quantifies over worlds, which are consistent by Definition~\ref{d:world}.
+
+\section{Objections}
+
+\begin{objection}[Primitive modality]
+\citet[\S3.2]{Lewis1986} objected that the ersatzist's \enquote{consistent} is a modal notion, so that ersatzism explains possibility in terms of possibility. Modal realism, by contrast, analyses modality in non-modal terms.
+\end{objection}
+
+\begin{reply}
+The premise is correct and the conclusion does not follow. Definition~\ref{d:cons} is modal, and we have said so. Ersatzism is a theory of what worlds are, not a reduction of modality, and a theory of what worlds are is not refuted by failing to be a reduction. Moreover, the modal notion it uses has an analysis: TSM-10 identifies consistency with logical consistency with the essential truths, and MET-13 argues that essence is prior to modality. The resulting account is reductive, though not to the non-modal in Lewis's sense, since it reduces possibility to essence and logic rather than to the existence of concrete universes. TSM-08 argues that Lewis's reduction itself uses a modal notion in its principle of recombination, so that the comparison is less favorable to modal realism than the objection supposes.
+\end{reply}
+
+\begin{objection}[Magical representation]
+\citet[\S3.4]{Lewis1986} classified propositional ersatzism as \enquote{magical}: it takes as primitive a relation between abstract elements and the concrete world, the relation of being true or of being selected, and says nothing about how an abstract simple can represent a concrete complex.
+\end{objection}
+
+\begin{reply}
+Every theory of thought needs propositions that represent the world, since beliefs are true or false according to how things are. If the relation between a proposition and the world is magical, the magic is not peculiar to ersatzism but is shared by every account of belief and assertion, including Lewis's own, which has to say what it is for a belief to be true. Lewis's own answer, that propositions are sets of concrete worlds, presupposes modal realism and cannot be used against the ersatzist. Theorems~\ref{t:actual} and~\ref{t:concrete} use only truth, which every theory recognizes, and concrete realization, which Assumptions~\ref{a:act} and~\ref{a:cosmos} tie to truth.
+\end{reply}
+
+\begin{objection}[Descriptive power]
+A propositional world can distinguish possibilities only as finely as there are propositions. If there are no singular propositions about merely possible individuals, which on actualism there are not, two possibilities that differ only over which of two non-actual individuals plays a role cannot be distinguished. Nor can possibilities involving alien properties, properties not instantiated in the actual world, which on actualism do not exist to be constituents of propositions \citep[\S3.2]{Lewis1986}.
+\end{objection}
+
+\begin{reply}
+The objection is sound against a contingentist ersatzism, and it should be weighed. Possibilities that differ only in which merely possible individual does what are, on that view, not distinct possibilities; a world says that there is something that does such-and-such, and nothing more. We accept this. Lewis himself denied that worlds can differ only haecceitistically \citep[\S4.4]{Lewis1986}. Alien properties are represented in the same general way. If, with \citet{Williamson2013}, every object and property exists necessarily and is only contingently concrete or instantiated, the objection lapses, since the singular propositions exist. We take no stand between these views. MET-01 is likewise neutral between them. In neither case are there objects that do not exist: MET-24 argues that there are none, and a general proposition about what there might have been is an existing object about no merely possible thing.
+\end{reply}
+
+\begin{objection}[No set of all truths]
+\citet{Grim1991} argued that there is no set of all truths: given any set of truths, for each subset there is a distinct truth, that the subset contains a given truth or not, so that by Cantor's theorem there are more truths than members of the set. The actual world of Theorem~\ref{t:actual} does not exist, and neither, by the same argument, do the other worlds.
+\end{objection}
+
+\begin{reply}
+The argument shows that the totality of propositions is too large to be a set, not that it does not exist. The construction does not require worlds to be sets in the sense of set theory; it requires that they be collections of propositions over which one can generalize and to which membership applies. If worlds are pluralities, or proper classes, the definitions and proofs are unchanged. The formalization in Section~\ref{s:formal} represents collections of propositions as predicates on propositions for exactly this reason. What the Cantorian argument shows is that worlds cannot all be members of a single set of worlds; the theory of modality needs quantification over worlds, which plural or higher-order quantification provides \citep{Williamson2013}.
+\end{reply}
+
+\begin{objection}[Equivocation on concreteness]
+Theorem~\ref{t:concrete} says that the actual world is concrete, yet the actual world is a set, and sets are abstract. The thesis that the actual world is the only concrete world either contradicts the thesis that it is a set or trades on an ambiguity.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:concrete} removes the ambiguity. A world is concrete when a concrete totality realizes it, and the actual world is the only one so realized. The set and the cosmos are distinct: one is abstract and the other concrete, and they stand in the relation of complete description to described. In \enquote{we live in the actual world} the phrase refers, by a familiar transfer, to the cosmos the set describes. \citet{Adams1974} drew the same distinction between the actual world as a world-story and the totality that the story is true of. Nothing in the theory turns on which usage one adopts, since Theorem~\ref{t:concrete} fixes the one-one relation between them.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not say what propositions are, whether structured or unstructured, nor whether they exist necessarily; the results hold on any view that supplies negation and truth. It does not analyse consistency, which is the task of TSM-10. And it does not decide the question of TSM-08, whether there are other concrete universes, except conditionally: Assumption~\ref{a:act} denies that there are, and a modal realist who rejects it will reject Theorem~\ref{t:concrete}. Finally, the semantic role of the actual world in the theory of consequence is not settled here; LOG-06 requires that the class of models over which validity is defined contain one isomorphic to the actual world, and the actual world of Theorem~\ref{t:actual} is the world whose structure that model copies.
+
+\section{Formalization}\label{s:formal}
+
+Lemma~\ref{l:truthworld}, Theorems~\ref{t:actual} and~\ref{t:concrete} and Corollary~\ref{c:poss} are formalized in \nolinkurl{Philosophy/TSM/TSM_07.lean}. Collections of propositions are predicates on propositions, so that worlds need not form a set; the definitions are those of Section~2 and the five assumptions are axioms. The main statements are (with \texttt{actual\_eq\_truth} the uniqueness half of Theorem~\ref{t:actual}):
+
+\begin{lstlisting}
+theorem unique_actual :
+    Actual IsTrue ∧ ∀ W, Actual W → W = IsTrue
+theorem concrete_iff_actual (W : Proposition → Prop) (hW : World W) :
+    ConcretelyRealized W ↔ W = IsTrue
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.TSM_07.actual_eq_truth' depends on axioms: [propext,
+ Quot.sound, Consistent, IsTrue, Proposition, neg, noncontradiction]
+'Philosophy.TSM_07.unique_actual' depends on axioms: [propext,
+ Quot.sound, Consistent, IsTrue, Proposition, bivalence, neg,
+ noncontradiction, truth_consistent]
+'Philosophy.TSM_07.concrete_iff_actual' depends on axioms: [propext,
+ Quot.sound, ConcretelyRealized, Consistent, IsTrue, Proposition,
+ cosmos_realizes, neg, noncontradiction, realization_truth]
+\end{lstlisting}
+
+\begin{sloppypar}Names other than \texttt{propext} and \texttt{Quot.sound}, which belong to Lean's core logic, carry the prefix \texttt{Philosophy.TSM\_07}. \texttt{Proposition}, \texttt{neg}, \texttt{IsTrue}, \texttt{Consistent} and \texttt{ConcretelyRealized} are the primitives of Definitions~\ref{d:prop}, \ref{d:cons} and~\ref{d:concrete}. \texttt{bivalence}, \texttt{noncontradiction}, \texttt{truth\_consistent}, \texttt{realization\_truth} and \texttt{cosmos\_realizes} are Assumptions~\ref{a:biv}--\ref{a:cosmos}. The first output confirms that uniqueness does not use bivalence (Remark~\ref{r:open}).\end{sloppypar}
+
+\section{Conclusion}
+
+A possible world is a maximal consistent set of propositions, and the actual world is the set of truths. Given bivalence and noncontradiction, there is exactly one actual world, and uniqueness survives the loss of bivalence. Given that only what is true is concretely realized and that the cosmos realizes the truths, the actual world is the only world that is concrete. The standard objections show that the account is not a reduction to the non-modal and that worlds are better taken as pluralities than as sets; none shows that it is false.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1974)]{Adams1974} Adams, R.~M. (1974). Theories of actuality. \emph{No\^us}, 8(3), 211--231.
+\bibitem[Armstrong(1989)]{Armstrong1989} Armstrong, D.~M. (1989). \emph{A Combinatorial Theory of Possibility}. Cambridge University Press.
+\bibitem[Fine(1977)]{Fine1977} Fine, K. (1977). Postscript: Prior on the construction of possible worlds and instants. In A.~N. Prior and K.~Fine, \emph{Worlds, Times and Selves}. Duckworth.
+\bibitem[Grim(1991)]{Grim1991} Grim, P. (1991). \emph{The Incomplete Universe: Totality, Knowledge, and Truth}. MIT Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Plantinga(1974)]{Plantinga1974} Plantinga, A. (1974). \emph{The Nature of Necessity}. Clarendon Press.
+\bibitem[Plantinga(1976)]{Plantinga1976} Plantinga, A. (1976). Actualism and possible worlds. \emph{Theoria}, 42, 139--160.
+\bibitem[Sider(2002)]{Sider2002} Sider, T. (2002). The ersatz pluriverse. \emph{Journal of Philosophy}, 99(6), 279--315.
+\bibitem[Stalnaker(1976)]{Stalnaker1976} Stalnaker, R. (1976). Possible worlds. \emph{No\^us}, 10(1), 65--75.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

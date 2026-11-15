@@ -1,0 +1,425 @@
+\documentclass{situationist-preprint}
+
+\title{The Everett Interpretation Defended}
+\msid{SCI-09-a}
+\msfamily{SCI-09}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_09.lean}
+\mskeywords{Everett interpretation; measurement problem; decoherence; Born rule; decision theory; probability; branching}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+How should quantum mechanics be interpreted? We argue that the Everett interpretation is correct: the universal quantum state evolves unitarily and without exception, and the multiplicity of quasi-classical branches that decoherence produces within it is real. The case has two parts. The first is comparative. Collapse theories change the dynamics without empirical warrant, hidden-variable theories add structure that is idle in quantum equilibrium, and operationalist readings abandon the realism that the success of the theory supports; the Everett interpretation alone takes the formalism as it stands. The second part answers the objection that has always weighed most against the view, that it cannot make sense of probability when every outcome occurs. Following Deutsch and Wallace, we show that a rational agent who expects to branch must weight her successors' prospects by the squared amplitudes of their branches. We give the derivation in a form that makes each premise explicit, prove the equal-amplitude and rational cases, and formalize them in Lean. We then defend the premises, above all branching indifference, against the main objections in the literature, and show how Everettian agents can confirm quantum mechanics from observed frequencies.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+Quantum mechanics is the most accurately confirmed theory in the history of science, and there is no agreement about what it says. Its formalism assigns to every isolated system a state, a vector in a Hilbert space, which evolves in time according to the Schrödinger equation. The equation is linear and deterministic. Applied to a measurement, it predicts that if a system begins in a superposition of states that the apparatus would register differently, the apparatus ends in a corresponding superposition of registering states. Yet every measurement we have performed has had a single result. The textbook resolves the conflict by a second rule: on measurement, the state collapses at random onto one of the components, with probability equal to the squared modulus of its amplitude. The rule is the Born rule, and it is the source of every quantitative prediction the theory makes. But the textbook does not say what a measurement is, and a physical theory cannot rest a fundamental law on a notion it does not define.
+
+\citet{Maudlin1995} gave the problem a sharp form. The following three claims are mutually inconsistent: that the wave function of a system is complete, specifying all its physical properties; that the wave function always evolves according to a linear dynamical equation; and that measurements always, or at least usually, have determinate outcomes. Every interpretation of quantum mechanics must reject at least one. Hidden-variable theories, of which Bohmian mechanics is the best developed \citep{Bohm1952}, reject the first: the wave function is supplemented by particle positions, and outcomes are determinate because the positions are. Collapse theories, of which the theory of \citet{GRW1986} is the best developed, reject the second: the Schrödinger evolution is modified by a stochastic process that suppresses macroscopic superpositions. The Everett interpretation rejects the third in its natural reading: every outcome occurs, each in its own branch of the universal state, and the determinacy that observers report is determinacy relative to a branch \citep{Everett1957}.
+
+There is a fourth family of responses, which rejects the presupposition that the wave function describes a physical state at all. On operationalist and information-theoretic readings, the state is a summary of an agent's expectations about measurement results, and the measurement problem dissolves because nothing physical collapses. We set this family aside early, for a reason that does not depend on the details of any of its members: it gives up the realism that the success of quantum mechanics supports. SCI-02 argues that mature, predictively successful theories are approximately true, and quantum mechanics is the paradigm of such a theory. A reading on which it is true of nothing but our expectations is not an interpretation of a successful theory but a refusal to interpret it.
+
+We defend the Everett interpretation. Our thesis is that it is correct, and that the objection traditionally taken to be decisive against it, that it leaves no room for probability, is answered by the decision-theoretic arguments of \citet{Deutsch1999} and \citet{Wallace2003b,Wallace2007,Wallace2012}. The argument is in two parts. Section~\ref{s:everett} argues that, given realism and the rejection of surplus structure, the Everett interpretation is preferable to its rivals provided it can account for the probabilistic predictions of the theory. Section~\ref{s:prob} argues that it can: a rational agent who knows that she is about to branch must, on pain of violating constraints of rationality that are independently plausible, adopt the Born weights as her decision weights; and the same weights are those by which Everettian observers confirm and disconfirm theories. The core of the derivation is formalized.
+
+\section{A history of the debate}\label{s:history}
+
+\paragraph{Relative states.} Everett's dissertation proposed to take the Schrödinger equation as universally valid, with no exception for measurement \citep{Everett1957}. An observer measuring a system in a superposition becomes correlated with it, and the composite state is a superposition of terms in each of which the observer has recorded a definite result. Everett described the observer's state as defined only relative to a state of the system, and he showed that, within each term, the records of repeated measurements display the statistics that the Born rule predicts, in the sense that the terms in which the records deviate from these statistics have small total squared amplitude. The proposal was received as an eccentricity. Its central difficulties were not that it was inconsistent but that it left two things unexplained: what the terms of the superposition are, given that any vector can be decomposed in infinitely many ways, and why their squared amplitudes should be probabilities.
+
+\paragraph{Many worlds and the preferred basis.} \citet{DeWitt1970} gave the view its popular name and its popular metaphysics. Each term of the superposition is a world, and on measurement the world splits. The formulation made vivid what Everett had left abstract, and it made the first difficulty acute. If worlds correspond to terms in a decomposition, a particular decomposition must be privileged, and the formalism does not privilege any. Adding a preferred basis as a further postulate would have reintroduced the extra structure the view was supposed to avoid.
+
+\paragraph{Decoherence.} The answer to the preferred-basis problem came from physics. A macroscopic system is never isolated: it interacts continually with its environment, of photons, air molecules and its own internal degrees of freedom. The interaction rapidly entangles each macroscopically distinct state of the system with a different, and nearly orthogonal, state of the environment, so that interference between the macroscopically distinct components becomes unobservable in practice \citep{Zurek2003}. The process, decoherence, selects a basis dynamically: the states that are robust under the interaction, roughly states localized in position and momentum to within quantum limits. \citet{Saunders1993} and \citet{Wallace2003a} argued that the Everett interpretation should take the branches to be the quasi-classical structures that decoherence produces. Branches are then not fundamental. They are emergent patterns in the universal state, as real and as approximate as the patterns that other sciences study, and the question how many branches there are has no more exact answer than the question how many species there are.
+
+\paragraph{The probability problem.} With the preferred basis addressed, the probability problem became the main objection. It has two parts \citep{Greaves2007}. The \emph{incoherence problem} is that, if every outcome of a measurement occurs, it seems that there is nothing for the probability of an outcome to be the probability of. In a collapse theory, the probability of spin up is the chance that spin up rather than spin down will occur; in the Everett interpretation both occur, with certainty. The \emph{quantitative problem} is that, even if some notion of probability can be made sense of, it remains to show that it is given by the squared amplitudes and not, for example, by the proportion of branches. Everett's own argument addressed the quantitative problem only in part: it showed that deviant branches have small squared amplitude, which is a reason to expect Born statistics only if squared amplitude already measures probability.
+
+Attempts to derive the Born rule from the formalism alone, by considering infinite sequences of measurements \citep{Hartle1968}, were shown to presuppose it. Gleason's theorem shows that any probability measure on the closed subspaces of a Hilbert space of dimension at least three that is additive over orthogonal decompositions is given by the trace rule \citep{Gleason1957}; but it presupposes that probability is noncontextual, and the Everettian needs a reason for that.
+
+\paragraph{The decision-theoretic programme.} \citet{Deutsch1999} changed the question. Instead of asking what the probability of an outcome is, he asked how a rational agent who accepts the Everett interpretation should choose among bets on the outcomes of quantum measurements. Following Savage's representation theorem \citep{Savage1954}, the agent's preferences over such bets, if they satisfy certain axioms, can be represented as maximizing expected utility with respect to some weighting of the outcomes; Deutsch argued that the axioms, together with the structure of quantum mechanics, force the weighting to be the Born weights. The argument was criticized immediately by \citet{Barnum2000}, who read it as an attempt to derive probabilities from non-probabilistic premises and took it to fail. \citet{Wallace2003b} showed that Barnum and colleagues had read Deutsch as working in a single-world framework, and that the argument is valid only in the Everettian one, where it relies on the fact that the physical description of a measurement does not fix which of its outcomes is relevant to a bet beyond what the state determines. \citet{Greaves2004} gave a reading on which the derived weights are a \emph{caring measure}, the measure by which a rational agent apportions her concern among her successors, and argued that this is all the Everettian needs. \citet{Wallace2007,Wallace2010} reformulated the argument with explicit axioms, and \citet{Wallace2012} gave the definitive version, with a representation theorem in which the Born weights are the unique weights consistent with a set of rationality axioms applied to an Everettian agent.
+
+\paragraph{The critics.} The decision-theoretic programme has been criticized from several directions, and the main criticisms were collected in \citet{Saunders2010}. \citet{Price2010} argued that an agent might care about her successors in ways that Wallace's axioms exclude, for instance by caring about how many of them there are, and that such an agent is not irrational. \citet{Albert2010} argued that one may coherently weight branches by the size, or \enquote{fatness}, of the observers in them, and that nothing in the formalism excludes such measures. \citet{Kent2010} argued that the Everett interpretation cannot account for the confirmation of quantum mechanics by observed frequencies, since observers in deviant branches would conclude, on the same reasoning, that quantum mechanics is false. We take up these objections in Section~\ref{s:objections}.
+
+\paragraph{Self-location.} An alternative line, due to \citet{Vaidman1998}, finds probability in self-locating uncertainty. After branching but before observing the result, an observer does not know which branch she is in, and her uncertainty is ordinary uncertainty about a matter of fact. We treat the self-location approach as a complement to the decision-theoretic one, not as a rival (Section~\ref{s:recent}).
+
+\section{Framework}\label{s:framework}
+
+\subsection{The interpretation}
+
+\begin{definition}\label{d:everett}
+The \emph{Everett interpretation} is the view that (i) the physical state of the universe is represented by a vector, the universal state, in a Hilbert space; (ii) the universal state evolves at all times by a unitary dynamics, without collapse; and (iii) nothing further is fundamental: whatever else is physically real is a structure in the universal state.
+\end{definition}
+
+\begin{definition}\label{d:branch}
+A \emph{branch} is a component of the universal state, relative to a decomposition selected by decoherence, within which macroscopic degrees of freedom have approximately definite values and evolve approximately classically, and between which interference is negligible for all practical purposes.
+\end{definition}
+
+Definition~\ref{d:branch} makes branches emergent and approximate. A branch is not a postulated entity but a pattern, identified by its dynamical robustness, as a hurricane is identified within the dynamics of the atmosphere \citep{Wallace2003a}. Whether two nearly orthogonal components count as two branches or as one may be indeterminate in borderline cases, and nothing in what follows depends on settling it.
+
+\subsection{Theory choice}
+
+We use three principles of theory choice.
+
+\begin{principle}[Realism]\label{p:realism}
+A mature, predictively successful theory is approximately true, and its central theoretical terms refer.
+\end{principle}
+
+\begin{principle}[No idle structure]\label{p:idle}
+If two theories are empirically equivalent, and one of them postulates structure that makes no difference to predictions and has no independent motivation, the other is to be preferred.
+\end{principle}
+
+\begin{principle}[Dynamical conservatism]\label{p:conservatism}
+A well-confirmed dynamical law is not to be modified unless the modification is required by evidence or by the incoherence of the unmodified theory.
+\end{principle}
+
+Principle~\ref{p:realism} is the conclusion of SCI-02. Principle~\ref{p:idle} is a consequence of SCI-04, which holds that theories are underdetermined only by empirically equivalent rivals lacking independent motivation: a rival of this kind does not make the choice between theories arbitrary, since the one that lacks motivation is to be rejected. Principle~\ref{p:conservatism} is a methodological maxim, and it is the one most likely to be contested; we note that it is weak, since it permits modification whenever evidence or incoherence requires it.
+
+\subsection{Decision under branching}
+
+The derivation of the Born rule concerns an agent who is about to perform a measurement on a system in a superposition, knowing that the result will be recorded in decohering branches, and who must choose among acts whose consequences differ between branches. We use the simplest setting in which the argument has content: a measurement with $n$ possible results on a state in which each result has the same amplitude, so that after the measurement the universal state is a superposition, with equal coefficients $1/\sqrt{n}$, of $n$ branches indexed by $0,\dots,n-1$.
+
+\begin{definition}\label{d:symmetry}
+A permutation $\sigma$ of the branches of a state is a \emph{symmetry} of the state if it is implemented by a unitary transformation, acting on degrees of freedom available to the agent, that leaves the state invariant.
+\end{definition}
+
+\begin{definition}\label{d:swap}
+The \emph{transposition} of branches $i$ and $j$ is the permutation that exchanges $i$ and $j$ and leaves every other branch fixed.
+\end{definition}
+
+\begin{definition}\label{d:weights}
+The \emph{decision weights} of a rational agent for an $n$-branch measurement are nonnegative numbers $w_n(0),\dots,w_n(n-1)$, one for each branch, such that the agent's preferences among acts are represented by the expected utility computed with these weights. Their sum is the \emph{scale} $s_n$.
+\end{definition}
+
+The scale is a unit. Only ratios of weights to the scale matter, and nothing is lost by allowing the unit to vary with $n$.
+
+\begin{definition}\label{d:event}
+The \emph{weight of an event}, a set $E$ of branches, is the sum of the weights of the branches in $E$. An \emph{outcome} of a coarser measurement is realized by a set of branches of a finer one when the finer measurement distinguishes the branches in the set and the coarser one does not.
+\end{definition}
+
+\begin{assumption}[Symmetric amplitudes]\label{a:swap}
+In an equal-amplitude state, the transposition of any two branches is a symmetry.
+\end{assumption}
+
+\begin{assumption}[Symmetry invariance]\label{a:invariance}
+A rational agent's decision weights are invariant under the symmetries of the state: if $\sigma$ is a symmetry, the branch $\sigma(i)$ receives the same weight as $i$.
+\end{assumption}
+
+\begin{assumption}[Branching indifference]\label{a:indifference}
+A rational agent is indifferent to branching as such: the weight she gives to an outcome is unaffected by whether the branches that realize it are further divided, and equals the weight of the event consisting of the finer branches that realize it.
+\end{assumption}
+
+\begin{assumption}[Continuity]\label{a:continuity}
+A rational agent's preferences are continuous in the state: acts on states that differ by an arbitrarily small amount in Hilbert-space norm are not preferred to one another by a fixed margin.
+\end{assumption}
+
+Assumption~\ref{a:swap} is physics. If the measured system is entangled with an environment in the state $\frac{1}{\sqrt{n}}\sum_i \lvert i\rangle\lvert e_i\rangle$, a transposition of $\lvert i\rangle$ and $\lvert j\rangle$ on the system, followed by the corresponding transposition of $\lvert e_i\rangle$ and $\lvert e_j\rangle$ on the environment, restores the state exactly. \citet{Zurek2005} called this property environment-assisted invariance and made it the basis of his own derivation. The transposition requires only equal amplitudes; it fails if the amplitudes differ in modulus, since the transposed state is then a different vector.
+
+Assumptions~\ref{a:invariance}, \ref{a:indifference} and~\ref{a:continuity} are rationality constraints, and the case for the Everett interpretation rests on them. Assumption~\ref{a:invariance} combines two of Wallace's axioms, \emph{state supervenience}, on which a rational agent's preferences between acts depend only on the quantum states the acts produce and the rewards they assign to branches, and the observation that a symmetry produces the same state. Assumption~\ref{a:indifference} is Wallace's axiom of the same name, which says that an agent does not care about branching per se \citep{Wallace2012}. Assumption~\ref{a:continuity} is Wallace's solution continuity, in a simplified form. We defend all three in Section~\ref{s:prob}.
+
+\section{The case for Everett}\label{s:everett}
+
+\begin{lemma}[Emergence of branches]\label{l:emergence}
+Unitary quantum mechanics, applied to systems that include macroscopic measuring devices and their environments, yields a universal state that decomposes into branches in the sense of Definition~\ref{d:branch}, one for each macroscopically distinct outcome.
+\end{lemma}
+
+\begin{proof}
+A measurement correlates the states of the measured system with macroscopically distinct states of the apparatus. Each such state of the apparatus interacts with its environment in a way that depends on its macroscopic configuration, and the interaction drives the corresponding environmental states to near-orthogonality on time scales that are, for macroscopic objects, extremely short \citep{Zurek2003}. The resulting components do not interfere for all practical purposes, and within each the macroscopic variables evolve approximately classically, since the decoherence-selected states are those stable under the dynamics. These are the conditions of Definition~\ref{d:branch}.
+\end{proof}
+
+Lemma~\ref{l:emergence} is a result of physics, and the Everett interpretation inherits it without modification. It shows that the third claim of Maudlin's trilemma, as an Everettian reads it, holds in the only sense that the evidence supports: within each branch, every measurement has a determinate outcome, and the observers in the branch, being part of it, record exactly one result.
+
+\begin{proposition}[Adequacy]\label{p:adequacy}
+If the Born weights are the correct weights for prediction and confirmation, the Everett interpretation accounts for every observation that quantum mechanics accounts for.
+\end{proposition}
+
+\begin{proof}
+The predictions of quantum mechanics are of two kinds. Those concerning the unitary evolution of isolated systems, such as interference, are reproduced because the Everett interpretation retains that evolution unchanged. Those concerning the statistics of measurement results are reproduced if, by Lemma~\ref{l:emergence}, measurement results are branch-relative and the probabilities attached to them are the Born weights. The proviso is exactly the hypothesis of the proposition.
+\end{proof}
+
+\begin{lemma}[Collapse theories]\label{l:collapse}
+Collapse theories modify the Schrödinger dynamics, and no evidence requires the modification.
+\end{lemma}
+
+\begin{proof}
+Collapse theories add to the Schrödinger equation a stochastic, nonlinear term that suppresses superpositions of macroscopically distinct states \citep{GRW1986}. The term makes predictions that differ from unitary quantum mechanics, for example spontaneous heating of matter and the breakdown of interference for sufficiently massive objects. No such deviation has been observed; the experiments to date have narrowed the parameter space of the theories without finding a signal. The modification is motivated by the measurement problem, and by Lemma~\ref{l:emergence} and Proposition~\ref{p:adequacy} the unmodified theory solves the measurement problem if it can account for probability. So the modification is required neither by evidence nor, if Section~\ref{s:prob} succeeds, by incoherence.
+\end{proof}
+
+\begin{lemma}[Hidden variables]\label{l:bohm}
+In quantum equilibrium, Bohmian mechanics is empirically equivalent to the Everett interpretation, and its additional variables make no difference to predictions and lack independent motivation.
+\end{lemma}
+
+\begin{proof}
+Empirical equivalence in equilibrium is established in SCI-09-c: both theories evolve the wave function unitarily, and in equilibrium the Bohmian distribution of configurations is the Born distribution \citep{DurrGoldsteinZanghi1992}. The particle configuration selects one branch as occupied; the unoccupied branches remain in the wave function and evolve exactly as the occupied one does. The predictions depend on the configuration only through the equilibrium distribution, which is fixed by the wave function. The independent motivation offered for the configuration is to secure determinate outcomes, which by Lemma~\ref{l:emergence} are already secured, branch by branch, by the wave function alone \citep{BrownWallace2005}.
+\end{proof}
+
+Outside equilibrium Bohmian mechanics predicts deviations from the Born rule \citep{Valentini1991}; were they found, Principle~\ref{p:idle} would no longer apply.
+
+\begin{theorem}[Comparative case]\label{t:comparative}
+Given Principles~\ref{p:realism}--\ref{p:conservatism}, if the Everett interpretation can account for the probabilistic predictions of quantum mechanics, it is to be preferred to collapse theories, to hidden-variable theories and to operationalist readings.
+\end{theorem}
+
+\begin{proof}
+Operationalist readings deny that the quantum state represents physical reality and so violate Principle~\ref{p:realism}. Collapse theories modify a well-confirmed dynamical law without the support of evidence and, under the hypothesis of the theorem, without the pressure of incoherence; by Lemma~\ref{l:collapse} they violate Principle~\ref{p:conservatism}. Bohmian mechanics, by Lemma~\ref{l:bohm}, is an empirically equivalent rival postulating idle structure without independent motivation, and Principle~\ref{p:idle} favors the Everett interpretation. The hypothesis of the theorem gives, by Proposition~\ref{p:adequacy}, that the Everett interpretation is empirically adequate.
+\end{proof}
+
+Theorem~\ref{t:comparative} reduces the question to the probability problem. That is where the debate has always been, and it is where the rest of this manuscript concentrates. Versions of the comparative argument are in \citet{Wallace2012} and \citet{BrownWallace2005}; its formulation here makes explicit that each rival is rejected by a different principle.
+
+\section{Probability}\label{s:prob}
+
+\subsection{The incoherence problem}
+
+\begin{definition}\label{d:game}
+A \emph{quantum game} is a triple consisting of a state of a system to be measured, an observable, and a payoff function assigning a reward to each eigenvalue of the observable. An agent who plays the game receives, in each branch, the reward assigned to the outcome recorded in that branch.
+\end{definition}
+
+\begin{proposition}[Coherence]\label{p:coherence}
+The question which quantum games a rational Everettian agent should prefer is well posed, and its answer, if it is given by expected utility, determines a weighting of branches that plays the decision-theoretic role of probability.
+\end{proposition}
+
+\begin{proof}
+An agent facing a measurement knows that she will have successors in each branch, and that each will receive the reward assigned to its branch. She must choose now among games, and her choice is constrained by what she cares about for her successors. A preference ordering over games is therefore well defined, whatever the metaphysics of branching. If the ordering satisfies the axioms of a representation theorem of Savage's kind, it is represented by a utility function on rewards and a weighting of branches, unique up to the usual transformations, such that the agent prefers games of higher weighted utility \citep{Savage1954,Wallace2012}. That weighting guides action exactly as subjective probability guides action in a single world.
+\end{proof}
+
+Proposition~\ref{p:coherence} answers the incoherence problem in the form in which it bears on action: there is something for the Born weights to be, namely the weights that rational action under branching requires. \citet{Greaves2004} called them a caring measure; \citet{Wallace2012} argued that they deserve the name of probability because they play every role that probability plays, in action and in inference. Whether an agent facing branching is \emph{uncertain} need not be settled: if the self-location approach is right, her credences after branching coincide with her decision weights; if not, she still has decision weights. Either way, it remains to show which weights are rational, and that is the quantitative problem.
+
+\subsection{The quantitative problem: equal amplitudes}
+
+\begin{lemma}[Equal weights]\label{l:equal}
+In an equal-amplitude state with $n$ branches, every branch receives the same decision weight.
+\end{lemma}
+
+\begin{proof}
+Let $i,j<n$. By Assumption~\ref{a:swap}, the transposition of $i$ and $j$ is a symmetry of the state. By Assumption~\ref{a:invariance}, the branch to which the transposition sends $i$, which is $j$, receives the same weight as $i$.
+\end{proof}
+
+\begin{lemma}[Counting]\label{l:count}
+If every branch of an $n$-branch measurement has weight $c$, an event consisting of $k$ branches has weight $kc$, and the scale is $nc$.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:event}, the weight of an event is the sum of the weights of its branches, and the scale is by Definition~\ref{d:weights} the sum of the weights of all $n$ branches. The proof is by induction on $n$.
+\end{proof}
+
+\begin{theorem}[Born rule, equal amplitudes]\label{t:born}
+In an equal-amplitude state with $n$ branches, the weight of an event consisting of $k$ branches, as a fraction of the scale, is $k/n$. This is the Born weight of the event.
+\end{theorem}
+
+\begin{proof}
+If $n=0$ there are no events with branches and nothing to prove. Otherwise let $c$ be the weight of branch $0$. By Lemma~\ref{l:equal} every branch has weight $c$. By Lemma~\ref{l:count} the event has weight $kc$ and the scale is $nc$, so that $n$ times the weight of the event equals $k$ times the scale. The Born weight of the event is the squared norm of the projection of the state onto the span of its branches, which is $k\cdot(1/\sqrt{n})^2=k/n$.
+\end{proof}
+
+\begin{remark}\label{r:assumed}
+Theorem~\ref{t:born} uses Assumptions~\ref{a:swap} and~\ref{a:invariance} and nothing else beyond the definitions. It is worth being precise about what this shows. The Born rule is not derived from the formalism alone: the derivation needs a premise about rational agents, and Assumption~\ref{a:invariance} is such a premise. What is derived is that a rational agent who accepts the Everett interpretation and lets her preferences depend only on the physical state, as Assumption~\ref{a:invariance} requires, has no freedom in the equal-amplitude case. In particular, branch counting and the Born rule coincide in this case, and the theorem does not by itself discriminate between them. The discrimination comes with Corollary~\ref{c:rational}.
+\end{remark}
+
+\subsection{Rational and irrational amplitudes}
+
+\begin{corollary}[Born rule, rational amplitudes]\label{c:rational}
+Let a measurement have an outcome whose squared amplitude is $m/n$, and let the measurement be fine-grained into $n$ branches of equal amplitude, $m$ of which realize the outcome. Then the weight of the outcome, as a fraction of the scale, is $m/n$.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:indifference}, the weight of the outcome equals the weight of the event consisting of the $m$ fine-grained branches that realize it. By Theorem~\ref{t:born}, that weight is $m/n$ of the scale.
+\end{proof}
+
+The fine-graining is physically available. If a system is in the state
+\[\sqrt{m/n}\,\lvert a\rangle+\sqrt{(n-m)/n}\,\lvert b\rangle,\]
+the agent can couple it to an auxiliary system so that $\lvert a\rangle$ is correlated with an equal superposition of $m$ auxiliary states and $\lvert b\rangle$ with an equal superposition of $n-m$ others. The resulting state is an equal superposition of $n$ components, and a measurement that records only whether the outcome was $a$ or $b$ is a coarse-graining of a measurement that records the auxiliary state as well. Branching indifference says that the agent, who cares about whether she receives the reward for $a$ or for $b$, does not care about the auxiliary record \citep{Deutsch1999,Wallace2007}.
+
+Corollary~\ref{c:rational} is where the derivation departs from branch counting. A branch counter assigns the outcome $a$ the weight $1/2$ before the fine-graining and $m/n$ after, so that her weights depend on whether an auxiliary system she does not care about has been consulted. Branching indifference excludes exactly this.
+
+\begin{proposition}[Irrational amplitudes]\label{p:irrational}
+Given Assumption~\ref{a:continuity}, the decision weight of any outcome, as a fraction of the scale, is its squared amplitude.
+\end{proposition}
+
+\begin{proof}
+Every real number in the unit interval is a limit of rationals, and every state whose squared amplitudes are irrational is a limit, in norm, of states whose squared amplitudes are rational. By Corollary~\ref{c:rational} the weights on the approximating states are the Born weights, and by Assumption~\ref{a:continuity} the weights on the limit state are the limits of these.
+\end{proof}
+
+Wallace's own representation theorem derives the utility function and the weights together, without presupposing expected utility \citep{Wallace2012}; we have presupposed it in Definition~\ref{d:weights} to isolate the step at which quantum mechanics enters.
+
+\subsection{The rationality assumptions}
+
+Assumption~\ref{a:invariance} says that a rational agent's preferences depend on the state and the rewards. The alternative is that they depend on something that is not part of the physical description of the game, such as the labels by which the agent happens to refer to the branches. An Everettian who accepts Definition~\ref{d:everett} holds that there is nothing in the world beyond the universal state, so a preference that depends on more than the state depends on nothing in the world. This is not an argument that every possible agent satisfies Assumption~\ref{a:invariance}; it is an argument that an agent who violates it is responding to features of her description that have no physical counterpart, which is a recognized form of irrationality in the single-world case as well.
+
+Assumption~\ref{a:indifference} says that a rational agent does not care about branching as such. The reason is that branching, in the Everett interpretation, is not a discrete, well-defined event. By Definition~\ref{d:branch}, branches are emergent and approximate, and their number depends on how finely decoherent histories are individuated and on processes, such as the scattering of air molecules, that occur continuously and in enormous numbers. Branching indifference is the rational response to the absence of a branch count, not a stipulation that one exists and is to be ignored (see the reply to Objection~\ref{o:price}).
+
+Assumption~\ref{a:continuity} is the weakest of the three: a discontinuous preference would distinguish states that no physical procedure can distinguish to any finite precision.
+
+\subsection{Confirmation}
+
+The decision-theoretic derivation tells an Everettian how to act given the Everett interpretation. A further question is how anyone could come to accept the interpretation, or quantum mechanics itself, on the basis of observed frequencies, if every sequence of results occurs in some branch. \citet{GreavesMyrvold2010} showed that the decision-theoretic framework extends to confirmation. An agent who is uncertain between theories, some of them branching, can be represented, under axioms analogous to those of Savage, as having credences over theories and, within each branching theory, a weighting of branches. Her preferences over bets that she will settle after observing the result fix how her credence in each theory should change, and the change obeys Bayesian conditionalization with the branch weights in the place of likelihoods.
+
+\begin{proposition}[Everettian confirmation]\label{p:confirmation}
+An Everettian agent who weights branches by the Born rule and updates by conditionalization confirms quantum mechanics by observed relative frequencies in the same way, and to the same degree, as an agent who takes quantum mechanics to be a stochastic single-world theory with the Born rule as its chance law.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{p:irrational} and the representation of \citet{GreavesMyrvold2010}, the Everettian's likelihood for a sequence of results, given quantum mechanics, is its Born weight; the single-world agent's likelihood is its Born chance. The two are the same number, and so are the posterior credences obtained by conditionalizing on the same evidence from the same priors.
+\end{proof}
+
+This answers Kent's form of the confirmation objection in Section~\ref{s:objections}. The Bayesian framework is the one SCI-12 defends. Proposition~\ref{p:confirmation} is the reason the Born weights deserve to be called probabilities: they play the role of probability in action, by Theorem~\ref{t:born} and its extensions, and in inference, by Proposition~\ref{p:confirmation}, and on a functionalist view of probability nothing more is required \citep{Saunders2010b,Wallace2012}.
+
+\begin{theorem}[Main result]\label{t:main}
+Given Principles~\ref{p:realism}--\ref{p:conservatism} and Assumptions~\ref{a:swap}--\ref{a:continuity}, the Everett interpretation is correct, and the probability problem is solved: the rational decision weights, and the weights by which observers confirm theories, are the Born weights.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:coherence}, Proposition~\ref{p:irrational} and Proposition~\ref{p:confirmation}, the Everett interpretation accounts for the probabilistic predictions of quantum mechanics and for their confirmation. By Theorem~\ref{t:comparative}, it is then to be preferred to its rivals.
+\end{proof}
+
+\section{Cases and connections}\label{s:cases}
+
+\paragraph{Stern--Gerlach.} A spin-$\frac12$ particle prepared in the $x$-up state passes through a magnet oriented along $z$. The particle's state is an equal superposition of $z$-up and $z$-down, and the detectors become entangled with the two paths within nanoseconds. By Lemma~\ref{l:emergence} there are two branches, and by Theorem~\ref{t:born} a rational agent gives each weight $1/2$. If the magnet is rotated by an angle $\theta$ from $x$, the squared amplitudes become $\cos^2(\theta/2)$ and $\sin^2(\theta/2)$. Corollary~\ref{c:rational} and Proposition~\ref{p:irrational} yield them as weights.
+
+\paragraph{The branch counter.} An agent proposes to weight outcomes by the number of branches in which they occur. In the Stern--Gerlach case at angle $\theta$ she assigns $1/2$ to each result, whatever $\theta$ is. She violates branching indifference, for the reason given after Corollary~\ref{c:rational}, and her rule is in any case not well defined, since decoherence continues after the measurement and the number of branches in which \enquote{up} is recorded keeps increasing at a rate that depends on the environment and not on the amplitudes. Her predictions are also wrong: observed frequencies at small $\theta$ are close to $1$ for up, not to $1/2$.
+
+\paragraph{Vaidman's sleeping pill.} An agent takes a pill, is put to sleep, and has a spin measured; she is then woken in a room whose color depends on the result, but the rooms are identical inside. On waking she does not know which branch she is in \citep{Vaidman1998}. Her credence that the result was up is, on the self-location approach, her Born weight, and on the decision-theoretic approach it is the weight she would have used for bets placed before the measurement and settled afterwards. The two approaches agree whenever both apply, and the decision-theoretic approach is the more fundamental, since the self-locating credence must be fixed by some principle, and the natural one is that it equal the pre-measurement decision weight, which the derivation determines.
+
+\paragraph{Relativity.} An instantaneous collapse across an extended state requires a preferred foliation of spacetime. The Everett interpretation has no collapse and so needs no preferred foliation, the point used in TSM-16-a, which argues that simultaneity is frame-relative.
+
+\paragraph{Logic.} The Everett interpretation is formulated in classical logic. It explains the failure of joint distributions for incompatible observables by the structure of the state, without revising the distributive law, as LOG-13-a holds: quantum mechanics revises probability theory, not logic.
+
+\paragraph{The cosmos.} By Definition~\ref{d:everett}, the fundamental physical object is the universal state, and branches and subsystems are structures within it. MET-09-a, which argues that the cosmos is the only fundamental object, draws on this: on the Everett interpretation, the state of the cosmos is the universal state.
+
+\paragraph{Eigenspaces.} The probabilities that the Everett interpretation recovers are branch weights, and a branch weight is the squared norm of the projection of the universal state onto the eigenspace associated with the recorded outcome. Every eigenspace of the measured observable figures in the computation, as MTH-16-a observes in arguing that physics cannot be nominalized.
+
+\section{Recent literature}\label{s:recent}
+
+The last fifteen years have produced three lines of work that bear on the argument.
+
+The first develops the self-location approach. \citet{SebensCarroll2018} derive the Born rule from a principle of epistemic separability, on which the credences of an observer about her own location should be unaffected by changes to the state of distant systems. Their derivation, like ours, proceeds from equal amplitudes to rational amplitudes by fine-graining, and it requires an analogue of branching indifference. \citet{McQueenVaidman2019} defend it against the objection that there is no time at which an observer is uncertain. These results confirm the decision-theoretic derivation rather than compete with it.
+
+The second line criticizes the premises. \citet{DizadjiBahmani2015} argues that the decision-theoretic derivation does not deliver probabilities of the kind needed to explain observed frequencies, since a decision weight is not a chance. \citet{Jansson2016} argues against state supervenience, the premise behind Assumption~\ref{a:invariance}, on the ground that an Everettian may legitimately care about features of branches that are not fixed by the state alone. Both criticisms are addressed in Section~\ref{s:objections}. \citet{Saunders2021} has revisited branch counting itself, arguing that, under a suitable fine-grained individuation of branches, counting and the Born rule agree. If this is right, it removes the last ground on which a branch counter could claim to be rational, and it is compatible with Assumption~\ref{a:indifference}.
+
+The third line concerns the framework. \citet{Wilson2020} reads Everettian branches as possible worlds, so that the Born weights measure objective chance in a familiar sense. \citet{Wallace2020} argues that quantum theory is a framework within which particular theories are formulated, and that only the Everett interpretation applies to the framework as physicists use it, since collapse and hidden-variable theories have been constructed only for particular theories. This strengthens Theorem~\ref{t:comparative}: a rival that cannot be extended to the theories of current physics is not yet an empirically adequate rival.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Caring about numbers]\label{o:price}
+An agent might care about how many successors receive a reward, not only about the weight of their branches. Such an agent violates branching indifference, but she is not irrational, and the derivation does not bind her \citep{Price2010}.
+\end{objection}
+
+\begin{reply}
+The objection supposes that there is a number of successors to care about. By Definition~\ref{d:branch} there is not: the count of branches depends on the grain at which decoherent histories are individuated and changes continuously as decoherence proceeds. An agent who cares about the number of her successors has preferences defined over a quantity with no determinate value, and her preferences over physically specified acts are undefined. If she fixes a grain by convention, her preferences change when the convention changes, though nothing physical has changed. She is in the position of an agent in a single world who cares about the number of clouds in the sky as such, under every way of counting clouds; there is no fact for her preferences to respond to.
+\end{reply}
+
+\begin{objection}[All outcomes occur]\label{o:incoherence}
+Probability requires that some outcomes occur and others do not. In the Everett interpretation all occur, so whatever the decision weights are, they are not probabilities, and the probability problem has been changed rather than solved.
+\end{objection}
+
+\begin{reply}
+The objection assumes a conception of probability on which it must be explained by something other than the role it plays. On a functionalist conception, a quantity is probability if it guides rational action under uncertainty as probability does and is updated by evidence as probability is. By Proposition~\ref{p:coherence}, Theorem~\ref{t:born} and Proposition~\ref{p:confirmation}, the Born weights do both. Single-world chance is itself characterized by its role, through the Principal Principle linking it to rational credence \citep{Lewis1980}; the Everett interpretation supplies a candidate that satisfies an analogue of the principle by derivation rather than stipulation \citep{Wallace2012}. \citet{DizadjiBahmani2015} presses the point that decision weights cannot explain frequencies. Within an Everettian branch, the observed frequencies are explained as single-world frequencies are: the branch is one of a family of branches in nearly all of whose weight the frequencies are close to the Born weights, and the observer has no reason to think hers atypical.
+\end{reply}
+
+\begin{objection}[Other measures]\label{o:albert}
+Nothing in the formalism excludes weighting branches by some other measure, for instance one that gives more weight to branches in which the observer is larger or more complex \citep{Albert2010}.
+\end{objection}
+
+\begin{reply}
+Such a measure violates Assumption~\ref{a:invariance} or Assumption~\ref{a:indifference}. If two branches of equal amplitude contain observers of different sizes, the transposition of the branches is still a symmetry of the state, given an environment that undoes it, and a measure that weights by size distinguishes branches that the state does not distinguish in any respect relevant to the act. Alternatively, if the size of an observer is a physical feature of the branch, a measure that weights by it cares about how the outcome is realized rather than about the outcome, and fine-graining the outcome by the observer's size would change the weights, which branching indifference forbids.
+\end{reply}
+
+\begin{objection}[State supervenience]\label{o:jansson}
+An Everettian may care about features of her successors that are not determined by the quantum state and the reward, such as their histories or their relations to particular persons. Assumption~\ref{a:invariance} forbids this, and so begs the question \citep{Jansson2016}.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:invariance} does not forbid caring about histories or relations. If the history of a successor matters, it is part of the reward, and the payoff function of Definition~\ref{d:game} can assign different rewards to branches with different histories. What the assumption forbids is caring about a difference between branches that neither the state nor the rewards record. By Definition~\ref{d:everett}, such a difference is a difference in nothing physical. An Everettian who violates the assumption must hold that her preferences track something beyond the universal state, which is to reject clause (iii) of Definition~\ref{d:everett}, the clause that defines the interpretation she accepts.
+\end{reply}
+
+\begin{objection}[Confirmation]\label{o:kent}
+In some branches, the observed frequencies deviate wildly from the Born weights, and observers there conclude that quantum mechanics is false. Everettian observers in our branch cannot be confident that they are not in such a branch, and so cannot confirm quantum mechanics \citep{Kent2010}.
+\end{objection}
+
+\begin{reply}
+In a single-world stochastic theory, there are also possible sequences of results in which frequencies deviate wildly, and observers who obtain them conclude, wrongly, that the theory is false. This does not show that confirmation is impossible in a stochastic world; it shows that it is fallible. By Proposition~\ref{p:confirmation}, the Everettian's confirmation of quantum mechanics is exactly as strong as the single-world stochastic agent's, since they assign the same likelihoods and update in the same way. Deviant branches have small total weight, as deviant sequences have small total chance. Kent's objection, if it were sound, would refute confirmation in every stochastic theory.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The argument does not establish the rationality assumptions from premises that every party accepts. It shows that they are well motivated for an agent who accepts Definition~\ref{d:everett}, and that rejecting them requires caring about quantities that the interpretation says do not exist. A critic who rejects clause (iii) of the definition is not bound by it, but has then rejected the Everett interpretation on other grounds.
+
+It does not establish that the Everett interpretation is correct independently of Principles~\ref{p:realism}--\ref{p:conservatism}. A philosopher who rejects realism, or who thinks that idle structure is harmless, will not be moved by Theorem~\ref{t:comparative}.
+
+It does not settle the metaphysics of persons under branching; the weights do not depend on whether each successor is the agent.
+
+It does not exclude non-equilibrium Bohmian mechanics or a collapse theory whose deviations are eventually observed. These are empirical possibilities, and evidence for either would change the comparison.
+
+It does not derive the Born rule from quantum mechanics alone, but from quantum mechanics together with constraints on rational preference (Remark~\ref{r:assumed}).
+
+\section{Formalization}\label{s:formal}
+
+The core of the quantitative argument, Lemma~\ref{l:equal}, Lemma~\ref{l:count}, Theorem~\ref{t:born} and Corollary~\ref{c:rational}, is formalized in \nolinkurl{Philosophy/SCI/SCI_09.lean}. Branches of an $n$-branch measurement are the natural numbers below $n$; weights are natural numbers on a scale that may depend on $n$; the transposition is defined; and the notions of symmetry, weight, scale and coarse-grained outcome weight are primitives. To avoid division, the theorem states that $n$ times the weight of an event equals the number of its branches times the scale.
+
+\begin{lstlisting}
+theorem born_equal (n : Nat) (E : Nat → Bool) :
+    n * eventWeight (weight n) E n = count E n * scale n
+
+theorem born_rational (n : Nat) (E : Nat → Bool) :
+    n * coarse n E = count E n * scale n
+\end{lstlisting}
+
+The checker reports the following dependencies.
+
+\begin{lstlisting}
+'Philosophy.SCI_09.born_equal' depends on axioms: [propext,
+ Quot.sound, Philosophy.SCI_09.normalization,
+ Philosophy.SCI_09.scale, Philosophy.SCI_09.swap_symmetry,
+ Philosophy.SCI_09.symmetry_invariance, Philosophy.SCI_09.weight]
+'Philosophy.SCI_09.born_rational' depends on axioms: [propext,
+ Quot.sound, Philosophy.SCI_09.branching_indifference,
+ Philosophy.SCI_09.coarse, Philosophy.SCI_09.normalization,
+ Philosophy.SCI_09.scale, Philosophy.SCI_09.swap_symmetry,
+ Philosophy.SCI_09.symmetry_invariance, Philosophy.SCI_09.weight]
+\end{lstlisting}
+
+The axioms \texttt{weight}, \texttt{scale}, \texttt{normalization} and \texttt{coarse} declare the primitives of Definitions~\ref{d:weights} and~\ref{d:event}; \texttt{swap\_symmetry} is Assumption~\ref{a:swap}, \texttt{symmetry\_invariance} is Assumption~\ref{a:invariance}, and \texttt{branching\_indifference} is Assumption~\ref{a:indifference}; \texttt{propext} and \texttt{Quot.sound} belong to Lean's core logic. The formalization confirms that Theorem~\ref{t:born} uses Assumptions~\ref{a:swap} and~\ref{a:invariance} and not branching indifference, as Remark~\ref{r:assumed} states, and that Corollary~\ref{c:rational} adds branching indifference and nothing else. A further theorem, \texttt{assumptions\_satisfiable}, shows without axioms that the conditions imposed by Definition~\ref{d:weights} and Assumption~\ref{a:invariance} are jointly satisfiable, by uniform weights, whatever the symmetries are. Proposition~\ref{p:irrational} requires the real numbers and a continuity axiom and is not formalized; neither are the physical content of Lemma~\ref{l:emergence} and the comparative argument of Section~\ref{s:everett}, which are not of a form that a proof assistant can check.
+
+\section{Conclusion}
+
+The Everett interpretation takes the formalism of quantum mechanics as it stands: the universal state evolves unitarily, decoherence divides it into quasi-classical branches, and every outcome of a measurement is recorded in some branch. Its rivals either change the dynamics without evidence, add structure that does no work, or give up on describing the world. The objection that it cannot accommodate probability fails. A rational agent who expects to branch, and whose preferences respond only to the physical state and not to the count of branches, must weight her successors by the Born rule; in the equal-amplitude case this follows from symmetry alone, and branching indifference and continuity extend it to all amplitudes. The same weights govern the confirmation of theories by observed frequencies. The Everett interpretation is correct, and the probability problem is solved.
+
+\begin{thebibliography}{99}\small
+\bibitem[Albert(2010)]{Albert2010} Albert, D.~Z. (2010). Probability in the Everett picture. In \citet{Saunders2010}.
+\bibitem[Barnum et~al.(2000)]{Barnum2000} Barnum, H., Caves, C.~M., Finkelstein, J., Fuchs, C.~A. and Schack, R. (2000). Quantum probability from decision theory? \emph{Proceedings of the Royal Society of London A}, 456, 1175--1182.
+\bibitem[Bohm(1952)]{Bohm1952} Bohm, D. (1952). A suggested interpretation of the quantum theory in terms of ``hidden'' variables, I and II. \emph{Physical Review}, 85(2), 166--193.
+\bibitem[Brown and Wallace(2005)]{BrownWallace2005} Brown, H.~R. and Wallace, D. (2005). Solving the measurement problem: De Broglie--Bohm loses out to Everett. \emph{Foundations of Physics}, 35(4), 517--540.
+\bibitem[Deutsch(1999)]{Deutsch1999} Deutsch, D. (1999). Quantum theory of probability and decisions. \emph{Proceedings of the Royal Society of London A}, 455, 3129--3137.
+\bibitem[DeWitt(1970)]{DeWitt1970} DeWitt, B.~S. (1970). Quantum mechanics and reality. \emph{Physics Today}, 23(9), 30--35.
+\bibitem[Dizadji-Bahmani(2015)]{DizadjiBahmani2015} Dizadji-Bahmani, F. (2015). The probability problem in Everettian quantum mechanics persists. \emph{The British Journal for the Philosophy of Science}, 66(2), 257--283.
+\bibitem[Dürr et~al.(1992)]{DurrGoldsteinZanghi1992} Dürr, D., Goldstein, S. and Zanghì, N. (1992). Quantum equilibrium and the origin of absolute uncertainty. \emph{Journal of Statistical Physics}, 67(5--6), 843--907.
+\bibitem[Everett(1957)]{Everett1957} Everett, H. (1957). ``Relative state'' formulation of quantum mechanics. \emph{Reviews of Modern Physics}, 29(3), 454--462.
+\bibitem[Ghirardi et~al.(1986)]{GRW1986} Ghirardi, G.~C., Rimini, A. and Weber, T. (1986). Unified dynamics for microscopic and macroscopic systems. \emph{Physical Review D}, 34(2), 470--491.
+\bibitem[Gleason(1957)]{Gleason1957} Gleason, A.~M. (1957). Measures on the closed subspaces of a Hilbert space. \emph{Journal of Mathematics and Mechanics}, 6(6), 885--893.
+\bibitem[Greaves(2004)]{Greaves2004} Greaves, H. (2004). Understanding Deutsch's probability in a deterministic multiverse. \emph{Studies in History and Philosophy of Modern Physics}, 35(3), 423--456.
+\bibitem[Greaves(2007)]{Greaves2007} Greaves, H. (2007). Probability in the Everett interpretation. \emph{Philosophy Compass}, 2(1), 109--128.
+\bibitem[Greaves and Myrvold(2010)]{GreavesMyrvold2010} Greaves, H. and Myrvold, W. (2010). Everett and evidence. In \citet{Saunders2010}.
+\bibitem[Hartle(1968)]{Hartle1968} Hartle, J.~B. (1968). Quantum mechanics of individual systems. \emph{American Journal of Physics}, 36(8), 704--712.
+\bibitem[Jansson(2016)]{Jansson2016} Jansson, L. (2016). Everettian quantum mechanics and physical probability: Against the principle of ``state supervenience''. \emph{Studies in History and Philosophy of Modern Physics}, 53, 45--53.
+\bibitem[Kent(2010)]{Kent2010} Kent, A. (2010). One world versus many: The inadequacy of Everettian accounts of evolution, probability, and scientific confirmation. In \citet{Saunders2010}.
+\bibitem[Lewis(1980)]{Lewis1980} Lewis, D. (1980). A subjectivist's guide to objective chance. In R.~C. Jeffrey (ed.), \emph{Studies in Inductive Logic and Probability}, vol.~II. University of California Press.
+\bibitem[Maudlin(1995)]{Maudlin1995} Maudlin, T. (1995). Three measurement problems. \emph{Topoi}, 14(1), 7--15.
+\bibitem[McQueen and Vaidman(2019)]{McQueenVaidman2019} McQueen, K.~J. and Vaidman, L. (2019). In defence of the self-location uncertainty account of probability in the many-worlds interpretation. \emph{Studies in History and Philosophy of Modern Physics}, 66, 14--23.
+\bibitem[Price(2010)]{Price2010} Price, H. (2010). Decisions, decisions, decisions: Can Savage salvage Everettian probability? In \citet{Saunders2010}.
+\bibitem[Saunders(1993)]{Saunders1993} Saunders, S. (1993). Decoherence, relative states, and evolutionary adaptation. \emph{Foundations of Physics}, 23(12), 1553--1585.
+\bibitem[Saunders(2010)]{Saunders2010b} Saunders, S. (2010). Chance in the Everett interpretation. In \citet{Saunders2010}.
+\bibitem[Saunders(2021)]{Saunders2021} Saunders, S. (2021). Branch-counting in the Everett interpretation of quantum mechanics. \emph{Proceedings of the Royal Society A}, 477, 20210600.
+\bibitem[Saunders et~al.(2010)]{Saunders2010} Saunders, S., Barrett, J., Kent, A. and Wallace, D. (eds.) (2010). \emph{Many Worlds? Everett, Quantum Theory, and Reality}. Oxford University Press.
+\bibitem[Savage(1954)]{Savage1954} Savage, L.~J. (1954). \emph{The Foundations of Statistics}. Wiley.
+\bibitem[Sebens and Carroll(2018)]{SebensCarroll2018} Sebens, C.~T. and Carroll, S.~M. (2018). Self-locating uncertainty and the origin of probability in Everettian quantum mechanics. \emph{The British Journal for the Philosophy of Science}, 69(1), 25--74.
+\bibitem[Vaidman(1998)]{Vaidman1998} Vaidman, L. (1998). On schizophrenic experiences of the neutron or why we should believe in the many-worlds interpretation of quantum theory. \emph{International Studies in the Philosophy of Science}, 12(3), 245--261.
+\bibitem[Valentini(1991)]{Valentini1991} Valentini, A. (1991). Signal-locality, uncertainty, and the subquantum H-theorem, I. \emph{Physics Letters A}, 156(1--2), 5--11.
+\bibitem[Wallace(2003a)]{Wallace2003a} Wallace, D. (2003a). Everett and structure. \emph{Studies in History and Philosophy of Modern Physics}, 34(1), 87--105.
+\bibitem[Wallace(2003b)]{Wallace2003b} Wallace, D. (2003b). Everettian rationality: Defending Deutsch's approach to probability in the Everett interpretation. \emph{Studies in History and Philosophy of Modern Physics}, 34(3), 415--439.
+\bibitem[Wallace(2007)]{Wallace2007} Wallace, D. (2007). Quantum probability from subjective likelihood: Improving on Deutsch's proof of the probability rule. \emph{Studies in History and Philosophy of Modern Physics}, 38(2), 311--332.
+\bibitem[Wallace(2010)]{Wallace2010} Wallace, D. (2010). How to prove the Born rule. In \citet{Saunders2010}.
+\bibitem[Wallace(2012)]{Wallace2012} Wallace, D. (2012). \emph{The Emergent Multiverse: Quantum Theory according to the Everett Interpretation}. Oxford University Press.
+\bibitem[Wallace(2020)]{Wallace2020} Wallace, D. (2020). On the plurality of quantum theories: Quantum theory as a framework, and its implications for the quantum measurement problem. In S.~French and J.~Saatsi (eds.), \emph{Scientific Realism and the Quantum}. Oxford University Press.
+\bibitem[Wilson(2020)]{Wilson2020} Wilson, A. (2020). \emph{The Nature of Contingency: Quantum Physics as Modal Realism}. Oxford University Press.
+\bibitem[Zurek(2003)]{Zurek2003} Zurek, W.~H. (2003). Decoherence, einselection, and the quantum origins of the classical. \emph{Reviews of Modern Physics}, 75(3), 715--775.
+\bibitem[Zurek(2005)]{Zurek2005} Zurek, W.~H. (2005). Probabilities from entanglement, Born's rule $p_k=|\psi_k|^2$ from envariance. \emph{Physical Review A}, 71, 052105.
+\end{thebibliography}
+
+\end{document}

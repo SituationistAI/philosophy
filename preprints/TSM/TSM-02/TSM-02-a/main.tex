@@ -1,0 +1,176 @@
+\documentclass{situationist-preprint}
+
+\title{Against Temporal Passage}
+\msid{TSM-02-a}
+\msfamily{TSM-02}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/TSM/TSM\_02.lean}
+\mskeywords{passage of time; flow; A-series; B-theory; temporal experience; introspection; becoming}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does time flow? It seems to: events approach from the future, are present, and recede into the past, and the present seems to advance through them. We argue that time does not flow and that the impression of passage is a feature of experience, not of time. The argument has two parts. The first is short: passage is the change of A-properties, and the A-series is incoherent (TSM-01), so nothing passes. The second does not depend on the first. Whatever passage would be, it is not fixed by the B-facts, since that is what distinguishes it from mere succession; but the impression of passage is fixed by the B-facts about experience. Hence a world without passage that matches ours in every B-fact contains the very same impression. The impression therefore cannot be evidence of passage, and its source lies in the structure of experience: in successive experiences each of which represents its predecessors as just past. Introspection is reliable about the impression, which is real, and unreliable about its cause. The result is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+We speak of time as flowing, of the future becoming present and the present slipping into the past, and of the present moment as advancing. On the \emph{dynamic} view these phrases are literally true: there is a fact, over and above the order of events, about which events are present, and this fact changes. \citet{Broad1923} held that reality grows by the accretion of new presents; \citet{Prior1959} argued that the relief we feel when a pain is over is relief that it is \emph{past}, which no tenseless fact captures; \citet{Maudlin2007} holds that the passage of time is a basic physical fact, intrinsic to the direction of time.
+
+On the \emph{static} view there is no such further fact. Events stand in the relations of earlier, later and simultaneous; that is all the temporal structure there is; and talk of flow is metaphor \citep{Smart1949,Williams1951}. The static theorist then owes an account of why time seems to pass. \citet{Paul2010} and \citet{Prosser2016} argue that the impression is produced by the way experience is structured, and Prosser argues further that experience could not detect passage even if there were passage to detect.
+
+We defend the static view and the second claim in a precise form. The collection's account of time is tenseless: TSM-01 argues that McTaggart's argument shows the A-series to be incoherent and that time is constituted by the B-series, and TSM-15 that the present has no metaphysical privilege. Given TSM-01, Lemma~\ref{l:nopass} below is immediate. The contribution of the present manuscript is Theorem~\ref{t:indep}, which does not rely on TSM-01, and the account of where the impression comes from. The rate-of-passage objection, that passage would have to proceed at some rate and that \enquote{one second per second} is no rate \citep{Markosian1993}, is the subject of the companion TSM-02-b and is not used here.
+
+\section{Framework}
+
+\begin{definition}[Passage]\label{d:passage}
+Time \emph{passes} if events change their A-properties: an event that is future comes to be present and then past, and what is present changes. A world contains a \emph{changing A-series} if its events have A-properties and these change.
+\end{definition}
+
+\begin{definition}[Impression of passage]\label{d:impression}
+The \emph{impression of passage} is the phenomenal character of an experience that presents events as coming to be present and slipping into the past, and the present as advancing.
+\end{definition}
+
+\begin{definition}[B-duplicate]\label{d:bdup}
+A world $v$ is a \emph{B-duplicate} of $w$ if $v$ and $w$ agree in every B-fact: in what occurs at each time, including the experiences of subjects, and in the relations of earlier, later and simultaneous among times and events.
+\end{definition}
+
+\begin{assumption}\label{a:requiresA}
+Passage requires a changing A-series.
+\end{assumption}
+
+\begin{assumption}[TSM-01]\label{a:incoherent}
+The A-series is incoherent: no world contains a changing A-series.
+\end{assumption}
+
+\begin{assumption}[Experience is fixed by the B-facts]\label{a:fixed}
+If $w$ contains the impression of passage and $v$ is a B-duplicate of $w$, then $v$ contains the impression of passage.
+\end{assumption}
+
+\begin{assumption}[Passage is not fixed by the B-facts]\label{a:static}
+Every world has a B-duplicate without passage.
+\end{assumption}
+
+Assumption~\ref{a:requiresA} is definitional of the view under discussion: the flow of time just is the movement of presentness. Assumption~\ref{a:fixed} says that experiences, including their phenomenal character, occur at times and are fixed by what occurs at those times; the B-facts include every experience and its character, and two worlds alike in all of them cannot differ in what experience is had. Assumption~\ref{a:static} is one the dynamic theorist accepts. If passage were fixed by the B-facts, it would be nothing over and above the succession of events, which the static theorist affirms; the dynamic view is distinctive precisely in holding that passage is an addition to succession, so that a world could have the same succession without it.
+
+\section{The argument}
+
+\begin{lemma}\label{l:nopass}
+No world has passage.
+\end{lemma}
+
+\begin{proof}
+If a world had passage, it would contain a changing A-series by Assumption~\ref{a:requiresA}, which Assumption~\ref{a:incoherent} excludes.
+\end{proof}
+
+\begin{theorem}[Independence]\label{t:indep}
+Every world in which the impression of passage is had has a B-duplicate in which the impression is had and in which there is no passage.
+\end{theorem}
+
+\begin{proof}
+Let $w$ contain the impression. By Assumption~\ref{a:static}, $w$ has a B-duplicate $v$ without passage. By Assumption~\ref{a:fixed}, $v$ contains the impression.
+\end{proof}
+
+Theorem~\ref{t:indep} does not use Assumption~\ref{a:incoherent}, and so holds for a reader who rejects TSM-01. Its epistemic consequence is direct. Evidence discriminates between hypotheses only if it is more to be expected on one than on the other. The impression of passage is had in $w$ and in its passage-free duplicate alike, so its presence is no more to be expected in a world with passage than in one without, and having it gives no reason to think that time passes. This is the precise form of Prosser's claim that passage, if real, would be undetectable \citep{Prosser2016}.
+
+\begin{theorem}\label{t:main}
+Wherever the impression of passage occurs, it occurs without passage, and it occurs in every B-duplicate of the world in which it occurs. The impression of passage is a feature of experience, not of time.
+\end{theorem}
+
+\begin{proof}
+The first conjunct is Lemma~\ref{l:nopass}; the second is Assumption~\ref{a:fixed}. The impression is therefore fixed by the B-facts, among which the facts about experience are the relevant ones, and not by any passage of time.
+\end{proof}
+
+\section{Where the impression comes from}\label{s:source}
+
+Theorem~\ref{t:main} says that the impression is fixed by the B-facts about experience. Which facts? The answer is an empirical matter, but its outline is clear enough to show that nothing is missing.
+
+First, experience is itself successive, and each experience represents its immediate predecessors as just past. Within the specious present one hears a melody, not a set of notes, because the experience at each time carries a representation of the notes just heard as having just occurred. Every experience thus presents a short stretch of events, with the latest as present and the earlier as receding, and the experience at the next time presents a shifted stretch. A subject whose experiences are so structured will find, at every time, that what was present is now represented as past. \citet{Paul2010} compares the case with apparent motion: two lights flashing in succession are seen as one light moving, though nothing moves, because the visual system constructs a representation of motion from successive inputs. The impression of a moving present is constructed from successive experiences in the same way.
+
+Second, there is an asymmetry of records and of agency. We remember the past and not the future, and we deliberate about the future and not the past. Since the content of our memories grows at later times and our options narrow, every experience is one in which more lies behind than before. This asymmetry has a B-theoretic explanation in the direction of time, which TSM-05 traces to the low-entropy initial state of the universe; it requires no moving present.
+
+The view of introspection defended in MND-20-a sharpens the point. Introspection is reliable about current phenomenal states and unreliable about their causes, because a judgment about a cause requires a causal inference that the experience itself does not supply. The judgment that one has the impression of passage is a judgment about a current phenomenal state, and we accept it: the impression is real, and Definition~\ref{d:impression} describes it correctly. The judgment that the impression is produced by time's passing is a judgment about its cause, and introspection lends it no authority. Theorem~\ref{t:indep} shows, moreover, that the causal hypothesis is idle: the impression would be produced in the duplicate world by exactly the processes that produce it here.
+
+\section{Objections and replies}
+
+\begin{objection}[Phenomenological evidence]
+Experience is our basic evidence about the world. We accept that there are colors because things look colored; we should accept that time passes because it seems to pass. To treat this seeming alone as illusory is special pleading.
+\end{objection}
+
+\begin{reply}
+The analogy fails at the point that matters. A world in which nothing reflected light differentially would not contain experiences as of color caused by surfaces; the experience of color varies with what it is evidence for. By Theorem~\ref{t:indep}, the impression of passage does not vary with passage: it is had equally where passage is absent. Our treatment is not special pleading, since any seeming that is present to the same degree whether or not its object exists is no evidence of that object.
+\end{reply}
+
+\begin{objection}[Thank goodness that's over]
+After a painful operation, one is relieved that it is over. One is not relieved that it ends before a certain date, nor that its end precedes one's utterance, since those facts were always so. The object of relief is the pastness of the pain, an A-fact \citep{Prior1959}.
+\end{objection}
+
+\begin{reply}
+The objection shows that the content of relief is tensed, not that there are changing A-facts. Tensed thoughts are indexical: the thought that the pain is over is the thought that it precedes the time of this very thought (TSM-15, TSM-18). A subject relieved at $t$ is relieved that the pain precedes $t$, under the indexical mode of presentation \enquote{now}; such contents are true or false as thought at a time, and their varying truth across times of thinking is no change in the times themselves. What the objection needs is a fact that the static theorist cannot state, and a thought content that varies with the time of thinking is not one.
+\end{reply}
+
+\begin{objection}[Passage as the direction of time]
+\citet{Maudlin2007} holds that the passage of time is the intrinsic directedness of time, the fact that time goes from past to future. Denying passage then denies that time has a direction, which physics will not allow.
+\end{objection}
+
+\begin{reply}
+If passage is identified with the asymmetry of time, then it is a B-fact: an asymmetric order among times, possibly grounded in an asymmetric distribution of matter. The static theorist affirms such an order; TSM-05 explains it. On this identification Assumption~\ref{a:requiresA} fails for Maudlin's notion, but then that notion is not flow, and Assumption~\ref{a:static} fails for it too, so it gives no ground for an impression that outruns the B-facts. A direction is not a movement along it.
+\end{reply}
+
+\begin{objection}[Becoming in branching time]
+The future is open: according to ACT-17-a, at a moment before a free choice, the sentence that it will be made lacks a truth value, and it becomes settled once the choice is made. Becoming settled is surely a kind of passage.
+\end{objection}
+
+\begin{reply}
+Settledness in ACT-17-a is relative to a moment: a sentence is settled at $m$ if it holds on every history through $m$. That the choice is unsettled at $m_1$ and settled at a later $m_2$ is a pair of facts about two moments, each of which obtains tenselessly, and the structure that contains them is a tree of moments ordered by precedence. No moment is privileged as the one at which settledness \enquote{really} stands, which is TSM-15's claim that the present is not special. What is called becoming in branching time is the variation of settledness across moments, and variation across moments is not movement of a present.
+\end{reply}
+
+\section{What the argument does not establish}
+
+The argument does not establish TSM-01; Lemma~\ref{l:nopass} and Theorem~\ref{t:main} depend on it, while Theorem~\ref{t:indep} does not. It does not decide whether the impression should be called an illusion. If its content is read as including a moving present, it is non-veridical; if, as some static theorists propose, it represents only the succession and asymmetry that experience exhibits, it is veridical and merely misdescribed by those who infer passage from it. Nor does it select among psychological accounts of the impression; Section~\ref{s:source} gives an outline, not a theory.
+
+\section{Formalization}
+
+Lemma~\ref{l:nopass}, Theorem~\ref{t:indep} and Theorem~\ref{t:main} are formalized in \nolinkurl{Philosophy/TSM/TSM_02.lean}. Worlds, passage, the changing A-series, the impression and B-duplication are primitive, and Assumptions~\ref{a:requiresA}--\ref{a:static} are axioms.
+
+\begin{lstlisting}
+theorem impression_without_passage (w : World) (hi : Impression w) :
+    ∃ v, BDup w v ∧ Impression v ∧ ¬ Passage v
+
+theorem feature_of_experience (w : World) (hi : Impression w) :
+    ¬ Passage w ∧ ∀ v, BDup w v → Impression v
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.TSM_02.impression_without_passage' depends on axioms:
+  [Philosophy.TSM_02.BDup, Philosophy.TSM_02.Impression,
+   Philosophy.TSM_02.Passage, Philosophy.TSM_02.World,
+   Philosophy.TSM_02.impression_B_fixed,
+   Philosophy.TSM_02.static_duplicate]
+'Philosophy.TSM_02.feature_of_experience' depends on axioms:
+  [Philosophy.TSM_02.A_series_incoherent, Philosophy.TSM_02.BDup,
+   Philosophy.TSM_02.Impression, Philosophy.TSM_02.Passage,
+   Philosophy.TSM_02.World, Philosophy.TSM_02.impression_B_fixed,
+   Philosophy.TSM_02.passage_requires_A]
+\end{lstlisting}
+
+The first four axioms in each list are the primitives. The substantive ones are Assumption~\ref{a:fixed} (\texttt{impression\_B\_fixed}), Assumption~\ref{a:static} (\texttt{static\_duplicate}), Assumption~\ref{a:requiresA} (\texttt{passage\_requires\_A}) and Assumption~\ref{a:incoherent} (\texttt{A\_series\_incoherent}). The check confirms the independence claim: Theorem~\ref{t:indep} does not use the conclusion of TSM-01.
+
+\section{Conclusion}
+
+Time does not flow. Passage would be the movement of presentness, which the incoherence of the A-series excludes; and, whatever passage would be, the impression of it is fixed by the B-facts about experience and would be had in a world without passage, so it is no evidence of passage. The impression is real, and introspection reports it correctly, but its source is the successive structure of experience and the asymmetry of memory and agency, not a moving present.
+
+\begin{thebibliography}{99}\small
+\bibitem[Broad(1923)]{Broad1923} Broad, C.~D. (1923). \emph{Scientific Thought}. Kegan Paul, Trench, Trubner.
+\bibitem[Markosian(1993)]{Markosian1993} Markosian, N. (1993). How fast does time pass? \emph{Philosophy and Phenomenological Research}, 53(4), 829--844.
+\bibitem[Maudlin(2007)]{Maudlin2007} Maudlin, T. (2007). \emph{The Metaphysics within Physics}. Oxford University Press.
+\bibitem[Paul(2010)]{Paul2010} Paul, L.~A. (2010). Temporal experience. \emph{The Journal of Philosophy}, 107(7), 333--359.
+\bibitem[Prior(1959)]{Prior1959} Prior, A.~N. (1959). Thank goodness that's over. \emph{Philosophy}, 34(128), 12--17.
+\bibitem[Prosser(2016)]{Prosser2016} Prosser, S. (2016). \emph{Experiencing Time}. Oxford University Press.
+\bibitem[Smart(1949)]{Smart1949} Smart, J.~J.~C. (1949). The river of time. \emph{Mind}, 58(232), 483--494.
+\bibitem[Williams(1951)]{Williams1951} Williams, D.~C. (1951). The myth of passage. \emph{The Journal of Philosophy}, 48(15), 457--472.
+\end{thebibliography}
+
+\end{document}

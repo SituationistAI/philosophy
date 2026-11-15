@@ -1,0 +1,218 @@
+\documentclass{situationist-preprint}
+
+\title{A Theory of Implicature}
+\msid{LNG-11-a}
+\msfamily{LNG-11}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mskeywords{conversational implicature; Grice; cancellability; calculability; scalar implicature; quantity; grammatical theory; exhaustification; symmetry problem; experimental pragmatics}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A speaker who says that some of the students passed is normally taken to convey that not all did, although her sentence does not entail it. Grice explained such inferences as conversational implicatures, calculable from the assumption that the speaker is cooperative and cancellable without contradiction. Both claims have been disputed: the calculability claim by theorists who hold that hearers recover implicatures by convention or by default, the cancellability claim by counterexamples, and the pragmatic derivation of scalar implicatures by grammatical theories on which a covert exhaustivity operator computes them in the syntax. We argue that implicatures are cancellable and calculable from the Gricean maxims, and that scalar implicatures are derived pragmatically. We state the derivation of scalar implicatures as two propositions, separating the speaker's lack of belief in a stronger alternative from her belief in its negation, and prove that the symmetry problem constrains the grammatical and the pragmatic theory alike. We then argue that the conditions under which scalar implicatures arise are conditions on speakers' knowledge and interests, which a grammatical theory can only reproduce by importing them, and that the embedded readings advanced in its favour are rare, contrast-dependent and pragmatically derivable.
+\end{abstract}
+
+\section{The problem}
+
+Suppose a speaker says (1).
+\begin{quote}
+(1) Some of the students passed.
+\end{quote}
+A hearer will normally take her to convey that not all of the students passed. Yet (1) does not entail this: it is true if all passed, and \enquote{Some of the students passed; in fact all of them did} is not a contradiction. \citet{Grice1975} explained inferences of this kind as conversational implicatures. A speaker implicates $q$ in saying $p$ when the hearer, presuming that she is observing the cooperative principle and the maxims of conversation, must suppose that she thinks $q$ in order to reconcile her saying $p$ with that presumption. In (1), if the speaker had believed that all passed, the maxim of Quantity (make your contribution as informative as required) would have led her to say so; she did not, so she does not believe it, and if she is in a position to know, she believes that not all passed.
+
+Grice offered two marks of conversational implicature. It is \emph{calculable}: there is an argument of the kind just given from what is said, the maxims and the context to what is implicated. And it is \emph{cancellable}: the speaker can add a clause that withdraws it without contradicting herself. Both marks have been doubted. \citet{Davis1998} argued that the maxims do not in fact generate the implicatures they are said to explain, and that hearers recover implicatures by conventions of use. \citet{Weiner2006} presented cases in which cancellation appears impossible. And a substantial programme in linguistics, beginning with \citet{Chierchia2004} and developed by \citet{Fox2007} and \citet{ChierchiaFoxSpector2012}, holds that scalar implicatures, the paradigm on which the Gricean theory was built, are not conversational implicatures at all but entailments of a covert grammatical operator.
+
+We defend three theses. Conversational implicatures are cancellable. They are calculable from the Gricean maxims. And scalar implicatures are derived pragmatically, in the way just sketched, not grammatically. The first two theses fix what implicature is; the third shows that the central case is no exception.
+
+\section{The history of the debate}\label{s:history}
+
+\emph{Grice.} The theory begins in Grice's William James Lectures, delivered in 1967 and published in part as \citet{Grice1975} and in full in \citet{Grice1989}. His aim was in part to show that the logical constants of natural language mean what their classical counterparts mean, and that divergences such as the apparent exclusivity of \enquote{or} are effects of use. His principle of method, which he called Modified Occam's Razor, is that senses are not to be multiplied beyond necessity \citep{Grice1978}.
+
+\emph{Scales.} \citet{Horn1972} noted that the expressions that give rise to quantity implicatures are ordered on scales by informativeness: $\langle$\emph{some}, \emph{all}$\rangle$, $\langle$\emph{or}, \emph{and}$\rangle$, $\langle$\emph{warm}, \emph{hot}$\rangle$, $\langle$\emph{possible}, \emph{certain}$\rangle$. Use of a weaker term implicates that the stronger does not apply. \citet{Gazdar1979} gave the first formal theory, on which scalar implicatures are added to the context unless inconsistent with it, which explains why they are defeasible. \citet{Hirschberg1985} showed that the relevant orderings are not fixed lexical scales but contextually given partial orders: \enquote{Did you get to the third chapter?}---\enquote{I read the second} implicates that the speaker did not read the third, though no lexical scale relates the two.
+
+\emph{Defaults and relevance.} \citet{Levinson2000} argued that generalized conversational implicatures, scalar ones among them, are default inferences, cancelled only when the context requires. Relevance theory \citep{SperberWilson1986} replaced the maxims with a single principle of relevance and treated many of Grice's implicatures as enrichments of what is said.
+
+\emph{The grammatical turn.} \citet{Chierchia2004} argued that scalar implicatures arise in embedded positions, for example under \enquote{every} and \enquote{think}, where the Gricean derivation, which operates on whole utterances, cannot reach them, and that they are suspended in downward-entailing contexts by the same mechanism that licenses negative polarity items. He proposed that they are computed recursively along with the compositional meaning. \citet{Fox2007} proposed that they are the effect of a covert operator, \emph{exh}, akin to \enquote{only}, which can be inserted at various points in the syntax, and used it to derive the free-choice reading of disjunction under possibility modals. \citet{ChierchiaFoxSpector2012} present the resulting theory as a whole. The main reply from the Gricean side is \citet{Geurts2010}, who argues that the embedded readings are rare and pragmatically explicable, and that the grammatical theory, to fit the data, must reintroduce the pragmatic conditions it set out to replace.
+
+\section{Framework}
+
+\begin{definition}[Conversational implicature]\label{d:imp}
+A speaker $S$ who says that $p$ \emph{conversationally implicates} that $q$ if (i) $q$ is not entailed by $p$; (ii) $S$ is presumed to be observing the cooperative principle; (iii) the supposition that $S$ thinks that $q$ is required to make her saying that $p$ consistent with this presumption; and (iv) $S$ thinks, and expects the hearer to think she thinks, that the hearer can work out that (iii) holds \citep{Grice1975}.
+\end{definition}
+
+\begin{principle}[Quantity]\label{p:quant}
+A cooperative speaker makes her contribution as informative as is required for the current purposes of the exchange, and not more informative than is required.
+\end{principle}
+
+\begin{principle}[Quality]\label{p:qual}
+A cooperative speaker says only what she believes, and only what she has adequate evidence for.
+\end{principle}
+
+We also use the maxims of Relation (be relevant) and Manner (be perspicuous, and in particular brief), as Grice stated them.
+
+\begin{definition}[Calculability]\label{d:calc}
+An implicature that $q$ is \emph{calculable} if there is an argument whose premises are (a) that $S$ said that $p$, (b) that $S$ is observing the maxims, (c) facts about the context mutually known to $S$ and the hearer, and whose conclusion is that $S$ thinks that $q$, such that the hearer could recover $q$ by that argument.
+\end{definition}
+
+\begin{definition}[Cancellability]\label{d:cancel}
+An implicature that $q$ of saying $p$ is \emph{explicitly cancellable} if $S$ can say \enquote{$p$, but not $q$} or \enquote{$p$, and I do not mean to suggest that $q$} without contradicting herself. It is \emph{contextually cancellable} if there is a context in which $S$ says that $p$ and does not implicate that $q$.
+\end{definition}
+
+\begin{definition}[Alternatives]\label{d:alt}
+The \emph{alternatives} of a sentence $\phi$ form a set $A(\phi)$ of sentences that the speaker could have uttered instead of $\phi$, no more complex than $\phi$ and equally relevant. An alternative $\psi$ is \emph{stronger} than $\phi$ if $\psi$ entails $\phi$ and $\phi$ does not entail $\psi$.
+\end{definition}
+
+\begin{assumption}[Competence]\label{a:comp}
+For a stronger alternative $\psi$ of $\phi$, the speaker is \emph{competent} with respect to $\psi$ if she either believes $\psi$ or believes its negation.
+\end{assumption}
+
+Assumption~\ref{a:comp} is a premise the hearer may or may not be entitled to on an occasion, not a universal claim. Whether it holds is a question about what the speaker knows, and the hearer answers it from the context.
+
+\section{Calculability and cancellability}
+
+\begin{lemma}\label{l:calc}
+Every conversational implicature is calculable.
+\end{lemma}
+
+\begin{proof}
+Let $S$ implicate that $q$ in saying that $p$. By Definition~\ref{d:imp}(iv), $S$ thinks that the hearer can work out that the supposition that $S$ thinks $q$ is required for consistency with the presumption that she is cooperative. To work this out is to argue from the fact that $S$ said that $p$, the presumption that she observes the cooperative principle, which the maxims make specific, and what is mutually known in the context, to the conclusion that she thinks that $q$. That argument satisfies Definition~\ref{d:calc}. So the implicature is calculable.
+\end{proof}
+
+Lemma~\ref{l:calc} is secured by Definition~\ref{d:imp}; calculability is what distinguishes conversational from conventional implicature. The substantive question, pressed by \citet{Davis1998}, is whether the inferences we count as conversational implicatures, such as that from (1) to \enquote{not all}, are in fact so calculable. Section~\ref{s:scalar} answers it for the scalar case, and Section~\ref{s:obj} answers Davis's general objection.
+
+\begin{theorem}[Cancellability]\label{t:cancel}
+Every conversational implicature is explicitly and contextually cancellable.
+\end{theorem}
+
+\begin{proof}
+\emph{Explicit.} By Definition~\ref{d:imp}(i), $p$ does not entail $q$, so \enquote{$p$ and not $q$} is consistent, and $S$ can say it without contradicting herself. \emph{Contextual.} By Lemma~\ref{l:calc}, the implicature is the conclusion of an argument one of whose premises is a fact about the context mutually known to the parties. Consider a context in which that premise fails: for a quantity implicature, one in which the stronger statement is not required for the purposes of the exchange, or the speaker is known not to be in a position to make it. In that context the argument does not go through, nothing else requires the supposition that $S$ thinks $q$, and by Definition~\ref{d:imp}(iii) $S$ does not implicate it.
+\end{proof}
+
+\citet{Weiner2006} described utterances whose implicature cannot be explicitly cancelled without making the utterance pointless or uncooperative. Such cases show that explicit cancellation can be infelicitous, not that it is contradictory; and by the second half of Theorem~\ref{t:cancel} there is a context in which the same sentence carries no such implicature. \citet{BlomeTillmann2008} defends the test against these cases on similar grounds.
+
+\section{Scalar implicature}\label{s:scalar}
+
+\begin{proposition}[Primary implicature]\label{p:primary}
+If $S$ says $\phi$, $\psi$ is a stronger alternative of $\phi$, and $S$ is presumed to observe Quantity, Quality and Manner, then $S$ does not believe $\psi$.
+\end{proposition}
+
+\begin{proof}
+Suppose $S$ believed $\psi$. Since $\psi$ is an alternative, it was available to her, no more complex and equally relevant (Definition~\ref{d:alt}); since it is stronger, it would have been more informative. By Quality she could have said it, and by Quantity and Manner she would have. She said the weaker $\phi$ instead, contrary to the presumption. So she does not believe $\psi$.
+\end{proof}
+
+\begin{proposition}[Secondary implicature]\label{p:secondary}
+If, in addition, $S$ is competent with respect to $\psi$, then $S$ believes not-$\psi$.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:comp}, she believes $\psi$ or believes not-$\psi$; by Proposition~\ref{p:primary}, she does not believe $\psi$.
+\end{proof}
+
+The two-step structure, from the primary \enquote{the speaker does not believe that all passed} to the secondary \enquote{the speaker believes that not all passed}, is due in this form to \citet{Sauerland2004}; \citet{Geurts2010} calls the move from the first to the second the epistemic step. The grammatical theory derives the secondary implicature directly, and so cannot by itself predict the cases in which only the primary one arises.
+
+\begin{proposition}[Symmetry]\label{p:sym}
+Suppose $A(\phi)$ contains two stronger alternatives $\psi_1$ and $\psi_2$ such that $\phi$ entails $\psi_1 \lor \psi_2$. Then no speaker who says $\phi$ observing Quality is competent with respect to both, and the reasoning of Propositions~\ref{p:primary} and~\ref{p:secondary} yields the primary implicature for both and the secondary implicature for at most one.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{p:primary}, $S$ believes neither $\psi_1$ nor $\psi_2$. If she were competent with respect to both, she would believe not-$\psi_1$ and not-$\psi_2$ (Proposition~\ref{p:secondary}), and since $\phi$ entails $\psi_1 \lor \psi_2$, her beliefs together would entail not-$\phi$; but by Quality she believes $\phi$. So she is not competent with respect to both, and the secondary implicature can be drawn for at most one of them, with nothing in the reasoning to select which.
+\end{proof}
+
+For (1), let $\psi_1$ be \enquote{all of the students passed} and $\psi_2$ \enquote{some but not all of the students passed}. Each entails (1), and (1) entails their disjunction. If both were alternatives, Quantity reasoning would deliver only ignorance, not the attested \enquote{not all}. This is the symmetry problem, first noted by Kroch in the early 1970s and studied systematically by \citet{Katzir2007} and \citet{FoxKatzir2011}. The problem constrains what the alternatives are, for any theory that computes implicatures by negating alternatives, and the grammatical operator \emph{exh} needs exactly the same restriction. The structural solution of \citet{Katzir2007}, which excludes alternatives more complex than the sentence uttered, is available to both; in Definition~\ref{d:alt} it is the Manner clause. The symmetry problem therefore gives neither side an advantage.
+
+\begin{theorem}[Pragmatic derivation]\label{t:prag}
+Scalar implicatures are derived pragmatically, by the reasoning of Propositions~\ref{p:primary} and~\ref{p:secondary}, and not by a grammatical operator.
+\end{theorem}
+
+\begin{proof}
+We show that the pragmatic derivation predicts the distribution of scalar implicatures, and that the grammatical theory fits that distribution only by importing the conditions on which the pragmatic derivation depends.
+
+(a) \emph{Unembedded cases.} For any unembedded use of a weak scalar term, Propositions~\ref{p:primary} and~\ref{p:secondary} derive the implicature from what is said, the maxims and the competence assumption.
+
+(b) \emph{Dependence on competence.} If the speaker is known not to be competent (\enquote{Some of the students passed; I have not seen all the results}), the secondary implicature disappears and the primary remains: the hearer concludes that the speaker does not know whether all passed. This is what Proposition~\ref{p:primary} without Assumption~\ref{a:comp} predicts. On the grammatical theory, the implicature is an entailment of an enriched sentence; to predict the ignorance reading it must make the insertion of \emph{exh} optional and conditioned on the speaker's knowledge, which is a pragmatic condition.
+
+(c) \emph{Dependence on relevance.} If the stronger alternative is not relevant to the purposes of the exchange, the implicature does not arise: a teacher who needs to know whether any student passed, to decide whether to offer a repeat course, takes \enquote{Some passed} to settle the question without implicating that not all did. Relevance enters the pragmatic derivation through Definition~\ref{d:alt}. The grammatical theory must restrict \emph{exh} to relevant alternatives \citep{ChierchiaFoxSpector2012}, which again imports a condition on the interests of the conversation.
+
+(d) \emph{Embedded cases.} The cases offered as decisive for the grammatical theory are those in which an implicature appears to be computed below an operator. For belief reports, \enquote{John thinks some students passed} receives the reading that John thinks not all did by global reasoning: the stronger alternative is \enquote{John thinks all passed}, its negation is derived by Proposition~\ref{p:secondary}, and the further step to John's believing that not all passed follows from the assumption that John is opinionated on the matter, a competence assumption about the subject \citep{Sauerland2004,Russell2006}. For universal quantifiers, the reading of \enquote{Every student read some of the books} on which every student read some but not all is, as the experimental work reported in Section~\ref{s:recent} shows, rarely obtained except in contexts that make the contrast between \enquote{some} and \enquote{all} salient for each individual, where a pragmatic narrowing of \enquote{some} is motivated by the same maxims \citep{GeurtsPouscoulous2009}. Global reasoning predicts the weaker reading, that not every student read all, which is the one usually obtained.
+
+By (a)--(d), the pragmatic derivation accounts for the data, and every condition on which the grammatical theory's predictions depend (competence, relevance, the restriction of alternatives) is a condition of the pragmatic derivation. A grammatical operator whose application is governed by the speaker's knowledge and the conversation's interests adds a mechanism without adding an explanation, and by Modified Occam's Razor we should not posit it.
+\end{proof}
+
+The argument does not claim that the grammatical theory is inconsistent with the data, only that, once fitted to the data, it explains nothing the pragmatic theory leaves unexplained; this is the shape of the argument of \citet{Geurts2010}.
+
+\section{A further case}
+
+\emph{Letters of recommendation.} Grice's testimonial for a philosophy candidate, which praises only his command of English and his regular attendance at tutorials, flouts Quantity: the writer, who is in a position to say more and is expected to, says less, and the reader concludes that she has nothing favourable to say about his philosophy. The case, analysed in the companion manuscript LNG-11-b, shows that Proposition~\ref{p:secondary} applies to non-lexical alternatives, as \citet{Hirschberg1985} argued, since \enquote{he is a good philosopher} is not a scale-mate of anything the writer said.
+
+\section{Recent work}\label{s:recent}
+
+\citet{Noveck2001} found that children accept \enquote{some} statements that are logically true but pragmatically underinformative far more often than adults, which suggests that the implicature is not part of the meaning of \enquote{some}. \citet{BottNoveck2004} found that adults who derive the implicature take longer to respond than those who do not, contrary to Levinson's default view, on which the implicature is automatic and its cancellation costly. \citet{BrehenyKatsosWilliams2006} found that the implicature is not generated in contexts in which only the lower bound is relevant, which supports Theorem~\ref{t:prag}(c). \citet{GeurtsPouscoulous2009} found embedded readings rare when the task does not make them salient.
+
+\citet{vanTieletal2016} found that the rate at which scalar implicatures are drawn varies greatly across scales, from near ceiling for $\langle$\emph{some}, \emph{all}$\rangle$ to low rates for many adjectival scales, and that the variation is predicted by factors such as the distinctness of the alternatives. Scalar diversity is what a pragmatic theory predicts, since whether a stronger alternative is salient and relevant varies with the alternative; a grammatical operator applying uniformly to scalar items does not predict it without further stipulation. Rational speech act models of recursive reasoning about speakers and listeners, with uncertainty about the lexicon, derive embedded readings in the contexts that favour them \citep{Pottsetal2016}. These models are probabilistic refinements of the Gricean derivation, not alternatives to it.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Overgeneration]\label{o:davis}
+The maxims generate too many implicatures. Saying \enquote{Some passed} is less informative than saying \enquote{Some passed and the weather is fine}, which is no less relevant to some purposes; Quantity predicts that the speaker does not believe the weather is fine. Hearers draw no such inference, so what selects the inferences they do draw is not the maxims but conventions of use \citep{Davis1998}.
+\end{objection}
+
+\begin{reply}
+The objection omits the restriction to alternatives that are no more complex and equally relevant (Definition~\ref{d:alt}). The conjunction is more complex than the sentence uttered and not relevant to the question under discussion, so it is not an alternative. What selects the inferences is the set of alternatives, and that set is determined by Manner and Relation, which are maxims. By Proposition~\ref{p:sym}, every theory needs the restriction.
+\end{reply}
+
+\begin{objection}[Embedding]\label{o:embed}
+The pragmatic theory applies to whole utterances. It cannot generate implicatures that are part of the content of an embedded clause, as in \enquote{If you take some of the cookies, you will be fine, but if you take all of them, you will be in trouble}, where the first antecedent must mean \enquote{some but not all} \citep{Chierchia2004}.
+\end{objection}
+
+\begin{reply}
+In the example, the contrast with the second conditional makes the strengthened reading of the first antecedent necessary for the utterance to be coherent: read weakly, the first conditional would imply that taking all of them is fine, contradicting the second. The narrowing of \enquote{some} is motivated by Quality and Relation, and is a pragmatic modulation of what is said in the first antecedent, recovered by the hearer from the maxims. Contrastive contexts of this kind are exactly where embedded readings are attested \citep{GeurtsPouscoulous2009}. Their derivation does not require a grammatical operator, and their restriction to such contexts is unexplained if there is one.
+\end{reply}
+
+\begin{objection}[Blindness]\label{o:blind}
+\enquote{Some Italians come from a warm country} is odd, although the stronger alternative is common knowledge and so irrelevant. Scalar implicatures are therefore computed blindly, and the oddness is the contradiction between the implicature and common knowledge. A pragmatic derivation, sensitive to relevance, cannot explain this \citep{Magri2009}.
+\end{objection}
+
+\begin{reply}
+The oddness of \enquote{Some Italians come from a warm country} is explained by a violation of Quantity and Manner: a speaker who chooses a weaker sentence when a stronger one, equally short and known to both parties to be true, was available, behaves uncooperatively, whether or not any implicature is drawn. If the implicature were computed blindly, sentences in which the stronger alternative is common knowledge and yet the weak sentence is natural would be odd as well. They are not: in a game whose instruction is to name a nationality some of whose members come from a warm country, \enquote{Some Italians come from a warm country} is an unremarkable move, because the purposes of the exchange require the weaker statement and make the stronger one irrelevant.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument concerns conversational implicature. It does not address conventional implicature, such as the contrast conveyed by \enquote{but}, which is neither cancellable nor calculable and is attached to particular words. It does not show that no grammatical process is ever involved in the interpretation of scalar terms; it shows that the scalar implicatures attested are derived pragmatically and that the grammatical operator is not needed for them.
+
+\section{Conclusion}
+
+Conversational implicatures are cancellable, because they are not entailed and because they depend on premises about the context that can fail, and calculable, because they are the conclusions of reasoning from what is said and the presumption that the speaker observes the maxims. Scalar implicatures are derived in this way: Quantity yields the primary implicature, and competence the secondary. A grammatical operator that respects the conditions on which they depend, what speakers know and what conversations need, adds a mechanism but no explanation.
+
+\begin{thebibliography}{99}\small
+\bibitem[Blome-Tillmann(2008)]{BlomeTillmann2008} Blome-Tillmann, M. (2008). Conversational implicature and the cancellability test. \emph{Analysis}, 68(2), 156--160.
+\bibitem[Bott and Noveck(2004)]{BottNoveck2004} Bott, L. and Noveck, I.~A. (2004). Some utterances are underinformative: The onset and time course of scalar inferences. \emph{Journal of Memory and Language}, 51(3), 437--457.
+\bibitem[Breheny et~al.(2006)]{BrehenyKatsosWilliams2006} Breheny, R., Katsos, N. and Williams, J. (2006). Are generalised scalar implicatures generated by default? An on-line investigation into the role of context in generating pragmatic inferences. \emph{Cognition}, 100(3), 434--463.
+\bibitem[Chierchia(2004)]{Chierchia2004} Chierchia, G. (2004). Scalar implicatures, polarity phenomena, and the syntax/pragmatics interface. In A. Belletti (ed.), \emph{Structures and Beyond}, 39--103. Oxford University Press.
+\bibitem[Chierchia et~al.(2012)]{ChierchiaFoxSpector2012} Chierchia, G., Fox, D. and Spector, B. (2012). Scalar implicature as a grammatical phenomenon. In C. Maienborn, K. von Heusinger and P. Portner (eds), \emph{Semantics: An International Handbook of Natural Language Meaning}, vol.~3, 2297--2331. De Gruyter.
+\bibitem[Davis(1998)]{Davis1998} Davis, W.~A. (1998). \emph{Implicature: Intention, Convention, and Principle in the Failure of Gricean Theory}. Cambridge University Press.
+\bibitem[Fox(2007)]{Fox2007} Fox, D. (2007). Free choice and the theory of scalar implicatures. In U. Sauerland and P. Stateva (eds), \emph{Presupposition and Implicature in Compositional Semantics}, 71--120. Palgrave Macmillan.
+\bibitem[Fox and Katzir(2011)]{FoxKatzir2011} Fox, D. and Katzir, R. (2011). On the characterization of alternatives. \emph{Natural Language Semantics}, 19(1), 87--107.
+\bibitem[Gazdar(1979)]{Gazdar1979} Gazdar, G. (1979). \emph{Pragmatics: Implicature, Presupposition, and Logical Form}. Academic Press.
+\bibitem[Geurts(2010)]{Geurts2010} Geurts, B. (2010). \emph{Quantity Implicatures}. Cambridge University Press.
+\bibitem[Geurts and Pouscoulous(2009)]{GeurtsPouscoulous2009} Geurts, B. and Pouscoulous, N. (2009). Embedded implicatures?!? \emph{Semantics and Pragmatics}, 2.
+\bibitem[Grice(1975)]{Grice1975} Grice, H.~P. (1975). Logic and conversation. In P. Cole and J.~L. Morgan (eds), \emph{Syntax and Semantics 3: Speech Acts}, 41--58. Academic Press.
+\bibitem[Grice(1978)]{Grice1978} Grice, H.~P. (1978). Further notes on logic and conversation. In P. Cole (ed.), \emph{Syntax and Semantics 9: Pragmatics}, 113--127. Academic Press.
+\bibitem[Grice(1989)]{Grice1989} Grice, H.~P. (1989). \emph{Studies in the Way of Words}. Harvard University Press.
+\bibitem[Hirschberg(1985)]{Hirschberg1985} Hirschberg, J. (1985). \emph{A Theory of Scalar Implicature}. PhD dissertation, University of Pennsylvania.
+\bibitem[Horn(1972)]{Horn1972} Horn, L.~R. (1972). \emph{On the Semantic Properties of Logical Operators in English}. PhD dissertation, University of California, Los Angeles.
+\bibitem[Katzir(2007)]{Katzir2007} Katzir, R. (2007). Structurally-defined alternatives. \emph{Linguistics and Philosophy}, 30(6), 669--690.
+\bibitem[Levinson(2000)]{Levinson2000} Levinson, S.~C. (2000). \emph{Presumptive Meanings: The Theory of Generalized Conversational Implicature}. MIT Press.
+\bibitem[Magri(2009)]{Magri2009} Magri, G. (2009). A theory of individual-level predicates based on blind mandatory scalar implicatures. \emph{Natural Language Semantics}, 17(3), 245--297.
+\bibitem[Noveck(2001)]{Noveck2001} Noveck, I.~A. (2001). When children are more logical than adults: Experimental investigations of scalar implicature. \emph{Cognition}, 78(2), 165--188.
+\bibitem[Potts et~al.(2016)]{Pottsetal2016} Potts, C., Lassiter, D., Levy, R. and Frank, M.~C. (2016). Embedded implicatures as pragmatic inferences under compositional lexical uncertainty. \emph{Journal of Semantics}, 33(4), 755--802.
+\bibitem[Russell(2006)]{Russell2006} Russell, B. (2006). Against grammatical computation of scalar implicatures. \emph{Journal of Semantics}, 23(4), 361--382.
+\bibitem[Sauerland(2004)]{Sauerland2004} Sauerland, U. (2004). Scalar implicatures in complex sentences. \emph{Linguistics and Philosophy}, 27(3), 367--391.
+\bibitem[Sperber and Wilson(1986)]{SperberWilson1986} Sperber, D. and Wilson, D. (1986). \emph{Relevance: Communication and Cognition}. Blackwell.
+\bibitem[van Tiel et~al.(2016)]{vanTieletal2016} van Tiel, B., van Miltenburg, E., Zevakhina, N. and Geurts, B. (2016). Scalar diversity. \emph{Journal of Semantics}, 33(1), 137--175.
+\bibitem[Weiner(2006)]{Weiner2006} Weiner, M. (2006). Are all conversational implicatures cancellable? \emph{Analysis}, 66(2), 127--130.
+\end{thebibliography}
+
+\end{document}

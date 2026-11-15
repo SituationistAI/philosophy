@@ -1,0 +1,59 @@
+\documentclass{situationist-preprint}
+
+\title{Mathematical Beauty: Case Studies}
+\msid{MTH-13-b}
+\msfamily{MTH-13}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{mathematical beauty; surprise; inevitability; mutilated chessboard; Zagier; proof}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-13-a argues that mathematical beauty is the combination of surprise and inevitability. We test the account on four cases not treated there: the mutilated chessboard, Gauss's summation of an arithmetic series, Zagier's one-sentence proof of Fermat's two-squares theorem, and the proof that $\sqrt{2}$ is irrational. The account predicts the verdicts mathematicians give, including the divided verdict on Zagier's proof, which surprises at once but becomes inevitable only when its involution is understood geometrically. A rival account on which beauty is simplicity or brevity gets this case wrong.
+\end{abstract}
+
+\section{The account}
+
+By Theorem~3.1 of MTH-13-a, a proof is beautiful if and only if it is disposed to give qualified observers in suitable conditions the pleasure of grasping its conclusion as both surprising and inevitable (Definitions~2.2 and~2.3). Lemmas~3.2 and~3.3 show that neither component suffices alone. \citet{Hardy1940} listed unexpectedness, inevitability and economy as the marks of a beautiful argument; the account of MTH-13-a keeps the first two and treats economy as a usual means to them. The cases below test whether the two components track the verdicts of mathematicians, and whether economy is a separate condition.
+
+\section{Cases}
+
+\paragraph{The mutilated chessboard.} Remove two diagonally opposite corners from a chessboard. Can the remaining 62 squares be covered by 31 dominoes? A qualified observer expects to settle the question by trying coverings, and the number of attempts is large. The proof observes that the removed corners have the same colour, so the board has 32 squares of one colour and 30 of the other, while every domino covers one of each. The connection between tiling and colouring is surprising; once seen, the impossibility could not have been otherwise, because it follows from a feature of the board held in view as a whole. The proof is commonly called beautiful, as the account predicts.
+
+\paragraph{Gauss's sum.} Pair the first and last terms of $1 + 2 + \dots + 100$, the second and second last, and so on: each pair sums to $101$, and there are fifty pairs. For a pupil who expects to add a hundred numbers, the route is surprising and the result inevitable. For a mathematician it is neither surprising nor, at this level, an object of admiration; it is elegant at most. The account explains the difference by the indexing of surprise to the observer's background (Definition~2.1 of MTH-13-a): the qualified observer of an elementary proof is one who knows only its elementary background, and for her the proof is beautiful.
+
+\paragraph{Zagier's proof.} \citet{Zagier1990} proved that every prime $p \equiv 1 \pmod 4$ is a sum of two squares in a single sentence: a certain involution on the finite set of solutions of $x^2 + 4yz = p$ in positive integers has exactly one fixed point, so the set has odd size, so the obvious involution swapping $y$ and $z$ also has a fixed point, which gives $p = x^2 + (2y)^2$. The proof is surprising to every qualified observer. Its verdicts are divided: some call it beautiful, many call it a trick, because the first involution is given by a piecewise formula whose origin the proof does not show. The account predicts the division. As the sentence stands, the conclusion follows by a verification of the formula, which leaves the observer unable to see why such an involution exists; there is surprise without inevitability, which by Lemma~3.2 of MTH-13-a is not beauty. When the solutions are drawn as plane figures composed of a square and four rectangles, the involution becomes a reassembly of the same figure, and the existence of exactly one fixed point becomes visible; this geometric reading is the form in which the proof is now usually presented and admired, and \citet{AignerZiegler1998} include the proof in their collection of proofs of exceptional elegance. The proof becomes beautiful when it becomes inevitable.
+
+\paragraph{The irrationality of $\sqrt{2}$.} Hardy's own example. That no ratio of integers squares to $2$ is surprising to anyone who expects that every magnitude is commensurable with unity. The proof by infinite descent shows that any such ratio could be reduced without end, which is impossible; the conclusion follows from the parity of squares, a feature held in view as a whole. The proof is surprising and inevitable, and it is a paradigm of mathematical beauty.
+
+\section{Economy}
+
+\begin{objection}
+The common feature of the beautiful cases is brevity. Beauty is economy, and surprise and inevitability are dispensable.
+\end{objection}
+
+\begin{reply}
+Zagier's proof is the shortest of the four and the one whose beauty is most disputed; its geometric version is longer and more admired. Brevity therefore does not track beauty when it costs inevitability. Economy contributes when it removes what hides the feature from which the conclusion follows, as in the chessboard, and not otherwise. This is what MTH-13-a predicts in treating simplicity as a partial version of its account.
+\end{reply}
+
+\begin{objection}
+A qualified observer familiar with all four cases is surprised by none of them, yet still finds three of them beautiful.
+\end{objection}
+
+\begin{reply}
+Beauty is a disposition to produce the response in qualified observers under suitable conditions, which include not yet being familiar with the proof. The familiar observer recognizes the disposition and can reconstruct the surprise from what the statement alone would lead one to expect, as MTH-13-a argues for Euclid's proof.
+\end{reply}
+
+\section{Conclusion}
+
+The four cases confirm that mathematicians call a proof beautiful when it is both surprising and inevitable for observers of the appropriate background, withhold the word when inevitability is missing, and grant it when inevitability is supplied. Neither brevity nor surprise alone predicts the verdicts.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aigner and Ziegler(1998)]{AignerZiegler1998} Aigner, M. and Ziegler, G.~M. (1998). \emph{Proofs from THE BOOK}. Springer.
+\bibitem[Hardy(1940)]{Hardy1940} Hardy, G.~H. (1940). \emph{A Mathematician's Apology}. Cambridge University Press.
+\bibitem[Zagier(1990)]{Zagier1990} Zagier, D. (1990). A one-sentence proof that every prime $p \equiv 1 \pmod 4$ is a sum of two squares. \emph{The American Mathematical Monthly}, 97(2), 144.
+\end{thebibliography}
+
+\end{document}

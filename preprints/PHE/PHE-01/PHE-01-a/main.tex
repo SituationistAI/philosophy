@@ -1,0 +1,315 @@
+\documentclass{situationist-preprint}
+
+\title{The Duration of the Epoché}
+\msid{PHE-01-a}
+\msfamily{PHE-01}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_01.lean}
+\mskeywords{epoché; natural attitude; phenomenological reduction; reflection; Husserl; Fink; Merleau-Ponty; habituality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can the natural attitude be suspended? Husserl presented the epoché as an act of freedom by which the general thesis of the world is put out of action, and in his last work compared its adoption to a conversion. His critics replied that the natural attitude cannot be suspended at all, or that, in Merleau-Ponty's phrasing, the reduction teaches above all that it cannot be completed. We argue for an intermediate thesis about duration: the epoché can be sustained as a reflective attitude over finite intervals, but never as a permanent state, and the natural attitude returns by default. The argument rests on three premises: that the reflective attitude persists only as long as acts of bracketing are renewed, while the natural attitude requires no act; that renewal lapses within a bounded span; and that within that span renewal is possible. From these premises, formalized in Lean, it follows that the epoché can be sustained over every sufficiently short interval, that no course of conscious life is reflective from some moment on, and that the natural attitude returns within a bounded time of any moment. We reconstruct the history of the debate from \emph{Ideas I} to Fink, Merleau-Ponty and Marion, examine the sceptic, the meditator and the habitual phenomenologist, and distinguish the impermanence of the attitude from the permanence of the capacity.
+\end{abstract}
+
+\section{The question}
+
+The phenomenological reduction begins with a suspension. In the natural attitude, Husserl writes, the world is constantly there for me as an actuality, and this standing positing of the world, the general thesis of the natural attitude, pervades every particular act of perceiving, judging and acting \citep[§§27--30]{Husserl1913}. The epoché puts this thesis out of action. It does not deny that the world exists, nor doubt it; it abstains from using its existence as a premise, so that the world can be studied as it is given \citep[§§31--32]{Husserl1913}. What the epoché opens is the field of transcendental experience, and everything in phenomenology after the \emph{Ideas} depends on its being possible.
+
+Whether it is possible has been disputed from the beginning, and the dispute has usually been framed as a question of extent: can the natural attitude be suspended completely, or only in part? We ask a related question that has received less explicit attention, the question of duration. Suppose the epoché can be performed. Can it be sustained? Can a subject enter the reflective attitude and remain in it, so that the natural attitude is not merely suspended at a moment but abolished for the rest of the subject's life? Or is the suspension something that must be renewed, and that lapses when it is not?
+
+Three answers can be distinguished. On the \emph{conversion} view, the epoché, once properly performed, transforms the subject permanently; Husserl's late comparison of the epoché to a religious conversion suggests it \citep[§35]{Husserl1954}. On the \emph{impossibility} view, the natural attitude cannot be suspended at all, because the subject who would suspend it is itself in the world and cannot step outside its own involvement; versions of this view are found in Heidegger's early criticism of the reduction and in many readings of Merleau-Ponty. On the view we defend, the epoché can be sustained as a reflective attitude, over intervals of finite length, but it cannot be sustained as a permanent state; and when it lapses, the natural attitude returns without any act being required to restore it. The natural attitude is the default, and the epoché is a departure from it that must be maintained.
+
+The thesis is partial in two senses. The suspension is partial in extent, because the act of bracketing itself is not bracketed (PHE-20, PHE-22), and it is partial in duration, because it does not last. This manuscript concerns the second sense. Section~\ref{s:history} reconstructs the history of the debate. Section~\ref{s:framework} states the framework, and Section~\ref{s:argument} the argument. Sections~\ref{s:cases} and~\ref{s:habit} examine further cases and the distinction between attitude and capacity. Section~\ref{s:recent} discusses recent literature, Section~\ref{s:objections} objections, and Section~\ref{s:formal} the formalization.
+
+\section{History of the debate}\label{s:history}
+
+\subsection{Ideas I: the epoché as an act of freedom}
+
+In the \emph{Ideas} the epoché is introduced through a modification of the Cartesian attempt at universal doubt. Descartes's doubt, Husserl observes, combines two things: an abstention from the thesis and a counter-thesis, the provisional assumption that what is doubted does not exist. The epoché retains the first and drops the second. It is a \enquote{putting out of action} or \enquote{parenthesizing} of the thesis, which remains as it was but is not used \citep[§§31--32]{Husserl1913}. Husserl emphasizes that this is within our freedom: we can perform the epoché at any time, with respect to any thesis.
+
+Two features of this presentation matter for the question of duration. First, the epoché is an act, something performed, and its result, the transcendental attitude, is an attitude that the subject adopts. Husserl speaks of a \enquote{change of attitude} and contrasts the natural attitude with the phenomenological one, but he does not say that the change, once made, is irreversible. Second, the general thesis of the natural attitude is not an act at all. It is a standing positing that pervades every act of the natural attitude, not as a judgement but as the character of actuality that the world has. The asymmetry is decisive for our argument: the reflective attitude is sustained by acts, and the natural attitude by none.
+
+\subsection{The ways to the reduction}
+
+After the \emph{Ideas} Husserl came to doubt that the Cartesian way, which reaches transcendental subjectivity in one leap by bracketing the world, was the best route. In the lectures on first philosophy of 1923--24 he explored other routes, among them the way through psychology and the way through the critique of the positive sciences, and he described the reduction as something to be worked through, not accomplished at once \citep{Husserl1959}. \citet{Kern1962} distinguished three ways to the reduction in Husserl's work, the Cartesian way, the way through intentional psychology and the way through the ontology of the life-world, and argued that the Cartesian way, though shortest, leaves the transcendental ego empty of content, because it reaches it without the detour through the world that gives it something to study. Kern's analysis already contains a point about duration. The reduction is not a state reached once but a method that must be practised, returning repeatedly to the world as natural experience presents it in order to reduce it again.
+
+\subsection{The Crisis: the epoché as vocational attitude}
+
+In the \emph{Crisis} Husserl takes up the question of duration explicitly. Discussing the epoché with respect to the objective sciences and then the life-world, he compares it to a vocational attitude \citep[§35]{Husserl1954}. A person who has a vocation, a scientist or a craftsman, devotes certain periods of time to it, and during those periods her other interests are not abolished but put aside; when the vocational time ends, she returns to them. The epoché is like this. It is a habitual attitude that one resolves to adopt at certain times, and its times are interrupted by the times of ordinary life. Husserl adds that the total phenomenological attitude, and the epoché belonging to it, is first of all destined to effect a complete personal transformation, which he compares, at the outset, to a religious conversion.
+
+These two passages pull in different directions. The comparison with the vocational attitude implies impermanence: the epoché is a stretch of a life, not the whole of it. The comparison with conversion implies permanence: a conversion changes a person for good. We take the first to describe the attitude and the second to describe the capacity, and we return to the distinction in Section~\ref{s:habit}. A converted person is not a person who is permanently in the reflective attitude, but a person for whom that attitude has become available as a standing possibility.
+
+\subsection{Fink: the phenomenologizing onlooker}
+
+Eugen Fink, Husserl's assistant from 1928, gave the most searching account of the reduction from within the Husserlian school. In his 1933 article defending Husserl against neo-Kantian criticism, Fink argued that the reduction is not a theory about the world but the discovery of the world's constitution, and that its starting point, the natural attitude, cannot be understood from within that attitude itself \citep{Fink1933}. The natural attitude is not one attitude among others that one could inspect from outside; it is the subject's captivation by the world (\emph{Weltbefangenheit}), which conceals its own status as an attitude.
+
+In the \emph{Sixth Cartesian Meditation}, written in 1932 as a continuation of Husserl's \emph{Cartesian Meditations}, Fink distinguished the constituting ego, which lives in the world and constitutes it, from the phenomenologizing onlooker, the ego that performs the reduction and observes constitution \citep{Fink1995}. The onlooker does not participate in the positing of the world; it watches. Yet the onlooker must return to the world in order to communicate what it has seen, and its statements are made in a language that belongs to the natural attitude. Fink called this the problem of the \enquote{enworlding} of phenomenologizing: transcendental results must be expressed in worldly terms, and the onlooker, in expressing them, re-enters the world it had bracketed \citep{Bruzina2004}. Fink did not draw the conclusion that the reduction is impermanent, but his analysis implies it. The onlooker exists only in the performance of the reduction, and phenomenology as a communicable discipline requires a return.
+
+\subsection{Heidegger and Sartre}
+
+Heidegger's criticism of the reduction, in the lectures of 1925 published as \emph{History of the Concept of Time}, was that Husserl's bracketing of the world abstracts from the being of the intentional, which is the being of an entity that exists in the world \citep{Heidegger1979}. The reduction, on this criticism, cannot reach what it seeks, because the being of the one who performs it is being-in-the-world. If this is right, the natural attitude cannot be suspended at all, since it is not an attitude but the way of being of the one who has attitudes. Heidegger's own method in \emph{Being and Time} retains something like a reduction, a leading back from beings to their being, but he does not describe it as a suspension.
+
+Sartre accepted the reduction but drew from it a conclusion about the ego that bears on duration. In \emph{The Transcendence of the Ego} he argued that the ego is an object in the world, constituted by reflection, and that a consistent epoché must bracket it \citep{Sartre1936}. Sartre added that the epoché is not a scholarly method performed at will but an anxiety that imposes itself on us and that we cannot avoid. On this view the reduction is neither sustained nor chosen; it occurs, and then the natural attitude, in which the ego is posited as the owner of consciousness, reasserts itself.
+
+\subsection{Merleau-Ponty: the impossibility of a complete reduction}
+
+The most influential formulation of the limits of the reduction is in the preface to Merleau-Ponty's \emph{Phenomenology of Perception}. Merleau-Ponty there reads the reduction as a slackening of the intentional threads that attach us to the world, which brings them to our notice; and he states that the most important lesson of the reduction is the impossibility of a complete reduction \citep[Preface]{MerleauPonty1945}. The reason he gives is that we are in the world, and that our reflection is carried out in the temporal flow it seeks to grasp: there is no thought that embraces all our thought.
+
+Merleau-Ponty's lesson is often taken to support the impossibility view. We think it supports ours. Merleau-Ponty does not say that the reduction is impossible; he says that it is incomplete, and he describes it as a perpetual beginning. A perpetual beginning is a reduction that is performed, that lapses, and that must be performed again: it is the reflective attitude sustained over finite intervals and returning to the natural attitude between them.
+
+\subsection{Marion: reduction and givenness}
+
+\citet{Marion1989} reconsidered the reduction as a whole. He argued that Husserl's reduction leads to objectness, Heidegger's to being, and that a third reduction, to the pure form of the call, leads to givenness itself; his maxim is that the more reduction there is, the more givenness there is. Marion's argument concerns the extent of the reduction: how much can be reduced, and what remains when it has been. It says nothing directly about duration. But Marion's description of the recipient of the call, who receives himself in receiving it \citep{Marion1997}, implies that the reduction is an event in the life of the recipient, not a condition in which the recipient permanently stands. A call is answered at a time.
+
+\subsection{The state of the debate}
+
+The positions of the debate can now be ordered by the answer they give to our question. The conversion reading of the \emph{Crisis} holds that the epoché can become permanent. Heidegger's criticism holds that it cannot occur at all. Husserl's vocational comparison, Fink's onlooker, Sartre's anxiety, Merleau-Ponty's perpetual beginning and Marion's call converge, despite their differences, on the view that the reduction is an occurrence or a practice that is performed for a time and lapses. What has been missing is an argument that this convergence is not accidental: that the structure of the epoché, as an act opposed to a default, makes its impermanence necessary.
+
+\section{Framework}\label{s:framework}
+
+We model a course of conscious life as a sequence of moments. The model is discrete for simplicity; the living present has a thickness (PHE-05), and moments in our sense may be taken as phases of that thickness.
+
+\begin{definition}[Natural attitude]\label{d:natural}
+A subject is in the \emph{natural attitude} at a moment if the general thesis of the world is in force in her experience at that moment, so that what she perceives, judges or does is posited as actual in the world.
+\end{definition}
+
+\begin{definition}[Act of bracketing]\label{d:bracket}
+An \emph{act of bracketing} is an act by which the subject puts the general thesis out of action, abstaining from using it while continuing to attend to what is given.
+\end{definition}
+
+\begin{definition}[Reflective attitude]\label{d:reflective}
+A subject is in the \emph{reflective attitude} at a moment if the general thesis is out of action in her experience at that moment.
+\end{definition}
+
+\begin{definition}[Permanence]\label{d:permanent}
+A course of conscious life is \emph{permanently reflective} from a moment $t_0$ if it is in the reflective attitude at every moment from $t_0$ on.
+\end{definition}
+
+The two attitudes are exhaustive and exclusive: at each moment the general thesis is either in force or out of action. A subject who is in neither attitude, in dreamless sleep for instance, is not in our model at that moment; we discuss the case in Section~\ref{s:cases}.
+
+\begin{assumption}[Default dynamics]\label{a:default}
+A subject is in the reflective attitude at a moment exactly when an act of bracketing was performed at the preceding moment.
+\end{assumption}
+
+Assumption~\ref{a:default} has two halves. The first, that the reflective attitude requires a preceding act of bracketing, states that the epoché is sustained by acts. It is not enough to have bracketed once; the bracketing must be renewed, or what was out of action comes back into force. This is the sense of Husserl's insistence that the epoché is a matter of freedom and of will: it is something one does, and what one does one can stop doing. The second half, that an act of bracketing suffices for the reflective attitude, states that the act is effective. Together they say that the reflective attitude persists exactly as long as it is renewed. The natural attitude, by contrast, requires no act. When no act of bracketing is performed, the general thesis is in force, because it is not a thesis that anyone posits at a moment but the standing character of actuality that the world has for a subject who lives in it. This is what we mean by saying that the natural attitude is the default.
+
+\begin{assumption}[Lapse]\label{a:lapse}
+There is a span $L$ such that, in every course of conscious life, every interval of $L+1$ consecutive moments contains a moment at which no act of bracketing is performed.
+\end{assumption}
+
+Assumption~\ref{a:lapse} states that renewal cannot be continued indefinitely. Its justification is threefold. First, an act of bracketing is an act of attention, and attention to one's own attitude is a demanding form of attention that is subject to fatigue and distraction. Second, the subject lives a life with needs, others and tasks, which call for engagement in the world as actual; the phenomenologist must eat, answer and act, and in doing these things she posits what she deals with. Third, and most fundamentally, the reflective attitude is parasitic on the natural attitude for its material. What it reflects on is the world as given in natural experience, and a reflection that never returned to natural experience would have nothing new to reflect on. Kern's account of the ways to the reduction and Fink's account of the enworlding of phenomenologizing both turn on this third point. The value of $L$ is not fixed by the argument; it may differ between subjects and be extended by training.
+
+\begin{assumption}[Capacity]\label{a:capacity}
+For every moment $t$ and every $k \le L$, some possible course of conscious life performs an act of bracketing at every moment from $t$ to $t+k-1$.
+\end{assumption}
+
+Assumption~\ref{a:capacity} states that within the span the epoché can be sustained. It is the possibility claim of the \emph{Ideas}, made precise: whenever we wish, we can perform the epoché, and we can renew it for as long as the span permits. The assumption is modal: it says what is possible for a course of life, not what any actual subject does.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:act}
+If a subject is in the reflective attitude at a moment, an act of bracketing was performed at the preceding moment.
+\end{lemma}
+
+\begin{proof}
+This is the first half of Assumption~\ref{a:default}.
+\end{proof}
+
+\begin{theorem}[Sustainability]\label{t:sustain}
+For every moment $t$ and every $k \le L$, some possible course of conscious life is in the reflective attitude at every moment from $t+1$ to $t+k$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:capacity}, some possible course of life performs an act of bracketing at every moment from $t$ to $t+k-1$. Let $u$ be a moment with $t < u \le t+k$. Then $u-1$ lies between $t$ and $t+k-1$, so an act of bracketing is performed at $u-1$, and by the second half of Assumption~\ref{a:default} the subject is in the reflective attitude at $u$.
+\end{proof}
+
+\begin{theorem}[No permanent epoché]\label{t:nopermanent}
+No course of conscious life is permanently reflective from any moment.
+\end{theorem}
+
+\begin{proof}
+Suppose a course of life is permanently reflective from $t_0$. By Assumption~\ref{a:lapse}, there is a moment $u$ with $t_0 \le u \le t_0 + L$ at which no act of bracketing is performed. Since $u+1 \ge t_0$, the subject is in the reflective attitude at $u+1$, and by Lemma~\ref{l:act} an act of bracketing was performed at $u$, a contradiction.
+\end{proof}
+
+\begin{corollary}[Return by default]\label{c:return}
+In every course of conscious life, for every moment $t$, the subject is in the natural attitude at some moment $u$ with $t < u \le t + L + 1$.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:lapse}, there is a moment $u'$ with $t \le u' \le t + L$ at which no act of bracketing is performed. By Assumption~\ref{a:default}, the subject is not in the reflective attitude at $u'+1$, and since the two attitudes are exhaustive, she is in the natural attitude at $u = u'+1$, which satisfies $t < u \le t+L+1$.
+\end{proof}
+
+\begin{theorem}[Partial and temporary]\label{t:main}
+The epoché can be sustained as a reflective attitude over every interval of at most $L$ moments; it is permanent in no course of conscious life; and the natural attitude returns within $L+1$ moments of any moment.
+\end{theorem}
+
+\begin{proof}
+By Theorems~\ref{t:sustain} and~\ref{t:nopermanent} and Corollary~\ref{c:return}.
+\end{proof}
+
+The proofs are elementary. What gives the result its content is the shape of Assumption~\ref{a:default}: an asymmetry between an attitude sustained by acts and an attitude sustained by nothing. Given that asymmetry, any bound on the renewal of acts, however generous, yields impermanence, and the return of the natural attitude needs no explanation beyond the lapse itself. The natural attitude does not have to be re-adopted, because it was never adopted in the first place.
+
+Corollary~\ref{c:return} also answers a question left open by Theorem~\ref{t:nopermanent}. One might think that a course of life could avoid permanence and yet remain reflective at all but a sparse set of moments, returning to the natural attitude ever more rarely. The corollary excludes this: the returns occur at bounded intervals, and the proportion of natural moments in any long stretch of life is at least $1/(L+1)$.
+
+\section{Further cases}\label{s:cases}
+
+\subsection{The Pyrrhonian sceptic}
+
+The ancient sceptic also practised an epoché, a suspension of judgement about how things are by nature, and Husserl took the word from that tradition. Sextus Empiricus reports that the sceptic, having suspended judgement, lives by the appearances, following the guidance of nature, the compulsion of the feelings, the laws and customs, and the teaching of the arts \citep[I.23--24]{Sextus}. The Pyrrhonian epoché may seem to be a counterexample to Theorem~\ref{t:nopermanent}, since the sceptic suspends judgement as a way of life and not for an hour.
+
+The case is not a counterexample, because the Pyrrhonian epoché is not the phenomenological one. The sceptic suspends dogmatic belief, belief about the hidden natures of things, but not the general thesis: she acts in the world, follows its customs and treats what she deals with as there. Sextus's account of the sceptic's life by appearances is precisely an account of how the sceptic remains in the natural attitude while suspending philosophical assertion. The Pyrrhonian epoché can be permanent because it suspends less. This confirms the role of Assumption~\ref{a:lapse}: what makes the phenomenological epoché impermanent is that it brackets the thesis on which acting in the world depends.
+
+\subsection{The meditator}
+
+Practices of meditation train a sustained attention to experience as it occurs, and some descriptions of advanced states suggest a continuous non-positing awareness. \citet{Depraz2003} developed a pragmatics of becoming aware that analyzes the epoché into three phases, suspension, redirection of attention from the object to the act, and letting-go into receptivity, and drew on contemplative traditions to describe how each phase can be trained. Their account bears on the value of $L$, not on its existence. Training extends the span over which renewal can be maintained, and the letting-go phase may make renewal less effortful. But the authors themselves describe the epoché as a cycle that must be re-entered, and the training they describe is a training in re-entering it. A meditator who does not eat, sleep or speak is not a counterexample but a person whose life is ending.
+
+\subsection{Sleep and the absence of an attitude}
+
+Dreamless sleep interrupts every course of conscious life, and on waking the subject finds herself in the natural attitude. The model does not represent moments without experience, but the case illustrates the default character of the natural attitude more clearly than any other. Nobody wakes in the reflective attitude; one wakes into the world. If the reflective attitude were a standing state rather than a renewed act, there would be no reason for it to be lost in sleep and not restored on waking, as dispositions, beliefs and memories are restored.
+
+\subsection{Derealization}
+
+In depersonalization and derealization, the world seems unreal, distant or dreamlike, and the patient may report that things do not seem to exist. \citet{Ratcliffe2008} has argued that these experiences are alterations of the background sense of reality, the existential feelings that frame all experience, and that they show the sense of reality to be a feeling that can be lost. One might take derealization to be a permanent suspension of the general thesis, involuntary and pathological. It is not the epoché. In derealization, the sense of reality is not put out of action but modified: the world is experienced as unreal, which is a positing of a different kind, and the experience is suffered rather than performed. The epoché neither affirms nor denies reality; derealization denies it in feeling. The case shows, rather, that the natural attitude is not a judgement but a felt background, which is why it returns without an act.
+
+\subsection{The phenomenologist at work}
+
+Consider, finally, the phenomenologist writing a description. She reflects on an experience in the reflective attitude, then writes a sentence, choosing words, correcting a typing error, attending to the page as a thing in the world; then she returns to the experience. Fink's problem of enworlding appears here in miniature. Every communicable result of phenomenology is produced by an alternation of the two attitudes, and the alternation is not a defect of execution but a condition of there being phenomenology as a discipline. Theorem~\ref{t:main} describes the rhythm of this work.
+
+\section{Attitude and capacity}\label{s:habit}
+
+The conversion passage of the \emph{Crisis} can now be given its proper place. Husserl's theory of habituality holds that every act leaves behind a lasting disposition: having judged, I hold the conviction as mine; having decided, I remain decided until I revise the decision \citep[§32]{Husserl1950}. The epoché is no exception. Having performed it, the subject acquires the ability to perform it again more easily, a sedimented familiarity with the reflective attitude and a knowledge of how to enter it.
+
+\begin{definition}\label{d:capacity}
+A subject has the \emph{capacity} for the epoché at a moment if, should she perform an act of bracketing at that moment, she would be in the reflective attitude at the next.
+\end{definition}
+
+\begin{proposition}\label{p:capacity}
+The capacity for the epoché can be possessed at every moment of a course of life, even though the reflective attitude is not.
+\end{proposition}
+
+\begin{proof}
+By the second half of Assumption~\ref{a:default}, any act of bracketing is followed by the reflective attitude, so the conditional of Definition~\ref{d:capacity} holds at every moment. Theorem~\ref{t:nopermanent} concerns the attitude, not the conditional, and is consistent with it.
+\end{proof}
+
+Proposition~\ref{p:capacity} gives the conversion its content. What is permanently transformed in the phenomenologist is not her attitude but her capacity, together with her understanding of the natural attitude as an attitude. The person who has never performed the epoché does not know that the general thesis is a thesis; the world is simply there, and nothing in it suggests that its being there is an achievement of constitution. The person who has performed it knows that the natural attitude is one attitude among the possible ones, even when she is in it. This knowledge is retained when the attitude lapses, and it changes the character of the natural attitude itself: it becomes, in Husserl's terms, a natural attitude that is understood transcendentally. The conversion is real, and it is permanent, but it is a conversion of the subject's self-understanding, not an exit from the world.
+
+The distinction also answers the impossibility view. Heidegger is right that the one who performs the reduction remains in the world, and that the natural attitude reasserts itself. But it does not follow that the reduction cannot occur. It follows that it occurs as an episode in the life of an entity in the world, and that what it leaves behind is a capacity and an understanding, not a new location outside the world.
+
+\section{Recent literature}\label{s:recent}
+
+The recent literature on the reduction has largely concerned its scope and its relation to metaphysics, but several contributions bear on duration.
+
+\citet{Zahavi2017} distinguishes the epoché, the suspension of the natural attitude, from the reduction proper, the analysis of the correlation between subjectivity and world that the epoché makes possible, and argues that Husserl's transcendental phenomenology is neither metaphysically neutral nor an idealism that denies the reality of the world. On Zahavi's account the epoché is a methodological step whose function is to make the correlation visible, and nothing in its function requires that it be maintained beyond the analysis it enables. This fits Theorem~\ref{t:main}: the epoché is sustained for as long as an analysis requires, and the results of the analysis are retained after it lapses.
+
+\citet{Crowell2001} reads Husserl and Heidegger together as investigating the space of meaning, and argues that the reduction is best understood not as a withdrawal from the world but as a shift of attention from entities to the meaning through which they are encountered. On this reading, which we find persuasive, the reflective attitude is less a separate place than a way of attending to the same world. That makes its impermanence still more natural: a way of attending can be maintained only by attending.
+
+\citet{Luft2011} examines the tension between the Cartesian way and the way through the life-world, and argues that Husserl's mature view requires both a transcendental subject that constitutes the world and a life-world in which that subject is situated. The tension Luft analyzes is a tension between the reflective and the natural attitude, and his resolution, on which the two are complementary perspectives on one subjectivity, implies that neither can permanently displace the other.
+
+\citet{Overgaard2004} argues that Husserl's and Heidegger's accounts of being-in-the-world converge more than Heidegger's criticism suggests, and that Husserl's reduction does not abstract from the subject's worldliness but thematizes it. If this is right, Heidegger's criticism does not support the impossibility view, and the remaining question is the one we have asked, not whether the reduction occurs but how long it lasts.
+
+\citet{Depraz2003}, discussed above, are the most explicit about duration. They describe the epoché as a practice with phases that must be repeated, and their practical recommendations concern how to return to it. The present manuscript gives a structural reason for the cyclical character they describe.
+
+Finally, two manuscripts in this discipline bear directly on the thesis. PHE-20 argues that the transcendental ego survives every reduction as an irreducible residue, which is what each act of reflection cannot bracket, not a persisting entity. If the residue were a persisting entity, one might expect it to keep the reflective attitude in place between acts; since it is present only in each act, it does not, and the natural attitude returns when the act lapses. PHE-22 argues that a machine can bracket everything except the bracketing itself, and that the bracketing is not given to it in reflection. The present result concerns subjects to whom the bracketing is given, and says that even for them the bracketing must be renewed.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Habit makes the attitude permanent]
+Habituality can make any act effortless. A phenomenologist trained long enough performs no act to remain in the reflective attitude; it has become her standing attitude, as the natural attitude is for others.
+\end{objection}
+
+\begin{reply}
+Habituality makes the act easier, not unnecessary. A habitually reflective subject still has to attend to her experience as given, and attention is exercised, not possessed. The analogy with the natural attitude fails at exactly this point: the natural attitude is not a habit acquired by repeated acts of positing, but the original form of experience, from which positing acts are abstracted. Even the most practised phenomenologist must deal with the world as actual when she acts in it, and Assumption~\ref{a:lapse} records this.
+\end{reply}
+
+\begin{objection}[The general thesis is also an act]
+Husserl calls the general thesis a thesis, that is, a positing. If the natural attitude is maintained by a positing, it is maintained by an act, and the asymmetry of Assumption~\ref{a:default} fails.
+\end{objection}
+
+\begin{reply}
+Husserl is explicit that the general thesis is not an articulated judgement about existence but a standing positing that belongs to every act of the natural attitude \citep[§31]{Husserl1913}. It is renewed, if one wishes to put it so, in every act of perceiving, judging and acting, but not by a separate act directed at the thesis. The epoché, by contrast, is a separate act directed at the thesis. So the natural attitude is sustained by ordinary experience as such, while the reflective attitude is sustained only by acts of a distinctive kind. The asymmetry concerns the kind of act required, and it survives the objection.
+\end{reply}
+
+\begin{objection}[Continuous time]
+Time-consciousness is continuous, not discrete. The model's moments, and the bound $L$, are artefacts of the discretization.
+\end{objection}
+
+\begin{reply}
+The discrete model is a simplification, but the result does not depend on it. In continuous time, Assumption~\ref{a:default} becomes the claim that the reflective attitude obtains at a time only if it is sustained by renewed bracketing in a neighbourhood of that time, and Assumption~\ref{a:lapse} becomes the claim that every interval of a given length contains a subinterval without renewal. The analogues of Theorem~\ref{t:nopermanent} and Corollary~\ref{c:return} follow by the same reasoning. The discrete version is presented because it can be formalized in a few lines and checked.
+\end{reply}
+
+\begin{objection}[Merleau-Ponty]
+Merleau-Ponty's point was not that the reduction lapses but that it never fully takes place: we are never wholly out of the natural attitude, even while reflecting. The thesis concerns the wrong dimension.
+\end{objection}
+
+\begin{reply}
+Merleau-Ponty's point concerns the extent of the reduction, and we accept it: the act of bracketing is not bracketed, and reflection takes place in the flow of time it reflects on (PHE-20). Our thesis concerns duration, and it is independent of the thesis about extent. But the two are connected. Because the reflective attitude is sustained by acts performed in time, the same temporal embedding that makes the reduction incomplete in extent makes it impermanent in duration. Merleau-Ponty's \enquote{perpetual beginning} names both.
+\end{reply}
+
+\begin{objection}[Begging the question]
+Assumption~\ref{a:lapse} is close to the conclusion. To assume that renewal lapses is to assume that the epoché is not permanent.
+\end{objection}
+
+\begin{reply}
+The assumption concerns acts, the conclusion concerns attitudes, and the bridge between them is Assumption~\ref{a:default}, which is the substantive phenomenological claim. A conversion theorist can grant that acts of bracketing lapse and still hold that the reflective attitude persists, if she denies that the attitude depends on renewed acts. The argument therefore identifies exactly where the conversion view must be resisted: not at the lapse of acts, which few would deny, but at the dependence of the reflective attitude on them. We have argued for that dependence from the nature of the epoché as an act of freedom and from the default character of the natural attitude.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish how long the epoché can be sustained; the span $L$ is a parameter, and it may vary with training and circumstance. It does not establish that the reflective attitude, while sustained, is complete in extent; that question is addressed by PHE-20. It does not show that phenomenological results are unreliable because they are obtained in an attitude that does not last; results are retained in the natural attitude as knowledge, as the results of any temporary inquiry are. And it does not decide between Husserlian and Heideggerian accounts of what the reduction reveals. It concerns only the temporal form of the reflective attitude: that it is an episode, renewable but not permanent, against the background of an attitude that needs no renewal.
+
+\section{Formalization}\label{s:formal}
+
+The framework and Theorem~\ref{t:main} are formalized in \nolinkurl{Philosophy/PHE/PHE_01.lean}. Attitudes are an inductive type with two constructors; possible courses of conscious life, the attitude function, the bracketing predicate and the span are primitives; and Assumptions~\ref{a:default}, \ref{a:lapse} and~\ref{a:capacity} are axioms. Lemma~\ref{l:act}, Theorems~\ref{t:sustain} and~\ref{t:nopermanent} and Corollary~\ref{c:return} are proved separately. The main theorem reads:
+
+\begin{lstlisting}
+theorem partial_and_temporary :
+    (∀ t k, k ≤ span →
+      ∃ l, ∀ u, t < u → u ≤ t + k → attitude l u = Attitude.reflective) ∧
+    (∀ l t0, ¬ PermanentFrom l t0) ∧
+    (∀ l t, ∃ u, t < u ∧ u ≤ t + span + 1 ∧ attitude l u = Attitude.natural)
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.PHE_01.partial_and_temporary' depends on axioms:
+  [propext, Quot.sound, Philosophy.PHE_01.Brackets,
+   Philosophy.PHE_01.Life, Philosophy.PHE_01.attitude,
+   Philosophy.PHE_01.capacity, Philosophy.PHE_01.default_dynamics,
+   Philosophy.PHE_01.lapse, Philosophy.PHE_01.span]
+\end{lstlisting}
+
+\noindent \texttt{propext} and \texttt{Quot.sound} belong to Lean's core logic and are used by the arithmetic tactic. \texttt{Life}, \texttt{attitude}, \texttt{Brackets} and \texttt{span} are the primitives of the model. The three remaining axioms are Assumptions~\ref{a:default}, \ref{a:lapse} and~\ref{a:capacity}. The module shows that the theorem follows from these and from nothing else. Proposition~\ref{p:capacity}, which concerns a counterfactual, is not formalized.
+
+\section{Conclusion}
+
+The natural attitude can be suspended, partially and temporarily. The reflective attitude is sustained by renewed acts of bracketing, while the natural attitude is sustained by none; renewal lapses within a bounded span, and within that span it is possible. It follows that the epoché can be sustained over finite intervals, that no course of conscious life remains in it permanently, and that the natural attitude returns by default within a bounded time. What becomes permanent in the phenomenologist is the capacity for the epoché and the understanding of the natural attitude as an attitude, not the reflective attitude itself.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bruzina(2004)]{Bruzina2004} Bruzina, R. (2004). \emph{Edmund Husserl and Eugen Fink: Beginnings and Ends in Phenomenology, 1928--1938}. Yale University Press.
+\bibitem[Crowell(2001)]{Crowell2001} Crowell, S.~G. (2001). \emph{Husserl, Heidegger, and the Space of Meaning: Paths toward Transcendental Phenomenology}. Northwestern University Press.
+\bibitem[Depraz et~al.(2003)]{Depraz2003} Depraz, N., Varela, F.~J., \& Vermersch, P. (2003). \emph{On Becoming Aware: A Pragmatics of Experiencing}. John Benjamins.
+\bibitem[Fink(1933)]{Fink1933} Fink, E. (1933). Die phänomenologische Philosophie Edmund Husserls in der gegenwärtigen Kritik. \emph{Kant-Studien}, 38, 319--383.
+\bibitem[Fink(1995)]{Fink1995} Fink, E. (1995). \emph{Sixth Cartesian Meditation: The Idea of a Transcendental Theory of Method} (R. Bruzina, Trans.). Indiana University Press. (Original work written 1932.)
+\bibitem[Heidegger(1979)]{Heidegger1979} Heidegger, M. (1979). \emph{Prolegomena zur Geschichte des Zeitbegriffs} (Gesamtausgabe 20). Klostermann. (Lectures of 1925.)
+\bibitem[Husserl(1913)]{Husserl1913} Husserl, E. (1913). \emph{Ideen zu einer reinen Phänomenologie und phänomenologischen Philosophie. Erstes Buch}. Niemeyer.
+\bibitem[Husserl(1950)]{Husserl1950} Husserl, E. (1950). \emph{Cartesianische Meditationen und Pariser Vorträge} (Husserliana I, S. Strasser, Ed.). Nijhoff.
+\bibitem[Husserl(1954)]{Husserl1954} Husserl, E. (1954). \emph{Die Krisis der europäischen Wissenschaften und die transzendentale Phänomenologie} (Husserliana VI, W. Biemel, Ed.). Nijhoff.
+\bibitem[Husserl(1959)]{Husserl1959} Husserl, E. (1959). \emph{Erste Philosophie (1923/24). Zweiter Teil: Theorie der phänomenologischen Reduktion} (Husserliana VIII, R. Boehm, Ed.). Nijhoff.
+\bibitem[Kern(1962)]{Kern1962} Kern, I. (1962). Die drei Wege zur transzendental-phänomenologischen Reduktion in der Philosophie Edmund Husserls. \emph{Tijdschrift voor Filosofie}, 24, 303--349.
+\bibitem[Luft(2011)]{Luft2011} Luft, S. (2011). \emph{Subjectivity and Lifeworld in Transcendental Phenomenology}. Northwestern University Press.
+\bibitem[Marion(1989)]{Marion1989} Marion, J.-L. (1989). \emph{Réduction et donation: recherches sur Husserl, Heidegger et la phénoménologie}. Presses Universitaires de France.
+\bibitem[Marion(1997)]{Marion1997} Marion, J.-L. (1997). \emph{Étant donné: essai d'une phénoménologie de la donation}. Presses Universitaires de France.
+\bibitem[Merleau-Ponty(1945)]{MerleauPonty1945} Merleau-Ponty, M. (1945). \emph{Phénoménologie de la perception}. Gallimard.
+\bibitem[Overgaard(2004)]{Overgaard2004} Overgaard, S. (2004). \emph{Husserl and Heidegger on Being in the World}. Kluwer.
+\bibitem[Ratcliffe(2008)]{Ratcliffe2008} Ratcliffe, M. (2008). \emph{Feelings of Being: Phenomenology, Psychiatry and the Sense of Reality}. Oxford University Press.
+\bibitem[Sartre(1936)]{Sartre1936} Sartre, J.-P. (1936). La transcendance de l'Ego: esquisse d'une description phénoménologique. \emph{Recherches philosophiques}, 6, 85--123.
+\bibitem[Sextus Empiricus(c.~200)]{Sextus} Sextus Empiricus (c.~200). \emph{Outlines of Pyrrhonism}.
+\bibitem[Zahavi(2017)]{Zahavi2017} Zahavi, D. (2017). \emph{Husserl's Legacy: Phenomenology, Metaphysics, and Transcendental Philosophy}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

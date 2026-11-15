@@ -1,0 +1,349 @@
+\documentclass{situationist-preprint}
+
+\title{Causation as Counterfactual Dependence Plus Normality}
+\msid{MET-04-a}
+\msfamily{MET-04}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_04.lean}
+\mskeywords{causation; counterfactual dependence; structural equations; preemption; omissions; normality; defaults; actual causation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Counterfactual theories of causation hold that a cause is something on which its effect depends. They face two families of counterexample. Preemption and overdetermination show that dependence is not necessary for causation; omissions and background conditions show that dependence is too permissive, since the effect depends on indefinitely many things that no one counts as its causes. We argue that a cause is a counterfactual difference-maker selected by norms of normality: causation is dependence plus default. Working in structural-equation models with Boolean variables, we define a normal difference-maker as a minimal set of variables on whose values the effect depends, holding fixed some other variables at their actual values, in a witness world that is no less normal than the actual world. We prove that every cause so defined is a de facto difference-maker, and that no variable at its default value is a cause or part of one. We then show that the definition delivers the accepted verdicts in late preemption, symmetric overdetermination, omission, norm violation, bogus prevention and switching, and that neither of its two clauses can be dropped. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+When a match is struck and lights, the striking is a cause of the lighting; the presence of oxygen, the dryness of the match and the absence of a strong wind are not ordinarily counted among its causes, although the lighting depends on each of them. When Suzy and Billy both throw rocks at a bottle and Suzy's rock arrives first, Suzy's throw is a cause of the shattering and Billy's is not, although the shattering would have occurred had Suzy not thrown. A theory of causation must say what a cause is, and these two facts set the terms for any answer. The first shows that dependence is not sufficient for being counted a cause; the second shows that it is not necessary.
+
+We defend an answer with two components. The first is counterfactual: a cause is a difference-maker, something whose alteration, with suitable other things held fixed, would have altered the effect. The second is normative in a broad sense: among the difference-makers, causes are those whose alteration returns the world towards what is normal, as fixed by statistical, prescriptive or functional norms. In a slogan, causation is dependence plus default. The account belongs to a programme developed in the structural-equations literature, above all by \citet{Hitchcock2007}, \citet{HitchcockKnobe2009}, \citet{HalpernHitchcock2015} and \citet{Halpern2016}. Our contribution is a compact statement of the account, a proof of two general properties that explain why it works, a verification that it gives the right verdicts across the standard cases, and a defence of the claim that the normative component belongs to the concept of a cause rather than to the pragmatics of causal talk.
+
+\subsection{A short history of the problem}\label{s:history}
+
+\citet[\S VII]{HumeEnquiry} gave two definitions of a cause. The first is a regularity: an object followed by another, where all objects similar to the first are followed by objects similar to the second. The second, which Hume presented as equivalent, is counterfactual: where, if the first object had not been, the second never had existed. The regularity tradition dominated for two centuries. \citet[III.v.3]{Mill1843} drew from it a conclusion that is the background of our problem. The cause of an event, philosophically speaking, is the sum total of its positive and negative conditions; when we single out one condition as \enquote{the} cause, we make a selection that has no scientific basis and is guided by what is interesting or unexpected. Mill thus separated the metaphysics of causation, which concerns complete sets of conditions, from the selection of causes among conditions, which he thought capricious.
+
+\citet{Mackie1965} refined the regularity view. A cause is an INUS condition: an insufficient but non-redundant part of an unnecessary but sufficient condition for the effect. The striking of the match is such a part of one minimally sufficient set of conditions, which includes oxygen and dryness. Mackie also introduced the \emph{causal field}, the background against which a causal question is posed: oxygen belongs to the field when we ask why the match lit, and so is not a candidate cause. The causal field is the first explicit appearance of defaults in the theory of causation, but Mackie treated it as a feature of the question rather than of the relation. The INUS account was defeated by cases of common causes and preemption: the fall of a barometer is an INUS condition of the storm, given the pressure drop that causes both, and Billy's throw is an INUS condition of the shattering, being part of a sufficient set (his throw, a clear path, a fragile bottle) that would have sufficed had Suzy not thrown.
+
+\citet{Lewis1973} revived Hume's second definition. An event $e$ depends causally on a distinct event $c$ if, had $c$ not occurred, $e$ would not have occurred; causation is the ancestral of causal dependence, so that a chain of dependences is a chain of causes even when the end does not depend on the beginning. The ancestral handles early preemption, in which the preempted process is cut off before the effect: if Billy would have thrown only had Suzy not, the shattering depends on Suzy's rock in flight, which depends on her throw. It fails for late preemption, in which the preempted process is cut off only by the effect itself: Billy's rock is in flight and would have shattered the bottle a moment later, so that at no stage does the shattering depend on Suzy's process. It also fails for symmetric overdetermination, where it counts neither throw a cause. \citet{Lewis1986Postscripts} tried quasi-dependence, and \citet{Lewis2000} replaced dependence of whether $e$ occurs with influence, the pattern of dependence of when, where and how $e$ occurs on alterations of $c$. Influence handles late preemption and trumping \citep{Schaffer2000}, but it counts too much: small influences, such as the gravitational pull of a bystander on the rock, become causes. \citet{Hall2004} concluded that there are two concepts of causation, production and dependence, and that the counterfactual analysis captures only the second. On Hall's view, omissions and double prevention are causes only in the dependence sense, and late preemption is captured only by production.
+
+The structural-equations approach, due to \citet{Pearl2000} and developed by \citet{Hitchcock2001}, \citet{Woodward2003} and \citet{HalpernPearl2005}, replaced counterfactuals between events with interventions on variables in a model. Its central idea for preemption is \citet{Yablo2002}'s \emph{de facto dependence}: the shattering does not depend on Suzy's throw simpliciter, but it does depend on it when we hold fixed, at its actual value, the fact that Billy's rock did not hit. \citet{Hitchcock2001} formulated this as dependence along an active route with off-route variables held at their actual values, and \citet{HalpernPearl2005} as a definition with a contingency clause. \citet{Halpern2015} later simplified the definition so that contingencies may only hold variables at their actual values, which is the version we adopt.
+
+The structural approach solved preemption and met two new problems. The first is the problem of profligate omissions, which it shares with every dependence theory: the death of a plant that no one watered depends on the gardener's failure to water and equally on the Queen's \citep{Beebee2004,McGrath2005,Thomson2003}. The second is the problem of isomorphism \citep{Hall2007,Hitchcock2007}: structurally identical models, with the same equations and the same actual values, sometimes receive different causal verdicts. Bogus prevention, in which a bodyguard gives an antidote against a poison that an assassin has decided not to administer, is structurally like a case of genuine joint causation; yet no one thinks the antidote caused the victim's survival. Since the structure is the same, something outside the structure must distinguish the cases. \citet{Menzies2004}, \citet{Hitchcock2007}, \citet{Halpern2008} and \citet{HalpernHitchcock2015} proposed that the difference lies in what is normal: the assassin's not poisoning is the default, and a contingency in which he poisons is a departure from it. Empirical work by \citet{KnobeFraser2008}, \citet{HitchcockKnobe2009}, \citet{Kominsky2015} and \citet{Icard2017} found that ordinary causal judgment is sensitive to statistical and prescriptive norms in just the way such proposals predict.
+
+The history therefore leaves two components in place, each introduced to meet a definite class of counterexample. Dependence, refined as de facto dependence, handles preemption. Normality handles omissions, background conditions and isomorphism. What remains is to state the combination exactly, to show that each component is needed, and to answer the charge that the second belongs to pragmatics rather than to metaphysics.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Causal model]\label{d:model}
+A \emph{causal model} consists of finitely many Boolean variables $V_0, \dots, V_{n-1}$, numbered so that each variable depends only on variables earlier in the order, together with a \emph{structural equation} for each variable that fixes its value as a function of the values of earlier variables. Variables whose equations are constant are \emph{exogenous}; their values form the context.
+\end{definition}
+
+A variable represents a determinable whose values are the alternatives that the model treats as serious: whether Suzy throws, whether the gardener waters. The restriction to Boolean variables is for simplicity; nothing in what follows depends on it. Acyclicity guarantees that every assignment to the exogenous variables, and every intervention, determines a unique solution.
+
+\begin{definition}[Interventions and solutions]\label{d:solution}
+An \emph{intervention} sets some variables to specified values and leaves the others to their equations. The \emph{solution} under an intervention assigns to each variable, in order, its specified value if the intervention sets it, and otherwise the value given by its equation. The \emph{actual world} is the solution under the null intervention.
+\end{definition}
+
+\begin{definition}[Witness world]\label{d:witness}
+Let $C$ and $H$ be sets of variables. The \emph{witness world} for $(C, H)$ is the solution under the intervention that sets every variable in $C$ to its non-actual value and every variable in $H \setminus C$ to its actual value.
+\end{definition}
+
+The variables in $H$ are those held fixed. Holding a variable fixed at its actual value is the formal counterpart of Yablo's de facto dependence: we ask what would have happened to the effect, had the candidate been different, in circumstances that match the actual ones in respect of $H$.
+
+\begin{definition}[Defaults]\label{d:default}
+Some variables carry a \emph{default}, a value fixed by a norm. The norm may be \emph{statistical} (what usually happens), \emph{prescriptive} (what is required by a moral, legal or institutional rule), or \emph{functional} (what a mechanism or organism does when working as it should). A variable whose actual value differs from its default is a \emph{deviation}.
+\end{definition}
+
+Defaults attach to variables, not to worlds, and they need not attach to every variable. In the models below, the variables that carry defaults are those corresponding to actions, omissions and standing conditions; derived variables, such as whether the bottle shatters, carry none. The three kinds of norm are those identified by \citet{HitchcockKnobe2009} and \citet{HalpernHitchcock2015}; we treat them together because the role they play in the account is the same, and we discuss in Section~\ref{s:objections} whether this is legitimate.
+
+\begin{definition}[Comparative normality]\label{d:normal}
+A world $w$ is \emph{at least as normal as} a world $v$ if, for every variable that carries a default, $w$ takes the default value wherever $v$ does.
+\end{definition}
+
+Definition~\ref{d:normal} gives a partial order, not a ranking: two worlds that deviate on different variables are incomparable. This is deliberate. A total ranking would require weighing one departure from a norm against another, and the account does not need such weights. It follows from the definition that a world that adds a deviation to the actual world, and removes none, is less normal than it, and that a world that removes deviations and adds none is more normal.
+
+\begin{definition}[De facto difference-maker]\label{d:df}
+A non-empty set $C$ of variables is a \emph{de facto difference-maker} for the actual value of a variable $Y$ if there is a set $H$ such that $Y$ takes a non-actual value in the witness world for $(C, H)$, and no non-empty proper subset of $C$ has this property.
+\end{definition}
+
+\begin{definition}[Normal difference-maker]\label{d:ndm}
+A non-empty set $C$ of variables is a \emph{normal difference-maker} for the actual value of $Y$ if there is a set $H$ such that $Y$ takes a non-actual value in the witness world for $(C, H)$ and that witness world is at least as normal as the actual world; and no non-empty proper subset of $C$ has this property.
+\end{definition}
+
+Definition~\ref{d:df} is the modified Halpern--Pearl definition of actual causation \citep{Halpern2015}, stated for Boolean variables; Definition~\ref{d:ndm} adds the normality condition of \citet[\S 3.2]{Halpern2016}. We speak of a single variable $X$ as a difference-maker when $\{X\}$ is one, and of $X$ as \emph{part} of a difference-maker when it belongs to a set that is one.
+
+\begin{principle}[Dependence]\label{p:dep}
+If the actual values of the variables in $C$ are a cause of the actual value of $Y$, then $C$ is a normal difference-maker for $Y$.
+\end{principle}
+
+\begin{principle}[Default]\label{p:def}
+If $C$ is a normal difference-maker for the actual value of $Y$ in an apt model, then the actual values of the variables in $C$ are a cause of the actual value of $Y$.
+\end{principle}
+
+Together, Principles~\ref{p:dep} and~\ref{p:def} state the thesis of this manuscript: a cause is a counterfactual difference-maker selected by norms of normality. The names record which component each principle chiefly secures: Principle~\ref{p:dep} says that nothing is a cause that does not make a difference, and Principle~\ref{p:def} says that every difference-maker that survives the selection by defaults is a cause.
+
+\begin{assumption}[Aptness]\label{a:apt}
+The models to which the principles are applied are apt: their variables represent distinct, independently manipulable features of the situation; every combination of values that an intervention can produce is a serious possibility; the equations are correct of the situation; and the defaults are fixed by norms that actually hold in it.
+\end{assumption}
+
+Assumption~\ref{a:apt} collects conditions discussed by \citet{HalpernHitchcock2010} and \citet[ch.~4]{Halpern2016}. It does not reduce aptness to anything else, and we do not claim that it can be so reduced; Section~\ref{s:limits} returns to the point.
+
+\section{The argument}\label{s:argument}
+
+We first prove two general properties of the account, and then verify its verdicts in the standard cases.
+
+\begin{lemma}\label{l:dep}
+Every cause is a de facto difference-maker: if the actual values of the variables in $C$ are a cause of the actual value of $Y$, then there is a set $H$ such that $Y$ takes a non-actual value in the witness world for $(C, H)$.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:dep}, $C$ is a normal difference-maker for $Y$. By Definition~\ref{d:ndm}, there is a set $H$ whose witness world gives $Y$ a non-actual value, and is in addition at least as normal as the actual world. Dropping the second conjunct gives the claim.
+\end{proof}
+
+Lemma~\ref{l:dep} records the sense in which the normality clause only selects. It never makes a cause of something on which the effect does not depend, even de facto; it only removes difference-makers from the list.
+
+\begin{lemma}[Defaults are conditions]\label{l:default}
+If a variable $X$ carries a default and its actual value is the default, then $X$ is neither a cause nor part of a cause of the actual value of any variable.
+\end{lemma}
+
+\begin{proof}
+Suppose $X$ belongs to a set $C$ that is a cause of the actual value of $Y$. By Principle~\ref{p:dep}, $C$ is a normal difference-maker for $Y$, so for some $H$ the witness world for $(C, H)$ is at least as normal as the actual world. In that witness world, $X$ is set to its non-actual value, since $X \in C$ (Definition~\ref{d:witness}); and its non-actual value is not its default, since its actual value is. So the witness world departs from the default at $X$, while the actual world does not. By Definition~\ref{d:normal}, the witness world is not at least as normal as the actual world, a contradiction.
+\end{proof}
+
+Lemma~\ref{l:default} is the formal content of Mill's distinction between causes and conditions, and of Mackie's causal field. Oxygen in the room where a match is struck is at its default (it is normally present), and so it is not a cause of the lighting, although the lighting depends on it. The lemma also shows that the selection made by norms is not capricious, as Mill thought, but systematic: a difference-maker is selected as a cause when its alteration towards the non-actual would move the world in the direction of the norms, or at least not against them. A default-valued condition cannot be so altered.
+
+We now verify the account in six models. Each model is described by its variables, its equations and its defaults; the verdicts follow from Definition~\ref{d:ndm} by checking every set of variables and every set of variables held fixed, and are proved by exhaustive verification in the formalization (Section~\ref{s:formal}).
+
+\paragraph{Late preemption.} Variables: $\mathit{ST}$ (Suzy throws), $\mathit{BT}$ (Billy throws), $\mathit{SH}$ (Suzy's rock hits), $\mathit{BH}$ (Billy's rock hits), $\mathit{BS}$ (the bottle shatters). Equations: $\mathit{ST} = \mathit{BT} = 1$; $\mathit{SH} = \mathit{ST}$; $\mathit{BH} = \mathit{BT} \wedge \neg\mathit{SH}$; $\mathit{BS} = \mathit{SH} \vee \mathit{BH}$. Defaults: throwing rocks at bottles is a deviation, so $\mathit{ST}$ and $\mathit{BT}$ have default $0$. This is the model of \citet{HalpernPearl2005}, in which the dependence of $\mathit{BH}$ on $\mathit{SH}$ records that Billy's rock arrives too late.
+
+\begin{theorem}[Preemption]\label{t:preempt}
+In the late preemption model, Suzy's throw is a cause of the shattering, and Billy's throw is neither a cause nor part of a cause of it.
+\end{theorem}
+
+\begin{proof}
+Take $C = \{\mathit{ST}\}$ and $H = \{\mathit{BH}\}$. In the witness world Suzy does not throw, her rock does not hit, Billy's rock is held at its actual value of not hitting, and the bottle does not shatter. The witness world removes a deviation (Suzy's throw) and adds none, so it is more normal than the actual world. No proper non-empty subset of $\{\mathit{ST}\}$ exists, so $\{\mathit{ST}\}$ is a normal difference-maker, and a cause by Principle~\ref{p:def}. For Billy, any set containing $\mathit{BT}$ either leaves $\mathit{ST}$ alone, in which case Suzy's rock still hits and the bottle still shatters, or also sets $\mathit{ST}$ to $0$, in which case the witness world for $\{\mathit{ST}, \mathit{BT}\}$ falsifies $\mathit{BS}$ but the set is not minimal, since $\{\mathit{ST}\}$ already does so with $\mathit{BH}$ held fixed. Sets that include derived variables are handled in the same way, and the exhaustive check confirms that no set containing $\mathit{BT}$ is a normal difference-maker. By Principle~\ref{p:dep}, Billy's throw is not part of a cause.
+\end{proof}
+
+\paragraph{Symmetric overdetermination.} Variables $\mathit{ST}$, $\mathit{BT}$ and $\mathit{BS}$, with $\mathit{BS} = \mathit{ST} \vee \mathit{BT}$ and both rocks arriving together; both throws have default $0$.
+
+\begin{theorem}[Overdetermination]\label{t:over}
+In the overdetermination model, neither throw alone is a cause of the shattering; the two throws together are a cause, and each throw is part of a cause.
+\end{theorem}
+
+\begin{proof}
+Setting $\mathit{ST}$ to $0$ while $\mathit{BT}$ is held at its actual value $1$ leaves $\mathit{BS} = 1$, and since $\mathit{BT}$ is exogenous, it is $1$ whether or not it is held; so $\{\mathit{ST}\}$ is not a difference-maker, and by symmetry neither is $\{\mathit{BT}\}$. Setting both to $0$ gives $\mathit{BS} = 0$ in a witness world that removes two deviations and adds none. Since neither singleton qualifies, the pair is minimal, and so a normal difference-maker and a cause by Principle~\ref{p:def}.
+\end{proof}
+
+Theorem~\ref{t:over} classifies each overdeterminer as part of a cause rather than a cause. We regard this as correct. Judgements about symmetric overdetermination are notoriously unstable \citep[ch.~3]{PaulHall2013}, and the classification explains why: each throw is involved in the causing of the shattering, as the joint cause's constituent, but neither is one on which the shattering depends even de facto. What we say about a firing squad, that each member contributed to the death, is the judgement that each member is part of a cause.
+
+\paragraph{Omission.} Variables: $\mathit{GW}$ (the gardener waters), $\mathit{QW}$ (the Queen waters), $D$ (the plant dies), with $D = \neg\mathit{GW} \wedge \neg\mathit{QW}$ and actual values $\mathit{GW} = \mathit{QW} = 0$. Defaults: the gardener is supposed to water, so $\mathit{GW}$ has default $1$; the Queen is not, so $\mathit{QW}$ has default $0$. The case is due to \citet{Beebee2004} and \citet{McGrath2005}.
+
+\begin{theorem}[Omission]\label{t:omission}
+In the gardener model, the gardener's failure to water is a cause of the plant's death, and the Queen's failure to water is neither a cause nor part of a cause of it.
+\end{theorem}
+
+\begin{proof}
+The witness world for $\{\mathit{GW}\}$, with nothing held fixed, has the gardener watering and the plant surviving. It restores the gardener's default and changes nothing else that carries a default, so it is more normal than the actual world, and $\{\mathit{GW}\}$ is a normal difference-maker. The Queen's not watering is at its default, so by Lemma~\ref{l:default} it is neither a cause nor part of a cause.
+\end{proof}
+
+\paragraph{Norm violation, bogus prevention and switching.} In the pen case of \citet{KnobeFraser2008}, faculty members are forbidden to take pens from the department office and administrative assistants are allowed to; one morning a professor and an assistant each take a pen, and the receptionist is left without one. Variables $P$ (the professor takes a pen, default $0$), $A$ (the assistant takes a pen, default $1$) and $R$ (the receptionist is left without a pen), with $R = P \wedge A$. In bogus prevention, the assassin does not poison the victim's coffee ($\mathit{AP} = 0$, default $0$), the bodyguard puts an antidote in it ($\mathit{BA} = 1$, no default), and the victim survives ($S = \neg \mathit{AP} \vee \mathit{BA}$). In the switch case of \citet{Hall2000}, a train approaches a junction; the switch is flipped ($F = 1$), the train takes the left-hand track ($T = F$), and arrives ($\mathit{AR}$), since both tracks lead to the station.
+
+\begin{theorem}[Further verdicts]\label{t:further}
+\begin{enumerate}
+\item In the pen case, the professor's taking a pen is a cause of the receptionist's lack, and the assistant's taking a pen is neither a cause nor part of a cause.
+\item In bogus prevention, the antidote is neither a cause nor part of a cause of the victim's survival.
+\item In the switch case, flipping the switch is neither a cause nor part of a cause of the train's arrival.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) The witness world for $\{P\}$ removes the professor's deviation and has the receptionist with a pen. The assistant's action is at its default, so Lemma~\ref{l:default} applies to it. (2) The survival does not depend on the antidote, whatever is held fixed, since the assassin does not poison. The only set containing $\mathit{BA}$ on which survival depends is $\{\mathit{AP}, \mathit{BA}\}$, whose witness world has the assassin poisoning, a deviation absent from the actual world; so it is not a normal difference-maker. (3) The arrival takes the same value whichever track the train takes, so no set containing $F$ makes a difference to it, holding fixed whatever one likes.
+\end{proof}
+
+The model of the switch case requires comment. If the train's route is represented by two variables, one for each track, holding fixed that the train is not on the right-hand track makes the arrival depend on the switch. Such a model is not apt: the two track variables are not independently manipulable, since the combinations they allow include the train's being on neither track, which is not a serious possibility in the case as described \citep{HalpernHitchcock2010}. Representing the route by a single variable, as we do, respects Assumption~\ref{a:apt}.
+
+It remains to show that each of the two components is needed.
+
+\begin{proposition}[Dependence does not select]\label{p:depalone}
+On the dependence clause alone (Definition~\ref{d:df}), the gardener's and the Queen's omissions are both difference-makers for the death; the professor's and the assistant's takings are both difference-makers for the receptionist's lack; and the antidote in bogus prevention, and the request in the petition model of Section~\ref{s:consequences}, are each part of a difference-maker.
+\end{proposition}
+
+\begin{proof}
+In the gardener model, setting either $\mathit{GW}$ or $\mathit{QW}$ to $1$ saves the plant, and no smaller set does so. In the pen case, setting either $P$ or $A$ to $0$ leaves the receptionist a pen. In bogus prevention, the pair $\{\mathit{AP}, \mathit{BA}\}$ makes a difference to survival and neither member does by itself. The petition model is treated in Proposition~\ref{p:petition}.
+\end{proof}
+
+\begin{proposition}[Default does not select]\label{p:defalone}
+In the late preemption model, Billy's throw is a deviation, as Suzy's is, and is nonetheless neither a cause nor part of a cause of the shattering.
+\end{proposition}
+
+\begin{proof}
+Billy's throw has default $0$ and actual value $1$; the rest is Theorem~\ref{t:preempt}.
+\end{proof}
+
+\begin{corollary}[Dependence plus default]\label{c:both}
+Neither clause of Definition~\ref{d:ndm} is redundant. An account of causes as de facto difference-makers overgenerates in omission, norm-violation and bogus-prevention cases; an account of causes as deviations from defaults overgenerates in preemption.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{p:depalone}, the dependence clause alone counts the Queen, the assistant and the antidote, which Theorems~\ref{t:omission} and~\ref{t:further} exclude. By Proposition~\ref{p:defalone}, any account that counts deviations upstream of an effect as causes counts Billy's throw, which Theorem~\ref{t:preempt} excludes.
+\end{proof}
+
+\subsection{Formalization}\label{s:formal}
+
+Definitions~\ref{d:model}--\ref{d:ndm}, Principles~\ref{p:dep} and~\ref{p:def}, Lemmas~\ref{l:dep} and~\ref{l:default}, Theorems~\ref{t:preempt}--\ref{t:further}, Propositions~\ref{p:depalone} and~\ref{p:defalone}, and Proposition~\ref{p:petition} below are formalized in \nolinkurl{Philosophy/MET/MET_04.lean}. A model is a structure with a number of variables, an equation for each variable reading the values of earlier variables, and an optional default for each variable; sets of variables are coded as bit masks, so that the quantifiers over sets in Definitions~\ref{d:df} and~\ref{d:ndm} range over finitely many cases and are decided by computation. The relation of causation is a primitive, \texttt{Causes M c y}, and Principles~\ref{p:dep} and~\ref{p:def} are axioms relating it to the computable predicate \texttt{normalMakerB}. Lemma~\ref{l:default} and Theorem~\ref{t:preempt} are stated as follows.
+
+\begin{lstlisting}
+theorem lemma_3_2 (M : Model) (x y : Nat) (hx : x < M.n)
+    (hd : M.norm x = some (actual M x)) : ¬ PartOfCause M x y
+
+theorem theorem_3_3 :
+    Causes preemption (single 0) 4 ∧ ¬ PartOfCause preemption 1 4
+\end{lstlisting}
+
+The checker reports the following axioms for Theorem~\ref{t:preempt}:
+
+\begin{lstlisting}
+'Philosophy.MET_04.theorem_3_3' depends on axioms: [propext,
+ Quot.sound, Philosophy.MET_04.Causes,
+ Philosophy.MET_04.principle_P1, Philosophy.MET_04.principle_P2]
+\end{lstlisting}
+
+\texttt{propext} and \texttt{Quot.sound} belong to Lean's core logic. \texttt{Causes} is the primitive causal relation, and \texttt{principle\_P1} and \texttt{principle\_P2} are Principles~\ref{p:dep} and~\ref{p:def}. Lemma~\ref{l:default} depends only on \texttt{Causes} and \texttt{principle\_P1}, as its prose proof does. Assumption~\ref{a:apt} is not an axiom of the module: it is a condition under which the principles are claimed to hold, and the formalization takes the six models as given. What the formalization verifies is that, if the principles hold of these models, the verdicts follow; and that the general Lemmas~\ref{l:dep} and~\ref{l:default} hold of every model.
+
+\section{Further cases}\label{s:cases}
+
+The account should be tested beyond the six models. We consider five further kinds of case that have shaped the literature, and say how the principles apply.
+
+\paragraph{Early preemption.} Billy will throw only if Suzy does not; Suzy throws, and Billy, seeing this, holds back. Here $\mathit{BT} = \neg \mathit{ST}$ and $\mathit{BS} = \mathit{ST} \vee \mathit{BT}$. Holding $\mathit{BT}$ fixed at its actual value $0$, the shattering depends on Suzy's throw, in a witness world that removes her deviation. Billy's not throwing is at its default, so by Lemma~\ref{l:default} it is not a cause. The case is easier than late preemption for every dependence theory, and the account handles it in the same way as Lewis's ancestral.
+
+\paragraph{Trumping.} A major and a sergeant both shout \enquote{Advance!}; the soldiers obey the major, whose orders trump the sergeant's \citep{Schaffer2000}. Whether the sergeant's order is a cause depends on how the case is modelled. If the soldiers' action is represented as a three-valued variable whose value is fixed by the highest-ranking order given, holding fixed the major's order makes the action independent of the sergeant's, and the sergeant is not a cause. If the model only records whether some order to advance was given, the case collapses into symmetric overdetermination. We take the first model to be apt, because it represents the rule of precedence that the case stipulates, and the verdict is that the major's order is a cause and the sergeant's is not, which is the judgement Schaffer elicited.
+
+\paragraph{Double prevention.} An enemy fighter would have shot down Suzy's bomber, but Billy, escorting her, shoots the fighter down first; Suzy bombs the target \citep{Hall2004}. The bombing depends on Billy's shot, and the witness world, in which Billy does not shoot and the fighter shoots Suzy down, is not less normal than the actual world, if escorting pilots are expected to shoot at enemy fighters but are not expected to fail. If the escort's shooting has default $1$, it is a condition rather than a cause, by Lemma~\ref{l:default}; if it has no default, it is a cause. We accept both verdicts, each in its setting. Hall's intuition that double preventers are not producers is correct and is respected by Lemma~\ref{l:default} in the case where the preventer is doing what is expected; in the case where Billy's shot is an unusual intervention, ordinary judgement does count him a cause of the bombing's success.
+
+\paragraph{Absences as causes.} Theorem~\ref{t:omission} counts the gardener's not watering as a cause. MET-16 argues that absences do not exist, though there are true sentences about them. The two theses are consistent. A causal claim, on the present account, relates the values of variables, and the value $0$ of $\mathit{GW}$ is not an object: it is the fact that the gardener did not water, and the truth that he did not is what the model records. Nothing in Definitions~\ref{d:model}--\ref{d:ndm} requires that a cause be an entity rather than a true proposition about one.
+
+\paragraph{Transitivity.} A dog bites off a terrorist's right forefinger; the terrorist presses the detonator with his left, and the bomb explodes \citep{McDermott1995}. The bite causes the use of the left hand, which causes the explosion, but the bite does not cause the explosion. The account delivers this. The explosion does not depend on the bite, holding fixed any set of variables at their actual values, since the terrorist can press with either hand. Causation, on the present account, is not transitive, and this is a merit: \citet{Hitchcock2001} showed that the cases in which transitivity seems to fail are exactly those in which the dependence along one route is cancelled by another.
+
+\section{Recent literature}\label{s:recent}
+
+Three lines of recent work bear directly on the thesis.
+
+\paragraph{Graded causation.} \citet{HalpernHitchcock2015} proposed that normality grades causes rather than filtering them. A candidate cause is the stronger the more normal its best witness world, and causal judgment selects the strongest candidates. Our Definition~\ref{d:ndm} is the filtering version, which \citet[\S 3.2]{Halpern2016} also states. The two are compatible: the filter marks the boundary of the class that the graded account orders. We prefer to state the thesis with the filter because the question \enquote{what is a cause?} asks for a boundary, and because the filter is what yields Lemma~\ref{l:default}, the general form of Mill's distinction. A theorist who prefers grades can read our principles as concerning the causes of maximal grade.
+
+\paragraph{Cause without default.} \citet{BlanchardSchaffer2017} argue that defaults are not needed. Their argument, as we read it, has two strands. First, the cases that motivate defaults can be handled by better modelling: by choosing variables and ranges that are apt, the isomorphism problem disappears, since isomorphic models of distinct cases are not both apt. Second, defaults introduce instability, since the norms in play vary with context. We grant the first part where it applies: the switch case above is one in which better modelling, not normality, gives the verdict. But it does not apply to the omission and pen cases. The gardener and the Queen stand in exactly the same physical relation to the plant, and no choice of variables for the physical situation distinguishes them; what distinguishes them is a norm that holds of the gardener and not of the Queen. Excluding the norm from the model leaves the Queen's omission a cause on the same footing as the gardener's. We think this cost too high, for a reason given by \citet{McGrath2005}: unless the norm is admitted, every omission of every person who could have watered the plant is a cause of its death, and the concept of a cause loses its use in attributing responsibility, prediction and control. The second strand is answered in Section~\ref{s:objections}.
+
+\paragraph{Empirical work.} \citet{KnobeFraser2008} found that participants judged the professor, who violated a norm, more of a cause of the receptionist's problem than the assistant, who did not. \citet{Kominsky2015} found that an abnormal cause \enquote{supersedes} a normal one in conjunctive structures but not in disjunctive ones, and \citet{Icard2017} proposed a sampling model of causal judgment on which this pattern follows from a measure of actual causal strength. The conjunctive pattern agrees with our account: in a conjunctive structure, such as the pen case, the normal factor is not a cause, by Lemma~\ref{l:default}. The disjunctive pattern is harder. \citet{Icard2017} report that in disjunctive structures the normal factor tends to be rated more of a cause than the abnormal one, while Lemma~\ref{l:default} classifies a factor at its default as a condition in every structure. We do not think the filtering account explains this datum. It concerns comparative ratings rather than the boundary of the class of causes, and it is the kind of datum that the graded account is designed to model; we record it as an open problem for the thesis in the form defended here. The empirical work does not establish that the account is correct, since judgements can be mistaken; but it shows that the account systematizes judgements that would otherwise have to be dismissed as errors on a large scale.
+
+\section{Consequences}\label{s:consequences}
+
+The account bears on three questions outside the theory of causation.
+
+\paragraph{Petitionary prayer.} REL-12-a argues that an outcome may be granted in response to a request although it would have occurred without the request, and that the request is then not among the outcome's causes. The present account confirms this. Variables: $Q$ (the request is made), $G$ (God has a good-making reason for the outcome), $W$ (God wills the outcome), $O$ (the outcome occurs); $W = Q \vee G$, $O = W$. Since God is perfectly good, $G$ has default $1$; $Q$ has no default.
+
+\begin{proposition}[Petition]\label{p:petition}
+In the petition model, the request is neither a cause nor part of a cause of the outcome, and God's willing is a cause of it.
+\end{proposition}
+
+\begin{proof}
+The outcome does not depend on $Q$, whatever is held fixed, since $G$ is $1$ in every witness world that does not set it. The only set containing $Q$ on which the outcome depends is $\{Q, G\}$, whose witness world has God without the good-making reason, a departure from the default absent from the actual world; so it is not a normal difference-maker. The witness world for $\{W\}$ has the outcome not occurring and changes no variable that carries a default, so $\{W\}$ is a normal difference-maker.
+\end{proof}
+
+Proposition~\ref{p:petition}, together with Proposition~\ref{p:depalone}, shows that the verdict of REL-12-a rests on both components of the account. On dependence alone, the request and the good-making reason would jointly make a difference, and the request would be part of a cause. It is the default, that God has the good-making reason, which excludes it. The verdict also shows what REL-12-a needs and does not need: the relation of granting, which it defends, is not a causal relation, and nothing in the present account counts it as one.
+
+\paragraph{Responsibility in law.} \citet{HartHonore1985} argued that the law's selection of causes, from among the conditions of a harm, follows common-sense principles: voluntary interventions and abnormal occurrences are causes, normal conditions are not. Lemma~\ref{l:default} gives the second half of their principle an exact form, and the account explains why the law's selection is not, as Mill would have it, a matter of convenience. The norms that select legal causes are prescriptive norms already present in the situation: the gardener's contract, the duty of care.
+
+\paragraph{Mental causation and actions.} MND-11 argues that mental causes are proportional causes. The present account is compatible with that thesis, since proportionality is a constraint on the choice of variables in an apt model, not a competitor to the definition of a cause. ACT-03 specifies the right way for a reason to cause a movement as sensitivity to counterfactual variations in the reason; the present account supplies the notion of dependence that this specification uses, and is neutral on its details.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Causation is objective]
+Whether one event causes another is a matter of objective fact. Norms are facts about what people expect or require. To make causation depend on norms is to make it depend on us.
+\end{objection}
+
+\begin{reply}
+The account has two components, and only the second involves norms. The first, de facto dependence, is as objective as the counterfactuals it uses. The second selects among difference-makers by norms, and the norms in question are themselves facts about the situation: that the gardener was employed to water the plant is as much a fact as that he did not. Statistical norms are facts about frequencies; functional norms are facts about what a mechanism does when working properly. What varies with interests is which norms are relevant to a question, and the account represents this by the choice of model, as every structural account must represent the choice of variables. The resulting relativity is of the same kind as the contrastivity of \citet{Schaffer2005}: causal claims are made against a background, and the background is part of their content.
+\end{reply}
+
+\begin{objection}[Contamination]
+The empirical findings on which the account relies show only that causal judgement is biased by moral judgement: we blame the professor and therefore call him a cause. A theory of causation should correct the bias, not codify it.
+\end{objection}
+
+\begin{reply}
+The bias hypothesis predicts that the effect of norms on causal judgement should disappear when blame is removed. It does not: statistical norms, which carry no blame, have the same effect as prescriptive ones \citep{HitchcockKnobe2009,Icard2017}. A machine part that usually works and fails is judged the cause of a breakdown over a part that usually fails and does not, and no one blames the part. The common factor is departure from a norm, of whatever kind, and the account captures that factor. What makes moral norms relevant to causation is not that they ground blame but that they fix defaults.
+\end{reply}
+
+\begin{objection}[The watering gardener]
+Suppose the gardener waters the plant and it survives. Watering is his default, so by Lemma~\ref{l:default} his watering is not a cause of the survival. But surely the plant survived because he watered it.
+\end{objection}
+
+\begin{reply}
+We accept the consequence for the model in which watering is the default, and deny that it is counterintuitive there. In a garden where the gardener always waters, the question why the plant survived is not naturally answered by citing his watering, any more than the question why the match lit is answered by citing the oxygen. The answer becomes natural when a different norm is in play: in a drought, when plants in the neighbourhood are dying, or when the gardener had been expected to neglect his duties. In such contexts the apt model gives the plant's dying, or the gardener's not watering, the status of the default, and then his watering is a cause. That the verdict changes with the norm is not instability; it is the account working as intended. The watering is in every case a de facto difference-maker (Lemma~\ref{l:dep} is not violated), and in every case a condition of the survival.
+\end{reply}
+
+\begin{objection}[Isomorphism remains]
+Pairs of cases may be constructed that are isomorphic both in structure and in their pattern of defaults but receive different verdicts; \citet{BlanchardSchaffer2017} press worries of this kind. If such pairs exist, defaults do not solve the isomorphism problem.
+\end{objection}
+
+\begin{reply}
+If two apt models agree in structure, in actual values and in defaults, Definition~\ref{d:ndm} gives them the same verdicts, and a pair of cases with different verdicts must differ in some respect the models omit. The question is then whether the omitted respect is one that an apt model should include. In the examples we know of, it is: either a variable is missing, as in the two-variable model of the switch, or a norm has been omitted that is present in the case as described. We do not claim that this will always be so; but the burden lies with the objector to produce a pair of apt models with the same structure, values and defaults whose verdicts plainly differ, and the cases in the literature do not meet it.
+\end{reply}
+
+\begin{objection}[Too many norms]
+In real situations many norms are in force, and they conflict. The gardener's contract requires him to water; his doctor's orders require him to rest. Which default does his not watering have?
+\end{objection}
+
+\begin{reply}
+Where norms conflict, Definition~\ref{d:default} does not fix a single default, and an apt model either omits the default for that variable or is relative to one of the norms. If the default is omitted, the variable behaves as a variable without a norm: its omission is a cause if the effect depends on it in a witness world that makes no other variable deviate. This is the right result. When the gardener was obliged to rest, the question whether his not watering caused the death has no determinate answer independent of which obligation is in focus, and the account says so.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The account does not reduce causation to non-causal notions. Its counterfactuals are interventionist counterfactuals evaluated in a model, and the aptness of a model, as \citet{Woodward2003} and \citet{HalpernHitchcock2010} emphasize, cannot be defined without causal notions: the variables must be independently manipulable, and manipulation is a causal notion. We take this circularity to be benign, in the way that the circularity of a definition of a family of concepts by their relations is benign; but we do not argue for this here.
+
+The account concerns actual or token causation, the relation between particular values of particular variables, and says nothing directly about type causation, such as the claim that smoking causes cancer. It is also silent on the nature of the counterfactuals it uses: they may be grounded in laws, in dispositions, or in nothing further. MET-12 and MET-11 take up two parts of that question. Finally, Assumption~\ref{a:apt} carries much of the weight, and the formal results are conditional on the models being apt; we have argued for the aptness of each model in the text, but the formalization does not and could not check it.
+
+\section{Conclusion}
+
+A cause is a counterfactual difference-maker selected by norms of normality. The first component, de facto dependence, distinguishes Suzy from Billy and explains why causation is not transitive; the second, comparative normality of the witness world, distinguishes the gardener from the Queen, the professor from the assistant, and real prevention from bogus prevention. Each component is needed, and together they deliver the accepted verdicts across the standard cases. Mill was right that the selection of causes from among conditions is made by something other than dependence, and wrong that it is capricious: it is made by the norms that hold in the situation, and its general form is that conditions at their defaults are not causes.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beebee(2004)]{Beebee2004} Beebee, H. (2004). Causing and nothingness. In J.~Collins, N.~Hall and L.~A. Paul (eds.), \emph{Causation and Counterfactuals}. MIT Press.
+\bibitem[Blanchard and Schaffer(2017)]{BlanchardSchaffer2017} Blanchard, T. and Schaffer, J. (2017). Cause without default. In H.~Beebee, C.~Hitchcock and H.~Price (eds.), \emph{Making a Difference}. Oxford University Press.
+\bibitem[Hall(2000)]{Hall2000} Hall, N. (2000). Causation and the price of transitivity. \emph{Journal of Philosophy}, 97(4), 198--222.
+\bibitem[Hall(2004)]{Hall2004} Hall, N. (2004). Two concepts of causation. In J.~Collins, N.~Hall and L.~A. Paul (eds.), \emph{Causation and Counterfactuals}. MIT Press.
+\bibitem[Hall(2007)]{Hall2007} Hall, N. (2007). Structural equations and causation. \emph{Philosophical Studies}, 132(1), 109--136.
+\bibitem[Halpern(2008)]{Halpern2008} Halpern, J.~Y. (2008). Defaults and normality in causal structures. In \emph{Proceedings of the Eleventh International Conference on Principles of Knowledge Representation and Reasoning (KR 2008)}.
+\bibitem[Halpern(2015)]{Halpern2015} Halpern, J.~Y. (2015). A modification of the Halpern--Pearl definition of causality. In \emph{Proceedings of the 24th International Joint Conference on Artificial Intelligence (IJCAI 2015)}.
+\bibitem[Halpern(2016)]{Halpern2016} Halpern, J.~Y. (2016). \emph{Actual Causality}. MIT Press.
+\bibitem[Halpern and Hitchcock(2010)]{HalpernHitchcock2010} Halpern, J.~Y. and Hitchcock, C. (2010). Actual causation and the art of modeling. In R.~Dechter, H.~Geffner and J.~Y. Halpern (eds.), \emph{Heuristics, Probability and Causality: A Tribute to Judea Pearl}. College Publications.
+\bibitem[Halpern and Hitchcock(2015)]{HalpernHitchcock2015} Halpern, J.~Y. and Hitchcock, C. (2015). Graded causation and defaults. \emph{British Journal for the Philosophy of Science}, 66(2), 413--457.
+\bibitem[Halpern and Pearl(2005)]{HalpernPearl2005} Halpern, J.~Y. and Pearl, J. (2005). Causes and explanations: A structural-model approach. Part I: Causes. \emph{British Journal for the Philosophy of Science}, 56(4), 843--887.
+\bibitem[Hart and Honor\'e(1985)]{HartHonore1985} Hart, H.~L.~A. and Honor\'e, T. (1985). \emph{Causation in the Law}, 2nd edition. Clarendon Press.
+\bibitem[Hitchcock(2001)]{Hitchcock2001} Hitchcock, C. (2001). The intransitivity of causation revealed in equations and graphs. \emph{Journal of Philosophy}, 98(6), 273--299.
+\bibitem[Hitchcock(2007)]{Hitchcock2007} Hitchcock, C. (2007). Prevention, preemption, and the principle of sufficient reason. \emph{Philosophical Review}, 116(4), 495--532.
+\bibitem[Hitchcock and Knobe(2009)]{HitchcockKnobe2009} Hitchcock, C. and Knobe, J. (2009). Cause and norm. \emph{Journal of Philosophy}, 106(11), 587--612.
+\bibitem[Hume(1748)]{HumeEnquiry} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}.
+\bibitem[Icard et~al.(2017)]{Icard2017} Icard, T.~F., Kominsky, J.~F. and Knobe, J. (2017). Normality and actual causal strength. \emph{Cognition}, 161, 80--93.
+\bibitem[Knobe and Fraser(2008)]{KnobeFraser2008} Knobe, J. and Fraser, B. (2008). Causal judgment and moral judgment: Two experiments. In W.~Sinnott-Armstrong (ed.), \emph{Moral Psychology, Volume 2: The Cognitive Science of Morality}. MIT Press.
+\bibitem[Kominsky et~al.(2015)]{Kominsky2015} Kominsky, J.~F., Phillips, J., Gerstenberg, T., Lagnado, D. and Knobe, J. (2015). Causal superseding. \emph{Cognition}, 137, 196--209.
+\bibitem[Lewis(1973)]{Lewis1973} Lewis, D. (1973). Causation. \emph{Journal of Philosophy}, 70(17), 556--567.
+\bibitem[Lewis(1986)]{Lewis1986Postscripts} Lewis, D. (1986). Postscripts to \enquote{Causation}. In \emph{Philosophical Papers, Volume II}. Oxford University Press.
+\bibitem[Lewis(2000)]{Lewis2000} Lewis, D. (2000). Causation as influence. \emph{Journal of Philosophy}, 97(4), 182--197.
+\bibitem[Mackie(1965)]{Mackie1965} Mackie, J.~L. (1965). Causes and conditions. \emph{American Philosophical Quarterly}, 2(4), 245--264.
+\bibitem[McDermott(1995)]{McDermott1995} McDermott, M. (1995). Redundant causation. \emph{British Journal for the Philosophy of Science}, 46(4), 523--544.
+\bibitem[McGrath(2005)]{McGrath2005} McGrath, S. (2005). Causation by omission: A dilemma. \emph{Philosophical Studies}, 123(1--2), 125--148.
+\bibitem[Menzies(2004)]{Menzies2004} Menzies, P. (2004). Difference-making in context. In J.~Collins, N.~Hall and L.~A. Paul (eds.), \emph{Causation and Counterfactuals}. MIT Press.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}. John W. Parker.
+\bibitem[Paul and Hall(2013)]{PaulHall2013} Paul, L.~A. and Hall, N. (2013). \emph{Causation: A User's Guide}. Oxford University Press.
+\bibitem[Pearl(2000)]{Pearl2000} Pearl, J. (2000). \emph{Causality: Models, Reasoning, and Inference}. Cambridge University Press.
+\bibitem[Schaffer(2000)]{Schaffer2000} Schaffer, J. (2000). Trumping preemption. \emph{Journal of Philosophy}, 97(4), 165--181.
+\bibitem[Schaffer(2005)]{Schaffer2005} Schaffer, J. (2005). Contrastive causation. \emph{Philosophical Review}, 114(3), 327--358.
+\bibitem[Thomson(2003)]{Thomson2003} Thomson, J.~J. (2003). Causation: Omissions. \emph{Philosophy and Phenomenological Research}, 66(1), 81--103.
+\bibitem[Woodward(2003)]{Woodward2003} Woodward, J. (2003). \emph{Making Things Happen: A Theory of Causal Explanation}. Oxford University Press.
+\bibitem[Yablo(2002)]{Yablo2002} Yablo, S. (2002). De facto dependence. \emph{Journal of Philosophy}, 99(3), 130--148.
+\end{thebibliography}
+
+\end{document}

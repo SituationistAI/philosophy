@@ -1,0 +1,50 @@
+\documentclass{situationist-preprint}
+
+\title{When Absences Are Causes}
+\msid{MET-04-c}
+\msfamily{MET-04}
+\msdiscipline{Metaphysics}
+\mstype{Consequence}
+\mskeywords{causation by absence; omissions; defaults; profligacy; negative causation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+If causation is counterfactual dependence plus normality, as MET-04-a argues, the conditions under which an absence is a cause follow at once. We state them: the absence of an event is a cause of an effect exactly when the effect depends on it, holding suitable conditions fixed, in a witness world no less normal than the actual one; and it never is when the absence is itself the norm. Two consequences follow. The profligacy of absent causes disappears, since almost all absences are at their defaults. And no absence need exist for an absence to cause: \enquote{the absence of $C$ caused $E$} is made true by dependence and normality alone.
+\end{abstract}
+
+\section{The conditions}
+
+In the structural models of MET-04-a, an absence is represented by a variable at value $0$: the gardener does not water, the alarm does not sound, the brakes do not engage. Let $X$ be such a variable, and let $Y$ be an effect.
+
+\begin{proposition}\label{p:absence}
+The absence represented by $X = 0$ is a cause of the actual value of $Y$ in an apt model if and only if $\{X\}$ is a normal difference-maker for $Y$, that is, if and only if there is a set $H$ of variables such that (i) $Y$ takes a non-actual value when $X$ is set to $1$ and the members of $H$ are held at their actual values, and (ii) that witness world is at least as normal as the actual world. In particular, if the default of $X$ is $0$, the absence is not a cause and not part of one.
+\end{proposition}
+
+\begin{proof}
+The biconditional is P1 and P2 of MET-04-a applied to the singleton $\{X\}$, with Definition~2.7 of MET-04-a; minimality is automatic for a singleton. The final claim is Lemma~3.2 of MET-04-a: a variable at its default is neither a cause nor part of one.
+\end{proof}
+
+Clause (ii) is satisfied in two ways. If $X$ has the default $1$, because the event was required, expected or normally produced, setting $X$ to $1$ restores a norm, and the witness world is at least as normal as the actual world provided nothing else in it deviates. If $X$ carries no default, the witness world is at least as normal provided it adds no deviation elsewhere. The first is the case of the gardener who fails to water (MET-04-a, Theorem~3.5); the second is the case of an absence of rain in a region where rainfall is subject to no statistical norm.
+
+\begin{corollary}\label{c:when}
+An absence is a cause only if the corresponding presence was required, expected or functionally normal, or was subject to no norm at all; and then only if the effect depends on it, holding fixed what actually happened along the other routes to the effect.
+\end{corollary}
+
+\section{Profligacy}
+
+\citet{Lewis2004} accepted that absences cause, and accepted with it that the absences of countless events are causes of every effect: the Queen's failure to water the plant, and the failure of every passer-by to do so, caused its death as much as the gardener's did. \citet{McGrath2005} argued that a theory of causation by omission must choose between counting far too many omissions as causes and counting none, unless it lets norms select among them; \citet{Beebee2004} accepted the second horn. Corollary~\ref{c:when} shows that it is neither. The Queen's not watering is at its default, and by Proposition~\ref{p:absence} it is not a cause. The same holds of the omissions of every passer-by. The absences that remain are few, and they are the ones ordinary judgment and the law single out: the omissions of those who were supposed to act, and the failures of mechanisms that normally work \citep{HartHonore1985}. Profligacy is the result of applying dependence without normality, which MET-04-a (Corollary~3.9) shows overgenerates.
+
+\section{No absence relatum}
+
+A causal claim, on the account, relates the values of variables. That $X$ takes the value $0$ is a fact about the situation, namely that the event did not occur; it is not an object. Proposition~\ref{p:absence} therefore gives the truth conditions of \enquote{the absence of $C$ caused $E$} without quantifying over absences: the sentence is true when $E$ counterfactually depends on whether $C$ occurred, in the de facto sense, in a witness world no less normal than the actual one. MET-16 argues that absences do not exist but that there are true sentences about them, and that this suffices. Proposition~\ref{p:absence} supplies the case of causal sentences. The sentence \enquote{the gardener's failure to water caused the death} is true, and its truth requires a gardener, a plant, a norm and a pattern of dependence, but no failure in addition to these. Causation by absence is causation by a variable's value, and values are not entities that must exist in order to be what an effect depends on.
+
+\begin{thebibliography}{9}\small
+\bibitem[Beebee(2004)]{Beebee2004} Beebee, H. (2004). Causing and nothingness. In J.~Collins, N.~Hall and L.~A. Paul (eds.), \emph{Causation and Counterfactuals}. MIT Press.
+\bibitem[Hart and Honor\'e(1985)]{HartHonore1985} Hart, H.~L.~A. and Honor\'e, T. (1985). \emph{Causation in the Law}, 2nd edition. Clarendon Press.
+\bibitem[Lewis(2004)]{Lewis2004} Lewis, D. (2004). Void and object. In J.~Collins, N.~Hall and L.~A. Paul (eds.), \emph{Causation and Counterfactuals}. MIT Press.
+\bibitem[McGrath(2005)]{McGrath2005} McGrath, S. (2005). Causation by omission: A dilemma. \emph{Philosophical Studies}, 123(1--2), 125--148.
+\end{thebibliography}
+
+\end{document}
