@@ -13,7 +13,8 @@ No. Moral disagreement is no deeper than disagreement in other theoretical domai
 ## Files
 
 - [`MTE-12-a.pdf`](MTE-12-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

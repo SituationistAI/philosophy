@@ -13,7 +13,8 @@ Yes. Persons have temporal parts, and perdurantism is the best account of their 
 ## Files
 
 - [`PID-11-a.pdf`](PID-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

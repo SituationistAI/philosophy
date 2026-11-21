@@ -13,7 +13,8 @@ Yes. The past is elsewhere in time, as distant places are elsewhere in space.
 ## Files
 
 - [`TSM-03-a.pdf`](TSM-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

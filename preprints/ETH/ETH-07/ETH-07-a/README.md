@@ -13,7 +13,8 @@ Yes. Sentience is necessary and sufficient for moral status, and moral status va
 ## Files
 
 - [`ETH-07-a.pdf`](ETH-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. There is no normalizable probability measure over the space of physical cons
 ## Files
 
 - [`REL-10-a.pdf`](REL-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Death has no meaning in itself, but it gives life a shape by limiting it.
 ## Files
 
 - [`EXI-19-a.pdf`](EXI-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

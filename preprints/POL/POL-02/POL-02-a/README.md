@@ -13,7 +13,8 @@ Yes, provided it can be justified to all reasonable persons subject to it.
 ## Files
 
 - [`POL-02-a.pdf`](POL-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

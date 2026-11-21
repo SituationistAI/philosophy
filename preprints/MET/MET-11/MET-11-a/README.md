@@ -13,7 +13,8 @@ Yes. Dispositions are real and irreducible properties of their bearers.
 ## Files
 
 - [`MET-11-a.pdf`](MET-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

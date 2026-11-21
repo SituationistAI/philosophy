@@ -13,7 +13,8 @@ No. A language whose rules only its speaker could know cannot be followed, and c
 ## Files
 
 - [`LNG-07-a.pdf`](LNG-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

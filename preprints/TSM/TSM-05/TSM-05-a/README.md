@@ -13,7 +13,8 @@ Because the universe began in a low-entropy state. The past hypothesis itself re
 ## Files
 
 - [`TSM-05-a.pdf`](TSM-05-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

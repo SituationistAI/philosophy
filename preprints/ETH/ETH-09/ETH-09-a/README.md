@@ -13,7 +13,8 @@ It is true and not repugnant. The intuition against it rests on a misunderstandi
 ## Files
 
 - [`ETH-09-a.pdf`](ETH-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

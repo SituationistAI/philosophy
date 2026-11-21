@@ -13,7 +13,8 @@ An act performed in uttering something, individuated by its constitutive rules.
 ## Files
 
 - [`LNG-13-a.pdf`](LNG-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

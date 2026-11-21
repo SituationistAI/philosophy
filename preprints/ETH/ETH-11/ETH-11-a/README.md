@@ -13,7 +13,8 @@ No. Virtue is necessary but not sufficient for happiness; the case of Priam refu
 ## Files
 
 - [`ETH-11-a.pdf`](ETH-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Bundle theories that rely on absolute or relative discernibility fail as a c
 ## Files
 
 - [`MET-29-a.pdf`](MET-29-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

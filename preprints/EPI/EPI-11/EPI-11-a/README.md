@@ -13,7 +13,8 @@ No. Belief is not under direct voluntary control, but attention is, and belief f
 ## Files
 
 - [`EPI-11-a.pdf`](EPI-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Metaethical commitments constrain first-order theory, as ETH-02 illustrates.
 ## Files
 
 - [`MTE-14-a.pdf`](MTE-14-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Modal realism is committed to an ontology that does no explanatory work its 
 ## Files
 
 - [`TSM-08-a.pdf`](TSM-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

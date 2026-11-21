@@ -13,7 +13,8 @@ No. Every level is grounded in a lower one, and this infinite descent is not vic
 ## Files
 
 - [`MET-10-a.pdf`](MET-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

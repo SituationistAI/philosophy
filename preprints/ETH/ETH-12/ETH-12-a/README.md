@@ -13,7 +13,8 @@ Yes. The right action is what the virtuous agent would characteristically do, an
 ## Files
 
 - [`ETH-12-a.pdf`](ETH-12-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

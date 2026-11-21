@@ -13,7 +13,8 @@ No. The universe is indifferent, and indifference is not hostility.
 ## Files
 
 - [`EXI-06-a.pdf`](EXI-06-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

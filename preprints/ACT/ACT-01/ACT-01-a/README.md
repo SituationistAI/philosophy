@@ -13,7 +13,8 @@ Yes. Free will is compatible both with determinism and with indeterminism; what 
 ## Files
 
 - [`ACT-01-a.pdf`](ACT-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Tropes are best understood as particularized universals, and trope theory ad
 ## Files
 
 - [`MET-08-a.pdf`](MET-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

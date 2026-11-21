@@ -13,7 +13,8 @@ Yes, but only under institutional conditions that guarantee equal access to publ
 ## Files
 
 - [`POL-20-a.pdf`](POL-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

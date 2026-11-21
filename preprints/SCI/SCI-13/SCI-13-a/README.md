@@ -13,7 +13,8 @@ Partly. Values legitimately guide the choice of problems and the management of i
 ## Files
 
 - [`SCI-13-a.pdf`](SCI-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

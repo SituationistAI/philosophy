@@ -13,7 +13,8 @@ Life is meaningful to the extent that one engages with projects of objective wor
 ## Files
 
 - [`EXI-01-a.pdf`](EXI-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

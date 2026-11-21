@@ -13,7 +13,8 @@ Yes. Consciousness is the intrinsic nature of physical structure; the explanator
 ## Files
 
 - [`MND-01-a.pdf`](MND-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

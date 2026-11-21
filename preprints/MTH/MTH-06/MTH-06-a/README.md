@@ -13,7 +13,8 @@ No. The continuum hypothesis is false, given new axioms that are independently m
 ## Files
 
 - [`MTH-06-a.pdf`](MTH-06-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

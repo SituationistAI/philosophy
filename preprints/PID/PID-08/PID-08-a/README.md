@@ -13,7 +13,8 @@ Yes. Survival does not require memory continuity, only the continuity of other p
 ## Files
 
 - [`PID-08-a.pdf`](PID-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

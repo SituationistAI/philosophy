@@ -13,7 +13,8 @@ Maximal consistent sets of propositions; the actual world is the only concrete o
 ## Files
 
 - [`TSM-07-a.pdf`](TSM-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

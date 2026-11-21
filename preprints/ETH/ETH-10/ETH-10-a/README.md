@@ -13,7 +13,8 @@ Factory farming is impermissible. Eating meat from animals raised and killed wit
 ## Files
 
 - [`ETH-10-a.pdf`](ETH-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

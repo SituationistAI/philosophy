@@ -13,7 +13,8 @@ Yes, as a form of communication: punishment expresses a censure that the offende
 ## Files
 
 - [`ETH-26-a.pdf`](ETH-26-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

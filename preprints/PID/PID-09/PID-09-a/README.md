@@ -13,7 +13,8 @@ Yes. Narrative identity is real but co-authored by others, and it is distinct fr
 ## Files
 
 - [`PID-09-a.pdf`](PID-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Partially and temporarily. The epoché can be sustained as a reflective attitude
 ## Files
 
 - [`PHE-01-a.pdf`](PHE-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

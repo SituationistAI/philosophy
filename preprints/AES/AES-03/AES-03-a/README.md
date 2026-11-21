@@ -13,7 +13,8 @@ Yes. Hume's standard of taste is satisfiable: the verdicts of ideal critics conv
 ## Files
 
 - [`AES-03-a.pdf`](AES-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

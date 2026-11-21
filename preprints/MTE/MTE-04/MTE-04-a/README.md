@@ -13,7 +13,8 @@ The question is either moral, and answered by morality, or prudential, and answe
 ## Files
 
 - [`MTE-04-a.pdf`](MTE-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Knowledge is safe, justified true belief. Gettier cases are exactly those in whi
 ## Files
 
 - [`EPI-01-a.pdf`](EPI-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

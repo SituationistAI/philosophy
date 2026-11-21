@@ -13,7 +13,8 @@ Yes, provided "physical" is defined by reference to current physics together wit
 ## Files
 
 - [`MND-02-a.pdf`](MND-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

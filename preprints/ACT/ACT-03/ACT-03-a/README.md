@@ -13,7 +13,8 @@ A bodily movement caused in the right way by a reason; the right way is specifie
 ## Files
 
 - [`ACT-03-a.pdf`](ACT-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

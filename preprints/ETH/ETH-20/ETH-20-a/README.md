@@ -13,7 +13,8 @@ No. Benatar's asymmetry fails: the absence of pleasure, though bad for no one, i
 ## Files
 
 - [`ETH-20-a.pdf`](ETH-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

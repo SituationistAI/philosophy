@@ -13,7 +13,8 @@ No voting rule satisfies all of Arrow's conditions; approval voting best balance
 ## Files
 
 - [`POL-17-a.pdf`](POL-17-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

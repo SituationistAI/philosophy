@@ -13,7 +13,8 @@ Yes. In S5, the possibility of a maximally great being entails its necessary exi
 ## Files
 
 - [`REL-01-a.pdf`](REL-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

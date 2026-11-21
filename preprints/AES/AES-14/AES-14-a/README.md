@@ -13,7 +13,8 @@ Yes. Photography is art despite its causal transparency, through choices of fram
 ## Files
 
 - [`AES-14-a.pdf`](AES-14-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

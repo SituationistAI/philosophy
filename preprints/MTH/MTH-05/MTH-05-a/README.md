@@ -13,7 +13,8 @@ No. The mind cannot recognize the truth of its own Gödel sentence any more than
 ## Files
 
 - [`MTH-05-a.pdf`](MTH-05-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

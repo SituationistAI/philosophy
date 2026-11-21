@@ -13,7 +13,8 @@ Partly. We choose our second-order desires, and first-order desires follow at a 
 ## Files
 
 - [`ACT-14-a.pdf`](ACT-14-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

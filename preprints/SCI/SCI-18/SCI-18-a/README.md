@@ -13,7 +13,8 @@ No. Science cannot explain the existence of the conditions that make science pos
 ## Files
 
 - [`SCI-18-a.pdf`](SCI-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

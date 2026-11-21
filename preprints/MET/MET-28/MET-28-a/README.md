@@ -13,7 +13,8 @@ No, for absolute and relative discernibility: Black's two spheres are a genuine 
 ## Files
 
 - [`MET-28-a.pdf`](MET-28-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

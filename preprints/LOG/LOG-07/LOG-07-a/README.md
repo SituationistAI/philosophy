@@ -13,7 +13,8 @@ Yes, for the purposes of logic. Indicative conditionals in natural language are 
 ## Files
 
 - [`LOG-07-a.pdf`](LOG-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

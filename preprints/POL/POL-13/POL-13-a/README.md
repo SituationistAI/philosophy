@@ -13,7 +13,8 @@ The duties of beneficence of ETH-06 apply globally, but their fulfilment require
 ## Files
 
 - [`POL-13-a.pdf`](POL-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

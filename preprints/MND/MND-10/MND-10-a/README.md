@@ -13,7 +13,8 @@ Yes. Qualia exist and are intrinsic, though their structure can be described rel
 ## Files
 
 - [`MND-10-a.pdf`](MND-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

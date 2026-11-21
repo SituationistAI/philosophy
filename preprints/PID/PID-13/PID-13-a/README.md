@@ -13,7 +13,8 @@ No. The self is a process that persists only as long as its constituent activiti
 ## Files
 
 - [`PID-13-a.pdf`](PID-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

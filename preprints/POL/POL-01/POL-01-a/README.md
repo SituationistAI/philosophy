@@ -13,7 +13,8 @@ Justice is fairness: the principles that would be chosen behind a veil of ignora
 ## Files
 
 - [`POL-01-a.pdf`](POL-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Formalism cannot explain the applicability of mathematics.
 ## Files
 
 - [`MTH-15-a.pdf`](MTH-15-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

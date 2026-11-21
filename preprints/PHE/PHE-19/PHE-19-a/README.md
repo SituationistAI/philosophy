@@ -13,7 +13,8 @@ A gift exists only if it is not recognized as a gift. It follows that the presen
 ## Files
 
 - [`PHE-19-a.pdf`](PHE-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

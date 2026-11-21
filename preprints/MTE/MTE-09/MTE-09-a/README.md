@@ -13,7 +13,8 @@ No. Evolution selected for tracking reasons, and those reasons include moral one
 ## Files
 
 - [`MTE-09-a.pdf`](MTE-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

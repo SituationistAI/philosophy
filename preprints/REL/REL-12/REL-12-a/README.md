@@ -13,7 +13,8 @@ Yes, without causal efficacy: an outcome may be granted because it was requested
 ## Files
 
 - [`REL-12-a.pdf`](REL-12-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

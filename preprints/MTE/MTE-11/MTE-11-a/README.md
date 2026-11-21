@@ -13,7 +13,8 @@ Yes. Reasons are primitive, and all other normative notions are defined in terms
 ## Files
 
 - [`MTE-11-a.pdf`](MTE-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

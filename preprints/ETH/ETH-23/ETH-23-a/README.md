@@ -13,7 +13,8 @@ Yes, with allowance for epistemic distance: past agents are blameworthy only for
 ## Files
 
 - [`ETH-23-a.pdf`](ETH-23-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

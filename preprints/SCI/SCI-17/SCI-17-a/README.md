@@ -13,7 +13,8 @@ Its effectiveness is not unreasonable: scientists select the mathematics that fi
 ## Files
 
 - [`SCI-17-a.pdf`](SCI-17-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

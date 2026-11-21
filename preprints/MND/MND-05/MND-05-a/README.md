@@ -13,7 +13,8 @@ Zombies are conceivable but not metaphysically possible; for phenomenal concepts
 ## Files
 
 - [`MND-05-a.pdf`](MND-05-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

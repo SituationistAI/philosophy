@@ -13,7 +13,8 @@ Yes. McTaggart's argument shows that the A-series is incoherent, not that time i
 ## Files
 
 - [`TSM-01-a.pdf`](TSM-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

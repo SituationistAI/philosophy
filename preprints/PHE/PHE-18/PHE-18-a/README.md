@@ -13,7 +13,8 @@ Yes, provided rigour is itself defined phenomenologically. The resulting circle 
 ## Files
 
 - [`PHE-18-a.pdf`](PHE-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

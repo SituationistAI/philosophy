@@ -13,7 +13,8 @@ No. Sartre's analysis of the look establishes objectification, not hostility; th
 ## Files
 
 - [`PHE-09-a.pdf`](PHE-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Yes, provided they are also treated as ends. The moral weight of the formula of 
 ## Files
 
 - [`ETH-21-a.pdf`](ETH-21-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

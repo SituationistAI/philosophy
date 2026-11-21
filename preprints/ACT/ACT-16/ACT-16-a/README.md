@@ -13,7 +13,8 @@ Not yet. Current artificial systems are not responsible agents; responsibility f
 ## Files
 
 - [`ACT-16-a.pdf`](ACT-16-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

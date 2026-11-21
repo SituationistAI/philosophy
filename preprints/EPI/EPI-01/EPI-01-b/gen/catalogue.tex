@@ -1,0 +1,726 @@
+\needspace{12\baselineskip}
+\subsection*{GE1 \enspace Ten coins}
+\addcontentsline{toc}{subsection}{GE1 Ten coins}
+\noindent\textit{Source.} \citet{Gettier1963}, case I.\quad \textit{Route:} inference.\quad \textit{Basis:} inference from evidence about Jones.\par
+\noindent\textit{Case.} Smith has strong evidence that Jones will be offered the job for which both have applied, and that Jones has ten coins in his pocket. He infers that the man who will get the job has ten coins in his pocket. In fact Smith gets the job, and, without knowing it, has ten coins in his own pocket.\par
+\noindent\textit{Belief} $p$: the man who will get the job has ten coins in his pocket.
+ \textit{Weaker} $q$: someone will get the job.
+ \textit{False lemma:} Jones will get the job. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+Smith has nine coins in his pocket & 1 & yes & yes & no & tm & yes \\
+a third applicant is hired & 2 & yes & yes & no & tm & yes \\
+Jones is hired, as the evidence indicated & 2 & yes & yes & yes & ok & yes \\
+Smith never hears the assurance about Jones & 3 & no & no & yes & basis & yes \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-fl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{GE2 \enspace Ford or Barcelona}
+\addcontentsline{toc}{subsection}{GE2 Ford or Barcelona}
+\noindent\textit{Source.} \citet{Gettier1963}, case II.\quad \textit{Route:} inference.\quad \textit{Basis:} disjunction introduced on evidence about Jones.\par
+\noindent\textit{Case.} Smith has strong evidence that Jones owns a Ford. Choosing place names at random, he infers the disjunction that either Jones owns a Ford or his friend Brown is in Barcelona. Jones does not own a Ford, but Brown, by coincidence, is in Barcelona.\par
+\noindent\textit{Belief} $p$: either Jones owns a Ford or Brown is in Barcelona.
+ \textit{False lemma:} Jones owns a Ford. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+Brown is in Boston & 1 & yes & yes & no & tm \\
+Brown is in Brest-Litovsk & 1 & yes & yes & no & tm \\
+Jones owns the car he has been driving & 2 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-fl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{NOG \enspace Nogot and Havit}
+\addcontentsline{toc}{subsection}{NOG Nogot and Havit}
+\noindent\textit{Source.} \citet{Lehrer1965}.\quad \textit{Route:} inference.\quad \textit{Basis:} inference via a belief about Nogot.\par
+\noindent\textit{Case.} A colleague, Nogot, gives the subject ample evidence that he owns a Ford: he says so, is seen driving one and shows papers. The subject infers that Nogot owns a Ford, and from that, that someone in the office owns a Ford. Nogot is deceiving; but another colleague, Havit, of whose car the subject knows nothing, owns a Ford.\par
+\noindent\textit{Belief} $p$: someone in the office owns a Ford.
+ \textit{Weaker} $q$: someone in the office has given me evidence that he owns a Ford.
+ \textit{False lemma:} Nogot owns a Ford. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+Havit has sold his Ford & 1 & yes & yes & no & tm & yes \\
+Havit works in another office & 1 & yes & yes & no & tm & yes \\
+Nogot is sincere & 2 & yes & yes & yes & ok & yes \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-fl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{FEL \enspace Nogot without the lemma}
+\addcontentsline{toc}{subsection}{FEL Nogot without the lemma}
+\noindent\textit{Source.} \citet{Feldman1974}.\quad \textit{Route:} inference.\quad \textit{Basis:} existential inference from true premises about testimony.\par
+\noindent\textit{Case.} The evidence of the Nogot case, but the subject reasons only through true intermediate beliefs: from the fact that a colleague in the office has told him, and shown him, that he owns a Ford, he infers directly that someone in the office owns a Ford, without forming the belief that Nogot in particular owns one.\par
+\noindent\textit{Belief} $p$: someone in the office owns a Ford.
+ \textit{Weaker} $q$: someone in the office has given me evidence that he owns a Ford.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+Havit has sold his Ford & 1 & yes & yes & no & tm & yes \\
+Havit works in another office & 1 & yes & yes & no & tm & yes \\
+Nogot is sincere & 2 & yes & yes & yes & ok & yes \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-nfl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{CLK \enspace Stopped clock}
+\addcontentsline{toc}{subsection}{CLK Stopped clock}
+\noindent\textit{Source.} \citet{Russell1948}.\quad \textit{Route:} instrument.\quad \textit{Basis:} reading the clock.\par
+\noindent\textit{Case.} A person looks at a clock that has stopped, though she takes it to be going, and forms a belief about the time from its reading. She happens to look at one of the two moments of the day at which the reading is correct.\par
+\noindent\textit{Belief} $p$: it is now the time the clock shows.
+ \textit{False lemma:} the clock is going. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she looks five minutes later & 1 & yes & yes & no & time \\
+she looks five minutes earlier & 1 & yes & yes & no & time \\
+the clock is going & 3 & no & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-tmp/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{BRN \enspace Fake barns}
+\addcontentsline{toc}{subsection}{BRN Fake barns}
+\noindent\textit{Source.} \citet{Goldman1976}, credited to Ginet.\quad \textit{Route:} perception.\quad \textit{Basis:} visual appearance from the road.\par
+\noindent\textit{Case.} Henry drives through a district in which, unknown to him, many facades have been put up which look from the road exactly like barns. He looks at the one real barn in view and believes that it is a barn.\par
+\noindent\textit{Belief} $p$: what I am looking at is a barn.
+ \textit{Weaker} $q$: there is a barn in this district.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+his gaze falls on a facade & 1 & yes & yes & no & env & yes \\
+he looks a moment earlier, at another facade & 1 & yes & yes & no & env & yes \\
+no facades have been built & 3 & no & yes & yes & ok & yes \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-env/c}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+ \textit{Dispute (int):} Intuitions are reported to be unstable across variants \citep{GendlerHawthorne2005} and many lay participants attribute knowledge \citep{Colaco2014}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{RED \enspace Red barn}
+\addcontentsline{toc}{subsection}{RED Red barn}
+\noindent\textit{Source.} \citet{Kripke2011}.\quad \textit{Route:} perception.\quad \textit{Basis:} visual appearance, including color.\par
+\noindent\textit{Case.} As in the fake-barn district, except that every facade is blue and the one real barn is red. Henry looks at the red barn and believes that he sees a red barn.\par
+\noindent\textit{Belief} $p$: what I am looking at is a red barn.
+ \textit{Weaker} $q$: what I am looking at is a barn.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+his gaze falls on a blue facade & 1 & yes & no & no & env & no \\
+he looks at another blue facade & 1 & yes & no & no & env & no \\
+a red facade has been built & 3 & no & yes & no & env & no \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{RDP \enspace Red barn, shape only}
+\addcontentsline{toc}{subsection}{RDP Red barn, shape only}
+\noindent\textit{Source.} \citet{Kripke2011}.\quad \textit{Route:} perception.\quad \textit{Basis:} visual appearance of shape.\par
+\noindent\textit{Case.} In the district of the red-barn case, Henry believes that he sees a barn on the basis of the shape he sees, not of its color.\par
+\noindent\textit{Belief} $p$: what I am looking at is a barn.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+his gaze falls on a blue facade & 1 & yes & yes & no & env \\
+he looks at another blue facade & 1 & yes & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-env/c}.
+ \textit{Source verdict:} not knowledge (presented against a fourth condition). Agreement: yes.
+ \textit{Dispute (bas):} Kripke's point is that Henry knows he sees a barn; on the analysis he does so on the deductive basis (variant RED.ded), not on this one.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SHP \enspace Sheep in the field}
+\addcontentsline{toc}{subsection}{SHP Sheep in the field}
+\noindent\textit{Source.} \citet{Chisholm1966}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing a sheep-like animal.\par
+\noindent\textit{Case.} A person looks into a field and sees an animal which looks like a sheep, and believes that there is a sheep in the field. The animal is a dog; but there is a sheep in the field, hidden from view.\par
+\noindent\textit{Belief} $p$: there is a sheep in the field.
+ \textit{False lemma:} that animal is a sheep. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the sheep is in the neighboring field & 1 & yes & yes & no & tm \\
+the dog is not in the field & 3 & no & no & yes & basis \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-int/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ZDR \enspace The diagnosis}
+\addcontentsline{toc}{subsection}{ZDR The diagnosis}
+\noindent\textit{Source.} \citet{Zagzebski1994}.\quad \textit{Route:} inference.\quad \textit{Basis:} inference from symptoms and tests.\par
+\noindent\textit{Case.} A physician, on excellent evidence from symptoms and tests, judges that a patient has virus X. The symptoms are in fact produced by another virus; but the patient has also, very recently, contracted X, which has not yet produced symptoms.\par
+\noindent\textit{Belief} $p$: the patient has virus X.
+ \textit{False lemma:} the symptoms are produced by X. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the patient has not contracted X & 1 & yes & yes & no & tm \\
+the symptoms are produced by X & 2 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-fl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ZHB \enspace The husband in the room}
+\addcontentsline{toc}{subsection}{ZHB The husband in the room}
+\noindent\textit{Source.} \citet{Zagzebski1994}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing a man she takes to be him.\par
+\noindent\textit{Case.} Mary, whose eyesight is good, glances into the living room and takes the man she sees in a chair to be her husband. It is his brother, who looks very like him. Her husband is in fact in the room, out of her line of sight.\par
+\noindent\textit{Belief} $p$: my husband is in the living room.
+ \textit{False lemma:} the man in the chair is my husband. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+her husband is in the garden & 1 & yes & yes & no & tm \\
+the man in the chair is her husband & 2 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-int/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{PYR \enspace The pyromaniac}
+\addcontentsline{toc}{subsection}{PYR The pyromaniac}
+\noindent\textit{Source.} \citet{Skyrms1967}.\quad \textit{Route:} induction.\quad \textit{Basis:} induction from past strikings.\par
+\noindent\textit{Case.} A man who has always found that matches of a certain brand light when struck believes, on that experience, that the match he is striking will light. This match has an impurity that would ordinarily prevent it from lighting; it lights because of an unusual physical occurrence at the moment of striking.\par
+\noindent\textit{Belief} $p$: this match will light.
+ \textit{False lemma:} this match is like the others. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the unusual occurrence does not take place & 1 & yes & yes & no & tm \\
+the match is free of the impurity & 3 & no & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-fl/d}.
+ \textit{Source verdict:} not knowledge (presented as a Gettier case). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{GRB \enspace Tom Grabit}
+\addcontentsline{toc}{subsection}{GRB Tom Grabit}
+\noindent\textit{Source.} \citet{LehrerPaxson1969}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing Tom take the book.\par
+\noindent\textit{Case.} The subject sees Tom Grabit, whom she knows well, take a book from the library and conceal it, and believes that Tom stole the book. Unknown to her, Tom's mother has said that Tom has an identical twin who was in the library; the mother is deluded, and there is no twin.\par
+\noindent\textit{Belief} $p$: Tom stole the book.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} misleading. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the mother's claim reaches her first & 1 & yes & no & yes & def \\
+she sees Tom from another angle & 2 & yes & yes & yes & ok \\
+Tom has a twin who was in the library & 4 & no & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K[md]}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{HAR \enspace Assassination}
+\addcontentsline{toc}{subsection}{HAR Assassination}
+\noindent\textit{Source.} \citet{Harman1973}.\quad \textit{Route:} testimony.\quad \textit{Basis:} a report in a reliable newspaper.\par
+\noindent\textit{Case.} Jill reads in a reliable newspaper that a political leader has been assassinated, and believes it. The report is true. The authorities then issue widespread false denials, which almost everyone hears and which Jill happens to miss.\par
+\noindent\textit{Belief} $p$: the leader has been assassinated.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} misleading. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+Jill hears the denials & 1 & yes & no & yes & def \\
+she reads the report in another paper & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K[md]}.
+ \textit{Source verdict:} not knowledge (presented against a fourth condition). Agreement: no.
+ \textit{Dispute (dep):} Harman's verdict is that Jill does not know. The case has the structure of GRB, where the source's verdict is knowledge: a misleading defeater the subject does not possess.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{CLV \enspace Norman the clairvoyant}
+\addcontentsline{toc}{subsection}{CLV Norman the clairvoyant}
+\noindent\textit{Source.} \citet{BonJour1980}.\quad \textit{Route:} faculty.\quad \textit{Basis:} an unexplained clairvoyant faculty.\par
+\noindent\textit{Case.} Norman is, in normal conditions, a completely reliable clairvoyant about a certain subject matter, but has no evidence for or against his having such a power. One day he comes to believe, for no reason he can give, that the President is in New York City. The belief is true and is produced by his power.\par
+\noindent\textit{Belief} $p$: the President is in New York City.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} no. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the President is in Washington & 1 & yes & no & no & tm \\
+the President has just arrived & 2 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J no, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge no. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{U}.
+ \textit{Source verdict:} not knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{TTP \enspace Truetemp}
+\addcontentsline{toc}{subsection}{TTP Truetemp}
+\noindent\textit{Source.} \citet{Lehrer1990}.\quad \textit{Route:} faculty.\quad \textit{Basis:} the output of an implanted device.\par
+\noindent\textit{Case.} Mr Truetemp has had, without his knowledge, a device implanted in his head that measures the temperature accurately and causes him to believe what it measures. He believes that it is 104 degrees, and it is. He has no idea why he has such beliefs and has never checked them.\par
+\noindent\textit{Belief} $p$: it is 104 degrees.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} no. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+it is 103 degrees & 1 & yes & no & no & tm \\
+it is 104 degrees an hour later & 2 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J no, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge no. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{U}.
+ \textit{Source verdict:} not knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{CHU \enspace Rubbish chute}
+\addcontentsline{toc}{subsection}{CHU Rubbish chute}
+\noindent\textit{Source.} \citet{Sosa1999}.\quad \textit{Route:} induction.\quad \textit{Basis:} induction from experience of the chute.\par
+\noindent\textit{Case.} A resident of a high-rise building drops a bag of rubbish into the chute and believes, from long experience of the chute, that the bag is now in the basement.\par
+\noindent\textit{Belief} $p$: the bag is in the basement.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she lets the bag go a moment later & 2 & yes & yes & yes & ok \\
+the bag snags on the way down & 4 & no & yes & no & tm \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{KAL \enspace Kaleidoscope}
+\addcontentsline{toc}{subsection}{KAL Kaleidoscope}
+\noindent\textit{Source.} \citet{Sosa2007}.\quad \textit{Route:} perception.\quad \textit{Basis:} visual appearance of color.\par
+\noindent\textit{Case.} A perceiver looks at a surface that is red and lit by normal light, and believes that it is red. The scene is controlled by a jokester who could as easily have shown her a white surface lit by red light, which would have looked the same.\par
+\noindent\textit{Belief} $p$: the surface is red.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} genuine. \textit{Reflective access:} no. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the jokester shows a white surface under red light & 1 & yes & yes & no & env \\
+a different red surface is shown & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-env/c}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: no.
+ \textit{Dispute (dep):} Sosa grants animal knowledge (apt belief) and denies reflective knowledge; the belief is unsafe, so on the analysis it is not knowledge.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{TMP \enspace Temp}
+\addcontentsline{toc}{subsection}{TMP Temp}
+\noindent\textit{Source.} \citet{Pritchard2012}.\quad \textit{Route:} instrument.\quad \textit{Basis:} reading the thermometer.\par
+\noindent\textit{Case.} Temp forms beliefs about the temperature of a room by reading a thermometer which, unknown to him, is broken and shows readings at random. Someone hidden in the room, whose task is to make the readings correct, adjusts the temperature to match each reading as Temp consults it.\par
+\noindent\textit{Belief} $p$: the room is at the temperature the thermometer shows.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the thermometer shows another reading & 1 & yes & yes & yes & ok \\
+the helper is absent & 3 & no & yes & no & tm \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{K[fx]}.
+ \textit{Source verdict:} not knowledge (presented against a fourth condition). Agreement: no.
+ \textit{Dispute (dep):} Pritchard's verdict is that Temp does not know. The belief is justified and safe; the truth is secured by another agent, as in MOR, where the source's verdict is knowledge.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{MOR \enspace Morris in Chicago}
+\addcontentsline{toc}{subsection}{MOR Morris in Chicago}
+\noindent\textit{Source.} \citet{Lackey2007}.\quad \textit{Route:} testimony.\quad \textit{Basis:} testimony of a passer-by.\par
+\noindent\textit{Case.} Morris, just arrived in Chicago, asks the first passer-by for directions to the Sears Tower, and believes what he is told. The passer-by is a local and the directions are correct.\par
+\noindent\textit{Belief} $p$: the tower is two blocks east.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+he asks a different local & 1 & yes & yes & yes & ok \\
+the passer-by is another visitor who guesses & 3 & no & yes & no & src \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{LOT \enspace Lottery}
+\addcontentsline{toc}{subsection}{LOT Lottery}
+\noindent\textit{Source.} \citet{Hawthorne2004}.\quad \textit{Route:} statistics.\quad \textit{Basis:} the odds.\par
+\noindent\textit{Case.} A holder of one ticket in a large and fair lottery believes, on the basis of the odds alone, that her ticket will lose. It does.\par
+\noindent\textit{Belief} $p$: my ticket will lose.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+her ticket is drawn & 1 & yes & yes & no & draw \\
+another losing ticket is drawn & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-lot/d}.
+ \textit{Source verdict:} not knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{LTN \enspace Lottery, newspaper}
+\addcontentsline{toc}{subsection}{LTN Lottery, newspaper}
+\noindent\textit{Source.} \citet{Hawthorne2004}.\quad \textit{Route:} testimony.\quad \textit{Basis:} the published result.\par
+\noindent\textit{Case.} The same holder believes that her ticket has lost on reading the published result in a reliable newspaper.\par
+\noindent\textit{Belief} $p$: my ticket has lost.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+her ticket is drawn and reported & 1 & yes & no & no & draw \\
+another ticket is drawn and reported & 1 & yes & yes & yes & ok \\
+the paper misprints the result & 3 & no & yes & no & src \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{MAG \enspace Magoo's tree}
+\addcontentsline{toc}{subsection}{MAG Magoo's tree}
+\noindent\textit{Source.} \citet{Williamson2000}.\quad \textit{Route:} perception.\quad \textit{Basis:} visual estimate of height.\par
+\noindent\textit{Case.} Mr Magoo looks at a distant tree and can judge its height only roughly. Its height is $i+1$ inches; he believes that it is not $i$ inches tall, though a tree of $i$ inches would look no different to him.\par
+\noindent\textit{Belief} $p$: the tree is not $i$ inches tall.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the tree is $i$ inches tall & 1 & yes & yes & no & marg \\
+the tree is $i+2$ inches tall & 1 & yes & yes & yes & marg \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-mrg/c}.
+ \textit{Source verdict:} not knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{MGW \enspace Magoo, wide margin}
+\addcontentsline{toc}{subsection}{MGW Magoo, wide margin}
+\noindent\textit{Source.} \citet{Williamson2000}.\quad \textit{Route:} perception.\quad \textit{Basis:} visual estimate of height.\par
+\noindent\textit{Case.} Mr Magoo, looking at the same tree, believes that it is not $i-50$ inches tall, a height that would look quite different to him.\par
+\noindent\textit{Belief} $p$: the tree is not $i-50$ inches tall.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the tree is $i$ inches tall & 1 & yes & yes & yes & marg \\
+the tree is $i-50$ inches tall & 4 & no & no & no & marg \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ZBP \enspace Zebras}
+\addcontentsline{toc}{subsection}{ZBP Zebras}
+\noindent\textit{Source.} \citet{Dretske1970}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing zebra-like animals in the zebra pen.\par
+\noindent\textit{Case.} A visitor to a zoo sees animals in a pen marked as the zebra enclosure, and believes that they are zebras.\par
+\noindent\textit{Belief} $p$: the animals are zebras.
+ \textit{Weaker} $q$: the animals are not mules cleverly disguised as zebras.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & $q$ \\ \midrule
+actual world & 0 & yes & yes & yes & act & yes \\
+other zebras are in the pen & 1 & yes & yes & yes & ok & yes \\
+the animals are disguised mules & 4 & no & yes & no & env & no \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ZBM \enspace Not disguised mules}
+\addcontentsline{toc}{subsection}{ZBM Not disguised mules}
+\noindent\textit{Source.} \citet{Dretske1970}.\quad \textit{Route:} deduction.\quad \textit{Basis:} deduction from the perceptual belief.\par
+\noindent\textit{Case.} The same visitor infers from her belief that the animals are zebras that they are not mules cleverly disguised to look like zebras.\par
+\noindent\textit{Belief} $p$: the animals are not cleverly disguised mules.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+other zebras are in the pen & 1 & yes & yes & yes & ok \\
+the animals are disguised mules & 4 & no & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K}.
+ \textit{Source verdict:} not knowledge (other). Agreement: no.
+ \textit{Dispute (dep):} Dretske denies knowledge, since the belief is insensitive; closure is defended by \citet{Williamson2000} and \citet{Hawthorne2004}, and by EPI-20.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{GRN \enspace The grandmother}
+\addcontentsline{toc}{subsection}{GRN The grandmother}
+\noindent\textit{Source.} \citet{Nozick1981}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing him.\par
+\noindent\textit{Case.} A grandmother sees her grandson on a visit and believes that he is well. Had he been ill, the family would have kept it from her and told her that he was well.\par
+\noindent\textit{Belief} $p$: my grandson is well.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+he visits an hour later & 1 & yes & yes & yes & ok \\
+he is ill and she is told he is well & 2 & yes & no & no & basis \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K[ev]}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{HLF \enspace Halloween, fine basis}
+\addcontentsline{toc}{subsection}{HLF Halloween, fine basis}
+\noindent\textit{Source.} \citet{Comesana2005}.\quad \textit{Route:} testimony.\quad \textit{Basis:} directions from a truthful director.\par
+\noindent\textit{Case.} A guest asks the way to a party of someone posted to give directions, who would, in circumstances that could easily have obtained, have given misleading ones. The guest receives correct directions and believes them. Here the basis is individuated to include the director's actual disposition to tell the truth.\par
+\noindent\textit{Belief} $p$: the party is at that house.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the circumstances obtain; directions misleading & 1 & yes & no & no & src \\
+he asks a moment later & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+ \textit{Dispute (bas):} Basis individuated finely: the verdict agrees with Comesa\~na's.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{HLC \enspace Halloween, coarse basis}
+\addcontentsline{toc}{subsection}{HLC Halloween, coarse basis}
+\noindent\textit{Source.} \citet{Comesana2005}.\quad \textit{Route:} testimony.\quad \textit{Basis:} directions from the person posted.\par
+\noindent\textit{Case.} The same case, with the basis individuated coarsely as directions from the person posted to give them, whatever his disposition.\par
+\noindent\textit{Belief} $p$: the party is at that house.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the circumstances obtain; directions misleading & 1 & yes & yes & no & src \\
+he asks a moment later & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-tst/c}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: no.
+ \textit{Dispute (bas):} Basis individuated coarsely: a Gettier case, against Comesa\~na's verdict.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ATF \enspace Atomic clock, fine basis}
+\addcontentsline{toc}{subsection}{ATF Atomic clock, fine basis}
+\noindent\textit{Source.} \citet{Bogardus2014}.\quad \textit{Route:} instrument.\quad \textit{Basis:} reading a functioning clock.\par
+\noindent\textit{Case.} A subject reads the time from a highly accurate clock. A nearby radioactive source could easily have made it malfunction, but did not. Here the basis is reading a functioning clock.\par
+\noindent\textit{Belief} $p$: it is the time the clock shows.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the clock malfunctions & 1 & yes & no & no & env \\
+she reads it a minute later & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+ \textit{Dispute (bas):} Basis individuated finely: the verdict agrees with Bogardus's.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ATC \enspace Atomic clock, coarse basis}
+\addcontentsline{toc}{subsection}{ATC Atomic clock, coarse basis}
+\noindent\textit{Source.} \citet{Bogardus2014}.\quad \textit{Route:} instrument.\quad \textit{Basis:} reading that clock.\par
+\noindent\textit{Case.} The same case, with the basis individuated as reading that clock, whether or not it functions.\par
+\noindent\textit{Belief} $p$: it is the time the clock shows.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the clock malfunctions & 1 & yes & yes & no & env \\
+she reads it a minute later & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-env/c}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: no.
+ \textit{Dispute (bas):} Basis individuated coarsely: a Gettier case, against Bogardus's verdict.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{WAR \enspace Handouts}
+\addcontentsline{toc}{subsection}{WAR Handouts}
+\noindent\textit{Source.} \citet{Warfield2005}.\quad \textit{Route:} inference.\quad \textit{Basis:} inference from a careful count.\par
+\noindent\textit{Case.} A speaker counts the audience at her talk, arrives at 53, and, having 100 handouts, concludes that she has enough. There are in fact 52 people present.\par
+\noindent\textit{Belief} $p$: I have enough handouts.
+ \textit{False lemma:} there are 53 people present. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she counts 54 & 1 & yes & yes & yes & marg \\
+53 people are present & 1 & yes & yes & yes & ok \\
+more than 100 people are present & 4 & no & no & no & tm \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+ \textit{Dispute (int):} The verdict is generally accepted; whether the knowledge depends on the falsehood is disputed by \citet{Klein2008}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{BKL \enspace Bank, low stakes}
+\addcontentsline{toc}{subsection}{BKL Bank, low stakes}
+\noindent\textit{Source.} \citet{DeRose1992}.\quad \textit{Route:} induction.\quad \textit{Basis:} memory of a recent Saturday.\par
+\noindent\textit{Case.} On a Friday, deciding whether to deposit a check now or on Saturday, a person believes that the bank will be open on Saturday because she was there on a Saturday two weeks ago. Little depends on it, and no one has raised the possibility that the hours have changed.\par
+\noindent\textit{Belief} $p$: the bank will be open on Saturday.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the bank has changed its hours & 3 & no & yes & no & tm \\
+she was there three weeks ago & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{BKH \enspace Bank, high stakes}
+\addcontentsline{toc}{subsection}{BKH Bank, high stakes}
+\noindent\textit{Source.} \citet{DeRose1992}.\quad \textit{Route:} induction.\quad \textit{Basis:} memory of a recent Saturday.\par
+\noindent\textit{Case.} The same person and evidence; a great deal depends on the deposit, and the possibility that the bank has changed its hours has been raised. The attended possibility is close in this context.\par
+\noindent\textit{Belief} $p$: the bank will be open on Saturday.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 3$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the bank has changed its hours & 3 & yes & yes & no & tm \\
+she was there three weeks ago & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 3$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{SSSuu}. Class: \textbf{G-nfl/c}.
+ \textit{Source verdict:} not knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{BIV \enspace Not a brain in a vat}
+\addcontentsline{toc}{subsection}{BIV Not a brain in a vat}
+\noindent\textit{Source.} \citet{Sosa1999}.\quad \textit{Route:} perception.\quad \textit{Basis:} ordinary perception and what it implies.\par
+\noindent\textit{Case.} A person sitting at her desk believes that she is not a handless brain in a vat being fed experiences as of sitting at a desk. Were she such a brain, she would believe the same.\par
+\noindent\textit{Belief} $p$: I am not a handless brain in a vat.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she sits in another chair & 1 & yes & yes & yes & ok \\
+she is a brain in a vat & 4 & no & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{JJM \enspace Jesse James}
+\addcontentsline{toc}{subsection}{JJM Jesse James}
+\noindent\textit{Source.} \citet{Nozick1981}.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing the robber's face.\par
+\noindent\textit{Case.} A bystander watches a masked man escape from a bank robbery. The mask slips, she sees the robber's face, recognizes Jesse James, and believes that Jesse James is robbing the bank. Had the mask not slipped, she would have formed no belief about who the robber was.\par
+\noindent\textit{Belief} $p$: Jesse James is robbing the bank.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the mask does not slip & 1 & yes & no & yes & basis \\
+the robber is a look-alike of Jesse James & 4 & no & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K[ev]}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{THT \enspace The jury}
+\addcontentsline{toc}{subsection}{THT The jury}
+\noindent\textit{Source.} Plato, \emph{Theaetetus}, 201a--c.\quad \textit{Route:} testimony.\quad \textit{Basis:} the advocate's persuasion.\par
+\noindent\textit{Case.} Jurors are brought by an advocate's skill to judge truly that a defendant committed a crime which only an eyewitness could know about. Their judgment is produced by persuasion, not by being taught the facts.\par
+\noindent\textit{Belief} $p$: the defendant committed the crime.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the defendant is innocent; the advocate argues as before & 1 & yes & yes & no & tm \\
+the advocate argues more briefly & 1 & yes & yes & yes & ok \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J no, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case no, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{U}.
+ \textit{Source verdict:} not knowledge (other). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{ICE \enspace Ice cubes}
+\addcontentsline{toc}{subsection}{ICE Ice cubes}
+\noindent\textit{Source.} \citet{Vogel1987}.\quad \textit{Route:} induction.\quad \textit{Basis:} induction from the heat and the time elapsed.\par
+\noindent\textit{Case.} Hours ago a person left a glass of ice cubes outside on a hot summer day. Without looking, she believes that the ice has melted. Had the cubes not melted, because of some unusual intervention, she would still believe they had.\par
+\noindent\textit{Belief} $p$: the ice cubes have melted.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she left the glass an hour earlier & 1 & yes & yes & yes & ok \\
+someone has replaced them with fresh cubes & 4 & no & yes & no & tm \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K}.
+ \textit{Source verdict:} knowledge (presented against a fourth condition). Agreement: yes.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SNC \enspace Faulty multiplication}
+\addcontentsline{toc}{subsection}{SNC Faulty multiplication}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} calculation.\quad \textit{Basis:} the pupil's procedure.\par
+\noindent\textit{Case.} A pupil computes $12 \times 13$ by a procedure that, through a systematic slip, gives wrong products for most nearby pairs but gives the right product, 156, for this one. She has every reason to trust the procedure.\par
+\noindent\textit{Belief} $p$: $12 \times 13 = 156$.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & alt \\ \midrule
+actual world & 0 & yes & yes & yes & act & -- \\
+she computes $12 	imes 14$ & 1 & yes & no & yes & ok & no \\
+she computes $11 	imes 13$ & 1 & yes & no & yes & ok & no \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe yes, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-nec/d}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SNS \enspace Sound multiplication}
+\addcontentsline{toc}{subsection}{SNS Sound multiplication}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} calculation.\quad \textit{Basis:} the standard procedure.\par
+\noindent\textit{Case.} A pupil computes $12 \times 13 = 156$ by the standard procedure, which she has mastered.\par
+\noindent\textit{Belief} $p$: $12 \times 13 = 156$.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rccclc@{}}
+world & $d$ & close & $B$ & $p$ & tag & alt \\ \midrule
+actual world & 0 & yes & yes & yes & act & -- \\
+she computes $12 	imes 14$ & 1 & yes & no & yes & ok & yes \\
+she computes $11 	imes 13$ & 1 & yes & no & yes & ok & yes \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SEV \enspace Witness at the window}
+\addcontentsline{toc}{subsection}{SEV Witness at the window}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} perception.\quad \textit{Basis:} seeing the robbery.\par
+\noindent\textit{Case.} A passer-by happens to look out of a window at the moment a robbery takes place across the street, and believes that the man in the green coat is the robber.\par
+\noindent\textit{Belief} $p$: the man in the green coat is the robber.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+she looks a moment later and sees nothing & 1 & yes & no & yes & basis \\
+a look-alike in a green coat commits it & 4 & no & yes & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K[ev]}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SCT \enspace Winner told}
+\addcontentsline{toc}{subsection}{SCT Winner told}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} testimony.\quad \textit{Basis:} the official announcement.\par
+\noindent\textit{Case.} A ticket holder learns from the official announcement that her ticket has won. It is a matter of chance that it won.\par
+\noindent\textit{Belief} $p$: my ticket has won.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+another ticket wins and is announced & 1 & yes & no & no & draw \\
+the announcement is misprinted & 4 & no & yes & no & src \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 4$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSu}. Class: \textbf{K[ct]}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{SRF \enspace Unreflective birder}
+\addcontentsline{toc}{subsection}{SRF Unreflective birder}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} perception.\quad \textit{Basis:} recognitional skill.\par
+\noindent\textit{Case.} A walker identifies a bird as a wren by sight, using a skill whose reliability she has never checked and about which she has no beliefs; it looks to her as a wren looks, and it is one.\par
+\noindent\textit{Belief} $p$: that bird is a wren.
+ \textit{False lemma:} none. \textit{Causal connection:} yes. \textit{Defeater:} none. \textit{Reflective access:} no. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+a different wren & 1 & yes & yes & yes & ok \\
+a bird of a similar species & 3 & no & no & no & env \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = \infty$, locally safe yes, safe basis-wide yes, Gettier case no, knowledge yes. Profile over $\theta = 0..4$: \texttt{SSSSS}. Class: \textbf{K[rf]}.
+\par\medskip
+\needspace{12\baselineskip}
+\subsection*{STL \enspace Mistaken liar}
+\addcontentsline{toc}{subsection}{STL Mistaken liar}
+\noindent\textit{Source.} schematic.\quad \textit{Route:} testimony.\quad \textit{Basis:} the liar's testimony.\par
+\noindent\textit{Case.} A habitual liar, intending to deceive, tells a hearer what he believes to be false. Through his own mistake, it is true. The hearer has no reason to distrust him.\par
+\noindent\textit{Belief} $p$: the train leaves at noon.
+ \textit{False lemma:} none. \textit{Causal connection:} no. \textit{Defeater:} genuine. \textit{Reflective access:} yes. \textit{Threshold} $\theta = 2$.\par
+\begin{center}\begin{tabular}{@{}p{0.43\linewidth}rcccl@{}}
+world & $d$ & close & $B$ & $p$ & tag \\ \midrule
+actual world & 0 & yes & yes & yes & act \\
+the liar's belief is correct; he says noon & 1 & yes & yes & no & src \\
+he lies about another train & 2 & yes & no & yes & basis \\
+\end{tabular}\end{center}
+\noindent\textit{Computed.} J yes, T yes, error distance $\delta = 1$, locally safe no, safe basis-wide no, Gettier case yes, knowledge no. Profile over $\theta = 0..4$: \texttt{Suuuu}. Class: \textbf{G-tst/d}.
+\par\medskip

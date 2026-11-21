@@ -1,0 +1,171 @@
+\section{The Lean module}\label{s:lean}
+
+Theorem~4 is formalized in the Lean~4 module \texttt{lean/Philosophy/EXI/EXI\_01.lean} \citep{deMouraUllrich2021}. The module is short, and we comment on every declaration in order, quoting each exactly. The quotations are checked against the module by the program of Appendix~\ref{app:conc}. The module uses only the core of Lean, with no external library, and contains no unproved step.
+
+\subsection{The header}
+
+\begin{lstlisting}
+/-
+EXI-01 · On the Meaning of Life
+Formalization of Theorem 4.
+\end{lstlisting}
+
+The header names the family and the text and says what is formalized: Theorem~4, not the whole of EXI-01-a. Definition~1 is formalized only in its positive case, and Assumption~2 and Remark~5 are not formalized at all.
+
+\begin{lstlisting}
+What this file establishes. Given Definition 1 and Assumption 3, a life of
+positive meaning is available to every agent. The proof is immediate; the
+substance of the manuscript lies in its assumptions, which are discussed in
+the commentary (EXI-01-b).
+-/
+\end{lstlisting}
+
+The header makes three claims. The first, that the module establishes Theorem~4 given Definition~1 and Assumption~3, omits the bridge principle, which the module states as an axiom; the omission is in the header and not in the module, and the \texttt{\#print axioms} output corrects it. The second, that the proof is immediate, is accurate: it has three steps, one for each sentence of the prose proof. The third, that the substance lies in the assumptions, is the formal counterpart of Remark~5, and it is the reason for the present work. The header refers to the Commentary, as Remark~5 does.
+
+\subsection{The primitives}
+
+\begin{lstlisting}
+namespace Philosophy.EXI_01
+\end{lstlisting}
+
+The namespace follows the convention of the collection's modules: one namespace per family.
+
+\begin{lstlisting}
+/-- Agents capable of intentional action. -/
+axiom Agent : Type
+\end{lstlisting}
+
+The domain of Assumption~3 and Theorem~4 is a type. The docstring carries the restriction of \Lm{4.2}: the type is not of all beings, or of all persons, but of agents capable of intentional action. Nothing in the formal system enforces this; the restriction lives in the interpretation. The type may be empty, and Proposition~\ref{p:indep} uses that possibility.
+
+\begin{lstlisting}
+/-- Projects. -/
+axiom Project : Type
+\end{lstlisting}
+
+Projects form a type without internal structure. The module does not distinguish project types from token undertakings, or projects in the narrow sense from projects in the broad sense; the comments on \Lm{2.6} and \Lm{3.1} have argued for the broad reading and the type reading, and both are consistent with the module.
+
+\begin{lstlisting}
+/-- Lives available to an agent. -/
+axiom Life : Agent → Type
+\end{lstlisting}
+
+This is the most interesting of the primitives. \texttt{Life} is not a type but a family of types indexed by agents: for each agent \texttt{a}, \texttt{Life a} is the type of lives available to \texttt{a}. Two features of the conception of a life discussed at \Lm{2.1} are built in. A life is someone's life, since there are no lives except as elements of \texttt{Life a} for some \texttt{a}. And the lives of an agent are those \emph{available} to her: the docstring identifies the elements of \texttt{Life a} with the possibilities open to the agent, so that existential quantification over \texttt{Life a} expresses availability. The modal content of \enquote{is available} in \Lm{5.3} is thereby represented without a modal operator, by quantification over a type of possibilities. The indexing of availability to times, which the comment on \Lm{5.3} argued for, is not represented; a time-indexed formalization would replace \texttt{Life a} by a type of continuations of the agent's life from a given time.
+
+\begin{lstlisting}
+/-- `ObjectivelyWorthy p`: the value of `p` does not depend on the attitudes
+of those engaged in it (Assumption 2 asserts that such projects exist). -/
+axiom ObjectivelyWorthy : Project → Prop
+\end{lstlisting}
+
+The predicate of objective worth is primitive, and its docstring gives the colon clause of Assumption~2 as its intended interpretation. The docstring is the only place in the module where Assumption~2 appears, and it appears as a gloss on a predicate, not as an axiom. This is the formal counterpart of the first finding of Section~\ref{s:ass2}: Assumption~2's role is to interpret, not to derive. The formal system does not know what the predicate means, and the theorem holds under every interpretation of it that satisfies the axioms (Proposition~\ref{p:neutralfml}).
+
+\begin{lstlisting}
+/-- `CanEngage a p`: agent `a` is able to engage actively in project `p`. -/
+axiom CanEngage : (a : Agent) → Project → Prop
+\end{lstlisting}
+
+The ability of \Lm{4.4} is a primitive relation between agents and projects. The docstring says \enquote{engage actively}, which settles in the module the question left open in the text, whether the ability of Assumption~3 is an ability to engage actively (\Lm{7.1}). The binder \texttt{(a : Agent)} is written in dependent form, though the result type does not depend on \texttt{a}; it is equivalent to \texttt{Agent} $\to$ \texttt{Project} $\to$ \texttt{Prop}.
+
+\begin{lstlisting}
+/-- `Includes l p`: life `l` includes active engagement with `p`. -/
+axiom Includes : {a : Agent} → Life a → Project → Prop
+\end{lstlisting}
+
+The relation between a life and a project that the prose expresses by \enquote{a life that includes engagement with $p$} (\Lm{7.1}) is primitive, and its docstring again says \enquote{active engagement}. The agent is an implicit argument, inferred from the life. The relation is binary in the life and the project and carries no measure: it records that a life includes active engagement with a project, not how much of the life it occupies.
+
+\subsection{The premises}
+
+\begin{lstlisting}
+/-- An agent who can engage in a project has a life that includes it. -/
+axiom engagement_realizable :
+  ∀ (a : Agent) (p : Project), CanEngage a p → ∃ l : Life a, Includes l p
+\end{lstlisting}
+
+This is the bridge principle of Proposition~\ref{p:bridge}, stated as an axiom. It does not correspond to any numbered statement of EXI-01-a, and its docstring cites none. The comment on \Lm{7.1} argued that it is properly regarded as a clarification of \enquote{available} rather than as a substantive premise, since on the reading of \enquote{able} adopted there, what an agent is able to do from her situation is what some life available to her includes. In the module, where ability and availability are independent primitives, the connection must be an axiom, and its presence in the axiom list is the clearest case in the collection of a formalization exposing a step that the prose takes for granted.
+
+\begin{lstlisting}
+/-- Definition 1, positive case. A life has positive meaning if it includes
+active engagement with some objectively worthy project. -/
+def PositivelyMeaningful {a : Agent} (l : Life a) : Prop :=
+  ∃ p, ObjectivelyWorthy p ∧ Includes l p
+\end{lstlisting}
+
+Definition~1 is formalized as a definition, not an axiom, and only in its positive case. Three features deserve comment.
+
+First, the degree variable is gone. The formal definition is of a one-place predicate, positive meaning, not of the two-place predicate of \Lm{2.2}. This is sufficient for Theorem~4, which concerns only positive meaning, and it is the reason the header says that Definition~1 is formalized in its positive case.
+
+Second, the step from inclusion to positive extent (\Lm{7.2}) is absorbed into the definition. In the prose, a life that includes engagement with a worthy project is inferred to consist in such engagement to a positive extent, and then, by Definition~1, to be meaningful to a positive degree. In the module, a life that includes active engagement with a worthy project is positively meaningful by definition. The condition of Proposition~\ref{p:neutral}, that the engagement be sustained over a non-null part of the life, is thereby assumed in the interpretation of \texttt{Includes}: a life \enquote{includes} active engagement with a project, in the sense of the module, only if the engagement occupies a non-null part of it.
+
+Third, only the right-to-left direction of Definition~1 is captured, though in a definition that makes it a biconditional for positive meaning. The module cannot express the comparative claims of Definition~1, or the claim of \Lm{10} that a life with no engagement with worthy projects has no meaning, except in the trivial form that such a life is not \texttt{PositivelyMeaningful}.
+
+\begin{lstlisting}
+/-- Assumption 3. Every agent can engage in some objectively worthy project. -/
+axiom assumption_3 : ∀ a : Agent, ∃ p, ObjectivelyWorthy p ∧ CanEngage a p
+\end{lstlisting}
+
+Assumption~3 is the one axiom of the module that corresponds to a numbered statement of EXI-01-a, and its form is exactly the form of \Lm{4}: universal over agents, existential over projects, as Proposition~\ref{p:order} requires.
+
+\subsection{The theorem}
+
+\begin{lstlisting}
+/-- Theorem 4. For every agent, a life of positive meaning is available. -/
+theorem meaning_available (a : Agent) : ∃ l : Life a, PositivelyMeaningful l := by
+  obtain ⟨p, hw, hc⟩ := assumption_3 a
+  obtain ⟨l, hl⟩ := engagement_realizable a p hc
+  exact ⟨l, p, hw, hl⟩
+\end{lstlisting}
+
+The statement is Theorem~4: for an arbitrary agent \texttt{a}, there is a life in \texttt{Life a} that is positively meaningful. The proof has three lines, which correspond to the three sentences of the prose proof with the bridge made explicit. The first line instantiates Assumption~3 at \texttt{a} and names the project \texttt{p}, its worth \texttt{hw} and the agent's ability \texttt{hc}; this is \Lm{6}. The second line applies the bridge to obtain a life \texttt{l} and the fact \texttt{hl} that it includes engagement with \texttt{p}; this is the existence that \Lm{7.1} assumes. The third line assembles the witness: \texttt{l} is a life of \texttt{a}, and \texttt{p}, \texttt{hw} and \texttt{hl} show that it is positively meaningful; this is \Lm{7.2} and \Lm{8}, combined by the formal definition.
+
+\begin{lstlisting}
+end Philosophy.EXI_01
+
+#print axioms Philosophy.EXI_01.meaning_available
+\end{lstlisting}
+
+The checker's output for the last command is:
+
+\begin{lstlisting}
+'Philosophy.EXI_01.meaning_available' depends on axioms:
+  [Philosophy.EXI_01.Agent, Philosophy.EXI_01.CanEngage,
+   Philosophy.EXI_01.Includes, Philosophy.EXI_01.Life,
+   Philosophy.EXI_01.ObjectivelyWorthy, Philosophy.EXI_01.Project,
+   Philosophy.EXI_01.assumption_3,
+   Philosophy.EXI_01.engagement_realizable]
+\end{lstlisting}
+
+Six of the eight axioms are primitives: types and relations without content. Two are premises: \texttt{assumption\_3}, which is Assumption~3, and \texttt{engagement\_realizable}, which is the bridge. None of Lean's own logical axioms (propositional extensionality, quotient soundness, choice) appears. The proof is constructive: it extracts the witness from the premises without appeal to excluded middle, which is fitting for an existence claim whose philosophical point is that the witness can be found, since a life of positive meaning is one the agent can lead by engaging with a project she can identify.
+
+\subsection{What the formalization shows}
+
+\begin{proposition}[Neutrality of the formal skeleton]\label{p:neutralfml}
+The formal theorem \texttt{meaning\_available} holds under every interpretation of the primitives that satisfies the two premises of the module, \texttt{assumption\_3} and the bridge axiom. In particular, it holds under interpretations on which \texttt{ObjectivelyWorthy} is true of every project.
+\end{proposition}
+
+\begin{proof}
+The theorem is derived from the two premises by the rules of Lean's logic, and the derivation is valid under every interpretation of the primitives. If \texttt{ObjectivelyWorthy} is true of every project, the theorem holds under any interpretation that also satisfies the premises, as every derived theorem does.
+\end{proof}
+
+The proposition shows what the formalization does not do. It does not distinguish the hybrid view from the subjective view: a subjectivist who read \texttt{ObjectivelyWorthy} as \enquote{is a project at all} would find the module's theorem true and the module's axioms acceptable. The distinction between EXI-01-a and Taylor lies entirely in the docstring of \texttt{ObjectivelyWorthy}, that is, in Assumption~2's gloss. This is not a defect of the formalization, which formalizes the logical skeleton of the argument, as it should; it is a precise statement of where the philosophy is.
+
+\begin{proposition}[Independence of Assumption~2]\label{p:indep}
+The existential part of Assumption~2, $\exists p$, \texttt{ObjectivelyWorthy p}, is not derivable from the axioms of the module.
+\end{proposition}
+
+\begin{proof}
+Interpret \texttt{Agent} as an empty type, \texttt{Project} as a type with one element, \texttt{Life} as the function assigning the empty type to every agent (vacuously, since there are none), and \texttt{ObjectivelyWorthy}, \texttt{CanEngage} and \texttt{Includes} as everywhere false. \texttt{assumption\_3} and \texttt{engagement\_realizable} quantify over agents and are vacuously true. $\exists p$, \texttt{ObjectivelyWorthy p} is false. So the axioms do not entail it.
+\end{proof}
+
+Proposition~\ref{p:indep} is the formal counterpart of the second part of Proposition~\ref{p:redundant}: Assumption~3 entails Assumption~2 only if there is an agent. In a world without agents, Assumption~3 is true and Assumption~2 may be false. The text's decision to state Assumption~2 separately is therefore not formally idle: it is the one premise of the text that says something about worth whether or not anyone exists to engage with it.
+
+\begin{proposition}[Consistency]\label{p:consistent}
+The axioms of the module are jointly satisfiable, and in a model in which there is at least one agent.
+\end{proposition}
+
+\begin{proof}
+Interpret \texttt{Agent}, \texttt{Project} and every \texttt{Life a} as one-element types, and \texttt{ObjectivelyWorthy}, \texttt{CanEngage} and \texttt{Includes} as everywhere true. Both premises then hold, and so does \texttt{meaning\_available}.
+\end{proof}
+
+The consistency of the axioms is cheap, as it should be for a module whose axioms are few and weak. What is not cheap is the truth of the axioms under their intended interpretation, and that, as the header says, is what the Commentary has discussed.
+
+\paragraph{What a fuller formalization would add.} A formalization of the whole of EXI-01-a would need a type of degrees with a distinguished zero and an order, a measure assigning degrees to lives, and an axiom connecting inclusion of sustained engagement with positive measure; it could then state Definition~1 in full, prove Proposition~\ref{p:noneg} and Proposition~\ref{p:neutral}, and express the comparative claims of EXI-01-d. It would need a predicate for vindication from the detached standpoint to state the reconstruction of the sceptical challenge and prove Proposition~\ref{p:vind}. Each of these would add premises, not remove them, and each would make the module's dependence on its interpretation more visible, not less. Volume~III, Part~D, states the measure-theoretic version of Definition~1 and proves the propositions of Volume~I that concern degree under it.

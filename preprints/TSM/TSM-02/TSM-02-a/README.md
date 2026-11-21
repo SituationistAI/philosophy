@@ -13,7 +13,8 @@ No. The impression of passage is a feature of experience, not of time.
 ## Files
 
 - [`TSM-02-a.pdf`](TSM-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

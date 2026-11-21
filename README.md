@@ -8,10 +8,10 @@ This repository contains philosophical manuscripts and supporting proof artifact
 The current catalogue contains 719 manuscripts organized into 372 families. A family groups related papers, which may include a principal result, companion arguments, consequences, alternative proofs or errata. Each family is classified by philosophical discipline.
 
 - New readers can begin with the [reading guide](READING_GUIDE.md).
-- Start with the [overview](overview.md) for descriptions of the families.
+- Start with the [overview](overview.pdf) for descriptions of the families.
 - Use the [manuscript map](CONTENTS.md) to find individual papers and their supporting materials.
 - The [`preprints/`](preprints/) directory contains PDFs, source files, and manuscript-specific citation and build instructions.
-- The [Lean library](lean/) and [formalization catalogue](formalization/README.md) describe the available formal proofs, their associated papers, and verification configurations. About 43% of top-line results are formalized.
+- The [Lean library](lean/README.md) and [formalization catalogue](lean/formalization.yaml) describe the available formal proofs, their associated papers, and verification configurations. About 43% of top-line results are formalized.
 - The [apparatus](apparatus/README.md) gives cross-references, a citation graph and indices computed from the sources.
 - Updates to the repository are described in the [history](history.md).
 
@@ -38,13 +38,19 @@ The current catalogue contains 719 manuscripts organized into 372 families. A fa
 | Philosophy of Mathematics | MTH | 18 | 35 | 10 |
 | **Total** | | **372** | **719** | **159** |
 
+## How the results were produced
+
+Most results were produced by the same procedure. An internal model was given a single question and asked for a manuscript answering it, with one prompt and one agent; some questions took several attempts. About 4,000 questions were posed during the evaluation, and the average compute per retained manuscript was about three hours. Manuscripts were then checked for compilation, internal cross-references and consistency with the rest of the collection, and the formalized arguments were checked in Lean.
+
+There are two kinds of exception. For the computed volumes (TSM-01-a, PID-01-a, MET-01-b, POL-01-c, REL-01-b, REL-01-c) and the inventories (MTH-01-a, MET-02-b, EPI-01-b, SCI-06-a, AES-01-a, EXI-10-b, ETH-12-a), the model also wrote the programs in each manuscript's `gen/` directory and ran them; the tables are their output. The multi-volume works are released as first volumes, with plans of the later volumes; errata to those volumes are released where they were produced.
+
+## Versions and citations
+
+The release history is preserved in [history.md](history.md). Corrections are recorded as new versions of the affected manuscripts, each with a changelog in its directory. To cite an individual manuscript, use the BibTeX entry in its directory; to cite the collection, see [`CITATION.cff`](CITATION.cff).
+
 ## Status of the results
 
 The manuscripts are at different stages of verification. A formalization establishes that the main argument of a manuscript is valid relative to its stated premises; it does not establish that the premises are true. Some of the unformalized results could have issues. Corrections are recorded in the [history](history.md) and in the changelog of each affected manuscript.
-
-## Citation
-
-To cite an individual manuscript, use the BibTeX entry in its directory. To cite the collection as a whole, see [`CITATION.cff`](CITATION.cff).
 
 ## License
 

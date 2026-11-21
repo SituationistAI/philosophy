@@ -13,7 +13,8 @@ Yes. Natural kinds are real divisions in nature, though fewer than standard taxo
 ## Files
 
 - [`MET-27-a.pdf`](MET-27-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

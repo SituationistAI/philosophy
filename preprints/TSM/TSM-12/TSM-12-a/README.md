@@ -13,7 +13,8 @@ Yes. Future contingents are neither true nor false until they are settled.
 ## Files
 
 - [`TSM-12-a.pdf`](TSM-12-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

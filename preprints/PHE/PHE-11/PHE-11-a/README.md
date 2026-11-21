@@ -13,7 +13,8 @@ Yes. The world is the horizon of all horizons, and therefore has no horizon of i
 ## Files
 
 - [`PHE-11-a.pdf`](PHE-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

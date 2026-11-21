@@ -13,7 +13,8 @@ Yes, up to moderate cost. Beyond that point, rescue is supererogatory (see ETH-1
 ## Files
 
 - [`ETH-18-a.pdf`](ETH-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

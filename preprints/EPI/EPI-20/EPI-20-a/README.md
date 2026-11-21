@@ -13,7 +13,8 @@ Yes. Closure holds; one knows that the zebra is not a cleverly disguised mule.
 ## Files
 
 - [`EPI-20-a.pdf`](EPI-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

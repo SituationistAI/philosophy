@@ -13,7 +13,8 @@ Yes. Moral progress is real and measurable as the expansion of the moral circle,
 ## Files
 
 - [`MTE-19-a.pdf`](MTE-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

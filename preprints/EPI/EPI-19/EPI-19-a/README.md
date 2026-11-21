@@ -13,7 +13,8 @@ Yes. If it seems to a subject that p, she has prima facie justification for beli
 ## Files
 
 - [`EPI-19-a.pdf`](EPI-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 
