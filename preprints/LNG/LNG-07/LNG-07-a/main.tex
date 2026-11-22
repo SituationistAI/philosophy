@@ -1,0 +1,181 @@
+\documentclass{situationist-preprint}
+
+\title{Against Private Language}
+\msid{LNG-07-a}
+\msfamily{LNG-07}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_07.lean}
+\mskeywords{private language; rule-following; Wittgenstein; criterion of correctness; Robinson Crusoe; communication; sensation language}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Could there be a language whose words refer to what only its speaker can know, so that another person could not understand it? Wittgenstein argued that there could not, and the argument has been reconstructed and contested ever since. We give a reconstruction with three premises: following a rule requires a standard of correctness independent of how things seem to the follower; any such standard is one that someone other than the follower could come to know; and communication by a rule requires that the hearer could know it. From these it follows that a rule private to its speaker can neither be followed nor used to communicate, and so that there is no private language. The proof is formalized in Lean. We defend the second premise by a dilemma: a purported check on private rule-following either consists in further seemings, and so is not independent, or involves something another could know, and so the rule is not private. We show that the argument does not exclude a solitary language, which is the point of Ayer's Crusoe, and that it does not deny private sensations, only private rules for talking about them.
+\end{abstract}
+
+\section{The problem}
+
+A private language, in the sense of \citet[\S243]{Wittgenstein1953}, is one whose words refer to what only the speaker can know, his immediate private sensations, so that another person cannot understand it. The question is not whether someone could speak a language that in fact no one else speaks, as the last speaker of a dying language does, nor whether a person could keep a code no one else has cracked. It is whether there could be a language that no one else could understand, because what fixes the meanings of its words is accessible only to the speaker.
+
+Wittgenstein's discussion centers on the diary case \citep[\S258]{Wittgenstein1953}. I want to record the recurrence of a sensation, and write the sign \enquote{S} in a diary whenever I have it. No definition of \enquote{S} can be given in public terms; I fix its meaning by concentrating my attention on the sensation, a kind of private ostensive definition. Wittgenstein's objection is that I have then no criterion of correctness for future uses of \enquote{S}: whatever will seem right to me is right, and that means only that here we cannot speak of right. The rule-following sections draw the general moral that to think one is following a rule is not to follow it, and therefore that a rule cannot be followed privately \citep[\S202]{Wittgenstein1953}.
+
+The reception divided early. \citet{Ayer1954} objected that a Robinson Crusoe isolated from birth could invent names for the birds and plants of his island, and that every language user relies on memory without independent checks; \citet{Rhees1954} defended Wittgenstein in the same symposium, and \citet{Malcolm1954} gave the reconstruction on which the private linguist cannot distinguish remembering correctly from seeming to remember. \citet{Kripke1982} read the argument as a consequence of the sceptical paradox about rules, with the conclusion that rule-following requires a community, and \citet{Blackburn1984} replied that an isolated individual can have as good a standard of correctness as a community. \citet{Fogelin1976} and \citet{Kenny1973} gave careful reconstructions that separate the argument from verificationism.
+
+We argue that there can be no private language: a language whose rules only its speaker could know can neither be followed nor be used to communicate. The argument is not verificationist, and it does not rely on Kripke's community view, which LNG-05 rejects.
+
+\section{Framework}
+
+\begin{definition}[Private rule]\label{d:private}
+A rule is \emph{private} to a speaker if no one other than that speaker could know what it requires.
+\end{definition}
+
+\begin{definition}[Independent standard]\label{d:standard}
+A speaker's applications of a rule have an \emph{independent standard} of correctness if there is a fact, other than how things seem to the speaker, that determines whether an application is correct.
+\end{definition}
+
+\begin{assumption}[Standard]\label{a:standard}
+A speaker follows a rule only if her applications of it have an independent standard of correctness.
+\end{assumption}
+
+\begin{assumption}[Shareability]\label{a:share}
+If a speaker's applications of a rule have an independent standard of correctness, then someone other than the speaker could know what the rule requires.
+\end{assumption}
+
+\begin{assumption}[Communication]\label{a:comm}
+To communicate by means of a rule is to communicate with someone other than oneself, who could know what the rule requires.
+\end{assumption}
+
+Assumption~\ref{a:standard} states the distinction between following a rule and seeming to oneself to follow it. A rule is something one can get wrong; if whatever seems correct to the speaker is correct, she is not following a rule but merely acting. The assumption does not require that errors be detected, or even detectable by the speaker at the time; it requires only that there be a fact, distinct from her impressions, that settles correctness. This is weaker than verificationism and weaker than the requirement of an actual community. Assumption~\ref{a:comm} is close to definitional: a hearer who could not know what a sign's rule requires could not understand the sign, and what is not understood is not communicated.
+
+Assumption~\ref{a:share} carries the weight. We defend it in Section~\ref{s:share}.
+
+\section{The argument}
+
+\begin{theorem}\label{t:follow}
+No speaker follows a rule private to her.
+\end{theorem}
+
+\begin{proof}
+Suppose a speaker follows a rule private to her. By Assumption~\ref{a:standard}, her applications have an independent standard of correctness. By Assumption~\ref{a:share}, someone other than her could know what the rule requires. This contradicts Definition~\ref{d:private}.
+\end{proof}
+
+\begin{corollary}\label{c:comm}
+No one communicates by means of a rule private to her.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:comm}, communication by the rule is with someone other than the speaker, who could know what it requires, contrary to Definition~\ref{d:private}.
+\end{proof}
+
+\begin{theorem}[Main result]\label{t:main}
+A language whose rules only its speaker could know can neither be followed nor used to communicate.
+\end{theorem}
+
+\begin{proof}
+From Theorem~\ref{t:follow} and Corollary~\ref{c:comm}, applied to each rule of the language.
+\end{proof}
+
+\begin{proposition}[Crusoe]\label{p:crusoe}
+Assumptions~\ref{a:standard} and~\ref{a:share} are consistent with a speaker's following a rule that, as it happens, only she knows.
+\end{proposition}
+
+\begin{proof}
+Take two possible speakers, one of whom is actual and follows a rule that the other could know but does not. The standard for her applications is something the other could come to know. Both assumptions hold, and she follows a rule known only to her.
+\end{proof}
+
+Proposition~\ref{p:crusoe} marks the scope of the argument. It excludes rules no one else could know, not rules no one else does know. A solitary speaker, the inventor of a code, the last speaker of a language and a Crusoe isolated from birth all follow rules that are not private in the sense of Definition~\ref{d:private}.
+
+\section{Defending shareability}\label{s:share}
+
+What could the independent standard for the diary-keeper's \enquote{S} be? There are two kinds of candidates.
+
+The first consists of further states of the speaker that are as private as the sensation itself: her memory of the original sample, her impression that this sensation matches it, her sense that \enquote{S} fits. These are seemings. A check of one seeming against another is not a check against something independent of how things seem to her. Wittgenstein's comparison is with buying a second copy of the morning paper to assure oneself that what the first says is true \citep[\S265]{Wittgenstein1953}. The point is not that memory is fallible, which it is in public languages too, but that here there is nothing beyond the memory for it to be right or wrong about, except a further impression of the same kind.
+
+The second kind consists of anything that is not a seeming of the speaker's: a correlation of the sensation with a rise in blood pressure \citep[\S270]{Wittgenstein1953}, a pattern among her bodily states, a causal regularity, or the sensation itself considered as a state of a kind that has instances in others. Each of these is a fact that someone other than the speaker could come to know. If the standard for \enquote{S} is the rise in blood pressure, a physician can know when \enquote{S} is correctly applied. If the standard is that the sensation is of a natural kind, others who have sensations of that kind, or who can identify its realizer, can know what the rule requires. Either way the rule is not private.
+
+The dilemma generalizes into Assumption~\ref{a:share}. A fact that only the speaker could know is a fact about how things seem to her; any other fact is in principle knowable by someone else. The first half of this claim is the privacy of the subjective that the defender of a private language himself relies on; the second half says only that facts that are not facts of the speaker's own perspective are not locked inside it. So an independent standard, being by definition not a seeming of the speaker's, is knowable by another.
+
+\section{Objections and replies}
+
+\begin{objection}[Crusoe]
+A Robinson Crusoe isolated from birth could invent a language for his surroundings and his sensations. No one else knows it, and no one checks him. If he can follow its rules, the argument fails \citep{Ayer1954}.
+\end{objection}
+
+\begin{reply}
+Crusoe's language is solitary, not private. A visitor to the island could learn it by watching him name the birds, and could learn his words for sensations by observing the circumstances and the behavior with which they occur. Proposition~\ref{p:crusoe} shows that the premises permit his rule-following. The argument requires no actual community; in this it differs from the reading of \citet{Kripke1982}, which LNG-05 rejects in rejecting the sceptical paradox on which it rests.
+\end{reply}
+
+\begin{objection}[Memory]
+Every speaker relies on memory to apply words consistently, and in the end must trust it without independent confirmation. If memory suffices in the public case, it suffices in the private case.
+\end{objection}
+
+\begin{reply}
+The argument does not require that the speaker confirm her memory; it requires that there be something for her memory to be right about besides further memories. In the public case there is: whether yesterday's object was red is settled by the object, whatever anyone remembers. In the private case, ex hypothesi, the only thing beyond the present impression is the past sensation, and if its being of the same kind as the present one were a fact independent of her impressions, it would be one another could know (Section~\ref{s:share}).
+\end{reply}
+
+\begin{objection}[Theory]
+An isolated individual can check her private applications against an elaborate theory of her inner life: regularities among her sensations, their connections with her moods and actions. Such a theory provides as much of a standard as a community does \citep{Blackburn1984}.
+\end{objection}
+
+\begin{reply}
+The theory's terms fall under the dilemma. If they concern only her sensations as they seem to her, the theory is a structure of seemings, and coherence among seemings is not correctness. If they concern her actions, her body or her environment, the theory connects the sensations with facts that others could know, and the rules for \enquote{S} become knowable by others through those connections. Blackburn is right that an individual can have a standard without a community; he is wrong if he thinks the standard can be private.
+\end{reply}
+
+\begin{objection}[Sensations]
+We do have words for private sensations, and only I can feel my pain. If there are no private languages, either there are no private sensations or we cannot talk about them.
+\end{objection}
+
+\begin{reply}
+Neither follows. The thesis concerns rules, not sensations. Our words for sensations are governed by public rules, tied to the circumstances and behavior in which sensations occur; a person who has pain and says so follows a rule others know. That sensations are subjective and have an intrinsic character is consistent with this, as MND-10 holds of qualia. What Wittgenstein's beetle in the box shows \citep[\S293]{Wittgenstein1953} is that if a word's rule made no contact with anything others could know, the private object would play no role in its meaning; it does not show that there is no beetle.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not establish that meaning is constituted by actual communal agreement, nor that rule-following facts reduce to facts about behavior; it is consistent with LNG-05, on which what a speaker means is a primitive fact. Primitive is not private: others can come to know what a speaker means through the constraints on interpretation that LNG-06 describes. Nor does it establish verificationism, since the independent standard need not be known by anyone, only knowable by someone other than the speaker. Its positive consequence is that the rules which, on LNG-01, constitute meaning are public.
+
+\section{Formalization}
+
+Theorems~\ref{t:follow} and~\ref{t:main}, Corollary~\ref{c:comm} and Proposition~\ref{p:crusoe} are formalized in \nolinkurl{Philosophy/LNG/LNG_07.lean}. Agents, rules and the relations of possible knowledge, following, having an independent standard and communicating are primitives; Definition~\ref{d:private} is a definition; Assumptions~\ref{a:standard}--\ref{a:comm} are axioms.
+
+\begin{lstlisting}
+def Private (r : Rule) (s : Agent) : Prop :=
+  ∀ a, CouldKnow a r → a = s
+
+theorem no_private_language (s : Agent) (r : Rule)
+    (hp : Private r s) :
+    ¬ Follows s r ∧ ∀ h, ¬ Communicates s h r
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.LNG_07.no_private_language' depends on axioms:
+  [Philosophy.LNG_07.Agent, Philosophy.LNG_07.Communicates,
+   Philosophy.LNG_07.CouldKnow, Philosophy.LNG_07.Follows,
+   Philosophy.LNG_07.Rule,
+   Philosophy.LNG_07.communication_requires_knowledge,
+   Philosophy.LNG_07.following_requires_standard,
+   Philosophy.LNG_07.standard_shareable]
+'Philosophy.LNG_07.crusoe' does not depend on any axioms
+\end{lstlisting}
+
+The last three axioms are Assumptions~\ref{a:standard}, \ref{a:share} and~\ref{a:comm}; the others are the primitives. Proposition~\ref{p:crusoe} is proved in a concrete model and depends on no axioms.
+
+\section{Conclusion}
+
+A rule is followed only if there is a standard of correctness independent of how things seem to the follower, and any such standard is one that another could come to know. A rule only its speaker could know therefore cannot be followed, and since communication requires a hearer who could know the rule, it cannot be used to communicate either. There is no private language. There can be solitary languages, and there are private sensations; what there cannot be is a rule for talking about them that no one else could learn.
+
+\begin{thebibliography}{99}\small
+\bibitem[Ayer(1954)]{Ayer1954} Ayer, A.~J. (1954). Can there be a private language? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 28, 63--76.
+\bibitem[Blackburn(1984)]{Blackburn1984} Blackburn, S. (1984). The individual strikes back. \emph{Synthese}, 58(3), 281--301.
+\bibitem[Fogelin(1976)]{Fogelin1976} Fogelin, R.~J. (1976). \emph{Wittgenstein}. Routledge \& Kegan Paul.
+\bibitem[Kenny(1973)]{Kenny1973} Kenny, A. (1973). \emph{Wittgenstein}. Allen Lane.
+\bibitem[Kripke(1982)]{Kripke1982} Kripke, S.~A. (1982). \emph{Wittgenstein on Rules and Private Language}. Harvard University Press.
+\bibitem[Malcolm(1954)]{Malcolm1954} Malcolm, N. (1954). Wittgenstein's \emph{Philosophical Investigations}. \emph{Philosophical Review}, 63(4), 530--559.
+\bibitem[Rhees(1954)]{Rhees1954} Rhees, R. (1954). Can there be a private language? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 28, 77--94.
+\bibitem[Wittgenstein(1953)]{Wittgenstein1953} Wittgenstein, L. (1953). \emph{Philosophical Investigations}. Blackwell.
+\end{thebibliography}
+
+\end{document}

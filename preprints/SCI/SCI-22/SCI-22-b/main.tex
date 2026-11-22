@@ -1,0 +1,68 @@
+\documentclass{situationist-preprint}
+
+\title{Unverified Results and Their Status}
+\msid{SCI-22-b}
+\msfamily{SCI-22}
+\msdiscipline{Philosophy of Science}
+\mstype{Companion manuscript}
+\mskeywords{machine-generated results; verification; formal proof; premises; candidate results; reliability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+SCI-22-a argues that machine-generated results count as science when, and only when, they are independently verified. We describe the status of those that are not. An unverified result is a candidate: a claim submitted for checking, which may be true and may be evidence of a kind, but which has not acquired the standing of a scientific result. The reliability of its generator gives a reason to expect it to pass a check, not a substitute for the check. The same holds of the parts of a formally verified result that the verification does not reach. A formal proof verifies the entailment from premises to conclusion; the premises, and therefore the conclusion taken by itself, remain unverified.
+\end{abstract}
+
+\section{Candidates}
+
+By Definition~2.1 of SCI-22-a, a body of candidate results is a list of claims together with the outcome of a check applied to each. Theorem~3.3 of SCI-22-a gives a result the status of science if it has passed an independent check that is sound or, for empirical results, that approximates soundness to the degree required of human results. A result to which no such check has been applied is not thereby false or worthless. Its status is that of a candidate.
+
+\begin{definition}\label{d:candidate}
+A result is a \emph{candidate} if it has been made available for checking and has not passed an independent check of the kind required by Theorem~3.3 of SCI-22-a.
+\end{definition}
+
+\begin{proposition}\label{p:reliability}
+The reliability of the process that generated a candidate gives a reason to expect that it would pass a sound check. It does not give the candidate the status of a scientific result.
+\end{proposition}
+
+\begin{proof}
+If a generator produces true claims with high frequency, a candidate from it is probably true, and so probably passes a sound check. But by Proposition~3.1 of SCI-22-a, what confers status is passing the check, whatever generated the candidates; and by SCI-01 the mark of science is having survived error-correction, not having been produced by a reliable source. A probably true result that has not been checked has not survived error-correction.
+\end{proof}
+
+This parallels the treatment of human results. A claim by a reliable expert that has not been reviewed, replicated or exposed to criticism is a candidate in the same sense, and the reputation of the expert is, in the terms of SCI-22-a, a matter of efficiency: it predicts which candidates will pass, not which have \citep{Longino1990}.
+
+\section{The unverified part of a verified result}
+
+A formal proof checked by machine is the clearest sound check, but it checks something specific.
+
+\begin{proposition}\label{p:premises}
+If a formal proof verifies that premises $P_1,\dots,P_n$ entail a conclusion $C$, the verified result is the entailment. The premises, and $C$ considered apart from them, have the status of candidates unless they are independently verified.
+\end{proposition}
+
+\begin{proof}
+The checker establishes that the formal statement of $C$ is derivable from the formal statements of the $P_i$. It does not establish that the $P_i$ are true, nor that the formal statements correctly express the claims they are meant to express. A sound check of the entailment passes only true entailments, and an entailment from candidates to $C$ confers on $C$ no status higher than that of the conjunction of the $P_i$.
+\end{proof}
+
+Where the premises are mathematical axioms accepted on other grounds, the residue is small. Where they are empirical or philosophical claims, it is the substance of the matter. The machine-checked proof of the four-color theorem verifies the entailment from the axioms of the proof assistant's logic to the formal statement \citep{Gonthier2008}; debate over the first computer-assisted proof concerned whether a check that no human could survey yields knowledge at all \citep{Tymoczko1979}, a question since answered by appeal to the reliability of checking as a source of warrant \citep{Burge1998}. A formalized philosophical argument verifies far less: its premises are claims that no proof checker can assess. The formally verified results of the present collection are of this kind, and their premises count as unverified.
+
+\begin{objection}
+If the premises of a formalized argument are unverified, the formalization adds nothing.
+\end{objection}
+
+\begin{reply}
+It adds the verification of the entailment, which is not nothing: it removes one source of error, the invalid step, and makes the premises explicit, so that criticism can be directed at them. By Proposition~\ref{p:premises} the formalization changes the status of the inference, not of the premises, and it makes plain which is which.
+\end{reply}
+
+\section{Conclusion}
+
+An unverified machine-generated result is a candidate. Its generator's reliability is a reason to check it, not a reason to accept it unchecked. A formally verified result is verified in its entailment and unverified in its premises, and its conclusion inherits the status of the premises.
+
+\begin{thebibliography}{99}\small
+\bibitem[Burge(1998)]{Burge1998} Burge, T. (1998). Computer proof, apriori knowledge, and other minds. \emph{Philosophical Perspectives}, 12, 1--37.
+\bibitem[Gonthier(2008)]{Gonthier2008} Gonthier, G. (2008). Formal proof---the four-color theorem. \emph{Notices of the American Mathematical Society}, 55(11), 1382--1393.
+\bibitem[Longino(1990)]{Longino1990} Longino, H.~E. (1990). \emph{Science as Social Knowledge}. Princeton University Press.
+\bibitem[Tymoczko(1979)]{Tymoczko1979} Tymoczko, T. (1979). The four-color problem and its philosophical significance. \emph{The Journal of Philosophy}, 76(2), 57--83.
+\end{thebibliography}
+
+\end{document}

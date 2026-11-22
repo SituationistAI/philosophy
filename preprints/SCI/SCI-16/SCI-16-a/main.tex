@@ -1,0 +1,349 @@
+\documentclass{situationist-preprint}
+
+\title{From Correlation to Causation}
+\msid{SCI-16-a}
+\msfamily{SCI-16}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_16.lean}
+\mskeywords{causal inference; correlation; causal Markov condition; faithfulness; d-separation; Markov equivalence; common cause}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Correlation is not causation: every pattern of statistical dependence among a set of variables is compatible with many causal structures, including structures in which the direction of every causal relation is reversed. We argue that this slogan, though true, does not support the scepticism about causal inference from statistics that it is often taken to express. Correlations together with a causal graph satisfying the causal Markov and faithfulness conditions license causal conclusions, some of which go beyond anything the correlations alone could indicate. We state the framework of Spirtes, Glymour and Scheines and of Pearl, prove that the Markov condition alone licenses nothing beyond the principle of the common cause, and prove that with faithfulness the conditional independences fix the adjacencies and the unshielded colliders of the graph, and therefore, in suitable cases, the direction of causation between two correlated variables. The three-variable core of the argument, including the indistinguishability of chain and fork and a case of cancelling paths, is formalized in Lean. We defend the two conditions against the objections of Cartwright, Sober and others, and relate the type-level causal claims so licensed to the account of actual causation of MET-04.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+\subsection{Correlation without causation}
+
+The statistician's warning that correlation does not imply causation is as old as the theory of correlation. \citet{Yule1926} showed that two time series with trends, such as the proportion of marriages solemnized in church and the mortality rate in England over half a century, can be highly correlated without any connection between the processes they record. \citet{Simpson1951} showed that an association present in each of several subpopulations can vanish or reverse in their union, so that the sign of a correlation depends on which variables one conditions on. In the Berkeley admissions data of \citet{Bickel1975}, women were admitted at a lower rate than men overall but at a rate equal to or higher than men in most departments, because women applied disproportionately to departments that admitted few applicants. \citet{Fisher1958} argued that the correlation between smoking and lung cancer might be due to a common genetic cause of the inclination to smoke and the susceptibility to cancer, and that the epidemiological data could not exclude this.
+
+Three ways in which a correlation between $X$ and $Y$ can fail to reflect a causal relation between them are illustrated by these cases: a common cause of both, a selection or conditioning that induces the dependence, and the coincident trends of unrelated processes. A fourth is the reversal of direction: $Y$ may cause $X$. Since a correlation is symmetric and causation is not, a correlation can at most indicate that some causal connection exists, not which way it runs.
+
+\citet{Reichenbach1956} formulated the principle of the common cause: if two events are correlated, and neither causes the other, they have a common cause, and conditional on it they are uncorrelated. The principle connects correlation to causation, but only disjunctively. It says that a correlation has some causal explanation, not which.
+
+\subsection{From probabilistic causation to causal graphs}\label{s:history}
+
+The first philosophical theories of probabilistic causation tried to define causation as correlation that survives conditioning. \citet{Suppes1970} defined a prima facie cause as an earlier event that raises the probability of a later one, and a genuine cause as a prima facie cause whose correlation with the effect is not screened off by any still earlier event. \citet{Cartwright1979} showed that the definition requires conditioning on the right factors, and that the right factors are causal: one must hold fixed the other causes of the effect, and Simpson's paradox shows that conditioning on the wrong ones reverses the sign of the association. She concluded that causal laws cannot be reduced to probabilities, a thesis she later summarized in the slogan \enquote{no causes in, no causes out} \citep{Cartwright1989}. The reductive project failed, but it left a correct insight: probabilities constrain causal structure given some causal assumptions.
+
+The graphical framework made the insight exact. \citet{Pearl1988} developed directed acyclic graphs as representations of conditional independence and introduced the criterion of d-separation; \citet{Geiger1990} and \citet{Lauritzen1990} proved its soundness and completeness for the independences entailed by the Markov condition. \citet{SGS2000}, in a book first published in 1993, interpreted the graphs causally, stated the causal Markov and faithfulness conditions, and gave algorithms that recover causal structure from conditional independences. \citet{Verma1990} characterized the graphs that entail the same independences. \citet{Pearl2009} connected the graphs with structural equations and a calculus of interventions, and showed that a structural model with independent exogenous variables generates a distribution satisfying the Markov condition with respect to its graph. On this framework, a statistical distribution together with the two conditions narrows the causal structures compatible with it to an equivalence class, which in many cases fixes the direction of some causal relations.
+
+The framework met three lines of criticism. \citet{Cartwright1999,Cartwright2007} argued that the Markov condition fails for indeterministic causes with several effects and that faithfulness has no general justification. \citet{Sober2001} gave the example of Venetian sea levels and British bread prices, both rising over the same period and therefore correlated, though neither causes the other and they have no common cause, as a counterexample to the principle of the common cause and hence to the Markov condition. \citet{Freedman1999} argued that the algorithms rest on assumptions that are rarely checkable in practice. \citet{Hausman1999} and \citet{Glymour2010} replied, and the exchange has shaped the subsequent literature, which we discuss in Section~\ref{s:recent}.
+
+\subsection{The thesis}
+
+We defend two claims. The first is negative: correlation is not causation, and more strongly, correlation together with the Markov condition alone licenses no conclusion about the direction of causation and no conclusion that one variable causes another rather than sharing a cause with it. The second is positive: correlation together with a causal graph satisfying both the Markov and the faithfulness conditions licenses causal conclusions, including conclusions about direction. The second claim answers the sceptical reading of the first. The slogan is true, but what it shows is that causal inference from statistics needs causal premises of a general kind, not that it is impossible.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Causal graph]\label{d:graph}
+Let $V$ be a finite set of variables. A \emph{causal graph} over $V$ is a directed acyclic graph with vertex set $V$ in which there is an edge $X \to Y$ iff $X$ is a direct cause of $Y$ relative to $V$: some intervention on $X$ changes the probability distribution of $Y$ when all other variables in $V$ are held fixed by intervention.
+\end{definition}
+
+The interventionist gloss is that of \citet{Woodward2003} and \citet{Pearl2009}. It makes the edges type-level causal relations among variables, relative to a choice of variables. A \emph{path} between $X$ and $Y$ is a sequence of distinct vertices, each adjacent to the next, regardless of the direction of the edges. $X$ is a \emph{cause} of $Y$ if there is a directed path from $X$ to $Y$.
+
+\begin{definition}[Collider]\label{d:collider}
+A vertex $Z$ is a \emph{collider} on a path if both edges of the path that meet at $Z$ point into $Z$. A triple $X - Z - Y$ is \emph{unshielded} if $X$ and $Z$ are adjacent, $Z$ and $Y$ are adjacent, and $X$ and $Y$ are not.
+\end{definition}
+
+\begin{definition}[d-separation]\label{d:dsep}
+A path between $X$ and $Y$ is \emph{blocked} by a set $S$ of vertices not containing $X$ or $Y$ if it contains a non-collider that belongs to $S$, or a collider such that neither it nor any of its descendants belongs to $S$. $X$ and $Y$ are \emph{d-separated} by $S$ if every path between them is blocked by $S$.
+\end{definition}
+
+The idea behind the definition is that dependence flows along chains and forks and is stopped by conditioning on their middle vertex, while it is stopped at a collider unless one conditions on the collider or on one of its effects. Two independent causes of a common effect are independent, but become dependent once the effect is known: if a lawn is wet, learning that it did not rain raises the probability that the sprinkler was on.
+
+\begin{assumption}[Causal Markov condition]\label{a:markov}
+If $X$ and $Y$ are d-separated by $S$ in the causal graph over $V$, then $X$ and $Y$ are independent conditional on $S$ in the population distribution over $V$.
+\end{assumption}
+
+This is the global form of the condition. It is equivalent to the local form, that every variable is independent of its non-descendants conditional on its parents \citep{Lauritzen1990}. It follows from the structural representation: if each variable is a function of its parents and of an exogenous error term, and the error terms are mutually independent, the distribution satisfies the condition with respect to the graph \citep[Theorem~1.4.1]{Pearl2009}.
+
+\begin{assumption}[Faithfulness]\label{a:faith}
+If $X$ and $Y$ are independent conditional on $S$ in the population distribution over $V$, then they are d-separated by $S$ in the causal graph over $V$.
+\end{assumption}
+
+Faithfulness is the converse of the Markov condition. It says that every independence in the distribution is due to the structure of the graph, not to a coincidence of parameters such as two paths whose effects cancel exactly.
+
+\begin{assumption}[Causal sufficiency]\label{a:suff}
+Every common cause of two variables in $V$ is in $V$.
+\end{assumption}
+
+Causal sufficiency is required for the causal reading of Definition~\ref{d:graph} to support the Markov condition: an unmeasured common cause of two variables produces a dependence between them that no d-separation in the graph over $V$ accounts for. We assume it in Sections~\ref{s:alone} and~\ref{s:license} and discuss its relaxation in Section~\ref{s:recent}.
+
+\begin{definition}[Markov equivalence]\label{d:equiv}
+Two graphs over $V$ are \emph{Markov equivalent} if they have the same d-separations.
+\end{definition}
+
+\begin{principle}[Licensing]\label{p:license}
+A causal claim about the variables in $V$ is \emph{licensed} by a distribution $P$ over $V$ relative to a set of conditions if it is true of every graph over $V$ that satisfies those conditions with respect to $P$.
+\end{principle}
+
+Principle~\ref{p:license} makes \enquote{licensing} a relation between statistical evidence, general conditions linking causal graphs to distributions, and causal claims. It is a deductive notion: a licensed claim follows from the distribution and the conditions. The statistical problem of estimating the distribution from a finite sample is a separate inductive step, to which we return in Objection~\ref{o:sample}.
+
+\section{Correlation alone}\label{s:alone}
+
+\begin{proposition}[Markov alone is silent about direction]\label{p:complete}
+Every distribution over $V$ satisfies the Markov condition with respect to every complete directed acyclic graph over $V$.
+\end{proposition}
+
+\begin{proof}
+In a complete graph every two vertices are adjacent, and the one-edge path between them is blocked by no set, since it contains no intermediate vertex. So no two vertices are d-separated by any set, and the Markov condition, whose antecedent is never satisfied, holds vacuously.
+\end{proof}
+
+\begin{corollary}[Correlation is not causation]\label{c:notcause}
+Relative to the Markov condition and causal sufficiency, no distribution over two or more variables licenses, for any pair $X, Y$, the claim that $X$ is a cause of $Y$.
+\end{corollary}
+
+\begin{proof}
+Order the variables so that $Y$ precedes $X$, and form the complete graph in which every edge points from the earlier variable to the later. It is acyclic, $V$ is trivially causally sufficient relative to it, and by Proposition~\ref{p:complete} it satisfies the Markov condition with respect to the distribution. In it every directed path runs from earlier to later variables, so there is none from $X$ to $Y$, and $X$ is not a cause of $Y$. The claim therefore fails in a graph satisfying the conditions.
+\end{proof}
+
+What the Markov condition does license is the principle of the common cause.
+
+\begin{proposition}[Common cause]\label{p:reichenbach}
+Relative to the Markov condition and causal sufficiency, if $X$ and $Y$ are dependent, then either one is a cause of the other or they have a common cause in $V$.
+\end{proposition}
+
+\begin{proof}
+Suppose neither is a cause of the other and they have no common cause. Take any path between them. If it contained no collider it would be a directed path from one to the other, or would consist of two directed paths from some vertex on it to $X$ and to $Y$, which would be a common cause. So every path contains a collider, and since $S = \varnothing$ contains no collider or descendant of one, every path is blocked by $\varnothing$. By the Markov condition $X$ and $Y$ are independent.
+\end{proof}
+
+Proposition~\ref{p:reichenbach} is Reichenbach's principle, in its graphical form. It is the most that correlation together with the Markov condition delivers: that some causal connection exists. Corollary~\ref{c:notcause} shows that the disjunction cannot be narrowed. These two results together are the precise content of the slogan that correlation is not causation.
+
+\section{Correlation with Markov and faithfulness}\label{s:license}
+
+\begin{lemma}[Adjacency]\label{l:adj}
+Under the Markov and faithfulness conditions, $X$ and $Y$ are adjacent in the causal graph iff they are dependent conditional on every set $S \subseteq V \setminus \{X, Y\}$.
+\end{lemma}
+
+\begin{proof}
+If $X$ and $Y$ are adjacent, no set d-separates them, so by faithfulness no set renders them independent. If they are not adjacent, the set of parents of $Y$, or of $X$ if $X$ is a descendant of $Y$, d-separates them; this is the local form of the Markov condition, and by the Markov condition they are independent conditional on that set.
+\end{proof}
+
+\begin{lemma}[Unshielded colliders]\label{l:collider}
+Under the Markov and faithfulness conditions, let $X - Z - Y$ be an unshielded triple, and let $S$ be any set that renders $X$ and $Y$ independent. Then $Z$ is a collider on the triple iff $Z \notin S$.
+\end{lemma}
+
+\begin{proof}
+By faithfulness, $S$ d-separates $X$ and $Y$, so it blocks the path $X - Z - Y$. If $Z$ is a non-collider, the path is blocked only if $Z \in S$. If $Z$ is a collider, the path is blocked only if neither $Z$ nor any descendant of $Z$ is in $S$; in particular $Z \notin S$.
+\end{proof}
+
+Lemmas~\ref{l:adj} and~\ref{l:collider} are the basis of the PC algorithm of \citet{SGS2000}. The first recovers the skeleton of the graph, the second the orientation of its unshielded colliders. The three-variable case shows how the lemmas license causal conclusions.
+
+\begin{theorem}[Three-variable identification]\label{t:three}
+Let $V = \{X, Z, Y\}$, and assume the Markov and faithfulness conditions.
+\begin{enumerate}[label=(\roman*)]
+\item If $X$ and $Y$ are independent, but dependent conditional on $Z$, then $X \to Z \leftarrow Y$, and $X$ and $Y$ are not adjacent.
+\item If $X$ and $Y$ are dependent, but independent conditional on $Z$, then $X$ and $Y$ are not adjacent, $Z$ is adjacent to both, and $Z$ is a direct cause of $X$ or of $Y$.
+\item If $X$ and $Y$ are dependent both unconditionally and conditional on $Z$, they are adjacent.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Under the two conditions, $X$ and $Y$ are independent given $S$ iff they are d-separated by $S$, for $S = \varnothing$ and $S = \{Z\}$. In a graph over three variables, if $X$ and $Y$ are adjacent, neither set separates them. If they are not adjacent and $Z$ is not adjacent to both, there is no path between them and both sets separate them. If they are not adjacent and $Z$ is adjacent to both, the only path is $X - Z - Y$; if $Z$ is a collider on it, $\varnothing$ separates them and $\{Z\}$ does not, and otherwise $\{Z\}$ separates them and $\varnothing$ does not. The three cases of the theorem correspond to three of the four combinations, and in case (ii) the non-collider $Z$ has an edge pointing out of it towards $X$ or towards $Y$.
+\end{proof}
+
+\begin{proposition}[Chain and fork]\label{p:chainfork}
+The chain $X \to Z \to Y$, the reverse chain $X \leftarrow Z \leftarrow Y$ and the fork $X \leftarrow Z \to Y$ are Markov equivalent. Hence no distribution licenses, relative to the Markov and faithfulness conditions, a choice among them.
+\end{proposition}
+
+\begin{proof}
+In each, the only d-separation is that of $X$ and $Y$ by $\{Z\}$. A distribution satisfying the two conditions with respect to one of them therefore satisfies them with respect to the others, and Principle~\ref{p:license} licenses only what is common to all three.
+\end{proof}
+
+The next three propositions show that each case of Theorem~\ref{t:three} is realized, and what happens when faithfulness fails.
+
+\begin{proposition}[Noisy chain]\label{p:exchain}
+Let $X$ be a fair binary variable, let $Z$ equal $X$ with probability $3/4$, and let $Y$ equal $Z$ with probability $3/4$, the noise terms being independent. The distribution satisfies the Markov and faithfulness conditions with respect to the chain $X \to Z \to Y$ and with respect to the fork $X \leftarrow Z \to Y$.
+\end{proposition}
+
+\begin{proposition}[Collider]\label{p:excollider}
+Let $X$ and $Y$ be fair and independent binary variables, and let $Z$ be their disjunction. The distribution satisfies the Markov and faithfulness conditions with respect to the collider $X \to Z \leftarrow Y$.
+\end{proposition}
+
+\begin{proposition}[Cancellation]\label{p:exxor}
+Let $X$ and $U$ be fair and independent binary variables, let $Z = X \oplus U$ and $Y = X \oplus Z$, where $\oplus$ is exclusive disjunction. The causal graph of this structure over $\{X, Z, Y\}$ is the complete graph $X \to Z \to Y$, $X \to Y$. The distribution satisfies the Markov condition with respect to it but not faithfulness, since $X$ and $Y$ are independent; and it satisfies both conditions with respect to the collider $X \to Z \leftarrow Y$.
+\end{proposition}
+
+\begin{proof}[Proof of Propositions~\ref{p:exchain}--\ref{p:exxor}]
+Each is a finite computation of the joint probabilities of the eight value combinations, carried out in the formalization (Section~\ref{s:formal}). In the case of cancellation, $Y = X \oplus X \oplus U = U$, so $Y$ is independent of $X$, though $Y$ depends on $X$ by both the direct edge and the path through $Z$; given $Z$, $Y$ is determined by $X$.
+\end{proof}
+
+Proposition~\ref{p:exxor} is the canonical failure of faithfulness: two paths from $X$ to $Y$ whose effects cancel exactly. A reasoner who assumed faithfulness would infer from the distribution that $Z$ is a common effect of $X$ and $Y$, which is false of the generating structure. The example shows that faithfulness is not idle in Theorem~\ref{t:three}, and that its failures are coincidences of parameters, not of structure: perturb the noise in either equation and the cancellation disappears.
+
+For graphs of any size, the reach of the two conditions is fixed by the theorem of \citet{Verma1990}.
+
+\begin{theorem}[Verma and Pearl]\label{t:vp}
+Two directed acyclic graphs are Markov equivalent iff they have the same skeleton and the same unshielded colliders.
+\end{theorem}
+
+\begin{corollary}[Licensing]\label{c:license}
+Under the Markov, faithfulness and sufficiency conditions, a distribution over $V$ determines the Markov equivalence class of the causal graph, and every causal claim true of all members of that class is licensed.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:adj} the distribution determines the skeleton, and by Lemma~\ref{l:collider} the unshielded colliders. By Theorem~\ref{t:vp} these determine the equivalence class. Every graph satisfying the conditions with respect to the distribution has exactly the d-separations corresponding to its independences, so lies in that class; Principle~\ref{p:license} gives the rest.
+\end{proof}
+
+The licensed claims include claims that two correlated variables stand in a definite causal relation, with a definite direction.
+
+\begin{proposition}[Orientation]\label{p:orient}
+Let $V = \{X, Y, Z, W\}$, and suppose that under the Markov, faithfulness and sufficiency conditions the distribution exhibits exactly the following independences, together with those they entail: $X$ and $Y$ are independent; $X$ and $W$ are independent conditional on $Z$, and on $\{Z, Y\}$; $Y$ and $W$ are independent conditional on $Z$, and on $\{Z, X\}$. Then $Z$ is a cause of $W$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:adj}, the adjacencies are $X - Z$, $Y - Z$ and $Z - W$: every other pair has a separating set, and these pairs have none, since the stated independences are all there are. By Lemma~\ref{l:collider}, since $Z$ is not in the set $\varnothing$ that separates $X$ and $Y$, the triple $X - Z - Y$ is a collider, $X \to Z \leftarrow Y$. Consider $Z - W$. If the edge were $W \to Z$, then $X - Z - W$ would be an unshielded triple with a collider at $Z$, and by Lemma~\ref{l:collider} $Z$ would belong to no set separating $X$ and $W$; but $\{Z\}$ separates them. So the edge is $Z \to W$.
+\end{proof}
+
+Proposition~\ref{p:orient} is the first of the orientation rules of \citet{Meek1995b}. Its significance for our question is that its conclusion, that $Z$ causes $W$ rather than the reverse, concerns two variables whose correlation, taken by itself, is symmetric. The direction is fixed by the pattern of independences among other variables, interpreted through the two conditions. This is the precise sense in which correlation together with a graph satisfying the Markov and faithfulness conditions licenses causal inference.
+
+\section{Cases}\label{s:cases}
+
+\paragraph{Smoking and lung cancer.} Fisher's hypothesis was that a genotype causes both smoking and lung cancer. Over the variables smoking and cancer alone, the hypothesis violates causal sufficiency, and Corollary~\ref{c:notcause} applies: the correlation does not discriminate. What settled the question was not a better estimate of the correlation but evidence of the kind Proposition~\ref{p:orient} exploits: dose--response relations, the decline in risk after cessation, and the association of cancer with inhaled tar in experimental animals, which together fix a pattern of dependences and independences that the genetic hypothesis could reproduce only by coincidences of parameters, that is, only by violating faithfulness. The criteria of \citet{Hill1965}, though not stated in graphical terms, can be read as a list of such patterns.
+
+\paragraph{Simpson's paradox.} The Berkeley data show an association between sex and admission that reverses on conditioning on department. Which association reflects the effect of sex on admission depends on the graph. If sex affects the choice of department and department affects admission, the department is a mediator, and the question whether admissions committees discriminate is the question of the direct edge from sex to admission, assessed by conditioning on department. The paradox is a paradox only for the view that correlations by themselves carry causal information; given the graph, it dissolves \citep[ch.~6]{Pearl2009}.
+
+\paragraph{Birth control pills and thrombosis.} \citet{Hesslow1976} described a case in which birth control pills cause thrombosis directly and prevent it by preventing pregnancy, itself a cause of thrombosis. If the two effects cancel, the pills are uncorrelated with thrombosis in the population, though they cause it. This is the structure of Proposition~\ref{p:exxor}, and an inference that assumed faithfulness would conclude, wrongly, that the pills are not a cause of thrombosis. The case shows that faithfulness is a substantive assumption. It does not show that it is unreasonable: exact cancellation requires a precise numerical balance that changes with the population's fertility and age, and \citet{Hitchcock2001} distinguishes the net effect, which may be zero, from the component effects along each path, which are not.
+
+\paragraph{Venetian sea levels and British bread prices.} Sober's two series are correlated because both increase over time. The correlation is a property of the time series, and the Markov condition concerns the distribution of variables over a population of units, each unit an independent draw. Successive years are not independent draws from one distribution; a series with a trend is non-stationary. \citet{Hoover2003} argues that for non-stationary series the appropriate relation is cointegration rather than correlation, and that the principle of the common cause, formulated for such data, survives the example. The example tells against a formulation of the Markov condition that ignores the conditions under which a sample represents a distribution, not against Assumption~\ref{a:markov}.
+
+\paragraph{Cartwright's factory.} \citet{Cartwright1999} describes a factory in which a single indeterministic process produces a chemical and, as a by-product, a pollutant, so that the two products occur together or not at all on each run. The chemical and the pollutant are then correlated conditional on the operation of the process, contrary to the local Markov condition applied to a graph in which the operation is their only common parent. The structural representation gives the reply. The case contains a variable not represented, the outcome of the single indeterministic event that produces both, and conditional on it the products are independent. Whether one counts that outcome as a variable or not, the correlation is due to a common cause, and a graph over a causally sufficient set satisfies the condition \citep{Hausman1999}.
+
+\section{Recent literature}\label{s:recent}
+
+\paragraph{The measure of unfaithful parameters.} \citet{SGS2000} and \citet{Meek1995a} showed that, for linear Gaussian and for discrete models, the parameter values for which a distribution is unfaithful to its graph form a set of Lebesgue measure zero in the parameter space. \citet{Uhler2013} showed that the set of parameters for which the distribution is close to unfaithful, in the sense that a dependence is too weak to be detected at a given sample size, has positive measure, which can be large, especially for larger and denser graphs. The result does not refute faithfulness; it shows that its finite-sample counterpart, strong faithfulness, is a more demanding assumption.
+
+\paragraph{Uniform consistency.} \citet{Robins2003} proved that no causal discovery procedure based on faithfulness is uniformly consistent: for every sample size, there are distributions close enough to unfaithful that the procedure errs with high probability. Under a strengthened faithfulness condition, uniformly consistent procedures exist \citep{Kalisch2007}. \citet{ZhangSpirtes2008} decomposed faithfulness into components, showed that some of its failures can be detected from data, and gave procedures that are robust to those that cannot.
+
+\paragraph{When to expect unfaithfulness.} \citet{Andersen2013} argued that faithfulness fails systematically in systems with homeostatic control, in which a variable is held near a set point by feedback, so that its causes are uncorrelated with it in equilibrium. \citet{Weinberger2018} argued that such cases require coordination between parameters that is itself in need of explanation, and that faithfulness is a defeasible default that can be suspended when that explanation is at hand. \citet{Steel2006} discussed how faithfulness interacts with population heterogeneity.
+
+\paragraph{Latent variables and interventions.} Causal sufficiency can be dropped. The FCI algorithm of \citet{SpirtesMeekRichardson1995} recovers, from the independences among observed variables, the causal facts common to all graphs with latent variables that satisfy the two conditions, and \citet{Zhang2008} proved its orientation rules complete. Some conclusions survive: in a pattern like that of Proposition~\ref{p:orient}, that $Z$ causes $W$ holds even when unmeasured common causes are admitted, because a latent common cause of $Z$ and $W$ would make $Z$ a collider on a path from $X$ to $W$ that conditioning on $Z$ opens. Where observational data leave the equivalence class large, interventions shrink it, and \citet{Eberhardt2007} analysed how different kinds of intervention contribute to identifying a graph.
+
+\paragraph{Beyond the equivalence class.} \citet{Peters2017} survey methods that identify the direction of causation between two variables by assumptions on the functional form of the structural equations, for example that the noise is additive and non-Gaussian. These methods go beyond Corollary~\ref{c:license} by adding assumptions, and they confirm its moral: causal conclusions come from statistics together with general conditions on how causal structure is reflected in them.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[No causes in, no causes out]\label{o:circular}
+The licensed conclusions depend on the Markov and faithfulness conditions, which are causal assumptions. The inference does not go from correlation to causation but from causation to causation \citep{Cartwright1989}.
+\end{objection}
+
+\begin{reply}
+We accept that the premises are partly causal; the thesis says that correlation \emph{together with} a graph satisfying the conditions licenses causal inference. But the causal premises are general. They concern the relation between any causal structure and the distributions it generates, not the particular causal facts concluded. Proposition~\ref{p:orient} infers that $Z$ causes $W$ from premises that say nothing about $Z$ and $W$ in particular. Inference that has general premises of the same kind as its conclusion is the normal form of ampliative inference in science; inferring a planet's orbit from its positions and the laws of mechanics is not circular because the laws are dynamical.
+\end{reply}
+
+\begin{objection}[The Markov condition is false]
+Indeterministic common causes and non-stationary series violate the Markov condition, so it cannot serve as a general premise \citep{Cartwright2007,Sober2001}.
+\end{objection}
+
+\begin{reply}
+Section~\ref{s:cases} argues that the cases are failures of causal sufficiency or of the conditions under which a sample represents a population distribution. The structural representation explains why the condition holds when these are met: if each variable is determined by its parents and an independent exogenous term, the condition follows \citep{Pearl2009}. A failure of the condition is therefore evidence of an omitted common cause, of dependent errors, or of a mixed population, and this diagnostic role is what one would expect of a condition that holds of correctly specified systems \citep{Hausman1999}. The thesis concerns causal graphs satisfying the condition; it does not say that every graph over every set of variables does.
+\end{reply}
+
+\begin{objection}[Faithfulness is unjustified]\label{o:faith}
+The measure-zero argument shows only that unfaithful parameters are rare under a particular measure on parameters, and nature does not choose parameters by Lebesgue measure. Homeostatic systems are common and systematically unfaithful \citep{Andersen2013}.
+\end{objection}
+
+\begin{reply}
+Faithfulness is an assumption of the same kind as the assumption, in every empirical inference, that the observed pattern is not a coincidence. The measure-zero result shows that unfaithfulness requires a relation among parameters, and such relations, where they exist, have explanations, such as the feedback in a homeostatic system. Where such an explanation is available, faithfulness is not assumed for the variables involved, and the inference is weakened accordingly \citep{Weinberger2018}. Where none is available, assuming faithfulness is assuming that the independences do not result from an unexplained exact balance. This is not a priori, but it is the kind of defeasible premise that every inference to structure from data relies on, and its failures can in part be detected \citep{ZhangSpirtes2008}.
+\end{reply}
+
+\begin{objection}[Finite samples]\label{o:sample}
+Licensing, as defined, is relative to the population distribution. Scientists have samples, and \citet{Robins2003} show that no procedure based on faithfulness is uniformly consistent.
+\end{objection}
+
+\begin{reply}
+The thesis concerns what the distribution licenses. Estimating the distribution, and in particular deciding whether a weak dependence is a true independence, is statistical inference, and it carries the inductive risk that all such inference carries. The negative result of Robins and colleagues concerns uniform consistency under faithfulness; under strong faithfulness uniformly consistent procedures exist \citep{Kalisch2007}. The finite-sample problem shows that causal conclusions from observational data are less certain than the population theory suggests. It does not show that the population theory is wrong.
+\end{reply}
+
+\begin{objection}[Variables]
+The causal graph is relative to a choice of variables. Coarsen or recombine the variables and the graph, and the conditions, change. The licensed conclusions are therefore artefacts of a representation.
+\end{objection}
+
+\begin{reply}
+Causal relations among variables are relative to the variables, as Definition~\ref{d:graph} states, and the same holds on any interventionist account. What is required is that the variables be distinct and independently manipulable, which is the aptness condition of MET-04. Given apt variables, the conclusions are not artefacts: that $Z$ causes $W$ is a claim about what an intervention on $Z$ would do to $W$, and it is true or false independently of how anyone represents it.
+\end{reply}
+
+\section{Consequences}\label{s:consequences}
+
+\paragraph{Type and token causation.} The edges of a causal graph are type-level relations of causal relevance among variables. MET-04 gives an account of actual causation in structural-equation models: a cause is a counterfactual difference-maker selected by norms of normality. The two accounts concern different relations and are consistent. The graph of a structural model is the graph of its equations, with an edge from $X$ to $Y$ when $Y$'s equation depends non-trivially on $X$, and under independence of the exogenous terms that graph satisfies the Markov condition. Causal discovery in the sense of this manuscript recovers, from statistics, the graph that MET-04 presupposes when it evaluates actual causation in a particular case. What the statistical methods cannot recover are the defaults: which values are normal is not fixed by a distribution over variables, but by statistical, prescriptive and functional norms, as MET-04 argues.
+
+\paragraph{Confirmation.} The licensing relation of Principle~\ref{p:license} is deductive, but the premises are uncertain. On the Bayesian account of confirmation defended in SCI-12, a pattern of independences confirms a causal hypothesis when it is more probable given the hypothesis than otherwise, and a graph that implies an observed independence by its structure makes it far more probable than a graph that could produce it only by cancellation. The faithfulness condition can be read as the limiting case of this comparison.
+
+\section{What the result does not establish}\label{s:limits}
+
+The argument does not establish that the Markov and faithfulness conditions hold of any particular system. It establishes what follows if they do, and Sections~\ref{s:cases} and~\ref{s:objections} argue that they hold of correctly specified systems absent special explanations. It does not show that every causal question can be answered from observational data: Proposition~\ref{p:chainfork} shows that some cannot, and the equivalence class of a graph is in general not a singleton. It does not address estimation from finite samples beyond the remarks in Objection~\ref{o:sample}. Nor does it treat cyclic systems, in which feedback makes the acyclic framework inapplicable without modification.
+
+\section{Formalization}\label{s:formal}
+
+Theorem~\ref{t:three}, Proposition~\ref{p:chainfork}, Proposition~\ref{p:complete} in the three-variable case, and Propositions~\ref{p:exchain}--\ref{p:exxor} are formalized in \nolinkurl{Philosophy/SCI/SCI_16.lean}. A graph over $X$, $Z$, $Y$ assigns to each pair no edge or an edge in one of two directions; all 27 patterns are admitted, so the results hold a fortiori for the acyclic ones. The d-separation of $X$ and $Y$, unconditionally and given $Z$, is computed by the three-variable form of Definition~\ref{d:dsep}. A distribution is given by natural-number weights on the eight value combinations, and independence and conditional independence are stated by cross-multiplication and decided by computation. The Markov and faithfulness conditions enter as hypotheses, restricted to the pair $X$, $Y$, which the full conditions entail. The main theorem reads:
+
+\begin{lstlisting}
+theorem identification (g : G3) (d : Dist)
+    (hm : MarkovXY g d) (hf : FaithfulXY g d) :
+    (indepAt d false = true → indepAt d true = false →
+        g.xz = .fwd ∧ g.zy = .bwd ∧ g.xy = .none) ∧
+    (indepAt d false = false → indepAt d true = true →
+        g.xy = .none ∧ g.xz ≠ .none ∧ g.zy ≠ .none ∧
+        (g.xz = .bwd ∨ g.zy = .fwd)) ∧
+    (indepAt d false = false → indepAt d true = false →
+        g.xy ≠ .none)
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.SCI_16.identification' depends on axioms: [propext]
+'Philosophy.SCI_16.xor_example' depends on axioms: [propext]
+\end{lstlisting}
+
+\noindent The only axiom is propositional extensionality, part of Lean's core logic. The module adds none: once a graph and a distribution are given, the results are combinatorial and arithmetical, and the philosophical premises, Assumptions~\ref{a:markov} and~\ref{a:faith}, appear as hypotheses of the theorems. The formalization does not establish that any actual system satisfies them, and it does not cover Lemmas~\ref{l:adj} and~\ref{l:collider}, Theorem~\ref{t:vp} or Proposition~\ref{p:orient}, which concern graphs of arbitrary size.
+
+\section{Conclusion}\label{s:conclusion}
+
+Correlation is not causation. With the Markov condition alone, a correlation licenses only the disjunctive conclusion of the principle of the common cause, and no conclusion about direction. With the faithfulness condition added, the conditional independences among a set of variables fix which variables are adjacent and which are common effects, and through them the direction of causation between variables whose correlation is, by itself, symmetric. The two conditions are general and defeasible causal premises, defensible for correctly specified systems, and their failures are diagnostic of omitted variables or of explicable coincidences of parameters. Correlation together with a causal graph satisfying them licenses causal inference.
+
+\begin{thebibliography}{99}\small
+\bibitem[Andersen(2013)]{Andersen2013} Andersen, H. (2013). When to expect violations of causal faithfulness and why it matters. \emph{Philosophy of Science}, 80, 672--683.
+\bibitem[Bickel et~al.(1975)]{Bickel1975} Bickel, P.~J., Hammel, E.~A., and O'Connell, J.~W. (1975). Sex bias in graduate admissions: data from Berkeley. \emph{Science}, 187, 398--404.
+\bibitem[Cartwright(1979)]{Cartwright1979} Cartwright, N. (1979). Causal laws and effective strategies. \emph{No\^us}, 13, 419--437.
+\bibitem[Cartwright(1989)]{Cartwright1989} Cartwright, N. (1989). \emph{Nature's Capacities and their Measurement}. Oxford University Press.
+\bibitem[Cartwright(1999)]{Cartwright1999} Cartwright, N. (1999). \emph{The Dappled World: A Study of the Boundaries of Science}. Cambridge University Press.
+\bibitem[Cartwright(2007)]{Cartwright2007} Cartwright, N. (2007). \emph{Hunting Causes and Using Them}. Cambridge University Press.
+\bibitem[Eberhardt and Scheines(2007)]{Eberhardt2007} Eberhardt, F., and Scheines, R. (2007). Interventions and causal inference. \emph{Philosophy of Science}, 74, 981--995.
+\bibitem[Fisher(1958)]{Fisher1958} Fisher, R.~A. (1958). Cancer and smoking. \emph{Nature}, 182.
+\bibitem[Freedman and Humphreys(1999)]{Freedman1999} Freedman, D., and Humphreys, P. (1999). Are there algorithms that discover causal structure? \emph{Synthese}, 121, 29--54.
+\bibitem[Geiger et~al.(1990)]{Geiger1990} Geiger, D., Verma, T., and Pearl, J. (1990). Identifying independence in Bayesian networks. \emph{Networks}, 20, 507--534.
+\bibitem[Glymour(2010)]{Glymour2010} Glymour, C. (2010). What is right with `Bayes net methods' and what is wrong with `hunting causes and using them'? \emph{British Journal for the Philosophy of Science}, 61, 161--211.
+\bibitem[Hausman and Woodward(1999)]{Hausman1999} Hausman, D.~M., and Woodward, J. (1999). Independence, invariance and the causal Markov condition. \emph{British Journal for the Philosophy of Science}, 50, 521--583.
+\bibitem[Hesslow(1976)]{Hesslow1976} Hesslow, G. (1976). Two notes on the probabilistic approach to causality. \emph{Philosophy of Science}, 43, 290--292.
+\bibitem[Hill(1965)]{Hill1965} Hill, A.~B. (1965). The environment and disease: association or causation? \emph{Proceedings of the Royal Society of Medicine}, 58, 295--300.
+\bibitem[Hitchcock(2001)]{Hitchcock2001} Hitchcock, C. (2001). A tale of two effects. \emph{Philosophical Review}, 110, 361--396.
+\bibitem[Hoover(2003)]{Hoover2003} Hoover, K.~D. (2003). Nonstationary time series, cointegration, and the principle of the common cause. \emph{British Journal for the Philosophy of Science}, 54.
+\bibitem[Kalisch and B\"uhlmann(2007)]{Kalisch2007} Kalisch, M., and B\"uhlmann, P. (2007). Estimating high-dimensional directed acyclic graphs with the PC-algorithm. \emph{Journal of Machine Learning Research}, 8, 613--636.
+\bibitem[Lauritzen et~al.(1990)]{Lauritzen1990} Lauritzen, S.~L., Dawid, A.~P., Larsen, B.~N., and Leimer, H.-G. (1990). Independence properties of directed Markov fields. \emph{Networks}, 20, 491--505.
+\bibitem[Meek(1995a)]{Meek1995a} Meek, C. (1995a). Strong completeness and faithfulness in Bayesian networks. In \emph{Proceedings of the Eleventh Conference on Uncertainty in Artificial Intelligence}. Morgan Kaufmann.
+\bibitem[Meek(1995b)]{Meek1995b} Meek, C. (1995b). Causal inference and causal explanation with background knowledge. In \emph{Proceedings of the Eleventh Conference on Uncertainty in Artificial Intelligence}. Morgan Kaufmann.
+\bibitem[Pearl(1988)]{Pearl1988} Pearl, J. (1988). \emph{Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference}. Morgan Kaufmann.
+\bibitem[Pearl(2009)]{Pearl2009} Pearl, J. (2009). \emph{Causality: Models, Reasoning, and Inference}. 2nd ed. Cambridge University Press.
+\bibitem[Peters et~al.(2017)]{Peters2017} Peters, J., Janzing, D., and Sch\"olkopf, B. (2017). \emph{Elements of Causal Inference: Foundations and Learning Algorithms}. MIT Press.
+\bibitem[Reichenbach(1956)]{Reichenbach1956} Reichenbach, H. (1956). \emph{The Direction of Time}. University of California Press.
+\bibitem[Robins et~al.(2003)]{Robins2003} Robins, J.~M., Scheines, R., Spirtes, P., and Wasserman, L. (2003). Uniform consistency in causal inference. \emph{Biometrika}, 90, 491--515.
+\bibitem[Simpson(1951)]{Simpson1951} Simpson, E.~H. (1951). The interpretation of interaction in contingency tables. \emph{Journal of the Royal Statistical Society, Series B}, 13, 238--241.
+\bibitem[Sober(2001)]{Sober2001} Sober, E. (2001). Venetian sea levels, British bread prices, and the principle of the common cause. \emph{British Journal for the Philosophy of Science}, 52, 331--346.
+\bibitem[Spirtes et~al.(1995)]{SpirtesMeekRichardson1995} Spirtes, P., Meek, C., and Richardson, T. (1995). Causal inference in the presence of latent variables and selection bias. In \emph{Proceedings of the Eleventh Conference on Uncertainty in Artificial Intelligence}. Morgan Kaufmann.
+\bibitem[Spirtes et~al.(2000)]{SGS2000} Spirtes, P., Glymour, C., and Scheines, R. (2000). \emph{Causation, Prediction, and Search}. 2nd ed. MIT Press. 1st ed.\ Springer, 1993.
+\bibitem[Steel(2006)]{Steel2006} Steel, D. (2006). Homogeneity, selection, and the faithfulness condition. \emph{Minds and Machines}, 16.
+\bibitem[Suppes(1970)]{Suppes1970} Suppes, P. (1970). \emph{A Probabilistic Theory of Causality}. North-Holland.
+\bibitem[Uhler et~al.(2013)]{Uhler2013} Uhler, C., Raskutti, G., B\"uhlmann, P., and Yu, B. (2013). Geometry of the faithfulness assumption in causal inference. \emph{Annals of Statistics}, 41, 436--463.
+\bibitem[Verma and Pearl(1990)]{Verma1990} Verma, T., and Pearl, J. (1990). Equivalence and synthesis of causal models. In \emph{Proceedings of the Sixth Conference on Uncertainty in Artificial Intelligence}.
+\bibitem[Weinberger(2018)]{Weinberger2018} Weinberger, N. (2018). Faithfulness, coordination and causal coincidences. \emph{Erkenntnis}, 83.
+\bibitem[Woodward(2003)]{Woodward2003} Woodward, J. (2003). \emph{Making Things Happen: A Theory of Causal Explanation}. Oxford University Press.
+\bibitem[Yule(1926)]{Yule1926} Yule, G.~U. (1926). Why do we sometimes get nonsense-correlations between time-series? \emph{Journal of the Royal Statistical Society}, 89.
+\bibitem[Zhang(2008)]{Zhang2008} Zhang, J. (2008). On the completeness of orientation rules for causal discovery in the presence of latent confounders and selection bias. \emph{Artificial Intelligence}, 172, 1873--1896.
+\bibitem[Zhang and Spirtes(2008)]{ZhangSpirtes2008} Zhang, J., and Spirtes, P. (2008). Detection of unfaithfulness and robust causal inference. \emph{Minds and Machines}, 18, 239--271.
+\end{thebibliography}
+
+\end{document}

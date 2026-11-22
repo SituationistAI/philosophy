@@ -1,0 +1,61 @@
+\documentclass{situationist-preprint}
+
+\title{Machines and Mathematical Discovery}
+\msid{MTH-17-a}
+\msfamily{MTH-17}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{computer-assisted proof; surveyability; mathematical discovery; automated reasoning; formal verification}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can machines do mathematics? We argue that they can, in the sense that matters for the question: they can produce new mathematical results, that is, proofs of previously unproved propositions that mathematicians recognize as contributions. We distinguish three roles a machine may play in the production of a result (verifier, searcher and author) and review cases of each, from the four colour theorem to recent collections of machine-generated manuscripts. We then consider the two main objections, that machine proofs are not surveyable and that machines do not understand what they prove. The first was answered by formal verification; the second confuses doing mathematics with understanding it, which are separable in human mathematicians too.
+\end{abstract}
+
+\section{Three roles}
+
+A machine may contribute to a mathematical result in three ways. As a \emph{verifier}, it checks that a proof given to it is correct. As a \emph{searcher}, it explores a space of cases or constructions defined by a human mathematician and finds the one that settles the question. As an \emph{author}, it produces a proof, or a statement and its proof, that no human mathematician specified in advance. The question whether machines can do mathematics is in the first instance the question whether they can play the third role.
+
+\emph{Verification and search.} The proof of the four colour theorem by \citet{AppelHaken1977} reduced the theorem to the reducibility of a large set of configurations and used a computer to check each one. The machine was a searcher and verifier: the strategy was human, the case analysis mechanical. The proof of the Kepler conjecture \citep{Hales2005} had the same structure, and its formal verification in the Flyspeck project \citep{HalesEtAl2017} made the machine the verifier of the whole proof, not only of its cases.
+
+\emph{Authorship.} The Robbins conjecture, that a certain set of equations axiomatizes Boolean algebra, was proved in 1996 by the automated theorem prover EQP \citep{McCune1997}, after resisting human attempts for six decades. The proof was found by the machine, not specified by a human, and it was short enough for mathematicians to check by hand. More recent systems combine learned models with search. \citet{RomeraParedesEtAl2024} used a language model in an evolutionary search over programs to find new constructions in extremal combinatorics, including larger cap sets than were previously known in certain dimensions. \citet{TrinhEtAl2024} produced a system that proves olympiad geometry problems at the level of strong human competitors. Most recently, collections of machine-generated manuscripts have been released that present many results at once, some of them accompanied by formal proofs.
+
+\begin{proposition}\label{p:main}
+Machines can produce new mathematical results.
+\end{proposition}
+
+\begin{proof}
+The Robbins conjecture, the cap-set constructions and the results of the recent collections are new mathematical results, in the sense that they settle previously open questions or improve previously known bounds, and they were produced by machines in the role of author.
+\end{proof}
+
+\section{Two objections}
+
+\begin{objection}[Surveyability]
+\citet{Tymoczko1979} argued that the computer-assisted proof of the four colour theorem is not a proof in the traditional sense, since no mathematician can survey it, and that accepting it introduces empirical considerations, the reliability of the machine, into mathematics.
+\end{objection}
+
+\begin{reply}
+Tymoczko's objection concerned a machine in the role of searcher, whose output was trusted on the basis of its programming. Formal verification changes the epistemic situation: what is trusted is a small proof-checking kernel, which can itself be surveyed, and the statement of the result, which must be read by a human to see that it says what is claimed. The empirical element Tymoczko identified has not been eliminated, since the hardware may fail, but it has been reduced to one shared by every use of a computer to check a calculation, and mathematicians routinely accept such checks.
+\end{reply}
+
+\begin{objection}[Understanding]
+A machine that produces a proof does not understand it. Mathematics aims at understanding, not merely at true theorems, so the machine has not done mathematics.
+\end{objection}
+
+\begin{reply}
+Mathematics aims at both, and the two come apart in human practice as well. A mathematician who proves a result by a long calculation that she cannot explain has proved it, and others may later find the proof that explains why it holds. The machine-produced proof of the Robbins conjecture was subsequently rewritten by human mathematicians in a more perspicuous form. Proposition~\ref{p:main} claims only that machines produce results. Whether they understand them is the question of MTH-18 for philosophy and of MND-08 for thought in general.
+\end{reply}
+
+\begin{thebibliography}{9}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Hales(2005)]{Hales2005} Hales, T.~C. (2005). A proof of the Kepler conjecture. \emph{Annals of Mathematics}, 162(3), 1065--1185.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[McCune(1997)]{McCune1997} McCune, W. (1997). Solution of the Robbins problem. \emph{Journal of Automated Reasoning}, 19(3), 263--276.
+\bibitem[Romera-Paredes et~al.(2024)]{RomeraParedesEtAl2024} Romera-Paredes, B. et~al. (2024). Mathematical discoveries from program search with large language models. \emph{Nature}, 625, 468--475.
+\bibitem[Trinh et~al.(2024)]{TrinhEtAl2024} Trinh, T.~H., Wu, Y., Le, Q.~V., He, H. and Luong, T. (2024). Solving olympiad geometry without human demonstrations. \emph{Nature}, 625, 476--482.
+\bibitem[Tymoczko(1979)]{Tymoczko1979} Tymoczko, T. (1979). The four-color problem and its philosophical significance. \emph{The Journal of Philosophy}, 76(2), 57--83.
+\end{thebibliography}
+
+\end{document}

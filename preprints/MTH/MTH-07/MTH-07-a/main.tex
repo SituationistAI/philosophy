@@ -1,0 +1,168 @@
+\documentclass{situationist-preprint}
+
+\title{Excluded Middle in Mathematics}
+\msid{MTH-07-a}
+\msfamily{MTH-07}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_07.lean}
+\mskeywords{excluded middle; intuitionism; Brouwer; Dummett; bivalence; categoricity; provability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Brouwer held that the law of excluded middle is valid for finite domains and was illegitimately extended to the infinite; Dummett held that a theory of meaning for mathematical language cannot underwrite bivalence, and so cannot underwrite the law. We argue that excluded middle holds in mathematics and that classical logic is the correct logic for mathematical reasoning. The argument rests on the determinacy of mathematical truth, which we defend from the categoricity of second-order arithmetic and the quasi-categoricity of second-order set theory. Given determinacy and the classical clauses for the connectives, every instance of excluded middle is true. The intuitionist's cases are undecided sentences, and we prove, without classical reasoning, that truth is not contained in provability in any system with an undecided sentence, and that no instance of the law can be refuted. Intuitionistic logic is the correct logic of provability; it is not the logic of mathematical truth. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Does every mathematical sentence $A$ satisfy $A \vee \neg A$? Classical mathematics assumes so, in proofs by cases and in the indirect proofs of existence that pervade analysis. \citet{Brouwer1908} denied it. On his view a mathematical statement is true only when a mental construction verifying it has been carried out, and excluded middle, unproblematic for finite domains that can be surveyed, was extended without warrant to infinite ones. \citet{Heyting1930} codified the logic that intuitionistic mathematics uses, and on the interpretation he and Kolmogorov gave, a proof of $A \vee \neg A$ is a proof of one disjunct together with an indication of which, so that the law amounts to the claim that every mathematical problem is solvable.
+
+The most developed case for revision is due to \citet{Dummett1975,Dummett1977}. If the meaning of a mathematical sentence must be fully manifest in the use competent speakers make of it, and if the only use that could manifest knowledge of a truth condition is the recognition of proofs and refutations, then the meaning of a mathematical sentence is given by its proof conditions. On that theory there is no ground for bivalence or for excluded middle. \citet{Prawitz1977} and \citet{Tennant1997} developed the proof-theoretic side of the argument, centred on the requirement that the rules for each connective be in harmony.
+
+LOG-02 argues that classical logic is the one correct logic and that intuitionistic logic correctly describes a different relation, provability. It leaves to the present manuscript the question whether the intuitionist objections succeed for mathematics in particular. We argue that they do not.
+
+\section{Framework}
+
+\begin{definition}[Mathematical sentences]\label{d:sent}
+The \emph{mathematical sentences} are the sentences of the languages of arithmetic, analysis and set theory, closed under negation and disjunction. $T(A)$ says that $A$ is true.
+\end{definition}
+
+\begin{definition}[Provability]\label{d:prov}
+$\mathit{Pr}(A)$ says that $A$ is provable in a fixed, consistent, recursively axiomatized formal system containing arithmetic.
+\end{definition}
+
+\begin{assumption}[Classical clauses]\label{a:clauses}
+For all mathematical sentences $A$ and $B$: $\neg A$ is true if and only if $A$ is not true; $A \vee B$ is true if and only if $A$ is true or $B$ is true.
+\end{assumption}
+
+\begin{assumption}[Determinacy]\label{a:det}
+Every mathematical sentence is true or not true.
+\end{assumption}
+
+\begin{assumption}[Incompleteness]\label{a:inc}
+Some mathematical sentence is neither provable nor refutable in the system of Definition~\ref{d:prov}.
+\end{assumption}
+
+Assumption~\ref{a:clauses} is the classical semantics of the connectives, which LOG-02 defends for sentences with classical content. Assumption~\ref{a:inc} is Gödel's first incompleteness theorem \citep{Goedel1931}. Assumption~\ref{a:det} is the substantive premise, and we defend it now.
+
+MTH-01 argues that numbers exist and are abstract objects, so that arithmetical sentences are about a structure that exists independently of our constructions. The question is whether that structure is fixed sharply enough for every arithmetical sentence to be true or not true of it. Dedekind's categoricity theorem answers it: any two models of second-order Peano arithmetic are isomorphic, and isomorphic models agree on every sentence \citep{Shapiro1991}. Since second-order logic is logic (LOG-09), the second-order induction axiom is part of the concept of natural number, and the concept therefore determines its structure up to isomorphism. An arithmetical sentence is true if it holds in that structure, and holding in a structure, as defined by Tarski's clauses, admits no third possibility. The same argument extends to set theory through the quasi-categoricity theorem of \citet{Zermelo1930}: any two models of second-order Zermelo--Fraenkel set theory are isomorphic or one is isomorphic to an initial segment of the other. Every sentence about a fixed level of the cumulative hierarchy, such as the continuum hypothesis, which concerns sets of reals and is settled at a low level, therefore has the same value in all models. That value is not settled by the first-order axioms; MTH-06 argues that it is falsity.
+
+\section{The argument}
+
+\begin{proposition}[Irrefutability]\label{p:irref}
+For every proposition $A$, the negation of $A \vee \neg A$ is refutable, in intuitionistic logic.
+\end{proposition}
+
+\begin{proof}
+Suppose $\neg(A \vee \neg A)$. If $A$, then $A \vee \neg A$, contradicting the supposition; so $\neg A$. Then $A \vee \neg A$, contradicting the supposition again. Hence $\neg\neg(A \vee \neg A)$. Every step is intuitionistically valid.
+\end{proof}
+
+\begin{theorem}[Excluded middle]\label{t:lem}
+For every mathematical sentence $A$, $A \vee \neg A$ is true.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:det}, $A$ is true or not true. If it is true, $A \vee \neg A$ is true by the disjunction clause. If it is not true, $\neg A$ is true by the negation clause, and $A \vee \neg A$ is true by the disjunction clause.
+\end{proof}
+
+\begin{proposition}[Truth outruns provability]\label{p:outrun}
+It is not the case that every true mathematical sentence is provable in the system of Definition~\ref{d:prov}.
+\end{proposition}
+
+\begin{proof}
+Suppose every true sentence is provable. Let $G$ be the undecided sentence of Assumption~\ref{a:inc}. If $G$ were true, it would be provable, which it is not; so $G$ is not true. By the negation clause, $\neg G$ is true, and so it is provable, which it is not. The proof uses only the right-to-left half of the negation clause and no classical reasoning.
+\end{proof}
+
+\begin{corollary}\label{c:nodec}
+Every instance of excluded middle is true, although not every mathematical sentence is provable or refutable.
+\end{corollary}
+
+\begin{proof}
+The first half is Theorem~\ref{t:lem}. If every sentence were provable or refutable, the sentence $G$ of Assumption~\ref{a:inc} would be, which it is not.
+\end{proof}
+
+Proposition~\ref{p:irref} limits what the intuitionist can claim. She does not, and cannot consistently, assert that some instance of excluded middle is false; she can only decline to assert it. The point extends to whole theories: by the negative translation of \citet{Goedel1933}, every theorem of classical arithmetic has a translation provable in intuitionistic arithmetic, and classical arithmetic is consistent if intuitionistic arithmetic is. Classical reasoning exposes mathematics to no risk of inconsistency that intuitionistic reasoning avoids.
+
+Proposition~\ref{p:outrun} and Corollary~\ref{c:nodec} show what the intuitionist's reluctance tracks. The reading of excluded middle on which it fails is the claim that every sentence is provable or refutable, and that claim is false of every formal system for which Gödel's theorem holds. But it is a claim about provability. Since the proof that the two claims come apart is constructive, the intuitionist cannot reject it on logical grounds. If she identifies truth with provability in a fixed system, Proposition~\ref{p:outrun} refutes the identification; if she identifies it with provability by any means whatever, the relation she then describes is, as LOG-02 argues, provability, and not truth.
+
+\section{The intuitionist objections}
+
+\begin{objection}[Brouwer: illegitimate extrapolation]
+Excluded middle is justified for finite domains by the possibility of checking each case. For infinite domains no such check is possible, and the law is extrapolated beyond the domain in which it was justified.
+\end{objection}
+
+\begin{reply}
+The law is not justified by the possibility of checking cases, even for finite domains. It is justified by the classical clauses together with determinacy, and determinacy for infinite mathematical domains is established by categoricity, not by survey. That a sentence about all natural numbers cannot be verified case by case shows that we may not know its truth value; it does not show that it lacks one.
+\end{reply}
+
+\begin{objection}[Weak counterexamples]
+Let $A$ be the sentence that the decimal expansion of $\pi$ contains a run of one hundred consecutive sevens. We have no proof of $A$ and no proof of $\neg A$. To assert $A \vee \neg A$ is to claim knowledge we do not have.
+\end{objection}
+
+\begin{reply}
+To assert $A \vee \neg A$ is to claim that $A$ is true or $\neg A$ is true, not that we know which. The claim is warranted by Theorem~\ref{t:lem}, whose proof requires no knowledge of which disjunct holds. Brouwer's weak counterexamples are, by Corollary~\ref{c:nodec}, examples of undecided sentences, and undecidedness is compatible with the truth of excluded middle. MTH-12 argues further that some mathematical truths are unknowable in principle; if so, there are sentences whose instance of excluded middle is true although no one could know which disjunct is.
+\end{reply}
+
+\begin{objection}[Dummett: manifestation]
+Knowledge of the meaning of a sentence must be manifestable in use. If the truth condition of an undecidable sentence can obtain without our being able to recognize that it does, knowledge of that condition cannot be manifested, and a truth-conditional theory of meaning for mathematics fails.
+\end{objection}
+
+\begin{reply}
+The objection assumes that understanding a sentence must be manifested by a capacity to recognize its truth value. Understanding of arithmetical sentences is manifested in the acceptance of the rules that constitute the concept of number, including second-order induction, and of the compositional clauses. These are exhibited in use, and by categoricity they determine the structure the sentences are about, and with it a truth condition for each sentence. The proof-theoretic form of the objection, that classical negation violates harmony, is answered in LOG-02 following \citet{Rumfitt2000}: classical logic admits a harmonious bilateral formulation.
+\end{reply}
+
+\begin{objection}[Begging the question]
+Assumption~\ref{a:det} is the law of excluded middle stated in the metalanguage. An argument that assumes it proves nothing to the intuitionist.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:det} is not assumed as a law of logic but argued for from categoricity, a theorem about the structure that mathematical sentences describe. The formalization confirms that it is the only classical premise: Proposition~\ref{p:irref} and Proposition~\ref{p:outrun} use none, and Theorem~\ref{t:lem} uses Assumption~\ref{a:det} and no other classical principle. The intuitionist who rejects it must reject it as a claim about numbers, not as a principle of logic; and by Proposition~\ref{p:irref}, she cannot refute any instance of it.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not show that constructive mathematics is without value: a constructive proof carries information, such as a witness or an algorithm, that a classical proof may lack, and intuitionistic logic is the correct logic of that information (LOG-02). Nor does the result decide any open question. Finally, it does not show that excluded middle holds for sentences outside mathematics that lack classical content, such as the semantically defective sentences of the paradoxes, which LOG-01 treats as neither true nor false.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTH/MTH_07.lean} formalizes Definitions~\ref{d:sent} and~\ref{d:prov}, Assumptions~\ref{a:clauses}--\ref{a:inc}, Propositions~\ref{p:irref} and~\ref{p:outrun}, Theorem~\ref{t:lem} and Corollary~\ref{c:nodec}. The main statements are these.
+
+\begin{lstlisting}
+theorem lem_irrefutable (A : Prop) : ¬¬(A ∨ ¬A)
+theorem lem_true (A : Sent) : T (disj A (neg A))
+theorem truth_outruns_proof : ¬ ∀ A, T A → Pr A
+\end{lstlisting}
+
+The axioms reported by the checker (prefix \texttt{Philosophy.MTH\_07.} omitted) are:
+
+\begin{lstlisting}
+'lem_irrefutable' does not depend on any axioms
+'lem_true' depends on axioms:
+  [Sent, T, clause_disj, clause_neg, determinacy, disj, neg]
+'truth_outruns_proof' depends on axioms:
+  [Pr, Sent, T, clause_neg, neg, undecided]
+\end{lstlisting}
+
+\texttt{Sent}, \texttt{T}, \texttt{Pr}, \texttt{neg} and \texttt{disj} are the primitives of Definitions~\ref{d:sent} and~\ref{d:prov}; \texttt{clause\_neg} and \texttt{clause\_disj} are Assumption~\ref{a:clauses}, \texttt{determinacy} is Assumption~\ref{a:det}, and \texttt{undecided} is Assumption~\ref{a:inc}. No result depends on \texttt{Classical.choice}, from which Lean derives excluded middle: the classical content is located entirely in \texttt{determinacy}.
+
+\section{Conclusion}
+
+Excluded middle holds in mathematics because mathematical truth is determinate and the connectives have their classical meanings. The intuitionist's cases are undecided sentences, and undecidedness is no evidence against truth. Brouwer mistakes the justification of the law, Dummett overlooks the manifest grasp of the concepts that fix mathematical structure, and no instance of the law can be refuted. Intuitionistic logic is the logic of provability; classical logic is the logic of mathematical truth.
+
+\begin{thebibliography}{99}\small
+\bibitem[Brouwer(1908)]{Brouwer1908} Brouwer, L.~E.~J. (1908). De onbetrouwbaarheid der logische principes. \emph{Tijdschrift voor Wijsbegeerte}, 2, 152--158.
+\bibitem[Dummett(1975)]{Dummett1975} Dummett, M. (1975). The philosophical basis of intuitionistic logic. In H.~E. Rose and J.~C. Shepherdson (eds.), \emph{Logic Colloquium '73}, North-Holland.
+\bibitem[Dummett(1977)]{Dummett1977} Dummett, M. (1977). \emph{Elements of Intuitionism}. Clarendon Press.
+\bibitem[G{\"o}del(1931)]{Goedel1931} G{\"o}del, K. (1931). {\"U}ber formal unentscheidbare S{\"a}tze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f{\"u}r Mathematik und Physik}, 38, 173--198.
+\bibitem[G{\"o}del(1933)]{Goedel1933} G{\"o}del, K. (1933). Zur intuitionistischen Arithmetik und Zahlentheorie. \emph{Ergebnisse eines mathematischen Kolloquiums}, 4, 34--38.
+\bibitem[Heyting(1930)]{Heyting1930} Heyting, A. (1930). Die formalen Regeln der intuitionistischen Logik. \emph{Sitzungsberichte der Preussischen Akademie der Wissenschaften, Physikalisch-mathematische Klasse}, 42--56.
+\bibitem[Prawitz(1977)]{Prawitz1977} Prawitz, D. (1977). Meaning and proofs: On the conflict between classical and intuitionistic logic. \emph{Theoria}, 43(1), 2--40.
+\bibitem[Rumfitt(2000)]{Rumfitt2000} Rumfitt, I. (2000). \enquote{Yes} and \enquote{No}. \emph{Mind}, 109(436), 781--823.
+\bibitem[Shapiro(1991)]{Shapiro1991} Shapiro, S. (1991). \emph{Foundations without Foundationalism: A Case for Second-Order Logic}. Clarendon Press.
+\bibitem[Tennant(1997)]{Tennant1997} Tennant, N. (1997). \emph{The Taming of the True}. Clarendon Press.
+\bibitem[Zermelo(1930)]{Zermelo1930} Zermelo, E. (1930). {\"U}ber Grenzzahlen und Mengenbereiche. \emph{Fundamenta Mathematicae}, 16, 29--47.
+\end{thebibliography}
+
+\end{document}

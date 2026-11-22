@@ -1,0 +1,206 @@
+\documentclass{situationist-preprint}
+
+\title{Democracy, Doubly Justified}
+\msid{POL-04-a}
+\msfamily{POL-04}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/POL/POL\_04.lean}
+\mskeywords{democracy; political equality; epistemic democracy; Condorcet jury theorem; epistocracy; instrumentalism; proceduralism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What justifies democracy? Proceduralists hold that democracy is justified intrinsically, because it treats citizens as equals; instrumentalists hold that it is justified by its results. We argue that democracy is justified both intrinsically and instrumentally, and that neither justification suffices alone. Equal standing alone cannot justify democracy, since a fair lottery among proposals gives every citizen an equal chance of having her view prevail and is nonetheless an unjustified way of making law. Good results alone cannot justify democracy, since a reliable epistocracy, if one were available, would be at least as good on that score and is unjustified because it denies citizens equal standing. Democracy is the procedure that satisfies both requirements: it gives each citizen an equal say, and, under conditions of competence that the procedure itself helps to sustain, it tracks good outcomes better than its members do individually. We prove the jury theorem for three voters in a form that also yields its reverse: majority rule amplifies competence above one half and incompetence below it. This dependence explains why the instrumental case is conditional and why it needs the intrinsic one. The arithmetic and the logical skeleton of the main theorem are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Democracy is a procedure for making collective decisions in which each adult citizen has an equal vote and the outcome is fixed, directly or through representatives, by some function of the votes. The question is what makes such a procedure the right one for a political community to use. Two families of answers dominate the literature.
+
+\emph{Instrumentalists} hold that democracy is justified, when it is, by the quality of the decisions it produces or by its other good effects: the protection of interests, the avoidance of famine and tyranny, the education of citizens \citep[ch.~III]{MillCRG}. On the purest version, no procedure has value in itself; we should choose whichever procedure produces the best outcomes, and if some non-democratic procedure did better, we should prefer it \citep{Arneson2003}. Recent defenders of epistocracy draw exactly this conclusion: since voters are on average poorly informed, a regime that weights votes by competence would produce better decisions and is therefore preferable \citep{Brennan2016}.
+
+\emph{Proceduralists} hold that democracy is justified, at least in part, independently of its results, because it is the procedure that expresses or realizes the equal standing of citizens. On Christiano's view, democracy is a public realization of equality under conditions of disagreement: since citizens disagree about justice and each has a fundamental interest in being treated as an equal, only a procedure that gives each an equal say makes that equality publicly evident \citep{Christiano2008}. \citet{Waldron1999} argues in a similar spirit that majority rule respects persons by giving equal weight to each view in the face of reasonable disagreement. \citet{Kolodny2014a,Kolodny2014b} grounds democracy in a claim against relations of inferior standing: a citizen subject to decisions over which others have greater say stands in a relation of subordination to them.
+
+Between the two, \citet{Estlund2008} defends \emph{epistemic proceduralism}: democratic procedures are legitimate because they have a tendency, better than random and acceptable to all qualified points of view, to make correct decisions. Estlund rejects pure proceduralism, which he thinks cannot explain why a coin toss would not do as well, and he rejects epistocracy, on the ground that the identification of the experts is not acceptable to all qualified points of view. Our view agrees with Estlund on the two rejections. It differs in locating the non-instrumental element not in the acceptability of an epistemic claim but in the equal standing that the procedure confers. The theory of legitimacy, as justifiability to all reasonable persons subject to the state, is developed in POL-02; the present manuscript concerns the narrower question of what justifies the democratic form of decision-making.
+
+\section{Two insufficiency arguments}
+
+The main theorem rests on two observations that have often been made separately and rarely combined.
+
+The first is the \emph{lottery observation}. Consider a procedure in which every citizen submits a proposal and one is chosen at random. Each citizen has exactly the same chance as every other of having her proposal adopted; no one stands above anyone else in the procedure. If equal standing in the procedure were sufficient to justify a way of making law, the lottery would be justified. It is not. A lottery among proposals ignores how many citizens support each proposal, makes outcomes unresponsive to reasons and evidence, and would make policy erratic from one decision to the next. The point is used against pure proceduralism by \citet{Estlund2008}; we accept it, and note that it holds whatever value one attaches to equality, since the lottery realizes equality as fully as voting does.
+
+The second is the \emph{epistocracy observation}. Suppose a procedure existed that reliably produced better decisions than democratic voting, for instance a council of the best-informed, or Mill's scheme of plural votes for the educated \citep[ch.~VIII]{MillCRG}. If good results were sufficient to justify a way of making law, this procedure would be justified, and democracy would not be, since it would be dominated. Defenders of epistocracy accept this consequence \citep{Brennan2016}. We do not. A procedure that assigns some citizens greater authority over all fixes in public law a ranking of persons as more and less fit to decide the common affairs. Those ranked lower are subject to decisions over which others have a structurally greater say, and this is a relation of inferior standing \citep{Kolodny2014b}. The epistocrat's best decisions are made over citizens rather than by them. POL-15 argues the related point that expertise, including philosophical expertise, does not confer political authority.
+
+The two observations are symmetric. Each shows that one of the two considerations, taken alone, would justify a procedure that is not justified. Together they leave open, and in Section~4 we argue they support, the view that democracy is justified because it satisfies both.
+
+\section{Framework}
+
+We model the instrumental question with the simplest version of Condorcet's jury theorem \citep{Condorcet1785}. A decision is a choice between two options, one of which is correct by whatever standard of correctness is in question (the better policy, the more just law). Each voter votes for the correct option with probability $p$, independently of the others.
+
+\begin{definition}\label{d:profile}
+A \emph{voting profile} for three voters is a triple of votes, each correct or incorrect. Write $p = a/(a+c)$ with $a$ and $c$ positive natural numbers, so that $a$ and $c$ are the weights of a correct and an incorrect vote. The \emph{weight} of a profile is the product of the weights of its three votes; the weights of the eight profiles sum to $(a+c)^3$. The \emph{majority} of a profile is correct if at least two votes are correct.
+\end{definition}
+
+\begin{definition}\label{d:accuracy}
+The \emph{majority accuracy} $M(a,c)$ is the sum of the weights of the profiles whose majority is correct; the \emph{individual accuracy} $I(a,c) = a(a+c)^2$ is the probability $p$ rescaled to the denominator $(a+c)^3$. Majority rule is more accurate than a single voter exactly when $I(a,c) < M(a,c)$.
+\end{definition}
+
+Rescaling to a common denominator turns the comparison of probabilities into an inequality between natural numbers, which is what makes the comparison exactly checkable.
+
+For the main theorem we need four assumptions. Call a procedure \emph{egalitarian} if it gives each citizen equal standing in the making of decisions, and \emph{reliable} if it tends to produce correct decisions at least as well as the citizens would individually.
+
+\begin{assumption}[Lottery]\label{a:lottery}
+The fair lottery among proposals is egalitarian, and it is not justified.
+\end{assumption}
+
+\begin{assumption}[Epistocracy]\label{a:episto}
+A reliable epistocracy is possible, and it is not justified.
+\end{assumption}
+
+\begin{assumption}[Democracy]\label{a:demo}
+Democracy is egalitarian, and, when citizens' competence on the questions before them exceeds one half, it is reliable.
+\end{assumption}
+
+\begin{assumption}[Joint sufficiency]\label{a:joint}
+A procedure that is both egalitarian and reliable is justified.
+\end{assumption}
+
+Assumptions~\ref{a:lottery} and~\ref{a:episto} are the two observations of Section~2. The reliability clause of Assumption~\ref{a:demo} is what Proposition~\ref{p:condorcet} supports, and its competence condition is discussed in Section~5. Assumption~\ref{a:joint} is the substantive claim of the positive view, defended in Section~4.
+
+\section{The argument}
+
+\begin{proposition}[Jury theorem, three voters]\label{p:condorcet}
+If $1/2 < p < 1$, majority rule among three independent voters of competence $p$ is more accurate than a single voter: $I(a,c) < M(a,c)$ whenever $0 < c < a$.
+\end{proposition}
+
+\begin{proof}
+The profiles with a correct majority are the one in which all three votes are correct, of weight $a^3$, and the three in which exactly two are correct, each of weight $a^2c$. Hence $M(a,c) = a^3 + 3a^2c$. Expanding, $I(a,c) = a(a+c)^2 = a^3 + 2a^2c + ac^2$. The difference $M - I$ is $a^2c - ac^2 = ac(a-c)$, which is positive when $0 < c < a$.
+\end{proof}
+
+In probabilities, majority accuracy is $p^3 + 3p^2(1-p)$, and the difference from $p$ is $p(1-p)(2p-1)$. For $p = 0.6$ the majority of three is correct with probability $0.648$; the general theorem, that accuracy tends to one as the number of voters grows, is the classical result \citep{Condorcet1785,Grofman1983}.
+
+\begin{proposition}[Reverse jury theorem, three voters]\label{p:reverse}
+If $0 < p < 1/2$, majority rule among three independent voters of competence $p$ is less accurate than a single voter: $M(a,c) < I(a,c)$ whenever $0 < a < c$.
+\end{proposition}
+
+\begin{proof}
+By the computation in the proof of Proposition~\ref{p:condorcet}, $M - I = ac(a-c)$, which is negative when $0 < a < c$.
+\end{proof}
+
+\begin{corollary}\label{c:conditional}
+The instrumental case for majority rule is conditional: majority rule amplifies whatever competence or incompetence citizens bring to a question.
+\end{corollary}
+
+\begin{proof}
+Immediate from Propositions~\ref{p:condorcet} and~\ref{p:reverse}: the same procedure improves on individual judgment when competence exceeds one half and worsens it when competence falls below one half.
+\end{proof}
+
+\begin{theorem}[Main theorem]\label{t:main}
+Neither equal standing nor reliability alone suffices to justify a decision procedure; democracy, which has both, is justified.
+\end{theorem}
+
+\begin{proof}
+If equal standing sufficed, the lottery among proposals would be justified, since by Assumption~\ref{a:lottery} it is egalitarian; but by the same assumption it is not. If reliability sufficed, the reliable epistocracy of Assumption~\ref{a:episto} would be justified; but by that assumption it is not. By Assumption~\ref{a:demo}, democracy is egalitarian and, under the competence condition, reliable; by Assumption~\ref{a:joint}, it is justified.
+\end{proof}
+
+The theorem says that the two justifications are jointly operative. It does not say that they are additive, as if each contributed half of a total. The relation is better described as mutual completion. Equal standing selects, among procedures that tend to good results, those that do not subordinate some citizens to others; reliability selects, among procedures that confer equal standing, those that are responsive to reasons. Voting by majority is the procedure in the intersection: each vote counts the same, and the count aggregates information that no single voter has.
+
+Assumption~\ref{a:joint} is the claim that nothing further is needed. We defend it by elimination. The considerations that have been offered as further necessary conditions for justifying a decision procedure are of two kinds. Some are conditions on the background in which the procedure operates, such as the protection of basic liberties and a public sphere open to all; these are conditions on the procedure's being egalitarian and reliable in fact, not further grounds of justification (POL-20 argues that a public sphere exists only under institutions that guarantee equal access to public debate). Others are conditions on legitimacy rather than on the choice of procedure, such as the justifiability of the state as a whole to those subject to it, which POL-02 treats. Neither kind adds a third ground of the kind the theorem is about.
+
+\section{The competence condition}
+
+Corollary~\ref{c:conditional} is the instrumentalist's difficulty and the epistocrat's opportunity. If citizens are systematically misinformed on a question, majority rule makes the collective error more likely than any individual's. Brennan presents evidence of systematic voter error on economic questions and concludes that democracy is, on such questions, worse than its alternatives \citep{Brennan2016}.
+
+Three points limit the force of this. First, the independence assumption is unrealistic in both directions. Votes that share a common source of information are correlated, which weakens the jury theorem; but the theorem survives positive correlation if it is not too strong \citep{Ladha1992}, and generalizations to many options and heterogeneous competences are available \citep{ListGoodin2001}. Second, competence is not a fixed endowment. It depends on the information available, on the framing of questions, and on public deliberation; diversity of perspectives can compensate for lower individual ability \citep{Landemore2013}. Third, the competence condition is precisely where the intrinsic justification does work that the instrumental one cannot. A procedure that gives everyone an equal say creates the incentive to inform, persuade and be persuaded, and so sustains the condition on which its reliability depends. Epistocracy removes that incentive from those it excludes.
+
+The dependence also explains why the instrumental case cannot stand alone. On a pure instrumentalist view, whenever competence falls below one half, democracy should be replaced on that question. But no institution can decide which questions those are without itself claiming the authority that the epistocrat claims, and the claim to that authority is what Assumption~\ref{a:episto} rejects. Conversely, the intrinsic case cannot stand alone, because it gives no reason to prefer counting votes to drawing lots, and the reason to prefer counting is that counting is responsive to the citizens' judgments and, under Proposition~\ref{p:condorcet}, aggregates them into a better one.
+
+\section{Objections}
+
+\begin{objection}[Equality is already instrumental]
+The value of equal standing is itself a matter of results: people are better off, and feel better treated, when they have an equal say. The intrinsic justification collapses into the instrumental one.
+\end{objection}
+
+\begin{reply}
+If equal standing were valuable only for its effects, a procedure that produced the same effects without equal standing, for instance a benevolent epistocracy that persuaded everyone that they had an equal say, would be as good. It is not, because the relation of subordination it maintains is objectionable whether or not anyone feels it \citep{Kolodny2014b}. The value of equal standing is constitutive of a relation among citizens, not a product of it.
+\end{reply}
+
+\begin{objection}[The lottery is a straw man]
+No proceduralist proposes a lottery among proposals. The proceduralist's equality is equality of say, and a lottery gives no one any say.
+\end{objection}
+
+\begin{reply}
+The lottery gives everyone an equal chance of determining the outcome, which is the most natural reading of equal power over decisions. If the proceduralist replies that equality of say requires that outcomes respond to what citizens think, the reply concedes our point: it imports responsiveness to judgment into the intrinsic value, and responsiveness to judgment is valued because judgment tends to be better than chance. That is the instrumental consideration under another name.
+\end{reply}
+
+\begin{objection}[Plural voting is egalitarian enough]
+Mill's plural voting gives every citizen at least one vote; the educated receive more. Everyone has a say, and the scheme is more reliable. It satisfies both requirements better than democracy.
+\end{objection}
+
+\begin{reply}
+Plural voting gives everyone a say but not an equal one, and it ranks citizens publicly by their fitness to decide. It therefore fails the egalitarian requirement, and Mill himself defended it on instrumental grounds alone \citep[ch.~VIII]{MillCRG}. Its claimed reliability gain also depends on the identification of the competent, which is contested among reasonable persons \citep{Estlund2008}; a scheme whose weights some citizens can reasonably reject does not satisfy the reliability requirement in a form that all can recognize.
+\end{reply}
+
+\section{What the result does not establish}
+
+The main theorem does not establish that every democratic decision is correct, or that citizens' competence actually exceeds one half on the questions they decide; it establishes that the justification of democracy is conditional on the circumstances that make it reliable and that equal standing is among the grounds that sustain those circumstances. It does not decide between direct and representative democracy, whether legislators should be elected or chosen by lot (POL-14), or which voting rule to use (POL-17). And Propositions~\ref{p:condorcet} and~\ref{p:reverse} are proved for three voters only; the general jury theorem is classical, but the formal verification covers only the small case.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/POL/POL_04.lean} has two parts. The first defines the weight of a vote, the majority of three votes, majority accuracy as the sum over the eight profiles, and individual accuracy (Definitions~\ref{d:profile} and~\ref{d:accuracy}), and proves Propositions~\ref{p:condorcet} and~\ref{p:reverse} by computing the sum and comparing the resulting polynomials. These are arithmetical facts, and they depend on no axioms beyond those of Lean's core logic:
+
+\begin{lstlisting}
+theorem condorcet_three (a c : Nat) (hc : 0 < c) (hca : c < a) :
+    individualAccuracy a c < majorityAccuracy a c
+'Philosophy.POL_04.condorcet_three' depends on axioms:
+ [propext, Quot.sound]
+'Philosophy.POL_04.condorcet_three_reverse' depends on axioms:
+ [propext, Quot.sound]
+\end{lstlisting}
+
+The second part states Assumptions~\ref{a:lottery} to~\ref{a:joint} as axioms over an abstract type of procedures and proves Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+theorem doubly_justified :
+    ¬ (∀ p, Egalitarian p → Justified p) ∧
+    ¬ (∀ p, Reliable p → Justified p) ∧
+    Justified democracy
+'Philosophy.POL_04.doubly_justified' depends on axioms:
+ [Philosophy.POL_04.Egalitarian,
+  Philosophy.POL_04.Justified,
+  Philosophy.POL_04.Procedure,
+  Philosophy.POL_04.Reliable,
+  Philosophy.POL_04.assumption_3_3,
+  Philosophy.POL_04.assumption_3_4,
+  Philosophy.POL_04.assumption_3_5,
+  Philosophy.POL_04.assumption_3_6,
+  Philosophy.POL_04.democracy,
+  Philosophy.POL_04.epistocracy,
+  Philosophy.POL_04.lottery]
+\end{lstlisting}
+
+The axioms \texttt{Procedure}, \texttt{Egalitarian}, \texttt{Reliable} and \texttt{Justified} are the primitives; \texttt{democracy}, \texttt{lottery} and \texttt{epistocracy} name the three procedures; the four numbered axioms are Assumptions~\ref{a:lottery} to~\ref{a:joint}. The verification shows that the main theorem follows from these and nothing else. It does not support the assumptions, which carry the philosophical weight and are defended in Sections~2, 4 and~5.
+
+\section{Conclusion}
+
+Democracy is justified because it gives each citizen equal standing in the making of decisions and because, under conditions it helps to sustain, it tracks correct decisions better than its members do individually. The lottery shows that equal standing alone is not enough; epistocracy shows that good results alone are not enough. The jury theorem and its reverse show why the two need each other: majority rule amplifies competence, and only a procedure that treats citizens as equals gives all of them reason to bring competence to it.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arneson(2003)]{Arneson2003} Arneson, R. J. (2003). Defending the purely instrumental account of democratic legitimacy. \emph{Journal of Political Philosophy}, 11(1), 122--132.
+\bibitem[Brennan(2016)]{Brennan2016} Brennan, J. (2016). \emph{Against Democracy}. Princeton University Press.
+\bibitem[Christiano(2008)]{Christiano2008} Christiano, T. (2008). \emph{The Constitution of Equality: Democratic Authority and Its Limits}. Oxford University Press.
+\bibitem[Condorcet(1785)]{Condorcet1785} Condorcet, Marquis de (1785). \emph{Essai sur l'application de l'analyse \`a la probabilit\'e des d\'ecisions rendues \`a la pluralit\'e des voix}. Imprimerie Royale.
+\bibitem[Estlund(2008)]{Estlund2008} Estlund, D. (2008). \emph{Democratic Authority: A Philosophical Framework}. Princeton University Press.
+\bibitem[Grofman et~al.(1983)]{Grofman1983} Grofman, B., Owen, G., and Feld, S. L. (1983). Thirteen theorems in search of the truth. \emph{Theory and Decision}, 15(3), 261--278.
+\bibitem[Kolodny(2014a)]{Kolodny2014a} Kolodny, N. (2014a). Rule over none I: What justifies democracy? \emph{Philosophy \& Public Affairs}, 42(3), 195--229.
+\bibitem[Kolodny(2014b)]{Kolodny2014b} Kolodny, N. (2014b). Rule over none II: Social equality and the justification of democracy. \emph{Philosophy \& Public Affairs}, 42(4), 287--336.
+\bibitem[Ladha(1992)]{Ladha1992} Ladha, K. K. (1992). The Condorcet jury theorem, free speech, and correlated votes. \emph{American Journal of Political Science}, 36(3), 617--634.
+\bibitem[Landemore(2013)]{Landemore2013} Landemore, H. (2013). \emph{Democratic Reason: Politics, Collective Intelligence, and the Rule of the Many}. Princeton University Press.
+\bibitem[List and Goodin(2001)]{ListGoodin2001} List, C., and Goodin, R. E. (2001). Epistemic democracy: Generalizing the Condorcet jury theorem. \emph{Journal of Political Philosophy}, 9(3), 277--306.
+\bibitem[Mill(1861)]{MillCRG} Mill, J. S. (1861). \emph{Considerations on Representative Government}. Parker, Son, and Bourn.
+\bibitem[Waldron(1999)]{Waldron1999} Waldron, J. (1999). \emph{Law and Disagreement}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

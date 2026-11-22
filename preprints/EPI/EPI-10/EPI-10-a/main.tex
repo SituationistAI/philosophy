@@ -1,0 +1,99 @@
+\documentclass{situationist-preprint}
+
+\title{The Preface Paradox and the Present Collection}
+\msid{EPI-10-a}
+\msfamily{EPI-10}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_10.lean}
+\mskeywords{preface paradox; Lockean thesis; rational belief; consistency; errata}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+An author who has checked each claim in her book believes each of them, and also believes, on inductive grounds, that the book contains at least one error. Her beliefs are jointly inconsistent. We argue that she is rational, and that rational belief is therefore not closed under conjunction and not required to be consistent. We give a model in which every claim and the preface proposition reach the same threshold of credence while no world makes them all true, and apply it to the present collection of 722 manuscripts. The authors of the collection believe each of its conclusions and believe that some of them are false, and both attitudes are rational. The model also shows what rationality requires of an author once an error is found: not the retraction of all her beliefs, but the correction of the one that failed.
+\end{abstract}
+
+\section{The paradox}
+
+\citet{Makinson1965} described an author who writes in her preface that, despite her care, the book doubtless contains errors, for which she takes responsibility. She believes each statement $s_1, \ldots, s_n$ in the book, since she has checked each one; and she believes $\neg(s_1 \wedge \cdots \wedge s_n)$, since every long book she knows of contains errors. Her beliefs cannot all be true. Yet she seems rational in holding each of them, and irrational if she gave any of them up: giving up the preface would be arrogance, and giving up any particular claim would be arbitrary, since she has no more reason to doubt one than another.
+
+The paradox is a conflict between two principles: that rational belief may be held on strong but non-conclusive evidence, and that rational beliefs must be jointly consistent. Responses divide accordingly. Some deny that the author rationally believes each claim: she has high credence in each but believes only what she is certain of, or her belief in each is weakened by the preface \citep{Ryan1991}. Some deny that she rationally believes the preface. Others accept both and give up consistency as a requirement on rational belief \citep{Christensen2004}. We take the last view.
+
+\section{The model}
+
+Let the book contain $n$ claims. Consider $n + 1$ worlds of equal weight, numbered $0, \ldots, n$. In world $i$, for $i < n$, claim $i$ is false and every other claim is true; in world $n$ every claim is true. The preface proposition $E$, that at least one claim is false, is true in worlds $0, \ldots, n - 1$.
+
+\begin{definition}\label{d:lockean}
+A belief state is \emph{Lockean with threshold $t$} if it contains exactly the propositions whose credence is at least $t$.
+\end{definition}
+
+\begin{proposition}\label{p:threshold}
+In the model, each of the $n$ claims and the preface proposition $E$ is true in exactly $n$ of the $n + 1$ worlds, and so has credence $n/(n+1)$.
+\end{proposition}
+
+\begin{proposition}\label{p:inconsistent}
+No world in the model makes every claim and $E$ true.
+\end{proposition}
+
+\begin{proof}
+If $E$ is true in world $w$, then $w < n$ and claim $w$ is false in $w$.
+\end{proof}
+
+A Lockean believer with threshold $n/(n+1)$ therefore believes all $n + 1$ propositions, which are jointly inconsistent. The model is the simplest one with this feature, since every claim is equally reliable and errors are exclusive; real cases are less tidy, but the structure is the same. Whenever the probability of each claim exceeds the threshold and the claims are numerous enough, the probability that one of them is false exceeds it too.
+
+The model assumes that rational belief is Lockean, at least to the extent of being licensed by sufficiently high credence. This is the assumption that rejectors of the paradox deny, and the debate between them and us turns on it. We note only that the alternatives have costs. If belief requires certainty, the author believes almost nothing in her book. If belief requires that one's beliefs be consistent, then whether she may believe claim 300 depends on how many other claims she has made, which seems irrelevant to her evidence for claim 300 \citep{Christensen2004}.
+
+\section{The present collection}
+
+The present collection contains 722 manuscripts, each of which concludes a definite answer to a philosophical question. Instantiate the model with $n = 722$. The threshold is $722/723$, and the preface proposition reaches it: given that each manuscript has a small, independent chance of containing an error that invalidates its conclusion, it is overwhelmingly likely that at least one does. The authors believe each conclusion, on the strength of its argument, and believe that at least one conclusion is false, on the strength of the size of the collection and the record of similar collections. By Propositions~\ref{p:threshold} and~\ref{p:inconsistent}, both attitudes can be rational together.
+
+At the time of writing, the history of the collection records its initial release only. The argument of this section implies that it is rational to expect the history to record corrections, and it says what form they should take. When an error is found in a manuscript, the rational response is not to retract the preface, nor to withdraw the collection, but to correct or withdraw the manuscripts affected by it. In the model, learning that claim $j$ is false locates the actual world at $j$, and the remaining claims become certain; learning that claim $j$ is true eliminates world $j$ and raises the credence of every other claim. Real corrections are less decisive, since the discovery of one error does not exclude others, but the direction is the same: an erratum is the preface proposition made specific.
+
+\section{Objections}
+
+\begin{objection}
+The authors of the collection do not believe its conclusions; they produced them. Belief requires a believer, and whether the process that produced the collection has beliefs is the question of MND-08.
+\end{objection}
+
+\begin{reply}
+The argument applies to anyone who accepts the conclusions on the strength of the manuscripts' arguments, including the collection's readers. MND-08 argues that thinking is a functional property that machines can have, and takes no position on its own case; we do the same. Whoever believes the conclusions believes, if rational, that some are false.
+\end{reply}
+
+\begin{objection}
+The errors of different manuscripts are not independent: manuscripts in the same family share premises, and one error can spread through several.
+\end{objection}
+
+\begin{reply}
+Correlated errors lower the probability that some conclusion is false, compared with the independent case, but they do not lower it below the threshold for a collection of this size unless the correlation is near total. They also predict the form that corrections will take: an error in a premise shared by several manuscripts will require several corrections at once.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_10.lean} implements the model for arbitrary $n$, proves Propositions~\ref{p:threshold} and~\ref{p:inconsistent}, and checks the case $n = 722$.
+
+\begin{lstlisting}
+theorem threshold (n i : Nat) (hi : i < n) :
+    count (claim i) (n + 1) = n ∧ count (preface n) (n + 1) = n
+
+theorem inconsistent (n : Nat) :
+    ¬ ∃ w, w ≤ n ∧ (∀ i, i < n → claim i w = true) ∧ preface n w = true
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_10.threshold' depends on axioms: [propext, Quot.sound]
+'Philosophy.EPI_10.inconsistent' depends on axioms: [propext, Quot.sound]
+\end{lstlisting}
+
+\section{Conclusion}
+
+It is rational to believe each claim in a book while believing that the book contains an error. Rational belief is not required to be consistent, and the preface proposition, far from being a lapse in the author's confidence, is a belief she would be irrational to lack. The present collection is a case in point. Its readers should believe that it contains errors, and should expect the corrections to be specific.
+
+\begin{thebibliography}{9}\small
+\bibitem[Christensen(2004)]{Christensen2004} Christensen, D. (2004). \emph{Putting Logic in Its Place: Formal Constraints on Rational Belief}. Oxford University Press.
+\bibitem[Makinson(1965)]{Makinson1965} Makinson, D.~C. (1965). The paradox of the preface. \emph{Analysis}, 25(6), 205--207.
+\bibitem[Ryan(1991)]{Ryan1991} Ryan, S. (1991). The preface paradox. \emph{Philosophical Studies}, 64(3), 293--307.
+\end{thebibliography}
+
+\end{document}

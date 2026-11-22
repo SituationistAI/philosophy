@@ -1,0 +1,120 @@
+\documentclass{situationist-preprint}
+
+\title{Against Divine Simplicity}
+\msid{REL-16-a}
+\msfamily{REL-16}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_16.lean}
+\mskeywords{divine simplicity; omniscience; contingency; divine knowledge; Aquinas; modal collapse}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The doctrine of divine simplicity holds that God has no parts or distinct properties: God's knowledge, will and power are identical with one another and with the divine essence. We argue that the doctrine is incoherent with omniscience in a world containing contingent truths. If God's knowledge is fixed by an essence that is the same at every world, God knows the same propositions at every world; since knowledge is factive, everything God knows is then true at every world; since God knows every truth, every truth is necessary. Some truths are contingent, and God knows them. The doctrine must therefore be abandoned. The argument uses only a weak consequence of simplicity, that God's knowledge supervenes on God's essence, so that it cannot be avoided by weakening identity to some other relation of non-distinctness. The proof is formalized in Lean. We consider the main replies, that divine knowledge varies only extrinsically and that the essence itself varies across worlds, and argue that each either gives up simplicity or gives up God's knowledge of contingent truths.
+\end{abstract}
+
+\section{The doctrine and the problem}
+
+The doctrine of divine simplicity was a commonplace of classical theism: Augustine, Anselm and Aquinas held that God is not composed in any way, so that there is no distinction in God between essence and existence, or between God and God's attributes \citep[I, q.~3]{Aquinas}. Its contemporary defenders include \citet{StumpKretzmann1985} and \citet{Brower2008}; its best-known critic is \citet{Plantinga1980}, who argued that if God is identical with each of God's properties, the properties are identical with each other and God is a property, which no person is.
+
+The problem we press is older than Plantinga's and independent of it. It concerns God's knowledge of contingent truths. Aquinas held that God knows contingent things \citep[I, q.~14, a.~13]{Aquinas} and wills creatures freely \citep[I, q.~19, a.~3]{Aquinas}. If God's knowing is identical with God's essence, and the essence is necessary, it is hard to see how God could have known otherwise, and so how what God knows could have been otherwise. The difficulty is usually raised for the divine will, under the name of modal collapse \citep{Mullins2013}; we raise it for knowledge, where the factivity of knowledge makes it sharper.
+
+\section{Framework}
+
+Propositions are sets of worlds. For each world $w$, God's knowledge at $w$ is the set of propositions God knows at $w$.
+
+\begin{definition}\label{d:simple}
+God is \emph{simple} if God's knowledge is fixed by God's essence: there is a function from essences to bodies of knowledge that takes God's essence at each world to God's knowledge at that world.
+\end{definition}
+
+The definition is weaker than the identity of knowledge and essence, which entails it. A defender of simplicity who replaces identity by some other relation of non-distinctness still accepts the definition, since an attribute not distinct from the essence cannot differ where the essence does not.
+
+\begin{assumption}\label{a:rigid}
+God's essence is the same at every world.
+\end{assumption}
+
+\begin{assumption}\label{a:factive}
+If God knows $p$ at $w$, then $p$ is true at $w$.
+\end{assumption}
+
+\begin{assumption}\label{a:omni}
+If $p$ is true at $w$, God knows $p$ at $w$.
+\end{assumption}
+
+\begin{assumption}\label{a:contingent}
+Some proposition is true at some world and false at another.
+\end{assumption}
+
+Assumption~\ref{a:rigid} is common ground: the doctrine of simplicity is motivated by God's necessity and aseity. Assumption~\ref{a:omni} concerns propositions understood as sets of worlds, which are not indexical; it is therefore consistent with the conclusion of REL-19 that a timeless God lacks indexical knowledge of what time it is now. The contingent truths at issue are of the form \enquote{Socrates sits at $t$}, which a timeless God can know.
+
+\section{The argument}
+
+\begin{lemma}\label{l:invariance}
+If God is simple, God knows the same propositions at every world.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:simple}, God's knowledge at $w$ and at $w'$ are the values of one function at God's essence at $w$ and at $w'$, which are the same by Assumption~\ref{a:rigid}.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+God is not simple.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:contingent}, some $p$ is true at $w$ and false at $w'$. By Assumption~\ref{a:omni}, God knows $p$ at $w$. If God were simple, then by Lemma~\ref{l:invariance} God would know $p$ at $w'$, and by Assumption~\ref{a:factive} $p$ would be true at $w'$, a contradiction.
+\end{proof}
+
+\section{Replies}
+
+\begin{objection}[Extrinsic variation]
+God's knowing act is the same at every world; what varies is only its object. That God knows $p$ at $w$ and not at $w'$ is an extrinsic fact about God, like being thought of by Socrates, and simplicity concerns only intrinsic features \citep{StumpKretzmann1985,Brower2008}.
+\end{objection}
+
+\begin{reply}
+Then \enquote{God knows $p$} does not report a cognitive state of God, since God's cognitive state is the same whether or not $p$; it reports only that an invariant act stands in a relation to $p$ that $p$'s truth supplies. God's state would be the same if $p$ were false. That is the profile of a state that does not discriminate between $p$ and its negation, and such a state is not knowledge of $p$. The reply preserves simplicity at the price of God's knowledge of contingent truths, which is the conclusion of Theorem~\ref{t:main} in another form.
+\end{reply}
+
+\begin{objection}[Varying essence]
+God's essence includes what God freely wills, and so differs from world to world.
+\end{objection}
+
+\begin{reply}
+This denies Assumption~\ref{a:rigid}. An essence that varies across worlds is not one God has necessarily, and a God whose nature could have been otherwise is not the God of the classical doctrine, whose simplicity was meant to secure necessity and aseity. The reply abandons the doctrine in substance.
+\end{reply}
+
+\begin{objection}[Truthmakers]
+The doctrine says only that God is the truthmaker for every true predication about God \citep{Brower2008}. It makes no claim about functions from essences to knowledge.
+\end{objection}
+
+\begin{reply}
+If God, the same at every world, is the truthmaker for \enquote{God knows $p$} at $w$, then the same truthmaker exists at $w'$, and truthmakers necessitate what they make true. The truthmaker version thus entails Lemma~\ref{l:invariance} directly, and the argument proceeds as before.
+\end{reply}
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/REL/REL_16.lean}. Simplicity is defined as in Definition~\ref{d:simple}; the four assumptions are axioms. The main theorem is \texttt{theorem not\_simple : ¬ Simple}, and the checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_16.not_simple' depends on axioms:
+  [Essence, Knows, World, contingent, ess, ess_rigid, factive,
+   omniscient]
+\end{lstlisting}
+
+The last four are Assumptions~\ref{a:contingent}, \ref{a:rigid}, \ref{a:factive} and \ref{a:omni}; the others are primitive constants (namespace prefixes omitted). The proof uses no classical principles.
+
+\section{Conclusion}
+
+A simple God would know the same propositions at every world, and so, by the factivity of knowledge, would know only necessary truths. God knows contingent truths. The doctrine of divine simplicity is therefore incoherent with omniscience, and must be abandoned; the replies that save it do so by giving up the necessity of the divine essence or God's knowledge of the contingent.
+
+\begin{thebibliography}{9}\small
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Brower(2008)]{Brower2008} Brower, J.~E. (2008). Making sense of divine simplicity. \emph{Faith and Philosophy}, 25(1), 3--30.
+\bibitem[Mullins(2013)]{Mullins2013} Mullins, R.~T. (2013). Simply impossible: A case against divine simplicity. \emph{Journal of Reformed Theology}, 7(2), 181--203.
+\bibitem[Plantinga(1980)]{Plantinga1980} Plantinga, A. (1980). \emph{Does God Have a Nature?} Marquette University Press.
+\bibitem[Stump and Kretzmann(1985)]{StumpKretzmann1985} Stump, E. and Kretzmann, N. (1985). Absolute simplicity. \emph{Faith and Philosophy}, 2(4), 353--382.
+\end{thebibliography}
+
+\end{document}

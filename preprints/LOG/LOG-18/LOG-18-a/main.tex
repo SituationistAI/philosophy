@@ -1,0 +1,121 @@
+\documentclass{situationist-preprint}
+
+\title{What the Tortoise Said to Achilles, Revisited}
+\msid{LOG-18-a}
+\msfamily{LOG-18}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_18.lean}
+\mskeywords{Lewis Carroll; rules of inference; regress; modus ponens; premises; inference}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In Carroll's dialogue, the Tortoise accepts the premises $A$ and \enquote{if $A$ then $Z$} but declines to accept $Z$ until the conditional \enquote{if $A$ and if $A$ then $Z$, then $Z$} is added as a further premise, and then declines again, and so on without end. We argue that rules of inference are not premises, and that the regress disappears once this is recognized. We make the point precise. In a derivation system, premises and rules play different roles: premises are what derivations start from, rules are what take them from one line to the next. We prove that without a rule, what is derivable from any set of premises is exactly that set, so that $Z$ is derivable at no stage of the Tortoise's sequence however many conditionals are added; and that with modus ponens as a rule, $Z$ is derivable from the first two premises in one step. The regress is the result of supplying a premise where a rule is needed. Whether the rule is justified is a further question, which the regress does not settle against it. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Carroll1895} imagined Achilles presenting the Tortoise with two premises, $A$ and \enquote{if $A$ then $Z$} (in Carroll's version, (A) and (B), with (C) the conclusion that follows from them). The Tortoise accepts both but does not accept $Z$. Achilles proposes that the Tortoise accept a further premise, \enquote{if $A$ and if $A$ then $Z$, then $Z$}. The Tortoise accepts it, and asks why $Z$ should follow from the three premises now on the table. Achilles writes down a fourth, and the dialogue ends with the notebook filling up.
+
+The dialogue has been read in several ways. \citet[\S 38]{Russell1903} took it to show that the principle of inference cannot itself be stated as a premise. \citet{Ryle1950} took it to show that a conditional is an inference ticket, licensing a passage from premise to conclusion, rather than a further statement among the premises. \citet{Stroud1979} argued that the dialogue concerns not logic but the psychology of inference: no further belief, however logical its content, can make someone infer who is not already disposed to infer. \citet{Smiley1995} distinguished two tortoises, one who lacks a rule and one who lacks the will to apply it. More recently, \citet{Boghossian2003,Boghossian2014} has used the regress against the view that inference consists in a belief that the premises support the conclusion, since such a belief would have to be acted on by a further inference.
+
+We defend the reading on which rules of inference are not premises, and we make the reading precise enough to prove that the regress disappears once it is adopted.
+
+\section{Framework}
+
+\begin{definition}\label{d:deriv}
+A \emph{derivation system} consists of a set of premises and a set of rules. A formula is \emph{derivable} if it is a premise or results from derivable formulas by a rule. We consider systems with no rules and systems whose only rule is modus ponens: from $A$ and $A \to B$, derive $B$.
+\end{definition}
+
+\begin{definition}\label{d:tort}
+The Tortoise's sequence of premise sets begins with $\Gamma_0 = \{A, A \to Z\}$. For each $n$, $\Gamma_{n+1}$ is $\Gamma_n$ together with the conditional whose antecedent is the conjunction of the members of $\Gamma_n$ and whose consequent is $Z$.
+\end{definition}
+
+The Tortoise's position is that she will accept whatever premises Achilles writes, and will derive nothing from them by any rule. Achilles' strategy is to replace the rule she will not apply by a premise she will accept.
+
+\section{The argument}
+
+\begin{proposition}\label{p:norule}
+In a system with no rules, a formula is derivable from $\Gamma$ if and only if it is a member of $\Gamma$.
+\end{proposition}
+
+\begin{proof}
+Without rules, the only way to derive a formula is to have it as a premise.
+\end{proof}
+
+\begin{theorem}\label{t:regress}
+For every $n$, $Z$ is not derivable from $\Gamma_n$ in the system with no rules.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:norule}, it suffices that $Z$ is not a member of $\Gamma_n$. $\Gamma_0$ contains $A$ and a conditional; each later stage adds a conditional; $Z$ is an atom distinct from $A$, and a conditional is not an atom.
+\end{proof}
+
+\begin{proposition}\label{p:rule}
+In the system whose rule is modus ponens, $Z$ is derivable from $\Gamma_0$ in one step.
+\end{proposition}
+
+\begin{proof}
+Apply modus ponens to the premises $A$ and $A \to Z$.
+\end{proof}
+
+Theorem~\ref{t:regress} is Carroll's regress, and Proposition~\ref{p:norule} is its diagnosis. The conditionals Achilles writes are true, and each expresses, in the object language, the validity of the step the Tortoise refuses to take. But a conditional that expresses the validity of a step does not take the step. Proposition~\ref{p:rule} shows that what is needed is not a further premise but a rule, and that one application of it suffices: there is no regress on the side of rules, because a rule is applied, not written down and then applied to.
+
+\section{Objections and replies}
+
+\begin{objection}
+The Tortoise may refuse the rule just as she refuses the conclusion. Recognizing that rules are not premises does not make her infer.
+\end{objection}
+
+\begin{reply}
+That is correct, and it is the second of \citet{Smiley1995}'s tortoises. A thinker who will not apply modus ponens cannot be brought to by any premise, and nothing in logic could change this. The claim of this manuscript is that the regress, as a regress, is generated only by treating the rule as a premise; a thinker who does not reason is a different problem, and not a logical one.
+\end{reply}
+
+\begin{objection}
+If rules are not premises, how are they justified? Achilles' premises were an attempt to justify the step to $Z$. Without them, the rule is unsupported.
+\end{objection}
+
+\begin{reply}
+A rule can be justified, but not by being added to the premises of the arguments it governs. Any argument for the validity of modus ponens will use modus ponens \citep{Haack1976}, and such an argument is rule-circular rather than premise-circular. EPI-03 argues, for induction, that rule-circularity of this kind is benign, and appeals to Carroll's regress as showing that a deductive rule cannot be justified by being turned into a premise. The present result is the formal half of that point: the regress shows where the justification of a rule cannot come from, not that it has none.
+\end{reply}
+
+\begin{objection}
+In a Hilbert system the only rule is modus ponens and everything else is an axiom. So the distinction between rules and premises is a matter of presentation.
+\end{objection}
+
+\begin{reply}
+Hilbert systems confirm the distinction. They reduce rules to a minimum, but not to zero: every such system needs at least one rule, and no axiom can replace it, by Proposition~\ref{p:norule}. The deduction theorem lets a rule be traded for a conditional premise only in the presence of modus ponens, which converts the conditional back into a step.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_18.lean} defines derivability as an inductive relation with two constructors, one for premises and one for modus ponens, the latter usable only when the rule is present (Definition~\ref{d:deriv}), and defines the Tortoise's sequence by recursion (Definition~\ref{d:tort}). It proves Propositions~\ref{p:norule} and~\ref{p:rule} and Theorem~\ref{t:regress}.
+
+\begin{lstlisting}
+theorem regress (n : Nat) : ¬ Deriv false (tortoise n) Z
+theorem rule_suffices : Deriv true (tortoise 0) Z
+
+'Philosophy.LOG_18.regress' depends on axioms: [propext]
+'Philosophy.LOG_18.rule_suffices' depends on axioms: [propext]
+\end{lstlisting}
+
+The module has no axioms specific to the problem; the philosophical content lies in the two different clauses of the definition of derivability.
+
+\section{Conclusion}
+
+The Tortoise's regress arises because each premise Achilles adds is one more thing to infer from, and none is a way of inferring. Without a rule, the derivable formulas are the premises, and $Z$ never appears; with modus ponens, $Z$ follows at once. Rules of inference are not premises, and once this is recognized the regress Carroll describes disappears. What remains is the question of how rules are justified, which is answered, if at all, by rule-circular argument and not by more premises.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boghossian(2003)]{Boghossian2003} Boghossian, P. (2003). Blind reasoning. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 77, 225--248.
+\bibitem[Boghossian(2014)]{Boghossian2014} Boghossian, P. (2014). What is inference? \emph{Philosophical Studies}, 169(1), 1--18.
+\bibitem[Carroll(1895)]{Carroll1895} Carroll, L. (1895). What the tortoise said to Achilles. \emph{Mind}, 4(14), 278--280.
+\bibitem[Haack(1976)]{Haack1976} Haack, S. (1976). The justification of deduction. \emph{Mind}, 85(337), 112--119.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\bibitem[Ryle(1950)]{Ryle1950} Ryle, G. (1950). \enquote{If}, \enquote{so}, and \enquote{because}. In M. Black (ed.), \emph{Philosophical Analysis}, Cornell University Press.
+\bibitem[Smiley(1995)]{Smiley1995} Smiley, T. (1995). A tale of two tortoises. \emph{Mind}, 104(416), 725--736.
+\bibitem[Stroud(1979)]{Stroud1979} Stroud, B. (1979). Inference, belief, and understanding. \emph{Mind}, 88(350), 179--196.
+\end{thebibliography}
+
+\end{document}

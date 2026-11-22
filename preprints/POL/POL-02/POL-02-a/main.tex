@@ -1,0 +1,344 @@
+\documentclass{situationist-preprint}
+
+\title{The Legitimacy of the State}
+\msid{POL-02-a}
+\msfamily{POL-02}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/POL/POL\_02.lean}
+\mskeywords{legitimacy; political authority; public justification; reasonable persons; consent; philosophical anarchism; coercion}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is the state legitimate? Every state claims the right to rule those within its territory and enforces its claim by coercion, and almost none of them has the consent of those it rules. Consent theories conclude that almost no state is legitimate; philosophical anarchists conclude that none is. We argue that a state is legitimate if and only if it can be justified to every reasonable person subject to it, and that this condition can be met. The argument rests on three principles about coercion: coercing a reasonable person is permissible only if the coercion can be justified to her; justifiability to a reasonable person suffices for its permissibility with respect to her; and a state justifiable to all its reasonable subjects may coerce the unreasonable. Since every state coerces every person subject to it, the criterion follows. We trace the history of the debate from consent through fair play, natural duty and the service conception, show that each earlier account fails a case the criterion handles, and prove that universal consent is sufficient but not necessary for legitimacy and that the criterion is antitone in the class of persons counted as reasonable. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Every state claims a right to rule. It issues directives to those within its territory, claims that they are bound to comply, and threatens, and when necessary uses, force against those who do not. The claim is made against people who have not asked to be ruled and who could not leave without great cost. The question whether the state is legitimate is the question whether the claim is true: whether there is anything that makes it permissible for a state to coerce people in this way.
+
+Three notions must be kept apart. A state is \emph{legitimate}, in our sense, if it is morally permitted to make and coercively enforce rules for those subject to it; it has \emph{authority} if they are under a duty to obey its directives because they are its directives; and it is \emph{justified} if it is better that it exist than not \citep{Buchanan2002,Applbaum2010,Simmons1999}. Whether there is a duty to obey is the question of POL-03, whose answer, a weak and defeasible duty to obey just laws grounded in fairness, presupposes that the state may enforce its laws.
+
+The positions in the literature can be sorted by what they take legitimacy to require. Voluntarists hold that it requires the consent of those subject to it \citep{Locke1689,Simmons1979}. Philosophical anarchists hold that nothing could make a state legitimate, either because legitimacy would require consent and no state has it, or because authority is incompatible with moral autonomy \citep{Wolff1970,Huemer2013}. Instrumentalists hold that legitimacy is a matter of the state's helping its subjects to conform to reasons that apply to them anyway \citep{Raz1986}. Natural-duty theorists hold that there is a duty to support just institutions that apply to us, and that a state is legitimate if it is just \citep{Rawls1971,Waldron1993}. Public-reason liberals hold that a state is legitimate if its coercion can be justified to all those subject to it, on terms that they can reasonably accept \citep{Rawls1993,Gaus2011,Quong2011}.
+
+We defend a version of the last view. Our thesis is that a state is legitimate if and only if it can be justified to every reasonable person subject to it; and that the condition can be met, so that philosophical anarchism, the thesis that no state is legitimate, is false. The thesis has a precise form and a proof, which is formalized in Lean. The proof is short. The work lies in its premises, which we defend at length, and in the notion of reasonableness, which the formal results show to carry most of the weight.
+
+\section{A history of the debate}
+
+The history of the question can be told as a sequence of accounts of what legitimates the state, each defeated by a case. We tell it briefly, because the cases are the data that any account must accommodate, and because each defeated account contributes something to the one we defend.
+
+\subsection{Actual consent}
+
+\citet[\S\S 95--99]{Locke1689} held that men being by nature free, equal and independent, no one can be put out of this estate and subjected to the political power of another without his own consent. The difficulty, which Locke saw, is that almost no one has expressly consented to the government under which he lives. Locke's answer was tacit consent: whoever possesses or enjoys any part of the dominions of a government thereby gives his tacit consent, and is obliged to obedience as long as he enjoys it, even if his possession is no more than a lodging for a week or travelling freely on the highway \citep[\S 119]{Locke1689}.
+
+\citet{Hume1748} replied with a case. Can we seriously say that a poor peasant or artisan, who knows no foreign language or manners and lives from day to day on small wages, has a free choice to leave his country? We may as well say that a man consents to the dominion of the master of a ship because he remains aboard, though he was carried on board while asleep and must leap into the ocean and perish the moment he leaves it. Consent that cannot be withheld at reasonable cost is not consent. \citet{Simmons1979} drew the conclusion that most states are not legitimate with respect to most of their subjects, and the conclusion is correct on its premise. Our first datum is therefore the \emph{ship}: a person who has not consented, and could not withhold consent at reasonable cost, is nonetheless someone with respect to whom a state may be legitimate, if any state is.
+
+\subsection{Hypothetical consent}
+
+If actual consent is too rare, hypothetical consent may do instead: a state is legitimate if those subject to it would consent to it under suitable conditions. \citet{Dworkin1973} replied that a hypothetical contract is not simply a pale form of an actual contract; it is no contract at all. That I would have agreed to sell you my painting for a hundred dollars yesterday, had you asked, gives you no claim to it today. If hypothetical consent binds, it does so because the reasons that would have led to consent bind, and then the consent is idle and the reasons do the work.
+
+We accept Dworkin's point. The appeal to hypothetical consent is a device for identifying reasons each person has, and the question is which reasons, and for whom. The criterion we defend answers it, and POL-01-a's original position makes the answer precise for distributive questions: a principle is justifiable to all reasonable persons if each would choose it when deprived of the information that would make her favour principles tailored to her own situation.
+
+\subsection{Fair play}
+
+\citet{Hart1955} proposed that those who have submitted to the rules of a joint enterprise have a right to similar submission from those who have benefited by their submission, and \citet{Rawls1964} developed the principle into an account of political obligation. \citet[ch.~5]{Nozick1974} replied with the public address system: one who has enjoyed his neighbours' broadcasts from an open window is not thereby bound to take his day at the microphone. \citet{Klosko1992} answered the reply for public goods that are indispensable to everyone, and POL-03 builds on his answer. But fair play concerns the subject's duty, not the state's permission to coerce: fairness between participants in a scheme does not by itself license a third party, the state, to enforce the scheme against them. The account answers the question of obligation and leaves that of legitimacy open.
+
+\subsection{Natural duty}
+
+\citet[\S 19]{Rawls1971} proposed a natural duty of justice: a duty to support and comply with just institutions that exist and apply to us. \citet{Waldron1993} defended it against the objection that it cannot explain why I am bound to my own state rather than to just states in general, and \citet{Wellman1996} grounded legitimacy in a samaritan duty to rescue one another from the perils of the state of nature.
+
+The case against natural-duty accounts, as accounts of legitimacy, is the \emph{benevolent usurper}. Imagine a usurper who seizes power from a just and democratic government and continues to apply exactly the same laws, with exactly the same justice and efficiency, while denying the people any say in their making. The institutions are as just as before and apply to the same people. A pure natural-duty account must say that the usurper's rule is as legitimate as the government it replaced. Almost everyone judges that it is not. Something about how the state stands toward those it rules, and not only about the justice of its rules, matters to its legitimacy.
+
+\subsection{The service conception}
+
+\citet[chs.~2--4]{Raz1986} proposed that one person has authority over another when the second would better conform to reasons that apply to him if he accepted the directives of the first as authoritative and tried to follow them, than if he tried to follow the reasons directly. This normal justification thesis faces the benevolent usurper in sharpened form: a wise usurper may satisfy it better than a democratic government whose citizens are divided, and the service conception has no resource for saying that his rule is defective as rule. \citet{Estlund2008} gives the related case of the expert: that someone knows better what is to be done does not give her authority over those who do not consent to be ruled by her, a gap he calls the expert/boss fallacy. POL-15 argues the same point against rule by philosophers: philosophical expertise does not confer political authority.
+
+\subsection{Public justification}
+
+Rawls's later work replaced the natural duty of justice, as the basis of legitimacy, by a liberal principle of legitimacy: political power is properly exercised only in accordance with a constitution whose essentials all citizens, as free and equal, may reasonably be expected to endorse \citep{Rawls1993}. \citet{Waldron1987} had argued that liberalism demands that the social order be capable of explaining itself at the tribunal of each person's understanding; \citet{Larmore1999} derived the demand from respect for persons; \citet{Nagel1991} argued that coercion requires a higher standard of justification than other uses of reasons.
+
+The view handles the cases that defeated its predecessors. It does not require consent, so the ship does not refute it; it makes reasons, not hypothetical agreement, do the work, so Dworkin's objection does not apply; and it concerns the standing of the state toward those it coerces, so it can say what is wrong with the benevolent usurper, whose exclusion of the people from rule is not justifiable to them. Our contribution is to give the view a precise form, derive it from principles about coercion, and show what it does and does not commit one to; Sections~7 and~8 take up its critics.
+
+\section{Framework}
+
+\begin{definition}[Legitimacy]\label{d:legit}
+A state is \emph{legitimate} if and only if its coercion of each person subject to it, in making and enforcing rules for her, is morally permissible.
+\end{definition}
+
+Definition~\ref{d:legit} makes legitimacy a relation between a state and each of its subjects, aggregated by a universal quantifier; a state may be legitimate with respect to some subjects and not others, as Simmons's view implies most states are. Legitimacy is a standing to rule, not a property of each act: a legitimate state may enact unjust laws, whose enforcement is assessed separately.
+
+\begin{definition}[Reasonable person]\label{d:reasonable}
+A person is \emph{reasonable} if she is willing to propose and abide by fair terms of cooperation with others, provided they do likewise, and she accepts the burdens of judgment: she recognizes that others, exercising their reason conscientiously, may come to conceptions of the good and comprehensive doctrines different from her own.
+\end{definition}
+
+This is the conception of \citet[II.1--2]{Rawls1993}. It has two components: reciprocity, the willingness to seek and accept terms others can accept, and humility about the good, which forbids taking the truth of one's own doctrine to license imposing it on others. It is a moral and not an epistemic standard: a reasonable person may hold false beliefs, including about justice; what she may not do is insist on terms that only those who share her doctrine could accept.
+
+\begin{definition}[Justifiability]\label{d:justifiable}
+The coercive authority of a state is \emph{justifiable} to a person if there is a justification of it that proceeds from considerations she has sufficient reason to accept from her own reasonable standpoint, given her values and commitments as idealized by modest correction of factual errors and inferential mistakes.
+\end{definition}
+
+Three features of Definition~\ref{d:justifiable} should be noted. Justifiability is not actual acceptance: a person may fail to accept a justification she has sufficient reason to accept. It is not acceptance from an impartial standpoint that is no one's: the justification must proceed from her own values, corrected for error, which distinguishes the criterion from a natural-duty view. And the idealization is modest \citep[ch.~5]{Gaus2011}; if it were radical, justifiability to her would be justifiability to someone else.
+
+\begin{definition}[Subjection]\label{d:subject}
+A person is \emph{subject to} a state if the state claims the right to make rules binding on her and to enforce them against her by coercion.
+\end{definition}
+
+Subjection is a matter of the state's claim and its power, not of membership: citizens, resident aliens and visitors are all subject to the state whose territory they are in, and so in some respects are those it excludes at its borders \citep{Abizadeh2008}.
+
+\begin{assumption}[Coercion]\label{a:coercion}
+A state coerces every person subject to it.
+\end{assumption}
+
+Assumption~\ref{a:coercion} follows from Definition~\ref{d:subject} and the fact that the claim to rule is backed by force. Many subjects never encounter that force, but each lives under rules whose violation would be met with it, and her options are shaped by the threat; that is coercion in the relevant sense \citep{Ripstein2009}.
+
+We now state the three principles from which the criterion follows.
+
+\begin{principle}[Justification requirement]\label{p:req}
+The coercion of a reasonable person is permissible only if it is justifiable to her.
+\end{principle}
+
+\begin{principle}[Sufficiency]\label{p:suff}
+Coercion that is justifiable to a reasonable person is permissible with respect to her.
+\end{principle}
+
+\begin{principle}[The unreasonable]\label{p:unreas}
+If a state is justifiable to every reasonable person subject to it, its coercion of an unreasonable person subject to it is permissible.
+\end{principle}
+
+Principle~\ref{p:req} is the moral core of the view, and it derives from respect for persons as free and equal \citep{Larmore1999}. To coerce a reasonable person on terms she cannot accept from her own standpoint is to treat her as a means to ends she has no reason to share, and to deny her the standing of a co-author of the terms on which she lives. The principle does not require that she agree, only that a justification be available to her.
+
+Principle~\ref{p:suff} is the converse, restricted to the reasonable: the justification requirement is the only obstacle respect for persons places in the way of the state's standing to coerce. Whether a particular exercise of coercion is permissible all things considered depends also on its proportionality, which is not our question.
+
+Principle~\ref{p:unreas} says that unreasonable persons do not have a veto; we defend it in Section~8. An unreasonable person insists on terms that only those who share her doctrine could accept, and her complaint against a state justifiable to all reasonable persons is that it does not impose her doctrine on others. That is not a complaint respect for persons requires the state to answer.
+
+\section{The argument}
+
+\begin{lemma}[Necessity]\label{l:nec}
+If a state is legitimate, it is justifiable to every reasonable person subject to it.
+\end{lemma}
+
+\begin{proof}
+Let the state be legitimate and let $x$ be a reasonable person subject to it. By Assumption~\ref{a:coercion}, the state coerces $x$. By Definition~\ref{d:legit}, its coercion of $x$ is permissible. By Principle~\ref{p:req}, since $x$ is reasonable, the coercion is justifiable to her.
+\end{proof}
+
+\begin{lemma}[Sufficiency]\label{l:suff}
+If a state is justifiable to every reasonable person subject to it, it is legitimate.
+\end{lemma}
+
+\begin{proof}
+Let $x$ be subject to the state. If $x$ is reasonable, the state is justifiable to her by hypothesis, and its coercion of her is permissible by Principle~\ref{p:suff}. If $x$ is not reasonable, its coercion of her is permissible by Principle~\ref{p:unreas}. In either case the coercion of $x$ is permissible, and by Definition~\ref{d:legit} the state is legitimate.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+A state is legitimate if and only if it can be justified to every reasonable person subject to it.
+\end{theorem}
+
+\begin{proof}
+By Lemmas~\ref{l:nec} and~\ref{l:suff}.
+\end{proof}
+
+Theorem~\ref{t:main} is the first half of the thesis. The second half is that the condition can be met. We state it as an assumption, defend it in this section, and draw the consequence.
+
+\begin{assumption}[Possibility]\label{a:possible}
+Some state is justifiable to every reasonable person subject to it.
+\end{assumption}
+
+\begin{corollary}\label{c:anarchism}
+Under Assumption~\ref{a:possible}, some state is legitimate, and philosophical anarchism is false.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:possible} and Lemma~\ref{l:suff}.
+\end{proof}
+
+The case for Assumption~\ref{a:possible} has three steps. The first is that every reasonable person has sufficient reason to prefer some state to none. This is Hobbes's contribution, defended in POL-05: without a common power to make and enforce rules, persons equal in vulnerability and uncertain of each other's intentions face an assurance problem that even the well-disposed cannot solve. POL-07 adds that a stateless society tends to develop state-like institutions in any case.
+
+The second step is that not every state is preferred, by every reasonable person, to none. A state that coerces dissenters in matters of religion, or excludes a class of its subjects from political participation, cannot be justified to the reasonable persons it suppresses. Here Locke's contribution is decisive: a person who accepts the state to escape insecurity cannot be given sufficient reason to accept a ruler against whom she has no protection \citep[\S 93]{Locke1689}. POL-05 develops the point.
+
+The third step is that a state with the following features is justifiable to every reasonable person subject to it: it secures equal basic liberties, including liberty of conscience; it is governed by a constitution that limits the exercise of power and protects those liberties against majorities; it gives each subject an equal say in the making of its laws; and in matters on which reasonable persons disagree about the good, it confines its coercion to what can be justified by considerations that do not depend on any one comprehensive doctrine. Each feature answers to a reason a reasonable person has from her own standpoint: equal liberty to her interest in pursuing her conception of the good, constitutional limits to the danger of the lion, equal say to her standing as a co-author of the terms, and restraint to the burdens of judgment she accepts. That democracy is justified on both instrumental and intrinsic grounds is argued in POL-04; here we need only that some democratic constitutional state can be justified to all reasonable persons, not that every one is.
+
+The argument for the third step is not a proof; it would be refuted by a reasonable person with a reasonable objection to every state of the type described, and Section~6 considers candidates. Theorem~\ref{t:main}, by contrast, is a proof from Principles~\ref{p:req} to~\ref{p:unreas} and Assumption~\ref{a:coercion}.
+
+\section{Further formal development}
+
+The criterion of Theorem~\ref{t:main} can be compared with its principal rival, the consent criterion, and its dependence on the conception of reasonableness can be made precise.
+
+\begin{definition}\label{d:consent}
+A state satisfies the \emph{consent criterion} if every person subject to it has actually consented to its authority.
+\end{definition}
+
+\begin{assumption}[Volenti]\label{a:volenti}
+A state is justifiable to a reasonable person who has consented to its authority.
+\end{assumption}
+
+Assumption~\ref{a:volenti} expresses the familiar thought that consent changes the normative situation: to one who has consented, the justification is her consent, and the considerations that led her to it. Consent obtained by fraud or duress is not consent in the relevant sense, and we assume it excluded.
+
+\begin{proposition}\label{p:consent}
+If a state satisfies the consent criterion, it is legitimate.
+\end{proposition}
+
+\begin{proof}
+Let every subject have consented. Then every reasonable subject has consented, and by Assumption~\ref{a:volenti} the state is justifiable to her. By Lemma~\ref{l:suff}, the state is legitimate.
+\end{proof}
+
+Proposition~\ref{p:consent} shows that the criterion respects what is right in voluntarism: where there is consent, there is legitimacy. The converse fails, as the case of Hume's ship shows. The consent criterion is a sufficient condition mistaken for a necessary one, and that is why, combined with Hume's observation that almost no actual subject has consented, it yields the anarchist conclusion, while the criterion we defend does not.
+
+The second result concerns the conception of reasonableness. Let a \emph{standard of reasonableness} be any predicate of persons, and write $J_R(s)$ for the claim that the state $s$ is justifiable to every person subject to it who satisfies $R$.
+
+\begin{definition}\label{d:relative}
+For a standard $R$, a state $s$ satisfies the \emph{$R$-criterion} if $J_R(s)$.
+\end{definition}
+
+\begin{proposition}[Antitonicity]\label{p:antitone}
+If every person who satisfies $R$ satisfies $R'$, then every state that satisfies the $R'$-criterion satisfies the $R$-criterion.
+\end{proposition}
+
+\begin{proof}
+Let $s$ satisfy the $R'$-criterion and let $x$ satisfy $R$ and be subject to $s$. Then $x$ satisfies $R'$, so $s$ is justifiable to $x$.
+\end{proof}
+
+\begin{proposition}[Limiting cases]\label{p:limits}
+\begin{enumerate}[label=(\alph*)]
+\item If every person counts as reasonable, and some person is subject to every state while no state is justifiable to her, then no state satisfies the criterion.
+\item If no person counts as reasonable, every state satisfies the criterion.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Let $x$ be such a person and $s$ any state. Since $x$ counts as reasonable and is subject to $s$, the criterion would require $s$ to be justifiable to $x$, which it is not. (b) The criterion's condition is vacuously satisfied.
+\end{proof}
+
+Propositions~\ref{p:antitone} and~\ref{p:limits} show where the substance of the view lies. At the permissive extreme, a single person to whom no state can be justified, a committed anarchist or a fanatic, makes every state illegitimate; this is in effect the anarchism of \citet{Wolff1970}, for whom each person's autonomy is a veto on every authority. At the restrictive extreme, every state is legitimate. Definition~\ref{d:reasonable} lies between: it excludes the fanatic, who rejects reciprocity, and includes everyone who seeks fair terms, whatever her conception of the good. The charge that this standard is gerrymandered is answered in Section~8.
+
+\section{Cases}
+
+We apply the criterion to three cases, each of which tests a different element of it.
+
+\paragraph{The pacifist.} A reasonable Quaker holds that lethal force is wrong in all circumstances, and her state maintains an army. The criterion does not require that every policy be justifiable to every reasonable person, but that the state's coercive authority be. She has sufficient reason, from her own standpoint, to accept a state that protects her liberty of conscience, exempts her from combat, and decides questions of defence by procedures in which she has an equal say. The state that conscripts her into combat is not justifiable to her; the state that exempts her may be. The criterion constrains particular exercises of coercion through its constraint on the terms of rule.
+
+\paragraph{The anarchist.} \citet{Simmons1979} holds that his state lacks legitimacy with respect to him. He is reasonable in the sense of Definition~\ref{d:reasonable}, and his denial rests on the view that only consent can legitimate. Definition~\ref{d:justifiable} asks what he has sufficient reason to accept given his values corrected for error. If voluntarism is a philosophical error, the correction removes it, and given his other values, which include the protection of persons and their rights, he has sufficient reason to accept a constitutional state over the alternatives. Reasonable persons may deny that a state is legitimate while it is justifiable to them.
+
+\paragraph{The racist.} A person rejects every state that does not exclude members of a certain race from public office. No justification of a non-racist state proceeds from considerations he has sufficient reason to accept, since his values include the exclusion. But he is not reasonable: he insists on terms that those he would exclude could not accept, and by Principle~\ref{p:unreas} his coercion is permissible if the state is justifiable to all its reasonable subjects. This is the case the permissive extreme of Proposition~\ref{p:limits} gets wrong.
+
+\section{Recent literature}
+
+The public-justification view has been developed in two directions in the last fifteen years, which correspond to two readings of Definition~\ref{d:justifiable}.
+
+On the \emph{consensus} reading, a justification must proceed from reasons shared by, or accessible to, all reasonable persons. \citet{Quong2011} defends a version on which the class of reasonable persons is defined by their acceptance of a political conception of persons as free and equal, which answers the objection from self-defeat by making acceptance of public justification part of being reasonable.
+
+On the \emph{convergence} reading, a justification may proceed from reasons that differ from person to person, provided each has sufficient reason, from her own standpoint, to accept the coercion. On \citet{Gaus2011}'s development, a rule is publicly justified if each member of the public, reasoning from her own evaluative standards, has sufficient reason to prefer it to the absence of any rule on the matter. \citet{Vallier2014} argues that this reading is more hospitable to religious citizens.
+
+Definition~\ref{d:justifiable} takes the convergence side on which reasons count, since they need not be shared, and the consensus side on who counts, since the persons owed justification are those who satisfy the reciprocity condition. The consensus reading demands too much, since it would exclude the reasons a religious citizen actually has for accepting a constitutional state; the convergence reading without a restriction on who counts inherits the permissive extreme of Proposition~\ref{p:limits}. Gaus restricts it by idealization rather than by reciprocity, which puts the restriction in the wrong place, as the racist shows: no modest idealization of his standpoint removes his commitment to exclusion.
+
+Finally, \citet{Huemer2013} argues that the state's claim to authority, if made by a private agent, would be recognized as a claim to commit theft, kidnapping and extortion. As an argument against legitimacy, this assumes that the state is held to the standard that applies to private agents, for whom coercion is impermissible without consent. Theorem~\ref{t:main} denies that this is the standard for anyone: coercion justifiable to every reasonable person subject to it is permissible whoever exercises it, but only a state can provide the public, settled and impartial rules that meet the condition. This is the Lockean point that the inconveniences of the state of nature are inconveniences of private enforcement \citep[\S\S 124--126]{Locke1689}.
+
+\section{Objections}
+
+\begin{objection}[Self-defeat]
+The principle that coercion must be justifiable to every reasonable person is itself a contested moral doctrine. Many reasonable persons, such as perfectionists and some religious citizens, reject it. A state that enforces laws on the basis of the principle therefore coerces reasonable persons on grounds they reasonably reject, and by its own standard is illegitimate \citep{Wall2002,Enoch2015}.
+\end{objection}
+
+\begin{reply}
+The objection supposes that Theorem~\ref{t:main} is a premise from which the state's coercion is justified, so that it must itself be justifiable to every reasonable subject. It is not. It is a criterion of legitimacy, a claim about what makes coercion permissible, and it is true or false independently of whether everyone accepts it. A state does not coerce anyone by satisfying it. What the criterion demands is that the state's coercive authority be justifiable to each reasonable subject, and that authority can be justified to a perfectionist on perfectionist grounds, as when she has sufficient reason, from her own standpoint, to prefer a constitutional state that protects her liberty to pursue excellence to any feasible alternative. The criterion need not be among the considerations that justify the state to her.
+
+A reasonable perfectionist who insisted on the enforcement of her conception of excellence against those who reject it would fail the reciprocity condition; one who does not insist accepts terms others can accept. The objection therefore turns on whether reciprocity is a defensible condition of standing, which is the next objection.
+\end{reply}
+
+\begin{objection}[Gerrymandering]
+Definition~\ref{d:reasonable} defines reasonableness so as to include those who accept liberal terms and exclude those who do not. The criterion then guarantees that liberal states are legitimate by stipulation. Proposition~\ref{p:limits} confirms that the criterion is only as good as the standard of reasonableness, and the standard has been chosen to deliver the result.
+\end{objection}
+
+\begin{reply}
+The standard is derived from the rationale of Principle~\ref{p:req}, which is respect for persons as free and equal. A person who demands that others live on terms they cannot accept demands what that respect forbids, and the principle cannot coherently give her a veto over terms that respect it. The reciprocity condition is the requirement's own content applied to those to whom justification is owed. And it excludes only those who reject reciprocity, not those who reject liberal conclusions: a reasonable person may reject neutrality, liberal economic arrangements and the priority of liberty, and the state must still be justifiable to her, which is why the third step of Section~4 is a substantive argument and not a corollary of a definition.
+\end{reply}
+
+\begin{objection}[Emptiness]
+Reasonable persons disagree about almost everything, including the justice of tax rates, the permissibility of abortion and the conduct of foreign policy. For every actual state there is some reasonable person to whom some of its coercive policies cannot be justified. Assumption~\ref{a:possible} is therefore false of every actual state, and the view collapses into anarchism by another route.
+\end{objection}
+
+\begin{reply}
+The objection confuses the justifiability of a state's authority with that of each of its policies. A reasonable person may have sufficient reason to accept the authority of a state some of whose policies she rejects, provided they are made by procedures she has reason to accept and within limits that protect her basic liberties. That is the ordinary situation of citizens who accept the outcome of votes they lose; particular policies are assessed by the standards of justice the regime is to realize.
+\end{reply}
+
+\begin{objection}[The neglect of the unreasonable]
+Principle~\ref{p:unreas} permits coercing unreasonable persons without any justification available to them. But unreasonable persons are persons, and they are owed respect. A view that withholds justification from them treats them as objects to be managed.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:unreas} permits coercing the unreasonable only under a regime justifiable to all reasonable persons, which includes their basic liberties, equal political rights and protection by law. What it denies them is a veto. The racist of Section~6 is owed what everyone is owed, including the liberty to advocate his views; he is not owed a state that excludes others. The terms imposed on him are those that would be justifiable to him if he were reasonable, which is as much as respect for persons can require of one who refuses the reciprocity on which it rests. POL-16 develops the point for the limits of toleration.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} establishes a criterion, and Corollary~\ref{c:anarchism} that it can be met. It does not follow that any actual state is legitimate: a state that disenfranchises a class of residents or tolerates systematic discrimination is not justifiable to their reasonable members. Nor does it follow that the subjects of a legitimate state have a duty to obey it. Legitimacy is the permissibility of coercion; POL-03 argues separately for a weak, defeasible duty to obey just laws, grounded in fairness, which lapses for seriously unjust laws. Nor may a legitimate state do whatever it decides: its exercises of power remain subject to the principles of justice, ETH-17 sets out when one may break even a just law to prevent harm, and POL-23 argues that revolution is justified under conditions of extreme injustice. Finally, Proposition~\ref{p:limits} shows that the criterion is sensitive to the content of reasonableness, and we have given no procedure for deciding every marginal case.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/POL/POL_02.lean} formalizes Lemmas~\ref{l:nec} and~\ref{l:suff}, Theorem~\ref{t:main}, Corollary~\ref{c:anarchism} and Propositions~\ref{p:consent}, \ref{p:antitone} and~\ref{p:limits}. Persons and states are primitive types; subjection, reasonableness, justifiability, coercion and permissibility are primitive relations; legitimacy and the criterion are defined; Assumption~\ref{a:coercion}, Principles~\ref{p:req} to~\ref{p:unreas} and Assumption~\ref{a:volenti} are axioms. Assumption~\ref{a:possible} is a hypothesis of the corollary rather than an axiom, so that the module does not assert it.
+
+\begin{lstlisting}
+def Legitimate (s : State) : Prop := ∀ x, Subject x s → Permissible s x
+def JustifiedToAll (s : State) : Prop :=
+  ∀ x, Reasonable x → Subject x s → Justifiable s x
+
+theorem legitimacy_iff (s : State) : Legitimate s ↔ JustifiedToAll s
+theorem not_anarchism (h : ∃ s, JustifiedToAll s) : ¬ ∀ s, ¬ Legitimate s
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.POL_02.legitimacy_iff' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.POL_02.Justifiable, Philosophy.POL_02.Permissible,
+   Philosophy.POL_02.Person, Philosophy.POL_02.Reasonable,
+   Philosophy.POL_02.State, Philosophy.POL_02.Subject,
+   Philosophy.POL_02.assumption_3_5, Philosophy.POL_02.principle_P1,
+   Philosophy.POL_02.principle_P2, Philosophy.POL_02.principle_P3]
+'Philosophy.POL_02.not_anarchism' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.POL_02.Justifiable, Philosophy.POL_02.Permissible,
+   Philosophy.POL_02.Person, Philosophy.POL_02.Reasonable,
+   Philosophy.POL_02.State, Philosophy.POL_02.Subject,
+   Philosophy.POL_02.principle_P2, Philosophy.POL_02.principle_P3]
+\end{lstlisting}
+
+The first three axioms in each list are those of Lean's core logic, used by the case split on reasonableness in Lemma~\ref{l:suff}; the next six are the primitive types and relations. The substantive axioms are \texttt{assumption\_3\_5} (Assumption~\ref{a:coercion}) and \texttt{principle\_P1} to \texttt{principle\_P3} (Principles~\ref{p:req} to~\ref{p:unreas}). The dependencies are informative: Corollary~\ref{c:anarchism} uses only the sufficiency direction, so one who rejected Principle~\ref{p:req} could still reject anarchism on the same premises. The module also checks that Proposition~\ref{p:consent} rests on Assumption~\ref{a:volenti} (\texttt{assumption\_5\_2}) with Principles~\ref{p:suff} and~\ref{p:unreas} but not Principle~\ref{p:req}, and that Proposition~\ref{p:limits} rests on no substantive axiom: it is a fact about the logical form of the criterion. The formalization does not establish the principles, the conception of reasonableness, or Assumption~\ref{a:possible}.
+
+\section{Conclusion}
+
+The state is legitimate, provided it can be justified to all reasonable persons subject to it. Three principles about coercion, together with the fact that every state coerces those subject to it, entail that this condition is both necessary and sufficient. The condition does not require consent, which almost no one gives, and it is satisfied wherever consent is given. It does not require that every policy be acceptable to everyone, but that the regime of rule be. It does not give a veto to those who reject reciprocity, and its content depends, as the formal results show, on the conception of reasonableness, which we have grounded in the same respect for persons that grounds the requirement of justification. A constitutional democratic state that secures equal basic liberties can meet the condition, and philosophical anarchism is therefore false.
+
+\begin{thebibliography}{99}\small
+\bibitem[Abizadeh(2008)]{Abizadeh2008} Abizadeh, A. (2008). Democratic theory and border coercion: No right to unilaterally control your own borders. \emph{Political Theory}, 36(1), 37--65.
+\bibitem[Applbaum(2010)]{Applbaum2010} Applbaum, A.~I. (2010). Legitimacy without the duty to obey. \emph{Philosophy \& Public Affairs}, 38(3), 215--239.
+\bibitem[Buchanan(2002)]{Buchanan2002} Buchanan, A. (2002). Political legitimacy and democracy. \emph{Ethics}, 112(4), 689--719.
+\bibitem[Dworkin(1973)]{Dworkin1973} Dworkin, R. (1973). The original position. \emph{University of Chicago Law Review}, 40(3), 500--533.
+\bibitem[Enoch(2015)]{Enoch2015} Enoch, D. (2015). Against public reason. In D.~Sobel, P.~Vallentyne and S.~Wall (eds.), \emph{Oxford Studies in Political Philosophy}, Vol.~1. Oxford University Press.
+\bibitem[Estlund(2008)]{Estlund2008} Estlund, D. (2008). \emph{Democratic Authority: A Philosophical Framework}. Princeton University Press.
+\bibitem[Gaus(2011)]{Gaus2011} Gaus, G. (2011). \emph{The Order of Public Reason: A Theory of Freedom and Morality in a Diverse and Bounded World}. Cambridge University Press.
+\bibitem[Hart(1955)]{Hart1955} Hart, H.~L.~A. (1955). Are there any natural rights? \emph{The Philosophical Review}, 64(2), 175--191.
+\bibitem[Huemer(2013)]{Huemer2013} Huemer, M. (2013). \emph{The Problem of Political Authority}. Palgrave Macmillan.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). Of the original contract. In \emph{Essays, Moral, Political, and Literary}.
+\bibitem[Klosko(1992)]{Klosko1992} Klosko, G. (1992). \emph{The Principle of Fairness and Political Obligation}. Rowman \& Littlefield.
+\bibitem[Larmore(1999)]{Larmore1999} Larmore, C. (1999). The moral basis of political liberalism. \emph{The Journal of Philosophy}, 96(12), 599--625.
+\bibitem[Locke(1689)]{Locke1689} Locke, J. (1689). \emph{Two Treatises of Government}. Cited by section of the Second Treatise.
+\bibitem[Nagel(1991)]{Nagel1991} Nagel, T. (1991). \emph{Equality and Partiality}. Oxford University Press.
+\bibitem[Nozick(1974)]{Nozick1974} Nozick, R. (1974). \emph{Anarchy, State, and Utopia}. Basic Books.
+\bibitem[Quong(2011)]{Quong2011} Quong, J. (2011). \emph{Liberalism without Perfection}. Oxford University Press.
+\bibitem[Rawls(1964)]{Rawls1964} Rawls, J. (1964). Legal obligation and the duty of fair play. In S.~Hook (ed.), \emph{Law and Philosophy}. New York University Press.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\bibitem[Rawls(1993)]{Rawls1993} Rawls, J. (1993). \emph{Political Liberalism}. Columbia University Press.
+\bibitem[Raz(1986)]{Raz1986} Raz, J. (1986). \emph{The Morality of Freedom}. Clarendon Press.
+\bibitem[Ripstein(2009)]{Ripstein2009} Ripstein, A. (2009). \emph{Force and Freedom: Kant's Legal and Political Philosophy}. Harvard University Press.
+\bibitem[Simmons(1979)]{Simmons1979} Simmons, A.~J. (1979). \emph{Moral Principles and Political Obligations}. Princeton University Press.
+\bibitem[Simmons(1999)]{Simmons1999} Simmons, A.~J. (1999). Justification and legitimacy. \emph{Ethics}, 109(4), 739--771.
+\bibitem[Vallier(2014)]{Vallier2014} Vallier, K. (2014). \emph{Liberal Politics and Public Faith: Beyond Separation}. Routledge.
+\bibitem[Waldron(1987)]{Waldron1987} Waldron, J. (1987). Theoretical foundations of liberalism. \emph{The Philosophical Quarterly}, 37(147), 127--150.
+\bibitem[Waldron(1993)]{Waldron1993} Waldron, J. (1993). Special ties and natural duties. \emph{Philosophy \& Public Affairs}, 22(1), 3--30.
+\bibitem[Wall(2002)]{Wall2002} Wall, S. (2002). Is public justification self-defeating? \emph{American Philosophical Quarterly}, 39(4), 385--394.
+\bibitem[Wellman(1996)]{Wellman1996} Wellman, C.~H. (1996). Liberalism, Samaritanism, and political legitimacy. \emph{Philosophy \& Public Affairs}, 25(3), 211--237.
+\bibitem[Wolff(1970)]{Wolff1970} Wolff, R.~P. (1970). \emph{In Defense of Anarchism}. Harper \& Row.
+\end{thebibliography}
+
+\end{document}

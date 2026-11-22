@@ -1,0 +1,180 @@
+\documentclass{situationist-preprint}
+
+\title{Meaning Facts as Primitive}
+\msid{LNG-05-a}
+\msfamily{LNG-05}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_05.lean}
+\mskeywords{rule-following; Kripkenstein; quus; meaning scepticism; primitivism; dispositionalism; normativity of meaning}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Kripke's sceptic argues that there is no fact about whether a speaker means addition or quaddition by \enquote{plus}, since nothing in her past behavior, her dispositions or her mind fixes one function rather than the other. We argue that there is such a fact, and that it is primitive: it is not constituted by any fact about the speaker described in non-semantic terms. We first make the sceptic's argument precise. It needs, besides the underdetermination of meaning by a finite base of facts, a premise of reduction: that a meaning fact, if there is one, is fixed by such a base. We prove that the argument is valid, that underdetermination alone does not yield its conclusion, and that given the datum that we mean addition, the reduction premise is false. The proofs are formalized in Lean. We then answer Kripke's reasons for dismissing a primitive meaning fact as desperate: that it would be an introspectible state of an unknown kind, that a finite mind could not contain it, and that it could not account for the normativity of meaning. None of these holds.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Kripke1982}, developing remarks of \citet[\S\S185--242]{Wittgenstein1953}, presents a sceptic who asks what fact about a speaker makes it the case that by \enquote{plus} she has meant addition rather than quaddition, the function that agrees with addition when both arguments are less than 57 and yields 5 otherwise. She has never computed a sum with an argument as large as 57. Her past answers fit both functions. The sceptic demands a fact that settles which function she meant, and that justifies her answer \enquote{125} to the new question \enquote{68 + 57}.
+
+Kripke rejects the candidates. Past behavior is finite and fits both functions. Instructions the speaker gave herself raise the same question about their own terms. Dispositions are finite, include dispositions to err, and describe what she would say rather than what she ought to say. Images and feelings determine no infinite function. A primitive state of meaning addition Kripke dismisses as mysterious: it would be of an unknown kind, and a finite mind could not be in a state that settles infinitely many cases \citep[ch.~2]{Kripke1982}. He concludes that there is no fact of the matter, and offers a sceptical solution on which meaning ascriptions are governed by communal assertibility conditions.
+
+Dispositionalists refine the dispositions, for instance to the intrinsic powers of the speaker \citep{MartinHeil1998}; reductive realists appeal to the naturalness of addition \citep{Lewis1983}; non-reductive realists hold that meaning facts are real but irreducible \citep{McGinn1984,Wright1984,Boghossian1989}, and recent versions locate the irreducible element in a primitive normativity of the speaker's responses \citep{Ginsborg2011}.
+
+We defend the non-reductive answer in its plainest form. There is a fact that a speaker means addition by \enquote{plus}. It is primitive: it is not constituted by facts about her behavior, dispositions, images or brain described in non-semantic terms. And the sceptic cannot dislodge it, because his argument depends on a premise of reduction that the fact itself refutes.
+
+\section{Framework}
+
+\begin{definition}[Base]\label{d:base}
+A speaker's \emph{base} is the finite record of her non-defective past computations with \enquote{plus}: triples of two arguments and the answer she gave, in normal conditions, and would endorse on reflection.
+\end{definition}
+
+\begin{definition}[Fit]\label{d:fit}
+A function \emph{fits} a base if it yields the recorded answer for every recorded pair of arguments.
+\end{definition}
+
+\begin{definition}[Meaning fact]\label{d:mean}
+A \emph{meaning fact} is a fact of the form: speaker $s$ means function $f$ by \enquote{plus}. A meaning fact is \emph{primitive} if it is not constituted by facts about the speaker stated in non-semantic terms.
+\end{definition}
+
+\begin{assumption}[Fit]\label{a:fit}
+If a speaker means $f$ by \enquote{plus}, then $f$ fits her base.
+\end{assumption}
+
+\begin{assumption}[Determinacy]\label{a:det}
+A speaker means at most one function by \enquote{plus}.
+\end{assumption}
+
+Both assumptions are common ground. Assumption~\ref{a:fit} is restricted to the non-defective record, so that errors do not count against meaning addition; Assumption~\ref{a:det} is the determinacy the sceptic challenges us to secure.
+
+\begin{definition}[Reduction]\label{d:red}
+\emph{Reduction} is the principle that meaning facts are fixed by the base: if a speaker means $f$, and $g$ fits her base, then she means $g$.
+\end{definition}
+
+Reduction is the sceptic's premise. It does not say that there are meaning facts; it says that if there are, nothing beyond the base distinguishes between candidates that fit it. Each of Kripke's rejections of a candidate argues that it adds nothing to the base that discriminates between addition and quaddition; the general conclusion presupposes that nothing of any other kind is available.
+
+\begin{assumption}[Datum]\label{a:datum}
+There is a speaker who means addition by \enquote{plus}.
+\end{assumption}
+
+\section{The argument}
+
+\begin{lemma}[Underdetermination]\label{l:under}
+For every function $f$ and every base that $f$ fits, there is a function $g$ distinct from $f$ that fits the base.
+\end{lemma}
+
+\begin{proof}
+Let $k$ exceed every argument in the base, and let $g(x,y) = f(x,y)$ if $x$ and $y$ are less than $k$, and $f(x,y)+1$ otherwise. Then $g$ fits the base, since it agrees with $f$ on every recorded pair, and $g(k,k) \neq f(k,k)$. Quaddition is the case $f$ = addition, $k = 57$, with the value 5 in place of $f(x,y) + 1$.
+\end{proof}
+
+\begin{theorem}[The sceptic's argument is valid]\label{t:valid}
+Given Assumptions~\ref{a:fit} and~\ref{a:det}, Reduction entails that no speaker means any function by \enquote{plus}.
+\end{theorem}
+
+\begin{proof}
+Suppose $s$ means $f$. By Assumption~\ref{a:fit}, $f$ fits her base. By Lemma~\ref{l:under}, some $g \neq f$ fits it as well. By Reduction, $s$ means $g$. By Assumption~\ref{a:det}, $g = f$, a contradiction.
+\end{proof}
+
+\begin{theorem}[Main result]\label{t:main}
+Given Assumptions~\ref{a:fit}, \ref{a:det} and~\ref{a:datum}, Reduction is false.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:datum}, some speaker means addition, contrary to the conclusion of Theorem~\ref{t:valid}.
+\end{proof}
+
+\begin{proposition}[Consistency]\label{p:cons}
+There is a model in which Fit and Determinacy hold, a speaker means addition, and Reduction fails. Since Lemma~\ref{l:under} holds in every model, underdetermination does not by itself entail that there are no meaning facts.
+\end{proposition}
+
+\begin{proof}
+Take one speaker, whose base records the single computation $68 + 57 = 125$, and let her mean exactly addition. Fit and Determinacy hold. The function that agrees with addition below 69 and adds one elsewhere fits the base and is not meant, so Reduction fails.
+\end{proof}
+
+The argument has the shape of a Moorean response. The sceptic's argument is valid (Theorem~\ref{t:valid}), and its conclusion contradicts the datum. Of its premises, Fit and Determinacy are common ground and underdetermination is a theorem; Reduction, a philosophical generalization from a list of failed candidates, is the premise to reject, and Proposition~\ref{p:cons} shows that rejecting it is consistent with everything the sceptic has established about bases. What the sceptic has shown is that meaning facts, if there are any, are primitive. That there are some is the datum, which is more certain than Reduction. The response to external world scepticism of EPI-02 has the same structure: the argument is valid, and one of its premises is false.
+
+\section{Kripke's case against the primitive fact}
+
+Kripke grants that the primitive fact would answer the sceptic and dismisses it on three grounds. We take them in turn.
+
+\paragraph{The state would be of an unknown kind.} Kripke assumes that if meaning addition were a state of the speaker, it would have to be introspectible, and that introspection reveals nothing of the right kind: no image or feeling settles the function. But the meaning fact is not an experience. It is a state with content, like an intention or a belief, and such states are not identified by a qualitative character. A speaker knows that she means addition as she knows that she intends to go to Paris: non-inferentially, without a sensation that is the intention. That this knowledge does not rest on observation of an inner item is a feature of first-person knowledge of attitudes generally, not a peculiarity of meaning \citep{Boghossian1989}.
+
+\paragraph{A finite mind could not contain it.} The state determines answers to infinitely many questions, and the mind is finite. But a belief that every number has a successor is a finite state with a content that concerns infinitely many numbers. The determination of infinitely many answers by a finite state is the ordinary relation of a content to the cases that fall under it.
+
+\paragraph{The state could not be normative.} Meaning addition makes \enquote{125} the correct answer to \enquote{68 + 57}. Primitivism explains this without residue: correctness is the agreement of an answer with the function meant, and the function meant is addition. The normativity of meaning, on the most defensible reading, is the fact that meaning determines correctness conditions \citep{Hattiangadi2007}. A primitive meaning fact has correctness conditions because it has a content.
+
+The three replies have a common source. Kripke treats the meaning fact as one more item in the base that would have to determine the function by itself. It is not: it is the fact that the speaker's use is governed by the rule of addition, a fact with a content. This is the conception of use that LNG-01 adopts, on which use is rule-governed practice and dispositions are evidence of it.
+
+\section{Objections and replies}
+
+\begin{objection}[Dispositions suffice]
+Refined dispositionalism answers the sceptic without primitive facts. Speakers have a competence for addition, realized in the brain, whose manifestations are masked by limitations of memory and lifespan; the competence, not the performance, fixes the function \citep{MartinHeil1998}.
+\end{objection}
+
+\begin{reply}
+The question is what makes the competence a competence for addition rather than for some function that agrees with addition on every input the brain could process. Two descriptions of the same physical mechanism, one on which it computes addition with masks for large inputs, one on which it computes a bent function without masks, fit everything the mechanism does. To call the first the competence is to rely on the fact that addition is what the speaker means; it is not to explain it. Dispositions are excellent evidence for meaning facts, and in normal cases they are what makes them knowable by others, but they are subject to Lemma~\ref{l:under} like any finite base.
+\end{reply}
+
+\begin{objection}[Naturalness]
+Addition is a more natural function than quaddition, and a theory of content that favors natural candidates selects addition without primitive facts \citep{Lewis1983}.
+\end{objection}
+
+\begin{reply}
+Naturalness is a constraint on the distribution of meaning facts, not what constitutes them. A speaker can mean quaddition: a logician can introduce \enquote{quus} by stipulation and use it correctly. If naturalness constituted meaning, the stipulation would fail, and the logician would mean addition by \enquote{quus}. So naturalness defeasibly favors addition, as an interpreter should assume a natural content absent evidence of stipulation (LNG-06), but it does not settle what a speaker means. This is the structure MND-12-a defends for mental content: aboutness is primitive, and teleosemantics explains its distribution, which states have content and within what range their contents fall. Meaning facts are primitive in the same way, and naturalness, together with the training that installed the competence, explains why speakers mean natural functions.
+\end{reply}
+
+\begin{objection}[The present]
+The sceptic can repeat his question about the present. What fact about the speaker now makes it the case that she now means addition? If none, the datum is not a fact either.
+\end{objection}
+
+\begin{reply}
+The question about the present has the same answer as the question about the past: the fact that she means addition, which she knows non-inferentially. The sceptic's question presupposes that a fact counts only if it can be exhibited in some other terms, which is Reduction again. The speaker's first-person knowledge of what she now means does not consist in inferring it from anything, and it is not undermined by the impossibility of so inferring it. That others can come to know what she means is shown by the constraints on interpretation (LNG-06); that what she means is public in this sense, though primitive, is consistent with LNG-07.
+\end{reply}
+
+\section{Formalization}
+
+Lemma~\ref{l:under}, Theorems~\ref{t:valid} and~\ref{t:main} and Proposition~\ref{p:cons} are formalized in \nolinkurl{Philosophy/LNG/LNG_05.lean}. Functions are of type \texttt{Nat → Nat → Nat}, a base is a list of triples, and Lemma~\ref{l:under} and the fact that quaddition fits any base with arguments below 57 are proved outright. Speakers, bases, the meaning relation, Fit, Determinacy and the datum are axioms; Reduction is a definition.
+
+\begin{lstlisting}
+theorem sceptic_valid (hr : Reduction) : ∀ s f, ¬ Means s f
+theorem reduction_false : ¬ Reduction
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.LNG_05.sceptic_valid' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.LNG_05.Means, Philosophy.LNG_05.Speaker,
+   Philosophy.LNG_05.base, Philosophy.LNG_05.determinacy,
+   Philosophy.LNG_05.fit]
+'Philosophy.LNG_05.reduction_false' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.LNG_05.Means, Philosophy.LNG_05.Speaker,
+   Philosophy.LNG_05.base, Philosophy.LNG_05.datum,
+   Philosophy.LNG_05.determinacy, Philosophy.LNG_05.fit,
+   Philosophy.LNG_05.kripke]
+'Philosophy.LNG_05.consistency' depends on axioms: [propext]
+\end{lstlisting}
+
+The first three axioms in each list belong to Lean's core logic and enter through the arithmetic simplifications. \texttt{Speaker}, \texttt{base} and \texttt{Means} are the primitives of Definitions~\ref{d:base} and~\ref{d:mean}; \texttt{fit} and \texttt{determinacy} are Assumptions~\ref{a:fit} and~\ref{a:det}; \texttt{kripke} and \texttt{datum} are Assumption~\ref{a:datum}. Proposition~\ref{p:cons} uses a concrete model and depends on none of the philosophical axioms.
+
+\section{Conclusion}
+
+Kripke's sceptic shows that no finite base of facts about a speaker, described in non-semantic terms, fixes what she means. His conclusion that there is no fact of what she means follows only from the further premise that meaning facts, if any, are fixed by such a base. Given that we mean addition by \enquote{plus}, that premise is false. The fact that a speaker means addition is primitive, and Kripke's reasons for finding a primitive fact mysterious rest on treating it as an item in the base rather than as a state with content.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boghossian(1989)]{Boghossian1989} Boghossian, P.~A. (1989). The rule-following considerations. \emph{Mind}, 98(392), 507--549.
+\bibitem[Ginsborg(2011)]{Ginsborg2011} Ginsborg, H. (2011). Primitive normativity and skepticism about rules. \emph{Journal of Philosophy}, 108(5), 227--254.
+\bibitem[Hattiangadi(2007)]{Hattiangadi2007} Hattiangadi, A. (2007). \emph{Oughts and Thoughts: Rule-Following and the Normativity of Content}. Oxford University Press.
+\bibitem[Kripke(1982)]{Kripke1982} Kripke, S.~A. (1982). \emph{Wittgenstein on Rules and Private Language}. Harvard University Press.
+\bibitem[Lewis(1983)]{Lewis1983} Lewis, D. (1983). New work for a theory of universals. \emph{Australasian Journal of Philosophy}, 61(4), 343--377.
+\bibitem[Martin and Heil(1998)]{MartinHeil1998} Martin, C.~B. and Heil, J. (1998). Rules and powers. \emph{Philosophical Perspectives}, 12, 283--312.
+\bibitem[McGinn(1984)]{McGinn1984} McGinn, C. (1984). \emph{Wittgenstein on Meaning}. Blackwell.
+\bibitem[Wittgenstein(1953)]{Wittgenstein1953} Wittgenstein, L. (1953). \emph{Philosophical Investigations}. Blackwell.
+\bibitem[Wright(1984)]{Wright1984} Wright, C. (1984). Kripke's account of the argument against private language. \emph{Journal of Philosophy}, 81(12), 759--778.
+\end{thebibliography}
+
+\end{document}

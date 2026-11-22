@@ -1,0 +1,101 @@
+\documentclass{situationist-preprint}
+
+\title{The Empty Hell Theorem}
+\msid{REL-20-b}
+\msfamily{REL-20}
+\msdiscipline{Philosophy of Religion}
+\mstype{Consequence}
+\mskeywords{hell; eternal punishment; proportionality; desert; universalism; annihilationism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-20-a concludes that no finite wrong merits eternal punishment and that a just God would leave hell unoccupied. We state the result as a theorem relative to six explicit premises, derive it, and strengthen it: the conclusion holds for any punishment that inflicts some fixed positive amount in infinitely many periods, whatever happens in the others. We then show that each premise is needed, by exhibiting for each a model in which the others hold and hell is occupied, and identify these models with the classical defenses of hell. The theorem is exactly as strong as its premises, and the defenses of hell are exactly denials of them. We close with what the theorem leaves open, including universalism and annihilationism.
+\end{abstract}
+
+\section{Premises}
+
+We fix the premises, using the definitions of REL-20-a: a punishment is a schedule assigning harm to periods, and its cumulative amount after $n$ periods is the sum of the first $n$ (Definition 2.1).
+
+\begin{assumption}[Measure]\label{a:measure}
+Harm and desert are measured on a common scale on which amounts can be added, and which is Archimedean: for every positive amount $\varepsilon$ and every amount $b$, some finite multiple of $\varepsilon$ exceeds $b$.
+\end{assumption}
+
+\begin{assumption}[Eternal punishment]\label{a:eternal}
+Hell, if occupied, inflicts on its occupant an amount of at least $\varepsilon > 0$ in infinitely many periods.
+\end{assumption}
+
+\begin{assumption}[Finite wrongs]\label{a:wrongs}
+Every wrong a human being commits has bounded desert.
+\end{assumption}
+
+\begin{assumption}[Finite records]\label{a:records}
+Each human life contains finitely many wrongs, and a finite record of wrongs with bounded desert has bounded desert.
+\end{assumption}
+
+\begin{assumption}[Proportionality]\label{a:prop}
+A just punisher never inflicts on anyone a cumulative amount exceeding her desert.
+\end{assumption}
+
+\begin{assumption}[Infliction and justice]\label{a:god}
+A person is in hell only if God inflicts its punishment on her, and God is just.
+\end{assumption}
+
+Assumption~\ref{a:eternal} weakens Definition 2.2 of REL-20-a, which requires at least one unit in every period. Assumptions~\ref{a:wrongs}, \ref{a:records} and \ref{a:prop} are Assumptions 2.3 and 2.4 and Principle P1 of REL-20-a. Assumption~\ref{a:god} combines Definition 2.5 with the antecedent of Corollary 3.5. Assumption~\ref{a:measure} is implicit in REL-20-a's counting of units and is made explicit here because the strengthening depends on it.
+
+\section{The theorem}
+
+\begin{lemma}\label{l:unbounded}
+Under Assumption~\ref{a:measure}, a punishment that inflicts at least $\varepsilon > 0$ in infinitely many periods has unbounded cumulative amounts.
+\end{lemma}
+
+\begin{proof}
+Let $b$ be any amount. By Assumption~\ref{a:measure} there is a finite $k$ with $k\varepsilon > b$. Since the punishment inflicts at least $\varepsilon$ in infinitely many periods, there is an $n$ such that at least $k$ of the first $n$ periods are among them, and harms are not negative, so the cumulative amount after $n$ periods is at least $k\varepsilon > b$.
+\end{proof}
+
+\begin{theorem}[Empty hell]\label{t:empty}
+Given Assumptions~\ref{a:measure}--\ref{a:god}, no human person is in hell.
+\end{theorem}
+
+\begin{proof}
+Suppose $x$ is in hell. By Assumption~\ref{a:god}, a just God inflicts its punishment on $x$, so by Assumption~\ref{a:prop} every cumulative amount is within $x$'s desert. By Assumptions~\ref{a:wrongs} and \ref{a:records}, that desert is bounded. By Assumption~\ref{a:eternal} and Lemma~\ref{l:unbounded}, the cumulative amounts are unbounded. Contradiction.
+\end{proof}
+
+Theorem~\ref{t:empty} strengthens Corollary 3.5 of REL-20-a in one respect only: the punishment may be intermittent, or may abate in some periods, provided it does not abate below a fixed positive level forever. A schedule whose harms shrink toward zero, such as $\varepsilon/2^{n}$ in period $n$, has a bounded sum and falls outside Assumption~\ref{a:eternal}; but, as REL-20-a observes, such a schedule eventually ceases to punish at all.
+
+\section{Each premise is needed}
+
+\begin{proposition}\label{p:indep}
+For each of Assumptions~\ref{a:measure}--\ref{a:god}, there is a model in which that premise fails, the others hold, and someone is in hell.
+\end{proposition}
+
+\begin{proof}
+We describe each model briefly.
+(i) \emph{Non-Archimedean measure.} Let some wrong have a desert that exceeds every finite multiple of $\varepsilon$ yet is bounded by a larger infinite amount. Its desert is bounded, so Assumption~\ref{a:wrongs} holds, while an eternal punishment of $\varepsilon$ per period never exceeds it.
+(ii) \emph{Diminishing punishment.} Let hell inflict $\varepsilon/2^{n}$ in period $n$, so that Assumption~\ref{a:eternal} fails; its cumulative amounts stay below $\varepsilon$, within any desert at least that large.
+(iii) \emph{The status principle.} Let a wrong against an infinitely worthy being have unbounded desert, in the spirit of Anselm's claim that the least sin against God outweighs any created good \citep[I.21]{Anselm1098}; Assumption~\ref{a:wrongs} fails and eternal punishment is within desert.
+(iv) \emph{Continuing sin.} Let the damned go on sinning in hell, so that the record is infinite and Assumption~\ref{a:records} fails; each period's punishment can then be matched by fresh desert.
+(v) \emph{Excess.} Let God punish beyond desert; Assumption~\ref{a:prop} fails.
+(vi) \emph{Chosen hell.} Let a person be in hell by her own continuing choice, with no punishment inflicted by God \citep{Lewis1946, Kvanvig1993}; Assumption~\ref{a:god} fails, since its first conjunct does.
+In each model the remaining premises are satisfied, and the conclusion of Theorem~\ref{t:empty} is false.
+\end{proof}
+
+Proposition~\ref{p:indep} shows that the theorem has no slack: it says exactly what its premises say. It also shows that the classical defenses of hell are not counterexamples to the theorem but denials of its premises: (iii) of Assumption~\ref{a:wrongs}, (iv) of Assumption~\ref{a:records}, (vi) of Assumption~\ref{a:god}. REL-20-a argues that each denial is either unacceptable or abandons the doctrine it was meant to save; the theorem itself takes no side on that further question, and \citet{Adams1975} argues on other grounds against reconciling eternal punishment with God's justice. Model (i) is a technical variant of (iii), and model (v) is excluded by the justice of God on any view of justice that includes the limiting function of desert.
+
+\section{What the theorem leaves open}
+
+The theorem says that no one is in hell, so defined. It does not say that everyone is saved. It is consistent with finite punishment, however long, for those whose desert is that great. It is silent on annihilationism unless the deprivation of a person who no longer exists counts as harm inflicted on her in each later period: on that reading annihilation satisfies Assumption~\ref{a:eternal} and is excluded; on the Epicurean reading, on which no harm accrues to the non-existent, it is a finite punishment and is not. Nor does the theorem say that a just God must punish at all, since Assumption~\ref{a:prop} is an upper limit and mercy lies below it.
+
+\section{Conclusion}
+
+Relative to six premises, each stated and each necessary, hell is empty. The premises are those of REL-20-a with eternal punishment weakened to intermittent punishment that never fades out. Whoever would keep hell occupied must deny one of them, and the list of possible denials is the list of the traditional defenses.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1975)]{Adams1975} Adams, M.~M. (1975). Hell and the God of justice. \emph{Religious Studies} 11(4): 433--447.
+\bibitem[Anselm(1098)]{Anselm1098} Anselm of Canterbury (1098). \emph{Cur Deus Homo}.
+\bibitem[Kvanvig(1993)]{Kvanvig1993} Kvanvig, J.~L. (1993). \emph{The Problem of Hell}. Oxford University Press.
+\bibitem[Lewis(1946)]{Lewis1946} Lewis, C.~S. (1946). \emph{The Great Divorce}. Geoffrey Bles.
+\end{thebibliography}
+
+\end{document}

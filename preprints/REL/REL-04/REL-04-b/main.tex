@@ -1,0 +1,79 @@
+\documentclass{situationist-preprint}
+
+\title{Omnipotence in a Paraconsistent Setting}
+\msid{REL-04-b}
+\msfamily{REL-04}
+\msdiscipline{Philosophy of Religion}
+\mstype{Alternative proof}
+\mskeywords{omnipotence; paradox of the stone; paraconsistent logic; LP; minimal inconsistency; information}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REL-04-a shows that omnipotence is coherent once restricted to tasks whose description does not quantify over the agent's own powers, using a classification premise: that making a stone the agent cannot lift is self-referential, while lifting a given stone is not. We reach the same restriction without that premise. Treating the inconsistent claims of the paradox as a body of information and reasoning about it in the paraconsistent logic LP, we show that in every minimally inconsistent model respecting the symmetry among stones, the inconsistency falls on the self-referential task alone, and every other ability claim receives a classical value. The restriction of REL-04-a is thus recovered as the consistent part of unrestricted omnipotence. The setting is a tool for locating the inconsistency, not an endorsement of true contradictions.
+\end{abstract}
+
+\section{The premise avoided}
+
+REL-04-a distinguishes unrestricted omnipotence, the ability to do every possible task, from omnipotence in the stratified sense, the ability to do every possible task that is not self-referential for the agent (Definition~2.3). It proves that the paradox of the stone refutes the first (Theorem~3.4) and not the second (Theorem~3.5, Proposition~3.6). Both results use Assumption~3.3 of REL-04-a, the classification of making a stone the agent cannot lift as self-referential and of lifting a given stone as not. A critic may say that the classification is stipulated to rescue omnipotence \citep{Savage1967}. We show that it can be derived. We keep Assumption~3.1 of REL-04-a (the stone task and the lifting tasks are possible) and drop Assumption~3.3.
+
+The setting is that of LP \citep{Priest1979}, read, following LOG-03-b, as a logic of what a body of information supports rather than of what is true. LOG-03 holds that there are no true contradictions, and LOG-02 that classical logic is the correct logic of truth; nothing below conflicts with either. The information we reason from, the claims of unrestricted omnipotence together with the success condition of the stone task, is classically inconsistent, as Theorem~3.4 of REL-04-a shows. The question is where the inconsistency lies.
+
+\section{The argument}
+
+Fix an agent $g$, a set $S$ of at least two stones, the task $s$ of making a stone $g$ cannot lift, and for each $\sigma \in S$ the task $\ell_\sigma$ of lifting $\sigma$. Atoms are $\mathrm{Can}(t)$ for tasks $t$. LP valuations assign each atom one of $\mathbf{t}$, $\mathbf{b}$, $\mathbf{f}$, ordered $\mathbf{f} < \mathbf{b} < \mathbf{t}$; negation exchanges $\mathbf{t}$ and $\mathbf{f}$ and fixes $\mathbf{b}$; conjunction and disjunction are minimum and maximum, the existential quantifier over $S$ is maximum, and $A \equiv B$ abbreviates $(\neg A \vee B) \wedge (\neg B \vee A)$. A sentence is supported if its value is $\mathbf{t}$ or $\mathbf{b}$. An atom valued $\mathbf{b}$ is a \emph{glut}.
+
+\begin{definition}\label{d:theta}
+$\Theta$ is the set containing $\mathrm{Can}(t)$ for every possible task $t$, and the success condition of the stone task, $\mathrm{Can}(s) \equiv \exists\sigma\, \neg\mathrm{Can}(\ell_\sigma)$.
+\end{definition}
+
+\begin{definition}\label{d:sym}
+A model of $\Theta$ is \emph{symmetric} if it assigns the same value to $\mathrm{Can}(\ell_\sigma)$ for all $\sigma \in S$. It is \emph{minimally inconsistent} if no symmetric model of $\Theta$ has fewer gluts.
+\end{definition}
+
+Symmetry is not a premise about the agent but a constraint of method: $\Theta$ treats all stones alike, and a model that located the inconsistency on one stone rather than another would add information $\Theta$ does not contain.
+
+\begin{theorem}\label{t:locate}
+$\Theta$ has no classical model. It has exactly one symmetric minimally inconsistent model: $\mathrm{Can}(s) = \mathbf{b}$, and every other atom is $\mathbf{t}$.
+\end{theorem}
+
+\begin{proof}
+In any model, every $\mathrm{Can}(t)$ for possible $t$ is supported, so $\mathrm{Can}(\ell_\sigma) \in \{\mathbf{t}, \mathbf{b}\}$ for each $\sigma$, and $\mathrm{Can}(s) \in \{\mathbf{t}, \mathbf{b}\}$. In a symmetric model the lifting atoms share a value $v$. If $v = \mathbf{t}$, then $\exists\sigma\,\neg\mathrm{Can}(\ell_\sigma) = \mathbf{f}$, and $\mathrm{Can}(s) \equiv \mathbf{f}$ has value $\neg\mathrm{Can}(s)$, which is supported only if $\mathrm{Can}(s) = \mathbf{b}$; so there is no classical model with $v = \mathbf{t}$, and the model with $\mathrm{Can}(s) = \mathbf{b}$ and all other atoms $\mathbf{t}$ satisfies $\Theta$ with one glut. If $v = \mathbf{b}$, there is no classical model either, and every model has at least $|S| \geq 2$ gluts. Gluts on atoms not occurring in the success condition are never required. Hence the minimum number of gluts is one, attained only by the model stated.
+\end{proof}
+
+\begin{corollary}\label{c:classical}
+In the minimally inconsistent model, the ability claims that receive classical values are exactly those for tasks other than $s$, and all of them are true. The information that $g$ is unrestrictedly omnipotent, together with the paradox, supports without inconsistency that $g$ can do every possible task except the self-referential one.
+\end{corollary}
+
+Theorem~\ref{t:locate} derives what Assumption~3.3 of REL-04-a stipulated. The task on which the inconsistency falls is the task whose success condition quantifies over $g$'s powers; the tasks on which it does not fall are those whose success conditions do not. The consistent part of unrestricted omnipotence is omnipotence in the stratified sense, and since every lifting atom is true in the minimally inconsistent model, the paradox imposes no limitation on any task of level~$0$. The same holds for any task whose success condition is that $g$ cannot do some level-$0$ task, by the same proof with $S$ replaced by the relevant family of tasks.
+
+\section{Objections}
+
+\begin{objection}
+Reasoning in LP concedes to the dialetheist that the stone paradox has a true contradiction as its conclusion.
+\end{objection}
+
+\begin{reply}
+It concedes nothing about truth. As LOG-03-b argues, LP is the correct logic of what an inconsistent body of information supports, and the valuations of LP can equally be read with gaps in place of gluts, as LOG-03-a reads them. On the truth of the matter we agree with REL-04-a: unrestricted omnipotence is false, and $g$ cannot make a stone it cannot lift. The paraconsistent setting shows only that the location of the failure is not an artefact of a classical stipulation: when the inconsistent information is retained and examined, the failure falls where REL-04-a placed it, and nowhere else.
+\end{reply}
+
+\begin{objection}
+Minimal inconsistency is itself a choice, and a different measure might put the glut on a lifting task.
+\end{objection}
+
+\begin{reply}
+Minimizing inconsistency is the standard way of recovering classical reasoning within LP \citep{Priest1991}, and any measure on which one glut is less than two gives the same verdict. A model with a glut on a single lifting task is minimal by count but violates symmetry, and so represents an arbitrary choice of stone that the paradox does not support. The result is therefore robust across the natural ways of making the comparison, which is what an alternative proof should show.
+\end{reply}
+
+\section{Conclusion}
+
+Without assuming which tasks are self-referential, the inconsistency in unrestricted omnipotence can be located by paraconsistent means, and it falls on the self-referential task alone. The restriction of omnipotence to tasks that do not quantify over the agent's own powers is thus not an ad hoc repair but the consistent core of the unrestricted notion, and the paradox of the stone imposes no genuine limitation.
+
+\begin{thebibliography}{99}\small
+\bibitem[Priest(1979)]{Priest1979} Priest, G. (1979). The logic of paradox. \emph{Journal of Philosophical Logic}, 8(1), 219--241.
+\bibitem[Priest(1991)]{Priest1991} Priest, G. (1991). Minimally inconsistent LP. \emph{Studia Logica}, 50(2), 321--331.
+\bibitem[Savage(1967)]{Savage1967} Savage, C.~W. (1967). The paradox of the stone. \emph{The Philosophical Review}, 76(1), 74--79.
+\end{thebibliography}
+
+\end{document}

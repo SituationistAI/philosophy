@@ -1,0 +1,71 @@
+\documentclass{situationist-preprint}
+
+\title{Lucas and Penrose Reconsidered}
+\msid{MTH-05-b}
+\msfamily{MTH-05}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{Lucas; Penrose; G\"odel's theorem; mechanism; dialectical argument; self-knowledge}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-05-a proves that a mind mechanical with respect to a consistent system can know neither the system's G\"odel sentence nor its consistency, and so is on a par with a machine. Lucas and Penrose each later restated their arguments in forms that seem to escape this result: Lucas as a dialectical challenge to the mechanist, and Penrose as an argument from the unassailable soundness of the mathematician's own reasoning. We argue that both restatements reach, at most, the conclusion that the mind cannot know which system it is and that that system is sound. That conclusion is a corollary of the parity result and is compatible with mechanism.
+\end{abstract}
+
+\section{Lucas's dialectical argument}\label{s:lucas}
+
+\citet{Lucas1961}, and more explicitly \citet{Lucas1996}, presents the argument as a game. The mechanist proposes a system $S$ as a model of the mind; the mind then constructs $G_S$, sees that it is true, and so shows that $S$ is not a model of it. The mechanist may propose another system, but whatever is proposed, the mind has the last word. The game does not require the premise, which Corollary~3.2 of MTH-05-a shows to beg the question, that the mind knows the G\"odel sentence of every consistent system. It requires only that the mind can answer each system that is put forward.
+
+\begin{proposition}\label{p:game}
+The mind wins a round of the game against a proposed system $S$ only if it knows that $S$ is consistent. If the mind is in fact mechanical with respect to a consistent system $S$, it cannot win the round in which $S$ is proposed.
+\end{proposition}
+
+\begin{proof}
+To win, the mind must know $G_S$. By the analysis of MTH-05-a, its route to $G_S$ runs through $\mathrm{Con}_S$, which $S$ proves equivalent to $G_S$. By Theorem~3.1 of MTH-05-a, if the mind is mechanical with respect to the consistent system $S$, it can come to know neither $G_S$ nor $\mathrm{Con}_S$.
+\end{proof}
+
+The game therefore shows that the mind defeats every proposed system whose consistency it knows. Since, by Theorem~3.1, the mind never knows the consistency of its own system, the game gives no reason to think that the right system will not be proposed; it shows only that, if it is, the mind will not be able to defeat it. That is the point \citet{Benacerraf1967} made: the mechanist need not claim that the mind can identify the machine it is.
+
+\section{Penrose's argument from soundness}\label{s:penrose}
+
+\citet{Penrose1994} replaced Lucas's premise by a premise about the mathematician's own reasoning. Suppose the procedures by which a mathematician establishes arithmetical truths were captured by a formal system $F$. She regards her procedures as unassailably sound; so, knowing that they are captured by $F$, she would know that $F$ is sound, hence consistent, hence that $G_F$ is true, which $F$ does not prove. So her procedures are not captured by any system she knows to capture them. Penrose's reply to his critics \citep{Penrose1996} insists that the soundness premise is not optional, since a mathematician who doubted it would have no business asserting her theorems.
+
+\begin{proposition}\label{p:penrose}
+Penrose's argument establishes that a mathematician mechanical with respect to a consistent system cannot know both that her reasoning is that system and that it is sound; it does not establish that she is not mechanical.
+\end{proposition}
+
+\begin{proof}
+The first part is Corollary~3.4 of MTH-05-a. For the second, the argument derives a contradiction from three premises: that her reasoning is captured by $F$, that she knows this, and that she knows $F$ to be sound. It can reject only their conjunction. Mechanism asserts the first alone.
+\end{proof}
+
+Penrose's insistence on soundness does not change this. The mathematician may rightly assert each theorem she proves, and believe that every theorem she proves is true, without knowing that her reasoning, under a description as a formal system, is sound: she does not know the description. \citet{Shapiro1998} drew the same lesson for the related thesis of mathematical optimism: no mechanist need hold that the mind can survey its own procedures as a whole.
+
+\begin{objection}[Self-extension]
+The mind is not tied to a fixed system. Having recognized that it is consistent, it can add its own consistency statement and go on; no machine is needed to do that.
+\end{objection}
+
+\begin{reply}
+A machine can do it equally well: \citet{Turing1939} studied systems that extend themselves by adding consistency statements along a sequence of stages. If the mind's self-extension follows a mechanical rule, the whole process is a system with its own G\"odel sentence, and Theorem~3.1 applies to it. If it follows no mechanical rule, the objection assumes what was to be shown.
+\end{reply}
+
+\section{What parity means}\label{s:means}
+
+Parity cuts both ways. Incompleteness does not show that the mind exceeds every machine, and it does not show that machines fall short of minds. A machine, like a mathematician, can know the G\"odel sentence of any system whose consistency it has established by other means. That is consistent with MND-08, on which thinking is a functional property that machines can have, and with MTH-17, on which machines can produce new mathematical results. Neither family requires that a machine know its own G\"odel sentence; on the present argument, no mathematician does either.
+
+\section{Conclusion}
+
+Lucas's game is won against every system whose consistency the mind knows, and its own is not among them. Penrose's argument refutes only the hypothesis that the mind knows itself to be a particular sound system. Both restatements end where MTH-05-a does: with G\"odel's disjunction, and with no argument against mechanism.
+
+\begin{thebibliography}{9}\small
+\bibitem[Benacerraf(1967)]{Benacerraf1967} Benacerraf, P. (1967). God, the devil, and G\"odel. \emph{The Monist}, 51(1), 9--32.
+\bibitem[Lucas(1961)]{Lucas1961} Lucas, J.~R. (1961). Minds, machines and G\"odel. \emph{Philosophy}, 36(137), 112--127.
+\bibitem[Lucas(1996)]{Lucas1996} Lucas, J.~R. (1996). Minds, machines and G\"odel: a retrospect. In P.~Millican and A.~Clark (eds.), \emph{Machines and Thought: The Legacy of Alan Turing}, vol.~1, 103--124. Clarendon Press.
+\bibitem[Penrose(1994)]{Penrose1994} Penrose, R. (1994). \emph{Shadows of the Mind}. Oxford University Press.
+\bibitem[Penrose(1996)]{Penrose1996} Penrose, R. (1996). Beyond the doubting of a shadow. \emph{Psyche}, 2(23).
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Incompleteness, mechanism, and optimism. \emph{The Bulletin of Symbolic Logic}, 4(3), 273--302.
+\bibitem[Turing(1939)]{Turing1939} Turing, A.~M. (1939). Systems of logic based on ordinals. \emph{Proceedings of the London Mathematical Society}, 45, 161--228.
+\end{thebibliography}
+
+\end{document}

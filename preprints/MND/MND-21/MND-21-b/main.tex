@@ -1,0 +1,67 @@
+\documentclass{situationist-preprint}
+
+\title{Modularity and Distributed Control}
+\msid{MND-21-b}
+\msfamily{MND-21}
+\msdiscipline{Philosophy of Mind}
+\mstype{Companion manuscript}
+\mskeywords{modularity; distributed control; cognitive architecture; central systems; dual-task interference}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MND-21-a argues that the mind computes but is not a single computer, because cognition is distributed over semi-autonomous processes. It is natural to read this as a thesis of massive modularity. We argue that it is not. Modularity concerns the information a process can access; semi-autonomy concerns what sequences processes. The two dimensions are independent, so the result neither requires nor supports massive modularity, and it is consistent with Fodor's view that central cognition is not modular. We then answer the objection that the central bottleneck revealed by dual-task interference is a single controller.
+\end{abstract}
+
+\section{Two dimensions}
+
+A Fodorian module is a domain-specific, fast, mandatory processing system whose central mark is informational encapsulation: its operations can access only a restricted store of information \citep{Fodor1983}. Massive modularity holds that the mind is composed largely or wholly of modules, central cognition included \citep{Carruthers2006}. MND-21-a defines a different property. Two processes are semi-autonomous if no unit sequences them (Definition~2.4); a single computer is a system all of whose operations are sequenced by one controller executing one program (Definition~2.3); and the mind contains at least one semi-autonomous pair (Assumption~2.7), so it is not a single computer (Lemma~3.2).
+
+\begin{proposition}\label{p:indep}
+Encapsulation and semi-autonomy are independent: each combination of their presence and absence is possible.
+\end{proposition}
+
+\begin{proof}
+An encapsulated process can be sequenced by a controller, as a dedicated subroutine is called by a main program that also calls others; it then has restricted access and no autonomy. Two unencapsulated processes can be semi-autonomous, as two threads with access to a common memory run without a common scheduler. Encapsulated semi-autonomous processes are the modules of a pandemonium architecture \citep{Selfridge1959}; unencapsulated sequenced processes are the operations of a classical von Neumann machine. Since encapsulation is a constraint on what a process reads and sequencing a constraint on when it runs, neither entails the other or its negation.
+\end{proof}
+
+\begin{corollary}\label{c:mod}
+Theorem~3.3 of MND-21-a neither entails nor is entailed by massive modularity.
+\end{corollary}
+
+So the distributed view of cognition is compatible with a non-modular central system of the kind Fodor described, whose processes are isotropic and draw on everything the subject believes \citep{Fodor2000}. What it denies is that this central system, if it exists, sequences all cognitive processes. Visual processing for action and for recognition, for instance, run in parallel streams that dissociate under lesion \citep{MilnerGoodale1995}, and neither is called by central cognition. Global workspace theories \citep{Baars1988} likewise describe broadcast rather than sequencing: the workspace makes contents available to many processes, which take them up on their own schedules.
+
+\section{The central bottleneck}
+
+\begin{objection}[A sequencing unit exists]
+Dual-task experiments show a psychological refractory period: when two tasks require response selection in quick succession, the second waits until the first is done \citep{Pashler1994}. This is a central bottleneck, a unit that sequences response selection. So the mind has a controller.
+\end{objection}
+
+\begin{reply}
+Grant that the bottleneck is a sequencing unit. It sequences response selection for concurrent tasks; perception, memory retrieval and motor execution for the two tasks proceed in parallel on either side of it, and this is precisely the finding that locates the bottleneck. A single computer requires that every operation be sequenced by one controller (Definition~2.3 of MND-21-a); the bottleneck sequences some. Assumption~2.7 of MND-21-a requires only one pair of cognitive processes that no unit sequences, and the parallel stages supply many. The bottleneck is a local point of serial coordination within a distributed system, which is what a theory of distributed control predicts there will be where outputs must not conflict.
+\end{reply}
+
+\begin{objection}[Functionalism requires a program]
+If the mind is not one computer running one program, there is no program for functionalism to identify the mind with.
+\end{objection}
+
+\begin{reply}
+Functionalism identifies mental states with functional roles, not with states of a single program. A system of semi-autonomous computing processes has functional states defined by its inputs, outputs and the interactions of its parts, and Corollary~3.4 of MND-21-a shows that the result is compatible with the functionalist thesis of MND-08 that thinking is a functional property.
+\end{reply}
+
+\section{Conclusion}
+
+Distributed control is a thesis about sequencing, modularity a thesis about information. The mind computes, is not a single computer, and may or may not be massively modular; the evidence for local serial bottlenecks is evidence of coordination within a distributed system, not of a central processor.
+
+\begin{thebibliography}{9}\small
+\bibitem[Baars(1988)]{Baars1988} Baars, B.~J. (1988). \emph{A Cognitive Theory of Consciousness}. Cambridge University Press.
+\bibitem[Carruthers(2006)]{Carruthers2006} Carruthers, P. (2006). \emph{The Architecture of the Mind}. Oxford University Press.
+\bibitem[Fodor(1983)]{Fodor1983} Fodor, J.~A. (1983). \emph{The Modularity of Mind}. MIT Press.
+\bibitem[Fodor(2000)]{Fodor2000} Fodor, J.~A. (2000). \emph{The Mind Doesn't Work That Way}. MIT Press.
+\bibitem[Milner and Goodale(1995)]{MilnerGoodale1995} Milner, A.~D. and Goodale, M.~A. (1995). \emph{The Visual Brain in Action}. Oxford University Press.
+\bibitem[Pashler(1994)]{Pashler1994} Pashler, H. (1994). Dual-task interference in simple tasks: data and theory. \emph{Psychological Bulletin}, 116(2), 220--244.
+\bibitem[Selfridge(1959)]{Selfridge1959} Selfridge, O.~G. (1959). Pandemonium: a paradigm for learning. In \emph{Mechanisation of Thought Processes}. Her Majesty's Stationery Office.
+\end{thebibliography}
+
+\end{document}

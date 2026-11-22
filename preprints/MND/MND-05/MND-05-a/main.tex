@@ -1,0 +1,179 @@
+\documentclass{situationist-preprint}
+
+\title{Zombies Are Conceivable but Impossible}
+\msid{MND-05-a}
+\msfamily{MND-05}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_05.lean}
+\mskeywords{zombies; conceivability; possibility; two-dimensional semantics; phenomenal concepts; physicalism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A zombie is a being physically identical to a conscious human being but lacking consciousness. Chalmers argues that zombies are conceivable, that what is ideally conceivable is possible, and that the possibility of zombies refutes physicalism. We grant that zombies are conceivable, even ideally, and deny that they are possible. We argue that the inference from ideal conceivability to possibility fails for propositions formulated with phenomenal concepts, because these concepts refer directly to their objects without a descriptive mode of presentation that would reveal their connection to physical concepts a priori. We show that, given physicalism, the conceivability-possibility principle fails for exactly one class of propositions, and that this failure is predicted rather than ad hoc.
+\end{abstract}
+
+\section{The argument}
+
+\citet{Chalmers1996} formulates the zombie argument as follows.
+\begin{enumerate}[label=(Z\arabic*)]
+\item It is conceivable that there be a zombie world: a world physically identical to ours in which there is no consciousness.
+\item If it is conceivable that there be a zombie world, it is metaphysically possible that there be one.
+\item If it is metaphysically possible that there be a zombie world, physicalism is false.
+\item Therefore, physicalism is false.
+\end{enumerate}
+Premise (Z3) follows from the standard formulation of physicalism as the thesis that the physical facts necessitate all the facts (MND-02). Physicalist responses therefore deny (Z1) or (Z2). Type-A physicalists deny (Z1), holding that zombies are not even ideally conceivable, since the concept of consciousness is a functional concept. Type-B physicalists grant (Z1) and deny (Z2) \citep{Chalmers2002}. We take the second route.
+
+\subsection{History}
+
+Arguments of this form are as old as modern philosophy. Descartes argued in the Sixth Meditation that since he could clearly and distinctly conceive of his mind existing without his body, God could make it so, and mind and body are therefore distinct. The zombie version was introduced by \citet{Kirk1974}, who later abandoned it, and given its contemporary form by \citet{Chalmers1996}. Its plausibility owes much to \citet{Levine1983}'s observation that there is an explanatory gap between physical facts and facts about experience: no physical description seems to make it intelligible why a given physical process should be accompanied by experience rather than none. If the gap cannot be closed a priori, zombies seem conceivable; the question is whether their conceivability shows anything about possibility.
+
+The debate about (Z2) turns on the relation between conceivability and possibility. \citet{Kripke1980} showed that there are necessary truths that are not knowable a priori, such as \enquote{water is H$_2$O}, and that their negations are, in a sense, conceivable. Chalmers replies, using two-dimensional semantics, that the conceivability of \enquote{water is not H$_2$O} is the conceivability of a world in which a watery substance is not H$_2$O, which is possible; the necessary a posteriori is explained by the difference between a term's primary and secondary intension. For the zombie case, he argues, there is no such difference: the primary and secondary intensions of \enquote{consciousness} coincide, since what it is like to be conscious is the same as what appears to be conscious. So if zombies are conceivable, they are possible.
+
+\section{Phenomenal concepts}
+
+The type-B reply rests on a claim about phenomenal concepts \citep{Loar1990,Papineau2002,Balog1999}.
+
+\begin{definition}\label{d:phen}
+A \emph{phenomenal concept} is a concept of a type of experience that refers to the experience directly, through a recognitional capacity, without a descriptive mode of presentation (MND-04, Definition~2.2).
+\end{definition}
+
+\begin{assumption}[Conceptual isolation]\label{a:iso}
+No a priori connection holds between phenomenal concepts and physical concepts: no proposition linking them is knowable a priori.
+\end{assumption}
+
+Assumption~\ref{a:iso} is what makes zombies conceivable. A zombie world is described using physical concepts for the physical facts and phenomenal concepts for the absence of experience. Since no a priori connection links the two, nothing in the description reveals a contradiction, and ideal reasoning cannot rule it out.
+
+The type-B physicalist adds that phenomenal concepts nonetheless refer to physical properties. The reference is fixed directly, through recognition, rather than by description, so the identity of the experience with a physical property is necessary but a posteriori, like the identity of water and H$_2$O, but without a primary intension that would make it look contingent.
+
+\section{The argument refuted}
+
+\begin{assumption}[Physicalism]\label{a:phys}
+The physical facts necessitate all the facts.
+\end{assumption}
+
+\begin{lemma}\label{l:imp}
+Given Assumption~\ref{a:phys}, a zombie world is not metaphysically possible.
+\end{lemma}
+
+\begin{proof}
+A zombie world is physically identical to ours and lacks consciousness. By Assumption~\ref{a:phys}, the physical facts of our world necessitate that there be consciousness. So no world physically identical to ours lacks consciousness.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Given Assumptions~\ref{a:iso} and \ref{a:phys}, zombies are ideally conceivable but not possible, and the conceivability-possibility principle (Z2) fails.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:iso}, the zombie hypothesis cannot be ruled out a priori, so it is ideally conceivable. By Lemma~\ref{l:imp}, it is not possible. Hence (Z2) fails for this proposition.
+\end{proof}
+
+\begin{corollary}\label{c:scope}
+The failure of (Z2) is confined to propositions formulated using phenomenal concepts.
+\end{corollary}
+
+\begin{proof}[Sketch]
+The failure arises because phenomenal concepts lack a descriptive mode of presentation that two-dimensional semantics could exploit. For propositions formulated with concepts that have such a mode of presentation, Chalmers's two-dimensional reconstruction of the necessary a posteriori applies, and ideal conceivability of the primary intension does entail possibility.
+\end{proof}
+
+Corollary~\ref{c:scope} answers the charge that the type-B response is ad hoc. It does not deny the conceivability-possibility principle in general; it identifies a class of concepts for which a specific premise of Chalmers's argument for the principle, the coincidence of primary and secondary intensions, holds for the wrong reason. The intensions of phenomenal concepts coincide not because their reference is fixed by appearance, but because their reference is fixed by nothing descriptive at all.
+
+\section{The parity argument}
+
+The type-B reply can be strengthened by an argument of parity, versions of which have been given by \citet{Frankish2007} and \citet{Brown2010}. Call an \emph{anti-zombie world} a world that is physically identical to ours and in which the physical facts necessitate consciousness. An anti-zombie world contains nothing but physical facts and the consciousness they necessitate.
+
+\begin{lemma}\label{l:anti}
+An anti-zombie world is ideally conceivable.
+\end{lemma}
+
+\begin{proof}[Sketch]
+Nothing a priori rules out that the physical facts necessitate consciousness. The explanatory gap shows that we cannot see a priori why they would, not that we can see a priori that they would not.
+\end{proof}
+
+\begin{proposition}\label{p:parity}
+If both the zombie hypothesis and the anti-zombie hypothesis are ideally conceivable, then the unrestricted principle (Z2) is false.
+\end{proposition}
+
+\begin{proof}
+Suppose (Z2) holds without restriction. Then both hypotheses are possible. The anti-zombie hypothesis says that the physical facts of our world necessitate consciousness; if this is possible, then, given S5, it is necessary, since necessitation claims are necessary if possible. But then no world physically identical to ours lacks consciousness, so the zombie hypothesis is impossible, a contradiction.
+\end{proof}
+
+Proposition~\ref{p:parity} does not presuppose physicalism, and in this respect it is stronger than Theorem~\ref{t:main}. It shows that anyone who accepts that both hypotheses are conceivable must restrict (Z2), and must therefore have some account of which conceivable propositions are possible. The type-B physicalist's account is that phenomenal concepts mark the exception. The dualist must give a rival account on which the zombie hypothesis falls under (Z2) and the anti-zombie hypothesis does not, and no such account has been given that does not presuppose dualism.
+
+The structure of the argument is the same as that of the converse argument of REL-01-a, Section~4: in S5, the possibility of a necessitation claim and the possibility of its failure are incompatible, and conceivability cannot decide between them.
+
+\section{The explanatory gap}
+
+Theorem~\ref{t:main} does not close the explanatory gap. It remains true, on the present view, that no physical description makes it a priori intelligible why a given process is accompanied by experience. What the theorem shows is that the gap is epistemic, not metaphysical: it reflects the conceptual isolation of phenomenal concepts (Assumption~\ref{a:iso}), not a gap in the world. MND-01 draws the same conclusion from the other direction, arguing that the gap arises from two modes of presentation of the same facts. On both views, the gap is a permanent feature of our concepts, and its persistence is no evidence against physicalism.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_05.lean} formalizes the structure of the argument. Propositions are primitive, with predicates for ideal conceivability and possibility. The module proves that physicalism, together with the ideal conceivability of the zombie hypothesis, is inconsistent with (Z2) in its unrestricted form.
+
+\begin{lstlisting}
+theorem z2_fails (conceivable_zombie : Conceivable zombie) :
+    ¬ (∀ p, Conceivable p → Possible p)
+
+theorem parity (cz : Conceivable zombie) (ca : Conceivable antiZombie)
+    (incompatible : Possible antiZombie → ¬ Possible zombie) :
+    ¬ (∀ p, Conceivable p → Possible p)
+\end{lstlisting}
+
+The second theorem, Proposition~\ref{p:parity}, does not use the physicalist axiom: \texttt{\#print axioms} lists only the primitive notions.
+
+The result is a theorem in the sense that it follows from Lemma~\ref{l:imp}. It is philosophically significant because it locates the disagreement between Chalmers and the type-B physicalist precisely: one of them must reject (Z2) for the zombie proposition, and the other must reject physicalism, and no further logical consideration decides between them.
+
+\section{Russellian monism}
+
+MND-01 argues that consciousness is the intrinsic nature of physical structure. On that view, a world physically identical to ours, including in the intrinsic natures of physical properties, contains consciousness, and zombies are impossible. Zombies remain conceivable, because physical concepts describe structure and phenomenal concepts describe intrinsic natures, and no a priori connection links them. The view therefore satisfies Theorem~\ref{t:main} with physicalism understood broadly, as including the intrinsic natures of the physical. This is the reading of \enquote{physical} adopted in MND-02, and it is the reading under which the present manuscript's conclusion is to be understood.
+
+\section{Varieties of zombie}
+
+Three kinds of zombie should be distinguished. A \emph{behavioural zombie} behaves like a conscious human being but may differ internally; a \emph{functional zombie} duplicates the functional organization of a conscious human being; a \emph{physical zombie} duplicates its physical constitution exactly. Chalmers's argument uses physical zombies, because only their possibility refutes physicalism: a behavioural zombie could lack consciousness because its internal workings differ, which is compatible with physicalism, and a functional zombie bears on functionalism rather than physicalism. \citet{Dennett1991} introduced the further notion of a \emph{zimbo}, a behavioural zombie with higher-order states that monitor its own states, and argued that a zimbo would believe and report that it was conscious, so that nothing in its behaviour or its own judgements would distinguish it from a conscious being.
+
+Theorem~\ref{t:main} concerns physical zombies only. It is compatible with the possibility of behavioural zombies, and it takes no stand on functional zombies, which would require a view about whether consciousness supervenes on functional organization. MND-21 argues that the mind computes without being a computer; if that is right, functional duplication of a human being is a more demanding condition than computational simulation, and the question of functional zombies is correspondingly harder to pose.
+
+\section{Zombies and artificial systems}
+
+The question of zombies has acquired practical interest with the development of artificial systems that produce human-like language. Such systems are not physical duplicates of human beings, and Theorem~\ref{t:main} says nothing about them. Whether they are conscious cannot be settled by conceivability arguments in either direction: it is conceivable that they are conscious and conceivable that they are not, and by Proposition~\ref{p:parity} conceivability is not a reliable guide to possibility in this domain. The question must instead be approached empirically, by asking whether such systems have the features that the best theories of consciousness associate with it \citep{Butlin2023}, as MND-23 does for animals.
+
+\section{Objections}
+
+\begin{objection}
+The type-B physicalist owes an explanation of why the identity of consciousness with a physical property is necessary. Other necessary a posteriori truths are explained by two-dimensional semantics; this one is brute \citep{Chalmers2002}.
+\end{objection}
+
+\begin{reply}
+The necessity is explained by the identity: if consciousness is a physical property, then necessarily whatever has that property is conscious, since everything is necessarily identical to itself. What remains unexplained is why the identity cannot be known a priori, and this is explained by Assumption~\ref{a:iso}, which is in turn explained by the recognitional character of phenomenal concepts. The physicalist owes an account of phenomenal concepts, not an additional explanation of the necessity.
+\end{reply}
+
+\begin{objection}
+The phenomenal concept strategy explains why physicalists find zombies conceivable, but it cannot explain the phenomenal concepts themselves without appealing to consciousness.
+\end{objection}
+
+\begin{reply}
+The objection, pressed by Chalmers, is that phenomenal concepts either have physical explanations, in which case zombies would have them too, or they do not, in which case physicalism is false. We accept the first horn: zombies, if they existed, would have physical counterparts of phenomenal concepts and would find zombies conceivable. Since zombies are impossible, the question of what their concepts would be like is idle.
+\end{reply}
+
+\section{Conclusion}
+
+Zombies are conceivable but impossible. The zombie argument fails at the step from ideal conceivability to possibility, and it fails there for a principled reason: phenomenal concepts refer without describing, and so cannot reveal their connection to physical concepts a priori. The response applies equally to the knowledge argument (MND-04) and leaves intact the conceivability-possibility principle for every other class of propositions.
+
+\begin{thebibliography}{99}\small
+\bibitem[Balog(1999)]{Balog1999} Balog, K. (1999). Conceivability, possibility, and the mind-body problem. \emph{The Philosophical Review}, 108(4), 497--528.
+\bibitem[Brown(2010)]{Brown2010} Brown, R. (2010). Deprioritizing the a priori arguments against physicalism. \emph{Journal of Consciousness Studies}, 17(3--4), 47--69.
+\bibitem[Butlin et~al.(2023)]{Butlin2023} Butlin, P., Long, R., Elmoznino, E., Bengio, Y., Birch, J., Constant, A. et~al. (2023). Consciousness in artificial intelligence: Insights from the science of consciousness. arXiv:2308.08708.
+\bibitem[Chalmers(1996)]{Chalmers1996} Chalmers, D.~J. (1996). \emph{The Conscious Mind: In Search of a Fundamental Theory}. Oxford University Press.
+\bibitem[Chalmers(2002)]{Chalmers2002} Chalmers, D.~J. (2002). Does conceivability entail possibility? In T.~S. Gendler and J. Hawthorne (Eds.), \emph{Conceivability and Possibility} (pp.~145--200). Oxford University Press.
+\bibitem[Dennett(1991)]{Dennett1991} Dennett, D.~C. (1991). \emph{Consciousness Explained}. Little, Brown.
+\bibitem[Frankish(2007)]{Frankish2007} Frankish, K. (2007). The anti-zombie argument. \emph{The Philosophical Quarterly}, 57(229), 650--666.
+\bibitem[Kirk(1974)]{Kirk1974} Kirk, R. (1974). Zombies v. materialists. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 48, 135--152.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Levine(1983)]{Levine1983} Levine, J. (1983). Materialism and qualia: The explanatory gap. \emph{Pacific Philosophical Quarterly}, 64(4), 354--361.
+\bibitem[Loar(1990)]{Loar1990} Loar, B. (1990). Phenomenal states. \emph{Philosophical Perspectives}, 4, 81--108.
+\bibitem[Papineau(2002)]{Papineau2002} Papineau, D. (2002). \emph{Thinking about Consciousness}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

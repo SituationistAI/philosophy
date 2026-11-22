@@ -1,0 +1,156 @@
+\documentclass{situationist-preprint}
+
+\title{Necessity and Essence}
+\msid{TSM-10-a}
+\msfamily{TSM-10}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mskeywords{metaphysical necessity; essence; real definition; possible worlds; necessary a posteriori; conceivability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What is metaphysical necessity? We argue that a proposition is metaphysically necessary if and only if it is true in all worlds consistent with the essences of things, and possible if and only if it is consistent with them. We prove that, for a consequence relation with the Lindenbaum property, a proposition is true in all such worlds exactly when it follows logically from the essential truths, so that necessity is the closure of essence under logic, and that these worlds are exactly the possible worlds of TSM-07. The account explains why necessities hold, which the rival accounts do not; it classifies the necessary a posteriori correctly; and it predicts that conceivability can come apart from possibility wherever the concepts in play do not reveal the essences of what they pick out. We answer four objections.
+\end{abstract}
+
+\section{The problem}
+
+Some truths could not have been otherwise. That Hesperus is Phosphorus, that water is composed of H$_2$O molecules, that Socrates is a man and that $\{\text{Socrates}\}$ has Socrates as a member are, on a widely shared view, metaphysically necessary, though none of them is a truth of logic and the first two were discovered empirically \citep{Kripke1980}. What makes them necessary?
+
+The possible-worlds answer, that they are true in all possible worlds, restates the question unless something is said about which worlds are possible. Four kinds of answer are in the literature. \emph{Modal realism} identifies possible worlds with concrete universes and necessity with truth in all of them \citep{Lewis1986}; TSM-08 argues that the ontology does no work its rivals cannot do. \emph{Primitivism} takes necessity, or possibility, as basic and unanalysed, and treats worlds as a model of it. \emph{Conventionalism} holds that necessity derives from our conventions for applying sortal terms \citep{Sidelle1989}, and \emph{modal Humeanism} holds that \enquote{necessary} applies to a gerrymandered list of truths of logic, mathematics, analytic truths and the like, unified only by our interests \citep{Sider2011}. \citet{Williamson2007} argued that metaphysical necessity is definable from the counterfactual conditional: $p$ is necessary just in case, if $p$ were false, a contradiction would hold.
+
+The \emph{essentialist} answer, due in its modern form to \citet{Fine1994}, is that necessities are grounded in the natures of things: it is necessary that Socrates is a man because being a man is part of what Socrates is. \citet{Hale2013} developed a theory of modality on this basis. MET-13 argues that essence is prior to modality, that every object has a real definition stating what it is, and that every necessity holds in virtue of the essences of some things. We state the essentialist account in terms of worlds, prove that it identifies necessity with the logical closure of the essential truths, and argue that it is correct.
+
+\section{Framework}
+
+We use the account of worlds of TSM-07, with its notion of consistency left open, and the notion of essence of MET-13. For objects $x$, $\nec_x\,p$ says that it is true in virtue of the nature of $x$ that $p$.
+
+\begin{definition}[Essential truths]\label{d:E}
+A proposition is an \emph{essential truth} if, for some objects $x$, $\nec_x\,p$. Let $E$ be the set of essential truths.
+\end{definition}
+
+\begin{definition}[Logical consequence and consistency]\label{d:log}
+$\Gamma\vDash p$ says that $p$ follows logically from the propositions in $\Gamma$. A set $\Gamma$ is \emph{logically consistent} if there is no $p$ with $\Gamma\vDash p$ and $\Gamma\vDash\neg p$.
+\end{definition}
+
+\begin{definition}[Worlds consistent with the essences]\label{d:Eworld}
+A \emph{maximal set} is a logically consistent set containing, for every $p$, either $p$ or $\neg p$, and closed under logical consequence. A maximal set is \emph{consistent with the essences} if it contains $E$.
+\end{definition}
+
+\begin{principle}[Necessity]\label{p:nec}
+A proposition is metaphysically \emph{necessary} if and only if it is true in every maximal set consistent with the essences, and \emph{possible} if and only if it is true in some such set.
+\end{principle}
+
+Principle~\ref{p:nec} is the thesis. One fact about logic is assumed.
+
+\begin{assumption}[Lindenbaum property]\label{a:lind}
+Every logically consistent set of propositions is included in a maximal set.
+\end{assumption}
+
+
+
+Assumption~\ref{a:lind} holds for classical first-order logic.
+
+\section{Necessity as the closure of essence}
+
+\begin{lemma}\label{l:poss}
+A proposition $p$ is possible if and only if $E\cup\{p\}$ is logically consistent.
+\end{lemma}
+
+\begin{proof}
+If $p$ is true in a maximal set containing $E$, then $E\cup\{p\}$ is included in a logically consistent set and is therefore logically consistent. Conversely, if $E\cup\{p\}$ is logically consistent, by Assumption~\ref{a:lind} it is included in a maximal set, which contains $E$ and $p$.
+\end{proof}
+
+\begin{theorem}[Necessity is the closure of essence]\label{t:closure}
+A proposition is metaphysically necessary if and only if it follows logically from the essential truths: $\nec p$ iff $E\vDash p$.
+\end{theorem}
+
+\begin{proof}
+If $E\vDash p$, every maximal set containing $E$ contains $p$, since maximal sets are closed under consequence; so $p$ is necessary. If $E\nvDash p$, then $E\cup\{\neg p\}$ is logically consistent, for otherwise $p$ would follow from $E$ by the classical behavior of negation. By Lemma~\ref{l:poss}, $\neg p$ is possible: it is true in a maximal set containing $E$, which therefore does not contain $p$. So $p$ is not necessary.
+\end{proof}
+
+\begin{corollary}\label{c:dual}
+Possibility is consistency with the essences: $\pos p$ iff $p$ is logically consistent with $E$; and $\pos p$ iff $\neg\nec\neg p$.
+\end{corollary}
+
+\begin{proof}
+The first claim is Lemma~\ref{l:poss}. The second follows from it and Theorem~\ref{t:closure}, since $E\cup\{p\}$ is consistent iff $E\nvDash\neg p$.
+\end{proof}
+
+\begin{corollary}[Agreement with TSM-07]\label{c:tsm07}
+If the consistency of TSM-07 is understood as logical consistency with $E$, the possible worlds of TSM-07 are exactly the maximal sets consistent with the essences, and necessity in the sense of Principle~\ref{p:nec} is truth in all possible worlds.
+\end{corollary}
+
+\begin{proof}
+A maximal set in the sense of TSM-07 that is logically consistent with $E$ contains $E$, since it contains each member of $E$ or its negation and cannot contain the negation of a member of $E$ without inconsistency with $E$. Conversely, a maximal set containing $E$ is logically consistent with $E$.
+\end{proof}
+
+Theorem~\ref{t:closure} says what clause (i) of the priority theorem of MET-13 uses: that a necessary proposition follows, by logic, from propositions true in virtue of the natures of some objects. Corollary~\ref{c:tsm07} reconciles the two ways in which the collection speaks of necessity: as truth in every possible world, with worlds the maximal consistent sets of TSM-07, and as truth in every world consistent with the essences. The two coincide once compossibility is identified with logical consistency with the essential truths, and that identification is the content of Principle~\ref{p:nec}.
+
+\section{The case for the account}
+
+\paragraph{It explains.} The essentialist account says why the necessary truths are necessary: because they follow from what things are. That $\{\text{Socrates}\}$ contains Socrates is necessary because containing Socrates is part of what the singleton is. Primitivism gives no explanation, by design. Modal realism explains necessity by quantification over concrete universes, but it must say which universes there are, and its principle of recombination is itself restricted by what is possible (TSM-08). Conventionalism makes the necessity of \enquote{Hesperus is Phosphorus} depend on us, though Venus would have been self-identical had there been no conventions. Modal Humeanism explains why we call certain truths necessary but not why they could not have failed. Williamson's counterfactual definition explains one modal fact by another of the same kind.
+
+\paragraph{It classifies the necessary a posteriori.} The essential truths are not in general known a priori. That water is H$_2$O is a truth about the nature of water, a kind, and was learnt by chemistry; that Socrates came from the gametes he came from, if it is essential to him, is learnt by tracing his origin. On the account, the necessity of these truths is the necessity of essence, and our knowledge of it is as empirical as our knowledge of the essences. The account therefore predicts Kripke's cases: necessary truths that are known a posteriori are those whose derivation from $E$ requires essential truths that are known a posteriori.
+
+\paragraph{It locates the gap between conceivability and possibility.} A proposition is conceivable, in the relevant sense, if its negation cannot be ruled out a priori from what our concepts reveal; it is possible, by Corollary~\ref{c:dual}, if it is consistent with the essences of things. The two coincide only where our concepts reveal the essences of what they pick out. For concepts whose reference is fixed descriptively, the two-dimensional analysis recovers a possibility from every ideal conceivability, by attaching it to the world that satisfies the description \citep{Chalmers2002}; MND-05 accepts this. Where a concept refers directly, without a mode of presentation that reveals the essence of its referent, the account predicts that a proposition may be ideally conceivable and yet inconsistent with the essences. MND-05 argues that phenomenal concepts are of this kind, and that zombies are conceivable but not metaphysically possible; MND-01 argues that physical concepts present their objects only structurally, so that the intrinsic nature of physical structure is not revealed by them. Both theses require that metaphysical necessity outrun a priori necessity, and the essentialist account explains why it does: necessity is fixed by the essences of things, and nothing guarantees that our concepts reveal them.
+
+\paragraph{It unifies.} Logical truths are necessary on the account because they follow from any premises, $E$ included. Mathematical truths are necessary because they follow from the real definitions of the mathematical objects and structures, or, if logicism of some form is true, from logic alone. TSM-11 argues that the necessary truths are those of logic, mathematics and essence, and Theorem~\ref{t:closure} explains why the list has that form: logic is the consequence relation, and mathematics and the rest are what the essences of the relevant things contain. Whether logical truths are themselves true in virtue of the natures of the logical concepts \citep{Fine1994} is a question MET-13 leaves open and Theorem~\ref{t:closure} need not settle.
+
+\section{Objections}
+
+\begin{objection}[Circularity]
+\enquote{Consistent} and \enquote{follows logically} are modal notions: a set is consistent if its members could be true together. The account therefore analyses metaphysical necessity in terms of another necessity.
+\end{objection}
+
+\begin{reply}
+Logical consequence is not metaphysical necessity, and the account uses only the former. LOG-06 argues that logical consequence is truth-preservation in all models of a class containing a copy of the actual world, which is not metaphysical necessity. Either way the account explains metaphysical necessity by two things, logical consequence and essence, neither of which is metaphysical necessity, and MET-13 argues that essence is not grounded in modal facts. The account is circular only if essence is itself modal, which is what Fine's counterexamples refute: it is necessary that Socrates belongs to $\{\text{Socrates}\}$ but no part of what Socrates is \citep{Fine1994}.
+\end{reply}
+
+\begin{objection}[Contingent existents]
+Socrates might not have existed. If \enquote{Socrates is a man} is an essential truth, it belongs to $E$ and is true in every world consistent with the essences, including worlds in which Socrates does not exist. Either Socrates is a man where he does not exist, or the account makes his existence necessary.
+\end{objection}
+
+\begin{reply}
+The objection applies to any account on which essential properties are necessary, and so does the standard resolution. On contingentism, the essential truth is that Socrates is a man if he exists, and $E$ contains the conditional \citep{Fine1994}. On necessitism \citep{Williamson2013}, Socrates exists necessarily and is only contingently concrete, and the essential truth is unconditional. The account is neutral between the views, as are MET-01 and LOG-06, which leave the choice between free logic and necessitism open.
+\end{reply}
+
+\begin{objection}[The necessity of essence]
+The account makes the essential truths necessary, since $E\vDash p$ for each $p\in E$. But it is a substantive question whether things could have had different natures. If they could, the account is false; if they could not, the account owes an explanation of why not, and cannot give one, since the explanans is $E$ itself.
+\end{objection}
+
+\begin{reply}
+That things could not have had different natures is a consequence of the account, not a premise. The question whether Socrates could have had a different nature is the question whether there is a world, consistent with the essences, in which something that is Socrates is not a man. There is not, since \enquote{Socrates is a man}, suitably formulated, is in $E$. The explanation of this is what the explanation of every necessity is: it follows from what Socrates is. The demand for a further explanation of why Socrates' nature is necessary is a demand to explain the explanans by something else, and essence is the end of the modal explanatory chain. \citet[ch.~3]{Hale2013} argued for the same stopping point, on the ground that any proposed further explanation would itself be essentialist or would leave the necessity unexplained.
+\end{reply}
+
+\begin{objection}[Natural necessity]
+The laws of nature are often said to be necessary. If they are, but are not essential truths, the account omits a kind of necessity; if they are essential truths about the natural properties, as dispositional essentialists hold \citep{Bird2007}, the account makes them metaphysically necessary, which is contested.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:nec} concerns metaphysical necessity only, and other necessities are restrictions of it. MET-12 argues that the laws are the axioms of the best system summarizing the mosaic of events, which makes them contingent; they are not essential truths, and the account classifies them correctly as metaphysically contingent. Natural necessity is truth in all worlds consistent with the essences and the laws. A dispositional essentialist who places the laws in the essences of properties will find them metaphysically necessary, as her view requires; the account says what follows from each view of the laws without settling between them.
+\end{reply}
+
+\section{What the account does not establish}
+
+The account does not say which propositions are essential truths; that is a matter for MET-13 and, case by case, for the sciences. It does not reduce modality to the non-modal in Lewis's sense, since it takes essence and logical consequence as given. And Theorem~\ref{t:closure} depends on Assumption~\ref{a:lind}: for a logic without the Lindenbaum property, necessity in the sense of Principle~\ref{p:nec} may be stronger than consequence from $E$.
+
+\section{Conclusion}
+
+Metaphysical necessity is truth in all worlds consistent with the essences of things, and possibility is consistency with them. Given that consequence has the Lindenbaum property, necessity is the closure of the essential truths under logic, and the worlds consistent with the essences are the possible worlds of TSM-07. The account explains why necessities hold, accounts for the necessary a posteriori, and predicts where conceivability outruns possibility.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bird(2007)]{Bird2007} Bird, A. (2007). \emph{Nature's Metaphysics: Laws and Properties}. Oxford University Press.
+\bibitem[Chalmers(2002)]{Chalmers2002} Chalmers, D.~J. (2002). Does conceivability entail possibility? In T.~S. Gendler and J.~Hawthorne (eds.), \emph{Conceivability and Possibility}. Oxford University Press.
+\bibitem[Fine(1994)]{Fine1994} Fine, K. (1994). Essence and modality. \emph{Philosophical Perspectives}, 8, 1--16.
+\bibitem[Hale(2013)]{Hale2013} Hale, B. (2013). \emph{Necessary Beings: An Essay on Ontology, Modality, and the Relations Between Them}. Oxford University Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Sidelle(1989)]{Sidelle1989} Sidelle, A. (1989). \emph{Necessity, Essence, and Individuation: A Defense of Conventionalism}. Cornell University Press.
+\bibitem[Sider(2011)]{Sider2011} Sider, T. (2011). \emph{Writing the Book of the World}. Oxford University Press.
+\bibitem[Williamson(2007)]{Williamson2007} Williamson, T. (2007). \emph{The Philosophy of Philosophy}. Blackwell.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass{situationist-preprint}
+
+\title{The Social Contract as Implicit Framework}
+\msid{POL-11-a}
+\msfamily{POL-11}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/POL/POL\_11.lean}
+\mskeywords{social contract; convention; mutual expectations; Hume; Lewis; institutions; persistence; consent}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is there a social contract? Taken as an actual agreement among the members of a society, there is not: almost no one has agreed to anything, as Hume observed. Taken as a hypothetical agreement, it is not a contract at all, as Dworkin observed. We argue that there is a social contract, and that it is an implicit framework of mutual expectations: a system of rules for basic cooperation that members generally follow, expect one another to follow, and prefer to follow on condition that others do. Such a framework is an institution, and by the persistence condition of MET-20-a it exists as long as, having been instituted by collective acceptance, it has not been collectively rejected. It follows that the social contract exists without anyone's having agreed to it, that it covers members who never agreed and never actively accepted it, and that an actual agreement which is never instituted, or which is collectively rejected, is no social contract. The framework plays the roles that contract theory assigned to the agreement: it specifies terms of cooperation, makes each person's compliance conditional on others', and can be dissolved. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+The social contract tradition holds that political society rests on an agreement among its members: a historical or quasi-historical event in \citet{Hobbes1651} and \citet{Locke1689}, the act by which a people becomes a people in \citet{Rousseau1762}, a hypothetical agreement in an original position of equality in \citet{Rawls1971}. The question whether there is a social contract is whether anything answers to the non-hypothetical notion. \citet{Hume1748} observed that almost no one has consented to the government under which he lives, and \citet{Dworkin1973} that a hypothetical agreement is not an agreement. If the contract is neither actual nor hypothetical, it seems to be nothing.
+
+There is a third possibility, and Hume himself pointed to it. Two men who pull the oars of a boat do so by an agreement or convention, though they have never given promises to each other \citep[3.2.2]{Hume1739}. Such a convention is a pattern of conduct sustained by each person's expectation that the others will continue it, not an agreement made at a time. \citet{Lewis1969} analysed the notion, and \citet{Skyrms1996} and \citet{Binmore2005} have reconstructed the social contract as an evolved equilibrium of a game of cooperation. \citet{Gilbert2006} has argued, by contrast, that political society rests on an actual if implicit agreement, a joint commitment of its members.
+
+Our thesis is that there is a social contract, and that it is an implicit framework of mutual expectations rather than an actual agreement. What is new in our defence of the conventionalist answer is an account of the framework's persistence: the framework is an institution in the sense of MET-20-a, which persists, once instituted by collective acceptance, as long as it is not collectively rejected. This condition explains why the absence of agreement, which refutes the actual-contract view, does not refute the existence of the contract.
+
+\section{Framework}
+
+\begin{definition}\label{d:framework}
+A \emph{framework of mutual expectations} for a community is a system of rules such that, in the contexts to which the rules apply, (a) members generally conform to them; (b) each member expects the others to conform; (c) each expects the others to expect her to conform, and to respond to her non-conformity with disapproval or sanction; and (d) each prefers to conform on condition that the others do.
+\end{definition}
+
+Clauses (a), (b) and (d) are the core of Lewis's analysis of convention \citep{Lewis1969}; clause (c) adds the normative expectations that \citet{Bicchieri2006} identifies as the mark of a social norm.
+
+\begin{definition}\label{d:contract}
+The \emph{social contract} of a society is the framework of mutual expectations that governs its basic cooperation: the security of persons, the recognition of holdings, the conduct of exchange, and the recognition of those who have authority to make, apply and enforce further rules.
+\end{definition}
+
+The last item matters most. A society's recognition of authority, what \citet[ch.~6]{Hart1961} called its rule of recognition, is not enacted by any authority; it exists because officials and citizens accept certain criteria as identifying valid law and expect one another to apply them.
+
+\begin{assumption}[Persistence]\label{a:persist}
+Frameworks of mutual expectations are institutions in the sense of MET-20-a, and their existence is governed by its persistence condition:
+\begin{enumerate}[label=(\alph*)]
+\item a framework that has come into existence through collective acceptance persists as long as it is not collectively rejected by the community whose practices contain its rules;
+\item collective rejection ends it;
+\item nothing exists as a framework without having come into existence through collective acceptance.
+\end{enumerate}
+\end{assumption}
+
+Clause (a) is MET-20-a, Lemma~3.2; clause (b) is the converse case that manuscript illustrates by demonetization; clause (c) is its claim that active acceptance is required for an institution to come into existence. Since MET-20-a's point is that active acceptance may lapse without the institution's ending, it may be asked how a framework defined by expectations can persist through such a lapse. The answer is that the expectations of Definition~\ref{d:framework} are dispositional and context-bound: a rule for the succession of authority is not acted on between occasions, and what persists is the framework that will be applied when the context arises, as MET-20-a's dormant statutes and vacant offices are.
+
+We consider an ongoing political society and its social contract, and make three assumptions about it.
+
+\begin{assumption}\label{a:inst}
+The society's framework of basic cooperation came into existence through collective acceptance.
+\end{assumption}
+
+\begin{assumption}\label{a:notrej}
+It has not been collectively rejected.
+\end{assumption}
+
+\begin{assumption}\label{a:noagree}
+It is not the content of an actual agreement among all those it governs; in particular, some members never agreed to it.
+\end{assumption}
+
+Assumption~\ref{a:inst} is Hume's historical claim about conventions: they arise through the accumulation of accepted practices. Assumption~\ref{a:notrej} holds of any society that has not undergone a revolution in the sense of POL-23 or a collapse of order. Assumption~\ref{a:noagree} holds of every actual society, since those born after any founding act took no part in it.
+
+\section{The argument}
+
+\begin{proposition}\label{p:iff}
+A framework of mutual expectations exists if and only if it came into existence through collective acceptance and has not been collectively rejected.
+\end{proposition}
+
+\begin{proof}
+If it exists, it came into existence through collective acceptance, by clause (c) of Assumption~\ref{a:persist}, and it has not been collectively rejected, since by clause (b) rejection would have ended it. Conversely, by clause (a), a framework that came into existence through collective acceptance and has not been rejected persists.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+There is a social contract, and it is not an actual agreement.
+\end{theorem}
+
+\begin{proof}
+By Assumptions~\ref{a:inst} and~\ref{a:notrej} and Proposition~\ref{p:iff}, the society's framework of basic cooperation exists. By Definition~\ref{d:contract}, it is the society's social contract. By Assumption~\ref{a:noagree}, it is not the content of an actual agreement.
+\end{proof}
+
+\begin{corollary}\label{c:notnec}
+Actual agreement is not necessary for the existence of a social contract, and a member of a society may fall under its social contract without having agreed to it.
+\end{corollary}
+
+\begin{proof}
+The first part is Theorem~\ref{t:main}. For the second, by Assumption~\ref{a:noagree} some member never agreed to the framework, and by Theorem~\ref{t:main} the framework exists; since she is a member of the community whose practices contain its rules, she falls under it.
+\end{proof}
+
+\begin{corollary}\label{c:notsuff}
+Actual agreement is not sufficient for the existence of a social contract: a framework that is agreed to but never instituted, or that is instituted and later collectively rejected, does not exist.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{p:iff}, which makes no reference to agreement.
+\end{proof}
+
+Corollary~\ref{c:notsuff} is illustrated by what \citet{LawVersteeg2013} call sham constitutions: formally adopted texts whose provisions bear little relation to the practices of the states that adopt them. On the present view, such a state's social contract is the framework its members actually expect one another to follow, and the text is at most evidence of a framework that was never instituted.
+
+Corollary~\ref{c:notnec} answers the oldest objection to contract theory. A person born into a society did not agree to its terms; on the present view she falls under them all the same, because the framework's persistence does not depend on her acceptance. This is MET-20-a's point that active acceptance is needed for an institution to come into being but not for it to continue.
+
+\subsection{Why the framework is a contract}
+
+It may be objected that a convention is not a contract. The name is earned, because the framework plays the four roles that contract theory assigned to the agreement.
+
+It \emph{specifies terms of cooperation}: what each may do and who may settle disputes. Its terms are \emph{reciprocal and conditional}: by clause (d) of Definition~\ref{d:framework}, each conforms on condition that the others do, which is the structure of an exchange of undertakings. It \emph{generates legitimate expectations}, on which each relies in planning her life. And it can be \emph{dissolved}: by clause (b) of Assumption~\ref{a:persist}, collective rejection ends it, which is the analogue of Locke's dissolution of government \citep[\S\S 211--222]{Locke1689}. What it lacks is a moment of agreement, which Hume showed no actual society has and contract theory does not need.
+
+\section{Objections}
+
+\begin{objection}[Gilbert's joint commitment]
+\citet{Gilbert2006} argues that membership in a political society involves an actual, if implicit, joint commitment to accept its rules, formed by each member's openly expressed readiness. There is then an actual social contract after all.
+\end{objection}
+
+\begin{reply}
+Either the expressions of readiness Gilbert requires are acts each member performs, or they are attributed to members on the basis of their participation. If the former, members who never performed them are not party to the commitment, though Corollary~\ref{c:notnec} shows that the social contract covers them. If the latter, the joint commitment is the framework of Definition~\ref{d:framework} under another description.
+\end{reply}
+
+\begin{objection}[Facts are not obligations]
+The social contract was meant to explain political obligation. A framework of mutual expectations is a social fact. It exists whether or not its terms are just, and its existence obliges no one. The view therefore abandons what made contract theory worth having.
+\end{objection}
+
+\begin{reply}
+We separate two questions the tradition ran together. POL-03 argues for a weak, defeasible duty to obey just laws, grounded in fairness: those who receive the goods of a reasonably just cooperative scheme owe it to the others to bear their share, and the framework is that scheme viewed as a social fact. POL-02 argues that a state is legitimate if and only if it can be justified to every reasonable person subject to it, a test of the framework's terms that does not depend on agreement. The tradition's mistake was to think that the contract's force had to come from an agreement.
+\end{reply}
+
+\begin{objection}[Oppressive frameworks persist]
+On the persistence condition, a framework that subordinates a class of persons persists even if those it subordinates reject it. So an oppressive order is a social contract.
+\end{objection}
+
+\begin{reply}
+It implies that an oppressive order may be a society's social contract, and that is correct: the social contract of a slave society included the expectations that sustained slavery. Whether such a contract binds is a further question, and it does not: POL-03's fairness duty lapses for seriously unjust laws, and POL-02's criterion is not met. The persistence condition also explains why oppressive frameworks are hard to end. Rejection by those they oppress, or by a lone dissenter, is not collective rejection until it is shared widely enough that members expect one another to refuse; until then a refusal is a breach of the framework, not its end. POL-23 takes up the case in which rejection takes the form of revolution.
+\end{reply}
+
+\section{Formalization}
+
+{\sloppy The module \nolinkurl{Philosophy/POL/POL_11.lean} formalizes Proposition~\ref{p:iff}, Theorem~\ref{t:main} and Corollaries~\ref{c:notnec} and~\ref{c:notsuff}. The axioms for the three clauses of Assumption~\ref{a:persist} are \texttt{persistence}, \texttt{rejection\_ends} and \texttt{requires\_institution}; and Assumptions~\ref{a:inst} to~\ref{a:noagree} are axioms about the primitive constant \texttt{contract}.\par}
+
+\begin{lstlisting}
+theorem contract_exists : Exists contract ∧ ¬ Agreed contract
+theorem agreement_not_sufficient (f : Framework) (_ : Agreed f)
+    (h : ¬ Instituted f ∨ Rejected f) : ¬ Exists f
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.POL_11.contract_exists' depends on axioms:
+  [Philosophy.POL_11.Agreed, Philosophy.POL_11.Exists,
+   Philosophy.POL_11.assumption_2_4, Philosophy.POL_11.assumption_2_5,
+   Philosophy.POL_11.assumption_2_6, Philosophy.POL_11.contract,
+   Philosophy.POL_11.persistence]
+'Philosophy.POL_11.agreement_not_sufficient' depends on axioms:
+  [Philosophy.POL_11.Agreed, Philosophy.POL_11.Exists,
+   Philosophy.POL_11.Framework, Philosophy.POL_11.Instituted,
+   Philosophy.POL_11.Rejected, Philosophy.POL_11.rejection_ends,
+   Philosophy.POL_11.requires_institution]
+\end{lstlisting}
+
+None of the results uses Lean's classical axioms. Theorem~\ref{t:main} uses only clause (a) of the persistence condition, MET-20-a's Lemma~3.2, together with the assumptions about the society; Corollary~\ref{c:notsuff} uses only clauses (b) and (c) and nothing about any particular society. The module also proves Corollary~\ref{c:notnec} (\texttt{agreement\_not\_necessary}), which uses in addition the axiom \texttt{assumption\_2\_6'}, the second half of Assumption~\ref{a:noagree}. The formalization does not establish the persistence condition, which is argued for in MET-20-a, nor the historical premises, nor anything about the contract's normative force.
+
+\section{Conclusion}
+
+There is a social contract. It is not an agreement anyone made, but a framework of mutual expectations governing a society's basic cooperation, instituted by collective acceptance and persisting until collectively rejected. It covers those who never agreed to it, and an agreement never instituted is no contract. Its normative force is a separate question, answered by the fairness of its terms and their justifiability to those who live under them.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bicchieri(2006)]{Bicchieri2006} Bicchieri, C. (2006). \emph{The Grammar of Society: The Nature and Dynamics of Social Norms}. Cambridge University Press.
+\bibitem[Binmore(2005)]{Binmore2005} Binmore, K. (2005). \emph{Natural Justice}. Oxford University Press.
+\bibitem[Dworkin(1973)]{Dworkin1973} Dworkin, R. (1973). The original position. \emph{University of Chicago Law Review}, 40(3), 500--533.
+\bibitem[Gilbert(2006)]{Gilbert2006} Gilbert, M. (2006). \emph{A Theory of Political Obligation: Membership, Commitment, and the Bonds of Society}. Oxford University Press.
+\bibitem[Hart(1961)]{Hart1961} Hart, H.~L.~A. (1961). \emph{The Concept of Law}. Clarendon Press.
+\bibitem[Hobbes(1651)]{Hobbes1651} Hobbes, T. (1651). \emph{Leviathan}.
+\bibitem[Hume(1739)]{Hume1739} Hume, D. (1739--40). \emph{A Treatise of Human Nature}. Cited by book, part and section.
+\bibitem[Hume(1748)]{Hume1748} Hume, D. (1748). Of the original contract. In \emph{Essays, Moral, Political, and Literary}.
+\bibitem[Law and Versteeg(2013)]{LawVersteeg2013} Law, D.~S. and Versteeg, M. (2013). Sham constitutions. \emph{California Law Review}, 101(4).
+\bibitem[Lewis(1969)]{Lewis1969} Lewis, D. (1969). \emph{Convention: A Philosophical Study}. Harvard University Press.
+\bibitem[Locke(1689)]{Locke1689} Locke, J. (1689). \emph{Two Treatises of Government}. Cited by section of the Second Treatise.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\bibitem[Rousseau(1762)]{Rousseau1762} Rousseau, J.-J. (1762). \emph{Du contrat social}.
+\bibitem[Skyrms(1996)]{Skyrms1996} Skyrms, B. (1996). \emph{Evolution of the Social Contract}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

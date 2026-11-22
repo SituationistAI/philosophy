@@ -1,0 +1,239 @@
+\documentclass{situationist-preprint}
+
+\title{The Trolley Problem Solved}
+\msid{ETH-03-a}
+\msfamily{ETH-03}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_03.lean}
+\mskeywords{trolley problem; doctrine of double effect; redirecting threats; killing and letting die; moral rules; extensional adequacy}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In the Switch case, a bystander may divert a runaway trolley from five people onto a side track where it will kill one. In the Footbridge case, the bystander may not push a large man onto the track to stop the trolley before it reaches the five. The trolley problem is the problem of finding a principle that explains why. We argue that the doctrine of the redirected threat provides the explanation: it is permissible to redirect an existing threat so that it harms fewer people, and impermissible to introduce a new threat to a person in order to save others. We then prove that any rule that delivers the two verdicts and satisfies three minimal adequacy conditions coincides with the doctrine of the redirected threat on the class of cases to which the problem applies. The proof is formalized in Lean. We show that the doctrine of double effect, the means principle and the distinction between killing and letting die each fail one of the adequacy conditions or one of the verdicts.
+\end{abstract}
+
+\section{The problem}
+
+The trolley problem originates in an example of \citet{Foot1967}, who used it to discuss the doctrine of double effect, and was named and developed by \citet{Thomson1976,Thomson1985}. The two central cases are these.
+
+\begin{description}
+\item[Switch.] A runaway trolley is heading towards five people who will be killed if it continues. A bystander can throw a switch that diverts it onto a side track, where it will kill one person.
+\item[Footbridge.] A runaway trolley is heading towards five people. A bystander on a footbridge can push a large man off the bridge onto the track; his body will stop the trolley, killing him and saving the five.
+\end{description}
+
+Most people judge that the bystander may throw the switch but may not push the man. The numbers are the same, five saved and one killed, and in both cases the bystander's act causes the one's death. The problem is to identify the morally relevant difference.
+
+The problem matters beyond the examples. Any principle that distinguishes the cases will have consequences for medicine, war and public policy, where agents frequently face choices between harming fewer and allowing harm to more. A principle that gets the trolley cases right for the wrong reason will get some of these choices wrong.
+
+The main candidates in the literature are four.
+\begin{enumerate}[label=(\roman*)]
+\item The \emph{doctrine of double effect} (DDE): it is permissible to bring about a harm as a foreseen side effect of pursuing a good end, but not as an intended means \citep{Foot1967}. In Switch, the one's death is a side effect; in Footbridge, the man's being struck is the means.
+\item The \emph{means principle}: it is impermissible to use a person as a means without his consent. This is close to the DDE but focuses on the use of persons rather than on intention \citep{Kamm2007}.
+\item The \emph{distinction between killing and letting die}: killing is worse than letting die. This is the distinction Foot originally invoked, but it does not distinguish Switch from Footbridge, since the bystander kills the one in both.
+\item The \emph{doctrine of the redirected threat}: it is permissible to redirect an existing threat so that it harms fewer, but not to create a new threat to someone in order to save others. A version of this view was proposed by \citet{Thomson1985}, who later abandoned it \citep{Thomson2008}.
+\end{enumerate}
+
+We defend (iv), and we argue that it is not merely one candidate among others but the only rule that satisfies a small set of adequacy conditions any candidate must meet.
+
+\subsection{A short history of the problem}
+
+Foot's original concern was not the bystander but the driver. A driver whose trolley is heading towards five may steer onto a track where it will kill one; a surgeon may not kill one patient to distribute his organs to five. Foot explained the difference by the distinction between negative duties, not to harm, and positive duties, to aid: the driver who steers faces a conflict between two negative duties, not to kill five and not to kill one, while the surgeon faces a conflict between a negative duty not to kill and a positive duty to save \citep{Foot1967}. The doctrine of double effect was the view Foot set out to examine, and she concluded that the distinction between negative and positive duties did the work that the doctrine was supposed to do.
+
+\citet{Thomson1976} moved the agent off the trolley. A bystander at the switch is not driving the trolley; if she does nothing, she lets the five die rather than killing them. Foot's explanation therefore does not apply, yet most people judge that the bystander, too, may throw the switch. Thomson introduced the Footbridge case to show that the bystander's permission is not a general permission to kill one to save five, and the trolley problem acquired its modern form: what distinguishes Switch from Footbridge, given that the bystander kills in both?
+
+\citet{Thomson1985} considered several answers and proposed that what matters is whether the agent makes something that already threatens the five threaten the one instead, or brings about the one's death by other means. This is an early statement of the doctrine of the redirected threat. Thomson also introduced the Loop case, which she took to tell against the doctrine of double effect. \citet{Kamm2007} developed the most elaborate alternative, the Principle of Permissible Harm, on which harm may be caused by a greater good or by means that have the greater good as their noncausal flip side, but not by means that cause the greater good. Kamm's principle handles a wide range of cases, but at the cost of a degree of complexity that has led many to doubt that it captures a single moral consideration.
+
+In 2008, Thomson retracted her view of Switch \citep{Thomson2008}. She argued that the bystander may not turn the trolley onto the one, because a bystander who could instead turn it onto himself, and who would not be willing to do so, has no right to impose the cost on someone else. The trolley problem, she concluded, does not need solving, because the Switch verdict is mistaken. We discuss this argument in Section~7.
+
+The last two decades have seen the problem taken up by moral psychology, where it serves as a probe of the cognitive processes behind moral judgement \citep{Greene2001,Hauser2007}, and by large-scale cross-cultural studies, which find that the asymmetry between Switch and Footbridge is present in every sampled country, though its size varies \citep{Awad2020}. Experimental work on Loop has found that responses depend on the order in which cases are presented, with Loop judged more permissible when it follows Switch than when it follows Footbridge \citep{Liao2012}. We take these findings as constraints on the data a solution must explain, not as substitutes for an explanation.
+
+\section{Framework}
+
+\begin{definition}\label{d:case}
+A \emph{trolley case} is a situation in which an agent can perform an act that will result in the death of some people and the survival of others who would otherwise die. A trolley case is characterized by three features:
+\begin{enumerate}[label=(\alph*)]
+\item whether the act redirects a threat that already exists, or introduces a new threat to the person who is harmed;
+\item the number of people saved by the act;
+\item the number of people killed by the act.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}\label{d:redirected}
+The \emph{doctrine of the redirected threat} (DRT) holds that, in a trolley case, the act is permissible if and only if it redirects an existing threat and saves more people than it kills.
+\end{definition}
+
+The notion of introducing a new threat requires comment. In Footbridge, the trolley is an existing threat to the five, but the man on the bridge is not threatened by it until he is pushed. The act of pushing creates a threat to him that did not exist before: it brings him into the path of harm. In Switch, the trolley is an existing threat, and throwing the switch changes whom it will harm without creating a new source of harm. The difference is between altering the trajectory of a threat and subjecting someone to a threat. We take this distinction to be intuitively clear in the central cases, and we discuss hard cases in Section~5.
+
+We impose three adequacy conditions on any rule $\rho$ that assigns a verdict, permissible or impermissible, to each trolley case.
+
+\begin{principle}[Verdicts]\label{p:verdicts}
+$\rho$ classifies Switch as permissible and Footbridge as impermissible.
+\end{principle}
+
+\begin{principle}[Numbers]\label{p:numbers}
+If an act kills at least as many people as it saves, $\rho$ classifies it as impermissible.
+\end{principle}
+
+\begin{principle}[Invariance]\label{p:invariance}
+The verdict of $\rho$ on a trolley case depends only on whether the act redirects an existing threat and on whether it saves more people than it kills.
+\end{principle}
+
+Principle~\ref{p:verdicts} encodes the data the problem is about. Principle~\ref{p:numbers} expresses the uncontroversial thought that no consideration about the structure of the case can make it permissible to kill some in order to save an equal or smaller number. Principle~\ref{p:invariance} is the substantive condition: it says that, within the class of trolley cases, the morally relevant features are the ones identified in Definition~\ref{d:case}, and that features such as physical proximity, the mechanism of the act, or the use of a switch rather than hands are irrelevant. We defend it in Section~4.
+
+\section{The uniqueness theorem}
+
+\begin{theorem}\label{t:unique}
+If a rule $\rho$ satisfies Principles~\ref{p:verdicts}, \ref{p:numbers} and \ref{p:invariance}, then for every trolley case, $\rho$ classifies the act as permissible if and only if the doctrine of the redirected threat does.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:invariance}, the verdict of $\rho$ on any case depends only on two binary features: whether the act redirects an existing threat ($r$), and whether it saves more than it kills ($b$). There are four combinations.
+
+If $b$ is false, the act kills at least as many as it saves, and $\rho$ classifies it as impermissible by Principle~\ref{p:numbers}; so does the DRT.
+
+If $b$ is true and $r$ is true, the case agrees with Switch on both features, so by Principle~\ref{p:invariance} $\rho$ gives it the same verdict as Switch, which is permissible by Principle~\ref{p:verdicts}; so does the DRT.
+
+If $b$ is true and $r$ is false, the case agrees with Footbridge on both features, so $\rho$ gives it the same verdict as Footbridge, which is impermissible by Principle~\ref{p:verdicts}; so does the DRT.
+\end{proof}
+
+\begin{corollary}\label{c:only}
+The doctrine of the redirected threat is the only rule satisfying Principles~\ref{p:verdicts}, \ref{p:numbers} and \ref{p:invariance}.
+\end{corollary}
+
+\begin{proof}
+The DRT satisfies the three principles by construction, and by Theorem~\ref{t:unique} any rule satisfying them agrees with it on every case.
+\end{proof}
+
+\begin{proposition}\label{p:adequate}
+The doctrine of the redirected threat satisfies Principles~\ref{p:verdicts}, \ref{p:numbers} and \ref{p:invariance}.
+\end{proposition}
+
+\begin{proof}
+Switch redirects an existing threat and saves more than it kills, so the DRT permits it; Footbridge introduces a new threat, so the DRT forbids it. An act that kills at least as many as it saves fails the second clause of the DRT. The DRT's verdict is defined in terms of the two features named in Principle~\ref{p:invariance} and no others.
+\end{proof}
+
+Proposition~\ref{p:adequate} and Theorem~\ref{t:unique} together establish that the three adequacy conditions are jointly satisfiable and that they determine a unique rule. Neither half is trivial. Without Proposition~\ref{p:adequate}, the conditions might have been inconsistent, and the uniqueness theorem vacuous; without Theorem~\ref{t:unique}, the DRT might have been one of several rules meeting them.
+
+\subsection{Formalization}
+
+Theorem~\ref{t:unique} is formalized in \nolinkurl{Philosophy/ETH/ETH_03.lean}. A trolley case is a structure with a Boolean field for redirection and two natural-number fields for the numbers saved and killed. Switch and Footbridge are particular cases, and the three principles are hypotheses about an arbitrary rule. The theorem states that the rule agrees with the DRT on every case.
+
+\begin{lstlisting}
+theorem uniqueness (rho : TrolleyCase → Prop)
+    (verdicts : rho switch ∧ ¬ rho footbridge)
+    (numbers : ∀ c, c.killed ≥ c.saved → ¬ rho c)
+    (invariance : ∀ c d, c.redirects = d.redirects →
+        (c.saved > c.killed ↔ d.saved > d.killed) → (rho c ↔ rho d)) :
+    ∀ c, rho c ↔ DRT c
+\end{lstlisting}
+
+The module contains no axioms beyond those of Lean's core logic. The three principles appear as hypotheses of the theorem rather than as axioms, so that the theorem is a conditional statement about every rule.
+
+\section{Defending invariance}
+
+Principle~\ref{p:invariance} carries the weight of the argument, since without it the two verdicts would constrain only the two central cases. It may be challenged in two ways: by producing a pair of cases that agree on the two features but differ in their verdict, or by arguing that some further feature is morally relevant.
+
+\begin{objection}[Proximity]
+Pushing the man requires physical contact; throwing a switch does not. Perhaps contact, or proximity, is what makes Footbridge impermissible.
+\end{objection}
+
+\begin{reply}
+Consider the variant in which the bystander can drop the man through a trapdoor by pulling a lever at a distance \citep{Thomson1985}. Most judge that this is as impermissible as pushing him. Conversely, consider the variant in which the bystander must physically push the switch lever with her shoulder. This is as permissible as throwing it. Contact and proximity do not affect the verdict once the distinction between redirecting and introducing a threat is held fixed.
+\end{reply}
+
+\begin{objection}[Psychological explanation]
+Empirical work suggests that the Footbridge judgement is driven by an emotional response to personal force, and that it has no rational basis \citep{Greene2001}. If so, Principle~\ref{p:verdicts} should not be treated as data.
+\end{objection}
+
+\begin{reply}
+The trapdoor variant elicits the same judgement without personal force, which suggests that the emotional response tracks something more abstract than force. That something is plausibly the introduction of a threat to a person who was not threatened. In any case, the objection concerns the reliability of one of the two verdicts, not the validity of Theorem~\ref{t:unique}. A theorist who rejects the Footbridge verdict will reject Principle~\ref{p:verdicts}, and the theorem will not apply to her; but she will then owe an account of why the trapdoor case is permissible, which very few are willing to give.
+\end{reply}
+
+\begin{objection}[Intention]
+The agent in Footbridge intends the man to be struck; the agent in Switch does not intend the one to be killed. Intention is therefore a further relevant feature, and Principle~\ref{p:invariance} is false.
+\end{objection}
+
+\begin{reply}
+This is the DDE, and it can be tested on Thomson's Loop case, in which the side track loops back to the main track, so that the trolley would kill the five from the other side unless stopped by the one person on the loop \citep{Thomson1985}. In Loop the agent intends the one to be struck, since his being struck is what saves the five. The DDE classifies Loop as impermissible. But Loop differs from Switch only by a piece of track that the trolley does not traverse when the one is on the loop, and many who consider the case judge that it is as permissible as Switch. The DRT classifies it as permissible, since diverting the trolley onto the loop redirects an existing threat. Loop therefore tells against intention as a relevant feature, and in favour of Principle~\ref{p:invariance}. The companion manuscript ETH-03-c gives a separate proof for Loop that does not rely on the DDE.
+\end{reply}
+
+\section{Hard cases}
+
+Two kinds of case test the distinction between redirecting and introducing a threat.
+
+In the first, the agent redirects a threat by moving the potential victim rather than the threat: for example, by turning a turntable on which the one is standing so that he ends up in the trolley's path \citep{Thomson2008}. We classify this as introducing a threat. The one was not in the path of the trolley, and the agent's act puts him there; that the act involves rotating a platform rather than pushing does not change this.
+
+In the second, the agent redirects a threat onto someone who was already under a different threat, for example someone who would have been killed by a second trolley in any case. The DRT classifies this as permissible if more are saved than killed, and we accept this consequence. It is consistent with the common judgement that the moral cost of killing someone who would otherwise have died is lower than that of killing someone who would otherwise have lived, a judgement that the DRT respects through Principle~\ref{p:numbers}, when the deaths are counted correctly.
+
+\section{Other candidates}
+
+Corollary~\ref{c:only} entails that every other rule fails one of the adequacy conditions. It is instructive to see which.
+
+\begin{itemize}
+\item The \emph{doctrine of double effect} violates Principle~\ref{p:invariance}, since it makes intention relevant and so gives different verdicts to Switch and Loop, which agree on both features.
+\item The \emph{means principle} violates Principle~\ref{p:invariance} for the same reason: in Loop, the one is used as a means.
+\item The \emph{distinction between killing and letting die} violates Principle~\ref{p:verdicts}, since in both central cases the agent kills, and it therefore cannot distinguish them.
+\item \emph{Act consequentialism} violates Principle~\ref{p:verdicts}, since it classifies Footbridge as permissible.
+\end{itemize}
+
+The DRT is not new, and it is often thought to be a mere redescription of the cases rather than an explanation of them \citep{Kamm2007,Thomson2008}. Theorem~\ref{t:unique} answers this charge. If the two verdicts are correct and the morally relevant features of trolley cases are those identified in Definition~\ref{d:case}, then the DRT is not one rule among others that fits the data; it is the only one.
+
+\subsection{Two recent alternatives}
+
+Two proposals from the recent literature deserve separate treatment, because they were designed to handle Loop, the case on which the doctrine of double effect founders.
+
+\citet{Kamm2007} proposes the doctrine of triple effect. It distinguishes acting \emph{in order that} an effect occur from acting \emph{because} it will occur. In Loop, the bystander turns the trolley because the one will stop it, not in order that he stop it: her aim is to save the five, and she would turn the trolley even if, per impossibile, the one's body were not needed. The doctrine permits harm that the agent acts because of, but not harm that she acts in order to bring about. Applied to the cases, it agrees with the DRT on Switch, Footbridge and Loop. It does so, however, by appeal to a feature of the agent's practical reasoning, and it therefore violates Principle~\ref{p:invariance}: two agents performing the same act in the same circumstances may receive different verdicts if one acts because of the harm and the other in order to bring it about. We regard this as a mark against it. The permissibility of turning the trolley should not depend on the fine structure of the agent's motivation.
+
+\citet{Otsuka2008} argues that no principle can square the circle in looping cases, because the intuitions about Loop and about closely related variants are inconsistent: small changes to the track configuration, which seem morally irrelevant, reverse the judgements of many respondents. He concludes that some of the intuitions must be abandoned. We agree with the diagnosis but not with its scope. The DRT gives a uniform verdict on all the variants Otsuka considers, namely that they are permissible whenever the trolley is redirected and more are saved than killed. The intuitions that must be abandoned are those that track the configuration of the track rather than the structure of the act, and Principle~\ref{p:invariance} identifies them as such.
+
+\section{Thomson's retraction}
+
+Thomson's argument against the Switch verdict uses a variant in which the bystander has three options \citep{Thomson2008}: she can do nothing, letting the trolley kill the five; she can turn it onto the side track, killing the one; or she can turn it onto a third track on which she herself stands, killing herself. Thomson argues that the bystander is not required to turn the trolley onto herself, and that if she would not do so, she may not turn it onto the one either: she may not make someone else pay a cost she is unwilling to pay herself. Generalizing, Thomson concludes that in the original Switch case the bystander may not turn the trolley.
+
+The argument relies on a principle of fairness: an agent may impose a cost on another to achieve a good only if she would be willing to bear it herself. We think the principle is false as stated, and that its falsity is shown by the cases it was designed to explain. Self-sacrifice to save five is supererogatory (ETH-14): it is admirable, but not required. Redirecting a threat from five to one is, by the DRT, permissible. The principle of fairness would make the permissibility of an act depend on the agent's willingness to perform a supererogatory act, so that a more self-sacrificing agent would have more permissions than a less self-sacrificing one. This gets the relation between permissibility and supererogation backwards. What the bystander owes the one on the side track is not a willingness to take his place, but that the threat she redirects onto him be a threat that already existed and that she redirect it to save a greater number. Both conditions are satisfied in the three-option case as in the original.
+
+There is a further difficulty. Thomson's principle would also forbid the driver in Foot's original case from steering onto the one, unless the driver were willing to steer onto himself, which in Foot's case is not an option. The principle therefore gives a verdict only when self-sacrifice is available, and gives no account of why the driver may steer when it is not. The DRT treats the driver and the bystander alike.
+
+\section{The driver and the bystander}
+
+The DRT does not distinguish the driver from the bystander. Both redirect an existing threat, and both are permitted to do so when more are saved than killed. Foot's distinction between negative and positive duties adds something in the driver's case: the driver who does nothing kills the five, while the bystander who does nothing lets them die. This makes the driver's case for turning stronger, and plausibly makes turning obligatory for the driver while it is merely permissible for the bystander. The DRT is a principle of permissibility and is compatible with this further distinction, which concerns obligation. We take this division of labour to be correct: the trolley problem, as Thomson posed it, concerns what the bystander may do, and the answer is that she may do what the driver must.
+
+\section{Applications}
+
+\paragraph{Autonomous vehicles.} An autonomous vehicle that is about to collide with five pedestrians may be able to swerve into one. The DRT permits swerving, since the vehicle's momentum is an existing threat that is redirected. It forbids a policy on which the vehicle would, for example, brake in a way that propels a passenger into the path of the pedestrians to absorb the impact, since that would introduce a new threat to the passenger. The application is developed in ETH-03-d.
+
+\paragraph{Redirected attacks.} During the Second World War, British intelligence used double agents to feed misleading reports on where German flying bombs were landing, with the aim of causing them to be aimed at less densely populated areas. The case has long been discussed as a real-world instance of redirection. The DRT classifies the policy as permissible in principle: the bombs were an existing threat, and the deception altered their trajectory so that fewer would be killed. It also explains why the case was nonetheless troubling to those who made the decision: the people in the areas to which the bombs were redirected were chosen, not merely found in the path.
+
+\paragraph{Triage.} Decisions about the allocation of scarce medical resources are not trolley cases in the sense of Definition~\ref{d:case}, since withholding a resource from one patient to give it to another does not redirect a threat to the first. The DRT is silent about them, as it should be: they are governed by principles of distributive justice rather than by principles of permissible harm.
+
+\section{Toward a justification}
+
+Theorem~\ref{t:unique} establishes that the DRT is the only rule consistent with the verdicts and the adequacy conditions. It does not explain why the rule is correct, and a critic may grant the theorem while holding that a rule without a justification is a summary of intuitions rather than a moral principle. We close by sketching the justification we take to be available.
+
+The sketch draws on a rights-based account of permissible harm \citep{Thomson1990,Quinn1989}. Each person has a claim against others that they not subject him to threats of serious harm. This claim does not include a claim that existing threats be distributed in any particular way. The one on the side track has no claim that the trolley continue towards the five rather than towards him, because the trolley's trajectory is not something to which anyone has a claim; it is a feature of a situation in which, through no one's doing, a threat exists and must fall somewhere. The bystander who redirects it does not infringe a claim of the one, provided she redirects it so as to minimize the number harmed. The man on the footbridge, by contrast, is not within the reach of the existing threat. Pushing him infringes his claim not to be subjected to a threat, and the infringement is not justified by the number saved, because claims of this kind are not overridden by aggregate benefit at ratios such as five to one.
+
+The account explains the two clauses of the DRT. The first clause, that the threat must already exist, marks the boundary between altering the distribution of a threat, to which no one has a claim, and subjecting someone to a threat, to which everyone has a claim. The second clause, that more must be saved than killed, reflects the requirement that a redistribution of harm be an improvement, without which the bystander's intervention would be gratuitous. Both clauses are therefore grounded in a single view about what persons are owed. A fuller defence of the view would require an account of when claims of this kind can be overridden, which we do not attempt here; ETH-21 discusses the related question of when persons may be used as means.
+
+\section{Conclusion}
+
+Divert the trolley; do not push the man. The doctrine of the redirected threat explains both verdicts, and it is the unique rule that delivers them while respecting the numbers and the invariance of moral status under morally irrelevant variations. The trolley problem, understood as the problem of finding the principle behind the verdicts, therefore has a solution. What remains open is whether the principle can be justified by a deeper theory of rights or of agency, which is a question for the companion manuscripts and for the discussion of consequentialism in ETH-02.
+
+\begin{thebibliography}{99}\small
+\bibitem[Awad et~al.(2020)]{Awad2020} Awad, E., Dsouza, S., Shariff, A., Rahwan, I. and Bonnefon, J.-F. (2020). Universals and variations in moral decisions made in 42 countries by 70,000 participants. \emph{Proceedings of the National Academy of Sciences}, 117(5), 2332--2337.
+\bibitem[Foot(1967)]{Foot1967} Foot, P. (1967). The problem of abortion and the doctrine of the double effect. \emph{Oxford Review}, 5, 5--15.
+\bibitem[Greene et~al.(2001)]{Greene2001} Greene, J.~D., Sommerville, R.~B., Nystrom, L.~E., Darley, J.~M. and Cohen, J.~D. (2001). An fMRI investigation of emotional engagement in moral judgment. \emph{Science}, 293(5537), 2105--2108.
+\bibitem[Hauser et~al.(2007)]{Hauser2007} Hauser, M., Cushman, F., Young, L., Jin, R.~K.-X. and Mikhail, J. (2007). A dissociation between moral judgments and justifications. \emph{Mind \& Language}, 22(1), 1--21.
+\bibitem[Kamm(2007)]{Kamm2007} Kamm, F.~M. (2007). \emph{Intricate Ethics: Rights, Responsibilities, and Permissible Harm}. Oxford University Press.
+\bibitem[Liao et~al.(2012)]{Liao2012} Liao, S.~M., Wiegmann, A., Alexander, J. and Vong, G. (2012). Putting the trolley in order: Experimental philosophy and the loop case. \emph{Philosophical Psychology}, 25(5), 661--671.
+\bibitem[Otsuka(2008)]{Otsuka2008} Otsuka, M. (2008). Double effect, triple effect and the trolley problem: Squaring the circle in looping cases. \emph{Utilitas}, 20(1), 92--110.
+\bibitem[Quinn(1989)]{Quinn1989} Quinn, W.~S. (1989). Actions, intentions, and consequences: The doctrine of doing and allowing. \emph{The Philosophical Review}, 98(3), 287--312.
+\bibitem[Thomson(1976)]{Thomson1976} Thomson, J.~J. (1976). Killing, letting die, and the trolley problem. \emph{The Monist}, 59(2), 204--217.
+\bibitem[Thomson(1985)]{Thomson1985} Thomson, J.~J. (1985). The trolley problem. \emph{The Yale Law Journal}, 94(6), 1395--1415.
+\bibitem[Thomson(1990)]{Thomson1990} Thomson, J.~J. (1990). \emph{The Realm of Rights}. Harvard University Press.
+\bibitem[Thomson(2008)]{Thomson2008} Thomson, J.~J. (2008). Turning the trolley. \emph{Philosophy \& Public Affairs}, 36(4), 359--374.
+\end{thebibliography}
+
+\end{document}

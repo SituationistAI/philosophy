@@ -1,0 +1,60 @@
+\documentclass{situationist-preprint}
+
+\title{Supertasks and Completion}
+\msid{TSM-13-b}
+\msfamily{TSM-13}
+\msdiscipline{Time, Space and Modality}
+\mstype{Companion manuscript}
+\mskeywords{Zeno; Achilles; supertasks; completion; continuity; Thomson; Benacerraf}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+TSM-13-a shows that the catch-up intervals in Zeno's Achilles have a finite sum. A residual worry is that Achilles must complete an infinite sequence of tasks with no last member, and that what has no last member cannot be completed. We distinguish two senses of completion: performing every member of a sequence, and arriving at a state that the sequence determines. The Achilles satisfies both. Every stage is performed before the time $10d/9$ is reached, and the continuity of motion fixes Achilles' position at the limit, which the sequence of stages alone does not. Supertasks in which nothing fixes the limit state, such as Thomson's lamp, are a different case.
+\end{abstract}
+
+\section{Two senses of completion}
+
+Let the tortoise start $d$ ahead, and Achilles run ten times as fast. The distance he covers in the first $n$ stages is $S_n = \tfrac{10d}{9}(1 - 10^{-n})$, by equation~(1) of TSM-13-a as revised, and by Theorem~1.1 of that manuscript the partial sums converge to $10d/9$, where he overtakes the tortoise. If Achilles runs at speed $v$, stage $n$ ends at time $t_n = S_n / v$, and every $t_n$ precedes $T = 10d/(9v)$.
+
+The worry, pressed by \citet{Black1951} and \citet{Thomson1954}, is that an infinite sequence has no last member, so that there is no last task whose performance completes the series. We distinguish:
+
+\begin{definition}[Completion]\label{d:comp}
+A sequence of stages is \emph{exhausted} by $T$ if every stage is performed before $T$. It is \emph{completed at a state} $s$ if, in addition, the agent is in $s$ at $T$ and $s$ is fixed by the stages together with the laws that govern the process.
+\end{definition}
+
+\begin{proposition}\label{p:ach}
+Achilles' stages are exhausted by $T$ and completed at the position $10d/9$.
+\end{proposition}
+
+\begin{proof}
+Every stage $n$ ends at $t_n < T$, so the stages are exhausted by $T$. Position is a continuous function of time, so Achilles' position at $T$ is the limit of his positions at the $t_n$, which by Theorem~1.1 of TSM-13-a is $10d/9$.
+\end{proof}
+
+The proof does not require a last stage. Exhaustion requires only that every stage be over by $T$; completion at a state requires that the state at $T$ be fixed, and continuity fixes it. \citet{Benacerraf1962} showed that the state at the limit is not fixed by the sequence of stages alone; we add that, for motion, it is fixed by continuity, which belongs to the description of the process and not to any particular stage.
+
+\section{The contrast with Thomson's lamp}
+
+In Thomson's lamp, a lamp is switched on and off at times that converge to a limit, and the question is whether it is on or off at the limit. The stages are exhausted, but nothing in the description fixes the state at the limit: the lamp's state is not a continuous function of time, and no law links it to the limit of the sequence, since that sequence has none. The lamp is therefore exhausted but not completed at any determinate state; MET-21-b treats it in detail. The contrast shows where the residual worry belongs. It concerns supertasks whose limit is not determined, and the Achilles is not one of them \citep{EarmanNorton1996}.
+
+\begin{objection}
+Achilles must at least intend each stage and act on each intention, and infinitely many acts cannot be performed in finite time.
+\end{objection}
+
+\begin{reply}
+As TSM-13-a argues, the stages are segments into which an observer divides a single motion, not separate actions. Achilles intends to overtake the tortoise and runs; that his run contains infinitely many segments no more requires infinitely many intentions than crossing a room does.
+\end{reply}
+
+\section{Conclusion}
+
+An infinite sequence of stages can be completed in finite time when its durations converge and the process fixes the state at the limit. Achilles' run meets both conditions. The supertasks that remain puzzling are those whose limit state is undetermined, and they do not touch Zeno's argument: Achilles overtakes the tortoise.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1962)]{Benacerraf1962} Benacerraf, P. (1962). Tasks, super-tasks, and the modern Eleatics. \emph{The Journal of Philosophy}, 59(24), 765--784.
+\bibitem[Black(1951)]{Black1951} Black, M. (1951). Achilles and the tortoise. \emph{Analysis}, 11(5), 91--101.
+\bibitem[Earman and Norton(1996)]{EarmanNorton1996} Earman, J. and Norton, J.~D. (1996). Infinite pains: The trouble with supertasks. In A. Morton and S.~P. Stich (eds.), \emph{Benacerraf and his Critics}, Blackwell, 231--261.
+\bibitem[Thomson(1954)]{Thomson1954} Thomson, J.~F. (1954). Tasks and super-tasks. \emph{Analysis}, 15(1), 1--13.
+\end{thebibliography}
+
+\end{document}

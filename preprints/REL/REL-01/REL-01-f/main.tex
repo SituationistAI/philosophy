@@ -1,0 +1,78 @@
+\documentclass{situationist-preprint}
+
+\title{On Lemma 2417 of \emph{On the Existence of God}}
+\msid{REL-01-f}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Companion manuscript}
+\mskeywords{ontological argument; possibility premise; perfections; filters; finite intersection property; Gödel}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lemma 2417 of \emph{On the Existence of God}, stated in Volume~X among the formal material for Volume~III, derives the possibility premise of the main argument from the hypothesis that the great-making properties form a proper filter. Volume~III uses it to transfer the support for the coherence of maximal excellence to the possibility premise. We show that two of the three filter conditions are idle: the lemma holds under the strictly weaker hypothesis that the family of great-making properties has the finite intersection property. Its proof uses neither the possibility premise nor the S5 conditions. The weakening matters, because closure under entailment is the condition on which the objections to Gödel-style positivity bear.
+\end{abstract}
+
+\section{The lemma and its use}
+
+The main argument of REL-01-a derives the necessary existence of a maximally great being (Theorem~3.4) from a single substantive premise, the possibility premise (Assumption~3.1), and REL-01-a assigns the defence of that premise against its converse (Proposition~4.1) to Volume~III. Volume~III argues from the coherence of maximal excellence, which Volume~IV establishes, to the possibility premise. The step from coherence to possibility is Lemma 2417. It is stated in Volume~X, Chapter~5, which collects the formal material for Volume~III; unlike Volume~I, Volume~X numbers its lemmas consecutively through the volume.
+
+Properties are functions from beings and worlds to truth values; worlds are restricted to those accessible from $@$. A property is \emph{instantiated} if some being has it at some world. $\mathrm{NE}$ is necessary existence ($x$ exists at every accessible world), and $\mathrm{NME}$ necessary maximal excellence ($x$ is maximally excellent at every accessible world), in the sense of Definitions~2.2 and~2.3 of REL-01-a. A family $\mathcal{P}$ of properties is a \emph{proper filter} if it is closed under conjunction, closed under entailment, and does not contain the empty property.
+
+\begin{lemma}[Lemma 2417]\label{l:2417}
+If $\mathcal{P}$ is a proper filter and $\mathrm{NE}, \mathrm{NME} \in \mathcal{P}$, then the possibility premise holds.
+\end{lemma}
+
+In Volume~III, $\mathcal{P}$ is the family of great-making properties, and the hypothesis that it is a proper filter is what the coherence argument of Volume~IV is taken to support.
+
+\section{A weaker hypothesis suffices}
+
+A family $\mathcal{P}$ has the \emph{finite intersection property} if every finite subfamily of $\mathcal{P}$ is jointly instantiated, that is, some being has all its members at some one world.
+
+\begin{proposition}\label{p:mg}
+Maximal greatness is the conjunction of $\mathrm{NE}$ and $\mathrm{NME}$.
+\end{proposition}
+
+\begin{proof}
+By Definition~2.4 of REL-01-a, $x$ is maximally great at $w$ iff, for every $v$ accessible from $w$, $x$ exists at $v$ and is maximally excellent at $v$. The universal quantifier distributes over the conjunction.
+\end{proof}
+
+\begin{proposition}\label{p:fip}
+If $\mathcal{P}$ has the finite intersection property and $\mathrm{NE}, \mathrm{NME} \in \mathcal{P}$, then the possibility premise holds.
+\end{proposition}
+
+\begin{proof}
+The subfamily $\{\mathrm{NE}, \mathrm{NME}\}$ is jointly instantiated: some being $x$ has both at some world $w$ accessible from $@$. By Proposition~\ref{p:mg}, $x$ is maximally great at $w$, which is Assumption~3.1 of REL-01-a.
+\end{proof}
+
+\begin{proposition}\label{p:weaker}
+Every proper filter has the finite intersection property, but not conversely.
+\end{proposition}
+
+\begin{proof}
+If $\mathcal{P}$ is a proper filter, the conjunction of any finite subfamily belongs to $\mathcal{P}$ and is therefore not empty. Conversely, take a model with a maximally great being in which the conjunction of $\mathrm{NE}$ and $\mathrm{NME}$ differs from each conjunct, and in which some non-empty property is strictly entailed by $\mathrm{NE}$. Then $\{\mathrm{NE}, \mathrm{NME}\}$ has the finite intersection property, but it lacks their conjunction and the weaker property, so it is closed neither under conjunction nor under entailment.
+\end{proof}
+
+Lemma~\ref{l:2417} is thus a special case of Proposition~\ref{p:fip}, and closure under conjunction and under entailment play no role in it. Two further points follow from the proofs. First, neither uses the possibility premise or its converse, so the use of the lemma in Volume~III is not circular: the content of the possibility premise is located in the hypothesis that the great-making properties are jointly instantiable, which is exactly what a coherence argument can address. Second, neither uses Assumption~2.1 of REL-01-a; Proposition~\ref{p:mg} is a consequence of Definition~2.4 alone.
+
+\section{Why the weakening matters}
+
+Closure under entailment is the condition through which Gödel's axioms for positive properties acquire their strength \citep{Godel1995}. Joined with the claim that necessary existence is positive and with Gödel's definition of essence, it underlies the modal collapse that \citet{Sobel1987} derived, and \citet{Anderson1990} emended the definitions of essence and positivity in part to block it. It also invites the objection that any property entailed by a perfection, however trivial or disjunctive, must count as great-making \citep{Oppy1995}. A defender of Volume~III who relied on the filter hypothesis would owe a reply to both. Proposition~\ref{p:fip} shows that nothing in the transfer from coherence to possibility requires that hypothesis: what Volume~III needs is only that the great-making properties do not jointly exclude one another, which is the claim that Volume~IV defends.
+
+\begin{objection}
+The finite intersection property for $\{\mathrm{NE}, \mathrm{NME}\}$ is the possibility premise itself, so the proposition is empty.
+\end{objection}
+
+\begin{reply}
+The proposition is not a defence of the premise; it is an analysis of what the defence must establish. That analysis shows that the burden is joint compossibility of a finite family, not membership in a structure closed under entailment. The burden is lighter, and it is of the kind a coherence argument can discharge.
+\end{reply}
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(1990)]{Anderson1990} Anderson, C.~A. (1990). Some emendations of Gödel's ontological proof. \emph{Faith and Philosophy}, 7(3), 291--303.
+\bibitem[Gödel(1995)]{Godel1995} Gödel, K. (1995). Ontological proof. In S.~Feferman et al. (Eds.), \emph{Collected Works, Volume III: Unpublished Essays and Lectures} (pp.~403--404). Oxford University Press.
+\bibitem[Oppy(1995)]{Oppy1995} Oppy, G. (1995). \emph{Ontological Arguments and Belief in God}. Cambridge University Press.
+\bibitem[Sobel(1987)]{Sobel1987} Sobel, J.~H. (1987). Gödel's ontological proof. In J.~J. Thomson (Ed.), \emph{On Being and Saying: Essays for Richard Cartwright} (pp.~241--261). MIT Press.
+\end{thebibliography}
+
+\end{document}

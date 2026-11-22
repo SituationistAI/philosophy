@@ -1,0 +1,177 @@
+\documentclass{situationist-preprint}
+
+\title{Idealization and Representation}
+\msid{SCI-10-a}
+\msfamily{SCI-10}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_10.lean}
+\mskeywords{models; idealization; representation; similarity; difference-making; explanation; Galilean idealization}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are scientific models true? The ideal gas and the infinite population of Hardy--Weinberg genetics are false of every actual system, yet they explain. We argue that models are false, that they represent their targets through partial similarity in the respects that make a difference to the phenomenon explained, and that their idealizations are essential to their explanatory power rather than a temporary concession to be removed by further work. Our premises are that an explanatory model agrees with every system in its class in the difference-making respects and is impartial on every other respect, assigning a value that no member has. We prove that every explanatory model is then false of every target in its class while similar to each in the respects that matter, and that a model made true of one target thereby ceases to explain the phenomenon across the class. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Much of science proceeds by building models: simplified systems, described mathematically, whose behavior is studied in place of the behavior of the systems of interest. The ideal gas consists of point molecules that do not interact except by perfectly elastic collisions; the population of Hardy--Weinberg genetics is infinite, randomly mating and free of selection, mutation and migration; Galileo's falling bodies move without air resistance. No actual gas, population or falling body is like this. The question is whether models are nevertheless true, and, if they are not, how they can represent and explain.
+
+Three answers have been given. On the first, associated with the semantic view of theories, a good model fits the observable structure of its target, and idealizations are approximations the fit tolerates \citep{vanFraassen1980}. On the second, models are false and their falsity does not matter, because they are instruments for prediction; \citet{Box1976} remarked that all models are wrong but some are useful. On the third, which \citet{Cartwright1983} pressed against the fundamental laws themselves, models are false and their falsity is what allows them to explain.
+
+On the question how false models represent, \citet{Giere1988,Giere2004} proposed that a model represents a target by being similar to it in specified respects and degrees,, developed by \citet{Weisberg2013}. \citet{Suarez2003} objected that similarity is neither necessary nor sufficient for representation, and \citet{Frigg2010} and \citet{GodfreySmith2006} treat models as imagined systems related to the world by similarity claims. On the question what idealization is for, \citet{McMullin1985} held that Galilean idealization is a temporary simplification to be removed as theory and computation improve, while \citet{Strevens2008}, \citet{Batterman2002}, \citet{BattermanRice2014} and \citet{Potochnik2017} argue that idealizations serve explanation by setting aside what does not make a difference.
+
+We defend the third answer in a form that combines Giere's account of representation with the minimalist account of idealization. Models are false; they represent through partial similarity; and the respects in which they are dissimilar to their targets are not defects to be removed, because the explanatory power of a model consists in part in its being false in those respects.
+
+\section{Framework}
+
+We treat a model and a target system alike as assignments of values to features: the quantities and properties that figure in the model's equations, such as the volume of a molecule, the size of a population or the coefficient of friction.
+
+\begin{definition}[Assignments]\label{d:assign}
+A \emph{target} assigns to each feature the value it has in an actual system. A \emph{model} assigns to each feature the value the model specifies.
+\end{definition}
+
+That a model assigns a value to every feature is a substantive feature of mathematical models. An equation of state for a gas cannot be solved without a value for the volume of the molecules; a model that \enquote{leaves out} molecular volume sets it to zero. This is why, in mathematical models, abstraction in Cartwright's sense, the mere omission of a factor \citep{Cartwright1989}, typically comes to a distortion: omitting a factor the equations need is assigning it a value it does not have.
+
+\begin{definition}[Truth and similarity]\label{d:truth}
+A model is \emph{true of} a target if it agrees with it on every feature. It is \emph{similar} to a target in a set of respects if it agrees with it on every feature in that set.
+\end{definition}
+
+Agreement can be relaxed to agreement within a tolerance. A model explains a phenomenon across a class of target systems relative to the set $D$ of respects that make a difference to the phenomenon: the features on which, across the class, its occurrence and form depend. We take explanation to be primitive and impose two conditions on it.
+
+\begin{assumption}[Similarity]\label{a:sim}
+A model that explains a phenomenon across a class of targets is similar to every target in the class in the difference-making respects.
+\end{assumption}
+
+\begin{assumption}[Impartiality]\label{a:imp}
+A model that explains a phenomenon across a class of targets assigns, to each respect that makes no difference to the phenomenon, a value that no target in the class has.
+\end{assumption}
+
+Assumption~\ref{a:sim} is the core of the similarity account: a model that misrepresented the factors on which the phenomenon depends would not explain it. It agrees with the account of explanation in SCI-03, on which an explanation locates its explanandum in a pattern of dependence, and with EPI-24-a, on which understanding requires that the core of an explanation be true enough.
+
+Assumption~\ref{a:imp} needs more defense. It says that explanatory models are idealized in a specific way: on features that make no difference, they assign extreme or limiting values, such as zero volume, infinite population, or zero friction, that no member of the class shares. Two considerations support it. The first is generality: an explanation of a pattern shared across a heterogeneous class should not represent the factors that vary within the class as having the value they have in a particular member, which would make it a model of that member. The second is the display of irrelevance \citep{Strevens2008}. A model that assigned a non-difference-maker its actual value in some target would leave open whether the phenomenon depends on that value. A model that assigns the factor a limiting value, typically its absence, and still yields the phenomenon, shows that the phenomenon does not depend on it. The ideal gas law explains why pressure rises with temperature at constant volume by showing that the rise occurs even in a gas whose molecules have no volume and do not attract one another, so that neither feature is needed for it.
+
+\section{Results}
+
+\begin{theorem}[Models are false]\label{t:false}
+If some respect makes no difference to a phenomenon, every model that explains the phenomenon across a class is false of every target in the class.
+\end{theorem}
+
+\begin{proof}
+Let $f$ be a respect that makes no difference, and let $t$ be any target in the class. By Assumption~\ref{a:imp}, the model assigns to $f$ a value that $t$ does not have. So the model does not agree with $t$ on every feature, and by Definition~\ref{d:truth} it is not true of $t$.
+\end{proof}
+
+\begin{theorem}[Partial similarity]\label{t:sim}
+If some respect makes no difference to a phenomenon, every model that explains it across a class is, for each target in the class, false of that target and similar to it in the difference-making respects.
+\end{theorem}
+
+\begin{proof}
+Falsity is Theorem~\ref{t:false}; similarity is Assumption~\ref{a:sim}.
+\end{proof}
+
+\begin{corollary}[Idealization is essential]\label{c:ess}
+If some respect makes no difference to a phenomenon, a model that is true of some target in a class does not explain the phenomenon across that class.
+\end{corollary}
+
+\begin{proof}
+If it explained the phenomenon across the class, it would by Theorem~\ref{t:false} be false of every target in the class, including the one of which it is true.
+\end{proof}
+
+Corollary~\ref{c:ess} is the precise sense in which idealizations are essential to explanatory power. A de-idealized model that matches one system may predict it better, but it represents that system's idiosyncrasies as though they were part of the explanation.
+
+\begin{proposition}[Heterogeneity]\label{p:het}
+Any model is false of at least one of two targets that differ in some feature.
+\end{proposition}
+
+\begin{proof}
+If the model were true of both, it would agree with each on the feature in which they differ, so the two would agree with each other on it.
+\end{proof}
+
+Proposition~\ref{p:het} uses neither assumption. A single model cannot be true of all members of a class that varies in a feature it specifies. Impartiality strengthens \enquote{false of some} to \enquote{false of all}, and makes the falsity a mark of explanatory success rather than a side effect of generality.
+
+\section{Cases}
+
+\paragraph{The ideal gas.} The difference-making respects for the relation between pressure, volume and temperature at low density are the number of molecules, their kinetic energy and the volume of the container. Molecular volume and intermolecular attraction vary across gases and make little difference at low density. The ideal gas sets both to zero, a value no gas has. It is false of every gas, similar to each in the respects that matter, and it explains Boyle's and Charles's laws across all dilute gases. The van der Waals equation, with gas-specific values for both, explains a different phenomenon: the departures from ideality.
+
+\paragraph{Hardy--Weinberg.} The Hardy--Weinberg principle explains why, in the absence of selection, mutation, migration and drift, genotype frequencies return to fixed proportions after one generation of random mating. Population size makes a difference only through drift, which the explanandum excludes; the model sets it to infinity. No population is infinite, and the model is false of all of them. Its role as the null model against which evolutionary forces are identified depends on that falsity.
+
+\section{Objections and replies}
+
+\begin{objection}[Models are not truth-apt]
+Models are objects, abstract or fictional, not statements. They are neither true nor false.
+\end{objection}
+
+\begin{reply}
+What is true or false is the claim that a model fits a target in all respects, or in specified respects, which Giere calls a theoretical hypothesis \citep{Giere1988}. The thesis that models are false is the thesis that the unrestricted hypotheses are false; the hypotheses restricted to difference-making respects are true.
+\end{reply}
+
+\begin{objection}[Similarity is cheap]
+Anything is similar to anything in some respect \citep{Goodman1972}, and similarity is symmetric while representation is not \citep{Suarez2003}. Similarity cannot ground representation.
+\end{objection}
+
+\begin{reply}
+The similarity required is similarity in the respects fixed by what the phenomenon depends on, not chosen to make the model come out similar. The asymmetry is supplied by use: a scientist uses the model to represent the gas, not the gas to represent the model \citep{Giere2004}. Similarity is necessary for representation of the explanatory kind, which is all Assumption~\ref{a:sim} claims.
+\end{reply}
+
+\begin{objection}[Galilean de-idealization]
+Science progresses by removing idealizations, as McMullin argued: the frictionless plane gives way to models with friction, the ideal gas to the van der Waals gas. Idealizations are therefore temporary, not essential.
+\end{objection}
+
+\begin{reply}
+De-idealization improves accuracy for particular systems and explains further phenomena, such as departures from ideality. It does not improve the explanation of the original phenomenon across its class, and by Corollary~\ref{c:ess}, carried to the point of truth, it destroys it. Idealizations made only for tractability exist, and their removal is progress; those of the ideal gas and Hardy--Weinberg are not of that kind.
+\end{reply}
+
+\begin{objection}[Approximate truth]
+SCI-02 argues that mature theories are approximately true. If models are false, it is unclear what is approximately true.
+\end{objection}
+
+\begin{reply}
+What a mature theory gets approximately right is the dependence of phenomena on their difference-makers. Models built from the theory share that structure, by Assumption~\ref{a:sim}, and are false only in the respects that make no difference, and their idealizing assumptions are used, not asserted by the theory. The approximate truth of theories and the falsity of models are compatible.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/SCI/SCI_10.lean} defines targets and models as functions from features to values (Definitions~\ref{d:assign} and~\ref{d:truth}); explanation is a primitive relation constrained by Assumptions~\ref{a:sim} and~\ref{a:imp} as axioms. Theorem~\ref{t:sim} reads as follows.
+
+\begin{lstlisting}
+theorem false_but_similar (m : Assignment)
+    (K : Assignment → Prop) (D : Feature → Prop)
+    (he : Explains m K D) (hf : ∃ f, ¬ D f) :
+    ∀ t, K t → ¬ TrueOf m t ∧ SimilarIn m t D
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.SCI_10.false_but_similar' depends on axioms:
+  [Philosophy.SCI_10.Explains, Philosophy.SCI_10.Feature,
+   Philosophy.SCI_10.Val, Philosophy.SCI_10.impartiality,
+   Philosophy.SCI_10.similarity]
+\end{lstlisting}
+
+Besides three primitives, the axioms are Assumptions~\ref{a:sim} and~\ref{a:imp}; Corollary~\ref{c:ess} does not need the first, and Proposition~\ref{p:het} needs neither.
+
+\section{Conclusion}
+
+Explanatory models assign to features that make no difference values that no system has, and so are false of the systems they represent. They represent through similarity in the respects on which the phenomenon depends, and their falsity is essential to their explanatory power: a model made true of one system no longer explains what its class has in common.
+
+\begin{thebibliography}{99}\small
+\bibitem[Batterman(2002)]{Batterman2002} Batterman, R.~W. (2002). \emph{The Devil in the Details: Asymptotic Reasoning in Explanation, Reduction, and Emergence}. Oxford University Press.
+\bibitem[Batterman and Rice(2014)]{BattermanRice2014} Batterman, R.~W. and Rice, C.~C. (2014). Minimal model explanations. \emph{Philosophy of Science} 81: 349--376.
+\bibitem[Box(1976)]{Box1976} Box, G.~E.~P. (1976). Science and statistics. \emph{Journal of the American Statistical Association} 71: 791--799.
+\bibitem[Cartwright(1983)]{Cartwright1983} Cartwright, N. (1983). \emph{How the Laws of Physics Lie}. Oxford University Press.
+\bibitem[Cartwright(1989)]{Cartwright1989} Cartwright, N. (1989). \emph{Nature's Capacities and Their Measurement}. Oxford University Press.
+\bibitem[Frigg(2010)]{Frigg2010} Frigg, R. (2010). Models and fiction. \emph{Synthese} 172: 251--268.
+\bibitem[Giere(1988)]{Giere1988} Giere, R.~N. (1988). \emph{Explaining Science: A Cognitive Approach}. University of Chicago Press.
+\bibitem[Giere(2004)]{Giere2004} Giere, R.~N. (2004). How models are used to represent reality. \emph{Philosophy of Science} 71: 742--752.
+\bibitem[Godfrey-Smith(2006)]{GodfreySmith2006} Godfrey-Smith, P. (2006). The strategy of model-based science. \emph{Biology and Philosophy} 21: 725--740.
+\bibitem[Goodman(1972)]{Goodman1972} Goodman, N. (1972). Seven strictures on similarity. In \emph{Problems and Projects}. Bobbs-Merrill.
+\bibitem[McMullin(1985)]{McMullin1985} McMullin, E. (1985). Galilean idealization. \emph{Studies in History and Philosophy of Science} 16: 247--273.
+\bibitem[Potochnik(2017)]{Potochnik2017} Potochnik, A. (2017). \emph{Idealization and the Aims of Science}. University of Chicago Press.
+\bibitem[Strevens(2008)]{Strevens2008} Strevens, M. (2008). \emph{Depth: An Account of Scientific Explanation}. Harvard University Press.
+\bibitem[Su\'arez(2003)]{Suarez2003} Su\'arez, M. (2003). Scientific representation: Against similarity and isomorphism. \emph{International Studies in the Philosophy of Science} 17: 225--244.
+\bibitem[van Fraassen(1980)]{vanFraassen1980} van Fraassen, B.~C. (1980). \emph{The Scientific Image}. Oxford University Press.
+\bibitem[Weisberg(2013)]{Weisberg2013} Weisberg, M. (2013). \emph{Simulation and Similarity: Using Models to Understand the World}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

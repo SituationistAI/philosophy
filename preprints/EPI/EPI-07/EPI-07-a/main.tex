@@ -1,0 +1,178 @@
+\documentclass{situationist-preprint}
+
+\title{Moderate Conciliationism}
+\msid{EPI-07-a}
+\msfamily{EPI-07}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_07.lean}
+\mskeywords{peer disagreement; conciliationism; equal weight view; higher-order evidence; uniqueness; steadfastness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When an epistemic peer who shares one's evidence reaches a different credence, what should one do? The equal weight view says: split the difference. Steadfast views say: hold firm if one has evaluated the evidence correctly. We argue for a position between them: conciliate, while giving some additional weight to one's own first-order evidence. The rational credence after disclosure is a weighted average of the credence the first-order evidence supports and the midpoint of the two parties' credences, with both weights positive. The higher-order evidence of disagreement cannot be ignored, and the first-order evidence is not screened off by it. Since neither party can identify what the first-order evidence supports except through her own evaluation, the policy each can follow is to move toward her peer while staying closer to her own credence than to her peer's. We prove that this policy conciliates and gives additional weight to one's own view, that it delivers the rational credence exactly for the party who evaluated the first-order evidence correctly, and hence for at most one party, as the uniqueness thesis requires. We reply to the bootstrapping, self-undermining and right-reasons objections. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Two peers, equally competent and equally informed, consider the same evidence and reach different credences in a proposition. After full disclosure each learns the other's credence. The \emph{equal weight view} holds that each should give the peer's credence the same weight as her own, and so move to the midpoint \citep{Elga2007,Christensen2007,Feldman2007}. Its rationale is the independence principle: in assessing whether one or one's peer has erred, one may not rely on the reasoning in dispute, and, setting it aside, nothing favours oneself. \emph{Steadfast} views hold that one may keep one's credence, at least when one has in fact evaluated the evidence correctly \citep{Kelly2005}. The \emph{total evidence view} of \citet{Kelly2010} holds that the rational credence depends both on the first-order evidence and on the higher-order evidence that the peer disagrees, and that the former is not swamped by the latter.
+
+Each view faces a familiar difficulty. The equal weight view makes the first-order evidence idle once the disagreement is known: two pairs of peers with the same credences would be required to end at the same place whatever their evidence, even if one pair had been considering a valid proof and the other a misleading statistic. Steadfast views make the higher-order evidence idle in the case that matters, since they let the party who reasoned correctly ignore the fact that someone as competent reasoned otherwise, which she has no independent way to discount. And any view on which each party may weight her own credence more heavily must explain how this is consistent with uniqueness, the thesis, defended in EPI-17, that a body of evidence fixes a unique rational credence: after disclosure the peers share their evidence, so if each moves to a credence weighted toward her own, they end at different credences on the same evidence.
+
+We argue for a moderate conciliationism that answers all three difficulties. Its central claim is that the rational credence after disclosure gives positive weight to the first-order evidence and positive weight to the higher-order evidence, and that the additional weight one may give to one's own view is the form the first weight takes from the inside.
+
+\section{Framework}
+
+\begin{definition}[Peer disagreement]\label{d:peer}
+Two parties $A$ and $B$ are in a \emph{peer disagreement} about $p$ if, after disclosure, they share their first-order evidence $E$ bearing on $p$, are equally competent at evaluating evidence of that kind, and have credences $a \neq b$ in $p$.
+\end{definition}
+
+\begin{definition}[Supported credence]\label{d:support}
+The credence $f$ \emph{supported by} the first-order evidence is the credence in $p$ that is rational on $E$ alone.
+\end{definition}
+
+\begin{assumption}[Uniqueness]\label{a:unique}
+For any body of evidence, there is a unique rational credence in each proposition (EPI-17).
+\end{assumption}
+
+By Assumption~\ref{a:unique}, $f$ exists and is unique, and so is the rational credence $r$ on the parties' total evidence after disclosure, which comprises $E$ together with the higher-order evidence $D$ that two peers reached $a$ and $b$. Since the parties share $E$ and $D$, $r$ is the same for both.
+
+\begin{definition}[Weight]\label{d:weight}
+The \emph{weight} of the first-order evidence is a number $\lambda$, with $0 \leq \lambda \leq 1$.
+\end{definition}
+
+\begin{principle}[Higher-order evidence counts]\label{p:higher}
+$\lambda < 1$.
+\end{principle}
+
+\begin{principle}[First-order evidence is not screened off]\label{p:first}
+$\lambda > 0$.
+\end{principle}
+
+\begin{principle}[Combination]\label{p:combine}
+The rational credence after disclosure is $r = \lambda f + (1-\lambda)\,\frac{a+b}{2}$.
+\end{principle}
+
+Principle~\ref{p:combine} combines two estimates of the truth. The first is what the first-order evidence supports. The second is the estimate the higher-order evidence alone recommends: given that the parties are peers, each is as likely as the other to have evaluated $E$ correctly, and the symmetric estimate is the midpoint. The linear form is chosen for definiteness; the qualitative results below depend only on $r$ lying strictly between $f$ and the midpoint.
+
+Principle~\ref{p:higher} says that the fact that a peer disagrees is evidence. It is evidence that one may have erred, since the peer is as likely as oneself to have evaluated $E$ correctly \citep{Christensen2007}; a view that sets $\lambda = 1$ makes it no evidence at all. Principle~\ref{p:first} says that the higher-order evidence does not wholly replace the first-order evidence. If $\lambda = 0$, the rational credence after disclosure would be the midpoint whatever $E$ is: a peer who has been shown a valid proof of $p$ and a peer who has been shown a misleading argument for $p$, if their credences were the same, would be required to end in the same place. That is implausible, and the argument of \citet{Kelly2010} against the equal weight view rests on it. Proposition~\ref{p:matters} below states the point precisely.
+
+\section{The policy and its properties}
+
+Neither party can apply Principle~\ref{p:combine} directly, since neither knows $f$ except through her own evaluation of $E$, and REL-11-a shows that neither is in a position to know which party, if either, has the rational credence. What each can follow is a policy that uses her own evaluation in place of $f$.
+
+\begin{definition}[The moderate policy]\label{d:policy}
+A party whose credence is $x$ and whose peer's credence is $y$ moves to $\lambda x + (1-\lambda)\frac{x+y}{2}$, that is, to $\frac{1+\lambda}{2}x + \frac{1-\lambda}{2}y$.
+\end{definition}
+
+\begin{theorem}[Moderation]\label{t:moderate}
+Let $a < b$. Then $A$'s output $o_A$ under the moderate policy satisfies $a < o_A < b$, and $o_A - a < b - o_A$. The same holds, with directions reversed, when $b < a$, and for $B$.
+\end{theorem}
+
+\begin{proof}
+We have $o_A - a = \frac{1-\lambda}{2}(b-a)$, which is positive by Principle~\ref{p:higher}, and $b - o_A = \frac{1+\lambda}{2}(b-a)$, which is positive and, by Principle~\ref{p:first}, larger than $o_A - a$.
+\end{proof}
+
+Theorem~\ref{t:moderate} is the thesis in its practical form. The first inequality says that each party conciliates: she moves toward her peer. The second says that she gives additional weight to her own view: she ends closer to her starting point than to her peer's, with weight $\frac{1+\lambda}{2} > \frac{1}{2}$ on her own credence. That weight is not a claim to be more reliable than the peer; it is the weight $\lambda$ that Principle~\ref{p:combine} gives to the first-order evidence, applied through the only access to it she has.
+
+\begin{proposition}[When the policy is right]\label{p:right}
+$A$'s output equals the rational credence $r$ if and only if $a = f$.
+\end{proposition}
+
+\begin{proof}
+$o_A - r = \lambda(a - f)$, which is zero if and only if $a = f$, since $\lambda > 0$ by Principle~\ref{p:first}.
+\end{proof}
+
+\begin{proposition}[First-order evidence matters]\label{p:matters}
+If two disagreements have the same credences $a, b$ but first-order evidence supporting different credences $f \neq f'$, the rational credences after disclosure differ.
+\end{proposition}
+
+\begin{proof}
+The two rational credences differ by $\lambda(f - f')$, which is not zero by Principle~\ref{p:first}.
+\end{proof}
+
+\begin{corollary}[At most one]\label{c:atmost}
+In a peer disagreement, the moderate policy yields the rational credence for at most one party.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{p:right}, it does so for $A$ only if $a = f$ and for $B$ only if $b = f$; both would give $a = b$, contrary to Definition~\ref{d:peer}.
+\end{proof}
+
+Corollary~\ref{c:atmost} answers the worry about uniqueness. The parties, following the same policy, end at different credences, and on the shared evidence at most one of these is rational. This is not a defect of the policy; it is the situation REL-11-a describes, in which steadfastness can be rational for at most one party and neither is in a position to know which. The moderate policy improves on both alternatives for each party: if she has evaluated $E$ correctly, it delivers the rational credence exactly; if she has not, it moves her some way toward her peer, and so, when the peer has evaluated $E$ correctly, toward the rational credence. The equal weight policy delivers $r$ for neither party unless $f$ is the midpoint, and the steadfast policy delivers it for neither unless $\lambda = 1$, which Principle~\ref{p:higher} excludes.
+
+\section{Objections}
+
+\begin{objection}[Bootstrapping]
+If one may give extra weight to one's own credence, one may infer, from the bare fact of disagreement, that one's peer is probably the one who erred. Repeated over many disagreements, this lets one conclude that one is more reliable than one's supposed peers \citep{Elga2007}.
+\end{objection}
+
+\begin{reply}
+The policy gives the same weight $\frac{1+\lambda}{2}$ to each party's own credence, and so licenses no asymmetric conclusion about reliability: from $B$'s point of view, the same policy gives extra weight to $B$. Nor does it rest on an estimate of who erred. The extra weight is the weight of the first-order evidence, which each party has, and which Principle~\ref{p:first} says is not screened off. Elga's argument shows that one may not use the disagreement itself as evidence of one's superiority, and the moderate policy does not.
+\end{reply}
+
+\begin{objection}[Right reasons]
+The party who evaluated the evidence correctly should stay where she is; moving away from the correct credence is moving away from the truth-conducive response \citep{Kelly2005}.
+\end{objection}
+
+\begin{reply}
+After disclosure her evidence includes the disagreement, and her old credence is no longer the correct response to her total evidence: by Principle~\ref{p:combine}, the correct response is $r$, which lies strictly between $f$ and the midpoint. By Proposition~\ref{p:right}, the moderate policy brings her exactly there. The right-reasons view is correct that she should be rewarded for evaluating $E$ well, and the policy rewards her: of the two parties, she alone ends at the rational credence.
+\end{reply}
+
+\begin{objection}[Self-undermining]
+Many epistemologists who are one's peers reject conciliationism. By its own lights, then, the conciliationist should lower her confidence in it \citep{Elga2010}.
+\end{objection}
+
+\begin{reply}
+The objection is most pressing for the equal weight view, which would require the conciliationist to move halfway toward rejecting it whenever she meets a steadfast peer. Under the moderate view she gives additional weight to her own first-order evidence about disagreement, and so remains, after conciliation, closer to her own view than to her opponent's. The view therefore recommends some loss of confidence in itself, which is the correct verdict, but not its abandonment. EPI-07-b treats the objection in full.
+\end{reply}
+
+\begin{objection}[What fixes $\lambda$?]
+The view states that $0 < \lambda < 1$ but does not say what $\lambda$ is. Without a value, it gives no definite advice.
+\end{objection}
+
+\begin{reply}
+By Assumption~\ref{a:unique} the rational credence is unique, so $\lambda$ is fixed by the case; it may vary with the kind of question, the difficulty of the evaluation and the number of peers. Our results do not depend on its value, only on its lying strictly between zero and one, and Theorem~\ref{t:moderate} gives definite qualitative advice in every case: move toward the peer, and stop short of the midpoint. Where a reasoner has independent evidence that her evaluations of a given kind are reliable, as when she can check a calculation, the case is not one of peer disagreement in the sense of Definition~\ref{d:peer}.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_07.lean} represents credences as integers on a fixed scale and $\lambda$ as the fraction $k/n$. To keep quantities integral, credences after disclosure are represented multiplied by $2n$, so that $A$'s output is \texttt{policy a b} $= 2ka + (n-k)(a+b)$. Principles~\ref{p:higher}, \ref{p:first} and~\ref{p:combine} are axioms, and Theorem~\ref{t:moderate}, Propositions~\ref{p:right} and~\ref{p:matters} and Corollary~\ref{c:atmost} are proved.
+
+\begin{lstlisting}
+theorem moderate (a b : Int) (h : a < b) :
+    2 * n * a < policy a b ∧ policy a b < 2 * n * b ∧
+    policy a b - 2 * n * a < 2 * n * b - policy a b
+
+theorem at_most_one (f a b : Int) (hne : a ≠ b) :
+    ¬ (RationalAfter f a b (policy a b) ∧
+       RationalAfter f a b (policy b a))
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_07.moderate' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   first_order_counts, higher_order_counts, k, n]
+'Philosophy.EPI_07.at_most_one' depends on axioms:
+  [propext, Quot.sound, RationalAfter, combination,
+   first_order_counts, k, n]
+\end{lstlisting}
+
+The axiom \texttt{higher\_order\_counts} is Principle~\ref{p:higher}, \texttt{first\_order\_counts} is Principle~\ref{p:first}, and \texttt{combination} is Principle~\ref{p:combine}; \texttt{k} and \texttt{n} give the weight of Definition~\ref{d:weight}. Uniqueness enters the formalization through \texttt{combination}, which defines the rational credence as a function of the case.
+
+\section{Conclusion}
+
+When a peer disagrees, one should conciliate, because the disagreement is evidence that one may have erred; and one should stop short of the midpoint, because the first-order evidence is not screened off by the higher-order evidence, and one's own evaluation is the only access to it one has. The policy that results gives each party additional weight to her own view. It is consistent with uniqueness, since it delivers the unique rational credence exactly for the party who evaluated the evidence correctly, and so for at most one.
+
+\begin{thebibliography}{99}\small
+\bibitem[Christensen(2007)]{Christensen2007} Christensen, D. (2007). Epistemology of disagreement: The good news. \emph{The Philosophical Review}, 116(2), 187--217.
+\bibitem[Elga(2007)]{Elga2007} Elga, A. (2007). Reflection and disagreement. \emph{No\^us}, 41(3), 478--502.
+\bibitem[Elga(2010)]{Elga2010} Elga, A. (2010). How to disagree about how to disagree. In R.~Feldman and T.~A. Warfield (Eds.), \emph{Disagreement} (pp.~175--186). Oxford University Press.
+\bibitem[Feldman(2007)]{Feldman2007} Feldman, R. (2007). Reasonable religious disagreements. In L.~M. Antony (Ed.), \emph{Philosophers Without Gods: Meditations on Atheism and the Secular Life} (pp.~194--214). Oxford University Press.
+\bibitem[Kelly(2005)]{Kelly2005} Kelly, T. (2005). The epistemic significance of disagreement. \emph{Oxford Studies in Epistemology}, 1, 167--196.
+\bibitem[Kelly(2010)]{Kelly2010} Kelly, T. (2010). Peer disagreement and higher-order evidence. In R.~Feldman and T.~A. Warfield (Eds.), \emph{Disagreement} (pp.~111--174). Oxford University Press.
+\end{thebibliography}
+
+\end{document}

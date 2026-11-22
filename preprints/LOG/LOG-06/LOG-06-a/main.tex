@@ -1,0 +1,304 @@
+\documentclass{situationist-preprint}
+
+\title{Logical Consequence and the Actual World}
+\msid{LOG-06-a}
+\msfamily{LOG-06}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_06.lean}
+\mskeywords{logical consequence; model theory; Tarski; Etchemendy; overgeneration; undergeneration; isomorphism invariance; squeezing argument}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+On the model-theoretic account, an argument is valid if every model of its premises is a model of its conclusion. Etchemendy argued that the account is conceptually and extensionally inadequate: validity in all models need not guarantee truth-preservation, the extension of the account depends on how many things there are, and the account may count invalid arguments valid or valid ones invalid. We argue that logical consequence is truth-preservation in all models, provided that the class of models includes one isomorphic to the actual world. The proviso is not an ornament. Given that satisfaction is invariant under isomorphism, it guarantees that model-theoretic validity entails actual truth-preservation, and, when the class contains a copy of the structure of each possible world, necessary truth-preservation. Without it, validity overgenerates in exactly the way Etchemendy described: we prove that if the actual domain has a finite size, the class of smaller domains validates a sentence that is actually false. Undergeneration is handled by holding the permutation-invariant constants fixed and, for first-order languages, by Kreisel's squeezing argument, which we state as a theorem. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+An argument is logically valid, on the account that \citet{Tarski1936} made standard, if its conclusion is true in every model in which its premises are true. A model assigns a domain of objects to the quantifiers and extensions in that domain to the non-logical vocabulary; the logical vocabulary is held fixed. The account replaced a modal and epistemic notion, that of a conclusion that must be true if the premises are, by a set-theoretic one, and it made logical consequence a subject for mathematics. Model theory, completeness proofs and most of the metatheory of logic since the 1930s presuppose it.
+
+\citet{Etchemendy1990} argued that the replacement was not a conceptual analysis and that it is not even extensionally guaranteed to be correct. The conceptual charge is that the account identifies validity with the truth of a universal generalization over models, and that the truth of such a generalization does not explain why a valid argument cannot lead from truths to a falsehood. The extensional charge has two parts. The account may \emph{overgenerate}, counting as valid arguments that are not: if there were only finitely many objects available for building models, the sentence saying that there are more than that many things would be false in every model, and its negation would come out logically true. And it may \emph{undergenerate}, counting as invalid arguments that are valid, as happens to second-order arguments when the second-order quantifiers are given a Henkin interpretation, or to arguments whose validity turns on expressions that the account treats as non-logical.
+
+The standard replies take one of three lines. The first is that Etchemendy's worries are idle for first-order logic, because the completeness theorem and Kreisel's squeezing argument show that set-theoretic validity coincides with intuitive validity \citep{Kreisel1967}. The second is that the account was never intended as a conceptual analysis, and that its extensional adequacy is underwritten by set theory \citep{McGee1992,Shapiro1998}. The third is that Etchemendy misread Tarski, whose notion of model is not the one Etchemendy criticized \citep{Sher1996,GomezTorrente1996,Ray1996}.
+
+We take a different line. We accept that model-theoretic validity, as such, does not guarantee truth-preservation, and we identify the condition under which it does. Logical consequence is truth-preservation in all models, provided that the class of models includes one isomorphic to the actual world. The proviso turns the generalization over models into a guarantee about truth: if every model of the premises in the class is a model of the conclusion, and one model in the class is a copy of the actual world, then the conclusion is actually true whenever the premises are (Theorem~\ref{t:reliable}). When the class contains a copy of each possible world, the guarantee becomes necessary (Corollary~\ref{c:nec}). Etchemendy's overgeneration cases are exactly cases in which the proviso fails (Proposition~\ref{p:over}). Undergeneration is a separate problem, which is solved by choosing the logical constants correctly and, for first-order languages, by the squeezing argument (Theorem~\ref{t:squeeze}).
+
+\section{A short history of the account}
+
+\subsection{Bolzano and Tarski}
+
+\citet[\S 155]{Bolzano1837} defined a proposition to be derivable from others, relative to a selection of its constituent ideas, if every uniform variation of those ideas that makes the premises true makes the conclusion true. Logical derivability is the case in which all non-logical ideas are varied. The definition is substitutional: it quantifies over replacements of expressions, not over interpretations. Its known defect is that it depends on the expressive resources of the language. If the language lacks a name for some object, or a predicate for some property, an argument may be valid by Bolzano's test because no available substitution falsifies it.
+
+\citet{Tarski1936} saw this defect and replaced substitution by satisfaction. A model of a class of sentences is a sequence of objects satisfying the sentential functions obtained by replacing the non-logical constants by variables; a sentence follows logically from a class of sentences if every model of the class is a model of the sentence. The definition does not depend on what the language can name. Tarski noted that its extension depends on the division of the vocabulary into logical and non-logical terms, and he did not claim to have a principled account of the division; he returned to the question much later \citep{Tarski1986}. Whether Tarski's 1936 models had variable domains, as models do in contemporary model theory, has been disputed. \citet{Etchemendy1990} held that they did not; \citet{GomezTorrente1996} and \citet{Mancosu2006} argued from Tarski's other writings that domain variation was available to him. Nothing below turns on the exegetical question.
+
+\subsection{Kreisel's squeezing argument}
+
+\citet{Kreisel1967} observed that, for first-order languages, the question whether the set-theoretic account is extensionally correct can be settled without settling what intuitive validity is. Every argument derivable in a standard deductive system is intuitively valid, since its rules are. Every intuitively valid argument is valid in all set-theoretic models, since a set-theoretic model is one of the ways the non-logical vocabulary could be interpreted. And every argument valid in all set-theoretic models is derivable, by the completeness theorem. The three notions therefore coincide. The argument requires a completeness theorem, so it does not extend to second-order logic with the standard semantics; and it presupposes that every set-theoretic model represents a legitimate interpretation, which is the point at which undergeneration would show up.
+
+\subsection{Etchemendy}
+
+\citet{Etchemendy1990} distinguished interpretational semantics, on which models represent reinterpretations of the language, from representational semantics, on which they represent ways the world could be. Tarski's account, he argued, is interpretational, and an interpretational account can at best yield the truth of a generalization: no reinterpretation of the non-logical vocabulary makes the premises true and the conclusion false. That such a generalization is true does not entail that the argument is necessarily truth-preserving, and does not explain it when it is. He called the inference from the one to the other Tarski's fallacy. He added the cardinality argument: on a fixed-domain reading, the sentence \enquote{there are at least $n$ things}, built only from quantifiers and identity, is logically true if and only if the domain has at least $n$ members, so that the logical truth of a sentence of pure logic would depend on how many things there are. Domain variation helps only if the universe of sets supplies domains of every size, and then the adequacy of the account rests on the axioms of set theory rather than on anything about logic. \citet{Etchemendy2008} restated the conclusion: the model-theoretic account is a useful mathematical tool for investigating consequence, not an analysis of it.
+
+\subsection{Responses}
+
+\citet{McGee1992} replied that the cardinality worry is answered by set theory, which provides domains of every cardinality, and that, for first-order languages, validity in all set models implies validity under every interpretation of the non-logical vocabulary, including interpretations whose domains are not sets, which is enough for the account to be extensionally correct. \citet{Sher1991,Sher1996} argued that Tarski's account is formal rather than interpretational: models represent formally possible structures, and the logical constants are exactly the operations invariant under isomorphism, so that validity in all models is truth-preservation under every formally possible structure. \citet{Hanson1997} defended a modal account on which validity requires necessary truth-preservation together with a formal or a priori element, and argued that the model-theoretic account is an approximation. \citet{Shapiro1998} argued that models represent possible structures and that the account is an adequate mathematical model of a modal notion.
+
+These replies share a premise with Etchemendy's challenge: that the question is whether the class of models is rich enough. We agree, and we say precisely what richness is needed. One model is enough for the guarantee Etchemendy asked for, and it must be the right one.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:models}
+A language has \emph{sentences}; a \emph{model} of the language consists of a domain and an assignment of extensions in that domain to the non-logical vocabulary. \emph{Satisfaction} is the relation between a model and a sentence true in it, defined by the usual recursive clauses, with the logical constants interpreted in each model by the same operations on its domain. Two models are \emph{isomorphic} if there is a bijection between their domains that carries the extensions of each non-logical expression in one onto those in the other.
+\end{definition}
+
+\begin{assumption}\label{a:iso}
+\emph{Isomorphism invariance.} Isomorphic models satisfy the same sentences.
+\end{assumption}
+
+Assumption~\ref{a:iso} is a theorem for first-order and second-order languages with the standard logical constants, and for any language whose logical constants are interpreted by operations invariant under permutations of the domain. LOG-16 argues that the logical constants are exactly such operations, and it is because of their invariance that the assumption holds: an operation invariant under all permutations of a domain is carried by any bijection onto the corresponding operation on the image domain \citep{McGee1996,Bonnay2008}. An expression whose interpretation is not invariant, such as a predicate for being a horse treated as logical, would make Assumption~\ref{a:iso} fail.
+
+\begin{definition}\label{d:worlds}
+Each possible world $w$ has a \emph{structure} $S_w$: the model whose domain consists of the things that exist at $w$ and whose extensions are those that the non-logical vocabulary has at $w$. One world, $@$, is \emph{actual}. A sentence is \emph{true at} $w$ if it is satisfied in $S_w$.
+\end{definition}
+
+The structure $S_@$ is the intended interpretation of the language: its domain is everything there is, and its extensions are what the predicates actually apply to. Definition~\ref{d:worlds} is the Tarskian assumption that truth is satisfaction in the intended interpretation. Whether $S_@$ is itself a set-theoretic model is a separate question, taken up in Section~\ref{s:cases}.
+
+\begin{definition}\label{d:valid}
+Let $K$ be a class of models. An argument from premises $\Gamma$ to conclusion $\phi$ is \emph{$K$-valid} if every model in $K$ that satisfies every member of $\Gamma$ satisfies $\phi$. It is \emph{truth-preserving at} $w$ if, whenever every member of $\Gamma$ is true at $w$, $\phi$ is true at $w$.
+\end{definition}
+
+\begin{definition}\label{d:anchor}
+A class of models $K$ is \emph{anchored} if it contains a model isomorphic to $S_@$. It is \emph{modally anchored} if, for every world $w$, it contains a model isomorphic to $S_w$.
+\end{definition}
+
+\begin{principle}[The account]\label{p:account}
+$\phi$ is a logical consequence of $\Gamma$ if and only if the argument from $\Gamma$ to $\phi$ is $K$-valid, where $K$ is the class of all models of the language, with the logical constants fixed as in Definition~\ref{d:models}, and $K$ is anchored.
+\end{principle}
+
+The account has two parts. The first is Tarski's: consequence is preservation of satisfaction over all models. The second is the proviso. It is not a further condition on individual arguments; it is a condition on the class over which the generalization ranges. An argument is not valid because it is truth-preserving at the actual world. It is valid because it preserves satisfaction across a class of models, and the proviso is what makes that fact entail truth-preservation.
+
+\section{Results}\label{s:results}
+
+\begin{theorem}\label{t:reliable}
+If $K$ is anchored, every $K$-valid argument is truth-preserving at the actual world.
+\end{theorem}
+
+\begin{proof}
+Let $M$ be a model in $K$ isomorphic to $S_@$, and suppose the premises are true at $@$, that is, satisfied in $S_@$. By Assumption~\ref{a:iso} they are satisfied in $M$. Since the argument is $K$-valid and $M$ is in $K$, the conclusion is satisfied in $M$, and by Assumption~\ref{a:iso} again it is satisfied in $S_@$, that is, true at $@$.
+\end{proof}
+
+\begin{corollary}\label{c:nec}
+If $K$ is modally anchored, every $K$-valid argument is truth-preserving at every world.
+\end{corollary}
+
+\begin{proof}
+For each world $w$, the argument of Theorem~\ref{t:reliable} applies with $S_w$ in place of $S_@$.
+\end{proof}
+
+\begin{proposition}\label{p:antitone}
+If $K \subseteq K'$, every $K'$-valid argument is $K$-valid.
+\end{proposition}
+
+\begin{proof}
+A model in $K$ that satisfies the premises is a model in $K'$ that satisfies them, and so satisfies the conclusion.
+\end{proof}
+
+Proposition~\ref{p:antitone} says that the smaller the class, the more arguments it validates. Overgeneration is the risk of a class that is too small, undergeneration the risk of one that is too large. The proviso sets a lower bound on the class: it must be large enough to contain a copy of the actual world. The next result shows that the bound is not idle.
+
+\begin{proposition}\label{p:over}
+Consider the language whose sentences are built by negation from the sentences \enquote{there are at least $n$ things}, for each $n$, and whose models are finite domains. If the actual domain has $a$ members, the class of domains with fewer than $a$ members makes valid the sentence \enquote{it is not the case that there are at least $a$ things}, which is false at the actual world; and that class is not anchored. Conversely, any class containing a domain of size $a$ validates no sentence false at the actual world.
+\end{proposition}
+
+\begin{proof}
+In a domain with $m < a$ members, the sentence \enquote{there are at least $a$ things} is false, so its negation is true. In the actual domain the sentence is true and its negation false. No domain in the class has $a$ members, and since isomorphism of pure domains is equinumerosity, none is isomorphic to the actual one. For the converse, a sentence true in every member of a class that contains a domain of size $a$ is true in that domain.
+\end{proof}
+
+Proposition~\ref{p:over} is Etchemendy's cardinality argument in its simplest form. It shows that the overgeneration he described is precisely a failure of anchoring: the sentence that comes out logically true is false because the actual world is not represented in the class. It also shows that the remedy is the proviso and nothing stronger. One does not need domains of every cardinality, nor any thesis about the size of the set-theoretic universe, to block the actual falsehood; one needs a domain as large as the actual one, with the right structure.
+
+The last result concerns undergeneration. It is Kreisel's argument, stated abstractly.
+
+\begin{theorem}\label{t:squeeze}
+Let $\mathrm{Der}$, $\mathrm{Int}$ and $\mathrm{Val}$ be relations between sets of sentences and sentences. If every $\mathrm{Der}$-argument is an $\mathrm{Int}$-argument, every $\mathrm{Int}$-argument is a $\mathrm{Val}$-argument, and every $\mathrm{Val}$-argument is a $\mathrm{Der}$-argument, then the three relations coincide.
+\end{theorem}
+
+\begin{proof}
+The three inclusions form a cycle, so each relation is included in each of the others.
+\end{proof}
+
+With $\mathrm{Der}$ derivability in a standard first-order system, $\mathrm{Int}$ intuitive validity and $\mathrm{Val}$ $K$-validity for the class of all set-theoretic models, the first premise is the soundness of the rules, the third is G\"odel's completeness theorem, and the second is the claim that every set-theoretic model is a legitimate interpretation. That second premise is the one undergeneration would violate. It holds when the logical constants are held fixed and only non-logical vocabulary is reinterpreted, which is what Definition~\ref{d:models} requires.
+
+\section{Etchemendy's arguments examined}\label{s:etch}
+
+\subsection{Tarski's fallacy}
+
+Etchemendy's conceptual objection is that the truth of the generalization \enquote{every model of $\Gamma$ is a model of $\phi$} does not entail that $\phi$ is true whenever $\Gamma$ is. The objection is correct as stated: a generalization over models entails nothing about truth unless truth is connected with some model. Theorem~\ref{t:reliable} supplies the connection. If truth is satisfaction in the intended interpretation, and the class of models contains a copy of the intended interpretation, then the generalization entails truth-preservation, because it includes, up to isomorphism, the instance that matters.
+
+The modal version of the objection asks for more: that a valid argument be not only truth-preserving but necessarily so. Corollary~\ref{c:nec} answers it on the condition that the class be modally anchored. Is the class of all models modally anchored? The structure of a possible world is a domain with extensions; if the possible domains are no larger than the sizes available in the class and the class is closed under isomorphism, every possible structure has a copy in it. The class of models is a class of mathematical objects, whose existence does not vary from world to world, so the question is only whether it is large enough. For countable first-order languages, the downward L\"owenheim--Skolem theorem ensures that a structure of any size satisfies the same sentences as some countable model; for second-order languages a reflection principle is needed, as discussed in Section~\ref{s:cases}.
+
+The proviso therefore does what Etchemendy said could not be done by the model-theoretic account: it explains why validity guarantees truth-preservation. It does so without abandoning the interpretational character of the account. Models remain reinterpretations of the non-logical vocabulary; one of them reinterprets it as it is actually interpreted.
+
+\subsection{Overgeneration}
+
+The cardinality argument has the form of Proposition~\ref{p:over}: if the models available are all smaller than the world, a sentence saying that the world is at least so large comes out logically false. Etchemendy took this to show that the account makes logic hostage to non-logical facts. On our account the facts in question are not hostages but conditions of adequacy. The account requires that the class contain a copy of the actual world; whether a given class meets the requirement depends on how large the world is. That dependence is not objectionable. Any account on which validity guarantees truth-preservation at the actual world must be answerable to what the actual world is like, since an argument whose conclusion is actually false and whose premises are actually true is not valid, whatever else is the case.
+
+Set theory guarantees that the requirement is met for the world as we take it to be. The set-theoretic universe contains domains of every infinite cardinality, and actual infinities exist (MTH-10). If the actual world contains a set-sized collection of things, there is a set-theoretic model isomorphic to its structure. If it contains a proper class of things, because it contains the sets themselves, no set model is isomorphic to it, and the proviso must be met in one of the ways described in Section~\ref{s:cases}.
+
+\subsection{Undergeneration}
+
+Undergeneration occurs when the class of models is too large: when it contains models that reinterpret expressions that should be held fixed, or interpretations of higher-order quantifiers that do not range over all the subsets of the domain. The first is a matter of choosing the logical constants. If \enquote{most} is a logical constant, as LOG-16 argues, then an account that treats it as non-logical will count as invalid the argument from \enquote{most $A$ are $B$} and \enquote{every $B$ is $C$} to \enquote{most $A$ are $C$}, which is valid. The cure is to hold \enquote{most} fixed, and the permutation-invariance criterion of LOG-16 says which expressions to hold fixed.
+
+The second is a matter of the semantics of second-order quantifiers. With Henkin models, in which the second-order variables range over a designated collection of subsets, second-order logic is complete and compact and so cannot express finiteness, well-foundedness or the categoricity of arithmetic \citep{Shapiro1991}. Arguments that are valid on the intended reading of the second-order quantifiers, such as the argument from the second-order Peano axioms to any arithmetical truth, are then counted invalid. The cure is the standard semantics, on which the second-order variables range over all subsets of the domain. LOG-09 argues that second-order logic so understood is logic. The price is the loss of completeness: no deductive system captures standard second-order validity, and Theorem~\ref{t:squeeze} has no application, since its third premise fails. The account does not need it. Kreisel's argument is a way of showing that the account is extensionally correct without relying on a prior grasp of validity; for second-order languages, extensional correctness rests instead on the anchoring of the class and the correct choice of the logical constants.
+
+\section{Further cases}\label{s:cases}
+
+\subsection{The actual world is not a set}
+
+If the actual world contains all sets, its structure has a proper class as domain, and no set-theoretic model is isomorphic to it. Three responses are available.
+
+The first, for first-order languages, is that isomorphism is more than the account needs. Theorem~\ref{t:reliable} uses only the fact that the copy of the actual world satisfies the same sentences. By the reflection principle of set theory, every first-order sentence true in the universe of sets is true in some set-sized initial segment of it, and for a countable language the downward L\"owenheim--Skolem theorem gives a countable model that satisfies the same sentences as the actual structure. The proviso can therefore be weakened, for first-order languages, to the requirement that the class contain a model elementarily equivalent to the actual world, and that requirement is met by the class of set models.
+
+The second, for second-order languages, is a second-order reflection principle, on which every second-order sentence true in the universe is true in some set-sized structure. \citet{Shapiro1987} discussed such principles and showed that they are strong set-theoretic hypotheses. They are widely accepted as consequences of the iterative conception, but they are hypotheses, and an account of consequence that rests on them is no more secure than they are.
+
+The third is to let the class of models include interpretations whose domains are not sets. \citet{Boolos1984,Boolos1985} showed that monadic second-order quantification can be interpreted plurally, without commitment to sets, and \citet{RayoUzquiano1999} developed a theory of second-order consequence on which interpretations are given by higher-order or plural quantification, so that the intended interpretation, whose domain is everything, is itself among the interpretations. On this approach the proviso is satisfied literally: the class of interpretations contains the actual world's structure itself. The approach requires that quantification over absolutely everything be coherent, which LOG-08 argues it is, and \citet{Williamson2003} defends at length.
+
+We adopt the third response for second-order languages and note that the first suffices for first-order ones. The proviso is stated with isomorphism because isomorphism is what the account needs in the general case; for first-order languages it may be weakened without loss.
+
+\subsection{Empty worlds}
+
+Standard models have non-empty domains, so the sentence \enquote{something exists} is valid. Is this overgeneration? At the actual world the sentence is true, so Theorem~\ref{t:reliable} raises no difficulty. Corollary~\ref{c:nec} does: if there is a possible world in which nothing exists, the class of non-empty models is not modally anchored, and the logical truth of \enquote{something exists} is not necessary truth. The account gives a clear verdict. Whether \enquote{something exists} is a logical truth depends on whether the empty domain is admitted, and the condition for admitting it is the possibility of an empty world. Our account is stated with the actual-world proviso, and the actual world is not empty; so the standard logic, with non-empty domains, is correct as an account of consequence. The modal question whether it is also correct as an account of necessary truth-preservation is the question whether an empty world is possible, which is a question of metaphysics, not of logic. This seems to us the right division of labor.
+
+\subsection{Contingent existents}
+
+A related case concerns proper names. If \enquote{$a$} names an actual object that might not have existed, the sentence \enquote{something is identical to $a$} is valid in every model, since every model assigns $a$ a member of its domain, but is false at a world where $a$ does not exist. The case is not one of overgeneration at the actual world. It shows that modal anchoring fails for the class of models in which names must denote: there are worlds whose structure, with $a$ missing from the domain, is not a model of the language at all. The two responses are the familiar ones: to adopt a free logic, admitting models in which names lack denotations, or to hold with \citet{Williamson2013} that everything exists necessarily. Our account takes no stand between them. It requires only that, whichever is chosen, the class of models contain a copy of the actual world, which both do.
+
+\subsection{Generalized quantifiers}
+
+Let \enquote{most} be interpreted in each model by the relation that holds between two subsets of the domain when the first has more members in the second than outside it. The interpretation is invariant under permutations, so Assumption~\ref{a:iso} holds for the extended language, and Theorem~\ref{t:reliable} applies. Logics with generalized quantifiers of this kind generally lack a complete proof system, as LOG-16 notes, and Theorem~\ref{t:squeeze} cannot then be invoked. The extended language is therefore a case, like second-order logic, where the account is correct and no completeness theorem confirms it.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Triviality]
+The class of all set-theoretic models contains models of every size and structure. The proviso is therefore always satisfied and adds nothing to Tarski's account.
+\end{objection}
+
+\begin{reply}
+The proviso is satisfied by the class of all models when the actual world has a copy in it, and the cases of Section~\ref{s:cases} show that this is not automatic: it fails for set models when the actual domain is a proper class and the language is second-order, and it fails for any restricted class, such as the class of finite models, when the world is infinite. Finite model theory is a well-developed subject whose validities include sentences, such as the negation of one saying that some relation is irreflexive, transitive and serial, that are false in every infinite structure in which that relation has those properties. The proviso is what distinguishes the class of all models from such classes as an account of consequence. That it is met by the class we use is a fact, not a triviality, and it is the fact that makes the account correct.
+\end{reply}
+
+\begin{objection}[Contingency]
+Whether the class of models contains a copy of the actual world depends on what the actual world is like, which is contingent. The account therefore makes logical consequence contingent.
+\end{objection}
+
+\begin{reply}
+The class of models is a class of mathematical objects and does not vary between worlds. What could vary is whether it contains a copy of the actual world. If it is modally anchored, it contains a copy of every world, and then nothing about the actual world in particular is presupposed. If it is not, there is a possible world with no copy in the class, and an argument might be valid and fail to preserve truth there. The account then says that the argument is a logical consequence, since the class is anchored, but that its validity does not guarantee necessary truth-preservation. This is the verdict of Section~\ref{s:cases} on empty worlds and contingent existents. Logical consequence, so understood, is no more contingent than the class of models; what is contingent is whether consequence coincides with necessary truth-preservation, and it is right that this should depend on the range of possibilities.
+\end{reply}
+
+\begin{objection}[Analysis]
+Etchemendy's challenge was to give a conceptual analysis of consequence. The account states a sufficient condition for the model-theoretic account to be reliable. That is not an analysis.
+\end{objection}
+
+\begin{reply}
+The account says what consequence is: preservation of satisfaction across a class of interpretations that includes the intended one. It explains the two features of consequence that the intuitive notion includes. Formality is explained by the generalization over reinterpretations of the non-logical vocabulary, which ensures that validity depends only on the logical constants. Truth-preservation is explained by the proviso. An analysis that explains both features of the analysandum, and from which both follow by Theorem~\ref{t:reliable} and Corollary~\ref{c:nec}, is what was asked for. Etchemendy's own diagnosis was that the model-theoretic account lacks a link between models and truth; the proviso is that link.
+\end{reply}
+
+\begin{objection}[Proof theory]
+Consequence is a proof-theoretic notion: a conclusion follows from premises if it can be reached from them by steps each of which is justified by the meaning of a logical constant. Models are beside the point \citep{Prawitz1985}.
+\end{objection}
+
+\begin{reply}
+For first-order languages, Theorem~\ref{t:squeeze} shows that the proof-theoretic and the model-theoretic notions coincide, so the disagreement makes no extensional difference. For second-order languages they diverge, and the divergence favors the model-theoretic account: the argument from the second-order Peano axioms to an arithmetical truth that no deductive system proves is valid, since the axioms are categorical, and the proof-theoretic account must count it invalid. Proof-theoretic accounts describe derivability, which is a real relation and a central one; they do not describe consequence. LOG-02 makes the parallel point about intuitionistic logic, which describes provability rather than consequence.
+\end{reply}
+
+\begin{objection}[Substitution]
+The proviso concerns the actual world, but validity should depend only on form. A substitutional account, on which an argument is valid if every substitution instance with true premises has a true conclusion, ties validity to actual truth without mentioning worlds \citep{Halbach2020}.
+\end{objection}
+
+\begin{reply}
+The substitutional account ties validity to actual truth by construction, since its instances are evaluated in the intended interpretation; its problem is Bolzano's, that it depends on the expressive resources of the language. \citet{Halbach2020} shows that, for first-order languages containing arithmetic, the substitutional and the model-theoretic accounts coincide, which is a further squeezing argument. Our account keeps what is right in the substitutional idea, that the intended interpretation must count, and keeps the model-theoretic independence from what the language can name.
+\end{reply}
+
+\section{Recent literature}
+
+\citet{Field2015} argues that validity cannot be defined in terms of truth-preservation, because a theory of truth that allows for the semantic paradoxes cannot consistently assert that all valid arguments preserve truth, and proposes to take validity as a primitive constrained by its role in governing degrees of belief. The argument concerns languages containing their own truth predicate, in which, as LOG-01 notes, the theorist cannot express that every valid argument preserves full truth. Our account applies to languages whose sentences have classical content, and for such languages Field's argument does not arise. Its scope is the same as that of LOG-02, on which classical logic describes consequence among sentences with classical content.
+
+\citet{GriffithsPaseau2022} defend logical monism at book length. The present account supplies the monist with a definition of the one consequence relation: once the logical constants are fixed, there is one class of models, and the anchoring condition links validity over that class to truth. \citet{Bonnay2008} refines the invariance criterion, proposing invariance under potential isomorphism, and shows how the choice of invariance group determines the logic. The account is neutral on this refinement, provided that the chosen operations satisfy Assumption~\ref{a:iso}, which every invariance criterion in the literature secures.
+
+\citet{RayoUzquiano1999} and \citet{Williamson2003} develop the higher-order approach to interpretations on which the intended interpretation, with everything in its domain, is itself an interpretation. This is the setting in which the proviso is met literally. \citet{Shapiro2014} argues for a pluralism on which different mathematical structures call for different logics. That view is a claim about which class of models suits which subject matter; the account here concerns the class of all models of a language, and so concerns the logic of the language rather than of any of its subject matters.
+
+\section{What the result does not establish}
+
+The account does not say which expressions are logical constants; that is the topic of LOG-16. It does not settle whether the logic of the account is classical; LOG-02 argues that it is, given the classical clauses for the connectives. It does not settle the modal status of logical truths: Corollary~\ref{c:nec} makes necessary truth-preservation depend on modal anchoring, which depends on what worlds there are. It does not provide a complete deductive system for languages beyond the first order; for those, consequence outruns any system of proof. Finally, the account is not a reduction of consequence to non-modal notions. The notion of a world and its structure enters in Definition~\ref{d:worlds}, and the proviso is formulated with it.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_06.lean} formalizes Definitions~\ref{d:models}--\ref{d:anchor}, Theorem~\ref{t:reliable}, Corollary~\ref{c:nec}, Propositions~\ref{p:antitone} and~\ref{p:over}, and Theorem~\ref{t:squeeze}. Models, sentences, satisfaction, isomorphism, worlds, the structure of a world and the actual world are primitives; isomorphism invariance is an axiom. Proposition~\ref{p:over} is proved for a concrete language whose models are natural numbers, the sizes of finite domains. Theorem~\ref{t:squeeze} takes the three relations and the three inclusions as hypotheses. The main theorems are stated as follows.
+
+\begin{lstlisting}
+theorem reliability (K : Model → Prop) (hK : Anchored K)
+    (G : Sentence → Prop) (A : Sentence) (hv : ValidIn K G A) :
+    PreservesAt actual G A
+theorem necessity (K : Model → Prop) (hK : ModallyAnchored K)
+    (G : Sentence → Prop) (A : Sentence) (hv : ValidIn K G A) :
+    ∀ w, PreservesAt w G A
+theorem overgeneration (a : Nat) :
+    ∃ K : Nat → Prop, ∃ A : CSentence,
+      (∀ m, K m → csat m A) ∧ ¬ csat a A ∧ ¬ K a
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_06.reliability' depends on axioms:
+  [Philosophy.LOG_06.Iso, Philosophy.LOG_06.Model,
+   Philosophy.LOG_06.Sat, Philosophy.LOG_06.Sentence,
+   Philosophy.LOG_06.World, Philosophy.LOG_06.actual,
+   Philosophy.LOG_06.iso_invariance, Philosophy.LOG_06.structureOf]
+'Philosophy.LOG_06.necessity' depends on axioms:
+  [Philosophy.LOG_06.Iso, Philosophy.LOG_06.Model,
+   Philosophy.LOG_06.Sat, Philosophy.LOG_06.Sentence,
+   Philosophy.LOG_06.World, Philosophy.LOG_06.iso_invariance,
+   Philosophy.LOG_06.structureOf]
+'Philosophy.LOG_06.overgeneration' depends on axioms:
+  [propext, Quot.sound]
+'Philosophy.LOG_06.squeeze' depends on axioms:
+  [Philosophy.LOG_06.Sentence]
+\end{lstlisting}
+
+All axioms other than \texttt{iso\_invariance} are primitives: the types of models, sentences and worlds, and the satisfaction, isomorphism, structure and actuality notions of Definitions~\ref{d:models} and~\ref{d:worlds}. The only premise is \texttt{iso\_invariance}, Assumption~\ref{a:iso}. The overgeneration result uses only Lean's standard axioms, as befits a combinatorial fact, and the squeezing argument uses nothing but the type of sentences over which its relations are defined. The formalization confirms that the actual-world proviso and isomorphism invariance are all that the reliability of model-theoretic validity requires. It does not formalize the satisfaction relation of any particular language, nor the claim that the class of models used in practice is anchored.
+
+\section{Conclusion}
+
+Tarski's account identifies logical consequence with the preservation of satisfaction across models. Etchemendy showed that this does not by itself guarantee truth-preservation and that, when the class of models is too small, it validates actual falsehoods. Both points are correct, and both are answered by one condition: the class must include a model isomorphic to the actual world. Given isomorphism invariance, which the permutation-invariant logical constants secure, the condition makes model-theoretic validity entail actual truth-preservation, and its modal extension makes it entail necessary truth-preservation. Undergeneration is avoided by fixing the right constants and, for first-order languages, confirmed by the squeezing argument. Logical consequence is truth-preservation in all models, provided the class of models includes one isomorphic to the actual world.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bolzano(1837)]{Bolzano1837} Bolzano, B. (1837). \emph{Wissenschaftslehre}. Seidel.
+\bibitem[Bonnay(2008)]{Bonnay2008} Bonnay, D. (2008). Logicality and invariance. \emph{Bulletin of Symbolic Logic}, 14(1), 29--68.
+\bibitem[Boolos(1984)]{Boolos1984} Boolos, G. (1984). To be is to be a value of a variable (or to be some values of some variables). \emph{Journal of Philosophy}, 81(8), 430--449.
+\bibitem[Boolos(1985)]{Boolos1985} Boolos, G. (1985). Nominalist Platonism. \emph{Philosophical Review}, 94(3), 327--344.
+\bibitem[Etchemendy(1990)]{Etchemendy1990} Etchemendy, J. (1990). \emph{The Concept of Logical Consequence}. Harvard University Press.
+\bibitem[Etchemendy(2008)]{Etchemendy2008} Etchemendy, J. (2008). Reflections on consequence. In D. Patterson (ed.), \emph{New Essays on Tarski and Philosophy}, Oxford University Press.
+\bibitem[Field(2015)]{Field2015} Field, H. (2015). What is logical validity? In C.~R. Caret and O.~T. Hjortland (eds.), \emph{Foundations of Logical Consequence}, Oxford University Press.
+\bibitem[G\'omez-Torrente(1996)]{GomezTorrente1996} G\'omez-Torrente, M. (1996). Tarski on logical consequence. \emph{Notre Dame Journal of Formal Logic}, 37(1), 125--151.
+\bibitem[Griffiths and Paseau(2022)]{GriffithsPaseau2022} Griffiths, O. and Paseau, A.~C. (2022). \emph{One True Logic: A Monist Manifesto}. Oxford University Press.
+\bibitem[Halbach(2020)]{Halbach2020} Halbach, V. (2020). The substitutional analysis of logical consequence. \emph{No\^us}.
+\bibitem[Hanson(1997)]{Hanson1997} Hanson, W.~H. (1997). The concept of logical consequence. \emph{Philosophical Review}, 106(3), 365--409.
+\bibitem[Kreisel(1967)]{Kreisel1967} Kreisel, G. (1967). Informal rigour and completeness proofs. In I. Lakatos (ed.), \emph{Problems in the Philosophy of Mathematics}, North-Holland.
+\bibitem[Mancosu(2006)]{Mancosu2006} Mancosu, P. (2006). Tarski on models and logical consequence. In J. Ferreir\'os and J.~J. Gray (eds.), \emph{The Architecture of Modern Mathematics}, Oxford University Press.
+\bibitem[McGee(1992)]{McGee1992} McGee, V. (1992). Two problems with Tarski's theory of consequence. \emph{Proceedings of the Aristotelian Society}, 92, 273--292.
+\bibitem[McGee(1996)]{McGee1996} McGee, V. (1996). Logical operations. \emph{Journal of Philosophical Logic}, 25(6), 567--580.
+\bibitem[Prawitz(1985)]{Prawitz1985} Prawitz, D. (1985). Remarks on some approaches to the concept of logical consequence. \emph{Synthese}, 62(2), 153--171.
+\bibitem[Ray(1996)]{Ray1996} Ray, G. (1996). Logical consequence: A defense of Tarski. \emph{Journal of Philosophical Logic}, 25(6), 617--677.
+\bibitem[Rayo and Uzquiano(1999)]{RayoUzquiano1999} Rayo, A. and Uzquiano, G. (1999). Toward a theory of second-order consequence. \emph{Notre Dame Journal of Formal Logic}, 40(3), 315--325.
+\bibitem[Shapiro(1987)]{Shapiro1987} Shapiro, S. (1987). Principles of reflection and second-order logic. \emph{Journal of Philosophical Logic}, 16(3), 309--333.
+\bibitem[Shapiro(1991)]{Shapiro1991} Shapiro, S. (1991). \emph{Foundations without Foundationalism: A Case for Second-Order Logic}. Oxford University Press.
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Logical consequence: Models and modality. In M. Schirn (ed.), \emph{The Philosophy of Mathematics Today}, Oxford University Press.
+\bibitem[Shapiro(2014)]{Shapiro2014} Shapiro, S. (2014). \emph{Varieties of Logic}. Oxford University Press.
+\bibitem[Sher(1991)]{Sher1991} Sher, G. (1991). \emph{The Bounds of Logic: A Generalized Viewpoint}. MIT Press.
+\bibitem[Sher(1996)]{Sher1996} Sher, G. (1996). Did Tarski commit \enquote{Tarski's fallacy}? \emph{Journal of Symbolic Logic}, 61(2), 653--686.
+\bibitem[Tarski(1936)]{Tarski1936} Tarski, A. (1936). On the concept of logical consequence. English translation in \emph{Logic, Semantics, Metamathematics} (1956), trans. J.~H. Woodger, Clarendon Press.
+\bibitem[Tarski(1986)]{Tarski1986} Tarski, A. (1986). What are logical notions? Ed. J. Corcoran. \emph{History and Philosophy of Logic}, 7(2), 143--154.
+\bibitem[Williamson(2003)]{Williamson2003} Williamson, T. (2003). Everything. \emph{Philosophical Perspectives}, 17, 415--465.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

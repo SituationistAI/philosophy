@@ -1,0 +1,184 @@
+\documentclass{situationist-preprint}
+
+\usepackage{longtable,array}
+\newenvironment{errlist}{\small\setlength{\LTpre}{2pt}\setlength{\LTpost}{4pt}%
+\begin{longtable}{@{}>{\raggedleft}p{1.1cm}@{\hspace{0.8em}}>{\raggedright}p{3.6cm}@{\hspace{0.8em}}>{\raggedright\arraybackslash}p{\dimexpr\linewidth-4.7cm-1.6em\relax}@{}}}%
+{\end{longtable}}
+\newenvironment{skeltab}{\small\setlength{\LTpre}{2pt}\setlength{\LTpost}{8pt}%
+\begin{longtable}{@{}r@{\hspace{0.8em}}p{\dimexpr\linewidth-3.6cm\relax}@{\hspace{0.8em}}r@{}}}%
+{\end{longtable}}
+
+\title{Corrigenda to \enquote{On the Existence of God}, Volumes III--XI}
+\msid{REL-01-h}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Erratum}
+\mskeywords{corrigenda; ontological argument; possibility premise; Lemma 2417; divine attributes; modal logic}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We list the corrections to Volumes III to XI of \emph{On the Existence of God} (REL-01), pages 791 to 4180. Eighteen corrections are substantive: they change the printed statement of a definition, lemma or proposition, a displayed premise, or a citation on which an argument relies. For each we give the printed text, the corrected text, and the results that use it, and we show that every such result stands. The most important concern Lemma~2417 of Volume~X, whose statement is unchanged but whose proof cites an idle principle and whose accompanying remark understates what the lemma shows; the definitions of omnipotence and omniscience in Volume~IV; the relation between the possibility premise and the conclusion in Volume~V; and a lemma on frames in Volume~X. The remaining corrections, about six thousand, are misprints and slips of reference, listed by volume, chapter and page. No correction affects the conclusion of the work, the argument of Volume~III for the possibility premise, or any result that Volume~I formalizes.
+\end{abstract}
+
+\section{Preface}
+
+\subsection{Scope}
+
+\emph{On the Existence of God} appeared in eleven volumes with continuous pagination. Volume~I (REL-01-a), pages 1 to 388, sets out the modal argument and its formalization; Volume~II, pages 389 to 790, treats dependence and the cosmological argument. The present list covers the other nine volumes: the defence of the possibility premise (Volume~III), the characterization of the maximally great being and the replies to objections (Volumes~IV to IX), the formal appendices (Volume~X) and the bibliography and indices (Volume~XI). Corrections to Volumes~I and~II are not included. Volume~I is in any case the volume least exposed to error of the kinds listed here, since its main argument is checked in the Lean module that accompanies it.
+
+Section~\ref{s:volumes} gives the chapter structure of the nine volumes with page ranges, so that every entry can be located without the volumes at hand. Three conventions of the work bear on how entries are stated. First, chapters are numbered afresh in each volume, so that \enquote{Chapter~5} without further indication means the fifth chapter of the volume under which the entry is listed, and a result of another volume is cited as, for example, \enquote{Lemma~3.3 of Volume~I}. Second, in Volumes~III to IX definitions, lemmas, propositions, theorems, corollaries and remarks share one counter within each chapter (Definition~5.1, Lemma~5.2, and so on), and displayed formulas are numbered separately within each chapter, as (5.1), (5.2), and so on. Third, Volume~X numbers its lemmas consecutively through the whole volume, from Lemma~1 in Chapter~1 to Lemma~3361 in Chapter~8; the range of lemmas in each chapter is shown in the table of Section~\ref{s:volumes}. Chapter~5 of Volume~X, which collects the formal material for Volume~III, contains Lemmas 1802 to 2650 and so Lemma~2417.
+
+\subsection{How the list was compiled}
+
+The list has four sources. The first is a complete check of cross-references. Every reference in Volumes~III to X to a numbered item, of the same volume or of another, was compared with the item it names and with the Index of Numbered Results in Volume~XI; every page reference was compared with the page on which the item it names is printed. Where the reference named an existing item that was not the one the argument needs, the entry gives the item the argument uses. Where the index itself was wrong, the correction is listed under Volume~XI. The second source is a comparison of formulas. Each displayed formula in Volumes~III to IX that restates a definition or a result of Volume~I or of Volume~X was compared with its source, and each formula in Volume~X with the corresponding statement in the modules described in Chapter~8 of that volume. The third is a check of every entry of the bibliography against the published work, and of every citation in the text against the bibliography. The fourth is the reports of readers and our own rereading, which account for most of the purely typographical corrections and for several of the substantive ones.
+
+The first three sources are systematic; the fourth is not. We therefore believe that the list is complete for cross-references, for formulas that restate results proved elsewhere in the work, and for the bibliography, and we do not claim completeness for typographical errors in running text.
+
+\subsection{Policy}
+
+Corrections are of two kinds, and the list treats them differently.
+
+A correction is \emph{substantive} if it changes what a numbered statement says, what a displayed premise says, or which work an argument relies on, so that a reader who took the printed text at its word would be misled about what is claimed or about what supports it. Substantive corrections are given in full in Section~\ref{s:substantive}, numbered S1 to S18. Each gives the printed text, the corrected text, the reason for the change, and every place where the corrected item is used, with an account of why the use is unaffected. In five cases (S4, S5, S6, S10 and S17) a statement as printed is false or unproved and the correction adds a missing hypothesis or replaces a wrong one; in each case every use of the statement already satisfies the corrected hypothesis. In two cases (S8 and S13) a statement as printed asserts the opposite of what the surrounding argument uses, and the correction restores the statement the argument uses. The remaining eleven correct citations of results or of works in places where an argument depends on them. At the place of each substantive correction, the list by volume carries a pointer to it.
+
+All other corrections are listed by volume in Sections~\ref{s:vol3} to \ref{s:vol11}. They are misprints of words, symbols and numbers, omitted or repeated words, wrong cross-references, wrong page references, and errors in the citation of works and in the indices. None of them changes what a numbered result states. Many occur inside proofs or inside the statement of a result; these are marked with a dagger (\dag). For every marked entry we have checked that the proof is valid when the correction is made, and that the corrected reading is the one the proof uses: a misprinted variable, a reversed accessibility relation in a step that the next line uses correctly, or a reference to a neighboring lemma in place of the one whose content the step applies. Where the corrected reading appears elsewhere in the same chapter, the entry says where, so that the reader can verify that the misprint is a misprint and not a second version of the claim.
+
+No correction, substantive or not, affects the main conclusions of the work. The conclusion that a maximally great being exists rests on Theorem~3.4 of Volume~I and on the possibility premise, Assumption~3.1 of Volume~I. Theorem~3.4 is formalized, and nothing in Volumes~III to XI is a premise of it. The case for the possibility premise against its converse is made in Volume~III, Chapters~5 to~7. Its formal core is Lemma~2417 of Volume~X, whose statement is unchanged (S2); the correction to the remark that follows it shows that the lemma holds under a weaker hypothesis than it states, which can only strengthen the transfer from coherence to possibility that Volume~III makes, as REL-01-f argues. The corrections to Volume~III itself (S1, S3) concern citations in the proofs of results whose statements are unchanged. The characterization of the maximally great being in Volume~IV (S4 to S7) is unchanged in substance: the corrected definitions of omnipotence and omniscience are the ones on which its theorems were proved. The replies to objections in Volumes~V to VII, the treatment of uniqueness, simplicity and indiscernible godlike beings in Volume~VIII, and the conclusion of Volume~IX that the main result leaves the causal role of the maximally great being undetermined, all stand as printed. In particular, the claims of the work on which companion manuscripts rely are unaffected: the transfer of Volume~III's support to the ancestral premise of REL-01-b, the relation between godlikeness and maximal greatness treated in Volume~IV and discussed in REL-01-c, and the analysis of Lemma~2417 in REL-01-f.
+
+\subsection{Form of the entries}
+
+Each entry gives the page, the location on the page, and the correction, in the form \enquote{\textit{for} X \textit{read} Y}. Lines are counted from the top of the text block, not counting the running head; \enquote{l.~4 from foot} counts upward from the last line of text, not counting footnotes; \enquote{n.~7} is a footnote; a displayed formula is located by its number; an entry inside a proof names the result whose proof it is. Entries are ordered by page and, within a page, by position. Where one correction applies at several places (a running head, for example), the entry gives the range of pages. Entries in the bibliography of Volume~XI are located by the heading of the entry corrected, and entries in its indices by the heading under which the page number is listed (\enquote{s.v.}). Short notes after a semicolon or in parentheses say what the corrected reference names, where the correct form is printed, or which result a step uses; they are part of the correction, not commentary.
+
+The list contains the following numbers of entries.
+
+\begin{center}\small
+\input{gen/stats.tex}
+\end{center}
+
+The proportions differ by volume as one would expect. Volume~X, which consists of formal material, has the largest share of misprinted formulas and of wrong references to neighboring lemmas, since its lemmas are short and numerous (eight to the page in places) and each proof cites several. Volumes~VI, VII and IX have proportionally more errors of citation and fewer of formulas. Volume~XI has few entries for its length: most of its bibliography is correct, and the indices were checked mechanically against the page numbers of the volumes.
+
+A few entries illustrate the kinds of error the list contains. In Volume~III, p.~955, display (5.3) prints the rigidity of maximal greatness with the accessibility relation reversed; under the S5 conditions the two readings are equivalent, which is why the slip went unnoticed in proof, but the chapter does not use the S5 conditions, and the formula is used in its correct form on p.~958. In Volume~V, p.~1817, display (3.4) prints necessary maximal excellence with an existential quantifier where the universal is meant; the correct form is printed in (3.5) on the next page. In Volume~X, p.~3539, the Contents give the first page of Chapter~6 as 3843 for 3833. In Volume~XI, p.~4135, the Index of Subjects refers under \enquote{maximal excellence} to p.~1824 for p.~1724, which is in Volume~IV, Chapter~8, where godlikeness and maximal greatness are compared.
+
+\section{The volumes and their chapters}\label{s:volumes}
+
+The following table gives, for each of the nine volumes, its title, its page range and the title and pages of each of its chapters. For Volume~X it also gives the range of lemma numbers in each chapter. Every entry in Sections~\ref{s:vol3} to~\ref{s:vol11} falls within the page range of the chapter under which it is listed.
+
+\medskip
+\input{gen/skeleton.tex}
+
+\section{Substantive corrigenda}\label{s:substantive}
+
+\paragraph{S1. Volume~III, Chapter~5, p.~967, l.~4, and proof of Theorem~5.6, p.~983.} Chapter~5 argues that the support Volume~IV gives to the coherence of maximal excellence carries over to the possibility premise. The step from coherence to possibility is Lemma~2417 of Volume~X. It is cited twice in the chapter, on p.~967 and in the proof of Theorem~5.6, and both times printed as \enquote{Lemma~2471 of Volume~X}. \textit{For} Lemma~2471 \textit{read} Lemma~2417, in both places. Lemma~2471 is a lemma of the same chapter of Volume~X on another subject, and it does not deliver the step. Theorem~5.6 states that whatever supports the hypothesis of Lemma~2417 supports the possibility premise at least as strongly. Its proof has two steps: by Lemma~2417 the hypothesis entails the premise, and support is not lost under entailment. With the correction the first step cites the result it uses. Theorem~5.6 stands as printed. Since the hypothesis of Lemma~2417 can be weakened (S2), the theorem also holds with the weaker hypothesis in place of the stronger one, but we have not altered its statement.
+
+\paragraph{S2. Volume~X, Chapter~5, p.~3803: Lemma~2417, its proof, and the following paragraph.} The lemma is printed as follows, and its statement is correct.
+
+\begin{quote}\small
+\textbf{Lemma 2417.} Let $\mathcal{P}$ be the family of great-making properties. If $\mathcal{P}$ is a proper filter, that is, if it is closed under conjunction and under entailment and does not contain the empty property, and if necessary existence and necessary maximal excellence belong to $\mathcal{P}$, then the possibility premise holds.
+\end{quote}
+
+Two corrections concern the text around it. First, the proof (pp.~3803--3804) opens with \enquote{By Lemma~3.3 of Volume~I}. Lemma~3.3 of Volume~I is the characteristic principle of S5, that whatever is possibly necessary is necessary. The proof does not use it: it uses closure under conjunction to place the conjunction of necessary existence and necessary maximal excellence in $\mathcal{P}$, properness to conclude that this conjunction is instantiated by some being at some world accessible from the actual world, and Definition~2.4 of Volume~I to identify that conjunction with maximal greatness. \textit{Delete} \enquote{By Lemma~3.3 of Volume~I}. The proof is otherwise correct, and as corrected it uses neither the possibility premise nor any of the S5 conditions, as REL-01-f observes.
+
+Second, the paragraph that follows the proof (p.~3804, ll.~6--14) says that \enquote{none of the three filter conditions can be dropped}. This is not so. The proof uses properness only for the conjunction of two properties, and closure under entailment not at all; what it uses is that this one conjunction is instantiated. REL-01-f, Proposition~2.2, shows that the conclusion holds whenever $\mathcal{P}$ contains necessary existence and necessary maximal excellence and has the finite intersection property, and its Proposition~2.3 that every proper filter has that property but not conversely. The paragraph should read: \enquote{The hypothesis is stronger than the proof requires. It suffices that $\mathcal{P}$ have the finite intersection property, that is, that every finite subfamily of $\mathcal{P}$ be jointly instantiated; closure under conjunction and under entailment are not used.} The paragraph is not cited anywhere in the work. Its use in Volume~III, through Theorem~5.6 (S1), needs only that the hypothesis of the lemma entail the possibility premise, and a weaker hypothesis that entails it makes the transfer stronger, not weaker.
+
+\paragraph{S3. Volume~III, Chapter~6, proof of Proposition~6.3, p.~1029.} Proposition~6.3 states that the possibility premise and the converse premise are not both true. The proof cites \enquote{Theorem~3.4 and Corollary~3.5 of Volume~I}. \textit{For} Corollary~3.5 \textit{read} Proposition~4.1. The proof runs as follows: if the possibility premise holds, then by the argument of Theorem~3.4 of Volume~I some being is maximally great at every world accessible from the actual world, and so, by reflexivity, at the actual world; if the converse premise holds, then by Proposition~4.1 of Volume~I no being is maximally great at the actual world. Corollary~3.5 of Volume~I, that some being exists and is maximally excellent at the actual world, does not contradict the converse premise by itself, and the proof does not use it. Proposition~6.3 stands as printed, and so does its use in Chapter~7, where the two premises are compared as exclusive alternatives.
+
+\paragraph{S4. Volume~IV, Chapter~3, Definition~3.2, p.~1452.} The definition is printed:
+
+\begin{quote}\small
+\textbf{Definition 3.2.} A being $x$ is \emph{omnipotent} at a world $w$ if and only if $x$ can, at $w$, perform every task.
+\end{quote}
+
+It should read:
+
+\begin{quote}\small
+\textbf{Definition 3.2 (corrected).} A being $x$ is \emph{omnipotent} at a world $w$ if and only if $x$ can, at $w$, perform every task whose description does not quantify over $x$'s own powers.
+\end{quote}
+
+The restriction is stated and motivated on p.~1449, in the discussion that introduces the definition, and it is the restriction defended in REL-04. Without it the definition is unsatisfiable, since the task of making a stone its maker cannot lift is one that no being can perform if it can perform every task \citep{Mavrodes1963,Savage1967}. Definition~3.2 is used in three places. Theorem~3.9 (p.~1478), that the paradox of the stone imposes no limitation on an omnipotent being, would be false under the printed definition; its proof begins by observing that the description of the stone task quantifies over the maker's power, and so already uses the corrected definition. Lemma~6.4 (p.~1601), that omnipotence and moral perfection are compossible, applies the definition only to tasks described without reference to the agent's powers. Chapter~9 uses it only through Theorem~3.9 and Lemma~6.4. All three stand.
+
+\paragraph{S5. Volume~IV, Chapter~4, Definition~4.1, p.~1499.} Omniscience is defined as knowledge of \enquote{every member of the set of propositions true at $w$}. \textit{Read}: \enquote{$x$ is omniscient at $w$ if and only if, for every proposition $p$ true at $w$, $x$ knows $p$ at $w$}. The printed definition presupposes that there is a set of all truths. Grim's Cantorian argument shows that there is none: for any set of truths, the truths about which of its subsets contain a given truth outnumber its members \citep{Grim1983,Grim1991}. The corrected definition quantifies over propositions without collecting them into a set. Theorem~4.6 (p.~1517) states that Grim's argument does not show omniscience to be incoherent, and its proof assumes the corrected form, since its point is that omniscience requires no set of all truths; under the printed definition the theorem would have no application. The other uses of the definition, in Chapters~6 and~9 and in Volume~IX, Chapter~7, quantify over propositions one at a time and are unaffected.
+
+\paragraph{S6. Volume~IV, Chapter~8, Proposition~8.5, p.~1694.} The proposition is printed as \enquote{Every godlike being, in the sense of \citet{Anderson1990}, is maximally great.} \textit{Read}: \enquote{If necessary existence and each of omnipotence, omniscience and moral perfection are positive, then every godlike being, in the sense of \citet{Anderson1990}, is maximally great.} A godlike being in Anderson's sense has necessarily exactly the positive properties. Nothing in his axioms makes the components of maximal excellence positive, and without that hypothesis the proof (pp.~1694--1696), which moves from \enquote{$F$ is positive} to \enquote{$x$ has $F$ at every accessible world}, has nothing to apply to. The proof is correct under the hypothesis, which it states in its first line. Proposition~8.5 is used in Theorem~8.7 (p.~1703), which compares godlikeness and maximal greatness and which includes the positivity hypothesis in its statement. Theorem~8.7 stands. The corrected proposition is the connection that REL-01-c describes as belonging to Volume~IV: the two notions are related through the positivity of necessary existence and of the components of maximal excellence.
+
+\paragraph{S7. Volume~IV, Chapter~6, p.~1589, l.~12.} The argument that an omnipotent being who cannot sin is not omnipotent is cited as \enquote{Pike (1965)}. \textit{For} Pike (1965) \textit{read} Pike (1969). The argument is in \citet{Pike1969}. \citet{Pike1965} is the paper on divine foreknowledge and voluntary action, discussed in Volume~IX, Chapter~7. Both are correctly listed in the bibliography of Volume~XI. The discussion on pp.~1589--1597 follows \citet{Pike1969} correctly and is unaffected.
+
+\paragraph{S8. Volume~V, Chapter~3, Proposition~3.4, p.~1838.} Chapter~3 answers the objection that the modal argument begs the question. Proposition~3.4 is printed:
+
+\begin{quote}\small
+\textbf{Proposition 3.4.} The possibility premise is not S5-equivalent to the conclusion of Theorem~3.4 of Volume~I.
+\end{quote}
+
+This is false. Under the S5 conditions the possibility premise entails the conclusion (Theorem~3.4 of Volume~I), and the conclusion entails the premise by reflexivity; the two are equivalent, as the chapter itself states on p.~1841. The proposition should read:
+
+\begin{quote}\small
+\textbf{Proposition 3.4 (corrected).} The possibility premise is S5-equivalent to the conclusion of Theorem~3.4 of Volume~I; but the grounds offered for it in Volume~III do not presuppose that conclusion.
+\end{quote}
+
+The reply to the objection in Chapter~3 uses only the second clause: an argument whose premise is equivalent to its conclusion in the background logic begs the question only if the premise can be supported in no way that presupposes the conclusion, and Volume~III supports it through the coherence of maximal excellence and Lemma~2417. The proof of Proposition~3.4 (pp.~1838--1840) establishes both clauses of the corrected statement; its first paragraph proves the equivalence that the printed statement denies. Nothing else in the volume depends on the printed form.
+
+\paragraph{S9. Volume~V, Chapter~2, p.~1783, l.~20.} Kant's statement that being is not a real predicate is cited at \enquote{A599/B627}. \textit{Read} A598/B626 \citep{Kant}. The surrounding discussion is unaffected.
+
+\paragraph{S10. Volume~V, Chapter~5, Lemma~5.3, p.~1926.} The lemma is printed: \enquote{On every frame with increasing domains (if $wRv$ then $D_w \subseteq D_v$), the Barcan formula $\forall x\,\nec Fx \to \nec\forall x\,Fx$ is valid.} \textit{For} increasing domains (if $wRv$ then $D_w \subseteq D_v$) \textit{read} decreasing domains (if $wRv$ then $D_v \subseteq D_w$). Increasing domains validate the converse Barcan formula, not the Barcan formula; the Barcan formula is valid on a frame exactly when domains do not grow along accessibility \citep{HughesCresswell1996}. The proof on p.~1927 in fact assumes decreasing domains: it takes an object of $D_v$ and uses that it belongs to $D_w$. The lemma is used in Theorem~5.5 (p.~1934), that the constant-domain framework of Volume~I validates both the Barcan formula and its converse. A constant domain is both increasing and decreasing, so the theorem follows from the corrected lemma together with its counterpart for the converse formula, which is stated correctly as Lemma~5.4. The formal version in Volume~X, Chapter~6, is stated correctly.
+
+\paragraph{S11. Volume~VI, Chapter~4, display (4.2), p.~2318.} Display (4.2) reproduces the second premise of the evidential argument of \citet{Rowe1979} without its qualifying clause, as \enquote{an omniscient, wholly good being would prevent the occurrence of any intense suffering it could}. \textit{Read}: an omniscient, wholly good being would prevent the occurrence of any intense suffering it could, unless it could not do so without thereby losing some greater good or permitting some evil equally bad or worse. Without the clause the premise is one that no theist accepts and the argument would be of no interest. Chapter~4 discusses the argument with the clause throughout, and Chapter~5's reply, that the first premise rests on an unwarranted noseeum inference \citep{Wykstra1984}, presupposes the qualified second premise. Both chapters are unaffected.
+
+\paragraph{S12. Volume~VI, Chapter~7, Lemma~7.5, p.~2483.} Chapter~7 models divine hiddenness as a signalling game between God and free creatures. Lemma~7.5 states that the strategy of non-revelation is an equilibrium of the game. It omits a hypothesis: that the creatures' payoff from a freely chosen response exceeds their payoff from a response that unambiguous revelation would make assured. \textit{After} \enquote{is an equilibrium} \textit{insert} \enquote{provided that the value to the creatures of a free response exceeds the value of an assured one}. Without the hypothesis, revelation weakly dominates and the lemma fails. The proof (pp.~2483--2485) uses the hypothesis in its second step, where it compares the two payoffs, and the condition is stated on p.~2477, where the payoffs are introduced. Theorem~7.7 (p.~2490), that hiddenness is the equilibrium a perfectly loving God would choose, includes the condition in its statement. It stands, as does its agreement with REL-03.
+
+\paragraph{S13. Volume~VII, Chapter~5, display (5.6), p.~2771.} Chapter~5 asks whether the existence of an evolutionary explanation of theistic belief disconfirms theism. Display (5.6) states the condition for evidence $E$ to disconfirm theism $T$ as $P(E \mid T)/P(E \mid \neg T) > 1$. \textit{For} $>$ \textit{read} $<$. Evidence disconfirms a hypothesis when it is less probable on the hypothesis than on its negation. The text on p.~2772 applies the correct condition, and argues that the evolutionary explanation is about equally probable on theism and on its negation, so that the ratio is close to one; it argues further that such evidence bears on how belief is caused and not on the a priori possibility premise. The conclusion of the chapter is unaffected.
+
+\paragraph{S14. Volume~VIII, Chapter~3, Lemma~3.6, p.~2989.} Chapter~3 treats the question whether indiscernible godlike beings are identical. Lemma~3.6 is printed: \enquote{If $x$ and $y$ have the same great-making properties, then $x = y$.} \textit{After} \enquote{the same great-making properties} \textit{insert} \enquote{at every world accessible from the actual world}. The proof (pp.~2989--2991) compares $x$ and $y$ at each accessible world in turn and uses the hypothesis at every one of them; sharing the great-making properties at a single world is not enough for it. The lemma is used in Theorem~3.8 (p.~2996), that any two maximally great beings are identical, where it is applied to beings that exist and have every great-making property at every accessible world, by Definition~2.4 of Volume~I. The corrected hypothesis is therefore satisfied, and Theorem~3.8 stands.
+
+\paragraph{S15. Volume~VIII, Chapter~5, p.~3066, l.~25.} The article in which Aquinas asks whether God is altogether simple is cited as \enquote{\emph{Summa Theologiae} I, q.~3, a.~8}. \textit{Read} I, q.~3, a.~7 \citep{Aquinas}. Article~8 of the same question asks whether God enters into composition with other things, which is discussed separately on p.~3071, where it is cited correctly.
+
+\paragraph{S16. Volume~IX, Chapter~3, proof of Theorem~3.5, p.~3280.} Theorem~3.5 states that there are two models of the framework of Volume~I which agree on which beings are maximally great at every world but differ on whether the maximally great being causes a given contingent event. The proof constructs the second model, $\mathcal{M}_2$, from the first, $\mathcal{M}_1$, by removing the causal relation between the maximally great being and the event, and prints the accessibility relation of $\mathcal{M}_2$ as $R_2 = \{(w,v) : w \neq v\}$. This relation is not reflexive, so $\mathcal{M}_2$ does not satisfy Assumption~2.1 of Volume~I. \textit{For} $R_2 = \{(w,v) : w \neq v\}$ \textit{read} $R_2 = W \times W$, which is the accessibility relation of $\mathcal{M}_1$. With the correction, $\mathcal{M}_2$ satisfies the S5 conditions; since the two models have the same worlds, the same accessibility relation, the same existence predicate and the same maximal excellence predicate, they agree on maximal greatness at every world, and they differ on the causal relation by construction. Theorem~3.5 stands, and with it the conclusion of Volume~IX, stated in REL-01-a and in REL-01-e, that the main result leaves the causal role of the maximally great being undetermined.
+
+\paragraph{S17. Volume~X, Chapter~1, Lemma~214, p.~3563.} The lemma is printed: \enquote{A relation is an equivalence relation if and only if it is serial and Euclidean.} \textit{For} serial \textit{read} reflexive. A serial and Euclidean relation need not be reflexive: on the worlds $a$ and $b$, the relation $\{(a,b), (b,b)\}$ is serial and Euclidean, and $a$ does not see itself. Seriality and the Euclidean property characterize the frames of KD45, not of S5 \citep{Chellas1980,HughesCresswell1996}. The corrected lemma, that a relation is an equivalence relation if and only if it is reflexive and Euclidean, is the standard one. It is used in Chapter~2, where the frames of Volume~I are shown to be S5 frames from Assumption~2.1 of Volume~I, which includes reflexivity explicitly. That use is unaffected, and no other lemma of the volume uses Lemma~214.
+
+\paragraph{S18. Volume~XI, Bibliography, p.~3976, entry Gödel (1995).} The entry places Gödel's ontological proof in \enquote{\emph{Collected Works, Volume II}}. \textit{Read} \emph{Collected Works, Volume III: Unpublished Essays and Lectures}, pp.~403--404 \citep{Godel1995}. Volume~II of the \emph{Collected Works} contains Gödel's publications from 1938 to 1974, and the ontological proof was not published in his lifetime. The year of the entry, 1995, is correct, and every citation of it in Volumes~III to X is correct.
+
+\section{Volume III: The Possibility Premise}\label{s:vol3}
+\input{gen/vol03.tex}
+
+\section{Volume IV: The Divine Attributes}\label{s:vol4}
+\input{gen/vol04.tex}
+
+\section{Volume V: Objections from Logic and Semantics}\label{s:vol5}
+\input{gen/vol05.tex}
+
+\section{Volume VI: Objections from Evil and Hiddenness}\label{s:vol6}
+\input{gen/vol06.tex}
+
+\section{Volume VII: Objections from the Sciences}\label{s:vol7}
+\input{gen/vol07.tex}
+
+\section{Volume VIII: Uniqueness and Simplicity}\label{s:vol8}
+\input{gen/vol08.tex}
+
+\section{Volume IX: Divine Agency}\label{s:vol9}
+\input{gen/vol09.tex}
+
+\section{Volume X: Formal Appendices}\label{s:vol10}
+\input{gen/vol10.tex}
+
+\section{Volume XI: Bibliography and Indices}\label{s:vol11}
+\input{gen/vol11.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(1990)]{Anderson1990} Anderson, C.~A. (1990). Some emendations of Gödel's ontological proof. \emph{Faith and Philosophy}, 7(3), 291--303.
+\bibitem[Aquinas(1265--1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}, Part I, question 3.
+\bibitem[Chellas(1980)]{Chellas1980} Chellas, B.~F. (1980). \emph{Modal Logic: An Introduction}. Cambridge University Press.
+\bibitem[Gödel(1995)]{Godel1995} Gödel, K. (1995). Ontological proof. In S.~Feferman et al. (Eds.), \emph{Collected Works, Volume III: Unpublished Essays and Lectures} (pp.~403--404). Oxford University Press.
+\bibitem[Grim(1983)]{Grim1983} Grim, P. (1983). Some neglected problems of omniscience. \emph{American Philosophical Quarterly}, 20(3), 265--276.
+\bibitem[Grim(1991)]{Grim1991} Grim, P. (1991). \emph{The Incomplete Universe: Totality, Knowledge, and Truth}. MIT Press.
+\bibitem[Hughes and Cresswell(1996)]{HughesCresswell1996} Hughes, G.~E. and Cresswell, M.~J. (1996). \emph{A New Introduction to Modal Logic}. Routledge.
+\bibitem[Kant(1781)]{Kant} Kant, I. (1781/1787). \emph{Kritik der reinen Vernunft}, A592--602/B620--630.
+\bibitem[Mavrodes(1963)]{Mavrodes1963} Mavrodes, G.~I. (1963). Some puzzles concerning omnipotence. \emph{The Philosophical Review}, 72(2), 221--223.
+\bibitem[Pike(1965)]{Pike1965} Pike, N. (1965). Divine omniscience and voluntary action. \emph{The Philosophical Review}, 74(1), 27--46.
+\bibitem[Pike(1969)]{Pike1969} Pike, N. (1969). Omnipotence and God's ability to sin. \emph{American Philosophical Quarterly}, 6(3), 208--216.
+\bibitem[Rowe(1979)]{Rowe1979} Rowe, W.~L. (1979). The problem of evil and some varieties of atheism. \emph{American Philosophical Quarterly}, 16(4), 335--341.
+\bibitem[Savage(1967)]{Savage1967} Savage, C.~W. (1967). The paradox of the stone. \emph{The Philosophical Review}, 76(1), 74--79.
+\bibitem[Wykstra(1984)]{Wykstra1984} Wykstra, S.~J. (1984). The Humean obstacle to evidential arguments from suffering: On avoiding the evils of \enquote{appearance}. \emph{International Journal for Philosophy of Religion}, 16(2), 73--93.
+\end{thebibliography}
+
+\end{document}

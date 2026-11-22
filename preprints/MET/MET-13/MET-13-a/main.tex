@@ -1,0 +1,205 @@
+\documentclass{situationist-preprint}
+
+\title{Real Definition and the Priority of Essence}
+\msid{MET-13-a}
+\msfamily{MET-13}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mskeywords{essence; real definition; modality; metaphysical necessity; identity conditions; substance; grounding}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do things have essences, and if they do, is essence a modal notion? We argue that every object has a real definition, a statement of what it is, and that essence is prior to modality: necessities hold in virtue of the essences of things, and not the other way round. The first thesis follows from two premises: every object has conditions of identity, and the conditions of identity of an object are fixed by what it is rather than by its relations or our concepts. The second follows from Fine's counterexamples to the modal account of essence, sharpened into an argument about grounding: the essential facts discriminate between cases that the modal facts do not, and a fact cannot be grounded in facts that fail to discriminate where it does. We then say what real definitions look like for substances, which bear universals and have essential properties, and for sets, holes, artefacts and persons, and answer the objections from interest-relativity, from the epistemology of essence, from obscurity and from the supposed collapse of contingency.
+\end{abstract}
+
+\section{The question}\label{s:question}
+
+Aristotle held that a definition is an account that signifies what a thing is, its essence \citep[I.5]{AristotleTop}, and that what a thing is, as opposed to what it merely happens to be, is the primary object of inquiry \citep[Z.4]{AristotleMet}. The definitions he had in mind were \emph{real} definitions, of things, not of words: a definition of man states what a man is, not what \enquote{man} means. Two questions arise. Does every object have such a definition, or only some, or none? And how is what a thing is related to what it must be?
+
+The modern history of the first question begins with Locke, who held that the real essences of substances, if they exist, are unknown to us, and that our sorting of things proceeds by nominal essences of our own making \citep[III.iii.15]{LockeEssay}. \citet[§41]{Quine1960} went further: he held that talk of the essential properties of a thing, as opposed to its properties under a description, makes no sense. A mathematician who is a cyclist is necessarily rational qua mathematician and not necessarily two-legged, and necessarily two-legged qua cyclist and not necessarily rational; asked about the man himself, there is no answer. \citet{Lewis1986} gave the view a systematic form: the essential properties of a thing are relative to a counterpart relation, and different contexts select different relations.
+
+The modern history of the second question begins with the revival of de re modality. \citet{Kripke1980} argued that objects have some of their properties necessarily, for instance their origins, and that this is not relative to description. The natural reading of his work, and the dominant view for two decades, identified the essential properties of a thing with the properties it could not exist without: $F$ is essential to $x$ if and only if, necessarily, if $x$ exists, then $x$ is $F$. Essence became a species of modality.
+
+\citet{Fine1994} reversed the order. He gave examples in which a property is necessary to an object but not part of what it is, and concluded that essence cannot be defined in modal terms. He proposed instead that metaphysical necessity is to be understood through essence: the necessary truths are those that hold in virtue of the natures of things. A body of work has developed the proposal. \citet{Fine1995Senses} distinguished constitutive from consequential essence; \citet{Lowe2008,Lowe2012} argued that essence is the source of modal truth and of modal knowledge; \citet{Hale2013} built a theory of necessary existence on it; \citet{Rosen2015} and \citet{Dorr2016} gave accounts of real definition in terms of grounding and of generalized identity; \citet{Wildman2013} defended a modal account of essence restricted to sparse properties against Fine's examples; and \citet{Teitel2019} argued that essence cannot account for all of modality if some things exist contingently. We defend Fine's order of priority and extend his view in one respect: we argue that every object has a real definition.
+
+Our thesis has two parts. First, every object has a real definition stating what it is. Second, essence is prior to modality: every metaphysically necessary truth holds in virtue of the essences of some things, and no essential truth holds in virtue of modal truths. TSM-10 relies on the second part when it takes metaphysical necessity to be truth in all worlds consistent with the essences of things.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Essential truth]\label{d:essential}
+A proposition is \emph{true in virtue of the nature} of some objects if its truth is part of what those objects are. We write $\nec_x\,p$ for \enquote{it is true in virtue of the nature of $x$ that $p$}.
+\end{definition}
+
+\begin{definition}[Real definition]\label{d:realdef}
+A \emph{real definition} of an object $x$ is a true statement of what $x$ is: a proposition $\phi(x)$ such that $\nec_x\,\phi(x)$, and such that every proposition true in virtue of the nature of $x$ alone follows from $\phi(x)$ together with the real definitions of the objects $\phi$ mentions and the truths of logic.
+\end{definition}
+
+\begin{definition}[Essential property]\label{d:essprop}
+A property $F$ is \emph{essential} to $x$ if $\nec_x\,(Fx)$.
+\end{definition}
+
+\begin{definition}[Metaphysical necessity]\label{d:nec}
+A proposition is \emph{metaphysically necessary}, $\nec p$, if it is true in every possible world, in the sense of TSM-07 and TSM-10.
+\end{definition}
+
+Definition~\ref{d:realdef} follows the distinction of \citet{Fine1995Senses} between constitutive and consequential essence. The real definition states the constitutive essence; what follows from it by logic, together with the definitions of the things it mentions, is the consequential essence. The definition of a singleton, that it is the set whose only member is Socrates, mentions Socrates; that Socrates is a man follows from it together with Socrates' definition, and so belongs to the consequential essence of the singleton, though not to its constitutive essence.
+
+The argument uses four principles.
+
+\begin{principle}[No entity without identity]\label{p:identity}
+Every object has conditions of identity: there is a fact as to what it would take for an object to be it.
+\end{principle}
+
+\begin{principle}[Identity from nature]\label{p:fromnature}
+The conditions of identity of an object are fixed by what it is, not by its relations to other things or by the concepts under which we think of it.
+\end{principle}
+
+\begin{principle}[Essence implies necessity]\label{p:impl}
+If $\nec_x\,p$, then $\nec p$.
+\end{principle}
+
+\begin{principle}[Discrimination]\label{p:discrim}
+If facts $\Gamma$ fully ground a fact $g$, and $g$ distinguishes between two cases that agree on every fact in $\Gamma$, then $\Gamma$ does not fully ground $g$ after all; that is, the full grounds of a fact discriminate at least as finely as the fact.
+\end{principle}
+
+Principle~\ref{p:identity} is Quine's maxim \citep{Quine1969}, which he used against intensional entities and which we use in its affirmative form: whatever there is has identity conditions. Principle~\ref{p:fromnature} is the substantive premise of the first part of the argument, and we defend it in Section~\ref{s:realdef}. Principle~\ref{p:impl} is accepted by every theorist of essence. Principle~\ref{p:discrim} is a structural principle about grounding. If two cases agree on every fact among the grounds and differ in the grounded fact, the grounds leave open what the grounded fact settles, and so cannot be the whole of what makes it obtain. Its application below concerns facts and grounds that are of the same relation of grounding that MET-14 argues is one relation, here restricted to essential and modal facts.
+
+\section{Every object has a real definition}\label{s:realdef}
+
+\begin{proposition}\label{p:realdef}
+Every object has a real definition.
+\end{proposition}
+
+\begin{proof}
+Let $x$ be an object. By Principle~\ref{p:identity}, there is a fact as to what it would take for something to be $x$; call this the identity condition of $x$. By Principle~\ref{p:fromnature}, that the identity condition of $x$ is what it is holds in virtue of what $x$ is: it is true in virtue of the nature of $x$. So there is at least one proposition true in virtue of the nature of $x$. The propositions true in virtue of the nature of $x$ are closed under the conjunctions of them, and their conjunction, together with logic and the definitions of the things it mentions, entails each of them; that conjunction, or any proposition from which it follows in the same way, is a real definition of $x$.
+\end{proof}
+
+The proof is short because the work is done by Principle~\ref{p:fromnature}, and it is this principle that the essentialist's opponents reject. Quine and Lewis hold that the conditions of identity of an object, or at least its modal profile, are fixed relative to a way of thinking of it. Two considerations favor the principle.
+
+The first is that identity is not relative to description. Whatever the mathematical cyclist is, he is one man, and the question whether a man in another situation would be he has one answer, though we may not know it. Identity conditions answer that question; if they were relative to description, so would be identity, and the cyclist would be two things, a mathematician and a cyclist, which happen to coincide. That conclusion is rejected by those who press the cyclist case, since they do not hold that the cyclist is two things. The relativity they find lies in our modal descriptions, which may indeed select different aspects of a thing, and not in the thing.
+
+The second consideration is that an object cannot be a mere bearer of properties without a nature. MET-23-a argues that there are no bare particulars: an object stripped of all its properties is nothing at all, and what an object has beyond its qualities is not a component but the object itself, a substance with a real definition. If an object's identity conditions were not fixed by what it is, they would be fixed by something outside it, and the object itself would be, in respect of its identity, bare. The rejection of bare particulars is thus a rejection of the view that identity comes from outside the nature of the thing.
+
+Principle~\ref{p:fromnature} should not be confused with the stronger claim that a real definition individuates its object, that is, distinguishes it qualitatively from every other. It does not. Two electrons have the same real definition, which states what an electron is; what makes them two is not a difference in what they are. MET-28 argues that Black's two spheres share all their qualitative properties and relations and are distinguished only weakly, by an irreflexive relation between them. A real definition says what an object is, not which object of that sort it is, and the identity conditions it states are conditions on being an object of that sort and standing in the relations that object stands in essentially.
+
+\section{Essence is not modality}\label{s:notmodal}
+
+The modal account says that $F$ is essential to $x$ if and only if, necessarily, if $x$ exists, then $Fx$.
+
+\begin{lemma}\label{l:fine}
+The modal account is extensionally inadequate: some properties are necessary to an object without being essential to it.
+\end{lemma}
+
+\begin{proof}
+The examples are \citeauthor{Fine1994}'s \citep{Fine1994}. Socrates and his singleton exist in the same worlds, and in every world in which Socrates exists he is a member of his singleton; so on the modal account it is essential to Socrates that he belongs to his singleton. But it is no part of what Socrates is that he belongs to a set; what Socrates is involves his being a man, not his set-theoretic relations. By contrast, it is part of what the singleton is that it has Socrates as its member. Again, it is necessary that Socrates exists only if two and two make four, and that he is distinct from the Eiffel Tower; neither is part of what Socrates is.
+\end{proof}
+
+Lemma~\ref{l:fine} is widely accepted. Two kinds of response have been made on behalf of the modal account. One restricts it: $F$ is essential to $x$ if, necessarily, if $x$ exists, then $Fx$, and $F$ is a sparse or intrinsic property \citep{Wildman2013}. The restriction removes the examples involving sets and other objects, since being a member of a singleton is neither sparse nor intrinsic. It does not remove the asymmetry that the examples display. The singleton has Socrates as a member essentially, and Socrates is not essentially a member; the restricted account can say this only by denying that having Socrates as a member is a property the singleton has essentially in the relevant sense, since that property is not intrinsic to it either. An account of essence that cannot say that a set's members are essential to it has given up the paradigm case. The other response accepts the examples and holds that the modal notion is the notion of essence that matters. We do not dispute the words; we argue next that the modal notion cannot be what grounds the essential facts.
+
+\begin{theorem}[Priority of essence]\label{t:priority}
+(i) Every metaphysically necessary truth holds in virtue of the essences of some objects. (ii) No essential truth is grounded in a modal truth that it grounds. (iii) Some essential truths are not fully grounded in modal truths at all.
+\end{theorem}
+
+\begin{proof}
+(i) Let $p$ be metaphysically necessary. By Definition~\ref{d:nec} and the account of TSM-10, $p$ is true in every world consistent with the essences of things; so the negation of $p$ is inconsistent with the essences of things, which is to say that $p$ follows, by logic, from propositions true in virtue of the natures of some objects. Each of these holds in virtue of the nature of its objects, and $p$ holds because they do.
+
+(ii) Grounding is a strict partial order, as MET-12-a and MET-14 assume, and so asymmetric. If an essential truth grounds a modal truth, the modal truth does not ground it.
+
+(iii) Consider Socrates and his singleton, and two questions: whether it is essential to the singleton that Socrates belongs to it, and whether it is essential to Socrates that he belongs to the singleton. The modal facts answer the two questions alike: of necessity, each exists if and only if the other does, and Socrates belongs to the singleton whenever either exists. The essential facts answer them differently: it is true in virtue of the nature of the singleton that Socrates belongs to it, and it is not true in virtue of the nature of Socrates. If the essential fact about the singleton were fully grounded in modal facts, those facts would discriminate between the two cases, by Principle~\ref{p:discrim}; they do not. So the essential fact about the singleton is not fully grounded in modal facts.
+\end{proof}
+
+Clause (i) of Theorem~\ref{t:priority} depends on the account of necessity that TSM-10 defends, and is to that extent conditional; clause (iii) does not, and it suffices to establish that essence is not in general posterior to modality. Together, the three clauses state the priority: the modal is grounded in the essential, and not conversely. Principle~\ref{p:impl} states the converse direction of entailment, which is not a direction of grounding: what is true in virtue of the nature of something is necessary because of that nature. In the terms of MET-14, the grounding of modal facts in essential facts is one of the apparent varieties of grounding, the restriction of grounding to the essential and modal levels.
+
+The necessary truths of logic and of mathematics raise a question that the theorem does not need to settle. TSM-11 holds that the necessary truths are those of logic, mathematics and essence. \citet{Fine1994} held that logical truths are true in virtue of the natures of the logical concepts, and mathematical truths in virtue of the natures of the mathematical objects. Whether this is right, or whether logic and mathematics are separate sources of necessity, does not affect the priority thesis for metaphysical necessity, which is the necessity of essence.
+
+\section{Real definitions by category}\label{s:categories}
+
+Proposition~\ref{p:realdef} says that every object has a real definition. It is worth saying what these look like for the main categories, since the uniformity claim is only as plausible as its instances.
+
+\paragraph{Substances.} A substance is an object that has properties and a real definition stating what it is, and the properties stated in its real definition are essential to it. The real definition of a substance states its kind and, for substances that come into being, its origin. The kind is, in the clearest cases, a natural kind, the extension of a cluster of genuine properties (MET-27), and the substance has the core properties of its kind essentially. An electron is essentially charged; a gold atom essentially has a nucleus with 79 protons. Since these properties are genuine universals in the sense of MET-02-a, substances bear universals, and some of the universals they bear they bear essentially. This is the picture that MET-02-a and MET-23-a presuppose, on which the bearers of the sparse universals are neither bundles nor substrata but substances with essential properties.
+
+\paragraph{Sets.} The real definition of a set states its members: the singleton of Socrates is the set whose only member is Socrates. Sets are the paradigm case in which the definition of an object mentions other objects, and in which the definiendum depends on what the definition mentions \citep{Fine1995Dep}.
+
+\paragraph{Holes.} MET-15 argues that holes are dependent immaterial particulars located at the boundaries of their hosts. The real definition of a hole states its host and the boundary at which it is located; it is essential to a hole to be in the host it is in.
+
+\paragraph{Artefacts.} The real definition of an artefact states its kind, which is fixed by the function its maker intended, and its material origin. EXI-09 holds that for artefacts essence precedes existence: the idea of a paper knife precedes the paper knife. The present account agrees, since the kind of an artefact is fixed by the intention that brings it into being.
+
+\paragraph{Persons.} PID-05 argues that we are thinking organisms. The real definition of a human person states the kind, a human organism capable of thought, and the origin. EXI-09 holds that for human beings existence precedes essence. The two claims are compatible, because they concern different things called essence. Sartre's essence is a defining project, a determination of what one's life is for, and his claim is that no such project is given to human beings in advance of their existence \citep{Sartre1946}. A real definition in our sense is not a project; it is a statement of what kind of thing one is, and it leaves open, as Sartre insists, what one makes of oneself.
+
+\paragraph{Social objects.} MET-20 argues that social kinds exist and depend on the absence of collective rejection. A banknote's real definition states what it is to be money of a given currency and the material item that has that status; the definition mentions the community whose practices sustain the status.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Interest-relativity]\label{o:quine}
+Which properties count as essential depends on how the object is described or on the context, as the mathematical cyclist shows \citep[§41]{Quine1960}. There is no fact as to what an object is, independently of a way of thinking of it.
+\end{objection}
+
+\begin{reply}
+The cyclist case shows that descriptions of an object carry different modal associations, not that the object has different natures. The question what a given man is has an answer, that he is a man, a human organism with a certain origin, and neither being a mathematician nor being a cyclist is part of it. The case looks compelling only if one supposes that essence must be read off from descriptions. On the present view it is not, and the cyclist is one object with one real definition, which mentions neither his profession nor his pastime. The counterpart-theoretic version of the objection \citep{Lewis1986} locates the relativity in the counterpart relation, and we accept that our modal discourse may be context-sensitive in this way; what we deny is that the facts about what things are share the sensitivity.
+\end{reply}
+
+\begin{objection}[Epistemology]\label{o:epist}
+If real definitions are not read off from our concepts, we have no way of knowing them. The essentialist owes an account of how we know what things are.
+\end{objection}
+
+\begin{reply}
+We know what things are in the way we know other things about them: by ordinary experience for familiar kinds, and by inquiry for others. That water is a compound of hydrogen and oxygen was discovered, and so was what gold is. \citet{Lowe2012} argues that a grasp of the essences of things is a precondition of thinking of them at all, since to think of an object one must know what kind of thing it is; that knowledge may be partial and fallible, and inquiry refines it. The epistemology of essence is no worse than the epistemology of modality, and on the present view it is the more basic of the two, since knowledge of necessity proceeds from knowledge of what things are.
+\end{reply}
+
+\begin{objection}[Obscurity]\label{o:obscure}
+The notion of truth in virtue of the nature of a thing is primitive and obscure. Without an analysis, the essentialist has replaced a clear modal notion by an unclear one.
+\end{objection}
+
+\begin{reply}
+That a notion is primitive does not make it obscure, if its role is clear. The notion is connected to necessity by Principle~\ref{p:impl}, to identity by Principle~\ref{p:fromnature}, and to grounding by the analysis of \citet{Rosen2015}, on which a real definition states a generalized identity whose left side holds in virtue of its right side; \citet{Dorr2016} develops the generalized identity in detail, and \citet{CorreiaSkiles2019} propose to understand essence in terms of grounding and generalized identity together. Any of these accounts suffices for the argument above, which uses only the four principles of Section~\ref{s:framework}. Nor is the modal notion clear in the respect that matters: it does not distinguish the singleton's essence from Socrates', and it is clarity of that kind that the question requires.
+\end{reply}
+
+\begin{objection}[Collapse]\label{o:collapse}
+If every object has a real definition, so does the cosmos, and since everything that happens is a feature of the cosmos, its real definition will include everything. Then by Principle~\ref{p:impl} everything is necessary.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the real definition of an object includes all its features. It includes only what the object is, and that is much less than everything true of it. The real definition of the cosmos, whether or not MET-09 is right that it is the only fundamental object, states that it is the maximal spatiotemporal whole, or whatever kind of thing it is; that it contains a planet with oceans is a fact about it, not part of what it is. Proposition~\ref{p:realdef} requires that every object have a definition, not that every truth about it follow from one. MET-13-b takes up the charge of modal collapse in detail.
+\end{reply}
+
+\begin{objection}[Contingent existence]\label{o:teitel}
+If some objects exist contingently, there are possibilities involving objects that might have existed but do not. These possibilities cannot hold in virtue of the natures of non-existent things, since there are no such things \citep{Teitel2019}.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:priority} concerns necessities, and a possibility is the absence of a necessity to the contrary. That there might have been a thing of some kind that does not in fact exist is true because no essence of anything that exists, including the natures of the kinds and properties involved, rules it out. This is the account of TSM-10, on which possibility is consistency with the essences of things. The objection has force against a reduction of all modal truths to essential truths about particular existents, and we do not offer one; it does not tell against the priority of essence over modality, which requires only that necessities hold in virtue of essences and that essences not be grounded in modal facts.
+\end{reply}
+
+\section{What the argument does not establish}\label{s:limits}
+
+The argument does not establish which real definitions objects have: that an electron is essentially charged, or that a person has her origin essentially, is a claim we have made in illustration, and its justification belongs to physics and to the theory of persons. It does not establish that real definitions individuate, and indeed denies it. It does not reduce modality to essence in the sense of providing, for every modal truth, an essential truth about particular existents that it is identical with; the priority it establishes is a matter of grounding. And clause (i) of Theorem~\ref{t:priority} depends on the account of necessity defended in TSM-10.
+
+\section{Conclusion}\label{s:conclusion}
+
+Every object has conditions of identity, and these are fixed by what it is; so every object has a real definition. The modal account of essence fails, because it cannot distinguish what belongs to the nature of a set from what belongs to the nature of its member, and since the essential facts discriminate where the modal facts do not, they are not grounded in them. Necessities hold in virtue of the essences of things. Substances have real definitions stating their kinds and origins, and they bear essentially the genuine universals that their definitions mention. Essence is prior to modality.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(Met.)]{AristotleMet} Aristotle. \emph{Metaphysics}.
+\bibitem[Aristotle(Top.)]{AristotleTop} Aristotle. \emph{Topics}.
+\bibitem[Correia and Skiles(2019)]{CorreiaSkiles2019} Correia, F., and Skiles, A. (2019). Grounding, essence, and identity. \emph{Philosophy and Phenomenological Research}, 98(3), 642--670.
+\bibitem[Dorr(2016)]{Dorr2016} Dorr, C. (2016). To be F is to be G. \emph{Philosophical Perspectives}, 30, 39--134.
+\bibitem[Fine(1994)]{Fine1994} Fine, K. (1994). Essence and modality. \emph{Philosophical Perspectives}, 8, 1--16.
+\bibitem[Fine(1995a)]{Fine1995Dep} Fine, K. (1995a). Ontological dependence. \emph{Proceedings of the Aristotelian Society}, 95, 269--290.
+\bibitem[Fine(1995b)]{Fine1995Senses} Fine, K. (1995b). Senses of essence. In W.~Sinnott-Armstrong, D.~Raffman and N.~Asher (Eds.), \emph{Modality, Morality, and Belief: Essays in Honor of Ruth Barcan Marcus} (pp.~53--73). Cambridge University Press.
+\bibitem[Hale(2013)]{Hale2013} Hale, B. (2013). \emph{Necessary Beings: An Essay on Ontology, Modality, and the Relations Between Them}. Oxford University Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Locke(1690)]{LockeEssay} Locke, J. (1690). \emph{An Essay Concerning Human Understanding}.
+\bibitem[Lowe(2008)]{Lowe2008} Lowe, E.~J. (2008). Two notions of being: Entity and essence. \emph{Royal Institute of Philosophy Supplement}, 62, 23--48.
+\bibitem[Lowe(2012)]{Lowe2012} Lowe, E.~J. (2012). What is the source of our knowledge of modal truths? \emph{Mind}, 121(484), 919--950.
+\bibitem[Quine(1960)]{Quine1960} Quine, W.~V. (1960). \emph{Word and Object}. MIT Press.
+\bibitem[Quine(1969)]{Quine1969} Quine, W.~V. (1969). \emph{Ontological Relativity and Other Essays}. Columbia University Press.
+\bibitem[Rosen(2015)]{Rosen2015} Rosen, G. (2015). Real definition. \emph{Analytic Philosophy}, 56(3), 189--209.
+\bibitem[Sartre(1946)]{Sartre1946} Sartre, J.-P. (1946). \emph{L'existentialisme est un humanisme}. Nagel.
+\bibitem[Teitel(2019)]{Teitel2019} Teitel, T. (2019). Contingent existence and the reduction of modality to essence. \emph{Mind}, 128(509), 39--68.
+\bibitem[Wildman(2013)]{Wildman2013} Wildman, N. (2013). Modality, sparsity, and essence. \emph{The Philosophical Quarterly}, 63(253), 760--782.
+\end{thebibliography}
+
+\end{document}

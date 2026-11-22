@@ -1,0 +1,221 @@
+\documentclass{situationist-preprint}
+
+\title{There Are No Genuine Moral Dilemmas}
+\msid{ETH-15-a}
+\msfamily{ETH-15}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_15.lean}
+\mskeywords{moral dilemmas; ought implies can; agglomeration; moral conflict; ties; fairness; lotteries; moral remainder}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A genuine moral dilemma is a situation in which every option open to the agent is wrong. Defenders of dilemmas point to cases in which an agent is under two requirements that cannot both be met, and to the remorse that remains whatever she chooses. We argue that there are no genuine dilemmas and, more strongly, that every apparent dilemma, a situation in which each option infringes some requirement, has exactly one permissible option. The first claim follows from ought-implies-can, the principle that impermissible options ought not to be taken, and the agglomeration of prohibitions; we show that the usual objections to agglomeration concern positive requirements and do not touch prohibitions. The second follows from three premises about the balance of reasons, the most contested of which is that exact ties between conflicting requirements are broken by an impartial procedure that is better than either partial choice. Because the balance of reasons is fixed by facts the agent may not know when she acts, the permissible option may be identifiable only in retrospect. The proofs are formalized in Lean. The infringed requirement does not vanish, which explains the remainder without a dilemma.
+\end{abstract}
+
+\section{The problem}
+
+Agents sometimes find that they cannot do everything they are required to do. A man has promised to meet a friend and, on the way, comes upon an accident victim whom only he can help. A physician has two patients who need the only available ventilator. In the most famous literary case, a mother at the entrance to a camp is told that one of her two children will be killed, that she must choose which, and that if she refuses both will be killed \citep{Styron1979}. In each case the agent appears to be under a requirement whatever she does that she will fail to meet. The question is whether, in any such case, \emph{everything} she can do is wrong.
+
+The defenders of genuine dilemmas answer yes. \citet{Lemmon1962} argued that moral philosophy had underrated the phenomenon of conflicting obligations. \citet{Williams1965} argued that the regret that remains after an agent resolves a conflict shows that the requirement she failed to meet was not cancelled but only outweighed, and that in some cases neither requirement outweighs the other; he concluded that moral requirements, unlike beliefs, need not be consistent, and rejected the principle that if one ought to do $a$ and ought to do $b$ one ought to do both. \citet{vanFraassen1973} gave a deontic logic that admits conflicting obligations by dropping the same principle. \citet{Marcus1980} argued that a consistent set of moral rules may still generate dilemmas in unfavorable circumstances, and that the second-order duty to arrange one's life so as to avoid them is evidence that they are real. \citet{SinnottArmstrong1988} defended dilemmas at length, and \citet{Tessman2015} has recently argued that some moral requirements are impossible to fulfill and remain binding.
+
+The opponents of dilemmas answer no. \citet{Ross1930} held that conflicts are between prima facie duties, and that in every case one of them is the actual duty. \citet{McConnell1978} and \citet{Conee1982} argued that dilemmas are inconsistent with basic deontic principles, and \citet{Donagan1984} that a rationalist moral system worth the name contains none. \citet{Brink1994} distinguished pro tanto from all-things-considered obligations and argued that dilemmas can arise only for the former. The debate since has concerned which deontic principles are true, and whether the residue of moral conflict, the regret, the duty to apologize or compensate, requires dilemmas to explain it.
+
+We defend a strong version of the opponents' view. A genuine dilemma, in the sense in which its existence is contested, is a situation in which no option is permissible all things considered. We show that there are none. We then show that every apparent dilemma has a \emph{uniquely} permissible option, so that the agent's conflict is never resolved by mere permission to choose either. The second claim is stronger than most opponents of dilemmas have defended, and it depends on a premise about ties that we defend in Section~\ref{s:ties}. Finally, we argue that the uniquely permissible option is fixed by facts that the agent may not know when she acts, and may therefore be identifiable only in retrospect.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Choice situation]\label{d:situation}
+A \emph{choice situation} is a situation of an agent together with a finite, nonempty menu of options available to her. Options are maximally specific: they differ whenever they differ in any respect that could bear on their permissibility, including the procedure by which the agent selects among other courses of action.
+\end{definition}
+
+\begin{definition}[Requirement]\label{d:requirement}
+A \emph{pro tanto requirement} in force in a situation is a consideration that counts decisively in favor of some options and against others unless it is outweighed: a promise, a duty of rescue, a parent's duty to protect a child. An option \emph{satisfies} a requirement or \emph{infringes} it.
+\end{definition}
+
+\begin{definition}[Apparent dilemma]\label{d:apparent}
+An \emph{apparent dilemma} is a choice situation in which every available option infringes some requirement in force, and every requirement in force can be satisfied by some available option.
+\end{definition}
+
+\begin{definition}[Genuine dilemma]\label{d:genuine}
+A \emph{genuine dilemma} is a choice situation in which no available option is permissible all things considered.
+\end{definition}
+
+The second clause of Definition~\ref{d:apparent} excludes requirements that cannot be met in the situation at all; their existence is a separate question, and it is settled against them by Principle~\ref{p:oic} below. Apparent dilemmas are common. The question is whether any of them, or any other situation, is a genuine dilemma. Three deontic principles bear on it.
+
+\begin{principle}[Ought implies can]\label{p:oic}
+If, all things considered, the agent ought to take an option with a certain feature, then some available option has that feature.
+\end{principle}
+
+\begin{principle}[Prohibition]\label{p:prohibition}
+If an option is impermissible all things considered, the agent ought not to take it.
+\end{principle}
+
+\begin{principle}[Agglomeration of prohibitions]\label{p:agglomeration}
+If the agent ought to take an option with feature $F$ and ought to take an option with feature $G$, she ought to take an option with both.
+\end{principle}
+
+Principle~\ref{p:oic} is Kant's, and it is accepted by most defenders of dilemmas as well as by their opponents; \citet{SinnottArmstrong1984} argued that \emph{ought} only conversationally implies \emph{can}, and we return to his argument in Section~\ref{s:objections}. Principle~\ref{p:prohibition} connects permissibility with the ought: it is what it is for an option to be impermissible that the agent ought not to take it. Principle~\ref{p:agglomeration} is stated generally, but we shall use it only where $F$ and $G$ are of the form \emph{is not option $a$}, and we defend it only in that use. Three further premises concern the balance of reasons.
+
+\begin{assumption}[Balance]\label{a:balance}
+If an option is permissible, no available option is better than it on the balance of reasons.
+\end{assumption}
+
+\begin{assumption}[Comparability]\label{a:comparability}
+In an apparent dilemma, of any two distinct available options, either one is better than the other on the balance of reasons, or the reasons for them are exactly balanced.
+\end{assumption}
+
+\begin{assumption}[Impartial tie-breaking]\label{a:ties}
+In an apparent dilemma, if the reasons for two available options are exactly balanced, some available option is better than both.
+\end{assumption}
+
+Assumption~\ref{a:balance} is the core of Ross's view: when requirements conflict, the actual duty is fixed by their comparative stringency, and an option is permissible only if no alternative is supported by weightier reasons \citep[ch.~2]{Ross1930}. Assumption~\ref{a:comparability} denies that the requirements in an apparent dilemma can be incomparable or merely on a par. Assumption~\ref{a:ties} is the distinctive premise of this manuscript, and it is what turns the denial of dilemmas into a uniqueness claim. We defend it in Section~\ref{s:ties}.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}[Agglomerated prohibition]\label{l:agglomerated}
+If every option in a nonempty list of options is impermissible, the agent ought to take an option that is not in the list.
+\end{lemma}
+
+\begin{proof}
+By induction on the length of the list. If the list contains one option $a$, which is impermissible, the agent ought not to take $a$ by Principle~\ref{p:prohibition}. If it contains $a$ followed by a nonempty list $t$ of impermissible options, she ought not to take $a$, by Principle~\ref{p:prohibition}, and ought to take an option not in $t$, by the induction hypothesis; by Principle~\ref{p:agglomeration} she ought to take an option that is neither $a$ nor in $t$.
+\end{proof}
+
+\begin{theorem}[No genuine dilemmas]\label{t:nodilemma}
+No choice situation is a genuine dilemma.
+\end{theorem}
+
+\begin{proof}
+Suppose that in some situation every available option is impermissible. The menu is nonempty, so by Lemma~\ref{l:agglomerated} the agent ought to take an option that is not on the menu. By Principle~\ref{p:oic}, some available option is not on the menu, which is absurd.
+\end{proof}
+
+Theorem~\ref{t:nodilemma} is the claim ETH-02 relies on: no agent faces a situation with no permissible option. It holds in every choice situation, not only in apparent dilemmas. The uniqueness claim, by contrast, is restricted to apparent dilemmas.
+
+\begin{theorem}[Uniqueness]\label{t:unique}
+In an apparent dilemma, no two distinct available options are both permissible.
+\end{theorem}
+
+\begin{proof}
+Let $a$ and $b$ be distinct available options, both permissible. By Assumption~\ref{a:comparability}, one of three things holds. If $a$ is better than $b$, then $b$ is not permissible, by Assumption~\ref{a:balance}. If $b$ is better than $a$, then likewise $a$ is not permissible. If they are exactly balanced, then by Assumption~\ref{a:ties} some available option $c$ is better than both, and neither is permissible, by Assumption~\ref{a:balance}. Each case contradicts the supposition.
+\end{proof}
+
+\begin{theorem}[Main result]\label{t:main}
+Every apparent dilemma has exactly one permissible option.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{t:nodilemma}, some available option is permissible; by Theorem~\ref{t:unique}, no other is.
+\end{proof}
+
+\begin{corollary}[Remainder]\label{c:remainder}
+In every apparent dilemma, the permissible option infringes some requirement in force.
+\end{corollary}
+
+\begin{proof}
+By Definition~\ref{d:apparent}, every available option infringes some requirement in force, the permissible one included.
+\end{proof}
+
+Corollary~\ref{c:remainder} is the observation on which the defenders of dilemmas built their case. The requirement the agent infringes does not disappear when she acts rightly; it was in force, it counted against what she did, and it continues to ground reasons to apologize, to explain, to compensate and to feel regret \citep{Williams1965,Marcus1980}. The corollary shows that this remainder is a consequence of the structure of apparent dilemmas, not evidence that the agent did wrong. A requirement can be infringed without being violated, in the sense of being infringed wrongfully \citep[ch.~3]{Thomson1990}. ETH-27 draws the consequence for agents who dirty their hands: they act rightly, and remorse remains appropriate.
+
+\section{Ties, fairness and retrospect}\label{s:ties}
+
+\paragraph{Why ties are broken.} Consider the physician with two patients and one ventilator, whose claims are, let us suppose, exactly equal: the same need, the same prospect of benefit, no prior commitment to either. Giving the ventilator to the first patient infringes the second patient's claim; giving it to the second infringes the first's. A common view is that either choice is permissible. We reject it. The physician has a third option: to allocate the ventilator by a fair lottery. \citet{Broome1990} argued that when claims are equal and cannot all be satisfied, a lottery gives each claimant a surrogate satisfaction of her claim, an equal chance, and that this is what fairness requires. The lottery does not satisfy either claim fully, but it honors both, whereas giving the ventilator directly to one patient honors one claim and treats the other as if it did not exist. The lottery is therefore better on the balance of reasons than either direct allocation, and by Assumption~\ref{a:balance} neither direct allocation is permissible. The uniquely permissible option is to draw lots.
+
+The argument generalizes. When two options are exactly balanced in an apparent dilemma, each infringes a requirement exactly as stringent as the one the other infringes. A procedure that selects between them without regard to anything but chance gives each requirement an equal standing, and it is better than either partial selection for the reason Broome gives in the case of claims. Where no external randomizing device is available, the agent can still select without preference: \citet{UllmannMargalitMorgenbesser1977} distinguish \emph{picking}, selecting among options one is indifferent between, from \emph{choosing} for a reason, and picking is an impartial procedure in the relevant sense. Definition~\ref{d:situation} requires options to be individuated finely enough that selecting by lot, or by picking, is an option distinct from taking either course directly. This is not a trick of individuation. The difference between giving the ventilator to the patient one prefers and giving it to the patient the coin selects is a difference that matters to the patient who does not receive it.
+
+\paragraph{Sophie's choice.} The mother in Styron's novel is the hardest case, because her claims are the claims of her own children, and because the officer has made her choice an instrument of his cruelty. Refusing to choose is an available option, and it leads to the death of both children; that option is worse than either choice by any measure, so it is not permissible. If the children's claims are exactly balanced, Assumption~\ref{a:ties} tells us that a choice made without preference is better than one made with it. If they are not, because one child has a better prospect of survival in the camp, then the choice of that child is better, and it is uniquely permissible. The companion manuscript ETH-15-b works through the case in detail. What we note here is that, in neither version, does the mother do wrong. Her remorse is fitting by Corollary~\ref{c:remainder}; the judgement that she acted wrongly is not.
+
+\paragraph{Retrospect.} Permissibility, as Assumption~\ref{a:balance} construes it, depends on the balance of reasons, and the balance of reasons depends on the facts of the situation, including facts about what will happen if the agent takes one option or another. These facts may be unknown to the agent when she acts. In the second version of Sophie's case, which child has the better prospect of survival is a fact about the future that the mother cannot know. The uniquely permissible option exists at the time of choice, since the facts that settle it obtain or will obtain, but the agent may be in a position to identify it only after the facts have become known. This is why the existence of a uniquely permissible option does not guarantee that the agent can be guided by it. An agent who chooses well on her evidence and turns out to have taken the impermissible option is not thereby blameworthy, and an agent who chooses carelessly and turns out to have taken the permissible one is not thereby free of criticism. The relation between permissibility fixed in retrospect and responsibility assessed at the time of choice is a form of moral luck, which ETH-13 argues is real and compatible with responsibility. The question what an agent should do when she cannot yet identify the permissible option is a question about decision under uncertainty; for uncertainty about which moral theory is true, MTE-16 defends maximizing expected choiceworthiness.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Agglomeration]
+\citet{Williams1965} and \citet{vanFraassen1973} reject agglomeration, and their reasons are good: from \emph{I ought to keep my promise} and \emph{I ought to help the victim} it does not follow that I ought to do both, if I cannot. Theorem~\ref{t:nodilemma} assumes the principle they reject.
+\end{objection}
+
+\begin{reply}
+The argument uses Principle~\ref{p:agglomeration} only for prohibitions: from \emph{I ought not to take $a$} and \emph{I ought not to take $b$}, it infers \emph{I ought to take neither $a$ nor $b$}. Williams's reason for rejecting agglomeration is that each of two conflicting oughts may be grounded in a requirement while their conjunction is grounded in none. That reason does not apply to all-things-considered prohibitions. Each says that an option is ruled out on the balance of reasons; ruling out two options is ruling out each, and there is no further consideration whose absence would make the conjunction fail. The pro tanto requirements in an apparent dilemma do not agglomerate, and we do not claim that they do: Definition~\ref{d:apparent} allows them to be jointly unsatisfiable.
+\end{reply}
+
+\begin{objection}[Ought does not imply can]
+\citet{SinnottArmstrong1984} argued that the inference from \emph{ought} to \emph{can} is a conversational implicature, which can be cancelled. An agent who has made two incompatible promises ought to keep each, though she cannot keep both.
+\end{objection}
+
+\begin{reply}
+The example concerns pro tanto requirements, and we agree that these may be jointly unsatisfiable. Principle~\ref{p:oic} concerns what the agent ought to do all things considered, and the point of that ought is to settle what she is to do. An ought that she cannot comply with settles nothing: it cannot guide her, and failing to comply with it reflects nothing about her will. The cases in which the implication seems cancelled are cases in which the agent is responsible for her inability, as with the double promiser; she is to blame for making the second promise, and Theorem~\ref{t:nodilemma} does not say otherwise. What she ought to do now, having made both, is to keep the weightier promise and make amends to the other promisee. These are self-imposed dilemmas only in name.
+\end{reply}
+
+\begin{objection}[Parity]
+Some options are neither better than one another nor exactly as good: they are on a par \citep{Chang2002}. A choice between keeping faith with a friend and serving one's country may be of this kind. Assumption~\ref{a:comparability} denies parity without argument.
+\end{objection}
+
+\begin{reply}
+Parity, if it exists, is most plausible between goods of very different kinds pursued for oneself, such as careers. In an apparent dilemma, the options are compared by the stringency of the requirements they infringe, and the stringency of a requirement is a matter of what is owed to the persons to whom it is owed. Where the requirements are owed to persons, their stringency is measured by the seriousness of the harm or the wrong to each, and the space of such measures is not multidimensional in the way the space of careers is. If two such requirements nonetheless seem on a par, the reasoning of Section~\ref{s:ties} applies to them as it applies to ties: an impartial procedure gives each its due and is better than either partial choice. A defender of parity who rejects Assumption~\ref{a:comparability} still faces Theorem~\ref{t:nodilemma}, which does not depend on it.
+\end{reply}
+
+\begin{objection}[Residue]
+If the agent acts rightly, she has nothing to regret. Yet regret, and even guilt, are appropriate after an apparent dilemma. Only a genuine dilemma explains this.
+\end{objection}
+
+\begin{reply}
+Corollary~\ref{c:remainder} explains it. The agent infringed a requirement in force, and the reactions appropriate to infringement, regret, apology, compensation, are appropriate to her. What would require a genuine dilemma is the judgement that she acted wrongly, and that judgement does not belong to the residue: an agent who keeps her promise to a dying friend at the cost of a lesser engagement does not think that she should have done otherwise. \citet{Hare1981} made the related point that the compunction a good agent feels in such cases is the mark of a sound disposition, not of a wrong act. ETH-27 develops the point for remorse.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} does not say that every situation has a uniquely permissible option. Outside apparent dilemmas there are typically many: when no requirement is in force, or when some option satisfies every requirement in force, the agent may have a wide range of permissible options, and some of them may be supererogatory (ETH-14). Nor does it identify the uniquely permissible option in any particular case, which is a matter for first-order ethics. Finally, it does not say that the agent can always know which option is permissible. Section~\ref{s:ties} argues that she sometimes cannot, before the event.
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/ETH/ETH_15.lean}. Situations, options, requirements, permissibility, the ought operator and the relations of being better and being tied are primitives; menus are lists, which makes them finite. Definitions~\ref{d:apparent} and~\ref{d:genuine} are Lean definitions; Principles~\ref{p:oic}--\ref{p:agglomeration} and Assumptions~\ref{a:balance}--\ref{a:ties} are axioms, as is the nonemptiness of menus required by Definition~\ref{d:situation}. Lemma~\ref{l:agglomerated} is proved by induction on lists. The main theorem is Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+theorem unique_permissible (s : Sit) (hd : ApparentDilemma s) :
+    ∃ o, o ∈ menu s ∧ Permissible s o ∧
+      ∀ o', o' ∈ menu s → Permissible s o' → o' = o
+\end{lstlisting}
+
+The checker reports, for Theorem~\ref{t:nodilemma} (\texttt{no\_genuine\_dilemma}) and Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+'Philosophy.ETH_15.no_genuine_dilemma' depends on axioms:
+  [propext, Quot.sound, Opt, Ought, Permissible, Sit,
+   agglomeration, menu, menu_nonempty, ought_implies_can,
+   prohibition]
+'Philosophy.ETH_15.unique_permissible' depends on axioms:
+  [propext, Classical.choice, Quot.sound, Better, InForce, Opt,
+   Ought, Permissible, Requirement, Sat, Sit, Tied,
+   agglomeration, balance, comparability, menu, menu_nonempty,
+   ought_implies_can, prohibition, tie_breaking]
+\end{lstlisting}
+
+(The names of the module's own axioms are printed with the prefix \texttt{Philosophy.ETH\_15}, omitted here.) Besides the standard axioms of Lean's logic and the primitives, Theorem~\ref{t:nodilemma} depends on exactly the three deontic principles and the nonemptiness of menus, and not on any assumption about the balance of reasons; the uniqueness claim adds Assumptions~\ref{a:balance}--\ref{a:ties}. Corollary~\ref{c:remainder} (\texttt{remainder}) depends on the same axioms as Theorem~\ref{t:main}. The formalization does not model what the agent knows, and so says nothing about the claim that the permissible option may be identifiable only in retrospect.
+
+\section{Conclusion}
+
+There are no genuine moral dilemmas: ought-implies-can, the link between impermissibility and the ought, and the agglomeration of prohibitions exclude situations in which every option is wrong. In every apparent dilemma, exactly one option is permissible, because conflicting requirements are comparable and exact ties are broken by an impartial procedure that is better than either partial choice. The infringed requirement remains, which explains the residue of moral conflict without wrongdoing, and the facts that settle the permissible option may come to light only after the agent has acted.
+
+\begin{thebibliography}{99}\small
+\bibitem[Brink(1994)]{Brink1994} Brink, D.~O. (1994). Moral conflict and its structure. \emph{The Philosophical Review}, 103(2), 215--247.
+\bibitem[Broome(1990)]{Broome1990} Broome, J. (1990). Fairness. \emph{Proceedings of the Aristotelian Society}, 91, 87--101.
+\bibitem[Chang(2002)]{Chang2002} Chang, R. (2002). The possibility of parity. \emph{Ethics}, 112(4), 659--688.
+\bibitem[Conee(1982)]{Conee1982} Conee, E. (1982). Against moral dilemmas. \emph{The Philosophical Review}, 91(1), 87--97.
+\bibitem[Donagan(1984)]{Donagan1984} Donagan, A. (1984). Consistency in rationalist moral systems. \emph{The Journal of Philosophy}, 81(6), 291--309.
+\bibitem[Hare(1981)]{Hare1981} Hare, R.~M. (1981). \emph{Moral Thinking: Its Levels, Method, and Point}. Oxford University Press.
+\bibitem[Lemmon(1962)]{Lemmon1962} Lemmon, E.~J. (1962). Moral dilemmas. \emph{The Philosophical Review}, 71(2), 139--158.
+\bibitem[Marcus(1980)]{Marcus1980} Marcus, R.~B. (1980). Moral dilemmas and consistency. \emph{The Journal of Philosophy}, 77(3), 121--136.
+\bibitem[McConnell(1978)]{McConnell1978} McConnell, T.~C. (1978). Moral dilemmas and consistency in ethics. \emph{Canadian Journal of Philosophy}, 8(2), 269--287.
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Oxford: Clarendon Press.
+\bibitem[Sinnott-Armstrong(1984)]{SinnottArmstrong1984} Sinnott-Armstrong, W. (1984). `Ought' conversationally implies `can'. \emph{The Philosophical Review}, 93(2), 249--261.
+\bibitem[Sinnott-Armstrong(1988)]{SinnottArmstrong1988} Sinnott-Armstrong, W. (1988). \emph{Moral Dilemmas}. Oxford: Blackwell.
+\bibitem[Styron(1979)]{Styron1979} Styron, W. (1979). \emph{Sophie's Choice}. New York: Random House.
+\bibitem[Tessman(2015)]{Tessman2015} Tessman, L. (2015). \emph{Moral Failure: On the Impossible Demands of Morality}. Oxford University Press.
+\bibitem[Thomson(1990)]{Thomson1990} Thomson, J.~J. (1990). \emph{The Realm of Rights}. Harvard University Press.
+\bibitem[Ullmann-Margalit and Morgenbesser(1977)]{UllmannMargalitMorgenbesser1977} Ullmann-Margalit, E. and Morgenbesser, S. (1977). Picking and choosing. \emph{Social Research}, 44(4), 757--785.
+\bibitem[van Fraassen(1973)]{vanFraassen1973} van Fraassen, B.~C. (1973). Values and the heart's command. \emph{The Journal of Philosophy}, 70(1), 5--19.
+\bibitem[Williams(1965)]{Williams1965} Williams, B. (1965). Ethical consistency. \emph{Proceedings of the Aristotelian Society, Supplementary Volumes}, 39, 103--124.
+\end{thebibliography}
+
+\end{document}

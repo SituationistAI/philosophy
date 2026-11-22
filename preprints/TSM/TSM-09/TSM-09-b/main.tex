@@ -1,0 +1,70 @@
+\documentclass{situationist-preprint}
+
+\title{Logical Omniscience and Impossible Worlds}
+\msid{TSM-09-b}
+\msfamily{TSM-09}
+\msdiscipline{Time, Space and Modality}
+\mstype{Companion manuscript}
+\mskeywords{logical omniscience; impossible worlds; epistemic logic; Bjerring; non-ideal agents}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Possible-worlds models of belief make agents logically omniscient. Impossible worlds remove the defect, but \citet{Bjerring2013} argued that they do so at a price: models whose impossible worlds are closed under any logic reintroduce omniscience for that logic, and models whose worlds are unconstrained make agents capable of believing anything. We argue that the dilemma concerns which impossible worlds a model selects, not whether impossible worlds exist. A model of a bounded reasoner selects the worlds that cannot be excluded by reasoning within the agent's bounds. Such models avoid both horns. The problem of logical omniscience therefore confirms the conclusion of TSM-09 that impossible worlds are required to model hyperintensional content.
+\end{abstract}
+
+\section{The problem and the dilemma}
+
+On the standard semantics \citep{Hintikka1962}, an agent believes $p$ if $p$ is true at every world compatible with what she believes. If the worlds are possible, she believes every logical consequence of her beliefs and every necessary truth. Since real agents do not, belief is hyperintensional, and by Theorem~3.1 of TSM-09-a every adequate model of it contains impossible worlds \citep{Hintikka1975,Rantala1982}.
+
+\citet{Bjerring2013} posed a dilemma. If the impossible worlds an agent may consider are closed under the consequence relation of some logic $L$, she is omniscient with respect to $L$, and no choice of $L$ is weak enough. If they are not closed under anything, she may consider a world at which $p \wedge q$ holds and $p$ fails, so that she may believe $p \wedge q$ without believing $p$, which no minimally rational agent does.
+
+\section{Selection by bounds}
+
+TSM-09-a distinguishes the existence of impossible worlds from the selection of those a model uses, the space of all sets of propositions being the domain from which models select. The dilemma assumes that selection must be by closure. It need not be.
+
+\begin{definition}[Bounded exclusion]\label{d:bound}
+A world $w$ is \emph{excluded within $n$ steps} by an agent's beliefs $B$ if a derivation of length at most $n$ from $B$ yields a proposition false at $w$. A model of an agent of \emph{bound} $n$ admits exactly the worlds, possible or impossible, not excluded within $n$ steps.
+\end{definition}
+
+\begin{proposition}\label{p:avoid}
+In a model of bound $n \geq 1$, the agent believes the consequences of her beliefs derivable in at most $n$ steps, and need not believe consequences derivable only in more.
+\end{proposition}
+
+\begin{proof}
+If $q$ is derivable from $B$ within $n$ steps, every world at which $q$ fails is excluded, so $q$ holds at every admitted world. If $q$ requires a longer derivation, some set of propositions containing $B$ and the negation of $q$ is not excluded within $n$ steps; it is an impossible world admitted by the model, and $q$ fails there.
+\end{proof}
+
+The first horn is avoided because the admitted worlds are not closed under any logic: closure under $n$-step derivation is not closure under a consequence relation, since it is not transitive. The second horn is avoided because one-step consequences, such as $p$ from $p \wedge q$, hold at every admitted world. This is the strategy of \citet{BjerringSkipper2019}, who add dynamic operators for steps of reasoning; Proposition~\ref{p:avoid} states only what TSM-09 needs, that it is carried out with impossible worlds.
+
+\begin{objection}
+Every finite bound is arbitrary, and an agent who can take $n$ steps can take $n + 1$.
+\end{objection}
+
+\begin{reply}
+The bound is a parameter of the model fixed by the agent and the task, as the domain of worlds in a counterfactual model is fixed by the context. That an agent could take another step makes her beliefs extend under reflection, which the dynamic version of the model represents by raising the bound. What no bound can represent is a reasoner without limits, and that is the idealization the problem asked us to give up.
+\end{reply}
+
+\begin{objection}
+Bounded exclusion uses a proof system, so the model is syntactic, and the worlds do no work.
+\end{objection}
+
+\begin{reply}
+The proof system selects the worlds; the worlds give the content. Belief remains truth at every admitted point, and update remains removal of points, which is the point format that Principle~P2 of TSM-09-a requires and syntactic models lack \citep{Jago2014}.
+\end{reply}
+
+\section{Conclusion}
+
+The problem of logical omniscience requires contents finer than sets of possible worlds, and Bjerring's dilemma shows that the selection of impossible worlds must not be by closure under a logic. Selection by bounded exclusion avoids both horns. Impossible worlds are required, and the remaining question is one of selection.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bjerring(2013)]{Bjerring2013} Bjerring, J.~C. (2013). Impossible worlds and logical omniscience: An impossibility result. \emph{Synthese}, 190, 2505--2524.
+\bibitem[Bjerring and Skipper(2019)]{BjerringSkipper2019} Bjerring, J.~C. and Skipper, M. (2019). A dynamic solution to the problem of logical omniscience. \emph{Journal of Philosophical Logic}, 48(3), 501--521.
+\bibitem[Hintikka(1962)]{Hintikka1962} Hintikka, J. (1962). \emph{Knowledge and Belief}. Cornell University Press.
+\bibitem[Hintikka(1975)]{Hintikka1975} Hintikka, J. (1975). Impossible possible worlds vindicated. \emph{Journal of Philosophical Logic}, 4(4), 475--484.
+\bibitem[Jago(2014)]{Jago2014} Jago, M. (2014). \emph{The Impossible: An Essay on Hyperintensionality}. Oxford University Press.
+\bibitem[Rantala(1982)]{Rantala1982} Rantala, V. (1982). Impossible worlds semantics and logical omniscience. \emph{Acta Philosophica Fennica}, 35, 106--115.
+\end{thebibliography}
+
+\end{document}

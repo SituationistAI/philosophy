@@ -1,0 +1,213 @@
+\documentclass{situationist-preprint}
+
+\title{Divine Hiddenness as a Signalling Equilibrium}
+\msid{REL-03-a}
+\msfamily{REL-03}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_03.lean}
+\mskeywords{divine hiddenness; signalling games; nonresistant nonbelief; freedom of response; Schellenberg; equilibrium}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Schellenberg's hiddenness argument holds that a perfectly loving God would ensure that every creature capable of relationship with God and not resisting it is in a position to believe that God exists, and that since there is nonresistant nonbelief, there is no such God. We argue that divine hiddenness is not evidence against God. We model the situation as a signalling game in which God chooses the clarity of a signal of God's existence and creatures of two types, open and closed, respond by turning toward God or away. Clear revelation raises the prudential stakes of the response until every type turns toward God, so that the response no longer depends on the creature's own disposition: revelation constrains the freedom of response. With explicit payoffs on which a perfectly loving God values a freely given response above compliance and also values creatures' being in a position to believe, God's optimal choice is the clearest signal that still leaves the response free, which is ambiguous. Since hiddenness is then what a perfectly loving God would choose, it is no more probable without God than with God. The game and its equilibrium are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Schellenberg1993} gave the problem of divine hiddenness its modern form. A perfectly loving God would seek a personal relationship with every creature capable of one. Such a relationship requires that the creature believe that God exists. A perfectly loving God would therefore ensure that every capable creature who does not resist the relationship is in a position to believe that God exists. But there are capable creatures who do not resist and who are not in that position, namely nonresistant nonbelievers. Hence there is no perfectly loving God. \citet{Schellenberg2015} restated the argument with greater care about the notion of nonresistance, and it has become, with the problem of evil, one of the two main arguments for atheism in contemporary philosophy of religion.
+
+The theme is older than the argument. Isaiah's \emph{Deus absconditus} became, for \citet{Pascal1670}, the claim that God is hidden enough to try those who seek and manifest enough to reward them. \citet[Part~I, Book~II, Ch.~2, \S~IX]{Kant1788} argued that if God and eternity stood before our eyes in their full majesty, transgression of the moral law would be avoided from fear, and the moral worth of actions, which depends on their being done from respect for the law, would disappear. \citet{Hick1966} held that creatures must be placed at an \enquote{epistemic distance} from God if their response to God is to be free. \citet{Murray1993} developed the point in terms of coercion: a threat made sufficiently evident constrains the choice of the one threatened, and the knowledge of God's existence would carry such a threat. \citet{Swinburne1998} argued that hiddenness makes possible the choice of the good for its own sake. On the other side, Schellenberg and others have argued that belief does not compel relationship, since one may believe and still refuse, and that a loving God could reveal without threatening \citep{Schellenberg2015}. \citet{Rea2018} has defended a different response, on which God's hiddenness reflects God's personality and transcendence rather than a strategy for preserving freedom.
+
+The debate has turned on the question whether evident knowledge of God would constrain the freedom of the creature's response. We make that question precise with a signalling game, in the sense of \citet{Lewis1969} and of the economic theory of signalling \citep{Spence1973,CrawfordSobel1982,Skyrms2010}, and answer it with explicit payoffs. The answer is that unambiguous revelation makes the creature's response independent of the creature's own disposition, and that a perfectly loving God would therefore choose the clearest signal that falls short of unambiguous revelation.
+
+\section{The game}
+
+\begin{definition}[The hiddenness game]\label{d:game}
+God chooses the \emph{clarity} $c \in \{0, 1, 2, 3, 4\}$ of a signal of God's existence; $c = 4$ is \emph{unambiguous revelation}, and $c \leq 3$ is \emph{hiddenness}. Each creature is of one of two \emph{types}, open or closed, and knows its type. After observing the signal, each creature chooses to turn \emph{toward} God or \emph{away}.
+\end{definition}
+
+The types correspond to Schellenberg's distinction: an open creature does not resist relationship with God, a closed creature prefers its independence. To turn toward God is to adopt a practical orientation of seeking and trust; it is not the same as believing, and Section~\ref{s:schellenberg} returns to the difference.
+
+\begin{definition}[Creature payoffs]\label{d:creature}
+At clarity $c$, an open creature receives $2 + c$ for turning toward God and $0$ for turning away; a closed creature receives $c$ for turning toward God and $3$ for turning away.
+\end{definition}
+
+Each payoff is the sum of an intrinsic component, which expresses the creature's own disposition ($2$ and $0$ for the open type, $0$ and $3$ for the closed type), and a prudential component $c$ for turning toward God, which expresses the stakes of the response as the creature perceives them. The prudential component increases with clarity because the stakes are perceived in proportion to the creature's confidence that God exists: a creature that is certain that an omnipotent, omniscient and perfectly good being exists, and that its relation to this being is the most important fact about its life, has a reason to turn toward it that does not depend on its disposition.
+
+\begin{assumption}[Stakes]\label{a:stakes}
+Under unambiguous revelation the prudential component of turning toward God exceeds the intrinsic preference of every type for turning away; under hiddenness it does not.
+\end{assumption}
+
+With the numbers of Definition~\ref{d:creature}, the closed type's preference for turning away is $3$, and the prudential component exceeds it exactly when $c = 4$. Assumption~\ref{a:stakes} is the formal counterpart of Kant's and Murray's claim, and we defend it in Section~\ref{s:objections}.
+
+\begin{definition}[Freedom of response]\label{d:free}
+The response is \emph{free} at clarity $c$ if the best response of the open type differs from the best response of the closed type at $c$.
+\end{definition}
+
+A response is free in this sense when it depends on the creature's own disposition, so that the creature's turning toward God expresses what kind of creature it is. Freedom of response is not free will. On the account of ACT-01-a, free will is the capacity to act from a reasons-responsive mechanism of one's own, and a creature that turns toward God because the stakes are evident acts freely in that sense: it responds to reasons. What revelation would remove is not the creature's freedom but the dependence of its response on its disposition toward God.
+
+\begin{definition}[Perfect love]\label{d:love}
+For each creature, God receives $4$ if the creature turns toward God and the response is free, $1$ if it turns toward God and the response is not free, and $0$ if it turns away; and in addition $c/2$, the value of the creature's being in a position to believe to the degree the signal allows.
+\end{definition}
+
+The two components of Definition~\ref{d:love} correspond to the two aspects of love that the literature distinguishes: the desire for union with the beloved, which a perfectly loving being wants to be reciprocal and so freely given, and the desire for the good of the beloved, which includes the creature's being in a position to know the truth about its situation. The numbers encode two judgements.
+
+\begin{assumption}[Priority of free response]\label{a:priority}
+A freely given response is worth more to a perfectly loving God than compliance, and compliance is worth more than refusal.
+\end{assumption}
+
+\begin{assumption}[Population]\label{a:pop}
+Open and closed creatures are equally numerous.
+\end{assumption}
+
+Assumption~\ref{a:pop} is a simplification, which we relax in Proposition~\ref{p:robust}.
+
+\section{The equilibrium}
+
+\begin{lemma}[Revelation pools]\label{l:pool}
+Under unambiguous revelation, both types turn toward God, and the response is not free.
+\end{lemma}
+
+\begin{proof}
+At $c = 4$, the open type receives $6$ for turning toward and $0$ for turning away; the closed type receives $4$ and $3$. Both turn toward God, so their best responses coincide.
+\end{proof}
+
+\begin{lemma}[Hiddenness separates]\label{l:sep}
+At every clarity $c \leq 3$, the open type turns toward God and the closed type turns away, and the response is free.
+\end{lemma}
+
+\begin{proof}
+The open type receives $2 + c \geq 2$ for turning toward and $0$ for turning away. The closed type receives $c \leq 3$ for turning toward and $3$ for turning away, and, breaking the tie at $c = 3$ in favour of the creature's own disposition, turns away.
+\end{proof}
+
+\begin{theorem}[Optimal clarity]\label{t:opt}
+With one creature of each type, God's payoff is $4 + c$ at each clarity $c \leq 3$ and $6$ at $c = 4$. Hence God's payoff is uniquely maximized at $c = 3$: a perfectly loving God chooses the clearest signal that falls short of unambiguous revelation.
+\end{theorem}
+
+\begin{proof}
+At $c \leq 3$, by Lemma~\ref{l:sep}, the open creature turns toward God freely, worth $4$, the closed creature turns away, worth $0$, and each is in a position to believe to degree $c$, worth $c/2$ each. At $c = 4$, by Lemma~\ref{l:pool}, both turn toward God without a free response, worth $1$ each, and the belief component is $2$ for each. The payoffs are therefore $4 + c$, with maximum $7$ at $c = 3$, and $6$ at $c = 4$.
+\end{proof}
+
+\begin{corollary}[Equilibrium]\label{c:eq}
+The profile in which God chooses $c = 3$, open creatures turn toward God at every clarity, and closed creatures turn toward God at $c = 4$ and away otherwise, is the unique subgame-perfect equilibrium of the game in which ties are broken in favour of the creature's disposition. In it, God is hidden.
+\end{corollary}
+
+\begin{proof}
+The creatures' strategies are best responses at every clarity by Lemmas~\ref{l:pool} and~\ref{l:sep}, and given them God's choice is optimal and unique by Theorem~\ref{t:opt}.
+\end{proof}
+
+Theorem~\ref{t:opt} explains two features of the actual evidential situation that a simple theory of hiddenness leaves unexplained. It explains why God, if God exists, is hidden, since $c = 4$ is not chosen. It also explains why God is not completely hidden, since $c = 3$ is preferred to $c = 0$: the evidence for God's existence is real but inconclusive, and religious experience is prima facie evidence of low weight, as REL-21 argues, rather than proof.
+
+\begin{proposition}[Robustness]\label{p:robust}
+Drop Assumption~\ref{a:pop}, and let there be $n_o$ open and $n_c$ closed creatures. Then $c = 3$ yields God a higher payoff than $c = 4$ if and only if $5 n_o > 3 n_c$, that is, if and only if open creatures are more than three-eighths of the whole.
+\end{proposition}
+
+\begin{proof}
+Doubling the payoffs to avoid fractions, God receives $8 n_o + 3(n_o + n_c) = 11 n_o + 3 n_c$ at $c = 3$, and $2(n_o + n_c) + 4(n_o + n_c) = 6 n_o + 6 n_c$ at $c = 4$. The first exceeds the second if and only if $5 n_o > 3 n_c$.
+\end{proof}
+
+Proposition~\ref{p:robust} shows how much the result depends on the proportion of types. The threshold is not demanding for a creator who creates creatures for relationship. Moreover, types need not be fixed: a closed creature under hiddenness may later become open, since nothing in its situation forces it to remain closed, while a closed creature that has turned toward God under revelation has had its response settled by the stakes. If the dynamics were modelled, hiddenness would gain further.
+
+\section{Hiddenness is not evidence}\label{s:evidence}
+
+Let $H$ be the observation that there is no unambiguous revelation. The question of the family is whether $H$ is evidence against God.
+
+\begin{theorem}\label{t:noevidence}
+If God exists and is perfectly loving, then, given the payoffs of Section~2, $P(H \mid G) = 1$. Since $P(H \mid \neg G) \leq 1$, the likelihood ratio $P(H \mid \neg G) / P(H \mid G)$ is at most $1$, and observing $H$ cannot raise the probability that God does not exist.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{t:opt}, a perfectly loving God chooses $c = 3$, so that if God exists $H$ obtains. The rest follows from Bayes's theorem: the posterior odds against God are the prior odds multiplied by a ratio that is at most $1$.
+\end{proof}
+
+If God does not exist, there is no unambiguous revelation either, so that $P(H \mid \neg G) = 1$ and the likelihood ratio is exactly $1$. Hiddenness is then evidentially neutral. Schellenberg's argument claims more: that $P(H \mid G)$ is zero, or nearly so, because a perfectly loving God would not be hidden. Theorem~\ref{t:opt} shows that, on payoffs that encode the two aspects of perfect love, a perfectly loving God would be hidden.
+
+\section{Schellenberg's premise}\label{s:schellenberg}
+
+Schellenberg's argument is stated in terms of belief rather than of a signal. Its key premise is that a perfectly loving God would ensure that every capable, nonresistant creature is in a position to believe. In the game, a nonresistant creature is an open creature, and under hiddenness it is in a position to believe only to the degree $c = 3$ allows, which is less than full belief. Theorem~\ref{t:opt} shows that a perfectly loving God would choose this situation over one in which every creature is in a position to believe with certainty. The premise is therefore false on the model, and the existence of nonresistant nonbelief is what the model predicts.
+
+Schellenberg holds that relationship with God requires belief. The model distinguishes turning toward God from believing, and assigns God's relational payoff to the former. An open creature that turns toward God under hiddenness does so with less than certainty, in the way that REL-17 describes faith as rational where the evidence underdetermines the question and the stakes are practical, and in the way that REL-06 describes the wager as supporting practical commitment rather than belief. The relationship that begins in this way is a relationship, though not one founded on certainty. A God who requires certainty for relationship requires a response that, by Lemma~\ref{l:pool}, would not be free.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Belief does not compel]
+One may know that God exists and still refuse. The demons believe and tremble. Assumption~\ref{a:stakes} is therefore false: revelation leaves the closed creature's refusal open.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:stakes} does not say that refusal becomes impossible under revelation, only that it ceases to be the closed creature's best response. The demons, if they believe and refuse, are agents whose intrinsic preference for independence exceeds any prudential consideration, a third type that the model can include. Adding it does not change the result: such creatures turn away at every clarity, contribute nothing to God's relational payoff in either case, and add to the belief component equally at $c = 3$ and $c = 4$ up to a difference of $1/2$ each. Unless they are numerous, the comparison of Proposition~\ref{p:robust} is unaffected. What matters is that for creatures of ordinary dispositions, evident knowledge of the stakes would decide the response, which is the claim of Kant and Murray and which is difficult to deny of creatures like us.
+\end{reply}
+
+\begin{objection}[Frankfurt]
+Under revelation the open creature turns toward God from love, and the fact that it would have turned toward God even if it had been closed does not make its response less its own \citep{Frankfurt1969}.
+\end{objection}
+
+\begin{reply}
+We agree that the open creature is responsible for its response under revelation, and Definition~\ref{d:free} does not deny it. In a Frankfurt case, however, the counterfactual intervener is inert: it plays no role in the agent's actual reasoning. The prudential stakes of revelation are not inert. They are among the reasons for which every creature acts, so that the open creature's response is overdetermined by love and by prudence, and neither the creature nor anyone observing it can separate the two. What revelation removes is the response's being an expression of the creature's disposition rather than of its situation, and that is what a perfectly loving God values in Definition~\ref{d:love}.
+\end{reply}
+
+\begin{objection}[Targeted revelation]
+God could reveal unambiguously to the open creatures only, leaving the closed creatures in hiddenness. Each open creature would then believe and turn toward God, and no closed creature would be constrained.
+\end{objection}
+
+\begin{reply}
+Under targeted revelation, the clarity an open creature receives is $4$, and at clarity $4$ the creature would turn toward God whatever its type. Its response is therefore not free in the sense of Definition~\ref{d:free}: it depends on the signal, not on its disposition. Targeted revelation trades the free response of every open creature, worth $4$, for compliance, worth $1$, and a gain of $1/2$ in the belief component, which is a loss by Assumption~\ref{a:priority}.
+\end{reply}
+
+\begin{objection}[The payoffs are stipulated]
+The result depends on numbers that the authors have chosen.
+\end{objection}
+
+\begin{reply}
+It depends on their order, and Proposition~\ref{p:robust} shows how. The qualitative premises are three: revelation makes turning toward God the best response for every type (Assumption~\ref{a:stakes}); a perfectly loving God values a free response more than compliance (Assumption~\ref{a:priority}); and the gain in the belief component from the last step of clarity is smaller than the loss in the relational component. The third holds whenever the value of a free relationship is large relative to the value of the last increment of evidence, which is the judgement that perfect love, as Schellenberg himself describes it, supports. A critic who denies it must hold that a perfectly loving God would prefer certainty to freely given love.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not show that God exists, nor that the actual evidential situation is the one a perfectly loving God would produce in every detail, nor that the clarity of the actual signal is exactly the clarity that maximizes God's payoff. It shows that the absence of unambiguous revelation is what a perfectly loving God would choose under the stated assumptions, and that hiddenness, in that sense, is not evidence against God's existence. Particular features of the distribution of belief, such as the concentration of nonbelief in some cultures and periods, raise questions that the model, with its two types and a single signal, does not address.
+
+\section{Formalization}
+
+The game is formalized in \nolinkurl{Philosophy/REL/REL_03.lean}. Types and responses are inductive types, clarity is a natural number, the payoffs are those of Definitions~\ref{d:creature} and~\ref{d:love} (God's doubled to avoid fractions), and best responses and freedom of response are computed. Lemmas~\ref{l:pool} and~\ref{l:sep}, Theorem~\ref{t:opt} and Proposition~\ref{p:robust} are proved by computation or by linear arithmetic. The main theorem reads:
+
+\begin{lstlisting}
+theorem optimal_clarity :
+    (∀ c, c ≤ 4 → godPay c ≤ godPay 3) ∧
+    (∀ c, c ≤ 4 → c ≠ 3 → godPay c < godPay 3) ∧ ¬ Free 4
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_03.optimal_clarity' does not depend on any axioms
+'Philosophy.REL_03.robustness' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.REL_03.not_evidence' depends on axioms: [propext]
+\end{lstlisting}
+
+There are no philosophical axioms: the assumptions of Section~2 are built into the payoff functions, which is appropriate for a result that is a computation in a given game. The philosophical content lies in the claim that the game represents the situation, which is what Sections~2 and~\ref{s:objections} defend. The main theorem is proved by evaluation and uses no axioms at all; the axioms listed for the other two results are Lean's own, used by the arithmetic tactic and the simplifier.
+
+\section{Conclusion}
+
+A perfectly loving God values a freely given response from creatures and values their being in a position to know the truth. Clear revelation would make turning toward God the best response for every creature, so that the response would no longer depend on the creature's disposition; it would constrain the freedom of response. In the signalling game that represents this situation, God's optimal choice is the clearest signal that leaves the response free, which is ambiguous. Hiddenness is therefore the equilibrium a perfectly loving God would choose, and its observation is no evidence against God.
+
+\begin{thebibliography}{99}\small
+\bibitem[Crawford and Sobel(1982)]{CrawfordSobel1982} Crawford, V.~P. and Sobel, J. (1982). Strategic information transmission. \emph{Econometrica}, 50(6), 1431--1451.
+\bibitem[Frankfurt(1969)]{Frankfurt1969} Frankfurt, H.~G. (1969). Alternate possibilities and moral responsibility. \emph{The Journal of Philosophy}, 66(23), 829--839.
+\bibitem[Hick(1966)]{Hick1966} Hick, J. (1966). \emph{Evil and the God of Love}. Macmillan.
+\bibitem[Kant(1788)]{Kant1788} Kant, I. (1788). \emph{Kritik der praktischen Vernunft}. Riga.
+\bibitem[Lewis(1969)]{Lewis1969} Lewis, D. (1969). \emph{Convention: A Philosophical Study}. Harvard University Press.
+\bibitem[Murray(1993)]{Murray1993} Murray, M.~J. (1993). Coercion and the hiddenness of God. \emph{American Philosophical Quarterly}, 30(1), 27--38.
+\bibitem[Pascal(1670)]{Pascal1670} Pascal, B. (1670). \emph{Pens\'ees}. Paris.
+\bibitem[Rea(2018)]{Rea2018} Rea, M.~C. (2018). \emph{The Hiddenness of God}. Oxford University Press.
+\bibitem[Schellenberg(1993)]{Schellenberg1993} Schellenberg, J.~L. (1993). \emph{Divine Hiddenness and Human Reason}. Cornell University Press.
+\bibitem[Schellenberg(2015)]{Schellenberg2015} Schellenberg, J.~L. (2015). \emph{The Hiddenness Argument: Philosophy's New Challenge to Belief in God}. Oxford University Press.
+\bibitem[Skyrms(2010)]{Skyrms2010} Skyrms, B. (2010). \emph{Signals: Evolution, Learning, and Information}. Oxford University Press.
+\bibitem[Spence(1973)]{Spence1973} Spence, M. (1973). Job market signaling. \emph{The Quarterly Journal of Economics}, 87(3), 355--374.
+\bibitem[Swinburne(1998)]{Swinburne1998} Swinburne, R. (1998). \emph{Providence and the Problem of Evil}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

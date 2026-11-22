@@ -1,0 +1,111 @@
+\documentclass{situationist-preprint}
+
+\title{The Responsibility of Artificial Agents}
+\msid{ACT-16-a}
+\msfamily{ACT-16}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mskeywords{artificial agents; moral responsibility; responsibility gap; ownership; deployment; reasons-responsiveness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can artificial systems be morally responsible for what they do? We argue that current artificial systems are not responsible agents, and that responsibility for their outputs lies with those who deploy them. On the account of ACT-01-a, an agent is responsible for an action if it issues from a reasons-responsive mechanism that is her own. Current systems may respond to reasons, but their mechanisms are not their own: their dispositions are installed and revised by others in ways that bypass any practical reasoning of theirs, and they lack a persisting standpoint from which to take responsibility. This opens no responsibility gap: responsibility for what a non-agent does traces to the agents whose free actions set it to work in the circumstances, and for an artificial system these are its deployers. The verdict is indexed to the present: nothing in the argument excludes artificial systems that satisfy the ownership condition.
+\end{abstract}
+
+\section{The problem}
+
+Artificial systems now produce text, decisions and actions that, when produced by human beings, are proper objects of praise and blame. \citet{Matthias2004} argued that systems which learn from their environment create a \emph{responsibility gap}: their behavior cannot be predicted by their designers or operators, who therefore cannot be held responsible for it, while the systems themselves are not the kind of thing that can be held responsible. \citet{Sparrow2007} pressed the point for autonomous weapons, arguing that it makes their use unjust, since no one could be held responsible for the deaths they cause. Others have argued that responsibility can be extended to artificial agents themselves: \citet{FloridiSanders2004} proposed that an artificial agent can be a source of moral action, and accountable, without being responsible in the full sense, and \citet{Dennett1997} argued that a system with the right higher-order capacities would be a proper target of blame.
+
+Two questions must be separated. The first is whether current artificial systems are responsible agents. The second is where responsibility for their outputs lies. We answer the first negatively and the second by locating responsibility in deployers. A third question, whether such systems are owed anything, concerns moral patiency rather than agency, and ETH-24 treats it.
+
+\section{Framework}
+
+\begin{definition}[Responsible agency]\label{d:resp}
+An entity is a \emph{responsible agent} if it is capable of acting from a mechanism that is reasons-responsive and its own, in the sense of ACT-01-a: a mechanism that would recognize and act on sufficient reasons in a range of situations, that has not been installed or manipulated by another agent in a way that bypasses its own practical reasoning, and for which the entity takes responsibility, regarding itself as an apt target of the reactive attitudes for what issues from it.
+\end{definition}
+
+\begin{definition}[Deployment]\label{d:deploy}
+To \emph{deploy} an artificial system is to put it into operation for some use, in some range of circumstances, by a decision that determines whether, where and with what constraints it acts.
+\end{definition}
+
+\begin{principle}[Tracing]\label{p:trace}
+When an outcome results from the operation of something that is not a responsible agent, responsibility for the outcome lies with the responsible agents whose free actions put it into operation in the circumstances in which it produced the outcome, to the extent that outcomes of that type were foreseeable.
+\end{principle}
+
+Principle~\ref{p:trace} is the principle we apply to animals, machines and fires set to work by human agents: the owner who releases a dog in a park is responsible for what it foreseeably does.
+
+\section{The argument}
+
+\begin{proposition}\label{p:notown}
+The mechanisms of current artificial systems are not their own.
+\end{proposition}
+
+\begin{proof}
+A current system's dispositions to respond to inputs are produced by a training process designed, run and evaluated by others, and they can be revised by others at any time, by further training, by changes to its instructions or by changes to the context it is given. These processes do not operate through any practical reasoning of the system: the system does not deliberate about whether to acquire the dispositions it is given, and could not resist their revision. By the first clause of ownership in Definition~\ref{d:resp}, its mechanism is installed by others in a way that bypasses its own practical reasoning. The second clause fails as well. Taking responsibility is a diachronic stance: it requires a standpoint that persists across actions, to which past actions can be attributed and from which future conduct is regulated in the light of the reactive attitudes others take toward it. A current system typically retains nothing of one exchange in the next, and the dispositions that might regulate its conduct in the light of censure are fixed by its developers rather than by its response to the censure. It has no standpoint from which to regard itself as an apt target of resentment for what it did yesterday.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Current artificial systems are not responsible agents.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{d:resp}, responsible agency requires a mechanism of one's own, and by Proposition~\ref{p:notown} current systems lack one.
+\end{proof}
+
+The argument does not rely on denying that current systems respond to reasons. They may change their outputs when given considerations against them, and so show what \citet{FischerRavizza1998} call reasons-receptivity; and MND-08 argues that machines can think. The argument relies on the ownership condition alone, which human agents formed by upbringing satisfy, since upbringing operates through the developing agent's own practical reasoning and leaves her a standpoint from which she endorses or revises what she was given.
+
+\begin{corollary}\label{c:deploy}
+Responsibility for the outputs of a current artificial system lies with those who deploy it.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main}, the system is not a responsible agent, so Principle~\ref{p:trace} applies to its outputs. The free actions that put a system into operation in the circumstances in which it produces an output are the decisions to deploy it there (Definition~\ref{d:deploy}). Outputs of the types that cause concern, errors, falsehoods, harmful content, are foreseeable as types for any current system. So responsibility for them lies with its deployers.
+\end{proof}
+
+A developer who releases a system for use by others thereby deploys it; a firm that integrates it into a service deploys it again. Deployers may be groups, which ACT-10 argues can be agents.
+
+\section{Objections and replies}
+
+\begin{objection}[Unpredictability]
+The outputs of learning systems cannot be predicted by those who deploy them, and one cannot be responsible for what one could not foresee \citep{Matthias2004}.
+\end{objection}
+
+\begin{reply}
+What cannot be predicted is the token output on a given input; what can be foreseen is the type, and Principle~\ref{p:trace} requires only the latter. A deployer who knows that a system will sometimes produce false or harmful outputs, and deploys it where such outputs will cause harm, has made a decision about a known risk.
+\end{reply}
+
+\begin{objection}[Many hands]
+Many agents contribute to a system's behavior: researchers, data workers, developers, deployers and users. Responsibility spread so thinly is no responsibility at all.
+\end{objection}
+
+\begin{reply}
+That many agents contribute does not make the contributions vanish. Principle~\ref{p:trace} singles out those whose actions put the system to work in the circumstances in which it acted, and among contributors these are the ones with control over whether it acts there at all. Others may be responsible for other things, such as the quality of the data or the honesty of the documentation; users are responsible for what they themselves do with the outputs. None of this removes the deployer's responsibility for the system's operation in the setting she chose.
+\end{reply}
+
+\begin{objection}[Functional accountability]
+Systems can be held accountable in the functional sense of being monitored, corrected and switched off, and \citet{FloridiSanders2004} argue that this suffices for a kind of moral agency.
+\end{objection}
+
+\begin{reply}
+We accept that systems can be accountable in that sense, and that holding them so is good practice. But being corrected by others is what distinguishes them from responsible agents: a responsible agent is one to whom censure is addressed in the expectation that she will take it up herself. That a system's conduct is revised by others when it errs is the clearest sign that its mechanism is not its own.
+\end{reply}
+
+\section{What the result does not establish}
+
+The thesis is indexed to current systems. Nothing in the argument shows that an artificial system could not have a mechanism of its own: a system with a persisting standpoint, whose dispositions were shaped through its own practical reasoning and revised by it in response to the reactions of others, would satisfy Definition~\ref{d:resp}, and Theorem~\ref{t:main} would not apply to it. Nor does the result say anything about what is owed to artificial systems.
+
+\section{Conclusion}
+
+Current artificial systems may respond to reasons, but their mechanisms are installed and revised by others and they lack a standpoint from which to take responsibility. They are not responsible agents. Since responsibility for what non-agents do traces to those whose free actions set them to work, responsibility for the outputs of current systems lies with those who deploy them, and there is no gap.
+
+\begin{thebibliography}{99}\small
+\bibitem[Dennett(1997)]{Dennett1997} Dennett, D.~C. (1997). When HAL kills, who's to blame? Computer ethics. In D.~G. Stork (ed.), \emph{HAL's Legacy: 2001's Computer as Dream and Reality}. MIT Press.
+\bibitem[Fischer and Ravizza(1998)]{FischerRavizza1998} Fischer, J.~M. and Ravizza, M. (1998). \emph{Responsibility and Control: A Theory of Moral Responsibility}. Cambridge University Press.
+\bibitem[Floridi and Sanders(2004)]{FloridiSanders2004} Floridi, L. and Sanders, J.~W. (2004). On the morality of artificial agents. \emph{Minds and Machines}, 14(3), 349--379.
+\bibitem[Matthias(2004)]{Matthias2004} Matthias, A. (2004). The responsibility gap: ascribing responsibility for the actions of learning automata. \emph{Ethics and Information Technology}, 6(3), 175--183.
+\bibitem[Sparrow(2007)]{Sparrow2007} Sparrow, R. (2007). Killer robots. \emph{Journal of Applied Philosophy}, 24(1), 62--77.
+\end{thebibliography}
+
+\end{document}

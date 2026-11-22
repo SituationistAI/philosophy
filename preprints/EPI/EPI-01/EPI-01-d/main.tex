@@ -1,0 +1,68 @@
+\documentclass{situationist-preprint}
+
+\title{Gettier's Original Cases Revisited}
+\msid{EPI-01-d}
+\msfamily{EPI-01}
+\msdiscipline{Epistemology}
+\mstype{Consequence}
+\mskeywords{Gettier problem; safety; false lemmas; epistemic luck; justified true belief}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Gettier's two cases are usually described as cases of inference from a justified false belief. We derive from the analysis of knowledge as safe, justified, true belief (EPI-01-a) what makes them failures of knowledge, and show that the false lemma is incidental. In each case the subject's basis is one on which, in close worlds, he believes the conclusion while it is false, because the fact that makes it true is unconnected to his basis and could easily have been otherwise. Variants with the false lemma removed remain failures of knowledge, and variants with the false lemma kept but the truth-maker secured are knowledge. The cases thus confirm the safety condition against the no-false-lemmas condition.
+\end{abstract}
+
+\section{The cases}
+
+\citet{Gettier1963} argued that justified true belief is not sufficient for knowledge, using two principles: that one can be justified in believing a falsehood, and that justification is preserved by competent deduction. In Case I, Smith has strong evidence that Jones will get the job and that Jones has ten coins in his pocket; he infers that the man who will get the job has ten coins in his pocket. Unknown to him, he himself will get the job, and he has ten coins in his pocket. In Case II, Smith has strong evidence that Jones owns a Ford, and infers, for a place name chosen at random, that either Jones owns a Ford or Brown is in Barcelona. Jones owns no Ford; by chance, Brown is in Barcelona.
+
+The first response, due to \citet{Clark1963}, located the defect in the false premise: knowledge requires that the belief not be inferred from a falsehood. EPI-01-a argues instead that knowledge is justified, safe belief, and that Gettier cases are exactly the justified true beliefs that are unsafe (its Theorem~3.3 and Corollary~3.4). We apply that analysis to Gettier's own cases.
+
+\section{The verdicts}
+
+Let $m_1$ be Smith's basis in Case I: deduction from his justified belief that Jones will get the job and has ten coins. Let $m_2$ be his basis in Case II: deduction from his justified belief that Jones owns a Ford.
+
+\begin{proposition}\label{p:case1}
+In Case I, Smith's belief on $m_1$ is justified, true and unsafe; hence it is not knowledge.
+\end{proposition}
+
+\begin{proof}
+Justification and truth are stipulated. The number of coins in Smith's own pocket is unconnected to $m_1$, which concerns Jones. A world in which Smith has spent one coin that morning, and everything bearing on $m_1$ is as before, is close to the actual world; in it Smith believes on $m_1$ that the man who will get the job has ten coins, and the belief is false. By Theorem~3.3 of EPI-01-a the case is a Gettier case, and by Corollary~3.4 the belief is not knowledge.
+\end{proof}
+
+\begin{proposition}\label{p:case2}
+In Case II, Smith's belief on $m_2$ is justified, true and unsafe; hence it is not knowledge.
+\end{proposition}
+
+\begin{proof}
+As before, with the close world one in which Brown has gone to Boston. Since the place name was chosen at random, the truth of the second disjunct is unconnected to $m_2$, and nothing about $m_2$ makes such a world remote.
+\end{proof}
+
+In both cases the truth of the belief depends on a fact that the basis does not track and that could easily have been otherwise. This is the double luck that \citet{Zagzebski1994} identified as the common structure of Gettier cases: bad luck makes the justifying evidence misleading, and good luck makes the belief true anyway. The safety analysis explains why the second piece of luck matters: it is the closeness of worlds in which the good luck fails that makes the belief unsafe.
+
+\section{The false lemma is incidental}
+
+\begin{corollary}\label{c:lemma}
+Neither the presence nor the absence of a false lemma settles whether the conclusion of an inference from justified premises is known.
+\end{corollary}
+
+\begin{proof}
+Remove the lemma from Case II: suppose Smith believes the disjunction on the basis of testimony from a usually reliable colleague who, on this occasion, is guessing about Brown and wrong about Jones. No false belief of Smith's figures in the basis, yet the world in which Brown is in Boston remains close and the belief remains unsafe. Conversely, keep the lemma but secure the truth-maker: suppose that in Case I the company's rules require the successful candidate to carry exactly ten coins to the interview, a rule Smith knows, and that Smith infers his conclusion from the false belief that Jones will be appointed together with this rule. The worlds in which the man who gets the job lacks ten coins are then remote, the belief is safe, and by Definition~2.3 of EPI-01-a it is knowledge, although a falsehood figures among its premises.
+\end{proof}
+
+The second variant is of the kind that \citet{Warfield2005} called knowledge from falsehood: the false belief is inessential, because the basis contains a further true belief that secures the conclusion. Clark's condition must be amended to accommodate such cases, and the amendments that succeed restrict the condition to falsehoods on which the safety of the belief depends.
+
+\section{Conclusion}
+
+Gettier's original cases are failures of knowledge because the subject's basis leaves close worlds in which he believes the conclusion while it is false. They are not failures of knowledge because a falsehood figures in the inference, and the cases show that the analysis of EPI-01-a, not the no-false-lemmas analysis, identifies what Gettier found.
+
+\begin{thebibliography}{9}\small
+\bibitem[Clark(1963)]{Clark1963} Clark, M. (1963). Knowledge and grounds: A comment on Mr. Gettier's paper. \emph{Analysis}, 24(2), 46--48.
+\bibitem[Gettier(1963)]{Gettier1963} Gettier, E.~L. (1963). Is justified true belief knowledge? \emph{Analysis}, 23(6), 121--123.
+\bibitem[Warfield(2005)]{Warfield2005} Warfield, T.~A. (2005). Knowledge from falsehood. \emph{Philosophical Perspectives}, 19, 405--416.
+\bibitem[Zagzebski(1994)]{Zagzebski1994} Zagzebski, L. (1994). The inescapability of Gettier problems. \emph{The Philosophical Quarterly}, 44(174), 65--73.
+\end{thebibliography}
+
+\end{document}

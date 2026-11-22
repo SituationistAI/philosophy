@@ -1,0 +1,184 @@
+\documentclass{situationist-preprint}
+
+\title{Quasi-Emotions and the Paradox of Fiction}
+\msid{AES-05-a}
+\msfamily{AES-05}
+\msdiscipline{Aesthetics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/AES/AES\_05.lean}
+\mskeywords{paradox of fiction; fear; quasi-emotion; belief condition; thought theory; make-believe; emotional response to fiction}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A spectator at a horror film trembles as the monster approaches, although she knows that there is no monster. The paradox of fiction arises from three claims that are individually plausible and jointly inconsistent: that we fear objects we know to be fictional, that fear requires the belief that its object exists and threatens, and that we do not believe this of objects we know to be fictional. We argue that the first claim is false. What the spectator undergoes is a quasi-emotion: a state that shares the physiological profile of fear, its arousal and its felt character, without the belief that fear requires. We show that rejecting the belief condition, as the thought theory does, misidentifies the object of the response, and that rejecting the disbelief claim, as theories of suspended disbelief do, cannot explain the absence of protective action. The quasi-emotional account explains both the intensity of the response and its practical inertness, which is what makes fiction a safe occasion for strong feeling. The inconsistency of the triad and the resolution are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Radford1975} asked how we can be moved by the fate of Anna Karenina, and concluded that our being so moved is irrational and incoherent: we respond with pity to what we know does not exist. \citet{Walton1978} sharpened the problem with the case of Charles, who watches a horror film in which a green slime oozes toward the camera. Charles's pulse quickens, his muscles tense, he grips the chair; afterwards he says that he was terrified of the slime. Yet he does not for a moment believe that the slime exists, and he does not flee the cinema or call the police.
+
+The paradox is the inconsistency of three claims:
+
+\begin{description}
+\item[(R)] Appreciators fear objects they know to be fictional.
+\item[(B)] To fear an object, one must believe that it exists and threatens.
+\item[(D)] One who knows an object to be fictional does not believe that it exists and threatens.
+\end{description}
+
+Each claim has been denied. \citet{Lamarque1981} and \citet{Carroll1990} deny (B): on the thought theory, emotions can be directed at the content of a thought entertained without belief, and Charles genuinely fears the thought of the slime. Defenders of a willing suspension of disbelief, in the phrase of \citet[ch.~XIV]{Coleridge1817}, deny (D). Radford accepts all three and accepts the incoherence. \citet{Walton1978,Walton1990} denies (R): Charles is not afraid of the slime, but it is fictional, in the game of make-believe he plays with the film, that he is; what he actually experiences is quasi-fear. \citet{Currie1990} develops a related view on which emotional responses to fiction are driven by imagining rather than belief, and \citet{GendlerKovakovich2006} argue on the contrary that such responses are genuine and rational emotions.
+
+We defend the denial of (R), in a form that does not depend on Walton's theory of make-believe: what appreciators experience are quasi-emotions, which share the physiological profile of emotions without their beliefs.
+
+\section{Framework}
+
+\begin{principle}[Belief condition]\label{p:belief}
+A subject fears an object only if she believes that the object exists and threatens her or someone she cares about.
+\end{principle}
+
+\begin{principle}[Disbelief]\label{p:disbelief}
+A subject who knows an object to be fictional does not believe that it exists and threatens.
+\end{principle}
+
+Principle~\ref{p:belief} is (B) and Principle~\ref{p:disbelief} is (D). Principle~\ref{p:belief} is the condition that individuates fear among the states with which it shares its bodily character. Fear, as MND-17 argues, represents its object as dangerous; the belief condition adds that the subject takes the danger to be actual. It is what distinguishes fear from excitement and from the arousal produced by a stimulant, and it is what makes fear assessable as reasonable or unreasonable in the light of evidence about danger.
+
+\begin{definition}[Physiological profile]\label{d:profile}
+The \emph{physiological profile} of an emotion is the pattern of bodily arousal and felt character typical of it: for fear, a quickened pulse, tensed muscles, a startle response and the felt quality of dread.
+\end{definition}
+
+\begin{definition}[Quasi-emotion]\label{d:quasi}
+A \emph{quasi-emotion} of kind $E$ directed at an object is a state with the physiological profile of $E$, directed at the object as it is represented or imagined, without the belief that $E$ requires. \emph{Quasi-fear} is the quasi-emotion of the kind of fear.
+\end{definition}
+
+\begin{assumption}[Profile]\label{a:profile}
+Appreciators who know an object to be fictional often exhibit, toward it, the physiological profile of fear.
+\end{assumption}
+
+\begin{assumption}[Motivational dependence]\label{a:motive}
+Fear motivates protective action, such as flight, warning or defence, toward its object only through the belief that the object exists and threatens.
+\end{assumption}
+
+\section{The argument}
+
+\begin{proposition}\label{p:triad}
+(R), (B) and (D) are jointly inconsistent.
+\end{proposition}
+
+\begin{proof}
+Suppose an appreciator fears an object she knows to be fictional. By (B) she believes it exists and threatens; by (D) she does not.
+\end{proof}
+
+At least one claim must go. Logic does not say which; the following two lemmas argue that it is not (B) or (D).
+
+\begin{lemma}[Against denying (B)]\label{l:thought}
+The thought theory misidentifies the object of the response.
+\end{lemma}
+
+\begin{proof}[Argument]
+On the thought theory, Charles fears the thought of the slime. But if fear represents its object as dangerous, Charles's fear of the thought represents the thought as dangerous, and Charles does not take it to be so: thoughts of slime do not threaten anyone, and he seeks them out. Nor does his response present itself as directed at a thought. He trembles at the slime, and what he reports, and what his attention follows, is the slime's approach. The theory keeps the response genuine by giving it an object it does not have.
+\end{proof}
+
+\begin{lemma}[Against denying (D)]\label{l:susp}
+No account on which appreciators believe, even momentarily, that fictional objects exist and threaten explains the absence of protective action.
+\end{lemma}
+
+\begin{proof}[Argument]
+A subject who fears an object she believes to exist and threaten is disposed to protect herself or others from it. Charles has no such disposition. He does not flee, warn the other spectators or call for help, and he would be puzzled by the suggestion. If he believed, even for a moment, that the slime was approaching, the absence of any such impulse would be inexplicable \citep{Walton1978}. Suspension of disbelief describes the appreciator's absorption, not a change in what she believes.
+\end{proof}
+
+\begin{theorem}[Resolution]\label{t:main}
+Given Principles~\ref{p:belief} and~\ref{p:disbelief}, an appreciator who knows an object to be fictional and exhibits the profile of fear toward it does not fear it, but quasi-fears it.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:disbelief} she does not believe the object exists and threatens, so by Principle~\ref{p:belief} she does not fear it. She exhibits the profile of fear toward it, which Assumption~\ref{a:profile} records as common, and lacks the belief; by Definition~\ref{d:quasi} she quasi-fears it.
+\end{proof}
+
+\begin{corollary}[Practical inertness]\label{c:inert}
+Quasi-fear of an object known to be fictional motivates no protective action toward it.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:motive}, protective motivation requires the belief that the object exists and threatens, which Principle~\ref{p:disbelief} excludes.
+\end{proof}
+
+Corollary~\ref{c:inert} explains what the denials of (B) and (D) left unexplained: the response can be as intense as fear, since it shares fear's profile, and yet it issues in no flight. Quasi-emotions are in this sense bounded. They are directed at represented events, they lack the practical consequences of emotions directed at real ones, and their course is governed by the work that elicits them. AES-06-a relies on this boundedness to explain why tragedy can be sought despite the pain it causes.
+
+\section{Objections}
+
+\begin{objection}[Phenomenology]
+Charles's experience feels exactly like fear. To deny that it is fear is to override the subject's own report.
+\end{objection}
+
+\begin{reply}
+The account grants that it feels like fear: sharing the profile is what makes it quasi-fear rather than something else. \enquote{Quasi} does not mean weaker. What the report gets wrong is the classification, and the subject is not authoritative about it, since the feature that distinguishes fear from quasi-fear, the belief in a present danger, is one Charles himself denies having.
+\end{reply}
+
+\begin{objection}[Alief]
+\citet{Gendler2008} argues that much behaviour is governed by alief, an automatic representational state that does not respond to evidence as belief does. Charles's response is fear grounded in an alief that the slime approaches; Principle~\ref{p:belief} should be weakened to require only alief.
+\end{objection}
+
+\begin{reply}
+The weakening would cost Principle~\ref{p:belief} its point. Fear grounded in belief is answerable to evidence and motivates protective action; a state grounded only in alief does neither, as Corollary~\ref{c:inert} records. A state that has the profile of fear without these features is what Definition~\ref{d:quasi} calls quasi-fear, and the alief may well be part of its mechanism. Whether one also calls it fear is a verbal choice; the substantive claim, that it lacks fear's doxastic and motivational role, is common ground.
+\end{reply}
+
+\begin{objection}[Genuine and rational]
+\citet{GendlerKovakovich2006} argue that responses to fiction are genuine emotions, since they draw on the same affective systems that guide practical reasoning about real situations and are assessable as fitting or unfitting.
+\end{objection}
+
+\begin{reply}
+Both points hold of quasi-emotions. They draw on the systems that produce emotions, which is why their profile is the same, and they are assessable for fit to the represented situation: quasi-fear of a harmless fictional kitten is unfitting. The argument shows that responses to fiction are continuous with emotions in their mechanism and their norms of fit, not that they include the belief that fear requires.
+\end{reply}
+
+\begin{objection}[Ad hoc]
+Quasi-emotions are posited only to save the belief condition.
+\end{objection}
+
+\begin{reply}
+The category is independently needed. Responses with the profile of fear and without its belief occur in vivid imagination, in rehearsing a feared conversation, and in dreams recalled as dreams. Fiction is one occasion among others for a kind of state that a theory of emotion must recognize anyway \citep{Currie1990}.
+\end{reply}
+
+The account does not deny that fiction can cause genuine emotions. A spectator who leaves a film about sharks afraid to swim fears real sharks, and fear for a real class of people depicted in a novel is genuine pity. The thesis concerns responses directed at objects the appreciator knows to be fictional.
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/AES/AES_05.lean}. Proposition~\ref{p:triad} is a theorem of pure logic, stated for arbitrary predicates; Principles~\ref{p:belief} and~\ref{p:disbelief} and Assumption~\ref{a:motive} are axioms, and Assumption~\ref{a:profile} enters as a hypothesis. The resolution reads:
+
+\begin{lstlisting}
+theorem resolution (x : Subject) (o : Object)
+    (hk : KnowsFictional x o) (hp : FearProfile x o) :
+    QuasiFears x o ∧ ¬ Fears x o
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.AES_05.triad_inconsistent' does not depend on any axioms
+'Philosophy.AES_05.resolution' depends on axioms:
+  [BelievesThreat, FearProfile, Fears, KnowsFictional, Object,
+   Subject, belief_condition, disbelief]
+'Philosophy.AES_05.no_protective_motive' depends on axioms:
+  [KnowsFictional, Object, ProtectiveMotive, Subject, disbelief,
+   motivation_needs_belief]
+\end{lstlisting}
+
+(each name prefixed by \texttt{Philosophy.AES\_05.}). The first six names in the second list are primitives; \texttt{belief\_condition} and \texttt{disbelief} are Principles~\ref{p:belief} and~\ref{p:disbelief}, and \texttt{motivation\_needs\_belief} is Assumption~\ref{a:motive}. The formalization confirms that logic alone leaves open which member of the triad to reject: the choice rests on Lemmas~\ref{l:thought} and~\ref{l:susp}, which are not formalized.
+
+\section{Conclusion}
+
+We do not fear what we know to be fictional. The triad of the paradox is inconsistent, and of its three claims the one to abandon is that appreciators fear fictional objects: the thought theory gives the response the wrong object, and suspended disbelief cannot explain why no one flees. What appreciators undergo is quasi-fear, which shares the physiological profile of fear without its belief, and so has its intensity without its practical consequences.
+
+\begin{thebibliography}{99}\small
+\bibitem[Carroll(1990)]{Carroll1990} Carroll, N. (1990). \emph{The Philosophy of Horror, or Paradoxes of the Heart}. Routledge.
+\bibitem[Coleridge(1817)]{Coleridge1817} Coleridge, S.~T. (1817). \emph{Biographia Literaria}. Rest Fenner.
+\bibitem[Currie(1990)]{Currie1990} Currie, G. (1990). \emph{The Nature of Fiction}. Cambridge University Press.
+\bibitem[Gendler(2008)]{Gendler2008} Gendler, T.~S. (2008). Alief and belief. \emph{The Journal of Philosophy}, 105(10), 634--663.
+\bibitem[Gendler and Kovakovich(2006)]{GendlerKovakovich2006} Gendler, T.~S. and Kovakovich, K. (2006). Genuine rational fictional emotions. In M. Kieran (ed.), \emph{Contemporary Debates in Aesthetics and the Philosophy of Art}. Blackwell.
+\bibitem[Lamarque(1981)]{Lamarque1981} Lamarque, P. (1981). How can we fear and pity fictions? \emph{British Journal of Aesthetics}, 21(4), 291--304.
+\bibitem[Radford(1975)]{Radford1975} Radford, C. (1975). How can we be moved by the fate of Anna Karenina? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 49, 67--80.
+\bibitem[Walton(1978)]{Walton1978} Walton, K.~L. (1978). Fearing fictions. \emph{The Journal of Philosophy}, 75(1), 5--27.
+\bibitem[Walton(1990)]{Walton1990} Walton, K.~L. (1990). \emph{Mimesis as Make-Believe}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,56 @@
+\documentclass{situationist-preprint}
+
+\title{Zeno's Achilles and Convergent Series}
+\msid{TSM-13-a}
+\msfamily{TSM-13}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/TSM/TSM\_13.lean}
+\mskeywords{Zeno; Achilles; convergent series; supertasks; motion}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Achilles, running ten times as fast as the tortoise, gives it a head start. Zeno argues that he can never overtake it: whenever he reaches the point where the tortoise was, it has moved on. We show that the infinitely many catch-up intervals have a finite sum, compute it, and argue that the residual worry, that Achilles must complete infinitely many tasks, is answered once the tasks are recognized as parts of a single motion rather than separate actions.
+\end{abstract}
+
+\paragraph{Note on the revision.} Equation~\eqref{eq:partial} of the version of 6 October 2026 stated the partial sums with an index shifted by one, so that the $n$-th partial sum was given as the $(n+1)$-th. The error was detected during formalization. The limit and the main result are unchanged.
+
+\section{The argument and its resolution}
+
+Zeno's argument is reported by \citet[VI.9, 239b14--18]{Aristotle}. Let the tortoise start $d$ metres ahead, and let Achilles run ten times as fast. Achilles reaches the tortoise's starting point after covering $d$; the tortoise has meanwhile moved $d/10$. He covers that distance; the tortoise has moved $d/100$. Zeno concludes that Achilles must complete infinitely many stages before overtaking the tortoise, and so never overtakes it.
+
+The distance Achilles covers in the first $n$ stages is
+\begin{equation}\label{eq:partial}
+S_n = d\left(1 + \frac{1}{10} + \dots + \frac{1}{10^{n-1}}\right) = \frac{10d}{9}\left(1 - \frac{1}{10^{n}}\right).
+\end{equation}
+
+\begin{theorem}\label{t:main}
+The partial sums $S_n$ are increasing and bounded above by $10d/9$, and converge to $10d/9$. Achilles overtakes the tortoise at the point $10d/9$.
+\end{theorem}
+
+\begin{proof}
+By equation~\eqref{eq:partial}, $S_n < 10d/9$ for every $n$, and $10d/9 - S_n = 10d/(9 \cdot 10^n)$, which tends to $0$. At constant speed, the time Achilles takes to cover $10d/9$ is finite, and at that moment the tortoise, which has covered $d/9$ from a start $d$ ahead, is at the same point.
+\end{proof}
+
+The mathematical resolution has been available since the theory of limits \citep{Grunbaum1967,Salmon1970}. The philosophical residue, pressed by \citet{Thomson1954}, is that completing infinitely many tasks seems impossible even when their durations sum to a finite time. \citet{Benacerraf1962} showed that Thomson's argument against supertasks is invalid. We add that the stages of Achilles' run are not tasks that he must perform one after another; they are segments into which an observer may divide a single continuous motion, and nothing requires the motion to be performed segment by segment.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/TSM/TSM_13.lean} proves the arithmetic content of equation~\eqref{eq:partial} in integer form: writing $G_n = 1 + 10 + \dots + 10^{n-1}$, it proves $9 G_n + 1 = 10^n$, from which the closed form of $S_n = d\,G_n/10^{n-1}$ follows. It also proves that $9 G_n < 10^n$, the integer form of the bound $S_n < 10d/9$. The limit itself requires real analysis and is not formalized.
+
+\begin{lstlisting}
+theorem repunit (n : Nat) : 9 * geom n + 1 = 10 ^ n
+\end{lstlisting}
+
+\begin{thebibliography}{9}\small
+\bibitem[Aristotle(n.d.)]{Aristotle} Aristotle. \emph{Physics}.
+\bibitem[Benacerraf(1962)]{Benacerraf1962} Benacerraf, P. (1962). Tasks, super-tasks, and the modern Eleatics. \emph{The Journal of Philosophy}, 59(24), 765--784.
+\bibitem[Grünbaum(1967)]{Grunbaum1967} Grünbaum, A. (1967). \emph{Modern Science and Zeno's Paradoxes}. Wesleyan University Press.
+\bibitem[Salmon(1970)]{Salmon1970} Salmon, W.~C. (Ed.) (1970). \emph{Zeno's Paradoxes}. Bobbs-Merrill.
+\bibitem[Thomson(1954)]{Thomson1954} Thomson, J.~F. (1954). Tasks and super-tasks. \emph{Analysis}, 15(1), 1--13.
+\end{thebibliography}
+
+\end{document}

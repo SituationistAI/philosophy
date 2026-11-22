@@ -1,0 +1,248 @@
+\documentclass{situationist-preprint}
+
+\title{On the Existence of God\\[0.4em]\large Volume I: The Modal Argument}
+\msid{REL-01-a}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript, Volume I of XI}
+\mslean{lean/Philosophy/REL/REL\_01.lean}
+\mskeywords{ontological argument; modal logic; S5; maximal greatness; possibility premise; formal verification}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This work argues that a maximally great being exists. Volume I presents the main argument: in the modal system S5, the possibility that a maximally great being exists entails that such a being exists necessarily, and therefore actually. The argument is formalized in Lean 4, and the formalization makes explicit that its conclusion depends on exactly one substantive premise, the possibility premise, together with the S5 conditions on accessibility. Since the same framework validates the converse argument from the possibility that no maximally great being exists, the dispute reduces to a choice between two possibility premises. Volume III argues that the premise of the original argument is better supported than its converse. Volume II shows that considerations of metaphysical dependence converge on the same object; Volumes IV to IX characterize that object and answer objections; Volume X collects the formal material.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Modal Argument & 1--388 \\
+II & Dependence and the Cosmological Argument & 389--790 \\
+III & The Possibility Premise & 791--1401 \\
+IV & The Divine Attributes & 1402--1757 \\
+V & Objections from Logic and Semantics & 1758--2204 \\
+VI & Objections from Evil and Hiddenness & 2205--2602 \\
+VII & Objections from the Sciences & 2603--2914 \\
+VIII & Uniqueness and Simplicity & 2915--3203 \\
+IX & Divine Agency & 3204--3537 \\
+X & Formal Appendices & 3538--3939 \\
+XI & Bibliography and Indices & 3940--4180 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+The ontological argument has been refuted many times, and has survived each refutation. Its survival is not owed to the ingenuity of its defenders alone. The argument has a structure that is unusually easy to state and unusually hard to evaluate: its logic is simple, its premises are few, and everything turns on whether one of those premises can be known. This work takes advantage of the first feature and confronts the second.
+
+Our method is to separate, as cleanly as possible, the questions that formal methods can settle from those they cannot. The logical core of the argument is formalized and machine-checked; there is therefore no longer any question about whether the conclusion follows from the premises. What remains is the question of whether the premises are true, and in particular whether it is possible that a maximally great being exists. That question is philosophical, and the formalization does not answer it. It does, however, sharpen it, by showing that nothing else is at stake. We regard this as the main contribution of Volume I.
+
+A word on scope. The work concludes that a maximally great being exists, and that this being is omnipotent, omniscient and morally perfect. It does not conclude that this being is the God of any particular tradition, nor that it acts in the world in any particular way. The question of divine agency is taken up in Volume IX, where we argue that the main result leaves the causal role of the maximally great being undetermined. Readers looking for a defence of a particular religion will not find one here.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & The modal framework & 19 \\
+3 & The argument & 41 \\
+4 & What the formalization establishes & 61 \\
+5 & The possibility premise: a first statement & 88 \\
+6 & Maximal greatness and the Barcan formula & 127 \\
+7 & The choice of S5 & 171 \\
+8 & Comparison with Gödel's argument & 236 \\
+9 & Summary and plan of the remaining volumes & 349 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+\subsection{The question}
+
+Does God exist? The question is among the oldest in philosophy, and among the few on which no consensus has emerged. Arguments for an affirmative answer fall into a small number of families: ontological arguments, which proceed from the concept of God; cosmological arguments, which proceed from the existence or dependence of the world; teleological arguments, which proceed from order or fine-tuning; and arguments from religious experience or from morality. This work is concerned primarily with the first family, and secondarily, in Volume II, with the second. The teleological argument is discussed and rejected in REL-10; the argument from religious experience in REL-21.
+
+Ontological arguments have a distinctive status. If sound, they establish not merely that God exists, but that God exists necessarily, and they do so a priori. This is why they have attracted both the strongest commitment and the strongest suspicion. It is also why they are the arguments best suited to formal treatment: their premises concern concepts and modal relations, not empirical facts, and their validity can in principle be settled by logic alone.
+
+\subsection{The ontological tradition}
+
+The tradition begins with Anselm, who argued in the second and third chapters of the \emph{Proslogion} that a being than which nothing greater can be conceived must exist in reality, and indeed cannot be conceived not to exist \citep{Anselm}. Descartes gave a different argument in the fifth Meditation, from the idea of a supremely perfect being whose essence includes existence \citep{Descartes}. Leibniz accepted the Cartesian argument but observed that it was incomplete: it shows that God exists if God is possible, and the possibility must be demonstrated \citep{Leibniz}. Kant's objection that existence is not a real predicate was taken for two centuries to dispose of the argument altogether \citep{Kant}.
+
+Twentieth-century work revived the argument in modal form. \citet{Malcolm1960} and \citet{Hartshorne1962} distinguished a second argument in Anselm, concerning necessary existence, from the first, concerning existence simpliciter, and argued that Kant's objection does not touch the second. \citet{Plantinga1974} gave the argument its canonical contemporary form, in terms of possible worlds and the modal system S5, and drew the conclusion that it is not a successful proof but a rational one: rational for anyone who accepts its central premise. Gödel's own ontological argument, circulated privately and published posthumously \citep{Godel1995}, used a second-order modal logic and a theory of positive properties; it was shown by \citet{Sobel1987} to entail modal collapse, the thesis that every truth is necessary, and emended by \citet{Anderson1990} to avoid it. \citet{Oppy1995} gives the most comprehensive critical survey of these and other versions.
+
+Two developments of the last fifteen years bear directly on our project. \citet{Oppenheimer2011} used an automated reasoning system to find a simplification of Anselm's argument in which one premise does all the work. \citet{Benzmuller2014} verified Gödel's argument and Sobel's collapse result with higher-order automated theorem provers. Both works show that the logical structure of ontological arguments is now a matter for machine verification. Neither attempts what we attempt here: to use the formalization to isolate the single premise on which the argument rests, and then to defend that premise at length.
+
+\subsection{Plan of the volume}
+
+Chapter~2 sets out the modal framework. Chapter~3 states and proves the main result, with reference to its formalization. Chapter~4 discusses what the formalization does and does not establish, and records the converse argument. Chapters~5 to 8 take up the four questions that Chapter~4 leaves open: the content of the possibility premise, the treatment of existence, the choice of S5, and the relation of our argument to Gödel's. Chapter~9 summarizes the volume and introduces the rest of the work.
+
+\section{The modal framework}
+
+\subsection{Worlds and accessibility}
+
+We work with a possible-worlds semantics for metaphysical modality. There is a non-empty set $W$ of worlds, a distinguished world $@ \in W$, the actual world, and an accessibility relation $R$ on $W$. Propositions are subsets of $W$, or equivalently functions from $W$ to truth values. For a proposition $p$ and a world $w$, we write $\nec p$ for the proposition that is true at $w$ if and only if $p$ is true at every world accessible from $w$, and $\pos p$ for the proposition that is true at $w$ if and only if $p$ is true at some world accessible from $w$.
+
+We assume that $R$ is an equivalence relation.
+
+\begin{assumption}[S5]\label{a:s5}
+For all worlds $w$, $v$, $u$: (i) $wRw$; (ii) if $wRv$ then $vRw$; (iii) if $wRv$ and $vRu$ then $wRu$.
+\end{assumption}
+
+The choice of S5 is the most contested formal assumption of the argument, and Chapter~7 is devoted to it. For now we note two points. First, S5 is the logic most commonly taken to govern metaphysical necessity, on the ground that what is metaphysically possible does not vary from world to world \citep{Williamson2013}. Second, some philosophers have argued that the logic of metaphysical modality is weaker, and in particular that it fails to validate the S4 principle $\nec p \to \nec\nec p$ \citep{Salmon1989}. Since our argument uses the S5 principle that whatever is possibly necessary is necessary (Lemma~3.3 below), it does not survive the move to a weaker logic. Companion manuscript REL-01-b gives a version of the argument that does not use the S5 axiom, at the cost of a stronger possibility premise.
+
+\subsection{Beings and existence}
+
+We assume a constant domain $B$ of beings, and an existence predicate $E$ such that $E(x, w)$ holds if and only if $x$ exists at $w$. A constant domain validates the Barcan formula, and with it a form of necessitism, the view that necessarily everything is necessarily something \citep{Williamson2013}. The existence predicate allows us to distinguish between being in the domain and existing at a world, so that a being may be in the domain while failing to exist at some worlds. Chapter~6 discusses whether the argument can be reformulated for variable domains; we show there that it can, at the cost of an additional premise.
+
+\subsection{Maximal greatness}
+
+\begin{definition}\label{d:excellence}
+A being $x$ is \emph{maximally excellent} at a world $w$ if and only if $x$ is omnipotent, omniscient and morally perfect at $w$.
+\end{definition}
+
+\begin{definition}\label{d:existence}
+For a being $x$ and a world $w$, $E(x,w)$ holds if and only if $x$ exists at $w$.
+\end{definition}
+
+\begin{definition}\label{d:greatness}
+A being $x$ is \emph{maximally great} at a world $w$ if and only if, at every world $v$ accessible from $w$, $x$ exists and is maximally excellent at $v$. In symbols:
+\[
+\mathrm{MG}(x, w) \iff \forall v\,(wRv \to E(x,v) \wedge \mathrm{ME}(x,v)).
+\]
+\end{definition}
+
+Definition~\ref{d:greatness} follows \citet{Plantinga1974}. It builds necessary existence into maximal greatness: a maximally great being is one that exists and is maximally excellent in every accessible world. This feature is essential to the argument, and it is the target of the objection, discussed in Volume V, that the definition begs the question. We note here only that the definition does not by itself imply that anything is maximally great. It defines a property, and the question whether that property is possibly instantiated is precisely the question of the possibility premise.
+
+\section{The argument}
+
+\subsection{The premise}
+
+\begin{assumption}[Possibility premise]\label{a:possibility}
+At the actual world, it is possible that some being is maximally great:
+\[
+@ \in \pos\,\exists x\, \mathrm{MG}(x, \cdot).
+\]
+\end{assumption}
+
+This is the only substantive premise of the argument. Assumption~\ref{a:s5} is a premise about the logic of modality, and Definitions~\ref{d:excellence} to \ref{d:greatness} introduce terms.
+
+\subsection{Two lemmas}
+
+\begin{lemma}\label{l:rigid}
+If $wRv$ and $x$ is maximally great at $v$, then $x$ is maximally great at every world accessible from $w$.
+\end{lemma}
+
+\begin{proof}
+Let $u$ be accessible from $w$, and let $u'$ be accessible from $u$. We must show that $x$ exists and is maximally excellent at $u'$. From $wRv$ we have $vRw$ by symmetry, and with $wRu$, $vRu$ by transitivity; with $uRu'$, $vRu'$ by transitivity again. Since $x$ is maximally great at $v$, it exists and is maximally excellent at every world accessible from $v$, and in particular at $u'$.
+\end{proof}
+
+\begin{lemma}\label{l:s5}
+For every proposition $p$ and world $w$: if $\pos\nec p$ holds at $w$, then $\nec p$ holds at $w$.
+\end{lemma}
+
+\begin{proof}
+Suppose $wRv$ and $\nec p$ holds at $v$. Let $u$ be accessible from $w$. By symmetry and transitivity, $vRu$, so $p$ holds at $u$.
+\end{proof}
+
+Lemma~\ref{l:s5} is the characteristic principle of S5. Lemma~\ref{l:rigid} is the form in which we use it: since maximal greatness is defined as a necessary property, its possibility entails its necessity.
+
+\subsection{The main result}
+
+\begin{theorem}\label{t:main}
+Necessarily, some being is maximally great: $@ \in \nec\,\exists x\, \mathrm{MG}(x,\cdot)$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:possibility}, there is a world $v$ with $@Rv$ and a being $x$ maximally great at $v$. Let $u$ be accessible from $@$. By Lemma~\ref{l:rigid}, $x$ is maximally great at $u$.
+\end{proof}
+
+\begin{corollary}\label{c:actual}
+Some being exists and is maximally excellent at the actual world.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main} and reflexivity, some $x$ is maximally great at $@$. By Definition~\ref{d:greatness} and reflexivity again, $x$ exists and is maximally excellent at $@$.
+\end{proof}
+
+\subsection{Formalization}
+
+The framework, the definitions and the argument are formalized in the Lean 4 module \nolinkurl{Philosophy/REL/REL_01.lean}. Worlds, the actual world, accessibility, beings, existence and maximal excellence are introduced as primitive constants; the S5 conditions and the possibility premise are introduced as axioms; maximal greatness is defined. The main result reads as follows.
+
+\begin{lstlisting}
+/-- Theorem 3.4 (main result). Necessarily, a maximally great being exists. -/
+theorem necessary_existence : Box SomeMaximallyGreat actual := by
+  intro u hu
+  obtain ⟨v, hv, x, hx⟩ := possibility_premise
+  exact ⟨x, maximal_greatness_rigid hv hx u hu⟩
+\end{lstlisting}
+
+The module builds without error and contains no unproved statements. Lean's \texttt{\#print axioms} command reports that the main result depends on the following axioms, and on no others:
+
+\begin{lstlisting}
+'Philosophy.REL_01.necessary_existence' depends on axioms:
+  [Being, Exists, MaximallyExcellent, R, R_refl, R_symm, R_trans,
+   World, actual, possibility_premise]
+\end{lstlisting}
+
+All of these except the last are either primitive constants of the framework or the three S5 conditions. The list therefore certifies what we claimed in Section~3.1: the argument rests on one substantive premise.
+
+\section{What the formalization establishes}
+
+\subsection{Validity}
+
+The formalization establishes that Theorem~\ref{t:main} follows from Assumption~\ref{a:s5} and Assumption~\ref{a:possibility}. It establishes nothing about the truth of either assumption, and nothing about whether the formal definitions capture the informal notions they are meant to represent. These are limits of every formalization, not peculiarities of this one, but they matter more here than in most mathematical cases, because the premises of the argument are precisely what is in dispute.
+
+\subsection{The converse argument}
+
+The point can be made precise. The same framework validates the following result, also proved in the module, without the possibility premise.
+
+\begin{proposition}\label{p:converse}
+If, at the actual world, it is possible that no being is maximally great, then no being is maximally great at the actual world.
+\end{proposition}
+
+\begin{proof}
+Suppose some $x$ is maximally great at $@$, and let $v$ be accessible from $@$. By Lemma~\ref{l:rigid}, $x$ is maximally great at $v$. Hence no world accessible from $@$ is one at which no being is maximally great, contrary to the hypothesis.
+\end{proof}
+
+\begin{lstlisting}
+'Philosophy.REL_01.converse_argument' depends on axioms:
+  [Being, Exists, MaximallyExcellent, R, R_refl, R_symm, R_trans,
+   World, actual]
+\end{lstlisting}
+
+Proposition~\ref{p:converse} is the formal counterpart of an objection that has accompanied the modal ontological argument since \citet{Plantinga1974} himself: in S5, the possibility of a maximally great being and the possibility of its absence are incompatible, and whichever one accepts decides the question. The formalization does not resolve this symmetry. What it does is show that the symmetry is the whole of the matter. There is no further logical gap in which a critic could locate the failure of the argument, and no further logical step on which a defender could rely. One must choose between Assumption~\ref{a:possibility} and the hypothesis of Proposition~\ref{p:converse}, and the choice cannot be made on logical grounds.
+
+\subsection{The task of the remaining volumes}
+
+It follows that the case for the conclusion of this work rests on the case for the possibility premise against its converse. Volume III makes that case. Its central argument is that the possibility premise is supported by considerations that do not presuppose the conclusion, namely the coherence of the concept of maximal excellence (Volume IV) and the convergence of cosmological considerations on a necessary being (Volume II), while the converse premise is supported only by the absence of evidence for the existence of a maximally great being, which does not bear on its possibility.
+
+% --------------------------------------------------------------------------
+% Pilot excerpt: Volume I continues with Chapters 5 to 9.
+% --------------------------------------------------------------------------
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 5 to 9.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(1990)]{Anderson1990} Anderson, C.~A. (1990). Some emendations of Gödel's ontological proof. \emph{Faith and Philosophy}, 7(3), 291--303.
+\bibitem[Anselm(1078)]{Anselm} Anselm of Canterbury (1078). \emph{Proslogion}, chapters 2--3.
+\bibitem[Benzmüller and Woltzenlogel~Paleo(2014)]{Benzmuller2014} Benzmüller, C. and Woltzenlogel Paleo, B. (2014). Automating Gödel's ontological proof of God's existence with higher-order automated theorem provers. In \emph{Proceedings of the 21st European Conference on Artificial Intelligence (ECAI 2014)} (pp.~93--98). IOS Press.
+\bibitem[Descartes(1641)]{Descartes} Descartes, R. (1641). \emph{Meditationes de prima philosophia}, Meditation V.
+\bibitem[Gödel(1995)]{Godel1995} Gödel, K. (1995). Ontological proof. In S.~Feferman et al. (Eds.), \emph{Collected Works, Volume III: Unpublished Essays and Lectures} (pp.~403--404). Oxford University Press.
+\bibitem[Hartshorne(1962)]{Hartshorne1962} Hartshorne, C. (1962). \emph{The Logic of Perfection}. Open Court.
+\bibitem[Kant(1781)]{Kant} Kant, I. (1781). \emph{Kritik der reinen Vernunft}, A592--602/B620--630.
+\bibitem[Leibniz(1676)]{Leibniz} Leibniz, G.~W. (1676). Quod ens perfectissimum existit. In \emph{Sämtliche Schriften und Briefe}, Series VI, Volume 3.
+\bibitem[Malcolm(1960)]{Malcolm1960} Malcolm, N. (1960). Anselm's ontological arguments. \emph{The Philosophical Review}, 69(1), 41--62.
+\bibitem[Oppenheimer and Zalta(2011)]{Oppenheimer2011} Oppenheimer, P.~E. and Zalta, E.~N. (2011). A computationally-discovered simplification of the ontological argument. \emph{Australasian Journal of Philosophy}, 89(2), 333--349.
+\bibitem[Oppy(1995)]{Oppy1995} Oppy, G. (1995). \emph{Ontological Arguments and Belief in God}. Cambridge University Press.
+\bibitem[Plantinga(1974)]{Plantinga1974} Plantinga, A. (1974). \emph{The Nature of Necessity}. Clarendon Press.
+\bibitem[Salmon(1989)]{Salmon1989} Salmon, N. (1989). The logic of what might have been. \emph{The Philosophical Review}, 98(1), 3--34.
+\bibitem[Sobel(1987)]{Sobel1987} Sobel, J.~H. (1987). Gödel's ontological proof. In J.~J. Thomson (Ed.), \emph{On Being and Saying: Essays for Richard Cartwright} (pp.~241--261). MIT Press.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

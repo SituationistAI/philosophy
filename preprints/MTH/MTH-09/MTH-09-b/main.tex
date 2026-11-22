@@ -1,0 +1,64 @@
+\documentclass{situationist-preprint}
+
+\title{Unsurveyable Proofs}
+\msid{MTH-09-b}
+\msfamily{MTH-09}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{surveyability; proof; four colour theorem; Wittgenstein; Tymoczko; formal verification; a priori knowledge}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Wittgenstein held that a proof must be surveyable, and Tymoczko concluded that the computer-assisted proof of the four colour theorem introduced experiment into mathematics. MTH-09-a argues that a proof is a derivation acceptable to a competent community and that a formally verified derivation is a proof whether or not it is surveyed. We develop the case for unsurveyable proofs. We distinguish three things surveyability might be required for (reproducibility, warrant and understanding) and argue that the first two are secured by a surveyable checker and that the third is a condition on explanation, not on proof. The requirement of surveyability therefore confuses being a proof with explaining.
+\end{abstract}
+
+\section{The surveyability requirement}
+
+\citet[Part III]{Wittgenstein1956} held that a proof must be surveyable: it must be possible to take it in and reproduce it, as one reproduces a picture, and a configuration of signs that cannot be so reproduced does not prove anything. \citet{Tymoczko1979} applied the requirement to the proof of the four colour theorem by \citet{AppelHaken1977}. No mathematician can survey its reducibility computations; the community accepts it because it trusts the computer; and trust in a computer is trust in an experiment. Either the theorem is not proved, or the concept of proof has changed to admit empirical elements.
+
+MTH-09-a rejects the requirement. A proof is a derivation acceptable to a competent community (Definition~2.4 of MTH-09-a), acceptability being certification by a method the community is warranted in relying on (Definition~2.3). By the de Bruijn condition (Assumption~2.6), a small proof-checking kernel whose own correctness can be surveyed is such a method. Hence every formally verified derivation is a proof (Theorem~3.1), whether or not anyone surveys it (Corollary~3.2), and surveyability is not necessary for proof (Proposition~3.4).
+
+\section{What surveyability is for}
+
+The requirement is best assessed by asking what it would secure. Three answers are available.
+
+\paragraph{Reproducibility.} Wittgenstein's own emphasis was on reproduction: a proof is a pattern that can be recognized and copied with certainty. A formal proof object is reproducible in a stronger sense than a written argument. It can be copied without loss and rechecked by any instance of the kernel, and by independently written kernels. The pattern that must be reproducible is the kernel and its specification, and these are small enough to survey.
+
+\paragraph{Warrant.} Tymoczko's worry is that reliance on a computer makes the warrant empirical. \citet{Burge1998} argued that the warrant a mathematician has from a computer's output can be a priori in the way testimony from another mathematician can be: the reliability of the source is a background condition, not a premise in the justification. Even granting Tymoczko the empirical character of the warrant, the point does not distinguish machine checking from long human proofs, which are accepted on the testimony of referees and on the reliability of memory, as \citet{DetlefsenLuker1980} observed. What matters for acceptability is that the community is warranted in relying on the method, and the de Bruijn condition reduces that warrant to the survey of a small program.
+
+\paragraph{Understanding.} What a reader loses when a proof cannot be surveyed is the ability to see why the conclusion holds. But that is the property MTH-08-a calls explanation, and MTH-08-a argues that it is distinct from proof-hood: a proof explains when it derives its conclusion uniformly from a salient feature, and a proof by exhaustion of cases is a proof that does not. The surveyability requirement takes a condition on explanation for a condition on proof.
+
+\begin{proposition}\label{p:sep}
+Of the goods surveyability secures, reproducibility and warrant are secured for a formally verified derivation by the survey of its checker, and understanding is not a condition of proof.
+\end{proposition}
+
+\section{Cases}
+
+The Kepler conjecture illustrates the point. The proof of \citet{Hales2005} could not be fully checked by its referees, and the community's acceptance was correspondingly qualified. The formal proof completed in the Flyspeck project \citep{HalesEtAl2017} removed the qualification without making the proof any more surveyable: what changed was the method of certification, not the size of the derivation. The proof of the Boolean Pythagorean triples theorem \citep{HeuleEtAl2016}, a certificate of some two hundred terabytes checked by a separate program, is further from survey than any earlier proof and is a proof for the same reason.
+
+\begin{objection}
+The kernel is itself run on hardware, and the hardware is known to work only empirically.
+\end{objection}
+
+\begin{reply}
+So is the human brain, and the possibility of a hardware fault is of the same order as that of a slip in human checking. MTH-09-a does not require infallible methods, only warranted reliance. Rechecking on independent hardware with independent kernels lowers the probability of error far below that of a refereed long proof.
+\end{reply}
+
+\section{Conclusion}
+
+Unsurveyable proofs are proofs. Surveyability was demanded for reproducibility, for warrant and for understanding; the first two are secured by a surveyable checker, and the third is what MTH-08 calls explanation, which many proofs lack without ceasing to be proofs.
+
+\begin{thebibliography}{99}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Burge(1998)]{Burge1998} Burge, T. (1998). Computer proof, apriori knowledge, and other minds. \emph{Philosophical Perspectives}, 12, 1--37.
+\bibitem[Detlefsen and Luker(1980)]{DetlefsenLuker1980} Detlefsen, M. and Luker, M. (1980). The four-color theorem and mathematical proof. \emph{The Journal of Philosophy}, 77(12), 803--820.
+\bibitem[Hales(2005)]{Hales2005} Hales, T.~C. (2005). A proof of the Kepler conjecture. \emph{Annals of Mathematics}, 162(3), 1065--1185.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[Heule et~al.(2016)]{HeuleEtAl2016} Heule, M.~J.~H., Kullmann, O. and Marek, V.~W. (2016). Solving and verifying the Boolean Pythagorean triples problem via cube-and-conquer. In \emph{Theory and Applications of Satisfiability Testing (SAT 2016)}, Lecture Notes in Computer Science 9710, 228--245. Springer.
+\bibitem[Tymoczko(1979)]{Tymoczko1979} Tymoczko, T. (1979). The four-color problem and its philosophical significance. \emph{The Journal of Philosophy}, 76(2), 57--83.
+\bibitem[Wittgenstein(1956)]{Wittgenstein1956} Wittgenstein, L. (1956). \emph{Remarks on the Foundations of Mathematics}. Blackwell.
+\end{thebibliography}
+
+\end{document}

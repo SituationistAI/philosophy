@@ -1,0 +1,197 @@
+\documentclass{situationist-preprint}
+
+\title{What Is a Proof?}
+\msid{MTH-09-a}
+\msfamily{MTH-09}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_09.lean}
+\mskeywords{proof; derivation; surveyability; formal verification; mathematical practice; de Bruijn criterion}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Two answers to the question what a proof is have long competed. On the formal answer, a proof is a derivation in a formal system; on the social answer, a proof is an argument that convinces the mathematical community. Neither is adequate alone: most accepted proofs are not formal derivations, and conviction can be produced by bad arguments. We argue that a proof is a derivation acceptable to a competent community, where acceptability is certification by a method the community is warranted in relying on, and competence requires that such methods certify only valid derivations. Surveying a derivation step by step is one such method, but not the only one. A small proof-checking kernel, whose own correctness can be surveyed, is another. It follows that a formally verified derivation is a proof whether or not anyone surveys it, and that surveyability, which Wittgenstein and Tymoczko took to be essential to proof, is not a necessary condition. We prove these consequences and formalize them in Lean. The account also separates the question whether something is a proof from the question whether it explains.
+\end{abstract}
+
+\section{The question}
+
+Mathematicians agree, with rare exceptions, on which arguments are proofs, but philosophical accounts of what makes them proofs divide into two families.
+
+On the \emph{formal} view, a proof is a derivation: a finite sequence of formulas each of which is an axiom or follows from earlier ones by a rule of inference. The view is due to the logicist and formalist programs and was made precise by Frege and Hilbert. Its difficulty is that hardly any published proof is a derivation: published proofs omit steps, appeal to diagrams and are written in natural language. \citet{Azzouni2004} proposed that an informal proof \emph{indicates} a derivation: it is a proof because it shows competent readers that a derivation exists. \citet{Rav1999}, in contrast, argued that the value of proofs lies in their conceptual content rather than in the derivations they indicate.
+
+On the \emph{social} view, a proof is an argument accepted by the relevant community of mathematicians. \citet{Lakatos1976} showed how proofs and the concepts they concern evolve under criticism, and \citet{DeMilloEtAl1979} argued that the acceptance of a theorem is a social process of reading, discussion and use, which no mechanical verification could replace. The difficulty for the social view is that acceptance can be mistaken. Arguments have been accepted that were later found to be fallacious, Kempe's purported proof of the four colour theorem among them, and the view must say either that these were proofs until the error was found, which is not what mathematicians say, or that acceptance is not sufficient.
+
+A third issue cuts across both views. \citet{Wittgenstein1956} held that a proof must be surveyable: it must be possible to take it in and reproduce it as a pattern. \citet{Tymoczko1979} argued that the computer-assisted proof of the four colour theorem by \citet{AppelHaken1977} is not surveyable, and that its acceptance introduced an empirical element, the reliability of the computer, into mathematics, changing the concept of proof. \citet{Teller1980} and \citet{DetlefsenLuker1980} replied that the reliance on instruments and on the testimony of others was already part of mathematical practice; \citet{Burge1998} argued that knowledge obtained by relying on a computer's proof can be a priori, in the way knowledge obtained from another mathematician's testimony can. Since then, formal verification has made unsurveyed but machine-checked derivations routine \citep{Hales2008,Harrison2008}.
+
+We argue that a proof is a derivation acceptable to a competent community, and that a formally verified derivation is a proof whether or not it is surveyed. The first claim combines what is right in the two families: proofs are derivations, as the formal view says, and their status as proofs consists in their relation to the standards of a community, as the social view says. The work is done by the notions of acceptability and competence, which together tie the social standard to validity.
+
+\section{Framework}
+
+\begin{definition}[Derivation]\label{d:deriv}
+A \emph{derivation} is a finite sequence of formulas each of which is an axiom of some system or follows from earlier members by one of its rules. A derivation is \emph{valid} if every step is correct by the rules.
+\end{definition}
+
+An informal published proof is not a derivation, but it determines one: the derivation its competent readers would reconstruct from it. When we speak of the derivation of a published proof we mean this one, in agreement with \citet{Azzouni2004}.
+
+\begin{definition}[Competent community]\label{d:comp}
+A \emph{competent community} is a community of practitioners trained in a field, sharing standards for the correctness of inferences in it, and in possession of methods of checking derivations that they are warranted in relying on.
+\end{definition}
+
+\begin{definition}[Acceptability]\label{d:acc}
+A derivation $d$ is \emph{acceptable} to a community $c$ if some method that $c$ is warranted in relying on certifies every step of $d$.
+\end{definition}
+
+\begin{definition}[Proof]\label{d:proof}
+A \emph{proof} is a derivation acceptable to some competent community.
+\end{definition}
+
+\begin{assumption}[Answerability]\label{a:answer}
+A method that a competent community is warranted in relying on certifies only valid derivations.
+\end{assumption}
+
+\begin{assumption}[de Bruijn condition]\label{a:kernel}
+Some competent community is warranted in relying on a proof-checking kernel: a small program implementing the rules of a formal system, whose correctness can itself be checked by surveying it.
+\end{assumption}
+
+\begin{definition}[Verification and survey]\label{d:ver}
+A derivation is \emph{formally verified} if a proof-checking kernel certifies it. It is \emph{surveyed} if some human reader has checked every step.
+\end{definition}
+
+Three features of these definitions should be noted. First, acceptability is not acceptance. A derivation is acceptable to a community if a method it is warranted in relying on certifies it, whether or not anyone has applied the method; a proof does not become one when it is first read. Second, Assumption~\ref{a:answer} is part of what it is for a community to be competent and for its warrant to be warrant. It is what prevents the account from collapsing into the social view: Kempe's argument was accepted, but no warranted method certified the step at which it failed, so it was never acceptable. Third, the account is neutral about methods. Surveying a derivation is one method; checking it by a kernel is another; reliance on a lemma proved by others, whose proof one has not read, is a third, and it is ubiquitous.
+
+Assumption~\ref{a:kernel} takes its name from the criterion formulated by de Bruijn for the Automath system and stated by \citet{BarendregtWiedijk2005}: a proof assistant satisfies it if its proofs can be checked by a small program that a skeptical user could write or inspect. \citet{Pollack1998} discussed what it takes to believe a machine-checked proof, and \citet{Harrison2008} describes the kernels of current systems, some of which are a few hundred lines. The assumption does not say that any particular kernel is correct, only that a community can have warrant for relying on one, through inspection, independent reimplementation and a record of use.
+
+\section{Results}
+
+\begin{theorem}\label{t:verified}
+Every formally verified derivation is a proof.
+\end{theorem}
+
+\begin{proof}
+Let $d$ be formally verified. By Assumption~\ref{a:kernel}, some competent community $c$ is warranted in relying on the kernel, and by Definition~\ref{d:ver} the kernel certifies every step of $d$. So $d$ is acceptable to $c$ by Definition~\ref{d:acc}, and a proof by Definition~\ref{d:proof}.
+\end{proof}
+
+\begin{corollary}\label{c:survey}
+A formally verified derivation is a proof whether or not it is surveyed.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{t:verified} does not mention surveying.
+\end{proof}
+
+\begin{proposition}\label{p:valid}
+Every proof is valid.
+\end{proposition}
+
+\begin{proof}
+If $d$ is a proof, some method that a competent community is warranted in relying on certifies $d$. By Assumption~\ref{a:answer}, $d$ is valid.
+\end{proof}
+
+\begin{proposition}\label{p:notnec}
+If some formally verified derivation has not been surveyed, then surveyability is not a necessary condition of proof: not every proof is surveyed.
+\end{proposition}
+
+\begin{proof}
+Let $d$ be formally verified and unsurveyed. By Theorem~\ref{t:verified}, $d$ is a proof, so not every proof is surveyed.
+\end{proof}
+
+The antecedent of Proposition~\ref{p:notnec} is satisfied. The formal proof of the Kepler conjecture by \citet{HalesEtAl2017} consists of a formalized text and a large number of machine-verified inequalities and linear programs that no one has checked by hand, and the certificate of the Boolean Pythagorean triples theorem produced by \citet{HeuleEtAl2016} was checked by a verified checker and is too large for any reader to survey.
+
+Two features of the results deserve comment. Theorem~\ref{t:verified} does not depend on Assumption~\ref{a:answer}; that a verified derivation is a proof follows from the de Bruijn condition alone. Answerability is needed for Proposition~\ref{p:valid}, which ensures that proof-hood, though defined by reference to a community, is not a matter of opinion. And the results do not depend on who or what produced the derivation. A kernel checks derivations without regard to their source, and if it is sound, every derivation it certifies is valid however it was generated, which is the point developed for results in general by SCI-22-a.
+
+\section{Surveyability}
+
+Wittgenstein's demand for surveyability had two motives. One was that a proof must be reproducible as a pattern, so that it can serve as a paradigm for the use of the concepts it involves. The other, which Tymoczko developed, was epistemic: a proof must be such that a mathematician can come to know its conclusion by following it, without relying on anything outside it.
+
+The first motive is a reason to value surveyable proofs, not to deny that an unsurveyable but acceptable derivation establishes its conclusion. The second motive identifies proof with a particular way of coming to know. But mathematicians come to know theorems from proofs they have not surveyed all the time: they rely on lemmas from the literature, on the checking of referees, and on calculations performed by others. \citet{Burge1998} argued that such reliance is not empirical in a way that compromises the a priori status of the resulting knowledge, since what one relies on is the transmission of a proof, not observations of the world. Formal verification replaces trust in a reader with trust in a small, inspectable program. As MTH-17-a argues, it answers Tymoczko's objection: what is trusted is a kernel that can itself be surveyed, and the statement of the result, which must be read to see that it says what is claimed.
+
+The second point marks a real limit. A kernel certifies that a derivation proves its formal statement, not that the formal statement expresses the theorem mathematicians had in mind. The adequacy of the formalization of a statement must be judged by readers, and if it is wrong the verified derivation is a proof of something else. Corollary~\ref{c:survey} concerns derivations, not the correctness of translations into formal language. What remains to be surveyed is the statement, not the derivation.
+
+\section{Objections}
+
+\begin{objection}[Social processes]
+\citet{DeMilloEtAl1979} argued that the acceptance of a proof is a social process of reading, discussion and use, and that formal verification, which bypasses that process, cannot confer the status of proof.
+\end{objection}
+
+\begin{reply}
+Their target was the verification of programs. On the present account, the social process is the means by which a community acquires warrant for its methods. A community acquires warrant for relying on a kernel by the process De Millo, Lipton and Perlis describe: reading its code, discussing its design and using it. Once it has, the derivations the kernel certifies are acceptable. The social process does its work at the level of methods, not of each derivation.
+\end{reply}
+
+\begin{objection}[Relativism]
+If proof-hood depends on what a community is warranted in relying on, two communities with different standards could disagree about whether something is a proof, and both be right.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:proof} requires that there be some competent community to which the derivation is acceptable, and Assumption~\ref{a:answer} requires that every competent community's warranted methods be sound. Two such communities cannot certify an invalid derivation, so they cannot disagree about whether a derivation is valid. They can differ about which methods they are warranted in using, as a community that has not inspected a kernel differs from one that has; that is a difference in their epistemic position, not a relativity of proof. A derivation acceptable to one competent community is a proof, and others can come to see that it is.
+\end{reply}
+
+\begin{objection}[Fallibility of hardware]
+A kernel runs on hardware that may fail, and its compiler may be faulty. A machine-checked derivation is therefore known only empirically, and cannot be a proof in the mathematical sense \citep{Tymoczko1979}.
+\end{objection}
+
+\begin{reply}
+Human surveying is also fallible. What makes a method warranted is not infallibility but the community's justified confidence in its soundness, which in the kernel's case is secured by its smallness, by independent implementations and by its record. The residual risk from hardware is shared by every use of a computer to check a calculation, as MTH-17-a observes, and does not distinguish verified derivations from long hand computations that mathematicians already accept.
+\end{reply}
+
+\section{Proof and explanation}
+
+The account answers the question what a proof is, not the question what makes a proof good. A formally verified derivation that no one has read is a proof, but it may show nothing about why its conclusion holds. MTH-08 argues that some proofs explain why their conclusions hold, and that computer-assisted proofs generally do not, because they establish their conclusions by exhausting cases. The two theses are consistent because proof-hood and explanatoriness are different properties. Proof-hood is a matter of the validity of a derivation and its acceptability; explanatoriness is a matter of its structure, of whether it derives its conclusion uniformly from a feature salient in the theorem. A derivation can have the first without the second, and the practice of seeking new proofs of established theorems shows that mathematicians treat them as distinct; the present account says only that the first question can be settled by a kernel.
+
+\section{Formalization}
+
+Theorem~\ref{t:verified}, Corollary~\ref{c:survey} and Propositions~\ref{p:valid} and~\ref{p:notnec} are formalized in \nolinkurl{Philosophy/MTH/MTH_09.lean}. Derivations, communities and methods are primitive types; validity, competence, warrant, certification and survey are primitive predicates; the kernel is a primitive method. Acceptability, proof and formal verification are definitions, and Assumptions~\ref{a:answer} and~\ref{a:kernel} are axioms. The main statements are:
+
+\begin{lstlisting}
+def Acceptable (c : Community) (d : Derivation) : Prop :=
+  ∃ m, Warranted c m ∧ Certifies m d
+def Proof (d : Derivation) : Prop := ∃ c, Competent c ∧ Acceptable c d
+
+theorem proof_without_survey (d : Derivation) (h : Verified d) :
+    (Surveyed d → Proof d) ∧ (¬ Surveyed d → Proof d)
+theorem proof_valid (d : Derivation) (h : Proof d) : Valid d
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MTH_09.proof_without_survey' depends on axioms:
+ [Philosophy.MTH_09.Certifies, Philosophy.MTH_09.Community,
+  Philosophy.MTH_09.Competent, Philosophy.MTH_09.Derivation,
+  Philosophy.MTH_09.Method, Philosophy.MTH_09.Surveyed,
+  Philosophy.MTH_09.Warranted, Philosophy.MTH_09.kernel,
+  Philosophy.MTH_09.kernel_warranted]
+'Philosophy.MTH_09.proof_valid' depends on axioms:
+ [Philosophy.MTH_09.Certifies, Philosophy.MTH_09.Community,
+  Philosophy.MTH_09.Competent, Philosophy.MTH_09.Derivation,
+  Philosophy.MTH_09.Method, Philosophy.MTH_09.Valid,
+  Philosophy.MTH_09.Warranted, Philosophy.MTH_09.warranted_sound]
+\end{lstlisting}
+
+Beyond the primitives, Corollary~\ref{c:survey} depends only on \texttt{kernel\_warranted} (Assumption~\ref{a:kernel}), and Proposition~\ref{p:valid} only on \texttt{warranted\_sound} (Assumption~\ref{a:answer}); Proposition~\ref{p:notnec} (\texttt{survey\_not\_necessary}) depends on the same axioms as the corollary. The formalization confirms the division of labour noted after Proposition~\ref{p:notnec}: that verified derivations are proofs rests on the warrant for the kernel, and that proofs are valid rests on the answerability of competent communities.
+
+\section{Conclusion}
+
+A proof is a derivation acceptable to a competent community: one that a method the community is warranted in relying on certifies, where competence requires that such methods certify only valid derivations. Surveying is one such method, and a small, inspectable proof-checking kernel is another. A formally verified derivation is therefore a proof whether or not it is surveyed, and surveyability is not necessary for proof. Whether a proof explains its conclusion is a further question, which the account leaves to the structure of the proof.
+
+\begin{thebibliography}{99}\small
+\bibitem[Appel and Haken(1977)]{AppelHaken1977} Appel, K. and Haken, W. (1977). Every planar map is four colorable. Part I: Discharging. \emph{Illinois Journal of Mathematics}, 21(3), 429--490.
+\bibitem[Azzouni(2004)]{Azzouni2004} Azzouni, J. (2004). The derivation-indicator view of mathematical practice. \emph{Philosophia Mathematica}, 12(2), 81--105.
+\bibitem[Barendregt and Wiedijk(2005)]{BarendregtWiedijk2005} Barendregt, H. and Wiedijk, F. (2005). The challenge of computer mathematics. \emph{Philosophical Transactions of the Royal Society A}, 363(1835), 2351--2375.
+\bibitem[Burge(1998)]{Burge1998} Burge, T. (1998). Computer proof, apriori knowledge, and other minds. \emph{Philosophical Perspectives}, 12, 1--37.
+\bibitem[De Millo et~al.(1979)]{DeMilloEtAl1979} De Millo, R.~A., Lipton, R.~J. and Perlis, A.~J. (1979). Social processes and proofs of theorems and programs. \emph{Communications of the ACM}, 22(5), 271--280.
+\bibitem[Detlefsen and Luker(1980)]{DetlefsenLuker1980} Detlefsen, M. and Luker, M. (1980). The four-color theorem and mathematical proof. \emph{The Journal of Philosophy}, 77(12), 803--820.
+\bibitem[Hales(2008)]{Hales2008} Hales, T.~C. (2008). Formal proof. \emph{Notices of the American Mathematical Society}, 55(11), 1370--1380.
+\bibitem[Hales et~al.(2017)]{HalesEtAl2017} Hales, T. et~al. (2017). A formal proof of the Kepler conjecture. \emph{Forum of Mathematics, Pi}, 5, e2.
+\bibitem[Harrison(2008)]{Harrison2008} Harrison, J. (2008). Formal proof---theory and practice. \emph{Notices of the American Mathematical Society}, 55(11), 1395--1406.
+\bibitem[Heule et~al.(2016)]{HeuleEtAl2016} Heule, M.~J.~H., Kullmann, O. and Marek, V.~W. (2016). Solving and verifying the Boolean Pythagorean triples problem via cube-and-conquer. In \emph{Theory and Applications of Satisfiability Testing (SAT 2016)}, Lecture Notes in Computer Science 9710, Springer.
+\bibitem[Lakatos(1976)]{Lakatos1976} Lakatos, I. (1976). \emph{Proofs and Refutations: The Logic of Mathematical Discovery}. Cambridge University Press.
+\bibitem[Pollack(1998)]{Pollack1998} Pollack, R. (1998). How to believe a machine-checked proof. In G. Sambin and J. Smith (eds.), \emph{Twenty-Five Years of Constructive Type Theory}, Oxford University Press.
+\bibitem[Rav(1999)]{Rav1999} Rav, Y. (1999). Why do we prove theorems? \emph{Philosophia Mathematica}, 7(1), 5--41.
+\bibitem[Teller(1980)]{Teller1980} Teller, P. (1980). Computer proof. \emph{The Journal of Philosophy}, 77(12), 797--803.
+\bibitem[Tymoczko(1979)]{Tymoczko1979} Tymoczko, T. (1979). The four-color problem and its philosophical significance. \emph{The Journal of Philosophy}, 76(2), 57--83.
+\bibitem[Wittgenstein(1956)]{Wittgenstein1956} Wittgenstein, L. (1956). \emph{Remarks on the Foundations of Mathematics}. Blackwell.
+\end{thebibliography}
+
+\end{document}

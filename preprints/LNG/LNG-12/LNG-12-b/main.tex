@@ -1,0 +1,66 @@
+\documentclass{situationist-preprint}
+
+\title{Margins of Error for Vague Predicates}
+\msid{LNG-12-b}
+\msfamily{LNG-12}
+\msdiscipline{Philosophy of Language}
+\mstype{Companion manuscript}
+\mskeywords{vagueness; margin for error; heap; semantic plasticity; epistemicism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LNG-12-a argues that \enquote{heap} has a sharp boundary that cannot be known, because the meaning of the word is plastic: patterns of use that no one could tell apart from ours would have placed the boundary one grain over. We show that a margin-for-error principle for \enquote{heap} follows from that plasticity, without appeal to a general theory of knowledge, provided the plasticity is two-sided. If plasticity were one-sided, the margin would hold on one side of the boundary only, and speakers could know one of its edges. The two-sidedness of plasticity is therefore the precise point at which the epistemic view of \enquote{heap} depends on facts about use.
+\end{abstract}
+
+\section{Margins from plasticity}
+
+MET-18-a models the unknowability of vague boundaries by a margin-for-error principle in the manner of \citet{Williamson1992}: if a case is known to be $F$, its neighbor is $F$. MET-18-b derives such principles from a safety condition on knowledge, and LOG-15-b iterates them to describe higher-order vagueness. Neither asks where, for a particular predicate, the margin comes from. For \enquote{heap} the framework of LNG-12-a supplies an answer. There, a speaker knows a claim about the extension only if it holds under every pattern of use close to hers (Definition 2.7 of LNG-12-a), and every pattern that draws the boundary at a number has a close pattern that does not draw it there (Assumption 2.8). Write $H_u(n)$ for \enquote{$n$ grains are a heap under pattern $u$} and $K_u$ for knowledge by speakers whose pattern is $u$.
+
+\begin{definition}\label{d:two}
+Plasticity is \emph{two-sided} if, for every pattern $u$ whose boundary is $b$, there are patterns close to $u$ whose boundaries are $b-1$ and $b+1$.
+\end{definition}
+
+Two-sidedness is what LNG-12-a has in mind when it says that close patterns differ by a grain. It holds if the dispositions that fix the boundary can be nudged in either direction by differences that no speaker could detect: a few speakers slightly more lenient in a few marginal cases, or slightly stricter. Nothing in the use of \enquote{heap} favors one direction.
+
+\begin{proposition}[Margin for error]\label{p:margin}
+If plasticity is two-sided, then for every pattern $u$ and number $n$: if $K_u H(n)$ then $H_u(n-1)$; and if $K_u \neg H(n)$ then $\neg H_u(n+1)$.
+\end{proposition}
+
+\begin{proof}
+Suppose $K_u H(n)$ but $\neg H_u(n-1)$. Since knowledge implies truth, $H_u(n)$, so the boundary under $u$ is $n-1$ (Definition 2.5 of LNG-12-a). By two-sidedness some close pattern $v$ has boundary $n$, so $\neg H_v(n)$, and $H(n)$ does not hold under every close pattern, contrary to $K_u H(n)$. The second half is symmetric, using the close pattern whose boundary is $b-1$.
+\end{proof}
+
+The margin is one grain wide because two-sidedness is stated for one grain. If close patterns could differ by up to $k$ grains in each direction, the same argument would give a margin of $k$: knowledge that $n$ grains are a heap requires that $n-k$ grains are. How wide the margin is for \enquote{heap} is thus an empirical question about the stability of our dispositions, and the epistemic view does not need to answer it. It needs only that the width is at least one grain on each side, which is the minimal form of the inexactness that \citet[ch.~8]{Williamson1994} attributes to our knowledge of meaning.
+
+\section{Why two sides are needed}
+
+\begin{proposition}\label{p:one}
+Suppose that every pattern $u$ with boundary $b$ has a close pattern with boundary $b+1$ but none with a smaller boundary. Then speakers whose pattern is $u$ know that $b$ grains are not a heap, although $b+1$ grains are a heap under $u$.
+\end{proposition}
+
+\begin{proof}
+Every pattern close to $u$ has its boundary at $b$ or above, so under each of them $b$ grains are not a heap; by Definition 2.7 of LNG-12-a nothing more is required for the knowledge. And $b+1$ grains are a heap under $u$, since $b$ is its boundary.
+\end{proof}
+
+The proof shows that one-sided plasticity lets speakers know the last non-heap, though not the first heap. Assumption 2.8 of LNG-12-a, which says only that some close pattern draws the boundary elsewhere, is compatible with this lopsided case, and in it the second half of Proposition~\ref{p:margin} fails. Theorem 3.5 of LNG-12-a, that of no number do speakers know that the boundary lies there, still holds, since knowing that $b$ grains are not a heap is not knowing that the boundary is at $b$. But speakers would know an edge of the borderline region from one side, which no one does: competent speakers are as unable to name the largest number of grains that is certainly not a heap as the smallest number that certainly is. The phenomenology of the sorites is symmetric, and two-sidedness is what explains its symmetry.
+
+\begin{objection}
+Margin principles were meant to be consequences of the nature of knowledge. Deriving them from facts about use makes them contingent.
+\end{objection}
+
+\begin{reply}
+They are contingent in their width, which is as it should be. Proposition~\ref{p:margin} is a special case of the safety principle of MET-18-b, with the close patterns supplying the nearby cases in which a belief must remain true. What the derivation adds is that the nearby cases for a vague term are not perceptual or instrumental variations but variations in the meaning-fixing use, and that their distribution around the boundary decides on which sides the margin holds.
+\end{reply}
+
+\section{Conclusion}
+
+For \enquote{heap}, the margin for error is the shadow of semantic plasticity. Two-sided plasticity yields a margin on both sides of the boundary and explains why neither edge of the borderline region is known; one-sided plasticity would not. The sharp, unknowable boundary that LNG-12-a defends thus rests on a definite and plausible claim about how our use of the word could have differed.
+
+\begin{thebibliography}{9}\small
+\bibitem[Williamson(1992)]{Williamson1992} Williamson, T. (1992). Inexact knowledge. \emph{Mind}, 101(402), 217--242.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\end{thebibliography}
+
+\end{document}

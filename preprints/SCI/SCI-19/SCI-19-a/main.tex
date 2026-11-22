@@ -1,0 +1,161 @@
+\documentclass{situationist-preprint}
+
+\title{Self-Correction in Science}
+\msid{SCI-19-a}
+\msfamily{SCI-19}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_19.lean}
+\mskeywords{self-correction; replication; meta-analysis; publication bias; Peirce; replication crisis; delay}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is science self-correcting? Peirce held that it is, Laudan that the claim is trivial unless it rests on a method guaranteed to converge, and the replication crisis has led many to doubt it. We argue that science is self-correcting, but slowly: replication and meta-analysis correct the record of accepted findings, with a delay that is typically measured in years and often in decades. We give a simple model in which a false finding enters the record with some evidential weight and is corrected when the pooled weight of disconfirming replications reaches it. We prove that if replications appear at a steady minimum rate, correction is certain and occurs within a bounded time; and that if they appear at most at that rate, correction cannot occur sooner than a time proportional to the replication interval and to the weight of the original evidence. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+\citet{Peirce1877} held that the method of science is distinguished from tenacity, authority and a priori reasoning by its capacity to correct its own errors in the long run. \citet{Laudan1981} objected that the thesis is either false or trivial.: no known method of inference guarantees convergence, and merely changing one's mind when shown wrong is true of any enterprise. \citet{Ioannidis2012} has argued that self-correction is not automatic, and the replication of psychological studies by the \citet{OSC2015}, in which roughly a third of the replications of significant original results were significant, has been read as showing that a discipline's record can be wrong for decades.
+
+We argue that science is self-correcting, but slowly. The thesis concerns the record of accepted findings and the institutions that check it, not a method of inference. SCI-01 argues that what distinguishes science is institutionalized error-correction, and that a record is self-cleansing, eventually losing every error, exactly when its checks recur without a last occasion. That result says that correction happens, not when; we add the rate.
+
+\section{Correction and its delay}
+
+Two kinds of case motivate the model.
+
+\paragraph{Ego depletion.} \citet{Baumeister1998} reported that exercising self-control in one task impairs it in a subsequent task. A meta-analysis of nearly two hundred conceptual replications found a moderate effect \citep{Hagger2010}. Bias-corrected re-analysis suggested that the pooled effect was largely an artefact of selective publication \citep{CarterMcCullough2014}, and a preregistered replication across more than twenty laboratories found an effect close to zero \citep{Hagger2016}. The record was corrected about eighteen years after the original report; the first meta-analysis, pooling a biased sample, delayed the correction.
+
+\paragraph{Clinical medicine.} Of highly cited clinical studies claiming that an intervention was effective, about a third were contradicted or found to have overstated the effect by later studies, typically larger and better controlled ones \citep{Ioannidis2005}. Conversely, cumulative meta-analysis of trials of thrombolytic therapy after myocardial infarction showed a significant reduction in mortality by the early 1970s \citep{Lau1992}, while textbooks and review articles continued for more than a decade to omit or doubt the treatment \citep{Antman1992}. Correction here was the acceptance of a true finding. In both kinds of case the record was eventually corrected, by the institutions SCI-01 identifies, and in both the delay was long.
+
+\section{A model of delayed correction}
+
+We consider a single false finding, admitted to the record at time $0$. Its evidential weight $W$ is the weight of the evidence on which it was accepted together with the weight it has accumulated through citation and conceptual replication, measured in units of a single direct replication. Disconfirming replications are published over time, each with weight $w$, and $R(t)$ is the number published by time $t$.
+
+\begin{definition}[Correction]\label{d:corr}
+The record is \emph{corrected} at time $t$ if $W \le w\cdot R(t)$: the pooled weight of the published disconfirming replications at least equals that of the original evidence.
+\end{definition}
+
+\begin{assumption}[Steady replication]\label{a:steady}
+There is an interval $k$ such that at least one disconfirming replication is published in every interval of length $k$.
+\end{assumption}
+
+\begin{assumption}[Bounded replication]\label{a:bounded}
+No disconfirming replication has been published at time $0$, the count never decreases, and at most one is published in any interval of length $k$.
+\end{assumption}
+
+Assumption~\ref{a:steady} is a quantitative form of SCI-01's requirement that checks be standing, and it requires $k \ge 1$. Assumption~\ref{a:bounded} expresses the scarcity of replication: direct replications are costly, poorly rewarded and, when negative, hard to publish.
+
+\begin{lemma}\label{l:steady}
+Under steady replication, at least $n$ replications have been published by time $nk$.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$: each interval of length $k$ adds at least one.
+\end{proof}
+
+\begin{theorem}[Eventual correction]\label{t:eventual}
+Under steady replication, the record is corrected by time $nk$ for any $n$ with $W \le w n$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:steady}, $R(nk) \ge n$, so $w\cdot R(nk) \ge wn \ge W$.
+\end{proof}
+
+\begin{lemma}\label{l:bounded}
+Under bounded replication, at most $n$ replications have been published at any time up to $nk$.
+\end{lemma}
+
+\begin{proof}
+By induction, $R(nk) \le n$, since there are none at the start and each interval adds at most one; and since the count never decreases, $R(t) \le R(nk)$ for $t \le nk$.
+\end{proof}
+
+\begin{theorem}[Delay]\label{t:delay}
+Under bounded replication, the record is not corrected at any time up to $nk$ whenever $wn < W$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:bounded}, $w\cdot R(t) \le wn < W$ for $t \le nk$.
+\end{proof}
+
+\begin{theorem}[Self-correction, slowly]\label{t:main}
+In every field satisfying Assumptions~\ref{a:steady} and~\ref{a:bounded}, a false finding of weight $W$ is corrected by time $nk$ if $W \le wn$, and is not corrected before time $mk$ if $wm < W$, where $k$ is the field's replication interval.
+\end{theorem}
+
+\begin{proof}
+Theorems~\ref{t:eventual} and~\ref{t:delay}, applied to the field's replication count.
+\end{proof}
+
+The time to correction is thus about $kW/w$, up to one replication interval.
+
+\section{Why the delay is substantial}
+
+The interval $k$ is long because direct replication is costly, brings little credit, and has been hard to publish when negative. Publication bias lengthens the effective interval, since an unpublished replication does not count toward correction; if negative results are published with low probability, false findings can become canonized \citep{Nissen2016}, and in the limit where none are published Assumption~\ref{a:steady} fails and SCI-01's condition of standing correction fails with it. The weight $W$ is large because a finding accumulates weight after admission, through conceptual replications that are themselves selectively published and through citation; the weight $w$ of a single replication is limited by sample size. The reforms of the last decade, among them preregistration, registered reports, multi-laboratory replications and bias-corrected meta-analysis, act on all three: they shorten $k$, prevent the inflation of $W$, and raise $w$. They change the rate of self-correction rather than introduce it, a reading of the replication crisis developed in SCI-19-b.
+
+\section{Objections and replies}
+
+\begin{objection}[Laudan's dilemma]
+The thesis is trivial. Any enterprise that ever changes its mind corrects some of its errors.
+\end{objection}
+
+\begin{reply}
+The thesis is not that some errors are corrected but that every error is corrected within a time bounded by the field's parameters, given Assumption~\ref{a:steady}. That is false of enterprises whose checks cease (SCI-01), and it rests not on a method guaranteed to converge but on a measurable institutional condition.
+\end{reply}
+
+\begin{objection}[Correction is not convergence]
+Removing a false finding does not put the truth in its place. A record that only loses errors may end up empty.
+\end{objection}
+
+\begin{reply}
+Correction includes the admission of true findings, as in the thrombolysis case; the model applies when $W$ is read as the weight of the evidence against the true finding. Whether the record grows toward a complete account is a further question.
+\end{reply}
+
+\begin{objection}[Meta-analysis can entrench error]
+The ego-depletion case shows that meta-analysis can confirm a false finding. It is not an instrument of correction.
+\end{objection}
+
+\begin{reply}
+A meta-analysis of a biased sample adds to $W$, and so delays correction; a meta-analysis that models selective publication, or pools preregistered studies, adds to the disconfirming weight. Its effect depends on its inputs.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/SCI/SCI_19.lean} proves Lemmas~\ref{l:steady} and~\ref{l:bounded}, Theorems~\ref{t:eventual} and~\ref{t:delay} with Assumptions~\ref{a:steady} and~\ref{a:bounded} as explicit hypotheses, and Theorem~\ref{t:main} with them as axioms about a primitive type of fields.
+
+\begin{lstlisting}
+theorem self_correcting_slowly (f : Field) (w W n m : Nat)
+    (hn : W ≤ w * n) (hm : w * m < W) :
+    Corrected (replications f) w W (n * interval f) ∧
+    ∀ t, t ≤ m * interval f → ¬ Corrected (replications f) w W t
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.SCI_19.self_correcting_slowly' depends on axioms:
+  [propext, Quot.sound, Philosophy.SCI_19.Field,
+   Philosophy.SCI_19.bounded_fields, Philosophy.SCI_19.interval,
+   Philosophy.SCI_19.replications, Philosophy.SCI_19.steady_fields]
+\end{lstlisting}
+
+Besides the standard axioms and three primitives, these are the two assumptions; Theorems~\ref{t:eventual} and~\ref{t:delay} need only the standard axioms.
+
+\section{Conclusion}
+
+Science corrects its record because its institutions keep checking it, and slowly, because the checks are scarce and the errors have accumulated weight. Science is self-correcting, but slowly.
+
+\begin{thebibliography}{99}\small
+\bibitem[Antman et~al.(1992)]{Antman1992} Antman, E.~M., et~al. (1992). A comparison of results of meta-analyses of randomized control trials and recommendations of clinical experts. \emph{JAMA} 268: 240--248.
+\bibitem[Baumeister et~al.(1998)]{Baumeister1998} Baumeister, R.~F., et~al. (1998). Ego depletion: Is the active self a limited resource? \emph{Journal of Personality and Social Psychology} 74: 1252--1265.
+\bibitem[Carter and McCullough(2014)]{CarterMcCullough2014} Carter, E.~C. and McCullough, M.~E. (2014). Publication bias and the limited strength model of self-control. \emph{Frontiers in Psychology} 5: 823.
+\bibitem[Hagger et~al.(2010)]{Hagger2010} Hagger, M.~S., et~al. (2010). Ego depletion and the strength model of self-control: A meta-analysis. \emph{Psychological Bulletin} 136: 495--525.
+\bibitem[Hagger et~al.(2016)]{Hagger2016} Hagger, M.~S., et~al. (2016). A multilab preregistered replication of the ego-depletion effect. \emph{Perspectives on Psychological Science} 11: 546--573.
+\bibitem[Ioannidis(2005)]{Ioannidis2005} Ioannidis, J.~P.~A. (2005). Contradicted and initially stronger effects in highly cited clinical research. \emph{JAMA} 294: 218--228.
+\bibitem[Ioannidis(2012)]{Ioannidis2012} Ioannidis, J.~P.~A. (2012). Why science is not necessarily self-correcting. \emph{Perspectives on Psychological Science} 7: 645--654.
+\bibitem[Lau et~al.(1992)]{Lau1992} Lau, J., et~al. (1992). Cumulative meta-analysis of therapeutic trials for myocardial infarction. \emph{New England Journal of Medicine} 327: 248--254.
+\bibitem[Laudan(1981)]{Laudan1981} Laudan, L. (1981). Peirce and the trivialization of the self-corrective thesis. In \emph{Science and Hypothesis}. Reidel.
+\bibitem[Nissen et~al.(2016)]{Nissen2016} Nissen, S.~B., et~al. (2016). Publication bias and the canonization of false facts. \emph{eLife} 5: e21451.
+\bibitem[Open Science Collaboration(2015)]{OSC2015} Open Science Collaboration (2015). Estimating the reproducibility of psychological science. \emph{Science} 349: aac4716.
+\bibitem[Peirce(1877)]{Peirce1877} Peirce, C.~S. (1877). The fixation of belief. \emph{Popular Science Monthly} 12: 1--15.
+\end{thebibliography}
+
+\end{document}

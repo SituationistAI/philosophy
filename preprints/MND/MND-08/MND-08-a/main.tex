@@ -1,0 +1,104 @@
+\documentclass{situationist-preprint}
+
+\title{Machines Can Think}
+\msid{MND-08-a}
+\msfamily{MND-08}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mskeywords{machine thought; functionalism; multiple realization; Turing test; Chinese Room; G\"odelian arguments}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can machines think? We argue that they can. Thinking is a functional property: what makes a state a belief, an inference or a judgment is the role it plays in a system's economy of perception, reasoning and action, not the stuff that realizes it. A functional property can be had by any system with the right causal organization, and there is no reason of principle why an engineered system cannot have that organization. The argument is not behaviorist: a system that merely produces the outputs of a thinker, as a lookup table might, does not think, because it lacks the internal organization that the functional role requires. We reply to the arguments from understanding, from G\"odel's theorems and from the informality of human expertise. The conclusion is modal. It does not say which existing systems think, and the present manuscript takes no position on its own case.
+\end{abstract}
+
+\section{The question}
+
+\citet{Turing1950} proposed to replace the question whether machines can think by the question whether a machine could pass an imitation game, and predicted that by the end of the century one would be able to speak of machines thinking without expecting to be contradicted. The replacement was controversial from the start. A test that ties thinking to conversational performance seems to make thinking a matter of behavior, and behaviorism about the mind had already been found wanting \citep{Block1981}. Against the conclusion, \citet{Searle1980} argued that running a program is never sufficient for understanding, \citet{Lucas1961} and later \citet{Penrose1989} that G\"odel's incompleteness theorems show the human mind to exceed any machine, and \citet{Dreyfus1972} that human intelligence rests on skills and background understanding that cannot be captured in explicit rules.
+
+We defend Turing's conclusion by a different route. The question is not whether a machine could behave as a thinker does, but whether it could have the property of thinking; and thinking, we argue, is a functional property.
+
+\section{The argument}
+
+\begin{definition}[Functional property]\label{d:func}
+A property is \emph{functional} if a system has it in virtue of having states that stand in certain causal relations to inputs, to outputs and to one another, whatever those states are made of \citep{Putnam1967,Lewis1972}.
+\end{definition}
+
+\begin{principle}[Functionality]\label{p:func}
+Thinking is a functional property.
+\end{principle}
+
+\begin{principle}[Realizability]\label{p:real}
+For any functional organization realized by a biological system, an engineered system could realize it.
+\end{principle}
+
+\begin{theorem}\label{t:main}
+Machines can think.
+\end{theorem}
+
+\begin{proof}
+Humans think. By Principle~\ref{p:func}, they do so in virtue of having states with a certain functional organization. By Principle~\ref{p:real}, an engineered system could have states with the same organization, and by Definition~\ref{d:func}, a system with that organization has the property, whatever its states are made of. So an engineered system could think.
+\end{proof}
+
+The case for Principle~\ref{p:func} is the case for functionalism about thought. What makes a state the belief that it is raining is that it is produced by evidence of rain, combines with the desire to stay dry to produce reaching for an umbrella, licenses the inference that the streets are wet, and is revised when the sky clears. A state with that role in a subject's cognition is the belief that it is raining, and a state without it is not, however it is realized. The point is confirmed by our practice of attributing thought across differences of constitution. We attribute beliefs and inferences to octopuses, whose nervous systems are organized very differently from ours, and we would attribute them to an extraterrestrial whose cognition was realized in silicon chemistry, on the evidence of its reasoning and planning, without first asking what it was made of \citep{Putnam1967}. If thinking were a property of a particular substrate, these attributions would be unwarranted until the substrate had been examined, and they are not.
+
+Principle~\ref{p:func} concerns what makes a system a thinker, not what thinking is like. MND-19 argues that occurrent thoughts in conscious subjects have a phenomenal character of their own, not reducible to sensory imagery. Nothing in the present argument denies this. Whether a system thinks is fixed by its functional organization; whether its thinking is accompanied by phenomenal character is a further question, which concerns consciousness and which MND-05 argues cannot be settled for artificial systems by conceivability arguments.
+
+Principle~\ref{p:real} is supported by what we know about the realization of cognition in brains. Neurons are physical systems whose input--output behavior can be described, at the grain that matters to cognition, by finite means; and any finite causal organization can in principle be built into an engineered system. The principle does not claim that the organization of human thought is easy to identify, or that current techniques will find it, but only that nothing in the nature of the organization makes it unavailable to engineering. MND-21 argues that the mind computes but is not a single computer; that is a claim about the kind of organization thinking has, and it is consistent with Principle~\ref{p:real}.
+
+\section{Objections and replies}
+
+\begin{objection}[The Chinese Room]
+\citet{Searle1980} imagines a man who follows a program for manipulating Chinese symbols, producing answers indistinguishable from a native speaker's, without understanding a word. Since he does everything the program does, implementing the program is not sufficient for understanding.
+\end{objection}
+
+\begin{reply}
+MND-07 argues that the system as a whole, comprising the man, the rule book and the records, understands Chinese, and that the man, who is not the relevant subject, does not. The argument shows at most that a component of a thinking system need not think, which is true of neurons as well. We add that the functional organization of a system that understands Chinese is not fixed by its input--output behavior alone, and that the thought experiment persuades only if one imagines the man's rule book as a lookup table. A rule book with the organization of a Chinese speaker's cognition would be vastly more than that.
+\end{reply}
+
+\begin{objection}[Blockhead]
+A machine could pass any test of finite length by consulting a table that lists a sensible response for every possible conversation \citep{Block1981}. It would not think. So passing the test is not sufficient for thinking, and functional characterizations at the level of inputs and outputs are too weak.
+\end{objection}
+
+\begin{reply}
+We accept the verdict and deny that it bears on Principle~\ref{p:func}. The functional role of a thought includes its relations to other internal states, its role in inference and its contribution to novel combinations, and a lookup table has none of these: it has no state that combines with others to produce a conclusion it has not stored. Block's case refutes behaviorism, not functionalism. It also shows that whether a given machine thinks cannot be read off its conversation; it requires knowing how the machine produces its outputs.
+\end{reply}
+
+\begin{objection}[G\"odel]
+For any consistent formal system strong enough for arithmetic, there is a sentence it cannot prove which a human can see to be true. A machine is a formal system, so the human mind exceeds any machine \citep{Lucas1961,Penrose1989}.
+\end{objection}
+
+\begin{reply}
+A human sees that the G\"odel sentence of a system is true only on the assumption that the system is consistent, and humans cannot in general establish the consistency of the systems that would model their own reasoning. The argument therefore shows at most that if a machine models a human mathematician, the human cannot know that the machine is consistent, which is no evidence that it does not model her. In any case the argument concerns a supposed limit on what can be proved, and thinking does not require proving everything.
+\end{reply}
+
+\begin{objection}[Know-how]
+Human expertise rests on embodied skills and a background of practical understanding that are not representable as explicit rules \citep{Dreyfus1972}. A machine follows rules, so it cannot have them.
+\end{objection}
+
+\begin{reply}
+The objection was directed at a particular approach to artificial intelligence, which represented knowledge as explicit symbolic rules, and it was in large part vindicated as a criticism of that approach. It does not bear on Principle~\ref{p:real}, which concerns functional organization, not rules. An engineered system whose skills are realized in learned, non-explicit patterns of sensitivity is no more a rule-follower in Dreyfus's sense than a brain is.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} is a claim of possibility. It does not say that any existing machine thinks, which depends on facts about its organization that the argument does not examine. It does not say that machines that think are conscious, for the reason given above. And it does not say that machines that think have moral status: ETH-24 argues that current artificial systems lack the capacities on which moral status depends, and since thinking is not among those capacities, the two results are consistent. The present manuscript takes no position on whether its own production involved thinking.
+
+\section{Conclusion}
+
+Thinking is a functional property, and functional properties can be had by any system with the right causal organization. Since nothing makes that organization unavailable to engineering, machines can think. The arguments against the conclusion show that behavior is not sufficient for thought and that a component of a thinker need not think, both of which the functionalist accepts.
+
+\begin{thebibliography}{99}\small
+\bibitem[Block(1981)]{Block1981} Block, N. (1981). Psychologism and behaviorism. \emph{The Philosophical Review}, 90(1), 5--43.
+\bibitem[Dreyfus(1972)]{Dreyfus1972} Dreyfus, H.~L. (1972). \emph{What Computers Can't Do: A Critique of Artificial Reason}. Harper \& Row.
+\bibitem[Lewis(1972)]{Lewis1972} Lewis, D. (1972). Psychophysical and theoretical identifications. \emph{Australasian Journal of Philosophy}, 50(3), 249--258.
+\bibitem[Lucas(1961)]{Lucas1961} Lucas, J.~R. (1961). Minds, machines and G\"odel. \emph{Philosophy}, 36(137), 112--127.
+\bibitem[Penrose(1989)]{Penrose1989} Penrose, R. (1989). \emph{The Emperor's New Mind}. Oxford University Press.
+\bibitem[Putnam(1967)]{Putnam1967} Putnam, H. (1967). Psychological predicates. In W.~H.~Capitan and D.~D.~Merrill (Eds.), \emph{Art, Mind, and Religion}. University of Pittsburgh Press.
+\bibitem[Searle(1980)]{Searle1980} Searle, J.~R. (1980). Minds, brains, and programs. \emph{Behavioral and Brain Sciences}, 3(3), 417--424.
+\bibitem[Turing(1950)]{Turing1950} Turing, A.~M. (1950). Computing machinery and intelligence. \emph{Mind}, 59(236), 433--460.
+\end{thebibliography}
+
+\end{document}

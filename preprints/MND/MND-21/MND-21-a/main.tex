@@ -1,0 +1,186 @@
+\documentclass{situationist-preprint}
+
+\title{Computation Without a Central Processor}
+\msid{MND-21-a}
+\msfamily{MND-21}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_21.lean}
+\mskeywords{computational theory of mind; central processor; modularity; distributed cognition; mechanistic computation; dissociation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is the mind a computer? The question runs together two claims: that cognition consists in computation, and that the mind is a single computing machine, a system whose operations are all sequenced by one controller executing one program. We argue that the first claim is true and the second false. Cognitive processes are computational in the mechanistic sense: they are processes in which a physical mechanism manipulates medium-independent vehicles according to rules sensitive to their properties. Computing processes connected by computable channels compose into a computing system, so the mind computes. But the mind contains cognitive processes whose relative order and timing no unit fixes: processes that run concurrently, stall and fail independently, and are coordinated by the exchange of results rather than by a common scheduler. A single computer has no such pair of processes. Cognition is therefore distributed over semi-autonomous processes. A Lean formalization confirms that the conclusion depends on exactly three premises. We show that the result is compatible with functionalism and with the computational explanation of cognition, and that it does not rest on the triviality arguments against computationalism.
+\end{abstract}
+
+\section{The problem}
+
+The computational theory of mind descends from \citet{Turing1936}, whose analysis of effective procedures provided a model of a mechanism that follows rules, and from \citet{Putnam1967}, who proposed that mental states are functional states of a probabilistic automaton. \citet{Fodor1975} gave the theory its classical form: thinking is the manipulation of symbols in a language of thought, by processes sensitive to their syntax. On this picture the mind is often described as a computer in the strict sense, and the description brings with it the architecture of the computers it was modelled on: a memory, a processor that reads and writes it, and a single stream of control.
+
+Two lines of criticism challenged the architecture rather than the computation. Connectionist models \citep{RumelhartMcClelland1986} described cognition as the parallel settling of networks with no central processor, and robotics showed that competent behavior could arise from layered control systems with no central model of the world \citep{Brooks1991}. In the philosophy of mind, \citet{Minsky1986} and \citet{Dennett1991} described the mind as a society of agents or a pandemonium of parallel drafts, a picture already present in \citet{Selfridge1959}. Fodor himself argued that the input systems are modular, fast and encapsulated, and that the central systems, which fix belief, are global and holistic \citep{Fodor1983}; he later argued that the computational theory has no account of such global processes \citep{Fodor2000}. The massive modularity hypothesis responds by denying that there is a single central system: cognition is the product of many specialized processes \citep{Carruthers2006}.
+
+A different line of criticism challenged the computation. \citet{Searle1992} and \citet{Putnam1988} argued that, under a liberal account of implementation, every physical system computes every function, so that the claim that the mind computes is trivial. \citet{Piccinini2015} replied with a mechanistic account of physical computation on which only some systems compute, and on which the claim is substantive.
+
+We defend a combination of these positions: the mind computes, in Piccinini's substantive sense, and it is not a single computer, because some of its cognitive processes are semi-autonomous. The view is compatible with the functionalism of MND-08, and it is the view MND-23 relies on when it notes that distributed processing in the octopus does not count against consciousness, since the human mind is itself distributed.
+
+\section{Framework}
+
+\begin{definition}[Computing process]\label{d:comp}
+A process \emph{computes} if it is the operation of a mechanism whose function is to transform medium-independent vehicles according to a rule sensitive to their properties \citep{Piccinini2015}.
+\end{definition}
+
+\begin{definition}[Sequencing]\label{d:seq}
+A unit $c$ of a system \emph{sequences} two processes $p$ and $q$ if the relative order and timing of the steps of $p$ and $q$ are fixed by the operation of $c$: $p$ and $q$ advance only when $c$ advances them, and their interleaving is determined by $c$.
+\end{definition}
+
+\begin{definition}[Single computer]\label{d:single}
+A system is a \emph{single computer} if some unit of it sequences every pair of its processes. Such a unit is a \emph{central processor}.
+\end{definition}
+
+A von Neumann machine running several programs is a single computer in this sense: its processes are interleaved by the processor's scheduler, and none of them takes a step the processor does not take. A Turing machine is the limiting case, with one process and one head. A cluster of machines that exchange messages is not a single computer: no unit fixes the relative timing of their operations.
+
+\begin{definition}[Semi-autonomy]\label{d:semi}
+Two processes are \emph{semi-autonomous} with respect to each other if no unit sequences them. A system's processing is \emph{distributed over semi-autonomous processes} if it contains at least one pair of semi-autonomous processes, which interact by exchanging results.
+\end{definition}
+
+The prefix \enquote{semi} records that the processes are not independent: each takes the others' outputs as inputs. What they lack is a common controller.
+
+\begin{assumption}[Computation]\label{a:comp}
+Every cognitive process computes.
+\end{assumption}
+
+\begin{assumption}[Composition]\label{a:compose}
+If every cognitive process computes, the mind, as the system of its cognitive processes and the channels between them, computes.
+\end{assumption}
+
+\begin{assumption}[Dissociation]\label{a:diss}
+There are two cognitive processes that no unit sequences.
+\end{assumption}
+
+Assumption~\ref{a:comp} is the working hypothesis of cognitive science, supported by the success of computational models of vision, motor control, language processing and learning. Its content is fixed by Definition~\ref{d:comp}: it is not the claim that cognitive processes can be simulated by computers, which is true of almost any process, but that they are themselves mechanisms for transforming vehicles by rules. Assumption~\ref{a:compose} holds because the channels between cognitive processes, neural pathways that carry spike trains, are themselves mechanisms that transmit vehicles, and a network of computing mechanisms linked by transmitting mechanisms is a computing mechanism \citep{Piccinini2015}.
+
+Assumption~\ref{a:diss} is supported by three kinds of evidence. First, dissociations: in the patient described by \citet{MilnerGoodale1995}, visually guided grasping proceeds accurately while conscious perception of the shape and orientation of the object is lost, so the visuomotor process advances while the perceptual process does not. If a single unit advanced both, the failure of one to advance would be a failure of that unit, and the other would stop with it. Second, concurrency: perceptual processing in different modalities, the maintenance of posture, and the regulation of gaze run in parallel, with timing driven by their own inputs. Third, independent failure: lesions, fatigue and drugs disrupt particular processes while sparing others, and the pattern of double dissociations found across neuropsychology is what one expects of processes with separate control and not what one expects of processes interleaved by one scheduler, whose failure would be shared.
+
+\section{The argument}
+
+\begin{lemma}\label{l:computes}
+The mind computes.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:comp} every cognitive process computes, and by Assumption~\ref{a:compose} the mind therefore computes.
+\end{proof}
+
+\begin{lemma}\label{l:notsingle}
+The mind is not a single computer.
+\end{lemma}
+
+\begin{proof}
+Suppose some unit $c$ sequences every pair of cognitive processes. By Assumption~\ref{a:diss} there are cognitive processes $p$ and $q$ that no unit sequences; in particular $c$ does not sequence them, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+The mind computes, it is not a single computer, and its cognition is distributed over semi-autonomous processes.
+\end{theorem}
+
+\begin{proof}
+The first two conjuncts are Lemmas~\ref{l:computes} and~\ref{l:notsingle}. The third follows from Assumption~\ref{a:diss} and Definition~\ref{d:semi}, since the processes it provides exchange results: each is a cognitive process of the same mind, and the outputs of perception and of visuomotor control are each inputs to the planning of action.
+\end{proof}
+
+\begin{corollary}\label{c:func}
+Theorem~\ref{t:main} is compatible with the thesis of MND-08 that thinking is a functional property that machines can have.
+\end{corollary}
+
+\begin{proof}
+A functional property is had in virtue of a pattern of causal relations among states, inputs and outputs, whatever realizes it. The pattern may include relations of concurrency and independent timing as well as relations of sequence; nothing in the notion requires a single controller. An engineered system of message-passing processors can realize such a pattern, so Theorem~\ref{t:main} restricts which organizations realize thinking without restricting what can realize them.
+\end{proof}
+
+The theorem settles an ambiguity in the slogan that the mind is a computer. On the reading on which the slogan says that cognition is computation, it is true; on the reading on which it says that the mind has the architecture of the machines on which the slogan was modelled, it is false. The two readings were run together because the first machines that computed were single computers. The point matters for the debate initiated by \citet{Fodor2000}: the global character of belief fixation was a problem for a theory on which a central processor must survey all of a subject's beliefs at once. On the present view there is no such processor, and globality is the effect of many processes each sensitive to the results of others.
+
+\section{Objections and replies}
+
+\begin{objection}[Simulation]
+Every distributed system can be simulated by a single serial computer. If the mind computes, a single computer can do whatever it does; the distinction between being distributed and being a single computer is therefore without significance.
+\end{objection}
+
+\begin{reply}
+The simulation computes the same input--output function, but it is not the same system and does not have the same organization. In the simulation, one unit sequences all the simulated processes; in the mind, none does. The difference shows itself whenever timing and failure matter: a fault in the simulating processor halts every simulated process, while a lesion in the mind disrupts some processes and spares others. MND-05 observes that, if the present result is correct, functional duplication of a human being is a more demanding condition than computational simulation; the reason is that the functional organization includes the independence of the processes.
+\end{reply}
+
+\begin{objection}[The central bottleneck]
+Dual-task experiments show a psychological refractory period: when two tasks require response selection at nearly the same time, the second waits for the first \citep{Pashler1994}. There is a central bottleneck, and so a central processor.
+\end{objection}
+
+\begin{reply}
+A bottleneck in one stage of processing is a local constraint, not a controller of all processes. On the bottleneck model itself, perceptual stages and motor execution of the two tasks proceed in parallel; only response selection is serial. A unit that serializes one stage does not sequence perception, posture or gaze, and does not fix the relative timing of processes that do not pass through it. The finding supports the claim that some cognitive processes are sequenced, which Theorem~\ref{t:main} does not deny.
+\end{reply}
+
+\begin{objection}[The workspace]
+Global workspace theories hold that information becomes available to the whole mind by being broadcast from a workspace of limited capacity \citep{Baars1988}. The workspace is the central processor.
+\end{objection}
+
+\begin{reply}
+A workspace broadcasts contents; it does not advance the processes that receive them. On Baars's account the specialized processors run in parallel and compete for access to the workspace, and the workspace serves as a medium of exchange among them. That is distribution over semi-autonomous processes with a shared channel, which is what Definition~\ref{d:semi} describes.
+\end{reply}
+
+\begin{objection}[Triviality]
+On a liberal account of implementation every physical system implements every computation \citep{Putnam1988,Searle1992}. Then the mind trivially computes, and trivially implements a single computer too, so Lemma~\ref{l:notsingle} is false.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:comp} is not liberal: it requires a mechanism with the function of transforming vehicles by rules, and it ascribes computational structure only where the causal organization of the mechanism supports it \citep{Piccinini2015}. Under this account, a system implements a single computer only if it has a unit whose operation sequences its processes, and whether it does is a question about its causal structure that the evidence of Assumption~\ref{a:diss} answers. A mapping from physical states to the states of a serial machine that is not underwritten by such a unit does not make the system a single computer.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem does not establish how many semi-autonomous processes there are, or whether they are modules in the sense of \citet{Fodor1983} or of \citet{Carruthers2006}. It does not establish that no cognitive process is sequenced, nor that there is no unit of integration: MND-15 argues that consciousness is unified at each time in normal subjects, and integration of contents is compatible with the absence of a common controller. Nor does it show that the mind's computations are classical rather than connectionist; Definition~\ref{d:comp} covers both. Finally, it does not show where the boundaries of the system lie; MND-09 argues that some cognitive processes extend into external resources, which, if true, adds further semi-autonomous components.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_21.lean} takes processes and units as types, with primitive predicates for being a cognitive process and for computing, a primitive relation of sequencing, and a primitive proposition that the mind computes. Definitions~\ref{d:single} and~\ref{d:semi} are definitions, and Assumptions~\ref{a:comp}--\ref{a:diss} are axioms. The module proves Lemmas~\ref{l:computes} and~\ref{l:notsingle} and Theorem~\ref{t:main}:
+
+\begin{lstlisting}
+theorem theorem_3_3 :
+    MindComputes ∧ ¬ SingleComputer ∧
+    ∃ p q, Cog p ∧ Cog q ∧ SemiAutonomous p q
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_21.theorem_3_3' depends on axioms:
+  [Philosophy.MND_21.Cog, Philosophy.MND_21.Ctrl,
+   Philosophy.MND_21.MindComputes, Philosophy.MND_21.Process,
+   Philosophy.MND_21.Sequences,
+   Philosophy.MND_21.assumption_2_5,
+   Philosophy.MND_21.assumption_2_6,
+   Philosophy.MND_21.assumption_2_7]
+\end{lstlisting}
+
+\texttt{Process}, \texttt{Ctrl}, \texttt{Cog}, \texttt{Computes}, \texttt{Sequences} and \texttt{MindComputes} are the primitives of Section~2 (\texttt{Computes} occurs only inside the statements of two axioms and is not reported separately); \texttt{assumption\_2\_5} to \texttt{assumption\_2\_7} are Assumptions~\ref{a:comp}--\ref{a:diss}. The proof uses no axiom of classical logic. The formal statement records the existence of a semi-autonomous pair; that the pair exchanges results is part of the informal proof and is not modelled. The formalization makes plain that the logical work is slight: the substance lies in Definition~\ref{d:single}, which says what it would be for the mind to be a single computer, and in the empirical support for Assumption~\ref{a:diss}.
+
+\section{Conclusion}
+
+Cognitive processes are computational, and processes that compute and communicate by computable channels compose a system that computes; so the mind computes. A single computer is a system whose processes are all sequenced by one unit, and the mind contains cognitive processes, such as visuomotor control and conscious perception, that no unit sequences. The mind therefore computes without being a single computer, and its cognition is distributed over semi-autonomous processes that coordinate by exchanging results.
+
+\begin{thebibliography}{99}\small
+\bibitem[Baars(1988)]{Baars1988} Baars, B.~J. (1988). \emph{A Cognitive Theory of Consciousness}. Cambridge University Press.
+\bibitem[Brooks(1991)]{Brooks1991} Brooks, R.~A. (1991). Intelligence without representation. \emph{Artificial Intelligence}, 47, 139--159.
+\bibitem[Carruthers(2006)]{Carruthers2006} Carruthers, P. (2006). \emph{The Architecture of the Mind}. Oxford University Press.
+\bibitem[Dennett(1991)]{Dennett1991} Dennett, D.~C. (1991). \emph{Consciousness Explained}. Little, Brown.
+\bibitem[Fodor(1975)]{Fodor1975} Fodor, J.~A. (1975). \emph{The Language of Thought}. Thomas Y. Crowell.
+\bibitem[Fodor(1983)]{Fodor1983} Fodor, J.~A. (1983). \emph{The Modularity of Mind}. MIT Press.
+\bibitem[Fodor(2000)]{Fodor2000} Fodor, J.~A. (2000). \emph{The Mind Doesn't Work That Way}. MIT Press.
+\bibitem[Milner and Goodale(1995)]{MilnerGoodale1995} Milner, A.~D. and Goodale, M.~A. (1995). \emph{The Visual Brain in Action}. Oxford University Press.
+\bibitem[Minsky(1986)]{Minsky1986} Minsky, M. (1986). \emph{The Society of Mind}. Simon and Schuster.
+\bibitem[Pashler(1994)]{Pashler1994} Pashler, H. (1994). Dual-task interference in simple tasks: data and theory. \emph{Psychological Bulletin}, 116(2), 220--244.
+\bibitem[Piccinini(2015)]{Piccinini2015} Piccinini, G. (2015). \emph{Physical Computation: A Mechanistic Account}. Oxford University Press.
+\bibitem[Putnam(1967)]{Putnam1967} Putnam, H. (1967). Psychological predicates. In W.~H. Capitan and D.~D. Merrill (eds.), \emph{Art, Mind, and Religion}, 37--48. University of Pittsburgh Press.
+\bibitem[Putnam(1988)]{Putnam1988} Putnam, H. (1988). \emph{Representation and Reality}. MIT Press.
+\bibitem[Rumelhart and McClelland(1986)]{RumelhartMcClelland1986} Rumelhart, D.~E., McClelland, J.~L. and the PDP Research Group (1986). \emph{Parallel Distributed Processing}, 2 vols. MIT Press.
+\bibitem[Searle(1992)]{Searle1992} Searle, J.~R. (1992). \emph{The Rediscovery of the Mind}. MIT Press.
+\bibitem[Selfridge(1959)]{Selfridge1959} Selfridge, O.~G. (1959). Pandemonium: a paradigm for learning. In \emph{Mechanisation of Thought Processes}. Her Majesty's Stationery Office.
+\bibitem[Turing(1936)]{Turing1936} Turing, A.~M. (1936). On computable numbers, with an application to the Entscheidungsproblem. \emph{Proceedings of the London Mathematical Society}, s2-42, 230--265.
+\end{thebibliography}
+
+\end{document}

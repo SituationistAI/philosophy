@@ -1,0 +1,140 @@
+\documentclass{situationist-preprint}
+
+\title{Property Is Not Theft}
+\msid{POL-06-a}
+\msfamily{POL-06}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/POL/POL\_06.lean}
+\mskeywords{property; theft; Proudhon; self-refutation; rights; possession; anarchism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Proudhon answered the question \enquote{What is property?} with the thesis that property is theft. We argue that the thesis, read as a condemnation of all property, is self-undermining. Theft is the taking or keeping of what someone else has a right to; it therefore presupposes that someone has a right to the thing stolen, and such a right is a property right. We prove that, given three premises about theft and rightful ownership, Proudhon's thesis is false as soon as anyone holds anything, and that it can be true only in a world in which no theft occurs. The proof is formalized in Lean. Each reading on which the slogan survives condemns some property in the name of other property rights.
+\end{abstract}
+
+\section{The question}
+
+\citet[ch.~1]{Proudhon1840} answered the question what property is by comparing it to the answer that slavery is murder: property, he said, is theft. Its intended force is that the institution presented as the foundation of right is a standing wrong.
+
+The best-known objection was made by Marx, in his letter on Proudhon to J.~B. von Schweitzer \citep{Marx1865}: theft, as a violation of property, presupposes property. Defenders of Proudhon reply that it targets only a particular form of property, the proprietor's right to an income from what others produce, which Proudhon distinguished from possession \citep[chs.~2--4]{Proudhon1840}. Proudhon himself later came to defend property as a guarantee of liberty against the state \citep{Proudhon1866}.
+
+We show that the objection is sound. Our thesis is that property is not theft: Proudhon's thesis, taken as a claim about all property, is self-undermining, since theft presupposes property.
+
+\section{Framework}
+
+\begin{definition}\label{d:basic}
+An \emph{agent} is an individual or a collective, such as a community or society. An agent \emph{holds} a thing as property when she controls it and excludes others from it under some rule, whether or not she is entitled to do so. An agent has a \emph{right} to a thing when she is morally entitled to hold it and to exclude others from it.
+\end{definition}
+
+\begin{definition}\label{d:theft}
+A \emph{theft} is a holding of a thing that is not rightful: a thief holds what he is not entitled to hold.
+\end{definition}
+
+\begin{assumption}[Theft presupposes property]\label{a:presup}
+Whatever is stolen is something to which someone other than the thief has a right.
+\end{assumption}
+
+\begin{assumption}\label{a:holding}
+Rightful ownership is a form of holding: an agent who has a right to a thing holds it as property, or has a claim to it of the same kind as a holder's.
+\end{assumption}
+
+\begin{definition}[Proudhon's thesis]\label{d:thesis}
+\emph{Proudhon's thesis} is that every property holding is a theft.
+\end{definition}
+
+Assumption~\ref{a:presup} states what distinguishes theft from other ways of coming to hold a thing. To catch a wild fish is to acquire something, but not to steal it, because no one is deprived of anything to which he has a right. Theft is a wrong done to a holder of rights. Assumption~\ref{a:holding} records that the right whose violation constitutes a theft is a property right in the sense of Definition~\ref{d:basic}: a right to hold and exclude. The rightful owner who has lost control of a thing still counts as a holder; a thesis about all property that exempted such owners would not be Proudhon's.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+If anyone holds anything as property, Proudhon's thesis is false.
+\end{theorem}
+
+\begin{proof}
+Suppose that $a$ holds $t$ as property and that Proudhon's thesis is true. Then $a$'s holding of $t$ is a theft. By Assumption~\ref{a:presup}, some agent $b$ other than $a$ has a right to $t$. By Assumption~\ref{a:holding}, $b$ holds $t$ as property. By Proudhon's thesis, $b$'s holding is a theft, and so, by Definition~\ref{d:theft}, it is not rightful. But $b$ has a right to $t$. This is a contradiction.
+\end{proof}
+
+\begin{corollary}\label{c:honest}
+If there is any theft, some holding is not a theft.
+\end{corollary}
+
+\begin{proof}
+If $a$ steals $t$, then by Assumption~\ref{a:presup} some $b$ has a right to $t$, by Assumption~\ref{a:holding} $b$ holds $t$, and by Definition~\ref{d:theft} $b$'s holding is not a theft, since it is rightful.
+\end{proof}
+
+\begin{corollary}\label{c:vacuous}
+Proudhon's thesis is true only if there is no theft at all.
+\end{corollary}
+
+\begin{proof}
+A theft is a holding (Definition~\ref{d:theft}); if there were a theft, someone would hold something, and Proudhon's thesis would be false by Theorem~\ref{t:main}.
+\end{proof}
+
+Corollary~\ref{c:vacuous} is the sense in which the thesis is self-undermining rather than merely false. Its truth requires that there be no theft, and so no property, and in such a world it is vacuous. The thesis can be true only where it has no application.
+
+\subsection{Formalization}
+
+Theorem~\ref{t:main} and Corollaries~\ref{c:honest} and~\ref{c:vacuous} are formalized in \nolinkurl{Philosophy/POL/POL_06.lean}, with the two clauses of Definition~\ref{d:theft} and Assumptions~\ref{a:presup} and~\ref{a:holding} as axioms:
+
+\begin{lstlisting}
+-- ProudhonThesis := ∀ a t, Holds a t → Theft a t
+theorem proudhon_self_undermining
+    (h : ∃ a t, Holds a t) : ¬ ProudhonThesis
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.POL_06.proudhon_self_undermining' depends on axioms:
+  [Philosophy.POL_06.Agent, Philosophy.POL_06.Holds,
+   Philosophy.POL_06.Rightful, Philosophy.POL_06.Theft,
+   Philosophy.POL_06.Thing, Philosophy.POL_06.rightful_is_holding,
+   Philosophy.POL_06.theft_not_rightful,
+   Philosophy.POL_06.theft_presupposes_property]
+\end{lstlisting}
+
+The first five axioms declare the primitives; the last three are the second clause of Definition~\ref{d:theft} and Assumptions~\ref{a:holding} and~\ref{a:presup}. No classical principle is used. The formalization shows that the argument is valid and needs exactly these premises, not that they are true.
+
+\section{Objections}
+
+\begin{objection}[Two senses of property]
+In the slogan, \enquote{property} means legal property, and the right that theft presupposes is a moral right. Legal property can be theft from the bearers of moral rights.
+\end{objection}
+
+\begin{reply}
+On this reading the thesis says that legal holdings are thefts from those who are morally entitled to the things held. A moral entitlement to hold and exclude is a property right in the sense of Definition~\ref{d:basic}, so the reading affirms that there is rightful property, and so denies that property is theft. It asserts only that the law protects the wrong holdings.
+\end{reply}
+
+\begin{objection}[Collective property]
+The proprietor steals from society, whose claim is not private property; so the slogan condemns all private property without presupposing any.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:basic} counts collectives as agents. If the proprietor steals from society, society has a right to what he holds, and that right is a property right held collectively. The thesis that results is that private property is theft from collective owners. It is not self-undermining, and it is not the thesis that property is theft. Proudhon's central charge, that the proprietor appropriates what collective labour produced \citep[ch.~3]{Proudhon1840}, presupposes the workers' title to the product of their labour, the title on which Locke founded private property \citep[II, ch.~V]{Locke1689}.
+\end{reply}
+
+\begin{objection}[Appropriation from the commons]
+Original appropriation takes from the commons what belonged to no one. This is the wrong the slogan names.
+\end{objection}
+
+\begin{reply}
+The wrong may be real; it is the problem of the Lockean proviso \citep{Nozick1974,Waldron1988}. But if what was taken belonged to no one, the taking was not theft, by Assumption~\ref{a:presup}. If, instead, the commons belonged to everyone, then everyone had a right to it, and the slogan presupposes common property. In neither case is all property theft.
+\end{reply}
+
+\section{Conclusion}
+
+Theft is a wrong done to someone with a right to the thing stolen, and that right is a property right. Proudhon's thesis is therefore false whenever there is property and vacuous when there is none. What survives of it is a family of claims about which property is rightful, each of which presupposes that some property is. The result does not show that any actual holding is rightful; that is a question for the theory of justice, which POL-01 answers for the basic structure and POL-12 applies to markets. The companion manuscript POL-06-b examines Proudhon's paradox further.
+
+\begin{thebibliography}{9}\small
+\bibitem[Locke(1689)]{Locke1689} Locke, J. (1689). \emph{Two Treatises of Government}. London: Awnsham Churchill. Cited by treatise and chapter.
+\bibitem[Marx(1865)]{Marx1865} Marx, K. (1865). Über P.-J. Proudhon. Letter to J.~B. von Schweitzer, 24 January 1865, published in \emph{Der Social-Demokrat}.
+\bibitem[Nozick(1974)]{Nozick1974} Nozick, R. (1974). \emph{Anarchy, State, and Utopia}. New York: Basic Books.
+\bibitem[Proudhon(1840)]{Proudhon1840} Proudhon, P.-J. (1840). \emph{Qu'est-ce que la propri\'et\'e? ou Recherches sur le principe du droit et du gouvernement}. Paris.
+\bibitem[Proudhon(1866)]{Proudhon1866} Proudhon, P.-J. (1866). \emph{Th\'eorie de la propri\'et\'e}. Paris. Published posthumously.
+\bibitem[Waldron(1988)]{Waldron1988} Waldron, J. (1988). \emph{The Right to Private Property}. Oxford: Clarendon Press.
+\end{thebibliography}
+
+\end{document}

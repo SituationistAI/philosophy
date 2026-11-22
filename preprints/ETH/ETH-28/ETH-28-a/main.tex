@@ -1,0 +1,106 @@
+\documentclass{situationist-preprint}
+
+\title{The Demandingness of Morality}
+\msid{ETH-28-a}
+\msfamily{ETH-28}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_28.lean}
+\mskeywords{demandingness; personal prerogative; beneficence; rescue; supererogation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Morality is moderately demanding. We combine three results: the duty of beneficence requires affluent agents to give a tenth of their income (ETH-06); the duty to rescue requires rescues up to a cumulative cost of a tenth of income per year, beyond which rescue is supererogatory (ETH-18); and supererogatory acts, bounded below by decency and above by sainthood, are not required (ETH-14). We prove that the total requirement lies between a tenth and a fifth of the agent's income, that at least four fifths is left to a personal prerogative, and that there is room for supererogation above the line of decency. The proof is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Objections to consequentialism from demandingness hold that a morality requiring agents to promote the good impartially would leave them no life of their own \citep{Scheffler1982}; \citet{Kagan1989} replied that the limits of ordinary morality cannot be defended. A dispute about how much morality demands is, however, not settled by the choice of framework, since every deontic theory has a consequentialist counterpart (ETH-02). It is settled by the content of the duties. We take the content from the three manuscripts of this cluster and compute their sum.
+
+\section{Framework}
+
+For an agent with annual income $I$, all costs are measured in income-equivalents for the year.
+
+\begin{assumption}[Beneficence, ETH-06]\label{a:ben}
+The duty of beneficence requires a tenth of income.
+\end{assumption}
+
+\begin{assumption}[Rescue, ETH-18]\label{a:res}
+The rescues required in a year cost in total at most a tenth of income.
+\end{assumption}
+
+\begin{assumption}[Supererogation, ETH-14]\label{a:sup}
+Supererogatory acts are not required: they contribute nothing to the requirement.
+\end{assumption}
+
+\begin{assumption}\label{a:saint}
+The saintly bound on self-sacrifice does not exceed the agent's income.
+\end{assumption}
+
+\begin{definition}\label{d:required}
+The \emph{total requirement} is the sum of the costs required by beneficence, rescue and supererogation. It is the \emph{line of decency}: an agent who meets it acts decently, and one who falls short does not.
+\end{definition}
+
+\begin{definition}\label{d:prerogative}
+The \emph{personal prerogative} is the part of income not subject to requirement: income minus the total requirement.
+\end{definition}
+
+The two duties are additive because they are distinct. Beneficence is a share of a collective task; rescue is owed to particular persons in emergencies; neither draws on the other (ETH-06, ETH-18).
+
+\section{The result}
+
+\begin{theorem}\label{t:moderate}
+Given Assumptions~\ref{a:ben}--\ref{a:sup}, the total requirement lies between a tenth and a fifth of income, and the personal prerogative is at least four fifths of income.
+\end{theorem}
+
+\begin{proof}
+The requirement is $I/10$ for beneficence, at most $I/10$ for rescue and $0$ for supererogation, so it is at least $I/10$ and at most $I/5$. The prerogative is $I$ minus at most $I/5$, which is at least $4I/5$.
+\end{proof}
+
+\begin{corollary}\label{c:room}
+Given also Assumption~\ref{a:saint}, if the saintly bound exceeds a fifth of income, there is a level of sacrifice above the line of decency and within the saintly bound.
+\end{corollary}
+
+\begin{proof}
+The saintly bound itself is such a level, since by Theorem~\ref{t:moderate} the line of decency is at most a fifth of income.
+\end{proof}
+
+The theorem gives the sense in which morality is moderately demanding. It is demanding: an affluent agent who gives nothing and rescues no one falls below decency, and the requirement is never less than a tenth of income. It is moderate: the requirement never exceeds a fifth, whatever the sequence of emergencies or the level of others' compliance. Between the line of decency and the saintly bound lies the space of supererogation, which ETH-14 describes; beyond the requirement, what the agent does with four fifths of her income is hers to decide, including giving priority to those close to her (ETH-19).
+
+\begin{objection}
+The figures are those of affluent agents in ordinary circumstances. In a catastrophe, morality may demand more.
+\end{objection}
+
+\begin{reply}
+The result is conditional on the assumptions, and a catastrophe that raised the cost of meeting basic need beyond the bound on which ETH-06 relies would change the beneficence share. What does not change is the structure: both duties are bounded fractions of income, so their sum is bounded, and a prerogative remains.
+\end{reply}
+
+\section{Formalization}
+
+Theorem~\ref{t:moderate} and Corollary~\ref{c:room} are formalized in \nolinkurl{Philosophy/ETH/ETH_28.lean}. The three required costs and the saintly bound are primitive functions of income, and Assumptions~\ref{a:ben}--\ref{a:saint} are axioms; the results of ETH-06 and ETH-18 enter as premises here, not as imported theorems.
+
+\begin{lstlisting}
+theorem moderate (I : Nat) :
+    I / 10 ≤ required I ∧ required I ≤ I / 5 ∧ 4 * I / 5 ≤ prerogative I
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_28.moderate' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.ETH_28.beneficence, Philosophy.ETH_28.beneficence_tenth,
+   Philosophy.ETH_28.rescue, Philosophy.ETH_28.rescue_tenth,
+   Philosophy.ETH_28.supererogation, Philosophy.ETH_28.supererogation_zero]
+\end{lstlisting}
+
+\section{Conclusion}
+
+The combined duties of beneficence, rescue and supererogation require at least a tenth and at most a fifth of an affluent agent's income, leaving at least four fifths to a personal prerogative and room for supererogation above decency. Morality is moderately demanding.
+
+\begin{thebibliography}{9}\small
+\bibitem[Kagan(1989)]{Kagan1989} Kagan, S. (1989). \emph{The Limits of Morality}. Clarendon Press.
+\bibitem[Scheffler(1982)]{Scheffler1982} Scheffler, S. (1982). \emph{The Rejection of Consequentialism}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

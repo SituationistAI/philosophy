@@ -1,0 +1,156 @@
+\documentclass{situationist-preprint}
+
+\title{Identity Is Absolute}
+\msid{LOG-12-a}
+\msfamily{LOG-12}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_12.lean}
+\mskeywords{relative identity; Geach; Leibniz's Law; sortals; Trinity; constitution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Geach argued that identity is relative: \enquote{$a$ is the same as $b$} is incomplete until a sortal is supplied, and $a$ may be the same $F$ as $b$ without being the same $G$, though both are $G$s. We argue that identity is absolute. The argument is a precise form of the objection from Leibniz's Law. We prove that any relation that is substitutive for every predicate relates only objects that are absolutely identical, that any two such relations agree, and that if Geach's thesis holds then the relation it calls \enquote{same $F$} fails substitutivity. Geach's relations exist, but they are restricted indiscernibility relations, not identity. The only plausible counterexamples come from theology: REL-13 shows that the doctrine of the Trinity is consistent in a logic of relative identity. We argue that this result, which we accept, does not show that identity is relative in general. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Geach1962,Geach1967} held that an identity statement is incomplete unless it says what kind of thing $a$ and $b$ are the same of. \enquote{$a$ is the same as $b$} is short for \enquote{$a$ is the same $F$ as $b$}, and Geach's distinctive thesis was that the choice of $F$ can make a difference to truth value: there are cases in which $a$ is the same $F$ as $b$, $a$ and $b$ are both $G$s, and $a$ is not the same $G$ as $b$. His examples included the same official and different men, the same surman (men sharing a surname) and different men, and the same river with different waters.
+
+The absolutist reply, developed by \citet{Perry1970} and \citet{Wiggins2001}, runs as follows. If $a$ is the same $F$ as $b$, then whatever is true of $a$ is true of $b$, by Leibniz's Law; one thing true of $a$ is that it is the same $G$ as $a$; so $b$ is the same $G$ as $a$. Relativity is therefore inconsistent with the substitutivity of identicals. \citet{Griffin1977} examined the formal options in detail. The relativist's answer, from Geach onward, has been that substitutivity holds for \enquote{same $F$} only with respect to a restricted range of predicates.
+
+We argue that identity is absolute. Section 3 makes the Leibniz's Law argument precise; Sections 4 and 5 treat the standard cases and the theological case.
+
+\section{Framework}
+
+\begin{definition}\label{d:prim}
+There are objects and sortals. For sortals $F$ and objects $a, b$, \enquote{$a$ is an $F$} and \enquote{$a$ is the same $F$ as $b$}, written $a =_F b$, are primitive.
+\end{definition}
+
+\begin{principle}\label{p:sub}
+\emph{Substitutivity.} A relation $R$ is substitutive if, for every predicate $P$ and all $a, b$, if $R(a, b)$ and $P(a)$ then $P(b)$.
+\end{principle}
+
+\begin{definition}\label{d:id}
+The relation $=_F$ is an \emph{identity relation} if it is reflexive on $F$s and substitutive in the sense of \ref{p:sub}.
+\end{definition}
+
+\begin{definition}\label{d:rel}
+\emph{Geach's thesis} (the relativity of identity) is that there are sortals $F$ and $G$ and objects $a$ and $b$, both $G$s, such that $a =_F b$ and not $a =_G b$.
+\end{definition}
+
+\begin{assumption}\label{a:refl}
+Every sortal relation is reflexive on its sortal: if $a$ is a $G$, then $a =_G a$.
+\end{assumption}
+
+Assumption~\ref{a:refl} is accepted by Geach, for whom each \enquote{same $G$} is an equivalence relation on $G$s. \ref{p:sub} is the substantive principle: it is what the absolutist takes identity to be.
+
+\section{The argument}
+
+\begin{theorem}\label{t:abs}
+A substitutive relation relates only objects that are absolutely identical: if $R$ is substitutive and $R(a, b)$, then $a = b$.
+\end{theorem}
+
+\begin{proof}
+Apply substitutivity to the predicate \enquote{is identical to $a$}, which $a$ satisfies.
+\end{proof}
+
+Theorem~\ref{t:abs} uses absolute identity in the predicate to which substitutivity is applied; the next result does not.
+
+\begin{theorem}\label{t:agree}
+If $=_F$ and $=_G$ are identity relations and $a$ is both an $F$ and a $G$, then $a =_F b$ if and only if $a =_G b$.
+\end{theorem}
+
+\begin{proof}
+Suppose $a =_F b$. Apply substitutivity of $=_F$ to the predicate \enquote{is the same $G$ as $a$}, which $a$ satisfies by reflexivity of $=_G$; then $b$ satisfies it. The converse is symmetric.
+\end{proof}
+
+\begin{corollary}\label{c:fail}
+Given Assumption~\ref{a:refl}, if Geach's thesis holds with sortals $F$ and $G$, then $=_F$ is not substitutive, and so is not an identity relation.
+\end{corollary}
+
+\begin{proof}
+If $=_F$ were substitutive, then from $a =_F b$ and $a =_G a$ we would have $a =_G b$, contrary to the thesis.
+\end{proof}
+
+Corollary~\ref{c:fail} is the precise content of the Leibniz's Law argument. It does not say that Geach's thesis is false. It says that if the thesis is true, the relation that holds between $a$ and $b$ fails to be substitutive, and fails, in particular, for a predicate of the form \enquote{is the same $G$ as $a$}. The relativist may accept this. But then the relation is not identity in the sense of Definition~\ref{d:id}, and what remains to be decided is whether anything is identity in that sense.
+
+\begin{proposition}\label{p:model}
+Restricted substitutivity is consistent with relativity. On a domain of two objects, the universal relation is reflexive and substitutive for every predicate that does not distinguish the two objects, and relates them, while equality does not; but the universal relation is not substitutive for all predicates.
+\end{proposition}
+
+\begin{proof}
+A predicate that does not distinguish the two objects is true of both or of neither, so the universal relation preserves it. The predicate \enquote{is the first object} is true of one and not the other.
+\end{proof}
+
+Proposition~\ref{p:model} gives the relativist her due. Geach's own proposal was that \enquote{same $F$} is indiscernibility with respect to the predicates of a given theory \citep{Geach1967}; such relations are consistent and abundant, but they are not identity. At the limit, indiscernibility with respect to every predicate, relativity disappears (Theorem~\ref{t:agree}).
+
+\section{The standard cases}
+
+\emph{Surmen and officials.} Two men with the same surname are the same surman; the same official may be one man this year and another man the next. In each case the relation that holds is an equivalence relation on men (sameness of surname, occupancy of the same office), and nothing requires that it be identity.
+
+\emph{The river.} Heraclitus's river is one thing, constituted at different times by different waters. No pair of objects is the same river and different somethings, since the river is not an instance of the sortal \enquote{waters}.
+
+\emph{The statue and the clay.} The statue and the lump of clay coincide, yet the lump survives squashing and the statue does not. The relativist says that they are the same lump but different statues. The absolutist says that they are two objects, one constituting the other, or one object under two sortals; on either view the identity relation is absolute. What the case shows is that counting is sortal-relative, which is the insight of Geach's view that \citet{Wiggins2001} preserves: identity is always identity of something answering to a sortal, but the relation is absolute.
+
+\section{The theological case}
+
+The doctrine of the Trinity holds that the Father is God, the Son is God and the Holy Spirit is God; that the Father is not the Son, the Son is not the Spirit and the Spirit is not the Father; and that there is exactly one God. With absolute identity and standard counting, these claims are inconsistent. \citet{vanInwagen1988} showed how to state them consistently in a logic of relative identity: the Father is the same God as the Son and not the same person as the Son. REL-13 argues, in this tradition, that the doctrine is consistent in any logic of relative identity extending Geach's system. Others model the doctrine on material constitution \citep{BrowerRea2005}.
+
+We regard this as the strongest case for relative identity, and we accept the result of REL-13. It differs from the cases of Section 4: there, the relation \enquote{same $F$} could be identified with an independently intelligible equivalence relation (same surname, same office, constitution), and the absolutist could describe the facts without remainder. Here, the doctrine itself forbids the reduction: the persons are not three Gods related by some lesser equivalence, and \enquote{the same God} must do the work that identity does in counting Gods.
+
+It does not follow that identity is relative in general. First, Corollary~\ref{c:fail} applies to the theological case as to any other: if the Father is the same God as the Son and not the same person, then \enquote{the same God} fails substitutivity for the predicate \enquote{is the same person as the Father}. A theologian in this tradition can accept this and locate the mystery of the doctrine there. Second, consistency in a logic of relative identity shows that the doctrine does not require a contradiction, not that the logic in which it is consistent is the correct logic of identity outside the divine case. A reason drawn from revealed doctrine bears on the doctrine's subject matter, not on statues, rivers and men. The theological case shows at most that, in the divine nature, a relation that does the work of identity in counting is not an identity relation in the sense of Definition~\ref{d:id}.
+
+\section{Objections and replies}
+
+\begin{objection}
+Theorem~\ref{t:abs} presupposes absolute identity in its proof, and Definition~\ref{d:id} presupposes unrestricted quantification over predicates. Both beg the question against Geach.
+\end{objection}
+
+\begin{reply}
+Theorem~\ref{t:agree} and Corollary~\ref{c:fail} use neither absolute identity nor any predicate beyond the sortal relations themselves: they apply substitutivity only to \enquote{is the same $G$ as $a$}.
+\end{reply}
+
+\begin{objection}
+Absolute identity is inexpressible: in any language, the strongest relation definable is indiscernibility with respect to that language's predicates, which may relate distinct things.
+\end{objection}
+
+\begin{reply}
+This shows that no first-order theory pins down identity by axioms, not that there is no such relation. Second-order logic, which LOG-09 argues is logic, defines it by quantifying over all properties.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_12.lean} takes objects, sortals and the two sortal relations as primitive axioms (Definition~\ref{d:prim}), defines substitutivity, identity relations and Geach's thesis (\ref{p:sub}, Definitions~\ref{d:id} and~\ref{d:rel}), and states Assumption~\ref{a:refl} as an axiom. It proves Theorems~\ref{t:abs} and~\ref{t:agree}, Corollary~\ref{c:fail} and Proposition~\ref{p:model}.
+
+\begin{lstlisting}
+theorem relativity_fails_substitutivity :
+    Relativity → ∃ F : Sortal, ¬ Substitutive (same F)
+
+'Philosophy.LOG_12.substitutive_absolute' depends on axioms:
+  [Philosophy.LOG_12.Obj]
+'Philosophy.LOG_12.relativity_fails_substitutivity' depends on
+  axioms: [Philosophy.LOG_12.Obj, Philosophy.LOG_12.Sortal,
+  Philosophy.LOG_12.isA, Philosophy.LOG_12.same,
+  Philosophy.LOG_12.sortal_reflexive]
+\end{lstlisting}
+
+The one premise beyond the primitives is Assumption~\ref{a:refl}.
+
+\section{Conclusion}
+
+Any relation that is substitutive for every predicate is absolute identity, and any two such relations agree; if Geach's thesis holds, the relation it calls \enquote{same $F$} is not substitutive, and is an indiscernibility relation rather than identity. The secular cases are described without remainder by absolute identity, equivalence relations and sortal-relative counting. REL-13 shows that the doctrine of the Trinity is consistent in a logic of relative identity; but that result concerns the divine nature and leaves identity, in general, absolute.
+
+\begin{thebibliography}{99}\small
+\bibitem[Brower and Rea(2005)]{BrowerRea2005} Brower, J.~E. and Rea, M.~C. (2005). Material constitution and the Trinity. \emph{Faith and Philosophy}, 22(1), 57--76.
+\bibitem[Geach(1962)]{Geach1962} Geach, P.~T. (1962). \emph{Reference and Generality}. Cornell University Press.
+\bibitem[Geach(1967)]{Geach1967} Geach, P.~T. (1967). Identity. \emph{The Review of Metaphysics}, 21(1), 3--12.
+\bibitem[Griffin(1977)]{Griffin1977} Griffin, N. (1977). \emph{Relative Identity}. Clarendon Press.
+\bibitem[Perry(1970)]{Perry1970} Perry, J. (1970). The same F. \emph{The Philosophical Review}, 79(2), 181--200.
+\bibitem[van Inwagen(1988)]{vanInwagen1988} van Inwagen, P. (1988). And yet they are not three Gods but one God. In T.~V. Morris (ed.), \emph{Philosophy and the Christian Faith}, University of Notre Dame Press.
+\bibitem[Wiggins(2001)]{Wiggins2001} Wiggins, D. (2001). \emph{Sameness and Substance Renewed}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

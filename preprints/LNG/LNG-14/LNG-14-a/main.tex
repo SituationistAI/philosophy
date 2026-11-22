@@ -1,0 +1,191 @@
+\documentclass{situationist-preprint}
+
+\title{Fictional Characters as Abstract Artefacts}
+\msid{LNG-14-a}
+\msfamily{LNG-14}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_14.lean}
+\mskeywords{fiction; fictional names; abstract artefacts; creationism; negative existentials; pretense}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can we talk about what does not exist? Sherlock Holmes does not exist, in the sense that there was no such detective, yet we say true things about him: that he was created by Conan Doyle, that he is more famous than any real detective. We argue that we can talk about Holmes because \enquote{Holmes} refers, and that what it refers to is an abstract artefact: an object brought into existence by Conan Doyle's writing, which is not located in space and is not a detective. The argument is that critical discourse about fiction is literally true, that the literal truth of a predication requires that its subject term refer, and that the referent has the properties critical discourse ascribes, being a character and being created, which make it an abstract artefact. We prove the argument valid in Lean and draw three corollaries: the referent exists, it is not a detective although the stories ascribe detection to it, and nothing concrete is Holmes. Talking about what does not exist therefore requires no non-existent objects. We answer the objections from pretense theory, from the mystery of creation, and from indeterminate identity.
+\end{abstract}
+
+\section{The problem}
+
+We say things like the following, and many of them are true.
+\begin{enumerate}[label=(\arabic*)]
+\item Holmes is a detective who lives at 221B Baker Street.
+\item Holmes is a fictional character created by Conan Doyle.
+\item Holmes is more famous than any real detective.
+\item Holmes does not exist.
+\end{enumerate}
+Sentence (1) is the kind of thing a reader says in summarizing the stories; (2) and (3) are the kind of thing a critic or historian says about them; (4) is the kind of thing one tells a child who has written to Baker Street. The problem is to give a semantics on which each comes out with the right truth value and on which the four are consistent. It is the problem of whether, and how, we can talk about what does not exist.
+
+Four kinds of answer have been given. \emph{Meinongians} hold that \enquote{Holmes} refers to an object that has the properties ascribed to it in the stories, and does not exist \citep{Parsons1980}. MET-24 argues that there are no such objects: existence is had by everything, and whatever is in the domain of quantification exists. \emph{Antirealists} hold that \enquote{Holmes} refers to nothing, and explain the apparent truth of (1)--(3) by pretense, by implicit story operators, or by paraphrase \citep{Walton1990,Everett2013}. \emph{Possibilists} hold that \enquote{Holmes} refers to a merely possible person, or would do so if the stories determined one; \citet{Kripke1980} argued that they do not, since many possible people fit the stories equally well. \emph{Artifactualists} hold that \enquote{Holmes} refers to an abstract object, a character, created by the author \citep{vanInwagen1977,Kripke2013,Thomasson1999,Salmon1998,Schiffer1996}. We defend the last view.
+
+The case for it begins with sentences like (2) and (3). They are not part of the story, since no story says that Holmes is fictional or that he was created by Doyle, and they are not uttered within a pretense; they are assertions of literary history and criticism, and they appear to be literally true. Van Inwagen made the point with quantified examples: \enquote{there are characters in some nineteenth-century novels who are presented with a greater wealth of physical detail than is any character in any eighteenth-century novel} is true, and it quantifies over characters \citep{vanInwagen1977}. If such sentences are true, and literal truth requires reference, then there are characters, and \enquote{Holmes} refers to one.
+
+\section{Framework}
+
+\begin{definition}\label{d:discourse}
+\emph{Internal} discourse reports what is true according to a fiction; \enquote{Holmes is a detective}, in internal discourse, says that the stories \emph{ascribe} detection to Holmes. \emph{Critical} discourse is literal assertion about fictions and their characters, such as (2) and (3). \emph{Existential} discourse comprises assertions and denials of existence, such as (4).
+\end{definition}
+
+\begin{definition}\label{d:abstract}
+An object is \emph{concrete} if it is located in space and time and can enter into causal relations as a material thing; otherwise it is \emph{abstract}. An object is an \emph{artefact} if it was brought into existence by the intentional activity of an agent.
+\end{definition}
+
+Characters, on this definition, may have temporal properties: Holmes came into existence in the 1880s. What makes them abstract is that they have no spatial location and are not material things. \citet{Thomasson1999} calls such objects abstract artefacts and compares them to laws, theories and works of literature, which are created at a time, depend for their continued existence on copies and on readers' memories, and are not located anywhere.
+
+\begin{assumption}[Critical truth]\label{a:critical}
+\enquote{Holmes is a fictional character created by Conan Doyle} is literally true.
+\end{assumption}
+
+\begin{assumption}[Reference]\label{a:ref}
+A sentence of the form \enquote{$n$ is a character created by $a$} is literally true only if $n$ refers to something that is a character and was created by $a$; and a name refers to at most one thing.
+\end{assumption}
+
+\begin{assumption}[Creation]\label{a:creation}
+Whatever an author creates is an artefact.
+\end{assumption}
+
+\begin{assumption}[Characters]\label{a:abstract}
+No fictional character is concrete.
+\end{assumption}
+
+\begin{assumption}[Detectives]\label{a:detective}
+Detectives, in the plain sense of the word, are concrete.
+\end{assumption}
+
+\begin{assumption}[Ascription]\label{a:ascription}
+The Holmes stories ascribe detection to whatever \enquote{Holmes} refers to.
+\end{assumption}
+
+Assumption~\ref{a:critical} is the substantive premise, and we defend it in Section~5. Assumption~\ref{a:ref} is the classical semantics of atomic predication, together with the uniqueness of the referent of a name in a practice. Assumption~\ref{a:creation} follows from Definition~\ref{d:abstract}, since to create is to bring into existence intentionally. Assumption~\ref{a:abstract} records that no character is anywhere: there is no place where Holmes is, although there is a place where the stories say he lives. Assumption~\ref{a:detective} says that the plain sense of \enquote{detective} is the sense in which detectives are people who investigate crimes. Assumption~\ref{a:ascription} records a fact about the stories, read through Definition~\ref{d:discourse}.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+If a sentence of the form \enquote{$n$ is a fictional character created by $a$} is literally true, then $n$ refers to an abstract artefact created by $a$.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:ref}, $n$ refers to something, $x$, that is a character and was created by $a$. By Assumption~\ref{a:abstract}, $x$ is not concrete, and so is abstract by Definition~\ref{d:abstract}. By Assumption~\ref{a:creation}, $x$ is an artefact.
+\end{proof}
+
+\begin{corollary}\label{c:holmes}
+\enquote{Holmes} refers to an abstract artefact created by Conan Doyle, and that artefact exists.
+\end{corollary}
+
+\begin{proof}
+From Theorem~\ref{t:main} and Assumption~\ref{a:critical}. The referent exists in the sense of MET-24, since something, namely itself, is identical to it.
+\end{proof}
+
+\begin{corollary}\label{c:detective}
+Whatever \enquote{Holmes} refers to is not a detective, and is ascribed detection by the stories.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:critical} and Assumption~\ref{a:ref}, the referent of \enquote{Holmes} is a character; it is unique, so whatever \enquote{Holmes} refers to is that character. By Assumption~\ref{a:abstract}, it is not concrete, and by Assumption~\ref{a:detective}, it is not a detective. By Assumption~\ref{a:ascription}, the stories ascribe detection to it.
+\end{proof}
+
+\begin{corollary}\label{c:noconcrete}
+Nothing concrete is Holmes.
+\end{corollary}
+
+\begin{proof}
+Whatever \enquote{Holmes} refers to is the character, which by Assumption~\ref{a:abstract} is not concrete.
+\end{proof}
+
+The four sentences of Section~1 now receive their truth values. Sentence (1), read as internal discourse, is true, since the stories ascribe detection to Holmes (Corollary~\ref{c:detective}); read as a literal predication, it is false, since Holmes is not a detective. Sentence (2) is true by Assumption~\ref{a:critical}, and Corollary~\ref{c:holmes} says what makes it true. Sentence (3) is true, since the character is famous, which an abstract artefact can be, in the way a theory or a symphony can. Sentence (4), as it is used in ordinary speech, denies that there is any such person as Holmes; by Corollary~\ref{c:noconcrete} it is true. The sentences are consistent, and none of them requires an object that does not exist.
+
+The answer to the question is therefore yes. We can talk about Holmes, who does not exist in the sense of sentence (4), because \enquote{Holmes} refers to something that does exist and is not a person. The non-existence we speak of is the non-existence of a concrete detective; the reference we achieve is to an abstract artefact. This is the second horn of the dilemma of MET-24-a for Meinongian objects: the characterizing properties of a character are had not in the plain sense but by ascription, and in that sense the character is an existing abstract object.
+
+\section{Reference to characters}
+
+The theory of reference of LNG-02 applies to fictional names without change. \enquote{Holmes} was introduced by Conan Doyle in the act of writing \emph{A Study in Scarlet}. The act was a grounding in the sense of LNG-02-a: the name was introduced together with the creation of what it names, under the sortal \emph{character}, and the grounding picks out exactly one object, the character Doyle was creating. Readers acquire the name by reference-preserving links from the stories and from other readers, and their uses refer to the character by an intact chain. The causal component determines the referent, and the readers' information, much of which is internal discourse about a detective, plays no role in fixing reference.
+
+This explains two features of fictional names that descriptive theories cannot. First, a reader who misremembers everything about Holmes still refers to Holmes, just as a speaker who misremembers everything about G\"odel refers to G\"odel. Second, a character in a different story who happens to match every description in Doyle's stories is not Holmes. If another author, independently and without knowledge of Doyle, wrote stories word for word identical to Doyle's, the name in them would refer to a different character, created by a different act \citep{Kripke1980,Thomasson1999}.
+
+Names introduced in fiction differ in this respect from names introduced by a failed hypothesis. \enquote{Vulcan} was introduced as the name of a planet causing the anomalies in Mercury's orbit; there was no such planet, no character was created, and the name is empty. Whether a name is fictional or empty depends on how it was introduced: in an act of storytelling, which creates what it names, or in an act of reference to something presumed already to exist, which may fail.
+
+\section{Objections and replies}
+
+\begin{objection}[Pretense]
+Critical discourse is pretense, or contains an implicit operator. \enquote{Holmes is a fictional character} means something like \enquote{in the game of make-believe authorized by the stories, there is someone called Holmes, and that game is a fiction} \citep{Walton1990}. No abstract object is needed.
+\end{objection}
+
+\begin{reply}
+The paraphrases do not extend to the full range of critical discourse. \enquote{Holmes was created by Doyle in the 1880s} is not true in any game of make-believe authorized by the stories, since the stories do not say that Holmes was created. \enquote{Holmes is more famous than any real detective} compares a character with real people, and no pretense includes both. Van Inwagen's quantified sentences compare characters across novels that belong to no common game \citep{vanInwagen1977}. Each can be paraphrased by a special-purpose device, but the devices multiply with the examples, whereas the artifactualist reads them all literally with one semantics. Absent a general paraphrase, the literal reading is to be preferred, and Assumption~\ref{a:critical} stands.
+\end{reply}
+
+\begin{objection}[Creation]
+Authors write sentences. It is mysterious how writing sentences could bring an object into existence, and the claim that it does seems to be an artifact of the theory \citep{Brock2010}.
+\end{objection}
+
+\begin{reply}
+Writing sentences brings many things into existence: a novel, a contract, a promise, a law. In each case, what is created depends on the intentional activity of an agent and on a practice in which that activity has the relevant significance. Characters are created in the same way. That the moment of creation may be vague, somewhere in the course of drafting, is no more problematic than the vagueness of when a novel came into existence. On the view of MET-18, the vagueness is in our words, not in the character.
+\end{reply}
+
+\begin{objection}[Identity]
+If characters are objects, there must be facts about their identity. But stories leave many identity questions unsettled: whether the character in an author's draft is the same as the character in the published book, or whether two characters in an incomplete story are one \citep{Everett2005}. Objects do not have indeterminate identity, so characters are not objects.
+\end{objection}
+
+\begin{reply}
+The identity of a character is fixed by its creation: a character is the same as another if they were created in the same act or by an act of continuing an existing character \citep{Thomasson1999}. Whether a revision continues a character is a question about the author's intentions and practice, and it may have a vague answer; vagueness of this kind is in the predicate, not in the object. Everett's cases, in which a story leaves it open whether two names are of one person, show that the story does not settle what it ascribes; they do not show that there is no fact about how many characters were created. Where the author created a single character under two names, there is one; where she created two, there are two.
+\end{reply}
+
+\begin{objection}[Negative existentials]
+If Holmes exists, \enquote{Holmes does not exist} is false. But it is plainly true.
+\end{objection}
+
+\begin{reply}
+In ordinary use, \enquote{Holmes does not exist} says that there is no such person, and that is true by Corollary~\ref{c:noconcrete}. The sentence that is false is the different sentence that nothing is Holmes, which no ordinary speaker asserts and which a critic who writes about Holmes denies. \citet{Thomasson1999} and \citet{Kripke2013} give versions of this treatment; it is consistent with the view of MET-24, on which existence is universal and \enquote{does not exist}, in ordinary use, denies that something of a contextually relevant kind is so.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} is conditional. It does not show that every fictional name refers: a name used only within a single act of pretense, without any author creating anything, may not, and names in myths whose status as fiction is unclear raise further questions that the argument does not settle. It does not explain emotional responses to fiction; the response to a fictional monster is not a response to an abstract artefact, and AES-05 argues that it is not fear but a quasi-emotion that lacks fear's belief. The two views are compatible: the spectator knows that the monster is not real, and her response, whatever it is, is not a belief that an abstract artefact threatens her. Finally, the argument does not say what abstract artefacts are made of, or whether there are any beyond those that literature, law and science provide; it requires only that there be some.
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/LNG/LNG_14.lean}. Reference, being a character, creation, concreteness, being an artefact, being a detective and being ascribed detection are primitives; the six assumptions are axioms; abstractness and existence (in the sense of MET-24) are definitions. The general theorem is:
+
+\begin{lstlisting}
+theorem abstract_artefact (n : Name) (a : Thing) (h : CriticalTrue n a) :
+    ∃ x, Ref n x ∧ Abstract x ∧ Artefact x ∧ CreatedBy x a
+\end{lstlisting}
+
+The checker reports that it depends on the primitives \lstinline{Thing}, \lstinline{Name}, \lstinline{Ref}, \lstinline{Character}, \lstinline{CreatedBy}, \lstinline{Concrete} and \lstinline{Artefact}, and on two axioms:
+
+\begin{lstlisting}
+Philosophy.LNG_14.characters_abstract,
+Philosophy.LNG_14.creation
+\end{lstlisting}
+
+which are Assumptions~\ref{a:abstract} and~\ref{a:creation}; the antecedent of the theorem incorporates the first half of Assumption~\ref{a:ref}, through the definition of \lstinline{CriticalTrue}. Corollary~\ref{c:holmes} (\lstinline{holmes_refers}) adds \lstinline{critical_truth}, which is Assumption~\ref{a:critical}, and the constants \lstinline{holmes} and \lstinline{doyle}. Corollary~\ref{c:detective} (\lstinline{not_detective}) adds \lstinline{ref_unique}, \lstinline{detectives_concrete} and \lstinline{ascription}, which are the second half of Assumption~\ref{a:ref} and Assumptions~\ref{a:detective} and~\ref{a:ascription}. The formalization confirms that the argument nowhere uses a non-existent object: existence is defined as identity with something, and the referent satisfies it trivially.
+
+\section{Conclusion}
+
+We can talk about what does not exist, in the sense in which Holmes does not exist, because fictional names refer to characters, and characters are abstract artefacts that authors create. The referent of \enquote{Holmes} exists, is not a detective, is ascribed detection by the stories, and is identical with nothing concrete. Internal, critical and existential discourse receive their truth values from a single semantics, and no object is required that lacks existence.
+
+\begin{thebibliography}{99}\small
+\bibitem[Brock(2010)]{Brock2010} Brock, S. (2010). The creationist fiction: The case against creationism about fictional characters. \emph{The Philosophical Review}, 119(3), 337--364.
+\bibitem[Everett(2005)]{Everett2005} Everett, A. (2005). Against fictional realism. \emph{The Journal of Philosophy}, 102(12), 624--649.
+\bibitem[Everett(2013)]{Everett2013} Everett, A. (2013). \emph{The Nonexistent}. Oxford University Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Kripke(2013)]{Kripke2013} Kripke, S.~A. (2013). \emph{Reference and Existence: The John Locke Lectures}. Oxford University Press.
+\bibitem[Parsons(1980)]{Parsons1980} Parsons, T. (1980). \emph{Nonexistent Objects}. Yale University Press.
+\bibitem[Salmon(1998)]{Salmon1998} Salmon, N. (1998). Nonexistence. \emph{No\^us}, 32(3), 277--319.
+\bibitem[Schiffer(1996)]{Schiffer1996} Schiffer, S. (1996). Language-created language-independent entities. \emph{Philosophical Topics}, 24(1), 149--167.
+\bibitem[Thomasson(1999)]{Thomasson1999} Thomasson, A.~L. (1999). \emph{Fiction and Metaphysics}. Cambridge University Press.
+\bibitem[van Inwagen(1977)]{vanInwagen1977} van Inwagen, P. (1977). Creatures of fiction. \emph{American Philosophical Quarterly}, 14(4), 299--308.
+\bibitem[Walton(1990)]{Walton1990} Walton, K.~L. (1990). \emph{Mimesis as Make-Believe: On the Foundations of the Representational Arts}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

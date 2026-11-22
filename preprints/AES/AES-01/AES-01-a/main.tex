@@ -1,0 +1,794 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{needspace}
+
+\title{What Art Is}
+\msid{AES-01-a}
+\msfamily{AES-01}
+\msdiscipline{Aesthetics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/AES/AES\_01.lean}
+\mskeywords{definition of art; institutional theory; artworld; critical uptake; presentation; Wollheim's dilemma; readymades; outsider art; machine art}
+
+\input{gen/stats.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We argue that art is what is presented as art within an artworld, subject to the artworld's critical uptake. The account has two jointly required conditions. Presentation is the offering of an object, by a participant in an artworld, to a public as a candidate for the appreciation and criticism the artworld practices; critical uptake is the engagement of that practice with the object as such a candidate, by interpretation, comparison and assessment. Presentation alone does not suffice: an object offered and ignored, or refused, is not yet art. Uptake is critical, not commercial, and adverse assessment counts, so that bad art is art and status comes apart from merit. Because uptake is a pattern of engagement by many participants, no single agent's decision confers status, and this is how the account escapes Wollheim's dilemma for institutional theories. We set the account against Danto, Dickie, Levinson, Beardsley, Stecker, Gaut and Carroll, prove its main theorems, formalize their logical skeleton in Lean, and test it on a catalogue of \stnepisodes{} documented and schematic episodes, from \emph{Fountain} to machine-generated images, with systematic variants and exhaustive enumerations of encoded states and histories. The account concerns status, not value.
+\end{abstract}
+
+\section{The problem and the debate}\label{s:problem}
+
+\subsection{The question and the thesis}
+
+What makes something a work of art? The question is old, but its present form was fixed in the twentieth century by objects that seemed designed to defeat every answer then available. A urinal signed with a false name, a stack of firebricks, a piano performance in which nothing is played, a plywood box indistinguishable from a grocery carton: each of these was offered as art, each was disputed, and each is now catalogued, exhibited and taught as art. Whatever art is, it is not a matter of how an object looks, of the skill that went into making it, or of the pleasure it gives. An answer has to explain why these objects are art and their perceptual twins are not, and it has to do so without collapsing into the view that anything is art if someone says so.
+
+We argue for an institutional answer:
+
+\begin{quote}
+Art is what is presented as art within an artworld, subject to the artworld's critical uptake.
+\end{quote}
+
+The thesis has two parts, and the second carries most of the weight. An object is presented as art when a participant in an artworld offers it to a public as a candidate for the kind of appreciation and criticism the artworld practices. An object receives critical uptake when that practice engages it as a candidate: interprets it, compares it with other works, and assesses it by the standards the practice applies to works. The two conditions are jointly required. The first is familiar from institutional theories since \citet{Dickie1974}; the second is what distinguishes the present account from them. We shall argue that it is the second condition that turns the institutional theory from a description of how art is offered into a criterion of what art is, and that it allows the theory to escape the objection, due to \citet{Wollheim1980}, that institutional status is either arbitrary or redundant.
+
+Four consequences of the account deserve to be stated at the outset, because they are where it parts company with its rivals. (i) Presentation alone is not enough. An object offered and ignored, or offered and refused, is not yet art; it is a candidate. (ii) Adverse assessment counts as uptake. A work that critics engage and find weak, derivative or meretricious has been taken up, so that bad art is art, and status comes apart from merit. (iii) Market uptake is not critical uptake. A sale, even at a record price, does not make an object art, and the absence of sales does not prevent it from being art. (iv) No single agent's decision confers status. Not the maker's declaration, not a curator's choice, not a buyer's purchase: uptake is a pattern of engagement by many participants, which no one of them can bring about by fiat. The account is an account of status, not of value: it says what makes something a work, not what makes a work good.
+
+The manuscript has two parts. The written part (Sections~\ref{s:problem}--\ref{s:conclusion}) states and defends the account. The computed part (Appendices~\ref{app:catalogue}--\ref{app:rivals}) tests it on a catalogue of \stnepisodes{} episodes drawn from the history of art and from the theoretical literature, applies \stnvariants{} systematic variants to them, and checks the theorems of Section~\ref{s:argument} on every row and on exhaustive enumerations of encoded states and of short histories of artworld events. The remainder of this section reviews the debate from which the account emerges, with the cases that defeated each earlier proposal.
+
+\subsection{Traditional definitions and the anti-essentialist challenge}
+
+Until the twentieth century, definitions of art were typically definitions by a single function or property: art as imitation, as the expression and communication of feeling, or as significant form. Tolstoy's \emph{What Is Art?} defined art as the transmission of felt emotion from artist to audience. \citet{Bell1914} held that what all visual works of art share is significant form, a combination of lines and colours that moves the sensitive viewer by aesthetic emotion. \citet{Collingwood1938} distinguished art proper, the imaginative expression of emotion in which the artist comes to know what she feels, from craft, amusement and magic. Each of these accounts captures something that some art does. Each fails as a definition, either because it excludes works that the practice of art plainly includes (representational works without significant form, decorative works without expression), or because it includes things that are not art (expressive letters, moving landscapes), or both.
+
+The failures prompted a sceptical reaction. \citet{Weitz1956} argued, drawing on Wittgenstein's remarks on family resemblance \citep[\S\S 65--77]{Wittgenstein1953}, that \enquote{art} is an open concept whose conditions of application are not necessary and sufficient but a matter of strands of resemblance among cases; that the history of art is a history of the creation of works unlike anything that came before; and that a definition would therefore foreclose the very creativity it purported to describe. \citet{Kennick1958} argued in the same spirit that traditional aesthetics rested on the mistaken assumption that works of art must share a common nature, and that we can pick out works of art perfectly well without a definition.
+
+The anti-essentialist case was answered, in a way that shaped everything that followed, by \citet{Mandelbaum1965}. Resemblances among family members, he observed, are not what makes them a family; what does is a genetic connection that is not exhibited in their appearance. If the common feature of works of art were likewise a relational property, not visible in the objects themselves, then Weitz's survey of exhibited features would not have shown that art cannot be defined. This opened the way for definitions in terms of the relations in which objects stand to people, practices and histories. The definitions considered in the rest of this section are all, in one way or another, of this kind.
+
+\subsection{Danto and the artworld}
+
+In the same year in which Warhol exhibited his \emph{Brillo Box} sculptures at the Stable Gallery in New York, \citet{Danto1964} published a paper that gave the institutional idea its name. Danto argued that whether something is a work of art cannot be settled by looking. To see something as art requires a background that perception does not supply: a knowledge of the history of art and of the theories current within it, which he called an artworld. Warhol's boxes and the cartons in the supermarket stockroom (episodes BB1 and BB2 of Appendix~\ref{app:catalogue}) could be indiscernible, yet one is a work of art and the other is not, and what makes the difference is the relation of the former to a body of theory and history in which it has a place.
+
+In \emph{The Transfiguration of the Commonplace}, \citet{Danto1981} developed the argument by imagining an exhibition of red rectangles, perceptually indiscernible, each with a different title and a different meaning: a painting of the Israelites after they have crossed the Red Sea, a psychological portrait called \emph{Kierkegaard's Mood}, a witty landscape of Moscow called \emph{Red Square}, and, among the indiscernibles, a canvas grounded by Giorgione for a painting he never executed and a surface simply painted with red lead (episodes RS1 to RS5). The exhibition shows that indiscernible objects can differ in their artistic properties, and that some indiscernibles are not artworks at all. Danto's positive proposal was that works of art are about something and embody their meaning, and that their interpretation is constitutive of them: an object becomes a work under an interpretation that the artworld makes available.
+
+Danto's own account was not institutional in Dickie's sense; he did not hold that art status is conferred by members of an institution, and he later distanced himself from that theory. But his argument fixed two points that every subsequent account has had to accept. First, art status is not a perceptual property. Second, whatever makes something art involves its relation to a history and a practice, so that the same object could be art at one time and in one context but not in another. Both points are built into the account we defend: presentation and uptake are relations to a practice, and the same object can stand in them or fail to.
+
+\subsection{Dickie's institutional theory and its critics}
+
+The first explicitly institutional definition was given by \citet{Dickie1969} and developed in \emph{Art and the Aesthetic} \citep{Dickie1974}. On this definition, a work of art in the classificatory sense is (1) an artefact (2) a set of the aspects of which has had conferred upon it the status of candidate for appreciation by some person or persons acting on behalf of a certain social institution, the artworld. Dickie took the artworld to be a loosely organized set of systems (theatre, painting, sculpture, literature, music) each with its own conventions and roles, whose core personnel are artists, presenters and members of the public, and whose wider circle includes critics, historians and theorists. Anyone who sees himself as a member of the artworld is a member, and anyone who acts on its behalf can confer the status.
+
+The theory has attractive features. It explains the readymades and the other objects of the twentieth-century avant-garde, since an ordinary object can be conferred upon. It separates the classificatory sense of \enquote{work of art} from the evaluative sense in which a good painting is called \enquote{a real work of art}. And it explains why art status depends on context: the same driftwood is art in the gallery and not on the beach (episodes DW0 and DW1), because in the gallery someone has conferred upon it the status of candidate for appreciation. Dickie's own illustration was the case of paintings made by a chimpanzee. Exhibited in a museum of natural history as exhibits about animal behavior, they are not art; hung in an art museum by someone acting on behalf of the artworld, they could be (episodes BT1 and BT2).
+
+The theory was criticized from the beginning on three fronts. The first concerned the notion of conferral. Conferral is ordinarily an act performed by someone with an institutional office, following procedures, as a degree is conferred by a university or a title by a monarch. The artworld has no offices and no procedures, and Dickie's liberality about membership seemed to make anyone an official. \citet{Cohen1973} pressed the related point that the status of candidate for appreciation was too thin to do the work required of it: either everything is a candidate for appreciation, in which case conferral adds nothing, or the notion must be filled out by an account of appreciation that the institutional theory was meant to avoid. The second front concerned the artworld itself. If the artworld is identified by the fact that its members deal with art, the definition is circular; if it is identified otherwise, the question is how. The third front, which proved the most damaging, was Wollheim's dilemma, to which we now turn.
+
+\subsection{Wollheim's dilemma}
+
+\citet{Wollheim1980} put the difficulty in the form of a dilemma about the representatives of the artworld who are supposed to confer status. Either they confer it for reasons, or they do not. If they do, then it is the reasons, and not the act of conferral, that make the object art; the reasons themselves constitute a definition of art, and the institutional apparatus is redundant. If they do not, then the status they confer is arbitrary, and nothing explains why it should matter whether something has it: we would have no reason to care about the classification, and the critical attention we give to works of art would be unmotivated.
+
+The dilemma is strongest against accounts on which status is conferred by a decision. A decision is the kind of thing that is either made for reasons or not, and in either case the dilemma bites. It is less obviously effective against an account on which status is not conferred by anyone's decision at all, and this is the opening that the present account exploits. Critical uptake, we shall argue in Section~\ref{s:argument}, is not a decision by anyone that an object is art. It is a pattern of engagement by many participants, each of whom gives reasons, but reasons for particular interpretations and assessments, not reasons for the classification \enquote{art}. The status is therefore neither arbitrary (each act of engagement answers to standards that participants dispute and can get wrong) nor reducible to the reasons (which differ from work to work and from period to period, and have nothing in common except that they are given within one practice). The companion manuscript AES-01-b develops this reply in detail; Proposition~\ref{p:wollheim} below states it.
+
+\subsection{Dickie's art circle and the charge of circularity}
+
+In \emph{The Art Circle}, \citet{Dickie1984} withdrew the notion of conferral and replaced it with a set of interlocking definitions. An artist is a person who participates with understanding in the making of a work of art. A work of art is an artefact of a kind created to be presented to an artworld public. A public is a set of persons whose members are prepared in some degree to understand an object which is presented to them. The artworld is the totality of all artworld systems. An artworld system is a framework for the presentation of a work of art by an artist to an artworld public. Dickie conceded that the definitions are circular, since each term is defined by means of the others, but argued that the circularity is not vicious: it reflects the fact that the concepts are learned together, as the elements of a practice, and that the circle is large enough to be informative.
+
+The revised theory avoids the problem of conferral, since no act of conferral is required. But it does so by moving the weight to the notion of an artefact \enquote{of a kind created to be presented}, and this notion inherits the difficulties it was meant to solve. The readymades were not created to be presented; they were manufactured as plumbing fixtures, bottle racks and snow shovels. Dickie's answer, that the artist's use of the object makes it an artefact of the relevant kind, reintroduces something very like conferral by a single agent. And the revised theory says nothing about what happens after presentation. An object created to be presented and presented to an artworld public is art, on the theory, whether or not the public attends to it. That is the feature we reject: on our account, presentation is subject to uptake.
+
+The charge of circularity has been pressed against every institutional account, and our account is no exception. We take it up as Objection~\ref{o:circ} below. The short reply is that the practice whose uptake matters is identified historically, by its continuity with a tradition of making, exhibiting, interpreting and assessing that can be traced through time, and not by the extension of \enquote{art}. A definition that appeals to an independently identifiable practice is not circular, even if its terms are learned together.
+
+\subsection{Reception in earlier institutional proposals}
+
+Dickie's was not the only institutional proposal of its time, and the role of reception in the others is instructive. \citet{Diffey1969} described a \enquote{republic of art} whose recognition makes objects art, and in which status is accorded by the community of those concerned with art rather than conferred by an individual. Diffey's republic is closer to the practice of the present account than Dickie's artworld is, since what it accords is recognition, a response to the object rather than an act of authority. But Diffey did not distinguish recognition as a work from recognition as a good work, and on his account it is unclear whether an object recognized and condemned has been recognized at all.
+
+The sociologist \citet{Becker1982}, working independently of the philosophical debate, described art worlds as networks of people whose cooperative activity, organized by shared conventions, produces the works the world is known for. Becker's art worlds include not only makers and presenters but also distributors, critics, aestheticians and audiences, and he insisted that what a world counts as a work depends on the conventions all of them share. His account is descriptive and does not offer a definition; but it makes vivid a point the philosophical institutional theories tended to neglect, namely that the activity of the art world does not end with presentation, and that what happens to an object after it is offered is part of what makes it a work. \citet{Binkley1977} had argued in a similar spirit that a work of art need not be an aesthetic object at all, and that what makes a piece a work is its being indexed, by its maker and by the practice, as the object of art-critical attention.
+
+These proposals share an emphasis that the classic institutional theories lacked, on the response to an object rather than on the act of offering it. None of them, however, separated the response that matters for status from the responses that matter for value, or distinguished critical engagement from attention, purchase and institutional acceptance. The present account is an attempt to make these distinctions and to show that, once they are made, the institutional theory becomes a criterion.
+
+\subsection{Levinson's historical definition}
+
+\citet{Levinson1979} proposed to define art historically, by the relation of an object to the history of art, without appeal to institutions. On his definition, an object is a work of art at a time if and only if it is an object of which it is true at that time that some person or persons having the appropriate proprietary right over it non-passingly intend, or intended, it for regard as a work of art, that is, for regard in any of the ways in which prior artworks are or were correctly regarded. The definition is recursive: what counts as art now depends on how earlier art was regarded. Its base consists of the first arts, the \enquote{ur-arts}, which Levinson acknowledged had to be identified in some other way. In a later paper \citep{Levinson1989}, he refined the account to allow that the intention may be opaque: a person may intend an object for regard in ways that are in fact ways in which artworks have been regarded, without having the concept of art or knowing that these are such ways.
+
+The historical definition has two great merits. It explains the continuity of art across radical change, since even a work that repudiates its predecessors is intended for regard in some of the ways in which they were regarded. And it accommodates the isolated artist, who makes works intended for regard as art but shows them to no one. Darger, who made several hundred large illustrations for his narrative and showed them to no one (episode DG1), is on Levinson's account an artist and his illustrations works of art from the moment they were made, provided he had the relevant intention.
+
+Its difficulties lie in the other direction. On the historical definition, the intention of a single person with proprietary right suffices for art status. Duchamp's submission of \emph{Fountain} in April 1917, which the Society of Independent Artists declined to show (episode FT1), was art from the moment of submission, whatever anyone else did. So were the chimpanzee paintings hung in an art museum by a director who intends them for regard as art (episode BT2), and so is a breakfast photographed and declared art by its eater (episode SD1). The historical definition makes art status a matter of a single agent's intention, and so falls on the first horn of Wollheim's dilemma, in a version without institutions: either the intention is formed for reasons, and the reasons do the work, or it is not, and the status is arbitrary. The account we defend accepts Levinson's point that the practice must be identified historically, but locates the historical relation in the practice's engagement with the object rather than in any individual's intention.
+
+\subsection{Functional definitions}
+
+The main alternative to procedural definitions, of which the institutional theories are examples, has been functional definitions, on which something is art because of what it does or is designed to do. The distinction between procedural and functional definitions, and the argument that the former are better placed to account for the art of the twentieth century, are due to \citet{Davies1991}. On a functional definition, something is art if it is designed to perform, or does perform, a function characteristic of art, usually that of affording aesthetic experience.
+
+The leading version is that of \citet{Beardsley1983}, on which an artwork is either an arrangement of conditions intended to be capable of affording an experience with marked aesthetic character, or an arrangement belonging to a class or type of arrangements that is typically intended to have this capacity. \citet{Zangwill2007} defends a related aesthetic creation theory, on which works of art are made with the insight that certain aesthetic properties would depend on certain non-aesthetic properties, and with the intention of realizing the former by means of the latter. Aesthetic definitions explain why most of the art of most periods is art, and they give art status a point: art matters because aesthetic experience matters. Their difficulty is the art of the twentieth century. A conceptual work need not be intended to afford aesthetic experience, and many of the works in our catalogue were made precisely to show that it need not \citep{Binkley1977}. Beardsley's definition excludes \emph{Fountain}, \emph{Erased de Kooning Drawing}, \emph{An Oak Tree} and much of Fluxus (episodes FT3, ED1, OT1, YC1); it includes the commercial carton designed by James Harvey, which was intended to have visual appeal (episode BB2), and the child's drawing on the kitchen door (episode CD1). Aesthetic theorists have responded by treating conceptual art as parasitic on aesthetic art, or as art in a secondary sense; whatever the merits of that response, it concedes that the definition does not fit the practice as it is.
+
+\citet{Stecker1997} proposed a historical functionalism designed to accommodate both the continuity and the variety of art. On his account, an item is an artwork at a time if and only if either it is in one of the central art forms at that time and is made with the intention of fulfilling a function art has at that time, or it is an artefact that achieves excellence in fulfilling such a function, whether or not it is in a central art form and whether or not it was intended to fulfil it. The functions of art are relativized to times, and the central art forms are identified historically. The disjunctive form lets the account count both conventional works in established forms and outstanding objects outside them. The cost is that the second disjunct makes art status depend on merit: an object outside the central forms becomes art by excelling, so that a poor object of the same kind is not art at all. Stecker's account therefore cannot say that the cave paintings at Lascaux at the time they were made (episode LX1) were not yet art in the sense in which we now take them to be, nor that a uniformly panned painting outside the central forms is bad art rather than no art.
+
+\subsection{Gaut's cluster account}
+
+\citet{Gaut2000} revived the anti-essentialist idea in a form that is compatible with saying something definite. On his cluster account, the concept of art is governed by a set of criteria, none of which is necessary, but which are jointly sufficient and some subsets of which are sufficient. Gaut's criteria are these: possessing positive aesthetic properties; being expressive of emotion; being intellectually challenging; being formally complex and coherent; having a capacity to convey complex meanings; exhibiting an individual point of view; being an exercise of creative imagination; being an artefact or performance that is the product of a high degree of skill; belonging to an established artistic form; and being the product of an intention to make a work of art. An object that satisfies enough of these criteria, in the right combinations, is art; an object that satisfies none is not; and between them lies a region of indeterminacy that the account takes to be real. \citet{Gaut2005} defended the account against the objections that it is a disguised disjunctive definition and that it cannot explain the unity of the concept. A related naturalist list was proposed by \citet{Dutton2006}.
+
+The cluster account has the virtue of honesty about the variety of art. But it has two features that matter here. First, it does not by itself give verdicts: it gives verdicts only when supplemented by a rule saying which subsets suffice, and Gaut declines to supply one. To compare the cluster account with the others on our catalogue we therefore have to state a threshold, and we report results for every threshold from three to eight (Appendix~\ref{tab:thresholds}). Second, its criteria are properties of objects and of their makers' intentions, not of their reception. It cannot distinguish an object that has been offered and ignored from the same object taken up; \emph{Fountain} in April 1917 and \emph{Fountain} in the 1950s (episodes FT1 and FT3) differ only in the criterion of belonging to an established form, which the readymade did not yet have. The cluster account captures what art is typically like, but not what makes an object a work rather than a candidate.
+
+\subsection{Carroll's identifying narratives}
+
+\citet{Carroll1993,Carroll1999} argued that the question how we identify art is more tractable than the question what art is, and that the answer is historical narrative. A new and disputed object is identified as art by a narrative that connects it, by intelligible steps, to works already acknowledged: it repeats a practice, amplifies it, or repudiates it in a way that makes sense given the state of the art at the time. Carroll was explicit that the narrative method is not a definition. It is a method of identification, a way of showing that something belongs to the practice, which presupposes that some works are already acknowledged.
+
+The narrative approach comes closest, among the accounts reviewed here, to the one we defend, and we regard our account as giving the metaphysical counterpart of Carroll's epistemology. Narratives of the kind Carroll describes are among the products of critical uptake: to construct a narrative linking \emph{Fountain} to the history of sculpture, or \emph{4$'$33$''$} to the history of music, is to interpret and assess it as a candidate. But the narrative approach, as a method of identification, does not say whether an object for which a narrative is available but which no one has constructed is art. The account we defend says that it is not yet: the availability of a narrative is a reason to take the object up, not the uptake itself.
+
+\subsection{Recent work}
+
+Three developments since 2000 bear on the account. First, several authors have revived the institutional idea in forms meant to escape the classic objections. \citet{Abell2012} proposed a reformulated institutional theory on which what makes an institution an art institution is a matter of what its products are designed to do, rather than of the authority of its members, so that the institutional and the functional approaches are combined. Our account shares Abell's view that what matters is a practice and not an office, but differs in locating the decisive condition in the practice's engagement with particular objects, not in the design of the institution.
+
+Second, \citet{Lopes2014} defended a buck-passing theory, on which something is a work of art if and only if it is a work in one of the arts (painting, music, literature, dance and so on), so that the question what art is passes to the theories of the individual arts. The buck-passing theory is attractive for its modesty, but it leaves the hard cases where they were: the question whether a urinal in an exhibition is a work of sculpture, or a silent performance a work of music, is the question whether it is art, posed again within a single art. It also passes over the difference between candidates and works within an art: a painting offered and ignored is a painting, and on the buck-passing theory a work.
+
+Third, \citet{MagUidhir2013} argued that art requires an art-attempt, so that something is art only if someone tried to make art, and that the theory of art must accommodate failed attempts. The point is right about something, namely that an object cannot be presented as art without someone intending it to be taken up as art. But the condition is satisfied by presenters as well as makers, and it is satisfied in many cases that our account classifies as candidates rather than works. An attempt that is ignored has not failed to be an attempt; it has failed to be taken up.
+
+To these philosophical developments should be added the work of historians who have questioned whether art, in the sense presupposed by the modern definitions, is a transhistorical category at all. \citet{Kristeller1951} argued that the modern system of the fine arts took shape only in the eighteenth century, and \citet{Shiner2001} that the concept of fine art, and the institutions that sustain it, were invented between the late seventeenth and the early nineteenth centuries. \citet{Belting1994} wrote a history of the devotional image \enquote{before the era of art}, in which images were venerated, not appreciated. The sociologist \citet{Becker1982} described art worlds as networks of cooperative activity, whose conventions decide what counts as a work. Any account on which art requires an artworld must say what it implies about cave paintings, icons and ritual objects made before or outside the practice. We take this up in Proposition~\ref{p:before} and Objection~\ref{o:before}.
+
+\subsection{Plan}
+
+Section~\ref{s:framework} sets out the framework: the definitions of presentation and critical uptake (which are those of AES-15-a, Definitions~2.1 and~2.2), of the artworld, of the modes of uptake and of market uptake, the principles of the account and the assumptions on which its theorems depend, and the reasons for preferring critical uptake to other second conditions. Section~\ref{s:argument} proves the main results: that presentation is necessary but not sufficient, that adverse uptake suffices, that status and merit come apart, that market uptake is neither necessary nor sufficient, that no single agent's decision suffices, that neither horn of Wollheim's dilemma applies, and that the account is a criterion in a sense that its rivals are not. Section~\ref{s:cases} applies the account to the cases that have structured the debate. Section~\ref{s:structure} says more about what uptake is, how much of it is needed, which practices can supply it and what it is uptake of. Section~\ref{s:rivals} compares the verdicts of the account with those of its rivals on the catalogue. Section~\ref{s:objections} answers seven objections, and Section~\ref{s:consequences} records the account's consequences for neighbouring questions. Sections~\ref{s:notestablish} and~\ref{s:formal} record what the result does not establish and describe the formalization. The appendices contain the catalogue, the variants, the enumerations and the comparison tables.
+
+\section{Framework}\label{s:framework}
+
+The objects of the account are \emph{episodes}: objects at a stage of their history, considered in relation to the artworld, if any, in which they stand at that stage. \emph{Fountain} as submitted in April 1917 and \emph{Fountain} as discussed in the 1950s are two episodes of one object (episodes FT1 and FT3); the cave paintings of Lascaux at the time they were made and the same paintings after their discovery in 1940 are two episodes of another (LX1 and LX2). Art status is a property of episodes: an object may be a candidate at one stage and a work at a later one, and the account must be able to say so.
+
+\begin{definition}[Presentation]\label{d:presented}
+An object is \emph{presented as art} within an artworld if some participant in that artworld offers it to a public as a candidate for the kind of appreciation and criticism the artworld practices.
+\end{definition}
+
+\begin{definition}[Critical uptake]\label{d:uptake}
+A presented object receives \emph{critical uptake} if the artworld's critical practice engages it as a candidate: it is interpreted, compared with other works, and assessed by the standards the practice applies to artworks. Assessment may be favourable or adverse.
+\end{definition}
+
+Definitions~\ref{d:presented} and~\ref{d:uptake} are those of AES-15-a (Definitions~2.1 and~2.2), with the clause on adverse assessment made explicit. Three features of Definition~\ref{d:presented} should be noted. The presenter need not be the maker: found objects, posthumous works and works published against their maker's wishes are presented by someone else (episodes DW1, DG2, KF1). The presenter must be a participant in the artworld, but participation is not an office; it is a matter of acting within the practice, by exhibiting, publishing, performing or otherwise offering objects to its public. And the offer must be an offer \emph{as a candidate}: an object displayed as a specimen of natural history, sold as packaging or kept as a family memento is offered, but not as a candidate for the appreciation and criticism of the artworld (episodes BT1, BB2, CD1).
+
+\begin{definition}[Artworld]\label{d:artworld}
+An \emph{artworld} is a continuing practice of making, presenting, interpreting and assessing objects as candidates for appreciation and criticism, identified historically by the continuity of its institutions, vocabularies, canons and participants. Its \emph{critical practice} is the part of it that interprets, compares and assesses: criticism, scholarship, curatorship, teaching, and the response of artists to one another's work.
+\end{definition}
+
+Definition~\ref{d:artworld} identifies the artworld as a historical particular, in the way a language or a legal system is identified, not by the extension of \enquote{art}. The modern artworld of Europe and its offshoots, which took shape in the eighteenth century \citep{Kristeller1951,Shiner2001} and now has participants on every continent, is the one whose uptake is at issue in nearly all the cases of the catalogue; the definition allows that there may be, or have been, others. A practice that makes and assesses objects, but not as candidates for appreciation and criticism (a devotional practice that judges icons by their fidelity to a canon, a ritual practice that judges power figures by their efficacy) is not an artworld in this sense, whatever the merits of its products (episodes RB1, NK0).
+
+\begin{definition}[Modes of engagement]\label{d:modes}
+The critical practice's response to a presented object at a stage is one of the following. \emph{None}: the practice does not engage it. \emph{Curiosity}: the practice, or the wider public, engages it, but not as a candidate (as news, as a stunt, as a specimen, as a document of a technique). \emph{Refusal}: the venue of presentation declines it as a candidate. \emph{Adverse}, \emph{favourable} or \emph{mixed} uptake: the practice engages it as a candidate and assesses it unfavourably, favourably, or both. \emph{Divided}: the practice is divided on whether to engage it as a candidate at all.
+\end{definition}
+
+The distinction between mixed and divided responses is important. A mixed response is a disagreement about merit among critics who agree that the object is to be assessed as a work: \emph{The Rite of Spring} at its premiere, \emph{My Bed} at the Turner Prize exhibition (episodes RSP and TE1). A divided response is a disagreement about whether the object is to be assessed as a work at all: the portrait sold at Christie's in 2018, which some critics discussed as a work and others as an event in the history of a technology (episode AI1). The first is uptake; the second is a case in which the condition is partly met and partly not, and the status of the object is correspondingly contested.
+
+\begin{definition}[Market uptake]\label{d:market}
+An object receives \emph{market uptake} if it is bought or sold, or offered for sale, at a price that reflects its supposed standing.
+\end{definition}
+
+\begin{definition}[Criterion]\label{d:criterion}
+A condition on art status is a \emph{criterion} if (i) whether an object meets it is in principle publicly ascertainable, (ii) it can fail to be met by an object that a participant in an artworld sincerely offers as art, and (iii) whether it is met is not settled by the decision of any single agent that it is.
+\end{definition}
+
+Definition~\ref{d:criterion} is the notion of AES-01-b. Condition (i) excludes accounts on which art status depends on a private mental act. Condition (ii) excludes accounts on which offering suffices. Condition (iii) is the requirement whose violation drives Wollheim's objection.
+
+\begin{principle}[Institutional condition]\label{p:inst}
+An episode is art if and only if the object is presented as art within an artworld and receives critical uptake there.
+\end{principle}
+
+\begin{principle}[Indexing]\label{p:index}
+Art status is relative to a stage of an object's history and to the artworld in relation to which the conditions of \ref{p:inst} are assessed. Where no artworld exists at a stage, the object is not art at that stage, though it may become art later.
+\end{principle}
+
+\begin{principle}[Persistence]\label{p:persist}
+Critical uptake, once received, is a historical fact about the practice and is not withdrawn by later neglect, by a fall in reputation, or by adverse reassessment. An object that has received critical uptake continues to have received it.
+\end{principle}
+
+\ref{p:inst} is the account. \ref{p:index} makes explicit the relativity that Danto's argument requires and that the historians' objection exploits; we use it in Proposition~\ref{p:before}. \ref{p:persist} reflects the fact that the condition of \ref{p:inst} is historical: what matters is that the practice has engaged the object, not that it is engaging it now. It is what allows the account to say that van Meegeren's \emph{Emmaus} remained a work when it was exposed as a forgery and that Vermeer's paintings remained works during the period in which they were neglected (episodes VG2 and VR1). A further reason for it is given in the reply to Objection~\ref{o:fashion}.
+
+The theorems of Section~\ref{s:argument} rest, in addition to \ref{p:inst} and Definition~\ref{d:uptake}, on three assumptions about the practice. Each is a claim of fact, and each is supported by the record collected in Appendix~\ref{app:catalogue}.
+
+\begin{assumption}[Offered and ignored]\label{a:ignored}
+Some objects presented as art within an artworld receive no critical uptake.
+\end{assumption}
+
+\begin{assumption}[No participant commands the practice]\label{a:command}
+For every agent, there are objects that the agent decides are art, and presents, which the critical practice does not take up.
+\end{assumption}
+
+\begin{assumption}[Market and criticism come apart]\label{a:market}
+Some presented objects receive market uptake without critical uptake, and some objects that receive critical uptake receive no market uptake.
+\end{assumption}
+
+Assumption~\ref{a:ignored} is documented by every refused submission and every unvisited exhibition. In the catalogue it is instantiated by \emph{Fountain} in April 1917 and by Manet's \emph{D\'ejeuner} before the Salon des Refus\'es opened (FT1, MN0), and schematically by the declared breakfast and the ignored machine output (SD1, AI5). Assumption~\ref{a:command} is the claim that the practice of criticism is not under the control of any of its members. It is true of the most powerful participants: a museum director who exhibits an object can secure its presentation but not its discussion (SD2), and an artist as celebrated as Manzoni could sign a person and issue a certificate without making the person, as an object, a topic of criticism (MZ4). Assumption~\ref{a:market} is documented on one side by the sale of objects as curiosities (the paintings of the chimpanzee Congo, sold at auction in 2005, episode CO1) and on the other by the many works that have been interpreted and assessed without ever being sold (\emph{Fountain} itself, whose original was lost before it could be, FT3).
+
+\begin{remark}[Status, not value]\label{r:status}
+\ref{p:inst} says what makes something a work of art. It says nothing about what makes a work good, important or worth attention. That a work has been taken up is no evidence that the uptake was warranted, and that it has been assessed adversely is no evidence that it is bad. Questions of value are the subject of AES-03, AES-04, AES-08 and AES-12; the account is compatible with each of their conclusions and presupposes none of them.
+\end{remark}
+
+\subsection{Why critical uptake}
+
+The second condition could have been formulated in other ways, and it is worth saying why the alternatives fail. Four candidates suggest themselves.
+
+\emph{Appreciation.} One might require that the object be appreciated, in the sense of being enjoyed or valued for its aesthetic qualities. This is the condition that a functional theorist would favour, and it fails for the reason functional definitions fail: many works are engaged by the practice without being enjoyed, and some are engaged precisely as provocations to which enjoyment would be an inappropriate response (EQ2, MZ1, CB1). It also fails Corollary~\ref{c:merit}: an object that the practice engages and finds wanting has been assessed, not appreciated, and it is still a work.
+
+\emph{Attention.} One might require only that the object be attended to by the artworld's public. This condition is too weak. The paintings of the chimpanzee Congo, the macaque self-portrait and Umanets's inscription on the Rothko received a great deal of attention (CO1, NS1, YW1), and the practice did not engage any of them as a candidate. Attention is a matter of who looks; uptake is a matter of how they look, and in particular of whether they treat the object as one whose meaning and merit are in question in the way they are for works.
+
+\emph{Institutional acceptance.} One might require that the object be accepted by a recognized institution of the artworld: acquired by a museum, shown by a major gallery, admitted to a salon. This condition is both too strong and too weak. It is too strong because the practice has engaged many works that no institution accepted, often in direct response to their rejection: the \emph{D\'ejeuner} was rejected by the Salon and taken up at the Salon des Refus\'es (MN0, MN1), and \emph{Fountain} was rejected by the Society and taken up by criticism (FT1, FT3). It is too weak because acceptance by an institution is the decision of the institution's officers, and a condition satisfied by such a decision fails clause (iii) of Definition~\ref{d:criterion}: the director of SD2 can secure an object's acceptance by her museum without securing its engagement by anyone else. Institutional acceptance is a form of presentation, not of uptake.
+
+\emph{Market uptake.} One might require that the object be bought and sold as art. This condition fails for the reasons given in Proposition~\ref{p:market}: sales are decisions of buyers and sellers, many works have never been sold, and many objects are sold for reasons that have nothing to do with their standing as works.
+
+Critical uptake avoids these failures. It is not restricted to favourable responses, so it does not require appreciation; it is restricted to engagement as a candidate, so it is stronger than attention; it is engagement by the practice, not by any one institution, so it is neither too strong nor settled by an officer's decision; and it is not a market transaction. It is, in short, the response that the practice reserves for works, whether it values them or not.
+
+\section{The argument}\label{s:argument}
+
+\subsection{Presentation is necessary but not sufficient}
+
+\begin{lemma}\label{l:necessary}
+Presentation is necessary for art status: no episode is art unless the object is presented as art within an artworld.
+\end{lemma}
+
+\begin{proof}
+Immediate from \ref{p:inst}, whose right-hand side is a conjunction one of whose conjuncts is presentation.
+\end{proof}
+
+Lemma~\ref{l:necessary} is not trivial in its consequences. It implies that works made and never shown are not art until someone presents them: Darger's illustrations during his lifetime and Maier's negatives before 2007 (episodes DG1 and VV1). We discuss this consequence in Proposition~\ref{p:posthumous} and in Objection~\ref{o:outsider}. It also implies that objects indiscernible from works but not presented, such as the urinal in the showroom, the carton in the stockroom and the bricks on the building site (FTU, BB2, EQ3), are not art, which is the verdict Danto's argument requires.
+
+\begin{theorem}\label{t:insufficient}
+Presentation alone does not suffice for art status: there are presented objects that are not art.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:ignored}, some presented object receives no critical uptake. By \ref{p:inst}, an episode is art only if the object receives critical uptake. So that object is presented and not art.
+\end{proof}
+
+Theorem~\ref{t:insufficient} is where the account parts company with Dickie, with Levinson, and with any account on which an act of offering, conferring or intending suffices. An object offered and ignored, or offered and refused, is not yet art; it is a candidate. The verdict is not a stipulation. It matches the way the practice itself treats such objects: the vast majority of what is offered as art in any year is offered by people whose work is never reviewed, exhibited or discussed, and the practice does not regard these objects as works whose merits it has failed to assess but as candidates it has not taken up. Presentation is a necessary condition; it is not a criterion in the sense of Definition~\ref{d:criterion}, since it fails condition (ii).
+
+\subsection{Adverse uptake suffices; status and merit come apart}
+
+\begin{theorem}\label{t:adverse}
+Adverse uptake suffices for art status: an object presented within an artworld and assessed unfavourably by its critical practice, as a candidate, is art.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{d:uptake}, critical uptake is engagement as a candidate, by interpretation, comparison and assessment, and the assessment may be adverse. An object assessed unfavourably as a candidate has therefore received critical uptake. It was presented, so by \ref{p:inst} it is art.
+\end{proof}
+
+\begin{corollary}\label{c:merit}
+Status and merit come apart. There is bad art: an object may be art although every assessment of it by the critical practice is unfavourable.
+\end{corollary}
+
+\begin{proof}
+Let an object be presented and assessed only unfavourably. By Theorem~\ref{t:adverse} it is art, and by hypothesis no assessment of it is favourable.
+\end{proof}
+
+Theorem~\ref{t:adverse} is what makes the second condition of the account a condition on status rather than on success. Ruskin's attack on Whistler's \emph{Nocturne} in 1877, the ridicule that met Manet's \emph{D\'ejeuner} at the Salon des Refus\'es, Leroy's mocking review of the exhibition of 1874, and the press campaign of 1976 against the Tate's bricks (episodes WN1, MN1, IM1 and EQ2) were acts of critical uptake. Each engaged the object as a work and found it wanting. The collection of the Museum of Bad Art (MB1) is an institution devoted to adverse uptake, and the paintings it exhibits are art for the reason that it gives them attention as paintings. The schematic case SD3, a painting reviewed by several critics all of whom find it worthless, is art by Corollary~\ref{c:merit}.
+
+An account that required favourable uptake would have to say that the \emph{Nocturne} became art only when Whistler's reputation recovered, and that \emph{Equivalent VIII} ceased to be art in 1976. Neither verdict is credible, and neither is the verdict of the practice, whose hostile critics took themselves to be assessing works, not to be declining to classify objects. The account's insistence that adverse uptake counts is not a concession; it is what the practice of criticism presupposes.
+
+\subsection{Market uptake is neither necessary nor sufficient}
+
+\begin{proposition}\label{p:market}
+Market uptake is neither sufficient, together with presentation, nor necessary for art status.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:market}, some presented object receives market uptake without critical uptake; by \ref{p:inst} it is not art, so presentation with market uptake is not sufficient. By the same assumption, some object that is presented and receives critical uptake receives no market uptake; by \ref{p:inst} it is art, so market uptake is not necessary.
+\end{proof}
+
+Proposition~\ref{p:market} separates two things that the art market of the last half century has tended to run together. A price, even a very high one, is a fact about what a buyer was willing to pay, and a buyer may pay for an object as a work, as a relic, as a curiosity, as an investment or as a document of a technology; the transaction does not reveal which. The sales of \emph{Comedian} in 2019 and 2024 (CM1 and CM4) added nothing to its status, which it had from its first engagement by critics, and the sale of \emph{Edmond de Belamy} in 2018 for many times its estimate (AI1) did not settle whether it is a work, which remains disputed among critics. Conversely, nothing about the status of \emph{Fountain} turned on whether anyone bought it. The companion manuscript AES-15-b develops the point for machine outputs: evidence of market uptake is weak evidence of critical uptake, because a price can be paid for an object for many reasons other than its standing as a work.
+
+\subsection{No single agent's decision suffices}
+
+\begin{theorem}\label{t:single}
+No single agent's decision suffices for art status. For every agent, it is not the case that whatever that agent decides is art is art.
+\end{theorem}
+
+\begin{proof}
+Let an agent be given. By Assumption~\ref{a:command}, there is an object that the agent decides is art and presents, and that the critical practice does not take up. By \ref{p:inst}, that object is not art. So it is not the case that whatever the agent decides is art is art.
+\end{proof}
+
+The theorem covers every kind of decision: the maker's declaration (Duchamp's signature on \emph{Fountain}, Manzoni's certificates, Umanets's inscription on the Rothko, episodes FT1, MZ4, YW1), the presenter's choice (the curator of SD2), and the buyer's purchase (CO1). It also covers decisions that withhold status. The cleaner who took Hirst's installation for rubbish, the caretaker who removed Beuys's \emph{Fat Corner} and the customs officers who refused Brancusi's \emph{Bird in Space} the duty-free entry granted to works of art (HC1, BF1, BX1) each decided, in effect, that an object was not art. None of these decisions changed the object's status, which depended on the practice's engagement and not on any one person's verdict. The account is symmetric in this respect, as it should be: if no one can make an object art by fiat, no one can unmake it by fiat either.
+
+Theorem~\ref{t:single} should be distinguished from the claim that individual acts play no role. Each act of presentation is an act of an individual, and critical uptake consists of individual acts of interpretation and assessment. The claim is that status supervenes on a pattern of such acts, which no single participant can bring about by deciding that it shall obtain. A critic who writes about a work contributes to its uptake; she does not confer its status, any more than a single speaker who uses a word in a new sense changes its meaning in the language.
+
+\subsection{Wollheim's dilemma}
+
+\begin{proposition}\label{p:wollheim}
+The account escapes Wollheim's dilemma. Art status on \ref{p:inst} is neither arbitrary nor reducible to the reasons for which it is conferred.
+\end{proposition}
+
+\begin{proof}
+The dilemma is addressed to an account on which status is conferred by a decision, made either for reasons or not. On \ref{p:inst}, status is not conferred by a decision: by Theorem~\ref{t:single}, no agent's decision suffices for it, and by Definition~\ref{d:uptake}, the second condition consists of a pattern of interpretations, comparisons and assessments. Each of these is made for reasons, so the status is not arbitrary. But the reasons are reasons for particular readings and evaluations of particular objects, not reasons for the classification \enquote{art}, and what the readings and evaluations of different works have in common is only that they are given within one practice. There is therefore no set of reasons, detachable from the practice, that would constitute a definition of art and make the practice redundant. Neither horn applies.
+\end{proof}
+
+The proof turns on a distinction between reasons that are given within a practice and reasons that define it. Wollheim's first horn assumes that if the representatives of the artworld act for reasons, those reasons can be collected into a definition. That assumption is natural if the reasons are reasons for the classification: if critics said \enquote{this is art because it has significant form}, the definition would be at hand. But critics do not, in general, give reasons for the classification. They give reasons for readings (\enquote{the title turns the snow shovel into a joke about prophecy}) and for evaluations (\enquote{the joke is thin}), and these reasons differ from work to work and from period to period. What the practice confers on an object is not a verdict that it is art, from which the reasons would be detachable, but a place among the objects about which its reasons are given. AES-01-b states the same point in terms of the criterion of Definition~\ref{d:criterion}.
+
+\subsection{Collective decisions}
+
+It may be objected that Theorem~\ref{t:single} merely relocates the act of conferral from an individual to a collective. If the critical practice, taken as a whole, decides which objects to engage, then the practice is a collective agent whose decisions confer status, and Wollheim's dilemma can be restated for it: the practice engages objects for reasons, which make it redundant, or without reasons, which make its engagement arbitrary.
+
+\begin{proposition}\label{p:collective}
+Critical uptake is not a decision of the practice, taken as a collective agent, that an object is art; and the account is not open to Wollheim's dilemma restated for such a decision.
+\end{proposition}
+
+\begin{proof}
+A collective decision requires a procedure by which the attitudes of members are aggregated into an attitude of the collective: a vote, a delegation, a rule of consensus. The critical practice has no such procedure. Its members engage objects independently, for their own reasons, often in disagreement with one another, and the pattern of their engagement is not the output of any procedure that aggregates their attitudes into a verdict that the object is art. Moreover, what the members do when they engage an object is not to judge that it is art but to interpret, compare and assess it (Definition~\ref{d:uptake}). The pattern of such acts is a fact about the practice, as the meaning of a word in a language is a fact about its use, without being a decision of the practice. Wollheim's dilemma is addressed to decisions, and so does not apply; Proposition~\ref{p:wollheim} shows that the reasons that figure in the individual acts do not constitute a definition that would make the practice redundant.
+\end{proof}
+
+The analogy with meaning is instructive in a further respect. The meaning of a word is not settled by any speaker's decision, nor by a collective decision of the speakers, yet it is not arbitrary: each use answers to standards, and speakers can get it wrong. Nor is it reducible to a set of reasons for using the word as it is used, which a dictionary could list and so make the practice of speaking redundant. Art status, on the account, has the same structure. It supervenes on a pattern of acts each of which answers to standards internal to the practice, and it is neither decided nor reducible.
+
+\subsection{The criterion theorem}
+
+\begin{theorem}\label{t:criterion}
+The condition of \ref{p:inst} is a criterion in the sense of Definition~\ref{d:criterion}. Presentation alone, conferral by a single agent, and market uptake are not.
+\end{theorem}
+
+\begin{proof}
+(i) Presentation and critical uptake are public: exhibitions, performances and publications are matters of record, and so are reviews, catalogues, scholarship and the responses of artists. Whether an object has been presented and taken up is therefore publicly ascertainable, though it may be difficult to ascertain and, in divided cases, contested. (ii) By Theorem~\ref{t:insufficient}, the condition can fail for an object that is sincerely offered as art. (iii) By Theorem~\ref{t:single}, whether the condition is met is not settled by any single agent's decision.
+
+Presentation alone fails (ii): any participant can offer any object, so every sincere offer meets it. Conferral by a single agent fails (iii) by definition, since its satisfaction is settled by the agent's decision. Market uptake fails (iii), since a sale is settled by the decisions of a buyer and a seller; and by Proposition~\ref{p:market} it is neither necessary nor sufficient for status.
+\end{proof}
+
+Theorem~\ref{t:criterion} is the main result of the manuscript. It says that the account does what a definition of art is supposed to do and what its institutional predecessors did not: it draws a line that sincere offers can fall on either side of, and that no one can move by deciding where it falls. Its formal core, the conjunction of Lemma~\ref{l:necessary}, Theorems~\ref{t:insufficient}, \ref{t:adverse} and~\ref{t:single}, and Proposition~\ref{p:market}, is verified in Lean (Section~\ref{s:formal}).
+
+\subsection{Persistence}
+
+\begin{proposition}\label{p:persistence}
+Art status, once acquired relative to an artworld, persists through neglect, adverse reassessment, change of attribution, damage and the loss of the original object, so long as the practice continues to identify the work.
+\end{proposition}
+
+\begin{proof}
+By \ref{p:persist}, an object that has received critical uptake continues to have received it. Neglect and adverse reassessment do not make it the case that the practice has not engaged the object; change of attribution changes what the practice takes the object to be, not whether it has engaged it; and damage or loss of the original leaves the history of engagement intact, so that the work continues to be identified through its instances, documents and replicas. By \ref{p:inst}, the status persists.
+\end{proof}
+
+Proposition~\ref{p:persistence} is checked on every history of length up to five in Appendix~\ref{app:histories} and on the documented histories of Appendix~\ref{app:timelines}. It explains why the exposure of van Meegeren did not turn \emph{Emmaus} into a non-work (VG1, VG2), why the forgeries sold by Knoedler remain works, now of a different author (KN1), and why the \emph{Unhappy Readymade}, which did not survive the weather, remains a work known through a photograph and a painting (UR1). The clause about identification matters for the replicas of \emph{Fountain} and for the replacement bananas of \emph{Comedian}, to which we turn in Section~\ref{s:cases}.
+
+\section{The cases}\label{s:cases}
+
+This section applies the account to the cases that have structured the debate. Each proposition is proved from the principles of Section~\ref{s:framework} together with facts recorded in the catalogue; the encodings and computed verdicts of the episodes cited are in Appendix~\ref{app:catalogue}, and the documented histories in Appendix~\ref{app:timelines}.
+
+\subsection{Fountain}
+
+\begin{proposition}\label{p:fountain}
+\emph{Fountain} is a work of art.
+\end{proposition}
+
+\begin{proof}
+The object was presented: Duchamp, a participant in the New York artworld, offered it through the exhibition of the Society of Independent Artists, and it was offered again through the photograph and editorial in \emph{The Blind Man}, and later through the authorized replicas. It has received critical uptake: since the 1950s it has been interpreted, compared with other works and assessed, adversely as well as favourably, by the critical practice of the artworld \citep{deDuve1996}. By \ref{p:inst} it is art (episode FT3).
+\end{proof}
+
+\begin{proposition}\label{p:refusal}
+\emph{Fountain} did not become art by Duchamp's declaration or by its submission in April 1917. Its status derives from the critical uptake that followed the refusal.
+\end{proposition}
+
+\begin{proof}
+In April 1917 the object had been presented, with Duchamp's pseudonymous signature, and the Society declined to show it (episode FT1). At that stage it was presented and not taken up, and by \ref{p:inst} it was not art; by Theorem~\ref{t:single}, the signature, a single agent's declaration, could not make it art. The defense in \emph{The Blind Man} came from within the presenter's own circle, while the wider practice had not yet engaged the object as a candidate; we encode that stage as divided (FT2). The object's status therefore depended on the engagement that followed, which the documented history of Appendix~\ref{app:timelines} (history FTN) dates, by its best-documented stage, to the critical reception from the 1950s onward.
+\end{proof}
+
+Proposition~\ref{p:refusal} corrects a common simplification, on which Duchamp made the urinal art by declaring it so. The account implies the opposite: no declaration could, and the refusal of 1917 is not an embarrassment for the institutional theory but a confirmation that presentation alone does not suffice. The case also shows that the artworld whose uptake matters is not identical with any institution within it. The Society refused; the practice of criticism, which was wider than the Society and outlasted it, did not. The account does not fix the date at which \emph{Fountain} became art more precisely than the record of its uptake allows, and it does not need to: what matters is that its status came from the practice and not from the submission. The companion manuscript AES-01-c derives the same consequences.
+
+\begin{proposition}\label{p:replicas}
+The replicas of \emph{Fountain} are art because the practice takes them up as the work.
+\end{proposition}
+
+\begin{proof}
+The replicas are distinct objects, made from 1950 onward, decades after the original was lost. They were presented, with Duchamp's authorization, as the work, and the practice has engaged them as the work: they are exhibited, catalogued and interpreted as \emph{Fountain} (episode FTR). By \ref{p:inst} they are art, and the work of which they are instances is the work the practice takes up through them. By Proposition~\ref{p:persistence}, the loss of the original did not end the work's status, since the practice continued to identify the work through its documents and, later, its replicas.
+\end{proof}
+
+The same structure explains two other cases in the catalogue. The replacement bananas of \emph{Comedian}, one of which replaced the banana eaten at the fair in 2019 (CM2), are art because the practice takes them up as instances of the work, which is sold as a certificate with instructions for its installation. The executions of LeWitt's wall drawings, painted by assistants from written instructions and repainted elsewhere (LW1), are art for the same reason. In each case the object's status is derivative from the practice's treating it as an instance of a work, and not from any feature of the object itself. By contrast, Sherrie Levine's bronze urinal of 1991 (SL2) is taken up as a work of its own, about Duchamp's, and not as an instance of it; and the replicas Pinoncelli attacked in 1993 and 2006 were not made into new works by the attacks, which the practice treated as attacks (PN1).
+
+\subsection{Indiscernibles}
+
+\begin{proposition}\label{p:indiscernible}
+Of two perceptually indiscernible objects, one may be art and the other not; the difference lies in presentation and uptake.
+\end{proposition}
+
+\begin{proof}
+Warhol's \emph{Brillo Box} was presented at the Stable Gallery and has been engaged as a work since its first exhibition (BB1); by \ref{p:inst} it is art. The commercial carton was offered to customers as packaging, not to an artworld public as a candidate (BB2); by Lemma~\ref{l:necessary} it is not art. The two objects need not differ perceptually. The same holds of the urinal in the showroom and \emph{Fountain} (FTU and FT3), of the bricks on the building site and \emph{Equivalent VIII} (EQ3 and EQ1), and of the red rectangles in Danto's exhibition, three of which are art and two of which are not (RS1 to RS5).
+\end{proof}
+
+Proposition~\ref{p:indiscernible} gives Danto's result without his positive theory. It does not require that works are about something, or that they embody their meanings, though many of them do; it requires only that presentation and uptake are not perceptual properties. The carton designed by James Harvey is a useful test of the rivals. An aesthetic definition counts it as art, since it was designed to have visual appeal; the institutional account does not, since it was not offered as a candidate. The account does not deny that the carton has aesthetic properties, or even that it is good design; it denies that it is a work of art, which is a different matter (Remark~\ref{r:status}).
+
+\subsection{Posthumous and outsider work}
+
+\begin{proposition}\label{p:posthumous}
+A work made and never shown becomes art when it is presented and taken up, whether during its maker's life or afterwards, and whether or not its maker would have consented.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:necessary}, an object not presented is not art; so Darger's illustrations during his lifetime and Maier's photographs before 2007 were not (DG1 and VV1). After Darger's work was found in 1972 it was presented by others and engaged by curators, critics and historians (DG2); after Maier's negatives were bought at auction in 2007 her photographs were printed, exhibited and engaged (VV2). Kafka's \emph{Trial} was presented by Max Brod against its author's instructions and has been engaged as literature since its publication in 1925 (KF1). Definition~\ref{d:presented} does not require that the presenter be the maker or act with the maker's consent. By \ref{p:inst}, each is art from the stage at which both conditions are met.
+\end{proof}
+
+The verdict that Darger's illustrations were not art while he kept them in his room is the most counterintuitive consequence of the account, and we defend it in Objection~\ref{o:outsider}. Here we note only what it does not say. It does not say that Darger was not an artist in the sense of a person engaged in making things of the kind the artworld takes up, or that his illustrations lacked any of the properties for which they are now admired. It says that their status as works depended on their entry into the practice, which is a fact about them and about the practice, and not about their maker's mind.
+
+\subsection{Art before artworlds}
+
+\begin{proposition}\label{p:before}
+Objects made before or outside any artworld are not art at the stages at which they stand in no relation to an artworld; they become art relative to an artworld that presents them and takes them up.
+\end{proposition}
+
+\begin{proof}
+By \ref{p:index}, art status is relative to a stage and an artworld, and where no artworld exists at a stage the object is not art at that stage. The paintings of Lascaux at the time they were made, the icon of the Trinity in liturgical use, and the Kongo power figure in use (LX1, RB1, NK0) stood in no relation to a practice of presenting objects as candidates for appreciation and criticism. After its discovery in 1940 the cave was presented by archaeologists and publications and its paintings engaged as the beginnings of art \citep{Bataille1955}; since 1929 the icon has been exhibited and studied in the Tretyakov Gallery; and power figures have been exhibited and engaged in art museums, with a degree of controversy about the terms of the engagement \citep{Rubin1984,McEvilley1984} (LX2, RB2, NK2). By \ref{p:inst}, each is art relative to the modern artworld from the stage at which it is presented and taken up.
+\end{proof}
+
+The case of Altamira (AL1, AL2) shows that the uptake of objects made before artworlds is subject to the same conditions as the uptake of contemporary works. Published in 1880, the painted ceiling was rejected by leading prehistorians as a recent fabrication; only after Cartailhac's retraction in 1902 \citep{Cartailhac1902} was its antiquity accepted and the paintings engaged as works. The refusal was a refusal on grounds of authenticity, not of merit, and it delayed the uptake, as the refusal of the Society delayed that of \emph{Fountain}. The case of the Kongo figure in an ethnographic museum (NK1) shows the converse: an object can be collected, catalogued and displayed for a century without being presented as a candidate, as Dickie's chimpanzee paintings were displayed in a museum of natural history. The Venus of Willendorf, held by a museum of natural history but figuring in surveys of the history of art (VW1), shows that what matters is the practice's engagement, not the type of building in which an object is kept.
+
+\subsection{Machine outputs}
+
+\begin{proposition}\label{p:machine}
+Machine outputs can be art, if they are presented within an artworld and taken up by its critical practice. Whether any have been so taken up is, on the present record, contested.
+\end{proposition}
+
+\begin{proof}
+\ref{p:inst} places no condition on how an object came to exist, only on its relation to an artworld; so a machine output can satisfy both conditions, provided someone presents it and the practice engages it as a candidate. The outputs in the catalogue that have been presented, \emph{Edmond de Belamy}, \emph{Th\'e\^atre D'op\'era Spatial} and \emph{Unsupervised} (AI1 to AI3), have received responses that we encode as divided: they have been discussed both as works and as events in the history of a technology, and the practice has not settled which. By Definition~\ref{d:modes} and \ref{p:inst}, their status is contested.
+\end{proof}
+
+Proposition~\ref{p:machine} is the conclusion of AES-15-a, derived here from the general account: machine outputs can be art if they are taken up by an artworld, and whether they are so taken up remains open. The account explains why the question cannot be settled by an argument about whether machines can have intentions, feelings or creativity, which is how it is usually posed \citep{Boden2010,Hertzmann2018}: the conditions of art status concern the relation between an object and a practice, not the inner states of whatever produced the object. AES-15-b adds that the large price paid for \emph{Edmond de Belamy} does not close the question, since market uptake is not critical uptake (Proposition~\ref{p:market}).
+
+\subsection{Misrecognition, damage and destruction}
+
+A group of cases in the catalogue concerns objects that someone treated as not being art: installations thrown away by cleaners (HC1, MG1, GB1), a corner of fat removed by a caretaker (BF1), a bronze refused entry as a work of art by customs officers (BX1). On an account on which art status is conferred by a decision, such cases are puzzling, since a decision that an object is not art seems to have the same standing as a decision that it is. On the present account they are straightforward. The cleaner's act is the act of a single agent, and by Theorem~\ref{t:single} no single agent's decision settles status in either direction. The customs classification and the court's ruling in \emph{Brancusi v.\ United States} were acts of a legal institution applying a legal category, not acts of the critical practice; the court's finding that \emph{Bird in Space} was a work of art recorded, for the purposes of a tariff, a status the object already had, and the customs officers' contrary finding did not remove it. The documented history BRA in Appendix~\ref{app:timelines} shows the structure: a presentation, a refusal by an authority outside the practice, an engagement by critics and artists, and a legal ruling with no bearing on the conditions.
+
+The converse cases are those in which an object is damaged or destroyed by, or with the consent of, its maker, and the act is presented as part of the work or as a new work: the shredding of \emph{Girl with Balloon} at the moment of its sale, the destruction of Landy's possessions, the cremation of Baldessari's paintings, Ai Weiwei's dropping of an urn (BK1, ML1, BC1, AW1). These acts are presentations, and each has been taken up as a work. The account does not say that destruction makes art, any more than signing does; it says that a destruction presented as a work and engaged as one is a work. Pinoncelli's attacks on the replicas of \emph{Fountain} and Umanets's inscription on a Rothko (PN1, YW1) were also presented by their agents as works, and the practice treated them as attacks on works. They are, on the encoding, candidates. The difference between these cases and Landy's is not that one is destructive and the other not, nor that one was legal and the other not, but that one was engaged by the practice as a work and the others were not.
+
+\subsection{Forgery and attribution}
+
+Forgeries are a test of Proposition~\ref{p:persistence}. Van Meegeren's \emph{Christ and the Disciples at Emmaus} was presented and acclaimed as a Vermeer in 1937 (VG1); after 1945 it was reassessed as a forgery, and its faults are now commonly remarked (VG2). On the account, the painting was art throughout: it was presented and taken up, first favourably and under a false attribution, then adversely and under the true one. What changed in 1945 was its attribution and its reputation, and with them, as AES-04-a argues, its artistic value, since the achievement it embodies is not the one it was taken to embody. Its status did not change. The paintings sold by Knoedler \& Company as works by Abstract Expressionists (KN1) are in the same position. The account therefore agrees with AES-04-a in separating the question whether a forgery is a work from the question what it is worth; it adds that the first question has an easy answer, since forgeries are presented and taken up, and that the hard question, which AES-04-a answers, concerns value (Remark~\ref{r:status}).
+
+A forgery that is never detected is a work under a false attribution; a forgery that is detected before it is presented is a candidate, if it is presented at all as the forger's own work, and otherwise not art. Neither verdict depends on the forgery's quality.
+
+\section{The structure of uptake}\label{s:structure}
+
+The account puts the weight on critical uptake, and it is fair to ask for more than Definition~\ref{d:uptake} says about what uptake is, how much of it is needed, which practices can supply it, and what exactly it is uptake of. This section answers these questions as far as the account requires.
+
+\subsection{Marks of engagement as a candidate}
+
+Critical uptake is engagement with an object as a candidate for the appreciation and criticism the practice applies to works. Its marks are the three activities named in Definition~\ref{d:uptake}. To \emph{interpret} an object is to attribute to it a meaning, a point or an expressive character, as a critic does who reads the title of \emph{In Advance of the Broken Arm} as a joke about prophecy, or the silence of \emph{4$'$33$''$} as a frame for ambient sound. To \emph{compare} it with other works is to place it in a tradition, a genre or a sequence, as a historian does who places \emph{Fountain} in the history of sculpture or \emph{Equivalent VIII} in the history of the plinth. To \emph{assess} it is to judge whether it succeeds by the standards the practice applies to works, favourably or adversely. The three activities usually occur together, and each implies the others in part, since an assessment presupposes an interpretation and an interpretation is made against a background of comparisons.
+
+What distinguishes critical uptake from other kinds of attention is not its subject matter, its venue or its tone, but whether the object is treated as one whose meaning and merit are in question in the way they are in question for works. News reports, legal proceedings, scientific studies and market analyses attend to objects for other purposes: to report what happened, to decide a dispute, to explain behavior, to estimate a price. Such attention can be intense and prolonged without being critical uptake, as the cases of Congo's paintings, the macaque self-portrait and Datuna's eating of the banana show (CO1, NS1, CM3). Conversely, a short review in a local newspaper that interprets and assesses a painting as a painting is critical uptake, however small its audience.
+
+\subsection{How much uptake}
+
+Definition~\ref{d:uptake} does not say how much engagement is needed, and the account does not supply a number. We think this is right. The practice itself does not recognize a threshold, and an account that stipulated one would be stipulating, not describing. But it does not follow that the condition is empty or that every case is borderline. Most objects that are offered are either engaged by several participants or by none; the cases in which the practice is divided or its engagement slight are a minority, and in these the account returns the verdict C.
+
+Two features of the condition help to explain where the borderline cases fall. First, uptake is engagement by the practice, not by the presenter or the presenter's circle. The defense of \emph{Fountain} in \emph{The Blind Man}, written by the presenter's associates in a magazine they edited (FT2), is on the margin for this reason: it is engagement, but not yet engagement by a practice independent of the presenter. Second, uptake is engagement as a candidate, and where the practice disagrees about whether an object is to be engaged in that way at all, as with the machine outputs of the catalogue (AI1 to AI3), the condition is partly met.
+
+\begin{proposition}\label{p:graded}
+Where the practice is divided on whether to engage an object as a candidate, or engages it only through the presenter's circle, the condition of \ref{p:inst} is neither clearly met nor clearly unmet, and the object's status is contested.
+\end{proposition}
+
+\begin{proof}
+In such cases some acts of engagement as a candidate have occurred, so the object is not a mere candidate in the sense of Theorem~\ref{t:insufficient}; and the engagement is not that of the practice as distinct from the presenter, or the practice disputes whether the object is to be engaged as a candidate, so the condition of Definition~\ref{d:uptake} is not clearly met. By \ref{p:inst}, whether the object is art turns on whether that condition is met, so its status is contested.
+\end{proof}
+
+Proposition~\ref{p:graded} says that the status of such objects is contested; it does not say that there is no fact of the matter. On the epistemic view of vagueness defended in MET-18, on which vague predicates have sharp boundaries that cannot be known, \enquote{has received critical uptake} has a sharp boundary like any other vague predicate, and the contested cases are those in which we cannot know on which side of it an object falls. The account is neutral on this question. What it requires is that the contested cases be few and identifiable, and that their contestation be explained by the condition, and both requirements are met: they are the cases in which the record shows divided or presenter-internal engagement.
+
+\subsection{Plural artworlds}
+
+Definition~\ref{d:artworld} identifies an artworld as a historical particular, and \ref{p:index} allows that there may be more than one. The modern artworld, which took shape in Europe in the eighteenth century, is the one whose uptake matters in nearly all the cases of the catalogue. But there have been other practices of presenting objects as candidates for appreciation and criticism, with their own institutions and vocabularies of assessment. The tradition of painting criticism in China, which by the sixth century had produced a canon of principles for the assessment of painting and a practice of ranking painters, is one; the practices of connoisseurship that grew up around poetry, calligraphy and the utensils of the tea ceremony in Japan are others. Relative to such a practice, an object presented to it and engaged by its critics was art in the sense of \ref{p:inst}, whether or not it was later taken up by the modern artworld.
+
+\begin{proposition}\label{p:plural}
+If a practice satisfies Definition~\ref{d:artworld}, an object presented and taken up within it is art relative to it, independently of its relation to any other artworld. Where two artworlds come into contact, an object may be art relative to one and a candidate, or not presented, relative to the other.
+\end{proposition}
+
+\begin{proof}
+\ref{p:inst} and \ref{p:index} relativize the conditions and the status to an artworld, and Definition~\ref{d:artworld} does not restrict artworlds to one tradition. The second sentence follows because presentation and uptake are relations to a particular practice, and an object may stand in them to one practice and not to another.
+\end{proof}
+
+Proposition~\ref{p:plural} answers part of the objection that the account mistakes a European institution for art itself. The account does not say that only the modern artworld can confer status; it says that status is relative to a practice of a certain kind, and that many objects made outside the modern artworld, including the icon and the power figure of the catalogue, were made within practices that were not of that kind (RB1, NK0). Whether a given practice was of that kind is a historical question, which the account does not answer and should not.
+
+\subsection{Works, instances and the object of uptake}
+
+Uptake is always uptake of something, and the account must say what. In the simplest case, the object presented is the object taken up: a painting is exhibited, and it is the painting that critics interpret and assess. But in many of the cases of the catalogue, the object presented and the object taken up come apart. The replicas of \emph{Fountain} are presented, but what the practice takes up through them is the work whose first instance was lost (FTR). The bananas of \emph{Comedian} are presented one after another, but what the practice takes up is the work that each instantiates (CM2). Manzoni signed people and issued them certificates, but what the practice takes up is the series, documented by the certificates and photographs, not the people as objects (MZ3, MZ4). A performance of \emph{4$'$33$''$} presents an interval of ambient sound, but what the practice takes up is the work of which the performance is an instance (CG1).
+
+\begin{proposition}\label{p:object}
+The work is what the practice takes up. An object presented is art as an instance of a work if the practice takes it up as an instance of that work; it is a work in its own right if the practice takes it up as such; and it is neither if the practice takes up something else through it.
+\end{proposition}
+
+\begin{proof}
+By \ref{p:inst}, an object is art if it is presented and taken up. What is taken up is fixed by the practice's interpretations, comparisons and assessments, which are directed at a work and, through it, at its instances. An object taken up as an instance of a work satisfies the condition as an instance; an object taken up as a work satisfies it as a work; and an object through which the practice takes up something else (a gesture, a series, an event) does not itself satisfy the condition, since it is not what the practice engages.
+\end{proof}
+
+Proposition~\ref{p:object} gives the account of replicas and replacement instances used in Section~\ref{s:cases}, and the verdict that Manzoni's signed person, considered as an object, is a candidate while the series is a work. It also gives the account of the performing arts, in which presentation is the performance of a work and uptake is engagement with the work and the performance; and of the literary arts, in which the object presented is a text or a copy and what is taken up is the work it presents (DK1, KF1). It does not settle the ontology of works, which is a further question; it requires only that the practice's engagement be directed, and that its direction fix which objects are instances.
+
+\subsection{Openness}
+
+\citet{Weitz1956} argued that art could not be defined because the concept is open: new works unlike any before are always possible, and a definition would foreclose them. The account is open in Weitz's sense without being anti-essentialist.
+
+\begin{proposition}\label{p:open}
+No kind of object is excluded from art status in advance: for any object presented within an artworld, there is a response of the critical practice under which it is art.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{t:adverse}, any presented object that is assessed adversely as a candidate is art, and nothing in Definitions~\ref{d:presented} and~\ref{d:uptake} restricts the kind of object that can be presented or so assessed. The census of Appendix~\ref{app:census} confirms that every coherent state with presentation within an artworld has a value of the uptake field under which its verdict is A; the corresponding statement about the encoding is proved in Lean as \texttt{census\_open}.
+\end{proof}
+
+Proposition~\ref{p:open} explains why the history of twentieth-century art, in which objects of every kind were offered and many were taken up, did not refute the account, as it refuted the aesthetic and the expressive definitions. It also explains why openness does not make the account empty. The account excludes nothing in advance, but it classifies every actual object by what has happened to it; and the census shows that, for every presented object, there are also responses under which it is not art. Openness is a property of the conditions, not a failure to impose any.
+
+\section{The rivals on the catalogue}\label{s:rivals}
+
+Appendix~\ref{app:catalogue} records, for each of the \stnepisodes{} episodes, the verdict of the account (IU, for institutional uptake) and the verdicts of six rivals: Dickie's 1974 definition read as conferral by presentation (D74); Beardsley's aesthetic definition (AE); Levinson's historical definition (HL); Gaut's cluster account with a threshold of five criteria for art and at most two for non-art (CG); Stecker's historical functionalism (ST); and Carroll's narrative method, read as a sufficient condition for identification (CN). The inputs to the rivals are encoded by us for each episode, and the encodings are given in full, so that a reader who disagrees with an encoding can recompute the verdict. Appendix~\ref{tab:rivals} records the verdicts side by side, and Appendix~\ref{tab:thresholds} the cluster verdicts at thresholds from three to eight.
+
+We count two verdicts as agreeing when both are positive (art) or both negative (not art, a candidate, or no artworld at the index), as diverging when one is positive and the other negative, and as open when either is indeterminate. The counts are as follows.
+
+\begin{center}\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Rival & agree & diverge & open \\ \midrule
+Dickie 1974 (D74) & \stdsagree & \stdsdiverge & \stdsopen \\
+Beardsley (AE) & \staeagree & \staediverge & \staeopen \\
+Levinson (HL) & \sthlagree & \sthldiverge & \sthlopen \\
+Gaut, $\theta = 5$ (CG) & \stcgagree & \stcgdiverge & \stcgopen \\
+Stecker (ST) & \ststagree & \ststdiverge & \ststopen \\
+Carroll (CN) & \stcnagree & \stcndiverge & \stcnopen \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Four patterns stand out.
+
+\emph{Dickie's theory diverges exactly on candidates.} The computation confirms what Theorem~\ref{t:insufficient} predicts: D74 and IU agree on every episode except those that are presented and not taken up, where D74 says art and IU says candidate, and those whose uptake is divided, where IU says contested. The divergent episodes include \emph{Fountain} in April 1917, Manet's \emph{D\'ejeuner} before the Salon des Refus\'es, Dickie's own chimpanzee paintings hung in an art museum, Manzoni's signed person, Umanets's inscription and Pinoncelli's attacks (FT1, MN0, BT2, MZ4, YW1, PN1). The generator asserts that this is the only source of divergence; it holds on every episode.
+
+\emph{Beardsley's definition diverges in both directions.} It denies art status to most of the readymades, to Fluxus event scores and to conceptual works (for example FT3, YC1, OT1), and grants it to the commercial carton and the child's drawing (BB2, CD1). It is the rival with the most divergences, which is the computational expression of the familiar point that aesthetic definitions do not fit the art of the twentieth century.
+
+\emph{Levinson's definition diverges on intention without reception.} It agrees with IU wherever intention and uptake go together, and diverges where a single person's intention is present and uptake is not (FT1, BT2, SD1, SD2, AI5, YW1), where uptake is present but the presenter's intention is not of the relevant kind (the Kongo figure in the art museum, NK2), and on objects made before any artworld, which it counts by its base clause or by their makers' intentions (LX1, RB1). Its open verdicts concern the outsider artists whose intentions are unknown (DG1, DG2, VV1).
+
+\emph{Gaut's cluster account tracks properties, not status.} At a threshold of five, the cluster account agrees with IU on most episodes, because most works have most of the properties on Gaut's list and most non-works have few. It diverges on candidates that have many of the properties but have not been taken up (FT1, MN0, AL1), and on objects that have many of them but have not been presented or stand in no relation to an artworld (DG1, VV1, PZ1, LX1, RB1, NK0, NK1). Works that have few of the properties, such as the paintings of the Museum of Bad Art and the uniformly panned painting (MB1, SD3), fall into its region of indeterminacy, where IU counts them as art by Corollary~\ref{c:merit}. Appendix~\ref{tab:thresholds} shows that the pattern is not an artefact of the threshold: as the threshold rises, the cluster account excludes conceptual works that IU includes, and as it falls, it includes more objects that were never presented.
+
+Stecker's historical functionalism and Carroll's narrative method fall between these. Stecker's second disjunct, on which an object outside the central forms is art if it achieves excellence, gives positive verdicts to Darger's illustrations and Maier's photographs before they were presented, and to Lascaux at the time of making (DG1, VV1, LX1); his first disjunct, which requires a central form, gives negative verdicts to works in forms that we do not count as central at their time, such as the snow shovel, Manzoni's tins, \emph{An Oak Tree} and \emph{Comedian} (SH1, MZ1, OT1, CM1). Carroll's method diverges from IU only on objects for which a narrative is available but which have not been taken up (FT1, MN0, SD1, SD2, AI5, YW1, PN1, CM3), which is the difference between the epistemology of identification and the metaphysics of status noted in Section~\ref{s:problem}.
+
+The variants of Appendix~\ref{app:variants} make the same points one condition at a time. Dickie's chimpanzee paintings hung in an art museum are a candidate on the account (BT2); the variant \texttt{ua}, in which critics engage them and find them wanting, is art, and so is \texttt{uf}, in which they find them good, while the variant \texttt{mk}, in which they are sold at a high price, remains a candidate. The submission of \emph{Fountain} in 1917 behaves in the same way (FT1): the variant \texttt{dc}, in which the object is unsigned, has the same verdict as the original, since a signature is a single declaration; the variants \texttt{ua} and \texttt{uf} are art. The Museum of Bad Art (MB1) under \texttt{uf} has the same verdict as under its actual adverse uptake, which is Corollary~\ref{c:merit}. And \emph{Edmond de Belamy} (AI1) under \texttt{mk}, with its sale removed, remains contested: the price paid at Christie's played no part in the verdict, which turns, under \texttt{ua} and \texttt{uf}, on whether the practice settles into engaging it as a candidate.
+
+The comparison does not prove that the rivals are false; their verdicts depend on encodings that their defenders may dispute, and on readings of their definitions that they may reject. What it shows is where each rival departs from IU, and that the departures fall into the patterns that the arguments of Sections~\ref{s:problem} and~\ref{s:argument} predict: accounts on which a single agent's act suffices diverge on candidates; accounts on which a property of the object suffices diverge on unpresented objects and on works that lack the property.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Circularity]\label{o:circ}
+Critical uptake is engagement by the artworld's critical practice, and the artworld is identified as the practice that deals with art. The account presupposes what it defines.
+\end{objection}
+
+\begin{reply}
+The artworld is identified historically (Definition~\ref{d:artworld}), as a continuing practice with traceable institutions, vocabularies, canons and participants, in the way a language or a legal system is identified. We can say what the modern artworld is (the practice that includes the Salons and the academies, the dealers and the museums, the critics, the art historians and the artists who respond to one another, from the eighteenth century to the present) without first deciding which objects are art. \citet{Levinson1979} made the parallel point that art status can be fixed by relation to the history of art-regard without a prior definition, and Dickie's concession that his definitions form a circle \citep{Dickie1984} is unnecessary on our account, since the practice is identified as a particular and not by its relation to the objects it deals with. The terms of the account are learned together, as the elements of any practice are; that does not make the definition circular, any more than the definition of a legal contract is circular because contracts are what courts enforce and courts are identified in part by their role in enforcing contracts.
+
+What the account does presuppose is that the practice exists and can be identified, and that its uptake of an object can be told apart from other kinds of attention. Both presuppositions are substantive, and both can fail at the margins: there are practices whose continuity with the artworld is disputed, and responses whose status as uptake is disputed. The account says that such cases are contested, and assigns them the verdict C. That is the right verdict about them.
+\end{reply}
+
+\begin{objection}[Fashion]\label{o:fashion}
+If uptake makes art, art status depends on the vagaries of critical fashion. A work could become art when it is in vogue and cease to be art when it goes out of it.
+\end{objection}
+
+\begin{reply}
+Reputation and status differ. Fashion moves reputations, which are matters of merit; uptake survives a fall in reputation, since adverse assessment is still assessment (Theorem~\ref{t:adverse}), and once given it is not withdrawn (\ref{p:persist}). An object that was once engaged as a work and is now neglected remains an object the practice has engaged, as Vermeer's paintings did in the period of their neglect (VR1). What the account allows is that an object offered and ignored may later be taken up, as the works of Darger, Maier and S\'eraphine Louis were (DG2, VV2, SE1). That is a feature of the practice and not an artefact of the account: the practice itself describes such cases as discoveries of works that had not been recognized, and the account explains what the recognition consisted in.
+
+It might be pressed that \ref{p:persist} is ad hoc, introduced only to block the objection. It is not. It follows from the historical character of the condition: \ref{p:inst} requires that the practice has engaged the object, and whether the practice has engaged an object is a fact about its history, which later events cannot undo. An account that made status depend on current attention would make the status of most of the art of the past depend on the current syllabus, which is neither the practice's view nor a credible one.
+\end{reply}
+
+\begin{objection}[Outsider art]\label{o:outsider}
+The account implies that Darger's illustrations were not art while he made them and kept them in his room, and that they became art only when his landlord found them. But the illustrations did not change. What changed was our knowledge of them. The account mistakes discovery for creation.
+\end{objection}
+
+\begin{reply}
+The objection assumes that art status is an intrinsic property of an object, or a property fixed by its maker's activity, which can be discovered but not acquired. That is the assumption Danto's argument refutes: indiscernible objects can differ in art status, so art status is not intrinsic, and the readymades show that it is not fixed by the maker's activity. Once that is granted, there is no reason to think that an object cannot acquire the status when it enters a practice, and much reason to think it can.
+
+What is true in the objection is that the illustrations had, while Darger kept them, all the properties for which they are now admired, and that Darger was engaged, in making them, in an activity of the kind the artworld takes up. The account accepts both points. It distinguishes the object's artistic properties, which it had all along, from its status as a work, which depended on its entry into the practice; and it allows that the practice, in taking up such objects, is responding to properties they already had. The language of discovery is appropriate to the properties, and the language of acquisition to the status. Levinson's account, which counts the illustrations as art from the moment they were made, does so at the price of making art status a matter of a single person's intention (Section~\ref{s:problem}); the encoding of DG1 records that we do not know what Darger's intentions were, and on Levinson's account the status of the illustrations would depend on that unknown fact. On ours it depends on a matter of record.
+
+The same reply covers the more ordinary case of the unshown work in an artist's studio. The practice routinely treats such works as works when they belong to an oeuvre it has taken up: they are catalogued, attributed and discussed as parts of the artist's work. That is uptake, and it is often uptake that occurs before the work is exhibited. The account says that a studio work by an artist whose work is engaged by the practice is, in the typical case, taken up as part of that work; and that a work by an artist whose work is engaged by no one is a candidate. Both verdicts seem to us correct.
+\end{reply}
+
+\begin{objection}[Art before artworlds]\label{o:before}
+The account implies that the paintings of Lascaux, made some seventeen thousand years before anything that could be called an artworld, were not art when they were made. But they are among the greatest works of art there are. An account that cannot count them as art when they were made has mistaken a modern European institution for art itself.
+\end{objection}
+
+\begin{reply}
+The account does not deny that the paintings of Lascaux are art. It says that they are art relative to the artworld that has taken them up, and that the question whether they were art at the time of making, relative to the practice of the people who made them, has the answer \enquote{not in the sense at issue} (Proposition~\ref{p:before}). The historians who have argued that the modern concept of art is an eighteenth-century invention \citep{Kristeller1951,Shiner2001} and that devotional images were made and venerated \enquote{before the era of art} \citep{Belting1994} have made the same point from the other side. The paintings were made within a practice whose purposes we do not know, and we have no reason to think that it was a practice of presenting objects as candidates for appreciation and criticism. If it was, the account counts them as art relative to that practice, and \ref{p:index} allows for it.
+
+The objection's real force lies in the thought that greatness cannot wait on recognition. But greatness is a matter of value, and the account concerns status (Remark~\ref{r:status}). The paintings had at the time of making the properties for which we now admire them; what they lacked was a place in the practice in which they are now admired, and in which the question of their greatness is posed. The verdict W (no artworld at the index) for LX1, RB1 and NK0 is a verdict about status relative to the practice of their makers and users, not a judgment about the paintings, the icon or the figure.
+\end{reply}
+
+\begin{objection}[Machine outputs]\label{o:machine}
+If art status depends only on presentation and uptake, then anything can be art, including the output of a machine that intends nothing. That shows the account is too permissive: art requires an artist, and an artist requires a mind.
+\end{objection}
+
+\begin{reply}
+The account does imply that machine outputs can be art (Proposition~\ref{p:machine}), and AES-15-a defends the implication. It does not imply that they are; on the present record, the responses of the practice to the machine outputs in the catalogue are divided, and their status is contested. The objection's premise that art requires an artist with a mind is not supported by the practice, which has taken up found objects, driftwood, readymades and chance procedures, none of which require that the object's producer had artistic intentions (DW1, BR1, BD1). What the practice does require, and what the account requires, is a presenter who offers the object as a candidate, and that requirement is met by whoever offers the machine output, as \citet{MagUidhir2013}'s requirement of an art-attempt would be met by the presenter rather than by the machine. Whether the machine is in some sense the artist is a question about authorship, connected with the question of agency treated in ACT-16; it is distinct from the question of status.
+
+The charge of permissiveness also mistakes the account's structure. Anything \emph{can} be art on the account, in the sense that there is no kind of object that is excluded in advance. But not everything \emph{is}: of the \stnepisodes{} episodes in the catalogue, \stvK{} are candidates that have been presented and not taken up, and \stvN{} are objects that have not been presented. An account that excluded kinds of objects in advance would have been refuted by the history of twentieth-century art; an account that admitted every offered object would have no content. The account does neither.
+\end{reply}
+
+\begin{objection}[Elitism]\label{o:elite}
+The account makes art status depend on the attention of critics, curators and historians, a small and unrepresentative group. It thereby ratifies their prejudices: what they have neglected, including much of the art of women, of colonized peoples and of the poor, is on the account not art.
+\end{objection}
+
+\begin{reply}
+The account makes art status depend on the uptake of the practice, and the practice is wider than its most prominent institutions. It includes artists, whose responses to one another's work are among its most important acts of uptake, and it includes the many local, popular and specialist venues in which works are offered and discussed. Where the practice has been exclusive, the account records the exclusion: the works it neglected were candidates, not works, at the stages at which they were neglected. That is not a ratification of the neglect. It is a description of it, and it identifies exactly what the neglect consisted in: a failure to engage, which the practice can correct and has repeatedly corrected (the history of the reception of outsider art in the catalogue is a history of such corrections, episodes WF1, PZ2, CH1, SE1). An account that counted the neglected works as art from the start, on the ground of their properties or their makers' intentions, would obscure the injustice it is meant to remedy, since it would make the neglect invisible at the level of status.
+
+The account also implies that the practice's judgments of value are not authoritative (Remark~\ref{r:status}). A critic who holds that the practice has overrated a celebrated work or underrated a neglected one denies nothing the account asserts.
+\end{reply}
+
+\begin{objection}[Redundancy of presentation]\label{o:redundant}
+If critical uptake is what makes the difference, the presentation condition is idle. Whatever the practice engages as a candidate is art, and whether someone first offered it is beside the point. A critic who wrote about Darger's illustrations on finding them in his room would have taken them up without anyone's presenting them.
+\end{objection}
+
+\begin{reply}
+The conditions are jointly required, but they are not independent. A critic who writes about an object for the artworld's public, interpreting and assessing it as a candidate, thereby offers it to that public as a candidate: her act is both a presentation and the beginning of uptake. The objection's example is therefore not a case of uptake without presentation; it is a case in which presentation and uptake begin with the same act, as they do whenever a critic, a historian or an archaeologist introduces an object to the practice (LX2, AL1, WF1). What the presentation condition excludes is engagement that is not offered to the practice's public at all: a private judgment, a note in a diary, a psychiatrist's clinical assessment (PZ1). Such engagement is not uptake by the practice, and it cannot be until it is presented.
+
+The presentation condition also does work that uptake cannot do alone. It fixes the stage at which an object becomes a candidate, and so distinguishes the candidates, which the practice may or may not take up, from the objects that have not been offered at all (Lemma~\ref{l:necessary}). And it fixes what is offered: the uptake of a replica, a performance or a document is uptake of the work it is offered as, and that is determined in part by the terms of its presentation (Proposition~\ref{p:object}). An account with uptake alone would lose both distinctions. Since Definition~\ref{d:uptake} defines uptake only for presented objects, uptake entails presentation; but presentation does not entail uptake, which is why the second condition is needed and the first is not idle.
+\end{reply}
+
+\section{Consequences for neighbouring questions}\label{s:consequences}
+
+Because the account concerns status and not value, it bears on the other questions of aesthetics mainly by separating them from the question what art is. We record its consequences for the families of this discipline that depend on it.
+
+\emph{Photography.} AES-14-a argues that photography is art, despite its causal transparency, through choices of framing and selection. On the present account the question whether photography is an art form is settled by the fact that photographs have long been presented and taken up as works, and the question AES-14-a addresses is whether that uptake is warranted, which is a question about the artistic agency photographs can embody. The two results are complementary: the account explains why the photographs of Maier became works when they were presented and taken up (VV2), and AES-14-a explains why the practice is right to engage them as it does.
+
+\emph{Forgery.} AES-04-a argues that a perfect forgery is aesthetically identical to its original but lacks its artistic value. The present account adds that a forgery is a work if it is presented and taken up, as the van Meegerens and the Knoedler forgeries were (VG1, VG2, KN1), and that its exposure changes its attribution, reputation and value without changing its status (Proposition~\ref{p:persistence}). The account thus agrees with AES-04-a that the difference between the forgery and the original is not a difference in whether either is art.
+
+\emph{Machines.} AES-15-a argues that machine outputs can be art if they are taken up by an artworld, and that whether they are so taken up remains open. Proposition~\ref{p:machine} derives this conclusion from the general account, and Proposition~\ref{p:graded} explains why the status of the machine outputs in the catalogue is contested rather than settled either way.
+
+\emph{Intention and meaning.} AES-09-a argues that a maker's intentions bear on a work's meaning only when they are successful. On the present account, the maker's intentions are not what make an object a work, since the presenter need not be the maker and no single agent's decision suffices; but once an object is a work, the question what it means is a question for interpretation, which is one of the activities of uptake. The two results fit: intentions enter the account of meaning, through the interpretations that constitute uptake, and not the account of status.
+
+\emph{Nature, architecture and progress.} AES-11-a argues that natural beauty is not representational and that its appreciation requires scientific rather than art-historical knowledge. The account implies that a natural object is not art unless it is presented and taken up, as the driftwood of DW1 is, and that the appreciation of natural beauty is not, in general, a form of critical uptake. AES-17-a argues that architecture is an art whose public character imposes stricter standards; the account explains its status as an art by the long practice of architectural criticism, and leaves the standards to that practice. AES-16-a argues that there is progress in artistic means but not in artistic value; since the account says nothing about value, it is compatible with that conclusion, and since status, once acquired, persists (Proposition~\ref{p:persistence}), the account implies that, relative to a continuing artworld, the class of works only grows.
+
+\section{What the result does not establish}\label{s:notestablish}
+
+The account is an account of status. It does not establish what makes a work good, important or worth attention, and it does not establish that the practice's uptake of any work was warranted: a critic who holds that \emph{Fountain} was a joke that should not have been taken seriously accepts that it is art and holds that it is bad art, or that the practice erred in attending to it (AES-01-c). It does not establish that the encodings of the catalogue are correct. Each is a judgment about the record, and some, especially those marked as our encoding, can reasonably be disputed; the account's verdict on an episode is only as good as the encoding of its presentation and uptake. It does not fix the date at which any object acquired its status more precisely than the record of its uptake allows. It does not settle whether any machine output is art, which depends on how the practice settles (AES-15-a). It does not establish that there is only one artworld, or that the modern artworld is the only practice relative to which art status can be assessed; \ref{p:index} allows for others. And it does not establish that the conditions are sharp. Divided responses yield contested verdicts, and the boundary between curiosity and critical engagement is itself a matter on which the practice may divide.
+
+\section{Formalization}\label{s:formal}
+
+The logical skeleton of Section~\ref{s:argument} is formalized in \nolinkurl{Philosophy/AES/AES_01.lean}. Episodes and agents are types; presentation (Definition~\ref{d:presented}), critical uptake (Definition~\ref{d:uptake}), adverse and favourable assessment (Definition~\ref{d:modes}), market uptake (Definition~\ref{d:market}), an agent's decision that an episode is art, and art status are predicates. \ref{p:inst}, the clause of Definition~\ref{d:uptake} on which adverse assessment of a presented object is uptake, and Assumptions~\ref{a:ignored}, \ref{a:command} and~\ref{a:market} are axioms. Lemma~\ref{l:necessary}, Theorems~\ref{t:insufficient}, \ref{t:adverse} and~\ref{t:single}, Corollary~\ref{c:merit} and Proposition~\ref{p:market} are theorems, and their conjunction is the formal core of Theorem~\ref{t:criterion}:
+
+\begin{lstlisting}
+theorem criterion :
+    (∀ e, Art e → Presented e) ∧
+    (¬ ∀ e, Presented e → Art e) ∧
+    (∀ e, Presented e → AssessedAdversely e → Art e) ∧
+    (¬ (∀ e, Presented e → MarketUptake e → Art e) ∧
+      ¬ (∀ e, Art e → MarketUptake e)) ∧
+    (∀ a : Agent, ¬ ∀ e, Decides a e → Art e)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.AES_01.criterion' depends on axioms:
+  [Philosophy.AES_01.Agent, Philosophy.AES_01.Art,
+   Philosophy.AES_01.AssessedAdversely, Philosophy.AES_01.Decides,
+   Philosophy.AES_01.Episode, Philosophy.AES_01.MarketUptake,
+   Philosophy.AES_01.Presented, Philosophy.AES_01.TakenUp,
+   Philosophy.AES_01.adverse_is_uptake,
+   Philosophy.AES_01.institutional,
+   Philosophy.AES_01.market_apart, Philosophy.AES_01.no_command,
+   Philosophy.AES_01.offered_and_ignored]
+\end{lstlisting}
+
+The first eight axioms are the primitive types and predicates. \texttt{institutional} is \ref{p:inst}; the axiom \texttt{adverse\_is\_uptake} is the adverse-assessment clause of Definition~\ref{d:uptake}; and the axioms \texttt{offered\_and\_ignored}, \texttt{no\_command} and \texttt{market\_apart} are Assumptions~\ref{a:ignored}, \ref{a:command} and~\ref{a:market}. Theorem~\ref{t:single} alone (\texttt{no\_single\_agent}) depends only on \texttt{institutional} and \texttt{no\_command} among the non-primitive axioms. Corollary~\ref{c:merit} is \texttt{status\_without\_merit}.
+
+The module also contains a second part, which verifies the bounded checks of the appendices in Lean's core logic without further axioms. It defines the encoded states of Appendix~\ref{app:census} and the verdict function of the generator, and proves by exhaustive case analysis that on every state presentation without engagement never yields art, adverse uptake within an artworld yields art and the same verdict as favourable uptake, the verdict is independent of market uptake and single declarations, and no unpresented state is art (Proposition~\ref{p:census}); and that every presented state within an artworld has an uptake value under which it is art (Proposition~\ref{p:open}). It defines the histories of Appendix~\ref{app:histories} and proves, for all $8^3 = 512$ histories of length three, the checks of Proposition~\ref{p:histories} (\texttt{histories\_three}, which depends on no axioms). The formalization does not establish \ref{p:inst} or the assumptions, which are defended in Sections~\ref{s:framework}, \ref{s:argument} and~\ref{s:objections}, and it does not establish that any episode is correctly encoded.
+
+\section{Conclusion}\label{s:conclusion}
+
+Art is what is presented as art within an artworld, subject to the artworld's critical uptake. The two conditions are jointly required: presentation alone does not suffice, since an object offered and ignored or refused is not yet art; and uptake is critical, not commercial, and includes adverse assessment, so that bad art is art and status comes apart from merit. Because uptake is a pattern of engagement by many participants, no single agent's decision confers status, and the account escapes Wollheim's dilemma: status is neither arbitrary nor reducible to a definition that would make the practice redundant. On this account \emph{Fountain} is art, its status derived from the uptake that followed the refusal of 1917 and not from Duchamp's declaration, and its replicas are art because the practice takes them up as the work. The account concerns status, not value.
+
+\appendix
+
+\section{Catalogue of episodes}\label{app:catalogue}
+
+\paragraph{What is catalogued.} Each entry is an episode: an object at a stage of its history, considered in relation to the artworld, if any, in which it stands at that stage. The catalogue contains \stnepisodes{} episodes in thirteen groups: Duchamp's readymades (\stgrpR), indiscernibles and thought experiments (\stgrpI), performance, music and Fluxus (\stgrpP), minimal, conceptual and appropriation works (\stgrpM), adverse reception (\stgrpA), outsider and posthumous work (\stgrpO), objects made before or outside artworlds (\stgrpH), non-human makers and found objects (\stgrpN), forgery (\stgrpF), the contemporary market (\stgrpC), objects mistaken, attacked or destroyed (\stgrpD), machine outputs (\stgrpX), and schematic cases (\stgrpS). Of the episodes, \stnreal{} concern documented objects and events and \stnhyp{} are thought experiments from the literature or schematic cases, marked as such. Thought experiments and some schematic cases appear in the group to whose discussion they belong; the remaining schematic cases are collected in the last group.
+
+\paragraph{Facts.} The facts recorded for each documented episode are restricted to matters of record that are not in dispute: dates, places, the names of makers, presenters and venues, and the main events of the object's reception. They are stated in our own words. Where an entry depends on a scholarly source, the source is cited. We have omitted details (exact prices, attendance, the full list of exhibitions) that are not needed for the encoding.
+
+\paragraph{Encoding.} Each entry gives a five-character code and its expansion. The characters are: whether an artworld exists in relation to which the object stands at the stage (\texttt{+} or \texttt{-}); presentation (\texttt{n} none, \texttt{m} by the maker, \texttt{o} by another, Definition~\ref{d:presented}); the response of the critical practice (\texttt{0} none, \texttt{c} curiosity, \texttt{r} refusal, \texttt{a} adverse, \texttt{f} favourable, \texttt{m} mixed, \texttt{v} divided, Definition~\ref{d:modes}); market uptake (\texttt{0} none, \texttt{s} sold, \texttt{h} high prices, Definition~\ref{d:market}); and whether a single agent declared the object art by signature, title, certificate or statement (\texttt{+} or \texttt{-}). The ground of the uptake encoding is stated in each entry; where it is a matter of interpretation rather than record, it is marked \enquote{our encoding}.
+
+\paragraph{Rival inputs.} For the rivals, the entry gives: whether Beardsley's condition is met (an arrangement intended to be capable of affording an experience with marked aesthetic character, or belonging to a type typically so intended; \texttt{Y}, \texttt{N} or \texttt{?}); whether Levinson's condition is met (a person with proprietary right non-passingly intends the object for regard as a work; \texttt{ur} for objects counted by the base clause); the ten criteria of Gaut's cluster account, in his order, as a string of ten binary digits with their count; for Stecker, whether the object was made with the intention of fulfilling a function art has at the time, and whether it achieves excellence in such a function (central form is read from Gaut's ninth criterion); and whether an identifying narrative in Carroll's sense, connecting the object to acknowledged works, is available.
+
+\paragraph{Verdicts.} The verdict of the account (IU) is computed from the encoding by \ref{p:inst} and \ref{p:index}: \textbf{W} if there is no artworld at the stage; \textbf{N} if the object is not presented; \textbf{K} (candidate) if it is presented and receives no engagement, curiosity only, or refusal; \textbf{A} (art) if it receives adverse, favourable or mixed uptake; \textbf{C} (contested) if the practice is divided. The rivals' verdicts are \textbf{A}, \textbf{N} or \textbf{?}. A rival diverges on an episode when one of its verdict and IU's is positive (A) and the other negative (N, K or W).
+
+\paragraph{Summary.} IU classifies \stvA{} episodes as art, \stvC{} as contested, \stvK{} as candidates, \stvN{} as not presented and \stvW{} as standing in no relation to an artworld. The generator checks Lemma~\ref{l:necessary}, Theorems~\ref{t:insufficient}, \ref{t:adverse} and~\ref{t:single}, Corollary~\ref{c:merit} and Proposition~\ref{p:market} on every episode, and the claim of Section~\ref{s:rivals} that Dickie's 1974 definition diverges from IU exactly on the candidates. Every check holds; the program would halt otherwise. The episodes discussed in the text are FT1--FT3 and FTR (Section~\ref{s:cases}), BB1 and BB2, BT1 and BT2, DG1 and DG2, LX1 and LX2, MZ4, AI1, YW1 and SD2.
+
+{\small
+\input{gen/catalogue.tex}
+}
+
+\section{Systematic variants}\label{app:variants}
+
+\paragraph{What is computed.} For each episode, the generator applies each of the following operations that is applicable, changing one condition and leaving the rest of the encoding as it is: \texttt{p0}, presentation removed (and with it any uptake, which presupposes presentation), predicted verdict N by Lemma~\ref{l:necessary}; \texttt{p1}, an unpresented object presented and nothing else changed, predicted K by Theorem~\ref{t:insufficient}; \texttt{u0} and \texttt{ur}, uptake set to none or to refusal, predicted K by Theorem~\ref{t:insufficient}; \texttt{ua}, uptake set to adverse, predicted A by Theorem~\ref{t:adverse}; \texttt{uf}, uptake set to favourable, predicted A and equal to the verdict under \texttt{ua} by Corollary~\ref{c:merit}; \texttt{mk}, market uptake toggled between none and high, predicted unchanged by Proposition~\ref{p:market}; and \texttt{dc}, the single declaration toggled, predicted unchanged by Theorem~\ref{t:single}. Operations on uptake apply only to presented objects, and \texttt{p1} only where an artworld exists. Each row gives the parent's code, the variant's code, the computed IU verdict, the predicted verdict, the verdict of Dickie's 1974 definition for comparison, and the result whose prediction is checked.
+
+\paragraph{Summary.} The generator produces \stnvariants{} variants: \stoppzero{} of type \texttt{p0}, \stoppone{} of \texttt{p1}, \stopuzero{} of \texttt{u0}, \stopur{} of \texttt{ur}, \stopua{} of \texttt{ua}, \stopuf{} of \texttt{uf}, \stopmk{} of \texttt{mk} and \stopdc{} of \texttt{dc}. Every computed verdict equals the predicted one. In particular, no variant in which an object is presented without engagement as a candidate is art, every variant with adverse uptake within an artworld is art, and no variant changes its verdict when only market uptake or a single declaration is changed. The column D74 shows where Dickie's definition would disagree: on every \texttt{p1}, \texttt{u0} and \texttt{ur} variant.
+
+\input{gen/variants.tex}
+
+\section{Census of encoded states}\label{app:census}
+
+\paragraph{What is enumerated.} An encoded state is a quintuple of values for the five fields of the encoding: artworld (2 values), presentation (3), response of the critical practice (7), market uptake (3) and single declaration (2), giving \stnstates{} states. A state is incoherent if it has presentation without an artworld, or engagement without presentation (Definition~\ref{d:uptake} defines uptake only for presented objects); there are \stnincoherent{} such states. The table lists the \stncoherent{} coherent states with the IU verdict and Dickie's. The enumeration is exhaustive over the encoding, and the checks are applied to all \stnstates{} states, coherent or not.
+
+\begin{proposition}\label{p:census}
+On every encoded state: (i) presentation without engagement as a candidate is not art; (ii) within an artworld, a presented object with adverse uptake is art, and has the same verdict as with favourable uptake; (iii) the verdict does not depend on market uptake or on a single declaration; (iv) no unpresented object is art.
+\end{proposition}
+
+\begin{proof}
+By exhaustive computation over the \stnstates{} states (generator, function \texttt{check\_state}); also proved in Lean by case analysis on all fields (Section~\ref{s:formal}).
+\end{proof}
+
+\paragraph{Summary.} Of the coherent states, \stcsA{} are art, \stcsC{} contested, \stcsK{} candidates, \stcsN{} not presented and \stcsW{} without an artworld. Dickie's 1974 verdict differs from IU's on \stcensusdiv{} coherent states: exactly the candidate states and the contested ones.
+
+\input{gen/census.tex}
+
+\section{Histories of artworld events}\label{app:histories}
+
+\paragraph{What is enumerated.} A history is a sequence of events affecting an object within an artworld, one event per stage. There are eight kinds of event: \texttt{0} (an event with no bearing on the conditions), \texttt{P} (presentation by a participant), \texttt{D} (a single agent's declaration), \texttt{R} (refusal by a venue), \texttt{S} (a sale), \texttt{a} (adverse engagement), \texttt{f} (favourable engagement) and \texttt{v} (divided engagement). The status at each stage is computed cumulatively, by \ref{p:inst} and \ref{p:persist}: an object is presented from its first presentation on; engagement counts as uptake only at or after presentation; status is N before presentation, A once there has been adverse or favourable engagement after presentation, C if there has been divided engagement but no other, and K otherwise. The table lists all \stnhistthree{} histories of length three with their trajectories of statuses. The generator also enumerates the \stnhistfour{} histories of length four and the \stnhistfive{} of length five and checks the same properties on each.
+
+\begin{proposition}\label{p:histories}
+On every history of length at most five: (H1) no stage is art unless there has been adverse or favourable engagement; (H2) adverse engagement at a stage after a presentation makes that stage and every later stage art; (H3) replacing sales and declarations by idle events leaves the trajectory unchanged; (H4) once a stage is art, every later stage is art; (H5) exchanging adverse and favourable engagement leaves the trajectory unchanged; (H6) replacing refusals by idle events leaves the trajectory unchanged.
+\end{proposition}
+
+\begin{proof}
+By exhaustive computation over the $8^3 + 8^4 + 8^5$ histories, with the generator's function \texttt{check\_history}. For length three, properties (H1) and (H3) to (H6) are also proved in Lean, as the theorem \texttt{histories\_three} of the module.
+\end{proof}
+
+\paragraph{Summary.} Of the \stnhistthree{} histories of length three, \sththreeA{} end in art, \sththreeC{} in a contested status, \sththreeK{} with a candidate and \sththreeN{} with no presentation. For length four the counts are \sthfourA, \sthfourC, \sthfourK{} and \sthfourN; for length five, \sthfiveA, \sthfiveC, \sthfiveK{} and \sthfiveN. Property (H6) records that a refusal by one venue is not a refusal by the practice: it changes nothing that the practice's subsequent engagement does not, which is the structure of the histories of \emph{Fountain} and of Manet's \emph{D\'ejeuner} in Appendix~\ref{app:timelines}. Histories such as \texttt{PaR} (presented, panned, then refused) and \texttt{aPR} (engaged before presentation, which does not count, then presented and refused) show the asymmetry between engagement after and before presentation.
+
+\input{gen/histories.tex}
+
+\section{Documented histories}\label{app:timelines}
+
+\paragraph{What is computed.} For \stntimelines{} cases with documented histories of presentation and reception, the events of the history are encoded in the vocabulary of Appendix~\ref{app:histories}, extended by \texttt{m} (engagement with assessments divided on merit, which counts as uptake) and \texttt{c} (engagement as curiosity, news or specimen only, which does not). The generator computes the trajectory of statuses and the stage at which the object first becomes art, checks that the final status agrees with the catalogue verdict of the last episode listed for the case, and checks that deleting sales, declarations, refusals and curiosity leaves the trajectory unchanged. Each history begins at the first stage at which the object stands in relation to an artworld; earlier stages are noted. The dates are those of the catalogue; where uptake is dated by its best-known document rather than by its first, this is noted.
+
+\paragraph{Summary.} Every documented history satisfies the checks. The histories of \emph{Fountain}, Manet's \emph{D\'ejeuner}, Altamira and \emph{Bird in Space} contain a refusal that the subsequent engagement overrides; those of Whistler's \emph{Nocturne}, the van Meegeren and \emph{Equivalent VIII} contain adverse engagement that confirms the status rather than removing it; those of \emph{Comedian}, \emph{Girl with Balloon} and \emph{Edmond de Belamy} contain sales that change nothing; and those of Manzoni's signed person and Umanets's inscription contain declarations that change nothing.
+
+\input{gen/timelines.tex}
+
+\section{Rival verdicts and cluster thresholds}\label{app:rivals}
+
+\subsection{Verdicts of the rivals}\label{tab:rivals}
+
+The table gives, for each episode, the IU verdict and the verdicts of the six rivals described in Section~\ref{s:rivals}; a rival verdict is set in bold where it diverges from IU, and the last column counts divergences.
+
+\input{gen/rivals.tex}
+
+\subsection{Cluster verdicts at thresholds from three to eight}\label{tab:thresholds}
+
+The table gives Gaut's ten criteria for each episode (g1, positive aesthetic properties; g2, expressive of emotion; g3, intellectually challenging; g4, formally complex and coherent; g5, capacity to convey complex meanings; g6, individual point of view; g7, originality; g8, high degree of skill; g9, established art form; g10, intention to make a work of art), their count $n$, and the cluster verdict at thresholds $\theta$ from three to eight, where the verdict is A if $n \geq \theta$, N if $n \leq \theta - 3$, and ? otherwise.
+
+\input{gen/thresholds.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Abell(2012)]{Abell2012} Abell, C. (2012). Art: What it is and why it matters. \emph{Philosophy and Phenomenological Research}, 85(3), 671--691.
+\bibitem[Bataille(1955)]{Bataille1955} Bataille, G. (1955). \emph{Lascaux, ou la naissance de l'art}. Skira.
+\bibitem[Beardsley(1983)]{Beardsley1983} Beardsley, M.~C. (1983). An aesthetic definition of art. In H.~Curtler (Ed.), \emph{What Is Art?} Haven Publications.
+\bibitem[Becker(1982)]{Becker1982} Becker, H.~S. (1982). \emph{Art Worlds}. University of California Press.
+\bibitem[Bell(1914)]{Bell1914} Bell, C. (1914). \emph{Art}. Chatto and Windus.
+\bibitem[Belting(1994)]{Belting1994} Belting, H. (1994). \emph{Likeness and Presence: A History of the Image before the Era of Art}. Trans. E.~Jephcott. University of Chicago Press.
+\bibitem[Binkley(1977)]{Binkley1977} Binkley, T. (1977). Piece: Contra aesthetics. \emph{The Journal of Aesthetics and Art Criticism}, 35(3), 265--277.
+\bibitem[Boden(2010)]{Boden2010} Boden, M.~A. (2010). \emph{Creativity and Art: Three Roads to Surprise}. Oxford University Press.
+\bibitem[Bredius(1937)]{Bredius1937} Bredius, A. (1937). A new Vermeer. \emph{The Burlington Magazine}, 71, 210--211.
+\bibitem[Cage(1961)]{Cage1961} Cage, J. (1961). \emph{Silence: Lectures and Writings}. Wesleyan University Press.
+\bibitem[Carroll(1993)]{Carroll1993} Carroll, N. (1993). Historical narratives and the philosophy of art. \emph{The Journal of Aesthetics and Art Criticism}, 51(3), 313--326.
+\bibitem[Carroll(1999)]{Carroll1999} Carroll, N. (1999). \emph{Philosophy of Art: A Contemporary Introduction}. Routledge.
+\bibitem[Cartailhac(1902)]{Cartailhac1902} Cartailhac, \'E. (1902). Les cavernes orn\'ees de dessins. La grotte d'Altamira, Espagne. \enquote{Mea culpa} d'un sceptique. \emph{L'Anthropologie}, 13, 348--354.
+\bibitem[Cohen(1973)]{Cohen1973} Cohen, T. (1973). The possibility of art: Remarks on a proposal by Dickie. \emph{The Philosophical Review}, 82(1), 69--82.
+\bibitem[Collingwood(1938)]{Collingwood1938} Collingwood, R.~G. (1938). \emph{The Principles of Art}. Clarendon Press.
+\bibitem[Danto(1964)]{Danto1964} Danto, A.~C. (1964). The artworld. \emph{The Journal of Philosophy}, 61(19), 571--584.
+\bibitem[Danto(1981)]{Danto1981} Danto, A.~C. (1981). \emph{The Transfiguration of the Commonplace: A Philosophy of Art}. Harvard University Press.
+\bibitem[Davies(1991)]{Davies1991} Davies, S. (1991). \emph{Definitions of Art}. Cornell University Press.
+\bibitem[de Duve(1996)]{deDuve1996} de Duve, T. (1996). \emph{Kant after Duchamp}. MIT Press.
+\bibitem[Diffey(1969)]{Diffey1969} Diffey, T.~J. (1969). The republic of art. \emph{The British Journal of Aesthetics}, 9(2), 145--156.
+\bibitem[Dickie(1969)]{Dickie1969} Dickie, G. (1969). Defining art. \emph{American Philosophical Quarterly}, 6(3), 253--256.
+\bibitem[Dickie(1974)]{Dickie1974} Dickie, G. (1974). \emph{Art and the Aesthetic: An Institutional Analysis}. Cornell University Press.
+\bibitem[Dickie(1984)]{Dickie1984} Dickie, G. (1984). \emph{The Art Circle: A Theory of Art}. Haven Publications.
+\bibitem[Dutton(2006)]{Dutton2006} Dutton, D. (2006). A naturalist definition of art. \emph{The Journal of Aesthetics and Art Criticism}, 64(3), 367--377.
+\bibitem[Gaut(2000)]{Gaut2000} Gaut, B. (2000). \enquote{Art} as a cluster concept. In N.~Carroll (Ed.), \emph{Theories of Art Today}. University of Wisconsin Press.
+\bibitem[Gaut(2005)]{Gaut2005} Gaut, B. (2005). The cluster account of art defended. \emph{The British Journal of Aesthetics}, 45(3), 273--288.
+\bibitem[Hertzmann(2018)]{Hertzmann2018} Hertzmann, A. (2018). Can computers create art? \emph{Arts}, 7(2), 18.
+\bibitem[Kennick(1958)]{Kennick1958} Kennick, W.~E. (1958). Does traditional aesthetics rest on a mistake? \emph{Mind}, 67(267), 317--334.
+\bibitem[Kristeller(1951)]{Kristeller1951} Kristeller, P.~O. (1951). The modern system of the arts: A study in the history of aesthetics (I). \emph{Journal of the History of Ideas}, 12(4), 496--527.
+\bibitem[Levinson(1979)]{Levinson1979} Levinson, J. (1979). Defining art historically. \emph{The British Journal of Aesthetics}, 19(3), 232--250.
+\bibitem[Levinson(1989)]{Levinson1989} Levinson, J. (1989). Refining art historically. \emph{The Journal of Aesthetics and Art Criticism}, 47(1), 21--33.
+\bibitem[Lopes(2014)]{Lopes2014} Lopes, D.~M. (2014). \emph{Beyond Art}. Oxford University Press.
+\bibitem[Mag Uidhir(2013)]{MagUidhir2013} Mag Uidhir, C. (2013). \emph{Art and Art-Attempts}. Oxford University Press.
+\bibitem[Mandelbaum(1965)]{Mandelbaum1965} Mandelbaum, M. (1965). Family resemblances and generalization concerning the arts. \emph{American Philosophical Quarterly}, 2(3), 219--228.
+\bibitem[McEvilley(1984)]{McEvilley1984} McEvilley, T. (1984). Doctor lawyer Indian chief: \enquote{Primitivism} in 20th century art at the Museum of Modern Art in 1984. \emph{Artforum}, 23(3).
+\bibitem[Morgenthaler(1921)]{Morgenthaler1921} Morgenthaler, W. (1921). \emph{Ein Geisteskranker als K\"unstler}. Ernst Bircher.
+\bibitem[Morris(1962)]{Morris1962} Morris, D. (1962). \emph{The Biology of Art}. Methuen.
+\bibitem[Prinzhorn(1922)]{Prinzhorn1922} Prinzhorn, H. (1922). \emph{Bildnerei der Geisteskranken}. Springer.
+\bibitem[Rubin(1984)]{Rubin1984} Rubin, W. (Ed.) (1984). \emph{\enquote{Primitivism} in 20th Century Art: Affinity of the Tribal and the Modern}. Museum of Modern Art.
+\bibitem[Shiner(2001)]{Shiner2001} Shiner, L. (2001). \emph{The Invention of Art: A Cultural History}. University of Chicago Press.
+\bibitem[Stecker(1997)]{Stecker1997} Stecker, R. (1997). \emph{Artworks: Definition, Meaning, Value}. Pennsylvania State University Press.
+\bibitem[Weitz(1956)]{Weitz1956} Weitz, M. (1956). The role of theory in aesthetics. \emph{The Journal of Aesthetics and Art Criticism}, 15(1), 27--35.
+\bibitem[Whistler(1890)]{Whistler1890} Whistler, J.~M. (1890). \emph{The Gentle Art of Making Enemies}. Heinemann.
+\bibitem[Wittgenstein(1953)]{Wittgenstein1953} Wittgenstein, L. (1953). \emph{Philosophical Investigations}. Trans. G.~E.~M. Anscombe. Blackwell.
+\bibitem[Wollheim(1980)]{Wollheim1980} Wollheim, R. (1980). The institutional theory of art. In \emph{Art and Its Objects}, 2nd edition. Cambridge University Press.
+\bibitem[Zangwill(2007)]{Zangwill2007} Zangwill, N. (2007). \emph{Aesthetic Creation}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

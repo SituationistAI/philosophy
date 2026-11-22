@@ -1,0 +1,212 @@
+\documentclass{situationist-preprint}
+
+\title{Testimony Transmits Knowledge}
+\msid{EPI-08-a}
+\msfamily{EPI-08}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_08.lean}
+\mskeywords{testimony; transmission; generation; safety; testimonial chains; creationist teacher; persistent believer}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can testimony give knowledge? We argue that it can, and that it does so by transmission: a hearer who justifiably believes what a knowing speaker tells her thereby knows it, and testimony as such generates no knowledge that was not already present upstream. Working with the analysis of knowledge as safe, justified, true belief, we locate what testimony carries in the safety of the telling, and what it does not carry in justification, which on an internalist view of justification remains the hearer's own. Given four assumptions about how safety passes along chains of tellings, we prove a transmission theorem and a no-generation theorem. The second says that whenever a hearer knows by testimony, either some subject at or upstream of the speaker knows, or the hearer supplies, from roots of her own, a component of knowledge that no one upstream had: the safety of her belief, or a justification that an upstream safe believer lacked. The known counterexamples to the transmission view, Lackey's creationist teacher and persistent believer among them, fall under the first or the third disjunct. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Most of what anyone knows was learned from others. If testimony could not give knowledge, the loss would be nearly total: geography, history, one's own date of birth. The tradition has accordingly asked not whether testimony gives knowledge but how. \citet[X]{HumeEnquiry} held that our reliance on testimony is justified by experience of the conformity of reports to facts; \citet[VI.24]{Reid1764} that we are disposed by our constitution to trust what we are told, and are right to do so until we have reason not to. The contemporary debate between reductionism and anti-reductionism descends from this contrast \citep{Coady1992,Fricker1995}.
+
+A second question cuts across the first: does testimony \emph{transmit} knowledge from speaker to hearer, or can it \emph{generate} knowledge the speaker lacks? On the transmission view, defended in different forms by \citet{Burge1993}, \citet{Audi1997} and \citet{Faulkner2011}, testimonial knowledge is borrowed: a hearer can know that $p$ by testimony only if the speaker knows it, and she then does. \citet{Lackey1999,Lackey2008} argued against both halves. Against necessity, she gave cases in which the hearer knows what the speaker does not. In \emph{creationist teacher}, a biology teacher who does not believe in evolution teaches it competently and from the textbook, and her pupils come to know that modern humans descend from earlier hominids. In \emph{persistent believer}, a subject who has been told by her doctors, misleadingly, that her vision is failing continues to trust her eyes, which are in fact sound; she sees a badger and reports it, and her hearer, who knows nothing of the doctors, comes to know there was a badger, though the speaker's belief is defeated and is not knowledge. \citet{Graham2000,Graham2006} gave further cases and concluded that testimony can generate knowledge.
+
+We defend the transmission view, with a precise statement of what is transmitted and of what the counterexamples show. Testimony gives knowledge (Theorem~\ref{t:trans}); it does not generate it (Theorem~\ref{t:nogen}); and in the cases of Lackey and Graham, what the hearer knows and the speaker does not is due either to an upstream knower for whom the speaker is a relay or to the hearer's own contribution. The framework is that of EPI-01, on which knowledge is safe, justified, true belief, together with the thesis of EPI-06 that justification is internalist while knowledge is not.
+
+\section{Framework}
+
+We fix a proposition $p$ and consider agents who may believe it, tell it, and take it up from one another.
+
+\begin{definition}[Knowledge]\label{d:know}
+An agent knows $p$ if she believes $p$, is justified in believing it, her belief is \emph{safe}, in the sense that she would not easily have believed $p$ on the same basis had $p$ been false, and $p$ is true.
+\end{definition}
+
+This is the analysis of EPI-01, where it is shown that the truth clause is redundant given safety; we keep it for perspicuity. Justification is, as EPI-06 argues, an internalist status: it depends on the agent's own mental states. Safety is externalist: it depends on the relation between the agent's basis and the world.
+
+\begin{definition}[Taking up; safe telling]\label{d:tell}
+An agent $h$ \emph{takes up} the telling of an agent $s$ that $p$ if $s$ tells $p$ and $h$ either believes $p$ on the basis of the telling or passes it on to others. The telling of $s$ is \emph{safe} if, in close situations in which $s$ tells $p$ in the same way, $p$ is true.
+\end{definition}
+
+The notion of taking up covers both the ordinary hearer and the relay: the teacher who reads out the textbook takes up the textbook's telling without believing it. The safety of a telling is a property of the telling, not of the teller's belief, and the creationist teacher shows that the two can come apart.
+
+\begin{definition}[Upstream]\label{d:up}
+An agent $u$ is \emph{upstream} of $w$ if $u$ is $w$, or $u$ is upstream of some $v$ whose telling $w$ takes up.
+\end{definition}
+
+\begin{definition}[Safe roots of one's own]\label{d:own}
+A hearer has \emph{safe roots of her own} for $p$ if her belief that $p$ rests, beyond the telling, on experiences or knowledge of hers that suffice to make it safe whatever the safety of the telling.
+\end{definition}
+
+A hearer who checks what she is told against a reliable instrument, or who knows that the speaker's circumstances leave him no way of saying $p$ unless $p$, has safe roots of her own in this sense. The ordinary hearer, who merely trusts, does not.
+
+We say that a hearer's testimonial knowledge is \emph{transmitted} if some agent upstream of the speaker knows $p$, and that it is \emph{generated by the hearer} if it is not transmitted and the hearer supplies, from her own mental life, a component of knowledge that is missing upstream. Testimony \emph{generates} knowledge if a hearer knows by testimony and her knowledge is neither transmitted nor generated by her. The thesis to be proved is that testimony never generates knowledge.
+
+\begin{assumption}[Inheritance]\label{a:inherit}
+If $h$ takes up the telling of $s$ and her belief is safe, then the telling of $s$ is safe or $h$ has safe roots of her own.
+\end{assumption}
+
+\begin{assumption}[Sources of safe tellings]\label{a:source}
+If the telling of $s$ is safe, then either $s$ believes $p$ and her belief is safe, or $s$ takes up the safe telling of someone else.
+\end{assumption}
+
+\begin{assumption}[Uptake and sincerity]\label{a:uptake}
+If $h$ takes up and believes a safe telling, her belief is safe. If $s$ tells $p$ sincerely on the basis of a safe belief, her telling is safe.
+\end{assumption}
+
+\begin{assumption}[Finite chains]\label{a:finite}
+Every chain of tellings has a first link.
+\end{assumption}
+
+Assumption~\ref{a:inherit} is the formal counterpart of the observation in EPI-01 that a hearer cannot acquire a safe belief from an unsafe source: the close situations in which the telling is false are close situations in which she believes on the same basis and is wrong, unless something of her own excludes them. Assumption~\ref{a:source} says that the safety of a telling is not created by the act of telling: it derives from a safe belief, either the teller's or one further up the chain. A telling that expresses a guess, or that is invented for the occasion, can be true, but it is not safe. Assumption~\ref{a:uptake} is the uncontroversial converse: a hearer whose basis is a safe telling holds a belief that would not easily have been false. Assumption~\ref{a:finite} excludes chains of relays with no origin.
+
+No assumption links the justification of the hearer to that of the speaker. On the internalist view of EPI-06, a hearer's justification for believing what she is told consists in how things seem to her: that the speaker said $p$, that he is competent and sincere so far as she can tell, that nothing she knows speaks against $p$ (EPI-19). A hearer deceived by a liar whom she has every reason to trust is as justified as one who is told the truth. In the language of EPI-05, the hearer's own part of the support tree is rooted in her experiences of the telling and its circumstances; what the testimony adds is a connection, through the speaker's belief, to roots in the experiences of others, and this connection bears on whether her justified belief is safe, not on whether it is justified.
+
+\section{The theorems}
+
+\begin{lemma}[Grounding]\label{l:ground}
+If the telling of $s$ is safe, some agent upstream of $s$ believes $p$ and her belief is safe.
+\end{lemma}
+
+\begin{proof}
+By induction on the position of $s$ in the chain, which is finite by Assumption~\ref{a:finite}. By Assumption~\ref{a:source}, either $s$ has a safe belief that $p$, and $s$ is upstream of herself, or $s$ takes up the safe telling of some $u$ earlier in the chain. In the second case, by the induction hypothesis some agent upstream of $u$ has a safe belief that $p$, and she is upstream of $s$.
+\end{proof}
+
+\begin{theorem}[Transmission]\label{t:trans}
+If $s$ knows $p$ and tells it, and $h$ believes $p$ on the basis of the telling and is justified in so believing, then $h$ knows $p$.
+\end{theorem}
+
+\begin{proof}
+Since $s$ knows $p$, her belief is safe, and by the second clause of Assumption~\ref{a:uptake} her sincere telling is safe. By the first clause, $h$'s belief is safe. It is justified by hypothesis, and $p$ is true since $s$ knows it. By Definition~\ref{d:know}, $h$ knows $p$.
+\end{proof}
+
+The hypothesis that $h$ is justified is not idle. A hearer who has strong reason to distrust the speaker, and believes him anyway, is not justified, and does not know, however reliable the speaker in fact is. This is the hearer's share of every testimonial transaction, and it is the share that internalism assigns to her alone.
+
+\begin{theorem}[No generation]\label{t:nogen}
+If $h$ knows $p$ by taking it up from $s$, then at least one of the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item some agent upstream of $s$ knows $p$;
+\item $h$ has safe roots of her own for $p$;
+\item some agent upstream of $s$ has a safe belief that $p$ which is not justified, while $h$'s belief is justified.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $h$ knows $p$, her belief is safe, and by Assumption~\ref{a:inherit} either $h$ has safe roots of her own, which is (ii), or the telling of $s$ is safe. In the latter case, by Lemma~\ref{l:ground}, some agent $u$ upstream of $s$ has a safe belief that $p$. Either $u$ is justified or not. If she is, she has a justified safe belief in $p$, which is true since $h$ knows it, and so she knows $p$, which is (i). If she is not, then since $h$ knows $p$ her belief is justified, and we have (iii).
+\end{proof}
+
+In case (i) the hearer's knowledge is transmitted. In cases (ii) and (iii), if no one upstream knows, the hearer supplies what was missing: in (ii) the safety of her belief, from roots of her own; in (iii) the justification that the upstream safe believer lacked, from the hearer's own undefeated perspective. Either way the knowledge is generated by the hearer. The telling contributes in (iii) a safe connection to the facts, but no safe connection that did not already exist in someone's belief; and it contributes no justification at all. This is the precise sense in which testimony transmits but does not generate.
+
+\begin{corollary}[Pure testimony]\label{c:pure}
+If $h$ knows $p$ by taking it up from $s$, has no safe roots of her own, and every agent upstream of $s$ whose belief that $p$ is safe is justified in it, then some agent upstream of $s$ knows $p$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{t:nogen}: (ii) is excluded by the second hypothesis and (iii) by the third.
+\end{proof}
+
+\section{The counterexamples}
+
+\emph{Creationist teacher.} The teacher does not believe that humans descend from earlier hominids, and so does not know it. Her telling is nevertheless safe: she reads out, accurately and as a matter of professional duty, what the textbook says, and the textbook states what biologists know. In the terms of Definition~\ref{d:tell}, she takes up the textbook's telling and relays it. The pupils' knowledge falls under case (i) of Theorem~\ref{t:nogen}: there are knowers upstream of the teacher, and the pupils' knowledge is transmitted from them through a link that does not believe. The case refutes the thesis that the \emph{immediate} speaker must know; it does not touch the thesis that testimony transmits knowledge, which concerns the chain. Lackey is right that the teacher's reliability as a reporter, not her belief, is what matters at that link; she is wrong to conclude that the knowledge is created there, since the reliability of the report is borrowed from the knowledge of others (Assumption~\ref{a:source}). Relative to the immediate speaker, the pupils do contribute something of their own: the belief and the justification that the teacher withholds, which they form from the content of her lesson with their own resources. If the case is described at the level of that single link, then, the knowledge the teacher lacks is generated by the hearers; described at the level of the chain, it is transmitted. On neither description is it generated by the telling.
+
+\emph{Persistent believer.} The speaker's visual belief that there was a badger is safe: her eyes are sound and the light was good. It is not justified, since she has an undefeated defeater, her doctors' testimony that her vision cannot be trusted. Her hearer has no such defeater, and her trust in the speaker is justified on her own experience of the speaker and the circumstances. The case falls under (iii). The hearer knows what the speaker does not, and the component that makes the difference, justification, is the hearer's own. As EPI-05 puts it, the hearer's support tree has roots of its own, in her experiences of the speaker and of the circumstances, which the speaker's tree lacks. The knowledge is generated by the hearer, at the meeting point of a safety that she inherits and a justification that she alone supplies.
+
+\emph{Hearers with their own roots.} Graham's cases in which the hearer knows something about the speaker's situation that makes the report a reliable sign of the fact fall under (ii). A hearer who knows that the only source from which a careless speaker could have taken a report is reliable, or who has observed that a certain gauge-reader's reports of a certain kind never fail, believes on a basis that includes her own knowledge. Her belief would be safe whatever the safety of the particular telling. This is not testimony generating knowledge; it is the hearer using testimony as evidence, as Hume thought all testimonial knowledge does.
+
+There is no fourth kind of case. By Theorem~\ref{t:nogen}, any purported example of testimony generating knowledge must be one in which the hearer knows, no one upstream knows, the hearer has no safe roots of her own and every upstream safe believer is justified; Corollary~\ref{c:pure} shows that there is no such example given the assumptions.
+
+\section{Objections}
+
+\begin{objection}[Testimony without a believing source]
+Suppose a speaker who has no belief about $p$ makes a reliable assertion that $p$ for reasons of her own, as a teacher who invents a mnemonic that happens to encode a truth. Her telling is reliable, but nothing upstream is believed.
+\end{objection}
+
+\begin{reply}
+Reliability in a single case is not safety. If nothing in the speaker's situation connects her telling to the fact that $p$, close situations in which she tells $p$ in the same way include ones in which $p$ is false, and her telling is not safe; her hearers do not know. If something does connect it, the connection runs through someone's knowledge of the fact, hers or another's, or through a reliable instrument whose readings someone takes up. Assumption~\ref{a:source} treats instruments as tellers whose tellings are safe because their states covary with the facts; if one prefers not to call them believers, the assumption can be widened to say that the safety of a telling derives from a safe state, and the theorems go through unchanged.
+\end{reply}
+
+\begin{objection}[Internalism makes the hearer do everything]
+If justification is always the hearer's own, every testimonial knower contributes a component of knowledge, and every case is one of generation by the hearer. The distinction between transmission and generation collapses.
+\end{objection}
+
+\begin{reply}
+It does not collapse, because the definitions distinguish cases by what is missing upstream. In a case of transmission, an upstream subject has every component of knowledge; the hearer's justification is necessary for her to receive it, as eyes are necessary to see what is there to be seen, but it does not complete anything incomplete. In a case of generation by the hearer, no upstream subject knows, and the hearer's contribution completes a safe belief, or a safe telling, into knowledge. The persistent believer and the ordinary hearer of a knowing speaker differ in exactly this respect.
+\end{reply}
+
+\begin{objection}[Reductionism]
+On reductionism, every testimonial belief is justified by the hearer's inductive evidence about the reliability of testimony \citep{Fricker1995}. Then every testimonial knower has safe roots of her own, and all testimonial knowledge falls under case (ii).
+\end{objection}
+
+\begin{reply}
+The objection confuses justification with safety. A hearer's inductive evidence that speakers of a certain kind are generally reliable can justify her belief; it does not make the belief safe whatever the safety of the particular telling, since a general reliability is compatible with this speaker's lying on this occasion. Safe roots of one's own in the sense of Definition~\ref{d:own} are rare. Reductionism, if true, is a thesis about the hearer's justification, and so about what she brings to every case; it is consistent with Theorem~\ref{t:trans} and does not turn ordinary testimony into generation.
+\end{reply}
+
+\begin{objection}[Group testimony]
+A committee may assert a conclusion that none of its members believes, after a vote in which each member's partial evidence is pooled. If hearers know the committee's conclusion, the knowledge seems to originate in the telling.
+\end{objection}
+
+\begin{reply}
+Either the committee's procedure makes its assertion safe, in which case the safety derives from the safe states of its members on the parts of the evidence they assessed, combined by an inference that is itself a source of no new safety; or it does not, in which case its hearers do not know. On the first alternative the case is a chain with several origins, and Lemma~\ref{l:ground} extends to it by applying Assumption~\ref{a:source} to each premise of the combining inference. Whether a group can itself believe and know is a further question, which the theorem does not need to settle.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorems are conditional on Assumptions~\ref{a:inherit}--\ref{a:finite}. They do not settle the dispute between reductionists and anti-reductionists about what justifies the hearer, which on the present view concerns only the hearer's share. They do not say when a telling is safe, which is an empirical matter about speakers, institutions and channels. They concern knowledge of a single proposition and do not address the transmission of understanding or of the appreciation of a work of art; AES-03 holds that testimony can give knowledge of aesthetic facts but not the appreciation that requires one's own response, which is consistent with the present result.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_08.lean} proves Lemma~\ref{l:ground}, Theorems~\ref{t:trans} and~\ref{t:nogen} and Corollary~\ref{c:pure}. Agents, belief, justification, safety, taking up, safe telling and own roots are primitives; upstream is defined inductively as in Definition~\ref{d:up}; finite chains are represented by a depth function that decreases along tellings, and Lemma~\ref{l:ground} is proved by induction on depth. The main theorems are:
+
+\begin{lstlisting}
+theorem transmission (s h : Agent) (hr : Receives s h)
+    (hks : Knows s) (hb : Believes h) (hj : Justified h) :
+    Knows h
+
+theorem no_generation (s h : Agent) (hr : Receives s h)
+    (hk : Knows h) :
+    (∃ u, Upstream u s ∧ Knows u) ∨ Own h ∨
+    (∃ u, Upstream u s ∧ Believes u ∧ Safe u ∧
+        ¬ Justified u ∧ Justified h)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_08.transmission' depends on axioms:
+  [Agent, Believes, Justified, Receives, Safe, Truth,
+   sincerity, uptake]
+'Philosophy.EPI_08.no_generation' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Agent, Believes, Justified, Own, Receives, Safe,
+   TellsSafely, Truth, depth, depth_lt, inheritance,
+   safe_telling_source]
+\end{lstlisting}
+
+The names are abbreviated by omitting the prefix \texttt{Philosophy.EPI\_08}. \texttt{inheritance} is Assumption~\ref{a:inherit}, \texttt{safe\_telling\_source} is Assumption~\ref{a:source}, \texttt{uptake} and \texttt{sincerity} are the two clauses of Assumption~\ref{a:uptake}, and \texttt{depth} with \texttt{depth\_lt} is Assumption~\ref{a:finite}. The remaining axioms are the primitives. Transmission uses no assumption about chains; no generation uses no assumption about uptake. The classical axioms enter through the case distinction on whether the upstream safe believer is justified. Corollary~\ref{c:pure} depends on the same axioms as Theorem~\ref{t:nogen}.
+
+\section{Conclusion}
+
+Testimony gives knowledge: a justified hearer who believes what a knowing speaker tells her knows it. It does so by transmission. What passes along a chain of tellings is the safety of a belief held by someone upstream; what the hearer contributes in every case is her own justification. Testimony as such creates neither. The cases offered as generation by testimony are cases in which the knowledge is transmitted through a non-believing relay, or in which the hearer supplies, from her own roots, the safety or the justification that was missing upstream.
+
+\begin{thebibliography}{99}\small
+\bibitem[Audi(1997)]{Audi1997} Audi, R. (1997). The place of testimony in the fabric of knowledge and justification. \emph{American Philosophical Quarterly}, 34(4), 405--422.
+\bibitem[Burge(1993)]{Burge1993} Burge, T. (1993). Content preservation. \emph{The Philosophical Review}, 102(4), 457--488.
+\bibitem[Coady(1992)]{Coady1992} Coady, C.~A.~J. (1992). \emph{Testimony: A Philosophical Study}. Oxford University Press.
+\bibitem[Faulkner(2011)]{Faulkner2011} Faulkner, P. (2011). \emph{Knowledge on Trust}. Oxford University Press.
+\bibitem[Fricker(1995)]{Fricker1995} Fricker, E. (1995). Telling and trusting: Reductionism and anti-reductionism in the epistemology of testimony. \emph{Mind}, 104(414), 393--411.
+\bibitem[Graham(2000)]{Graham2000} Graham, P.~J. (2000). Conveying information. \emph{Synthese}, 123(3), 365--392.
+\bibitem[Graham(2006)]{Graham2006} Graham, P.~J. (2006). Can testimony generate knowledge? \emph{Philosophica}, 78, 105--127.
+\bibitem[Hume(1748)]{HumeEnquiry} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}.
+\bibitem[Lackey(1999)]{Lackey1999} Lackey, J. (1999). Testimonial knowledge and transmission. \emph{The Philosophical Quarterly}, 49(197), 471--490.
+\bibitem[Lackey(2008)]{Lackey2008} Lackey, J. (2008). \emph{Learning from Words: Testimony as a Source of Knowledge}. Oxford University Press.
+\bibitem[Reid(1764)]{Reid1764} Reid, T. (1764). \emph{An Inquiry into the Human Mind on the Principles of Common Sense}.
+\end{thebibliography}
+
+\end{document}

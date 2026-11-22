@@ -1,0 +1,114 @@
+\documentclass{situationist-preprint}
+
+\title{Saying and Showing}
+\msid{LNG-22-a}
+\msfamily{LNG-22}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mskeywords{saying and showing; ineffability; Tractatus; logical form; Tarski; truth; metalanguage}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The \emph{Tractatus} held that what can be shown cannot be said, and placed a great deal on the side of showing: the logical form that propositions share with reality, the semantic relation between language and world, the limits of the world, ethics, aesthetics and the mystical. Critics replied that nothing is shown that cannot be said. We argue for an intermediate thesis. Some things can be shown but not said: in particular, the general semantic fact that relates every language to what its sentences say is manifested in the use of languages and cannot be stated in any language. But the class of such things is much smaller than the \emph{Tractatus} supposed. The logical form and the semantics of any particular language can be said in a richer metalanguage, and ethical, aesthetic and phenomenal truths are said in the ordinary way. What remains unsayable is not any particular fact, but the generalization over all languages, including the one in which it would be stated.
+\end{abstract}
+
+\section{The problem}
+
+Wittgenstein held that a proposition shows its sense and shows the logical form it shares with reality, but cannot represent that form: to represent it we would have to station ourselves with propositions outside logic, that is, outside the world \citep[4.12, 4.121]{Wittgenstein1922}. What can be shown cannot be said (4.1212). The same holds of the metaphysical subject (5.632) and of ethics (6.421); what cannot be put into words makes itself manifest (6.522). The propositions of the book are themselves nonsensical, to be climbed over like a ladder and thrown away (6.54), a passage examined in the companion manuscript LNG-22-b.
+
+\citet{Russell1922}, in his introduction, suggested that what cannot be said in one language can be said in a metalanguage, and that there may be a hierarchy of languages with no total limit. \citet{Carnap1937} showed how the logical syntax of a language can be formulated precisely in a metalanguage. \citet{Ramsey1931} pressed the dilemma that what cannot be said cannot be whistled either. \citet{Hacker2000} reads the \emph{Tractatus} as conveying ineffable truths, \citet{Diamond1988} as dissolving the idea of them.
+
+We argue that Russell's suggestion is right about almost everything the \emph{Tractatus} placed beyond saying, and that it nonetheless leaves something: the semantics of the totality of languages, which every language shows in being used and no language says.
+
+\section{Framework}
+
+\begin{definition}[Saying]\label{d:say}
+A sentence $s$ of a language $L$ \emph{says} that $p$ if $s$ expresses in $L$ the proposition that $p$. A proposition is \emph{sayable} if some sentence of some language says it.
+\end{definition}
+
+\begin{definition}[Showing]\label{d:show}
+A language $L$ \emph{shows} that $p$ if every competent use of $L$ is correct only if $p$, and competence in $L$ consists in part in using it in accordance with $p$.
+\end{definition}
+
+Competent use of a language shows, in this sense, the truth conditions of its sentences: speakers use \enquote{snow is white} in accordance with its being true just in case snow is white. Showing does not require that anyone can state what is shown.
+
+\begin{assumption}[Tarski]\label{a:tarski}
+No language with a classical logic that can describe its own syntax contains a predicate satisfying every instance of the schema \enquote{$n$ is true if and only if $s$}, where $n$ is a name of $s$, for its own sentences $s$ \citep{Tarski1956}.
+\end{assumption}
+
+Assumption~\ref{a:tarski} is Tarski's undefinability theorem, and it is consistent with LNG-18: self-reference alone is harmless, and the contradiction arises from self-reference together with a semantic predicate. We take classical logic as the background, as LOG-02 argues we should.
+
+\begin{assumption}[Self-description]\label{a:self}
+A language that can state semantic facts about every language can describe its own syntax, since it must be able to refer to the sentences of each.
+\end{assumption}
+
+\section{The argument}
+
+\begin{lemma}\label{l:particular}
+For every language $L$, the semantics of $L$ and its logical form are sayable.
+\end{lemma}
+
+\begin{proof}
+Given $L$, a metalanguage $M$ that contains names of the expressions of $L$, translations of its sentences and a predicate \enquote{true in $L$} can say, for each sentence of $L$, under what conditions it is true, and can state the syntactic and logical relations among its sentences \citep{Tarski1956,Carnap1937}. $M$ is a language distinct from $L$, so Assumption~\ref{a:tarski} does not apply. By Definition~\ref{d:say}, these facts are sayable.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Some things can be shown but not said: the general semantic fact relating every language to what its sentences say is shown by the use of languages and said by no language.
+\end{theorem}
+
+\begin{proof}
+\emph{Shown.} By Definition~\ref{d:show}, each language shows the truth conditions of its sentences, so the totality of languages in use shows, of every sentence of every language, under what conditions it is true. \emph{Not said.} Suppose a sentence of some language $U$ said that, for every language $L$ and every sentence $s$ of $L$, $s$ is true in $L$ just in case its truth condition obtains. Then $U$ states semantic facts about every language, and by Assumption~\ref{a:self} it can describe its own syntax. Instantiating to $U$ itself, $U$ would contain a predicate, \enquote{true in $U$}, satisfying the truth schema for all its own sentences, contrary to Assumption~\ref{a:tarski}. So no language says it.
+\end{proof}
+
+\begin{corollary}\label{c:smaller}
+The class of things shown but not said is smaller than the \emph{Tractatus} supposed: it excludes the logical form and the semantics of any particular language, and the ethical, aesthetic and phenomenal.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:particular}, logical form and the semantics of any particular language are sayable, in a metalanguage. Ethical and aesthetic sentences are well formed, embed in conditionals and arguments, and are used to make claims that are contradicted and defended; they say things, whatever the right account of what they say, and REL-18 argues that religious statements are truth-apt in the same way. Phenomenal facts are said by sentences using phenomenal concepts; on the account of MND-04, Mary acquires new concepts of facts she already knew, and those facts were sayable before. Theorem~\ref{t:main} leaves on the side of showing only generalizations over all languages that include the language of their statement.
+\end{proof}
+
+\section{Objections and replies}
+
+\begin{objection}[Hierarchy]\label{o:hier}
+By Lemma~\ref{l:particular}, every semantic fact about each language is sayable in some language. There is then nothing that is not said somewhere, and the theorem is empty.
+\end{objection}
+
+\begin{reply}
+Each instance is sayable, but the generalization over all languages is a further proposition, and it is the generalization that no language says. Likewise each level of the Tarskian hierarchy is defined at the next, and no level defines truth for the whole. Even fixed-point theories of truth for a single language, such as that of \citet{Kripke1975}, leave some semantic notions for that language, such as being ungrounded, statable only in a richer metalanguage.
+\end{reply}
+
+\begin{objection}[Whistling]\label{o:whistle}
+If it cannot be said, it cannot be thought, and there is nothing that is shown \citep{Ramsey1931}. The theorem itself states what it says cannot be stated.
+\end{objection}
+
+\begin{reply}
+The theorem does not state the general semantic fact; it states that no language states it, which is a claim about languages and is said by the theorem. What is shown is manifested in competent use (Definition~\ref{d:show}), and grasping it in that way does not require stating it.
+\end{reply}
+
+\begin{objection}[Rules]\label{o:rules}
+The validity of a rule of inference is shown in inference and cannot be said: to state it as a premise starts Carroll's regress. So the class includes the rules of logic.
+\end{objection}
+
+\begin{reply}
+The validity of modus ponens can be said. What cannot be achieved by saying it is the drawing of an inference, which is a doing and not a content. LOG-18 shows that the regress arises from treating rules as premises; it does not show that there is any truth about rules that cannot be stated.
+\end{reply}
+
+\section{Conclusion}
+
+Some things can be shown and not said. The semantic relation between every language and what its sentences say is manifested in the use of each and stated by none, since any language that stated it would define truth for itself. The logical form and semantics of any particular language can be stated in a metalanguage, and ethics, aesthetics and experience are spoken of in the ordinary way. What lies beyond saying is not a realm of facts but one generalization, over the languages in which anything is said.
+
+\begin{thebibliography}{99}\small
+\bibitem[Carnap(1937)]{Carnap1937} Carnap, R. (1937). \emph{The Logical Syntax of Language}. Trans. A. Smeaton. Kegan Paul.
+\bibitem[Diamond(1988)]{Diamond1988} Diamond, C. (1988). Throwing away the ladder. \emph{Philosophy}, 63(243), 5--27.
+\bibitem[Hacker(2000)]{Hacker2000} Hacker, P.~M.~S. (2000). Was he trying to whistle it? In A. Crary and R. Read (eds), \emph{The New Wittgenstein}. Routledge.
+\bibitem[Kripke(1975)]{Kripke1975} Kripke, S. (1975). Outline of a theory of truth. \emph{The Journal of Philosophy}, 72(19), 690--716.
+\bibitem[Ramsey(1931)]{Ramsey1931} Ramsey, F.~P. (1931). \emph{The Foundations of Mathematics and Other Logical Essays}, ed. R.~B. Braithwaite. Kegan Paul.
+\bibitem[Russell(1922)]{Russell1922} Russell, B. (1922). Introduction. In L. Wittgenstein, \emph{Tractatus Logico-Philosophicus}. Kegan Paul.
+\bibitem[Tarski(1956)]{Tarski1956} Tarski, A. (1956). The concept of truth in formalized languages. In \emph{Logic, Semantics, Metamathematics}, trans. J.~H. Woodger, 152--278. Clarendon Press. (Polish original 1933.)
+\bibitem[Wittgenstein(1922)]{Wittgenstein1922} Wittgenstein, L. (1922). \emph{Tractatus Logico-Philosophicus}. Trans. C.~K. Ogden. Kegan Paul. Cited by proposition number.
+\end{thebibliography}
+
+\end{document}

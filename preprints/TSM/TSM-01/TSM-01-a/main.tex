@@ -1,0 +1,793 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+
+\title{On the Reality of Time}
+\msid{TSM-01-a}
+\msfamily{TSM-01}
+\msdiscipline{Time, Space and Modality}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/TSM/TSM\_01.lean}
+\mskeywords{McTaggart; A-series; B-series; reality of time; tenseless theory; branching time; settledness; growing block; causal structure of spacetime}
+
+\input{gen/numbers.tex}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+McTaggart argued that time is unreal: there is no time without change, there is no change without the A-series of past, present and future, and the A-series is contradictory. We argue that the argument establishes less and more than he thought. It establishes that the A-series is incoherent: no world contains a changing A-series, and the only coherent way of making the A-determinations vary, relativizing them to moments, returns the order of earlier and later under another description. It does not establish that time is unreal, because its bridge premise, that time requires a changing A-series, owes its credibility to an equivocation between change in things over time and the change of A-determinations. Run in reverse from the reality of time, the argument refutes the bridge. Time is real and is constituted by the B-series, which we identify with the causal and metrical structure of spacetime. For an indeterministic world we add branching histories and moment-relative settledness, prove that settledness is monotone along every history, and exclude the growing block. The structural results are verified on all \NFrames{} branching frames with at most eleven moments, and the logical skeleton is formalized in Lean.
+\end{abstract}
+
+\section{Introduction}\label{s:intro}
+
+Is time real? The question sounds idle until one meets the argument that it is not. In \citeyear{McTaggart1908} J.~M.~E. McTaggart argued that the positions of events in time are ordered in two ways: as past, present and future, which he called the A-series, and as earlier and later, which he called the B-series. He argued that time requires change, that change requires the A-series, and that the A-series is contradictory. It follows that nothing is in time \citep{McTaggart1908,McTaggart1927}.
+
+Almost no one has accepted the conclusion, and almost everyone has accepted something from the argument. The literature since McTaggart can be organized by the premise each party rejects. Those who reject the third premise, that the A-series is contradictory, are A-theorists: they hold that one time is objectively present and that the present moves, and they owe a statement of the A-series that escapes McTaggart's regress \citep{Broad1938,Prior1967,Zimmerman2005,Cameron2015}. Those who reject the second premise, that change requires the A-series, are B-theorists: they hold that change is the variation of things across times and that the A-series is either a feature of our representation of time or a mistake \citep{Russell1903,Russell1915,Smart1963,Mellor1981,Mellor1998}. A third group accepts that the argument shows something about reality as a whole, that reality cannot be completely described from no temporal standpoint \citep{Dummett1960} or that it is not coherent as a whole \citep{Fine2005}.
+
+We defend a version of the second response and give it a form that clarifies what the argument proves. Our thesis has two parts. First, McTaggart was right about the A-series: it is incoherent, and no world contains a changing A-series (Theorem~\ref{t:nochange}). Second, he was wrong about time: time is real and is constituted by the B-series, the order of events by earlier and later, which in our world is the causal and metrical structure of spacetime (Principle~\ref{p:constitution}). The argument is valid, and what its validity shows depends on the direction in which it is run. Run forward from the claim that time requires a changing A-series, it denies time. Run backward from the reality of time, for which our evidence is as good as for anything in physics, it denies that time requires a changing A-series (Theorem~\ref{t:inversion}). The backward direction is the rational one, because the bridge premise owes its appeal to an equivocation on \enquote{change} (Proposition~\ref{p:equivocation}).
+
+A B-theory must also accommodate the open future. If the world is indeterministic, as current physics and our practice as agents both suggest, the B-series may branch toward the later: one past for each moment and several possible continuations. We develop the view for such a world. Relative to each moment some matters are settled and some open, and we prove that settledness is monotone along every history: what is settled at a moment remains settled, with the same value, at every later moment (Theorem~\ref{t:monotone}). Settledness is a relation between a moment and a proposition. No moment has it absolutely, and so the open future requires no privileged present and no growing block (Theorem~\ref{t:noblock}).
+
+The structural results lend themselves to exhaustive verification. In the appendices we enumerate every finite branching frame with at most eleven moments, one per isomorphism class, \NFrames{} in all, and verify for each frame and each of its valuations the monotonicity of settledness, the bivalence of truth relative to a history together with the failure of bivalence for settledness, and the McTaggart-style facts about A-assignments. The tables record, for each of the \NFramesDetail{} frames with at most ten moments, the computed values at every moment. Section~\ref{s:computation} discusses particular entries.
+
+The plan is as follows. Section~\ref{s:history} reviews the argument and its reception. Section~\ref{s:framework} sets out the framework. Section~\ref{s:incoherence} proves the incoherence result, Section~\ref{s:inversion} the inversion, and Section~\ref{s:branching} develops branching and settledness. Section~\ref{s:spacetime} defends the identification of the B-series with the causal and metrical structure of spacetime, and Section~\ref{s:block} excludes the growing block and the other A-theories. Section~\ref{s:objections} answers objections, Section~\ref{s:computation} reports the computation, Section~\ref{s:limits} records what the result does not establish, and Section~\ref{s:formal} describes the formalization.
+
+\section{The argument and its reception}\label{s:history}
+
+\subsection{Before McTaggart}
+
+The question whether time is real is older than McTaggart's argument, and two strands of the earlier discussion bear directly on it. The first concerns the relation of time to change. Aristotle held that time is not change but is not without change: we perceive time when we perceive change, and time is the number of change with respect to before and after (\emph{Physics} IV.11). He also raised the puzzles about the now that every later A-theory inherits: if the now is always different, it seems that a now must perish, and it cannot perish in itself nor in another now (\emph{Physics} IV.10). The Aristotelian claim that time requires change is the ancestor of McTaggart's first premise, and Aristotle's own gloss shows what it concerns: change in things, the motion that time numbers, which is what we call B-change.
+
+The second strand concerns the future. In \emph{De Interpretatione} 9 Aristotle considered whether it is now true or false that there will be a sea battle tomorrow, and argued that if every statement about the future were already true or false, everything would happen of necessity. The passage is the source of the problem of future contingents and of the branching treatment of it, on which the future is open at a moment because the moment has several possible continuations. Augustine's reflections in \emph{Confessions} XI add the epistemic and psychological side: the past is no longer and the future not yet, and the present, if it had extension, would divide into past and future; Augustine concluded that time is in some way an extension of the mind, which measures in memory and expectation what it cannot measure in things (\emph{Confessions} XI.14--28). Augustine's puzzles about the present are the ancestors of the presentist's view that only the present exists and of the A-theorist's sense that the present is special; his solution, placing the measure of time in the mind, is an early statement of the view that the experience of passage is a feature of experience (TSM-02).
+
+In the modern period the reality of time was argued over in the dispute between Newton's absolute time, which flows equably without relation to anything external (\emph{Principia}, Scholium to the Definitions), and Leibniz's relational time, an order of successions (Correspondence with Clarke, Third Paper, §4). Kant held that time is the form of inner sense and is transcendentally ideal (\emph{Critique of Pure Reason}, Transcendental Aesthetic, §§4--7), which McTaggart cites as one of the predecessors of his conclusion. Our view takes from Leibniz the claim that time is an order, and from relativity, rather than from Newton, the claim that the order has a physical measure; it takes from neither the idea of a flow.
+
+\subsection{McTaggart, 1908 and 1927}
+
+McTaggart's paper of 1908 opens by remarking that the unreality of time is a doctrine that has attracted philosophers of very different schools, and he cites Spinoza, Kant, Hegel and Schopenhauer as well as the Buddhist tradition, before offering an argument of his own. The argument was restated, with minor changes, as chapter 33 of the second volume of \emph{The Nature of Existence}, published posthumously \citep{McTaggart1927}. We follow the later version where the two differ, and we use McTaggart's terminology throughout.
+
+Positions in time, McTaggart says, appear to us in two ways. Each position is earlier than some and later than others; the series of positions so ordered is the B-series. Each position is also past, present or future; the series of positions running from the far past through the present to the far future is the A-series. The distinctions of the B-series are permanent: if an event is ever earlier than another, it is always earlier. The distinctions of the A-series are not: an event that is future becomes present and then past. McTaggart also introduces a third series, the C-series, an order of positions that is not temporal at all but which, combined with the A-series, gives rise to the B-series. The C-series has an order but no direction; the A-series supplies the direction and the change \citep[ch.~33]{McTaggart1927}.
+
+The first stage of the argument claims that the A-series is essential to time. McTaggart's ground is that time involves change, and that the only change there can be is change in the A-determinations of events. An event is a content at a position in the B-series; its B-relations to other events cannot change, and its non-temporal characteristics cannot change either, since a change in them would make it a different event. A poker that is hot on Monday and cold on Tuesday does not, he says, change in the required sense, since it is always true that it is hot on Monday and cold on Tuesday. What does change is that the event of the poker's being hot, once future, becomes present and then past. If there were no A-series, then, there would be no change, and so no time. The B-series, which presupposes time, would not exist either.
+
+The second stage claims that the A-series is contradictory. Past, present and future are incompatible determinations: no event can have more than one. Yet every event has all three, since every event is past, present and future. The natural reply is that no event has them all at once: an event is future, will be present, and will be past, or it is past, was present and was future. McTaggart argues that this reply is circular or regressive. To say that an event \emph{is} past, \emph{was} present and \emph{will be} future is to say that it is past at a present moment, present at a past moment and future at a future moment. But the moments at which it has these determinations themselves have all three A-determinations, and the same contradiction recurs at the second level, and so on. The regress is vicious, McTaggart holds, because each stage is needed to remove the contradiction of the previous one, and none succeeds without the next.
+
+The conclusion follows. Time requires the A-series; the A-series is contradictory and so not real; therefore nothing is in time. McTaggart did not deny that there is some series in reality that we misperceive as temporal: the C-series, in his metaphysics, is the order of a timeless reality of perceptions, which appears to us as a series of events in time \citep{McTaggart1927}. He denied that this series is a temporal one.
+
+\subsection{McTaggart's positive view}
+
+It is easy to forget that McTaggart's argument was part of a system. In the second volume of \emph{The Nature of Existence} the unreality of time is one of several results, alongside the unreality of matter and of sense data, on the way to the conclusion that reality consists of selves and their perceptions, related by love \citep{McTaggart1927}. The C-series has a place in this system. It is the real, non-temporal order of a self's perceptions, ordered by their degree of inclusiveness, and the appearance of time is the misperception of this order as a series of events in which some are past and some future. The series runs, McTaggart held, from a least inclusive term to a most inclusive one, and the appearance of temporal passage is the appearance of a self moving along it.
+
+The system explains why McTaggart did not regard the B-series as a fallback. On his view the B-series is constituted by the A-series together with the C-series: an event is earlier than another just if it is past when the other is present, or present when the other is future. Take away the A-series and what is left is the C-series, which is real but not temporal. Our disagreement with McTaggart is located precisely here. We hold that the B-relation is not defined from the A-series and the C-series but is a physical relation in its own right, the causal order of events, and that it has a direction of its own (Section~\ref{s:spacetime}). McTaggart's reduction of the B-series to the A-series is the bridge in another form, and its failure is the subject of Section~\ref{s:inversion}.
+
+\subsection{Russell and Broad}
+
+The argument met an immediate response from the view it was designed to refute. \citet[§442]{Russell1903} had already defined change as the difference, in respect of truth or falsity, between a proposition concerning an entity and a time and a proposition concerning the same entity and another time. On this definition the poker changes: the proposition that it is hot at Monday is true, and the proposition that it is hot at Tuesday is false. McTaggart's reply, that these propositions are both always true or always false and so do not change, assumes that change must be the change of a proposition's truth-value over time, which on Russell's view is not what change is. \citet{Russell1915} added that the A-determinations are relations to a subject: \enquote{past} means earlier than the time of the present experience, so that the A-series is the B-series viewed from a position within it. This is the ancestor of the indexical treatment of tense.
+
+C.~D. Broad responded twice. In \emph{Scientific Thought} he proposed the view now called the growing block: past and present events exist and future events do not, and the sum total of existence increases as events come into being \citep{Broad1923}. The present is the edge of the block, and becoming is the addition of new slices. In his examination of McTaggart's philosophy he gave a criticism of the regress that has been influential among A-theorists \citep{Broad1938}. He argued that the regress arises only if one reads \enquote{was}, \enquote{is} and \enquote{will be} as a timeless copula followed by a temporal predicate. Read as irreducibly tensed copulas, the statements that an event was future, is present and will be past are consistent and do not need to be paraphrased in terms of moments. Broad thus located McTaggart's error in his translation of tensed statements into tenseless ones. We return to this reply in Section~\ref{s:incoherence}, where we argue that it secures consistency only by giving up the change it was meant to protect.
+
+\subsection{Dummett}
+
+Michael \citet{Dummett1960} argued that McTaggart's argument is better than its critics allow. The key move is to read it as an argument about descriptions. The A-series is essential to time because a description of a temporal reality from no temporal standpoint omits something: it cannot say which events are past and which future, and it cannot be supplemented to say this without adopting a standpoint. McTaggart's assumption, on this reading, is that there must be a complete description of reality, one that is not given from any standpoint. Since a temporal reality has no such description, it is not real. Dummett did not endorse the conclusion. He held that the argument shows that we must give up either the reality of time or the idea that reality has a complete, standpoint-free description, and he inclined to the latter.
+
+Dummett's reading has proved fertile. It locates the issue in the relation between perspective and reality and is the ancestor of Fine's reconstruction. We think it also shows where the argument goes wrong. The ineliminability of tensed thought is that of indexical thought in general, and the same considerations show that no description from no standpoint says which place is here or which person is me. That thought has a perspective does not show that reality has one (Objection~\ref{o:dummett}).
+
+\subsection{Prior and the logic of tense}
+
+A.~N. Prior made tense the subject of a logic \citep{Prior1957,Prior1967}. Tense operators $P$ (\enquote{it was the case that}) and $F$ (\enquote{it will be the case that}) are prefixed to present-tensed sentences, and the logic of their combinations is studied in the same way as the logic of necessity and possibility. Prior was an A-theorist and in his later work a presentist: he held that tensed sentences are the fundamental bearers of truth, and that the truths about past and future are tensed truths about the present \citep{Prior1968}. Against the B-theory he offered his famous argument from relief: when a painful experience is over, one says \enquote{thank goodness that's over}, and what one is thankful for is not the tenseless fact that the experience ends before the utterance, which obtains at every time, but the tensed fact that it is now over \citep{Prior1959}.
+
+Prior's logic is neutral between metaphysical views, and the B-theorist can use it. Two of his innovations are central to what follows. The first is his semantics for an indeterministic world, in which the moments of time form a tree branching toward the future and future-tensed sentences are evaluated relative to histories through a moment \citep{Prior1967}. Prior distinguished a Peircean reading, on which \enquote{it will be that $p$} means that $p$ on every continuation, from an Ockhamist reading, on which it is evaluated relative to a history. \citet{Thomason1970} combined the Ockhamist reading with supervaluation to give a semantics on which future contingents are neither true nor false at a moment, and the framework was developed by \citet{Belnap2001} into a general theory of agency in indeterministic time. The second innovation is the observation that the semantics of a tensed language may be stated in a tenseless metalanguage: the truth conditions of \enquote{it will be that $p$} at a moment are given by the existence of a later moment at which $p$. We adopt both.
+
+\subsection{Smart, Mellor and the new B-theory}
+
+The B-theory received its classical modern statement in \citet{Smart1963} and \citet{Mellor1981}. Smart held that tensed expressions are token-reflexive or indexical, so that \enquote{it is raining now} uttered at $t$ is true just if it rains at $t$, and that the A-series has no place in the scientific image. Mellor's \emph{Real Time} and its successor \citep{Mellor1998} gave a version of McTaggart's argument that the B-theorist can accept. Mellor's version concerns tensed sentence tokens and their truth conditions. Every A-determination is had by an event only relative to a time, since an event is past at some times and future at others. If we try to make A-facts absolute by saying that an event is past at some time and future at another, we must specify those times by their A-determinations or by their B-positions. In the first case the problem recurs; in the second, the A-facts are B-facts. Mellor concludes that there are no A-facts and that tensed sentences have tenseless truth conditions: a token of \enquote{$e$ is past} is true just if it occurs later than $e$.
+
+Mellor's reconstruction drew a sharp debate. \citet{Lowe1987} charged it with an \enquote{indexical fallacy}: McTaggart's argument, Lowe held, depends on treating tensed sentences as having tenseless truth conditions, and so begs the question against the A-theorist. \citet{LePoidevinMellor1987} replied that the argument requires only that tensed tokens have truth conditions that a tenseless theory can state, and that the A-theorist who denies this owes an account of what makes a tensed token true. We agree with the reply and offer a version of the argument in Section~\ref{s:incoherence} that does not require the premise Lowe objected to. Its central claim is that an absolute present, a monadic property that one moment has simpliciter, cannot change without being had by more than one moment, and that the only way to let it change coherently is to relativize it to moments.
+
+The new B-theory added an account of tensed belief. \citet{Perry1979} and \citet{Lewis1979} showed that the content of indexical belief cannot be captured by a proposition true or false absolutely: the belief that I am making a mess, or that it is now noon, has self-locating content. Mellor and others concluded that the irreducibility of tensed belief, which Prior's relief argument exploits, is an instance of the irreducibility of indexical belief in general and is no evidence of tensed facts \citep{Mellor1998}. The same conclusion governs the treatment of \enquote{now} in EPI-18-c, where Beauty's uncertainty whether it is now Monday is uncertainty about her location in a world whose history she knows, and in REL-19, where God's timelessness entails a lack of indexical knowledge of what time it is.
+
+\subsection{Fine's reconstruction}
+
+Kit \citet{Fine2005} reconstructed McTaggart's argument as a conflict between four assumptions. \emph{Realism}: reality is constituted, at least in part, by tensed facts. \emph{Neutrality}: no time is privileged; the tensed facts that constitute reality are not oriented toward one time as opposed to another. \emph{Absolutism}: the constitution of reality is an absolute matter, not relative to a time or other standpoint. \emph{Coherence}: reality is not contradictory; it is not constituted by facts with incompatible content. Fine argued that the four are inconsistent, since by Realism and Neutrality reality contains tensed facts oriented toward each time, and these are incompatible, so that by Absolutism reality contains incompatible facts, contrary to Coherence. The standard A-theorist rejects Neutrality: one time, the present, is privileged. The B-theorist rejects Realism. Fine himself considered two non-standard options: \emph{external relativism}, which gives up Absolutism and holds that reality is constituted relative to a time, and \emph{fragmentalism}, which gives up Coherence for reality as a whole while holding that each fragment, the facts oriented toward a single time, is coherent.
+
+Fine's reconstruction is valuable because it shows how much the A-theorist must give up. The standard A-theorist must privilege one time, and so must explain why reality favors this time over every other, and how the favor can move. The non-standard A-theorist preserves Neutrality only by giving up the absoluteness or the coherence of reality. Our view rejects Realism, and in Section~\ref{s:incoherence} we show that the relativist's \enquote{reality relative to a time} is, so far as its temporal content goes, the B-series under another description (Proposition~\ref{p:stage}). Fragmentalism we discuss in Objection~\ref{o:fine}.
+
+\subsection{Recent A-theories}
+
+The last two decades have seen a revival of the A-theory in several forms. Presentism, the view that only present things exist, has been defended against the objection from relativity and the objection that it lacks truthmakers for truths about the past \citep{Markosian2004}. The growing block has found defenders who argue that it captures the asymmetry between the fixed past and the open future \citep{Tooley1997,CorreiaRosenkranz2018}, and it has been attacked on the ground that its inhabitants could not know whether they were at the edge of the block \citep{Bourne2002,BraddonMitchell2004}; \citet{Forrest2004} replied that only the present is conscious, a reply whose costs we discuss in Section~\ref{s:block}. The moving spotlight, on which all times exist but one is objectively present and the present moves, has been given a careful defense by \citet{Cameron2015}, who treats the past and future as existing but having their temporal distance from the present as a fundamental property, and by \citet{Skow2015}, who examines what objective becoming would have to be and argues that the best version of the A-theory is a moving spotlight with a privileged present. \citet{Zimmerman2005} argued that the debate between A- and B-theorists is substantive, against those who would dissolve it, and that \enquote{taking tense seriously} commits one to a distinction in what exists or in what is fundamental.
+
+These views share a feature that is decisive for our argument: each privileges one moment, the present or the edge, absolutely. In Section~\ref{s:block} we show that this feature is what McTaggart's argument refutes, and that a view on which the openness of the future and the fixity of the past are moment-relative obtains every asymmetry the A-theorist wants without it.
+
+\subsection{Where we stand}
+
+Our position combines elements of the tradition. With McTaggart and Mellor, we hold that the A-series is incoherent. With Russell, Smart and Mellor, we hold that change is variation across times and that tensed thought is indexical. With Prior, Thomason and Belnap, we hold that the future may be open, and we model openness by branching. Against McTaggart, we hold that time is real, and against Broad and Prior, that the open future does not require an A-series. The novelty of the treatment, if it has one, lies in three things: in presenting the argument as an inversion rather than a selective rejection of premises, in following TSM-01-b; in proving that the coherent relativization of the A-series is the B-series (Proposition~\ref{p:stage}); and in showing, by proof and by exhaustive computation, that moment-relative settledness has the formal properties the open future requires and none of those the growing block attributes to it.
+
+\section{Framework}\label{s:framework}
+
+We begin with the two series and the two notions of change.
+
+\begin{definition}[B-series]\label{d:bseries}
+The \emph{earlier-than} relation is a strict partial order on events (or on the moments at which they occur): irreflexive and transitive. The \emph{B-series} is the set of events so ordered, together with the metrical relations of temporal separation between them. A \emph{B-fact} is a fact about what occurs at which moments and about the relations of earlier, later, simultaneous and temporal separation among them.
+\end{definition}
+
+We do not assume that the order is linear. In a relativistic spacetime it is the causal order, under which spacelike separated events are incomparable, and in an indeterministic world it may branch toward the later (Section~\ref{s:branching}).
+
+\begin{definition}[A-determinations]\label{d:adet}
+The \emph{A-determinations} are past, present and future, taken as the A-theorist takes them: monadic properties that events or moments have absolutely, not relative to a time or to a thinker. The \emph{A-series} is the series of positions ordered by these determinations. In particular, \emph{absolute presentness} is the property a moment has if it is present simpliciter.
+\end{definition}
+
+\begin{definition}[B-change and A-change]\label{d:change}
+An object undergoes \emph{B-change} if it has a property at one moment and an incompatible property at a later moment. An event undergoes \emph{A-change} if it passes from future to present to past, that is, if its A-determination changes.
+\end{definition}
+
+McTaggart's premises, in the form in which TSM-01-b states them, are these.
+
+\begin{assumption}[Time requires change]\label{a:m1}
+There is no time without change.
+\end{assumption}
+
+\begin{assumption}[Change requires the A-series]\label{a:m2}
+The only change there could be is change in A-determinations: an event's ceasing to be future, becoming present, and becoming past.
+\end{assumption}
+
+\begin{assumption}[Incoherence]\label{a:incoherence}
+The A-series is incoherent: every event would have to be past, present and future, which are incompatible, and the attempt to remove the contradiction by tensing the copula generates a regress in which it recurs. In its formal core: the A-determinations are incompatible, so that absolute presentness is had by at most one moment of a world.
+\end{assumption}
+
+The formal core requires comment. If two distinct moments were both present simpliciter, then, since distinct moments of one history are related as earlier and later, one would be earlier than the other, and the earlier would be both present and, relative to the later, past. Absolute presentness would then be had by a moment that also has an incompatible determination. Where the moments are incomparable, as on different branches or at spacelike separation, the A-theorist who holds that both are present simpliciter has given up the uniqueness of the present that distinguishes the A-series from a mere labeling of moments; we return to this in Section~\ref{s:spacetime}. The formal core is therefore what remains of McTaggart's premise once the contradiction is stated without his regress; the regress itself is the subject of Corollary~\ref{c:dilemma}.
+
+We accept Assumption~\ref{a:incoherence}. We reject the conjunction of Assumptions~\ref{a:m1} and~\ref{a:m2}. Our positive view is stated by two principles.
+
+\begin{principle}[Constitution]\label{p:constitution}
+Time is constituted by the B-series. For there to be time is for there to be events ordered as earlier and later; temporal facts are B-facts.
+\end{principle}
+
+\begin{principle}[Physical identification]\label{p:physical}
+In our world the B-series is the causal and metrical structure of spacetime: the earlier-than relation is the causal order of events, and temporal separation is the proper time along timelike curves.
+\end{principle}
+
+Principle~\ref{p:constitution} is the thesis that time is the B-series. Principle~\ref{p:physical} says what the B-series is in our world, and it is the identification that TSM-14 uses when it asks whether time had a beginning. We defend it in Section~\ref{s:spacetime}. Two consequences may be noted now. First, Principle~\ref{p:constitution} does not say that time requires change. Whether a stretch of time could pass with no change in anything is a separate question, which TSM-17 answers affirmatively with Shoemaker's argument: the B-series is an order of times, and it needs no change to be populated. Second, Principle~\ref{p:constitution} makes tensed thought indexical. \enquote{Now} refers to the time of the thought or utterance (TSM-18), the present is the time at which a thought or utterance occurs (TSM-15), and to know what time it is is to have self-locating information about one's position in the B-series (EPI-18-c).
+
+\section{The incoherence of the A-series}\label{s:incoherence}
+
+McTaggart's contradiction is often presented as a puzzle about tensed sentences. We present it as a result about assignments of A-determinations to moments. This has two advantages. It makes clear exactly which feature of the A-series generates the contradiction, namely its absoluteness, and it shows that the only coherent repair, relativization to moments, yields the B-series.
+
+Let a world have a set of moments ordered by earlier-than. An A-determination of a moment $x$ relative to a moment $m$ is one of four values: \emph{past} if $x$ is earlier than $m$, \emph{present} if $x = m$, \emph{future} if $x$ is later than $m$, and \emph{other} if $x$ and $m$ are incomparable (which can happen only if the order branches or is relativistic). We write $P$, $N$, $F$, $O$ for these values.
+
+\begin{definition}[Monadic A-series]\label{d:monadic}
+A \emph{monadic A-series} for a world is an assignment of A-determinations to its moments that the world has absolutely: not relative to a time, a thinker or a standpoint. It is \emph{coherent} if it gives each moment exactly one A-determination and its determinations agree with the order: if $x$ is present, every moment earlier than $x$ is past and every moment later than $x$ is future.
+\end{definition}
+
+\begin{lemma}\label{l:onepresent}
+By Assumption~\ref{a:incoherence}, a monadic A-series has at most one present moment. A coherent monadic A-series with a present moment $m$ gives every moment the determination it has relative to $m$.
+\end{lemma}
+
+\begin{proof}
+The first claim is the formal core of Assumption~\ref{a:incoherence}. For the second, let $m$ be the present moment. By coherence, the moments earlier than $m$ are past and the moments later than $m$ are future. No other moment is present, by the first claim, and a moment incomparable with $m$ is neither earlier nor later than the present and so is assigned the remaining value. The assignment is therefore the one relative to $m$.
+\end{proof}
+
+\begin{definition}[Changing A-series]\label{d:changing}
+A world contains a \emph{changing A-series} if the present is at more than one of its moments: there are distinct moments $x$ and $y$ each of which is present.
+\end{definition}
+
+Definition~\ref{d:changing} is McTaggart's requirement that every event be present: an A-series that changes is one in which the present is not fixed at one moment but is had, in turn, by many. An A-series whose present is at only one moment does not change. It is a single labeling of the moments, and the events it labels are each past, present or future for good. Such a series is no rival to the B-series as the source of change; it is a further, static feature of the world that contributes no change at all.
+
+\begin{theorem}[No changing A-series]\label{t:nochange}
+No world contains a changing A-series.
+\end{theorem}
+
+\begin{proof}
+Suppose a world contains a changing A-series, so that distinct moments $x$ and $y$ are each present. By Lemma~\ref{l:onepresent}, a monadic A-series has at most one present moment, so $x = y$, which contradicts their distinctness.
+\end{proof}
+
+The proof is short because the work has been done by isolating the formal core of McTaggart's premise. The A-theorist will reply that the present is at different moments \emph{at different times}: $x$ is present at $x$, and $y$ is present at $y$. This is the move to the tensed copula, and the next results examine where it leads.
+
+\begin{definition}[Moment-relative A-assignment]\label{d:relative}
+For each moment $m$, the \emph{A-assignment relative to $m$}, $A_m$, gives each moment $x$ the value $P$ if $x$ is earlier than $m$, $N$ if $x = m$, $F$ if $x$ is later than $m$, and $O$ otherwise.
+\end{definition}
+
+The family $\{A_m\}$ is coherent and changing in the only sense the A-theorist's reply can give these words: each $A_m$ is coherent, and every moment is present according to one of them, namely its own. The question is what this family is.
+
+\begin{proposition}[The relativized A-series is the B-series]\label{p:stage}
+Let $\{A_m\}$ be the family of moment-relative A-assignments of a frame.
+\begin{enumerate}[label=(\alph*)]
+\item $A_m(x) = P$ if and only if $x$ is earlier than $m$. Hence the earlier-than order can be read off the family, and the family can be read off the order.
+\item $A_m(x) = F$ if and only if $A_x(m) = P$.
+\item The family commutes with every automorphism $\sigma$ of the order: $A_{\sigma(m)}(\sigma(x)) = A_m(x)$.
+\item No single member of the family gives every moment the value $N$ unless the frame has exactly one moment.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) If $x$ is earlier than $m$, then $x \ne m$ by irreflexivity, so $A_m(x) = P$. Conversely, if $A_m(x) = P$ then by definition $x \ne m$ and $x$ is earlier than $m$. (b) $A_m(x) = F$ just if $x \ne m$ and $m$ is earlier than $x$, which by (a) holds just if $A_x(m) = P$. (c) Automorphisms preserve identity and the order, and $A_m(x)$ is defined from these alone. (d) $A_m$ gives $N$ only to $m$.
+\end{proof}
+
+The family $\{A_m\}$ contains no more information than the order, by (a), and treats moments only by their position in it, by (c). It is the B-series described in the vocabulary of tense. Clause (d) is the computational shadow of Theorem~\ref{t:nochange}: the family makes every moment present only by having many members, one for each moment, none of which is the A-series of the world.
+
+An example makes the point concrete. In the three-moment chain T3.1, with moments $0$, $1$, $2$ in that order, and in the fork T3.2, in which $0$ precedes the incomparable moments $1$ and $2$, the family $\{A_m\}$ is given by the following matrices, whose row $m$ lists $A_m(0)$, $A_m(1)$, $A_m(2)$.
+\begin{center}
+\begin{tabular}{c@{\qquad}ccc@{\qquad\qquad}c@{\qquad}ccc}
+\toprule
+\multicolumn{4}{c}{T3.1 (chain)} & \multicolumn{4}{c}{T3.2 (fork)}\\
+$m$ & $x=0$ & $x=1$ & $x=2$ & $m$ & $x=0$ & $x=1$ & $x=2$\\
+\midrule
+0 & $N$ & $F$ & $F$ & 0 & $N$ & $F$ & $F$\\
+1 & $P$ & $N$ & $F$ & 1 & $P$ & $N$ & $O$\\
+2 & $P$ & $P$ & $N$ & 2 & $P$ & $O$ & $N$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each matrix is the order written out: the entries $P$ below the diagonal of the chain are its pairs $x < m$, the entries $F$ above it the converse pairs, and in the fork the entries $O$ mark the incomparable pair. Each row is coherent, every moment is $N$ in exactly one row, and no row is $N$ throughout, as clause (d) requires. In the fork the automorphism exchanging $1$ and $2$ exchanges rows $1$ and $2$ and columns $1$ and $2$ together and leaves the matrix unchanged, as clause (c) requires. The A-theorist who wants a changing A-series wants the matrix to be a single row that changes. What the B-series provides is the whole matrix, which does not change and does not need to.
+
+
+\begin{corollary}[The dilemma of the tensed copula]\label{c:dilemma}
+An A-theorist who answers McTaggart by tensing the copula must choose. If \enquote{$x$ is present at $m$} means that $x$ is present relative to $m$, the A-series so described is the family $\{A_m\}$, which is the B-series under another description (Proposition~\ref{p:stage}). If it means that, at the stage at which $m$ is absolutely present, $x$ is absolutely present, then the stages are ordered, and either their order is the B-order of moments, and the first horn applies, or the stages are a second series whose own A-determinations generate the problem again.
+\end{corollary}
+
+\begin{proof}
+The first horn is Proposition~\ref{p:stage}. For the second, the stages at which the various moments are absolutely present are distinct, since a moment is absolutely present at one stage and past at another, and they are ordered, since one moment's presentness precedes another's. If the stages are ordered as their moments are, the stage order is the earlier-than order, and the absolute presentness of a moment \enquote{at a stage} is its presentness relative to a moment, which is the first horn. If they are not, the stages form a series of their own; for it to be a series in which the present changes, a stage must be present absolutely, and by Theorem~\ref{t:nochange} applied to the series of stages, at most one is. This is McTaggart's regress.
+\end{proof}
+
+Corollary~\ref{c:dilemma} is our version of McTaggart's regress. It answers Broad's reply \citep{Broad1938}. Broad held that the irreducibly tensed copula renders the A-theorist's claims consistent, and so it does: \enquote{$e$ was future, is present and will be past} is consistent if \enquote{was}, \enquote{is} and \enquote{will be} are read as tense operators evaluated at a moment. But evaluation at a moment is what the first horn describes. The consistent reading of tensed claims is the reading on which their truth at a moment is fixed by the moment's position in the B-series, and this reading supplies no absolute present that changes. The A-theorist who wants more must say what it is for the present to move other than for different moments to be present relative to themselves, and every answer either repeats the B-series or starts a regress.
+
+Lowe's charge of an indexical fallacy \citep{Lowe1987} is not engaged by this argument, since we have not assumed that tensed sentences have tenseless truth conditions. We have assumed only the formal core of incompatibility, which the A-theorist accepts: the present is one. The argument shows that a unique absolute present cannot change, and that a changing present is not absolute.
+
+\subsection{The regress and its readers}
+
+McTaggart's regress has been read in three ways, and the dilemma of Corollary~\ref{c:dilemma} shows what is right in each. On the first reading, the regress is a regress of times: to remove the contradiction we say that an event is present at one moment and past at another, the moments themselves must be past, present and future, and so on. Broad's reply was directed at this reading, and it is correct as far as it goes: if \enquote{at a moment} is read as a tense operator, no further moments are introduced, and nothing regresses \citep{Broad1938}. On the second reading, which \citet{Dummett1960} favored, the regress is a regress of descriptions: each attempt to describe the A-series consistently is given from a standpoint, and to describe the standpoints we must adopt another. On the third reading, Mellor's, the regress is a regress of truth conditions: a tensed token is true or false at a time, and if the A-facts are to be absolute, the truth of a token must not depend on when it is assessed, which can be secured only by giving tokens tenseless truth conditions \citep{Mellor1981,Mellor1998}.
+
+The dilemma accommodates all three. On the first horn, the tensed copula is evaluated at moments, and Broad is right that no regress begins; but what is consistently described is the family $\{A_m\}$, whose temporal content is the B-order (Proposition~\ref{p:stage}). Mellor's conclusion, that the truth conditions of tensed tokens are tenseless, is then a consequence rather than a premise, which is why the argument is not open to Lowe's charge. On the second horn, stages are introduced over and above moments, and Dummett's regress of standpoints is the regress of series of stages, each requiring a present of its own. The three readers disagree about where McTaggart's argument has its force; they agree, and Corollary~\ref{c:dilemma} confirms, that the only consistent A-series is one whose determinations are relative to moments, and that such a series does not change in the A-theorist's sense.
+
+\subsection{The present as a further fact}
+
+One more feature of the moment-relative family deserves statement, because it bears on the A-theorist's claim that the present is a further fact over and above the B-facts.
+
+\begin{proposition}[The B-facts do not select a present]\label{p:select}
+Let a frame have more than one moment.
+\begin{enumerate}[label=(\alph*)]
+\item The B-facts of the frame are the same whichever moment is taken to be present; hence they do not determine which moment is present.
+\item A moment that is singled out by the B-facts alone is fixed by every automorphism of the frame. In a finite branching frame the least moment is always so fixed.
+\item If the frame has a non-trivial automorphism, there are distinct moments $x$ and $y$ such that the world with $x$ present and the world with $y$ present differ in no B-fact and in no respect of the position of the present in the B-series.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) The B-facts are the facts of occurrence and order, and Definition~\ref{d:adet} makes absolute presentness a further, monadic property; replacing one present moment by another leaves the order and the occurrences untouched. (b) If a moment is the unique moment satisfying a condition stated in terms of the order, an automorphism, which preserves the order, maps it to a moment satisfying the same condition, hence to itself. The least moment of a finite branching frame is the unique moment earlier than every other. (c) A non-trivial automorphism $\sigma$ moves some moment $x$ to $y = \sigma(x) \ne x$. The pointed frames $(F, x)$ and $(F, y)$ are isomorphic by $\sigma$, so every condition on the position of the present in the order that holds of one holds of the other.
+\end{proof}
+
+Proposition~\ref{p:select} shows that a monadic present is, by the A-theorist's own lights, a fact that the B-facts leave open, and in frames with symmetry it distinguishes worlds that agree in everything else, including in where the present stands relative to every event. The computation in Appendix~\ref{app:detail} records, for each frame, the orbits of its automorphism group: in each of the frames that are not rigid, which number $\NFrames - \NRigid$ of the \NFrames{} frames, some moments share an orbit, and the A-theorist's present would there distinguish worlds that differ only in which of two indiscernible moments has it. In the \NRigid{} rigid frames every moment is singled out by the B-facts, so that the B-facts single out too many moments rather than none, and they still do not say which one is present.
+
+\section{The inversion}\label{s:inversion}
+
+The results of the previous section concern the A-series. McTaggart's conclusion concerns time. To reach it he needs a premise linking the two, and his first two premises supply it.
+
+\begin{assumption}[Reality of time]\label{a:real}
+Time is real in the actual world: there are events ordered as earlier and later, at temporal separations.
+\end{assumption}
+
+Our evidence for Assumption~\ref{a:real} is the evidence for the temporal order and duration of events: clocks agree with each other and with the laws that predict their readings; records and memories are ordered consistently with the causal structure of the processes that produce them; physical theory, from mechanics to general relativity, describes a world whose events stand in a causal and metrical order and is confirmed in that description to extraordinary precision. Nothing in this evidence concerns an absolute present. It is evidence for the B-series.
+
+\begin{definition}[The bridge]\label{d:bridge}
+The \emph{bridge} is the claim that there is no time without a changing A-series. It is the conjunction of Assumptions~\ref{a:m1} and~\ref{a:m2}.
+\end{definition}
+
+TSM-01-b shows that the argument needs exactly the bridge and that the conjunction of Assumptions~\ref{a:m1} and~\ref{a:m2} is equivalent to it. McTaggart's argument has the form: bridge, incoherence, so no time. Its inversion has the form: time, incoherence, so not the bridge.
+
+\begin{theorem}[The inversion]\label{t:inversion}
+If time is real in some world, the bridge is false. Given Assumption~\ref{a:real}, the bridge is false.
+\end{theorem}
+
+\begin{proof}
+Suppose time is real in $w$ and the bridge holds. Then $w$ contains a changing A-series, which contradicts Theorem~\ref{t:nochange}. Hence if time is real in some world, the bridge is false, and by Assumption~\ref{a:real} time is real in the actual world.
+\end{proof}
+
+The theorem does not by itself say which direction is rational. A valid argument with premises $A$ and $B$ and conclusion $C$ supports $\neg C$ from $A$ and $B$ no more and no less than it supports $\neg B$ from $A$ and $C$. The choice depends on the comparative credibility of the bridge and of the reality of time. The reality of time has the support just described. The bridge, we now show, has none that survives disambiguation.
+
+\begin{proposition}[The bridge equivocates]\label{p:equivocation}
+Assumption~\ref{a:m1} is credible only when \enquote{change} means B-change, and Assumption~\ref{a:m2} only when it means A-change. Hence the bridge has no reading on which both of its conjuncts are credible.
+\end{proposition}
+
+\begin{proof}
+The considerations that recommend Assumption~\ref{a:m1} are the Aristotelian thought that time is the number of motion with respect to before and after (\emph{Physics} IV.11), the verificationist thought that a time at which nothing differs from any other could not be detected, and the relationist thought that times are constructed from the states of things. Each concerns variation in things across times, which is B-change; none concerns events' passing from future to past. The consideration that recommends Assumption~\ref{a:m2} is McTaggart's argument from the poker: the poker's being hot on Monday and cold on Tuesday is a permanent fact, so the poker does not change. This presupposes that change must be a change in the truth-value of a fixed proposition, which is the definition of A-change. Read as a claim about B-change, Assumption~\ref{a:m2} is false, since the poker is hot at one time and cold at a later one, which is all that B-change is \citep[§442]{Russell1903}. Read as a claim about A-change, Assumption~\ref{a:m1} has no independent support.
+\end{proof}
+
+Proposition~\ref{p:equivocation} reproduces the diagnosis of TSM-01-b, which we accept in full: the credibility of the bridge derives from an equivocation between B-change and A-change, and the reality of time does not. Geach's term for the poker's variation, a \enquote{Cambridge change}, was intended to mark it as a degenerate case \citep{Geach1969}; what the term marks is only that the variation is not A-change. Russell's definition is not a stipulation that changes the subject. It describes the change we observe and measure: the poker cooling, the planet moving, the cell dividing. An argument that such things do not change unless their events also change their A-determinations rests on a premise that has no support of its own.
+
+\begin{corollary}[What survives]\label{c:survives}
+Time is an order of events by earlier and later. McTaggart's premise that time requires change, insofar as it supports his conclusion, concerns the change of A-determinations, and in that sense it is false; in the sense in which it is plausible, it concerns B-change, and it neither requires the A-series nor entails that time is unreal.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:inversion} and Assumption~\ref{a:real}, time is real and does not require a changing A-series; by Theorem~\ref{t:nochange} there is none. What there is, in every world with time, is an order of events, which is the B-series of Definition~\ref{d:bseries}. The second sentence restates Proposition~\ref{p:equivocation}.
+\end{proof}
+
+Whether time requires B-change is a further question. We need not answer it here, since nothing in the argument depends on it, and TSM-17 argues that it does not: time without change is possible and could be known to occur. On the B-theory a total freeze is a stretch of the B-series at whose times the world's states are qualitatively alike, and that is a possibility the B-series leaves open.
+
+\subsection{The evidence for the reality of time}
+
+The inversion is rational only if the reality of time is more credible than the bridge. Proposition~\ref{p:equivocation} shows that the bridge has no credibility of its own; it remains to say why the reality of time has a great deal. Three kinds of evidence converge on it.
+
+The first is the agreement of clocks. Physical processes of very different kinds, the swing of a pendulum, the decay of an isotope, the oscillation of a caesium atom, the rotation of the earth, assign durations to the same intervals between the same events, and they agree with one another to within their known errors and with the laws that predict their readings. Where they disagree, as moving and stationary clocks do, the disagreement is predicted by the metrical structure of spacetime. Agreement of this kind among independent measures is the standard evidence for the reality of a magnitude, and the magnitude here is temporal separation, a B-relation.
+
+The second is the order of records. Fossils, sediments, tree rings, light from distant galaxies and memories record events in an order that is consistent across kinds of record and consistent with the causal processes that produce them. A record is formed after what it records, never before; and the orders inferred from different records coincide. This is evidence for a causal order of events, which is the earlier-than relation of Principle~\ref{p:physical}.
+
+The third is the success of theories that presuppose the B-series. Every dynamical theory, from Newtonian mechanics to general relativity and quantum theory, describes how states at earlier times are related to states at later ones, and every one is confirmed in that description. None contains a quantity that measures the motion of a present, and none needs one. The A-theorist may say that physics is silent about the A-series, not that it denies it. That is correct, and it is why the evidence for the reality of time supports the B-series and not the bridge: what the evidence shows to be real is an order and a measure of events, and the bridge says that there is no such order without a changing A-series. The evidence, in other words, is the evidence of physics for the B-series, and the bridge would require that this evidence be evidence for nothing.
+
+
+\section{Branching and settledness}\label{s:branching}
+
+A B-theory must be stated for an indeterministic world as well as for a deterministic one. If the laws and the past do not fix the future, there are several ways the world could go on from a given moment, and the B-series, which contains the events that occur, has several continuations. The tradition of Prior, Thomason and Belnap models this by letting the order of moments branch toward the later \citep{Prior1967,Thomason1970,Belnap2001}. We adopt the model and show that it gives the open future everything it needs without an A-series.
+
+\begin{definition}[Branching frame]\label{d:frame}
+A \emph{branching frame} is a set of moments with a strict partial order, earlier-than, in which the moments earlier than any given moment are linearly ordered, and any two moments have a common earlier-or-equal moment. A \emph{finite} branching frame is a finite tree: it has a least moment, and every other moment has a unique immediate predecessor.
+\end{definition}
+
+The frame branches toward the later and not toward the earlier: each moment has one past and possibly several futures. The structure exists tenselessly. Every moment of every branch is as real as every other; the branches are the ways things go on from each moment, and branching is a feature of the B-series, not an addition to it.
+
+\begin{definition}[History]\label{d:history}
+A \emph{history} is a maximal chain of moments: a set of pairwise comparable moments to which no further moment can be added without loss of comparability. The histories \emph{through} $m$ are those containing $m$.
+\end{definition}
+
+In a finite branching frame the histories correspond one to one to the maximal moments: each history is the chain from the least moment to one maximal moment. We write $h(m)$ for the number of histories through $m$.
+
+\begin{definition}[Tenseless truth relative to a history]\label{d:truth}
+A \emph{valuation} assigns to an atomic sentence $p$ the set of moments at which it holds. A tenseless proposition is anything that is true or false relative to each history. For each moment $m$, the proposition $F_m p$, \enquote{at some moment later than $m$, $p$}, is true relative to a history $h$ if $h$ contains a moment later than $m$ at which $p$ holds, and false relative to $h$ otherwise. \enquote{It will be that $p$}, uttered or thought at $m$, expresses $F_m p$.
+\end{definition}
+
+Definition~\ref{d:truth} is the Ockhamist clause of \citet{Prior1967}, stated tenselessly: the index $m$ is a moment of the B-series and not a privileged present, and the tensed sentence expresses, at each moment, a proposition indexed to that moment, in the way that \enquote{it is raining here} expresses at each place a proposition about that place.
+
+\begin{definition}[Settledness]\label{d:settled}
+A tenseless proposition $\varphi$ is \emph{settled true at} $m$ if it is true relative to every history through $m$, \emph{settled false at} $m$ if it is false relative to every history through $m$, and \emph{open at} $m$ otherwise.
+\end{definition}
+
+Settledness is a relation between a moment and a proposition, like \enquote{north of} between a place and a thing. Every moment stands in it to some propositions. The definition agrees with Definition~2.2 of TSM-12-a, where a sentence is settled at a moment if it has the same truth value on every history through the moment, and with Definition~2.1 of REL-05-b; TSM-12-a adds the thesis that a future contingent, a sentence open at $m$, is neither true nor false at $m$, which we accept.
+
+\begin{lemma}[Histories are closed under the past]\label{l:pastclosed}
+In a branching frame, every history through a moment $m'$ passes through every moment earlier than $m'$.
+\end{lemma}
+
+\begin{proof}
+Let $h$ pass through $m'$ and let $m$ be earlier than $m'$. We show that $m$ is comparable with every moment $x$ of $h$, so that, by maximality, $m$ belongs to $h$. Since $h$ is a chain, $x$ is comparable with $m'$. If $m'$ is earlier than $x$ or equal to it, then $m$ is earlier than $x$ by transitivity. If $x$ is earlier than $m'$, then $m$ and $x$ are both earlier than $m'$, and the moments earlier than $m'$ are linearly ordered, so $m$ and $x$ are comparable.
+\end{proof}
+
+\begin{theorem}[Monotonicity of settledness]\label{t:monotone}
+For every tenseless proposition $\varphi$ and moments $m$ earlier than $m'$: if $\varphi$ is settled true at $m$, it is settled true at $m'$, and if it is settled false at $m$, it is settled false at $m'$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:pastclosed}, the histories through $m'$ are among the histories through $m$. A proposition true (false) relative to all of the latter is true (false) relative to all of the former.
+\end{proof}
+
+Theorem~\ref{t:monotone} is the fixity of the past in its general form, the form REL-05-b uses when it states that every proposition settled at a moment is settled at every later moment. It holds for every proposition, not only for propositions about the past. In particular it holds for $F_m p$: if at $m$ it is settled that $p$ will hold at some later moment, then at every moment later than $m$ it is settled that $p$ holds at some moment later than $m$. The computation verifies the theorem for $F_m p$ under every valuation of every frame with at most eleven moments, \NMonoChecks{} instances in all (Appendix~\ref{app:detail}, column M).
+
+\begin{proposition}[Bivalence and its failure]\label{p:bivalence}
+\begin{enumerate}[label=(\alph*)]
+\item Truth relative to a history is bivalent: every tenseless proposition is true or false, and not both, relative to each history.
+\item Settledness is not bivalent: in a frame where $m$ has more than one history through it, there is a valuation for which $F_m p$ is neither settled true nor settled false at $m$.
+\item Conversely, if exactly one history passes through $m$, every tenseless proposition is settled at $m$. Hence $F_m p$ is open at $m$ for some valuation if and only if $h(m) \geq 2$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) is Definition~\ref{d:truth}. (b) Let $h_1$ and $h_2$ be distinct histories through $m$. They diverge at some moment not earlier than $m$, after which each contains a moment, $x_1$ and $x_2$, that is later than $m$ and not contained in the other. Let $p$ hold at $x_1$ only. Then $F_m p$ is true relative to $h_1$ and false relative to $h_2$, and so open at $m$. (c) If $h$ is the only history through $m$, every proposition has, relative to all histories through $m$, the value it has relative to $h$.
+\end{proof}
+
+Proposition~\ref{p:bivalence} is the formal content of the open future: the openness of a proposition at a moment is a matter of the shape of the frame above that moment, and nothing else. Combined with the thesis of TSM-12-a, it yields the conclusion that future contingents at $m$ lack truth values at $m$, without any appeal to a present that is privileged absolutely.
+
+\begin{corollary}[Profiles and settling moments]\label{c:profile}
+Along every history the number $h(m)$ of histories through its successive moments is non-increasing, and it reaches $1$ at a first moment, the \emph{settling moment} of the history, at and after which every tenseless proposition is settled.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:pastclosed}, if $m$ is earlier than $m'$ then every history through $m'$ is a history through $m$, so $h(m') \leq h(m)$. The maximal moment of a history in a finite frame has exactly one history through it, so the value $1$ is reached; by Proposition~\ref{p:bivalence}(c) every proposition is settled from that moment on.
+\end{proof}
+
+Appendix~\ref{app:histories} lists, for every frame with at most nine moments, every history with its profile and its settling moment.
+
+A point about indexicality must now be made explicit, because it is where the equivocation of Proposition~\ref{p:equivocation} returns in the setting of branching. The sentence \enquote{it will be that $p$}, evaluated at successive moments, expresses different propositions: at $m$ it expresses $F_m p$, at $m'$ it expresses $F_{m'} p$. Theorem~\ref{t:monotone} concerns a fixed proposition, and it says nothing about the sequence of propositions that a fixed sentence expresses at successive moments.
+
+\begin{proposition}[Indexical reversal]\label{p:reversal}
+There are frames, valuations and moments $m$ earlier than $m'$ such that the sentence \enquote{it will be that $p$} is settled true at $m$ (that is, $F_m p$ is settled true at $m$) and settled false at $m'$ (that is, $F_{m'} p$ is settled false at $m'$).
+\end{proposition}
+
+\begin{proof}
+In the two-moment frame in which $m$ is earlier than $m'$, let $p$ hold at $m'$ only. Then $F_m p$ is true relative to the only history, and $F_{m'} p$ is false relative to it.
+\end{proof}
+
+The computation counts such reversals: there are \NReversals{} of them, summed over all frames, valuations and pairs of moments (column rev). None of them is a counterexample to Theorem~\ref{t:monotone}, and each is a case of B-variation: the sentence is true at one moment and false at a later one, as the poker is hot at one time and cold at a later one. The A-theorist who reads the reversal as the future's \enquote{becoming past} is reading a B-fact about the truth of a sentence at different moments as a change in a single proposition. That is the equivocation of Proposition~\ref{p:equivocation}, made in the vocabulary of tense logic. The same holds of the \NResolutions{} \emph{resolutions} recorded in column res: pairs of a proposition $F_m p$ open at $m$ and a later moment $m'$ at which it is settled. That a proposition is open at one moment and settled at a later one is a difference between two moments, not a movement of settledness along the series. As TSM-01-c puts it, to say that a contingent \enquote{has now become} settled is to say that it is settled at the moment of utterance.
+
+\begin{proposition}[No thin red line from the B-facts]\label{p:trl}
+A history singled out by the B-facts of a frame alone is fixed by every automorphism of the frame. There are frames in which no history is so fixed.
+\end{proposition}
+
+\begin{proof}
+The first claim is proved as Proposition~\ref{p:select}(b). For the second, in the frame with three moments in which one moment precedes two incomparable ones, the automorphism exchanging the two later moments exchanges the two histories.
+\end{proof}
+
+Proposition~\ref{p:trl} supports, from the side of the B-facts, Principle P2 of TSM-12-a, that nothing relative to a moment distinguishes one history through it as the one that will be followed. A \enquote{thin red line}, a privileged actual history relative to which future contingents are true at earlier moments, would be a further fact over and above the B-structure, as an absolute present would be a further fact over and above the B-order. Of the \NFrames{} frames enumerated, \NNoFixH{} have no history fixed by every automorphism (column h-fix), so that in them a thin red line could not even be specified by the shape of the frame. We do not rest the rejection of the thin red line on this count, since a privileged history might be specified by the events on it. The point of the proposition is the parallel: the thin red line and the absolute present are the same kind of addition, one along the branches and the other along the order, and the B-theory needs neither \citep{BelnapGreen1994,MacFarlane2003}.
+
+Theorem~\ref{t:monotone} depends on one structural feature of branching frames: the moments earlier than any moment are linearly ordered, so that the order branches toward the later and not toward the earlier. It is worth seeing that this feature is not an incidental assumption but exactly what the fixity of the past requires.
+
+\begin{proposition}[Fixity of the past and the uniqueness of the past]\label{p:converse}
+Let a strict partial order have histories as in Definition~\ref{d:history}. Settledness is monotone along the order for every tenseless proposition (as in Theorem~\ref{t:monotone}) if and only if every history through a moment passes through every moment earlier than it. In particular, if some moment $m'$ has a history through it that omits a moment $m$ earlier than $m'$, then the proposition that the history passes through $m$ is settled true at $m$ and not settled at $m'$.
+\end{proposition}
+
+\begin{proof}
+If every history through $m'$ passes through every earlier $m$, monotonicity follows as in the proof of Theorem~\ref{t:monotone}. Conversely, suppose $h$ passes through $m'$ but not through $m$, where $m$ is earlier than $m'$. Let $\varphi$ be the proposition true relative to a history just if the history passes through $m$. Then $\varphi$ is true relative to every history through $m$, and so settled true at $m$; but it is false relative to $h$, which passes through $m'$, so it is not settled true at $m'$. Since $m$ itself lies on some history through $m'$ (extend the chain $\{m, m'\}$ to a maximal one), $\varphi$ is not settled false at $m'$ either.
+\end{proof}
+
+In a frame that branches toward the earlier, for instance one in which two incomparable moments $a$ and $b$ both precede a moment $c$, the histories through $c$ are $\{a, c\}$ and $\{b, c\}$, and at $c$ it is open whether $a$ occurred, although at $a$ it was settled. The fixity of the past is therefore equivalent, given the definition of histories, to the uniqueness of the past: a moment's past is fixed at it just because it has one past. This is the formal content of the asymmetry that TSM-12-a describes when it says that, relative to every moment, the past is fixed and the contingent future open, and that the asymmetry lies in the shape of the structure, not in a privileged present. It is also a reason why the asymmetry is a B-fact: it is a fact about the shape of the earlier-than order, not about where a present is.
+
+Why should the order branch toward the later and not the earlier? The branching frame is a model of an indeterministic world in which the laws together with the course of events up to a moment do not fix what comes after it. The laws that do this in our world are time-asymmetric in their application, not in their form: the asymmetry of records, of influence and of the fixity of the past derives from the thermodynamic asymmetry and so, by the argument of TSM-05, from the low entropy of the early universe. Branching toward the later is the representation of that asymmetry in the modal structure of the world, and it requires nothing that the B-series lacks.
+
+Two further propositions relate the framework to the semantics of tense. The first concerns the logic of future contingents at a moment, the second the alternative reading of the future tense that Prior called Peircean.
+
+\begin{proposition}[Excluded middle without bivalence]\label{p:superval}
+For every moment $m$ and every tenseless proposition $\varphi$, the disjunction $\varphi \lor \neg\varphi$ is settled true at $m$, although, if $\varphi$ is open at $m$, neither disjunct is settled true at $m$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{p:bivalence}(a), $\varphi$ or $\neg\varphi$ is true relative to each history, so the disjunction is true relative to every history through $m$. If $\varphi$ is open at $m$, it is false relative to some history through $m$ and true relative to another, so neither it nor its negation is true relative to all.
+\end{proof}
+
+Proposition~\ref{p:superval} is the supervaluational treatment of future contingents \citep{Thomason1970}: settled truth at a moment is supertruth over the histories through it, and it keeps classical logic while denying bivalence. TSM-12-b argues that the gap it leaves is a gap in truth at the moment, not a gap in what can be known about a sharp fact, since relative to a moment nothing grounds the choice of one history. Our framework agrees. The disjunction \enquote{there will be a sea battle or there will not} is settled at the moment of utterance; neither disjunct is; and nothing in the B-series relative to that moment selects one.
+
+\begin{proposition}[The Peircean future]\label{p:peirce}
+Read \enquote{it will be that $p$} at $m$ in Prior's Peircean way, as true at $m$ just if $F_m p$ is settled true at $m$, and \enquote{it will never be that $p$} as true at $m$ just if $F_m p$ is settled false at $m$. Then at a moment through which more than one history passes there is a valuation for which neither is true, and at a moment through which only one history passes, exactly one of them is true for every valuation.
+\end{proposition}
+
+\begin{proof}
+Immediate from Definition~\ref{d:settled} and Proposition~\ref{p:bivalence}(b) and~(c).
+\end{proof}
+
+The Peircean values are what the tables record: in each row of Appendix~\ref{app:detail}, the column \emph{st} counts the valuations under which the Peircean \enquote{it will be that $p$} is true at the moment, \emph{sf} those under which \enquote{it will never be that $p$} is true, and \emph{op} those under which neither is. The Ockhamist and Peircean readings thus differ in a way the B-theory makes precise: the Ockhamist sentence expresses at $m$ a proposition true or false relative to each history, and the Peircean sentence expresses at $m$ the settledness of that proposition at $m$. Neither reading requires an absolute present, and the choice between them is a choice of which tenseless fact the future tense reports. \citet{MacFarlane2003} has proposed a third option, on which the truth of a future contingent is relative to a context of assessment as well as a context of utterance, so that a prediction made at $m$ may be neither true nor false as assessed from $m$ and true as assessed from a later moment on which the predicted event occurs. That view, too, is stated in a tenseless metalanguage: it relativizes truth to pairs of moments, and the relation it uses is the monotone settledness of Theorem~\ref{t:monotone}.
+
+\section{The B-series as the structure of spacetime}\label{s:spacetime}
+
+Principle~\ref{p:constitution} says that time is the B-series; Principle~\ref{p:physical} says what the B-series is in our world. The second principle is not needed to answer McTaggart, since the inversion goes through for any world in which events are ordered as earlier and later. It is needed to answer the question of the family, since a claim that time is real is a claim about our world, and it is the identification that TSM-14 relies on when it argues that time had a beginning. We defend it in four steps.
+
+\subsection{Order and measure}
+
+The relation of being earlier than, between events in a relativistic spacetime, is the causal order: $e$ is earlier than $e'$ if a future-directed causal curve runs from $e$ to $e'$, so that a signal sent at $e$ could reach $e'$. This relation is a strict partial order, and two events are incomparable under it just if they are spacelike separated. That the causal order carries nearly all the geometry of spacetime was shown early. \citet{Robb1914} gave axioms for a relation of \enquote{after} among the points of a four-dimensional manifold from which the whole of Minkowski geometry can be recovered, so that the causal order of special relativity determines its metric up to a constant factor. For general relativity, \citet{HawkingKingMcCarthy1976} and \citet{Malament1977} showed that in spacetimes without causal pathologies the causal order determines the topology and the conformal structure, that is, the metric up to a conformal factor. What the causal order leaves undetermined is a measure of volume: given the causal order and the volume element, the metric is fixed. This is the basis of the slogan of the causal set program, \enquote{order plus number equals geometry} \citep{Bombelli1987}.
+
+The B-series of Definition~\ref{d:bseries} has exactly these two components: an order of earlier and later, and a measure of temporal separation. In a relativistic spacetime the second is the proper time along timelike curves, which is fixed by the metric and recorded by clocks. Principle~\ref{p:physical} therefore identifies the B-series with structure that physics already contains and that our best theories describe in detail. Nothing in that structure corresponds to an absolute present. A clock measures the proper time between two events on its worldline; it does not measure the rate at which the present moves along it, and the theory in which clocks are described has no quantity that could play that role.
+
+\subsection{Direction}
+
+McTaggart held that without the A-series the B-series reduces to the C-series, an order without direction, and that an order without direction is not temporal. The causal order is a strict partial order, and so has a direction in the formal sense: it distinguishes $e$'s being earlier than $e'$ from $e'$'s being earlier than $e$. But a critic may press that the formal direction is a matter of convention: the converse relation is equally a strict partial order, and nothing in the structure says which of the two is \enquote{earlier than} and which \enquote{later than}.
+
+The reply is that the two orientations of the causal order are physically distinguished. In a time-orientable spacetime the light cones at each point divide into two halves, and a continuous choice of one half as future is a time orientation. Which orientation is the future one is fixed by the asymmetries of physical processes along it: the increase of entropy, the direction in which records and memories are formed, the direction of causal influence as agents exploit it. TSM-05 argues that these asymmetries derive from the low-entropy state of the early universe, which itself requires no further explanation. The direction of time is therefore the orientation of the physical asymmetries along the B-series; it is fixed by what occurs at each time, and it is not supplied by a moving present \citep{Price1996,Maudlin2007}. An order whose direction is grounded in this way is not a C-series. McTaggart's assumption that only the A-series could direct the order is the bridge once again: the claim that what makes time temporal is a change in A-determinations.
+
+\subsection{Relativity and the present}
+
+In special relativity there is no frame-independent relation of simultaneity between spacelike separated events. A global present, a set of events simultaneous with a given one, can be defined only relative to a frame, and different frames give different presents. \citet{Putnam1967} argued that this refutes the view that only present things are real, since by the relativity of simultaneity and the transitivity of \enquote{being real for}, every event would be real for every observer. \citet{Godel1949} argued, more radically, that relativity shows the \enquote{objective lapse of time} to be an illusion, and that in some solutions of the field equations there is not even a global time function. Gödel's conclusion resembles McTaggart's, and our response to it is the same. What relativity shows is the absence of a frame-independent global present, and hence the absence of anything that could be the A-series of the world. It does not show that time is unreal, since the causal and metrical structure that relativity describes is the B-series, and that structure is not frame-relative. TSM-16 draws the conclusion that the present is a local rather than a global notion.
+
+\citet{Stein1968} argued that, in Minkowski spacetime, the only relation of \enquote{having become} that respects the structure is relative to a point: the events that have become, relative to a point-event, are those in or on its past light cone. Stein's relativized becoming is, in our terms, a moment-relative notion like settledness, and it has the formal property that makes settledness innocuous: it is defined at every point, and no point is privileged. We accept Stein's notion as a tenseless relation and reject the inference, sometimes drawn from it, that it vindicates an A-theory. A relation that every event bears to the events in its past cone is a B-relation.
+
+The formal core of Assumption~\ref{a:incoherence} uses the fact that two distinct moments of one history are comparable. In a relativistic setting, an A-theorist might try to escape it by making many spacelike separated events present together, the present being a spacelike hypersurface. This saves uniqueness at the cost of choosing a hypersurface, which, in the absence of a privileged frame, is a choice that the B-facts do not make. The A-theorist must then hold that reality contains a privileged foliation which physics does not detect. Such a view is consistent, but it adds to the B-series a structure for which there is no evidence and which does no physical work, and it remains subject to Theorem~\ref{t:nochange}, since the privileged hypersurface could change only by being had by more than one of the hypersurfaces of a single history of foliations.
+
+\subsection{Branching in spacetime}
+
+The branching frames of Section~\ref{s:branching} have moments as their points: global states of the world that are linearly ordered on each history. In a relativistic setting, the points are better taken to be point-events, and the branching structure to be a branching of spacetimes. \citet{Belnap1992} developed a theory of branching space-times in which histories are maximal directed sets of point-events and the past of a point-event need not be linearly ordered. The results we need carry over. What Lemma~\ref{l:pastclosed} requires is that a history containing an event contain everything in that event's causal past, and in Belnap's theory histories are closed downward in this sense. Settledness at a point-event is then defined as in Definition~\ref{d:settled}, and Theorem~\ref{t:monotone} holds with the same proof. We work with linear moments in the body of the paper and in the computation because they suffice for the questions McTaggart raises, all of which concern the order of times along a history.
+
+\subsection{Realism about the B-series}
+
+An idealist may grant the inversion and hold that it shows only that the B-series is the order in which we represent events: Kant held that time is the form of inner sense, and McTaggart that the B-series is the appearance of a non-temporal C-series. On either view the B-series is real as a representation and not as a feature of things in themselves. This raises a different question from McTaggart's, that of realism about the physical world. Principle~\ref{p:physical} identifies the B-series with the causal and metrical structure of spacetime, and our grounds for thinking that this structure is mind-independent are our grounds for thinking that spacetime and its contents are: the success of theories that describe it, the agreement of independent measurements, and the absence of any account of why a merely represented order would display the structure it does. An idealist who holds that the whole physical world is appearance will hold that time is too, and we do not argue against general idealism here. What the idealist cannot do is use McTaggart's argument to single out time: the argument shows that the A-series is incoherent, and it gives no reason to treat the B-series differently from any other physical structure. McTaggart's own reason for doing so was his reduction of the B-series to the A-series and the C-series, which presupposes the bridge.
+
+\subsection{The beginning of time}
+
+Principle~\ref{p:physical} has a consequence that TSM-14 develops. If time is the causal and metrical structure of spacetime, then whether time had a beginning is the question whether that structure has a finite past: whether there is a bound on the duration of every past-directed history. The singularity theorems of general relativity give evidence that our universe has a finite past, and on the identification of the B-series with that structure, a question about what preceded every time presupposes a time outside the series. In the finite frames of the appendices every frame has a least moment, and every history begins there; nothing in a frame is earlier than its least moment, and nothing in the definitions invites the question what is.
+
+\section{Against the growing block and the other A-theories}\label{s:block}
+
+The open future is often thought to favor the growing block. If the future is open and the past fixed, it seems that the past exists and the future does not, and that the boundary between them, the present, moves as the future becomes past \citep{Broad1923,Tooley1997,CorreiaRosenkranz2018}. Branching is then naturally pictured as a tree that grows: at each stage the tree consists of the past and present, and its growth selects one continuation and discards the others.
+
+\begin{definition}[Growing block]\label{d:block}
+The \emph{growing block} is the view that the totality of existing moments is the set of moments up to and including an absolute present, its \emph{edge}, and that the edge moves, so that the totality of what exists is different at different stages.
+\end{definition}
+
+\begin{theorem}[The growing block is excluded]\label{t:noblock}
+The growing block requires a changing A-series and is therefore excluded. Its static counterpart, on which every moment exists and settledness is relative to moments, is the branching B-theory of Section~\ref{s:branching}.
+\end{theorem}
+
+\begin{proof}
+The edge of the block is an absolute present in the sense of Definition~\ref{d:adet}: it is the moment that is present simpliciter, and what exists is fixed by it. For the edge to move is for the present to be at more than one moment, which by Definition~\ref{d:changing} is for the world to contain a changing A-series. By Theorem~\ref{t:nochange} no world does. If the edge is relativized to moments, so that relative to each moment the block extends up to that moment, then by Corollary~\ref{c:dilemma} the relativized edge is the moment-relative A-assignment of Definition~\ref{d:relative}, and the view is a description of the whole frame, every moment of which exists, together with the relation \enquote{earlier than or equal to}. What varies between moments is then which moments are earlier, and which propositions are settled; by Theorem~\ref{t:monotone} the latter is a structural fact about the frame.
+\end{proof}
+
+The growing block has a further cost that TSM-12-a, following \citet{Bourne2002} and \citet{BraddonMitchell2004}, presses against it. On the block view, the past is as real as the present; past thinkers exist, and many of them believe, as we do, that they are at the edge. They are wrong. Since their evidence is the same as ours, we have no reason to think that we are not in their position, and the growing-blocker cannot know that it is now now. \citet{Forrest2004} replied that only the present is conscious: the past is real but dead. The reply concedes that existence does not mark the present, since the dead past exists, and makes consciousness do the marking instead, at the cost of holding that the conscious lives of our predecessors are not conscious. On our view the argument does not arise. The present is the time of the thought, and every thinker who believes that it is now the time of her thought is right \citep{Mellor1998}.
+
+Settledness is the notion the growing-blocker wanted, and it is available without the block. The past of a moment is settled at that moment, the future of a moment may be open at it, and every history through a moment contains its whole past (Lemma~\ref{l:pastclosed}). These are relations of moments to propositions. They are moment-relative in the way that TSM-12-a requires: existence is not relativized to moments, only settledness is. TSM-03 adds that the past exists in the way distant places do, as elsewhere in time; we add that the branches above a moment exist in the same way, as other ways in which the world goes on from that moment, none of which is \enquote{the one that will come to exist}, since there is no moving present for it to come to exist at.
+
+The other A-theories fare no better. The moving spotlight holds that all times exist and that one of them is absolutely present, the present moving from earlier to later \citep{Cameron2015,Skow2015}. The spotlight is an absolute present, and its motion is a changing A-series; Theorem~\ref{t:nochange} applies directly. Cameron's version replaces the monadic present by a fundamental property of temporal distance from the present, had by each time in some degree; but for these properties to change is for each time to have different degrees at different stages, and Corollary~\ref{c:dilemma} applies to the stages. Presentism, on which only present things exist, makes the present absolute in the strongest way, since it is the boundary of existence itself, and it faces in addition the objection from relativity and the problem of grounding truths about the past \citep{Markosian2004}; these are the subject of TSM-03 and TSM-16, and we do not repeat them here. Each view privileges one moment absolutely and has it move, and that combination is what Theorem~\ref{t:nochange} excludes.
+
+Fine's non-standard views are different, and we treat them as objections.
+
+\section{Cases and variants}\label{s:cases}
+
+The principles of Section~\ref{s:framework} should give a verdict on the cases that have been used to test theories of time. We consider six.
+
+\paragraph{The frozen world.} \citet{Shoemaker1969} described a world divided into three regions, each of which undergoes a total freeze at regular intervals, every third, fourth and fifth year respectively, for a year at a time. The inhabitants observe the local freezes from outside and infer, by the simplest law that fits their observations, that every sixtieth year all three regions freeze together. If they are right, a year passes in which nothing changes anywhere. TSM-17 argues that this is possible and could be known to occur. On our view the case is straightforward. A total freeze is a stretch of the B-series whose times are qualitatively alike: the order and the duration are there, and the change is not. Assumption~\ref{a:m1}, in its B-reading, is false in the frozen world, and nothing in the inversion depended on it. The case also confirms Proposition~\ref{p:equivocation} from the other side. The considerations that recommend Assumption~\ref{a:m1}, that idle time could not be detected and that times are constructed from the states of things, are exactly the considerations Shoemaker's case is designed to answer, and they concern B-change. McTaggart's A-reading of the premise is not engaged by the case at all.
+
+\paragraph{The one-moment world.} A world with a single moment, the frame T1.1, is the limiting case. Its B-series is a one-element order with no pairs in the earlier-than relation and no temporal separations. On Principle~\ref{p:constitution} there is time in such a world only in a degenerate sense: there is a moment, but nothing is earlier or later than anything. It is also the only world in which a single A-assignment makes every moment present (Proposition~\ref{p:stage}(d)), and so the only world in which an A-series is complete in McTaggart's sense. This is no comfort to the A-theorist. The world in which the A-series is complete is the world in which nothing passes, since the only event is present and has never been future and will never be past. McTaggart's requirement that every event be past, present and future is unsatisfiable in every world with more than one moment and vacuous in the one world where it can be met.
+
+\paragraph{The twins.} Two clocks are synchronized at an event $e$; one remains inertial and the other travels and returns, and at their reunion $e'$ the traveling clock records less elapsed time. The B-theory describes the case directly. The causal order puts $e$ earlier than $e'$; the metrical structure assigns different proper times to the two worldlines between them; each clock correctly measures the proper time along its own worldline. Principle~\ref{p:physical} identifies the temporal separation of events along a curve with this proper time. An A-theorist who holds that the present advances must say how fast it advances along each worldline. If it advances at one proper second per second along each, the \enquote{rate} is the B-fact of proper time under another description \citep{Markosian1993}, which is the topic of TSM-02-b; if it advances along a privileged global time, the theory adds a structure that the clocks do not record.
+
+\paragraph{Time travel and closed curves.} TSM-04 argues that backward time travel is consistent provided the past is not changed, and that the grandfather paradox shows only that the traveler fails. The B-theory explains why the past cannot be changed. To change the past would be for an event to occupy a position in the B-series and later not to occupy it, which would be for its location in the order to vary across stages; and a variation across stages of what is at each position is a changing A-series in the sense of Corollary~\ref{c:dilemma}, now applied to occupancy rather than presentness. On the B-theory each event is where it is in the order, once; the traveler's attempt and its failure are both in the order, and the failure is a B-fact about the attempt. Spacetimes with closed timelike curves, such as the solution described by \citet{Godel1949}, raise a different issue: in them the causal order is not irreflexive, since an event can be causally earlier than itself. Principle~\ref{p:physical} must then be read locally. In any sufficiently small region the causal order is a strict partial order and is the B-series of that region; globally, the structure is a causal structure that fails to be an order. We do not think this threatens Principle~\ref{p:constitution}, since a causally pathological spacetime still has a causal and metrical structure, and the temporal facts in it are facts about that structure; but we record it as a case in which the identification of time with an order is local rather than global.
+
+\paragraph{Foreknowledge.} REL-05-b argues that Ockhamism, in branching time with moment-relative settledness, is a confused statement of the view that God's knowledge is timeless. The argument uses the monotonicity of settledness in exactly the form of Theorem~\ref{t:monotone}: every proposition settled at a moment is settled at every later moment, so that a divine belief at an earlier moment about a contingent choice would have to be settled before the choice was, which branching excludes. The soft fact, correctly described, is a tenseless truth relative to a history. Our framework supplies the distinction REL-05-b needs: between truth relative to a history, which is bivalent (Proposition~\ref{p:bivalence}(a)), and settledness at a moment, which is not (Proposition~\ref{p:bivalence}(b)). A timeless knower knows the former and has no position in the order relative to which the latter could be assessed; REL-19 draws the consequence that such a knower lacks indexical knowledge of what time it is now.
+
+\paragraph{Self-location.} In the Sleeping Beauty problem, Beauty wakes not knowing whether it is Monday or Tuesday. EPI-18-c argues that her uncertainty is uncertainty about her location in a world whose history she knows apart from the coin, and that her credences are defined on centered worlds. On our view this is the general form of tensed uncertainty. Every question of the form \enquote{is it now $t$?} is a question about where the thought is in the B-series. The B-series itself is not uncertain for her in that respect: she knows that there is an awakening on Monday and, on tails, one on Tuesday. What she lacks is self-locating information, and that is all that knowing what time it is ever comes to.
+
+\section{Consequences for neighboring questions}\label{s:neighbors}
+
+The answer to the question whether time is real constrains the answers to several neighboring questions, and the families that address them presuppose it. We indicate how.
+
+\paragraph{Passage (TSM-02).} If the A-series is incoherent, nothing passes, since passage is the change of A-determinations, the present moving from earlier to later times. TSM-02-a takes Theorem~\ref{t:nochange} as a premise and adds an independent argument that the impression of passage is fixed by the B-facts about experience. The two arguments are complementary: ours shows that there is no passage for the impression to represent; TSM-02-a's shows that the impression would be had whether or not there were. The impression itself is not thereby an illusion. Its source lies in the structure of experience, in the succession of experiences each of which represents its predecessors as just past \citep{Williams1951}; what is mistaken, if anything, is the inference from it to a moving present, and the view requires only that a description of experience as of passage not be read as a description of time.
+
+\paragraph{The past and the present (TSM-03, TSM-15, TSM-16, TSM-18).} On the B-theory every moment is as real as every other, and the past is elsewhere in time, as distant places are elsewhere in space (TSM-03). The present has no metaphysical privilege; it is the time at which a thought or utterance occurs (TSM-15), and \enquote{now} is an indexical (TSM-18). Proposition~\ref{p:select} shows from our side why a privileged present would have to be a further fact not fixed by the B-facts, and TSM-16 shows that relativity leaves no frame-independent global present for such a fact to concern.
+
+\paragraph{Direction (TSM-05).} The B-series has a direction, and the direction is not supplied by a moving present. TSM-05 grounds it in the low-entropy initial state. Section~\ref{s:spacetime} uses that result to answer McTaggart's claim that without the A-series the B-series is a C-series.
+
+\paragraph{The open future (TSM-12, ACT-17).} TSM-12-a argues that future contingents are neither true nor false until they are settled, and ACT-17 that fatalism is therefore unsupported. Section~\ref{s:branching} supplies the B-theoretic setting: settledness is moment-relative and monotone, the past of each moment is fixed at it because it has one past (Proposition~\ref{p:converse}), and the open future at a moment is the plurality of histories through it (Proposition~\ref{p:bivalence}). No moment is the edge of a growing block (Theorem~\ref{t:noblock}). It may be objected that if every moment is as real as every other, including the moments later than this one, it is already true what will happen, so that the B-theory entails fatalism. The objection runs together two senses in which the future might be \enquote{real}. In a branching frame every moment exists tenselessly, including every moment on every branch above this one. What does not exist is a fact, relative to this moment, about which branch is the one that will be followed: by Proposition~\ref{p:trl} nothing in the B-structure singles one out, and Principle P2 of TSM-12-a denies that anything else does. The reality of later moments is therefore compatible with the openness of what happens later, since what is real above a moment is several ways the world goes on, and a future contingent at the moment is true on some of them and false on others. That is why, as TSM-12-a and ACT-17 conclude, future contingents lack a truth value at the moment and fatalism is unsupported. In a deterministic world, the frame is a chain and every future-tensed proposition is settled; but then fatalism follows from determinism, not from the reality of the future.
+
+\paragraph{The beginning of time (TSM-14).} TSM-14-a identifies time with the causal and metrical structure of spacetime, as Principle~\ref{p:physical} does, and argues that this structure has a finite past and that the question what preceded it is ill-formed. The identification is what makes the question of a beginning a question about the structure of spacetime rather than about a time outside it.
+
+\paragraph{Time without change (TSM-17).} TSM-17-a argues, with Shoemaker, that time without change is possible. On our view this is the falsity of Assumption~\ref{a:m1} in its B-reading, which the inversion does not need. McTaggart's premise that time requires change, insofar as it was a premise of his argument, concerned the change of A-determinations (Corollary~\ref{c:survives}).
+
+\paragraph{What time was asked to do.} TSM-01-c lists the roles standardly assigned to time: to order events and measure their separation, to make change possible, to give the order a direction, to make tensed sentences true or false, to leave the future open while the past is fixed, and to present itself as passing. It derives that the B-series, with the location of thinkers in it, suffices for each. The results of this manuscript supply the parts of that derivation that concern the order, change, the open future and the fixity of the past. The tenseless view, branching and with moment-relative settledness, gives up none of what time was asked to do.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[The C-series]\label{o:cseries}
+Without the A-series, the B-series is a mere order, McTaggart's C-series. An order of positions is no more temporal than an order of points on a line or of numbers by magnitude. What makes an order temporal is that its members pass from future to past. Hence time is not constituted by the B-series.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the B-series is distinguished from other orders only by its form. It is not. The B-series is the order of events by the relation of being earlier than, and this relation is distinguished from spatial and numerical orders by its role in causation, in the laws of motion, in the formation of records and in the orientation of the thermodynamic asymmetry (Section~\ref{s:spacetime}). An order of events in which causes precede their effects, entropy increases toward the later, and memories record the earlier and not the later is a temporal order, and nothing in it is a passage from future to past. The objection's premise that only passage makes an order temporal is an instance of the bridge, and Proposition~\ref{p:equivocation} has shown that the bridge has no support of its own.
+\end{reply}
+
+\begin{objection}[Dummett: the completeness of description]\label{o:dummett}
+A complete description of a temporal world must say which events are past, which present and which future. No description from no temporal standpoint can say this, and any description from a standpoint is incomplete, since it omits how things are from other standpoints. Hence either reality has no complete description or the B-theory omits something real \citep{Dummett1960}.
+\end{objection}
+
+\begin{reply}
+The first premise trades on an ambiguity in \enquote{say which events are past}. A description that says, of each event, at which moments it is past (all those later than it) says which events are past relative to each moment, and this description is complete and from no standpoint: it is the moment-relative A-assignment of Definition~\ref{d:relative}, which Proposition~\ref{p:stage} shows to be equivalent to the B-series. What it does not say is which events are past relative to the moment at which the description is read. That is self-locating information, and the parallel with space and with persons shows that its absence is no incompleteness in the description of the world. A complete atlas does not say which place is here, and a complete biography of everyone does not say which of them I am \citep{Perry1979,Lewis1979}. What Dummett's point establishes is that thought has a perspective, not that time does. EPI-18-c gives the same treatment of Beauty's uncertainty whether it is now Monday, and REL-19 of the indexical knowledge that a timeless God lacks without defect in omniscience.
+\end{reply}
+
+\begin{objection}[Prior: thank goodness that's over]\label{o:prior}
+When a headache ends, I am glad that it is over. What I am glad about is not that its end is earlier than my utterance, a tenseless fact I could have known in advance and to which I am indifferent, but that it is now over. The B-theory has no fact for my gladness to be about \citep{Prior1959}.
+\end{objection}
+
+\begin{reply}
+The content of the relief is self-locating: that the headache ends before \emph{this} time, the time of the thought. Its content is true at some centers and false at others, and it is the content one has reason to welcome, because the location of one's present thinking relative to the headache is what determines whether one is in pain. That the B-theory has no non-indexical fact that one could be glad about in advance is correct and is no objection, since one could not, in advance, be glad of a content whose truth depends on the time of the gladness. The reply is Mellor's \citep{Mellor1998}, and TSM-01-c shows that it extends to every role tense is asked to play. On our view the facts that make the relief appropriate are B-facts: the relief occurs later than the headache, and its subject is not in pain at its time.
+
+The same holds of a related objection, that action requires tensed facts. An agent who must leave at noon acts when she believes that it is now noon, and no belief with tenseless content, such as the belief that her leaving is simultaneous with noon, explains why she acts now rather than at some other time. The argument is Perry's argument for the essential indexical, applied to time, and Perry's conclusion is that indexical belief is essential to the explanation of action, not that there are indexical facts \citep{Perry1979}. The agent who believes that it is now noon believes that her thought occurs at noon; the content is self-locating, and it explains her acting at the time of the thought because the belief and the action are at the same time. The same structure explains why a person who believes \enquote{the bear is attacking me} runs, while one who believes \enquote{the bear is attacking the person in the mirror} need not. In both cases what explains action is the location of the believer, and in both cases the facts that make the belief true are non-indexical: that the thought occurs at noon, that the bear attacks the believer. The timing of action is therefore explained by B-facts about where the believer and her thoughts are located \citep{Mellor1998}.
+\end{reply}
+
+\begin{objection}[Fine: relativism and fragmentalism]\label{o:fine}
+The B-theorist rejects Realism, the claim that reality is constituted in part by tensed facts. But there are A-theories that keep Realism and Neutrality and give up Absolutism or Coherence instead \citep{Fine2005}. External relativism holds that reality is constituted only relative to a time; fragmentalism holds that reality consists of fragments, each coherent and oriented toward one time, which do not cohere with one another. Neither privileges a present, and neither is touched by Theorem~\ref{t:nochange}.
+\end{objection}
+
+\begin{reply}
+We take the two views in turn. External relativism says that reality relative to $t$ contains the tensed facts oriented toward $t$. The temporal content of this reality is the family $\{A_t\}$ of Definition~\ref{d:relative}: relative to $t$, the events earlier than $t$ are past, $t$ is present and the later events future. By Proposition~\ref{p:stage}, this family is equivalent to the B-order, and the relativist's \enquote{reality relative to $t$} is the B-series seen from $t$. If the relativist adds that one of these relativized realities is the one that obtains, Absolutism returns and with it Theorem~\ref{t:nochange}; if not, the view differs from ours in the vocabulary in which it describes the same structure. Fragmentalism grants what TSM-01-b notes the inversion needs: a reality whose tensed facts do not form a coherent whole is one in which the A-series is not coherent. Our use of Assumption~\ref{a:incoherence} is only to conclude that time does not consist in an A-series that is coherent and absolute. The fragmentalist may say that time consists in an incoherent totality of coherent fragments. We reply that the fragments, too, are ordered: the fragment oriented toward $t$ and the fragment oriented toward $t'$ stand in the relation that $t$ and $t'$ do, and the order of fragments is again the B-series. Fragmentalism adds to the B-series a refusal to combine the fragments, and that refusal does no temporal work: everything time is asked to do is done by the order of the fragments and their content, as TSM-01-c argues.
+\end{reply}
+
+\begin{objection}[Becoming in a branching world]\label{o:becoming}
+In an indeterministic world the future becomes settled. At one moment it is open whether the coin lands heads; at a later moment it is settled. Becoming settled is a change, and it is not B-change in any object: it is the change of a proposition from open to settled. Hence the open future requires A-change after all.
+\end{objection}
+
+\begin{reply}
+That a proposition is open at $m$ and settled at a later $m'$ is a difference between two moments in their relation to the proposition: $m$ stands in the relation \enquote{settles} to it and $m'$ does not. It is a B-fact about the branching structure, of the same kind as the poker's being hot at one time and cold at another. Theorem~\ref{t:monotone} says what is invariant along a history: what is settled stays settled. Proposition~\ref{p:reversal} says what is not: the proposition expressed by a tensed sentence differs between moments. Neither requires that settledness move along the frame. The objector's \enquote{change of a proposition from open to settled} is, on inspection, a pair of facts about two moments described as if it were a single fact about one proposition across stages; that is the equivocation of Proposition~\ref{p:equivocation}, and the computation counts \NResolutions{} such pairs among the frames enumerated without finding any that is anything else. To say that the coin's landing \enquote{has now become} settled is to say that it is settled at the moment of utterance (TSM-12, TSM-18).
+\end{reply}
+
+
+
+
+
+\begin{objection}[Lowe: the indexical fallacy]\label{o:lowe}
+Arguments of McTaggart's kind assume that tensed sentences have tenseless truth conditions, so that \enquote{$e$ is past} uttered at $t$ is true just if $e$ is earlier than $t$. The A-theorist denies this, and so the argument begs the question \citep{Lowe1987}.
+\end{objection}
+
+\begin{reply}
+Our argument does not assume it. Theorem~\ref{t:nochange} uses only the formal core of the incoherence premise, that absolute presentness is had by at most one moment, which the A-theorist accepts, since it is the uniqueness of the present. Corollary~\ref{c:dilemma} uses only the claim that stages, if they are distinct from moments, are ordered. The tenseless truth conditions of tensed tokens are a conclusion of the argument: the consistent reading of the tensed copula is evaluation at a moment, and evaluation at a moment is the family $\{A_m\}$, whose content is the B-order. As \citet{LePoidevinMellor1987} replied to Lowe, an A-theorist who rejects the conclusion owes an account of what makes a tensed token true, and the dilemma shows what such an account must either repeat or regress through.
+\end{reply}
+
+
+\section{The computation}\label{s:computation}
+
+Several of the results of Sections~\ref{s:incoherence} and~\ref{s:branching} are general theorems with short proofs. We have also verified them exhaustively on all finite branching frames up to a bound, for two reasons. The first is the usual one: a mechanical check of a general claim on all small cases guards against errors in the proofs and in the definitions, especially in definitions of maximal chains and of settledness, where small slips produce false theorems. The second is particular to the subject. The claims of the A-theorist and the B-theorist about branching time are often made with diagrams of one or two forks, and it is useful to have, for every frame up to a bound, the exact pattern of settledness at every moment under every valuation, together with the symmetry facts on which Propositions~\ref{p:select} and~\ref{p:trl} depend.
+
+\subsection{What is enumerated and checked}
+
+A finite branching frame (Definition~\ref{d:frame}) is a finite rooted tree, the order being the ancestor relation. We enumerate every frame with at most eleven moments, one per isomorphism class. Frames are generated by adding a maximal moment in every possible position to every frame with one moment fewer and reducing each result to a canonical form; the canonical form is the level sequence of the tree in which the subtrees of every moment are arranged in decreasing order of their own canonical sequences, which is a complete isomorphism invariant for rooted trees \citep{AhoHopcroftUllman1974,BeyerHedetniemi1980}. The numbers of classes obtained for $n = 1, \dots, 11$ moments are $1, 1, 2, 4, 9, 20, 48, 115, 286, 719, 1842$, which are Otter's numbers of rooted trees \citep{Otter1948,Cayley1857}. As an independent check of exhaustiveness, for $n \leq 10$ the program also canonicalizes every labeled tree whose moments are numbered so that each moment's predecessor has a smaller number, \NLabelled{} labeled trees in all, and confirms that they yield exactly the same classes.
+
+For each frame and for every one of the $2^n$ valuations of an atomic sentence $p$ the program computes, at every moment $m$, whether $F_m p$ is settled true, settled false or open, and checks the following.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Monotonicity} (Lemma~\ref{l:pastclosed}, Theorem~\ref{t:monotone}): every history through a later moment passes through every earlier one, and for every pair of moments $m$ earlier than $m'$, if $F_m p$ is settled at $m$ it is settled with the same value at $m'$.
+\item \emph{Bivalence and its failure} (Proposition~\ref{p:bivalence}): truth relative to a history partitions the valuations, while $F_m p$ is open at $m$ for some valuation exactly when $h(m) \geq 2$.
+\item \emph{Profiles} (Corollary~\ref{c:profile}): along every history the profile of $h(m)$ is non-increasing from the number of histories to $1$.
+\item \emph{A-assignments} (Proposition~\ref{p:stage}): the moment-relative assignments recover the earlier-than order and its converse, commute with a generating set of automorphisms, and no single assignment makes every moment present unless $n = 1$.
+\end{enumerate}
+It also computes the order of the automorphism group, its orbits on moments and on histories, and the counts of resolutions and reversals defined in Section~\ref{s:branching}. Every check holds in every case. Table~\ref{tab:stats} summarizes the results; Appendix~\ref{app:detail} gives the per-moment values for the \NFramesDetail{} frames with at most ten moments, Appendix~\ref{app:histories} the histories of the frames with at most nine moments, and Appendix~\ref{app:eleven} one line for each of the \NFramesEleven{} frames with eleven moments.
+
+\begin{table}[ht]
+\centering
+\input{gen/stats.tex}
+\caption{Summary of the enumeration by number of moments $n$. \emph{Frames}: isomorphism classes; \emph{labeled}: labeled trees canonicalized in the independent check; $\sum|H|$: total number of histories; \emph{linear}: frames with one history; \emph{rigid}: frames with trivial automorphism group; \emph{no fixed $h$}: frames in which no history is fixed by every automorphism; \emph{M checks}: instances of Theorem~\ref{t:monotone} checked (pairs $m < m'$ times valuations); \emph{resolutions} and \emph{reversals} as in Section~\ref{s:branching}.}
+\label{tab:stats}
+\end{table}
+
+\subsection{A row reproduced by hand}
+
+The values in the tables can be checked by hand for small frames, and doing so for one row shows what they mean. Take the root of T4.3, whose moments are $0$ (the root), $1$ and $3$ (its successors) and $2$ (the successor of $1$). The histories through the root are $\{0, 1, 2\}$ and $\{0, 3\}$. The proposition $F_0 p$ is true relative to the first if $p$ holds at $1$ or $2$, and relative to the second if $p$ holds at $3$. It is settled true at the root just if both conditions hold: $p$ at $3$, and $p$ at $1$ or at $2$. Of the $2^4 = 16$ valuations, those satisfying both are fixed at moment $3$ and allow three of the four combinations at moments $1$ and $2$, with moment $0$ free, which gives $3 \times 2 = 6$; this is the entry \emph{st}. It is settled false just if $p$ holds at none of $1$, $2$, $3$, which leaves moment $0$ free and gives $2$, the entry \emph{sf}. The remaining $16 - 6 - 2 = 8$ valuations make it open, the entry \emph{op}. At moment $1$, only one history passes, so nothing is open; $F_1 p$ is settled true just if $p$ holds at $2$, which gives $8$ valuations. Every valuation under which $F_0 p$ is settled true at the root remains one under which $F_0 p$ is settled true at $1$, since the history through $1$ is one of the two through the root; that is the instance of Theorem~\ref{t:monotone} the program checks. The program performs this computation for every moment of every frame, for every valuation, and confirms by direct evaluation for all frames with at most six moments that the bit-string method gives the same counts.
+
+\subsection{Patterns in the tables}
+
+Three patterns in Table~\ref{tab:stats} are worth recording. First, the number of rigid frames, those with no non-trivial automorphism, grows with $n$, from two of the four frames at $n = 4$ to 247 of the 1842 at $n = 11$, while their proportion falls; the number of frames in which no history is fixed by every automorphism grows in step with it. So the two situations that Proposition~\ref{p:select} distinguishes, that in which the B-facts single out every moment and that in which they leave pairs of moments indiscernible, both persist as frames grow, and neither offers the A-theorist a present selected by the B-facts. Second, resolutions outnumber reversals from $n = 6$ on, and the ratio increases steadily with $n$, from about 1.07 at $n = 6$ to about 1.28 at $n = 11$, as the number of branching moments, and so of open future contingents to be resolved by later moments, grows. Third, the chains, which are the deterministic frames, are the only frames without resolutions, while the stars have, for each $n$, the fewest reversals: in T11.1842 there are 20, against 20,440 resolutions among its 20,480 instances of monotonicity. In a deterministic world all variation across moments in the truth of tensed sentences is reversal; in a maximally branching one nearly all is resolution. Neither kind of variation is a change in a single proposition.
+
+\subsection{Particular entries}
+
+Some entries illustrate the results with special clarity.
+
+\paragraph{T1.1.} The frame with one moment is the only frame in which a single A-assignment makes every moment present (Proposition~\ref{p:stage}(d)). It is also the only frame in which the A-theorist's present could be fixed by the B-facts without remainder, since there is only one moment for it to be at. It is the degenerate case in which the A-series and the B-series coincide, because there is no order for them to disagree about. With one moment, $F_m p$ is settled false under both valuations, since nothing is later.
+
+\paragraph{T2.1 and the chains.} The two-moment chain is the frame used in the proof of Proposition~\ref{p:reversal}: under the two valuations in which $p$ holds at the later moment, \enquote{it will be that $p$} is settled true at the earlier moment and settled false at the later. Its entry records two reversals. The chains T$n$.1 are the deterministic frames: one history, all moments fixed by the (trivial) automorphism group, no open entries and no resolutions. T10.001 records 46,080 instances of monotonicity, all trivial since every proposition is settled at every moment, and 14,362 reversals; T11.0001 in Appendix~\ref{app:eleven} records 32,796 reversals and no resolutions. In a deterministic world, then, every tensed sentence is settled at every moment, and every variation in the truth of \enquote{it will be that $p$} is a reversal of the kind the A-theorist misreads as A-change. The linear B-series is the special case of the branching one in which the open future is empty.
+
+\paragraph{T3.2.} The fork, a moment with two incomparable successors, is the smallest frame in which settledness fails to be bivalent and the frame used in the proof of Proposition~\ref{p:trl}. At the root $F_0 p$ is settled true under 2 valuations (those in which $p$ holds at both later moments), settled false under 2 (those in which it holds at neither), and open under 4. The single-point vector at the root, \texttt{-??}, shows that $p$ at either later moment alone yields an open future contingent. The automorphism group has order 2 and exchanges the two histories, so neither is fixed: no thin red line can be specified by the shape of the frame. It is the frame formalized in the Lean module.
+
+\paragraph{T4.3.} The smallest frame that branches and is rigid: the root has one successor with a further successor and one maximal successor. Every moment and every history is fixed by the trivial automorphism group, so every moment is singled out by the B-facts, and Proposition~\ref{p:select}(b) offers the A-theorist no help in choosing a present: the B-facts single out each of the four moments equally. At the root, $F_0 p$ is open under 8 of the 16 valuations, and its single-point vector \texttt{-???} shows that $p$ at moment 2, which lies on only one of the two histories, is open at the root but, as the row for moment 1 shows (\texttt{--+-}), settled true at moment 1. This is Theorem~\ref{t:monotone} in its simplest non-trivial instance.
+
+\paragraph{T7.42.} A frame in which the root has two isomorphic successors, each of which is a fork. Its automorphism group has order 8, and of its three orbits on moments only the root's is a singleton. The root is thus the only moment singled out by the B-facts, and every other moment has an indiscernible partner, so that the A-theorist's present, placed at any moment but the root, distinguishes worlds that differ in nothing else (Proposition~\ref{p:select}(c)). None of its four histories is fixed.
+
+\paragraph{T10.719 and T11.1842.} The stars, one moment with nine or ten maximal successors, maximize symmetry: their automorphism groups have orders $9! = 362{,}880$ and $10! = 3{,}628{,}800$. At the root of T10.719, $F_0 p$ is settled true under 2 of the 1024 valuations and settled false under 2, and open under the remaining 1,020; nearly every proposition about the immediate future is open, and every one of them is settled at the next moment, whichever it is. The star is the frame in which the open future is as open as the number of moments allows.
+
+\medskip
+In aggregate, of the \NFrames{} frames, \NRigid{} are rigid and \NNoFixH{} have no history fixed by every automorphism. The \NMonoChecks{} instances of Theorem~\ref{t:monotone} hold without exception, as the proof requires; the \NReversals{} reversals and \NResolutions{} resolutions show how much variation across moments there is in the truth and settledness of tensed sentences, none of which is a change in a single proposition.
+
+\section{What the result does not establish}\label{s:limits}
+
+The argument establishes that the A-series is incoherent in the sense of Theorem~\ref{t:nochange} and Corollary~\ref{c:dilemma}, and that, given the reality of time, the bridge premise of McTaggart's argument is false. It does not establish the incoherence premise from premises the A-theorist must accept. We have stated its formal core, that absolute presentness is had by at most one moment, and argued that the A-theorist who denies it gives up the uniqueness of the present that distinguishes the A-series from a labeling of moments. An A-theorist who holds that absolute presentness is had by many moments, but by each at a different stage, has been answered by Corollary~\ref{c:dilemma}, whose proof relies on the claim that the stages are ordered. A view on which they are not ordered at all would not be a theory of time, and we have not addressed it.
+
+The argument does not establish Principle~\ref{p:physical} from the philosophy of time alone. It rests on physics, and in particular on the theorems relating causal order to the geometry of spacetime. If a future physics replaced spacetime by a structure without a causal order, Principle~\ref{p:constitution} would require that the B-series be identified with whatever ordering of events that physics retains; we have not considered whether every such physics retains one.
+
+The argument does not decide whether time requires B-change. That is the question of TSM-17, which answers it negatively. It does not decide whether the world is indeterministic. The branching framework is a framework for indeterminism, and Section~\ref{s:branching} shows only that a B-theorist can accept indeterminism and the open future without the A-series. If the world is deterministic, the frame is a chain and every proposition is settled at every moment, as the entries T$n$.1 show.
+
+Finally, the computation verifies the results on finite frames only. The proofs are general, and the module formalizes Lemma~\ref{l:pastclosed} and Theorem~\ref{t:monotone} for arbitrary branching frames, finite or infinite; but the counts in the tables concern the finite frames up to the stated bound, and the symmetry facts of Propositions~\ref{p:select} and~\ref{p:trl} are illustrated, not exhausted, by them.
+
+\section{Formalization}\label{s:formal}
+
+The module \texttt{lean/Philosophy/TSM/TSM\_01.lean} formalizes the logical skeleton of the argument in core Lean~4. Part I treats McTaggart's argument and its inversion. Worlds, their moments, absolute presentness and the reality of time are primitives. The formal core of Assumption~\ref{a:incoherence} is the axiom \texttt{present\_unique}; Definition~\ref{d:changing} is the definition \texttt{ChangingASeries}; the bridge of Definition~\ref{d:bridge} is \texttt{Bridge}; Assumption~\ref{a:real} is the axiom \texttt{time\_real\_actual}. The main results are these.
+
+\begin{lstlisting}
+/-- Theorem 4.4. No world contains a changing A-series. -/
+theorem no_changing_A_series (w : World) : ¬ ChangingASeries w
+
+/-- Theorem 5.3 (the inversion). -/
+theorem bridge_fails : ¬ Bridge
+\end{lstlisting}
+
+Part II formalizes branching frames (Definition~\ref{d:frame}), histories as maximal chains (Definition~\ref{d:history}) and settledness (Definition~\ref{d:settled}) for arbitrary frames, proves Lemma~\ref{l:pastclosed}, Theorem~\ref{t:monotone} and the converse direction of Proposition~\ref{p:converse}, proves that settledness is not bivalent by exhibiting the fork T3.2 with an open future contingent at its root (Proposition~\ref{p:bivalence}), and proves clauses (a) and (b) of Proposition~\ref{p:stage} for the moment-relative A-assignment of Definition~\ref{d:relative}.
+
+\begin{lstlisting}
+/-- Theorem 6.6 (monotonicity of settledness). -/
+theorem settled_monotone (phi : History F → Prop) {m m' : F.M}
+    (hlt : F.lt m m') :
+    (SettledTrue phi m → SettledTrue phi m') ∧
+    (SettledFalse phi m → SettledFalse phi m')
+\end{lstlisting}
+
+The checker reports the following dependencies.
+\begin{lstlisting}
+'Philosophy.TSM_01.no_changing_A_series' depends on axioms:
+  [Philosophy.TSM_01.Mom, Philosophy.TSM_01.Present,
+   Philosophy.TSM_01.World, Philosophy.TSM_01.present_unique]
+'Philosophy.TSM_01.bridge_fails' depends on axioms:
+  [Philosophy.TSM_01.Mom, Philosophy.TSM_01.Present,
+   Philosophy.TSM_01.TimeReal, Philosophy.TSM_01.World,
+   Philosophy.TSM_01.actual, Philosophy.TSM_01.present_unique,
+   Philosophy.TSM_01.time_real_actual]
+'Philosophy.TSM_01.settled_monotone' does not depend on any axioms
+'Philosophy.TSM_01.fixity_requires_unique_past' does not depend
+  on any axioms
+'Philosophy.TSM_01.fork_open' depends on axioms: [propext]
+'Philosophy.TSM_01.stage_order' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+\end{lstlisting}
+
+\texttt{World}, \texttt{Mom}, \texttt{Present}, \texttt{TimeReal} and \texttt{actual} are primitives. The two substantive axioms are \texttt{present\_unique}, the formal core of the incoherence premise, and \texttt{time\_real\_actual}, the reality of time; the inversion uses both, and Theorem~\ref{t:nochange} uses only the first. The monotonicity theorem and its converse depend on no axioms at all: it is a theorem about branching frames, and it holds whatever one thinks about the A-series. The remaining dependencies are the standard axioms of Lean's logic. The module does not establish the premises, does not formalize Principle~\ref{p:physical}, and does not reproduce the enumeration, which is carried out by the generator \texttt{gen/generate.py} distributed with the manuscript.
+
+\section{Conclusion}\label{s:conclusion}
+
+McTaggart's argument is valid, and its incoherence premise is true: an absolute present cannot change without being had by more than one moment, and a present relativized to moments is the B-series under another name. Its bridge premise is false, because it is credible only by equivocating between the change of things across times and the change of A-determinations. Run in reverse from the reality of time, the argument refutes the bridge and leaves time to the B-series, which in our world is the causal and metrical structure of spacetime. In an indeterministic world the B-series branches, settledness is a relation between moments and propositions, and what is settled at a moment stays settled at every later one; the open future and the fixed past are features of the shape of the series, not of a moving present, and the growing block is excluded with the A-series. Time is real, and it is the B-series.
+
+\clearpage
+\appendix
+
+\section{Volume of frames: settledness at every moment}\label{app:detail}
+
+\paragraph{What is enumerated.} This appendix lists every finite branching frame with at most ten moments, one representative of each isomorphism class, \NFramesDetail{} frames and \NMoments{} moments in all. A frame is a finite rooted tree of moments under the relation earlier-than (Definition~\ref{d:frame}); its histories are the maximal chains (Definition~\ref{d:history}), one for each maximal moment.
+
+\paragraph{Encoding.} Each frame is given by its canonical level sequence: the moments are listed in preorder, the subtrees of each moment arranged in decreasing order of their own canonical sequences, and the $i$-th digit is the number of moments earlier than the $i$-th moment (the digits $a$ and $b$, used in Appendix~\ref{app:eleven}, stand for 10 and 11). Two frames are isomorphic if and only if their canonical sequences coincide, so each sequence names exactly one class. Moments are numbered $0, \dots, n-1$ in the order of the sequence; moment 0 is the least moment, and the predecessor of each moment has a smaller number. The frame identifier T$n$.$k$ gives the number of moments and the position of the frame in the list for $n$, the frames being listed in decreasing lexicographic order of their sequences, so that T$n$.1 is the chain and the last frame for each $n$ is the star.
+
+\paragraph{The program.} The generator \texttt{gen/generate.py} (Python~3, standard library only) produces the frames by adding a maximal moment in every possible position to every frame with one moment fewer, canonicalizing, and removing duplicates. Exhaustiveness rests on the fact that removing any maximal moment from a frame with $n$ moments leaves a frame with $n-1$. The counts agree with Otter's numbers, and the program confirms them independently for $n \leq 10$ by canonicalizing all \NLabelled{} increasingly labeled trees (Section~\ref{s:computation}). Settledness is computed for all $2^n$ valuations simultaneously, by representing, for each moment $m$ and history $h$ through it, the set of valuations under which $F_m p$ is true relative to $h$ as a bit string of length $2^n$. For $n \leq 6$ the program recomputes every settledness count by direct evaluation, valuation by valuation, and checks agreement. The output is deterministic, and the program runs in a few seconds.
+
+\paragraph{Reading an entry.} Each frame has a header line:
+the identifier; the level sequence; $n$, the number of moments; $|H|$, the number of histories; \emph{len}, the number of moments on a longest history; \emph{br}, the number of moments with more than one immediate successor; $|\mathrm{Aut}|$, the order of the automorphism group; \emph{orb} $a/b$, the number $a$ of orbits of the group on moments and the number $b$ of moments fixed by every automorphism; \emph{hist-orb} $c/d$, the same for histories; \emph{M}, the number of instances of Theorem~\ref{t:monotone} checked, that is, the number of pairs $m < m'$ times $2^n$; \emph{res}, the number of resolutions, triples of a valuation and moments $m < m'$ such that $F_m p$ is open at $m$ and settled at $m'$; \emph{rev}, the number of reversals of Proposition~\ref{p:reversal}, triples such that $F_m p$ is settled true at $m$ and $F_{m'} p$ settled false at $m'$; and the verdict \enquote{ok}, which means that checks (i)--(iv) of Section~\ref{s:computation} hold for the frame.
+
+One row follows for each moment $m$: its number; \emph{par}, its immediate predecessor; \emph{lvl}, the number of moments earlier than it; $h(m)$, the number of histories through it; \emph{orb}, the size of its orbit under the automorphism group (1 if it is singled out by the B-facts in the sense of Proposition~\ref{p:select}(b)); \emph{st}, \emph{sf} and \emph{op}, the numbers of valuations, out of $2^n$, under which $F_m p$ is settled true, settled false and open at $m$; and the \emph{single-point vector}, whose $x$-th character gives the status at $m$ of $F_m p$ when $p$ holds at moment $x$ alone: \texttt{+} settled true, \texttt{-} settled false, \texttt{?} open.
+
+Several identities can be checked by eye. In every row $\mathit{st} + \mathit{sf} + \mathit{op} = 2^n$. The value of \emph{sf} is $2^{n-u}$, where $u$ is the number of moments later than $m$, since $F_m p$ is settled false at $m$ just if $p$ holds at no later moment. The value of \emph{op} is $0$ exactly when $h(m) = 1$ (Proposition~\ref{p:bivalence}). The single-point vector has \texttt{-} at $x$ unless $x$ is later than $m$, \texttt{+} if $x$ is later than $m$ and lies on every history through $m$, and \texttt{?} otherwise; along every history, a \texttt{+} at $x$ in the row of $m$ remains a \texttt{+} in the row of every later moment that is earlier than $x$ (Theorem~\ref{t:monotone}). The single-point vectors of maximal moments consist of \texttt{-} only.
+
+\paragraph{Summary.} All checks hold in all \NFramesDetail{} frames. The cases of philosophical interest are discussed in Section~\ref{s:computation}: T1.1, the only frame in which one A-assignment makes every moment present; T2.1 and the chains, in which nothing is open and every variation is a reversal; T3.2, the fork, the smallest frame with an open future contingent and with no history singled out by the B-facts; T4.3, the smallest rigid branching frame; T7.42, in which the root is the only moment singled out by the B-facts; and T10.719, the star.
+
+\input{gen/frames_detail.tex}
+
+\section{Volume of histories: profiles and settling moments}\label{app:histories}
+
+\paragraph{What is listed.} For every frame with at most nine moments (\NHistRows{} histories in all), this appendix lists each history: its number $h$ (histories are numbered in the order of their maximal moments); the moments it contains, from the least moment to its maximal moment; its \emph{profile}, the values of $h(m)$ at those moments in the same order; its \emph{settling moment}, the first moment on it through which no other history passes; and the size of its orbit under the automorphism group. A history with orbit size 1 is singled out by the shape of the frame; a frame none of whose histories has orbit size 1 is one in which no thin red line can be specified by the B-structure (Proposition~\ref{p:trl}).
+
+\paragraph{What is checked.} The program verifies that every profile is non-increasing, begins with the number of histories of the frame and ends with 1 (Corollary~\ref{c:profile}). From the settling moment on, every tenseless proposition is settled relative to the history, by Proposition~\ref{p:bivalence}(c). In a chain the settling moment is the least moment; in a frame with more than one history, the settling moment of a history is the immediate successor, on that history, of the last branching moment on it. The profiles display Theorem~\ref{t:monotone} in its most compact form: the number of possible continuations never increases along a history.
+
+\input{gen/histories.tex}
+
+\section{Frames with eleven moments}\label{app:eleven}
+
+\paragraph{What is listed.} One line for each of the \NFramesEleven{} frames with eleven moments, with the same frame-level data as the headers of Appendix~\ref{app:detail}: identifier, canonical level sequence, number of histories, length of a longest history, number of branching moments, order of the automorphism group, orbits on moments and fixed moments, orbits on histories and fixed histories, and the counts M, res and rev. The per-moment values are computed and checked exactly as for the smaller frames but are not printed. All checks hold in every case. The entries include the chain T11.0001, which has 32,796 reversals and no resolutions, and the star T11.1842, whose automorphism group has order $10!$ and in which, of the 20,480 instances of monotonicity checked, 20,440 are resolutions of an open future contingent at the root by a later moment.
+
+\input{gen/frames_eleven.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Aho et~al.(1974)]{AhoHopcroftUllman1974} Aho, A.~V., Hopcroft, J.~E. and Ullman, J.~D. (1974). \emph{The Design and Analysis of Computer Algorithms}. Addison-Wesley.
+\bibitem[Belnap(1992)]{Belnap1992} Belnap, N. (1992). Branching space-time. \emph{Synthese}, 92(3), 385--434.
+\bibitem[Belnap and Green(1994)]{BelnapGreen1994} Belnap, N. and Green, M. (1994). Indeterminism and the thin red line. \emph{Philosophical Perspectives}, 8, 365--388.
+\bibitem[Belnap et~al.(2001)]{Belnap2001} Belnap, N., Perloff, M. and Xu, M. (2001). \emph{Facing the Future: Agents and Choices in Our Indeterminist World}. Oxford University Press.
+\bibitem[Beyer and Hedetniemi(1980)]{BeyerHedetniemi1980} Beyer, T. and Hedetniemi, S.~M. (1980). Constant time generation of rooted trees. \emph{SIAM Journal on Computing}, 9(4), 706--712.
+\bibitem[Bombelli et~al.(1987)]{Bombelli1987} Bombelli, L., Lee, J., Meyer, D. and Sorkin, R.~D. (1987). Space-time as a causal set. \emph{Physical Review Letters}, 59(5), 521--524.
+\bibitem[Bourne(2002)]{Bourne2002} Bourne, C. (2002). When am I? A tense time for some tense theorists? \emph{Australasian Journal of Philosophy}, 80(3), 359--371.
+\bibitem[Braddon-Mitchell(2004)]{BraddonMitchell2004} Braddon-Mitchell, D. (2004). How do we know it is now now? \emph{Analysis}, 64(3), 199--203.
+\bibitem[Broad(1923)]{Broad1923} Broad, C.~D. (1923). \emph{Scientific Thought}. Kegan Paul.
+\bibitem[Broad(1938)]{Broad1938} Broad, C.~D. (1938). \emph{An Examination of McTaggart's Philosophy}, Vol.~II. Cambridge University Press.
+\bibitem[Cameron(2015)]{Cameron2015} Cameron, R.~P. (2015). \emph{The Moving Spotlight: An Essay on Time and Ontology}. Oxford University Press.
+\bibitem[Cayley(1857)]{Cayley1857} Cayley, A. (1857). On the theory of the analytical forms called trees. \emph{Philosophical Magazine}, 13, 172--176.
+\bibitem[Correia and Rosenkranz(2018)]{CorreiaRosenkranz2018} Correia, F. and Rosenkranz, S. (2018). \emph{Nothing to Come: A Defence of the Growing Block Theory of Time}. Springer.
+\bibitem[Dummett(1960)]{Dummett1960} Dummett, M. (1960). A defense of McTaggart's proof of the unreality of time. \emph{The Philosophical Review}, 69(4), 497--504.
+\bibitem[Fine(2005)]{Fine2005} Fine, K. (2005). Tense and reality. In \emph{Modality and Tense: Philosophical Papers}, 261--320. Oxford University Press.
+\bibitem[Forrest(2004)]{Forrest2004} Forrest, P. (2004). The real but dead past: A reply to Braddon-Mitchell. \emph{Analysis}, 64(4), 358--362.
+\bibitem[Geach(1969)]{Geach1969} Geach, P.~T. (1969). \emph{God and the Soul}. Routledge \& Kegan Paul.
+\bibitem[Gödel(1949)]{Godel1949} Gödel, K. (1949). A remark about the relationship between relativity theory and idealistic philosophy. In P.~A. Schilpp (ed.), \emph{Albert Einstein: Philosopher-Scientist}, 557--562. Library of Living Philosophers.
+\bibitem[Hawking et~al.(1976)]{HawkingKingMcCarthy1976} Hawking, S.~W., King, A.~R. and McCarthy, P.~J. (1976). A new topology for curved space-time which incorporates the causal, differential, and conformal structures. \emph{Journal of Mathematical Physics}, 17(2), 174--181.
+\bibitem[Le~Poidevin and Mellor(1987)]{LePoidevinMellor1987} Le~Poidevin, R. and Mellor, D.~H. (1987). Time, change, and the \enquote{indexical fallacy}. \emph{Mind}, 96(384), 534--538.
+\bibitem[Lewis(1979)]{Lewis1979} Lewis, D. (1979). Attitudes de dicto and de se. \emph{The Philosophical Review}, 88(4), 513--543.
+\bibitem[Lowe(1987)]{Lowe1987} Lowe, E.~J. (1987). The indexical fallacy in McTaggart's proof of the unreality of time. \emph{Mind}, 96(381), 62--70.
+\bibitem[MacFarlane(2003)]{MacFarlane2003} MacFarlane, J. (2003). Future contingents and relative truth. \emph{The Philosophical Quarterly}, 53(212), 321--336.
+\bibitem[Malament(1977)]{Malament1977} Malament, D.~B. (1977). The class of continuous timelike curves determines the topology of spacetime. \emph{Journal of Mathematical Physics}, 18(7), 1399--1404.
+\bibitem[Markosian(2004)]{Markosian2004} Markosian, N. (2004). A defense of presentism. In D.~W. Zimmerman (ed.), \emph{Oxford Studies in Metaphysics}, Vol.~1, 47--82. Oxford University Press.
+\bibitem[Markosian(1993)]{Markosian1993} Markosian, N. (1993). How fast does time pass? \emph{Philosophy and Phenomenological Research}, 53(4), 829--844.
+\bibitem[Maudlin(2007)]{Maudlin2007} Maudlin, T. (2007). \emph{The Metaphysics Within Physics}. Oxford University Press.
+\bibitem[McTaggart(1908)]{McTaggart1908} McTaggart, J.~M.~E. (1908). The unreality of time. \emph{Mind}, 17(68), 457--474.
+\bibitem[McTaggart(1927)]{McTaggart1927} McTaggart, J.~M.~E. (1927). \emph{The Nature of Existence}, Vol.~II, ed. C.~D. Broad. Cambridge University Press.
+\bibitem[Mellor(1981)]{Mellor1981} Mellor, D.~H. (1981). \emph{Real Time}. Cambridge University Press.
+\bibitem[Mellor(1998)]{Mellor1998} Mellor, D.~H. (1998). \emph{Real Time II}. Routledge.
+\bibitem[Otter(1948)]{Otter1948} Otter, R. (1948). The number of trees. \emph{Annals of Mathematics}, 49(3), 583--599.
+\bibitem[Perry(1979)]{Perry1979} Perry, J. (1979). The problem of the essential indexical. \emph{Noûs}, 13(1), 3--21.
+\bibitem[Price(1996)]{Price1996} Price, H. (1996). \emph{Time's Arrow and Archimedes' Point}. Oxford University Press.
+\bibitem[Prior(1957)]{Prior1957} Prior, A.~N. (1957). \emph{Time and Modality}. Clarendon Press.
+\bibitem[Prior(1959)]{Prior1959} Prior, A.~N. (1959). Thank goodness that's over. \emph{Philosophy}, 34(128), 12--17.
+\bibitem[Prior(1967)]{Prior1967} Prior, A.~N. (1967). \emph{Past, Present and Future}. Clarendon Press.
+\bibitem[Prior(1968)]{Prior1968} Prior, A.~N. (1968). \emph{Papers on Time and Tense}. Clarendon Press.
+\bibitem[Putnam(1967)]{Putnam1967} Putnam, H. (1967). Time and physical geometry. \emph{The Journal of Philosophy}, 64(8), 240--247.
+\bibitem[Robb(1914)]{Robb1914} Robb, A.~A. (1914). \emph{A Theory of Time and Space}. Cambridge University Press.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\bibitem[Russell(1915)]{Russell1915} Russell, B. (1915). On the experience of time. \emph{The Monist}, 25(2), 212--233.
+\bibitem[Shoemaker(1969)]{Shoemaker1969} Shoemaker, S. (1969). Time without change. \emph{The Journal of Philosophy}, 66(12), 363--381.
+\bibitem[Skow(2015)]{Skow2015} Skow, B. (2015). \emph{Objective Becoming}. Oxford University Press.
+\bibitem[Smart(1963)]{Smart1963} Smart, J.~J.~C. (1963). \emph{Philosophy and Scientific Realism}. Routledge \& Kegan Paul.
+\bibitem[Stein(1968)]{Stein1968} Stein, H. (1968). On Einstein--Minkowski space-time. \emph{The Journal of Philosophy}, 65(1), 5--23.
+\bibitem[Thomason(1970)]{Thomason1970} Thomason, R.~H. (1970). Indeterminist time and truth-value gaps. \emph{Theoria}, 36(3), 264--281.
+\bibitem[Tooley(1997)]{Tooley1997} Tooley, M. (1997). \emph{Time, Tense, and Causation}. Clarendon Press.
+\bibitem[Williams(1951)]{Williams1951} Williams, D.~C. (1951). The myth of passage. \emph{The Journal of Philosophy}, 48(15), 457--472.
+\bibitem[Zimmerman(2005)]{Zimmerman2005} Zimmerman, D.~W. (2005). The A-theory of time, the B-theory of time, and \enquote{taking tense seriously}. \emph{Dialectica}, 59(4), 401--457.
+\end{thebibliography}
+
+\end{document}

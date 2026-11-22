@@ -1,0 +1,387 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable,array,multicol}
+
+\title{A Modal Ontological Argument Without the S5 Axiom}
+\msid{REL-01-b}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Companion manuscript}
+\mskeywords{ontological argument; modal logic; S5; Brouwerian system; frame correspondence; ancestral accessibility; possibility premise}
+
+\input{gen/stats.tex}
+\newcommand{\MG}{\mathrm{MG}}
+\newcommand{\MGs}{\mathrm{MG}^{*}}
+\newcommand{\Rp}{R^{+}}
+\newcommand{\nplus}{\nec^{+}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The main argument of \emph{On the Existence of God} (REL-01-a) derives the necessary existence of a maximally great being from the possibility that one exists, using the S5 conditions on accessibility. We determine exactly which frame conditions each step of that argument needs, and we give a version that does not use the S5 axiom. With the original possibility premise, the actual existence of a maximally excellent being requires exactly symmetry, and necessary maximal greatness requires exactly a condition we call uniformity: worlds accessible from a common world see the same worlds. With a stronger possibility premise, that possibly some being exists and is maximally excellent at every world reachable by any finite chain of accessibility, the whole conclusion follows on every frame in which each step of accessibility can be retraced, and in particular on every symmetric frame, with or without reflexivity and transitivity. All correspondence claims are proved in general and checked by exhaustive enumeration of the \stTotal{} frames with at most four worlds, listed in the appendix.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The S5 premise and its critics}
+
+REL-01-a states the modal ontological argument in the possible-worlds framework of \citet{Plantinga1974}. Its formal premises are the S5 conditions on accessibility (Assumption~2.1 of REL-01-a: reflexivity, symmetry and transitivity) and the possibility premise (Assumption~3.1), that at the actual world it is possible that some being is maximally great. A being is maximally great at a world if it exists and is maximally excellent at every world accessible from that world (Definition~2.4). The argument passes through two lemmas: whatever is maximally great at a world accessible from $w$ is maximally great at every world accessible from $w$ (Lemma~3.2), and whatever is possibly necessary is necessary (Lemma~3.3). It concludes that necessarily some being is maximally great (Theorem~3.4), and hence that some being actually exists and is maximally excellent (Corollary~3.5).
+
+The S5 conditions have been doubted for metaphysical modality. \citet{Chandler1976} and \citet{Salmon1989} argued, from cases of tolerance in the origins of artefacts and organisms, that what is possible may itself be contingently possible, so that accessibility among metaphysically possible worlds is not transitive and the S4 principle $\nec p \to \nec\nec p$ fails. Others have accepted S5 as the logic of metaphysical necessity on the ground that what is metaphysically possible does not vary from world to world \citep{Williamson2013}. REL-01-a takes the second view and notes that, since its proof uses Lemma~3.3, the proof does not survive the move to a weaker logic; it assigns to the present manuscript a version of the argument that does not use the S5 axiom, at the cost of a stronger possibility premise. REL-01-g observes in passing that the principle $\pos\nec p \to p$, which needs only symmetry, would yield actual existence directly. The question that these remarks leave open is precise: which conditions on accessibility does each conclusion of the argument actually need?
+
+\subsection{The modal premise in the history of the argument}
+
+The dependence of the modal ontological argument on a strong modal logic was visible from its revival. \citet{Malcolm1960} argued that Anselm's second argument shows the existence of God to be either necessary or impossible, so that it is necessary unless it is impossible. \citet{Hartshorne1962} gave the argument a formal statement in which the decisive step is a principle he called Becker's postulate, that modal status is itself necessary: if something is possible or necessary, it is necessarily so. That postulate is characteristic of S5, and it plays in Hartshorne's proof the role that Lemma~3.3 plays in REL-01-a. \citet{Plantinga1974} restated the argument in terms of possible worlds and took the logic of broadly logical necessity to be S5, so that what is possible does not vary from world to world; his maximal greatness, like Definition~2.4 of REL-01-a, builds necessary existence into the property whose possibility is premised.
+
+Critics have pressed on the modal premise from two directions. The first questions S5 itself. \citet{Chandler1976} and \citet{Salmon1989} argued that accessibility among metaphysically possible worlds is not transitive. On their view an artefact could have originated from slightly different material, and could have had, had it so originated, a further slight difference, without its being possible for it to have originated from material that differs by the sum of the two: a world possible relative to a possible world need not be possible relative to the actual world. If they are right, S4 fails, and with it the S5 principle. The second direction accepts S5 and turns it against the argument: in S5 the possibility of a maximally great being and the possibility of its absence are incompatible, and the argument from the second is as valid as the argument from the first \citep{Oppy1995}. REL-01-a records this as Proposition~4.1 and assigns the choice between the premises to Volume~III.
+
+The present manuscript addresses the first line of criticism only, and it does so without taking sides on whether metaphysical accessibility is transitive. A parallel question arises for Gödel's version of the argument. \citet{Benzmuller2014} reported, from their computer-assisted analysis of Scott's version of Gödel's proof, that the modal logic KB suffices for its main theorem. REL-01-c shows by a checked derivation that the same holds for the emended version it studies, whose only relational step is symmetry. Our results for the Plantinga-style argument are of the same kind but sharper: for each step, they identify the exact condition on frames, not only a sufficient system.
+
+\subsection{Thesis}
+
+We answer the question completely for the frames of propositional and constant-domain quantified modal logic. Our results are of two kinds.
+
+\emph{Correspondence results.} Keeping the possibility premise of REL-01-a, Corollary~3.5 (actual existence and maximal excellence) follows on a frame if and only if the frame is symmetric, and Theorem~3.4 (necessary maximal greatness) follows if and only if the frame is \emph{uniform}: any two worlds accessible from a common world have the same successors. Uniformity is strictly weaker than the Euclidean condition that corresponds to the S5 axiom, so the original argument is valid on exactly the symmetric uniform frames, a class that properly includes the equivalence relations and contains frames that are neither reflexive nor transitive (Corollary~\ref{c:orig}).
+
+\emph{The argument without the S5 axiom.} Replace maximal greatness by \emph{ancestral} maximal greatness: existence and maximal excellence at every world reachable by a finite chain of accessibility steps. From the possibility of ancestral maximal greatness, the conclusions of Theorem~3.4 and Corollary~3.5 both follow on every frame in which every accessibility step can be retraced by some chain of steps (condition C), and in particular on every symmetric frame, whether or not it is reflexive or transitive (Theorem~\ref{t:main}). Condition C is also necessary (Proposition~\ref{p:exact}). On equivalence relations the strengthened premise coincides with the possibility premise of REL-01-a (Proposition~\ref{p:coincide}), so the version agrees with the main argument where the main argument applies.
+
+The general results are proved below. They are also checked by a program that enumerates every frame with at most four worlds up to isomorphism, \stTotal{} frames in all, and decides by brute force over all valuations whether each of eight argument schemas is valid on each frame. The listing in Appendix~\ref{app:listing} records the verdicts frame by frame.
+
+\subsection{Plan}
+
+Section~\ref{s:framework} sets out the framework and the argument schemas. Section~\ref{s:corr} proves the correspondence results. Section~\ref{s:main} states and proves the argument without the S5 axiom. Section~\ref{s:computation} summarizes the computation and discusses six frames from the listing. Section~\ref{s:objections} answers five objections, and Section~\ref{s:not} records what the results do not establish.
+
+\section{Framework}\label{s:framework}
+
+\subsection{Frames and conditions}
+
+A \emph{frame} is a non-empty set $W$ of worlds with a relation $R$ on $W$. We write $R(w)$ for the set of worlds accessible from $w$. A proposition is a set of worlds; $\nec p$ holds at $w$ if $p$ holds at every world in $R(w)$, and $\pos p$ if $p$ holds at some world in $R(w)$. A schema is \emph{valid on a frame} if every instance holds at every world under every valuation \citep{Kripke1963, HughesCresswell1996}. For the purposes of the argument the actual world is any world; validity on a frame therefore requires the argument to succeed whichever world is actual.
+
+\begin{definition}\label{d:std}
+The five standard conditions are: T (reflexivity: $wRw$); B (symmetry: $wRv$ implies $vRw$); 4 (transitivity: $wRv$ and $vRu$ imply $wRu$); 5 (the Euclidean condition: $wRv$ and $wRu$ imply $vRu$); D (seriality: $R(w)$ is non-empty). The S5 conditions of Assumption~2.1 of REL-01-a are T, B and 4 together, which hold exactly when $R$ is an equivalence relation.
+\end{definition}
+
+\begin{definition}\label{d:ancestral}
+$\Rp$ is the transitive closure of $R$: $w\Rp v$ if there is a chain $w = w_0 R w_1 R \cdots R w_k = v$ with $k \geq 1$. We write $\nplus p$ for the proposition that holds at $w$ if $p$ holds at every world in $\Rp(w)$.
+\end{definition}
+
+\begin{definition}\label{d:conds}
+A frame is \emph{uniform} (condition U) if, for all $w$ and all $u, v \in R(w)$, $R(u) = R(v)$. It is \emph{ancestrally uniform} (condition U$^+$) if, for all $w$ and all $u, v \in R(w)$, $\Rp(u) = \Rp(v)$. It is \emph{retraceable} (condition C) if $wRv$ implies $v \Rp w$: every step of accessibility can be undone by a chain of steps.
+\end{definition}
+
+Retraceability is equivalent to the symmetry of $\Rp$, and on a finite frame to the condition that every arrow lies on a cycle. Symmetry is the special case in which every step can be undone in one step.
+
+\subsection{Maximal greatness and its ancestral}
+
+We keep the constant domain of beings, the existence predicate and the definitions of maximal excellence and maximal greatness of REL-01-a (Definitions~2.2 to~2.4). Write $M(x,w)$ for: $x$ exists and is maximally excellent at $w$. Then $x$ is maximally great at $w$, $\MG(x,w)$, if $M(x,v)$ for every $v \in R(w)$.
+
+\begin{definition}\label{d:mgstar}
+A being $x$ is \emph{ancestrally maximally great} at $w$, $\MGs(x,w)$, if $M(x,v)$ for every $v \in \Rp(w)$: $x$ exists and is maximally excellent at every world reachable from $w$ by a finite chain of accessibility steps.
+\end{definition}
+
+Since $R(w) \subseteq \Rp(w)$, ancestral maximal greatness entails maximal greatness. On a transitive frame $\Rp = R$ and the two coincide. Ancestral maximal greatness is the natural reading of the informal idea behind Definition~2.4 of REL-01-a when accessibility may fail to be transitive: a being that is maximally great in the intended sense exists and is maximally excellent not only at the worlds possible relative to here, but at the worlds possible relative to those, and so on.
+
+\begin{principle}[Strong possibility premise]\label{pr:strong}
+At the actual world, it is possible that some being is ancestrally maximally great: $@ \in \pos\,\exists x\,\MGs(x,\cdot)$.
+\end{principle}
+
+Principle~\ref{pr:strong} is the stronger possibility premise that REL-01-a announces for this manuscript. It entails Assumption~3.1 of REL-01-a on every frame, and is entailed by it on every transitive frame.
+
+\subsection{The argument schemas}
+
+The steps and conclusions of the argument are captured by eight schemas. In each, $p$ stands for the proposition that a given being exists and is maximally excellent; $\nec p$ then says that the being is maximally great, and $\nplus p$ that it is ancestrally maximally great.
+
+\begin{center}\footnotesize
+\begin{tabular}{@{}llll@{}}
+\toprule
+& Schema & Role in the argument & Condition \\
+\midrule
+S1 & $\pos\nec p \to p$ & Assumption~3.1 yields Corollary~3.5 & B \\
+S2 & $\pos\nec p \to \nec p$ & Lemma~3.3 of REL-01-a & 5 \\
+S3 & $\pos\nec p \to \nec\nec p$ & Lemma~3.2; Assumption~3.1 yields Theorem~3.4 & U \\
+S4 & $\nec p \to \nec\nec p$ & Anselm's principle (REL-01-g) for $\MG$ & 4 \\
+S5 & $\pos\nplus p \to p$ & Principle~\ref{pr:strong} yields Corollary~3.5 & C \\
+S6 & $\pos\nplus p \to \nec\nplus p$ & Principle~\ref{pr:strong} yields $\nec\exists x\,\MGs$ & U$^+$ \\
+S7 & $\pos(\nec p \wedge \nec\nec p) \to p \wedge \nec\nec p$ & two-step version (Section~\ref{s:finite}) & C$_2$ \\
+S8 & $\pos(\nec p \wedge \nec\nec p \wedge \nec\nec\nec p) \to p \wedge \nec\nec p$ & three-step version (Section~\ref{s:finite}) & C$_3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The last column anticipates the results of Section~\ref{s:corr}. Schema S4 is the form that Anselm's principle of REL-01-g, $\nec(G \to \nec G)$, takes when $G$ is analysed by Definition~2.4; it is also the principle behind the converse argument of REL-01-a (Proposition~4.1), since $\pos\neg\nec p \to \neg\nec p$ is equivalent to S4.
+
+The quantified forms of the schemas replace $\pos\nec p$ by $\pos\exists x\,\MG(x,\cdot)$, $\nec\nec p$ by $\nec\exists x\,\MG(x,\cdot)$, $p$ in S1 and S5 by $\exists x\, M(x,\cdot)$, and similarly for the ancestral notions. The next lemma shows that nothing is lost by working with the propositional forms.
+
+\begin{lemma}[Reduction]\label{l:reduction}
+On every frame, and for every domain size, the quantified form of each of S1--S8 is valid if and only if its propositional form is valid.
+\end{lemma}
+
+\begin{proof}
+Suppose the propositional form fails at a world $w$ under a valuation $V$. Give every being of the domain the same profile, $M(x,v)$ if and only if $v \in V$; each quantified clause then reduces to the corresponding propositional clause, and the quantified form fails at $w$. Conversely, suppose the quantified form fails at $w$. Its antecedent supplies a being $b$ that has the relevant property (maximal greatness, ancestral or $k$-step maximal greatness, or in S4 maximal greatness at $w$ itself) at the relevant world, and its consequent fails for every being, in particular for $b$. Let $V = \{v : M(b,v)\}$. Under $V$ the propositional antecedent holds at $w$, because $b$ witnesses it, and the propositional consequent fails at $w$, because it fails for $b$.
+\end{proof}
+
+The proof uses the constant domain of REL-01-a (Section~2.2) only in that the quantifiers range over the same beings at every world. For variable domains the reduction needs the premise that REL-01-a, Chapter~6, adds; we do not pursue that case.
+
+\section{Exact frame conditions}\label{s:corr}
+
+Each schema corresponds to a first-order condition on frames. The results for S1, S2 and S4 are standard \citep{HughesCresswell1996, Blackburn2001}; we include the short proofs because the other three follow the same pattern, and because the pattern is what makes the counterexamples in the listing intelligible.
+
+\begin{proposition}\label{p:s1}
+S1 is valid on a frame if and only if the frame is symmetric.
+\end{proposition}
+
+\begin{proof}
+If the frame is symmetric and $\nec p$ holds at some $v \in R(w)$, then $w \in R(v)$, so $p$ holds at $w$. If $wRv$ but not $vRw$, let $p$ be $R(v)$: $\nec p$ holds at $v$, so $\pos\nec p$ holds at $w$, but $p$ fails at $w$.
+\end{proof}
+
+\begin{proposition}\label{p:s2}
+S2 is valid on a frame if and only if the frame is Euclidean.
+\end{proposition}
+
+\begin{proof}
+If the frame is Euclidean, $\nec p$ holds at $v \in R(w)$ and $u \in R(w)$, then $vRu$, so $p$ holds at $u$. If $wRv$, $wRu$ and not $vRu$, let $p$ be $R(v)$: $\pos\nec p$ holds at $w$ and $p$ fails at $u \in R(w)$.
+\end{proof}
+
+\begin{proposition}\label{p:s3}
+S3 is valid on a frame if and only if the frame is uniform.
+\end{proposition}
+
+\begin{proof}
+If the frame is uniform, $\nec p$ holds at $v \in R(w)$, $u \in R(w)$ and $z \in R(u)$, then $z \in R(u) = R(v)$, so $p$ holds at $z$; hence $\nec\nec p$ holds at $w$. If $u, v \in R(w)$ and some $z \in R(u)$ is not in $R(v)$, let $p$ be $R(v)$: $\pos\nec p$ holds at $w$, and $\nec p$ fails at $u$ because $p$ fails at $z$.
+\end{proof}
+
+\begin{proposition}\label{p:s4}
+S4 is valid on a frame if and only if the frame is transitive.
+\end{proposition}
+
+\begin{proof}
+Standard: if $wRv$, $vRu$ and not $wRu$, let $p$ be $R(w)$; then $\nec p$ holds at $w$ and $\nec p$ fails at $v$. The converse is immediate.
+\end{proof}
+
+\begin{proposition}\label{p:s5}
+S5 is valid on a frame if and only if the frame is retraceable.
+\end{proposition}
+
+\begin{proof}
+If the frame is retraceable and $\nplus p$ holds at $v \in R(w)$, then $w \in \Rp(v)$, so $p$ holds at $w$. If $wRv$ but $w \notin \Rp(v)$, let $p$ be $\Rp(v)$: $\nplus p$ holds at $v$, so $\pos\nplus p$ holds at $w$, and $p$ fails at $w$.
+\end{proof}
+
+\begin{proposition}\label{p:s6}
+S6 is valid on a frame if and only if the frame is ancestrally uniform.
+\end{proposition}
+
+\begin{proof}
+As for Proposition~\ref{p:s3}, with $\Rp(u)$ and $\Rp(v)$ in place of $R(u)$ and $R(v)$, using $\Rp(u) \subseteq \Rp(w')$ whenever $w' R u$.
+\end{proof}
+
+\begin{lemma}\label{l:inclusions}
+Every symmetric frame is retraceable; every retraceable frame is ancestrally uniform; every Euclidean frame is uniform. None of the converses holds.
+\end{lemma}
+
+\begin{proof}
+The first claim is immediate. For the second, let $u, v \in R(w)$. Then $\Rp(u) \subseteq \Rp(w)$, and since $w \in \Rp(u)$ by retraceability, $\Rp(w) \subseteq \Rp(u)$; so $\Rp(u) = \Rp(w) = \Rp(v)$. For the third, let $u, v \in R(w)$ and $z \in R(u)$. By the Euclidean condition applied at $w$, $uRv$; applied at $u$ to $v$ and $z$, $vRz$. So $R(u) \subseteq R(v)$, and by symmetry of the roles, equality. Counterexamples to the converses are the frames F3.27, F2.5 and F2.6 of the listing, discussed in Section~\ref{s:computation}: a three-cycle, retraceable but not symmetric; a frame in which two worlds both see one of them, ancestrally uniform but not retraceable; and two worlds that see each other and not themselves, uniform but not Euclidean.
+\end{proof}
+
+\begin{corollary}\label{c:orig}
+The argument of REL-01-a, from Assumption~3.1 to both Theorem~3.4 and Corollary~3.5, is valid on a frame if and only if the frame is symmetric and uniform. Every equivalence relation is symmetric and uniform, but not conversely: the symmetric uniform frames include frames that are neither reflexive nor transitive.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:reduction} and Propositions~\ref{p:s1} and~\ref{p:s3}. An equivalence relation is Euclidean and hence uniform by Lemma~\ref{l:inclusions}. The frame F2.6, two worlds each seeing only the other, is symmetric and uniform, and is neither reflexive nor transitive.
+\end{proof}
+
+Corollary~\ref{c:orig} sharpens the remark of REL-01-a that its proof does not survive the move to a weaker logic. The proof does not, because Lemma~3.3 is the S5 principle S2 and fails on every non-Euclidean frame. The conclusions survive on a class of frames strictly larger than the equivalence relations, but only on frames that satisfy uniformity, a condition that is implied neither by the conditions of S4 nor by those of the Brouwerian system KTB. In particular they fail on some reflexive transitive frames, so the argument from Assumption~3.1 is not valid in S4, which is the logic \citet{Salmon1989} defends against; and they fail on some reflexive symmetric frames, so it is not valid in the Brouwerian system KTB either.
+
+\section{The argument without the S5 axiom}\label{s:main}
+
+\begin{theorem}\label{t:main}
+On every retraceable frame, Principle~\ref{pr:strong} entails:
+\begin{enumerate}[label=(\roman*)]
+\item necessarily, some being is ancestrally maximally great: $@ \in \nec\,\exists x\, \MGs(x,\cdot)$;
+\item necessarily, some being is maximally great: $@ \in \nec\,\exists x\, \MG(x,\cdot)$, which is the conclusion of Theorem~3.4 of REL-01-a;
+\item some being actually exists and is maximally excellent, which is the conclusion of Corollary~3.5 of REL-01-a;
+\item some being is ancestrally maximally great at the actual world.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{pr:strong} there are a world $v \in R(@)$ and a being $b$ such that $M(b,z)$ for every $z \in \Rp(v)$. Since $@ R v$, retraceability gives $v \Rp @$. Hence $@ \in \Rp(v)$, and every world reachable from $@$ is reachable from $v$: $\Rp(@) \subseteq \Rp(v)$. So $M(b,@)$, which is (iii), and $M(b,z)$ for every $z \in \Rp(@)$, which is (iv). Let $u \in R(@)$. Then $\Rp(u) \subseteq \Rp(@)$, so $b$ is ancestrally maximally great at $u$, which gives (i); and since $R(u) \subseteq \Rp(u)$, $b$ is maximally great at $u$, which gives (ii).
+\end{proof}
+
+The proof uses neither reflexivity nor transitivity, and it uses symmetry only in the weakened form of retraceability. It does not use Lemma~3.3 of REL-01-a or any other form of the S5 principle.
+
+\begin{corollary}\label{c:systems}
+The conclusions (i)--(iv) of Theorem~\ref{t:main} follow from Principle~\ref{pr:strong} in the Brouwerian systems KB, KDB and KTB, whose frames are the symmetric, the symmetric serial and the symmetric reflexive frames.
+\end{corollary}
+
+\begin{proof}
+Every symmetric frame is retraceable (Lemma~\ref{l:inclusions}).
+\end{proof}
+
+\begin{proposition}\label{p:exact}
+Retraceability is necessary as well as sufficient: if a frame is not retraceable, there is a model on it in which Principle~\ref{pr:strong} holds at some world and (iii) fails there. Ancestral uniformity is necessary and sufficient for (i) alone.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:reduction}, Proposition~\ref{p:s5} for (iii) and Proposition~\ref{p:s6} for (i).
+\end{proof}
+
+\begin{proposition}\label{p:coincide}
+On every transitive frame, and in particular under Assumption~2.1 of REL-01-a, Principle~\ref{pr:strong} is equivalent to Assumption~3.1 of REL-01-a.
+\end{proposition}
+
+\begin{proof}
+On a transitive frame $\Rp = R$, so $\MGs = \MG$.
+\end{proof}
+
+\begin{proposition}\label{p:anselm}
+Anselm's principle for ancestral maximal greatness,
+\[\nec(\exists x\,\MGs(x,\cdot) \to \nec\,\exists x\,\MGs(x,\cdot)),\]
+is valid on every frame. So is the corresponding converse argument: if it is possible that no being is ancestrally maximally great, then no being is ancestrally maximally great.
+\end{proposition}
+
+\begin{proof}
+If $b$ is ancestrally maximally great at $w$ and $u \in R(w)$, then $\Rp(u) \subseteq \Rp(w)$, so $b$ is ancestrally maximally great at $u$. The converse argument is the contrapositive of the same fact.
+\end{proof}
+
+Proposition~\ref{p:anselm} explains where the frame conditions of the main argument go in the present version. In REL-01-a the work done by symmetry and transitivity in Lemma~3.2, and in REL-01-g the work done by Anselm's principle (Assumption~2.2 of REL-01-g), is to make maximal greatness persist along accessibility. Ancestral maximal greatness persists along accessibility by its definition, so the substitute principle needs no frame condition at all. What remains is to return from the world at which the possibility premise is witnessed to the actual world, and that is exactly retraceability.
+
+\subsection{Finite strengthenings}\label{s:finite}
+
+The reply to the third objection below notes that ancestral maximal greatness is not expressible by a single formula of the basic modal language. On symmetric frames that expressive cost can be avoided, because a bounded strengthening of the premise suffices.
+
+\begin{definition}\label{d:ck}
+For $k \geq 1$, let $R^{\leq k}(w)$ be the set of worlds reachable from $w$ by a chain of between $1$ and $k$ accessibility steps. A being is \emph{$k$-step maximally great} at $w$ if it exists and is maximally excellent at every world in $R^{\leq k}(w)$. A frame satisfies C$_k$ if (a) $wRv$ implies $w \in R^{\leq k}(v)$, and (b) $u, v \in R(w)$ implies $R(u) \subseteq R^{\leq k}(v)$.
+\end{definition}
+
+One-step maximal greatness is maximal greatness, and $k$-step maximal greatness is expressed by $\nec p \wedge \nec\nec p \wedge \cdots \wedge \nec^k p$, which is a formula of the basic modal language for each finite $k$. Clause (a) of C$_k$ says that every step can be retraced in at most $k$ steps; clause (b) says that whatever is seen from one successor of a world is reachable in at most $k$ steps from every other successor.
+
+\begin{proposition}\label{p:finite}
+The possibility that some being is $k$-step maximally great entails, at every world of a frame, both that some being exists and is maximally excellent there and that necessarily some being is maximally great there, if and only if the frame satisfies C$_k$. Every symmetric frame satisfies C$_3$. Some reflexive symmetric frames do not satisfy C$_2$.
+\end{proposition}
+
+\begin{proof}
+Sufficiency: let $b$ be $k$-step maximally great at $v \in R(w)$. By (a), $w \in R^{\leq k}(v)$, so $b$ exists and is maximally excellent at $w$; for $u \in R(w)$, $R(u) \subseteq R^{\leq k}(v)$ by (b), so $b$ is maximally great at $u$. Necessity: if (a) fails for $wRv$, or (b) fails for $u, v \in R(w)$, let $p$ be $R^{\leq k}(v)$; in either case the antecedent of the schema (S7 for $k=2$, S8 for $k=3$, and its analogue for other $k$) holds at $w$ and the consequent fails, and Lemma~\ref{l:reduction} lifts the countermodel to the quantified form. On a symmetric frame, $wRv$ gives $vRw$, a one-step return, and for $u, v \in R(w)$ and $z \in R(u)$ the chain $v R w R u R z$ has three steps. The frame F4.2683 of the listing is reflexive and symmetric and fails C$_2$, as explained in Section~\ref{s:computation}.
+\end{proof}
+
+On symmetric frames, then, the strengthened premise can be stated in the object language as $\pos\exists x(\nec Mx \wedge \nec\nec Mx \wedge \nec\nec\nec Mx)$, and three iterations are the least number that works on all of them. This gives a second version of the argument without the S5 axiom, valid in KB, KDB and KTB, whose premise is weaker than Principle~\ref{pr:strong} but whose frame condition is stronger than retraceability: of the \stNumC{} retraceable frames in the enumeration, \stNumCnotSEight{} do not satisfy C$_3$.
+
+\section{The computation}\label{s:computation}
+
+The general results are checked by an exhaustive computation, whose method is described in Appendix~\ref{app:method}. Every frame with at most four worlds is generated up to isomorphism; there are \stNOne, \stNTwo, \stNThree{} and \stNFour{} such frames with one to four worlds, \stTotal{} in all. For each frame, the program computes the eight conditions T, B, 4, 5, D, U, U$^+$ and C, and decides the validity of S1--S8 by evaluating each schema at every world under every valuation. It also decides the quantified forms over a domain of two beings under every assignment of the profile $M$. It verifies that every verdict agrees with the condition that Propositions~\ref{p:s1}--\ref{p:s6} and~\ref{p:finite} assign to the schema, and that the quantified and propositional verdicts agree, as Lemma~\ref{l:reduction} requires. There is no disagreement among the \stChecks{} verdicts.
+
+Table~\ref{tab:systems} gives the result by system: for each class of frames defined by a combination of standard conditions, the number of frames of the class (up to four worlds) and the number on which each schema is valid; \textbf{all} marks a schema valid on every frame of the class.
+
+\begin{table}[ht]
+\caption{Validity of the argument schemas by system, frames with at most four worlds.}\label{tab:systems}
+\input{gen/systems.tex}
+\end{table}
+
+The table displays the results of Sections~\ref{s:corr} and~\ref{s:main} in miniature. S5 and S6, the two schemas of the strengthened argument, are valid on every frame of KB, KDB and KTB. S1 is valid on exactly the frames of the B systems. S3, the step to Theorem~3.4 from the original premise, is valid on all frames of the systems containing 5 and on only \stNumArgOrig{} of the \stNumB{} symmetric frames, the symmetric uniform ones of Corollary~\ref{c:orig}. In the S4 class, neither the original nor the strengthened argument is valid on the frames that are not equivalence relations. Of the \stTotal{} frames, \stNumC{} are retraceable and only \stNumB{} are symmetric: retraceability is a much weaker requirement than symmetry, and \stNumCnotB{} frames validate the strengthened argument without being symmetric.
+
+Seven frames illustrate the results. The listing writes a frame as the successor sets of worlds $0, 1, \ldots$ separated by dots, so that \texttt{01.0} is the frame in which world $0$ sees itself and world $1$, and world $1$ sees world $0$.
+
+\emph{F2.6} (\texttt{1.0}). Two worlds, each seeing only the other. The frame is symmetric and uniform but neither reflexive, transitive nor Euclidean, and all six schemas except S2 and S4 are valid on it. The original argument of REL-01-a is therefore valid on F2.6 although Lemma~3.3 fails there: the conclusions are reached without the S5 principle, through Lemma~3.2, which holds on F2.6 because the frame is uniform. This frame is the witness for the second part of Corollary~\ref{c:orig}.
+
+\emph{F2.8} (\texttt{01.0}). World 0 sees itself and world 1; world 1 sees world 0. The frame is symmetric but not uniform. S1 is valid: from the original premise, a maximally excellent being actually exists. S3 fails, under the valuation that makes $p$ true at world 0 alone, evaluated at world 0: a being that exists and is maximally excellent at world 0 only is maximally great at world 1, so the original premise holds at world 0, but it is not maximally great at world 0, because world 0 sees world 1. The strengthened premise is false at world 0 under this valuation, since world 1 reaches itself through world 0, and S5 and S6 are valid on the frame. F2.8 is the smallest frame on which the strengthened premise does what the original one cannot.
+
+\emph{F2.5} (\texttt{0.0}). Both worlds see world 0 only. The frame is serial, transitive and Euclidean (KD45), hence uniform, and S2, S3, S4 and S6 are valid. But S1 and S5 fail at world 1 under the valuation that makes $p$ true at world 0 only, and the listing records this witness as \texttt{1:10}. At world 1 it is necessary that some being is maximally great, and nothing exists and is maximally excellent at world 1. This is the doxastic pattern familiar from KD45: necessity without truth. It shows that Theorem~3.4 does not by itself yield Corollary~3.5, which REL-01-a derives with the help of reflexivity.
+
+\emph{F3.27} (\texttt{1.2.0}). A three-cycle. It is retraceable and uniform but not symmetric, and S1 fails: from the original premise, nothing need actually exist. S3, S5 and S6 are valid. The strengthened argument succeeds here without symmetry, which shows that retraceability, not symmetry, is the exact condition of Theorem~\ref{t:main}.
+
+\emph{F3.93} (\texttt{01.12.02}). A reflexive three-cycle: each world sees itself and its successor. It is reflexive and retraceable, but neither symmetric, transitive nor uniform. Both steps of the original argument fail (S1 and S3), and both steps of the strengthened argument hold (S5 and S6). Of the \stNThree{} three-world frames, this is the simplest reflexive frame on which the two versions come apart completely.
+
+\emph{F2.9} (\texttt{01.1}). World 0 sees both worlds, world 1 sees only itself: the smallest reflexive transitive frame that is not an equivalence relation. Only S4 is valid. Both versions of the argument fail, and the witness \texttt{0:01} makes $p$ true at world 1 alone: a being that exists and is maximally excellent at world 1 only is ancestrally maximally great at world 1, so the strengthened premise holds at world 0, but the being does not exist at world 0. This is the shape of the cases of \citet{Chandler1976} and \citet{Salmon1989}: a world possible relative to the actual world from which the actual world is not possible. Neither version of the argument survives the move to S4, and no version can, since the frame is a countermodel to S5 and S6 alike.
+
+\emph{F4.559 and F4.2683} (\texttt{13.02.1.0} and \texttt{013.012.12.03}). The first is the path $3$--$0$--$1$--$2$ with accessibility in both directions; the second adds reflexivity. Both are symmetric, so S5, S6 and S8 are valid on them, but S7 fails at world~1 when $p$ is false at world~3 alone. A being that exists and is maximally excellent everywhere except at world~3 is two-step maximally great at world~2, which is accessible from world~1; but world~3 is accessible from world~0, which is accessible from world~1, so the being is not maximally great at world~0, and Theorem~3.4 fails at world~1. The two frames are among the smallest witnesses for the last clause of Proposition~\ref{p:finite}: among symmetric frames with at most four worlds, \stNumBnotSSeven{} fail C$_2$ and none fails C$_3$.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}
+The strengthened premise is stronger, and a stronger premise is less credible. The version without the S5 axiom buys validity with plausibility.
+\end{objection}
+
+\begin{reply}
+That is the cost REL-01-a announces, and we do not deny it. Two points limit it. First, on transitive frames the premises coincide (Proposition~\ref{p:coincide}); the strengthening is felt only by someone who already denies transitivity, and for such a person the original premise does not express the idea of maximal greatness well, since a being that is maximally great in the sense of Definition~2.4 may fail to exist at a world that is possible relative to a possible world. Second, the support that Volume~III gives the possibility premise transfers. REL-01-f shows that what Volume~III needs from its Lemma~2417 is that the great-making properties be jointly instantiable, and that the proof uses neither the possibility premise nor S5. The same proof gives Principle~\ref{pr:strong} if the great-making properties include the ancestral forms of necessary existence and necessary maximal excellence, since by the argument of REL-01-f their conjunction is ancestral maximal greatness.
+\end{reply}
+
+\begin{objection}
+The converse argument gains more than the original. Possibly no being is ancestrally maximally great is a weaker premise than possibly no being is maximally great, and by Proposition~\ref{p:anselm} the converse argument from it needs no frame condition at all. The dialectical balance of REL-01-a (Proposition~4.1) is upset in favour of the atheist.
+\end{objection}
+
+\begin{reply}
+The converse argument does become frame-free, but the balance is not upset on the frames on which the strengthened argument is valid. On a retraceable frame the worlds reachable from the actual world form a single cluster under $\Rp$, and on that cluster the strengthened premise and its converse are contradictories at every world, exactly as Assumption~3.1 and the hypothesis of Proposition~4.1 are in S5. The dispute again reduces to a choice between two possibility premises. On frames that are not retraceable the converse argument succeeds and the original one fails, but on those frames, as F2.9 shows, no version of the argument succeeds, so the asymmetry there is not a new cost of the present version.
+\end{reply}
+
+\begin{objection}
+Ancestral maximal greatness is not expressible in the language of propositional modal logic: $\nplus$ is an infinitary operator. A premise stated with it is not a modal premise at all.
+\end{objection}
+
+\begin{reply}
+The premise is stated in the same metalanguage of worlds and accessibility in which REL-01-a states Definition~2.4, and nothing in the argument requires it to be the translation of a modal formula. If one wants an object-language version, $\nplus p$ is the infinite conjunction of $\nec p, \nec\nec p, \nec\nec\nec p, \ldots$, and on a frame with $n$ worlds the first $n$ conjuncts suffice. The enumeration in Appendix~\ref{app:listing} uses this fact: the program computes $\Rp$ by closure, which on frames with at most four worlds coincides with the fourfold iteration.
+\end{reply}
+
+\begin{objection}
+The S5 objection was never about frames. Those who reject S5 for metaphysical modality, such as \citet{Salmon1989}, reject transitivity and keep reflexivity; the relevant system is a reflexive non-transitive one, and the question is whether the argument survives there.
+\end{objection}
+
+\begin{reply}
+The results answer that question. None of the six conditions of Section~\ref{s:corr} is implied by reflexivity, and reflexivity plays no role in any of the proofs. Among reflexive non-transitive frames, the strengthened argument is valid on exactly the retraceable ones (F3.93 is an example), and the original argument on none that are not symmetric and uniform. Whether metaphysical accessibility is retraceable when it is not transitive is a question about tolerance in origins that our results do not settle; what they settle is that this, and nothing else, is what the argument needs.
+\end{reply}
+
+\begin{objection}
+The reduction to a single being (Lemma~\ref{l:reduction}) depends on the constant domain of REL-01-a, which REL-01-g criticizes. On variable domains the frame conditions might differ.
+\end{objection}
+
+\begin{reply}
+They might, and we have not computed them. Two remarks. The sentential version of REL-01-g avoids the domain question by treating \enquote{a maximally great being exists} as an unanalysed sentence $G$; for that version the frame conditions are those of the propositional schemas with Anselm's principle as an explicit premise, and our Propositions~\ref{p:s1}--\ref{p:s6} apply directly. And on variable domains the existence predicate already appears inside $M$, so that the reduction fails only if quantifiers range over different beings at different worlds; the additional premise that REL-01-a, Chapter~6, introduces for variable domains is designed to close exactly that gap.
+\end{reply}
+
+\section{What the results do not establish}\label{s:not}
+
+The results concern validity, not soundness. They do not show that Principle~\ref{pr:strong}, or Assumption~3.1 of REL-01-a, is true; that remains the task of Volume~III. They do not show that metaphysical accessibility is symmetric, retraceable or uniform. They establish frame correspondence for six schemas, not completeness: we have not axiomatized the logic of uniform frames or of retraceable frames, and the latter is not finitely axiomatizable in the basic modal language for the reason given in the reply to the third objection. The enumeration is bounded at four worlds, but every claim the manuscript makes is proved for all frames; the enumeration serves as a check on the proofs and as a catalogue of counterexamples, not as their ground.
+
+\section{Conclusion}
+
+The conclusions of the main argument of REL-01-a do not need the S5 axiom. With the original possibility premise they follow on exactly the symmetric uniform frames, a class strictly larger than the equivalence relations and containing frames that are neither reflexive nor transitive. With the stronger premise that possibly some being is ancestrally maximally great, they follow on exactly the retraceable frames, and so in KB, KDB and KTB. The substitute principle that does the work of transitivity, Anselm's principle for ancestral maximal greatness, holds on every frame. What no version can do without is the possibility of returning from the world that witnesses the possibility premise to the actual world.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benzmüller and Woltzenlogel~Paleo(2014)]{Benzmuller2014} Benzmüller, C. and Woltzenlogel Paleo, B. (2014). Automating Gödel's ontological proof of God's existence with higher-order automated theorem provers. In \emph{Proceedings of the 21st European Conference on Artificial Intelligence (ECAI 2014)} (pp.~93--98). IOS Press.
+\bibitem[Blackburn et~al.(2001)]{Blackburn2001} Blackburn, P., de~Rijke, M. and Venema, Y. (2001). \emph{Modal Logic}. Cambridge University Press.
+\bibitem[Chandler(1976)]{Chandler1976} Chandler, H.~S. (1976). Plantinga and the contingently possible. \emph{Analysis}, 36(2), 106--109.
+\bibitem[Hartshorne(1962)]{Hartshorne1962} Hartshorne, C. (1962). \emph{The Logic of Perfection}. Open Court.
+\bibitem[Hughes and Cresswell(1996)]{HughesCresswell1996} Hughes, G.~E. and Cresswell, M.~J. (1996). \emph{A New Introduction to Modal Logic}. Routledge.
+\bibitem[Kripke(1963)]{Kripke1963} Kripke, S.~A. (1963). Semantical analysis of modal logic I: Normal modal propositional calculi. \emph{Zeitschrift für mathematische Logik und Grundlagen der Mathematik}, 9, 67--96.
+\bibitem[Malcolm(1960)]{Malcolm1960} Malcolm, N. (1960). Anselm's ontological arguments. \emph{The Philosophical Review}, 69(1), 41--62.
+\bibitem[Oppy(1995)]{Oppy1995} Oppy, G. (1995). \emph{Ontological Arguments and Belief in God}. Cambridge University Press.
+\bibitem[Plantinga(1974)]{Plantinga1974} Plantinga, A. (1974). \emph{The Nature of Necessity}. Clarendon Press.
+\bibitem[Salmon(1989)]{Salmon1989} Salmon, N. (1989). The logic of what might have been. \emph{The Philosophical Review}, 98(1), 3--34.
+\bibitem[Williamson(2013)]{Williamson2013} Williamson, T. (2013). \emph{Modal Logic as Metaphysics}. Oxford University Press.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{The enumeration of frames}\label{app:method}
+
+\subsection{What is enumerated}
+
+The program \texttt{gen/generate.py} (Python~3, standard library only) generates every binary relation on $\{0, \ldots, n-1\}$ for $n = 1, \ldots, 4$, encodes it as an $n^2$-bit mask, and keeps exactly one representative of each isomorphism class: the relation whose mask is least among the masks of its images under all $n!$ permutations of the worlds. Representatives are numbered by size and then by number of arrows; the identifier F$n$.$k$ is the $k$-th class with $n$ worlds. Since every relation is generated and every class is represented by its least member, the enumeration is exhaustive up to isomorphism; the counts \stNOne, \stNTwo, \stNThree, \stNFour{} agree with the known numbers of unlabelled directed graphs with loops allowed on one to four vertices.
+
+\subsection{How each entry is checked}
+
+For each frame the program computes $R$, its transitive closure $\Rp$ (by Warshall's algorithm), the sets of worlds reachable in at most two and three steps, and the ten conditions of Definitions~\ref{d:std}, \ref{d:conds} and~\ref{d:ck}. It then evaluates each schema S1--S8 at every world under every valuation of $p$, $2^n$ valuations per frame and \stValuations{} in all, and records the schema as valid if no world and valuation falsify it, together with the first falsifying world and valuation otherwise. The quantified forms are evaluated over a constant domain of two beings under all $2^{2n}$ assignments of the profile $M$, \stQValuations{} assignments in all. The program halts with an error if any verdict disagrees with the condition paired with the schema in Sections~\ref{s:corr} and~\ref{s:finite}, if a quantified verdict disagrees with the propositional one, or if one of the implications of Lemma~\ref{l:inclusions} fails. It also verifies that ancestral uniformity coincides with the condition that every successor of a successor of $w$ is reachable from every successor of $w$, an equivalent form used in checking Proposition~\ref{p:s6}. The run completes without error.
+
+\subsection{Summary statistics}
+
+Of the \stTotal{} frames, \stNumB{} are symmetric, \stNumC{} retraceable, \stNumU{} uniform, \stNumFive{} Euclidean, \stNumFour{} transitive and \stNumSFive{} are equivalence relations. There are \stNumCnotB{} retraceable frames that are not symmetric, \stNumUnotFive{} uniform frames that are not Euclidean, \stNumBnotU{} symmetric frames that are not uniform, and \stNumBnotFour{} symmetric frames that are not transitive. On \stNumSOneNotSThree{} frames the original premise yields actual existence but not necessary maximal greatness, and on \stNumSThreeNotSOne{} the reverse. The original argument (S1 and S3) is valid on \stNumArgOrig{} frames and the strengthened argument (S5 and S6) on \stNumArgStar, exactly the retraceable frames. Table~A.1 breaks the counts down by the combination of standard conditions a frame satisfies.
+
+\begin{center}\small Table A.1: Frames by combination of standard conditions (a dash marks a failed condition), with the number satisfying U and C and the number validating each schema.\end{center}
+\input{gen/counts.tex}
+
+\section{Listing of all frames with at most four worlds}\label{app:listing}
+
+Each line gives: the identifier; the frame as successor sets of worlds $0, 1, \ldots$ separated by dots (\texttt{-} for the empty set); the standard conditions T, B, 4, 5, D, with a dash for each that fails; the conditions U, U$^+$ and C (header \texttt{UPC}, with U$^+$ written \texttt{P}), with a dash for each that fails; the verdicts on S1--S8 in order (\texttt{+} valid, \texttt{-} not valid); and, in the last column, \texttt{ok} if the strengthened argument is valid on the frame, or otherwise a falsifying witness $w$\texttt{:}$b_0b_1\ldots$, where $w$ is a world and $b_i$ is $1$ if $p$ is true at world $i$. An unprimed witness falsifies S5 and a primed one (where S5 holds) falsifies S6.
+
+\input{gen/frames.tex}
+
+\end{document}

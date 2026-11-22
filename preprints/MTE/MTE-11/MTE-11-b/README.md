@@ -1,0 +1,22 @@
+# MTE-11-b · Defining "Ought" in Terms of Reasons
+
+- **Family:** MTE-11 — Are reasons fundamental?
+- **Type:** consequence
+- **Discipline:** Metaethics
+- **Estimated length:** 3 pages
+- **Formalized:** no
+
+## Files
+
+- [`MTE-11-b.pdf`](MTE-11-b.pdf): compiled manuscript
+- `main.tex`, `situationist-preprint.cls`: sources
+
+## Build
+
+```
+latexmk -pdf main.tex
+```
+
+## Citation
+
+See [`MTE-11-b.bib`](MTE-11-b.bib).

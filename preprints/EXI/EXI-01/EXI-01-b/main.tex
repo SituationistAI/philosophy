@@ -1,0 +1,64 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{needspace}
+\usepackage{graphicx}
+
+\title{Commentary on On the Meaning of Life\\[0.4em]\large Volume I: Text, Commentary and Concordance}
+\msid{EXI-01-b}
+\msfamily{EXI-01}
+\msdiscipline{Meaning, Death and the Absurd}
+\mstype{Companion manuscript, Volume I of III}
+\mskeywords{meaning in life; objective worth; engagement; Wolf; fitting fulfilment; availability of meaning; the absurd; Nagel; commentary; concordance}
+
+\input{gen/stats.tex}
+\emergencystretch=3em
+
+% A lemma of EXI-01-a, quoted exactly; gen/generate.py checks every \lem
+% against the source text and against gen/lemmata.py.
+\newcommand{\lem}[2]{\par\needspace{4\baselineskip}\medskip\noindent\textbf{[#1]}\quad\enquote{#2}\par\nopagebreak\smallskip}
+\newcommand{\kwichead}[2]{\par\needspace{4\baselineskip}\medskip\noindent{\normalsize\textbf{#1}}\quad(#2)\par\nopagebreak\smallskip}
+\newcommand{\kwicnone}{\noindent No occurrences in the other manuscripts.\par}
+\newcommand{\Lm}[1]{[#1]}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EXI-01-a answers the question of what the meaning of life is in one page: a definition, two assumptions, a theorem with a three-sentence proof, and a remark. This Commentary explains that page sentence by sentence and, for its central sentences, phrase by phrase. Volume I divides the text into \cnSentLemmata{} sentence lemmata and \cnPhraseLemmata{} phrase lemmata and comments on each: its claim, its sources and parallels in Wolf, Metz, Nagel, Taylor, Nozick, Frankfurt, Williams, Camus, Tolstoy and Aristotle, the rival readings it admits, the objections it faces, and its relation to the rest of the collection. We argue that the text is more precise than its brevity suggests. Its notion of objective worth is restricted, requiring independence only from the attitudes of those engaged; its proof does not use Assumption~2, whose role is to fix the interpretation of the theorem; its availability claim rests on Assumption~3 together with a bridge principle that the Lean module makes explicit; and its remark on the absurd identifies exactly the premise of Nagel's challenge that the assumption of objective worth denies. The volume contains the defence of Assumption~2 and the discussion of the absurd that EXI-01-a assigns to the Commentary, a commentary on every declaration of the Lean module, and a computed apparatus: a concordance of the \cnTypes{} word types of the text across \cnOtherMss{} manuscripts of the discipline, a table of the \cnStatements{} numbered statements of those manuscripts with the lemmata they bear on, and the testimonia.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & Text, Commentary and Concordance & 1--114 \\
+II & Objective Worth and the Absurd & 115--612 \\
+III & Availability, Degree and Death & 613--1104 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\input{ch00.tex}
+\input{ch01.tex}
+\input{ch02.tex}
+\input{ch03.tex}
+\input{ch04.tex}
+\input{ch05.tex}
+\input{ch06.tex}
+\input{ch07.tex}
+\input{ch08.tex}
+\input{ch09.tex}
+\input{ch10.tex}
+\input{ch11.tex}
+\input{ch12.tex}
+
+\appendix
+\input{app.tex}
+
+\input{bib.tex}
+\label{LastPageVolI}
+\end{document}

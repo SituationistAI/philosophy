@@ -1,0 +1,65 @@
+\documentclass{situationist-preprint}
+
+\title{The Halfer's Last Argument}
+\msid{EPI-18-b}
+\msfamily{EPI-18}
+\msdiscipline{Epistemology}
+\mstype{Companion manuscript}
+\mskeywords{Sleeping Beauty; halfer; uncentred evidence; Technicolor Beauty; self-locating belief; conditionalization}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Once the halfer concedes that conditionalizing on \enquote{it is Monday} violates the Principal Principle, one argument remains: Beauty's credences concern only uncentred propositions, and the only uncentred evidence she gains on waking, that she is woken at least once, was certain on Sunday. We show that this argument, applied to the standard protocol in which Beauty's awakenings are subjectively indistinguishable, makes her credence in heads depend on details of her experience that bear neither on the coin nor on the day. Add any such detail and the uncentred halfer must move to one third. The halfer answer is therefore refuted for the standard protocol, and what survives of the halfer's position is a thesis about the content of self-locating belief.
+\end{abstract}
+
+\section{The argument}
+
+EPI-18-a defends the thirder answer for the standard protocol, in which Beauty's evidence is the same at each awakening (Assumption~2.1 there), and shows that a halfer who conditionalizes on the information that it is Monday violates the restricted Principal Principle (Proposition~4.1). The halfer's last argument, which goes back to \citet{Lewis2001}, avoids self-locating information altogether.
+
+\begin{quote}
+(U1) Rational credence is defined on uncentred propositions and changes only by conditionalization on uncentred evidence. (U2) The uncentred evidence Beauty has on waking is that she is woken at least once during the experiment. (U3) That proposition had probability one on Sunday, given both heads and tails. So her credence in heads on waking is one half.
+\end{quote}
+
+The argument is valid. We show that (U2) cannot be maintained by anyone who accepts (U1), and that the result is a view that no halfer should accept.
+
+\section{Irrelevant detail}
+
+Beauty's experience on waking is not a bare awareness of being awake. It has detail: the light in the room, a passing thought, an itch. Under the standard protocol this detail does not tell her whether it is Monday or Tuesday, which is what Assumption~2.1 of EPI-18-a requires; but it is part of her evidence. By (U1) her evidence is the strongest uncentred proposition she learns, and that is $E_\delta$: \emph{Beauty has, at some awakening, an experience with detail $\delta$}.
+
+\begin{principle}[Irrelevance]\label{p:irr}
+If a detail of Beauty's experience is produced by a process independent of the coin and of the day, then learning that her experience has that detail does not change her credence in heads.
+\end{principle}
+
+\begin{proposition}\label{p:uncentred}
+Let $\delta$ occur at each awakening independently with probability $\varepsilon$, $0 < \varepsilon < 1$. An agent who conditionalizes on $E_\delta$ has credence in heads $1/(3-\varepsilon)$, which differs from one half for every such $\varepsilon$, and tends to one third as $\varepsilon$ tends to zero.
+\end{proposition}
+
+\begin{proof}
+$P(E_\delta \mid \textit{heads}) = \varepsilon$ and $P(E_\delta \mid \textit{tails}) = 1-(1-\varepsilon)^2 = \varepsilon(2-\varepsilon)$. With prior one half, $P(\textit{heads} \mid E_\delta) = \varepsilon/(\varepsilon + \varepsilon(2-\varepsilon)) = 1/(3-\varepsilon)$.
+\end{proof}
+
+The uncentred halfer therefore faces a dilemma. If he conditionalizes on his total uncentred evidence, as (U1) requires, his credence is not one half, and since real experience is rich, its details are rarely repeated and $\varepsilon$ is small: his credence is close to one third \citep{Neal2006}. If he insists on (U2), excluding the detail, he violates (U1), since $E_\delta$ is uncentred evidence that he has. Either way the conclusion that Beauty's credence in heads is one half does not follow.
+
+The same point appears in a clean form in Technicolor Beauty \citep{Titelbaum2008}. A coin unrelated to the first decides whether the room is red on Monday and blue on Tuesday or the reverse; on heads, Beauty sees one colour on Monday. On waking in a red room, her strongest uncentred evidence is that she sees red at some awakening, which has probability one half on heads and one on tails; conditionalization gives one third. The thirder holds that the colour, which says nothing about coin or day, leaves her credence at one third, as Principle~\ref{p:irr} requires; EPI-18-a (Section~5) shows that the thirder answer is robust in just this way. The uncentred halfer must hold that an uninformative colour moves her from one half to one third, in violation of Principle~\ref{p:irr}.
+
+\begin{objection}
+Under the standard protocol the awakenings are indistinguishable, so there is no detail $\delta$ that could occur at one awakening and not the other.
+\end{objection}
+
+\begin{reply}
+Indistinguishability, as Assumption~2.1 of EPI-18-a states it, concerns the day: nothing in Beauty's experience lets her tell a Monday waking from a Tuesday waking. It does not require the two experiences to be qualitatively identical in every detail; random details satisfy it. If the halfer instead stipulates exact qualitative identity, his answer holds only for an idealization in which any random detail, however irrelevant, would overturn it. A credence that an irrelevant detail would overturn was not responding to the evidence that matters, and the thirder's credence, which is unchanged by such details, is the one that does.
+\end{reply}
+
+\section{Conclusion}
+
+The halfer's last argument requires both that Beauty conditionalize on all her uncentred evidence and that she ignore most of it. Without self-locating credences it yields one third or violates its own rule; with them, it violates the Principal Principle, by EPI-18-a. For the standard protocol the halfer answer is refuted. What remains of the halfer view is the thesis (U1), that credence has only uncentred content, and that is a thesis about the content of self-locating belief, not about the coin.
+
+\begin{thebibliography}{99}\small
+\bibitem[Lewis(2001)]{Lewis2001} Lewis, D. (2001). Sleeping Beauty: Reply to Elga. \emph{Analysis}, 61(3), 171--176.
+\bibitem[Neal(2006)]{Neal2006} Neal, R.~M. (2006). Puzzles of anthropic reasoning resolved using full non-indexical conditioning. arXiv preprint math/0608592.
+\bibitem[Titelbaum(2008)]{Titelbaum2008} Titelbaum, M.~G. (2008). The relevance of self-locating beliefs. \emph{The Philosophical Review}, 117(4), 555--606.
+\end{thebibliography}
+
+\end{document}

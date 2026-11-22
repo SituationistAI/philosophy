@@ -1,0 +1,159 @@
+\documentclass{situationist-preprint}
+
+\title{Libet Does Not Refute Free Will}
+\msid{ACT-05-a}
+\msfamily{ACT-05}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ACT/ACT\_05.lean}
+\mskeywords{Libet; readiness potential; free will; neuroscience; picking; accumulator model; reasons-responsiveness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Libet and his colleagues found that the readiness potential, a slow negative shift in scalp activity, begins several hundred milliseconds before participants report deciding to flex their wrists. The finding has been taken to show that free will is an illusion: the brain decides before we do. We argue that it shows no such thing. The readiness potential precedes the decision to flex now, but not the decision to take part in the experiment, and it is in the latter decision, together with the acceptance of the instructions, that the reasons bearing on the flexing operate. The instructions remove every reason for flexing at one moment rather than another, so that the moment of flexing is picked, not chosen; and the accumulator model of Schurger and colleagues explains the readiness potential as the trace of exactly such picking, a threshold crossing by spontaneous fluctuations. On the reasons-responsiveness account of ACT-01, the flexing is free whatever initiates its timing. The argument is formalized in Lean, which shows that Libet's inference is valid only if the locus of the action's reasons-responsiveness is the decision to flex.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Libet1983} asked participants to flex their wrist or fingers whenever they felt the urge to do so, and to report, by the position of a spot revolving on a clock face, when they first became aware of the urge or decision to move (\enquote{W}). Electrodes recorded the readiness potential (RP), the slow negative shift first described by \citet{KornhuberDeecke1965}. In trials in which participants reported no preplanning, the RP began on average about 550 milliseconds before the movement, and W about 200 milliseconds before it. The neural process leading to the movement began some 350 milliseconds before the participant was aware of deciding to move. \citet{Libet1985} concluded that voluntary acts are initiated unconsciously, leaving to conscious will at most the power to veto a movement already under way; others, such as \citet{Wegner2002}, concluded that conscious will is an illusion altogether.
+
+The data have been contested on their own terms: the reliability of the clock reports, the relation of the RP to the decision rather than to a general expectation of movement \citep{TrevenaMiller2010}, and the meaning of the average. We grant the timing data. We argue that, even granted, they do not bear on free will, because they concern the wrong decision.
+
+\section{Framework}
+
+\begin{definition}[Decision to take part]\label{d:part}
+The \emph{decision to take part} is the participant's decision, made before the session, to take part in the experiment and to comply with its instructions, including the instruction to flex at a moment of her choosing within each trial.
+\end{definition}
+
+\begin{definition}[Decision to flex]\label{d:flex}
+The \emph{decision to flex} is the event, within a trial, whose time the participant reports as W: her deciding, or becoming aware of the urge, to flex now.
+\end{definition}
+
+\begin{definition}[Locus]\label{d:locus}
+The \emph{locus} of an action's reasons-responsiveness is the decision through which the reasons bearing on the action operate: the decision that would have been different had those reasons been different.
+\end{definition}
+
+\begin{assumption}[Libet's data]\label{a:data}
+The onset of the RP precedes the decision to flex.
+\end{assumption}
+
+\begin{assumption}[Protocol]\label{a:protocol}
+The decision to take part precedes the onset of the RP.
+\end{assumption}
+
+\begin{assumption}[Locus]\label{a:locus}
+The locus of the flexing's reasons-responsiveness is the decision to take part.
+\end{assumption}
+
+\begin{assumption}[Ordinary participant]\label{a:ordinary}
+The participant's mechanism of practical reasoning is reasons-responsive and her own.
+\end{assumption}
+
+\begin{principle}[Free action]\label{p:free}
+An action that issues from a mechanism of practical reasoning that is reasons-responsive and the agent's own is free.
+\end{principle}
+
+\begin{principle}[Precursor]\label{p:precursor}
+If an unconscious neural precursor precedes the locus of an action's reasons-responsiveness, the mechanism from which the action issues is not reasons-responsive.
+\end{principle}
+
+Principle~\ref{p:free} is the account of free action defended in ACT-01-a, on which an agent acts freely when her action issues from a mechanism that is her own and would recognize and act on sufficient reasons to do otherwise in a range of situations. Assumptions~\ref{a:data} and~\ref{a:protocol} are the data and the design of the experiment: participants are recruited, consent and are instructed before any trial begins. Principle~\ref{p:precursor} is the premise Libet's argument needs, stated in the strongest form that makes the argument valid. We do not accept it, but we grant it, since the reply does not depend on rejecting it. Assumption~\ref{a:locus} is the substantive claim, and Section~\ref{s:locus} defends it.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+The RP precedes the decision to flex, it does not precede the decision that is the locus of the flexing's reasons-responsiveness, and the flexing is free.
+\end{theorem}
+
+\begin{proof}
+The first conjunct is Assumption~\ref{a:data}. By Assumption~\ref{a:locus}, the locus is the decision to take part, which by Assumption~\ref{a:protocol} precedes the RP; since temporal precedence is asymmetric, the RP does not precede the locus. By Assumption~\ref{a:ordinary} and Principle~\ref{p:free}, the flexing is free.
+\end{proof}
+
+\begin{corollary}\label{c:valid}
+Granting Principle~\ref{p:precursor}, Libet's data yield that the participant's mechanism is not reasons-responsive if the locus is the decision to flex. The reply to Libet therefore turns on Assumption~\ref{a:locus}.
+\end{corollary}
+
+\begin{proof}
+If the locus is the decision to flex, the RP precedes the locus by Assumption~\ref{a:data}, and Principle~\ref{p:precursor} yields that the mechanism is not reasons-responsive.
+\end{proof}
+
+Theorem~\ref{t:main} shows that Principle~\ref{p:precursor}, even if true, does not apply: no unconscious precursor precedes the locus. Corollary~\ref{c:valid} shows that Libet's argument is not a fallacy. Read as concerning the decision to flex, it is valid, and the only premise one must reject to escape it is the one that locates the reasons-responsiveness of the flexing in that decision.
+
+\section{Where the reasons operate}\label{s:locus}
+
+\paragraph{The instructions remove the reasons for timing.} Participants were told to let the urge to move appear on its own, without planning when to move. Every reason that bears on when to flex within a trial is thereby removed: no moment is better than another, and the participant has been asked not to prefer one. What remains is what \citet{UllmannMargalitMorgenbesser1977} call \emph{picking}: selection among options between which the agent is indifferent and knows herself to be indifferent. A choice in their sense is made for reasons that distinguish the options; a picking is made for no such reason, though the agent may have excellent reasons to pick something. The decision to flex now is a picking.
+
+\paragraph{The reasons for flexing operate earlier.} The participant does have reasons bearing on the flexing: to help the experimenters, to earn the fee, to keep her word. These reasons operated in her decision to take part and in her acceptance of the instructions. They satisfy Definition~\ref{d:locus}. Had she had sufficient reason not to flex, because the experimenter asked her to stop, or because she found the procedure harmful, she would not have flexed: she would have withdrawn, or declined, or kept her hand still. Had she had no reason to take part, there would have been no trials. The flexing is responsive to reasons at the level at which reasons bear on it.
+
+\paragraph{The RP is the trace of picking.} \citet{Schurger2012} proposed that the RP reflects the accumulation of spontaneous fluctuations in neural activity toward a threshold, whose crossing triggers the movement. Averaged over trials time-locked to the movement, such fluctuations produce a slow negative ramp, even though no decision has been made when the ramp begins: on any given trial, the activity might have drifted down again. The model predicts that participants interrupted while activity is near the threshold respond faster, and Schurger and colleagues found that they do. If the model is correct, the RP onset is not the time of an unconscious decision to flex. It is an artefact of averaging a process whose only role is to determine when the threshold is crossed. That is exactly what a picking mechanism should look like. An agent who has decided, for reasons, to flex at some moment, and who has no reason to prefer any moment, needs some process to settle the time; spontaneous fluctuation is such a process.
+
+\paragraph{The decision that matters is not preceded.} The decision to take part was made minutes, hours or days before any RP was recorded. Whether that decision was itself preceded by neural events of which the participant was unaware is not something Libet's experiment measured, and it is not something Principle~\ref{p:free} cares about: ACT-01 argues that what threatens free will is neither determinism nor indeterminism, so that a decision's having neural antecedents does not make it unfree. Principle~\ref{p:precursor}, which we have granted, is false on that view. But the argument here does not need its falsity.
+
+\section{Objections and replies}
+
+\begin{objection}[Generalization]
+Libet's finding generalizes. \citet{Soon2008} decoded, from activity up to several seconds before participants were aware of deciding, which of two buttons they would press. All our decisions may be like this.
+\end{objection}
+
+\begin{reply}
+The decisions decoded by \citet{Soon2008} were, like Libet's, pickings: participants chose freely between two buttons with no reason to prefer either, and prediction was only modestly above chance. The finding is evidence about how pickings are settled, not about decisions made for reasons. \citet{Maoz2019} compared arbitrary decisions with deliberate ones, in which the options mattered to participants, and found an RP before the arbitrary decisions but not before the deliberate ones. This is what Section~\ref{s:locus} predicts: the RP marks the settling of indifference, not the operation of reasons.
+\end{reply}
+
+\begin{objection}[The flexing must be free on its own]
+The question is whether the flexing is free, not whether the participation was. A free decision to undergo something does not make what one undergoes free: a person who freely boards a plane does not freely fly.
+\end{objection}
+
+\begin{reply}
+The flexing is not something the participant undergoes. It is her action, sensitive to her intention to flex in the sense of ACT-03: had she intended to flex the other wrist, or to tap a finger, she would have done so. And it issues from her mechanism of practical reasoning, which is reasons-responsive in the sense of Principle~\ref{p:free}: had she had sufficient reason not to flex, she would not have flexed. What is settled by noise is only which moment within the trial, a parameter on which her reasons are silent. ACT-01-a holds that indeterminism confined to such places does not remove reasons-responsiveness, and ACT-15 that indeterministic luck is compatible with responsibility when the agent tries to bring about the outcome that occurs. A participant who flexes at 3.2 seconds rather than 3.5 is in no worse position than a golfer whose putt drops on the second roll rather than the first.
+\end{reply}
+
+\begin{objection}[Epiphenomenal awareness]
+Even if the participant is free in the sense of ACT-01, the data show that conscious awareness of deciding comes after the process that produces the movement has begun. Free will worth wanting requires that conscious decisions cause actions.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:free} does not require that awareness of a decision precede its neural onset, and we do not think free will worth wanting does either. But the reply does not need this. The decision to take part, the one that carries the reasons, was conscious and preceded the RP. What came after the RP was awareness of the moment of flexing, which the participant had delegated, by accepting the instructions, to whatever process would settle it.
+\end{reply}
+
+\section{Formalization}
+
+Theorem~\ref{t:main} and Corollary~\ref{c:valid} are formalized in \nolinkurl{Philosophy/ACT/ACT_05.lean}. Events, their times, the RP, the two decisions, the locus, freedom and reasons-responsiveness are primitives; Assumptions~\ref{a:data}--\ref{a:ordinary} and Principle~\ref{p:free} are axioms. Principle~\ref{p:precursor} enters Corollary~\ref{c:valid} as a hypothesis, not an axiom, since we grant it without asserting it.
+
+\begin{lstlisting}
+theorem libet_no_refutation :
+    time rp < time flexDecision ∧ ¬ time rp < time locus ∧ Free
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ACT_05.libet_no_refutation' depends on axioms:
+  [propext, Quot.sound, Philosophy.ACT_05.Event,
+   Philosophy.ACT_05.Free, Philosophy.ACT_05.flexDecision,
+   Philosophy.ACT_05.free_of_rr, Philosophy.ACT_05.libet_data,
+   Philosophy.ACT_05.locus,
+   Philosophy.ACT_05.locus_is_participation,
+   Philosophy.ACT_05.ordinary_participant,
+   Philosophy.ACT_05.participation, Philosophy.ACT_05.protocol,
+   Philosophy.ACT_05.rp, Philosophy.ACT_05.time]
+\end{lstlisting}
+
+\texttt{propext} and \texttt{Quot.sound} are standard axioms of Lean's logic, used by the arithmetic decision procedure. The primitives are \texttt{Event}, \texttt{time}, \texttt{rp}, \texttt{flexDecision}, \texttt{participation}, \texttt{locus} and \texttt{Free}. The substantive axioms are \texttt{libet\_data} (Assumption~\ref{a:data}), \texttt{protocol} (Assumption~\ref{a:protocol}), \texttt{locus\_is\_participation} (Assumption~\ref{a:locus}), \texttt{ordinary\_participant} (Assumption~\ref{a:ordinary}) and \texttt{free\_of\_rr} (Principle~\ref{p:free}). The theorem for Corollary~\ref{c:valid} depends only on the primitives and \texttt{libet\_data}, which confirms that Libet's inference, with the decision to flex as locus, needs nothing beyond his data and Principle~\ref{p:precursor}.
+
+\section{Conclusion}
+
+The readiness potential precedes the decision to flex, a picking among moments that the instructions made indifferent. It does not precede the decision to take part in the experiment, in which the reasons bearing on the flexing operate. On the reasons-responsiveness account, the flexing is free, and the accumulator model explains why the RP should look as it does if the moment of movement is settled by spontaneous fluctuation. Neuroscience has not refuted free will.
+
+\begin{thebibliography}{99}\small
+\bibitem[Kornhuber and Deecke(1965)]{KornhuberDeecke1965} Kornhuber, H.~H. and Deecke, L. (1965). Hirnpotential\"anderungen bei Willk\"urbewegungen und passiven Bewegungen des Menschen: Bereitschaftspotential und reafferente Potentiale. \emph{Pfl\"ugers Archiv}, 284, 1--17.
+\bibitem[Libet(1985)]{Libet1985} Libet, B. (1985). Unconscious cerebral initiative and the role of conscious will in voluntary action. \emph{Behavioral and Brain Sciences}, 8(4), 529--566.
+\bibitem[Libet et~al.(1983)]{Libet1983} Libet, B., Gleason, C.~A., Wright, E.~W. and Pearl, D.~K. (1983). Time of conscious intention to act in relation to onset of cerebral activity (readiness-potential): the unconscious initiation of a freely voluntary act. \emph{Brain}, 106(3), 623--642.
+\bibitem[Maoz et~al.(2019)]{Maoz2019} Maoz, U., Yaffe, G., Koch, C. and Mudrik, L. (2019). Neural precursors of decisions that matter: an ERP study of deliberate and arbitrary choice. \emph{eLife}, 8, e39787.
+\bibitem[Schurger et~al.(2012)]{Schurger2012} Schurger, A., Sitt, J.~D. and Dehaene, S. (2012). An accumulator model for spontaneous neural activity prior to self-initiated movement. \emph{Proceedings of the National Academy of Sciences}, 109(42), E2904--E2913.
+\bibitem[Soon et~al.(2008)]{Soon2008} Soon, C.~S., Brass, M., Heinze, H.-J. and Haynes, J.-D. (2008). Unconscious determinants of free decisions in the human brain. \emph{Nature Neuroscience}, 11(5), 543--545.
+\bibitem[Trevena and Miller(2010)]{TrevenaMiller2010} Trevena, J. and Miller, J. (2010). Brain preparation before a voluntary action: evidence against unconscious movement initiation. \emph{Consciousness and Cognition}, 19(1), 447--456.
+\bibitem[Ullmann-Margalit and Morgenbesser(1977)]{UllmannMargalitMorgenbesser1977} Ullmann-Margalit, E. and Morgenbesser, S. (1977). Picking and choosing. \emph{Social Research}, 44(4), 757--785.
+\bibitem[Wegner(2002)]{Wegner2002} Wegner, D.~M. (2002). \emph{The Illusion of Conscious Will}. MIT Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,158 @@
+\documentclass{situationist-preprint}
+
+\title{Pascal's Wager Under Bounded Utilities}
+\msid{REL-06-a}
+\msfamily{REL-06}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_06.lean}
+\mskeywords{Pascal's wager; bounded utility; infinite utility; mixed strategies; many-gods objection; doxastic involuntarism; practical commitment}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Pascal's wager recommends a religious life on the ground that its expected utility, given an infinite reward and any positive credence in God, exceeds that of every alternative. We argue that the wager is sound only under bounded utilities. With an infinite reward, every option that gives the reward any positive probability, including mixed strategies and commitment to rival gods, has the same infinite expected utility, so the argument cannot single out its recommendation. With bounded utilities, the wager becomes a comparison of credence-weighted gains and costs, and it is sound for every agent whose credence exceeds a threshold fixed by the stakes. Under that restriction two further consequences follow. Since belief is not under direct voluntary control, the options of the wager are acts, and what it supports is practical commitment rather than belief. And since rival gods are weighed by their credences rather than tied at infinity, the many-gods objection loses its force: improbable gods contribute little, and among gods with comparable stakes the more credible one is favoured. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+In the fragment of the \emph{Pens\'ees} known as \enquote{Infini--rien}, Pascal argues that reason cannot decide whether God exists, that one must nevertheless wager, and that one should wager that God exists, since if one wins one wins everything, and if one loses one loses nothing \citep{Pascal1670}. \citet{Hacking1972} distinguished three arguments in the fragment: an argument from dominance, an argument from expectation with even odds, and an argument from dominating expectation, on which an infinite reward outweighs any finite cost for any positive probability. The third is the one usually called the wager, and the one we examine.
+
+It faces three classical objections. The \emph{many-gods objection}, pressed by Diderot and in the modern literature by \citet{Cargile1966} and \citet{Mackie1982}, holds that the same reasoning recommends wagering on every god who promises an infinite reward, so that it recommends nothing in particular. The \emph{objection from mixed strategies}, due to \citet{Duff1986} and developed by \citet{Hajek2003}, holds that with an infinite reward any strategy with a positive chance of ending in belief has infinite expected utility, so that wagering is not uniquely recommended. The \emph{objection from involuntariness} holds that belief cannot be adopted for practical reasons, so that the wager recommends an act no one can perform. Defenders of the wager have responded by modifying its decision theory, through relative utilities \citep{Bartha2007} or through finite rewards \citep{McClennen1994,Jordan2006}.
+
+We argue that the wager is sound only under bounded utilities, and that under that restriction the second and third objections are answered and the first loses its force.
+
+\section{Framework}
+
+\begin{definition}[The wager]\label{d:wager}
+An agent has credence $p$ that God exists. Her options are to \emph{commit} and to \emph{abstain}. If God exists, commitment yields utility $u_{GC}$ and abstention $u_{GA}$; if not, commitment yields $u_{NC}$ and abstention $u_{NA}$. The \emph{gain} of commitment is $g = u_{GC} - u_{GA}$, its \emph{cost} is $k = u_{NA} - u_{NC}$, and we assume both are non-negative.
+\end{definition}
+
+\begin{assumption}[Expected utility]\label{a:eu}
+A rational agent chooses an option of greatest expected utility, where expected utility is defined.
+\end{assumption}
+
+\begin{definition}[Bounded utilities]\label{d:bounded}
+Utilities are \emph{bounded} if there is a number $B$ such that every outcome has utility at most $B$ in absolute value.
+\end{definition}
+
+Bounded utility is not an ad hoc restriction. It follows from Savage's axioms for rational preference \citep{Savage1954}, and it is the standard resolution of the St.~Petersburg paradox, whose infinite expectation is otherwise as compelling a reason to pay any price for the gamble as the wager is a reason to commit.
+
+\section{Infinite utilities}
+
+\begin{definition}\label{d:xeu}
+With an infinite reward, the expected utility of an option that yields the reward with probability $q$ is infinite if $q > 0$, and equal to the expectation of its finite outcomes if $q = 0$.
+\end{definition}
+
+\begin{proposition}[Ties at infinity]\label{p:ties}
+If the reward for commitment is infinite, every option that gives the reward a positive probability has the same, infinite, expected utility. In particular, commitment, any mixed strategy that leads to commitment with positive chance, and commitment to any rival god who offers an infinite reward with positive credence all tie.
+\end{proposition}
+
+\begin{proof}
+Each option yields the infinite reward with positive probability: commitment with probability $p$, a mixed strategy with probability $ps$ for its positive chance $s$ of leading to commitment, and abstention with probability $p\cdot t$ for the positive chance $t$ that the abstainer will come to commit later. By Definition~\ref{d:xeu}, all are infinite.
+\end{proof}
+
+Proposition~\ref{p:ties} is Hájek's point, and it shows that the wager with infinite utilities is not a valid argument for commitment: Assumption~\ref{a:eu} recommends every option with positive probability of reward equally, which is nearly every option. A defender may refine the decision theory to break the ties, but the refinements either weigh probabilities after all, in which case they are bounded utilities in disguise, or introduce orderings on infinite values that have no independent motivation \citep{Hajek2003}.
+
+\section{Bounded utilities}
+
+\begin{theorem}[Threshold]\label{t:threshold}
+Under bounded utilities, commitment has greater expected utility than abstention if and only if $(1 - p) k < p g$, that is, if and only if $p > k/(g + k)$.
+\end{theorem}
+
+\begin{proof}
+The expected utility of commitment exceeds that of abstention if and only if $p u_{GC} + (1-p) u_{NC} > p u_{GA} + (1-p) u_{NA}$. Writing $u_{GC} = u_{GA} + g$ and $u_{NA} = u_{NC} + k$, this is $pg > (1-p)k$.
+\end{proof}
+
+\begin{corollary}[Negligible credence]\label{c:neg}
+If $pB \leq (1-p)k$, the wager does not recommend commitment, however large the reward within the bound.
+\end{corollary}
+
+\begin{proof}
+Since $g \leq B$, $pg \leq pB \leq (1-p)k$.
+\end{proof}
+
+Theorem~\ref{t:threshold} makes the wager valid and determinate. It is sound for every agent whose credence exceeds the threshold $k/(g+k)$. If the gain of commitment, an eternal relation to God, is large compared with its cost, a life of religious practice that turns out to have been unwarranted, the threshold is low, and the wager applies to anyone who regards the existence of God as a live possibility. What it does not do is apply to every agent with any positive credence at all, and Corollary~\ref{c:neg} shows why this is a virtue: a decision theory on which any positive credence in an infinite reward overrides every finite consideration is exploitable by anyone who promises such a reward.
+
+\begin{proposition}[Many gods]\label{p:many}
+Under bounded utilities: (i) if two rival gods offer the same gain $g > 0$ to those committed to them, and credence in the first exceeds credence in the second, commitment to the first has the greater expected gain; (ii) gods whose credence is at most $\varepsilon$ contribute at most $\varepsilon B$ to any comparison of options.
+\end{proposition}
+
+\begin{proof}
+(i) $p_2 g < p_1 g$ when $p_2 < p_1$ and $g > 0$. (ii) Each such god contributes $q u$ with $q \leq \varepsilon$ and $u \leq B$.
+\end{proof}
+
+The many-gods objection derives its force from the tie of Proposition~\ref{p:ties}: if every god promises infinity, every god is an equally good bet, and the wager selects none. Under bounded utilities the gods are not tied. They are weighed by their credences, the exotic gods of the philosophical literature, including the god who rewards only unbelievers \citep{MouginSober1994}, contribute in proportion to the small credence they deserve, and the comparison is dominated by the hypotheses an agent takes seriously. The objection does not vanish, since an agent may have comparable credence in rival traditions with exclusive demands, but it becomes an ordinary problem of decision under uncertainty, to be resolved by the credences, rather than a refutation of the method.
+
+\section{Commitment, not belief}\label{s:commit}
+
+Pascal's interlocutor objects that he is so made that he cannot believe, and Pascal replies that he should act as if he believed, taking holy water and having masses said. The exchange concedes what EPI-11 argues: belief is not under direct voluntary control, though attention is, and belief follows attention. The options of a decision problem must be acts the agent can choose, and so the options of the wager are not believing and not believing, but committing and abstaining, where commitment is a practical orientation: a pattern of action, participation and attention directed toward God.
+
+The wager therefore supports practical commitment, and not belief. It gives a practical reason to commit, and no evidence that God exists. If belief follows from the attention that commitment involves, its epistemic standing depends on the evidence that attention brings to light, not on the wager. This is the position of REL-17, on which faith is rational where the evidence underdetermines the question and the stakes are practical. It also answers the objection that a God who rewards belief formed for prudential reasons would be rewarding a vice: the wager recommends no belief formed for prudential reasons, only a commitment whose rationality is prudential.
+
+\section{Objections}
+
+\begin{objection}[Bounding heaven]
+Heaven is infinitely good by definition. To bound utilities is to change the subject.
+\end{objection}
+
+\begin{reply}
+Bounded utility represents the agent's preferences, not the value of heaven. An eternal good may be preferred to every finite good while its utility, in the sense relevant to choice under risk, remains finite, which is what Savage's representation requires. A defender of infinite utility must accept Proposition~\ref{p:ties} and, with it, the conclusion that the wager recommends nothing in particular.
+\end{reply}
+
+\begin{objection}[Credence is the real problem]
+Theorem~\ref{t:threshold} makes the wager depend on the agent's credence, and those whom Pascal addressed may have credence below the threshold.
+\end{objection}
+
+\begin{reply}
+That is the correct result. The wager is addressed to the agent for whom reason cannot decide, as Pascal says; for an agent whose credence is negligible, Corollary~\ref{c:neg} shows that it does not apply, and it should not.
+\end{reply}
+
+\begin{objection}[Commitment without belief is hypocrisy]
+To practise a religion without believing it is to pretend.
+\end{objection}
+
+\begin{reply}
+Commitment involves acting on the hypothesis that God exists, not asserting it. One may commit to a course of action on a hypothesis one does not believe, as a physician treats for the more dangerous of two diagnoses; such commitment is not pretence. The hiddenness of God, as REL-03-a argues, leaves exactly this kind of response open to creatures.
+\end{reply}
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/REL/REL_06.lean}, with probabilities as multiples of a unit $1/N$ and utilities as natural numbers. Infinite utility is modelled by an extended type with a top element. The threshold theorem reads:
+
+\begin{lstlisting}
+theorem threshold (N p gc gn nc nn : Nat) (h1 : gn ≤ gc) (h2 : nc ≤ nn) :
+    EU N p gn nn < EU N p gc nc ↔ (N - p) * (nn - nc) < p * (gc - gn)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_06.infinite_ties' depends on axioms: [propext]
+'Philosophy.REL_06.threshold' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.REL_06.many_gods' does not depend on any axioms
+\end{lstlisting}
+
+The listed axioms are Lean's own, used by the simplifier and the arithmetic tactic; there are no philosophical axioms. The philosophical premises, that rational choice maximizes expected utility and that utilities are bounded, are built into the definitions, and the claim that the options are acts rather than beliefs is argued in Section~\ref{s:commit}.
+
+\section{Conclusion}
+
+With infinite utilities, Pascal's wager cannot single out its recommendation, since every option with any chance of the reward ties at infinity. With bounded utilities, it is a sound argument for every agent whose credence in God exceeds a threshold set by the stakes. Its conclusion is a reason for practical commitment, since belief is not an option one can take, and it weighs rival gods by their credences, which deprives the many-gods objection of the tie on which it depended.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bartha(2007)]{Bartha2007} Bartha, P. (2007). Taking stock of infinite value: Pascal's wager and relative utilities. \emph{Synthese}, 154(1), 5--52.
+\bibitem[Cargile(1966)]{Cargile1966} Cargile, J. (1966). Pascal's wager. \emph{Philosophy}, 41(157), 250--257.
+\bibitem[Duff(1986)]{Duff1986} Duff, A. (1986). Pascal's wager and infinite utilities. \emph{Analysis}, 46(2), 107--109.
+\bibitem[Hacking(1972)]{Hacking1972} Hacking, I. (1972). The logic of Pascal's wager. \emph{American Philosophical Quarterly}, 9(2), 186--192.
+\bibitem[H\'ajek(2003)]{Hajek2003} H\'ajek, A. (2003). Waging war on Pascal's wager. \emph{The Philosophical Review}, 112(1), 27--56.
+\bibitem[Jordan(2006)]{Jordan2006} Jordan, J. (2006). \emph{Pascal's Wager: Pragmatic Arguments and Belief in God}. Clarendon Press.
+\bibitem[Mackie(1982)]{Mackie1982} Mackie, J.~L. (1982). \emph{The Miracle of Theism}. Clarendon Press.
+\bibitem[McClennen(1994)]{McClennen1994} McClennen, E.~F. (1994). Pascal's wager and finite decision theory. In J. Jordan (ed.), \emph{Gambling on God: Essays on Pascal's Wager}. Rowman \& Littlefield.
+\bibitem[Mougin and Sober(1994)]{MouginSober1994} Mougin, G. and Sober, E. (1994). Betting against Pascal's wager. \emph{No\^us}, 28(3), 382--395.
+\bibitem[Pascal(1670)]{Pascal1670} Pascal, B. (1670). \emph{Pens\'ees}. Paris.
+\bibitem[Savage(1954)]{Savage1954} Savage, L.~J. (1954). \emph{The Foundations of Statistics}. Wiley.
+\end{thebibliography}
+
+\end{document}

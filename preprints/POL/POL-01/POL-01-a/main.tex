@@ -1,0 +1,175 @@
+\documentclass{situationist-preprint}
+
+\title{On Justice\\[0.4em]\large Volume I: The Original Position}
+\msid{POL-01-a}
+\msfamily{POL-01}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript, Volume I of II}
+\mslean{lean/Philosophy/POL/POL\_01.lean}
+\mskeywords{justice; original position; veil of ignorance; difference principle; maximin; Rawls; Harsanyi; risk}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This work defends justice as fairness: the principles of justice for the basic structure of society are those that would be chosen by free and equal persons behind a veil of ignorance. Volume I presents the original position, argues that its parties would choose a principle of equal basic liberties and a difference principle, and modifies the difference principle in one respect. Rawls's principle directs that inequalities be arranged to the greatest benefit of the least advantaged; read as strict maximin, it is indifferent between distributions that give the worst-off position the same level, however much they differ for everyone else. We propose that ties on the worst-off level be broken by the total, and show that the resulting principle is a strict weak order, that choosing by it over any finite feasible set yields an undominated distribution, and that it differs both from utilitarianism and from strict maximin. These results are formalized in Lean. We then argue that the parties would choose the modified principle over both alternatives, using recent work on choice under risk to answer Harsanyi's objection. Volume II derives the institutional consequences.
+\end{abstract}
+
+\section*{Plan of the work}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+\toprule
+Vol. & Title & Pages \\
+\midrule
+I & The Original Position & 1--344 \\
+II & Principles and Institutions & 345--680 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Preface}
+
+Half a century after \emph{A Theory of Justice}, justice as fairness remains the most developed account of social justice, and also the most criticized. Utilitarians argue that the parties to the original position would maximize expected utility; libertarians argue that justice concerns the history of holdings, not their pattern; egalitarians argue that the difference principle permits too much inequality; sufficientarians argue that it demands too much. We think that the central structure of Rawls's view survives these criticisms, and that the one place where it needs revision is the difference principle, whose strict maximin form has consequences that Rawls himself sought to avoid. This work restates the view, makes the revision, and defends the result.
+
+The work has two volumes. The first concerns the original position and the choice of principles. The second concerns the application of the principles to institutions: the constitution, the tax system, the labour market, and the international order.
+
+\section*{Contents of Volume I}
+
+\begin{center}\small
+\begin{tabular}{@{}rlr@{}}
+1 & Introduction & 3 \\
+2 & Justice as fairness: the idea & 27 \\
+3 & The original position & 52 \\
+4 & The argument for maximin & 88 \\
+5 & The difference principle modified & 121 \\
+6 & The thickness of the veil & 158 \\
+7 & Utilitarian objections & 197 \\
+8 & Libertarian objections & 241 \\
+9 & Reflective equilibrium & 284 \\
+10 & Summary and plan of Volume II & 327 \\
+\end{tabular}
+\end{center}
+
+\section{Introduction}
+
+What is justice? We take the question to concern the basic structure of society: the way its major institutions distribute fundamental rights and duties and determine the division of advantages from social cooperation \citep{Rawls1971}. The question is not what individuals owe one another in their private dealings, nor what a just person is like, though answers to both depend on the answer to the question about institutions. Our thesis is that justice is fairness: the principles of justice are those that free and equal persons would agree to under conditions that are fair to all of them.
+
+The thesis has two parts. The first is a method: principles of justice are identified by a hypothetical agreement under fair conditions. The second is a result: the principles so identified are a principle of equal basic liberty and a principle governing social and economic inequalities. We defend both, but the method is prior, and some critics of the result accept the method. Harsanyi, in particular, accepted a version of the original position and argued that it yields utilitarianism \citep{Harsanyi1975}. The dispute between Rawls and Harsanyi is therefore a dispute about rational choice under ignorance, and Chapter~4 treats it as such.
+
+\section{Justice as fairness: the idea}
+
+Society is a cooperative venture for mutual advantage, marked by both an identity and a conflict of interests: everyone gains from cooperation, but everyone prefers a larger share of its benefits to a smaller one. Principles of justice settle the conflict. Because the parties to the conflict are free and equal, the principles must be ones that each could accept, and because each would prefer principles that favour her own situation, the conditions of acceptance must prevent anyone from tailoring principles to her advantage. The original position is a device for representing these conditions.
+
+The legitimacy of a state, on the account of POL-02, depends on whether it can be justified to all reasonable persons subject to it. The original position is a way of making this requirement precise for distributive questions: a principle can be justified to all reasonable persons if it would be chosen by each of them when deprived of the information that would make them favour principles tailored to their situation.
+
+\section{The original position}
+
+The parties in the original position choose principles for the basic structure of their society. They are behind a \emph{veil of ignorance}: they do not know their place in society, their class position or social status, their natural assets and abilities, their conception of the good or their special psychological propensities. They know the general facts of human society, including the principles of economics and psychology, and that their society is under moderate scarcity. They are mutually disinterested: each seeks to advance her own interests, as measured by an index of primary goods, and none is moved by envy.
+
+\begin{assumption}\label{a:veil}
+The parties know neither their position in society nor the probabilities of occupying any position.
+\end{assumption}
+
+\begin{assumption}\label{a:stakes}
+The parties choose principles once and for all, for a society they cannot leave, and their choice determines the basic structure under which their whole lives will go.
+\end{assumption}
+
+\begin{assumption}\label{a:floor}
+Among the available principles, some guarantee every position a level of primary goods that is adequate for a decent life and for the exercise of the basic liberties, and some do not.
+\end{assumption}
+
+Assumption~\ref{a:veil} is the most contested feature of the original position. Harsanyi's version gives the parties equal probabilities of occupying each position, which turns the choice into a choice under risk and yields the principle of average utility. Rawls's thick veil excludes probabilities altogether. The question how thick the veil should be is examined in Chapter~6 and in the companion manuscript POL-01-b; here we note only that the thick veil is justified by the aim of the device. The parties are to choose principles that each could accept whatever her position, and probabilities of occupying positions, even if equal, would reintroduce the thought that a principle is acceptable because one is likely to do well under it.
+
+\section{The argument for maximin}
+
+\citet[\S 26]{Rawls1971} argued that, under Assumptions~\ref{a:veil} to~\ref{a:floor}, the parties would follow the maximin rule: rank alternatives by their worst outcomes and choose the alternative whose worst outcome is best. Maximin is not in general a rational rule; it is rational in the special circumstances described by the three assumptions. When probabilities are unknown, expected value cannot be computed; when the choice is irreversible and determines the course of a whole life, the cost of a bad outcome is not compensated by the chance of a good one; and when a satisfactory minimum is available, there is little to be gained by risking it for what lies above.
+
+Harsanyi's objection is that maximin is irrational in general, and that the special circumstances do not change this. A person following maximin would refuse to take a plane from New York to Chicago to accept a better job, since the worst outcome of flying is death \citep{Harsanyi1975}. The objection has been regarded by many as decisive. We think it is not, for a reason that recent decision theory has made precise.
+
+\citet{Buchak2017} argues that rational choice under risk is governed not by expected utility but by risk-weighted expected utility, in which an agent's attitude to risk is represented by a function that weights outcomes according to their rank. Expected-utility maximization corresponds to neutrality toward risk; maximin is the limiting case of extreme risk aversion. Buchak argues that the appropriate attitude to risk for choices made on behalf of others, or for one's own whole life, is the most risk-averse attitude within the reasonable range, and that behind the veil of ignorance this attitude yields a principle that gives strong but not absolute priority to the worst-off position. Her argument answers Harsanyi without requiring maximin to be rational in general: it requires only that the parties be risk-averse to the degree that is reasonable for choices of this kind. \citet{Gustafsson2018} argues on the contrary that the difference principle would not be chosen, since the parties could do better by a principle that is sensitive to the size of gains above the minimum. We accept the premise of Gustafsson's argument and draw a different conclusion: the difference principle should be modified so as to be sensitive to such gains when the minimum is fixed. That is the modification of Chapter~5.
+
+\section{The difference principle modified}
+
+The difference principle, in Rawls's statement, requires that social and economic inequalities be arranged so that they are to the greatest benefit of the least advantaged \citep[\S 13]{Rawls1971}. Read as strict maximin over distributions, the principle ranks distributions by the level of primary goods of the worst-off representative position, and nothing else. It is then indifferent between two distributions that give the worst-off the same level, even if one gives everyone else much more than the other. Rawls recognized this consequence and proposed a lexical version, on which ties are broken by the level of the second worst-off position, then the third, and so on \citep[\S 13]{Rawls1971}. The lexical version is sensitive to gains above the minimum, but only to gains for the worst-off of those who differ. We propose a different tie-breaker.
+
+\begin{definition}\label{d:mdp}
+Represent a distribution by the level $m$ of primary goods of its worst-off representative position and the total $t$ of the levels of all positions. Distribution $x$ is \emph{better} than distribution $y$ according to the \emph{modified difference principle} if $m_x > m_y$, or $m_x = m_y$ and $t_x > t_y$.
+\end{definition}
+
+The modified principle gives absolute priority to the worst-off position, as Rawls's does, and among distributions that are equal for the worst-off it favours the one with the greater total. It thus combines the priority view of \citet{Parfit1997} at the bottom with a utilitarian tie-breaker above it.
+
+\begin{proposition}\label{p:order}
+The relation \enquote{better} of Definition~\ref{d:mdp} is irreflexive and transitive.
+\end{proposition}
+
+\begin{proposition}\label{p:negtrans}
+The relation \enquote{not worse} is transitive: if $x$ is not worse than $y$, and $y$ is not worse than $z$, then $x$ is not worse than $z$.
+\end{proposition}
+
+Propositions~\ref{p:order} and~\ref{p:negtrans} together say that the modified principle is a strict weak order. It induces a complete ranking of distributions, with ties only between distributions that agree on both the worst-off level and the total.
+
+\begin{theorem}\label{t:choice}
+For every finite set of feasible distributions, choosing by the modified difference principle selects a distribution than which no feasible distribution is better.
+\end{theorem}
+
+\begin{proof}
+Consider the feasible distributions in turn, keeping at each step the better of the one kept so far and the one considered. By transitivity, the distribution kept at the end is not worse than any kept earlier; by negative transitivity, it is not worse than any considered.
+\end{proof}
+
+\begin{proposition}\label{p:differs}
+The modified principle differs from utilitarianism: a distribution with a lower total can be better. It also differs from strict maximin: of two distributions with the same worst-off level, the one with the greater total is better.
+\end{proposition}
+
+\begin{proof}
+The distribution with worst-off level $3$ and total $7$ is better than the one with worst-off level $2$ and total $12$. The distribution with worst-off level $3$ and total $100$ is better than the one with worst-off level $3$ and total $7$.
+\end{proof}
+
+The case for the modification over Rawls's lexical version is that it responds to the objection Gustafsson presses. Under the lexical version, a gain of one unit for the second worst-off position outweighs a gain of any size for all positions above it; under the modified version, gains above the minimum count in proportion to their size. The case for the modification over prioritarianism, which weighs gains at every level with diminishing weight, is that it preserves what the parties in the original position care about most, the guarantee of the minimum, in the strict form that Assumption~\ref{a:floor} makes rational. Chapter~7 argues that the parties would choose the modified principle over both, and the companion manuscript POL-01-d states the modification in a compact form.
+
+\subsection*{Formalization}
+
+The module \nolinkurl{Philosophy/POL/POL_01.lean} represents a distribution by its worst-off level and total, defines the modified principle, and proves Propositions~\ref{p:order}, \ref{p:negtrans} and~\ref{p:differs} and Theorem~\ref{t:choice}.
+
+\begin{lstlisting}
+def Better (x y : Dist) : Prop :=
+  x.worst > y.worst ∨ (x.worst = y.worst ∧ x.total > y.total)
+
+theorem choose_best : ∀ (l : List Dist) (d : Dist),
+    ∀ y ∈ l, ¬ Better y (choose l d)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.POL_01.choose_best' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.POL_01.not_utilitarian' does not depend on any axioms
+\end{lstlisting}
+
+The formalization contains no axiom specific to the problem. It establishes that the modified principle is well behaved as a criterion of choice, which strict maximin is too, and that it is distinct from its two main rivals. It does not establish that the parties would choose it. That claim depends on Assumptions~\ref{a:veil} to~\ref{a:floor} and on an account of rational choice under ignorance, which are argued for informally in Chapters~4 and~7.
+
+\section{The thickness of the veil}
+
+The argument of Chapter~4 depends on Assumption~\ref{a:veil}, and the most common reply to it is that the assumption is unmotivated. Why should the parties not know the probabilities of occupying each position? If they reason from the general facts of human society, which they are allowed to know, they can estimate the distribution of positions in any society governed by given principles; and if they do not know which position will be theirs, the principle of insufficient reason assigns each person an equal chance. This is Harsanyi's construction, and it seems to use no information that Rawls's parties lack.
+
+We reply in three steps.
+
+First, the principle of insufficient reason is not a source of information. A party who assigns equal probabilities to positions because she has no reason to favour any of them has represented her ignorance as a precise belief, and the choice that results is no more justified than the representation. Where the outcome is the structure of a whole life, the difference between ignorance and equiprobability is not a technicality. A party who knows that she has an equal chance of each position knows that, over a large population, the gains of some will balance the losses of others; a party who knows nothing of the kind does not.
+
+Second, the aim of the device requires the thick veil. The original position is meant to identify principles that each person could accept whatever her position, and so to model the requirement of POL-02 that principles be justifiable to every reasonable person subject to them. A principle chosen because, on average, the chooser is likely to do well under it is not thereby justifiable to the person who does badly. The thick veil excludes this form of justification, which is the form utilitarianism relies on: the objection, familiar since Rawls, that utilitarianism does not take seriously the distinction between persons.
+
+Third, the thickness of the veil is a matter of degree, and the modified principle is less sensitive to it than strict maximin. If the parties had some probabilistic information, but not enough to make expected-value reasoning reliable, the risk-weighted framework of \citet{Buchak2017} would still recommend strong priority for the worst-off, and the utilitarian tie-breaker of Definition~\ref{d:mdp} would come into play wherever the minimum is fixed. The companion manuscript POL-01-b argues that the veil must be thick enough to exclude knowledge of the society's level of development, since that knowledge would let the parties tailor principles to it; a thinner veil, it argues, leaves the parties' choice of principle unchanged in the cases that matter. The conclusion of this volume does not depend on the exact thickness.
+
+A different objection holds that the whole procedure is idle: since the parties are identical in what they know and in how they reason, the original position contains in effect a single chooser, and the appeal to agreement adds nothing to an argument about rational choice. We accept the premise and deny that it is an objection. The agreement in the original position is not a bargain between parties with different interests. It is unanimity, and it follows from the fact that the same reasoning would be accepted by everyone who reasoned under fair conditions. That is what justification to each person requires.
+
+\bigskip
+\begin{center}\small\itshape [Volume I continues with Chapters 7 to 10.]\end{center}
+
+\begin{thebibliography}{99}\small
+\bibitem[Buchak(2017)]{Buchak2017} Buchak, L. (2017). Taking risks behind the veil of ignorance. \emph{Ethics}, 127(3), 610--644.
+\bibitem[Gustafsson(2018)]{Gustafsson2018} Gustafsson, J.~E. (2018). The difference principle would not be chosen behind the veil of ignorance. \emph{The Journal of Philosophy}, 115(11), 588--604.
+\bibitem[Harsanyi(1975)]{Harsanyi1975} Harsanyi, J.~C. (1975). Can the maximin principle serve as a basis for morality? A critique of John Rawls's theory. \emph{American Political Science Review}, 69(2), 594--606.
+\bibitem[Parfit(1997)]{Parfit1997} Parfit, D. (1997). Equality and priority. \emph{Ratio}, 10(3), 202--221.
+\bibitem[Rawls(1971)]{Rawls1971} Rawls, J. (1971). \emph{A Theory of Justice}. Harvard University Press.
+\end{thebibliography}
+
+\end{document}

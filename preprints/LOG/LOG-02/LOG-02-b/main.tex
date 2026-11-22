@@ -1,0 +1,90 @@
+\documentclass{situationist-preprint}
+
+\title{What Non-Classical Logics Describe}
+\msid{LOG-02-b}
+\msfamily{LOG-02}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{logical monism; logical pluralism; intuitionistic logic; first-degree entailment; Kripke semantics; points of evaluation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-02-a argues that classical logic is the one true logic and that non-classical logics correctly describe other relations, such as provability and relevance. We give a uniform account of why this is so. The standard semantics of the main non-classical logics evaluate sentences at points that may be incomplete, inconsistent or both: stages of information, bodies of data, situations. We prove that at a point that is complete and consistent the intuitionistic and first-degree entailment clauses reduce to the classical ones. A non-classical logic therefore describes preservation across points that are not ways for things to be; restricted to the points that are, it is classical. This identifies, for each logic, the relation it describes, and it explains why the pluralist's cases are not cases of consequence.
+\end{abstract}
+
+\section{Points of evaluation}
+
+Every semantics evaluates sentences at something. In the classical semantics of LOG-02-a the points are interpretations: assignments of contents and extensions under which every sentence with classical content is true or not true, and not both (Assumption 3.4 there). The pluralism of \citet{BeallRestall2006} generalizes the Tarskian account of consequence to other \emph{cases}: constructions for intuitionistic logic, situations for relevant logic. LOG-02-a answers that truth-preservation across such cases is a relation distinct from consequence (Principle P2 and Corollary 4.6 there). Here we ask what makes it distinct, and the answer is the same for every non-classical logic we consider: its points need not settle every question, or need not settle every question in only one way.
+
+\paragraph{Intuitionistic logic.} In the semantics of \citet{Kripke1965}, a model is a set of stages partially ordered by $\leq$, with a relation $w \Vdash p$ between stages and atoms that is persistent: if $w \Vdash p$ and $w \leq v$, then $v \Vdash p$. Conjunction and disjunction are evaluated pointwise; $w \Vdash \neg A$ if no $v \geq w$ forces $A$, and $w \Vdash A \to B$ if every $v \geq w$ that forces $A$ forces $B$. A stage is a state of information that may later grow. It need not decide $p$: it may force neither $p$ nor $\neg p$, if $p$ is not yet established but may be.
+
+\paragraph{First-degree entailment.} In the semantics of \citet{Dunn1976} and \citet{Belnap1977}, a point assigns to each atom a subset of $\{\mathrm{t}, \mathrm{f}\}$: told true, told false, both or neither. $\neg A$ is told true where $A$ is told false and conversely; conjunction and disjunction follow the usual clauses for each of $\mathrm{t}$ and $\mathrm{f}$ separately. Consequence is preservation of being told true. Belnap's points are bodies of information fed to a reasoner, and such a body may say nothing about $p$ or may say both that $p$ and that not $p$. LP and the strong Kleene logic K3 are the restrictions to points that are complete and to points that are consistent, respectively.
+
+\section{The reduction}
+
+\begin{definition}\label{d:settled}
+A stage $w$ of a Kripke model is \emph{settled} if for every atom $p$, either $w \Vdash p$ or no $v \geq w$ forces $p$. A point of a first-degree model is \emph{classical} if it assigns to every atom exactly one of $\mathrm{t}$ and $\mathrm{f}$.
+\end{definition}
+
+\begin{proposition}\label{p:kripke}
+If $w$ is settled, then every $v \geq w$ forces exactly the sentences $w$ forces, and for every sentence $A$, $w \Vdash \neg A$ if and only if $w \nVdash A$, and $w \Vdash A \to B$ if and only if $w \nVdash A$ or $w \Vdash B$. The sentences forced at $w$ are the sentences true under the classical valuation that makes true exactly the atoms forced at $w$.
+\end{proposition}
+
+\begin{proof}
+For $v \geq w$, $v$ forces an atom $p$ if and only if $w$ does: if $w \Vdash p$, by persistence; if not, by settledness no stage above $w$ forces $p$. By induction on sentences, $v$ and $w$ force the same sentences: the cases of conjunction and disjunction are immediate, and in the cases of negation and the conditional the clauses quantify over stages above $v$ or above $w$, all of which agree on every sentence by the induction hypothesis applied to them, since each stage above a settled stage is itself settled. Then $w \Vdash \neg A$ iff no $v \geq w$ forces $A$ iff $w \nVdash A$, and similarly for the conditional. The last claim follows by induction, the clauses being those of the classical truth tables.
+\end{proof}
+
+\begin{proposition}\label{p:fde}
+At a classical point of a first-degree model, every sentence is told exactly one of true and false, and is told true if and only if it is true under the classical valuation that makes true the atoms told true.
+\end{proposition}
+
+\begin{proof}
+By induction on sentences. For atoms this is the hypothesis. If $A$ is told exactly one value, $\neg A$ is told exactly the other. If $A$ and $B$ are each told exactly one value, $A \wedge B$ is told true iff both are told true and told false iff one is told false, which are exclusive and exhaustive; disjunction is dual.
+\end{proof}
+
+Propositions~\ref{p:kripke} and~\ref{p:fde} show that the non-classical clauses are classical clauses evaluated at partial or inconsistent points. Once a point settles every atom in exactly one way, the logics agree with classical logic; they differ from it only because their consequence relations quantify over points that do not. This is the analogue, for these semantics, of Theorem 5.2 of LOG-02-a, which shows the same for regular many-valued semantics at classical values.
+
+\section{What each logic describes}
+
+The reduction tells us, for each logic, what relation it describes: preservation of a property across a class of points that includes unsettled ones.
+
+Intuitionistic consequence is preservation of being established across all stages of information and all ways information may grow. A stage at which $p \vee \neg p$ is not forced is one at which neither $p$ nor its refutation has been established. Excluded middle fails because establishment is not settled in advance, and this is the relation of provability that LOG-02-a (Section 5.1) identifies by way of the translation into S4. The settled stages are the stages at which information is complete; at them, by Proposition~\ref{p:kripke}, intuitionistic forcing is classical truth. MTH-07 argues that mathematical sentences have classical content and that excluded middle holds for them, so that the stages at which a mathematical question is open are stages of knowledge, not of the mathematical facts.
+
+First-degree entailment is preservation of being told true across bodies of information, consistent or not, complete or not. It is the right logic for a reasoner whose inputs may conflict, as \citet{Belnap1977} intended it to be: from a database that says both $p$ and $\neg p$, it does not derive $q$. LOG-03 holds that there are no true contradictions; a body of information that says both $p$ and $\neg p$ is not a way for things to be but a record that someone has said both. The relevant logics, whose first-degree fragment this is \citep{AndersonBelnap1975}, add a conditional evaluated by a ternary relation on such points, and the relation they describe, which LOG-02-a calls relevance, is preservation across situations that may be partial or inconsistent.
+
+The pattern also covers logics that LOG-02-a does not discuss. Linear logic \citep{Girard1987} rejects contraction and weakening because its premises are resources, consumed when used; the relation it describes is the production of one resource from others, and with the exponentials, which mark resources that may be reused freely, intuitionistic and classical logic can be embedded in it. In each case the logic is correct for its relation, as Principle P2 of LOG-02-a allows, and its relation is not consequence, because its points are not interpretations.
+
+\section{Objections and replies}
+
+\begin{objection}
+The pluralist will say that the classical monist has simply chosen complete and consistent points as cases, and that the choice begs the question.
+\end{objection}
+
+\begin{reply}
+The choice is fixed by what consequence is. Consequence is the relation that guarantees that the truth of the premises brings the truth of the conclusion with it (LOG-02-a, Section 4). What is guaranteed must be guaranteed for the way things are, and the way things are, for sentences with classical content, settles each such sentence in exactly one way. An incomplete stage of information is not a way for things to be: when a question is open at a stage, it is the stage that is incomplete, not the world. An inconsistent body of data is not a way for things to be either, unless some contradiction is true, and LOG-03 argues that none is.
+\end{reply}
+
+\begin{objection}
+Every actual state of information is incomplete. If logic is to guide reasoning, it should be the logic of incomplete points, and classical logic is then an idealization.
+\end{objection}
+
+\begin{reply}
+The objection runs together two questions that LOG-05 separates: what follows from what, and how a reasoner with limited information should manage her beliefs. Classical logic answers the first. The intuitionistic and first-degree logics are useful for the second, since they track what is established and what one has been told. That they are useful in this way is a reason to study them, and LOG-02-a grants it, but it does not make the relations they describe into consequence.
+\end{reply}
+
+\section{Conclusion}
+
+The non-classical logics evaluate sentences at points that may fail to settle a question or may settle it both ways, and at points that settle every question in exactly one way their clauses are classical. Intuitionistic logic describes the growth of established information, first-degree entailment and the relevant logics describe what is supported by bodies of information and situations, and linear logic describes the use of resources. Each is correct for its relation. None describes consequence, because consequence is preservation of truth across interpretations, and interpretations are the settled points.
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson and Belnap(1975)]{AndersonBelnap1975} Anderson, A.~R. and Belnap, N.~D. (1975). \emph{Entailment: The Logic of Relevance and Necessity}, vol.~1. Princeton University Press.
+\bibitem[Beall and Restall(2006)]{BeallRestall2006} Beall, J.~C. and Restall, G. (2006). \emph{Logical Pluralism}. Oxford University Press.
+\bibitem[Belnap(1977)]{Belnap1977} Belnap, N.~D. (1977). A useful four-valued logic. In J.~M. Dunn and G. Epstein (eds.), \emph{Modern Uses of Multiple-Valued Logic}, Reidel, 5--37.
+\bibitem[Dunn(1976)]{Dunn1976} Dunn, J.~M. (1976). Intuitive semantics for first-degree entailments and \enquote{coupled trees}. \emph{Philosophical Studies}, 29(3), 149--168.
+\bibitem[Girard(1987)]{Girard1987} Girard, J.-Y. (1987). Linear logic. \emph{Theoretical Computer Science}, 50(1), 1--102.
+\bibitem[Kripke(1965)]{Kripke1965} Kripke, S.~A. (1965). Semantical analysis of intuitionistic logic I. In J.~N. Crossley and M.~A.~E. Dummett (eds.), \emph{Formal Systems and Recursive Functions}, North-Holland, 92--130.
+\end{thebibliography}
+
+\end{document}

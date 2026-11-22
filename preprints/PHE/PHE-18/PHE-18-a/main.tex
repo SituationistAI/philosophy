@@ -1,0 +1,179 @@
+\documentclass{situationist-preprint}
+
+\title{Philosophy as Rigorous Science, Circularly Grounded}
+\msid{PHE-18-a}
+\msfamily{PHE-18}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_18.lean}
+\mskeywords{rigorous science; Husserl; evidence; reflection; circularity; epistemic circularity; method}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In \enquote{Philosophie als strenge Wissenschaft} Husserl claimed that philosophy could become a rigorous science, and that phenomenology was the way. The claim faces a dilemma. If rigour is defined by the standards of the mathematical and natural sciences, phenomenology, which proceeds by reflective description, fails them. If rigour is defined by phenomenology itself, the claim that phenomenology is rigorous seems circular. We argue that phenomenology is possible as a rigorous science provided rigour is itself defined phenomenologically, as the condition that every claim a discipline asserts is evident and can be re-verified by returning to the reflective attitude. The resulting circle is real: the definition of rigour is one of phenomenology's own claims, and phenomenology's rigour depends on the evidence of that claim. We show that the circle is virtuous, because the definition discriminates between disciplines and because its application to phenomenology is a genuine test that could fail. We contrast it with a vicious definition, on which rigour is agreement with phenomenology, which phenomenology satisfies whatever its evidence. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+In the 1911 \emph{Logos} essay, Husserl argued that philosophy, from its beginning, has claimed to be a rigorous science, and that it has never fulfilled the claim \citep{Husserl1911}. Naturalism, which reduces consciousness to nature, fails because it presupposes what it would explain: the validity of its own logical and epistemic norms cannot be a natural fact. Historicism and the philosophy of world-views fail because they abandon the claim to validity altogether. Phenomenology, Husserl proposed, can fulfil it, by describing the essential structures of consciousness on the basis of what is given in reflection, and by refusing every claim that is not so given. The method was codified two years later in the \enquote{principle of all principles}: every originary presentive intuition is a legitimate source of cognition, and everything given in intuition is to be accepted simply as what it is given as, but only within the limits in which it is given \citep[§24]{Husserl1913}.
+
+The claim has been doubted from two directions. From outside phenomenology, it has been objected that reflective description is not a reliable source of knowledge: introspective reports conflict, cannot be checked by others, and have repeatedly been shown to be mistaken \citep{Schwitzgebel2008}. On this view, rigour belongs to the third-person methods of the natural sciences, and the most that can be done with first-person reports is to treat them as data for such methods \citep{Dennett2003}. From inside phenomenology, Heidegger's hermeneutic turn and the later work of Husserl's assistants raised the question whether the reflecting subject can ever reach a presuppositionless starting point. Fink, in the \emph{Sixth Cartesian Meditation}, argued that transcendental phenomenology requires a theory of its own method, and that this theory cannot be given in the same terms as the phenomenology it is a theory of \citep{Fink1995}.
+
+The two lines meet in a dilemma. If rigour is defined by external standards, such as intersubjective checkability by instruments or formal derivation, phenomenology fails them, or meets them only by ceasing to be phenomenology. If rigour is defined by phenomenology's own standards, the claim that phenomenology is rigorous is circular: phenomenology is rigorous by a definition of rigour that phenomenology supplies.
+
+We accept the second horn. Phenomenology is possible as a rigorous science provided rigour is defined phenomenologically, and the resulting circle is virtuous. The argument requires a precise definition of rigour, a criterion for distinguishing virtuous from vicious circles, and a proof that the circle meets the criterion.
+
+\section{Framework}
+
+\begin{definition}\label{d:evident}
+A claim is \emph{evident} if what it says is given in a fulfilling intuition: the intended state of affairs is itself presented, not merely meant \citep[VI, §§36--39]{Husserl1901}.
+\end{definition}
+
+\begin{definition}\label{d:reverify}
+A claim is \emph{re-verifiable} if its evidence can be regained, by the same or another subject, on re-entering the attitude in which it was obtained.
+\end{definition}
+
+Re-verifiability is the phenomenological form of checkability. It does not require that evidence be held permanently. PHE-01 argues that the epoché can be sustained only as a reflective attitude, never as a permanent state, and that the natural attitude returns by default. Phenomenological evidence is accordingly something one has while in the reflective attitude and can have again by returning to it, not a possession that persists through the return of the natural attitude. Re-verifiability by another subject is what makes the evidence public: a phenomenological claim is checked by others who perform the reduction and describe what they find.
+
+\begin{definition}\label{d:rigour}
+A discipline is \emph{rigorous} if every claim it asserts is evident and re-verifiable.
+\end{definition}
+
+Definition~\ref{d:rigour} is a phenomenological definition of rigour: it states rigour in terms of evidence and re-verification, which are concepts of phenomenology. It nonetheless applies to all disciplines. A mathematical discipline is rigorous in this sense when each of its theorems has a proof whose evidence can be regained by working through it; PHE-14 argues that this evidence is founded on the perception of the inscriptions in which proofs are written, which is why proofs can be re-verified by others. A natural science is rigorous when its claims are given in the evidence of observation and experiment, reproducible by others. Definition~\ref{d:rigour} thus does not exempt phenomenology from a standard that other sciences meet; it states the standard that they meet in a form that applies to phenomenology as well.
+
+\begin{assumption}\label{a:defphen}
+Definition~\ref{d:rigour} is a phenomenological claim: it is asserted by phenomenology, as the result of a reflective analysis of what it is for knowledge to be rigorous.
+\end{assumption}
+
+\begin{assumption}\label{a:phenevident}
+Every claim phenomenology asserts is evident and re-verifiable.
+\end{assumption}
+
+\begin{assumption}\label{a:discr}
+Some discipline asserts a claim that is not evident.
+\end{assumption}
+
+Assumption~\ref{a:phenevident} is the substantive one. It is not the claim that every description ever published by a phenomenologist is evident, which is false; it is the claim that phenomenology, as a discipline, asserts only what it can make evident, and withdraws what it cannot. This is a methodological commitment, the principle of all principles, and Assumption~\ref{a:phenevident} says that the commitment can be honoured. Assumption~\ref{a:discr} is easily satisfied: speculative metaphysics and the philosophy of world-views that Husserl criticized assert theses that are not given in any intuition.
+
+\begin{definition}\label{d:virtuous}
+A discipline $p$ that asserts a definition $\delta$ of a property $R$ stands in a \emph{virtuous circle} if (i) $p$ has $R$; (ii) $R$ discriminates, that is, some discipline lacks $R$; and (iii) the self-application is a test: if $\delta$ were not evident, $p$ would lack $R$.
+\end{definition}
+
+Condition (ii) excludes empty standards, which every discipline meets. Condition (iii) excludes self-sealing ones, which the defining discipline meets whatever the quality of its own evidence. Together they capture what distinguishes the circles that philosophers have accepted as benign, such as the mutual adjustment of rules and inferences in Goodman's justification of deduction \citep[ch.~III]{Goodman1955} or the reliance on perception in establishing the reliability of perception \citep{Alston1986}, from circles that only assume what they claim to show.
+
+\section{The argument}
+
+\begin{theorem}\label{t:rigorous}
+Phenomenology is rigorous.
+\end{theorem}
+
+\begin{proof}
+Immediate from Assumption~\ref{a:phenevident} and Definition~\ref{d:rigour}.
+\end{proof}
+
+\begin{lemma}\label{l:test}
+If the definition of rigour were not evident, phenomenology would not be rigorous.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:defphen}, phenomenology asserts the definition of rigour. If phenomenology were rigorous, every claim it asserts would be evident, including the definition. So if the definition is not evident, phenomenology is not rigorous.
+\end{proof}
+
+\begin{proposition}\label{p:discr}
+Not every discipline is rigorous.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:discr}, some discipline asserts a claim that is not evident; by Definition~\ref{d:rigour}, it is not rigorous.
+\end{proof}
+
+\begin{theorem}\label{t:virtuous}
+Phenomenology, with its definition of rigour, stands in a virtuous circle.
+\end{theorem}
+
+\begin{proof}
+Condition (i) of Definition~\ref{d:virtuous} is Theorem~\ref{t:rigorous}, condition (ii) is Proposition~\ref{p:discr} and condition (iii) is Lemma~\ref{l:test}; that phenomenology asserts the definition is Assumption~\ref{a:defphen}.
+\end{proof}
+
+The circle is real. Phenomenology's rigour depends on the evidence of its own definition of rigour, and the evidence of that definition can be established only by phenomenological reflection. What makes the circle virtuous is that the reflection might fail. If reflective analysis of rigorous knowledge did not in fact present it as knowledge whose claims are evident and re-verifiable, or presented it otherwise to different investigators, the definition would not be evident, and Lemma~\ref{l:test} shows that phenomenology would then fail its own standard. The self-application is not a formality but an investigation with an open outcome. Contrast the following definition.
+
+\begin{proposition}\label{p:vicious}
+If a discipline is called rigorous when it asserts only what phenomenology asserts, phenomenology is rigorous with no premise at all, and the self-application cannot fail.
+\end{proposition}
+
+\begin{proof}
+Every claim phenomenology asserts is asserted by phenomenology.
+\end{proof}
+
+The definition in Proposition~\ref{p:vicious} also discriminates, since other disciplines assert claims that phenomenology does not; but it fails condition (iii), because nothing about the evidence of phenomenology's claims bears on whether phenomenology satisfies it. A philosophy that defined rigour as agreement with its own results would be a closed system of the kind that the 1911 essay rejected in the philosophy of world-views. The phenomenological definition differs from it precisely in making phenomenology answerable to evidence it might fail to have.
+
+\section{Objections and replies}
+
+\begin{objection}[Unreliability of introspection]
+\citet{Schwitzgebel2008} documents widespread disagreement and error in introspective reports about current conscious experience. If reflective evidence is unreliable, Assumption~\ref{a:phenevident} is false.
+\end{objection}
+
+\begin{reply}
+Phenomenological reflection is not naive introspection. It is the description of essential structures, such as the horizon-structure of perception or the retentional structure of time-consciousness, under imaginative variation, not the report of momentary qualitative detail. Schwitzgebel's cases concern the latter, and the disagreements he documents are, on the present account, cases in which a claim is not re-verifiable and should be withdrawn. Definition~\ref{d:rigour} thus accommodates the evidence of unreliability: it identifies which claims fail the standard. What the objection would need is evidence that structural descriptions of the kind phenomenology asserts cannot be re-verified, and it does not provide it.
+\end{reply}
+
+\begin{objection}[Fink's problem]
+The definition of rigour is a claim about phenomenology's own method. \citet{Fink1995} argued that the phenomenologizing subject, the one who performs the reduction and describes its results, is not itself among the objects the reduction makes available, so that claims about the method cannot be made evident in the same way as claims about consciousness.
+\end{objection}
+
+\begin{reply}
+The objection would show, if sound, that Assumption~\ref{a:defphen} cannot be satisfied in the same way as Assumption~\ref{a:phenevident}. But the act of bracketing is given in reflection to the one who performs it; this is the thesis of PHE-20, on which the transcendental ego survives every reduction as an irreducible residue, and of PHE-22, on which bracketing everything except the bracketing is exactly what the reduction consists in. A claim about the method, such as Definition~\ref{d:rigour}, describes acts that are given to the phenomenologist as hers, and is evident in the way that claims about these acts are. Fink is right that this self-givenness has a peculiar structure; he is not right that it is absent.
+\end{reply}
+
+\begin{objection}[The circle is still a circle]
+Lemma~\ref{l:test} shows only that phenomenology would fail its standard if the definition were not evident. Whether the definition is evident is decided by phenomenology. So the test is administered by the examinee.
+\end{objection}
+
+\begin{reply}
+The test is administered by everyone who performs the reflection, and its result is re-verifiable by Definition~\ref{d:reverify}. The situation is that of every foundational discipline. Logic tests inferences with inferences, and perception is checked by perception \citep{Alston1986}. What distinguishes a virtuous from a vicious circle is not who administers the test but whether its outcome is determined by the definition alone, and Proposition~\ref{p:vicious} shows that, for the phenomenological definition, it is not.
+\end{reply}
+
+\begin{objection}[The hermeneutic circle]
+\citet[§32]{Heidegger1927} argued that understanding always moves within a circle of anticipation, and that the task is not to escape the circle but to enter it in the right way. If so, there is no need for a criterion of virtuous circularity; every understanding is circular, and rigour in Husserl's sense is an illusion.
+\end{objection}
+
+\begin{reply}
+Heidegger's claim that the circle must be entered in the right way already requires a distinction between right and wrong ways, and Definition~\ref{d:virtuous} supplies one. Heidegger's further claim, that the standard of rigour of the mathematical sciences is not the only standard, is one we accept, and Definition~\ref{d:rigour} is a standard of the kind he demanded: one that fits the matter studied. We do not accept that it is an illusion, since Theorem~\ref{t:virtuous} shows that it can be met without self-sealing.
+\end{reply}
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/PHE/PHE_18.lean}. Disciplines, claims, assertion, evidence and re-verifiability are primitives; Definitions~\ref{d:rigour} and~\ref{d:virtuous} are Lean definitions; Assumptions~\ref{a:defphen}--\ref{a:discr} are axioms. The main theorem is
+
+\begin{lstlisting}
+theorem virtuous : VirtuousCircle Rigorous phen rigourDef
+\end{lstlisting}
+
+\noindent and \texttt{\#print axioms} reports (namespace prefix omitted)
+
+\begin{lstlisting}
+[Asserts, Claim, Discipline, Evident, ReVerifiable,
+ def_is_phen, discriminating, phen, phen_evident, rigourDef]
+\end{lstlisting}
+
+\noindent The three substantive axioms are Assumptions~\ref{a:defphen}, \ref{a:phenevident} and~\ref{a:discr}. For Proposition~\ref{p:vicious}, the theorem \texttt{by\_fiat\_trivial} depends only on the primitives \texttt{Asserts}, \texttt{Claim}, \texttt{Discipline} and \texttt{phen}: no assumption about evidence is used, which is the formal mark of a self-sealing definition.
+
+\section{Conclusion}
+
+Phenomenology is possible as a rigorous science if rigour is defined phenomenologically, as the requirement that every asserted claim be evident and re-verifiable on returning to the reflective attitude. The definition is itself a phenomenological claim, so phenomenology's rigour depends on the evidence of its own standard. The circle is virtuous: the standard discriminates between disciplines, and its application to phenomenology is a test that would be failed if the definition were not evident, unlike the self-sealing standard of agreement with phenomenology. Husserl's claim of 1911 is thereby vindicated in the only form in which it could be: not by meeting a standard borrowed from other sciences, but by meeting one that it states for all of them and that it could fail.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alston(1986)]{Alston1986} Alston, W.~P. (1986). Epistemic circularity. \emph{Philosophy and Phenomenological Research}, 47(1), 1--30.
+\bibitem[Dennett(2003)]{Dennett2003} Dennett, D.~C. (2003). Who's on first? Heterophenomenology explained. \emph{Journal of Consciousness Studies}, 10(9--10), 19--30.
+\bibitem[Fink(1995)]{Fink1995} Fink, E. (1995). \emph{Sixth Cartesian Meditation: The Idea of a Transcendental Theory of Method} (R. Bruzina, Trans.). Indiana University Press. (Original work written 1932.)
+\bibitem[Goodman(1955)]{Goodman1955} Goodman, N. (1955). \emph{Fact, Fiction, and Forecast}. Harvard University Press.
+\bibitem[Heidegger(1927)]{Heidegger1927} Heidegger, M. (1927). \emph{Sein und Zeit}. Niemeyer.
+\bibitem[Husserl(1901)]{Husserl1901} Husserl, E. (1901). \emph{Logische Untersuchungen. Zweiter Teil: Untersuchungen zur Phänomenologie und Theorie der Erkenntnis}. Niemeyer.
+\bibitem[Husserl(1911)]{Husserl1911} Husserl, E. (1911). Philosophie als strenge Wissenschaft. \emph{Logos}, 1, 289--341.
+\bibitem[Husserl(1913)]{Husserl1913} Husserl, E. (1913). \emph{Ideen zu einer reinen Phänomenologie und phänomenologischen Philosophie. Erstes Buch}. Niemeyer.
+\bibitem[Schwitzgebel(2008)]{Schwitzgebel2008} Schwitzgebel, E. (2008). The unreliability of naive introspection. \emph{The Philosophical Review}, 117(2), 245--273.
+\end{thebibliography}
+
+\end{document}

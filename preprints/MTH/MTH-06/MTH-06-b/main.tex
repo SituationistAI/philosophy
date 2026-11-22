@@ -1,0 +1,56 @@
+\documentclass{situationist-preprint}
+
+\title{Motivating New Axioms}
+\msid{MTH-06-b}
+\msfamily{MTH-06}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{continuum hypothesis; new axioms; extrinsic justification; forcing axioms; Martin's Maximum; maximality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-06-a argues that the continuum hypothesis is false given new axioms that are independently motivated, and rests the argument on Martin's Maximum. Its conclusion depends on the claim that the motivation for that axiom does not depend on the reader's opinion about CH. We set out the motivation as a sequence of generalizations of the Baire category theorem, each accepted for reasons unrelated to the size of the continuum, and we answer the objection that extrinsic justification is too weak to bear the weight the argument places on it.
+\end{abstract}
+
+\section{The motivation}\label{s:mot}
+
+By Definition~3.3 of MTH-06-a, an axiom is independently motivated with respect to CH if it is intrinsically or extrinsically justified by considerations that neither include CH or its negation nor depend for their force on antecedent opinion about it. Assumption~4.2 of MTH-06-a says that Martin's Maximum (MM) meets this condition. Its motivation runs as follows.
+
+The Baire category theorem says that a compact Hausdorff space is not the union of countably many nowhere dense sets. Equivalently, for every partial order and every countable family of dense sets, there is a filter meeting them all. It is a theorem of ZFC, used throughout analysis. \emph{Forcing axioms} assert the same for larger families: Martin's Axiom for families of size less than the continuum and partial orders with the countable chain condition, the Proper Forcing Axiom for $\aleph_1$ dense sets and proper partial orders \citep{Baumgartner1984}, and MM for $\aleph_1$ dense sets and every partial order that preserves stationary subsets of $\omega_1$ \citep{FMS1988}. Each step enlarges the class of partial orders to which the Baire principle applies, and MM takes the largest class for which the principle, at $\aleph_1$ dense sets, can consistently hold.
+
+\begin{proposition}\label{p:indep}
+The motivation of MM by maximality of the Baire principle is independent of CH in the sense of Definition~3.3 of MTH-06-a.
+\end{proposition}
+
+\begin{proof}
+The motivating considerations are that the Baire principle is a fruitful truth of analysis, and that the universe of sets should be as full as consistency permits, so that whatever generic objects could be added for $\aleph_1$ dense sets already exist. Neither mentions the size of the continuum, and neither would lose force for a reader who held CH true or one who held it false. That MM in fact implies $2^{\aleph_0} = \aleph_2$ (Lemma~4.1 of MTH-06-a) was a discovery about the axiom, made after it had been formulated for its own sake.
+\end{proof}
+
+The extrinsic support is the second strand. MM settles questions across set theory and beyond: it implies that the nonstationary ideal on $\omega_1$ is saturated, and, through its consequence the Open Coloring Axiom, questions about automorphisms of the Calkin algebra and other problems in operator algebras \citep{Farah2011}. These are fruits in the sense of \citet{Godel1947}: the consequences are verifiable, numerous and illuminating, and none of them was the reason the axiom was proposed.
+
+\section{An objection}\label{s:obj}
+
+\begin{objection}[Extrinsic justification is not evidence of truth]
+Fruitfulness shows that an axiom is useful, not that it is true. A theory can be fruitful and false, and the argument of MTH-06-a requires truth.
+\end{objection}
+
+\begin{reply}
+In empirical science, the fruitfulness of a hypothesis, its unifying and predictive power, is evidence of its truth, and no one asks for more. In set theory, the analogue of prediction is the verification of consequences that can be checked independently, for instance the consequences of large cardinals for the projective sets, which extend the classical results on Borel and analytic sets in the way those results led analysts to expect \citep{Maddy1988a,Maddy2011}. MM has such consequences. Principle P2 of MTH-06-a requires only that independently motivated axioms be justified, not that they be certain; the conclusion that CH is false is held, as the family's conclusion says, given axioms of this kind, and with the defeasibility that belongs to any belief held on such grounds.
+\end{reply}
+
+\section{Conclusion}
+
+Martin's Maximum is the end point of a natural sequence of generalizations of a theorem of analysis, and its support is the support that maximality and fruitfulness give. Neither depends on the continuum hypothesis. The axiom is therefore independently motivated, as the argument of MTH-06-a requires.
+
+\begin{thebibliography}{9}\small
+\bibitem[Baumgartner(1984)]{Baumgartner1984} Baumgartner, J.~E. (1984). Applications of the Proper Forcing Axiom. In K.~Kunen and J.~E. Vaughan (eds.), \emph{Handbook of Set-Theoretic Topology}, 913--959. North-Holland.
+\bibitem[Farah(2011)]{Farah2011} Farah, I. (2011). All automorphisms of the Calkin algebra are inner. \emph{Annals of Mathematics}, 173, 619--661.
+\bibitem[Foreman et~al.(1988)]{FMS1988} Foreman, M., Magidor, M. and Shelah, S. (1988). Martin's Maximum, saturated ideals, and non-regular ultrafilters. Part I. \emph{Annals of Mathematics}, 127, 1--47.
+\bibitem[G\"odel(1947)]{Godel1947} G\"odel, K. (1947). What is Cantor's continuum problem? \emph{American Mathematical Monthly}, 54, 515--525.
+\bibitem[Maddy(1988a)]{Maddy1988a} Maddy, P. (1988). Believing the axioms. I. \emph{Journal of Symbolic Logic}, 53, 481--511.
+\bibitem[Maddy(2011)]{Maddy2011} Maddy, P. (2011). \emph{Defending the Axioms: On the Philosophical Foundations of Set Theory}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

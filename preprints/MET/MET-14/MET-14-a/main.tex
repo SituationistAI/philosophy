@@ -1,0 +1,339 @@
+\documentclass{situationist-preprint}
+
+\title{The Unity of Grounding}
+\msid{MET-14-a}
+\msfamily{MET-14}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_14.lean}
+\mskeywords{grounding; metaphysical dependence; levels of reality; small-g relations; normative grounding; strict partial order; pluralism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Disjunctions are grounded in their disjuncts, sets in their members, wholes in their parts or parts in wholes, determinables in determinates, mental states in their physical realizers, moral facts in natural facts, laws in their instances. Are these one relation or many? Pluralists hold that each is a distinct relation and that \enquote{grounding} is at best a label for the family. We argue that grounding is a single relation and that its apparent varieties are that relation applied at different levels of reality. Two features of the varieties support the claim: chains that pass through several varieties never return to their starting point, and the variety of a mediate connection depends only on the levels of the facts it connects. We prove that these two features hold exactly when the varieties are the restrictions to pairs of levels of a single strict partial order witnessed by chains of links, and that this order is unique. We then argue that the order is the genuine relation and the varieties its restrictions, rather than the reverse, since only that reading explains the two features. The results are formalized in Lean; they do not require grounding to be well-founded.
+\end{abstract}
+
+\section{The question}\label{s:question}
+
+Much recent metaphysics is stated in terms of what holds \emph{in virtue of} what. The fact that the ball is red or round obtains in virtue of the fact that it is red. The singleton of Socrates exists in virtue of Socrates' existing. Pain is had in virtue of some physical state that realizes it. An act is wrong in virtue of the natural features that make it wrong. The relation expressed by \enquote{in virtue of} in these sentences is called \emph{grounding}, and its theory has been developed by \citet{Fine2001,Fine2012}, \citet{Schaffer2009}, \citet{Rosen2010} and \citet{Audi2012}, among others. These authors take grounding to be a relation of non-causal determination that backs metaphysical explanation, and they agree, with exceptions discussed below, that it is irreflexive and transitive.
+
+The examples are heterogeneous. Their relata belong to different subject matters, the necessity with which ground necessitates grounded appears to differ between them, and some have been studied for centuries under their own names: the relation of a set to its members, of a whole to its parts, of a determinable to its determinates, of a functional state to its realizer. The question of this manuscript is whether grounding is one relation, of which these are cases, or whether there are many relations, which the word \enquote{grounding} lumps together.
+
+\citet{Wilson2014} has argued for the second answer. On her view the work of metaphysical dependence is done by specific relations, which she calls small-g relations: type and token identity, functional realization, the part--whole relation, set membership, the determinable--determinate relation and others. A big-G relation of grounding, which these would be cases of, adds nothing: it is too unspecific to settle any question of dependence, and every question it might settle is settled by the specific relations. \citet{Koslicki2015} has argued, in the same direction, that grounding is too coarse-grained a notion to capture what is distinctive about each kind of dependence. \citet{Bennett2017} has proposed an intermediate view: there is a family of \emph{building relations}, among them composition, constitution, set formation, realization and grounding narrowly understood, which share a profile (they are directed, necessitating and generative) but are distinct relations. \citet{Fine2012} himself distinguished metaphysical, natural and normative ground, each with its own kind of necessity, and inclined to the view that they are not species of a single notion; the distinction of necessities is defended in \citet{Fine2002}. On the other side, \citet{Berker2018} has argued that the case for a distinct normative grounding relation fails and that there is a single grounding relation, and \citet{Rosen2010} and \citet{Audi2012} take the unity of the notion for granted.
+
+We defend the unity of grounding. Our thesis is that grounding is one relation and that its apparent varieties are that relation applied at different levels of reality: a variety of grounding is the restriction of grounding to pairs of facts at a certain pair of levels. The thesis does not deny that the specific relations exist or that they are useful; it denies that they are distinct relations in the sense the pluralist intends. They are related to grounding as the relation of being taller than among siblings is related to being taller than.
+
+\subsection{A short history of the question}\label{s:history}
+
+The idea that some things are prior to others not in time but in nature is Aristotelian. \citet[$\Delta$.11]{AristotleMet} distinguished priority in nature and substance, on which something is prior if it can be without the other but not the other without it, from priority in knowledge and in time, and the \emph{Categories} adds a sense in which, of two things that imply each other's existence, the one that is the cause of the other's being is prior \citep[12, 14b10--23]{AristotleCat}. The examples were already heterogeneous: substance is prior to its attributes, a man to the true statement that he exists, the parts to the whole in one sense and the whole to the parts in another. Aristotle did not ask whether these were one relation, but his list of the senses of \enquote{prior} reads as a list of varieties of a single notion of priority whose instances differ in subject matter.
+
+\citet{Bolzano1837} gave the first systematic theory of a relation of objective consequence, \emph{Abfolge}, by which truths are ordered by ground and consequence independently of how they are known. Bolzano's relation holds between truths of every subject matter, and he held it to be irreflexive and asymmetric. Bolzano's work was largely ignored, and in the twentieth century metaphysical dependence was expressed in modal terms, by supervenience. Supervenience is a single relation, but it is reflexive and non-symmetric, and it holds between necessarily coextensive properties in both directions; it cannot express the asymmetry that the \enquote{in virtue of} locution carries. Dissatisfaction with supervenience as an account of dependence is the background of the revival of grounding \citep{Fine2001,Schaffer2009,Rosen2010}.
+
+The revival came with a presumption of unity. \citet{Rosen2010} introduced grounding by a list of examples from logic, set theory, the theory of determinables and ethics, and treated them as cases of one relation with one logic. \citet{Schaffer2009} took grounding to be a single primitive relation that orders all entities into a hierarchy with a fundamental level. \citet{Fine2012} gave a logic of ground that applies to every case of metaphysical ground but, as noted, distinguished metaphysical from natural and normative ground. The pluralist reaction followed within a few years: \citet{Wilson2014} and \citet{Koslicki2015} argued that the unity of the notion was presumed rather than shown, and that the specific relations do all the work. \citet{Bennett2017} defended the family view. Since then the question has been discussed as the question of grounding \emph{monism} versus grounding \emph{pluralism} \citep{Berker2018}.
+
+Each side has a case that troubles the other. Against unity, the pluralist cites the diversity of modal profiles: the natural features of an act necessitate its wrongness only given the moral principles, which on many views are not metaphysically necessary, while a disjunct necessitates its disjunction as a matter of logic \citep{Fine2002}. Against pluralism, the unifier cites mixed chains: the microphysical facts ground the chemical facts, the chemical facts ground facts about the organism, and those ground the fact that it is in pain, so that the pain obtains in virtue of the microphysical facts. The connection between the first and the last is not any one of the specific relations. If there were only specific relations, the connection would not be a dependence at all, and the pain would not obtain in virtue of the microphysical facts. Yet it does. The argument of this manuscript develops the second case and answers the first.
+
+\subsection{Recent work}\label{s:recent}
+
+The last fifteen years have produced four lines of work bearing on the question. First, the formal properties of grounding. \citet{Raven2013} defended the view that grounding is a strict partial order against counterexamples to irreflexivity and transitivity; \citet{Jenkins2011} questioned irreflexivity; \citet{Schaffer2012} proposed counterexamples to transitivity and a contrastive account to accommodate them. Second, the connection between grounding and explanation: \citet{deRosset2013} argued that grounding should be understood through the explanations it backs, and the debate between those who identify grounding with a kind of explanation and those who take it to back explanation bears on whether a single relation could back explanations of such different kinds. Third, the modal profile of grounding: whether full grounds necessitate what they ground has been discussed by \citet{Trogdon2013}, among others, and the answer bears on Fine's distinction of necessities. Fourth, the analogy with causation: \citet{Schaffer2016} modeled grounding by structural equations in the image of causation, and \citet{Wilson2018} argued that grounding is a kind of causation. The fourth line raises the question whether the unity of grounding extends to causation; we do not take it up here, and MET-14-b examines the analogy.
+
+\section{Framework}\label{s:framework}
+
+We treat grounding as a relation between facts, in the way of \citet{Rosen2010} and \citet{Audi2012}; entity grounding in the sense of \citet{Schaffer2009} is recovered by taking an entity to be grounded in another when the fact that it exists is grounded in the fact that the other does. We are concerned with \emph{partial} and \emph{mediate} grounding: $f$ grounds $g$ if $f$ is among the facts in virtue of which $g$ obtains, directly or through intermediate facts.
+
+\begin{definition}[Facts and levels]\label{d:levels}
+Each fact has a \emph{level}. The level of a fact is fixed by its subject matter and its form: the microphysical facts, the chemical facts, the facts about organisms, the mental facts, the normative facts, the social facts are at different levels, and so, within a subject matter, are atomic and logically complex facts, determinate and determinable facts, facts about sets of different ranks, facts about parts and facts about wholes.
+\end{definition}
+
+Definition~\ref{d:levels} uses \enquote{level} in a generalized sense. The layered picture of \citet{OppenheimPutnam1958} and \citet{Kim2002} orders levels by composition, and in that picture a level is a stratum of the world. In the generalized sense, a level is a sort of fact, and levels need not be linearly ordered; they include the strata of the layered picture and the logical and set-theoretic sorts as well. What matters for the argument is that levels are individuated by the subject matter and form of facts, not by the grounding relations between them, so that it is not circular to classify grounding connections by the levels of their relata.
+
+\begin{definition}[Varieties]\label{d:varieties}
+An \emph{apparent variety} of grounding is one of the relations listed in the literature as a kind of grounding or dependence: logical grounding (of a disjunction in a disjunct, a conjunction in its conjuncts, a generalization in its instances together with a totality fact), set-theoretic grounding (of a set's existence in its members'), mereological grounding (of a fact about a whole in facts about its parts, or the converse), determinable grounding, realization, normative grounding (of normative facts in non-normative ones), social grounding (of social facts in facts about attitudes and practices), nomic grounding (of laws in their instances), and the grounding of modal facts in essential facts. We write $R_v(f,g)$ for \enquote{$f$ grounds $g$ in variety $v$}, and we take each variety in its mediate form.
+\end{definition}
+
+\begin{definition}[Generic grounding]\label{d:generic}
+A \emph{link} is a pair of facts related by some variety. Fact $f$ \emph{generically grounds} $g$, written $G(f,g)$, if there is a finite chain of links $f = f_0, f_1, \ldots, f_n = g$ with $n \geq 1$, each link of any variety.
+\end{definition}
+
+\begin{definition}[Signature]\label{d:signature}
+The \emph{signature} of a variety $v$ is the set of pairs of levels $(l, m)$ such that some fact at level $l$ grounds some fact at level $m$ in variety $v$.
+\end{definition}
+
+\begin{definition}[Strict partial order]\label{d:spo}
+A relation is a \emph{strict partial order} if it is irreflexive and transitive.
+\end{definition}
+
+\begin{definition}[Witnessed]\label{d:witnessed}
+A relation $H$ on facts is \emph{witnessed} if whenever $H(f,g)$, some chain of links leads from $f$ to $g$; that is, $H$ is included in $G$.
+\end{definition}
+
+\begin{definition}[Unifier]\label{d:unifier}
+A \emph{unifier} of the varieties is a transitive, witnessed relation that includes every variety.
+\end{definition}
+
+\begin{definition}[Level restrictions]\label{d:restrictions}
+The varieties are \emph{level restrictions} of a relation $H$ if there is an assignment to each variety $v$ of a class $S_v$ of pairs of levels such that, for all facts $f$ and $g$, $R_v(f,g)$ holds if and only if $H(f,g)$ holds and the pair of levels of $f$ and $g$ belongs to $S_v$.
+\end{definition}
+
+Definition~\ref{d:generic} defines $G$ from the varieties. That $G$ deserves the name of grounding is the content of the following principle.
+
+\begin{principle}[Mixed chains]\label{p:mixed}
+If $f$ grounds $g$ in some variety and $g$ grounds $h$ in some variety, then $h$ obtains in virtue of $f$, in the same sense of \enquote{in virtue of} in which it obtains in virtue of $g$.
+\end{principle}
+
+Principle~\ref{p:mixed} is the datum the unifier's case rests on. If the pain obtains in virtue of the neural state, and the neural state obtains in virtue of the chemical facts, then the pain obtains in virtue of the chemical facts; and the \enquote{in virtue of} of the conclusion is the same as that of the premises, since the conclusion is drawn by chaining explanations of a single kind. The pluralist who denies the principle must hold that the pain does not obtain in virtue of the chemical facts, or that it does so only in a sense that differs from both senses in the premises. The first is incredible, and the second leaves the third sense unaccounted for.
+
+\begin{assumption}[Mixed acyclicity]\label{a:acyclic}
+No chain of links, of whatever varieties, leads from a fact back to itself.
+\end{assumption}
+
+\begin{assumption}[Level closure]\label{a:closure}
+If a chain of links leads from $f$ to $g$, and the pair of levels of $f$ and $g$ belongs to the signature of variety $v$, then $f$ grounds $g$ in variety $v$.
+\end{assumption}
+
+Assumption~\ref{a:acyclic} extends to mixed chains the irreflexivity that every theorist of grounding accepts for each variety separately: nothing is a set-theoretic ground of itself, nothing a mereological ground of itself. It says in addition that one cannot return to a fact by passing through several varieties: no fact about a set is grounded in a fact about a whole that is grounded in a fact about that set. We defend it in Section~\ref{s:defence}. It does not say that grounding is well-founded.
+
+Assumption~\ref{a:closure} is the substantive premise. It says that the variety of a mediate grounding connection is fixed by the levels of its endpoints, not by the route between them. If the chemical facts ground the pain through a chain of links of several varieties, and the pair of levels (chemical, mental) is one at which realization operates, then the chemical facts realize the pain, in the mediate sense. We defend it in Section~\ref{s:defence} as well.
+
+\section{The unity theorem}\label{s:theorem}
+
+\begin{lemma}\label{l:unifier}
+Generic grounding is a unifier of the varieties.
+\end{lemma}
+
+\begin{proof}
+Each link is a chain of length one, so every variety is included in $G$. Two chains, one from $f$ to $g$ and one from $g$ to $h$, concatenate into a chain from $f$ to $h$, so $G$ is transitive. $G$ is witnessed by definition.
+\end{proof}
+
+\begin{lemma}[Uniqueness]\label{l:unique}
+Every unifier coincides with generic grounding.
+\end{lemma}
+
+\begin{proof}
+Let $H$ be a unifier. Since $H$ is witnessed, $H$ is included in $G$. Conversely, suppose $G(f,g)$, by a chain $f = f_0, \ldots, f_n = g$. Each link $(f_i, f_{i+1})$ belongs to some variety, so $H(f_i, f_{i+1})$, since $H$ includes every variety. By transitivity of $H$, applied $n - 1$ times, $H(f, g)$.
+\end{proof}
+
+\begin{proposition}\label{p:spo}
+Given Assumption~\ref{a:acyclic}, generic grounding is a strict partial order, and it is asymmetric.
+\end{proposition}
+
+\begin{proof}
+Transitivity is Lemma~\ref{l:unifier}. Irreflexivity is Assumption~\ref{a:acyclic}, since $G(f,f)$ would be a chain from $f$ back to $f$. If $G(f,g)$ and $G(g,f)$, then $G(f,f)$ by transitivity, which is excluded.
+\end{proof}
+
+\begin{proposition}\label{p:restriction}
+Given Assumption~\ref{a:closure}, each variety is the restriction of generic grounding to its signature: $R_v(f,g)$ holds if and only if $G(f,g)$ holds and the pair of levels of $f$ and $g$ belongs to the signature of $v$.
+\end{proposition}
+
+\begin{proof}
+If $R_v(f,g)$, then $(f,g)$ is a link, so $G(f,g)$; and the pair of levels of $f$ and $g$ belongs to the signature of $v$, witnessed by $f$ and $g$ themselves. Conversely, if $G(f,g)$ and the pair of levels belongs to the signature of $v$, then $R_v(f,g)$ by Assumption~\ref{a:closure}.
+\end{proof}
+
+The next theorem shows that the two assumptions are not merely sufficient for the representation of the varieties as restrictions of one order, but equivalent to it.
+
+\begin{theorem}[Characterization]\label{t:char}
+Assumptions~\ref{a:acyclic} and~\ref{a:closure} both hold if and only if there is a witnessed strict partial order of which the varieties are level restrictions.
+\end{theorem}
+
+\begin{proof}
+Suppose both assumptions hold. By Proposition~\ref{p:spo}, $G$ is a strict partial order; it is witnessed; and by Proposition~\ref{p:restriction} the varieties are its level restrictions, with $S_v$ the signature of $v$.
+
+Conversely, let $H$ be a witnessed strict partial order and $S$ an assignment of classes of level pairs such that $R_v(f,g)$ if and only if $H(f,g)$ and the levels of $f$ and $g$ are in $S_v$. Then every variety is included in $H$, and $H$ is transitive and witnessed, so $H$ is a unifier and coincides with $G$ by Lemma~\ref{l:unique}. Assumption~\ref{a:acyclic} follows: a chain from $f$ to $f$ would give $H(f,f)$, contrary to irreflexivity. For Assumption~\ref{a:closure}, suppose $G(f,g)$ and the levels $(l,m)$ of $f$ and $g$ are in the signature of $v$, so that $R_v(f',g')$ for some $f'$ at $l$ and $g'$ at $m$. By the representation, $(l,m)$ belongs to $S_v$. Since $G(f,g)$, also $H(f,g)$; so by the representation $R_v(f,g)$.
+\end{proof}
+
+\begin{theorem}[Unity of grounding]\label{t:unity}
+Given Assumptions~\ref{a:acyclic} and~\ref{a:closure}, there is exactly one unifier of the varieties, namely generic grounding; it is a strict partial order; and each variety is its restriction to the pairs of levels at which that variety operates.
+\end{theorem}
+
+\begin{proof}
+Generic grounding is a unifier by Lemma~\ref{l:unifier}, and every unifier coincides with it by Lemma~\ref{l:unique}. It is a strict partial order by Proposition~\ref{p:spo}, and the varieties are its restrictions to their signatures by Proposition~\ref{p:restriction}.
+\end{proof}
+
+\begin{corollary}[Shared profile]\label{c:profile}
+Given Assumption~\ref{a:acyclic}, every variety is irreflexive and asymmetric.
+\end{corollary}
+
+\begin{proof}
+Each variety is included in $G$, which is irreflexive and asymmetric by Proposition~\ref{p:spo}.
+\end{proof}
+
+\begin{corollary}[Definability]\label{c:define}
+Given Assumption~\ref{a:closure}, each variety is definable from generic grounding, the assignment of levels and its signature: any relation that holds between $f$ and $g$ exactly when $G(f,g)$ and the levels of $f$ and $g$ are in the signature of $v$ is the variety $v$.
+\end{corollary}
+
+\begin{proof}
+Immediate from Proposition~\ref{p:restriction}.
+\end{proof}
+
+Theorem~\ref{t:unity} states the unity thesis in the form the catalogue of varieties allows. Its content is not that the varieties have something in common, which every pluralist grants, but that there is a single relation, unique among relations of its type, of which each variety is the part that lies between facts at a given pair of levels. Corollary~\ref{c:profile} records that the shared formal profile of the varieties, on which \citet{Bennett2017} bases the family resemblance of building relations, is inherited from that relation. Corollary~\ref{c:define} records that once generic grounding and the levels are given, the varieties add nothing further to be specified.
+
+\section{One relation, not many}\label{s:one}
+
+Theorem~\ref{t:char} is symmetric in an important respect. It shows that the two assumptions are equivalent to the existence of a strict partial order whose level restrictions are the varieties, and Corollary~\ref{c:define} and Definition~\ref{d:generic} show that each side can be defined from the other: the varieties from generic grounding and the levels, generic grounding from the varieties. A pluralist can therefore accept every theorem of Section~\ref{s:theorem} and maintain that the varieties are the genuine relations and generic grounding a construction from them, the ancestral of their union. Something more is needed to show that the order is the relation and the varieties its restrictions, rather than the reverse. We give two arguments.
+
+The first is explanatory. On the pluralist reading, the varieties are distinct relations, and Assumptions~\ref{a:acyclic} and~\ref{a:closure} are constraints connecting them. Mixed acyclicity says that no combination of set-theoretic, mereological, normative and realization links returns to its origin; level closure says that a chain of links of several varieties always yields a link of whichever variety operates between its endpoints. These are necessary connections between distinct relations, and on the pluralist reading nothing explains them: the irreflexivity of each relation separately does not entail that a chain mixing several of them cannot close, and the existence of mixed chains does not entail that each mixed chain coincides with a link of a single variety. On the unifier's reading, both constraints are consequences of two facts about one relation: that it is irreflexive and transitive, and that its restrictions to pairs of levels are what we have called its varieties. The converse half of Theorem~\ref{t:char} is the precise statement of this: given one witnessed strict partial order, the constraints follow.
+
+\begin{principle}[Explanatory economy]\label{p:economy}
+If a body of necessary constraints connecting several relations follows from the hypothesis that they are restrictions of a single relation with a simple structural property, and is otherwise unexplained, the hypothesis is to be preferred.
+\end{principle}
+
+Principle~\ref{p:economy} is an instance of the general preference for theories that explain necessary connections over theories that posit them. It is the principle by which we prefer the hypothesis that the various measured charges are values of one determinable quantity to the hypothesis that they are unrelated properties whose combinations happen to obey the same laws. With Theorem~\ref{t:char}, it yields the unifier's reading.
+
+The second argument concerns primitives. The pluralist reading needs one primitive relation for each variety, together with the two constraints; the unifier's reading needs one primitive relation, together with the levels, which both readings need in any case, since the varieties are identified by the levels of their relata. The unifier's reading has fewer primitives and no primitive constraints, and it is preferred by parsimony, in the way MET-03 prefers realism to idealism because idealism requires one more primitive. The parsimony argument is weaker than the explanatory argument, since primitive counts depend on how theories are stated; but here the two point the same way.
+
+The two arguments do not show that the varieties are unreal. A restriction of a relation is a relation, and claims made with the specific relations are true. The relation of being a parent of someone born in Lyon is a relation, and it is the restriction of being a parent to a class of relata; it is not a further way of being a parent. The analogy with the sparse theory of MET-02-a is close. There, few properties are genuine and every other qualitative property is constructed from them, and construction does not make the constructed properties unreal. Here, one relation is genuine and the varieties are constructed from it by restriction to levels, a construction that uses only the genuine relation and the sorting of facts by subject matter and form.
+
+\section{Levels without a fundamental level}\label{s:levels}
+
+The thesis speaks of different levels of reality, and it might seem to presuppose a hierarchy with a bottom. It does not. Nothing in Assumptions~\ref{a:acyclic} and~\ref{a:closure} requires that every chain of grounds terminate, and the following model shows that the unity theorem holds in a structure with no fundamental level.
+
+\begin{proposition}\label{p:descent}
+There is a structure satisfying Assumptions~\ref{a:acyclic} and~\ref{a:closure}, with two varieties both instantiated, in which every fact has a ground at a strictly lower level.
+\end{proposition}
+
+\begin{proof}
+Let the levels be the integers, and at each level $n$ let there be two facts, $(n, 0)$ and $(n, 1)$, standing for an atomic fact and a logically complex fact at that level. The intra-level variety relates $(n, 0)$ to $(n, 1)$; the inter-level variety relates any fact at a level $m$ to any fact at a level $n > m$. Every chain of links increases the lexicographic order on pairs, so no chain returns to its origin, and Assumption~\ref{a:acyclic} holds. The signature of the intra-level variety consists of the pairs $(n,n)$, and a chain between facts at the same level can only be the intra-level link from $(n,0)$ to $(n,1)$; the signature of the inter-level variety consists of the pairs $(m,n)$ with $m < n$, and the inter-level variety relates every such pair of facts. So Assumption~\ref{a:closure} holds. Each fact at level $n$ is grounded in the corresponding fact at level $n - 1$.
+\end{proof}
+
+Proposition~\ref{p:descent} shows that the unity thesis is consistent with the view of MET-10, on which every level is grounded in a lower one and the descent is not vicious. It is equally consistent with a well-founded hierarchy; the thesis takes no side. It also takes no side on the direction of mereological grounding. \citet{Schaffer2009} and MET-09 hold that the cosmos is the only fundamental object and that ordinary objects are abstractions from it, so that facts about parts are grounded in facts about the whole; the more common view runs the other way. Either direction fixes a signature for the mereological variety, and the theorem applies to whichever is correct. The use of grounding as a strict partial order not assumed to be well-founded in MET-12-a and REL-09-a is the use Theorem~\ref{t:unity} vindicates.
+
+\section{Cases}\label{s:cases}
+
+We now go through the apparent varieties and ask, for each, whether it is the restriction of generic grounding to its levels, and whether mixed chains through it behave as Assumptions~\ref{a:acyclic} and~\ref{a:closure} require.
+
+\paragraph{Logical grounding.} A disjunction is grounded in each true disjunct, a conjunction in its conjuncts together, an existential generalization in its instances. The levels are logical sorts: the fact that $p \vee q$ is at a level distinct from the fact that $p$, and the signature of logical grounding consists of pairs of a less complex and a more complex sort within a subject matter. Mixed chains ending in a logically complex fact are common: the fact that the ball is scarlet grounds the fact that it is red, which grounds the fact that it is red or round. By Assumption~\ref{a:closure}, the first fact grounds the third in the logical variety, if the pair of their levels is in the logical signature, which it is, since the fact that the ball is scarlet logically grounds the fact that it is scarlet or round. The pluralist objects that the connection between the scarlet and the red-or-round is partly a matter of determination. We reply that the objection classifies mediate connections by their routes, and that routes are not unique: the same two facts are connected through the fact that the ball is scarlet or round, by a logical link followed by a determinable one. A classification by route would place one connection in several varieties at once; a classification by endpoints, which is what Assumption~\ref{a:closure} expresses, places it in one.
+
+\paragraph{Set-theoretic grounding.} The existence of a set is grounded in the existence of its members. The levels are ranks: the facts about the existence of sets of rank $n$ form a level, and the signature consists of pairs of lower and higher rank, together with the pairs whose first member is a fact about urelements. Mixed chains arise when a member is itself grounded: Socrates' existence is grounded, on the common view, in facts about his parts or his organism, and the singleton's existence is grounded in his. Closure says that the facts about his organism ground the singleton's existence in the set-theoretic variety, in the mediate sense; this is what we say when we say that the singleton exists because the organism does.
+
+\paragraph{Mereological grounding.} Facts about wholes are grounded in facts about their parts, or the converse if MET-09 is right. Whichever direction holds, the facts about wholes and the facts about parts are at different levels in the layered sense, and the signature consists of pairs of levels related as part-level to whole-level. Mixed chains are the rule here, because the parts of chemical wholes are physical and the parts of organisms are chemical.
+
+\paragraph{Determinable grounding.} That the ball is red is grounded in its being scarlet. The levels are determinable and determinate sorts within a family of properties, and the signature consists of pairs of more and less determinate sorts. MET-02-a treats determinables as constructed from their determinates; on that view, determinable grounding is a case of the grounding of a constructed fact in the genuine facts from which it is constructed, and its relata are at levels ordered by the length of construction.
+
+\paragraph{Realization.} A mental or functional state is realized by a physical state. The levels are the functional and the physical, or, more finely, the levels of a hierarchy of functional descriptions. That realization is a variety of grounding is the thesis of non-reductive physicalism, and it is the case in which mixed chains were first noticed: the realizer is itself grounded in its chemical and physical constitution, and the functional state is grounded in that constitution through it.
+
+\paragraph{Normative grounding.} An act is wrong in virtue of its natural features. The levels are the natural and the normative, and the signature consists of pairs whose first member is natural or normative and whose second is normative. REL-09-a gives a theological case: goodness and divine command are jointly grounded in co-endorsement, and MTE-20 holds that morality is jointly grounded in divine and non-divine facts. Both use grounding as a strict partial order, and on the present view the grounding they use is the same relation as in the other cases, restricted to normative facts and their grounds. This is the case in which pluralism has been most strongly urged, and we take it up in Objection~\ref{o:modal}.
+
+\paragraph{Social grounding.} A piece of paper is a banknote in virtue of facts about the practices and attitudes of a community; MET-20 argues that social kinds depend on the absence of collective rejection rather than on active acceptance. The levels are the individual and the social, and the signature consists of pairs whose first member concerns individuals and their attitudes and whose second concerns social statuses. Mixed chains run through it in both directions of level, since the attitudes are themselves mental facts realized physically.
+
+\paragraph{Nomic grounding.} On the best-system account of MET-12-a, the instances of a law are among the facts that ground its being a law. The levels are particular and general facts about the mosaic. MET-12-a argues that laws explain their instances without grounding them, and that the principle that grounding followed by scientific explanation is explanation must be rejected. On the present view this is unproblematic: scientific explanation is not a variety of grounding, and the chain from instance to law to instance is not a chain of links.
+
+\paragraph{Essence and modality.} MET-13 argues that essence is prior to modality, and TSM-10 that metaphysical necessity is truth in all worlds consistent with the essences of things. If modal facts are grounded in essential facts, the grounding of the modal in the essential is a further variety, with the essential and the modal sorts as its levels. Its inclusion in the catalogue of varieties bears on the modal objection below, since it makes the necessity that attaches to a grounding connection a matter of what the essences at the relevant levels are.
+
+The cases show a pattern. In each, the variety is identified by the sorts of its relata, and the discussions of each variety in the literature use those sorts to say what the variety is: normative grounding is the grounding of normative facts, set-theoretic grounding the grounding of facts about sets. This is the pattern Assumption~\ref{a:closure} generalizes.
+
+\section{Defence of the assumptions}\label{s:defence}
+
+\paragraph{Mixed acyclicity.} Nothing explains itself, and a chain of explanations of a single kind that returned to its starting point would explain the starting point by itself. If Principle~\ref{p:mixed} is granted, a mixed chain is such a chain, and Assumption~\ref{a:acyclic} follows from the non-circularity of metaphysical explanation. The pluralist who rejects Principle~\ref{p:mixed} owes an account of why mixed cycles do not occur, since on her view nothing about each relation separately excludes them; this is the explanatory argument of Section~\ref{s:one}.
+
+Proposed counterexamples to the irreflexivity of grounding \citep{Jenkins2011} concern identities and reductions: if pain is identical to C-fibre firing, the fact that someone is in pain is grounded in the fact that she is in a state of C-fibre firing, which is the fact that she is in pain. Such cases rest on an individuation of facts on which identical facts are described in two ways, and on the fine-grained individuation that grounding requires the two descriptions express different facts, or else the identity is not a case of grounding; \citet{Raven2013} defends the strict order against such cases along these lines. The puzzles of \citet{Fine2010} derive cycles of ground from plausible principles about truth and generalization applied to self-referential cases. MET-19 argues that metaphysical indeterminacy occurs only in states of affairs that are self-referential. We claim Assumption~\ref{a:acyclic} for the facts that are not self-referential, and leave the self-referential cases to a theory of them.
+
+\paragraph{Level closure.} Assumption~\ref{a:closure} rests on two points. The first is that mediate grounding is a two-place relation between ground and grounded, and whether it holds depends only on them and not on a route, since there may be several routes between the same facts. The second is that the varieties are identified, in the literature and in use, by the sorts of the facts they relate. Given the second point, the question whether a mediate connection from $f$ to $g$ belongs to variety $v$ is the question whether $f$ and $g$ are of the sorts $v$ relates; given the first, the answer does not depend on what lies between them. Together, the two points yield Assumption~\ref{a:closure}.
+
+An apparent consequence needs comment. If two varieties have overlapping signatures, Assumption~\ref{a:closure} entails that they coincide on the overlap. We accept this. Where two varieties are said to relate facts of the same pair of sorts, they are, on the present view, two names for the same restriction of grounding, as \enquote{determination} and \enquote{logical grounding} name the same connection between the fact that the ball is scarlet and the fact that it is red or round.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[The modal profiles differ]\label{o:modal}
+Logical and set-theoretic grounds necessitate what they ground with metaphysical necessity. The natural features of an act necessitate its wrongness only with normative necessity, which is weaker \citep{Fine2002}. A single relation cannot carry different modal forces; so normative grounding is a different relation.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the necessity with which a ground necessitates what it grounds belongs to the relation. On the present view it belongs to the level. If necessity is truth in all worlds consistent with the essences of things (TSM-10), then a grounding connection carries whatever necessity the essences of the items at the relevant levels confer, and different levels involve items with different essences. The natural features of an act necessitate its wrongness in the worlds consistent with the essences of the act and of the normative properties; if normative necessity is weaker than metaphysical necessity, that is because the essences involved settle less, not because a different relation holds. The same relation of grounding connects facts at levels at which more or less is settled by essence. The essentialist account of necessity thus predicts the differences of modal force on which the objection relies, and it predicts them from the levels of the relata, which is what the unity thesis requires.
+\end{reply}
+
+\begin{objection}[Big-G does no work]\label{o:work}
+Every question of dependence is answered by citing a specific relation: the singleton depends on Socrates because he is its member; the whole on its parts because they compose it \citep{Wilson2014}. A generic relation of grounding answers no question that the specific relations do not answer, and should not be posited.
+\end{objection}
+
+\begin{reply}
+Generic grounding answers questions the specific relations do not: whether the pain obtains in virtue of the chemical facts, whether the singleton exists in virtue of the organism, whether the wrongness of an act obtains in virtue of the microphysical facts. These are questions about mixed chains, and no specific relation answers them, since none relates facts at those levels by a single link. The questions are not idle; physicalism is the thesis that everything obtains in virtue of the physical, and it cannot be stated with the specific relations alone. Moreover, on the present view the specific relations are not rivals to generic grounding but its restrictions, and the work they do is done by it. That a restriction is more informative than the relation it restricts is no argument against the relation. \enquote{Is a parent of someone born in Lyon} is more informative than \enquote{is a parent of}, and both are relations.
+\end{reply}
+
+\begin{objection}[The unifier is a gerrymandered construction]\label{o:gerry}
+Generic grounding is defined as the ancestral of the union of the varieties. A relation defined by disjunction and closure is the paradigm of a non-natural relation. If anything is constructed here, it is generic grounding, and the varieties are the genuine relations.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:generic} defines generic grounding from the varieties, but Corollary~\ref{c:define} defines the varieties from generic grounding, so definability does not settle which is genuine. What settles it is explanation (Section~\ref{s:one}). If the varieties were the genuine relations, Assumptions~\ref{a:acyclic} and~\ref{a:closure} would be unexplained necessary connections between them; if generic grounding is the genuine relation, they follow from its being a strict partial order of which the varieties are restrictions. The disjunctive form of the definition is an artefact of starting from the varieties, as a property defined by listing the determinates of a determinable is disjunctive in form though the determinable is not gerrymandered.
+\end{reply}
+
+\begin{objection}[Entities and facts]\label{o:relata}
+Some varieties relate entities (a set and its members, a whole and its parts), others facts (a disjunction and its disjunct). A single relation cannot have relata of different categories.
+\end{objection}
+
+\begin{reply}
+Every variety stated with entities as relata can be restated with facts: the existence of the set is grounded in the existence of its members, the fact that the whole has a property in the facts that its parts have certain properties and stand in certain relations. The restatement loses nothing that matters to dependence, since dependence of entities is dependence of their existence or their features. We take facts as the relata throughout, as \citet{Rosen2010} and \citet{Audi2012} do, and the objection then lapses. If entity grounding is taken as primitive instead, as by \citet{Schaffer2009}, the argument can be rerun with entities as relata and levels as sorts of entity.
+\end{reply}
+
+\begin{objection}[Transitivity fails]\label{o:trans}
+\citet{Schaffer2012} gives cases in which $f$ grounds $g$ and $g$ grounds $h$ but $f$ does not ground $h$: the fact that a dented sphere has a certain maximally determinate shape grounds its being roughly spherical, since that shape is a determinate of roughly spherical, and the dent grounds the determinate shape; yet the dent does not ground the sphere's being roughly spherical. Generic grounding, defined as an ancestral, is transitive by definition; so it is not grounding.
+\end{objection}
+
+\begin{reply}
+The case turns on the difference between partial grounding and grounding of the fact under a contrast. The dent is a partial ground of the sphere's determinate shape, and the determinate shape grounds its being roughly spherical; the dent is then a partial ground of its being roughly spherical, among many others, and what is false is that the dent makes the difference between its being roughly spherical and its not being so. The intuition the case elicits concerns difference-making, which is contrastive, and not partial grounding. MET-12-a and REL-09-a assume, as we do, that partial grounding is transitive.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The unity theorem is conditional on Assumptions~\ref{a:acyclic} and~\ref{a:closure}, which are substantive and are defended above but not proved. It concerns mediate, partial grounding. Immediate grounding, the relation of a fact to the grounds from which it follows in one step, is not transitive, and the theorem says nothing about whether the immediate restrictions of the varieties are restrictions of one immediate relation; in a dense order, as the model of Proposition~\ref{p:descent} could be modified to be, there may be no immediate grounds at all.
+
+The theorem does not settle which varieties there are. It applies to whatever list of apparent varieties is given, and a new variety discovered by some science is covered by it once it satisfies the two assumptions together with the old ones. It does not settle the direction of mereological grounding, the question of a fundamental level, or the content of normative grounding: which natural facts ground which normative facts is a question for ethics. Finally, it does not settle whether causation is a further restriction of the same relation. The analogy between grounding and causation is examined in MET-14-b.
+
+\section{Formalization}\label{s:formal}
+
+The results of Sections~\ref{s:framework}, \ref{s:theorem} and~\ref{s:levels} are formalized in \nolinkurl{Philosophy/MET/MET_14.lean}. A frame is a structure with types of facts, levels and varieties, a level assignment, and a relation for each variety. Generic grounding is the transitive closure of the links, as given by core Lean's \texttt{Relation.TransGen}; signature, strict partial order, witnessing, unifier and level restriction are defined as in Definitions~\ref{d:signature}--\ref{d:restrictions}. Lemmas~\ref{l:unifier} and~\ref{l:unique}, Propositions~\ref{p:spo} and~\ref{p:restriction}, Theorems~\ref{t:char} and~\ref{t:unity} and Corollaries~\ref{c:profile} and~\ref{c:define} are proved for an arbitrary frame, with the two assumptions as hypotheses where they are used. The actual frame is then introduced as a constant, and Assumptions~\ref{a:acyclic} and~\ref{a:closure} become axioms about it. The main theorem reads:
+
+\begin{lstlisting}
+theorem unity_of_grounding :
+    Unifier actual (G actual) ∧ StrictOrder actual (G actual) ∧
+      (∀ v f g, actual.R v f g ↔
+        (G actual f g ∧ sig actual v (actual.lev f) (actual.lev g))) ∧
+      (∀ H, Unifier actual H → ∀ f g, H f g ↔ G actual f g)
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MET_14.unity_of_grounding' depends on axioms:
+  [Philosophy.MET_14.actual, Philosophy.MET_14.assumption_2_10,
+   Philosophy.MET_14.assumption_2_9]
+'Philosophy.MET_14.theorem_3_5' does not depend on any axioms
+'Philosophy.MET_14.proposition_5_1' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+\noindent Here \texttt{actual} is the actual frame of facts, levels and varieties (Definitions~\ref{d:levels} and~\ref{d:varieties}), and \texttt{assumption\_2\_9} and \texttt{assumption\_2\_10} are Assumptions~\ref{a:acyclic} and~\ref{a:closure}. The characterization theorem (Theorem~\ref{t:char}) depends on no axioms at all: it is a theorem about every frame. Proposition~\ref{p:descent} is proved for the concrete model of Section~\ref{s:levels}, with facts as pairs of an integer and a Boolean; it uses only the standard axioms \texttt{propext} and \texttt{Quot.sound} of Lean's logic. Principles~\ref{p:mixed} and~\ref{p:economy} are not formalized. The first is the reason for calling generic grounding grounding, and enters the formal development only through Definition~\ref{d:generic}; the second is the premise of the argument of Section~\ref{s:one}, which concerns which of two interdefinable relations is genuine and is not a matter of proof.
+
+\section{Conclusion}\label{s:conclusion}
+
+The apparent varieties of grounding are connected by mixed chains, and two features of these chains, that they never return to their origin and that the variety of a mediate connection depends only on the levels of its endpoints, hold exactly when the varieties are the restrictions to pairs of levels of a single witnessed strict partial order, which is then unique. The pluralist must take these features as unexplained necessary connections between distinct relations; the unifier derives them from the irreflexivity and transitivity of one relation. Grounding is therefore a single relation, a strict partial order that need not be well-founded, and its apparent varieties are that relation applied at different levels of reality.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aristotle(Cat.)]{AristotleCat} Aristotle. \emph{Categories}.
+\bibitem[Aristotle(Met.)]{AristotleMet} Aristotle. \emph{Metaphysics}.
+\bibitem[Audi(2012)]{Audi2012} Audi, P. (2012). Grounding: Toward a theory of the in-virtue-of relation. \emph{The Journal of Philosophy}, 109(12), 685--711.
+\bibitem[Bennett(2017)]{Bennett2017} Bennett, K. (2017). \emph{Making Things Up}. Oxford University Press.
+\bibitem[Berker(2018)]{Berker2018} Berker, S. (2018). The unity of grounding. \emph{Mind}, 127(507), 729--777.
+\bibitem[Bolzano(1837)]{Bolzano1837} Bolzano, B. (1837). \emph{Wissenschaftslehre}. Seidel.
+\bibitem[deRosset(2013)]{deRosset2013} deRosset, L. (2013). Grounding explanations. \emph{Philosophers' Imprint}, 13(7), 1--26.
+\bibitem[Fine(2001)]{Fine2001} Fine, K. (2001). The question of realism. \emph{Philosophers' Imprint}, 1(1), 1--30.
+\bibitem[Fine(2002)]{Fine2002} Fine, K. (2002). The varieties of necessity. In T.~S. Gendler and J.~Hawthorne (Eds.), \emph{Conceivability and Possibility} (pp.~253--281). Oxford University Press.
+\bibitem[Fine(2010)]{Fine2010} Fine, K. (2010). Some puzzles of ground. \emph{Notre Dame Journal of Formal Logic}, 51(1), 97--118.
+\bibitem[Fine(2012)]{Fine2012} Fine, K. (2012). Guide to ground. In F.~Correia and B.~Schnieder (Eds.), \emph{Metaphysical Grounding: Understanding the Structure of Reality} (pp.~37--80). Cambridge University Press.
+\bibitem[Jenkins(2011)]{Jenkins2011} Jenkins, C.~S. (2011). Is metaphysical dependence irreflexive? \emph{The Monist}, 94(2), 267--276.
+\bibitem[Kim(2002)]{Kim2002} Kim, J. (2002). The layered model: Metaphysical considerations. \emph{Philosophical Explorations}, 5(1), 2--20.
+\bibitem[Koslicki(2015)]{Koslicki2015} Koslicki, K. (2015). The coarse-grainedness of grounding. \emph{Oxford Studies in Metaphysics}, 9, 306--344.
+\bibitem[Oppenheim and Putnam(1958)]{OppenheimPutnam1958} Oppenheim, P., and Putnam, H. (1958). Unity of science as a working hypothesis. In H.~Feigl, M.~Scriven and G.~Maxwell (Eds.), \emph{Minnesota Studies in the Philosophy of Science}, Vol.~2 (pp.~3--36). University of Minnesota Press.
+\bibitem[Raven(2013)]{Raven2013} Raven, M.~J. (2013). Is ground a strict partial order? \emph{American Philosophical Quarterly}, 50(2), 193--201.
+\bibitem[Rosen(2010)]{Rosen2010} Rosen, G. (2010). Metaphysical dependence: Grounding and reduction. In B.~Hale and A.~Hoffmann (Eds.), \emph{Modality: Metaphysics, Logic, and Epistemology} (pp.~109--135). Oxford University Press.
+\bibitem[Schaffer(2009)]{Schaffer2009} Schaffer, J. (2009). On what grounds what. In D.~Chalmers, D.~Manley and R.~Wasserman (Eds.), \emph{Metametaphysics} (pp.~347--383). Oxford University Press.
+\bibitem[Schaffer(2012)]{Schaffer2012} Schaffer, J. (2012). Grounding, transitivity, and contrastivity. In F.~Correia and B.~Schnieder (Eds.), \emph{Metaphysical Grounding: Understanding the Structure of Reality} (pp.~122--138). Cambridge University Press.
+\bibitem[Schaffer(2016)]{Schaffer2016} Schaffer, J. (2016). Grounding in the image of causation. \emph{Philosophical Studies}, 173(1), 49--100.
+\bibitem[Trogdon(2013)]{Trogdon2013} Trogdon, K. (2013). Grounding: Necessary or contingent? \emph{Pacific Philosophical Quarterly}, 94(4), 465--485.
+\bibitem[Wilson(2018)]{Wilson2018} Wilson, A. (2018). Metaphysical causation. \emph{No\^us}, 52(4), 723--751.
+\bibitem[Wilson(2014)]{Wilson2014} Wilson, J.~M. (2014). No work for a theory of grounding. \emph{Inquiry}, 57(5--6), 535--579.
+\end{thebibliography}
+
+\end{document}

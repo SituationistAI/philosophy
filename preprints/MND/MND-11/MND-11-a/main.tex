@@ -1,0 +1,198 @@
+\documentclass{situationist-preprint}
+
+\title{Mental Causes Are Proportional}
+\msid{MND-11-a}
+\msfamily{MND-11}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_11.lean}
+\mskeywords{mental causation; exclusion argument; proportionality; multiple realization; interventionism; difference-making}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The exclusion argument concludes that if mental properties are not identical to physical ones, they are causally idle: every physical effect has a sufficient physical cause, and an effect is not systematically caused twice over. We argue that the mental can cause the physical, because mental causes are proportional causes, whereas their physical realizers are overly specific. A cause is proportional to its effect when the effect occurs under an intervention exactly when the cause is present. When a mental property is multiply realized and the effect depends on it, the mental property meets this condition and its actual realizer does not: there are other ways of not having the realizer under which the effect still occurs, so the intervention that removes the realizer is ambiguous and a model built on it is not apt. We prove that the proportional cause is unique up to coextension, so that the correct exclusion principle excludes the realizer at the grain of the effect and leaves the mental cause in place. A Lean formalization confirms the structure of the argument. The account fits the difference-making theory of causation of MET-04-a, on which proportionality constrains the choice of variables in apt models.
+\end{abstract}
+
+\section{The exclusion problem}
+
+When Jones decides to drink and reaches for the glass, her decision seems to be a cause of the movement of her arm. The exclusion argument, in the form \citet{Kim1998,Kim2005} gave it, says that it cannot be, unless the decision is identical to a physical state. The physical realizer of the decision, a neural state $N$, is sufficient for the movement, given the laws; every physical effect that has a cause has a sufficient physical cause; an effect does not have two distinct sufficient causes unless it is overdetermined; mental causation does not systematically overdetermine its effects. Since multiple realization makes the decision distinct from $N$ \citep{Putnam1967}, the decision is not a cause.
+
+Responses divide. Reductive physicalists accept the conclusion's antecedent and identify mental properties with physical ones, at the cost of multiple realization. Some accept systematic overdetermination as harmless \citep{Bennett2003}. Others argue that the argument proves too much: if it works for the mental, it works for every property above the fundamental level, and causation drains away to a level that may not exist \citep{Block2003}. The response we develop, which goes back to \citet{Yablo1992} and has been put in interventionist terms by \citet{ListMenzies2009} and \citet{Woodward2008}, denies the exclusion premise in Kim's form. Sufficiency is not causation. A cause must make a difference, and the difference made by the decision is not made by its realizer.
+
+Yablo's example states the idea. A pigeon is trained to peck at red targets and is shown a scarlet one. It pecks. The target's being scarlet is sufficient for the peck, but it is not the cause of it in the sense that matters: had the target been crimson, the pigeon would still have pecked. Redness is the cause; scarlet is \emph{too specific}. Our aim is to state the idea precisely, to prove that it yields the result about mental causation, and to show how it fits the theory of causation defended in MET-04-a.
+
+\section{Framework}\label{s:framework}
+
+We work with a single variable $X$ whose values are the ways a system might be in the respect in question, and with interventions that set its value \citep{Woodward2003}.
+
+\begin{definition}[Serious possibilities]\label{d:serious}
+The values of the \emph{realizing variable} $X$ are the physically specific states the system could be in, at the relevant time, that are serious possibilities in the situation. Properties of the system are represented as sets of values; $x_0$ is the actual value, and $E(v)$ says that the effect occurs under the intervention that sets $X$ to $v$.
+\end{definition}
+
+\begin{definition}[Proportional cause]\label{d:prop}
+A property $C$ is \emph{proportional} to the effect if $C$ is actually instantiated and, for every value $v$, the effect occurs under the intervention setting $X$ to $v$ if and only if $v$ has $C$.
+\end{definition}
+
+\begin{definition}[Overly specific]\label{d:over}
+A property $C$ is \emph{overly specific} for the effect if $C$ is actually instantiated, the effect occurs whenever $X$ is set to a value with $C$, and there is a value without $C$ under which the effect also occurs.
+\end{definition}
+
+\begin{definition}[Ambiguous intervention]\label{d:amb}
+The intervention that makes $C$ absent is \emph{ambiguous} if there are two values without $C$ such that the effect occurs under one and not under the other.
+\end{definition}
+
+Definition~\ref{d:prop} combines Yablo's two conditions: a proportional cause is \emph{required}, since without it the effect does not occur, and \emph{enough}, since it does not matter how it is realized. Definition~\ref{d:amb} is the notion of \citet{SpirtesScheines2004}. If removing $C$ can be done in two ways that differ in their outcome, the counterfactual \enquote{had $C$ been absent, the effect would not have occurred} has no determinate truth value, and a model in which $C$ is represented by a binary variable misrepresents the situation.
+
+Let $M$ be a mental property, such as Jones's deciding to drink, and let the actual physical realizer be the maximally specific property $P$ of having the value $x_0$.
+
+\begin{assumption}\label{a:actual}
+$M$ is actually instantiated.
+\end{assumption}
+
+\begin{assumption}[Realization insensitivity]\label{a:insens}
+Under every intervention that sets $X$ to a value with $M$, the effect occurs.
+\end{assumption}
+
+\begin{assumption}[Dependence]\label{a:dep}
+Under every intervention that sets $X$ to a value without $M$, the effect does not occur.
+\end{assumption}
+
+\begin{assumption}[Multiple realizability and contingency]\label{a:mr}
+Some value other than $x_0$ has $M$, and some value lacks $M$.
+\end{assumption}
+
+\begin{principle}[Proportional causation]\label{p:cause}
+A property that is proportional to an effect is a cause of it.
+\end{principle}
+
+Assumptions~\ref{a:insens} and~\ref{a:dep} are what we take ourselves to know when we say that Jones reached because she decided to drink. Had she decided to drink with her neurons in a slightly different state, as she might have, she would have reached; had she not decided to drink, she would not have. Assumption~\ref{a:mr} is multiple realization, restricted to the serious possibilities of the situation: neural states differ in microscopic detail from one occasion to the next while realizing the same decision \citep{Putnam1967}.
+
+Principle~\ref{p:cause} is the sufficiency direction of a difference-making theory of causation. It follows from the theory of MET-04-a, on which a normal difference-maker in an apt model is a cause, together with the constraint that an apt model represent the candidate cause by a variable whose values support unambiguous interventions. That constraint is the role of proportionality: as MET-04-a puts it, proportionality is a constraint on the choice of variables in an apt model, not a rival definition of causation. A binary variable for $M$ meets the constraint, and Lemma~\ref{l:over} shows that a binary variable for $P$ does not.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:prop}
+$M$ is proportional to the effect.
+\end{lemma}
+
+\begin{proof}
+$M$ is instantiated by Assumption~\ref{a:actual}. If $X$ is set to a value with $M$, the effect occurs by Assumption~\ref{a:insens}. Conversely, if the effect occurs under the intervention setting $X$ to $v$, then $v$ has $M$, since otherwise, by Assumption~\ref{a:dep}, the effect would not occur.
+\end{proof}
+
+\begin{lemma}\label{l:over}
+The physical realizer $P$ is overly specific for the effect, and the intervention that makes $P$ absent is ambiguous.
+\end{lemma}
+
+\begin{proof}
+$P$ is instantiated, since $x_0$ is the actual value. The only value with $P$ is $x_0$, which has $M$ by Assumption~\ref{a:actual}, so the effect occurs under it by Assumption~\ref{a:insens}. By Assumption~\ref{a:mr} there is a value $v \neq x_0$ with $M$; it lacks $P$, and the effect occurs under it. So $P$ is overly specific. By Assumption~\ref{a:mr} there is also a value $w$ without $M$; $w$ is not $x_0$, since $x_0$ has $M$, so $w$ lacks $P$, and by Assumption~\ref{a:dep} the effect does not occur under it. The values $v$ and $w$ witness that the intervention removing $P$ is ambiguous.
+\end{proof}
+
+\begin{proposition}[Uniqueness]\label{p:unique}
+Every property proportional to the effect is coextensive with $M$ over the serious possibilities.
+\end{proposition}
+
+\begin{proof}
+If $C$ is proportional, then for every value $v$, $v$ has $C$ if and only if the effect occurs under $v$, and by Lemma~\ref{l:prop} the effect occurs under $v$ if and only if $v$ has $M$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+$M$ is a cause of the effect, and its physical realizer is overly specific and not proportional to it.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:prop} and Principle~\ref{p:cause}, $M$ is a cause. By Lemma~\ref{l:over}, $P$ is overly specific. If $P$ were proportional, the value $v$ of Lemma~\ref{l:over}, under which the effect occurs, would have $P$; but $v$ lacks $P$.
+\end{proof}
+
+Proposition~\ref{p:unique} is the correct exclusion principle. At a given grain of effect, there is at most one proportional cause, up to coextension, and so there is no competition between distinct proportional causes and no overdetermination. Kim's principle, which forbids two sufficient causes, is false, since every determinate of a sufficient condition is also sufficient, and sufficiency is shared by the decision, by its realizer and by every more specific state of the brain and its surroundings. When the principle is restated for proportional causes it is true, and it excludes the realizer rather than the decision.
+
+The argument does not make the mental cause non-physical. If $M$ is grounded in the physical properties of a foreseeable extension of current physics, as MND-02 argues every instantiated property is, the decision is physical in the extended sense, and its causal role is a role a physical property plays. What the argument denies is that the role belongs to the most specific physical description of the cause.
+
+\section{Objections and replies}
+
+\begin{objection}[Closure]
+Physics is causally closed: every physical event that has a cause has a sufficient physical cause. If the realizer is the physical cause of the movement, the decision is either identical to it or idle.
+\end{objection}
+
+\begin{reply}
+Closure, as supported by physics, is a thesis about sufficiency: the prior physical state, together with the laws, fixes the probabilities of later physical states. Lemma~\ref{l:over} does not deny that the realizer is sufficient. It denies that sufficiency makes the realizer the cause of the movement at the grain at which the movement is described. The closure premise therefore supports Kim's conclusion only together with the exclusion principle for sufficient causes, and that principle is the one Proposition~\ref{p:unique} replaces.
+\end{reply}
+
+\begin{objection}[Fine-grained models]
+In a model whose cause variable is $X$ itself, with many values, the effect depends on $X$, and the actual value of $X$ is a cause. The realizer is therefore a cause after all.
+\end{objection}
+
+\begin{reply}
+In such a model what makes a difference is which of two classes $X$ falls in: the values that realize $M$, under which the effect occurs, and the others, under which it does not. Changes of $X$ within either class make no difference. The difference made by $X$ is thus exactly the difference made by $M$, and the fine-grained model carries more detail than the dependence it represents \citep{Woodward2010}. If one says that the realizer is a cause in this model, one says that it is a cause in virtue of realizing $M$, which is the conclusion, not an objection to it. Theorem~\ref{t:main} says that the realizer is overly specific, not that physical states never cause anything.
+\end{reply}
+
+\begin{objection}[Causal inheritance]
+A realized property has no causal powers beyond those of its realizers \citep{Kim1998}. Whatever the decision can do, the realizer can do.
+\end{objection}
+
+\begin{reply}
+For sufficiency, the principle is true: whatever the decision suffices for, its realizer suffices for. For difference-making, it is false, and the inheritance runs the other way. Being proportional to the movement is a feature that the decision has and the realizer lacks (Theorem~\ref{t:main}), and it is a feature in virtue of which a property is a cause. The same holds of dispositions and their bases: MET-11-a argues that a glass's fragility is the proportional cause of its breaking, while its molecular basis is too specific, by reasoning parallel to ours.
+\end{reply}
+
+\begin{objection}[Proportionality is explanatory, not causal]
+Proportionality is a virtue of explanations. It tells us which cause it is most informative to cite, not which properties are causes.
+\end{objection}
+
+\begin{reply}
+We use proportionality where MET-04-a places it: as a constraint on which variables an apt model may contain. A model in which the realizer is represented by a binary variable is not apt, because the intervention that sets it to its non-actual value is ambiguous (Lemma~\ref{l:over}), and a counterfactual with an ambiguous antecedent has no determinate truth value. This is a constraint on whether the model correctly represents the dependence in the situation, not on how informative it is. Principle~\ref{p:cause}, moreover, is only a sufficient condition for causation; we do not claim that every cause is proportional.
+\end{reply}
+
+\begin{objection}[Backup and preemption]
+If Jones's arm would have moved even without the decision, for example because a neuroscientist stood ready to trigger the movement, Assumption~\ref{a:dep} fails and the argument does not apply.
+\end{objection}
+
+\begin{reply}
+That is correct, and in such a case the decision is not a proportional cause of the movement. Whether it is a cause at all is then a question for the treatment of preemption in a difference-making theory, which MET-04-a gives. The present argument concerns the ordinary case, in which the movement depends on the decision, and shows that in that case the exclusion argument gives the wrong answer.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} does not show that every mental property causes every physical effect associated with it; it shows that a mental property which satisfies Assumptions~\ref{a:insens}--\ref{a:mr} with respect to an effect is a cause of it. Whether the assumptions hold in a given case is an empirical question about the dependence of behavior on mental states. Nor does the theorem settle whether phenomenal properties, as opposed to intentional ones, are proportional to their behavioral effects; it applies to them if they satisfy the assumptions. Finally, the argument is local to a grain of effect: for a more specific effect, such as the exact trajectory of Jones's hand, a more specific cause may be proportional. MND-11-b extends the argument to show that the exclusion principle in Kim's form would exclude causes at every level above the fundamental.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_11.lean} takes the serious possibilities as a type \texttt{Val} with an actual element, represents $M$ and the effect as predicates on it, and defines proportionality, over-specificity and ambiguity as in Definitions~\ref{d:prop}--\ref{d:amb}. The realizer $P$ is defined as the property of being the actual value. Assumptions~\ref{a:actual}--\ref{a:mr} and Principle~\ref{p:cause} are axioms. The module proves Lemmas~\ref{l:prop} and~\ref{l:over}, Proposition~\ref{p:unique} and Theorem~\ref{t:main}.
+
+\begin{lstlisting}
+theorem mental_causation :
+    Causes M ∧ OverlySpecific P ∧ ¬ Proportional P
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_11.mental_causation' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.MND_11.Causes, Philosophy.MND_11.E,
+   Philosophy.MND_11.M, Philosophy.MND_11.Val,
+   Philosophy.MND_11.actual,
+   Philosophy.MND_11.assumption_2_5, Philosophy.MND_11.assumption_2_6,
+   Philosophy.MND_11.assumption_2_7, Philosophy.MND_11.assumption_2_8,
+   Philosophy.MND_11.principle_P1]
+\end{lstlisting}
+
+\texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound} belong to Lean's core logic; classical reasoning is used in Lemma~\ref{l:prop}. \texttt{Causes} is the primitive causal relation, and \texttt{Val}, \texttt{actual}, \texttt{M} and \texttt{E} are the primitives of Definition~\ref{d:serious}. \texttt{assumption\_2\_5} to \texttt{assumption\_2\_8} are Assumptions~\ref{a:actual}--\ref{a:mr}, and \texttt{principle\_P1} is Principle~\ref{p:cause}. Lemma~\ref{l:over} and Proposition~\ref{p:unique} do not depend on Principle~\ref{p:cause}: that the realizer is overly specific is a consequence of multiple realization and dependence alone.
+
+\section{Conclusion}
+
+The exclusion argument rests on the principle that an effect has at most one sufficient cause. On a difference-making theory the principle that holds is that an effect has at most one proportional cause, and when a mental property is multiply realized and the effect depends on it, that cause is the mental property, not its physical realizer, which is overly specific. The mental can therefore cause the physical, without overdetermination and without identity with its realizers.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bennett(2003)]{Bennett2003} Bennett, K. (2003). Why the exclusion problem seems intractable, and how, just maybe, to tract it. \emph{No\^us}, 37(3), 471--497.
+\bibitem[Block(2003)]{Block2003} Block, N. (2003). Do causal powers drain away? \emph{Philosophy and Phenomenological Research}, 67(1), 133--150.
+\bibitem[Kim(1998)]{Kim1998} Kim, J. (1998). \emph{Mind in a Physical World}. MIT Press.
+\bibitem[Kim(2005)]{Kim2005} Kim, J. (2005). \emph{Physicalism, or Something Near Enough}. Princeton University Press.
+\bibitem[List and Menzies(2009)]{ListMenzies2009} List, C. and Menzies, P. (2009). Nonreductive physicalism and the limits of the exclusion principle. \emph{The Journal of Philosophy}, 106(9), 475--502.
+\bibitem[Putnam(1967)]{Putnam1967} Putnam, H. (1967). Psychological predicates. In W.~H.~Capitan and D.~D.~Merrill (Eds.), \emph{Art, Mind, and Religion}. University of Pittsburgh Press.
+\bibitem[Spirtes and Scheines(2004)]{SpirtesScheines2004} Spirtes, P. and Scheines, R. (2004). Causal inference of ambiguous manipulations. \emph{Philosophy of Science}, 71(5), 833--845.
+\bibitem[Woodward(2003)]{Woodward2003} Woodward, J. (2003). \emph{Making Things Happen: A Theory of Causal Explanation}. Oxford University Press.
+\bibitem[Woodward(2008)]{Woodward2008} Woodward, J. (2008). Mental causation and neural mechanisms. In J.~Hohwy and J.~Kallestrup (Eds.), \emph{Being Reduced: New Essays on Reduction, Explanation, and Causation}. Oxford University Press.
+\bibitem[Woodward(2010)]{Woodward2010} Woodward, J. (2010). Causation in biology: stability, specificity, and the choice of levels of explanation. \emph{Biology and Philosophy}, 25(3), 287--318.
+\bibitem[Yablo(1992)]{Yablo1992} Yablo, S. (1992). Mental causation. \emph{The Philosophical Review}, 101(2), 245--280.
+\end{thebibliography}
+
+\end{document}

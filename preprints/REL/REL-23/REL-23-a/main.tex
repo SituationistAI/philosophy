@@ -1,0 +1,128 @@
+\documentclass{situationist-preprint}
+
+\title{Gaunilo's Island, the Devil and an Asymmetry}
+\msid{REL-23-a}
+\msfamily{REL-23}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_23.lean}
+\mskeywords{ontological argument; parody; Gaunilo; evil god; maximal greatness; intrinsic maximum}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Since Gaunilo, critics of the ontological argument have replied with parodies: arguments of the same form for a perfect island or a maximally evil being. If the parody is as good as the original, the original proves nothing. We argue that the modal argument for a maximally evil being fails where the argument for a maximally great being does not, because maximal evil, unlike maximal greatness, is not a coherent maximum. Maximal greatness, as defined in REL-01-a, is necessary existence with omnipotence, omniscience and moral perfection, each a property with an attainable upper bound. Perfect evil, by contrast, requires willing an outcome at least as bad as any the agent can bring about, and an omnipotent agent faces an unbounded scale of possible badness. We prove that no being is both omnipotent and perfectly evil, so that the possibility premise of the parody is false at every world, while omnipotence and moral perfection are jointly consistent under the same assumption. The proofs are formalized in Lean. A devil defined by a threshold escapes the proof but is no longer a maximum.
+\end{abstract}
+
+\section{The parody}
+
+Gaunilo replied to Anselm that the same reasoning would prove the existence of an island more excellent than all others \citep{Gaunilo}. \citet{Plantinga1974} answered that the qualities that make an island great, such as the number of its palm trees, have no intrinsic maximum: for any island there could be a greater, so the concept of a greatest possible island is incoherent. Parodies of the modal argument for a maximally evil being have proved harder to dismiss. \citet{Millican2004} argues that the ontological argument's flaw is shared by its parodies, and \citet{Law2010} argues more generally that the case for a good god is mirrored by a case for an evil one. If the possibility premise for a maximally evil being is as plausible as the possibility premise of REL-01-a, then, since the two cannot both be true, neither argument gives any reason to believe its conclusion.
+
+We argue that Plantinga's diagnosis of the island extends to the devil, and that it does not extend to maximal greatness. We keep the notions of REL-01-a fixed: a being is maximally great at $w$ if, at every world accessible from $w$, it exists and is maximally excellent, that is, omnipotent, omniscient and morally perfect.
+
+\section{Framework}
+
+\begin{definition}\label{d:omni}
+$x$ is \emph{omnipotent} at $w$ if $x$ can bring about at $w$ every possible outcome.
+\end{definition}
+
+Outcomes are described without reference to the agent's powers, so Definition~\ref{d:omni} is omnipotence in the stratified sense of REL-04-a.
+
+\begin{definition}\label{d:evil}
+$x$ is \emph{perfectly evil} at $w$ if $x$ wills at $w$ an outcome at least as bad as every outcome $x$ can bring about at $w$.
+\end{definition}
+
+\begin{definition}\label{d:wicked}
+$x$ is \emph{maximally wicked} at $w$ if $x$ exists, is omnipotent and is perfectly evil at $w$; $x$ is \emph{maximally evil} at $w$ if $x$ is maximally wicked at every world accessible from $w$.
+\end{definition}
+
+Definition~\ref{d:wicked} is the counterpart of maximal greatness in REL-01-a, with perfect evil in place of moral perfection; omniscience, which plays no role, is omitted.
+
+\begin{assumption}\label{a:unbounded}
+For every outcome there is a possible outcome that is worse.
+\end{assumption}
+
+Assumption~\ref{a:unbounded} has the same ground as Plantinga's point about islands: to any state of affairs containing suffering, one may add a further sufferer.
+
+\section{The asymmetry}
+
+\begin{lemma}\label{l:nomax}
+No being is omnipotent and perfectly evil at any world.
+\end{lemma}
+
+\begin{proof}
+Suppose $x$ is both at $w$, willing an outcome $o$ at least as bad as any it can bring about. By Assumption~\ref{a:unbounded} some possible $o'$ is worse than $o$; by omnipotence $x$ can bring about $o'$, so $o'$ is no worse than $o$, a contradiction.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+At every world, it is not possible that a maximally evil being exists.
+\end{theorem}
+
+\begin{proof}
+If some $x$ were maximally evil at an accessible world $v$, then by reflexivity $x$ would be maximally wicked at $v$, contrary to Lemma~\ref{l:nomax}.
+\end{proof}
+
+\begin{proposition}\label{p:asym}
+Omnipotence and moral perfection, understood as bringing about no wrong outcome, are jointly consistent with Assumption~\ref{a:unbounded}.
+\end{proposition}
+
+\begin{proof}
+Let outcomes be the natural numbers, badness the identity, every outcome possible, and wrong just in case its badness is positive. A being that can bring about every outcome and brings about only the outcome of badness zero is omnipotent and brings about nothing wrong.
+\end{proof}
+
+The asymmetry lies in the form of the two properties. Moral perfection is a threshold property: never acting wrongly is a bound that can be met whatever the range of available outcomes. Perfect evil is an extremal property: it requires a worst element of the available range, and for an omnipotent agent there is none.
+
+\section{Objections}
+
+\begin{objection}[A threshold devil]
+Define the devil by a threshold: omnipotent and never acting permissibly. Lemma~\ref{l:nomax} does not touch it.
+\end{objection}
+
+\begin{reply}
+Such a being is not maximally evil, since a being that does worse wrongs is more evil; the argument for it is not a parody of the argument for an unsurpassable being. Its possibility premise, moreover, is no rival to REL-01-a's but a version of the converse premise. Under the assumptions of REL-15-a, a necessarily existing omnipotent being leaves no world at which another being is omnipotent, and it is itself not morally perfect, so no being is maximally excellent at any world. The threshold devil's premise thus entails the premise of the converse argument of REL-01-a, and is no better supported than it.
+\end{reply}
+
+\begin{objection}[No best world]
+Moral perfection faces the same difficulty: if there is no best world, an omnipotent good being cannot do the best it can \citep{Rowe2004}.
+\end{objection}
+
+\begin{reply}
+That shows that moral perfection must not be defined as doing the best, which is why REL-01-a and Proposition~\ref{p:asym} define it as acting without wrong. The objection would succeed only if creating a world when a better one is available were wrong, which is the contested premise of Rowe's argument. Evil admits no parallel threshold that is also a maximum.
+\end{reply}
+
+\begin{objection}[Bounded badness]
+Perhaps badness is bounded, and there is a worst possible outcome.
+\end{objection}
+
+\begin{reply}
+Then Assumption~\ref{a:unbounded} fails and the parody may be run. But a worst possible outcome is as doubtful as a greatest possible island, and for the same reason; the defender of the parody must deny what Plantinga's reply to Gaunilo assumes.
+\end{reply}
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/REL/REL_23.lean}, which restates the modal framework of REL-01-a. The main theorem is \texttt{parody\_premise\_false (w : World) : ¬ Dia SomeMaximallyEvil w}, and the checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_23.parody_premise_false' depends on axioms:
+  [propext, Quot.sound, Being, CanBring, Exists, Outcome, Possible,
+   R, R_refl, Wills, World, bad, unbounded]
+'Philosophy.REL_23.Model.perfection_consistent' depends on axioms:
+  [propext]
+\end{lstlisting}
+
+Apart from Lean's \texttt{propext} and \texttt{Quot.sound}, used by the arithmetic tactic, the only substantive axioms are \texttt{unbounded} (Assumption~\ref{a:unbounded}) and \texttt{R\_refl}; the rest are primitive constants (namespace prefixes omitted). The second line is Proposition~\ref{p:asym}, proved in a concrete model.
+
+\section{Conclusion}
+
+The parody fails. A maximally evil being would have to be omnipotent and do the worst it can, and on an unbounded scale of badness an omnipotent being has no worst option. Maximal evil, like Gaunilo's island and unlike maximal greatness, is not a coherent maximum, so there is no ontological argument for a maximally evil being.
+
+\begin{thebibliography}{9}\small
+\bibitem[Gaunilo(c.~1079)]{Gaunilo} Gaunilo of Marmoutiers (c.~1079). \emph{Pro insipiente} (On behalf of the fool).
+\bibitem[Law(2010)]{Law2010} Law, S. (2010). The evil-god challenge. \emph{Religious Studies}, 46(3), 353--373.
+\bibitem[Millican(2004)]{Millican2004} Millican, P. (2004). The one fatal flaw in Anselm's argument. \emph{Mind}, 113(451), 437--476.
+\bibitem[Plantinga(1974)]{Plantinga1974} Plantinga, A. (1974). \emph{The Nature of Necessity}. Clarendon Press.
+\bibitem[Rowe(2004)]{Rowe2004} Rowe, W.~L. (2004). \emph{Can God Be Free?} Oxford University Press.
+\end{thebibliography}
+
+\end{document}

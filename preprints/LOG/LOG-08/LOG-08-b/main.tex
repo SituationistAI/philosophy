@@ -1,0 +1,63 @@
+\documentclass{situationist-preprint}
+
+\title{Russell's Paradox and Unrestricted Quantification}
+\msid{LOG-08-b}
+\msfamily{LOG-08}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{absolute generality; Russell's paradox; comprehension; potentialism; Thomson's schema; plural logic}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-08-a argues that absolute generality is coherent and that Russell's paradox does not threaten it. We separate the paradox into a theorem of pure logic, valid on every domain including the domain of everything, and a comprehension principle. Every argument from Russell against absolute generality therefore adds a comprehension principle, and we show that each such principle is either inconsistent on every domain, consistent with absolute generality, or stated in a way that presupposes that the domain is restricted. The modal formulation of the relativist's view is no exception.
+\end{abstract}
+
+\section{The logical core}
+
+The formula
+\[
+\neg \exists y\, \forall x\, (Rxy \leftrightarrow \neg Rxx)
+\]
+is a theorem of first-order logic, and indeed of intuitionistic first-order logic: instantiate the universal quantifier to $y$ itself. \citet{Thomson1962} observed that Russell's paradox, Grelling's paradox and the barber share this form, and each becomes a contradiction only with a premise asserting that some $y$ does what the theorem says nothing does. Lemma 4.1 of LOG-08-a is this theorem.
+
+Being a theorem of logic, the formula is true on every domain under every interpretation of $R$, including the domain of everything with $R$ as membership, and it cannot by itself tell against any domain of quantification. An argument from Russell against absolute generality must therefore add a premise, and the premises available are comprehension principles: principles saying that some object codes a given condition, in the sense of Definition 3.2 of LOG-08-a.
+
+\section{The comprehension principles}
+
+Four principles have been used. \emph{Naive comprehension}: for every condition, some object has as members exactly the things that satisfy it. It is Collapse, which fails over every domain (Theorem 4.2 of LOG-08-a), and its failure says nothing about which domains there are.
+
+\emph{Separation}: for every object $a$ and condition, some object has as members exactly the members of $a$ that satisfy it (Assumption 3.5 of LOG-08-a). It is consistent with absolute generality (Proposition 5.1 of LOG-08-a) and with the theorem yields only that there is no universal set (Theorem 4.6 there).
+
+\emph{Domain comprehension}: for every domain, some object, perhaps outside it, has as members exactly the things in the domain. Applied to the domain of everything, it yields a universal set, which Separation and the theorem exclude; so it implies that no domain is absolutely general, but only because it says so. With Separation it yields the extensibility premise of Definition 3.4 of LOG-08-a, since the members of the object it provides can be separated into a Russell object for the domain; and Theorem 4.4 there shows that the extensibility premise, stated with the generality it needs, fails over every domain. Restricted to bounded domains, those whose members are all members of some set, it is a consequence of Separation and is accepted by the absolutist.
+
+\emph{Plural comprehension}: for every condition, there are some things that are all and only its satisfiers, or nothing satisfies it (Principle P1 of LOG-08-a). Since pluralities are not objects, it says nothing about which objects code which conditions, and it is consistent with the theorem on every domain \citep{Boolos1984}.
+
+Only the third principle tells against absolute generality, and it presupposes the conclusion.
+
+\section{The modal formulation}
+
+\citet{Linnebo2013} and \citet{Studd2019} state the relativist's view with a modality: necessarily, for any things, it is possible that there is a set of exactly them. Domain comprehension then asserts only that a universal set could exist, and no quantifier ranges over everything there could be.
+
+\begin{objection}
+The modal principle is consistent and entails that every domain is extensible. Russell's paradox, in modal form, threatens absolute generality after all.
+\end{objection}
+
+\begin{reply}
+The modal principle has a reading that the absolutist accepts. If the modality is read as \enquote{at some later stage of the iterative hierarchy}, the principle says that any things that all exist at some stage have a set at a later stage. That principle about the hierarchy of sets, all of whose stages exist, follows from the iterative conception \citep{Boolos1971} and implies nothing about the range of the quantifier, which includes every stage. If it is read as the possibility of a wider domain of quantification, the relativist must say what that domain could contain without an unrestricted quantifier over possibilia, and the dilemma of expressibility in LOG-08-a, Section 6.1, recurs. In neither reading does the paradox supply the restriction.
+\end{reply}
+
+\section{Conclusion}
+
+Russell's paradox conjoins a logical truth, valid on every domain, with a comprehension principle. Naive comprehension fails everywhere, Separation and plural comprehension are consistent with absolute generality, and domain comprehension, unrestricted or modal, restricts quantification only by assuming that every domain is extensible. The paradox shows that there is no universal set; it does not show that we cannot quantify over absolutely everything.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boolos(1971)]{Boolos1971} Boolos, G. (1971). The iterative conception of set. \emph{The Journal of Philosophy}, 68(8), 215--231.
+\bibitem[Boolos(1984)]{Boolos1984} Boolos, G. (1984). To be is to be a value of a variable (or to be some values of some variables). \emph{The Journal of Philosophy}, 81(8), 430--449.
+\bibitem[Linnebo(2013)]{Linnebo2013} Linnebo, {\O}. (2013). The potential hierarchy of sets. \emph{The Review of Symbolic Logic}, 6(2), 205--228.
+\bibitem[Studd(2019)]{Studd2019} Studd, J.~P. (2019). \emph{Everything, More or Less: A Defence of Generality Relativism}. Oxford University Press.
+\bibitem[Thomson(1962)]{Thomson1962} Thomson, J.~F. (1962). On some paradoxes. In R.~J. Butler (ed.), \emph{Analytical Philosophy}, Blackwell, 104--119.
+\end{thebibliography}
+
+\end{document}

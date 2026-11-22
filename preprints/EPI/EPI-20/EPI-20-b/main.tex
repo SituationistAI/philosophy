@@ -1,0 +1,56 @@
+\documentclass{situationist-preprint}
+
+\title{Dretske's Zebra Revisited}
+\msid{EPI-20-b}
+\msfamily{EPI-20}
+\msdiscipline{Epistemology}
+\mstype{Companion manuscript}
+\mskeywords{closure; zebra case; Dretske; safety; sensitivity; abominable conjunction}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EPI-20-a argues that closure holds and that the zoo visitor knows the animals are not cleverly disguised mules. We revisit the case by varying the zoo. In an ordinary zoo, the visitor knows both that the animals are zebras and that they are not disguised mules. In a zoo where disguise is a live practice, she knows neither. There is no variant in which she knows the first and not the second. Dretske's verdict is the result of evaluating the two beliefs in different zoos, and the abominable conjunction never comes out true.
+\end{abstract}
+
+\section{Two zoos}
+
+\citet{Dretske1970} held that the visitor knows $Z$, that the animals are zebras, and does not know $\neg M$, that they are not mules cleverly disguised as zebras. By Theorem~3.2 of EPI-20-a, knowledge is closed under competent deduction, and by Corollary~3.4, in an ordinary zoo (Assumption~3.3) the visitor who deduces $\neg M$ from $Z$ knows $\neg M$.
+
+Consider two zoos. In the \emph{ordinary zoo}, no zoo in the region disguises animals, and at every world close to the actual one at which the visitor believes $Z$ by looking, the animals are zebras. In the \emph{disguising zoo}, the management sometimes replaces sick zebras with painted mules, and has done so recently.
+
+\begin{proposition}[No split verdict]\label{p:nosplit}
+In each zoo, the visitor who believes $\neg M$ by competent deduction from $Z$ knows $\neg M$ if and only if she knows $Z$.
+\end{proposition}
+
+\begin{proof}[Argument]
+Left to right: since $\neg M$ does not entail $Z$ (the pen might be empty), we argue by safety. If her belief in $Z$ is unsafe, there is a close world at which she believes $Z$ by looking and the animals are not zebras; in either zoo the only such worlds that looking cannot rule out are worlds of disguise, at which $\neg M$ is false and she still believes it on the same deduction. So her belief in $\neg M$ is unsafe too. Right to left is Theorem~3.2 of EPI-20-a.
+\end{proof}
+
+In the ordinary zoo, both beliefs are safe and she knows both. In the disguising zoo, disguise worlds are close; her belief in $Z$ is unsafe and she knows neither. The situation Dretske describes, knowledge of $Z$ with ignorance of $\neg M$, requires that disguise worlds be remote for the first belief and close for the second, in the same zoo. That is a shift of standard, not a failure of closure.
+
+\section{The abominable conjunction}
+
+\citet{DeRose1995} called \enquote{she knows that the animals are zebras but does not know that they are not disguised mules} an abominable conjunction. Proposition~\ref{p:nosplit} explains the abomination: in no zoo is the conjunction true. The impression that she fails to know $\neg M$ comes from insensitivity: were the animals disguised mules, she would still believe they were not \citep{Nozick1981}. By Proposition~3.5 of EPI-20-a, insensitivity is compatible with safety, and safety, not sensitivity, is the condition on knowledge \citep{Sosa1999}.
+
+\begin{objection}
+The visitor has no evidence against disguise beyond what she sees, and what she sees would be the same if the animals were disguised.
+\end{objection}
+
+\begin{reply}
+That is insensitivity again. Her evidence that the animals are not disguised is the same as her evidence that they are zebras; in the ordinary zoo it suffices for both, and in the disguising zoo for neither.
+\end{reply}
+
+\section{Conclusion}
+
+Varying the zoo separates the two questions Dretske ran together: whether the visitor's evidence suffices, and whether her conclusion follows. The first depends on the zoo; the second does not. Closure holds, and in an ordinary zoo she knows that the zebra is not a cleverly disguised mule.
+
+\begin{thebibliography}{99}\small
+\bibitem[DeRose(1995)]{DeRose1995} DeRose, K. (1995). Solving the skeptical problem. \emph{The Philosophical Review}, 104(1), 1--52.
+\bibitem[Dretske(1970)]{Dretske1970} Dretske, F. (1970). Epistemic operators. \emph{The Journal of Philosophy}, 67(24), 1007--1023.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Sosa(1999)]{Sosa1999} Sosa, E. (1999). How to defeat opposition to Moore. \emph{Philosophical Perspectives}, 13, 141--153.
+\end{thebibliography}
+
+\end{document}

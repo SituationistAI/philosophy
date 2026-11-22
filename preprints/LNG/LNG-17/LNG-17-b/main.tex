@@ -1,0 +1,65 @@
+\documentclass{situationist-preprint}
+
+\title{Propositions and Sentences: A Cardinality Argument}
+\msid{LNG-17-b}
+\msfamily{LNG-17}
+\msdiscipline{Philosophy of Language}
+\mstype{Companion manuscript}
+\mskeywords{propositions; sentences; Cantor; diagonal argument; singular propositions; fine-grained content}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LNG-17-a argues that for every language some proposition is expressed by none of its sentences. We give the argument in a minimal form: a direct diagonal construction that uses only two premises, that every set of sentences is an object and that singular propositions about different objects differ. It needs no comparison of cardinalities, no structure beyond this one injectivity, and no quantification over collections of propositions, so it is untouched by the Russell--Myhill paradox. The minimal form also shows exactly where fine-grainedness enters: possible-worlds propositions fail the injectivity premise.
+\end{abstract}
+
+\section{The argument}
+
+Fix a language $L$ and any assignment $e$ that sends each sentence of $L$ to the proposition it expresses, if any. We use two premises, which are Assumptions 3.3 and 3.4 of LNG-17-a in a slightly sharpened form.
+
+\begin{assumption}[Sets]\label{a:sets}
+Every collection of sentences of $L$ has a set, which is an object.
+\end{assumption}
+
+\begin{assumption}[Distinct singular propositions]\label{a:dist}
+For every object $x$ there is a proposition $[x]$, the proposition that $x$ exists, of which $x$ is a constituent; and if $[x] = [y]$, then $x = y$.
+\end{assumption}
+
+\begin{theorem}\label{t:diag}
+Some proposition is not the value of $e$ for any sentence of $L$.
+\end{theorem}
+
+\begin{proof}
+Let $D$ be the set of sentences $s$ such that, for some set $X$ of sentences, $e(s) = [X]$ and $s \notin X$. It exists by Assumption~\ref{a:sets}. Suppose that $e(d) = [D]$ for some sentence $d$. If $d \in D$, then $e(d) = [X]$ for some $X$ with $d \notin X$; by Assumption~\ref{a:dist}, $X = D$, so $d \notin D$. If $d \notin D$, then $D$ itself witnesses $d \in D$. Both cases are contradictory, so $[D]$ is expressed by no sentence of $L$.
+\end{proof}
+
+This is Theorem 4.2 of LNG-17-a with the general Lemma 4.1 (Cantor) unfolded into a single diagonal step, the step \citet{Cantor1891} used and \citet[Appendix~B]{Russell1903} applied to propositions. The construction names the inexpressible proposition: the proposition that the diagonal set exists.
+
+\section{What the minimal form shows}
+
+\paragraph{No cardinalities.} The proof does not ask how many sentences or propositions there are, so it holds of languages with uncountably many sentences, or with a name for every object it can describe, as well as of finite and countable languages. Whatever the language, its expressing map misses a proposition.
+
+\paragraph{No quantification over sets of propositions.} The diagonal set is a set of sentences. The Russell--Myhill paradox, Theorem 7.1 of LNG-17-a, arises when every collection of propositions is mapped injectively into propositions. The argument here maps only collections of sentences, which are not propositions, and so it does not need the structuring principle in the form that the paradox refutes.
+
+\paragraph{Where fine-grainedness enters.} Assumption~\ref{a:dist} fails if propositions are sets of possible worlds. Sets exist necessarily, if at all, so the proposition that $X$ exists is the set of all worlds for every $X$, and $[X] = [Y]$ for all $X$ and $Y$. On the coarse view the diagonal argument does not get started, and the conclusion must then be argued, if at all, by counting worlds. That the minimal argument requires injectivity on singular propositions about necessary existents is the precise sense in which the conclusion of LNG-17-a depends on propositions being fine-grained \citep{King2007}.
+
+\begin{objection}
+Assumption~\ref{a:dist} is stronger than it looks: it says that singular propositions are individuated by their constituents, which is the structured view under another name.
+\end{objection}
+
+\begin{reply}
+It requires much less than the structured view. It says only that one family of propositions, those predicating existence of a single object, separates objects. A view on which propositions are unstructured but finer than sets of worlds, provided it individuates singular propositions by their subjects, satisfies it. What the minimal argument shows is that any account of propositions fine enough to tell the existence of one set from the existence of another already has more propositions than any language has sentences.
+\end{reply}
+
+\section{Conclusion}
+
+Two premises and one diagonal step give the conclusion of LNG-17-a that for every language some proposition is expressed by none of its sentences, and the argument specifies which proposition is missed. The minimal form is free of cardinal arithmetic and of the Russell--Myhill paradox, and it locates the dependence of the result on the fineness of propositions.
+
+\begin{thebibliography}{9}\small
+\bibitem[Cantor(1891)]{Cantor1891} Cantor, G. (1891). \"Uber eine elementare Frage der Mannigfaltigkeitslehre. \emph{Jahresbericht der Deutschen Mathematiker-Vereinigung}, 1, 75--78.
+\bibitem[King(2007)]{King2007} King, J.~C. (2007). \emph{The Nature and Structure of Content}. Oxford University Press.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

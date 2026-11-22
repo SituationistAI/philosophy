@@ -1,0 +1,191 @@
+\documentclass{situationist-preprint}
+
+\title{Escaping Euthyphro via Joint Grounding}
+\msid{REL-09-a}
+\msfamily{REL-09}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_09.lean}
+\mskeywords{Euthyphro dilemma; divine command theory; grounding; co-endorsement; arbitrariness; theistic ethics}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is what is good good because God commands it, or does God command it because it is good? The first horn seems to make morality arbitrary; the second seems to make it independent of God. We argue that neither horn is true. Goodness and divine command are jointly grounded in a third fact, which we call co-endorsement: an act-type is co-endorsed when it is endorsed both by God and by the natures of the creatures it concerns. Co-endorsement is itself grounded in a divine fact and in a non-divine fact. Treating grounding as a strict partial order and co-endorsement as the full ground of both goodness and command, we prove that command does not ground goodness and goodness does not ground command; that goodness is grounded in both divine and non-divine facts and obtains only if both obtain; and that a divine command guarantees the goodness of what it commands without grounding it. The result avoids arbitrariness, since God cannot make cruelty good by commanding it, and avoids independence, since nothing is good that God does not endorse. The proofs are formalized in Lean. We defend the account against the charge that the dilemma recurs at the level of co-endorsement.
+\end{abstract}
+
+\section{The dilemma}
+
+In Plato's dialogue, Socrates asks Euthyphro whether the pious is loved by the gods because it is pious, or pious because it is loved \citep[10a]{Euthyphro}. Transposed to monotheism and to morality, the question becomes: is what is good (or required) so because God commands it, or does God command it because it is good (or required)?
+
+The first answer is the core of divine command theory. In the voluntarist tradition associated with Ockham, moral requirements are constituted by divine commands, and God could have commanded otherwise. Its defect is arbitrariness: had God commanded cruelty, cruelty would have been required. \citet{Cudworth1731} pressed this objection against the voluntarists, and Leibniz argued that a God whose commands make goodness could not be praised for being good \citep[\S2]{Leibniz1686}. The second answer, held in different forms by natural law theorists and by contemporary non-theistic realists \citep{Wielenberg2014}, makes goodness a standard God conforms to, and so a domain over which God has no authority and to which God's existence is irrelevant.
+
+Contemporary theistic ethics has sought a third way. \citet{Quinn1978} defended a divine command theory of moral requirement on which the dependence of obligation on God is a necessary, not a contingent, relation. \citet{Adams1999} distinguished goodness, which he identified with resemblance to God, the Good itself, from obligation, which he held to be constituted by the commands of a good God; arbitrariness is blocked because God's commands issue from God's goodness. \citet{Alston1990} argued that God is good not by conforming to standards but by being the standard. \citet{Zagzebski2004} grounded moral properties in divine motives, and \citet{Evans2013} defended a version of Adams's view for obligation. \citet{Murphy2011} argued that the theist should hold God to be the source of morality by being the source of the natures from which natural law derives, rather than by issuing commands.
+
+Each of these views takes one horn for one class of moral facts. Adams takes the first horn for obligation, and something close to the second, with God as the standard, for goodness; so does Evans. The objections recur accordingly: if obligation is constituted by command, a good God's commands still do not explain why certain acts are obligatory rather than others, except by appeal to a goodness that does the explanatory work, so that the command seems idle; if goodness is constituted by resemblance to God, the question is why God's character, rather than some other, is the standard.
+
+We propose that the dilemma rests on a false presupposition: that one of goodness and command must ground the other. The theory of grounding \citep{Fine2012,Schaffer2009,Rosen2010} allows two facts to be co-grounded, each grounded in a common source and neither in the other. Correlation without mutual grounding is familiar elsewhere: two effects of a common cause, or two facts both grounded in the existence of a set. We argue that goodness and command are related in this way, and identify their common ground.
+
+\section{Framework}
+
+\begin{definition}\label{d:coend}
+An act-type $a$ is \emph{endorsed by God} if God, from God's own nature, wills that $a$ be done. It is \emph{endorsed by creaturely natures} if the natures of the creatures whom $a$ concerns are such that their flourishing calls for $a$. It is \emph{co-endorsed} if it is endorsed both by God and by creaturely natures.
+\end{definition}
+
+Co-endorsement is a relation between God, an act-type and created natures, and it is distinct from each of its relata. It is not a conjunction of two independent facts that happen to coincide, since it is constitutive of God's nature, on the theism we assume, that God endorses in light of the natures God creates. But nothing in the definition makes one endorsement ground the other.
+
+\begin{definition}\label{d:first}
+The \emph{first horn} holds for $a$ if the fact that God commands $a$ grounds the fact that $a$ is good.
+\end{definition}
+
+\begin{definition}\label{d:second}
+The \emph{second horn} holds for $a$ if the fact that $a$ is good grounds the fact that God commands $a$.
+\end{definition}
+
+We use \enquote{good} for the moral status of an act-type; the argument applies without change to the fact that an act-type is required.
+
+\begin{assumption}\label{a:order}
+Partial grounding is irreflexive and transitive.
+\end{assumption}
+
+\begin{assumption}\label{a:coend}
+The fact that $a$ is co-endorsed is grounded in the fact that God endorses $a$ and in the fact that creaturely natures endorse $a$, and it obtains just in case both obtain.
+\end{assumption}
+
+\begin{assumption}\label{a:joint}
+The fact that $a$ is co-endorsed grounds both the fact that $a$ is good and the fact that God commands $a$.
+\end{assumption}
+
+\begin{assumption}\label{a:exhaust}
+Every ground of the fact that $a$ is good, and every ground of the fact that God commands $a$, is either the fact that $a$ is co-endorsed or a ground of that fact.
+\end{assumption}
+
+\begin{assumption}\label{a:divine}
+The fact that God endorses $a$ is a divine fact; the fact that creaturely natures endorse $a$ is not.
+\end{assumption}
+
+\begin{assumption}\label{a:obtain}
+$a$ is good just in case $a$ is co-endorsed; God commands $a$ only if $a$ is co-endorsed.
+\end{assumption}
+
+Assumption~\ref{a:order} is the standard view of grounding as a strict partial order \citep{Fine2012,Rosen2010}. Assumptions~\ref{a:coend} and~\ref{a:divine} articulate Definition~\ref{d:coend}. Assumptions~\ref{a:joint} and~\ref{a:exhaust} are the substantive thesis: co-endorsement is the full and immediate ground of goodness and of command, in the sense that whatever else grounds either does so through co-endorsement. Assumption~\ref{a:obtain} says that goodness is neither more nor less extensive than co-endorsement, and that God commands only what God and creaturely natures jointly endorse. It does not say that God commands everything good; much that is good is permitted rather than commanded.
+
+The case for Assumption~\ref{a:joint} is explanatory. Why is gratuitous cruelty wrong? Two answers are available, and both are correct: because it destroys what the flourishing of sentient creatures requires, and because God, who loves those creatures, wills against it. An account that cites only the first leaves God idle; one that cites only the second cannot explain why God wills as God does. Co-endorsement is what the two answers are jointly answers to. Why does God forbid cruelty? Not because it is bad, if this means that the badness is a prior fact to which God responds, since God's will is not a response to a standard external to it; nor arbitrarily, since God wills against cruelty in light of what creatures are. God forbids cruelty for the same reason that cruelty is bad: because it is contrary both to God's love and to creaturely flourishing.
+
+\section{Results}
+
+\begin{lemma}\label{l:asym}
+Grounding is asymmetric: if $f$ grounds $g$, then $g$ does not ground $f$.
+\end{lemma}
+
+\begin{proof}
+If $f$ grounds $g$ and $g$ grounds $f$, then by transitivity $f$ grounds $f$, contrary to irreflexivity (Assumption~\ref{a:order}).
+\end{proof}
+
+\begin{theorem}\label{t:main}
+For every act-type, neither horn of the dilemma holds.
+\end{theorem}
+
+\begin{proof}
+Suppose the first horn holds for $a$: God's command of $a$ grounds $a$'s goodness. By Assumption~\ref{a:exhaust}, the command either is the co-endorsement of $a$ or grounds it. By Assumption~\ref{a:joint}, co-endorsement grounds the command. In the first case, co-endorsement grounds itself, contrary to irreflexivity; in the second, co-endorsement and command ground each other, contrary to Lemma~\ref{l:asym}. The argument against the second horn is the same with goodness and command exchanged.
+\end{proof}
+
+\begin{proposition}\label{p:joint}
+For every act-type $a$, the goodness of $a$ is grounded in a divine fact and in a non-divine fact, and $a$ is good only if God endorses $a$ and creaturely natures endorse $a$.
+\end{proposition}
+
+\begin{proof}
+By Assumptions~\ref{a:coend} and~\ref{a:joint} and transitivity, the fact that God endorses $a$ and the fact that creaturely natures endorse $a$ both ground the goodness of $a$; by Assumption~\ref{a:divine}, the first is divine and the second is not. If $a$ is good, it is co-endorsed (Assumption~\ref{a:obtain}), and so both endorsements obtain (Assumption~\ref{a:coend}).
+\end{proof}
+
+\begin{corollary}\label{c:confirm}
+If God commands $a$, then $a$ is good; but God's command of $a$ does not ground the goodness of $a$.
+\end{corollary}
+
+\begin{proof}
+If God commands $a$, $a$ is co-endorsed, and so good, by Assumption~\ref{a:obtain}. The second clause is the first half of Theorem~\ref{t:main}.
+\end{proof}
+
+Proposition~\ref{p:joint} disposes of both charges the dilemma raises. Arbitrariness: God's commanding cruelty would require cruelty to be co-endorsed, and so endorsed by the natures of the creatures it harms, which it is not; given those natures, what they call for is not up to God. Independence: nothing is good unless God endorses it, so that, had there been no God, nothing would have been good in the sense at issue, and God's will is a ground of every moral fact. Corollary~\ref{c:confirm} states the role that remains for commands. They are not idle, since they are reliable indications of goodness and express God's endorsement; but they confirm what they command rather than make it good. MTE-20 draws the metaethical consequence: morality is jointly grounded in divine and non-divine facts, and divine commands confirm rather than create obligations.
+
+\section{Objections}
+
+\begin{objection}[The dilemma recurs]
+Ask of co-endorsement what Socrates asked of piety. Does God endorse $a$ because creaturely natures call for it, or do they call for it because God endorses it? On the first answer, the non-divine fact does the work and God's endorsement is a response to an independent standard; on the second, the creaturely fact is a creature of God's will, and arbitrariness returns.
+\end{objection}
+
+\begin{reply}
+Neither, for the reason that defeats the original dilemma. The two endorsements are not related by grounding; each is grounded in a nature, the first in God's and the second in the creatures'. That they agree is not a coincidence, since it belongs to God's nature to love what God creates, and a loving will endorses what the flourishing of the beloved calls for. But agreement that follows from the natures of the relata is not grounding of one relatum in the other. It may be pressed that creaturely natures are themselves God's creation. God creates creatures, but God does not make it the case that a creature of a given nature flourishes in a given way: that is fixed by the essence of the kind, and essence is prior to modality, as MET-13 argues. God chooses which natures to instantiate, not what those natures are. The companion manuscript REL-09-b takes up the related charge that co-endorsement is circular.
+\end{reply}
+
+\begin{objection}[Exhaustion is question-begging]
+Assumption~\ref{a:exhaust} excludes by fiat the voluntarist's view that command is an additional ground of goodness. Without it, Theorem~\ref{t:main} fails.
+\end{objection}
+
+\begin{reply}
+The assumption is substantive, and the formalization shows that Theorem~\ref{t:main} uses it at exactly one step. It is supported by the explanatory argument of Section~2: every explanation of an act's goodness that cites God's command can be continued by asking why God commanded it, and the answer, if it is not \enquote{for no reason}, cites co-endorsement. A ground that adds nothing to the explanation once its own explanation is given is not a further ground. The voluntarist who denies this must hold that God's command of $a$ grounds the goodness of $a$ in addition to the reasons for which God commanded it, and must then explain why the same reasons do not already ground it.
+\end{reply}
+
+\begin{objection}[God's goodness becomes trivial]
+If goodness is grounded partly in God's endorsement, the claim that God is good reduces to the claim that God endorses what God endorses.
+\end{objection}
+
+\begin{reply}
+God's moral perfection, on this account, is the agreement of God's endorsement with what creaturely natures call for, and this is not trivial: it is the claim that the divine relatum of co-endorsement never endorses what the creaturely relatum does not. A God whose will diverged from the flourishing of creatures would not be good. The account thus agrees with the definition of maximal excellence in REL-01-a, on which moral perfection is a substantive attribute, and with the view of Leibniz and Cudworth that God can be praised for being good.
+\end{reply}
+
+\begin{objection}[Redundant commands]
+If commands do not ground obligations, they serve no purpose. Divine command theory loses its subject matter.
+\end{objection}
+
+\begin{reply}
+The account is not a divine command theory, and does not aim to be one. Commands have an epistemic and expressive role: they make known what is co-endorsed and express God's endorsement, which is itself a ground of moral facts. That role is what Corollary~\ref{c:confirm} establishes. A command is redundant as a ground, not as a communication.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem is conditional on theism: it says how goodness and command are related if there is a God who commands. It does not establish that God exists, which is the subject of REL-01, nor does it say what morality would be in a godless world beyond the consequence that nothing would be good in the sense defined. It does not identify the content of creaturely flourishing, which is a question for normative ethics. And it does not show that co-endorsement is the only possible common ground of goodness and command; it shows that a common ground of the kind specified suffices to escape the dilemma, and gives reasons to think co-endorsement is that ground.
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/REL/REL_09.lean}. Facts, grounding, obtaining, divinity, act-types and the five facts associated with each act-type are primitive constants; Assumptions~\ref{a:order}--\ref{a:obtain} are axioms; the two horns are defined. The main theorem reads:
+
+\begin{lstlisting}
+theorem neither_horn (a : Act) : ¬ FirstHorn a ∧ ¬ SecondHorn a
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_09.neither_horn' depends on axioms:
+  [Act, Fact, Ground, cmd, coend, exhaust_cmd, exhaust_good, good,
+   ground_irrefl, ground_trans, joint]
+'Philosophy.REL_09.commands_confirm' depends on axioms:
+  [Act, Fact, Ground, Obtains, cmd, cmd_only, coend, exhaust_cmd,
+   exhaust_good, good, good_iff, ground_irrefl, ground_trans, joint]
+\end{lstlisting}
+
+\noindent Here \texttt{ground\_irrefl} and \texttt{ground\_trans} are Assumption~\ref{a:order}, \texttt{joint} is Assumption~\ref{a:joint}, \texttt{exhaust\_good} and \texttt{exhaust\_cmd} are Assumption~\ref{a:exhaust}, and \texttt{good\_iff} and \texttt{cmd\_only} are Assumption~\ref{a:obtain}; the rest are primitive constants (namespace prefixes omitted). Theorem~\ref{t:main} does not depend on Assumptions~\ref{a:coend}, \ref{a:divine} or~\ref{a:obtain}: neither horn holds whatever co-endorsement consists in, provided it is the full common ground of goodness and command. Proposition~\ref{p:joint} (\texttt{joint\_grounding}) additionally uses Assumptions~\ref{a:coend} and~\ref{a:divine}.
+
+\section{Conclusion}
+
+The Euthyphro dilemma presupposes that either goodness grounds divine command or divine command grounds goodness. Both are grounded in co-endorsement, the joint endorsement of an act by God and by the natures of the creatures it concerns, and grounding is asymmetric, so neither grounds the other. Goodness is thereby grounded in divine and non-divine facts together, which avoids both arbitrariness and independence, and divine commands guarantee the goodness of what they command without creating it.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1999)]{Adams1999} Adams, R.~M. (1999). \emph{Finite and Infinite Goods: A Framework for Ethics}. Oxford University Press.
+\bibitem[Alston(1990)]{Alston1990} Alston, W.~P. (1990). Some suggestions for divine command theorists. In M.~D. Beaty (Ed.), \emph{Christian Theism and the Problems of Philosophy}. University of Notre Dame Press.
+\bibitem[Cudworth(1731)]{Cudworth1731} Cudworth, R. (1731). \emph{A Treatise Concerning Eternal and Immutable Morality}. London.
+\bibitem[Evans(2013)]{Evans2013} Evans, C.~S. (2013). \emph{God and Moral Obligation}. Oxford University Press.
+\bibitem[Fine(2012)]{Fine2012} Fine, K. (2012). Guide to ground. In F.~Correia and B.~Schnieder (Eds.), \emph{Metaphysical Grounding: Understanding the Structure of Reality} (pp.~37--80). Cambridge University Press.
+\bibitem[Leibniz(1686)]{Leibniz1686} Leibniz, G.~W. (1686). \emph{Discours de métaphysique}.
+\bibitem[Murphy(2011)]{Murphy2011} Murphy, M.~C. (2011). \emph{God and Moral Law: On the Theistic Explanation of Morality}. Oxford University Press.
+\bibitem[Plato()]{Euthyphro} Plato. \emph{Euthyphro}.
+\bibitem[Quinn(1978)]{Quinn1978} Quinn, P.~L. (1978). \emph{Divine Commands and Moral Requirements}. Clarendon Press.
+\bibitem[Rosen(2010)]{Rosen2010} Rosen, G. (2010). Metaphysical dependence: Grounding and reduction. In B.~Hale and A.~Hoffmann (Eds.), \emph{Modality: Metaphysics, Logic, and Epistemology} (pp.~109--135). Oxford University Press.
+\bibitem[Schaffer(2009)]{Schaffer2009} Schaffer, J. (2009). On what grounds what. In D.~Chalmers, D.~Manley and R.~Wasserman (Eds.), \emph{Metametaphysics: New Essays on the Foundations of Ontology} (pp.~347--383). Oxford University Press.
+\bibitem[Wielenberg(2014)]{Wielenberg2014} Wielenberg, E.~J. (2014). \emph{Robust Ethics: The Metaphysics and Epistemology of Godless Normative Realism}. Oxford University Press.
+\bibitem[Zagzebski(2004)]{Zagzebski2004} Zagzebski, L.~T. (2004). \emph{Divine Motivation Theory}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

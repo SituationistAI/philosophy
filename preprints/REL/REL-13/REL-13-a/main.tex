@@ -1,0 +1,302 @@
+\documentclass{situationist-preprint}
+
+\title{A Consistency Proof for Trinitarian Doctrine}
+\msid{REL-13-a}
+\msfamily{REL-13}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_13.lean}
+\mskeywords{Trinity; relative identity; Geach; consistency; Horn clauses; counting; Athanasian Creed}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The doctrine of the Trinity holds that the Father, the Son and the Holy Spirit are each God, that no one of them is another, and that there is one God. Read with absolute identity and standard counting, these claims are inconsistent. Geach's thesis that identity is relative to a sortal offers a reading on which the Father is the same God as the Son but not the same person, and on which Gods are counted by \enquote{same God}. We prove that the doctrine, so read, is consistent in any logic of relative identity extending Geach's system. A logic of relative identity is taken to be a set of universal Horn principles in the language of sortal predication and sortal-relative sameness that admits at least one case of relativity. We first exhibit an explicit three-element model; we then show, using the preservation of Horn principles under products and substructures, that every such logic has a model of the doctrine, and that admitting relativity is also necessary. A non-Horn counting principle shows that the restriction to Horn principles cannot be dropped. All results are formalized in Lean without axioms.
+\end{abstract}
+
+\section{The problem}
+
+\subsection{The logical problem of the Trinity}
+
+The Athanasian Creed states that the Father is God, the Son is God and the Holy Spirit is God, and yet that there are not three Gods but one God; and it states, in the same breath, that the Father, the Son and the Spirit are three persons, not to be confounded. Richard \citet{Cartwright1987} reduced the logical difficulty to seven propositions: the Father is God; the Son is God; the Holy Spirit is God; the Father is not the Son; the Father is not the Holy Spirit; the Son is not the Holy Spirit; there is exactly one God. If \enquote{is} in the first three is the \enquote{is} of identity, and \enquote{not} in the next three denies identity, then the first three and the last together imply that the Father is the Son, by the symmetry and transitivity of identity, contradicting the fourth. If instead \enquote{is God} is predicative, as in \enquote{Socrates is a man}, then the first six imply that there are at least three things that are Gods, contradicting the seventh. Either way the propositions cannot all be true with absolute identity and with Gods counted by absolute identity.
+
+The problem is old, and the solutions to it fall into a small number of families. The relative-identity solution, which we develop, holds that the propositions are true when \enquote{is} and \enquote{is not} are read as sortal-relative sameness and difference, and when Gods are counted by the relation \enquote{is the same God as}. The Father is the same God as the Son and is not the same person as the Son. This reading was proposed by \citet{Geach1962,Geach1967}, whose thesis that identity is relative is examined in LOG-12-a, and it was developed by \citet{Martinich1978}, \citet{vanInwagen1988} and \citet{Cain1989}. Its principal rival in recent work is the constitution model of \citet{BrowerRea2005}, on which the persons are related to God as several objects constituted by one matter are related to one another, together with social trinitarianism \citep{Swinburne1994,Hasker2013} and Latin trinitarianism \citep{Leftow2004}.
+
+What the relative-identity reading has lacked is a proof of consistency of the right generality. The strongest claim one can make for it is not that the Trinitarian propositions are consistent in some particular logic, which can be shown by a particular model, but that they are consistent in every logic of relative identity that a relative-identity theorist could accept. That is the result we prove. It is the result LOG-12-a accepts while denying that it shows identity to be relative in general, and our proof confirms the point LOG-12-a makes about it: in any model of the doctrine, \enquote{the same God} fails substitutivity for the predicate \enquote{is the same person as the Father} (Proposition~\ref{p:subst}).
+
+\subsection{A short history of the debate}
+
+\emph{The patristic formulation.} Tertullian introduced the Latin vocabulary of one substance and three persons in his treatise against Praxeas, whose modalism identified the Father with the Son and treated the persons as successive modes of one God. The Council of Nicaea (325) affirmed that the Son is of one substance (\emph{homoousios}) with the Father, and the Cappadocians distinguished \emph{ousia}, what the persons share, from \emph{hypostasis}, what each is. Gregory of Nyssa, in his letter to Ablabius on why there are not three Gods, faced the objection that Peter, James and John are three men although they share one human nature, so that the Father, the Son and the Spirit should be three Gods. His reply, that strictly speaking \enquote{man} names the nature and should not be counted, conceded the logical point that sharing a nature is compatible with plurality of the things that share it, and located the difference in the use of the counting noun. In our terms, Gregory saw that the question is how Gods are counted.
+
+\emph{Augustine.} In \emph{De Trinitate}, Augustine asked what the three are three \emph{of}. They are not three Gods, three substances or three essences; \enquote{three persons} is said, he wrote, not so much to say something as in order not to remain silent (V.9.10, VII.4.7). Augustine's question, \enquote{three what?}, is the question of the sortal under which the persons are counted, and his answer, that \enquote{person} is a term of art with no ordinary generic content, is the first recognition that the doctrine requires two counting sortals that give different answers.
+
+\emph{The medieval theory of relations.} Boethius, in his treatise on the Trinity, held that the persons are distinguished by relation alone and that predicates of substance are said of the three in the singular. Aquinas developed the view that the divine persons are subsistent relations, each identical with the divine essence and really distinct from one another by opposition of relation \citep[I, qq.~28--30]{Aquinas}. The medieval theory faced the objection, raised against it from the start, that things identical with one and the same thing are identical with each other. Aquinas's reply was that the principle holds of things that are identical both in reality and in concept, and that the persons differ by the relations of paternity, filiation and procession, which are opposed to one another though not to the essence. \citet{AnscombeGeach1961} read this as an anticipation of relative identity, and Geach's later work made the reading explicit.
+
+\emph{The analytic revival.} \citet{Geach1962} argued that \enquote{$a$ is the same as $b$} is incomplete until a sortal is supplied, and that $a$ may be the same $F$ as $b$ without being the same $G$, though both are $G$s; his secular examples, the same official and different men, the same river and different waters, are discussed in LOG-12-a. \citet{Martinich1978} applied the thesis to the Trinity, and \citet{Cartwright1987} argued against it that relative identity without absolute identity cannot explain how we count. \citet{vanInwagen1988} gave the most careful statement: a language with relative-identity predicates and no absolute identity, in which the Athanasian propositions are expressed as claims about \enquote{same God} and \enquote{same person}, together with an argument that, so stated, they imply no contradiction. Van Inwagen did not claim that the doctrine is thereby made intelligible; he claimed that it is not shown to be incoherent. \citet{Cain1989} examined the logic of the resulting position, and \citet{Rea2003} argued that the position, if it rejects absolute identity altogether, carries metaphysical commitments, in particular a form of anti-realism about the individuation of objects, that its proponents may not want.
+
+\emph{Rivals.} The constitution model of \citet{BrowerRea2005} keeps absolute identity and reads \enquote{the Father is God} as numerical sameness without identity, the relation that holds between a statue and the lump of clay that constitutes it: the persons are three, each constituted by the divine essence, and the Gods are counted by numerical sameness. Social trinitarianism \citep{Swinburne1994,Hasker2013} holds that the persons are three centres of consciousness and will, bound by necessary agreement, and that \enquote{one God} names the community or the nature; it faces the charge of tritheism, which REL-15 makes precise. Latin trinitarianism \citep{Leftow2004} holds that there is one divine subject living three lives, and faces the charge of modalism. The essays collected by \citet{McCallRea2009} represent the state of the debate among these options.
+
+The history yields a moral that guides the framework below. Every successful reply to the counting objection has had to say how Gods are counted, and every proposal that counts Gods by absolute identity has had either to deny that the persons are absolutely distinct (modalism) or to deny that they are each God in the sense in which there is one God (tritheism, or a deflation of \enquote{is God}). The relative-identity reading is the one reading on which the counting sortal for Gods is \enquote{God} itself, as the creeds suggest.
+
+\section{Framework}
+
+We work in a first-order language without absolute identity. Its non-logical vocabulary consists of sortal predication and sortal-relative sameness, and its variables range over objects and over sortals.
+
+\begin{definition}\label{d:struct}
+A \emph{relative-identity structure} consists of a domain of objects, a domain of sortals, a relation \enquote{$a$ is an $F$} ($F a$) and a relation \enquote{$a$ is the same $F$ as $b$} ($a =_F b$).
+\end{definition}
+
+\begin{definition}\label{d:horn}
+An \emph{atom} has the form $F x$ or $x =_F y$, with $F$ a sortal variable and $x, y$ object variables. A \emph{Horn principle} is the universal closure of a formula $A_1 \wedge \dots \wedge A_n \to B$, where the $A_i$ are atoms and $B$ is an atom or $\bot$. It is \emph{valid} in a structure if, under every assignment to its variables, $B$ holds whenever every $A_i$ holds.
+\end{definition}
+
+\begin{definition}\label{d:logic}
+A \emph{Horn logic} is a set of Horn principles. A structure is a \emph{model} of a Horn logic if every principle of the logic is valid in it.
+\end{definition}
+
+\begin{definition}\label{d:geach}
+\emph{Geach's system} $\mathsf{G}$ consists of the four Horn principles
+\begin{align*}
+&F x \to x =_F x, && x =_F y \to F x,\\
+&x =_F y \to y =_F x, && x =_F y \wedge y =_F z \to x =_F z.
+\end{align*}
+They say that each relation \enquote{same $F$} is an equivalence relation whose field is the class of $F$s.
+\end{definition}
+
+\begin{definition}\label{d:interp}
+An \emph{interpretation} of the theological vocabulary in a structure assigns objects to the names \enquote{the Father}, \enquote{the Son} and \enquote{the Holy Spirit}, written $f$, $s$, $h$, and sortals to \enquote{God} and \enquote{person}, written $D$ and $P$.
+\end{definition}
+
+\begin{definition}\label{d:trin}
+The \emph{Trinitarian claims} are:
+\begin{enumerate}[label=(T\arabic*)]
+\item $D f$, $D s$ and $D h$: the Father is God, the Son is God, the Spirit is God;
+\item $P f$, $P s$ and $P h$: each is a person;
+\item $f =_D s$, $s =_D h$ and $f =_D h$: each is the same God as each;
+\item not $f =_P s$, not $s =_P h$, not $f =_P h$: no one of them is the same person as another;
+\item there is an $x$ such that $D x$ and, for every $y$ such that $D y$, $y =_D x$: there is exactly one God;
+\item every person is the same person as the Father, the Son or the Spirit: there are exactly three persons.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}\label{d:relativity}
+A structure \emph{witnesses relativity} if there are sortals $F$ and $G$ and objects $a$ and $b$ such that $G a$, $G b$, $a =_F b$ and not $a =_G b$. A Horn logic \emph{admits relativity} if one of its models witnesses relativity.
+\end{definition}
+
+\begin{definition}\label{d:rilogic}
+A \emph{logic of relative identity extending Geach's system} is a Horn logic that contains $\mathsf{G}$ and admits relativity.
+\end{definition}
+
+Definitions~\ref{d:geach} and~\ref{d:relativity} follow LOG-12-a, whose Definition~2.3 states Geach's thesis in the same form and whose Assumption~2.4 is the first principle of $\mathsf{G}$. Definition~\ref{d:trin} follows van Inwagen's practice of replacing each \enquote{is} of the creeds by a relative-identity predicate, and adds the counting claims (T5) and (T6) in the form that relative identity permits: \enquote{there is exactly one $F$} means that there is an $F$ and every $F$ is the same $F$ as it. (T5) and (T6) are what make the doctrine a doctrine about number; without them the claims (T1) to (T4) are satisfied by three Gods who are three persons.
+
+Definition~\ref{d:rilogic} is the substantive choice, and it has two parts. The first is that the principles of a logic of relative identity are Horn principles. The principles that the relative-identity literature has proposed are of this form: the equivalence principles of $\mathsf{G}$; principles of restricted substitution, which say that if $x =_F y$ and $x$ stands in some relation of a specified kind then so does $y$; principles of sortal dominance, which say that if $x =_F y$ then $x =_G y$ for some pairs of sortals; and the principle that if $x =_F y$ then $x$ is a $G$ just in case $y$ is, when $G$ is a sortal that is preserved by $F$. Each is a universal conditional with a conjunction of atoms as antecedent and a single atom as consequent. What the definition excludes are principles that assert existence, which belong to a theory of what there is rather than to a logic, and principles with disjunctive consequents. The latter are counting principles in disguise, and Section~\ref{s:limits} shows that they must be excluded if the theorem is to be true. The second part is that the logic admits relativity. A Horn logic containing $\mathsf{G}$ that admits no relativity is a logic on which sortal sameness never discriminates more finely under one sortal than under another; whatever its notation, it is a logic of absolute identity, and it is not the logic the relative-identity theorist proposes.
+
+Two features of the language should be noted. There is no absolute identity predicate, following Geach and van Inwagen; Remark~\ref{r:abs} considers what happens when one is added. And the sortals are variables, so that a logic says nothing specific about God or persons: the principle \enquote{whatever is the same God as something is the same person as it}, for example, is not a principle of logic, since it contains the sortal constants $D$ and $P$, and so cannot appear in a logic of relative identity in the sense of Definition~\ref{d:rilogic}. This is the topic-neutrality that distinguishes a logic from a theology.
+
+\section{An explicit model}
+
+We begin with the simplest model, in which every claim of the doctrine can be checked by inspection.
+
+\begin{theorem}\label{t:explicit}
+There is a structure with three objects and two sortals that is a model of $\mathsf{G}$ and satisfies every Trinitarian claim.
+\end{theorem}
+
+\begin{proof}
+Let the objects be $f$, $s$ and $h$, and the sortals $D$ and $P$. Let every object be a $D$ and a $P$. Let $x =_D y$ hold for all $x$ and $y$, and $x =_P y$ hold just when $x$ and $y$ are the same object of the domain. Both relations are equivalence relations on the whole domain, which is the field of each sortal, so $\mathsf{G}$ is valid. (T1) and (T2) hold because everything is a $D$ and a $P$. (T3) holds because $=_D$ is universal. (T4) holds because $=_P$ relates no two of the three objects. (T5) holds with $x = f$, since every object is the same $D$ as $f$. (T6) holds because every object is one of $f$, $s$, $h$ and is the same $P$ as itself.
+\end{proof}
+
+The model is not a picture of the divine nature. It shows that the propositions of Definition~\ref{d:trin}, read with relative identity, can be jointly true together with the principles of $\mathsf{G}$; that is what consistency means. The model uses absolute identity in the metalanguage, to define $=_P$, and this is legitimate: the object language contains no identity predicate, and a model is a mathematical structure, described in a metalanguage that is classical in every respect. A theorist who rejects absolute identity in the object language need not reject the mathematics in which models are described, any more than an intuitionist need reject the classical metatheory of Kripke models in order to use them to prove that a formula is not intuitionistically provable.
+
+Theorem~\ref{t:explicit} shows that the doctrine is consistent in $\mathsf{G}$. It does not yet show that it is consistent in every extension of $\mathsf{G}$: a stronger logic has fewer models, and one of its principles may be false in this one. The next section proves the general result.
+
+\section{Consistency in every extension}
+
+The strategy is to build, from any model of a logic that witnesses relativity, a model of the same logic that satisfies the doctrine. Two facts about Horn principles do the work. They are the two halves of the classical theorem that universal Horn sentences are preserved under direct products and substructures \citep{McKinsey1943,Horn1951}; see \citet[ch.~9]{Hodges1993} for a modern treatment. We prove them for the language at hand.
+
+The \emph{square} of a structure $M$ has as objects the ordered pairs of objects of $M$ and as sortals the ordered pairs of sortals of $M$; $(F_1, F_2)$ applies to $(a_1, a_2)$ just when $F_1 a_1$ and $F_2 a_2$ in $M$, and $(a_1, a_2) =_{(F_1, F_2)} (b_1, b_2)$ just when $a_1 =_{F_1} b_1$ and $a_2 =_{F_2} b_2$ in $M$. A \emph{substructure} of $M$ restricts its domain of objects to a nonempty subset and its relations to that subset.
+
+\begin{lemma}\label{l:square}
+Every Horn principle valid in a structure is valid in its square.
+\end{lemma}
+
+\begin{proof}
+An assignment of objects and sortals of the square to the variables determines two assignments into $M$, one taking first components and one taking second components. By the definition of the square, an atom holds in the square under the given assignment just when it holds in $M$ under both projected assignments. Suppose every atom of the antecedent of a valid principle holds in the square. Then every atom of the antecedent holds in $M$ under each projected assignment, so the consequent holds in $M$ under each. If the consequent is $\bot$, this is already impossible, so the antecedent cannot hold in the square. If it is an atom, it holds in $M$ under both projections and therefore holds in the square.
+\end{proof}
+
+\begin{lemma}\label{l:sub}
+Every Horn principle valid in a structure is valid in each of its substructures.
+\end{lemma}
+
+\begin{proof}
+An assignment into a substructure is an assignment into the structure, and atoms have the same truth value in both under it. A universal principle true of all objects of the structure is true of all objects of the substructure.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Let $L$ be a logic of relative identity extending Geach's system. Then $L$ has a model in which every Trinitarian claim is true.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{d:rilogic}, $L$ has a model $M$ that witnesses relativity: there are sortals $F$ and $G$ and objects $a$ and $b$ with $G a$, $G b$, $a =_F b$ and not $a =_G b$. Since $M$ is a model of $\mathsf{G}$, $=_F$ and $=_G$ are equivalence relations with the $F$s and the $G$s as their fields; so $a$ and $b$ are $F$s, $b =_F a$, $a =_F a$, $a =_G a$ and $b =_G b$.
+
+Let $N$ be the substructure of the square of $M$ whose objects are the three pairs
+\[
+f = (a, a), \qquad s = (a, b), \qquad h = (b, a),
+\]
+and interpret \enquote{God} as $D = (F, F)$ and \enquote{person} as $P = (G, G)$. By Lemmas~\ref{l:square} and~\ref{l:sub}, $N$ is a model of $L$. We check the Trinitarian claims. (T1) and (T2): every component of $f$, $s$ and $h$ is $a$ or $b$, each of which is an $F$ and a $G$. (T3): any two of the three pairs are componentwise the same $F$, since $a$ and $b$ are the same $F$ as each other and as themselves. (T4): the pairs $f$ and $s$ differ in their second components, which are $a$ and $b$; the pairs $f$ and $h$, and the pairs $s$ and $h$, differ in their first components, which are $a$ and $b$ in that order; since $a$ is not the same $G$ as $b$, no two of the pairs are the same $(G, G)$. (T5): $f$ is a $D$, and every object of $N$ is the same $D$ as $f$, as just shown. (T6): every object of $N$ is one of $f$, $s$, $h$, and each is the same $(G, G)$ as itself, by the reflexivity of $=_G$ on $a$ and $b$.
+\end{proof}
+
+The construction deserves comment. A single witness of relativity, two objects that are the same $F$ and different $G$s, yields at most two persons in one God. Squaring the structure multiplies the witness: the four pairs drawn from $\{a, b\}$ are all the same $(F, F)$, and any two of them differ in some component, so no two are the same $(G, G)$. Restricting to three of the four pairs gives exactly three persons and keeps exactly one God. Nothing in the construction depends on the content of $F$ and $G$, and nothing depends on the further principles of $L$, provided that they are Horn principles. The proof does not require that the witness come from a theological structure: a logic that admits Geach's own example of the same official and different men already has, by Theorem~\ref{t:main}, a model of the doctrine.
+
+The condition of admitting relativity is not only sufficient but necessary.
+
+\begin{corollary}\label{c:iff}
+A Horn logic containing $\mathsf{G}$ has a model of the Trinitarian claims if and only if it admits relativity.
+\end{corollary}
+
+\begin{proof}
+If the logic admits relativity, Theorem~\ref{t:main} applies. Conversely, in any model of the Trinitarian claims, the Father and the Son are both persons, they are the same God, and they are not the same person; so the model witnesses relativity.
+\end{proof}
+
+Corollary~\ref{c:iff} states the exact cost of the doctrine in a Horn logic: it is consistent just in case sortal sameness can, somewhere, be coarser under one sortal than under another. A theologian who accepts Geach's thesis for any secular case pays nothing further; one who denies it for every case cannot read the doctrine this way.
+
+\begin{proposition}\label{p:subst}
+Let $N$ be a model of $\mathsf{G}$ in which the Trinitarian claims are true. Then the relation \enquote{same God} is not substitutive in $N$: the Father is the same God as the Son, the Father satisfies the predicate \enquote{is the same person as the Father}, and the Son does not.
+\end{proposition}
+
+\begin{proof}
+By (T2) and the first principle of $\mathsf{G}$, the Father is the same person as the Father. By (T3) the Father is the same God as the Son. By (T4) the Son is not the same person as the Father.
+\end{proof}
+
+Proposition~\ref{p:subst} is LOG-12-a's Corollary~3.3 applied to the doctrine, and it fixes what the relative-identity theorist must accept. \enquote{Same God} is not an identity relation in the sense of LOG-12-a's Definition~2.2: it is not substitutive for every predicate. The relative-identity theorist can accept this, since substitutivity for all predicates is what she denies of every sortal relation, and can locate the mystery of the doctrine in this failure. What she cannot do is hold both that the doctrine is consistent in her logic and that \enquote{same God} is substitutive without restriction. We agree with LOG-12-a that this result bears on the divine nature and not on identity in general; Section~\ref{s:limits} returns to the point.
+
+\begin{remark}\label{r:abs}
+The theorem survives the addition of an absolute identity predicate to the language, interpreted as identity in each structure, together with any Horn principles involving it, such as substitutivity of absolute identity for every atom. Horn sentences with identity are also preserved under products and substructures \citep{Horn1951}, and identity of pairs is componentwise identity, so the argument of Theorem~\ref{t:main} goes through unchanged. What the addition makes possible is a Horn principle such as $x =_F y \to x = y$, which, together with substitutivity of absolute identity, makes every sortal relation entail every other on common instances; a logic containing it admits no relativity and falls outside Definition~\ref{d:rilogic}. In the model of Theorem~\ref{t:main} so extended, the Father, the Son and the Spirit are three objects that are one God. Whether this is acceptable depends on whether Gods are counted by absolute identity or by \enquote{same God}, and the relative-identity reading is the claim that they are counted by the latter.
+\end{remark}
+
+\section{Further cases and variants}\label{s:cases}
+
+The Trinitarian claims of Definition~\ref{d:trin} are the core of the doctrine, not the whole of it. We consider five further claims and variants, and show how each is handled by the construction or by a direct extension of it.
+
+\emph{Distinct beings.} The doctrine is often stated as the claim that the persons are not three beings but one. Add a sortal \enquote{being}, interpreted in the explicit model of Theorem~\ref{t:explicit} by the universal relation, as \enquote{God} is. Then each person is a being, any two are the same being, and there is exactly one being in the domain. In the construction of Theorem~\ref{t:main} the same is achieved by interpreting \enquote{being} as $(F, F)$. This is the position REL-15-a invokes when it observes that its uniqueness theorem for maximally great beings is compatible with a plurality of divine persons if these are not distinct beings: counted by \enquote{same being}, there is one maximally great being, and the conflict-of-wills argument of REL-15-a, which concerns distinct beings, does not apply to the persons.
+
+\emph{Relations of origin.} The creeds add that the Father begets the Son, that the Son is begotten and does not beget, and that the Spirit proceeds. These are claims in an extended vocabulary with a two-place relation of begetting and one of procession. In the explicit model, interpret \enquote{$x$ begets $y$} as holding of the pair $(f, s)$ only, and \enquote{$x$ proceeds from $y$} as holding of $(h, f)$ and, for those who accept the \emph{filioque}, of $(h, s)$. Since no principle of $\mathsf{G}$ mentions these relations, the extended model is still a model of $\mathsf{G}$, and the Father begets the Son while the Son does not beget the Father. The point generalizes: claims about the relations of origin are atomic or negated atomic claims about the three named objects, and any finite set of such claims that is consistent with (T1) to (T6) in a Horn logic with the extended vocabulary can be added to the explicit model. This vindicates, within the relative-identity reading, the medieval view that the persons are distinguished by relations of origin. The relations of origin are not substitutive for \enquote{same God} either, for the same reason as in Proposition~\ref{p:subst}: the Father begets the Son, is the same God as the Son, and the Son does not beget the Son.
+
+\emph{The common predicates.} The Athanasian Creed says that the Father is uncreated, the Son uncreated and the Spirit uncreated, and yet not three uncreated but one uncreated; and similarly for eternal, almighty and Lord. On the relative-identity reading, \enquote{not three uncreated but one} is a counting claim of the form (T5), with the counting sortal \enquote{God}: every uncreated thing is the same God as the Father. In the explicit model, interpret \enquote{uncreated} as true of every object; the counting claim holds because $=_D$ is universal. The creed's pattern, attributes predicated of each person and counted as one, is the pattern of (T1) and (T5), applied to adjectives used as sortal-dependent nouns.
+
+\emph{Gregory's objection.} Why are Peter, James and John not one man, in the way in which the persons are one God? On the relative-identity reading the question has an answer: \enquote{same man} relates no two of the three apostles, whereas \enquote{same God} relates any two of the three persons. The doctrine claims that the divine case differs from the human case in this respect, and this is a claim of theology, not of logic. Theorem~\ref{t:main} shows that logic does not decide against it; it does not show that the claim is true, and it does not show that \enquote{man} could behave as \enquote{God} does. The asymmetry is precisely what Gregory was trying to explain by distinguishing the nature from the individuals that have it, and what the relative-identity reading builds into the sortal relations themselves.
+
+\emph{Modalism and tritheism.} The two heresies between which the doctrine is defined correspond to the two ways of collapsing the model. If $=_P$ is universal, the three are the same person; this is modalism, on which the Father, the Son and the Spirit are one person under three names. If $=_D$ coincides with $=_P$, the three are three Gods; this is tritheism. The model of Theorem~\ref{t:explicit} is the one in which $=_P$ is as fine as possible and $=_D$ as coarse as possible on three objects, and every model built in the proof of Theorem~\ref{t:main} has the same shape. The relative-identity reading defines orthodoxy as the configuration in which the two sortal relations differ maximally on the three persons.
+
+\section{The limits of the result}\label{s:limits}
+
+\subsection{The Horn restriction is essential}
+
+Theorem~\ref{t:main} quantifies over Horn logics. The restriction is not a convenience of the proof: some non-Horn principles are consistent with Geach's system and with relativity, and exclude the doctrine. Consider the principle
+\[
+\text{(AM2)}\qquad x =_F y \wedge y =_F z \wedge G x \wedge G y \wedge G z \to x =_G y \vee y =_G z \vee x =_G z,
+\]
+which says that no relation of sortal sameness collects three $G$s of which no two are the same $G$.
+
+\begin{proposition}\label{p:horn}
+There is a model of $\mathsf{G}$ that witnesses relativity and validates (AM2); and no structure in which (AM2) is valid satisfies the Trinitarian claims.
+\end{proposition}
+
+\begin{proof}
+Take the two-element structure of LOG-12-a, Proposition~3.4: objects $1$ and $2$, two sortals, one under which every object is the same as every object and one under which each object is the same only as itself, and every object falling under both. $\mathsf{G}$ is valid, and relativity is witnessed by $1$ and $2$. (AM2) is valid because, among any three objects drawn from a domain of two, two are the same object, and so the same under every sortal. Conversely, in any structure satisfying the Trinitarian claims, the Father, the Son and the Spirit are the same God as one another by (T3) and persons by (T2); (AM2) then requires that two of them be the same person, which (T4) denies.
+\end{proof}
+
+(AM2) is a counting principle: it bounds the number of $G$-distinct things that one $F$ can comprise. Proposition~\ref{p:horn} shows that the theorem would be false if such principles counted as logic. We have argued that they do not: a principle that limits how many distinct things of one sort may fall under one thing of another sort is a substantive claim about the sorts in question, of the kind that a theory of persons or of material objects might make, and its disjunctive consequent is the mark of this. The theological counterpart of (AM2) is precisely the denial of the doctrine; to count it as logic would settle the question by definition.
+
+\subsection{What the result does not establish}
+
+The result establishes consistency, and consistency is all it establishes. It does not establish that the doctrine is true, or that it is intelligible in a sense stronger than freedom from contradiction. It does not establish that the relative-identity reading is the correct reading of the creeds; that is a historical and theological question, to which the history in Section~1 is relevant but not decisive. It does not establish that identity is relative outside theology. On this we agree with LOG-12-a. Our theorem requires that the logic admit relativity, and it is silent on whether the relations of sortal sameness in secular cases are identity relations; LOG-12-a argues that they are not, and that the secular cases are described without remainder by absolute identity, equivalence relations and sortal-relative counting. That argument is consistent with our result, since a logic may admit relativity, in the sense of having a model that witnesses it, without its secular sortal relations being identity relations. Finally, the result concerns Horn logics, and a reader who holds that some non-Horn principle such as (AM2) is a law of logic will not be persuaded by it; Proposition~\ref{p:horn} shows that such a reader is in effect denying the doctrine on logical grounds, and we have argued that the grounds are not logical.
+
+\section{Recent discussion}
+
+Three lines of recent work bear on the result.
+
+\emph{The anti-realism objection.} \citet{Rea2003} argued that a relative-identity theory of the Trinity that rejects absolute identity is committed to the view that there are no objects independently of the sortals under which we individuate them, since otherwise there would be facts about how many objects there are, and those facts would be stated with absolute identity. Our result does not depend on rejecting absolute identity: by Remark~\ref{r:abs}, the doctrine remains consistent when absolute identity is added, provided that no principle makes sortal sameness entail it. The relative-identity theorist may therefore be a realist about objects and hold that the three persons are three objects, while holding that Gods are counted by \enquote{same God}. What she must deny is that every counting noun counts by absolute identity. This is the position of the constitution model with respect to statues and lumps \citep{BrowerRea2005}, transposed from numerical sameness without identity to sortal sameness; the two models agree on the structure of the counting and differ on whether the relation that does the counting for Gods is constitution or a primitive relation of sortal sameness.
+
+\emph{Social and Latin trinitarianism.} Social trinitarians \citep{Swinburne1994,Hasker2013} accept that the persons are three in the strongest sense and account for the unity of God by a relation among them. On the present reading, their unity relation is a candidate for $=_D$: it is an equivalence relation on divine persons that relates any two. Social trinitarians differ from relative-identity theorists in what they say this relation is, not in its formal properties, and Theorem~\ref{t:main} therefore establishes the consistency of the formal core of their view as well, read with \enquote{same God} as the counting relation. Latin trinitarians \citep{Leftow2004} make the opposite choice, taking the unity of God as primary and the distinctness of persons as a distinctness of lives or roles. On the present reading, their view is a choice of $=_P$, and the same theorem applies. The formal result is neutral among the substantive views of what the two relations are, and it shows that none of them is refuted by logic alone, provided each counts Gods by a relation coarser than the one by which it counts persons.
+
+\emph{Mysterianism.} Some theologians hold that the doctrine is not consistent by our lights and need not be, since it concerns a mystery that exceeds human logic. Our result removes the motive for this position as far as the logical problem goes: no appeal to the limits of reason is needed to avoid contradiction. It leaves the mystery where Proposition~\ref{p:subst} puts it, in the failure of \enquote{same God} to be substitutive, which is a feature that no secular relation of sortal sameness need share in the same way.
+
+\section{Objections and replies}
+
+\begin{objection}
+The proof assumes classical, absolute identity in the metalanguage. A relative-identity theorist cannot accept a consistency proof that presupposes the very notion she rejects.
+\end{objection}
+
+\begin{reply}
+The relative-identity theorist rejects absolute identity as the correct analysis of the sameness relations of ordinary and theological discourse. She has no reason to reject the mathematics in which structures are described, and consistency is a mathematical property. Moreover, by Remark~\ref{r:abs}, she need not reject absolute identity at all: the doctrine is consistent in logics that contain it, provided that they admit relativity. The proof presupposes classical mathematics, as every consistency proof does.
+\end{reply}
+
+\begin{objection}
+\enquote{Any logic extending Geach's system} should mean any logic whatever that contains $\mathsf{G}$, including logics with existential and disjunctive principles. On that reading, the theorem is false: add the negation of the doctrine to $\mathsf{G}$.
+\end{objection}
+
+\begin{reply}
+The negation of the doctrine is not a principle of logic: it contains the constants \enquote{God}, \enquote{person} and three names, and a logic is topic-neutral. The objection becomes serious only when the added principle is topic-neutral, as (AM2) is. We have argued that topic-neutral counting principles with disjunctive consequents are substantive claims about how many things of one sort can fall under one thing of another sort, and Proposition~\ref{p:horn} shows that this is where the line must be drawn if the doctrine is to be consistent in any extension of $\mathsf{G}$ at all. The line is principled: it is the line between the laws governing sameness and claims about cardinalities, and every principle proposed in the literature as a law of relative identity falls on the logical side of it.
+\end{reply}
+
+\begin{objection}[Cartwright]
+Relative identity cannot explain counting. To say that there is exactly one God is to say that there is a God and that any God is identical to it; replacing \enquote{identical} by \enquote{the same God as} changes the subject.
+\end{objection}
+
+\begin{reply}
+Counting $F$s requires an equivalence relation on $F$s; the number of $F$s is the number of its classes. Counting by absolute identity is the special case in which the relation is identity. \citet{Cartwright1987} assumed that counting $F$s always uses absolute identity; the relative-identity theorist denies this for some sortals, and LOG-12-a, which defends absolute identity, agrees that counting is sortal-relative. Given that counting is by an equivalence relation, (T5) says that there is exactly one God, and (T6) together with (T4) says that there are exactly three persons, in the only sense of \enquote{exactly} that the relative-identity reading admits.
+\end{reply}
+
+\begin{objection}
+The model of Theorem~\ref{t:main} is built from any witness of relativity, for instance Geach's official and two men. A model of the doctrine built from two men and an office cannot represent the Trinity.
+\end{objection}
+
+\begin{reply}
+A model represents nothing; it shows that a set of sentences can be jointly true. The objection would have force against a claim that the doctrine is intelligible on the analogy of the official, and we make no such claim. Gregory of Nyssa's and Augustine's warnings against reading the divine case from created analogues are consistent with a proof that the sentences of the doctrine are consistent, since consistency is a property of sentences and is shown by any structure whatever.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/REL/REL_13.lean} defines relative-identity structures (Definition~\ref{d:struct}), the Horn language and its semantics (Definitions~\ref{d:horn} and~\ref{d:logic}), Geach's system (Definition~\ref{d:geach}), interpretations and the Trinitarian claims (Definitions~\ref{d:interp} and~\ref{d:trin}) and relativity (Definition~\ref{d:relativity}). Since the result is a consistency proof, the module contains no axioms: every result is a theorem about structures. It proves Theorem~\ref{t:explicit} by constructing the explicit model, Lemmas~\ref{l:square} and~\ref{l:sub}, Theorem~\ref{t:main}, Corollary~\ref{c:iff}, Proposition~\ref{p:subst} and Proposition~\ref{p:horn}. The main theorem is stated as follows; the hypotheses \texttt{hG}, \texttt{hM} and \texttt{hR} say that $L$ contains $\mathsf{G}$ and has a model witnessing relativity (Definition~\ref{d:rilogic}).
+
+\begin{lstlisting}
+theorem consistency (L : Horn → Prop) (hG : ∀ c, G c → L c)
+    (M : RIStructure) (hM : Models M L) (hR : Relativity M) :
+    ∃ (N : RIStructure) (I : Interp N), Models N L ∧ Trinity N I
+
+'Philosophy.REL_13.explicit_model' depends on axioms: [propext]
+'Philosophy.REL_13.consistency' depends on axioms: [propext]
+'Philosophy.REL_13.consistency_iff' depends on axioms: [propext]
+'Philosophy.REL_13.god_not_substitutive' does not depend on any
+  axioms
+'Philosophy.REL_13.horn_essential' depends on axioms: [propext]
+\end{lstlisting}
+
+The only axiom used is \texttt{propext}, the principle of propositional extensionality built into Lean's logic, which the proof automation invokes when it rewrites with equivalences. No philosophical premise is assumed: the premises of the doctrine and of the logic appear as hypotheses or as definitions, and the theorems state that structures satisfying them exist.
+
+\section{Conclusion}
+
+Read with relative identity, the doctrine of the Trinity is consistent in every logic of relative identity extending Geach's system, where such a logic is a set of Horn principles that contains Geach's equivalence principles and admits at least one case of relativity. An explicit three-element model satisfies the doctrine and Geach's system; any model witnessing relativity yields, by squaring and restriction, a model of the doctrine that satisfies every Horn principle the original model satisfies; and admitting relativity is also necessary. In every such model \enquote{the same God} fails substitutivity for \enquote{is the same person as the Father}, which is where the relative-identity theorist locates the mystery of the doctrine, and a non-Horn counting principle can exclude the doctrine only because it is, in effect, its denial.
+
+\begin{thebibliography}{99}\small
+\bibitem[Anscombe and Geach(1961)]{AnscombeGeach1961} Anscombe, G.~E.~M. and Geach, P.~T. (1961). \emph{Three Philosophers}. Basil Blackwell.
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Brower and Rea(2005)]{BrowerRea2005} Brower, J.~E. and Rea, M.~C. (2005). Material constitution and the Trinity. \emph{Faith and Philosophy}, 22(1), 57--76.
+\bibitem[Cain(1989)]{Cain1989} Cain, J. (1989). The doctrine of the Trinity and the logic of relative identity. \emph{Religious Studies}, 25(2), 141--152.
+\bibitem[Cartwright(1987)]{Cartwright1987} Cartwright, R. (1987). On the logical problem of the Trinity. In \emph{Philosophical Essays}, MIT Press.
+\bibitem[Geach(1962)]{Geach1962} Geach, P.~T. (1962). \emph{Reference and Generality}. Cornell University Press.
+\bibitem[Geach(1967)]{Geach1967} Geach, P.~T. (1967). Identity. \emph{The Review of Metaphysics}, 21(1), 3--12.
+\bibitem[Hasker(2013)]{Hasker2013} Hasker, W. (2013). \emph{Metaphysics and the Tri-Personal God}. Oxford University Press.
+\bibitem[Hodges(1993)]{Hodges1993} Hodges, W. (1993). \emph{Model Theory}. Cambridge University Press.
+\bibitem[Horn(1951)]{Horn1951} Horn, A. (1951). On sentences which are true of direct unions of algebras. \emph{The Journal of Symbolic Logic}, 16(1), 14--21.
+\bibitem[Leftow(2004)]{Leftow2004} Leftow, B. (2004). A Latin Trinity. \emph{Faith and Philosophy}, 21(3), 304--333.
+\bibitem[Martinich(1978)]{Martinich1978} Martinich, A.~P. (1978). Identity and Trinity. \emph{The Journal of Religion}, 58(2), 169--181.
+\bibitem[McCall and Rea(2009)]{McCallRea2009} McCall, T. and Rea, M.~C. (eds.) (2009). \emph{Philosophical and Theological Essays on the Trinity}. Oxford University Press.
+\bibitem[McKinsey(1943)]{McKinsey1943} McKinsey, J.~C.~C. (1943). The decision problem for some classes of sentences without quantifiers. \emph{The Journal of Symbolic Logic}, 8(3), 61--76.
+\bibitem[Rea(2003)]{Rea2003} Rea, M.~C. (2003). Relative identity and the doctrine of the Trinity. \emph{Philosophia Christi}, 5(2), 431--445.
+\bibitem[Swinburne(1994)]{Swinburne1994} Swinburne, R. (1994). \emph{The Christian God}. Oxford University Press.
+\bibitem[van Inwagen(1988)]{vanInwagen1988} van Inwagen, P. (1988). And yet they are not three Gods but one God. In T.~V. Morris (ed.), \emph{Philosophy and the Christian Faith}, University of Notre Dame Press.
+\end{thebibliography}
+
+\end{document}

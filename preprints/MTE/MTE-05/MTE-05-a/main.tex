@@ -1,0 +1,237 @@
+\documentclass{situationist-preprint}
+
+\title{Companions in Guilt and the Error Theory}
+\msid{MTE-05-a}
+\msfamily{MTE-05}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_05.lean}
+\mskeywords{error theory; argument from queerness; companions in guilt; Mackie; philosophy of mathematics; objective prescriptivity; categorical reasons}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The moral error theory holds that all positive moral claims are false, because they presuppose objectively prescriptive facts and there are none. Its principal support is Mackie's argument from queerness: such facts would be utterly unlike anything else in the universe, knowable only by a special faculty, and authoritative for every agent regardless of her desires. We argue that the argument proves too much. Mathematical facts bear all three marks of queerness as Mackie states them: they are abstract and causally inert, they are not known by perception or by causal contact, and a recognized mathematical truth rationally requires belief of every rational agent independently of her desires. If queerness excluded facts, it would exclude mathematical facts, and all positive mathematical claims would be false. Since they are not, the queerness principle is false. We prove, further, that no restriction of the principle implied by the three marks fares better, and that any restriction that spares mathematics while condemning morality relies on a feature that Mackie's marks do not supply. The argument is formalized in Lean. Together with MTE-01, the result answers the question in the negative: not all moral talk is false.
+\end{abstract}
+
+\section{The problem}
+
+Is all moral talk false? \citet{Mackie1977} argued that it is. His view combines a conceptual claim with an ontological one. The conceptual claim is that ordinary moral judgments purport to state objectively prescriptive facts: facts that hold independently of anyone's desires and that nonetheless tell everyone what to do. The ontological claim is that there are no such facts. It follows that positive moral judgments, such as the judgment that torturing a child for fun is wrong, are uniformly false, in the way that positive claims about phlogiston are false. Mackie supported the ontological claim with two arguments, the argument from relativity and the argument from queerness \citep[ch.~1, \S\S 8--9]{Mackie1977}. The argument from relativity infers the absence of moral facts from the extent of moral disagreement; MTE-12 argues that moral disagreement is no deeper than disagreement in other theoretical domains that are not thought to lack facts. The present manuscript concerns the argument from queerness, which Mackie and his successors regard as the stronger.
+
+The argument has a metaphysical and an epistemological part. Metaphysically, objective values would be entities, qualities or relations of a very strange sort, utterly different from anything else in the universe. Epistemologically, if we were aware of them, it would have to be by some special faculty of moral perception or intuition, utterly different from our ordinary ways of knowing everything else. What makes them strange is their prescriptivity: an objective good would be pursued by anyone acquainted with it, not because of any contingent desire, but because the end has its \enquote{to-be-pursuedness} somehow built into it. A further difficulty concerns the relation between moral and natural features: what is the connection between the natural fact that an act is deliberate cruelty and the moral fact that it is wrong? The \enquote{because} that joins them is, Mackie thought, itself mysterious.
+
+Contemporary error theorists have refined the argument. \citet{Joyce2001} locates the queerness in categorical reasons, reasons that apply to agents irrespective of their desires and interests, and argues that such reasons cannot be vindicated. \citet{Olson2014} distinguishes four versions of the argument, concerning supervenience, knowledge, motivation and irreducible normativity, and defends only the last.
+
+The standard response is the companions in guilt strategy \citep{Lillehammer2007}: identify a domain whose facts share the features the argument condemns, and whose existence the error theorist cannot deny without unacceptable cost. \citet{Cuneo2007} argues that epistemic facts are such a companion, since epistemic reasons are categorical in the same sense as moral reasons, and the error theorist who denies them cannot claim that we have reason to believe her theory. \citet{ClarkeDoane2012} compares morality and mathematics with respect to evolutionary debunking and argues that the two stand or fall together more closely than is commonly supposed. Mackie himself anticipated a companions in guilt reply. He considered the list of non-empirical notions that Richard Price had offered in defence of moral intuition, including number, identity, substance and necessity, and replied that each of them could be given an empiricist account \citep[ch.~1, \S 9]{Mackie1977}.
+
+We argue that mathematics is a companion in guilt and that Mackie's reply fails for it. Mathematical facts bear each of the marks the argument condemns, and the empiricist account of mathematics that Mackie needed is not available. The argument from queerness therefore proves too much.
+
+\section{Framework}
+
+\begin{definition}\label{d:facts}
+Let $D$ be a domain of discourse, such as morality or mathematics.
+\begin{enumerate}[label=(\alph*)]
+\item $D$ \emph{has facts} if there are facts of the kind its positive claims presuppose: moral facts for morality, mathematical facts for mathematics.
+\item $D$ is \emph{uniformly false} if every positive atomic claim of $D$ is false.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Queerness]\label{d:queer}
+A domain $D$ is \emph{queer} if its putative facts bear three marks:
+\begin{enumerate}[label=(\alph*)]
+\item the \emph{metaphysical mark}: they are unlike anything else in the natural order, in that they are neither physical nor causally efficacious, and are not constituted by facts of the kinds studied by the empirical sciences;
+\item the \emph{epistemic mark}: if they are known, they are known by a faculty unlike ordinary perception and empirical inference, since they stand in no causal relation to those who know them;
+\item the \emph{mark of authority}: recognition of them rationally requires a response of every rational agent, independently of her desires.
+\end{enumerate}
+\end{definition}
+
+Definition~\ref{d:queer} follows Mackie's text. The metaphysical mark is the claim that objective values would be \enquote{utterly different from anything else in the universe}; the epistemic mark is the special faculty; the mark of authority is to-be-pursuedness, generalized to cover any response that a fact rationally requires, of action or of belief. We defend the generalization in Section~\ref{s:obj}. The supervenience difficulty is not a separate mark. It concerns the relation between the putative facts and the natural facts on which they depend, and it arises for every domain whose facts satisfy the metaphysical mark and supervene on natural facts; we return to it below.
+
+\begin{assumption}[Presupposition]\label{a:presup}
+If a domain does not have facts, it is uniformly false.
+\end{assumption}
+
+Assumption~\ref{a:presup} is the general form of Mackie's conceptual claim. It is the step from the absence of moral facts to the falsity of moral claims, rather than to their lacking truth value or to their expressing something other than belief. We grant it for the sake of argument, and apply it to mathematics as the error theorist applies it to morality.
+
+\begin{principle}[The queerness principle]\label{p:qp}
+No queer domain has facts.
+\end{principle}
+
+The argument from queerness is then: morality is queer; by Principle~\ref{p:qp}, it has no facts; by Assumption~\ref{a:presup}, it is uniformly false.
+
+\section{Mathematics bears the marks}\label{s:math}
+
+\begin{assumption}[Metaphysical mark]\label{a:met}
+Mathematical facts bear the metaphysical mark.
+\end{assumption}
+
+By MTH-01, numbers are abstract objects, whose existence is established by the indispensability argument \citep{Quine1948,Putnam1971,Colyvan2001}. Abstract objects are not located in space or time and do not enter into causal relations. Mathematical facts are facts about such objects. They are not physical and not causally efficacious, and they are not constituted by facts of the kinds the empirical sciences study, though the empirical sciences use them. They are as unlike anything else in the natural order as anything could be. Mackie's phrase fits them better than it fits moral facts, which, on any view, concern acts and agents within the natural order.
+
+\begin{assumption}[Epistemic mark]\label{a:epi}
+Mathematical facts bear the epistemic mark.
+\end{assumption}
+
+This is the problem of \citet{Benacerraf1973}: if knowledge requires a causal relation between knower and known, and mathematical objects are causally inert, mathematical knowledge is impossible; if it does not, we need an account of how we know what we cannot be causally related to. Mathematical knowledge is acquired by proof, by intuition about axioms and by a holistic assessment of their fruitfulness, none of which is perception or empirical inference from causal effects. MTH-02 argues that we know abstract objects through reliable belief-forming methods, and that Benacerraf's causal requirement is too strong. We agree; the point here is that the methods in question are of a kind the epistemic mark describes. They are a faculty unlike ordinary perception and empirical inference, and that is all the mark requires. MTE-08 makes the parallel claim for morality, that moral intuition is a fallible but generally reliable faculty comparable to perception under imperfect conditions. If the existence of such a faculty were evidence against the facts it is a faculty for, it would be evidence against mathematical facts as well.
+
+\begin{assumption}[Mark of authority]\label{a:auth}
+Mathematical facts bear the mark of authority.
+\end{assumption}
+
+A rational agent who recognizes that $7 + 5 = 12$ is required to believe it, and to believe what it entails about her apples, her accounts and her bridges. The requirement does not depend on her desires: an agent who would prefer that the sum be 13, because she has promised 13 apples and has only 12, is not thereby released from believing that it is 12. Nor does it depend on her interests. It applies to every rational agent, simply in virtue of her recognizing the fact. This is to-be-believedness built into the fact, in exactly the sense in which Mackie's objective good would have to-be-pursuedness built into it. The requirement is not merely hypothetical: it is not that she must believe that $7 + 5 = 12$ if she wants true beliefs. An agent indifferent to truth who recognizes the sum and does not believe it is irrational, not merely unmotivated.
+
+\begin{assumption}[Mathematics is not uniformly false]\label{a:true}
+Some positive mathematical claims are true.
+\end{assumption}
+
+Assumption~\ref{a:true} follows from MTH-01, on which numbers exist, so that claims such as \enquote{there is a prime between 10 and 20} are true. It is supported independently by MTH-16, which argues that mathematical fictionalism fails because physics cannot be nominalized. That argument is directed at the most developed attempt to treat mathematics as uniformly false, the program of \citet{Field1980}, which sought to show that physical theories can be stated without quantifying over mathematical objects, so that mathematics is conservative over physics and dispensable. If the program fails, the cost of the error theory about mathematics is the falsity of our best science.
+
+\section{The argument}\label{s:arg}
+
+\begin{proposition}[The argument proves too much]\label{p:too}
+If the queerness principle is true, mathematics is uniformly false.
+\end{proposition}
+
+\begin{proof}
+By Assumptions~\ref{a:met}, \ref{a:epi} and~\ref{a:auth}, mathematics is queer. By Principle~\ref{p:qp}, it has no facts. By Assumption~\ref{a:presup}, it is uniformly false.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+The queerness principle is false.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:too}, the principle implies that mathematics is uniformly false, and by Assumption~\ref{a:true} mathematics is not uniformly false.
+\end{proof}
+
+\begin{corollary}\label{c:unsound}
+The argument from queerness is unsound: its premises, the queerness principle and the queerness of morality, are not both true.
+\end{corollary}
+
+\begin{proof}
+Its first premise is false by Theorem~\ref{t:main}.
+\end{proof}
+
+The error theorist may try to repair the argument by weakening the principle: perhaps not every queer domain lacks facts, but every domain that satisfies some related condition $R$ does. The next two results constrain the repair.
+
+\begin{corollary}\label{c:weaker}
+Let $R$ be any condition on domains that every queer domain satisfies. Then the principle that no domain satisfying $R$ has facts is false.
+\end{corollary}
+
+\begin{proof}
+Mathematics is queer, so it satisfies $R$. If no domain satisfying $R$ had facts, mathematics would have none, and by Assumption~\ref{a:presup} would be uniformly false, contrary to Assumption~\ref{a:true}.
+\end{proof}
+
+\begin{proposition}\label{p:restrict}
+Let $R$ be a condition that morality satisfies and mathematics does not. Then $R$ is not implied by the three marks of queerness.
+\end{proposition}
+
+\begin{proof}
+If the three marks implied $R$, mathematics, which bears them, would satisfy $R$.
+\end{proof}
+
+Corollary~\ref{c:weaker} excludes repairs that weaken the condition. Proposition~\ref{p:restrict} shows that a successful repair must strengthen it with a feature that mathematics lacks and that the three marks do not supply. Such a repair is not a version of the argument from queerness. It is a new argument, which must identify the new feature and show that it, rather than queerness, excludes facts. We consider the candidates in Section~\ref{s:obj}.
+
+The supervenience difficulty, which we set aside in Section~2, receives the same treatment. Mathematical facts are related to natural facts in ways that are equally hard to articulate: that there are two apples on the table and three in the bowl, and five in all, is a natural fact, and its relation to the fact that $2 + 3 = 5$ is no more transparent than the relation between the fact that an act is deliberate cruelty and the fact that it is wrong. The application of mathematics to the world is a long-standing problem in the philosophy of mathematics; it is not taken to show that there are no mathematical facts.
+
+\section{Is all moral talk false?}
+
+Theorem~\ref{t:main} removes the error theory's principal support. It does not by itself show that some moral claims are true: a theory can be true though the main argument for it fails. But the question has a negative answer when Theorem~\ref{t:main} is combined with MTE-01, which argues that moral facts are natural facts about idealized reactions and that some of them obtain. Two features of that account bear on the present argument.
+
+First, on MTE-01 morality does not bear the metaphysical mark. Moral facts are constituted by counterfactual facts about the psychology of agents, which the empirical sciences study. The argument from queerness therefore fails twice on that account: its general premise is false by Theorem~\ref{t:main}, and its particular premise, that morality is queer, is false as well. The companions in guilt argument does not depend on naturalism. It shows that the argument fails even for the non-naturalist, whose moral facts bear all three marks: the non-naturalist is in no worse position than the mathematical platonist.
+
+Second, MTE-01 explains the mark of authority without positing anything queer. On that account, a rational agent who believes that an act would be disapproved by her own fully informed, imaginatively engaged, error-free and impartial counterpart is disposed, insofar as she is rational, not to perform it, because she treats her corrected judgment as authoritative. This is the internalism for rational agents defended in MTE-07. The authority of moral facts is, on this account, the authority that any rational agent accords to her own corrected judgment, and the authority of mathematical facts over belief has the same source. Neither requires a fact with motivation built into it.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Practical authority]
+The queerness of moral facts lies in their practical authority, their being reasons for action that apply regardless of desire \citep{Joyce2001,Olson2014}. Mathematical facts have no practical authority. They require belief, not action, and the authority of theoretical reasons is not in question.
+\end{objection}
+
+\begin{reply}
+Mackie's argument, as he stated it, concerned the necessary connection between recognizing a fact and responding to it, independently of desire. Nothing in the argument depends on whether the response is belief or action: to-be-believedness built into a fact is as much a departure from the Humean picture as to-be-pursuedness. If the error theorist restricts the mark of authority to practical responses, Proposition~\ref{p:restrict} applies: she has added a feature, practicality, that the three marks do not supply, and she owes an argument that practical categorical requirement, unlike theoretical categorical requirement, excludes facts. The only such argument on offer is the argument from motivation: that a moral fact would have to motivate by itself, while, on the Humean theory, only desires motivate. That is a different argument, and its premise is rejected by MTE-07, on which moral judgment motivates rational agents in virtue of their rationality, not in virtue of a motivating power in the fact. The restricted argument also faces the companion of \citet{Cuneo2007}: practical rationality includes instrumental requirements, such as the requirement to take the means to one's ends, which apply to agents whatever their desires about being rational. If categorical practical authority is queer, so is instrumental rationality.
+\end{reply}
+
+\begin{objection}[Empiricist accounts]
+Mackie replied to Price that number and the other non-empirical notions admit empiricist accounts. If mathematics is construed empirically, it does not bear the metaphysical or epistemic mark, and is no companion.
+\end{objection}
+
+\begin{reply}
+The empiricist accounts of mathematics available in 1977 were of two kinds. Mill's account, on which arithmetic consists of very general empirical laws, cannot explain the necessity of arithmetic or the fact that no observation would lead us to revise it. Nominalist accounts, on which mathematics is false but useful, were given their best form by \citet{Field1980}, and their success depends on the nominalization of physics. MTH-16 argues that physics cannot be nominalized, and MTH-01 that the indispensability argument establishes the existence of numbers. If those arguments are sound, Mackie's reply is unavailable. If they are not, and mathematics is uniformly false, then the error theory about morality is in respectable company, and the argument from queerness has the consequence that mathematics is false, which is the consequence we say it has.
+\end{reply}
+
+\begin{objection}[Indispensability]
+Mathematics, unlike morality, is indispensable to our best science, and this gives us reason to believe in mathematical facts that we lack in the moral case. The two domains are not on a par.
+\end{objection}
+
+\begin{reply}
+The objection concedes Theorem~\ref{t:main}. It grants that mathematical facts bear the marks of queerness and exist, and so that queerness does not exclude facts; it then offers a different argument against moral facts, that we lack evidence for them. That argument is Harman's challenge, not Mackie's, and it is answered by showing that moral facts figure in explanations \citep{Sturgeon1985} or that moral judgment is deliberatively indispensable \citep{Enoch2011}. MTE-01 gives an answer of the first kind. Whatever the merits of the challenge, the argument from queerness, which was meant to show that moral facts are not merely unevidenced but metaphysically objectionable, has been abandoned.
+\end{reply}
+
+\begin{objection}[Biting the bullet]
+The error theorist can accept Proposition~\ref{p:too} and become an error theorist about mathematics as well.
+\end{objection}
+
+\begin{reply}
+She can, but at a price that exceeds any support the argument gives her. The queerness principle is a general philosophical claim, supported by an impression of strangeness. The claim that there is a prime between 10 and 20 is among the most certain claims we make. An argument whose premise has the first status and whose conclusion contradicts the second is a reductio of the premise. The point is the one that G.~E. Moore made about scepticism, applied to a principle rather than to a perception: we are more certain that the conclusion is false than that the premise is true. An error theorist who accepts mathematical error theory must, in addition, explain the success of mathematical physics on the hypothesis that its mathematics is false, which is the task MTH-16 argues cannot be completed.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that non-naturalist realism is true, or that moral facts bear the three marks. It establishes that, if they do, this is no reason to deny them. It does not refute every form of the error theory: an error theory supported by an argument other than queerness, for instance by the argument from relativity, must be assessed on its own terms, and MTE-12 does so. And it does not establish that the conceptual claim of the error theory is false, that is, that moral claims do not presuppose objective prescriptivity. We granted that claim, as Assumption~\ref{a:presup} applied to morality, for the sake of argument. On MTE-01, the presupposition is satisfied, since there are attitude-independent moral facts that bear on what rational agents do.
+
+\section{Formalization}
+
+The argument of Section~\ref{s:arg} is formalized in \nolinkurl{Philosophy/MTE/MTE_05.lean}. Domains, the three marks, having facts and uniform falsity are primitives. Queerness is defined as the conjunction of the three marks (Definition~\ref{d:queer}), and the queerness principle is a defined proposition (Principle~\ref{p:qp}). Assumption~\ref{a:presup} and the four assumptions about mathematics are axioms.
+
+\begin{lstlisting}
+def Queer (d : Domain) : Prop :=
+  Unlike d ∧ SpecialAccess d ∧ Authority d
+
+def P1 : Prop := ∀ d, Queer d → ¬ HasFacts d
+
+theorem p1_false : ¬ P1
+
+theorem no_weaker_principle (R : Domain → Prop)
+    (hR : ∀ d, Queer d → R d) :
+    ¬ (∀ d, R d → ¬ HasFacts d)
+\end{lstlisting}
+
+The checker reports the same axioms for both theorems, except that \texttt{p1\_false} also lists \texttt{AllFalse}:
+
+\begin{lstlisting}
+'Philosophy.MTE_05.p1_false' depends on axioms:
+ [Philosophy.MTE_05.AllFalse, Philosophy.MTE_05.Authority,
+  Philosophy.MTE_05.Domain, Philosophy.MTE_05.HasFacts,
+  Philosophy.MTE_05.SpecialAccess, Philosophy.MTE_05.Unlike,
+  Philosophy.MTE_05.assumption_2_3,
+  Philosophy.MTE_05.assumption_3_1,
+  Philosophy.MTE_05.assumption_3_2,
+  Philosophy.MTE_05.assumption_3_3,
+  Philosophy.MTE_05.assumption_3_4,
+  Philosophy.MTE_05.mathematics]
+\end{lstlisting}
+
+The first six axioms declare the primitives. The axiom \texttt{assumption\_2\_3} is Assumption~\ref{a:presup}, and \texttt{assumption\_3\_1} to \texttt{assumption\_3\_4} are Assumptions~\ref{a:met} to~\ref{a:true}. No axiom concerns morality: the refutation of the principle uses only facts about mathematics, which is the sense in which the argument proves too much. The module also proves Proposition~\ref{p:too}, Corollary~\ref{c:unsound} and Proposition~\ref{p:restrict}.
+
+\section{Conclusion}
+
+Mackie's argument from queerness condemns facts that are unlike anything in the natural order, known by a special faculty, and authoritative for every rational agent regardless of desire. Mathematical facts are all three. If the argument were sound, mathematics would be false; since it is not, the argument is unsound, and no weakening of its principle repairs it. The error theory thereby loses its principal support, and, given the realism of MTE-01, the answer to the question whether all moral talk is false is that it is not.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1973)]{Benacerraf1973} Benacerraf, P. (1973). Mathematical truth. \emph{The Journal of Philosophy}, 70(19), 661--679.
+\bibitem[Clarke-Doane(2012)]{ClarkeDoane2012} Clarke-Doane, J. (2012). Morality and mathematics: The evolutionary challenge. \emph{Ethics}, 122(2), 313--340.
+\bibitem[Colyvan(2001)]{Colyvan2001} Colyvan, M. (2001). \emph{The Indispensability of Mathematics}. Oxford University Press.
+\bibitem[Cuneo(2007)]{Cuneo2007} Cuneo, T. (2007). \emph{The Normative Web: An Argument for Moral Realism}. Oxford University Press.
+\bibitem[Enoch(2011)]{Enoch2011} Enoch, D. (2011). \emph{Taking Morality Seriously: A Defense of Robust Realism}. Oxford University Press.
+\bibitem[Field(1980)]{Field1980} Field, H. (1980). \emph{Science Without Numbers: A Defence of Nominalism}. Princeton University Press.
+\bibitem[Joyce(2001)]{Joyce2001} Joyce, R. (2001). \emph{The Myth of Morality}. Cambridge University Press.
+\bibitem[Lillehammer(2007)]{Lillehammer2007} Lillehammer, H. (2007). \emph{Companions in Guilt: Arguments for Ethical Objectivity}. Palgrave Macmillan.
+\bibitem[Mackie(1977)]{Mackie1977} Mackie, J.~L. (1977). \emph{Ethics: Inventing Right and Wrong}. Penguin.
+\bibitem[Olson(2014)]{Olson2014} Olson, J. (2014). \emph{Moral Error Theory: History, Critique, Defence}. Oxford University Press.
+\bibitem[Putnam(1971)]{Putnam1971} Putnam, H. (1971). \emph{Philosophy of Logic}. Harper \& Row.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V.~O. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Sturgeon(1985)]{Sturgeon1985} Sturgeon, N.~L. (1985). Moral explanations. In D. Copp and D. Zimmerman (eds.), \emph{Morality, Reason and Truth}, 49--78. Rowman \& Allanheld.
+\end{thebibliography}
+
+\end{document}

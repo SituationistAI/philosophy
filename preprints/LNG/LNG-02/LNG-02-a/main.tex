@@ -1,0 +1,281 @@
+\documentclass{situationist-preprint}
+
+\title{Causal Reference With Descriptive Backup}
+\msid{LNG-02-a}
+\msfamily{LNG-02}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_02.lean}
+\mskeywords{proper names; reference; causal theory; descriptivism; Madagascar; Kripke; Evans; qua problem}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+How do proper names refer? Descriptivism holds that a name refers to whatever satisfies the descriptions its users associate with it; the causal theory holds that it refers to the object at the origin of a chain of reference-preserving uses. Kripke's cases refute descriptivism, and Evans's Madagascar case refutes the pure causal theory: the name now refers to the island, although the chain of its use leads back to a part of the African mainland. We argue that names refer causally, with a descriptive component that takes over when the causal component fails to determine a referent, either because the chain is broken or because its grounding does not single out one object. We prove that this hybrid rule is the only rule that selects between the two components according to which of them determines an object and that gives the verdicts of the G\"odel, Feynman and Madagascar cases, and that reference is preserved along any stretch of intact links. The account generalizes: for natural kind terms with successful groundings the causal component does the work, while for moral terms it fails and the role their theory assigns fixes reference. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+A proper name such as \enquote{Aristotle} or \enquote{Madagascar} is used by millions of speakers, most of whom know little about its bearer, and some of whom believe falsehoods about it. Yet their uses refer, and refer to the same thing. The question of how names refer is the question of what makes it the case that a use of a name refers to one object rather than another, or to none.
+
+Two answers have dominated the debate. On the \emph{descriptivist} answer, a speaker associates with a name a description, or a cluster of descriptions, and the name refers to whatever uniquely satisfies it, or satisfies enough of the cluster \citep{Frege1892,Russell1905,Searle1958}. On the \emph{causal} answer, a name is introduced in a grounding, an act of naming in the presence of the object or under a description that picks it out, and is passed from speaker to speaker by uses each of which is intended to refer to what the speaker's source referred to; a use refers to the object at the origin of the chain \citep{Kripke1980,Donnellan1970,Devitt1981}.
+
+Each answer has a decisive counterexample. Against descriptivism, \citet{Kripke1980} showed that a speaker may refer with a name while associating with it only descriptions that fit someone else, or that fit no one in particular. Against the pure causal theory, \citet{Evans1973} showed that a name can come to refer to something other than the object at the origin of its chain. Our thesis is that the two answers describe two components of a single mechanism. Names refer causally; but the causal component can fail, and when it does, a descriptive component takes over. The thesis is not the vague claim that reference involves both causes and descriptions, which every party accepts in some form. It is a claim about priority and about the conditions under which the priority is reversed: the causal component determines the referent whenever it determines one at all, and the descriptive component determines it only when the causal component does not.
+
+Section~2 recounts the history of the debate, with the case that defeated each proposal. Section~3 sets out the framework. Section~4 proves that the hybrid rule is the only rule of a natural class that respects the three cases on which the debate has turned, and that it propagates reference along chains as it should. Section~5 analyses further cases, Section~6 extends the account to kind terms and moral terms, Section~7 discusses the recent literature, and Section~8 answers objections. Section~10 describes the formalization.
+
+\section{A history of the debate}
+
+\subsection{Mill, Frege and Russell}
+
+\citet[I.ii.5]{Mill1843} held that proper names denote without connoting any attribute of their bearers. Frege's puzzle tells against the view taken alone: \enquote{Hesperus is Phosphorus} is informative and was an astronomical discovery, while \enquote{Hesperus is Hesperus} is trivial \citep{Frege1892}. Frege concluded that a name has a sense, a mode of presentation that determines its reference. Russell reached a similar conclusion by a different route: ordinary proper names are disguised definite descriptions \citep{Russell1905}. On both views, what a speaker has in mind settles what the name refers to.
+
+\subsection{The cluster theory}
+
+The descriptivism of Frege and Russell faced an immediate difficulty: different speakers associate different descriptions with the same name, and a single speaker would not withdraw the name if any one of them turned out to be false. \citet{Searle1958} and \citet{Strawson1959} replied with the cluster theory: a name is associated with a cluster of descriptions, and it refers to the object that satisfies a sufficient number, or a weighted majority, of them. No single description is necessary, which explained the tolerance of names for error.
+
+\subsection{Kripke and Donnellan}
+
+\citet{Kripke1980} brought three arguments against descriptivism in all its forms. The \emph{modal} argument: \enquote{Aristotle} is a rigid designator, referring to the same man in every possible world in which he exists, whereas \enquote{the teacher of Alexander} is not; so the name does not mean what the description means. The modal argument tells against descriptivism as a theory of the meaning of names, but not against it as a theory of how their reference is fixed, since a description can fix the reference of a rigid name \citep[Lecture~I]{Kripke1980}. The other two arguments tell against both. The \emph{epistemic} argument: if \enquote{G\"odel} meant \enquote{the man who proved the incompleteness of arithmetic}, it would be knowable a priori that G\"odel proved incompleteness, which it is not. The \emph{semantic} argument consists of cases. In the most famous, the incompleteness theorem was in fact proved by an obscure Viennese named Schmidt, whose manuscript G\"odel obtained and published as his own. A speaker whose only description of G\"odel is \enquote{the prover of incompleteness} still refers to G\"odel, the fraud, not to Schmidt. In the case of Feynman, an ordinary speaker who knows only that he was a physicist, a description that singles out no one, still refers to Feynman. In the case of Peano, speakers who credit him with the axioms of arithmetic, which are due to Dedekind, still refer to Peano.
+
+\citet{Donnellan1970} reached the same conclusion independently, with cases of the same structure, and proposed that the referent of a use of a name is the object that figures in the historical explanation of the use. Kripke offered a \enquote{picture} rather than a theory: a name is introduced in an initial baptism, by ostension or by a reference-fixing description, and passed on by speakers who intend to use it with the same reference as those from whom they learned it.
+
+\subsection{Evans and the Madagascar case}
+
+\citet{Evans1973} accepted Kripke's cases against descriptivism and produced one against the causal picture. \enquote{Madagascar}, as Evans reports the history, was a name used by local speakers for a portion of the African mainland. Marco Polo, misunderstanding his sources, took it to be the name of the large island off the coast, and wrote of it as such. His usage spread, and \enquote{Madagascar} now names the island. On the causal picture, each later use was intended to refer to what the speaker's source referred to; the chain leads back through Polo to the mainland; so the name should still refer to the mainland. It does not. Evans concluded that the causal picture neglects the role of the body of information speakers associate with a name, and proposed that a name refers to the dominant causal source of that information. The proposal combines a causal relation, being the source, with something descriptive, the information, and it is the ancestor of the view we defend.
+
+\subsection{Grounding and the qua problem}
+
+\citet{Devitt1981} developed the causal theory into a theory of designating-chains, with groundings in perception and reference borrowing along communication. \citet{DevittSterelny1987} identified a difficulty at the grounding itself, the \emph{qua problem}. A grounding by ostension puts the name in causal contact with an object; but in pointing at a cat, one is in causal contact with the cat, its front half, its surface, the stage of the cat, and the feline kind. What makes the name a name of the cat? Devitt and Sterelny concluded that a grounder must associate with the name a sortal, a general term under which the object is picked out, and that a pure causal theory of grounding is impossible. The descriptive element enters at the beginning of the chain, as Evans had shown it enters in the middle.
+
+\subsection{Causal descriptivism}
+
+Descriptivists replied by absorbing the causal theory. \citet{Kroon1987} and \citet{Jackson1998} proposed that the description associated with a name is itself causal: a speaker who uses \enquote{G\"odel} associates with it the description \enquote{the person who stands at the origin of the chain of uses of \enquote{G\"odel} that led to my use}. This description is satisfied by G\"odel, not by Schmidt, so Kripke's cases are accommodated. \citet{Lewis1984} gave a related view in the course of answering Putnam's model-theoretic argument. Kripke had anticipated the move and objected that it is circular, since the description mentions the reference of the name it is supposed to determine \citep[Lecture~II]{Kripke1980}. Whatever the force of the circularity charge, causal descriptivism agrees with the causal theory on every case where the chain is intact, and therefore gives the wrong verdict on Madagascar for the same reason: the origin of the chain is the mainland.
+
+\section{Framework}
+
+\begin{definition}\label{d:practice}
+A \emph{naming practice} is the use of a name in a community, structured as a set of chains. Each chain begins with a \emph{grounding}, an episode in which the name is introduced in perceptual contact with an object, or under a description that applies to it, together with a sortal under which it is picked out; and continues by \emph{links}, episodes in which a speaker acquires the name from another speaker's use.
+\end{definition}
+
+\begin{definition}\label{d:link}
+A link is \emph{reference-preserving} if the acquiring speaker's subsequent uses are governed by the intention to refer to what the source's use referred to, and are not sustained predominantly by information whose dominant causal source is some other object. A chain is \emph{intact} if all its links are reference-preserving.
+\end{definition}
+
+The second clause of Definition~\ref{d:link} is the lesson of Evans's case. An intention to defer to one's source is necessary for preservation but not sufficient. What breaks Marco Polo's link is not that he lacked the intention to use the name as his sources did; he presumably had it. It is that his uses, and those of the readers who learned the name from him, were sustained by information about the island: the descriptions he gave, the reports of later travellers, the maps. The deferential intention was then idle, and the use was anchored to a different object.
+
+\begin{definition}\label{d:causal}
+The \emph{causal component} of a practice \emph{determines} an object $o$ if (a) the practice's chains are intact, (b) their groundings pick out $o$ and nothing else, given the sortals the grounders associate with the name, and (c) all chains lead back to groundings of the same object. Otherwise the causal component fails to determine a referent: it \emph{breaks} if (a) fails, and it is \emph{indeterminate} if (b) or (c) fails.
+\end{definition}
+
+\begin{definition}\label{d:desc}
+The \emph{descriptive component} of a practice is the body of information that its users predominantly associate with the name: the descriptions they would offer, and, for a theoretical or evaluative term, the role the relevant theory assigns to the referent. It \emph{determines} an object if exactly one object satisfies it, or satisfies it best by a clear margin.
+\end{definition}
+
+\begin{definition}\label{d:hybrid}
+The \emph{hybrid rule}: a name used in a practice refers to the object its causal component determines, if there is one; otherwise to the object its descriptive component determines, if there is one; otherwise to nothing.
+\end{definition}
+
+The rule is a rule of reference-fixing, not a theory of meaning. A name whose reference is fixed by its descriptive component is still a rigid designator; the description fixes which object the name designates in every world, as \enquote{the cause of the perturbations in the orbit of Uranus} fixed the reference of \enquote{Neptune} without becoming its meaning.
+
+We now state the conditions any rule of reference for names must meet.
+
+\begin{principle}[Selection]\label{p:select}
+The referent of a name in a practice, if any, is either the object its causal component determines or the object its descriptive component determines.
+\end{principle}
+
+\begin{principle}[Invariance]\label{p:invariance}
+Which of the two components a rule follows in a practice depends only on which of them determines an object, not on which objects they determine.
+\end{principle}
+
+\begin{principle}[Cases]\label{p:cases}
+In the G\"odel case, where the causal component determines G\"odel and the descriptive component determines Schmidt, the name refers to G\"odel. In the Feynman case, where the causal component determines Feynman and the descriptive component determines nothing, the name refers to Feynman. In the Madagascar case, where the causal component breaks and the descriptive component determines the island, the name refers to the island.
+\end{principle}
+
+\begin{assumption}\label{a:distinct}
+G\"odel is not Schmidt.
+\end{assumption}
+
+Principle~\ref{p:select} says that there is no third source of reference for names. It excludes, for instance, the view that a name refers to whatever its users would accept as its referent on reflection, unless that is analysed in terms of one of the two components. Principle~\ref{p:invariance} says that the rule is general: it does not favor particular objects, and it does not consult the content of the information beyond whether it singles something out. It would be violated by a rule that followed the causal component for persons and the descriptive component for places, a rule we know of no one defending. Principle~\ref{p:cases} records the data. Assumption~\ref{a:distinct} is needed because, if G\"odel and Schmidt were the same man, the G\"odel case would not discriminate between the components.
+
+\section{The argument}
+
+We write a rule as a function assigning to each practice a referent or none. By Principles~\ref{p:select} and~\ref{p:invariance}, such a rule is given by a selector, which, for each of the four combinations of whether the causal component determines an object and whether the descriptive component does, says which component the rule follows.
+
+\begin{lemma}\label{l:goedel}
+A rule satisfying Principles~\ref{p:select}--\ref{p:cases} follows the causal component when both components determine an object.
+\end{lemma}
+
+\begin{proof}
+In the G\"odel case both components determine an object. If the rule followed the descriptive component there, the name would refer to Schmidt; by Principle~\ref{p:cases} it refers to G\"odel, and by Assumption~\ref{a:distinct} G\"odel is not Schmidt. So the rule follows the causal component in the G\"odel case, and by Principle~\ref{p:invariance} in every case in which both components determine an object.
+\end{proof}
+
+\begin{lemma}\label{l:feynman}
+A rule satisfying Principles~\ref{p:select}--\ref{p:cases} follows the causal component when only the causal component determines an object.
+\end{lemma}
+
+\begin{proof}
+In the Feynman case only the causal component determines an object. If the rule followed the descriptive component, the name would refer to nothing; by Principle~\ref{p:cases} it refers to Feynman. Principle~\ref{p:invariance} generalizes the verdict.
+\end{proof}
+
+\begin{lemma}\label{l:madagascar}
+A rule satisfying Principles~\ref{p:select}--\ref{p:cases} follows the descriptive component when only the descriptive component determines an object.
+\end{lemma}
+
+\begin{proof}
+In the Madagascar case the causal component breaks and the descriptive component determines the island. Following the causal component would leave the name without a referent; by Principle~\ref{p:cases} it refers to the island. Principle~\ref{p:invariance} generalizes the verdict.
+\end{proof}
+
+\begin{theorem}\label{t:unique}
+Every rule satisfying Principles~\ref{p:select}--\ref{p:cases}, given Assumption~\ref{a:distinct}, assigns to every naming practice the referent that the hybrid rule assigns.
+\end{theorem}
+
+\begin{proof}
+Take any practice. If both components determine an object, the rule follows the causal component by Lemma~\ref{l:goedel}, as the hybrid rule does. If only the causal component does, the rule follows it by Lemma~\ref{l:feynman}, as the hybrid rule does. If only the descriptive component does, the rule follows it by Lemma~\ref{l:madagascar}, as the hybrid rule does. If neither does, the rule assigns nothing, whichever component it follows, and so does the hybrid rule.
+\end{proof}
+
+\begin{proposition}\label{p:adequate}
+The hybrid rule satisfies Principles~\ref{p:select}--\ref{p:cases}.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{d:hybrid}, the hybrid rule follows the causal component when it determines an object and the descriptive component otherwise; this satisfies Principle~\ref{p:select}, and depends only on whether the causal component determines an object, which satisfies Principle~\ref{p:invariance}. It gives G\"odel in the G\"odel case, Feynman in the Feynman case and the island in the Madagascar case.
+\end{proof}
+
+Theorem~\ref{t:unique} and Proposition~\ref{p:adequate} together say that the conditions are consistent and determine a unique rule. Each case is needed: without the G\"odel case, descriptivism with a causal backup would survive; without the Madagascar case, the pure causal theory would; without the Feynman case, so would a rule that ignores a causal component unaccompanied by identifying descriptions.
+
+The remaining results concern how reference behaves along a chain. Index the uses along a chain by stages $0, 1, 2, \dots$, and say that the link at stage $i$ is the acquisition of the name at stage $i+1$ from the use at stage $i$.
+
+\begin{lemma}[Transmission]\label{l:trans}
+If a reference-preserving link at stage $i$ ensures that the use at stage $i+1$ refers to what the use at stage $i$ refers to, then, for all $k$ and $n$, if every link from stage $k$ to stage $k+n$ is reference-preserving, the use at stage $k+n$ refers to what the use at stage $k$ refers to.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$. For $n=0$ there is nothing to prove. If the claim holds for $n$ and the links from $k$ to $k+n+1$ are preserving, the use at $k+n$ refers to what the use at $k$ refers to, and the preserving link at $k+n$ passes this referent to stage $k+n+1$.
+\end{proof}
+
+\begin{corollary}[After a break]\label{c:break}
+If the causal component fails at stage $k$, so that the use at $k$ refers, by its descriptive component, to an object $d$, and every later link is reference-preserving, then every later use refers to $d$.
+\end{corollary}
+
+\begin{proof}
+At stage $k$ the hybrid rule assigns $d$. By Lemma~\ref{l:trans}, every later stage inherits it.
+\end{proof}
+
+Corollary~\ref{c:break} is what makes the hybrid rule a causal theory with a backup, rather than a theory that alternates. Once a break has occurred and the descriptive component has supplied a referent, later speakers acquire the name by ordinary reference-preserving links, and the referent they inherit is the one fixed at the break. The present-day schoolchild who learns \enquote{Madagascar} from an atlas refers to the island causally, by a chain that is intact from Polo's readers onward. The descriptive component operated once, at the break; it does not operate in the schoolchild's use, and her false beliefs about the island, if she has any, do not affect what she refers to. In this sense the descriptive component \emph{takes over} at the break and then hands reference back to the causal component.
+
+\section{Cases}
+
+\subsection{Madagascar}
+
+The case is analysed at length in the companion LNG-02-b; we state the analysis the framework gives. Before Polo, the practice of the local speakers was grounded in the mainland and intact. Polo's link is not reference-preserving under Definition~\ref{d:link}: his uses were sustained by information whose dominant source was the island, which he described, located and wrote about. At the stage of Polo and his first readers, therefore, the causal component breaks. The descriptive component of their practice, the body of information about a large island off the south-eastern coast of Africa, determines the island. The hybrid rule assigns the island, and by Corollary~\ref{c:break} every later use inherits it.
+
+The break is located at a link, not at a time: the local speakers' practice was not broken, and their uses continued to refer to the mainland, so that for a period there were two practices with the same name.
+
+\subsection{G\"odel and Schmidt}
+
+The chain from G\"odel's name to current uses is intact. Ordinary speakers' information about G\"odel has its dominant causal source in G\"odel: it derives from his publications, his reputation and his biography, all of which are about him, although one item in it is false. Schmidt is the dominant source of nothing that speakers associate with \enquote{G\"odel}; he is the satisfier of a description, not the source of information. This is the difference from Madagascar. In both cases the speakers' descriptions fit an object other than the origin; but in Madagascar the information was produced by the other object, whereas in the G\"odel case it was produced by the origin and is false of it.
+
+\subsection{The qua problem}
+
+A child points at the family cat and says \enquote{Tibbles}. The causal contact is with the cat, its parts, its surfaces and the kind. Clause (b) of Definition~\ref{d:causal} requires that the grounding pick out one object given the sortal the grounder associates with the name. The child's sortal, \emph{animal} or \emph{pet}, selects the cat. Had the child no sortal at all, the grounding would fail to determine an object, and the name, if it were later used, would have its reference fixed by the descriptive component of the subsequent practice: the family's information about Tibbles, which is about the cat. The qua problem is thus an instance of indeterminacy in the sense of Definition~\ref{d:causal}, and the hybrid rule handles it by the same mechanism as Madagascar.
+
+\section{Generalization: kind terms and moral terms}
+
+Nothing in the framework is specific to proper names except the examples. Definitions~\ref{d:practice}--\ref{d:hybrid} apply to any term whose use is transmitted in a community and whose reference is grounded in contact with what it refers to. The rule then says, for any such term, that its reference is fixed causally where the causal component determines a referent, and by the descriptive component, including the role the relevant theory assigns, where it does not. Theorem~\ref{t:unique} applies with the same proof to any class of terms for which the three kinds of case arise.
+
+\paragraph{Natural kind terms.} \enquote{Water} was grounded in samples of a liquid that share an underlying nature, and its practice is intact. Its causal component determines H$_2$O, and the descriptive component, the colourless odourless liquid that fills the lakes, plays no role in fixing its reference. This is why, as LNG-08 argues, the meanings of kind terms are not in the head, and why, as MET-27-a states, kind terms refer independently of the descriptions associated with them: for any kind term with a successful grounding, the descriptive component is idle. The backup is engaged only where the grounding fails to determine a kind. \enquote{Jade} is the standard example. Its samples were of two minerals of different composition, clause (b) of Definition~\ref{d:causal} fails, and the term applies to what satisfies its descriptive component, the ornamental green stone of a certain hardness, which covers both.
+
+\paragraph{Moral terms.} For moral terms the causal component characteristically fails. There is no grounding of \enquote{wrong} in perceptual contact with a property under a sortal that excludes the alternatives, and the causal regulation of its use does not determine one property. Different communities whose use of the term plays the same role are regulated by different properties, as the Moral Twin Earth case of \citet{HorganTimmons1991} shows, and within a community the regulation is mixed with error that the community itself would correct. The regulation therefore fails clause (c) of Definition~\ref{d:causal}, and, insofar as regulation by error counts as a break, clause (a). By the hybrid rule, the reference of a moral term is then fixed by its descriptive component, which for a moral term is the role that moral inquiry assigns to its referent. This is the semantics on which MTE-01-a and MTE-13-a rely: moral terms refer by role, because causal regulation fails to determine a referent. It is not a special semantics for moral terms. It is the hybrid rule applied to a class of terms whose causal component fails systematically rather than occasionally.
+
+\section{Recent literature}
+
+\paragraph{Experimental semantics.} \citet{Machery2004} presented the G\"odel case to American and Hong Kong undergraduates and found that a substantial proportion of the latter, and a minority of the former, gave the descriptivist answer. If the case verdicts in Principle~\ref{p:cases} were intuitions about which speakers disagree, the argument would lose its data. \citet{Devitt2011} replied that the relevant evidence about reference is the usage of competent speakers rather than their intuitions about vignettes, and that the vignettes are ambiguous between the question to whom the speaker refers and the question to whom the description applies. We agree, and add a point specific to the present argument: the G\"odel verdict is required only for Lemma~\ref{l:goedel}, and the usage it records, that speakers continue to use \enquote{G\"odel} of G\"odel after learning of the fraud and say that G\"odel did not prove the theorem, is not in dispute.
+
+\section{Objections and replies}
+
+\begin{objection}[Causal descriptivism makes the backup redundant]
+If the associated description is \enquote{the origin of the chain that led to my use}, descriptivism and the causal theory coincide, and there is no separate descriptive component to take over.
+\end{objection}
+
+\begin{reply}
+Causal descriptivism coincides with the pure causal theory, not with the hybrid rule. It assigns the origin of the chain in every case, including Madagascar, where the origin is the mainland. To get the Madagascar verdict, the causal descriptivist must add a condition under which the description is not the chain-origin description but one about the island, and that addition is the backup. Causal descriptivism is therefore not an alternative to the hybrid rule but, once repaired, a restatement of it in which both components are expressed as descriptions.
+\end{reply}
+
+\begin{objection}[The break condition is ad hoc]
+Definition~\ref{d:link} counts a link as broken exactly when the theory needs it to be. Any counterexample to the causal theory can be described as a break.
+\end{objection}
+
+\begin{reply}
+The condition is independent of the verdict it is used to obtain. Whether a speaker's uses are sustained predominantly by information whose dominant causal source is a different object is a question about the history of the information, which can be settled without asking what the name refers to. It gives the G\"odel case and the Madagascar case different answers for a reason stated in Section~5: in the first, the misinformation was produced by the origin; in the second, the information was produced by a different object. A theory that counted every misdescription as a break would get the G\"odel case wrong, and one that counted none would get Madagascar wrong; the condition is located where the two cases differ.
+\end{reply}
+
+\begin{objection}[The modal argument]
+If the descriptive component sometimes fixes reference, names whose reference is so fixed are synonymous with descriptions, and Kripke's modal argument refutes this.
+\end{objection}
+
+\begin{reply}
+The descriptive component fixes reference; it does not supply meaning. The reference so fixed is the actual satisfier, and the name designates it rigidly, as \enquote{Neptune} designates Neptune in worlds where it causes no perturbations. Kripke himself distinguished reference-fixing from synonymy for exactly this purpose \citep[Lecture~I]{Kripke1980}.
+\end{reply}
+
+\begin{objection}[Moral terms]
+\citet{Boyd1988} and his followers hold that moral terms are causally regulated by a unique property. If so, the causal component succeeds for moral terms, and the generalization of Section~6 fails.
+\end{objection}
+
+\begin{reply}
+The hybrid rule does not settle by itself whether the causal component of moral terms determines a referent; Definition~\ref{d:causal} states the conditions. What settles it is the Moral Twin Earth case: two communities whose terms play the same role are regulated by different properties, and they genuinely disagree, which they could not do if regulation fixed reference \citep{HorganTimmons1991}. MTE-13-a develops the argument. Given its conclusion, clause (c) of Definition~\ref{d:causal} fails for moral terms across communities that share the role, and the rule assigns the referent determined by the role.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:unique} is conditional on the three principles. It does not show that a given chain is intact, or that a given body of information has a given dominant source; these are empirical questions about the history of a practice. It does not establish that the descriptive component of moral terms has a unique realizer, which is a separate claim argued in MTE-01-a. And it does not say how much divergence in information is needed for a break, beyond requiring that the information's dominant source be another object. The vagueness of \enquote{dominant} is the vagueness of an ordinary predicate, which on the view of LNG-12 has a sharp but unknowable boundary.
+
+\section{Formalization}
+
+The results of Section~4 are formalized in \nolinkurl{Philosophy/LNG/LNG_02.lean}. A practice is represented by what its two components deliver, an optional object each. Principles~\ref{p:select} and~\ref{p:invariance} are expressed together as the condition \lstinline{ShapeRule R}: there is a selector from the two Boolean facts, whether each component determines an object, to the source the rule follows. The case verdicts of Principle~\ref{p:cases} are hypotheses of the theorem.
+
+\begin{lstlisting}
+theorem uniqueness (R : Practice → Option Obj) (shape : ShapeRule R)
+    (hg : R goedelCase = some goedel)
+    (hf : R feynmanCase = some feynman)
+    (hm : R madagascarCase = some island) :
+    ∀ p, R p = hybrid p
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.LNG_02.uniqueness' depends on axioms: [propext,
+ Philosophy.LNG_02.Obj, Philosophy.LNG_02.feynman,
+ Philosophy.LNG_02.goedel, Philosophy.LNG_02.goedel_ne_schmidt,
+ Philosophy.LNG_02.island, Philosophy.LNG_02.schmidt]
+\end{lstlisting}
+
+\lstinline{propext} is part of Lean's core logic. \lstinline{Obj} is the type of candidate referents; \lstinline{goedel}, \lstinline{schmidt}, \lstinline{feynman} and \lstinline{island} are the objects of the three cases; \lstinline{goedel_ne_schmidt} is Assumption~\ref{a:distinct}. No other philosophical premise is used: the principles are hypotheses, so that the theorem is a conditional claim about every rule. The module also proves Proposition~\ref{p:adequate} (\lstinline{adequacy}), Lemma~\ref{l:trans} (\lstinline{transmission}, by induction on the length of the stretch) and Corollary~\ref{c:break} (\lstinline{after_break}, which depends only on \lstinline{propext}, \lstinline{Quot.sound} and \lstinline{Obj}). The definitions of intactness, grounding and dominant source are not formalized; the module takes as given what each component delivers.
+
+\section{Conclusion}
+
+Names refer causally. The object at the origin of an intact chain of reference-preserving uses, grounded under a sortal that singles it out, is the referent, whatever the speakers believe about it. When the chain breaks, as it did at Marco Polo, or its grounding fails to single out one object, the descriptive component takes over, fixes a referent, and hands it back to ordinary transmission. This is the only rule that chooses between the two components on general grounds and respects the cases of G\"odel, Feynman and Madagascar. Applied to kind terms, it explains why their reference is independent of associated descriptions; applied to moral terms, whose causal component fails, it yields the role semantics on which moral realism depends.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boyd(1988)]{Boyd1988} Boyd, R. (1988). How to be a moral realist. In G. Sayre-McCord (ed.), \emph{Essays on Moral Realism}, 181--228. Cornell University Press.
+\bibitem[Devitt(1981)]{Devitt1981} Devitt, M. (1981). \emph{Designation}. Columbia University Press.
+\bibitem[Devitt(2011)]{Devitt2011} Devitt, M. (2011). Experimental semantics. \emph{Philosophy and Phenomenological Research}, 82(2), 418--435.
+\bibitem[Devitt and Sterelny(1987)]{DevittSterelny1987} Devitt, M. and Sterelny, K. (1987). \emph{Language and Reality: An Introduction to the Philosophy of Language}. MIT Press.
+\bibitem[Donnellan(1970)]{Donnellan1970} Donnellan, K.~S. (1970). Proper names and identifying descriptions. \emph{Synthese}, 21(3/4), 335--358.
+\bibitem[Evans(1973)]{Evans1973} Evans, G. (1973). The causal theory of names. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 47, 187--208.
+\bibitem[Frege(1892)]{Frege1892} Frege, G. (1892). \"Uber Sinn und Bedeutung. \emph{Zeitschrift f\"ur Philosophie und philosophische Kritik}, 100, 25--50.
+\bibitem[Horgan and Timmons(1991)]{HorganTimmons1991} Horgan, T. and Timmons, M. (1991). New wave moral realism meets moral twin earth. \emph{Journal of Philosophical Research}, 16, 447--465.
+\bibitem[Jackson(1998)]{Jackson1998} Jackson, F. (1998). \emph{From Metaphysics to Ethics: A Defence of Conceptual Analysis}. Oxford University Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[Kroon(1987)]{Kroon1987} Kroon, F. (1987). Causal descriptivism. \emph{Australasian Journal of Philosophy}, 65(1), 1--17.
+\bibitem[Lewis(1984)]{Lewis1984} Lewis, D. (1984). Putnam's paradox. \emph{Australasian Journal of Philosophy}, 62(3), 221--236.
+\bibitem[Machery et~al.(2004)]{Machery2004} Machery, E., Mallon, R., Nichols, S. and Stich, S.~P. (2004). Semantics, cross-cultural style. \emph{Cognition}, 92(3), B1--B12.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}. John W. Parker.
+\bibitem[Russell(1905)]{Russell1905} Russell, B. (1905). On denoting. \emph{Mind}, 14(56), 479--493.
+\bibitem[Searle(1958)]{Searle1958} Searle, J.~R. (1958). Proper names. \emph{Mind}, 67(266), 166--173.
+\bibitem[Strawson(1959)]{Strawson1959} Strawson, P.~F. (1959). \emph{Individuals: An Essay in Descriptive Metaphysics}. Methuen.
+\end{thebibliography}
+
+\end{document}

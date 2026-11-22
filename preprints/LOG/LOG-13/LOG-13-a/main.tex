@@ -1,0 +1,220 @@
+\documentclass{situationist-preprint}
+
+\title{Distributivity Survives Quantum Mechanics}
+\msid{LOG-13-a}
+\msfamily{LOG-13}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_13.lean}
+\mskeywords{quantum logic; distributive law; revisability of logic; Putnam; joint probability; Bell inequalities; orthomodular lattices}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can logic be revised on empirical grounds? The most serious case for an affirmative answer is quantum logic: Putnam argued that quantum mechanics shows the distributive law to be false, as general relativity showed Euclidean geometry to be false. We argue that it shows no such thing. What quantum mechanics revises is probability theory: it denies that the probabilities of outcomes of incompatible measurements are the marginals of a single classical joint distribution. We show that the failure of distributivity in the lattice of quantum propositions is the lattice-theoretic expression of this fact, that each family of compatible propositions forms a distributive block, and that the empirical anomalies that motivated quantum logic, of which Bell-type correlations are the clearest, are failures of joint distributions, which a theory of probability with a family of classical event spaces accommodates without any change in logic. Since logic is topic-neutral, every empirical anomaly reaches it only through non-logical premises, and the principle of minimal revision directs the change there. The distributive law survives. The mathematical results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Quine1951} held that no statement is immune from revision, and offered as an example that the law of excluded middle might be revised to simplify quantum mechanics. \citet{BirkhoffVonNeumann1936} had already observed that the closed subspaces of the Hilbert space of a quantum system, which represent its experimental propositions, form a lattice in which the distributive law
+\[
+p \wedge (q \vee r) = (p \wedge q) \vee (p \wedge r)
+\]
+fails, and they proposed that this lattice be regarded as the logic of quantum mechanics. \citet{Putnam1968} turned the proposal into a thesis about logic itself. Just as general relativity showed that the geometry of physical space is not Euclidean, quantum mechanics shows that the logic of physical propositions is not classical: the distributive law is false, and once it is given up, the paradoxes of quantum mechanics, such as the two-slit experiment, dissolve. Logic, on this view, is empirical.
+
+The thesis provoked replies of three kinds. \citet{Dummett1976} argued that the quantum logician's connectives do not mean what the classical connectives mean, so that the disagreement is either verbal or must be fought over the theory of meaning; this was in effect \citeauthor{Quine1970}'s later verdict too, that a change of logic is a change of subject \citep{Quine1970}. \citet{Stairs1983} and \citet{Gibbins1987} argued that Putnam's realist quantum logic, on which every physical quantity has a definite value and the paradoxes disappear, is refuted by the theorem of \citet{KochenSpecker1967}. And \citet{Maudlin2005} and \citet{Bacciagaluppi2009} argued that quantum logic does not solve the measurement problem, which is the problem a revision of logic was supposed to remove; Putnam himself eventually abandoned the view.
+
+These replies show that Putnam's argument fails. They leave open what the phenomena that motivated it do show. We give a positive answer: quantum mechanics revises probability theory. It denies that there is a single classical probability space on which every physical quantity is a random variable, and replaces it with a family of classical spaces, one for each set of compatible quantities, glued together along their common events. This is the view of quantum mechanics as a theory of probability developed by \citet{Pitowsky2006}, and it has a corollary for logic that we draw explicitly: the failure of distributivity in the quantum lattice is the failure of joint probability, described in the language of lattices. Logic, which is topic-neutral, is untouched.
+
+\section{Framework}
+
+\begin{definition}\label{d:logic}
+\emph{Logic} is the theory of consequence: a conclusion follows from premises if every model of the premises is a model of the conclusion, where models interpret the logical constants uniformly and the non-logical vocabulary arbitrarily. Classical propositional logic is the logic of truth-functional conjunction, disjunction and negation.
+\end{definition}
+
+\begin{definition}\label{d:qprop}
+A \emph{quantum proposition} about a system is a closed subspace of its Hilbert space. The \emph{quantum meet} of two propositions is their intersection, the \emph{quantum join} the closed span of their union, and the \emph{orthocomplement} of a proposition its orthogonal complement. Two propositions are \emph{compatible} if their projections commute.
+\end{definition}
+
+\begin{assumption}[Empirical content]\label{a:content}
+The empirical content of quantum mechanics consists of the probabilities it assigns to the outcomes of measurements of compatible quantities in given states.
+\end{assumption}
+
+\begin{assumption}[Topic-neutrality]\label{a:neutral}
+An empirical theory yields predictions only from premises that are not logical truths: claims about particular quantities, their values and their probabilities. A conflict between a prediction and observation therefore involves at least one non-logical premise, and a revision of that premise is always available.
+\end{assumption}
+
+\begin{principle}[Minimal revision]\label{p:minimal}
+When observation conflicts with a body of theory, revise the least general premise whose revision accommodates the observation, other things being equal.
+\end{principle}
+
+Definition~\ref{d:logic} follows LOG-06, and the uniform interpretation of the logical constants is what makes logic topic-neutral; LOG-16 identifies the logical constants with the operations invariant under all permutations of the domain, a characterization on which no constant is specific to any subject matter. Assumption~\ref{a:content} is common ground among the interpretations of quantum mechanics: what is tested in the laboratory is the frequency with which outcomes occur. Assumption~\ref{a:neutral} is the Duhemian point, made by \citet{Quine1951} himself, that hypotheses face observation as a body; we use it in the direction Quine did not stress, that the body always contains non-logical hypotheses. \ref{p:minimal} is Quine's maxim of minimum mutilation \citep{Quine1970}. The quantum logician accepts all three. The question between us is where \ref{p:minimal} directs the revision.
+
+\section{Distributivity and its failure}
+
+\begin{theorem}\label{t:dist}
+The distributive law holds in classical propositional logic: for all propositions $p$, $q$, $r$, the conjunction of $p$ with the disjunction of $q$ and $r$ is equivalent to the disjunction of the conjunctions of $p$ with $q$ and with $r$.
+\end{theorem}
+
+\begin{proof}
+If $p$ is true and one of $q$, $r$ is true, then $p$ is true together with that one, and conversely.
+\end{proof}
+
+The failure that the quantum logician points to occurs in the simplest non-trivial case, a two-dimensional space such as the spin space of a spin-$\frac{1}{2}$ particle.
+
+\begin{definition}\label{d:mo2}
+$\mathrm{MO}_2$ is the six-element lattice whose elements are the zero subspace $0$, the whole space $1$, two rays $a$ and $b$ that are neither equal nor orthogonal, and their orthocomplements $a'$ and $b'$. Meet and join are those of Definition~\ref{d:qprop}: two distinct rays meet in $0$ and span $1$.
+\end{definition}
+
+\begin{proposition}\label{p:fail}
+Distributivity fails in $\mathrm{MO}_2$: $a \wedge (b \vee b') = a$, while $(a \wedge b) \vee (a \wedge b') = 0$.
+\end{proposition}
+
+\begin{proof}
+$b \vee b'$ is the whole space, whose meet with $a$ is $a$. $a$ is distinct from $b$ and from $b'$, so $a \wedge b = a \wedge b' = 0$.
+\end{proof}
+
+\begin{proposition}\label{p:blocks}
+Each Boolean block of $\mathrm{MO}_2$, $\{0, a, a', 1\}$ and $\{0, b, b', 1\}$, is closed under meet and join and is distributive.
+\end{proposition}
+
+\begin{proof}
+Each block is the four-element Boolean algebra; the claim is checked case by case.
+\end{proof}
+
+In physical terms, let $a$ be the proposition that the spin along the $z$-axis is up, and $b$ and $b'$ the propositions that the spin along the $x$-axis is up and down. Proposition~\ref{p:fail} says that the quantum proposition \enquote{spin-$z$ up, and spin-$x$ up or spin-$x$ down} is the ray $a$, which is true in the state with spin $z$ up, while each quantum conjunction \enquote{spin-$z$ up and spin-$x$ up} is the zero subspace, true in no state. Proposition~\ref{p:blocks} says that the failure arises only when incompatible propositions are combined: within the propositions about spin along a single axis, every law of classical logic holds. The orthomodular lattice of a quantum system is a pasting of such Boolean blocks, one for each maximal family of compatible propositions \citep{KochenSpecker1967}.
+
+Two readings of Proposition~\ref{p:fail} must be distinguished. On the first, the quantum meet and join are conjunction and disjunction, and the proposition \enquote{the spin along $x$ is up or down} is true in a state just in case the state lies in $b \vee b'$. Then disjunction is not truth-functional: in the state with spin $z$ up, the disjunction is true and neither disjunct is true, since that state lies in neither $b$ nor $b'$. This is the reading of \citet{BirkhoffVonNeumann1936}, and on it the failure of distributivity is a consequence of the fact that $\vee$ is not classical disjunction. The disagreement with classical logic is then about which operation \enquote{or} names, and the classical logician can agree that the closed span exists and fails to distribute over intersection, while denying that it is disjunction. That is Dummett's and Quine's point.
+
+On the second reading, which was Putnam's, $\vee$ is disjunction, a disjunction is true only if a disjunct is true, and every quantity has a definite value at all times: the particle's spin along $x$ is either up or down. The failure of distributivity is then a substantive claim about which conjunctions can be true together: there is a definite spin along $x$, but the conjunction of spin-$z$ up with either value of spin-$x$ is false. \citet{Stairs1983} showed that this reading requires a valuation assigning truth values to all quantum propositions, respecting their lattice relations, and the Kochen--Specker theorem shows that, in Hilbert spaces of dimension three or more, there is no such valuation. The realist quantum logic fails for a reason independent of logic: it is inconsistent with the structure of quantum propositions it was introduced to describe.
+
+Neither reading gives a reason to think that classical disjunction fails to distribute over classical conjunction. The first changes the subject; the second is refuted. What remains is the lattice, and the question what its non-distributivity represents.
+
+\section{What quantum mechanics revises}
+
+\begin{definition}\label{d:joint}
+A \emph{classical joint distribution} for a family of quantities is a probability measure on the set of joint assignments of values to all of them, whose marginals give the probabilities of the values of each quantity, and of each subfamily of compatible quantities, in the given state.
+\end{definition}
+
+Kolmogorov's axioms presuppose that all events of interest belong to a single Boolean $\sigma$-algebra, so that any two events have a conjunction to which the measure assigns a probability. This is the assumption quantum mechanics denies. The cleanest demonstration is the form of Bell's inequality given by \citet{Wigner1970}.
+
+\begin{theorem}\label{t:wigner}
+Let $A$, $B$ and $C$ be quantities with two values each, and suppose that there is a classical joint distribution for them. Then the probabilities that $A$ agrees with $B$, that $B$ agrees with $C$, and that $A$ agrees with $C$ sum to at least $1$.
+\end{theorem}
+
+\begin{proof}
+Each of the eight joint assignments of values to $A$, $B$ and $C$ makes at least two of the three quantities agree, since there are only two values. So each assignment is counted at least once in the sum of the three agreement probabilities, and the sum is at least the total probability, $1$.
+\end{proof}
+
+\begin{corollary}\label{c:nojoint}
+No classical joint distribution assigns probability $\frac{1}{4}$ to each of the three agreements.
+\end{corollary}
+
+\begin{proof}
+The three probabilities would sum to $\frac{3}{4}$.
+\end{proof}
+
+Quantum mechanics predicts exactly this pattern. For a pair of spin-$\frac{1}{2}$ particles in the singlet state, measured along three directions at $120^\circ$ to one another, the probability that the two particles give opposite results along two different directions is $\cos^2 60^\circ = \frac{1}{4}$. Since results along the same direction are always opposite, the outcome on the second particle reveals what the first would have given along the second direction, and \enquote{the first particle's spin along $x$ agrees with its spin along $y$} has probability $\frac{1}{4}$ for each pair of directions \citep{Mermin1981}. The predictions have been confirmed by experiment, and by Corollary~\ref{c:nojoint} no classical joint distribution over the three spin quantities reproduces them. \citet{Fine1982} proved the general connection: for the correlation experiments in question, the Bell inequalities hold if and only if there is a joint distribution for all the quantities, compatible with the observed marginals.
+
+The proof of Theorem~\ref{t:wigner} uses classical reasoning, and the quantum logician may propose to block it by denying the case analysis that counts each joint assignment. But the case analysis is not where the proof fails in quantum mechanics. The eight joint assignments are the events \enquote{$A = i$ and $B = j$ and $C = k$}; for incompatible quantities, their quantum meets are the zero subspace, and the quantum lattice contains no such events to which a probability could be assigned. The non-existence of these joint events is exactly the content of Corollary~\ref{c:nojoint}: there is no probability measure on the joint assignments with the right marginals. The lattice records the same fact in another notation. When the quantum logician says that \enquote{spin-$z$ up and spin-$x$ up} is the zero proposition, she says that the event algebra of the system contains no such joint event; when the probabilist says that there is no joint distribution, she says that no measure on such events reproduces the statistics. Both describe the event structure of a probabilistic theory. Neither concerns the consequence relation between propositions.
+
+What replaces Kolmogorov's single space is a family of classical probability spaces, one for each Boolean block of the lattice, which agree on the events they share. By Proposition~\ref{p:blocks}, each block is a Boolean algebra, and by Gleason's theorem \citep{Gleason1957}, in dimension at least three, every assignment of probabilities to the propositions of all blocks that is additive within each block is given by a quantum state. Quantum mechanics is therefore a theory of probability on a non-Boolean event structure built from Boolean pieces \citep{Pitowsky2006}. The revision it imposes is a revision of the first assumption of classical probability theory, that all events belong to one Boolean algebra. Our thesis is that this is all it imposes on the formal sciences.
+
+\begin{theorem}[Location of the revision]\label{t:location}
+Given Assumptions~\ref{a:content} and~\ref{a:neutral} and \ref{p:minimal}, the revision required by quantum mechanics is a revision of probability theory, not of logic.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:content}, the empirical content of quantum mechanics consists of probabilities of outcomes of compatible measurements. These are accommodated by a family of classical probability measures, one on each Boolean block, glued along common events; within each block, the laws of classical logic, including distributivity, hold (Proposition~\ref{p:blocks}). So revising the assumption that all quantities have a joint distribution accommodates the whole empirical content, and by Corollary~\ref{c:nojoint} some such revision is required. By Assumption~\ref{a:neutral}, the assumption of a joint distribution is a non-logical premise about physical quantities, and it is less general than any law of logic, which applies to every subject matter. By \ref{p:minimal}, it is the premise to revise. Classical logic, including Theorem~\ref{t:dist}, remains.
+\end{proof}
+
+Theorem~\ref{t:location} answers the family's question for quantum mechanics, and the argument generalizes. By Assumption~\ref{a:neutral}, any empirical conflict involves a non-logical premise whose revision accommodates it; and a non-logical premise is always less general than a law of logic. \ref{p:minimal} therefore never directs revision to logic on empirical grounds. The case of quantum mechanics is instructive because it is the one in which the alternative seemed most compelling, and in which the non-logical premise, the existence of joint distributions, had been so deeply embedded in classical physics that it was mistaken for logic.
+
+\section{Objections and replies}
+
+\begin{objection}[Putnam's geometry analogy]
+Euclidean geometry was once regarded as a priori and was revised on empirical grounds. The status of logic is no different: the distributive law is to quantum mechanics what the parallel postulate is to general relativity.
+\end{objection}
+
+\begin{reply}
+The analogy fails at the point where it was supposed to bite. What general relativity revised was physical geometry, the theory of the metric structure of spacetime, which is a theory of a particular subject matter; Euclidean geometry as a mathematical theory remains true of Euclidean spaces. The counterpart of physical geometry in the quantum case is the theory of the event structure of physical systems, which quantum mechanics revises by replacing a single Boolean algebra with a pasting of Boolean blocks. The counterpart of pure geometry is logic, which, being topic-neutral, has no physical subject matter to be revised. Putnam's analogy shows that an empirical theory can revise the structure we attribute to a domain; it does not show that the domain-independent laws of consequence are among the things so revised.
+\end{reply}
+
+\begin{objection}[Probability is logic]
+On the subjective view of \citet{Ramsey1926} and de Finetti, probability theory is the logic of partial belief. A revision of probability theory is therefore a revision of logic, and the thesis is a distinction without a difference.
+\end{objection}
+
+\begin{reply}
+Even on the subjective view, the norms of coherence apply to a given algebra of propositions, and they say nothing about which propositions the algebra contains. What quantum mechanics revises is the algebra: it says that there are no events of the form \enquote{$A = i$ and $B = j$} for incompatible $A$ and $B$ to which credences should be assigned, or more cautiously, that the frequencies of measurement outcomes are not marginals of a distribution over such events. This is a claim about physical quantities, not about coherence. Within each Boolean block, Ramsey's and de Finetti's coherence norms apply unchanged. If one calls these norms logic, they too survive quantum mechanics.
+\end{reply}
+
+\begin{objection}[Quine]
+No statement is immune from revision. To say that logic cannot be revised on empirical grounds is to reinstate the analytic--synthetic distinction that \citet{Quine1951} refuted.
+\end{objection}
+
+\begin{reply}
+Our argument uses Quine's own principles: holism (Assumption~\ref{a:neutral}) and minimal mutilation (\ref{p:minimal}). It does not say that logic is immune from revision in principle; it says that empirical evidence never makes logic the premise to revise, because empirical evidence bears on logic only through non-logical premises that are always less general. This is a consequence of holism, not an exception to it. Quine himself later counseled against the quantum logician's deviation, on the ground that the simplicity and familiarity of classical logic outweigh what it would gain \citep{Quine1970}.
+\end{reply}
+
+\begin{objection}[The two-slit experiment]
+In the two-slit experiment, the particle passes through slit 1 or slit 2, yet the interference pattern differs from the mixture of the patterns produced when only one slit is open. Classically, the probability of arrival at a point is the sum of the probabilities via each slit; the failure of this sum is a failure of distributivity of \enquote{arrives at $x$} over \enquote{through slit 1 or through slit 2}.
+\end{objection}
+
+\begin{reply}
+The classical sum rule follows from the law of total probability applied to a joint distribution over which-slit and arrival position. When no which-slit measurement is made, which-slit and arrival position are incompatible quantities, and there is no such joint distribution: the case is a failure of the law of total probability across incompatible quantities, of the kind Corollary~\ref{c:nojoint} exhibits. \citet{Feynman1951} drew this moral explicitly: what fails is the rule for combining probabilities, replaced in quantum mechanics by the rule for combining amplitudes. The interference term is a fact about probabilities, and the logical form of \enquote{through slit 1 or slit 2} is not involved.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish an interpretation of quantum mechanics. It is compatible with any interpretation that formulates the theory in classical logic, which includes Bohmian mechanics, collapse theories and the Everett interpretation defended in SCI-09; each of these accounts for the failure of joint distributions in its own way, and none revises logic \citep{Maudlin2005}. It does not establish that logic is a priori in any strong sense, only that empirical evidence never favors revising it. It does not establish that classical logic is correct, which is argued in LOG-02 on other grounds; it establishes that quantum mechanics provides no reason against it. And it leaves open the mathematical interest of orthomodular lattices, which, as LOG-02 holds of non-classical logics generally, correctly describe something other than consequence: here, the event structure of quantum systems.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_13.lean} proves Theorem~\ref{t:dist} for Lean's propositions, defines $\mathrm{MO}_2$ with its meet, join and orthocomplement (Definition~\ref{d:mo2}), and proves Propositions~\ref{p:fail} and~\ref{p:blocks} by computation. It represents a classical joint distribution for three two-valued quantities by natural-number weights on the eight joint assignments, which is no loss of generality for rational probabilities, and proves Theorem~\ref{t:wigner} and Corollary~\ref{c:nojoint}. These results are mathematical and the module contains no axioms. The philosophical premises, Assumptions~\ref{a:content} and~\ref{a:neutral} and \ref{p:minimal}, are not formalized; Theorem~\ref{t:location} is argued in prose from them and from the formalized results.
+
+\begin{lstlisting}
+theorem no_joint_distribution
+    (n000 n001 n010 n011 n100 n101 n110 n111 N : Nat)
+    (hN : N = n000 + n001 + n010 + n011 + n100 + n101 + n110 + n111)
+    (hpos : N > 0)
+    (hAB : 4 * (n000 + n001 + n110 + n111) = N)
+    (hBC : 4 * (n000 + n100 + n011 + n111) = N)
+    (hAC : 4 * (n000 + n010 + n101 + n111) = N) : False
+
+'Philosophy.LOG_13.distributive' does not depend on any axioms
+'Philosophy.LOG_13.mo2_not_distributive' does not depend on any
+  axioms
+'Philosophy.LOG_13.blocks_distributive' does not depend on any
+  axioms
+'Philosophy.LOG_13.no_joint_distribution' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+\texttt{propext} and \texttt{Quot.sound} are axioms of Lean's logic, used by the arithmetic decision procedure.
+
+\section{Conclusion}
+
+Quantum mechanics shows that the probabilities of outcomes of incompatible measurements are not the marginals of a single classical joint distribution. The lattice of quantum propositions expresses this fact as the failure of distributivity between incompatible propositions, while each family of compatible propositions forms a Boolean, and so distributive, block. Read as a logic, the lattice either changes the meaning of \enquote{or} or is refuted by the Kochen--Specker theorem; read as an event structure, it is the domain of a probability theory that replaces Kolmogorov's single algebra with a family of Boolean algebras. Since logic is topic-neutral, empirical evidence bears on it only through non-logical premises, and minimal revision directs the change to them. Quantum mechanics revises probability theory, not logic, and the distributive law survives.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bacciagaluppi(2009)]{Bacciagaluppi2009} Bacciagaluppi, G. (2009). Is logic empirical? In K. Engesser, D.~M. Gabbay and D. Lehmann (eds.), \emph{Handbook of Quantum Logic and Quantum Structures: Quantum Logic}, Elsevier.
+\bibitem[Birkhoff and von Neumann(1936)]{BirkhoffVonNeumann1936} Birkhoff, G. and von Neumann, J. (1936). The logic of quantum mechanics. \emph{Annals of Mathematics}, 37(4), 823--843.
+\bibitem[Dummett(1976)]{Dummett1976} Dummett, M. (1976). Is logic empirical? In H.~D. Lewis (ed.), \emph{Contemporary British Philosophy}, 4th series, Allen and Unwin. Reprinted in \emph{Truth and Other Enigmas}, Duckworth, 1978.
+\bibitem[Feynman(1951)]{Feynman1951} Feynman, R.~P. (1951). The concept of probability in quantum mechanics. In J. Neyman (ed.), \emph{Proceedings of the Second Berkeley Symposium on Mathematical Statistics and Probability}, University of California Press.
+\bibitem[Fine(1982)]{Fine1982} Fine, A. (1982). Hidden variables, joint probability, and the Bell inequalities. \emph{Physical Review Letters}, 48(5), 291--295.
+\bibitem[Gibbins(1987)]{Gibbins1987} Gibbins, P. (1987). \emph{Particles and Paradoxes: The Limits of Quantum Logic}. Cambridge University Press.
+\bibitem[Gleason(1957)]{Gleason1957} Gleason, A.~M. (1957). Measures on the closed subspaces of a Hilbert space. \emph{Journal of Mathematics and Mechanics}, 6(6), 885--893.
+\bibitem[Kochen and Specker(1967)]{KochenSpecker1967} Kochen, S. and Specker, E.~P. (1967). The problem of hidden variables in quantum mechanics. \emph{Journal of Mathematics and Mechanics}, 17(1), 59--87.
+\bibitem[Maudlin(2005)]{Maudlin2005} Maudlin, T. (2005). The tale of quantum logic. In Y. Ben-Menahem (ed.), \emph{Hilary Putnam}, Cambridge University Press.
+\bibitem[Mermin(1981)]{Mermin1981} Mermin, N.~D. (1981). Bringing home the atomic world: quantum mysteries for anybody. \emph{American Journal of Physics}, 49(10), 940--943.
+\bibitem[Pitowsky(2006)]{Pitowsky2006} Pitowsky, I. (2006). Quantum mechanics as a theory of probability. In W. Demopoulos and I. Pitowsky (eds.), \emph{Physical Theory and Its Interpretation}, Springer.
+\bibitem[Putnam(1968)]{Putnam1968} Putnam, H. (1968). Is logic empirical? In R.~S. Cohen and M.~W. Wartofsky (eds.), \emph{Boston Studies in the Philosophy of Science}, vol.~5, Reidel.
+\bibitem[Quine(1951)]{Quine1951} Quine, W.~V. (1951). Two dogmas of empiricism. \emph{The Philosophical Review}, 60(1), 20--43.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\bibitem[Ramsey(1926)]{Ramsey1926} Ramsey, F.~P. (1926). Truth and probability. Published in R.~B. Braithwaite (ed.), \emph{The Foundations of Mathematics and Other Logical Essays}, Routledge and Kegan Paul, 1931.
+\bibitem[Stairs(1983)]{Stairs1983} Stairs, A. (1983). Quantum logic, realism, and value definiteness. \emph{Philosophy of Science}, 50(4), 578--602.
+\bibitem[Wigner(1970)]{Wigner1970} Wigner, E.~P. (1970). On hidden variables and quantum mechanical probabilities. \emph{American Journal of Physics}, 38(8), 1005--1009.
+\end{thebibliography}
+
+\end{document}

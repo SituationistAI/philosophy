@@ -1,0 +1,157 @@
+\documentclass{situationist-preprint}
+
+\title{Asymmetric Steadfastness in Religious Disagreement}
+\msid{REL-11-a}
+\msfamily{REL-11}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_11.lean}
+\mskeywords{peer disagreement; religious disagreement; steadfastness; conciliationism; uniqueness; independence}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When two epistemic peers, having shared all their evidence, continue to disagree about whether God exists, may each rationally hold to her view? Steadfast views say that at least one may; conciliatory views say that both must move. We argue for a result that cuts across the debate: steadfastness can be rational for at most one party to a peer disagreement, and neither party is in a position to know which. The first half follows from the uniqueness thesis, on which a body of evidence fixes a unique rational credence, together with the fact that peers who have disclosed their evidence share it. The second follows from the symmetry that peerhood imposes on the evidence bearing on which party has responded correctly: whatever puts one party in a position to know that she is the one would put her equally in a position to know that the other is, and both cannot be. The result does not tell either party to abandon her view, but it removes the ground on which either could claim to be entitled to keep it. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Religious disagreement is the most visible and persistent of philosophical disagreements. Thoughtful, informed and fair-minded people, aware of the same arguments and of each other's views, disagree about whether God exists, and the disagreement shows no sign of resolution. The epistemology of disagreement asks what such a situation requires. \emph{Conciliatory} views hold that, on learning that a peer disagrees, one should move one's credence toward hers, in the limit splitting the difference \citep{Elga2007,Christensen2007,Feldman2007}. \emph{Steadfast} views hold that one may, at least sometimes, keep one's credence: because the first-order evidence supports it \citep{Kelly2005}, because one has private insight one cannot share \citep{vanInwagen1996}, or because the evidence permits more than one rational response \citep{Rosen2001}. In the religious case, \citet{Feldman2007} argued that reasonable disagreement among those who have shared their evidence is impossible, and \citet{vanInwagen1996} argued that he must suppose himself to have some incommunicable insight that his opponents lack.
+
+We do not take sides in the general debate between conciliation and steadfastness. We prove a weaker result that both sides should accept, given two premises that are largely common ground: that a body of evidence fixes a unique rational credence, and that peerhood makes the evidence bearing on who has responded correctly symmetric between the parties.
+
+\section{Framework}
+
+\begin{definition}[Peer disagreement]\label{d:peer}
+Two parties are in a \emph{peer disagreement} about a proposition $G$ if, after full disclosure of their evidence and of their credences, they have the same total evidence, they are equally competent at evaluating evidence of the relevant kind, and their credences in $G$ differ.
+\end{definition}
+
+\begin{definition}[Steadfastness]\label{d:steadfast}
+A party is \emph{steadfast} if she maintains her credence after disclosure. Steadfastness is \emph{rational} for her if the credence she maintains is rational on her total evidence after disclosure.
+\end{definition}
+
+\begin{principle}[Uniqueness]\label{p:unique}
+For any body of evidence and any proposition, there is at most one credence in the proposition that is rational on that evidence.
+\end{principle}
+
+Principle~\ref{p:unique} is the uniqueness thesis \citep{White2005}, defended in EPI-17. We discuss permissive alternatives in Section~\ref{s:obj}.
+
+Let $R_A$ be the proposition that $A$'s credence is the rational credence on the shared evidence, and $R_B$ the corresponding proposition for $B$. We write $K_i\,\varphi$ for \enquote{party $i$ is in a position to know that $\varphi$}.
+
+\begin{assumption}[Factivity]\label{a:factive}
+If a party is in a position to know that $\varphi$, then $\varphi$.
+\end{assumption}
+
+\begin{assumption}[Shared evidence]\label{a:shared}
+For propositions about the disagreement, $A$ is in a position to know that $\varphi$ if and only if $B$ is.
+\end{assumption}
+
+\begin{assumption}[Symmetry]\label{a:sym}
+For each party $i$, $K_i\,R_A$ holds if and only if $K_i\,R_B$ holds.
+\end{assumption}
+
+Assumption~\ref{a:shared} reflects full disclosure together with equal competence: what a party is in a position to know is fixed by her evidence and her capacities, and in a peer disagreement both are the same. Assumption~\ref{a:sym} reflects the independence principle of \citet{Elga2007} and \citet{Christensen2007}: whether a party is in a position to know which of two peers has responded correctly must be settled by evidence that is independent of the reasoning in dispute, and, by the definition of peerhood, that evidence does not favour either. Whatever would put a party in a position to know that $A$ responded correctly would, by symmetry, put her in a position to know that $B$ did.
+
+\section{The result}
+
+\begin{theorem}[At most one]\label{t:atmost}
+In a peer disagreement, steadfastness is rational for at most one party.
+\end{theorem}
+
+\begin{proof}
+If steadfastness were rational for both, then by Definition~\ref{d:steadfast} both credences would be rational on the shared evidence. By Principle~\ref{p:unique} they would be equal, contrary to Definition~\ref{d:peer}.
+\end{proof}
+
+\begin{theorem}[Neither knows which]\label{t:neither}
+In a peer disagreement, neither party is in a position to know that $R_A$, and neither is in a position to know that $R_B$.
+\end{theorem}
+
+\begin{proof}
+Suppose party $i$ is in a position to know $R_A$. By Assumption~\ref{a:sym} she is in a position to know $R_B$, and by Assumption~\ref{a:factive} both $R_A$ and $R_B$ hold. Then both credences are rational on the shared evidence, and by Principle~\ref{p:unique} they are equal, a contradiction. The case of $R_B$ is the same. The argument applies to each party, and Assumption~\ref{a:shared} confirms that their positions coincide: what one is not in a position to know about the disagreement, the other is not either.
+\end{proof}
+
+\begin{corollary}\label{c:entitled}
+Neither party to a peer disagreement is in a position to know that her own steadfastness is rational.
+\end{corollary}
+
+\begin{proof}
+For $A$, that her steadfastness is rational is $R_A$; for $B$, it is $R_B$. Apply Theorem~\ref{t:neither}.
+\end{proof}
+
+\begin{remark}\label{r:open}
+The results leave open whether steadfastness is in fact rational for one of the parties. It is if the rational credence on the shared evidence, including the evidence of disagreement, coincides with one party's credence, which is what the total-evidence view of \citet{Kelly2005} allows; it is for neither if the rational credence lies strictly between them, as conciliatory views hold. Theorem~\ref{t:atmost} is compatible with both, and so is Theorem~\ref{t:neither}.
+\end{remark}
+
+The practical bearing of the result follows from Corollary~\ref{c:entitled}. A party who remains steadfast does so without being in a position to know that she is entitled to, and with the knowledge that, if her opponent remained steadfast with the same entitlement, one of them would be wrong to do so. The policy she can adopt in that situation is one that does not depend on knowing which party she is. EPI-07 argues that the right policy is to conciliate while giving some additional weight to one's own first-order evidence; the present result is consistent with that policy and supports its first half, since a policy that permitted full steadfastness would have to be one each party could follow, and Theorem~\ref{t:atmost} shows that both could not follow it rationally. The companion manuscript REL-11-b develops the negative point that no rule identifies which party should concede.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Permissivism]
+Religious belief is the paradigm of a question on which the evidence permits more than one rational credence \citep{Rosen2001}. If so, both parties may be steadfast.
+\end{objection}
+
+\begin{reply}
+If Principle~\ref{p:unique} is false, Theorem~\ref{t:atmost} fails, and both may be rational. We take the principle from EPI-17, and add one observation. Even permissivists usually grant that the permitted range is bounded, and that a party who learns that a peer reached a different credence within the range learns nothing that bears on her own. That concession does not survive scrutiny in the religious case, where the parties' credences typically lie on opposite sides of one half, so that one believes and the other disbelieves; a range wide enough to permit both belief and disbelief on the same evidence is one on which the evidence settles almost nothing about the question, which neither party, each of whom takes the evidence to favour her view, accepts.
+\end{reply}
+
+\begin{objection}[Right reasons]
+The party who has evaluated the evidence correctly has, in the first-order evidence itself, a reason to think she has done so, and her opponent has no such reason. Assumption~\ref{a:sym} is therefore false \citep{Kelly2005}.
+\end{objection}
+
+\begin{reply}
+The first-order evidence is shared, and each party's evaluation of it is what is in dispute. To use one's evaluation of the first-order evidence as evidence that one has evaluated it correctly is to reason in a way that the opponent can mirror exactly, and that would put her, by the same standard, in a position to know the opposite. This is why the independence principle requires that the question who has responded correctly be settled by dispute-independent evidence, and on that evidence peers are symmetric. The objection is right that one party has in fact responded correctly, if either has; Theorem~\ref{t:atmost} allows it. What the party cannot do is know it.
+\end{reply}
+
+\begin{objection}[Private evidence]
+Religious believers often rely on experiences that cannot be fully shared \citep{Alston1991}. Then the parties do not have the same evidence, and both may be rational.
+\end{objection}
+
+\begin{reply}
+In that case the disagreement is not a peer disagreement in the sense of Definition~\ref{d:peer}, and the results do not apply. But the reply concedes that steadfastness is rational for both parties only if one has evidence the other lacks, and an experience that is reported, discussed and weighed is to that extent shared. REL-21 argues that religious experience is prima facie evidence of low weight; if so, the unshared residue is unlikely to make the difference between belief and disbelief.
+\end{reply}
+
+\begin{objection}[No peers]
+There are no religious peers. Disagreements about God involve differences in background beliefs, upbringing and temperament that make the parties not peers.
+\end{objection}
+
+\begin{reply}
+Differences of upbringing and temperament are differences in the causes of belief, and they bear on peerhood only if they affect competence or evidence. Where they do, the results do not apply. But the claim that there are no religious peers is the claim that, in every religious disagreement, one party is better placed than the other, and the parties would then owe an account of which, on dispute-independent grounds; that account is what Theorem~\ref{t:neither} shows to be unavailable when the parties are, by those grounds, equally placed.
+\end{reply}
+
+\section{Formalization}
+
+The results are formalized in \nolinkurl{Philosophy/REL/REL_11.lean}. The two parties form an inductive type; credences, the rational-credence predicate and the position-to-know operator are primitive constants; Principle~\ref{p:unique} and Assumptions~\ref{a:factive}--\ref{a:sym} are axioms. The main theorem reads:
+
+\begin{lstlisting}
+theorem neither_knows (i : Party) :
+    ¬ K i (Rational .A) ∧ ¬ K i (Rational .B)
+\end{lstlisting}
+
+The checker reports (namespace prefixes omitted):
+
+\begin{lstlisting}
+'at_most_one' depends on axioms:
+  [RationalCred, cred, disagree, uniqueness]
+'neither_knows' depends on axioms:
+  [K, RationalCred, cred, disagree, factive, symmetry, uniqueness]
+\end{lstlisting}
+
+The substantive axioms are \texttt{uniqueness} (Principle~\ref{p:unique}), \texttt{factive} (Assumption~\ref{a:factive}) and \texttt{symmetry} (Assumption~\ref{a:sym}), together with \texttt{disagree}, which states that the credences differ, as Definition~\ref{d:peer} requires. Assumption~\ref{a:shared} is formalized as an axiom but is not needed for Theorems~\ref{t:atmost} and~\ref{t:neither} or for Corollary~\ref{c:entitled}, which the module proves for an arbitrary party; the module records separately that, under it, what one party is not in a position to know about the disagreement the other is not either.
+
+\section{Conclusion}
+
+In a peer disagreement about God, at most one of the two credences is rational on the shared evidence, so steadfastness is rational for at most one party. Because peerhood makes the evidence about who has responded correctly symmetric, neither party is in a position to know that she is that party. A believer and an unbeliever who have shared their evidence may each continue to hold their view, but neither can claim to know that she is entitled to.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alston(1991)]{Alston1991} Alston, W.~P. (1991). \emph{Perceiving God: The Epistemology of Religious Experience}. Cornell University Press.
+\bibitem[Christensen(2007)]{Christensen2007} Christensen, D. (2007). Epistemology of disagreement: The good news. \emph{The Philosophical Review}, 116(2), 187--217.
+\bibitem[Elga(2007)]{Elga2007} Elga, A. (2007). Reflection and disagreement. \emph{No\^us}, 41(3), 478--502.
+\bibitem[Feldman(2007)]{Feldman2007} Feldman, R. (2007). Reasonable religious disagreements. In L.~M. Antony (ed.), \emph{Philosophers Without Gods: Meditations on Atheism and the Secular Life}, 194--214. Oxford University Press.
+\bibitem[Kelly(2005)]{Kelly2005} Kelly, T. (2005). The epistemic significance of disagreement. \emph{Oxford Studies in Epistemology}, 1, 167--196.
+\bibitem[Rosen(2001)]{Rosen2001} Rosen, G. (2001). Nominalism, naturalism, epistemic relativism. \emph{Philosophical Perspectives}, 15, 69--91.
+\bibitem[van Inwagen(1996)]{vanInwagen1996} van Inwagen, P. (1996). It is wrong, everywhere, always, and for anyone, to believe anything upon insufficient evidence. In J. Jordan and D. Howard-Snyder (eds.), \emph{Faith, Freedom, and Rationality}, 137--153. Rowman \& Littlefield.
+\bibitem[White(2005)]{White2005} White, R. (2005). Epistemic permissiveness. \emph{Philosophical Perspectives}, 19, 445--459.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,80 @@
+\documentclass{situationist-preprint}
+
+\title{The Bad Company Objection Answered}
+\msid{MTH-04-b}
+\msfamily{MTH-04}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Companion manuscript}
+\mskeywords{neo-logicism; abstraction principles; bad company; stability; New V; order types}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MTH-04-a defines a sense in which an abstraction principle is logical, by permutation invariance, preservation of the abstraction condition, uniqueness up to relabeling and stability, and shows that Hume's principle meets it while Basic Law V, the nuisance principle and Weir's principles fail stability. We extend the treatment to three further members of the bad company: a principle that abstracts on a non-logical relation, the abstraction principle for order types of well-orderings, and Boolos's New V. Each is excluded by a condition of the definition, the first by invariance and the other two by stability, which shows that every condition does work.
+\end{abstract}
+
+\section{The criterion}\label{s:crit}
+
+By Definition~3.6 of MTH-04-a, an abstraction principle for an equivalence relation $E$ is logical in the relevant sense if (a) $E$ is a logical relation by the permutation-invariance criterion (Principle P1 of MTH-04-a), (b) the abstraction condition is preserved under permutations, (c) the principle fixes its operator up to relabeling, and (d) it is stable: satisfiable on every domain of cardinality at least some $\kappa$ (Definition~3.5). Theorem~5.5 shows that Hume's principle meets the four conditions; Section~7 of MTH-04-a shows that Basic Law V and the consistent members of the bad company discussed by \citet{Boolos1990}, \citet{Wright1997} and \citet{Weir2003} fail (d). Since those cases are all excluded by stability, one might suspect that (a) to (c) are idle and that the criterion is stability under another name. The first case below shows otherwise.
+
+\section{Three further members}\label{s:members}
+
+\paragraph{Abstraction on a non-logical relation.} Fix a concept $C$ and let $F \approx_C G$ if and only if $F$ and $G$ have the same instances among the $C$s. The principle $\S F = \S G \leftrightarrow F \approx_C G$ has one abstract for each part of $C$'s extension; when $C$ has $n$ instances it is satisfiable on every domain of at least $2^n$ objects, so it raises no difficulty of size and is stable. It is not logical.
+
+\begin{proposition}\label{p:noninv}
+The principle for $\approx_C$, with $C$ a non-empty concept not coextensive with the universe, fails condition (a).
+\end{proposition}
+
+\begin{proof}
+Let $a$ fall under $C$ and $b$ not. The transposition of $a$ and $b$ maps the concept whose only instance is $a$ to the concept whose only instance is $b$. The first is not $\approx_C$-related to the empty concept and the second is. So $\approx_C$ is not invariant under all permutations, and by Principle P1 of MTH-04-a it is not a logical relation.
+\end{proof}
+
+\paragraph{Order types.} The abstraction principle for order types of well-orderings says that the order type of a well-ordering $R$ is identical to that of $S$ if and only if $R$ and $S$ are isomorphic. It abstracts on relations rather than concepts, extending Definition~3.2 of MTH-04-a in the obvious way, and it is the natural extension of Hume's principle from cardinals to ordinals, and its relation, isomorphism, is permutation invariant, so it passes (a).
+
+\begin{proposition}\label{p:ord}
+The order-type principle is satisfiable on no domain, and so fails condition (d).
+\end{proposition}
+
+\begin{proof}
+On a domain of cardinality $\kappa$, every ordinal of cardinality at most $\kappa$ is the type of a well-ordering of some part of the domain. There are more such ordinals than $\kappa$: for finite $\kappa = n$ there are the $n + 1$ ordinals $0, \dots, n$, and for infinite $\kappa$ there are $\kappa^+$ of them. An abstractor would map the types one-one into the domain, which is impossible.
+\end{proof}
+
+The argument is the Burali-Forti paradox in the form appropriate to abstraction, as Proposition~7.1 of MTH-04-a is Russell's paradox in that form.
+
+\paragraph{New V.} \citet{Boolos1989} proposed New V: the extensions of $F$ and $G$ are identical if and only if either both $F$ and $G$ are equinumerous with the universe, or they are coextensive. New V is consistent, and with suitable definitions it yields a substantial set theory, which made it a candidate for an abstractionist foundation beyond arithmetic. Its relation is permutation invariant.
+
+\begin{proposition}\label{p:newv}
+New V is unsatisfiable on every domain of singular cardinality, and so fails condition (d).
+\end{proposition}
+
+\begin{proof}
+On a domain of infinite cardinality $\kappa$, New V requires one abstract for each subset of cardinality less than $\kappa$, together with one for the large concepts. There are $\kappa^{<\kappa}$ such subsets. If $\kappa$ is singular, with cofinality $\lambda < \kappa$, then $\kappa^{<\kappa} \geq \kappa^\lambda > \kappa$ by K\"onig's theorem, so no abstractor exists. Singular cardinals are unbounded, so there is no $\kappa$ above which New V is always satisfiable.
+\end{proof}
+
+New V fails at other cardinals too. On a domain of cardinality $\aleph_1$ it needs $\aleph_1^{\aleph_0} = 2^{\aleph_0}$ abstracts, and if the continuum hypothesis is false, as MTH-06 argues, that is more than $\aleph_1$. Whether New V is satisfiable on a given domain thus depends on cardinal arithmetic, which is the mark of a principle that is not neutral on the size of the universe. That does not impugn New V as a principle of set theory; it shows that it is not logic.
+
+\section{Objection and reply}\label{s:obj}
+
+\begin{objection}[Gerrymandering]
+A criterion that excludes each bad principle by whichever condition it happens to fail is fitted to the cases, and would exclude any principle the neo-Fregean wished to exclude \citep{Fine2002,Linnebo2018}.
+\end{objection}
+
+\begin{reply}
+The conditions were stated before the cases, each with its own motivation in MTH-04-a: invariance as the mark of the logical, uniqueness as silence about which objects are which, stability as neutrality on the size of the universe. The cases confirm that the conditions are independent: the principle for $\approx_C$ is stable and fails only (a), while the order-type principle and New V pass (a) and fail (d). A gerrymandered criterion would not have been forced to use different conditions on cases that look alike, nor would it have admitted, as this one does, every stable invariant principle, including those for which the neo-Fregean has no use.
+\end{reply}
+
+\section{Conclusion}
+
+The bad company is larger than Basic Law V and the nuisance principle, and it is excluded on principle. Non-logical relations fail invariance; principles that overgenerate, as the order-type principle does everywhere and New V does at singular cardinals, fail stability. Hume's principle meets every condition, and the objection from bad company does not show otherwise.
+
+\begin{thebibliography}{9}\small
+\bibitem[Boolos(1989)]{Boolos1989} Boolos, G. (1989). Iteration again. \emph{Philosophical Topics}, 17(2), 5--21.
+\bibitem[Boolos(1990)]{Boolos1990} Boolos, G. (1990). The standard of equality of numbers. In G.~Boolos (ed.), \emph{Meaning and Method: Essays in Honor of Hilary Putnam}, 261--277. Cambridge University Press.
+\bibitem[Fine(2002)]{Fine2002} Fine, K. (2002). \emph{The Limits of Abstraction}. Oxford University Press.
+\bibitem[Linnebo(2018)]{Linnebo2018} Linnebo, {\O}. (2018). \emph{Thin Objects: An Abstractionist Account}. Oxford University Press.
+\bibitem[Weir(2003)]{Weir2003} Weir, A. (2003). Neo-Fregeanism: an embarrassment of riches. \emph{Notre Dame Journal of Formal Logic}, 44(1), 13--48.
+\bibitem[Wright(1997)]{Wright1997} Wright, C. (1997). On the philosophical significance of Frege's theorem. In R.~G. Heck Jr. (ed.), \emph{Language, Thought, and Logic: Essays in Honour of Michael Dummett}, 201--244. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

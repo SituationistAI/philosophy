@@ -1,0 +1,271 @@
+\documentclass{situationist-preprint}
+
+\title{Scientific Realism Defended}
+\msid{SCI-02-a}
+\msfamily{SCI-02}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_02.lean}
+\mskeywords{scientific realism; no-miracles argument; pessimistic meta-induction; selective realism; approximate truth; novel prediction; inference to the best explanation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Scientific realism holds that our best scientific theories are approximately true, including in what they say about unobservable things. Its main support is the no-miracles argument: the predictive success of mature theories would be inexplicable if they were not approximately true. Its main opponent is the pessimistic meta-induction: most past successful theories were false, so current ones probably are too. We defend realism. We define the essential posits of a theory as the claims used ineliminably in deriving its novel predictive successes, and approximate truth as the truth of the essential posits. From a no-miracles premise and inference to the best explanation we prove that every mature theory, one with at least one novel success, is approximately true in this sense. We then show that the historical premise of the meta-induction, that past theories were false, does not entail that they were not approximately true, and that the record of retained essential content across theory change, from Fresnel to Maxwell and from caloric to thermodynamics, supports the conclusion that past theories were partially true. The objections from circularity, unconceived alternatives, false essential posits, post hoc selection and selectionist explanation are answered. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Scientific realism is the view that the theories of the mature sciences are approximately true, and that the entities they postulate, including unobservable ones such as electrons, exist and have approximately the properties ascribed to them \citep{Smart1963,Boyd1983,Psillos1999}. Its rivals agree that science is successful but deny that its success warrants belief in the truth of its theories. The instrumentalist holds that theories are instruments for prediction that need not be true or false at all. The constructive empiricist holds that the aim of science is empirical adequacy, truth about the observable, and that acceptance of a theory involves only the belief that it is empirically adequate \citep{vanFraassen1980}. Entity realists believe in the entities that experimenters manipulate but not in the theories that describe them \citep{Hacking1983,Cartwright1983}. Structural realists hold that our theories are right about the structure of the world but not about the nature of what has that structure \citep{Worrall1989}.
+
+The debate turns on two arguments. The first, the no-miracles argument, says that realism is the only philosophy that does not make the success of science a miracle \citep[73]{Putnam1975}. Mature theories predict phenomena of kinds that their authors had never observed and did not use in constructing them: Fresnel's wave theory predicted a bright spot at the center of the shadow of a disk, and general relativity predicted the bending of starlight by the sun. If these theories were not approximately true, their success at such predictions would be an unexplained coincidence. The second, the pessimistic meta-induction, says that the history of science is a graveyard of successful theories now known to be false \citep{Laudan1981}. The caloric theory of heat, the elastic-solid ether and the phlogiston theory of combustion each enjoyed predictive success, and each is false. If success did not indicate truth in their case, it does not indicate it in ours.
+
+We argue that realism is true. Mature, predictively successful theories are approximately true, and the meta-induction fails because the past theories it cites were partially true: what they got right is what made them successful, and it was retained by their successors. We define approximate truth as the truth of a theory's \emph{essential posits}, the claims on which its novel successes depend; derive realism, so understood, from a no-miracles premise and inference to the best explanation; and show that the meta-induction is invalid and that the historical record supports realism. The position is a form of \emph{selective} realism, in the tradition of \citet{Kitcher1993} and \citet{Psillos1999}.
+
+Section~2 reviews the history of the debate, Sections~3 and 4 give the framework and the argument, Section~5 examines historical cases and Section~6 objections; the remaining sections draw consequences, record limits and describe the formalization.
+
+\section{A short history of the debate}
+
+The modern debate has four phases, each of which ended with a case or an argument that the next phase had to accommodate.
+
+\paragraph{Instrumentalism and its collapse.} In the first half of the twentieth century, the dominant empiricist view treated theoretical terms as devices for organizing observations. \citet{Duhem1954} held that a physical theory aims to represent experimental laws simply and completely, and that explanation by hidden causes belongs to metaphysics. The logical empiricists' attempt to give theoretical terms meaning through correspondence rules foundered, chiefly because the distinction between observational and theoretical vocabulary could not be drawn in a principled way, and by the 1960s it was widely accepted that theoretical sentences are true or false in the same sense as observational ones \citep{Smart1963}.
+
+\paragraph{The no-miracles argument.} \citet{Smart1963} argued that if theoretical entities did not exist, the observable phenomena would have to behave as if they did by a cosmic coincidence. \citet{Putnam1975} gave the argument its slogan, and \citet{Boyd1983} developed it into an abductive argument: the instrumental reliability of scientific methodology, which is heavily theory-dependent, is best explained by the approximate truth of the background theories on which it depends.
+
+\paragraph{The confutation.} \citet{Laudan1981} attacked this convergent realism. He produced a list of theories that were successful for a time and are now regarded as false, and whose central terms do not refer: the crystalline spheres of ancient and medieval astronomy, the humoral theory of medicine, the effluvial theory of static electricity, catastrophist geology, the phlogiston theory of chemistry, the caloric theory of heat, the vibratory theory of heat, the vital force theories of physiology, the electromagnetic ether, the optical ether, the theory of circular inertia and the theory of spontaneous generation. If success could be had without reference and without approximate truth, Laudan argued, then the explanatory link that the no-miracles argument asserts does not exist. In the same period \citet{vanFraassen1980} offered a rival explanation of success: theories are selected for empirical adequacy as organisms are selected for fitness, so that the success of the survivors needs no further explanation. \citet{Fine1984} added that the no-miracles argument begs the question, since it uses inference to the best explanation to defend a realism that the anti-realist rejects precisely because she rejects that form of inference at the theoretical level.
+
+\paragraph{Selective realism.} Realists responded by giving up the claim that successful theories are true as wholes. \citet{Worrall1989} observed that when Fresnel's theory of light was replaced by Maxwell's, Fresnel's equations for the intensities of reflected and refracted light survived intact, while his account of light as a vibration of an elastic solid did not; he concluded that what survives theory change, and what we should believe, is structure. \citet{Kitcher1993} distinguished the working posits of a theory, those that figure in the derivations responsible for its success, from its presuppositional posits, which are idle. \citet{Psillos1999} argued, by detailed case studies of the caloric theory and of the ether, that the parts of past theories that were essential to their successes were retained, and that the parts that were abandoned were not essential.
+
+\paragraph{The recent debate.} The last two decades have tested selective realism against new cases and new arguments. \citet{Stanford2006} argued that the historical record reveals a recurrent failure of scientists to conceive of the alternatives that later replaced their theories, and that this failure, rather than Laudan's list, is the real ground for pessimism. \citet{Lyons2006} argued that some false posits were essential to past successes, so that the realist's division between working and idle posits does not track truth. \citet{Chang2003} argued that the caloric theory's successes depended on assumptions about caloric that are false. \citet{SaatsiVickers2011} examined Kirchhoff's theory of diffraction, which was highly successful although its boundary conditions are mutually inconsistent, and argued that the realist can identify the true content responsible for its success only with care. \citet{Vickers2013} surveyed the proposed counterexamples and argued that most can be accommodated.
+
+Our position belongs to the selective realist tradition. We give it a precise formulation, derive it from explicit premises, and answer the objections that the recent debate has made most pressing.
+
+\section{Framework}
+
+Theories assert claims, and some of the phenomena a theory predicts occur. We use the following notions.
+
+\begin{definition}[Novel success]\label{d:novel}
+A phenomenon $p$ is a \emph{novel success} of a theory $T$ if $T$, together with auxiliary assumptions independently available at the time, entails that $p$ occurs; $p$ was not used in the construction of $T$; and $p$ occurs.
+\end{definition}
+
+This is the notion of use-novelty \citep{Worrall1989}. Temporal novelty is sufficient but not necessary. The perihelion of Mercury was known before general relativity, but Einstein did not adjust the theory to obtain it, and it counts as a novel success.
+
+\begin{definition}[Essential posit]\label{d:essential}
+A claim $c$ asserted by $T$ is an \emph{essential posit} of $T$ if there is a novel success $p$ of $T$ such that $c$ is used in the derivation of $p$ from $T$, and the derivation does not go through if $c$ is removed and not replaced by another claim of $T$ or of the available auxiliaries.
+\end{definition}
+
+The definition follows \citet{Psillos1999} and \citet{Kitcher1993}. A claim replaceable by a weaker claim that also yields the prediction is not essential; the weaker claim is. In the Fresnel case, the claim that light consists of transverse waves satisfying certain boundary conditions at an interface is essential to the derivation of the reflection and refraction coefficients, while the claim that the waves are vibrations of an elastic solid is not, because the coefficients can be derived from the boundary conditions without it.
+
+\begin{definition}[Approximate truth]\label{d:approx}
+A theory is \emph{approximately true} if each of its essential posits is true.
+\end{definition}
+
+The definition counts a theory as approximately true when it is right about what its success depends on, and allows it to be false as a whole. Where an essential posit is itself an approximation, as when a law holds within a bounded domain of parameter values, the claim that is essential is the claim restricted to that domain, which is true; we return to this in Section~5.
+
+\begin{definition}[Maturity]\label{d:mature}
+A theory is \emph{mature} if it has at least one novel success.
+\end{definition}
+
+Maturity, so defined, is a minimal condition; the evidence for approximate truth grows with the number and variety of novel successes, but the argument needs only one.
+
+We make three assumptions.
+
+\begin{assumption}[Use]\label{a:use}
+Every claim used in a derivation from a theory is asserted by the theory, and in the derivation of every novel success of a theory at least one claim of the theory is used ineliminably.
+\end{assumption}
+
+\begin{assumption}[No miracles]\label{a:nm}
+If a claim is used ineliminably in deriving a novel success, then its truth is part of the best explanation of that success.
+\end{assumption}
+
+\begin{assumption}[Inference to the best explanation]\label{a:ibe}
+If the truth of a claim is part of the best explanation of a phenomenon that occurs, then the claim is true.
+\end{assumption}
+
+Assumption~\ref{a:use} is close to definitional: a derivation from a theory that used none of the theory's claims ineliminably would not be a derivation from that theory. Assumption~\ref{a:nm} is the core of the no-miracles argument, restricted to essential posits and to novel successes. Assumption~\ref{a:ibe} is inference to the best explanation, stated as a principle about which claims are true rather than about which claims we are entitled to believe. It is this principle that underwrites realism: without it, the no-miracles premise yields only that the truth of the essential posits would explain the success. The epistemic conclusion follows when the premises are known. Inference to the best explanation is ampliative and its conclusions are sometimes false. We discuss the status of the two substantive assumptions after the argument and in Section~6.
+
+Finally, a notion for the comparison of theories over time.
+
+\begin{definition}[Retention]\label{d:retain}
+A theory $S$ \emph{retains the essential content} of a theory $P$ if for every essential posit $c$ of $P$ there is an essential posit $d$ of $S$ such that the truth of $d$ implies the truth of $c$.
+\end{definition}
+
+Retention does not require that $S$ assert $c$. It requires that what $S$ says about the matter, in a claim on which $S$'s own successes depend, implies what $P$ said about it.
+
+\section{The argument}
+
+\begin{lemma}\label{l:true}
+Every essential posit of a theory is true.
+\end{lemma}
+
+\begin{proof}
+Let $c$ be an essential posit of $T$. By Definition~\ref{d:essential}, there is a novel success $p$ of $T$ in whose derivation $c$ is used ineliminably. By Assumption~\ref{a:nm}, the truth of $c$ is part of the best explanation of $p$. By Definition~\ref{d:novel}, $p$ occurs. By Assumption~\ref{a:ibe}, $c$ is true.
+\end{proof}
+
+\begin{theorem}[Realism]\label{t:realism}
+Every mature theory is approximately true, and asserts at least one essential posit that is true.
+\end{theorem}
+
+\begin{proof}
+Let $T$ be mature. By Lemma~\ref{l:true}, every essential posit of $T$ is true, so $T$ is approximately true by Definition~\ref{d:approx}. By Definition~\ref{d:mature}, $T$ has a novel success $p$. By Assumption~\ref{a:use}, some claim $c$ is used ineliminably in the derivation of $p$, and $T$ asserts $c$. So $c$ is an essential posit of $T$ and, by Lemma~\ref{l:true}, true.
+\end{proof}
+
+The second conjunct prevents a trivial reading of the first. A theory with no essential posits would be approximately true vacuously by Definition~\ref{d:approx}; Theorem~\ref{t:realism} ensures that a mature theory is approximately true in virtue of having true content on which its success depends.
+
+We turn to the meta-induction. In Laudan's form, its premise is that many past mature theories were false, and its conclusion is that current mature theories are probably not approximately true. The inference requires that falsity be evidence against approximate truth. It is not.
+
+\begin{proposition}\label{p:pmi}
+That a theory is false does not entail that it is not approximately true.
+\end{proposition}
+
+\begin{proof}
+Consider a theory that asserts two claims: $c_1$, that light consists of transverse waves satisfying the boundary conditions at an interface, and $c_2$, that these waves are vibrations of an elastic solid. Suppose $c_1$ is essential and true and $c_2$ is idle and false. The theory is false, since it asserts $c_2$, and approximately true, since its only essential posit is $c_1$. The assignment is consistent with Definitions~\ref{d:essential} and \ref{d:approx}, so falsity does not entail the absence of approximate truth.
+\end{proof}
+
+Proposition~\ref{p:pmi} is a point of logic; its significance depends on whether past mature theories resemble the model, with idle false parts and retained essential ones. If they do, the record is evidence for realism, by the following result.
+
+\begin{proposition}\label{p:transfer}
+If $S$ retains the essential content of $P$ and $S$ is approximately true, then $P$ is approximately true.
+\end{proposition}
+
+\begin{proof}
+Let $c$ be an essential posit of $P$. By Definition~\ref{d:retain}, there is an essential posit $d$ of $S$ whose truth implies the truth of $c$. Since $S$ is approximately true, $d$ is true, and so $c$ is true.
+\end{proof}
+
+\begin{corollary}\label{c:chain}
+Let $T_0, T_1, T_2, \ldots$ be a sequence of theories in which each $T_{n+1}$ retains the essential content of $T_n$. If $T_m$ is approximately true, then so is every $T_n$ with $n \le m$.
+\end{corollary}
+
+\begin{proof}
+By induction on $m - n$, applying Proposition~\ref{p:transfer} at each step.
+\end{proof}
+
+Corollary~\ref{c:chain} states the realist reading of the history of science. If the theories in a historical sequence each retain the essential content of their predecessors, and the current theory is approximately true, then every theory in the sequence was approximately true, that is, partially true in the sense that matters. Where the meta-induction infers from the falsity of past theories to the falsity of the present one, the retention structure licenses the reverse inference, from the approximate truth of the present theory, established by Theorem~\ref{t:realism}, to the partial truth of the past ones; and it uses the fine structure of the record, not merely the verdict that past theories were false.
+
+\paragraph{The status of the assumptions.} Theorem~\ref{t:realism} is only as good as Assumptions~\ref{a:nm} and \ref{a:ibe}. Assumption~\ref{a:nm} is plausible for novel successes in particular. A theory constructed to fit a body of data will fit it whether or not it is true. A theory that entails a phenomenon its constructor did not use is in a different position: if the claims used in the derivation were false, the entailed phenomenon would have occurred for reasons unconnected with what the theory says, and its agreement with the theory would be a coincidence. Assumption~\ref{a:ibe} is the principle that licenses ordinary inference to unobserved causes, as from tracks in the snow to a passing animal. We take up the charge that the argument is circular in Section~6.
+
+\section{Historical cases}
+
+The test of selective realism is whether the theories on Laudan's list and those added since conform to the pattern of Proposition~\ref{p:pmi}: false idle posits, true essential ones, retained by successors. We examine the cases that have been most discussed.
+
+\paragraph{The optical ether.} Fresnel's theory of diffraction, presented in 1818, predicted that a bright spot would appear at the center of the shadow of an opaque disk. Poisson derived the prediction as an objection, and Arago observed the spot. Fresnel's theory of reflection and refraction gave equations for the intensities of reflected and refracted light that were confirmed in detail. In both cases, the derivations used the claims that light is a transverse wave and that the wave satisfies certain continuity conditions at an interface. They did not use the claim that the wave is a vibration of an elastic solid, except as a heuristic for arriving at the boundary conditions, which can be stated and used without it \citep{Worrall1989,Psillos1999}. Maxwell's theory retained the transverse-wave character of light and implies boundary conditions from which Fresnel's equations follow. The case satisfies Definition~\ref{d:retain}, and by Proposition~\ref{p:transfer} Fresnel's theory was approximately true if Maxwell's is.
+
+\paragraph{The caloric theory.} The caloric theory held that heat is a material fluid, conserved in all processes. Its successes included Laplace's correction of Newton's calculation of the speed of sound and Carnot's analysis of heat engines. \citet{Psillos1999} argued that the derivations behind these successes used the claims that heat is conserved in the processes in question and that the heating of air under adiabatic compression changes its elasticity, and not the claim that heat is a substance. \citet{Chang2003} replied that the derivations used substantive assumptions about caloric, such as its conservation in all processes, which is false, since heat is converted into work. The reply is correct that conservation of heat is false in general, but the derivations in question concern processes in which no work is done on or by the system, or in which the work done is negligible, as in Laplace's adiabatic sound waves at small amplitudes. The claim that is essential is the restricted claim, that heat is conserved in processes of this kind, and the restricted claim is true and is implied by the first law of thermodynamics. Carnot's analysis, which used conservation of caloric in a cycle that does work, is harder; but what was essential to his result, that the efficiency of a reversible engine depends only on the reservoir temperatures, was the impossibility of a certain kind of perpetual motion, which the second law retains.
+
+\paragraph{Phlogiston.} The phlogiston theory explained the reversibility of calcination and reduction by the transfer of one principle in opposite directions in the two processes. Whether it had novel successes in the sense of Definition~\ref{d:novel} is disputed. If it did not, it is not mature, and Theorem~\ref{t:realism} makes no claim about it. If it did, the essential content retained by the oxygen theory is that the two processes are inverse and involve the transfer of one substance; what was false was the direction of transfer, which the oxygen theory corrected with gravimetric evidence the phlogiston theory could not accommodate.
+
+\paragraph{Newtonian gravitation.} Newton's theory is false, and its successes were numerous and novel, including the return of Halley's comet and the discovery of Neptune. The essential posits used in deriving these successes are claims about the gravitational acceleration of bodies moving slowly in weak fields, and general relativity implies them in that domain. The essential posit is thus a restricted claim, in the sense mentioned after Definition~\ref{d:approx}, and it is true.
+
+The cases fall into two groups. In the first, which includes the ether, caloric and Newtonian gravitation, as well as Kirchhoff's theory of diffraction on the analysis of \citet{SaatsiVickers2011}, the theory was mature and its essential posits, suitably restricted, were retained. In the second, which includes Ptolemaic astronomy with its crystalline spheres, humoral medicine and the effluvial theory, the theory accommodated its data without novel success and was not mature in our sense; such items reflect a looser notion of success than the realist's argument uses. The phlogiston theory is borderline. No case so far discussed in the literature, in our assessment and in that of \citet{Vickers2013}, is a clear instance of a mature theory whose essential posits, correctly identified, were false.
+
+\section{Objections}
+
+\begin{objection}[Circularity]
+The no-miracles argument is an inference to the best explanation. The anti-realist doubts that inference to the best explanation is reliable when its conclusions concern unobservables. To use it in defence of realism is to beg the question \citep{Laudan1981,Fine1984}.
+\end{objection}
+
+\begin{reply}
+The argument is rule-circular, not premise-circular: it uses inference to the best explanation as a rule, but does not include the reliability of that rule among its premises \citep{Psillos1999}. Rule-circularity is the structure of every fundamental justification of a basic inference rule, including the inductive justification of induction, which EPI-03 argues is benign for exactly this reason. A rule-circular argument cannot persuade someone who has already rejected the rule, but it can show that a rule is self-supporting rather than self-undermining, and it can justify those who reasonably use the rule. The anti-realist who rejects the rule at the theoretical level while accepting it at the observable level owes an account of the boundary, and observability by unaided human senses is not a line that any inferential principle recognizes.
+\end{reply}
+
+\begin{objection}[Unconceived alternatives]
+\citet{Stanford2006} argues that scientists have repeatedly failed to conceive of the alternatives to their theories that later replaced them, and that we have no reason to think our situation is different. If there are unconceived alternatives to our theories that are equally well confirmed, then the best explanation we have is not thereby the true one.
+\end{objection}
+
+\begin{reply}
+The unconceived alternatives of the past were rivals to past theories as wholes, and in each case examined in Section~5 they retained the essential posits of the theories they replaced. Maxwell's theory was unconceived by Fresnel, and it retained Fresnel's transverse waves and boundary conditions. The argument from unconceived alternatives therefore supports the expectation that current theories will be replaced, which the realist accepts, but not that their essential posits will be abandoned, which is what realism denies. Moreover, SCI-04 argues that a rival undistinguished by all the evidence lacks independent motivation and creates no genuine underdetermination, while an independently motivated rival is distinguishable by the evidence once the relevant domain is tested.
+\end{reply}
+
+\begin{objection}[False essential posits]
+\citet{Lyons2006} argues that the list of successful theories with false posits that were genuinely used in deriving their successes is long, and includes Kepler's derivations from mystical principles, the caloric theory's assumption of conservation of heat and Leverrier's prediction of Vulcan. Selective realism is refuted by such cases.
+\end{objection}
+
+\begin{reply}
+Three replies apply to the cases on Lyons' list. First, use is not essential use: a claim used in a derivation from which a weaker claim, also asserted or available, would yield the same prediction is not essential by Definition~\ref{d:essential}. Second, an essential posit may be a restricted claim that is true, as in the caloric case discussed in Section~5. Third, some cases are failures, not successes: the prediction of Vulcan was not borne out, and the inference that an unseen body perturbed Mercury used a method that had succeeded in the case of Neptune but failed in this one. A failed prediction is not a novel success, and Theorem~\ref{t:realism} says nothing about the claims used to derive it.
+\end{reply}
+
+\begin{objection}[Post hoc selection]
+The realist identifies the essential posits of a past theory by looking at which of its claims survived. Selective realism is then unfalsifiable: whatever was retained is declared essential and whatever was discarded is declared idle \citep{Stanford2006,Chang2003}.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:essential} identifies essential posits by the structure of the derivations, which is fixed at the time the theory is proposed and can be examined without knowing what later science retained. The identification can be made prospectively, for current theories, by asking which claims are used ineliminably in deriving their novel successes. That retained and essential posits coincide in the historical cases is a finding, not a definition, and it could have been otherwise: the cases discussed in Section~5 were candidate refutations, and they could have revealed a mature theory whose essential posits were false. Selective realism is therefore testable against the record, and the record supports it. Identifying ineliminable use is sometimes difficult \citep{Vickers2013}, but difficulty in applying a criterion is not circularity in its definition.
+\end{reply}
+
+\begin{objection}[Selection explains success]
+\citet{vanFraassen1980} holds that the success of current theories needs no explanation by their truth, since theories that failed were eliminated, as organisms that are unfit die. The survivors are successful because they were selected for success.
+\end{objection}
+
+\begin{reply}
+Selection explains why the theories we hold are successful with respect to the data used to select them. It does not explain why a theory selected on past data succeeds in predicting phenomena of a new kind, which is what a novel success is. Selection explains adaptation to the environments of the ancestors, not flourishing in an environment of a new kind; novel successes are of the second kind, and Assumption~\ref{a:nm} is restricted to them.
+\end{reply}
+
+
+\section{Consequences for neighbouring questions}
+
+\paragraph{Quantum mechanics.} Quantum mechanics is mature on any account: its novel successes range from the anomalous magnetic moment of the electron to the violation of Bell inequalities. By Theorem~\ref{t:realism} it is approximately true, and instrumentalism about it, the view that it is only a device for predicting measurement outcomes, is false. This is the premise on which MTH-16-a relies when it argues that physics cannot be nominalized; it is also the starting point of SCI-09-a, which argues that the Everett interpretation is the correct account of what quantum mechanics says.
+
+\paragraph{Models and idealization.} SCI-10 argues that scientific models are false and represent through partial similarity. This is consistent with Theorem~\ref{t:realism}: the idealizing assumptions of a model are not asserted by the theory that uses it, and where a derivation goes through an idealized model, the essential posit is the theory's claim about the domain in which the idealization introduces negligible error.
+
+\section{What the argument does not establish}
+
+\begin{remark}\label{r:limits}
+The argument does not establish that any particular claim of a current theory is essential; this must be shown by examining the derivations of its novel successes. It does not establish that current theories are true as wholes, and it predicts that many of them will be replaced. And it does not show that Assumptions~\ref{a:nm} and \ref{a:ibe} hold without exception; inference to the best explanation is ampliative, and the conclusion of Theorem~\ref{t:realism} has the epistemic status of its premises.
+\end{remark}
+
+Nor does the argument decide between selective and structural realism in every case. Where the essential posits are mathematical relations, as in Worrall's reading of Fresnel, the two coincide; where they include claims about the nature of entities, such as the charge and mass of the electron, selective realism says more. That dispute concerns the content of the essential posits, not whether they are true.
+
+\section{Formalization}
+
+Lemma~\ref{l:true}, Theorem~\ref{t:realism}, Propositions~\ref{p:pmi} and \ref{p:transfer} and Corollary~\ref{c:chain} are formalized in \nolinkurl{Philosophy/SCI/SCI_02.lean}. Essential posits, approximate truth, maturity and retention are defined as in Definitions~\ref{d:essential}--\ref{d:retain} from primitive types and predicates. The main theorem reads:
+
+\begin{lstlisting}
+theorem realism (T : Theory) (hm : Mature T) :
+    ApproxTrue T ∧ ∃ c, Asserts T c ∧ Essential T c ∧ Tru c
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.SCI_02.realism' depends on axioms:
+ [Philosophy.SCI_02.Asserts, Philosophy.SCI_02.Claim,
+  Philosophy.SCI_02.NovelSuccess, Philosophy.SCI_02.Phenomenon,
+  Philosophy.SCI_02.Theory, Philosophy.SCI_02.Tru,
+  Philosophy.SCI_02.Uses, Philosophy.SCI_02.ibe,
+  Philosophy.SCI_02.no_miracles, Philosophy.SCI_02.success_obtains,
+  Philosophy.SCI_02.success_uses, Philosophy.SCI_02.uses_asserted]
+'Philosophy.SCI_02.pmi_invalid' does not depend on any axioms
+'Philosophy.SCI_02.retention_chain' depends on axioms:
+ [Philosophy.SCI_02.Claim, Philosophy.SCI_02.NovelSuccess,
+  Philosophy.SCI_02.Phenomenon, Philosophy.SCI_02.Theory,
+  Philosophy.SCI_02.Tru, Philosophy.SCI_02.Uses]
+\end{lstlisting}
+
+The first seven names are the primitive types and predicates. The remaining five are the premises: \texttt{uses\_asserted} and \texttt{success\_uses} are the two clauses of Assumption~\ref{a:use}, \texttt{no\_miracles} and \texttt{ibe} are Assumptions~\ref{a:nm} and \ref{a:ibe}, and \texttt{success\_obtains} is the success clause of Definition~\ref{d:novel}; the predicates for best explanation and occurrence appear only inside these axioms. Proposition~\ref{p:pmi} negates the meta-induction's inference form over all assignments of claims, essential posits and truth values, and is proved by a two-claim model. Corollary~\ref{c:chain} takes retention as a hypothesis. The realist conclusion thus rests on exactly two substantive premises, and the reply to the meta-induction on none.
+
+\section{Conclusion}
+
+Scientific realism is true. A mature theory, one that has predicted phenomena it was not built to accommodate, is approximately true, in the sense that the claims on which its novel successes depend are true. This follows from the premise that the truth of those claims is part of the best explanation of the successes, together with inference to the best explanation. The pessimistic meta-induction fails because its premise, that past mature theories were false, does not entail that they were not approximately true, and because the historical record shows the essential posits of past mature theories retained by their successors.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boyd(1983)]{Boyd1983} Boyd, R. (1983). On the current status of the issue of scientific realism. \emph{Erkenntnis}, 19, 45--90.
+\bibitem[Cartwright(1983)]{Cartwright1983} Cartwright, N. (1983). \emph{How the Laws of Physics Lie}. Oxford University Press.
+\bibitem[Chang(2003)]{Chang2003} Chang, H. (2003). Preservative realism and its discontents: Revisiting caloric. \emph{Philosophy of Science}, 70(5), 902--912.
+\bibitem[Duhem(1954)]{Duhem1954} Duhem, P. (1954). \emph{The Aim and Structure of Physical Theory}. Translated by P.~P. Wiener. Princeton University Press. Original work published 1906.
+\bibitem[Fine(1984)]{Fine1984} Fine, A. (1984). The natural ontological attitude. In J.~Leplin (ed.), \emph{Scientific Realism}. University of California Press.
+\bibitem[Hacking(1983)]{Hacking1983} Hacking, I. (1983). \emph{Representing and Intervening}. Cambridge University Press.
+\bibitem[Kitcher(1993)]{Kitcher1993} Kitcher, P. (1993). \emph{The Advancement of Science}. Oxford University Press.
+\bibitem[Laudan(1981)]{Laudan1981} Laudan, L. (1981). A confutation of convergent realism. \emph{Philosophy of Science}, 48(1), 19--49.
+\bibitem[Lyons(2006)]{Lyons2006} Lyons, T.~D. (2006). Scientific realism and the stratagema de divide et impera. \emph{The British Journal for the Philosophy of Science}, 57(3), 537--560.
+\bibitem[Psillos(1999)]{Psillos1999} Psillos, S. (1999). \emph{Scientific Realism: How Science Tracks Truth}. Routledge.
+\bibitem[Putnam(1975)]{Putnam1975} Putnam, H. (1975). \emph{Mathematics, Matter and Method}. Philosophical Papers, vol.~1. Cambridge University Press.
+\bibitem[Saatsi and Vickers(2011)]{SaatsiVickers2011} Saatsi, J. and Vickers, P. (2011). Miraculous success? Inconsistency and untruth in Kirchhoff's diffraction theory. \emph{The British Journal for the Philosophy of Science}, 62(1), 29--46.
+\bibitem[Smart(1963)]{Smart1963} Smart, J.~J.~C. (1963). \emph{Philosophy and Scientific Realism}. Routledge \& Kegan Paul.
+\bibitem[Stanford(2006)]{Stanford2006} Stanford, P.~K. (2006). \emph{Exceeding Our Grasp: Science, History, and the Problem of Unconceived Alternatives}. Oxford University Press.
+\bibitem[van Fraassen(1980)]{vanFraassen1980} van Fraassen, B.~C. (1980). \emph{The Scientific Image}. Clarendon Press.
+\bibitem[Vickers(2013)]{Vickers2013} Vickers, P. (2013). A confrontation of convergent realism. \emph{Philosophy of Science}, 80(2), 189--211.
+\bibitem[Worrall(1989)]{Worrall1989} Worrall, J. (1989). Structural realism: The best of both worlds? \emph{Dialectica}, 43(1--2), 99--124.
+\end{thebibliography}
+
+\end{document}

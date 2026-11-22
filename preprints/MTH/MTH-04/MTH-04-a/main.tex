@@ -1,0 +1,370 @@
+\documentclass{situationist-preprint}
+
+\title{Neo-Logicism Vindicated}
+\msid{MTH-04-a}
+\msfamily{MTH-04}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_04.lean}
+\mskeywords{logicism; neo-Fregeanism; Hume's principle; Frege's theorem; abstraction; Caesar problem; bad company; logicality; invariance}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does arithmetic reduce to logic? Frege's attempt failed because Basic Law V is inconsistent, but the derivation of the Peano axioms in second-order logic from Hume's principle alone, Frege's theorem, survives. Whether this vindicates logicism depends on whether Hume's principle is itself logical. We argue that it is, in the sense the logicist needs. We define that sense by four conditions: the equivalence relation on the right-hand side is a logical relation by the permutation-invariance criterion; the condition the principle places on its abstraction operator is preserved under every permutation of the domain; the principle fixes its operator up to a one-one relabeling; and the principle is stable, satisfiable on every domain above some size. Hume's principle meets all four; Basic Law V and the other members of the bad company fail the last. The Caesar problem is answered by the third condition: Hume's principle fixes no property of numbers that a relabeling would change, and identity with Caesar is such a property. Arithmetic therefore reduces to logic plus Hume's principle, and Hume's principle is logical in the relevant sense. The arithmetical core and the structural results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}\label{s:problem}
+
+Logicism is the thesis that mathematics, or some substantial part of it, is logic: that its concepts are definable in logical terms and its truths derivable from logical laws by logical means. Frege held it for arithmetic and analysis, and not for geometry \citep{Frege1884}; Russell held it for the whole of mathematics \citep{WhiteheadRussell1910}. In both forms it is generally regarded as having failed. Frege's system was inconsistent, as Russell showed in 1902; the system of \emph{Principia Mathematica} required an axiom of infinity and an axiom of reducibility that no one regarded as truths of logic.
+
+In 1983 Crispin Wright argued that a part of Frege's programme survives the collapse \citep{Wright1983}. Frege had considered, and rejected, defining the cardinal numbers implicitly by the principle that the number of $F$s is identical with the number of $G$s if and only if the $F$s and the $G$s can be correlated one-one \citep[§§62--69]{Frege1884}. Frege called this principle the criterion of identity for numbers; it is now called \emph{Hume's principle} (HP), after a remark in Hume that Frege quotes. Wright observed that the axioms of second-order Peano arithmetic can be derived in second-order logic from HP alone, without Basic Law V, and that HP is consistent. The derivation had been sketched by \citet{Parsons1965} and is implicit in Frege's own proofs, since Frege uses Basic Law V essentially only to derive HP \citep{Heck1993}. \citet{Boolos1987} proved the consistency of the resulting theory, now called \emph{Frege arithmetic}, relative to second-order arithmetic, and named the derivation \emph{Frege's theorem}.
+
+Frege's theorem is not in dispute; its significance is. If HP is logical, or close enough to logic to transmit logic's standing to what follows from it, logicism is vindicated for arithmetic. If HP is a substantive existential claim, Frege's theorem shows only that arithmetic follows from one non-logical axiom rather than another.
+
+We argue for the first option. More exactly, we argue that arithmetic reduces to logic plus Hume's principle, and that Hume's principle is logical in the relevant sense. We give the relevant sense explicitly (Definition~\ref{d:rel}), defend its credentials, and prove that HP satisfies it. Three problems must be faced on the way. The first is Frege's own, the \emph{Caesar problem}: HP fixes the truth of identities between numbers but appears to leave open whether Julius Caesar is a number. The second is the \emph{bad company} objection: principles of the same form as HP include Basic Law V, which is inconsistent, and others that are consistent but incompatible with HP, so the form of HP cannot be what makes it acceptable. The third is the \emph{logicality} question proper: even granting that HP is acceptable, what makes it logical rather than merely analytic, or merely true?
+
+\section{The history of the debate}\label{s:history}
+
+\subsection{Frege}
+
+The \emph{Grundlagen} argues that numbers are objects, since number words function as singular terms in statements of identity, and that a statement of number is an assertion about a concept \citep[§§46, 55--57]{Frege1884}. To explain our knowledge of numbers, Frege appeals to the context principle: it suffices to fix the sense of identities in which number terms occur, and HP fixes them. He then raises the objection that has given its name to a problem: the principle tells us when the number of $F$s is the number of $G$s, but it does not tell us whether the number of $F$s is Julius Caesar, since Caesar is not given as the number of anything \citep[§§56, 66]{Frege1884}. Frege concluded that HP could not serve as a definition and defined the number of $F$s explicitly, as the extension of the concept \enquote{equinumerous with $F$}. HP then becomes a theorem, and the burden falls on the theory of extensions.
+
+In the \emph{Grundgesetze}, that theory is Basic Law V: the extension of $F$ is the extension of $G$ if and only if every $F$ is a $G$ and conversely \citep{Frege1893}. Russell's letter of 1902 showed that Basic Law V, in Frege's second-order setting, is inconsistent \citep{Russell1902}. We state the result as Proposition~\ref{p:blv}.
+
+\subsection{Logicism after Frege, and its revival}
+
+Russell's type theory recovered arithmetic only with an axiom of infinity and an axiom of reducibility \citep{WhiteheadRussell1910}, neither a plausible law of logic; and the success of first-order set theory, with Quine's arguments that second-order logic is set theory in disguise, made the question seem settled in the negative. \citet{Wright1983} reopened it: if HP can be regarded as an implicit definition of the concept of cardinal number, and if such definitions are, as Frege's context principle suggests, a legitimate way of introducing reference to objects, then knowledge of arithmetic can be founded on logic and a definition. \citet{Hodes1984} proposed a related but deflationary view, on which number terms are not genuinely referential. The programme was developed by Wright and Hale in papers collected in \citet{HaleWright2001}. Its critics raised four main objections. \citet{Field1984} argued that existence cannot be secured by stipulation: if HP is analytic, its left-hand side cannot carry an existential commitment the right-hand side lacks. \citet{Boolos1990,Boolos1997} argued that HP is not analytic, since it entails that there are infinitely many objects, and no analytic truth does; and he raised the possibility, developed by \citet{Dummett1991}, that the acceptability of HP cannot be due to its form, since Basic Law V has the same form. Dummett added that HP is impredicative, since the domain over which its second-order quantifiers range includes the numbers it defines, and that the context principle cannot sustain reference under such conditions. And Frege's own Caesar problem remained: an implicit definition that settles the truth of \enquote{the number of $F$s $=$ the number of $G$s} must also settle the truth of \enquote{the number of $F$s $=$ Caesar}, and HP alone does not.
+
+The neo-Fregean replies were these. To Field and Boolos, that the left-hand side of HP reconceptualizes the content of the right-hand side, so that no new commitment is incurred beyond what is already present when the right-hand side is true \citep{Wright1997}. To the Caesar problem, that numbers belong to a sortal category whose identity criterion is equinumerosity, and that objects of different categories, such as persons, are distinct \citep[ch.~14]{HaleWright2001}. To the bad company objection, that acceptable abstraction principles must meet further conditions, such as conservativeness, which HP satisfies and Basic Law V does not.
+
+\subsection{Recent work}
+
+The bad company objection was sharpened by \citet{Weir2003}, who constructed families of abstraction principles each of which is consistent and conservative in the neo-Fregean sense but which are pairwise inconsistent, since each is satisfiable only on domains of a particular kind of cardinality. A principle that discriminates between the possible sizes of the universe in this way cannot be a logical truth, since logic is neutral on such questions. The most systematic response is \citet{Fine2002}, who identified \emph{stability}, satisfiability on every domain beyond some size, as the condition that separates acceptable abstraction principles from the rest, and who also studied the conditions under which an abstraction principle is invariant. \citet{Antonelli2010} examined which notions of invariance an abstraction operator can satisfy. \citet{MacBride2003} surveyed the programme, \citet{Heck2011} examined what exactly Frege's theorem shows, \citet{Linnebo2018} developed a dynamic abstractionism, and \citet{EbertRossberg2016} review the field. Our argument draws on Fine's stability condition and on the invariance literature, and differs from Hale and Wright mainly in its treatment of the Caesar problem, which we resolve by a structural result rather than by sortal categories.
+
+\section{Framework}\label{s:framework}
+
+We work in second-order logic with standard semantics. A \emph{concept} on a domain is a predicate of the domain, and a relation is a two-place predicate.
+
+\begin{definition}[Equinumerosity]\label{d:eq}
+Concepts $F$ and $G$ are \emph{equinumerous}, $F \approx G$, if some relation $R$ correlates them one-one: every $F$ bears $R$ to some $G$, every $G$ is borne $R$ by some $F$, nothing bears $R$ to two things, and no two things bear $R$ to the same thing.
+\end{definition}
+
+Definition~\ref{d:eq} is Frege's \citep[§§71--72]{Frege1884}. It uses only the second-order quantifier, the connectives and identity, and it does not presuppose any notion of number or of set. The four clauses do not require that $R$ hold only between $F$s and $G$s; they ensure that $R$, restricted to the $F$s, is a bijection onto the $G$s.
+
+\begin{definition}[Abstraction]\label{d:abs}
+An \emph{abstraction principle} for an equivalence relation $E$ on concepts is a principle of the form
+\[ \forall F\, \forall G\, (\S F = \S G \leftrightarrow E(F, G)), \]
+where $\S$ is a function symbol taking concepts to objects. An \emph{$E$-abstractor} on a domain is an operation from concepts on the domain to objects of the domain that makes the principle true.
+\end{definition}
+
+\begin{definition}[Hume's principle]\label{d:hp}
+Hume's principle is the abstraction principle for equinumerosity:
+\[ \forall F\, \forall G\, (\# F = \# G \leftrightarrow F \approx G). \]
+We read $\#F$ as \enquote{the number of $F$s}. Basic Law V is the abstraction principle for coextensiveness, $\forall x (Fx \leftrightarrow Gx)$.
+\end{definition}
+
+\begin{definition}[Frege]\label{d:zero}
+\emph{Zero} is the number of things not identical with themselves, $0 = \#[x : x \neq x]$. \emph{One} is the number of things identical with zero. A number $n$ \emph{immediately precedes} $m$, $P(n, m)$, if for some concept $F$ and some object $x$ that falls under $F$, $m = \#F$ and $n = \#[z : Fz \wedge z \neq x]$.
+\end{definition}
+
+The criterion of logicality is the one defended in LOG-16.
+
+\begin{principle}[Invariance]\label{p:inv}
+An operation on a domain is a logical constant if and only if it is invariant under all permutations of the domain; an expression is a logical constant if and only if it denotes a permutation-invariant operation on every domain.
+\end{principle}
+
+LOG-16-a shows that equinumerosity is permutation invariant, and identifies the relation on the right-hand side of HP as one ingredient of the claim that HP is logical, leaving open the status of the number operator, which takes concepts to objects. That question is the one this paper must answer.
+
+\begin{definition}[Stability]\label{d:stable}
+An abstraction principle is \emph{stable} if there is a cardinal $\kappa$ such that the principle is satisfiable on every domain of cardinality at least $\kappa$ \citep{Fine2002}.
+\end{definition}
+
+\begin{definition}[Logical in the relevant sense]\label{d:rel}
+An abstraction principle for $E$ is \emph{logical in the relevant sense} if
+\begin{enumerate}[label=(\alph*)]
+\item $E$ is a logical relation by Principle~\ref{p:inv};
+\item the condition the principle imposes on its operator is permutation invariant: on every domain, the transport of an $E$-abstractor along a permutation is an $E$-abstractor;
+\item the principle fixes its operator up to relabeling: on every domain, any two $E$-abstractors differ by a relabeling that is one-one on the abstracts;
+\item the principle is stable.
+\end{enumerate}
+\end{definition}
+
+The transport of an operator $\S$ along a permutation $\pi$ with inverse $\sigma$ is the operator that takes $F$ to $\pi(\S[z : F(\pi z)])$. It is the operator that does to the permuted domain what $\S$ does to the original. Condition (b) is the form Principle~\ref{p:inv} takes for a principle that constrains an operator without determining it: what must be invariant is not the operator but the class of operators that satisfy the principle. Condition (c) says that the principle discriminates between its abstracts only by the equivalence classes they represent: it is silent about which objects they are. Condition (d) says that the principle decides nothing about the size of the universe beyond a lower bound. Section~\ref{s:logical} defends these conditions as jointly capturing what the logicist needs.
+
+\begin{definition}[Reduction]\label{d:red}
+A theory $T$ \emph{reduces to logic plus} a principle $A$ if the primitive terms of $T$ are definable in the language of second-order logic enriched with the operator of $A$, and the axioms of $T$, so translated, are derivable in second-order logic from $A$.
+\end{definition}
+
+\begin{assumption}\label{a:sol}
+Second-order logic, with standard semantics, is logic.
+\end{assumption}
+
+Assumption~\ref{a:sol} is the conclusion of LOG-09, which argues that the second-order quantifiers are invariant and therefore logical constants by Principle~\ref{p:inv}, and that second-order quantification is not first-order quantification over sets. We rely on it in the form that derivations in second-order logic preserve logical status.
+
+\section{Frege's theorem}\label{s:frege}
+
+\begin{definition}[Frege]\label{d:nat}
+The \emph{strong ancestral} of $P$ holds between $a$ and $b$ if $b$ falls under every concept that is hereditary in $P$ (every $P$-successor of something falling under it falls under it) and under which every $P$-successor of $a$ falls. The \emph{weak ancestral} holds if, in addition, $a = b$ is allowed. A \emph{natural number} is an object to which $0$ bears the weak ancestral of $P$.
+\end{definition}
+
+The following lemmas are derived from HP using only Definitions~\ref{d:eq}--\ref{d:zero}.
+
+\begin{lemma}\label{l:zero}
+Zero is the successor of nothing: there is no $n$ such that $P(n, 0)$.
+\end{lemma}
+
+\begin{proof}
+Suppose $P(n, 0)$. Then for some $F$ and some $x$ with $Fx$, $\#F = 0 = \#[z : z \neq z]$. By HP, $F$ is equinumerous with a concept under which nothing falls. The correlating relation must correlate $x$ with something that falls under that concept, which is impossible.
+\end{proof}
+
+\begin{lemma}\label{l:func}
+$P$ is functional: if $P(n, m)$ and $P(n, m')$, then $m = m'$.
+\end{lemma}
+
+\begin{proof}
+Let $m = \#F$ and $n = \#[z : Fz \wedge z \neq x]$ with $Fx$, and $m' = \#G$ and $n = \#[z : Gz \wedge z \neq y]$ with $Gy$. By HP, some $R$ correlates the $F$s other than $x$ one-one with the $G$s other than $y$. Let $R'$ hold between $u$ and $v$ if either $u$ is an $F$ other than $x$, $v$ a $G$ other than $y$ and $Ruv$, or $u = x$ and $v = y$. $R'$ correlates the $F$s one-one with the $G$s: the added pair is disjoint from the rest on both sides. By HP, $\#F = \#G$.
+\end{proof}
+
+\begin{lemma}\label{l:inj}
+$P$ is one-one: if $P(n, m)$ and $P(n', m)$, then $n = n'$.
+\end{lemma}
+
+\begin{proof}
+Let $m = \#F = \#G$, with $Fx$, $Gy$, $n = \#[z : Fz \wedge z \neq x]$ and $n' = \#[z : Gz \wedge z \neq y]$. By HP, some $R$ correlates the $F$s one-one with the $G$s. Let $a$ be the $G$ correlated with $x$ and $b$ the $F$ correlated with $y$. If $a = y$, the restriction of $R$ correlates the $F$s other than $x$ with the $G$s other than $y$. If not, modify $R$ by correlating $b$ with $a$ in place of the pairs $(b, y)$ and $(x, a)$. Uniformly: let $R'$ hold between an $F$ $u \neq x$ and a $G$ $v \neq y$ if either $Ruv$, or $Ruy$ and $Rxv$. One checks clause by clause that $R'$ is a one-one correlation; the only cases needing care are those in which $u$ is correlated with $y$ by $R$, and in those $v$ must be $a$, which differs from $y$ because $R$ is one-one and $u \neq x$. By HP, $n = n'$.
+\end{proof}
+
+\begin{lemma}\label{l:one}
+Zero immediately precedes one.
+\end{lemma}
+
+\begin{proof}
+Take the concept \enquote{identical with zero} and the object $0$ in Definition~\ref{d:zero}. The things identical with zero other than zero are no things, so their number is $\#[z : z \neq z] = 0$ by HP, the empty relation correlating two empty concepts.
+\end{proof}
+
+\begin{theorem}[Frege's theorem]\label{t:frege}
+In second-order logic, HP and Definitions~\ref{d:zero} and~\ref{d:nat} yield the axioms of second-order Peano arithmetic: zero is a natural number; every natural number has exactly one immediate successor, which is a natural number; zero is the successor of no natural number; no two natural numbers have the same successor; and every concept under which zero falls and which is hereditary in $P$ among the natural numbers holds of every natural number.
+\end{theorem}
+
+\begin{proof}
+That zero is a natural number, and that the successor of a natural number is one, are immediate from Definition~\ref{d:nat}; induction is the definition of natural number unfolded. Uniqueness of successors, the fact that zero is no successor and the injectivity of successor are Lemmas~\ref{l:func}, \ref{l:zero} and~\ref{l:inj}. It remains to show that every natural number has a successor. Frege's proof takes, for each natural number $n$, the concept \enquote{natural number that bears the weak ancestral of $P$ to $n$}, and shows by induction that the number of this concept is a successor of $n$: the concept holds of $n$, and removing $n$ yields a concept equinumerous with the corresponding concept for $n$'s predecessor. The induction requires the lemma that no natural number bears the strong ancestral of $P$ to itself, itself proved by induction from Lemmas~\ref{l:zero} and~\ref{l:inj}. Lemma~\ref{l:one} is the base case. The details are in \citet{Frege1893} and, in modern form, \citet{Heck1993} and \citet{Boolos1987}.
+\end{proof}
+
+\begin{corollary}\label{c:red}
+Second-order Peano arithmetic reduces to logic plus HP in the sense of Definition~\ref{d:red}.
+\end{corollary}
+
+\begin{proof}
+The primitives of arithmetic, zero, successor and natural number, are defined by Definitions~\ref{d:zero} and~\ref{d:nat} in second-order logic with $\#$. Theorem~\ref{t:frege} derives the translated axioms. Addition and multiplication are definable in second-order arithmetic by recursion, so the reduction extends to the arithmetic of addition and multiplication.
+\end{proof}
+
+\section{Hume's principle is logical in the relevant sense}\label{s:logical}
+
+\begin{proposition}\label{p:eqinv}
+Equinumerosity is a logical relation by Principle~\ref{p:inv}.
+\end{proposition}
+
+\begin{proof}
+LOG-16-a proves that equinumerosity is preserved by every permutation of the domain, indeed by every bijection between domains. Definition~\ref{d:eq} defines it in pure second-order logic, so the same expression denotes it on every domain.
+\end{proof}
+
+\begin{proposition}[Transport]\label{p:transport}
+On any domain, if $\#$ is an HP-abstractor, so is its transport along any permutation.
+\end{proposition}
+
+\begin{proof}
+Let $\pi$ be a permutation with inverse $\sigma$, and let $\#^\pi F = \pi(\#[z : F(\pi z)])$. Suppose $\#^\pi F = \#^\pi G$. Applying $\sigma$, $\#[z : F(\pi z)] = \#[z : G(\pi z)]$, so by HP the composite concepts are equinumerous. Composing the correlating relation with $\sigma$ on both sides correlates $F$ with $G$. Conversely, if $F \approx G$ by $R$, the composite concepts are equinumerous by the relation that holds between $u$ and $v$ when $R(\pi u, \pi v)$, so by HP their numbers are identical, and so are their images under $\pi$.
+\end{proof}
+
+\begin{proposition}[Uniqueness up to relabeling]\label{p:unique}
+On any domain, if $\#$ and $\#'$ are HP-abstractors, there is a function $h$ such that $\#' F = h(\# F)$ for every $F$, and $h$ is one-one on the numbers.
+\end{proposition}
+
+\begin{proof}
+For a number $d$, let $h(d) = \#'G$ for some $G$ with $\#G = d$, chosen by the axiom of choice; outside the numbers let $h$ be arbitrary. If $\#F = d$, then $\#F = \#G$, so $F \approx G$ by HP for $\#$, and so $\#' F = \#' G = h(d)$ by HP for $\#'$. If $h(\#F) = h(\#G)$, then $\#'F = \#'G$, so $F \approx G$, so $\#F = \#G$.
+\end{proof}
+
+\begin{proposition}[Stability]\label{p:stable}
+HP is satisfiable on every infinite domain and on no finite domain. It is therefore stable.
+\end{proposition}
+
+\begin{proof}
+On a domain of $n$ elements, concepts have $n + 1$ cardinalities, $0$ to $n$, and an HP-abstractor must assign $n + 1$ distinct objects to them, which is impossible. On an infinite domain of cardinality $\kappa = \aleph_\alpha$, the cardinalities of concepts are the finite cardinals and the infinite cardinals $\aleph_\beta$ with $\beta \leq \alpha$; there are $\aleph_0 + |\alpha|$ of these, which is at most $\kappa$, since $|\alpha| \leq \aleph_\alpha$. Choose an injection of these cardinalities into the domain and let $\#F$ be the image of the cardinality of $F$. Take $\kappa$ in Definition~\ref{d:stable} to be $\aleph_0$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+Hume's principle is logical in the relevant sense.
+\end{theorem}
+
+\begin{proof}
+Conditions (a) to (d) of Definition~\ref{d:rel} are Propositions~\ref{p:eqinv}, \ref{p:transport}, \ref{p:unique} and~\ref{p:stable}.
+\end{proof}
+
+\begin{corollary}\label{c:main}
+Arithmetic reduces to logic plus Hume's principle, and Hume's principle is logical in the relevant sense.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{c:red} and Theorem~\ref{t:main}.
+\end{proof}
+
+\begin{remark}\label{r:naive}
+The number operator is not a logical constant in the sense of Principle~\ref{p:inv}. On a domain with at least two elements, a permutation that moves $\#[z : z \neq z]$ maps the empty concept to itself but its number elsewhere, so $\#$ does not commute with it. No operation from concepts to objects is invariant in this sense on such domains; compare the discussion in \citet{Antonelli2010}. LOG-16-a left open whether the number operator is logical; our answer is that it is not, taken by itself, and that it does not need to be. What the logicist needs is that the principle introducing it is logical, and the principle constrains the operator only up to the relabelings of Proposition~\ref{p:unique}, a class closed under permutations by Proposition~\ref{p:transport}.
+\end{remark}
+
+\subsection{Why these conditions are the relevant ones}
+
+The logicist claims that arithmetic has the standing of logic: that it is topic-neutral and neutral on contingent questions about what the world contains. Each condition of Definition~\ref{d:rel} secures part of this.
+
+Conditions (a) and (b) secure topic-neutrality. An abstraction principle introduces singular terms that must denote particular objects, so what can be topic-neutral is not the denotation of each term but the condition the terms jointly satisfy; Proposition~\ref{p:transport} shows that whatever HP says about the number operator, it says equally about every permuted version of it. Condition (c) secures that HP says nothing about which objects the numbers are: by Proposition~\ref{p:unique}, HP fixes only the pattern of identities and distinctions among the abstracts, and hence, by Theorem~\ref{t:frege}, the arithmetical structure they form. This is the basis of our answer to the Caesar problem.
+
+Condition (d) secures neutrality on the size of the universe. HP entails that there are infinitely many objects, and this has been taken to disqualify it from logical status \citep{Boolos1997}. But HP does not decide between any two infinite cardinalities, and it is compatible with every other stable principle (Proposition~\ref{p:compat}). A principle that, like Basic Law V, has no models, or that, like the principles of Section~\ref{s:bad}, has models only of selected sizes, settles a question on which logic must be neutral. A principle that has models of every size beyond its lower bound settles only that its abstracts exist.
+
+\section{The Caesar problem}\label{s:caesar}
+
+Frege's objection was that HP does not determine the truth value of \enquote{$\#F = $ Caesar}. As a statement about what HP entails, the objection is correct. Proposition~\ref{p:unique} explains why: on a domain that contains Caesar, if one HP-abstractor sends the empty concept to Caesar, a relabeling yields another that sends it elsewhere, and both satisfy HP. As an objection to neo-logicism, it presupposes that the identity must be settled by HP or not at all.
+
+The neo-Fregean reply of \citet[ch.~14]{HaleWright2001} is that number is a sortal concept with equinumerosity as its criterion of identity, and that objects falling under sortals with different criteria of identity are distinct. Caesar falls under the sortal \enquote{person}, whose criterion of identity is not equinumerosity of concepts, so Caesar is not a number. The reply has been criticized on the ground that a single object can fall under sortals with different criteria, as a statue and a lump may on some views \citep{MacBride2003}, so that a difference in criteria does not entail distinctness.
+
+We give a different answer. It does not require that categories be exclusive. It requires only Leibniz's law and the following principle.
+
+\begin{principle}[Structural exhaustion]\label{p:exh}
+The properties a number has are those fixed by Hume's principle, logic and its position in the series of numbers; a property not preserved by every relabeling of Proposition~\ref{p:unique} is not had by any number.
+\end{principle}
+
+\begin{proposition}\label{p:caesar}
+Given Principle~\ref{p:exh}, no number is Caesar.
+\end{proposition}
+
+\begin{proof}
+Caesar has properties that are not preserved by relabeling, such as having been born in Rome: for any number $\#F$, a relabeling exchanges $\#F$ with some object that has not been born in Rome. By Principle~\ref{p:exh}, no number has this property. Caesar has it. By Leibniz's law, Caesar is not $\#F$, for any $F$.
+\end{proof}
+
+Principle~\ref{p:exh} is the thesis of MTH-14, that numbers are positions in structures with no properties beyond their structural ones, applied to the numbers HP introduces. The two theses are mutually supporting. Proposition~\ref{p:unique} shows that HP fixes the numbers only up to relabeling; Theorem~\ref{t:frege} shows that the finite numbers form, under $P$, a progression; the structural properties of a number are those it has in virtue of its place in that progression, and in the wider structure of cardinals. An object about which nothing is fixed beyond its place in a structure is what MTH-14 calls a position. The abstracts of HP are therefore abstract objects, as MTH-01 holds numbers to be, and they are positions, as MTH-14 holds.
+
+The answer extends to all cross-sortal identifications that do not follow from HP. Whether the number $2$ is the set $\{\emptyset, \{\emptyset\}\}$ is settled negatively in the same way, since being the set with those members is not preserved by relabeling. This agrees with the observation of \citet{Benacerraf1965} that no set-theoretic reduction of the numbers is privileged, since each attributes to numbers properties that the others deny them. On our account the reason is that none of those properties is structural, so none is had by numbers, and each reduction is a relabeling.
+
+\section{The bad company}\label{s:bad}
+
+\begin{proposition}\label{p:blv}
+Basic Law V is unsatisfiable on every domain.
+\end{proposition}
+
+\begin{proof}
+Suppose $\S$ satisfies Basic Law V on a domain. Let $R$ be the concept \enquote{is $\S F$ for some $F$ under which it does not fall}. If $\S R$ falls under $R$, then $\S R = \S F$ for some $F$ under which $\S R$ does not fall; by Basic Law V, $F$ and $R$ are coextensive, so $\S R$ does not fall under $R$. Hence $\S R$ does not fall under $R$. But then $R$ itself witnesses that it does.
+\end{proof}
+
+Basic Law V fails condition (d) of Definition~\ref{d:rel} trivially, having no models at all. It satisfies conditions (a) to (c), since coextensiveness is invariant and the abstractors of Basic Law V, on any domain where there were any, would be preserved by transport and unique up to relabeling. This shows that conditions (a) to (c) do not suffice, and that the work of excluding Basic Law V is done by (d). The bad company objection, as Dummett and Boolos pressed it, is that the form of HP does not distinguish it from Basic Law V; our answer is that what distinguishes them is not their form but their stability.
+
+Consistent members of the bad company are excluded in the same way. The \emph{nuisance principle} \citep{Wright1997} abstracts on the relation of differing in finitely many objects. On a finite domain all concepts are so related, and the principle is satisfiable; on an infinite domain of cardinality $\kappa$ there are $2^\kappa$ equivalence classes, too many to be mapped one-one into the domain. The principle is consistent and has only finite models; it is incompatible with HP and is not stable. \citet{Boolos1990} gave other examples, and \citet{Weir2003} gave families of principles, each consistent and conservative, that are satisfiable exactly on domains whose cardinalities have some property and are pairwise incompatible. None is stable: each fails on arbitrarily large domains.
+
+\begin{proposition}\label{p:compat}
+Any two stable abstraction principles are jointly satisfiable on every sufficiently large domain.
+\end{proposition}
+
+\begin{proof}
+Let the first be satisfiable on every domain of cardinality at least $\kappa$ and the second on every domain of cardinality at least $\lambda$. On a domain of cardinality at least the larger of $\kappa$ and $\lambda$, each has an abstractor. The two principles constrain different operators and impose no condition linking them, so the pair of abstractors satisfies both.
+\end{proof}
+
+Proposition~\ref{p:compat} answers the embarrassment of riches argument of \citet{Weir2003}: the principles that are logical in the relevant sense cannot conflict, since stability entails joint satisfiability. The argument assumes that the operators of different principles are not identified with one another; if they were, as in a theory that identified the number of $F$s with some other abstract, the joint principle would be a new abstraction principle, to be assessed by Definition~\ref{d:rel} in its own right. The companion manuscript MTH-04-b treats further members of the bad company.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Infinity]
+No truth of logic entails that there are infinitely many objects. HP entails it. So HP is not a truth of logic \citep{Boolos1997}.
+\end{objection}
+
+\begin{reply}
+First-order logic, on the standard semantics, already entails that there is at least one object. Existential commitment as such does not disqualify a principle from logic. What would disqualify it is a commitment to a specific contingent fact about what there is. Proposition~\ref{p:stable} shows that HP's commitment is not of that kind: HP is neutral on every question about the size of the universe except the existence of the objects it introduces. That the numbers exist is not a contingent fact about the world but the content of HP's left-hand side.
+\end{reply}
+
+\begin{objection}[Existence by stipulation]
+If HP is a definition, it cannot create objects; if it is not, it is a substantive axiom and its logicality is irrelevant. One cannot define things into existence \citep{Field1984}.
+\end{objection}
+
+\begin{reply}
+HP is not a definition that creates objects; it is a principle that, if true, fixes the truth conditions of number statements in terms of statements about concepts \citep{Wright1997}. Its truth is not stipulated; what makes it knowable a priori is that accepting it is constitutive of possessing the concept of cardinal number, which is the claim of EPI-12. That the concept is not defective, as the concept of extension was, is not guaranteed by its constitutive rules. Proposition~\ref{p:stable} shows that HP is consistent, relative to set theory; MTH-01 provides independent, empirical support for the existence of numbers. Our claim is not that HP is true by stipulation but that, being true, it is logical in the relevant sense.
+\end{reply}
+
+\begin{objection}[Impredicativity]
+The second-order quantifiers in HP range over concepts on a domain that includes the numbers being introduced. The definition of the number of $F$s thus presupposes the totality to which the number belongs, and is viciously circular \citep{Dummett1991}.
+\end{objection}
+
+\begin{reply}
+Impredicative specification is vicious when what is specified is constructed from the totality, as in the ramified hierarchy. HP does not construct numbers; it states a condition on their identity. The condition is determinate whenever the second-order quantifiers have a determinate range, which on the standard semantics they do; and LOG-09 argues that this semantics is correct. Proposition~\ref{p:stable} confirms that HP is satisfiable on any infinite domain, so the condition is coherent. Impredicativity of this kind is pervasive in classical mathematics, for instance in the least upper bound principle, and it is no more objectionable here.
+\end{reply}
+
+\begin{objection}[Gerrymandering]
+Definition~\ref{d:rel} has been tailored to fit HP. Nothing makes \enquote{logical in the relevant sense} logic.
+\end{objection}
+
+\begin{reply}
+Each condition is motivated independently of HP, by a feature that logic is generally held to have: invariance under permutation \citep{Tarski1986,Sher1991}, silence about which objects are which, and neutrality on the size of the universe. The definition does not mention numbers or equinumerosity, and it classifies other principles, including Basic Law V, the nuisance principle and Weir's principles, in the way that the literature on bad company independently judges them. We grant that \enquote{logical in the relevant sense} is not \enquote{first-order valid}, and that a philosopher who restricts logic to first-order validity will not accept the conclusion. Such a philosopher must also deny Assumption~\ref{a:sol}, which LOG-09 defends.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result concerns arithmetic. It does not establish that analysis or set theory reduces to logic. Abstraction principles for the real numbers have been proposed \citep{Hale2000}, and abstraction principles for sets have been studied for their stability, but whether they meet Definition~\ref{d:rel} requires separate argument. It does not establish that the concept of number is not defective; it establishes that HP is consistent relative to standard set theory, which is as much as can be established for any non-trivial mathematical theory. It does not establish that the indispensability argument of MTH-01 is idle: as EPI-12-a notes, a proposition may be knowable on more than one basis. Nor does it establish that the number operator is a logical constant by Principle~\ref{p:inv}; Remark~\ref{r:naive} shows that it is not, and that logicism does not need it to be.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/MTH/MTH_04.lean} defines equinumerosity as Frege's one-one correlation (Definition~\ref{d:eq}), declares a domain \texttt{D} and a number operator \texttt{num} as primitives, and states Hume's principle as an axiom \texttt{hume} (Definition~\ref{d:hp}). Zero, one and the predecessor relation are defined as in Definition~\ref{d:zero}. From these the module proves Lemmas~\ref{l:zero}, \ref{l:func}, \ref{l:inj} and~\ref{l:one}. It proves Propositions~\ref{p:transport} and~\ref{p:unique} for an arbitrary operator satisfying HP on an arbitrary type, and Proposition~\ref{p:blv} for an arbitrary operator on an arbitrary type. The main statements are these.
+
+\begin{lstlisting}
+theorem pred_injective (n n' m : D) (h1 : Pred n m) (h2 : Pred n' m) :
+    n = n'
+
+theorem basic_law_V_inconsistent {E : Type} (ext : (E → Prop) → E) :
+    ¬ ∀ F G : E → Prop, ext F = ext G ↔ ∀ x, F x ↔ G x
+\end{lstlisting}
+
+The \texttt{\#print axioms} output is as follows (reflowed).
+
+\begin{lstlisting}
+'Philosophy.MTH_04.zero_not_successor' depends on axioms:
+  [Philosophy.MTH_04.D, Philosophy.MTH_04.hume, Philosophy.MTH_04.num]
+'Philosophy.MTH_04.pred_injective' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.MTH_04.D, Philosophy.MTH_04.hume, Philosophy.MTH_04.num]
+'Philosophy.MTH_04.hp_unique' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+'Philosophy.MTH_04.basic_law_V_inconsistent' does not depend on any axioms
+\end{lstlisting}
+
+The arithmetical lemmas depend on Hume's principle and on nothing else beyond Lean's classical logic; the axioms \texttt{D} and \texttt{num} only declare the domain and the operator. That Basic Law V is inconsistent depends on no axiom at all, as Russell's argument requires only the logic of the second-order quantifier. Proposition~\ref{p:unique} uses choice to pick a representative concept for each number, as its prose proof does. The module does not formalize the ancestral, the existence of successors for every natural number or the induction axiom, and so formalizes the core of Theorem~\ref{t:frege} rather than the whole; nor does it formalize Proposition~\ref{p:stable}, which requires cardinal arithmetic. It formalizes none of the philosophical claims of Sections~\ref{s:logical} and~\ref{s:caesar}, which concern whether the conditions of Definition~\ref{d:rel} capture logicality.
+
+\section{Conclusion}
+
+Frege's theorem shows that the axioms of second-order arithmetic follow in second-order logic from Hume's principle. Hume's principle is logical in the sense the logicist needs: the relation on its right-hand side is permutation invariant, the condition it places on the number operator is preserved by every permutation, it fixes that operator up to relabeling, and it is stable. The number operator itself is not a logical constant, and need not be. The Caesar problem is answered by the fact that Hume's principle fixes nothing about the numbers beyond their structure, together with the thesis that numbers have no other properties; the bad company is excluded by stability, which Basic Law V and its consistent but discriminating relatives lack. Arithmetic reduces to logic plus Hume's principle, and Hume's principle is logical in the relevant sense.
+
+\begin{thebibliography}{99}\small
+\bibitem[Antonelli(2010)]{Antonelli2010} Antonelli, G.~A. (2010). Notions of invariance for abstraction principles. \emph{Philosophia Mathematica}, 18(3), 276--292.
+\bibitem[Benacerraf(1965)]{Benacerraf1965} Benacerraf, P. (1965). What numbers could not be. \emph{Philosophical Review}, 74(1), 47--73.
+\bibitem[Boolos(1987)]{Boolos1987} Boolos, G. (1987). The consistency of Frege's \emph{Foundations of Arithmetic}. In J.~J. Thomson (Ed.), \emph{On Being and Saying: Essays for Richard Cartwright} (pp.~3--20). MIT Press.
+\bibitem[Boolos(1990)]{Boolos1990} Boolos, G. (1990). The standard of equality of numbers. In G.~Boolos (Ed.), \emph{Meaning and Method: Essays in Honor of Hilary Putnam} (pp.~261--277). Cambridge University Press.
+\bibitem[Boolos(1997)]{Boolos1997} Boolos, G. (1997). Is Hume's principle analytic? In R.~G. Heck Jr. (Ed.), \emph{Language, Thought, and Logic: Essays in Honour of Michael Dummett} (pp.~245--261). Oxford University Press.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{Frege: Philosophy of Mathematics}. Duckworth.
+\bibitem[Ebert and Rossberg(2016)]{EbertRossberg2016} Ebert, P.~A. and Rossberg, M. (Eds.) (2016). \emph{Abstractionism: Essays in Philosophy of Mathematics}. Oxford University Press.
+\bibitem[Field(1984)]{Field1984} Field, H. (1984). Platonism for cheap? Crispin Wright on Frege's context principle. \emph{Canadian Journal of Philosophy}, 14(4), 637--662.
+\bibitem[Fine(2002)]{Fine2002} Fine, K. (2002). \emph{The Limits of Abstraction}. Oxford University Press.
+\bibitem[Frege(1884)]{Frege1884} Frege, G. (1884). \emph{Die Grundlagen der Arithmetik}. Koebner.
+\bibitem[Frege(1893)]{Frege1893} Frege, G. (1893). \emph{Grundgesetze der Arithmetik}, vol.~I. Pohle.
+\bibitem[Hale(2000)]{Hale2000} Hale, B. (2000). Reals by abstraction. \emph{Philosophia Mathematica}, 8(2), 100--123.
+\bibitem[Hale and Wright(2001)]{HaleWright2001} Hale, B. and Wright, C. (2001). \emph{The Reason's Proper Study: Essays towards a Neo-Fregean Philosophy of Mathematics}. Oxford University Press.
+\bibitem[Heck(1993)]{Heck1993} Heck, R.~G. (1993). The development of arithmetic in Frege's \emph{Grundgesetze der Arithmetik}. \emph{Journal of Symbolic Logic}, 58(2), 579--601.
+\bibitem[Heck(2011)]{Heck2011} Heck, R.~G. (2011). \emph{Frege's Theorem}. Oxford University Press.
+\bibitem[Hodes(1984)]{Hodes1984} Hodes, H.~T. (1984). Logicism and the ontological commitments of arithmetic. \emph{Journal of Philosophy}, 81(3), 123--149.
+\bibitem[Linnebo(2018)]{Linnebo2018} Linnebo, {\O}. (2018). \emph{Thin Objects: An Abstractionist Account}. Oxford University Press.
+\bibitem[MacBride(2003)]{MacBride2003} MacBride, F. (2003). Speaking with shadows: A study of neo-logicism. \emph{British Journal for the Philosophy of Science}, 54(1), 103--163.
+\bibitem[Parsons(1965)]{Parsons1965} Parsons, C. (1965). Frege's theory of number. In M.~Black (Ed.), \emph{Philosophy in America} (pp.~180--203). Allen \& Unwin.
+\bibitem[Russell(1902)]{Russell1902} Russell, B. (1902). Letter to Frege. In J.~van Heijenoort (Ed.), \emph{From Frege to G\"odel: A Source Book in Mathematical Logic, 1879--1931} (1967, pp.~124--125). Harvard University Press.
+\bibitem[Sher(1991)]{Sher1991} Sher, G. (1991). \emph{The Bounds of Logic: A Generalized Viewpoint}. MIT Press.
+\bibitem[Tarski(1986)]{Tarski1986} Tarski, A. (1986). What are logical notions? \emph{History and Philosophy of Logic}, 7(2), 143--154.
+\bibitem[Weir(2003)]{Weir2003} Weir, A. (2003). Neo-Fregeanism: An embarrassment of riches. \emph{Notre Dame Journal of Formal Logic}, 44(1), 13--48.
+\bibitem[Whitehead and Russell(1910)]{WhiteheadRussell1910} Whitehead, A.~N. and Russell, B. (1910). \emph{Principia Mathematica}, vol.~1. Cambridge University Press.
+\bibitem[Wright(1983)]{Wright1983} Wright, C. (1983). \emph{Frege's Conception of Numbers as Objects}. Aberdeen University Press.
+\bibitem[Wright(1997)]{Wright1997} Wright, C. (1997). On the philosophical significance of Frege's theorem. In R.~G. Heck Jr. (Ed.), \emph{Language, Thought, and Logic: Essays in Honour of Michael Dummett} (pp.~201--244). Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,405 @@
+\documentclass{situationist-preprint}
+
+\title{Reasons First}
+\msid{MTE-11-a}
+\msfamily{MTE-11}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_11.lean}
+\mskeywords{reasons; normativity; buck-passing; ought; fittingness; Padoa's method; naturalism; definition}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Which normative notion is fundamental? Reasons-first theorists hold that the relation of being a reason is primitive and that ought, value, fittingness and rationality are defined from it; rivals give the first place to ought, to value or to fittingness. We argue that reasons come first. The thesis has two halves. The first is that every other normative notion can be defined from reasons: we give definitions of ought, permission, fittingness, goodness, betterness and rationality, and prove that the defined notions have the structure the pre-theoretic notions are agreed to have. The second is that reasons cannot be defined from any rival base. We establish it by Padoa's method: two possible situations agree on every deontic and fittingness fact and differ in whether there are reasons, and two others agree on every evaluative fact and differ in the same way. The first half is a matter of construction, the second of non-definability, and both are formalized in Lean. We then show that the primacy of reasons in the order of normative definition is consistent with the identity of reason facts with natural facts about idealized reactions, since an a posteriori identity is not a definition.
+\end{abstract}
+
+\section{The question}
+
+Normative vocabulary is varied. We say that an agent ought to keep her promise, that she may break it, that her resentment is fitting, that her friendship is good, that her decision was rational, and that the fact that she promised is a reason for her to keep the promise. The question whether reasons are fundamental is the question whether one of these notions is first in the order of definition: whether there is a normative notion from which all the others can be defined, and which cannot itself be defined from any of them. Four answers are current.
+
+\emph{Reasons first.} The relation of being a reason, holding between a fact, an agent and a response, is primitive, and the other normative notions are defined in terms of it. \citet{Scanlon1998} proposed that being good is not a reason-giving property but the higher-order property of having properties that give reasons to favor; he later defended the view that reasons are the fundamental normative notion \citep{Scanlon2014}. \citet{Parfit2011} holds that the concept of a reason is indefinable and that the other normative concepts can be explained in its terms. \citet{Skorupski2010} develops the view systematically, defining the normative domain as the domain of reasons, and \citet{Raz1999} and \citet{Dancy2004} take reasons as the basic unit of normative explanation. \citet{Schroeder2007,Schroeder2021} gives the most developed contemporary defence, and combines it, as we shall, with a reductive account of what reasons are.
+
+\emph{Value first.} The good is fundamental, and reasons are facts about what would promote or respect value. This is the structure of \citet{Moore1903}, for whom the right act is the one that produces the most good, and it is defended today by \citet{Maguire2016}, among others.
+
+\emph{Ought first.} The deontic notion is fundamental. \citet{Broome2004,Broome2013} defines a reason for an agent to $\phi$ as a fact that plays a certain role in explaining why she ought to $\phi$, and \citet{KearnsStar2009} define it as evidence that she ought to $\phi$. \citet{Wedgwood2007} gives ought a central place in the semantics of normative terms.
+
+\emph{Fittingness first.} The fittingness of attitudes is fundamental. The idea goes back to the fitting-attitude analyses of value of \citet{Brentano1889} and \citet{Ewing1939}, and has been developed into a general programme by \citet{Chappell2012} and by \citet{McHughWay2016}, who define a reason as a premise of good reasoning, and good reasoning as reasoning that preserves fittingness.
+
+We defend reasons first. The thesis has two halves, which are often run together. The first is \emph{sufficiency}: every other normative notion can be defined in terms of reasons, together with non-normative notions. The second is \emph{primitiveness}: the notion of a reason cannot be defined in terms of other normative notions. Sufficiency is established by giving definitions and showing that they deliver the right structure; primitiveness is established by showing that every rival base leaves the reasons undetermined. The second half has been argued mostly case by case, by counterexamples to particular definitions. We give a general method, Padoa's, and two witnesses, and we prove that no definition of reasons from deontic, fittingness or evaluative facts can succeed.
+
+A third question must be kept apart from both. That reasons are primitive in the order of normative definition does not settle whether reason facts are identical to, or grounded in, facts of some other kind. MTE-01 argues that moral facts are natural facts about idealized reactions. Section~\ref{s:natural} shows that this is consistent with the primacy of reasons, and states precisely how the two theses fit together.
+
+\subsection{A short history of the debate}
+
+The programme of defining the normative from a single notion is as old as the subject, and each of its main versions was defeated by a case.
+
+\emph{The good as fundamental.} Moore defined the right as what produces the most good, and held that the good itself is simple and indefinable \citep{Moore1903}. The view was undone by the observation that it leaves no room for agent-relative constraints and options: Ross's case of the promise whose breach would produce marginally more good than its keeping, in which the promise still binds, showed that what one ought to do is not fixed by the value of outcomes \citep{Ross1930}. Value-first theorists responded by relativizing value to agents, at the cost of a notion of value that is no longer the notion with which they began.
+
+\emph{Fitting attitudes.} Brentano proposed that to be good is to be the fitting object of love, and Ewing that it is to be the fitting object of a pro attitude \citep{Brentano1889,Ewing1939}. The proposal reverses Moore's order: value is defined from a deontic or quasi-deontic notion applied to attitudes. Its difficulty, now known as the wrong kind of reasons problem, is that there may be reasons, or fittingness of a sort, to favor something that is not good, as when a demon threatens to punish anyone who does not admire him \citep{RabinowiczRonnow2004}. The same difficulty arises for emotions, where it was pressed against sentimentalist theories as the conflation of fittingness with moral or prudential appropriateness \citep{DArmsJacobson2000}.
+
+\emph{Buck-passing.} \citet{Scanlon1998} took the fitting-attitude analysis over into the vocabulary of reasons: being good is having other properties that provide reasons to respond favorably. The buck-passing account made reasons the unit in terms of which value is explained, and it inherited the wrong kind of reasons problem. \citet{Parfit2001} distinguished object-given from state-given reasons, and \citet{Hieronymi2005} distinguished reasons that bear on whether the object merits the attitude from reasons that bear on whether it would be good to have it; the buck-passer restricts the analysis to the first kind. Critics replied that the restriction cannot be stated without using the notion of value it was meant to define \citep{Vayrynen2006}. We return to the point in Objection~\ref{o:wkr}.
+
+\emph{Ought first.} \citet{Broome2004} proposed that a reason is a fact that figures in a certain kind of explanation of why one ought: either a fact that explains why one ought, or a fact that plays the role of a weight in a weighing explanation. \citet{KearnsStar2009} proposed that a reason to $\phi$ is evidence that one ought to $\phi$, and \citet{Brunero2009} replied with cases of evidence that one ought that are not reasons, such as the testimony of a reliable adviser. Broome's account is the more resistant, and it is the one we discuss in Objection~\ref{o:broome}.
+
+\emph{Fittingness first, again.} \citet{Chappell2012} argued that fittingness is the sole normative primitive, and \citet{McHughWay2016} that a reason is a premise of a pattern of good reasoning, good reasoning being defined as reasoning that tends to preserve fittingness. On their view the notion of a reason is downstream of fittingness and of a non-normative notion of reasoning.
+
+The history shows a pattern. Each proposal defines one notion from another, and each is met by a case in which the base facts are fixed and the defined facts vary. That pattern is the one Padoa's method makes precise, and the cases are our witnesses.
+
+\section{What \enquote{first} means}
+
+Three claims should be distinguished.
+
+\begin{principle}[Sufficiency]\label{p:suff}
+Every normative notion other than that of a reason can be defined in terms of the reason relation together with non-normative notions.
+\end{principle}
+
+\begin{principle}[Primitiveness]\label{p:prim}
+The reason relation cannot be defined in terms of other normative notions, with or without non-normative notions.
+\end{principle}
+
+\begin{principle}[Explanatory priority]\label{p:expl}
+Where a normative fact of another kind obtains, it obtains because of the reasons: an agent ought to $\phi$ because of the reasons for $\phi$-ing and against the alternatives, and not conversely.
+\end{principle}
+
+A definition, in the sense of \ref{p:suff} and \ref{p:prim}, is an explicit biconditional that holds necessarily and that states what the defined notion consists in. Necessity is not enough for definition, since necessarily coextensive notions may differ in which of them explains the other; but necessary coextension is a necessary condition of definition, and our negative results exploit only that condition. Where we show that reasons are not definable from a base, we show that no function of the base facts gives the reason facts in every possible situation, and a fortiori that no definition does.
+
+The three claims concern the \emph{order of normative definition}: the relations of definition among normative notions. None of them says that reasons are metaphysically fundamental, that reason facts are not identical to facts of another kind, or that the concept of a reason is unanalysable in non-normative terms by a posteriori identification. Those questions are taken up in Section~\ref{s:natural}.
+
+\section{Framework}
+
+A situation, for our purposes, is a possible circumstance of a given agent, with a set of options: the acts she can perform and the attitudes she can take. We call acts and attitudes alike \emph{responses}.
+
+\begin{assumption}[The primitive]\label{a:prim}
+There is a relation of being a reason, which holds between a fact, an agent, a response and a situation, and which comes with a strength. In each situation, the reasons for each response combine into a total strength, which is a non-negative magnitude.
+\end{assumption}
+
+The assumption builds in two simplifications, which we discuss in Section~\ref{s:limits}. The first is that strengths combine additively into a total; the second is that the totals are comparable. The strength is not a second primitive: a consideration that is a reason is a reason of some strength, and there is no reason of no strength, so the primitive is a single graded relation, as the primitive of a theory of length is the single graded relation of being longer by a given amount. Neither simplification is part of the thesis that reasons come first; both are needed only for the particular definitions of ought and permission below, and both can be relaxed without affecting the non-definability results. Holism about reasons, the view that a consideration that is a reason in one situation may be no reason, or a reason against, in another \citep{Dancy2004}, is accommodated by the relativization of the relation to situations.
+
+\begin{definition}[Pro tanto reason]\label{d:reason}
+In a situation, there is a \emph{reason} for a response if the total strength of the reasons for it is positive.
+\end{definition}
+
+\begin{definition}[Ought]\label{d:ought}
+In a situation with choice set $S$, the agent \emph{ought} to choose $a$ if $a\in S$ and the reasons for $a$ are stronger than the reasons for each other option in $S$.
+\end{definition}
+
+\begin{definition}[Permission]\label{d:perm}
+In a situation with choice set $S$, $a$ is \emph{permissible} if $a\in S$ and no option in $S$ is supported by stronger reasons than $a$.
+\end{definition}
+
+\begin{definition}[Fittingness]\label{d:fit}
+An attitude is \emph{fitting}, among the attitudes open to the agent in a situation, if the reasons for it are sufficient: no rival attitude is supported by stronger reasons of the right kind.
+\end{definition}
+
+\begin{definition}[Goodness and betterness]\label{d:good}
+An object is \emph{good} if there is reason, of the right kind, to favor it; one object is \emph{better} than another if the reasons of the right kind to favor the first are stronger than those to favor the second.
+\end{definition}
+
+Definition~\ref{d:good} is the buck-passing account \citep{Scanlon1998}. The qualification \enquote{of the right kind} restricts the reasons to those given by the object rather than by the benefits of having the attitude \citep{Parfit2001}; it is defined in Section~\ref{s:cases} in terms of reasons alone, and nothing in the formal results depends on it.
+
+Rationality is said in several ways. An agent may be called rational because she responds correctly to the reasons she possesses \citep{Lord2018}, because she responds to what she takes her reasons to be \citep{Parfit2011}, or because her choices cohere with what she most cares about, as in ETH-25. Each of these is a way of responding to reasons relative to a restricted body of considerations, and we define the family accordingly.
+
+\begin{definition}[Rationality relative to a base]\label{d:rational}
+Let a \emph{base} be a function that assigns to each situation of an agent a body of considerations: the reasons she possesses, the facts her beliefs represent, or the considerations deriving from her deepest concerns. A response is \emph{rational relative to the base} if it is permissible in the sense of Definition~\ref{d:perm} when the reasons in the situation are taken to be those that the considerations in the base would provide.
+\end{definition}
+
+The substantive sense of rationality takes as its base the reasons the agent possesses; Parfit's takes the facts her beliefs represent, so that she is rational if she does what she would have most reason to do if her beliefs were true; the structural sense of ETH-25 takes the considerations her deepest concerns would provide if they were the only source of reasons. Definition~\ref{d:rational} unifies them without identifying them, and it explains why they can come apart: an agent whose concerns are corrupt may be rational in the structural sense and fail to be rational in the substantive one, as ETH-25 observes of the cult member. It also explains why MTE-07 can hold that the amoralist is practically irrational: an agent who believes she morally ought to $\phi$ believes that there are decisive moral reasons for her to $\phi$, so that $\phi$-ing is what her beliefs, if true, would give her most moral reason to do, and an agent wholly unmoved by such a belief does not respond to the considerations her own beliefs represent.
+
+\section{Sufficiency: the defined notions have the right structure}\label{s:suff}
+
+A definition of ought must deliver an ought that behaves as ought does. The following propositions show that the definitions of Section~3 do. We write $r(a)$ for the total strength of the reasons for $a$ in the situation at issue.
+
+\begin{proposition}[Ought implies may]\label{p:oim}
+If the agent ought to choose $a$ in $S$, then $a$ is permissible in $S$.
+\end{proposition}
+
+\begin{proof}
+Let $b\in S$. If $b=a$, then $r(b)\le r(a)$ trivially. If $b\neq a$, then $r(b)<r(a)$ by Definition~\ref{d:ought}. In either case no option is supported by stronger reasons than $a$, so $a$ is permissible.
+\end{proof}
+
+\begin{proposition}[Deontic consistency]\label{p:cons}
+In a choice set there is at most one option that the agent ought to choose.
+\end{proposition}
+
+\begin{proof}
+Suppose she ought to choose $a$ and ought to choose $b$, with $a\neq b$. Since both are in $S$, Definition~\ref{d:ought} gives $r(b)<r(a)$ and $r(a)<r(b)$, which is impossible.
+\end{proof}
+
+\begin{proposition}[No predicaments]\label{p:exists}
+Every nonempty finite choice set contains a permissible option.
+\end{proposition}
+
+\begin{proof}
+By induction on the size of the set. A one-element set contains its element, which is permissible. If $S$ consists of $x$ together with a nonempty set $T$, the induction hypothesis gives an option $a\in T$ such that $r(b)\le r(a)$ for every $b\in T$. If $r(x)\le r(a)$, then $a$ is permissible in $S$; otherwise $r(a)<r(x)$, and $x$ is permissible in $S$, since every option in $T$ has strength at most $r(a)$.
+\end{proof}
+
+\begin{proposition}[Ought as unique permission]\label{p:unique}
+The agent ought to choose $a$ in $S$ if and only if $a$ is permissible in $S$ and no other option in $S$ is.
+\end{proposition}
+
+\begin{proof}
+From left to right: $a$ is permissible by Proposition~\ref{p:oim}. If some $b\neq a$ were permissible, we would have $r(a)\le r(b)$, since $a\in S$, and $r(b)<r(a)$, since the agent ought to choose $a$; a contradiction. From right to left: let $b\in S$ with $b\neq a$, and suppose that $r(a)\le r(b)$. Then every option in $S$ has strength at most $r(a)$, hence at most $r(b)$, so $b$ is permissible, contrary to the hypothesis. Hence $r(b)<r(a)$ for every such $b$, and the agent ought to choose $a$.
+\end{proof}
+
+The four propositions are the formal core of sufficiency. Proposition~\ref{p:oim} is the principle that ought implies may, accepted in every standard deontic logic. Proposition~\ref{p:cons} rules out conflicting all-things-considered oughts within a choice set, while leaving room for conflicting pro tanto reasons, which is where the phenomena of moral conflict and moral remainder belong \citep{Williams1965}. Proposition~\ref{p:exists} says that, with finitely many options, an agent is never in a situation in which every option is impermissible: there are no normative predicaments of the kind that would make morality inconsistent. Proposition~\ref{p:unique} shows that ought and permission are interdefinable once permission is defined from reasons, so that a theorist who took permission as primitive would gain nothing.
+
+The definitions also explain two features that rival bases must posit. First, the agent may be permitted to choose several options and required to choose none. This happens exactly when two or more options tie for the greatest strength. The space between requirement and permission is the space of options, and it is the space in which ETH-14 locates supererogation. A full treatment of supererogation requires a distinction between the requiring and the justifying strength of a reason \citep{Gert2004}, which Assumption~\ref{a:prim} omits; it is a refinement of the primitive, not a departure from reasons first. Second, the definitions explain why an ought is always backed by a reason: if the agent ought to choose $a$ in a set with at least two options, then $r(a)>r(b)\ge 0$ for some $b$, so there is a reason for $a$. An ought-first theory must add this as a further principle.
+
+\section{Primitiveness: reasons are not definable from rival bases}\label{s:prim}
+
+\subsection{Padoa's method}
+
+\citet{Padoa1901} observed that a notion is not definable from others in a theory if there are two models of the theory that agree on the others and disagree on it. \citet{Beth1953} proved that, for first-order theories, the method is complete: if a notion is implicitly fixed by the others, it is explicitly definable from them. We need only the easy direction, in a form that does not depend on any particular logic.
+
+\begin{lemma}[Padoa's method]\label{l:padoa}
+Let a base and a target assign to each possible situation some facts. If two possible situations agree on the base facts and differ on the target facts, then there is no function from base facts to target facts that gives the target facts of every situation; a fortiori, the target is not definable from the base.
+\end{lemma}
+
+\begin{proof}
+Suppose that $D$ gives the target facts of every situation from its base facts. Let $s$ and $t$ agree on the base. Then the target facts of $s$ are $D$ applied to the base of $s$, which is $D$ applied to the base of $t$, which are the target facts of $t$. So $s$ and $t$ do not differ on the target.
+\end{proof}
+
+The lemma reduces primitiveness to the existence of witnesses. A witness against a base is a pair of possible situations that agree on the base and differ on the reasons. We supply two: one against the deontic and fittingness base, and one against the evaluative base.
+
+\subsection{Shift invariance}
+
+\begin{proposition}[Shift invariance]\label{p:shift}
+Suppose that, in two situations with the same choice set, the reasons for each option in the second are stronger than those for it in the first by the same amount. Then the two situations agree on what the agent ought to choose and on what is permissible, and they agree on which attitudes are fitting.
+\end{proposition}
+
+\begin{proof}
+Write $r$ and $r'$ for the strengths, with $r'(b)=r(b)+c$ for every option $b$. For any options $a$ and $b$, $r(b)<r(a)$ if and only if $r'(b)<r'(a)$, and $r(b)\le r(a)$ if and only if $r'(b)\le r'(a)$. Definitions~\ref{d:ought}, \ref{d:perm} and~\ref{d:fit} use the strengths only in such comparisons, so they give the same verdicts in the two situations.
+\end{proof}
+
+Proposition~\ref{p:shift} is the formal expression of a familiar thought: ought, permission and fittingness are comparative notions, which register how the reasons for the options compare, while the existence of a reason is not comparative. A uniform increase changes the second and leaves the first alone.
+
+\subsection{The assumptions}
+
+\begin{assumption}[Adequacy]\label{a:adequacy}
+The ought, permission, fittingness, goodness and betterness facts of every possible situation are as Definitions~\ref{d:ought} to~\ref{d:good} say they are.
+\end{assumption}
+
+Assumption~\ref{a:adequacy} is the claim that the definitions are correct. Sufficiency is the claim that it holds; the propositions of Section~\ref{s:suff} are evidence for it, since they show that the definitions reproduce the structure of the notions defined, and Section~\ref{s:cases} gives further evidence from cases. In the argument for primitiveness, the assumption plays a different role: it fixes the base facts of the witness situations, so that the witnesses need only be described in terms of reasons.
+
+\begin{assumption}[The two doors]\label{a:doors}
+There are two possible situations with the same options, in one of which there is no reason for any option, and in the other of which the reasons for each option are stronger than in the first by the same positive amount.
+\end{assumption}
+
+Here is a pair of situations of the kind the assumption describes. An agent stands before two doors, and must go through one of them. In the first situation nothing lies behind either door that matters to anyone; the doors lead to two identical corridors that rejoin. In the second, a child is trapped behind each door, the two children are in the same danger, and going through a door will free the child behind it and only that child. The options are the same in both situations: go through the left door, go through the right door. In the first, there is no reason for either; in the second, there is a strong reason for each, and it is the same reason, of the same strength. In both situations, each option is permissible and neither is required.
+
+The situations differ normatively, and in a way that matters. In the second, the agent who goes through the left door leaves undone something there was strong reason to do; she may properly regret that she could not free the other child, and she has reason to explain herself to the child's parents. In the first, there is nothing to regret and nothing to explain. A theory that registers only what the agent ought to do and what she may do cannot tell the situations apart.
+
+\begin{assumption}[Trivial evidence]\label{a:trivial}
+There are two possible situations that agree on what is good and on what is better than what, and differ in whether there is a reason for some response.
+\end{assumption}
+
+Here is a pair of the kind this assumption describes. In the first situation, an agent has conclusive evidence that the number of blades of grass on a certain lawn is even: she has just watched them being counted. In the second, she has no evidence either way. Believing a proposition of this kind has no value, for the agent or for anyone, in either situation; nothing about the lawn is good or bad, and nothing else differs. Yet in the first situation there is a reason for her to believe that the number is even, namely the evidence, and in the second there is none. That believing trivial truths need not be valuable is defended by \citet{Kelly2003}; that evidence is a reason for belief whatever the value of believing is defended by \citet{Shah2006}. The value-first theorist must deny one of these claims: either evidence is a reason only where believing would be valuable, or every true belief is of some value. The first denial would make the evidential support of trivial beliefs a matter of luck, and the second has to postulate a value for which there is no independent evidence.
+
+\subsection{The theorem}
+
+\begin{theorem}[Reasons first]\label{t:main}
+Given Assumptions~\ref{a:prim} and~\ref{a:adequacy} to~\ref{a:trivial}:
+\begin{enumerate}[label=(\alph*)]
+\item the ought, permission, fittingness, goodness and betterness facts of each situation are fixed by its reasons;
+\item the reason facts are not definable from the deontic and fittingness facts, that is, from the options together with what the agent ought to choose, what is permissible and what is fitting;
+\item the reason facts are not definable from the evaluative facts, that is, from what is good and what is better than what.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(a) is Assumption~\ref{a:adequacy}, read as the statement that in each situation the facts in question are given by functions of the strengths.
+
+(b) Take the two situations of Assumption~\ref{a:doors}, and a response $a$ among the options for which there is no reason in the first situation. The options are the same, and by Proposition~\ref{p:shift} and Assumption~\ref{a:adequacy} the ought, permission and fittingness facts are the same. But there is no reason for $a$ in the first situation, and there is a reason for $a$ in the second, since the strength of the reasons for it is the positive amount by which the strengths increase. So the situations agree on the deontic and fittingness base and differ on the reason facts, and by Lemma~\ref{l:padoa} the reason facts are not definable from that base.
+
+(c) Take the two situations of Assumption~\ref{a:trivial}. They agree on the evaluative base and differ on the reason facts, and Lemma~\ref{l:padoa} applies.
+\end{proof}
+
+\begin{corollary}\label{c:rivals}
+Neither the ought-first nor the fittingness-first nor the value-first theory, in its pure form, can define reasons: no function of the deontic and fittingness facts, and no function of the evaluative facts, yields the reason facts in every possible situation.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{t:main}(b) and~(c).
+\end{proof}
+
+The qualification \enquote{in its pure form} matters. A theory that enriches its base, by adding a relation of explanation to ought, a relation of good reasoning to fittingness, or agent-relative values to the evaluative facts, is not refuted by Theorem~\ref{t:main} as it stands. We consider such enrichments in Section~\ref{s:objections}, and we argue that each reintroduces the notion of a reason under another name.
+
+\section{Reasons and natural facts}\label{s:natural}
+
+MTE-01 argues that moral facts are natural facts about idealized reactions, and that Moore's open question argument fails. The present thesis says that reasons are primitive. The two may seem to conflict: if reason facts are natural facts, the notion of a reason would seem to be definable after all, in natural terms, and so not primitive. We show that there is no conflict, and we state the relation exactly.
+
+\begin{principle}[Identity]\label{p:identity}
+The reason relation is identical to a natural relation: for a fact $f$ to be a reason for an agent to $\phi$ is for $f$ to be such that the reactions of agents under idealized conditions would favor $\phi$-ing in response to $f$, where the idealized conditions are specified in non-normative terms. The identity is known, if at all, a posteriori.
+\end{principle}
+
+\ref{p:identity} is a form of the view of MTE-01, extended from moral facts to reason facts in general. Since the moral facts are the facts about moral reasons and what Section~3 defines from them, MTE-01's thesis is the restriction of \ref{p:identity} to the moral domain, together with Assumption~\ref{a:adequacy}. The idealized conditions are those of full information about the situation, vivid imagination of what the response would mean for each person affected, and equal attention to the interests of all of them, in the tradition of the ideal observer \citep{Firth1952} and of reforming naturalist definitions \citep{Railton1986}. We do not specify them further; that is the task of MTE-01.
+
+\begin{proposition}[Compatibility]\label{p:compat}
+\ref{p:prim} and \ref{p:identity} are consistent: the reason relation can be identical to a natural relation while being undefinable from other normative notions.
+\end{proposition}
+
+\begin{proof}
+\ref{p:prim} denies that the reason relation is definable from other \emph{normative} notions. \ref{p:identity} identifies it with a relation specified in \emph{non-normative} terms. The natural relation is not an ought, a permission, a fittingness or a value relation, so its identity with the reason relation is not a definition of reasons from any of these. Moreover, the witnesses of Assumptions~\ref{a:doors} and~\ref{a:trivial} differ in their natural facts: the two-door situations differ in whether children are trapped, and the lawn situations in whether the agent has watched the counting. So the reason facts, which on \ref{p:identity} are natural facts, can differ between situations that agree on the deontic, fittingness and evaluative facts, exactly as Theorem~\ref{t:main} says.
+\end{proof}
+
+Two further points complete the picture.
+
+First, the identity is not a definition even in the sense in which \ref{p:suff} speaks of definitions. A definition states what the defined notion consists in, and it is available, at least in principle, to reflection on the concepts involved. The identity of \ref{p:identity} is like the identity of water with H$_2$O: it is necessary, if true, but it is discovered by investigating what plays the role that our concept of a reason picks out, and the concept itself does not contain it \citep{Boyd1988,Brink1989}. This is why the question \enquote{$f$ is such that idealized reactions would favor $\phi$-ing in response to it, but is $f$ a reason to $\phi$?} is open to a competent speaker, and why its openness does not show that the identity is false. That is the reply to Moore which MTE-01 gives, and it applies to reasons as it does to goodness.
+
+Second, the two theses concern different orders. In the order of normative definition, reasons come first: ought, permission, fittingness, value and rationality are defined from them, and they are not defined from any of these. In the order of constitution, reason facts are natural facts: there is nothing to a reason over and above the natural fact that is the reason and the natural relation in which it stands to the agent's response. Nothing in the one order dictates the shape of the other. An analogy may help. In the order of chemical definition, the notion of an element is prior to that of a compound, which is defined as a substance composed of elements in fixed proportions; that elements are themselves identical to physical kinds, nuclei of given atomic number, does not reverse the chemical order, since the physical identification is not a chemical definition.
+
+Two consequences for neighboring families follow. MTE-10 argues that an ought can be derived from an is only with a normative bridge premise. \ref{p:identity} is such a premise: it is a normative claim, since it says what reasons are, and from it, together with natural facts, conclusions about reasons and so about oughts follow. That it is known a posteriori is consistent with Hume's law in the form MTE-10 defends, which concerns derivations from purely descriptive premise sets. ACT-12 argues that external reasons exist: an agent may have a reason that no sound deliberation from her motivations would reveal. \ref{p:identity} is consistent with this, and supports it, since the idealized conditions are not defined by deliberation from the agent's own motivational set, as on the internalist model of \citet{Williams1981}, but by full information and equal attention to the interests of all affected. An agent whose motivations are narrow may therefore have reasons that her own sound deliberation would never reach.
+
+\section{Further cases}\label{s:cases}
+
+The adequacy of the definitions of Section~3 is tested by cases. We consider five.
+
+\paragraph{The right kind of reasons.} The demon who threatens to punish anyone who does not admire him gives everyone a reason to want to admire him, and arguably a reason to admire him; but he is not admirable \citep{RabinowiczRonnow2004}. Definition~\ref{d:good} requires reasons of the right kind, and the restriction can be stated in terms of reasons alone. A reason for an attitude is of the right kind if it is a reason that bears on the attitude in virtue of a feature of its object that the attitude represents the object as having; otherwise it is of the wrong kind. Admiration represents its object as excellent in some respect; the demon's threat is not a feature of the demon that admiration represents him as having, since admiration does not represent its object as dangerous to those who withhold it. The threat is therefore a reason of the wrong kind, and indeed it is better described as a reason to want, and to bring about, the state of admiring the demon, which is a reason for an action and not for the attitude \citep{Hieronymi2005}. The definition of the right kind uses the content of attitudes and the reason relation, and neither presupposes value.
+
+\paragraph{Wrongness and blame.} An act is \emph{wrong} if the moral reasons against it are decisive, that is, if among the options there is one that the moral reasons favor over it and the agent ought, by the moral reasons, not to choose it. An agent is \emph{blameworthy} for an act if there is reason of the right kind to blame her for it, and this requires, in addition to the wrongness of the act, that the agent was in a position to know of the reasons against it, which is the condition ETH-23 imposes when it holds past agents blameworthy only for what they could reasonably have known. ACT-09 argues that resentment is a fitting response to wrongdoing; by Definition~\ref{d:fit}, this is the claim that the reasons for resentment of the wrongdoer are sufficient, given the wrong.
+
+\paragraph{Rights.} POL-18 argues that rights are real normative constraints. On the present view a right is a structure of reasons: that $x$ has a right against $y$ that $y$ not $\phi$ is that there is a reason for $y$ not to $\phi$ which is owed to $x$, which $x$ may waive, and which excludes from $y$'s deliberation certain reasons for $\phi$-ing that would otherwise count, such as the benefit to others of a modest infringement. The notion of an exclusionary reason is that of \citet{Raz1999}, and it is a notion of a reason. Reasons first does not require that rights reduce to the weighing of reasons; it requires only that the normative relations involved in rights be relations of reasons.
+
+\paragraph{Rationality.} By Definition~\ref{d:rational}, the irrationality of the akratic agent, who judges that she ought to $\phi$ and does not intend to, is the failure to respond to the considerations represented by her own normative belief. ACT-04 argues that weakness of will is possible; the definition explains why it is a defect, and it does so without positing a requirement of rationality distinct from reasons. Whether the requirements of structural rationality are themselves normative, a question pressed by \citet{Kiesewetter2017}, is on this view the question whether the considerations in the relevant base are reasons. They need not be, since an agent's beliefs may be false; that is why rationality relative to a base can come apart from what the agent has most reason to do, and why there may be no reason to be rational in a given case.
+
+\paragraph{Thick concepts.} MTE-15 argues that thick concepts such as that of the lewd cannot be factored into a descriptive concept and an evaluation. Reasons first is consistent with this. The normativity of a thick concept consists in its application entailing reasons, for instance reasons to object to the lewd act as such; the inseparability thesis says that the extension of the concept cannot be specified independently of grasping those reasons. Neither claim requires that the thick concept be defined as the conjunction of a descriptive concept and a reason claim, and the present thesis concerns the normative component, which is a matter of reasons.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Broome's definition]\label{o:broome}
+\citet{Broome2004} defines a reason as a fact that plays the role of a weight in a weighing explanation of why the agent ought, or ought not, to act. His base includes the notion of explanation, which is not deontic, and Theorem~\ref{t:main}(b) does not apply to it: in the two-door case, the children's danger enters into the explanation of why the agent may go through either door, and so counts as a reason.
+\end{objection}
+
+\begin{reply}
+We grant that Theorem~\ref{t:main}(b) does not apply to an enriched base. But Broome's definition uses the notion of a weighing explanation, and that notion cannot be specified without the notion of a reason. A weighing explanation is one in which considerations for and against are compared by their weights and the ought follows from the comparison. To say that a fact plays the role of a weight is to say that it bears on the ought by counting in favor of an option to some degree, and that is the notion of a reason of some strength. The witness shows this: the explanation of why the agent may take either door is the same whether or not the children are trapped, namely that nothing favors either door over the other. The danger of the children enters the explanation only if it is described as a weight on each side, which is to say as a reason for each option. Broome's definition is therefore not a definition of reasons in terms of ought and explanation, but an identification of reasons by their role, in which the role is itself described in the vocabulary of reasons.
+\end{reply}
+
+\begin{objection}[Reasons as evidence]\label{o:evidence}
+\citet{KearnsStar2009} define a reason to $\phi$ as evidence that one ought to $\phi$. In the two-door case, the danger of the child behind the left door is evidence that one ought to go through the left door, since it raises the probability that one ought to, and so it counts as a reason. Evidence is not a deontic notion, and the definition escapes the theorem.
+\end{objection}
+
+\begin{reply}
+In the two-door case, the danger of the child behind the left door is no evidence that one ought to go through the left door. One ought not to go through it, since one ought not to go through either door, and the danger of both children makes this certain. So, on the evidential definition, the danger is no reason to go through the left door, and the definition gives the wrong result. The defender may reply that the danger is evidence relative to some background, for instance a background ignorant of the other child. Relativizing to backgrounds of ignorance makes almost any fact evidence for almost anything, and the definition then fails in the opposite direction, as the cases of \citet{Brunero2009} show: the testimony of a reliable adviser that one ought to $\phi$ is evidence that one ought to $\phi$, but it is not, in the normal case, a reason to $\phi$ over and above the reasons the adviser reports.
+\end{reply}
+
+\begin{objection}[Fittingness first]\label{o:fit}
+\citet{McHughWay2016} do not define reasons from fittingness alone. They define a reason as a premise of a good pattern of reasoning, and good reasoning as reasoning that tends to preserve fittingness. Their base includes the non-normative notion of a pattern of reasoning, which distinguishes the two-door situations: in the second, there is a good pattern from \enquote{the child behind the left door is in danger} to the intention to go through the left door.
+\end{objection}
+
+\begin{reply}
+A pattern of reasoning from a premise to an intention is good, on their account, if it tends to preserve fittingness: roughly, if fitting premise-attitudes tend to lead to a fitting conclusion-attitude. But in the two-door case the intention to go through the left door is fitting, since it is permissible, and so is the intention to go through the right door; the pattern that leads from the danger of the left child to the left intention preserves fittingness, and so does the pattern that leads from the danger of the left child to the right intention. On the fittingness definition, then, the danger of the left child is a reason for going through the right door, which is false. To exclude the second pattern, the theorist must require that the premise bear on the conclusion by favoring it, and that is the notion of a reason. We conclude that the patterns of reasoning that are good in the relevant sense are those that follow the reasons, and that the definition presupposes what it was meant to define.
+\end{reply}
+
+\begin{objection}[The wrong kind of reasons]\label{o:wkr}
+The buck-passing definition of value needs a distinction between reasons of the right and of the wrong kind. Every attempt to draw it appeals to the value of the object: the right-kind reasons are those that bear on whether the object is valuable \citep{Vayrynen2006}. The definition of value from reasons is therefore circular.
+\end{objection}
+
+\begin{reply}
+The characterization of Section~\ref{s:cases} does not appeal to value. A reason for an attitude is of the right kind if it bears on the attitude through a feature of the object that the attitude represents its object as having. This appeals to the representational content of attitudes, which is not a normative notion, and to the reason relation. Admiration represents its object as excellent in some respect, fear represents it as dangerous, amusement as funny; the right-kind reasons for these attitudes are reasons constituted by features relevant to excellence, danger and humor. It may be objected that \enquote{excellent} is evaluative, so that the content of admiration is evaluative. It is; but the definition does not use the notion of excellence, it uses the notion of a feature that the attitude represents its object as having, and that notion is the same whether the attitude is admiration or the belief that the object is red. The definition of goodness is then not circular, although the contents of the attitudes it mentions are evaluative, as are the contents of beliefs about goodness that the definition does not mention either.
+\end{reply}
+
+\begin{objection}[Queerness]\label{o:queer}
+A primitive normative relation is metaphysically queer: a relation that is irreducibly normative, standing in no relation of identity to anything natural, is the kind of entity that \citet{Mackie1977} argued we have no reason to believe in. Parfit and Scanlon accept such a relation; the reasons-first theorist inherits its costs.
+\end{objection}
+
+\begin{reply}
+The reasons-first theorist inherits Parfit's structural thesis, not his metaphysics. By Proposition~\ref{p:compat}, primitiveness in the order of normative definition is consistent with the identity of the reason relation with a natural relation, and on \ref{p:identity} it is so identical. There is therefore nothing queer about the relation: it is a natural relation, picked out by a concept that is not definable in other normative terms. Those who reject \ref{p:identity} can appeal to MTE-05, which argues that the argument from queerness proves too much, since it would make mathematics false as well; but our thesis does not need that defence.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+Theorem~\ref{t:main} depends on Assumptions~\ref{a:adequacy} to~\ref{a:trivial}, and these carry the philosophical weight. The argument for Assumption~\ref{a:adequacy} is the structural adequacy of Section~\ref{s:suff} and the cases of Section~\ref{s:cases}; the arguments for the witnesses are the descriptions of the two doors and of the lawn. A theorist who denied that the two-door situations differ normatively, or that evidence about trivial matters is a reason for belief, would escape the corresponding part of the theorem.
+
+The model of weighing in Assumption~\ref{a:prim} is additive and assumes that total strengths are comparable. These simplifications are not needed for the non-definability results, which use only the fact that ought, permission and fittingness are comparative while the existence of a reason is not; they are needed for the particular definitions of ought and permission. If reasons are incomparable in some cases, or combine non-additively, as holists hold \citep{Dancy2004}, the definitions must be adjusted, for instance by letting permission be defined by the absence of a better-supported option in a partial order. Nor have we treated the distinction between requiring and justifying strength \citep{Gert2004}, or the default logic of reasons \citep{Horty2012}; both are refinements of the reason relation, and neither replaces it by another primitive.
+
+We have not argued against every enriched base. Theorem~\ref{t:main} refutes the pure forms of the rival theories, and the replies to Objections~\ref{o:broome} to~\ref{o:fit} argue that the best-known enrichments presuppose the notion of a reason. A new enrichment would need a new examination.
+
+Finally, \ref{p:identity} is not established here. It is the hypothesis that makes the present view consistent with MTE-01 and with a naturalistic metaphysics, and Proposition~\ref{p:compat} shows only that it is consistent with primitiveness; the case for it is the case for naturalism in metaethics.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTE/MTE_11.lean} formalizes Definitions~\ref{d:reason} to~\ref{d:good}, Propositions~\ref{p:oim} to~\ref{p:unique}, Lemma~\ref{l:padoa}, Proposition~\ref{p:shift} and Theorem~\ref{t:main}. Responses form an arbitrary type, and a reason profile assigns to each response a natural number, the total strength of the reasons for it (Assumption~\ref{a:prim}). The definitions are Lean definitions, and Propositions~\ref{p:oim} to~\ref{p:unique} and~\ref{p:shift} and Lemma~\ref{l:padoa} are proved from them using only Lean's logic. Situations, responses, objects, the strengths and the pre-theoretic normative facts are introduced as primitives, and Assumptions~\ref{a:adequacy} to~\ref{a:trivial} as axioms. The main theorem reads as follows.
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+theorem reasons_first :
+    (∀ s, OughtFact s = Ought (strength s) (options s) ∧
+          PermFact s = Permissible (strength s) (options s) ∧
+          FitFact s = Fitting IsAttitude (strength s) (options s) ∧
+          GoodFact s = Good favor (strength s) ∧
+          BetterFact s = Better favor (strength s)) ∧
+    (¬ ∃ D : List Resp × (Resp → Prop) × (Resp → Prop) × (Resp → Prop)
+          → (Resp → Prop), ∀ s, reasonFacts s = D (deonticBase s)) ∧
+    (¬ ∃ D : (Obj → Prop) × (Obj → Obj → Prop) → (Resp → Prop),
+          ∀ s, reasonFacts s = D (valueBase s))
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+'Philosophy.MTE_11.reasons_first' depends on axioms: [propext,
+ Quot.sound, Philosophy.MTE_11.BetterFact, Philosophy.MTE_11.FitFact,
+ Philosophy.MTE_11.GoodFact, Philosophy.MTE_11.IsAttitude,
+ Philosophy.MTE_11.Obj, Philosophy.MTE_11.OughtFact,
+ Philosophy.MTE_11.PermFact, Philosophy.MTE_11.Resp,
+ Philosophy.MTE_11.Sit, Philosophy.MTE_11.better_adequate,
+ Philosophy.MTE_11.favor, Philosophy.MTE_11.fit_adequate,
+ Philosophy.MTE_11.good_adequate, Philosophy.MTE_11.options,
+ Philosophy.MTE_11.ought_adequate, Philosophy.MTE_11.perm_adequate,
+ Philosophy.MTE_11.strength, Philosophy.MTE_11.trivial_evidence,
+ Philosophy.MTE_11.two_doors]
+\end{lstlisting}
+
+The axioms are of three kinds. \texttt{propext} and \texttt{Quot.sound} belong to Lean's logic; they are used to identify the base facts of the witness situations as functions. \texttt{Sit}, \texttt{Resp}, \texttt{Obj}, \texttt{favor}, \texttt{IsAttitude}, \texttt{strength}, \texttt{options} and the five fact predicates are the primitives: situations, responses, objects of evaluation, the attitude of favoring, the class of attitudes, the reasons (Assumption~\ref{a:prim}), the options, and the deontic, fittingness and evaluative facts taken as given before any definition. The five \texttt{\_adequate} axioms are Assumption~\ref{a:adequacy}, \texttt{two\_doors} is Assumption~\ref{a:doors}, and \texttt{trivial\_evidence} is Assumption~\ref{a:trivial}. The structural results, Propositions~\ref{p:oim} to~\ref{p:unique}, depend on no primitive of the module: \texttt{permissible\_exists} uses only \texttt{propext}, and \texttt{ought\_iff} uses \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The module does not formalize Definition~\ref{d:rational}, the right-kind restriction, or the identity of Section~\ref{s:natural}.
+
+The formalization makes one feature of the argument explicit. Part~(b) of the theorem needs the witness only on the options of the situation: the strengths of responses that are not options play no role, so that the assumption is a claim about a single choice, the two doors, and not about a uniform change in every reason the agent has.
+
+\section{Conclusion}
+
+Reasons come first in the order of normative definition. Ought, permission, fittingness, goodness, betterness and rationality can be defined from the reason relation, and the defined notions have the structure the pre-theoretic ones have: ought implies may, oughts within a choice set are unique, finite choices admit a permissible option, and ought is permission without a permissible rival. The reason relation cannot be defined from any rival base: two situations agree on every deontic and fittingness fact and differ in their reasons, because those notions are comparative and reasons are not; two others agree on every evaluative fact and differ in their reasons, because evidence about trivial matters gives reasons without value. The primacy of reasons in the normative order is consistent with their identity with natural facts about idealized reactions, since that identity is an a posteriori discovery and not a definition in normative terms.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beth(1953)]{Beth1953} Beth, E.~W. (1953). On Padoa's method in the theory of definition. \emph{Indagationes Mathematicae}, 15, 330--339.
+\bibitem[Boyd(1988)]{Boyd1988} Boyd, R. (1988). How to be a moral realist. In G.~Sayre-McCord (Ed.), \emph{Essays on Moral Realism}. Cornell University Press.
+\bibitem[Brentano(1889)]{Brentano1889} Brentano, F. (1889). \emph{Vom Ursprung sittlicher Erkenntnis}. Duncker \& Humblot. English translation: \emph{The Origin of Our Knowledge of Right and Wrong}.
+\bibitem[Brink(1989)]{Brink1989} Brink, D.~O. (1989). \emph{Moral Realism and the Foundations of Ethics}. Cambridge University Press.
+\bibitem[Broome(2004)]{Broome2004} Broome, J. (2004). Reasons. In R.~J. Wallace, P.~Pettit, S.~Scheffler and M.~Smith (Eds.), \emph{Reason and Value: Themes from the Moral Philosophy of Joseph Raz}. Oxford University Press.
+\bibitem[Broome(2013)]{Broome2013} Broome, J. (2013). \emph{Rationality Through Reasoning}. Wiley-Blackwell.
+\bibitem[Brunero(2009)]{Brunero2009} Brunero, J. (2009). Reasons and evidence one ought. \emph{Ethics}, 119(3), 538--545.
+\bibitem[Chappell(2012)]{Chappell2012} Chappell, R.~Y. (2012). Fittingness: The sole normative primitive. \emph{The Philosophical Quarterly}, 62(249), 684--704.
+\bibitem[Dancy(2004)]{Dancy2004} Dancy, J. (2004). \emph{Ethics Without Principles}. Oxford University Press.
+\bibitem[D'Arms and Jacobson(2000)]{DArmsJacobson2000} D'Arms, J. and Jacobson, D. (2000). The moralistic fallacy: On the \enquote{appropriateness} of emotions. \emph{Philosophy and Phenomenological Research}, 61(1), 65--90.
+\bibitem[Ewing(1939)]{Ewing1939} Ewing, A.~C. (1939). A suggested non-naturalistic analysis of good. \emph{Mind}, 48(189), 1--22.
+\bibitem[Firth(1952)]{Firth1952} Firth, R. (1952). Ethical absolutism and the ideal observer. \emph{Philosophy and Phenomenological Research}, 12(3), 317--345.
+\bibitem[Gert(2004)]{Gert2004} Gert, J. (2004). \emph{Brute Rationality: Normativity and Human Action}. Cambridge University Press.
+\bibitem[Hieronymi(2005)]{Hieronymi2005} Hieronymi, P. (2005). The wrong kind of reason. \emph{The Journal of Philosophy}, 102(9), 437--457.
+\bibitem[Horty(2012)]{Horty2012} Horty, J.~F. (2012). \emph{Reasons as Defaults}. Oxford University Press.
+\bibitem[Kearns and Star(2009)]{KearnsStar2009} Kearns, S. and Star, D. (2009). Reasons as evidence. \emph{Oxford Studies in Metaethics}, 4, 215--242.
+\bibitem[Kelly(2003)]{Kelly2003} Kelly, T. (2003). Epistemic rationality as instrumental rationality: A critique. \emph{Philosophy and Phenomenological Research}, 66(3), 612--640.
+\bibitem[Kiesewetter(2017)]{Kiesewetter2017} Kiesewetter, B. (2017). \emph{The Normativity of Rationality}. Oxford University Press.
+\bibitem[Lord(2018)]{Lord2018} Lord, E. (2018). \emph{The Importance of Being Rational}. Oxford University Press.
+\bibitem[Mackie(1977)]{Mackie1977} Mackie, J.~L. (1977). \emph{Ethics: Inventing Right and Wrong}. Penguin.
+\bibitem[Maguire(2016)]{Maguire2016} Maguire, B. (2016). The value-based theory of reasons. \emph{Ergo}, 3.
+\bibitem[McHugh and Way(2016)]{McHughWay2016} McHugh, C. and Way, J. (2016). Fittingness first. \emph{Ethics}, 126(3), 575--606.
+\bibitem[Moore(1903)]{Moore1903} Moore, G.~E. (1903). \emph{Principia Ethica}. Cambridge University Press.
+\bibitem[Padoa(1901)]{Padoa1901} Padoa, A. (1901). Essai d'une th\'eorie alg\'ebrique des nombres entiers, pr\'ec\'ed\'e d'une introduction logique \`a une th\'eorie d\'eductive quelconque. In \emph{Biblioth\`eque du Congr\`es International de Philosophie}, vol.~3. Armand Colin.
+\bibitem[Parfit(2001)]{Parfit2001} Parfit, D. (2001). Rationality and reasons. In D.~Egonsson, J.~Josefsson, B.~Petersson and T.~R{\o}nnow-Rasmussen (Eds.), \emph{Exploring Practical Philosophy: From Action to Values}. Ashgate.
+\bibitem[Parfit(2011)]{Parfit2011} Parfit, D. (2011). \emph{On What Matters}, vol.~1. Oxford University Press.
+\bibitem[Rabinowicz and R{\o}nnow-Rasmussen(2004)]{RabinowiczRonnow2004} Rabinowicz, W. and R{\o}nnow-Rasmussen, T. (2004). The strike of the demon: On fitting pro-attitudes and value. \emph{Ethics}, 114(3), 391--423.
+\bibitem[Railton(1986)]{Railton1986} Railton, P. (1986). Moral realism. \emph{The Philosophical Review}, 95(2), 163--207.
+\bibitem[Raz(1999)]{Raz1999} Raz, J. (1999). \emph{Engaging Reason: On the Theory of Value and Action}. Oxford University Press.
+\bibitem[Ross(1930)]{Ross1930} Ross, W.~D. (1930). \emph{The Right and the Good}. Oxford University Press.
+\bibitem[Scanlon(1998)]{Scanlon1998} Scanlon, T.~M. (1998). \emph{What We Owe to Each Other}. Harvard University Press.
+\bibitem[Scanlon(2014)]{Scanlon2014} Scanlon, T.~M. (2014). \emph{Being Realistic about Reasons}. Oxford University Press.
+\bibitem[Schroeder(2007)]{Schroeder2007} Schroeder, M. (2007). \emph{Slaves of the Passions}. Oxford University Press.
+\bibitem[Schroeder(2021)]{Schroeder2021} Schroeder, M. (2021). \emph{Reasons First}. Oxford University Press.
+\bibitem[Shah(2006)]{Shah2006} Shah, N. (2006). A new argument for evidentialism. \emph{The Philosophical Quarterly}, 56(225), 481--498.
+\bibitem[Skorupski(2010)]{Skorupski2010} Skorupski, J. (2010). \emph{The Domain of Reasons}. Oxford University Press.
+\bibitem[V{\"a}yrynen(2006)]{Vayrynen2006} V{\"a}yrynen, P. (2006). Resisting the buck-passing account of value. \emph{Oxford Studies in Metaethics}, 1, 295--324.
+\bibitem[Wedgwood(2007)]{Wedgwood2007} Wedgwood, R. (2007). \emph{The Nature of Normativity}. Oxford University Press.
+\bibitem[Williams(1965)]{Williams1965} Williams, B. (1965). Ethical consistency. \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 39, 103--124.
+\bibitem[Williams(1981)]{Williams1981} Williams, B. (1981). Internal and external reasons. In \emph{Moral Luck}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

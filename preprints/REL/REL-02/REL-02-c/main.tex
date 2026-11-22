@@ -1,0 +1,60 @@
+\documentclass{situationist-preprint}
+
+\title{Gratuitous Suffering and the Noseeum Inference}
+\msid{REL-02-c}
+\msfamily{REL-02}
+\msdiscipline{Philosophy of Religion}
+\mstype{Consequence}
+\mskeywords{evidential problem of evil; gratuitous suffering; noseeum inference; sceptical theism; detection probability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The evidential argument from evil has as its first premise that there is gratuitous suffering, suffering that a perfect being could have prevented without loss of a greater good. We derive from the detection threshold of REL-02-a that this premise has no observational support beyond a factor of $1/(1-\delta)$, where $\delta$ is the probability that we would discern a justifying reason if there were one. Apparently gratuitous suffering is therefore evidence of gratuitous suffering only to the extent that our detection of reasons is reliable, and the claim that suffering is gratuitous cannot be established by observation without an independent estimate of that reliability.
+\end{abstract}
+
+\section{The consequence}
+
+REL-02-a analyzes Rowe's argument \citep{Rowe1979} as a noseeum inference \citep{Wykstra1984} from the observation $\neg D$, that we discern no reason that would justify a perfect being in permitting an evil $E$, to atheism. Its Theorem~6.3 states that the posterior odds against theism after $\neg D$ reach $r$ to $1$ from even odds only if the detection probability $\delta$ of Definition~6.1 is at least $(r-1)/r$. Rowe's argument passes through an intermediate claim, that $E$ is gratuitous, and the same analysis applies to it.
+
+Let $J$ be the proposition that there is a reason justifying the permission of $E$, so that $\neg J$ is the proposition that $E$ is gratuitous, and let $\delta_J$ be the probability of $D$ given $J$.
+
+\begin{proposition}\label{p:grat}
+If we never discern a justifying reason that does not exist, then the posterior odds of $\neg J$ after $\neg D$ are at most $1/(1-\delta_J)$ times the prior odds.
+\end{proposition}
+
+\begin{proof}
+By hypothesis $P(\neg D \mid \neg J) = 1$, and $P(\neg D \mid J) = 1 - \delta_J$. By Bayes's theorem, the posterior odds of $\neg J$ against $J$ equal the prior odds multiplied by $P(\neg D \mid \neg J)/P(\neg D \mid J) = 1/(1-\delta_J)$.
+\end{proof}
+
+\begin{corollary}\label{c:grat}
+For the observation $\neg D$ to raise the odds that $E$ is gratuitous from even to $r$ to $1$, $\delta_J$ must be at least $(r-1)/r$.
+\end{corollary}
+
+Under theism, $J$ holds by Assumption~6.2 of REL-02-a, so that $\delta_J$ and $\delta$ coincide on the theistic hypothesis; Corollary~\ref{c:grat} is the form Theorem~6.3 takes when the conclusion is gratuitousness rather than atheism. The point of stating it separately is that the premise of Rowe's argument is often treated as an observation, and the corollary shows that it is not. What is observed is apparent gratuitousness, $\neg D$. Gratuitousness is a hypothesis, and its support from the observation is bounded by the reliability of detection.
+
+\section{Why the bound is low}
+
+REL-02-a gives three reasons why nothing warrants a high value of $\delta$: some goods are independent goods, realized only if God does not settle outcomes of a kind; some are holistic goods of a whole history; and our acquaintance with goods is a sample of unknown representativeness \citep{Bergmann2001}. Each lowers $\delta_J$ for exactly the evils that seem gratuitous. In particular, if the reason for permitting $E$ is a policy of not settling outcomes of $E$'s kind, then nothing in $E$ shows the reason, and $E$ will appear gratuitous whether or not it is. The appearance of gratuitousness is then what theism predicts, and it is no evidence against it. Remark~6.5 of REL-02-a adds that failures of detection for evils of a kind share a common source, so that many apparently gratuitous evils do not multiply the likelihood ratio.
+
+\begin{objection}
+Some suffering is so intense and so isolated that no good could justify it. Its gratuitousness is seen, not inferred.
+\end{objection}
+
+\begin{reply}
+To see that no good could justify it is to see that $J$ is false, which is to survey the goods that might justify it and find none. That survey is the detection whose reliability $\delta_J$ measures. The intensity of the suffering raises the bar a justifying reason must meet; it does not raise the probability that we would recognize such a reason if there were one. \citet{BentonHawthorneIsaacs2016} are right that apparent gratuitousness is some evidence; Proposition~\ref{p:grat} says how much.
+\end{reply}
+
+\section{Conclusion}
+
+Gratuitous suffering is not an observed datum but a conclusion from the noseeum inference, and its support is bounded by $1/(1-\delta_J)$. The evidential problem of evil therefore rests on that inference at its first step, not only at its last, and it fails there for the reason REL-02-a gives.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benton et~al.(2016)]{BentonHawthorneIsaacs2016} Benton, M.~A., Hawthorne, J. and Isaacs, Y. (2016). Evil and evidence. \emph{Oxford Studies in Philosophy of Religion}, 7, 1--31.
+\bibitem[Bergmann(2001)]{Bergmann2001} Bergmann, M. (2001). Skeptical theism and Rowe's new evidential argument from evil. \emph{No\^us}, 35(2), 278--296.
+\bibitem[Rowe(1979)]{Rowe1979} Rowe, W.~L. (1979). The problem of evil and some varieties of atheism. \emph{American Philosophical Quarterly}, 16(4), 335--341.
+\bibitem[Wykstra(1984)]{Wykstra1984} Wykstra, S.~J. (1984). The Humean obstacle to evidential arguments from suffering: On avoiding the evils of \enquote{appearance}. \emph{International Journal for Philosophy of Religion}, 16(2), 73--93.
+\end{thebibliography}
+
+\end{document}

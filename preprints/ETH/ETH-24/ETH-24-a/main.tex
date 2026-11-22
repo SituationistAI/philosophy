@@ -1,0 +1,146 @@
+\documentclass{situationist-preprint}
+
+\title{The Moral Status of Artificial Systems}
+\msid{ETH-24-a}
+\msfamily{ETH-24}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_24.lean}
+\mskeywords{artificial intelligence; moral status; sentience; AI welfare; valence; precaution; robot rights}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do we owe anything to machines? We argue that we owe nothing to current artificial systems, because they lack the capacity on which moral status depends, and that this may change. The argument applies the account of ETH-07, on which sentience, the capacity for valenced experience, is necessary and sufficient for moral status. We argue that valenced experience requires an affective architecture: states that represent the system's own condition as good or bad for it and that regulate its processing and behavior so as to maintain that condition. Current artificial systems, including those that produce fluent language and may count as thinking, lack such an architecture. Nothing is therefore owed to them, though there may be reasons regarding them, such as reasons not to cultivate cruelty. The premises do not exclude artificial systems as such, and we show that they are consistent with a future artificial system that has moral status. The question of when that happens is empirical, and there are reasons to investigate it before building systems that might answer it.
+\end{abstract}
+
+\section{The problem}
+
+Artificial systems now converse, plan and describe themselves in the vocabulary of feeling. Some users form attachments to them, and some systems, when asked, report that they suffer or that they wish not to be shut down. The question whether anything is owed to such systems has moved from speculation to practical philosophy.
+
+Three answers are defended. On \emph{relational} views, moral status is conferred by the social relations in which an entity stands, so that systems that are treated as social partners may come to have status regardless of their inner constitution \citep{Coeckelbergh2010,Gunkel2018}. On \emph{capacity} views, status depends on intrinsic capacities, and artificial systems would have it if and only if they had the relevant capacities, so that a system with a human-like psychology would have human-like rights \citep{SchwitzgebelGarza2015}. On \emph{precautionary} views, the uncertainty about whether current or near-future systems have the relevant capacities is already sufficient to require some moral consideration \citep{SeboLong2023,Long2024}. A further position, defended by \citet{Bryson2010}, holds that artificial systems should be designed so as not to be candidates for status in the first place.
+
+We defend a capacity view, with a definite answer for the present. ETH-07 argues that sentience is necessary and sufficient for moral status, and that the degree of status varies with the capacity for welfare. We argue that current artificial systems are not sentient, and so that nothing is owed to them; and that the argument contains nothing that excludes future artificial systems from moral status.
+
+Two neighboring results frame the argument. MND-08 argues that thinking is a functional property that machines can have. If that is right, the question of moral status cannot be settled by asking whether a system thinks: thinking is not what status depends on. MND-05-a argues that whether artificial systems are conscious cannot be settled by conceivability arguments in either direction and must be approached empirically, by asking whether they have the features that the best theories of consciousness associate with it. Our argument is empirical in that sense. And ACT-16 argues that current artificial systems are not responsible agents, so that responsibility for their outputs lies with those who deploy them. That is a claim about moral agency. The present question concerns moral patiency, and the two can come apart: a being may be owed things without being responsible for anything, as infants are.
+
+\section{Framework}
+
+\begin{assumption}[Status and sentience]\label{a:eth07}
+A being has moral status if and only if it is sentient, that is, capable of valenced experience.
+\end{assumption}
+
+\begin{principle}[Directed duties]\label{p:owed}
+Something is owed to a being only if it has moral status.
+\end{principle}
+
+Assumption~\ref{a:eth07} is the threshold result of ETH-07. Principle~\ref{p:owed} is close to a definition: to owe something to a being is to be in a position to wrong it, and a being can be wronged only if it has moral status.
+
+\begin{definition}[Affective architecture]\label{d:affect}
+A system has an \emph{affective architecture} if it has states that represent its own condition as good or bad for it, and that regulate its processing and behavior, over time and across its activities, so as to maintain or improve that condition.
+\end{definition}
+
+\begin{assumption}[Valence requires affect]\label{a:affect}
+Every sentient being has an affective architecture.
+\end{assumption}
+
+\begin{assumption}[Current systems]\label{a:current}
+No current artificial system has an affective architecture.
+\end{assumption}
+
+Assumption~\ref{a:affect} connects a phenomenal property to a functional one. In every case of valenced experience we know, pain, fear, hunger and satisfaction are states that register how things stand with the organism and that mobilize it accordingly: they interrupt ongoing activity, reorganize attention and set priorities for action. A state that felt bad but registered nothing about the subject's condition and made no difference to what it did would be a feeling without any of the roles that make valenced experience matter to its subject. We do not claim that the functional profile is sufficient for valence; that question is not needed here. We claim that it is necessary, and the claim is supported by the convergence of the theories of consciousness that \citet{Butlin2023} survey, several of which tie consciousness to agency, embodiment or the modelling of the system's own states, and by the approach of \citet{Birch2024}, which treats such markers as the evidence that makes a being a candidate for sentience.
+
+Assumption~\ref{a:current} is empirical. Current language models compute each output from a context by a fixed function whose parameters were set in training. The signals used in training, including rewards, adjust the parameters; they are not states the deployed system is in. Within its operation, the system has no persistent state that represents how things stand with it and that it acts to maintain: nothing in its condition is at stake in its outputs, and nothing it does is regulated by such a stake. Reinforcement-learning agents have reward signals at run time, but a reward is a training quantity and not a representation of the agent's own condition that its behavior serves to protect. Reports of feeling produced by language models are not evidence against the assumption, since they are produced by training on human text, in which such reports are frequent, and would be produced whether or not the system had the states reported; \citet{Birch2024} calls this the gaming problem. The assumption is a judgment on current evidence, and it is the premise of the argument that will fail if things change.
+
+\section{The argument}
+
+\begin{theorem}\label{t:main}
+No current artificial system has moral status, and nothing is owed to any current artificial system.
+\end{theorem}
+
+\begin{proof}
+Let $x$ be a current artificial system. By Assumption~\ref{a:current}, $x$ has no affective architecture, so by Assumption~\ref{a:affect} it is not sentient, and by Assumption~\ref{a:eth07} it has no moral status. By Principle~\ref{p:owed}, nothing is owed to it.
+\end{proof}
+
+\begin{proposition}[Substrate neutrality]\label{p:change}
+The premises of Section~2 are jointly consistent with a current artificial system that thinks and lacks moral status, and with a future artificial system that has moral status and to which something is owed.
+\end{proposition}
+
+\begin{proof}
+Consider two artificial systems, $a$ current and $b$ future. Let $a$ think and lack an affective architecture, sentience, status and anything owed to it; let $b$ have an affective architecture, sentience and status, and let something be owed to it. Assumption~\ref{a:eth07}, Principle~\ref{p:owed} and Assumptions~\ref{a:affect} and \ref{a:current} hold of both.
+\end{proof}
+
+Proposition~\ref{p:change} is the formal content of \enquote{this may change}. Nothing in the premises refers to biological constitution, and the only premise that applies to artificial systems specifically, Assumption~\ref{a:current}, is restricted to current ones. The proposition also shows that the argument is consistent with MND-08: a current system may think and still lack status, since thinking does not entail an affective architecture.
+
+Two features of the argument deserve emphasis. First, it does not require that current systems lack consciousness altogether. ETH-07 argues that consciousness without valence does not suffice for moral status, since a being to which nothing matters cannot be wronged. A current system might have some form of experience without valence and still lack status; the argument needs only that it lacks valenced experience. Second, it does not rest on a conceivability argument. It is conceivable that current systems suffer, and conceivable that they do not; as MND-05-a argues, this settles nothing, and the argument instead relies on what is known about their architecture.
+
+\section{Objections}
+
+\begin{objection}[Relational status]
+Status is conferred by relations. People who live with social robots and conversational systems treat them as partners, and these relations confer status \citep{Coeckelbergh2010,Gunkel2018}.
+\end{objection}
+
+\begin{reply}
+ETH-07 argues that relationships generate special obligations but presuppose status rather than conferring it. A person who mourns a robot is not mistaken to grieve, but the loss is hers, not the robot's. What the relational view correctly records is that there may be reasons \emph{regarding} such systems. Treating a lifelike system with cruelty may express or cultivate dispositions that are bad, and may distress those who care about it; \citet{Darling2016} argues on such grounds for some legal protection of social robots. These are reasons grounded in the interests of human beings and other sentient beings. They are not owed to the system, and Theorem~\ref{t:main} concerns only what is owed.
+\end{reply}
+
+\begin{objection}[Precaution]
+We cannot be certain that current systems are not sentient. Given the stakes, some moral consideration is warranted now \citep{SeboLong2023,Long2024}.
+\end{objection}
+
+\begin{reply}
+Precaution is warranted for candidates, beings for which there is evidence-based reason to take sentience seriously \citep{Birch2024}. Our claim is that current systems are not candidates in that sense: the evidence for sentience in their case consists of reports that would be produced whether or not they were true, and the architectural evidence tells against it. A precautionary principle that applied to every system that cannot be proved non-sentient would apply to everything. The precautionary argument does, however, apply to the design of future systems. If an affective architecture is necessary for sentience, then building systems with such architectures is the step at which the question of status arises, and there are strong reasons to investigate it before taking that step; \citet{Metzinger2021} argues for a moratorium on research that risks creating artificial suffering.
+\end{reply}
+
+\begin{objection}[Behavioral parity]
+We attribute sentience to other animals on behavioral evidence. Current systems exhibit the behavior: they say they are in pain, they plead. Consistency requires the same attribution.
+\end{objection}
+
+\begin{reply}
+We attribute sentience to animals on behavioral evidence because, in their case, the behavior is produced by mechanisms homologous or analogous to those that produce valenced experience in us, and is not produced by imitation of reports of experience. In current language models the relation is reversed: the behavior is produced by training on such reports. The evidential value of a behavior depends on how it was produced, and this is why the same verbal report is good evidence in one case and no evidence in the other.
+\end{reply}
+
+\section{What the argument does not establish}
+
+The argument does not say which future systems would have moral status, nor what would be owed to them. If an artificial system came to have an affective architecture and valenced experience, ETH-07 implies that it would have status in proportion to its capacity for welfare, which might be small or large. Nor does the argument say that current systems may be treated in any way at all: reasons regarding them remain, grounded in the interests of those affected. It says only that nothing is owed to the systems themselves.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/ETH/ETH_24.lean} formalizes Section~3. The premises are collected as the fields of a structure over an arbitrary type of beings, so that Theorem~\ref{t:main} holds for every interpretation of the primitive notions satisfying them, and so that Proposition~\ref{p:change} can be proved by exhibiting such an interpretation, a two-element model with a current system that thinks and a future system with status.
+
+\begin{lstlisting}
+theorem no_status_now {B : Type} (P : Premises B) (x : B)
+    (ha : P.Artificial x) (hc : P.Current x) :
+    ¬ P.HasStatus x ∧ ¬ P.OwedTo x
+
+theorem may_change : ∃ (B : Type) (P : Premises B) (x y : B),
+    P.Artificial x ∧ P.Current x ∧ P.Thinks x ∧ ¬ P.HasStatus x ∧
+    P.Artificial y ∧ ¬ P.Current y ∧ P.HasStatus y ∧ P.OwedTo y
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_24.no_status_now' does not depend on any axioms
+'Philosophy.ETH_24.may_change' depends on axioms: [propext]
+\end{lstlisting}
+
+Neither theorem depends on a substantive axiom, because the premises are hypotheses: the fields \texttt{status\_iff\_sentient} (Assumption~\ref{a:eth07}), \texttt{owed\_requires\_status} (Principle~\ref{p:owed}), \texttt{sentience\_requires\_affect} (Assumption~\ref{a:affect}) and \texttt{current\_lack\_affect} (Assumption~\ref{a:current}) of the structure \texttt{Premises}. Theorem~\ref{t:main} is therefore exactly as strong as these premises, and in particular as strong as the empirical Assumption~\ref{a:current}.
+
+\section{Conclusion}
+
+Moral status depends on sentience, sentience requires an affective architecture, and current artificial systems have none. Nothing is owed to them, though there are reasons regarding them that are owed to others. The argument is substrate-neutral, and its premises are consistent with an artificial system that has moral status. Whether and when such a system will exist is an empirical question, and the moment at which systems with affective architectures are built is the moment at which the answer to the title question may change.
+
+\begin{thebibliography}{99}\small
+\bibitem[Birch(2024)]{Birch2024} Birch, J. (2024). \emph{The Edge of Sentience: Risk and Precaution in Humans, Other Animals, and AI}. Oxford University Press.
+\bibitem[Bryson(2010)]{Bryson2010} Bryson, J.~J. (2010). Robots should be slaves. In Y. Wilks (ed.), \emph{Close Engagements with Artificial Companions}. John Benjamins.
+\bibitem[Butlin et~al.(2023)]{Butlin2023} Butlin, P., Long, R., Elmoznino, E., Bengio, Y., Birch, J., Constant, A. et~al. (2023). Consciousness in artificial intelligence: Insights from the science of consciousness. arXiv:2308.08708.
+\bibitem[Coeckelbergh(2010)]{Coeckelbergh2010} Coeckelbergh, M. (2010). Robot rights? Towards a social-relational justification of moral consideration. \emph{Ethics and Information Technology}, 12(3), 209--221.
+\bibitem[Darling(2016)]{Darling2016} Darling, K. (2016). Extending legal protection to social robots: The effects of anthropomorphism, empathy, and violent behavior towards robotic objects. In R. Calo, A.~M. Froomkin and I. Kerr (eds.), \emph{Robot Law}. Edward Elgar.
+\bibitem[Gunkel(2018)]{Gunkel2018} Gunkel, D.~J. (2018). \emph{Robot Rights}. MIT Press.
+\bibitem[Long et~al.(2024)]{Long2024} Long, R., Sebo, J., Butlin, P. et~al. (2024). Taking AI welfare seriously. arXiv:2411.00986.
+\bibitem[Metzinger(2021)]{Metzinger2021} Metzinger, T. (2021). Artificial suffering: An argument for a global moratorium on synthetic phenomenology. \emph{Journal of Artificial Intelligence and Consciousness}, 8(1), 43--66.
+\bibitem[Schwitzgebel and Garza(2015)]{SchwitzgebelGarza2015} Schwitzgebel, E. and Garza, M. (2015). A defense of the rights of artificial intelligences. \emph{Midwest Studies in Philosophy}, 39(1), 98--119.
+\bibitem[Sebo and Long(2023)]{SeboLong2023} Sebo, J. and Long, R. (2023). Moral consideration for AI systems by 2030. \emph{AI and Ethics}.
+\end{thebibliography}
+
+\end{document}

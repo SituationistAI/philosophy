@@ -1,0 +1,190 @@
+\documentclass{situationist-preprint}
+
+\title{Proportionality and Eternal Punishment}
+\msid{REL-20-a}
+\msfamily{REL-20}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_20.lean}
+\mskeywords{hell; eternal punishment; proportionality; desert; status principle; continuing sin; divine justice}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The traditional doctrine of hell holds that some human beings are punished without end for wrongs committed in a finite life. We argue that eternal punishment is unjust, and that a just God would leave hell unoccupied. The argument rests on proportionality as an upper limit: a just punisher never inflicts on anyone more punishment than she deserves. We show that eternal punishment, understood as punishment of at least some minimal amount in every period without end, has unbounded cumulative magnitude, whereas the desert of a finite wrong, and of the finite record of a human life, is bounded. It follows that no finite wrong merits eternal punishment and that a just God inflicts it on no one. We examine the three classical ways of resisting the conclusion: the status principle, on which an offence against an infinitely worthy being is infinitely serious; the doctrine of continuing sin; and the view that hell is chosen rather than imposed. Each either denies a premise at an unacceptable cost or abandons the doctrine it was meant to defend. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The doctrine of eternal punishment has been defended in the Christian tradition by an argument from the dignity of the one offended. \citet[I.21]{Anselm} argued that the smallest sin against God outweighs the whole created world, and \citet[I--II, q.~87, a.~4]{Aquinas} that sin against an infinite good deserves a punishment infinite in duration, though finite in intensity. \citet{Edwards1738} gave the argument its sharpest form: the obligation to love and honour a being is proportional to the being's excellence, so that a failure of that obligation toward an infinitely excellent being is infinitely culpable.
+
+The modern discussion was opened by \citet{Adams1975}, who argued that the argument from dignity cannot make finite agents with limited understanding infinitely culpable, and by \citet{Kvanvig1993}, who isolated the \emph{strong view} of hell: hell exists, some persons are there, it is a place of punishment justified by earthly conduct, and there is no escape from it. Kvanvig rejected the strong view and replaced it with an issuant conception, on which hell expresses the same divine love as heaven and is entered and remained in by choice; \citet{Walls1992} and \citet{BuckareffPlug2005} defend related views. \citet{Sider2002} showed that a binary division of persons into the saved and the damned is unjust given that the properties on which it is based come in degrees, and universalists such as \citet{Talbott1999} conclude that all will finally be reconciled.
+
+We argue for a narrower claim, which does not depend on the issuant conception or on universalism: no finite wrong merits infinite punishment, and a just God would leave hell, understood as a place of eternal punishment, unoccupied. The argument uses only one principle of justice, proportionality as an upper limit, which retributivists and their critics share.
+
+\section{Framework}
+
+\begin{definition}[Punishment]\label{d:sched}
+A \emph{punishment} is a schedule that assigns to each period of time a number of units of harm, where a unit is the least amount of suffering or deprivation that counts as punishment at all. Its \emph{cumulative amount} after $n$ periods is the sum of the harms of the first $n$ periods.
+\end{definition}
+
+\begin{definition}[Eternal punishment]\label{d:eternal}
+A punishment is \emph{eternal} if it inflicts at least one unit of harm in every period, without end.
+\end{definition}
+
+Definition~\ref{d:eternal} is weaker than the traditional doctrine, which holds that the pains of hell do not abate, and it is what the doctrine requires if hell is a punishment at all: a schedule that eventually inflicted less than a unit in every period would eventually cease to punish.
+
+\begin{assumption}[Finite wrongs]\label{a:finite}
+Every wrong a human being commits has bounded desert: there is an amount of punishment that exceeds every amount it merits.
+\end{assumption}
+
+\begin{assumption}[Finite records]\label{a:record}
+A human life contains finitely many wrongs, and if each of finitely many wrongs has bounded desert, so does the record that contains them.
+\end{assumption}
+
+\begin{principle}[Proportionality]\label{p:prop}
+A just punisher never inflicts on anyone a cumulative punishment exceeding what that person deserves: at every time, the punishment inflicted so far is within desert.
+\end{principle}
+
+Principle~\ref{p:prop} is the limiting function of desert, which even theorists who deny that desert gives a reason to punish accept as a constraint on punishment \citep{vonHirsch1993}. It is not the claim that a just punisher must inflict all that is deserved. Mercy, which inflicts less, is consistent with it.
+
+\begin{definition}[Hell]\label{d:hell}
+A person is \emph{in hell} if God inflicts an eternal punishment on her.
+\end{definition}
+
+\section{The argument}
+
+\begin{lemma}[Eternal punishment is unbounded]\label{l:unbounded}
+If a punishment is eternal, its cumulative amount after $n$ periods is at least $n$. Hence no bounded range of amounts contains all its cumulative amounts.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$. After no periods the amount is zero. If after $k$ periods it is at least $k$, then after $k + 1$ periods it is at least $k + 1$, since the $(k+1)$-th period adds at least one unit. If every cumulative amount were at most some bound $b$, the amount after $b + 1$ periods would be at most $b$ and at least $b + 1$.
+\end{proof}
+
+\begin{proposition}[No finite wrong merits eternal punishment]\label{p:nowrong}
+For every wrong a human being commits and every eternal punishment, some cumulative amount of the punishment exceeds the desert of the wrong.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:finite} the desert of the wrong is bounded, and by Lemma~\ref{l:unbounded} the cumulative amounts of an eternal punishment are not.
+\end{proof}
+
+\begin{lemma}\label{l:person}
+The desert of every human person is bounded.
+\end{lemma}
+
+\begin{proof}
+Each wrong in her record has bounded desert by Assumption~\ref{a:finite}, and the record is finite, so its desert is bounded by Assumption~\ref{a:record}.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+A just God inflicts eternal punishment on no human person.
+\end{theorem}
+
+\begin{proof}
+Suppose God is just and inflicts an eternal punishment on $x$. By Principle~\ref{p:prop}, every cumulative amount of the punishment is within $x$'s desert. By Lemma~\ref{l:person}, that desert is bounded. By Lemma~\ref{l:unbounded}, the cumulative amounts of an eternal punishment are not, which is a contradiction.
+\end{proof}
+
+\begin{corollary}[Empty hell]\label{c:empty}
+If God is just, no one is in hell.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{t:main} and Definition~\ref{d:hell}.
+\end{proof}
+
+The argument does not depend on how harm is measured, provided units are comparable over time, nor on how desert is fixed, provided the desert of finite wrongs is bounded. It is consistent with any finite punishment, however severe, for wrongs that deserve it. What it excludes is the step from finitely many bounded deserts to a punishment without end.
+
+\section{Objections}
+
+\begin{objection}[The status principle]
+The seriousness of a wrong depends on the dignity of the one wronged. God's dignity is infinite, and so every sin, which is an offence against God, has unbounded desert. Assumption~\ref{a:finite} is false.
+\end{objection}
+
+\begin{reply}
+The status principle has some truth: other things equal, wronging a person is worse than damaging a thing. But desert depends on culpability as well as on the status of the one wronged, and culpability is limited by the agent's understanding of what she does and her capacity to do otherwise \citep{Adams1975}. A finite agent who grasps God's worth only dimly cannot be infinitely culpable for failing to honour it. The principle also proves too much. If every sin has unbounded desert, every sin deserves the same eternal punishment, and the theft of a pear is no less deserving of it than murder \citep{Kvanvig1993}. The tradition itself denies this, since it holds that the pains of the damned differ in degree. A theorist who accepts degrees of desert among sins cannot also hold that all of them exceed every bound.
+\end{reply}
+
+\begin{objection}[Continuing sin]
+The damned go on sinning in hell, and each new sin deserves a further punishment. Punishment without end is then the sum of infinitely many finite punishments, each deserved; Assumption~\ref{a:record} fails, since the record is not finite.
+\end{objection}
+
+\begin{reply}
+The objection changes the ground of the punishment. Definition~\ref{d:hell} concerns a sentence that is imposed at judgment for the record of a life and that cannot be revoked, and the irrevocability is part of the sentence: at the time of judgment, the record is finite, and by Theorem~\ref{t:main} the sentence exceeds its desert. Continuing sin could justify at most a punishment renewed period by period as long as the wrongs continue. Such a punishment ends whenever the wrongs end, and a just God, who is not indifferent to whether they end, would not maintain the conditions that make their continuation inevitable. If the conditions of hell cause the further sins, the further punishments are punishments for wrongs that the punisher's own sentence produced, which no principle of desert licenses.
+\end{reply}
+
+\begin{objection}[Hell is chosen]
+On the issuant conception, hell is not imposed but chosen: the damned prefer separation from God and are granted their preference \citep{Kvanvig1993,Walls1992}. Principle~\ref{p:prop} governs punishment, and hell so understood is not punishment.
+\end{objection}
+
+\begin{reply}
+We agree, and the reply supports the conclusion. If hell is the freely sustained choice of separation, it is not a place of eternal punishment, and Corollary~\ref{c:empty} is consistent with its being occupied in that other sense. Those who defend the issuant view have abandoned the doctrine that Theorem~\ref{t:main} concerns. Two further points apply. First, a choice made under ignorance and distorted desire is not obviously one a loving God would make final, which is the ground on which \citet{BuckareffPlug2005} argue that the door of hell is always open. Second, if the separation is accompanied by suffering that God sustains without end, the proportionality question returns for that suffering.
+\end{reply}
+
+\begin{objection}[Diminishing punishment]
+A punishment might go on forever while diminishing in intensity, so that its cumulative amount converges. Such a punishment is endless without being unbounded.
+\end{objection}
+
+\begin{reply}
+Definition~\ref{d:eternal} measures harm in units of the least amount that counts as punishment. A schedule whose harm per period eventually falls below that amount and stays there eventually ceases to punish, and so is not eternal punishment. If it does not fall below the unit, Lemma~\ref{l:unbounded} applies. Either way the objection describes a finite punishment, which Theorem~\ref{t:main} does not exclude.
+\end{reply}
+
+\begin{objection}[Other aims of punishment]
+Principle~\ref{p:prop} is retributive. If punishment is justified by its effects, eternal punishment might be justified by deterrence.
+\end{objection}
+
+\begin{reply}
+Proportionality as an upper limit is accepted by most non-retributive theories as a side-constraint, and in any case deterrence after the last judgment has no one left to deter. ETH-26 argues that punishment is justified as communication, expressing a censure that the offender has reason to accept. A punishment that never ends forecloses the reconciliation to which such communication is directed \citep{Duff2001}, and is therefore unjustified on that account too.
+\end{reply}
+
+\section{What the result does not establish}
+
+The theorem is conditional on God's justice and is silent on whether God exists. It does not decide between annihilationism, on which the unredeemed cease to exist, and universalism, on which all are eventually reconciled. Whether annihilation is a bounded punishment is a separate question, since it is the deprivation of an unending good rather than the infliction of unending harm, and we leave it open. Nor does the theorem exclude the issuant hell discussed in the third objection, or deserved punishment after death that is finite. It shows only that hell as eternal punishment for the wrongs of a finite life would be empty under a just God.
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/REL/REL_20.lean}. Schedules are functions from periods to natural numbers, and desert is represented by predicates on cumulative amounts, one for each wrong and one for each person. Assumptions~\ref{a:finite} and~\ref{a:record} and Principle~\ref{p:prop} are axioms; Lemma~\ref{l:unbounded} is proved by induction. The main results read:
+
+\begin{lstlisting}
+theorem no_wrong_merits_eternal (w : Wrong) (P : Schedule)
+    (hP : Eternal P) : ¬ ∀ n, Merits w (cum P n)
+theorem empty_hell (hJ : Just) : ∀ x, ¬ InHell x
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_20.no_wrong_merits_eternal' depends on axioms:
+  [propext, Quot.sound, Philosophy.REL_20.Merits,
+   Philosophy.REL_20.Wrong, Philosophy.REL_20.finite_wrong]
+'Philosophy.REL_20.empty_hell' depends on axioms:
+  [propext, Quot.sound, Philosophy.REL_20.Deserves,
+   Philosophy.REL_20.Inflicts, Philosophy.REL_20.Just,
+   Philosophy.REL_20.Person, Philosophy.REL_20.Wrong,
+   Philosophy.REL_20.aggregation, Philosophy.REL_20.finite_wrong,
+   Philosophy.REL_20.proportionality, Philosophy.REL_20.record]
+\end{lstlisting}
+
+\texttt{propext} and \texttt{Quot.sound} are used by Lean's arithmetic tactic. \texttt{Person}, \texttt{Wrong}, \texttt{record}, \texttt{Merits}, \texttt{Deserves}, \texttt{Inflicts} and \texttt{Just} are primitives. The three philosophical premises are \texttt{finite\_wrong} (Assumption~\ref{a:finite}), \texttt{aggregation} with \texttt{record} (Assumption~\ref{a:record}) and \texttt{proportionality} (Principle~\ref{p:prop}). Proposition~\ref{p:nowrong} uses only the first; the corollary uses all three.
+
+\section{Conclusion}
+
+Eternal punishment has no upper bound, and the desert of a finite wrong, or of the finite record of a human life, has one. A just punisher keeps punishment within desert. A just God therefore inflicts eternal punishment on no one, and hell, as a place of such punishment, is empty. The classical defences either deny that finite wrongs have bounded desert, at the cost of erasing the differences between them, or replace the doctrine with another that the argument does not concern.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1975)]{Adams1975} Adams, M.~M. (1975). Hell and the God of justice. \emph{Religious Studies}, 11(4), 433--447.
+\bibitem[Anselm(1098)]{Anselm} Anselm of Canterbury (1098). \emph{Cur Deus Homo}.
+\bibitem[Aquinas(1274)]{Aquinas} Thomas Aquinas (1265--1274). \emph{Summa Theologiae}.
+\bibitem[Buckareff and Plug(2005)]{BuckareffPlug2005} Buckareff, A.~A. and Plug, A. (2005). Escaping hell: divine motivation and the problem of hell. \emph{Religious Studies}, 41(1), 39--54.
+\bibitem[Duff(2001)]{Duff2001} Duff, R.~A. (2001). \emph{Punishment, Communication, and Community}. Oxford University Press.
+\bibitem[Edwards(1738)]{Edwards1738} Edwards, J. (1738). The justice of God in the damnation of sinners. In \emph{Discourses on Various Important Subjects}. Boston.
+\bibitem[Kvanvig(1993)]{Kvanvig1993} Kvanvig, J.~L. (1993). \emph{The Problem of Hell}. Oxford University Press.
+\bibitem[Sider(2002)]{Sider2002} Sider, T. (2002). Hell and vagueness. \emph{Faith and Philosophy}, 19(1), 58--68.
+\bibitem[Talbott(1999)]{Talbott1999} Talbott, T. (1999). \emph{The Inescapable Love of God}. Universal Publishers.
+\bibitem[von Hirsch(1993)]{vonHirsch1993} von Hirsch, A. (1993). \emph{Censure and Sanctions}. Oxford University Press.
+\bibitem[Walls(1992)]{Walls1992} Walls, J.~L. (1992). \emph{Hell: The Logic of Damnation}. University of Notre Dame Press.
+\end{thebibliography}
+
+\end{document}

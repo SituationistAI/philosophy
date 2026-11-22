@@ -1,0 +1,127 @@
+\documentclass{situationist-preprint}
+
+\title{The Systems Reply Vindicated}
+\msid{MND-07-a}
+\msfamily{MND-07}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_07.lean}
+\mskeywords{Chinese Room; systems reply; understanding; functionalism; implementation; Searle}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Searle's Chinese Room argument concludes that running a program is not sufficient for understanding, on the ground that a man who runs a program for answering questions in Chinese does not thereby understand Chinese. The systems reply holds that the man is not the subject to whom understanding should be ascribed: the system of which he is a part understands Chinese, even though he does not. We argue that the systems reply is correct. The argument turns on a distinction between running a program and executing its steps, which Searle's argument conflates. We show that the inference from the man's lack of understanding to the system's requires a principle of downward transfer that is false for other cognitive properties, and that, once the distinction is drawn, a standard functionalist premise entails that the system understands. The main inference is formalized in Lean.
+\end{abstract}
+
+\section{The argument}
+
+In the Chinese Room thought experiment \citep{Searle1980}, a man who knows no Chinese is locked in a room with a rule book written in English. Slips of paper bearing Chinese characters are passed in; the man consults the rule book, which tells him which characters to write in response, and passes the result out. The rule book is so good that the answers are indistinguishable from those of a native speaker. Searle argues as follows.
+\begin{enumerate}[label=(S\arabic*)]
+\item The man in the room runs a program that produces competent Chinese answers.
+\item The man does not understand Chinese.
+\item Therefore, running such a program is not sufficient for understanding Chinese.
+\end{enumerate}
+Since a computer running the same program is in no better position than the man, Searle concludes that no computer understands anything merely by virtue of running a program.
+
+The \emph{systems reply}, which Searle himself reports and rejects, holds that (S1) is false as stated. The man does not run the program; the system consisting of the man, the rule book, the slips of paper and the room runs it. The man is a component of the system, playing the role of a central processor, and the question whether the system understands is not settled by the fact that one of its components does not \citep{Copeland1993}.
+
+Searle's response is that the man can internalize the system: he can memorize the rule book and do all the work in his head, so that there is nothing in the system that is not in him. He still does not understand Chinese, and so, Searle concludes, neither does the system. The companion manuscript MND-07-c examines this response in detail. Here we argue that the systems reply is correct for the original case, and that the reason it is correct also explains why internalization does not help Searle.
+
+\section{Running and executing}
+
+\begin{definition}\label{d:execute}
+An agent \emph{executes} a program if it carries out, one by one, the operations that the program specifies.
+\end{definition}
+
+\begin{definition}\label{d:run}
+A system \emph{runs} a program if its states and transitions realize the functional organization the program specifies: its states play the roles of the program's states, and its transitions occur because the corresponding operations are specified.
+\end{definition}
+
+The distinction is familiar from computer science. A processor executes the instructions of an interpreter, and the interpreter runs a program written in a higher-level language. The processor does not run that program in the sense of Definition~\ref{d:run}: its own states are register contents and instruction pointers, not the states of the high-level program, which are realized only at the level of the processor together with the interpreter and memory. The program's variables, data structures and control flow are properties of the whole system, not of the processor.
+
+In the Chinese Room, the man executes the program, since he carries out its operations one by one. The system runs it, since its states (the configuration of the man, the book and the slips) realize the functional organization the program specifies. The man's own states do not realize that organization: his beliefs are about which squiggle to write after which, not about whatever the Chinese sentences are about.
+
+\section{The transfer principle}
+
+Searle's argument requires that what is true of the man be true of the system. Made explicit, the requirement is the following principle.
+
+\begin{principle}[Downward transfer]\label{p:transfer}
+If a component of a system executes every operation of a program the system runs, and the component lacks a cognitive property, then the system lacks it.
+\end{principle}
+
+Principle~\ref{p:transfer} is false for other cognitive properties. A processor that executes a chess program does not know the rules of chess; it executes instructions about bits. The system that runs the chess program does, in the only sense in which any computational system can be said to know rules, represent them and act on them. Similarly, no single neuron understands English, and the brain of an English speaker is a system whose components execute operations without understanding them. If Principle~\ref{p:transfer} were true, no system with components that lack understanding could understand, and since every physical system that understands has such components, nothing could understand.
+
+\begin{proposition}\label{p:invalid}
+Without Principle~\ref{p:transfer}, Searle's argument is invalid: (S1) and (S2) are consistent with the system's understanding Chinese.
+\end{proposition}
+
+\begin{proof}
+A model of the case in which the man executes the program, lacks understanding, and the system runs the program and understands is consistent with (S1), read as a claim about execution, and with (S2). Such a model is given by any functionalist theory on which understanding supervenes on the functional organization of the system, since the man's states do not realize that organization and the system's do.
+\end{proof}
+
+\section{The functionalist premise}
+
+The systems reply does not merely block Searle's argument. Together with a functionalist premise, it entails that the system understands.
+
+\begin{assumption}[Functionalism about understanding]\label{a:func}
+A system that runs a program realizing the functional organization of a competent speaker of a language understands that language.
+\end{assumption}
+
+\begin{theorem}\label{t:main}
+Under Assumption~\ref{a:func}, the Chinese Room system understands Chinese.
+\end{theorem}
+
+\begin{proof}
+By the description of the case, the rule book is a program that realizes the functional organization of a competent Chinese speaker: its answers are indistinguishable from a native speaker's, and the description stipulates that this is achieved by rules that track the relations between inputs, internal states and outputs. By Section~2, the system runs this program. By Assumption~\ref{a:func}, the system understands Chinese.
+\end{proof}
+
+Assumption~\ref{a:func} is, of course, precisely what Searle denies, and Theorem~\ref{t:main} does not refute him. What it shows is that the Chinese Room provides no independent reason to deny Assumption~\ref{a:func}. The thought experiment was meant to show that a system can run the right program without understanding. It shows only that a component of such a system can execute the program without understanding, which functionalism already predicts.
+
+\subsection{Formalization}
+
+The inference is formalized in \nolinkurl{Philosophy/MND/MND_07.lean}. Entities, the relations of executing and running, and understanding are primitive; the description of the case and Assumption~\ref{a:func} are axioms. The main theorem derives the system's understanding without using the man's lack of understanding. A second theorem shows that adding Principle~\ref{p:transfer} to the axioms yields a contradiction: given the description of the case and Assumption~\ref{a:func}, downward transfer cannot hold.
+
+\begin{lstlisting}
+theorem system_understands : Understands room :=
+  functionalism room chineseProgram competent room_runs
+\end{lstlisting}
+
+\section{Objections}
+
+\begin{objection}
+Systems do not understand anything; only people do. Ascribing understanding to a room containing a man and a book is a category mistake.
+\end{objection}
+
+\begin{reply}
+The objection begs the question. Whether systems composed of people and objects can understand is what is at issue. In the case of brains, we already ascribe understanding to a system composed of parts that do not understand. Nothing in the Chinese Room case makes the ascription less appropriate, except the unfamiliarity of the system's composition.
+\end{reply}
+
+\begin{objection}
+The syntax of the program cannot by itself determine semantics: symbols do not acquire meaning by being manipulated according to rules \citep{Searle1980}.
+\end{objection}
+
+\begin{reply}
+This is Searle's deeper argument, and it is independent of the Chinese Room. It concerns whether any computational organization suffices for content, and it applies to brains as much as to rooms, unless brains have causal powers that rooms lack. We discuss the naturalization of content in MND-12, where we argue that aboutness is primitive but its distribution is explained by teleosemantics. If that view is correct, symbols in a suitably embedded system can have content, and the syntax-semantics objection does not distinguish the room from a brain.
+\end{reply}
+
+\begin{objection}
+The man can internalize the system. Then there is nothing in the system that is not in the man, and the systems reply has nothing to point to.
+\end{objection}
+
+\begin{reply}
+After internalization, the man executes the program in his head, and a system realized in his brain runs it. That system is not the man, in the sense relevant to the attribution of understanding: it does not share his beliefs, his memories or his language, and its states are not his states \citep{Cole1991}. That both are realized in the same brain no more makes them identical than two programs running on one computer are identical. MND-07-c develops this point.
+\end{reply}
+
+\section{Conclusion}
+
+The system as a whole understands Chinese; the man in the room does not, and he is not the relevant subject. The Chinese Room shows that executing a program does not suffice for understanding, which no functionalist denies; it does not show that running a program does not suffice, which is what Searle needed. The distinction between running and executing is the one the systems reply relied on from the start, and once it is made explicit the reply is vindicated.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cole(1991)]{Cole1991} Cole, D. (1991). Artificial intelligence and personal identity. \emph{Synthese}, 88(3), 399--417.
+\bibitem[Copeland(1993)]{Copeland1993} Copeland, B.~J. (1993). \emph{Artificial Intelligence: A Philosophical Introduction}. Blackwell.
+\bibitem[Searle(1980)]{Searle1980} Searle, J.~R. (1980). Minds, brains, and programs. \emph{Behavioral and Brain Sciences}, 3(3), 417--457.
+\end{thebibliography}
+
+\end{document}

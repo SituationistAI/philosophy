@@ -1,0 +1,97 @@
+\documentclass{situationist-preprint}
+
+\title{Margins for Error}
+\msid{MET-18-b}
+\msfamily{MET-18}
+\msdiscipline{Metaphysics}
+\mstype{Companion manuscript}
+\mskeywords{vagueness; epistemicism; margin for error; safety; inexact knowledge; KK principle; supervaluation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MET-18-a explains the unknowability of the sharp boundaries of vague predicates by margin-for-error principles: if a case is known to be $F$, its neighbor is $F$. There the principle follows from a definition of knowledge as truth under every indiscriminable interpretation, and critics may suspect that it was built in. We give a fuller defence. Margin principles follow from a safety condition on knowledge that is independently motivated, and they govern inexact knowledge in perception and measurement as well as in the use of vague terms. We reply to the objections that the vague case lacks the unreliability that safety requires and that iterated margins are incoherent. Finally, we state how margins relate to supervaluation: supertruth over admissible precisifications measures what can be known, and the epistemic view adds that there is a fact beyond it.
+\end{abstract}
+
+\section{Margins without stipulation}\label{s:safety}
+
+Proposition~3.3 of MET-18-a states that, at every interpretation $u$ and position $i$ of a sorites series, if it is known that $i$ is $F$ then $i+1$ is $F$, and if it is known that $i+1$ is not $F$ then $i$ is not $F$. Its proof uses Definition~2.5 of that manuscript, on which a claim is known at $u$ if it holds under every interpretation indiscriminable from $u$, together with semantic plasticity (Assumption~2.6). The definition is a model, and a critic may hold that the margin principle is a feature of the model rather than of knowledge. We derive it instead from a general condition on knowledge.
+
+\begin{principle}[Safety]\label{p:safety}
+If a subject knows $p$ by believing it in a certain way, then in every case close to the actual one in which she believes in the same way something expressed in the same way, what she believes is true.
+\end{principle}
+
+Principle~\ref{p:safety} is the condition \citet{Williamson2000} places at the center of the theory of knowledge: knowledge is belief that could not easily have been false. It is not tailored to vagueness. It explains why a lucky true belief, formed by a method that would easily have produced a false one, is not knowledge.
+
+\begin{assumption}[Fixed method, shifting content]\label{a:shift}
+A speaker who judges \enquote{$i$ is $F$} at interpretation $u$ would, in a close case in which the use of $F$ differed slightly so as to fix an interpretation $v$ indiscriminable from $u$, make the same judgment in the same way, and the judgment would then express the claim that $i$ is $F$ under $v$.
+\end{assumption}
+
+Assumption~\ref{a:shift} records how vague words get their meanings. The speaker's grounds for the judgment, her perception of the case and her competence with the word, would be the same had the community's use been slightly different, and her sentence would then have meant something slightly different \citep[ch.~8]{Williamson1994}.
+
+\begin{proposition}[Margins from safety]\label{p:margins}
+Given Principle~\ref{p:safety}, Assumption~\ref{a:shift} and Assumption~2.6 of MET-18-a, if a speaker knows that $i$ is $F$ at $u$, then $i+1$ is $F$ at $u$.
+\end{proposition}
+
+\begin{proof}
+By Assumption~2.6 of MET-18-a, there is an interpretation $w$, indiscriminable from $u$, under which the boundary lies one place earlier, so that $i$ is $F$ under $w$ only if $i+1$ is $F$ under $u$. By Assumption~\ref{a:shift}, there is a close case in which the speaker judges \enquote{$i$ is $F$} in the same way and the judgment expresses the claim that $i$ is $F$ under $w$. By Principle~\ref{p:safety}, that claim is true. Hence $i+1$ is $F$ under $u$.
+\end{proof}
+
+The second half of Proposition~3.3 of MET-18-a follows in the same way from the interpretation with the boundary one place later. The margin principle is therefore not stipulated: it is what safety requires of beliefs whose content depends on use that could easily have been slightly different.
+
+\paragraph{The general phenomenon.} Margin principles are not peculiar to vagueness. \citet[ch.~5]{Williamson2000} considers a subject who judges the height of a distant tree by eye. Her eyesight cannot discriminate heights that differ by less than some amount; if she knows that the tree is not $i$ inches tall, her belief must be safe, and a belief formed in the same way about a tree $i+1$ inches tall would have been the same belief. So she knows that the tree is not $i$ inches tall only if it is not $i+1$ inches tall either. Margin principles of this kind are the general form of inexact knowledge \citep{Williamson1992}. The structure is that of Proposition~\ref{p:margins}, with variation in the world in place of variation in use. The vague case is the special case in which what varies across close cases is the content of the word rather than the state of the object, and this is why the ignorance it produces is unavoidable: no improvement in the speaker's eyesight shrinks a margin generated by the instability of meaning.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[No risk of error]\label{o:risk}
+Safety concerns the risk of false belief. A speaker who judges \enquote{$i$ is $F$} in a close case with a shifted interpretation believes a different proposition, which is true if her judgment is in the extension under the shifted interpretation. There is no risk of believing falsely, only of believing something else; so safety imposes no margin.
+\end{objection}
+
+\begin{reply}
+The objection would succeed if safety concerned propositions individually. It concerns methods: a belief is safe if the method by which it was formed could not easily have produced a false belief. The method here is to judge \enquote{$i$ is $F$} on the basis of the look of the case, and in a close case it produces a judgment that is false if $i$ is the last $F$ under the actual interpretation and the shifted interpretation places the boundary earlier. The speaker cannot tell from the inside which interpretation her use fixes, so her method is as exposed to the shift as the tree-judge's is to small differences in height. That the false belief in the close case has a different content is what makes the error invisible to her, not what makes her safe.
+\end{reply}
+
+\begin{objection}[Iteration]\label{o:iter}
+If the margin principle holds, and is itself known, then it can be applied to known claims repeatedly: from knowing that $0$ is $F$ and knowing the principle, one can infer and so know that $1$ is $F$, and so on down the series. Margin principles and knowledge of clear cases together reconstruct the sorites.
+\end{objection}
+
+\begin{reply}
+The inference requires that one know, at each step, that one knows the premise of the next step. From the margin principle and knowledge that $i$ is $F$ one gets only the truth of \enquote{$i+1$ is $F$}, not knowledge of it. To continue, one would need to know that one knows that $i$ is $F$, and margin principles imply that this iteration fails near the boundary: the principle that knowing entails knowing that one knows is false for inexact knowledge \citep[ch.~5]{Williamson2000}. The margin principle is true at every point, but it cannot be used as a premise for knowledge at every point, and this is exactly the asymmetry Corollary~3.5 of MET-18-a records between the tolerance premise and its knowledge version. The same failure of iteration explains why the edges of the borderline region are themselves unknowable, as LOG-15 requires for higher-order vagueness.
+\end{reply}
+
+\begin{objection}[The size of the margin]
+The margin $m$ of Proposition~3.6 of MET-18-a is a sharp number. If speakers cannot know where the boundary is, they cannot know how wide the margin is either, and the model has merely moved the sharpness.
+\end{objection}
+
+\begin{reply}
+The epistemic view accepts that the width of the margin is a fact that speakers do not know exactly; it is a fact about how far use could easily have been different, and that is itself known only inexactly. Moving the sharpness is not a cost for the view, which holds that the world is sharp throughout. It would be a cost for a view that hoped to avoid sharp boundaries, \citet{DokicEgre2009} discuss how margin principles interact with what a subject can know about her own knowledge, and nothing in that discussion requires the margin itself to be known exactly.
+\end{reply}
+
+\section{Margins and supervaluation}\label{s:super}
+
+MET-05-a uses supervaluation to show that there is one cloud: on every admissible precisification of \enquote{cloud}, exactly one candidate aggregate is a cloud. Supervaluationists in the tradition of \citet{Fine1975} define truth as truth on all admissible precisifications, and so deny that \enquote{$c$ is the cloud} has a truth value for any particular candidate $c$. The epistemic view keeps the machinery and changes its interpretation.
+
+\begin{proposition}[Supertruth is knowability]\label{p:super}
+If the admissible precisifications at $u$ are the interpretations indiscriminable from $u$, then a sentence is supertrue at $u$ if and only if it is known at $u$ in the sense of Definition~2.5 of MET-18-a; and whatever is supertrue at $u$ is true at $u$.
+\end{proposition}
+
+\begin{proof}
+The first claim is the coincidence of the two definitions. The second follows from the reflexivity of indiscriminability (Assumption~2.4 of MET-18-a): $u$ is among its own admissible precisifications.
+\end{proof}
+
+Supervaluation therefore measures what can be known: a sentence is supertrue when it holds under every interpretation the speakers cannot rule out. Epistemicism adds that there is a fact beyond it, the truth at the interpretation that use actually fixes. The two accounts agree on every supertruth, including that there is exactly one cloud, and they differ only on sentences that are neither supertrue nor superfalse. For those, the supervaluationist says there is no fact; the epistemic view says there is a fact that falls within the margin for error, and so cannot be known. Proposition~\ref{p:margins} explains why there is such a region of unknowable facts. Supervaluation has no corresponding explanation of why the admissible precisifications are as many as they are, and when it is asked where the admissible ones end, it must draw a sharp boundary of its own.
+
+\section{Conclusion}
+
+Margin-for-error principles follow from the safety condition on knowledge together with the dependence of meaning on use that could easily have been slightly different. They hold for inexact knowledge generally, they do not license the sorites because knowledge does not iterate within the margin, and they explain the unknowability of sharp boundaries without any vagueness in the world. Read through them, supervaluation is a model of what can be known about vague matters, and the epistemic view is the claim that the facts outrun it.
+
+\begin{thebibliography}{99}\small
+\bibitem[Dokic and \'Egr\'e(2009)]{DokicEgre2009} Dokic, J. and \'Egr\'e, P. (2009). Margin for error and the transparency of knowledge. \emph{Synthese}, 166(1), 1--20.
+\bibitem[Fine(1975)]{Fine1975} Fine, K. (1975). Vagueness, truth and logic. \emph{Synthese}, 30, 265--300.
+\bibitem[Williamson(1992)]{Williamson1992} Williamson, T. (1992). Inexact knowledge. \emph{Mind}, 101(402), 217--242.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

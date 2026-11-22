@@ -1,0 +1,93 @@
+\documentclass{situationist-preprint}
+
+\title{The Surprise Examination}
+\msid{LOG-11-a}
+\msfamily{LOG-11}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/LOG/LOG\_11.lean}
+\mskeywords{surprise examination; unexpected hanging; backward induction; knowledge; blindspots; KK principle}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A teacher announces that there will be an examination on one day next week and that the students will not know on the morning of that day that the examination is that day. The students reason that it cannot be on the last day, then that it cannot be on the penultimate day, and so on, and conclude that it cannot take place. It takes place on Wednesday, and they are surprised. We show that the examination can take place, with surprise, on any day but the last. The first step of the students' backward induction is sound. The second fails, because excluding the penultimate day requires the students to know the announcement on the morning of that day, and the announcement cannot be known then: knowing it would make it false. The proof uses only the factivity of knowledge and its closure under logical consequence, and does not rely on the KK principle.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 proved Theorem~\ref{t:second} using the KK principle, according to which whoever knows that $p$ knows that she knows that $p$. That principle is rejected by many epistemologists \citep{Williamson2000}, and its use made the result depend on a contested assumption. The present proof uses only factivity and closure. The conclusions are unchanged.
+
+\section{The paradox}
+
+The paradox, known also as the unexpected hanging, was discussed by \citet{OConnor1948} and \citet{Quine1953} and has generated a large literature \citep{Sorensen1988,Chow1998}. Let the days of the week be $1, \dots, n$. The teacher's announcement $A$ says that the examination will take place on exactly one of these days, and that on the morning of that day the students will not know that it is the day of the examination.
+
+The students reason as follows. If the examination has not taken place by the morning of day $n$, they will know that it is on day $n$; so it cannot be on day $n$ without violating $A$. Given that it is not on day $n$, if it has not taken place by the morning of day $n-1$, they will know that it is on day $n-1$; so it cannot be on day $n-1$ either. Continuing, they exclude every day.
+
+\section{The first step}
+
+\begin{theorem}\label{t:first}
+If $A$ is true, the examination is not on day $n$.
+\end{theorem}
+
+\begin{proof}
+Suppose the examination is on day $n$. On the morning of day $n$ the students know that it has not taken place on any earlier day and that it takes place on one of the days $1, \dots, n$; by closure, they know that it is on day $n$. This contradicts the surprise clause of $A$.
+\end{proof}
+
+The first step uses only the students' knowledge of the calendar and of what has happened, not their knowledge of $A$. It is sound.
+
+\section{The second step}
+
+The second step requires more. To exclude day $n-1$, the students must know, on the morning of day $n-1$, that the examination is not on day $n$. They can know this only by knowing $A$ and applying Theorem~\ref{t:first}. We show that they cannot know $A$ on that morning.
+
+Write $K$ for the students' knowledge on the morning of day $n-1$, and suppose the examination has not taken place before. Let $E_{n-1}$ and $E_n$ be the propositions that it is on day $n-1$ and on day $n$ respectively. We assume:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Factivity}: if $K p$ then $p$.
+\item \emph{Closure}: if $p$ entails $q$ and $K p$, then $K q$.
+\item \emph{Calendar}: $K(E_{n-1} \vee E_n)$.
+\end{enumerate}
+By Theorem~\ref{t:first}, $A$ entails $\neg E_n$; and $A$ entails that if $E_{n-1}$ then $\neg K E_{n-1}$.
+
+\begin{theorem}\label{t:second}
+On the morning of day $n-1$, the students do not know $A$.
+\end{theorem}
+
+\begin{proof}
+Suppose $K A$. By closure, $K \neg E_n$. With the calendar and closure, $K E_{n-1}$. By factivity, $A$ is true, so $\neg E_n$; with the calendar and factivity, $E_{n-1}$. Since $A$ is true and $E_{n-1}$, the surprise clause gives $\neg K E_{n-1}$, which contradicts $K E_{n-1}$.
+\end{proof}
+
+The proof does not use the KK principle: at no point do we infer from the students' knowing something that they know that they know it. The announcement belongs to the class of propositions that \citet{Sorensen1988} calls blindspots: propositions that may be true but cannot be known by a particular subject at a particular time.
+
+\begin{corollary}\label{c:any}
+The examination can take place, with surprise, on any day but the last.
+\end{corollary}
+
+\begin{proof}
+For $d = n-1$ this is Theorem~\ref{t:second}: the students do not know $A$, so they cannot exclude day $n$, and with two days open they do not know $E_{n-1}$. Take $d < n-1$, and suppose the examination is on day $d$. Assume, as in the standard telling, that on the morning of day $d$ everything the students know about the date follows from the calendar, from what has happened, and at most from $A$. Then even if they knew $A$, they could exclude only day $n$ (Theorem~\ref{t:first}): $A$ together with the calendar does not entail $E_d$, since it is consistent with an examination on day $n-1$, at which the surprise clause holds by Theorem~\ref{t:second}. By closure and factivity alone nothing more follows, so they do not know $E_d$. The surprise clause holds, and $A$ is true. (The retention of the announcement across mornings, which the backward induction would need at later steps, is examined in LOG-11-b.)
+\end{proof}
+
+\section{Formalization}
+
+Theorem~\ref{t:second} is formalized in \nolinkurl{Philosophy/LOG/LOG_11.lean}. The students' knowledge is a predicate on propositions, constrained only by factivity and closure.
+
+\begin{lstlisting}
+theorem announcement_unknowable (K : Prop → Prop)
+    (factive : ∀ p, K p → p)
+    (closure : ∀ p q, (p → q) → K p → K q)
+    (E1 E2 : Prop) (calendar : K (E1 ∨ E2)) :
+    ¬ K (¬ E2 ∧ (E1 → ¬ K E1))
+\end{lstlisting}
+
+\section{Conclusion}
+
+The students' backward induction is sound at its first step and fails at its second, because the second step requires knowledge of an announcement that cannot be known at the time it would be needed. The examination can take place on any day but the last, and the students will be surprised.
+
+\begin{thebibliography}{99}\small
+\bibitem[Chow(1998)]{Chow1998} Chow, T.~Y. (1998). The surprise examination or unexpected hanging paradox. \emph{The American Mathematical Monthly}, 105(1), 41--51.
+\bibitem[O'Connor(1948)]{OConnor1948} O'Connor, D.~J. (1948). Pragmatic paradoxes. \emph{Mind}, 57(227), 358--359.
+\bibitem[Quine(1953)]{Quine1953} Quine, W.~V. (1953). On a so-called paradox. \emph{Mind}, 62(245), 65--67.
+\bibitem[Sorensen(1988)]{Sorensen1988} Sorensen, R.~A. (1988). \emph{Blindspots}. Clarendon Press.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass{situationist-preprint}
+
+\title{On the Possibility of Metaphysics}
+\msid{MET-30-a}
+\msfamily{MET-30}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_30.lean}
+\mskeywords{metametaphysics; deflationism; Carnap; quantifier variance; verbal disputes; ontological anti-realism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is metaphysics possible as a discipline with determinate answers? Deflationists deny it. Carnap held that metaphysical questions are either internal to a linguistic framework and trivial, or external and practical; Hirsch holds that ontological disputes are merely verbal; and anti-realists about ontology hold that existence questions lack determinate answers. We argue that metaphysics is possible, by the most direct route: some metaphysical questions have determinate, substantive answers, as the results of MET-01 to MET-29 illustrate. We take two of them as witnesses: the question of the external world, which Carnap treated as his paradigm external question and which MET-03 answers by a criterion of theory choice, and the identity of indiscernibles, whose apparent verbal component MET-28 eliminates by disambiguation, leaving determinate answers. Given that these questions are determinate and substantive, each of the deflationary theses is false in its general form. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Kant complained that metaphysics had not found the secure path of a science (\emph{Critique of Pure Reason}, Preface to the second edition); the twentieth century gave the complaint a semantic form. \citet{Carnap1950} distinguished questions internal to a linguistic framework, such as whether there is a prime number greater than a hundred, which are answered by the framework's rules and evidence, from external questions about the reality of the entities of the framework as a whole, which he took to be practical questions about whether to adopt it. \citet{Hirsch2011} argued that many ontological disputes, such as the dispute over whether arbitrary sums of objects exist, are verbal: each party can interpret the other as speaking truly in her own language. \citet{Chalmers2009} examined the view that ontological questions lack determinate answers. The main positions are collected in \citet{ChalmersManleyWasserman2009}. Against these views, \citet{Quine1951} denied that the internal--external distinction can be drawn sharply, and \citet{Sider2011} argued that ontological questions are substantive because the quantifier carves reality at its joints.
+
+We argue that metaphysics is possible, and we argue it from actuality: some metaphysical questions have determinate and substantive answers, so the discipline that answers them is possible.
+
+\section{Framework}
+
+\begin{definition}[Substantive]\label{d:subst}
+A question is \emph{substantive} if it is neither \emph{trivial}, that is, answerable by the rules of a linguistic framework alone, nor \emph{merely verbal}, that is, such that the parties to a dispute over it disagree only about the meaning of an expression \citep{Chalmers2011}.
+\end{definition}
+
+\begin{definition}[Determinate]\label{d:det}
+A question is \emph{determinate} if exactly one of its candidate answers is true.
+\end{definition}
+
+\begin{definition}[Possibility of metaphysics; deflationism]\label{d:poss}
+Metaphysics is \emph{possible as a discipline with determinate answers} if some metaphysical question is determinate and substantive. \emph{General deflationism} is the thesis that no metaphysical question is both.
+\end{definition}
+
+\begin{assumption}[Witnesses]\label{a:witness}
+The question of MET-03, whether the external world exists, is ontological, metaphysical, determinate and substantive. The question of MET-28, whether the identity of indiscernibles is true, taken in each of its disambiguations, is metaphysical, determinate and substantive.
+\end{assumption}
+
+The question of MET-03 is Carnap's own example of an external question, the question of the reality of the thing world. It is not trivial: no framework rule settles whether the structure responsible for the order of experience depends on being conceived by a mind. It is not verbal: realist and idealist agree on the meaning of every term in the shared vocabulary of experience, structure and production, and their disagreement concerns whether a further notion, conception, is needed to describe the world. And it is determinate: MET-03 shows that idealism is consistent and eliminated by parsimony of ideology, so that one answer is true. Carnap would classify parsimony as a practical criterion. But it is the criterion by which scientific theories are chosen between when they agree in prediction, and if it makes the external question practical, it makes every such choice in science practical as well, which is the conclusion \citet{Quine1951} drew against the distinction.
+
+The question of MET-28 shows what happens to a dispute with a verbal component. \enquote{Discernible} is ambiguous between absolute, relative and weak discernibility. Following the method of \citet{Chalmers2011}, the ambiguity is removed by replacing the disputed term with each of its precisifications; the dispute does not disappear but splits into three questions, each with a determinate answer: Black's spheres refute the principle for absolute and relative discernibility, and the principle holds in its weak form.
+
+\section{The result}
+
+\begin{theorem}\label{t:main}
+Metaphysics is possible as a discipline with determinate answers, and general deflationism is false.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:witness}, the question of MET-03 is metaphysical, determinate and substantive, which by Definition~\ref{d:poss} is what the possibility of metaphysics requires, and which contradicts general deflationism.
+\end{proof}
+
+\begin{corollary}\label{c:theses}
+In their general forms, Carnap's dichotomy, Hirsch's thesis that ontological questions are merely verbal, its extension to all metaphysical questions, and anti-realism about ontological questions are false.
+\end{corollary}
+
+\begin{proof}
+The question of MET-03 is neither trivial nor indeterminate, against Carnap's dichotomy; it is ontological and not verbal, against Hirsch's thesis; and it is ontological and determinate, against anti-realism. The question of MET-28 is metaphysical and not verbal, against the extended thesis.
+\end{proof}
+
+Hirsch's thesis restricted to some disputes is untouched, and MET-28 is a case in which part of a dispute was verbal; but restricted deflationism is a thesis within metaphysics, assessed question by question, and does not threaten the discipline.
+
+The two witnesses are not isolated. MET-21 diagnoses Parmenides' argument against change as an equivocation and proves that the principle needed to repair it entails that nothing exists; MET-24 shows that existence is a first-order property had by everything; MET-18 locates vagueness in language rather than the world; MET-06 answers the special composition question that is Hirsch's central example. Each answer is reached by explicit argument from stated premises.
+
+\begin{objection}
+The determinacy of the answers is inherited from premises that the deflationist will reject.
+\end{objection}
+
+\begin{reply}
+Every determinate answer in every discipline is reached from premises some will reject. The deflationist's claim is not that the premises are false but that no premises could settle the questions, and a single sound argument for an answer to a substantive question refutes that claim.
+\end{reply}
+
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MET/MET_30.lean} takes questions and the properties of being metaphysical, ontological, determinate, trivial and verbal as primitive, defines substantivity, possibility and the deflationary theses, and states Assumption~\ref{a:witness} as axioms \texttt{w03} and \texttt{w28}. The main statement is:
+
+\begin{lstlisting}
+theorem metaphysics_possible : MetaphysicsPossible ∧ ¬ Deflationism
+
+'Philosophy.MET_30.metaphysics_possible' depends on axioms:
+  [Determinate, Metaphysical, Ontological, Question, Trivial,
+   Verbal, q03, w03]
+\end{lstlisting}
+
+The content of the proof lies in Assumption~\ref{a:witness}, which the formalization isolates as its only substantive premise.
+
+\section{Conclusion}
+
+Metaphysics is possible as a discipline with determinate answers, because it has some: the questions of the external world and of the identity of indiscernibles are metaphysical, substantive and determinate, and the general forms of the deflationary theses are therefore false.
+
+\begin{thebibliography}{99}\small
+\bibitem[Carnap(1950)]{Carnap1950} Carnap, R. (1950). Empiricism, semantics, and ontology. \emph{Revue Internationale de Philosophie}, 4, 20--40.
+\bibitem[Chalmers(2009)]{Chalmers2009} Chalmers, D. J. (2009). Ontological anti-realism. In \citet{ChalmersManleyWasserman2009}.
+\bibitem[Chalmers(2011)]{Chalmers2011} Chalmers, D. J. (2011). Verbal disputes. \emph{Philosophical Review}, 120, 515--566.
+\bibitem[Chalmers et~al.(2009)]{ChalmersManleyWasserman2009} Chalmers, D. J., Manley, D., and Wasserman, R. (eds.) (2009). \emph{Metametaphysics: New Essays on the Foundations of Ontology}. Oxford University Press.
+\bibitem[Hirsch(2011)]{Hirsch2011} Hirsch, E. (2011). \emph{Quantifier Variance and Realism: Essays in Metaontology}. Oxford University Press.
+\bibitem[Quine(1951)]{Quine1951} Quine, W. V. (1951). On Carnap's views on ontology. \emph{Philosophical Studies}, 2, 65--72.
+\bibitem[Sider(2011)]{Sider2011} Sider, T. (2011). \emph{Writing the Book of the World}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,293 @@
+\documentclass{situationist-preprint}
+
+\title{Conditionals Without Truth Values}
+\msid{LNG-20-a}
+\msfamily{LNG-20}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_20.lean}
+\mskeywords{indicative conditionals; conditional probability; Adams's thesis; Stalnaker's thesis; triviality results; Lewis; probabilistic validity; suppositional theory}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do indicative conditionals, such as \enquote{if it rained, the match was cancelled}, have truth values? We argue that they do not. The probability of an indicative conditional is the conditional probability of its consequent given its antecedent, a thesis supported by the Ramsey test, by the failure of every truth-conditional rival to predict how confident speakers are in conditionals, and by experimental evidence. Lewis's triviality results show that no proposition, fixed independently of the credence function that assesses it, can have this probability under every credence of a class closed under conditionalization. We prove the core of Lewis's first result in a finite probability model and exhibit a four-world model in which no proposition satisfies the thesis. Of the premises of the argument, the one to give up is that indicative conditionals express propositions. We show that what remains is a working theory: Adams's probabilistic logic validates modus ponens with a precise bound on uncertainty and explains why the material conditional seems right in some inferences and wrong in others. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+An indicative conditional is a sentence such as \enquote{If Oswald did not kill Kennedy, someone else did} or \enquote{If it rained in Paris yesterday, the match was cancelled}. The question is whether such sentences are true or false, in the way that \enquote{It rained in Paris yesterday} is true or false, and if so under what conditions.
+
+The answer that comes first to a student of logic is that an indicative conditional is true unless its antecedent is true and its consequent false. That is the material conditional. LOG-07-a argues that the material conditional is the right conditional for logic, the connective that internalizes classical consequence; it also notes that this leaves open what the English \enquote{if} means, and refers the question to the present manuscript. The material analysis of English indicatives has well-known costs. It makes every conditional with a false antecedent true, so that anyone confident that it did not rain in Paris yesterday should be equally confident that if it rained the match was cancelled and that if it rained the match went ahead. Speakers are not.
+
+The main alternatives are three. On the possible-worlds view of \citet{Stalnaker1968}, \enquote{if $A$, $C$} is true at a world when $C$ is true at the closest world at which $A$ is true. On the view of \citet{Jackson1979,Jackson1987} and \citet{Grice1989}, indicatives have the truth conditions of the material conditional, and their behavior in conversation is explained by implicature or by a conventional requirement of robustness. On the suppositional view of \citet{Adams1965,Adams1975}, developed by \citet{Edgington1986,Edgington1995} and \citet{Bennett2003}, indicative conditionals have no truth conditions at all: to assert \enquote{if $A$, $C$} is to assert $C$ under the supposition that $A$, and the degree to which one may assert it is the conditional probability of $C$ given $A$.
+
+We defend the suppositional view. Our thesis has three parts. First, the probability of an indicative conditional is the conditional probability of its consequent given its antecedent. Second, indicative conditionals have no truth values. Third, the second part is the correct response to Lewis's triviality results, which show that the first part cannot hold for a conditional that expresses a proposition. The argument is that the first part is well supported, that the triviality results are sound, and that of their premises the one that should be given up is the assumption that conditionals have truth conditions fixed independently of the credences that assess them.
+
+\section{A history of the debate}\label{s:history}
+
+\subsection{Ramsey and de Finetti}
+
+The suppositional view begins with a footnote. \citet{Ramsey1931} observed that when two people are arguing about \enquote{if $p$, will $q$?} and both are in doubt about $p$, they are adding $p$ hypothetically to their stock of knowledge and arguing on that basis about $q$; they fix their degrees of belief in $q$ given $p$. The procedure, which became known as the Ramsey test, makes the acceptance of a conditional a matter of conditional belief rather than of belief in a proposition. \citet{deFinetti1936} proposed independently that a conditional is a \emph{conditional event}: it is true if antecedent and consequent are true, false if the antecedent is true and the consequent false, and void otherwise, as a bet on $C$ conditional on $A$ is won, lost or called off. Neither Ramsey nor de Finetti presented the view as a denial that conditionals have truth values, but both located the content of a conditional in a conditional attitude.
+
+\subsection{Adams and probabilistic validity}
+
+\citet{Adams1965,Adams1975} made the view precise. He took the assertibility of an indicative conditional to be the conditional probability of its consequent on its antecedent, and asked which inferences involving conditionals preserve high probability. He called an inference \emph{probabilistically valid} if the uncertainty of its conclusion (one minus its probability) cannot exceed the sum of the uncertainties of its premises. Modus ponens, contraposition for factual sentences and the inference from \enquote{$A$ or $C$} to \enquote{if not $A$, $C$} behave differently in this logic. Modus ponens is probabilistically valid. Strengthening the antecedent, transitivity and contraposition are not: one can be highly confident that if it rains the match will be cancelled, and not at all confident that if it rains and the stadium has a roof it will be cancelled. These are precisely the inferences that Stalnaker's semantics also invalidates and that the material conditional validates, and it was soon observed that, for conditionals not embedded in other conditionals, the two logics agree closely \citep{Gibbard1981}. The agreement suggested that the probabilistic and the possible-worlds approaches were two descriptions of one phenomenon.
+
+\subsection{Stalnaker's thesis}
+
+\citet{Stalnaker1970} drew the natural conclusion. If the probability of a conditional is the conditional probability, and if conditionals express propositions, then there should be, for each $A$ and $C$, a proposition $A \Rightarrow C$ with
+\begin{equation}\label{e:thesis}
+P(A \Rightarrow C) = P(C \mid A) \quad\text{whenever } P(A) > 0,
+\end{equation}
+for every reasonable probability function $P$. Stalnaker hoped that his possible-worlds semantics supplied the proposition. Equation~\eqref{e:thesis}, with $P$ ranging over all reasonable credences, became known as Stalnaker's thesis, or simply as the Thesis.
+
+\subsection{Lewis's triviality results}
+
+\citet{Lewis1976} showed that the Thesis fails. His first result is this: if a class of probability functions is closed under conditionalization and the Thesis holds for every member of the class, then every member that gives positive probability to both $A \wedge C$ and $A \wedge \neg C$ makes $A$ and $C$ probabilistically independent. Since there are reasonable credences under which a sentence and its antecedent are dependent although neither combination is excluded, the Thesis cannot hold for them. His second result strengthens the first: a language for which the Thesis holds over a class closed under conditionalization can contain at most four pairwise incompatible propositions with positive probability, and is in that sense trivial. \citet{Lewis1976} drew the conclusion that the indicative conditional has the truth conditions of the material conditional, and that its assertibility, not its probability, goes by the conditional probability, a combination he presented as a version of Jackson's and Grice's view. \citet{Lewis1986} extended the results to classes closed under Jeffrey conditionalization.
+
+\subsection{The aftermath}
+
+The results were strengthened in every direction. \citet{Hajek1989} showed by a counting argument that a non-trivial probability function on a finite space cannot satisfy the Thesis even taken alone: its unconditional probabilities take too few values to supply all the conditional probabilities it determines. \citet{HajekHall1994} surveyed the family of results and the hypotheses on which each depends. \citet{Bradley2000} derived triviality from a preservation condition much weaker than closure under conditionalization: whoever gives $A$ positive probability and is certain that $C$ is false must be certain that \enquote{if $A$, $C$} is false. \citet{KhooMandelkern2019} gave a triviality result that turns not on probability but on the logic of conditionals in natural language.
+
+Three lines of response emerged. The first, Lewis's own, keeps truth conditions and gives up the Thesis as an account of probability, keeping it as an account of assertibility. The second keeps the Thesis by letting the proposition expressed by a conditional vary with the credence that assesses it: \citet{vanFraassen1976} showed that for any probability function one can construct a proposition with the conditional probability, and later work developed the idea with sequences of worlds \citep{McGee1989,Kaufmann2004} and with contextually varying contents \citep{Bacon2015}. The third, the suppositional view, keeps the Thesis and gives up the assumption that conditionals express propositions \citep{Adams1975,Edgington1995,Bennett2003}. Our argument is that the third is correct.
+
+\subsection{Evidence about speakers}
+
+A further development bears on the Thesis directly. Experimental work in the psychology of reasoning has asked people how probable they judge conditionals about a set of cards or a described distribution. Most participants answer with the conditional probability; a minority answer with the probability of the conjunction; almost none answer with the probability of the material conditional \citep{EvansHandleyOver2003}. \citet{DouvenVerbrugge2010} found that judgments of the acceptability of conditionals in natural contexts track the conditional probability closely, while judgments of their probability do so somewhat less closely. The evidence does not establish the Thesis, since speakers' answers may not track the probabilities they ought to have. But it shows that the competing hypotheses, on which the probability of a conditional is the probability of the material conditional or of a Stalnaker proposition that varies from the conditional probability, predict the data less well.
+
+\section{Framework}\label{s:frame}
+
+We work with finite probability models. Nothing in the argument depends on finiteness except that the formalization is simpler; Lewis's results hold in general.
+
+\begin{definition}\label{d:model}
+A \emph{finite probability model} consists of a finite set of worlds and a weighting that assigns to each world a natural number. An \emph{event} is a set of worlds. The \emph{weight} $m(E)$ of an event is the sum of the weights of its worlds, and when the total weight $m(\top)$ is positive the \emph{probability} of $E$ is $P(E) = m(E)/m(\top)$. When $m(A) > 0$, the \emph{conditional probability} of $C$ given $A$ is $P(C \mid A) = m(A \wedge C)/m(A)$.
+\end{definition}
+
+Every finite probability function with rational values arises from a weighting, and every identity between probabilities can be stated by cross-multiplication as an identity between weights. This is how the formalization avoids rational arithmetic.
+
+\begin{definition}\label{d:cond}
+The \emph{conditionalization} of a weighting $m$ on an event $B$ is the weighting $m_B$ that agrees with $m$ on the worlds in $B$ and gives weight $0$ to the others.
+\end{definition}
+
+If $m(B) > 0$, then $m_B$ represents the credence that results from learning $B$ and nothing else: $P_B(E) = P(E \mid B)$.
+
+\begin{principle}[The Thesis]\label{p:thesis}
+The probability of an indicative conditional \enquote{if $A$, $C$} is the conditional probability of $C$ given $A$, under every reasonable credence that gives $A$ positive probability.
+\end{principle}
+
+\begin{assumption}[Truth conditions]\label{a:prop}
+If indicative conditionals have truth values, then for each antecedent $A$ and consequent $C$ there is a proposition $X$, the same whatever the credence of the person who considers the conditional, such that the conditional is true at exactly the worlds in $X$, and the probability of the conditional under a credence is the probability of $X$.
+\end{assumption}
+
+\begin{assumption}[Closure]\label{a:closed}
+The reasonable credences form a class closed under conditionalization: if $m$ is reasonable and $m(B) > 0$, then $m_B$ is reasonable.
+\end{assumption}
+
+Principle~\ref{p:thesis} is the thesis we defend. Assumption~\ref{a:prop} states what it is for a sentence to have truth conditions in the ordinary sense: its truth value at a world is settled by the world, not by the credences of those who evaluate it, and its probability is the probability that it is true. Assumption~\ref{a:closed} says that learning a proposition of positive probability does not make a reasonable credence unreasonable. Lewis's results need nothing stronger.
+
+\section{The triviality argument}\label{s:triv}
+
+\begin{lemma}\label{l:cond}
+For all events $B$ and $E$, $m_B(E) = m(E \wedge B)$.
+\end{lemma}
+
+\begin{proof}
+A world contributes its weight to $m_B(E)$ exactly when it is in $E$ and in $B$.
+\end{proof}
+
+\begin{lemma}\label{l:split}
+For all events $E$ and $F$, $m(E) = m(E \wedge F) + m(E \wedge \neg F)$.
+\end{lemma}
+
+\begin{proof}
+Every world in $E$ is in exactly one of $F$ and $\neg F$.
+\end{proof}
+
+\begin{theorem}[Lewis]\label{t:lewis}
+Suppose that a proposition $X$ satisfies Principle~\ref{p:thesis} for $A$ and $C$ over a class of credences closed under conditionalization. Then every member of the class that gives positive weight to both $A \wedge C$ and $A \wedge \neg C$ makes $A$ and $C$ independent: $P(C \mid A) = P(C)$.
+\end{theorem}
+
+\begin{proof}
+Let $m$ be a member of the class with $m(A \wedge C) > 0$ and $m(A \wedge \neg C) > 0$. Then $m(C) > 0$ and $m(\neg C) > 0$, so by Assumption~\ref{a:closed} both $m_C$ and $m_{\neg C}$ belong to the class, and by Lemma~\ref{l:cond} each gives $A$ positive weight.
+
+Apply the Thesis to $m_C$. By Lemma~\ref{l:cond}, the probability of $X$ under $m_C$ is $m(X \wedge C)/m(C)$, and the conditional probability of $C$ given $A$ under $m_C$ is $m(A \wedge C)/m(A \wedge C) = 1$. So $m(X \wedge C) = m(C)$: given $C$, the conditional is certain. Apply the Thesis to $m_{\neg C}$. The probability of $X$ under $m_{\neg C}$ is $m(X \wedge \neg C)/m(\neg C)$, and the conditional probability of $C$ given $A$ under $m_{\neg C}$ is $0$. So $m(X \wedge \neg C) = 0$: given $\neg C$, the conditional is certainly false. By Lemma~\ref{l:split}, $m(X) = m(X \wedge C) + m(X \wedge \neg C) = m(C)$. Finally, apply the Thesis to $m$ itself: $P(X) = P(C \mid A)$. Hence $P(C \mid A) = P(C)$.
+\end{proof}
+
+The heart of the proof is that the Thesis, applied to the credences that result from learning $C$ and from learning $\neg C$, fixes the probability of the conditional at $1$ and $0$ respectively, so that by the law of total probability the probability of the conditional must equal the probability of its consequent. The conditional probability need not.
+
+\begin{corollary}\label{c:four}
+Consider the model with four worlds, at which $A$ and $C$ take the four combinations of truth values, and the class of all weightings on it, which is closed under conditionalization. No proposition satisfies Principle~\ref{p:thesis} for $A$ and $C$ over this class.
+\end{corollary}
+
+\begin{proof}
+Give the worlds $A \wedge C$, $A \wedge \neg C$, $\neg A \wedge C$, $\neg A \wedge \neg C$ the weights $2$, $1$, $0$, $1$. Then $P(C \mid A) = 2/3$ and $P(C) = 1/2$, although $A \wedge C$ and $A \wedge \neg C$ both have positive weight. By Theorem~\ref{t:lewis}, no proposition satisfies the Thesis.
+\end{proof}
+
+The credence of Corollary~\ref{c:four} is not exotic. Let $A$ be the proposition that it rained in Paris yesterday and $C$ that the match was cancelled, and suppose one thinks rain likely, cancellation likely if it rained, and cancellation unlikely otherwise. Nothing about this credence is unreasonable, and it is the normal case: the antecedents of conditionals that people care to assert are usually relevant to their consequents.
+
+\begin{theorem}\label{t:main}
+Indicative conditionals do not have truth values.
+\end{theorem}
+
+\begin{proof}
+Suppose they do. By Assumption~\ref{a:prop}, for the antecedent and consequent of Corollary~\ref{c:four} there is a proposition $X$ whose probability under each credence is that of the conditional. By Principle~\ref{p:thesis}, this probability is the conditional probability under every reasonable credence that gives $A$ positive probability. If every weighting on the four worlds is a reasonable credence, which is the case Corollary~\ref{c:four} considers, this contradicts the corollary. If only some are, Assumption~\ref{a:closed} and Theorem~\ref{t:lewis} still yield the contradiction, provided one reasonable credence makes $A$ and $C$ dependent while giving positive probability to $A \wedge C$ and $A \wedge \neg C$, as the credence about rain and the match does.
+\end{proof}
+
+The theorem rests on three premises, and the argument is valid. Those who reject the conclusion must reject a premise. The Thesis is the subject of Section~\ref{s:frame} and of the history recounted above; Assumption~\ref{a:closed} is as secure as anything in the theory of rational credence. What remains is Assumption~\ref{a:prop}, which is a statement of what having truth values would come to. Theorem~\ref{t:main} therefore says that indicative conditionals lack truth values in the ordinary sense, the sense in which a sentence's truth value is settled by the world. Section~\ref{s:obj} considers the view that they have truth values in some other sense.
+
+\section{Conditionals without truth values}\label{s:adams}
+
+A theory that denies truth values to indicatives owes an account of their logic and of their use. The account is Adams's.
+
+\begin{definition}\label{d:unc}
+The \emph{uncertainty} of a factual sentence $A$ under a credence is $u(A) = 1 - P(A)$. The uncertainty of a conditional \enquote{if $A$, $C$} is $u(A \Rightarrow C) = 1 - P(C \mid A)$. An inference is \emph{probabilistically valid} if, under every credence, the uncertainty of its conclusion is at most the sum of the uncertainties of its premises.
+\end{definition}
+
+The definition does not require conditionals to be propositions. Uncertainty is defined for them directly, from the conditional probability.
+
+\begin{proposition}[Adams]\label{p:mp}
+Modus ponens is probabilistically valid: $u(C) \leq u(A) + u(A \Rightarrow C)$ whenever $P(A) > 0$.
+\end{proposition}
+
+\begin{proof}
+The probability of $\neg C$ is at most the probability of $A \wedge \neg C$ plus that of $\neg A$, and $P(A \wedge \neg C) = P(A)\, u(A \Rightarrow C) \leq u(A \Rightarrow C)$.
+\end{proof}
+
+Proposition~\ref{p:mp} is what the suppositional view needs to explain why reasoning with conditionals is reliable. One who is confident that $A$ and confident that if $A$ then $C$ may be confident that $C$, and the loss of confidence is bounded by the sum of the doubts.
+
+\begin{proposition}\label{p:matge}
+The probability of the material conditional $\neg A \vee C$ is at least the conditional probability of $C$ given $A$.
+\end{proposition}
+
+\begin{proof}
+$P(\neg A \vee C) = P(\neg A) + P(A \wedge C)$. Now $P(A \wedge C) = P(A)\,P(C \mid A)$, and $P(\neg A) \geq P(\neg A)\, P(C \mid A)$ since $P(C \mid A) \leq 1$. Adding, $P(\neg A \vee C) \geq (P(\neg A) + P(A))\, P(C \mid A) = P(C \mid A)$.
+\end{proof}
+
+Proposition~\ref{p:matge} explains a fact that troubles the material analysis and supports the suppositional one. The inference from \enquote{if $A$, $C$} to \enquote{not-$A$ or $C$} is probabilistically valid: whoever may assert the conditional may assert the disjunction. The converse inference is not. One may be nearly certain that either it did not rain or the match was cancelled, because one is nearly certain that it did not rain, without being at all confident that if it rained the match was cancelled. The difference between the two probabilities is greatest when $P(A)$ is small, which is exactly when the material analysis gives the wrong verdict. Where $P(A)$ is high, the two coincide nearly, and so does the material analysis with the data. The material conditional is a good approximation to the indicative in the circumstances in which conditionals are mostly used, and a poor one in the circumstances its critics cite.
+
+The inference from \enquote{$A$ or $C$} to \enquote{if not $A$, $C$}, which is the basis of much ordinary reasoning, is probabilistically valid when the disjunction is asserted on grounds that do not depend on one disjunct alone \citep{Edgington1995}. If one believes that the butler or the gardener did it because the evidence implicates both, one may infer that if the butler did not, the gardener did; if one believes the disjunction only because one is sure the butler did it, the inference fails, and so it should.
+
+\section{Further cases}\label{s:cases}
+
+\paragraph{Gibbard's riverboat.} \citet{Gibbard1981} described a card game on a riverboat in which Sly Pete must decide whether to call his opponent's bet. One onlooker, who knows that Pete has been shown the opponent's hand and so would call only if he held the better hand, sends a note saying \enquote{If Pete called, he won}. Another, who has seen both hands and knows that Pete's is the worse, sends a note saying \enquote{If Pete called, he lost}. Both notes are assertible on the evidence of the person who wrote them, and neither writer has made a mistake. On a view on which conditionals express propositions, the two notes express contradictory propositions, given that Pete called, and one of them must be false; yet neither writer has said anything false by her own lights or ours. On the suppositional view the case is straightforward. Each writer's conditional probability of the consequent given the antecedent is high on her evidence, and there is no proposition about which they disagree; the conditional is not a report of a fact about the world but an expression of a conditional credence. Gibbard concluded that indicative conditionals do not express propositions, and the case is a second argument for Theorem~\ref{t:main} that does not depend on probability.
+
+\paragraph{The future and the counterfactual.} \enquote{If it rains tomorrow, the match will be cancelled} is indicative, and the suppositional account applies to it. \enquote{If it had rained, the match would have been cancelled} is subjunctive, and its assessment differs: one who learns that it did not rain may still be confident of the counterfactual, while the corresponding indicative has lost its point. The present thesis is restricted to indicatives. Whether counterfactuals have truth values is a separate question on which nothing here depends.
+
+\paragraph{Compounds.} Conditionals appear as conjuncts, in the consequents of other conditionals and, less often, in antecedents and under negation. A theory without truth values must say what these compounds mean. Our view, with \citet{Edgington1995} and \citet{Bennett2003}, is that the embeddings that occur are limited and each is interpretable without truth values. A conjunction of conditionals is the assertion of both. A conditional with a conditional consequent, \enquote{if $A$, then if $B$, $C$}, is equivalent to \enquote{if $A$ and $B$, $C$}, the import--export principle, and the Thesis gives it the probability $P(C \mid A \wedge B)$. Negations of conditionals in ordinary speech, such as \enquote{it is not the case that if you press the button the bomb will explode}, are denials that the conditional is assertible, typically expressing \enquote{if you press the button the bomb may not explode}. Conditionals in antecedents, \enquote{if the vase broke if it was dropped, it was fragile}, are rare and their interpretation is unstable among speakers; \citet{McGee1989} gives a systematic treatment that remains within the probabilistic framework.
+
+\paragraph{McGee's counterexample.} \citet{McGee1985} argued that modus ponens fails for conditionals with conditional consequents: before the 1980 election one could be confident that if a Republican wins, then if Reagan does not win Anderson will, and confident that a Republican will win, without being confident that if Reagan does not win Anderson will. The suppositional view predicts the case. By import--export, the major premise has the probability of \enquote{if a Republican wins and Reagan does not, Anderson will}, which was high; the conclusion has the probability of Anderson's winning given that Reagan does not, which was low, since the likeliest alternative to Reagan was Carter. The inference from \enquote{$A$} and \enquote{if $A$ and $B$, $C$} to \enquote{if $B$, $C$} is not probabilistically valid, and McGee's numbers show why. Proposition~\ref{p:mp} concerns modus ponens with a factual consequent, and it is untouched: what fails is the detachment of a conditional consequent, which the theory never licensed.
+
+\paragraph{Conditional questions and commands.} \enquote{If you see Mary, will you give her this?} and \enquote{If you see Mary, give her this} have no truth values on any view, and their conditional structure is the same as that of the indicative: they raise a question or issue a command under a supposition. \citet{Belnap1970} proposed that conditional assertion is a speech act in its own right, to be understood on the model of these. The uniformity of \enquote{if} across the three moods is evidence for the suppositional view, on which the indicative too performs a speech act under a supposition.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Credence-dependent propositions]\label{o:vf}
+\citet{vanFraassen1976}, \citet{McGee1989} and \citet{Bacon2015} show that the Thesis can be satisfied by propositions that depend on the credence of the speaker or on the context. Conditionals then have truth values, and Theorem~\ref{t:main} is avoided by rejecting Assumption~\ref{a:prop} in its requirement that the proposition be the same for every credence.
+\end{objection}
+
+\begin{reply}
+The proposal assigns to each conditional, relative to each credence, a set of worlds or of sequences of worlds. A sentence whose truth value at a world depends on the credence of whoever evaluates it does not have a truth value in the sense at issue: two people who agree about every matter of fact may disagree about whether the conditional is true without either being mistaken about anything, which is Gibbard's case. The constructions are valuable as representations of conditional credence; they show that conditional probabilities can be written as probabilities of artificial events. But what the event is depends on the credence, and the credence comes first. That is the suppositional view in another notation, and we accept it as such.
+\end{reply}
+
+\begin{objection}[Material truth conditions]\label{o:jack}
+\citet{Jackson1979,Jackson1987} and \citet{Lewis1976} hold that indicative conditionals have the truth conditions of the material conditional and that the conditional probability measures their assertibility, not their probability. Theorem~\ref{t:main} is then avoided by rejecting Principle~\ref{p:thesis} for probability while keeping it for assertibility.
+\end{objection}
+
+\begin{reply}
+The view predicts that someone who is nearly certain that it did not rain must be nearly certain that if it rained the match was cancelled, while declining to assert it. That is not how speakers report their confidence: asked how likely it is that if it rained the match was cancelled, they give the conditional probability, not the probability of the material conditional (Section~\ref{s:history}). \citet{Edgington1995} adds that the view makes a person's credence in a conditional idle: on it one may believe a conditional to degree $0.99$ and rightly refuse to act on it or to infer from it. Implicature theory, which LNG-11 defends for scalar and other implicatures, explains why some true assertions are misleading; it cannot explain why speakers who are asked about their confidence, not invited to make an assertion, report the conditional probability. The burden of explaining this falls on the material analysis, and it has not been met.
+\end{reply}
+
+\begin{objection}[Truth talk]\label{o:true}
+Speakers call conditionals true and false. \enquote{It is true that if he took the train he arrived on time}, and \enquote{That is false: if he took the train he was late}, are ordinary English. A theory on which conditionals have no truth values must call this talk mistaken.
+\end{objection}
+
+\begin{reply}
+Given deflationism about truth, which LNG-10 defends, \enquote{it is true that if $A$, $C$} says no more than \enquote{if $A$, $C$}, and saying it requires no more than being in a position to assert the conditional. The truth predicate is a device of endorsement and generalization, and it can be applied to whatever can be asserted, including conditional assertions, without attributing to them truth conditions settled by the world. What Theorem~\ref{t:main} denies is that conditionals have truth values in the sense of Assumption~\ref{a:prop}. It does not legislate against the word \enquote{true}. The calling of conditionals false is likewise the denial of the conditional, which in ordinary use asserts a contrary conditional, as the example shows.
+\end{reply}
+
+\begin{objection}[Embedding]\label{o:embed}
+If conditionals do not express propositions, they cannot embed under logical operators, and a compositional semantics cannot treat them. Yet conditionals embed, as Section~\ref{s:cases} concedes. The view therefore cannot be integrated with the semantics of the rest of the language.
+\end{objection}
+
+\begin{reply}
+The objection would be decisive if embedding were unrestricted. It is not. Conditionals appear freely in conjunctions and in consequents; under negation, in antecedents and in disjunctions they appear rarely and receive interpretations that speakers find unstable. The restrictor analysis of \citet{Kratzer1986}, on which \enquote{if} restricts the domain of a modal or quantifier rather than forming a sentence with truth conditions of its own, is a compositional semantics on which the bare conditional is a restricted modal claim, and it fits the suppositional view: with the probability operator as the modal, \enquote{probably, if $A$, $C$} is true just when $P(C \mid A)$ is high. The suppositional theorist therefore has a compositional treatment of the embeddings that occur, and an explanation of the absence or instability of those that do not.
+\end{reply}
+
+\begin{objection}[Logic]\label{o:logic}
+Logic is the study of truth preservation. If conditionals have no truth values, there is no logic of conditionals, and inferences such as modus ponens cannot be called valid.
+\end{objection}
+
+\begin{reply}
+Probabilistic validity (Definition~\ref{d:unc}) generalizes truth preservation: for factual sentences, an inference is probabilistically valid exactly when it is classically valid \citep{Adams1975}. Proposition~\ref{p:mp} shows that modus ponens is valid in this sense. The logic of conditionals is therefore a logic of uncertainty preservation, and classical logic is its factual fragment. Logic in the sense of LOG-07-a, where the conditional internalizes consequence in a formal language, is another matter, and there the material conditional is the right choice.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The argument shows that indicative conditionals lack truth values in the sense of Assumption~\ref{a:prop}. It does not show that the conditional of a formal language must lack them; LOG-07-a argues that the material conditional is the right conditional for logic, and the two theses are consistent because they concern different objects. It does not show that subjunctive conditionals lack truth values; their probability does not in general equal the conditional probability, and the triviality argument does not apply to them in the form given here. It does not decide which credences are reasonable, beyond the closure of Assumption~\ref{a:closed}; it requires only that some reasonable credence make an antecedent relevant to its consequent. And it does not settle the interpretation of every compound containing conditionals. The suppositional view is committed to there being no proposition for a compound to embed; it is not committed to any particular account of the compounds that speakers produce.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/LNG/LNG_20.lean} represents a finite probability model by a list of worlds and a weighting into the natural numbers (Definition~\ref{d:model}), with events as Boolean functions on worlds and conditionalization as in Definition~\ref{d:cond}. Identities between probabilities are stated by cross-multiplication. The Thesis for a proposition \texttt{X} over a class of weightings \texttt{Cr} (Principle~\ref{p:thesis} with Assumption~\ref{a:prop}) and closure (Assumption~\ref{a:closed}) are definitions, and the theorem takes them as hypotheses.
+
+\begin{lstlisting}
+theorem lewis (ws : List W) (Cr : (W → Nat) → Prop) (A C X : W → Bool)
+    (hcl : Closed ws Cr) (hth : Thesis ws Cr A C X)
+    (wt : W → Nat) (hwt : Cr wt)
+    (hAC : 0 < mass wt (conj A C) ws)
+    (hAnC : 0 < mass wt (conj A (neg C)) ws) :
+    Indep ws wt A C
+
+theorem no_conditional_proposition :
+    ¬ ∃ X, Thesis worlds4 AllWeightings antecedent consequent X
+\end{lstlisting}
+
+The first is Theorem~\ref{t:lewis}, the second Corollary~\ref{c:four}. The module also proves Lemmas~\ref{l:cond} and~\ref{l:split} and Propositions~\ref{p:mp} and~\ref{p:matge}. The checker reports the following for the main results.
+
+\begin{lstlisting}
+'Philosophy.LNG_20.lewis' depends on axioms: [propext, Quot.sound]
+'Philosophy.LNG_20.no_conditional_proposition' depends on axioms:
+  [propext, Quot.sound]
+'Philosophy.LNG_20.modus_ponens_bound' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+The results use no axioms beyond those of Lean's core logic. The philosophical premises enter as hypotheses: the Thesis and closure in Theorem~\ref{t:lewis}, and in Corollary~\ref{c:four} the Thesis over the class of all weightings on four worlds. Theorem~\ref{t:main} is not formalized, because its remaining premise, Assumption~\ref{a:prop}, is a claim about what having truth values consists in; the formal content of the argument is that a proposition in the sense of that assumption cannot satisfy the Thesis.
+
+\section{Conclusion}
+
+The probability of an indicative conditional is the conditional probability of its consequent given its antecedent. Lewis's argument, whose core we have proved, shows that no proposition fixed independently of the assessing credence can have that probability under every credence of a class closed under conditionalization. Since the Thesis is well supported and closure is not negotiable, indicative conditionals do not express such propositions: they have no truth values. Their logic is Adams's logic of uncertainty, in which modus ponens is valid, the inference to the material conditional is valid and its converse is not. The material conditional remains the conditional of logic, as LOG-07-a argues; the English indicative is a device for asserting under a supposition.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1965)]{Adams1965} Adams, E.~W. (1965). The logic of conditionals. \emph{Inquiry}, 8, 166--197.
+\bibitem[Adams(1975)]{Adams1975} Adams, E.~W. (1975). \emph{The Logic of Conditionals: An Application of Probability to Deductive Logic}. Reidel.
+\bibitem[Bacon(2015)]{Bacon2015} Bacon, A. (2015). Stalnaker's thesis in context. \emph{The Review of Symbolic Logic}, 8(1), 131--163.
+\bibitem[Belnap(1970)]{Belnap1970} Belnap, N.~D. (1970). Conditional assertion and restricted quantification. \emph{No\^us}, 4(1), 1--12.
+\bibitem[Bennett(2003)]{Bennett2003} Bennett, J. (2003). \emph{A Philosophical Guide to Conditionals}. Oxford University Press.
+\bibitem[Bradley(2000)]{Bradley2000} Bradley, R. (2000). A preservation condition for conditionals. \emph{Analysis}, 60(3), 219--222.
+\bibitem[de~Finetti(1936)]{deFinetti1936} de Finetti, B. (1936). La logique de la probabilit\'e. In \emph{Actes du Congr\`es International de Philosophie Scientifique}, Hermann.
+\bibitem[Douven and Verbrugge(2010)]{DouvenVerbrugge2010} Douven, I. and Verbrugge, S. (2010). The Adams family. \emph{Cognition}, 117(3), 302--318.
+\bibitem[Edgington(1986)]{Edgington1986} Edgington, D. (1986). Do conditionals have truth-conditions? \emph{Cr\'itica}, 18(52).
+\bibitem[Edgington(1995)]{Edgington1995} Edgington, D. (1995). On conditionals. \emph{Mind}, 104(414), 235--329.
+\bibitem[Evans et~al.(2003)]{EvansHandleyOver2003} Evans, J. St.~B.~T., Handley, S.~J. and Over, D.~E. (2003). Conditionals and conditional probability. \emph{Journal of Experimental Psychology: Learning, Memory, and Cognition}, 29(2), 321--335.
+\bibitem[Gibbard(1981)]{Gibbard1981} Gibbard, A. (1981). Two recent theories of conditionals. In W.~L. Harper, R. Stalnaker and G. Pearce (eds.), \emph{Ifs}, Reidel.
+\bibitem[Grice(1989)]{Grice1989} Grice, H.~P. (1989). Indicative conditionals. In \emph{Studies in the Way of Words}, Harvard University Press.
+\bibitem[H\'ajek(1989)]{Hajek1989} H\'ajek, A. (1989). Probabilities of conditionals---revisited. \emph{Journal of Philosophical Logic}, 18(4), 423--428.
+\bibitem[H\'ajek and Hall(1994)]{HajekHall1994} H\'ajek, A. and Hall, N. (1994). The hypothesis of the conditional construal of conditional probability. In E. Eells and B. Skyrms (eds.), \emph{Probability and Conditionals: Belief Revision and Rational Decision}, Cambridge University Press.
+\bibitem[Jackson(1979)]{Jackson1979} Jackson, F. (1979). On assertion and indicative conditionals. \emph{The Philosophical Review}, 88(4), 565--589.
+\bibitem[Jackson(1987)]{Jackson1987} Jackson, F. (1987). \emph{Conditionals}. Blackwell.
+\bibitem[Kaufmann(2004)]{Kaufmann2004} Kaufmann, S. (2004). Conditioning against the grain. \emph{Journal of Philosophical Logic}, 33(6), 583--606.
+\bibitem[Khoo and Mandelkern(2019)]{KhooMandelkern2019} Khoo, J. and Mandelkern, M. (2019). Triviality results and the relationship between logical and natural languages. \emph{Mind}, 128(510), 485--526.
+\bibitem[Kratzer(1986)]{Kratzer1986} Kratzer, A. (1986). Conditionals. In \emph{Papers from the Parasession on Pragmatics and Grammatical Theory}, Chicago Linguistic Society, 22(2).
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Probabilities of conditionals and conditional probabilities. \emph{The Philosophical Review}, 85(3), 297--315.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). Probabilities of conditionals and conditional probabilities II. \emph{The Philosophical Review}, 95(4), 581--589.
+\bibitem[McGee(1985)]{McGee1985} McGee, V. (1985). A counterexample to modus ponens. \emph{The Journal of Philosophy}, 82(9), 462--471.
+\bibitem[McGee(1989)]{McGee1989} McGee, V. (1989). Conditional probabilities and compounds of conditionals. \emph{The Philosophical Review}, 98(4), 485--541.
+\bibitem[Ramsey(1931)]{Ramsey1931} Ramsey, F.~P. (1931). General propositions and causality. In \emph{The Foundations of Mathematics and Other Logical Essays}, ed. R.~B. Braithwaite, Routledge \& Kegan Paul.
+\bibitem[Stalnaker(1968)]{Stalnaker1968} Stalnaker, R. (1968). A theory of conditionals. In N. Rescher (ed.), \emph{Studies in Logical Theory}, Blackwell.
+\bibitem[Stalnaker(1970)]{Stalnaker1970} Stalnaker, R. (1970). Probability and conditionals. \emph{Philosophy of Science}, 37(1), 64--80.
+\bibitem[van~Fraassen(1976)]{vanFraassen1976} van Fraassen, B.~C. (1976). Probabilities of conditionals. In W.~L. Harper and C.~A. Hooker (eds.), \emph{Foundations of Probability Theory, Statistical Inference, and Statistical Theories of Science}, Vol.~I, Reidel.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass{situationist-preprint}
+
+\title{The Rationality of Errata}
+\msid{EPI-10-b}
+\msfamily{EPI-10}
+\msdiscipline{Epistemology}
+\mstype{Consequence}
+\mskeywords{preface paradox; errata; correction; correlated error; rational belief}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EPI-10-a argues that it is rational to believe each claim in a book while believing that the book contains an error. We derive what this implies for the discovery of errors. An erratum should correct or withdraw the claims that depend on the error, and only those; it should not retract the preface; and, when the rate of error is uncertain, the discovery of one error should raise the author's credence that others remain. When errors share a premise, the rational correction extends to every claim that depends on it. The corrections made to the present collection on 7 October 2026 illustrate each of these points.
+\end{abstract}
+
+\section{What an erratum is}
+
+On the view of EPI-10-a, the author of a long book \citep{Makinson1965} rationally believes each of its claims $s_1, \ldots, s_n$ and rationally believes the preface proposition $E$, that at least one of them is false; rational belief is not required to be consistent \citep{Christensen2004}. An erratum announces that a particular claim $s_j$ is false, or unsupported. It is the preface proposition made specific: it identifies a witness to $E$.
+
+\begin{proposition}\label{p:scope}
+On learning that $s_j$ is unsupported, the author should withdraw belief in $s_j$ and in the claims whose support depends on $s_j$, and should retain belief in the others and in the preface proposition.
+\end{proposition}
+
+\begin{proof}
+Belief in each claim is rational, on the view of EPI-10-a, because its credence reaches the threshold on the evidence for it. The discovery removes the evidence for $s_j$ and for what depends on it, and leaves the evidence for the other claims unchanged. The preface proposition was believed on the strength of the number of claims and the record of similar books; neither is affected by the discovery that one claim failed, except in the direction considered in Proposition~\ref{p:more}.
+\end{proof}
+
+\begin{proposition}\label{p:more}
+Suppose each claim is in error with probability $\varepsilon$, independently given $\varepsilon$, and that the author is uncertain of $\varepsilon$. Then, for $j \neq k$, the credence that $s_k$ is in error, given that $s_j$ is, is at least the prior credence that $s_k$ is in error.
+\end{proposition}
+
+\begin{proof}
+Write $\mathrm{E}$ for expectation over the author's uncertainty about $\varepsilon$. The prior probability of error in $s_k$ is $\mathrm{E}[\varepsilon]$; the joint probability of error in $s_j$ and $s_k$ is $\mathrm{E}[\varepsilon^2]$. The conditional probability is $\mathrm{E}[\varepsilon^2]/\mathrm{E}[\varepsilon] \geq \mathrm{E}[\varepsilon]$, since $\mathrm{E}[\varepsilon^2] \geq \mathrm{E}[\varepsilon]^2$, with equality only when $\varepsilon$ is certain.
+\end{proof}
+
+An erratum is therefore evidence that the book contains further errors. The rational author, having published one, should be more confident than before that the preface proposition remains true of what is left.
+
+\section{Shared premises}
+
+EPI-10-a noted that errors in a collection are correlated when its items share premises, and that such errors should produce several corrections at once. Proposition~\ref{p:scope} specifies their form: when a shared premise fails, the items whose conclusions depend on it are withdrawn; the items whose conclusions survive a corrected premise are revised; and the remaining items stand.
+
+The present collection supplies the case. On 7 October 2026, the day after its release, three manuscripts were withdrawn because each relied on Lemma~3.2 of MET-20-a, which stated the persistence condition for institutions as continued collective acceptance, where the argument required only the absence of collective rejection; MET-20-a itself was revised, and fourteen manuscripts in all were revised by repaired proofs or corrected statements. The collection did not retract its other conclusions, and it did not cease to expect errors in them. By Proposition~\ref{p:more}, the credence that some of the remaining 719 manuscripts contain errors is now higher than it was on 6 October.
+
+\section{Conclusion}
+
+Rational errata are specific in what they withdraw, conservative in what they retain, and leave the preface in place, strengthened. An author who responds to the discovery of an error by retracting everything, or by asserting that nothing else is wrong, departs from what the evidence supports in opposite directions.
+
+\begin{thebibliography}{9}\small
+\bibitem[Christensen(2004)]{Christensen2004} Christensen, D. (2004). \emph{Putting Logic in Its Place: Formal Constraints on Rational Belief}. Oxford University Press.
+\bibitem[Makinson(1965)]{Makinson1965} Makinson, D.~C. (1965). The paradox of the preface. \emph{Analysis}, 25(6), 205--207.
+\end{thebibliography}
+
+\end{document}

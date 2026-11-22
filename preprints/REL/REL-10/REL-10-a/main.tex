@@ -1,0 +1,171 @@
+\documentclass{situationist-preprint}
+
+\title{Fine-Tuning and the Normalizability Problem}
+\msid{REL-10-a}
+\msfamily{REL-10}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_10.lean}
+\mskeywords{fine-tuning; design argument; principle of indifference; normalizability; countable additivity; Bertrand's paradox}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The fine-tuning argument holds that the values of the fundamental constants of physics fall within ranges that permit life, that this would be very improbable if the constants were not set by a designer, and that their falling there therefore supports theism. We argue that fine-tuning does not support theism, because the improbability on which the argument relies is undefined. The ranges of the constants are unbounded, and the argument's probabilities are obtained from a principle of indifference that gives equal weight to equal ranges. No such assignment is normalizable: in the discrete case, a constant weight on countably many values sums either to zero or to no finite total, and the continuous case follows by partition. The usual escapes do not help. Finitely additive measures give every bounded range probability zero, so that a coarse-tuned universe would be as improbable as a fine-tuned one; truncated or non-uniform measures can be chosen to give the life-permitting range any probability whatever. Without a privileged normalizable measure there is no improbability to explain. The core results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Physicists have observed that small changes in several fundamental constants and cosmological parameters would have produced a universe incapable of supporting life: no stable atoms, no stars of long lifetime, no chemistry of the required complexity \citep{Carter1974,Rees1999,Barnes2012}. The cosmological constant, the ratio of the strengths of the electromagnetic and gravitational forces and the masses of the light quarks are standard examples. The fine-tuning argument for theism, in its Bayesian form \citep{Swinburne2004,Collins2009}, holds that the life-permitting character of the constants is much more probable given theism than given its denial, since a designer would have reason to create a life-permitting universe, while on the hypothesis of no design the constants could have taken any values in ranges compared with which the life-permitting ranges are tiny. By the likelihood principle, the observation confirms theism.
+
+The argument has been criticized on many grounds: that observers could only find themselves in a life-permitting universe \citep{Carter1974}, that a multiverse would explain the observation as well \citep{Leslie1989}, that the notion of being fine-tuned for life is not well defined \citep{Manson2000}, and that the probabilities are not well defined \citep{McGrewMcGrewVestrup2001,ColyvanGarfieldPriest2005}. We develop the last criticism, which we take to be decisive, and show that it survives the replies made to it.
+
+\section{Framework}
+
+\begin{definition}[Parameter space]\label{d:space}
+A free constant is a parameter whose value is not fixed by known physical theory. Its \emph{range} is the set of values it could take consistently with the form of the theory; for the constants at issue this is an unbounded interval, such as the positive reals.
+\end{definition}
+
+\begin{definition}[Normalizable measure]\label{d:norm}
+A \emph{probability measure} on a range is a countably additive assignment of non-negative weights to measurable sets of values, with total weight $1$. An assignment of weights is \emph{normalizable} if it can be rescaled to a probability measure, that is, if its total weight is positive and finite.
+\end{definition}
+
+The probability of the life-permitting range on the hypothesis of no design is supposed to be fixed by indifference, since on that hypothesis nothing favours one value over another.
+
+\begin{principle}[Indifference]\label{p:indiff}
+On the hypothesis of no design, equal ranges of values of a free constant receive equal probability.
+\end{principle}
+
+\begin{assumption}[Bounded life-permitting range]\label{a:bounded}
+The life-permitting values of each constant form a bounded set.
+\end{assumption}
+
+Principle~\ref{p:indiff} is the source of the claimed improbability: if the life-permitting range has width $w$ and the whole range had width $W$, the probability of the former would be $w/W$, which is small when $W$ is large. Assumption~\ref{a:bounded} is granted by both sides.
+
+\section{The normalizability problem}
+
+We first give the argument in a discrete form, in which the range of a constant is divided into countably many cells of equal width, indexed by the natural numbers.
+
+\begin{theorem}[No uniform probability on a countable space]\label{t:discrete}
+Let every cell receive the same weight $c$. Then either $c = 0$, and the total weight of any finite set of cells is $0$, or $c > 0$, and the total weight of the first $k$ cells exceeds any given bound for $k$ large enough. In neither case is the total weight a positive finite number.
+\end{theorem}
+
+\begin{proof}
+The total weight of the first $k$ cells is $kc$. If $c = 0$ this is $0$ for every $k$, so the total is $0$. If $c > 0$, then for any bound $M$, taking $k > M/c$ gives $kc > M$, so the total exceeds every finite number. By countable additivity the total weight of all cells is the limit of the partial sums, which is $0$ or infinite.
+\end{proof}
+
+\begin{corollary}[The continuous case]\label{c:cont}
+No probability measure on an unbounded interval of the reals gives equal probability to intervals of equal width.
+\end{corollary}
+
+\begin{proof}
+Partition the interval into countably many intervals of unit width. By the hypothesis they receive equal probability, and Theorem~\ref{t:discrete} applies.
+\end{proof}
+
+\begin{theorem}[Undefined improbability]\label{t:undefined}
+Under Principle~\ref{p:indiff}, there is no probability measure for the values of a free constant with an unbounded range, and the probability that the constant lies in its life-permitting range, on the hypothesis of no design, is undefined.
+\end{theorem}
+
+\begin{proof}
+By Corollary~\ref{c:cont}, no probability measure satisfies Principle~\ref{p:indiff}; a conditional probability on the hypothesis of no design must be the value of some probability measure, and there is none that the hypothesis, through Principle~\ref{p:indiff}, determines.
+\end{proof}
+
+A defender may abandon Principle~\ref{p:indiff} and choose a normalizable measure that is not uniform. The next result shows what such a choice can deliver.
+
+\begin{proposition}[No privileged normalizable measure]\label{p:arbitrary}
+For any bounded range of values containing at least one cell and any number $v$ between $0$ and $1$, there is a normalizable measure that gives the range probability exactly $v$.
+\end{proposition}
+
+\begin{proof}
+Put weight $v$ on a cell inside the range and weight $1 - v$ on a cell outside it, and weight $0$ elsewhere.
+\end{proof}
+
+The measure in the proof is crude, but the point does not depend on crudeness: smooth measures concentrated near or far from the life-permitting range give it a probability near $1$ or near $0$. Once indifference is abandoned, the probability of the life-permitting range is whatever the chosen measure makes it, and the hypothesis of no design, which by definition says nothing about which values are favoured, provides no ground for any choice. Theorem~\ref{t:undefined} and Proposition~\ref{p:arbitrary} together establish the thesis of this manuscript: under the principle that is supposed to define the improbability there is no probability, and without it there is a probability for every taste.
+
+\section{The escapes}
+
+\paragraph{Finite additivity.} One may drop countable additivity and use a finitely additive uniform measure on the natural numbers or the reals, as de Finetti allowed \citep{deFinetti1974}. Such a measure exists, but it gives every bounded range probability $0$. The life-permitting range then has probability $0$ on the hypothesis of no design, and so has every bounded range, however wide. A universe whose constants could vary over ranges a billion times wider than the actual ones without precluding life, a coarse-tuned universe, would be exactly as improbable on that hypothesis as a fine-tuned one, and if the argument worked it would confirm design equally in both cases \citep{McGrewMcGrewVestrup2001,ColyvanGarfieldPriest2005}. An argument that is indifferent to the degree of tuning is not an argument from fine-tuning. The companion manuscript REL-10-b develops the point. Finitely additive measures have further pathologies, such as failures of conglomerability, that make them unsuited to Bayesian updating, but the objection does not need them.
+
+\paragraph{Truncation.} One may restrict the range to a bounded interval, for instance values below the Planck scale or values for which current physics is believed to be reliable, which \citet{Collins2009} calls the epistemically illuminated range. The uniform measure on a bounded interval is normalizable, and the life-permitting range then has a small but definite probability. The probability, however, depends on the cutoff: doubling the illuminated range halves it, and the cutoff is fixed by the limits of our theories rather than by any feature of the hypothesis of no design. Collins argues that the restriction is principled, since we can only assert that a value would preclude life where our theories apply. That is true, but it shows that the claim of fine-tuning is relative to a range, not that the hypothesis of no design assigns probabilities relative to that range. On the hypothesis of no design, the constants are not constrained to the range our theories illuminate.
+
+\paragraph{Reparametrization.} Even on a bounded range, uniformity is relative to a parametrization. A constant and its square, or its logarithm, are equally good parameters, and a measure uniform in one is not uniform in the others. This is Bertrand's paradox applied to the constants, and it shows that Principle~\ref{p:indiff} does not determine a measure even where normalizability is not at issue. A log-uniform measure, which is often proposed for scale parameters, is not normalizable on the positive reals either, so the choice of parametrization does not rescue the argument.
+
+\paragraph{Likelihoods without priors.} One may say that the argument needs only the ratio of the likelihood of the life-permitting range on theism to its likelihood on the hypothesis of no design, not prior probabilities of the hypotheses. But the likelihood on the hypothesis of no design is precisely the probability Theorem~\ref{t:undefined} shows to be undefined. The ratio of a defined quantity to an undefined one is undefined.
+
+\section{Objections}
+
+\begin{objection}[Naturalness]
+Physicists routinely reason that dimensionless constants should be of order one, and treat departures as problems requiring explanation. They are using a normalizable measure, and the fine-tuning argument may use the same one.
+\end{objection}
+
+\begin{reply}
+The naturalness heuristic does use a normalizable measure, concentrated around values of order one, and it is a fruitful methodological principle. But it is a choice of the kind Proposition~\ref{p:arbitrary} describes, justified by its past success in guiding theory, not by a hypothesis about how the constants were set. Its failures, such as the cosmological constant, are treated in physics as indications that a theory is missing, not as evidence that the constants were chosen by an agent. Transferred to the fine-tuning argument, the heuristic delivers an improbability only relative to a measure that the hypothesis of no design does not supply.
+\end{reply}
+
+\begin{objection}[The firing squad]
+If fifty marksmen fire at me and all miss, I should infer that they meant to miss, even though I could not have observed anything else \citep{Leslie1989}. The fine-tuning argument has the same structure.
+\end{objection}
+
+\begin{reply}
+In the firing squad, the space of outcomes is finite, there is a physical chance of each marksman's missing that can be estimated from the frequencies of such events, and the improbability of fifty misses is therefore well defined. The fine-tuning case lacks exactly these features: the range is unbounded, and there is no physical chance process, known to us, by which the constants were fixed, so no frequencies to estimate. The analogy confirms that the inference requires a probability measure and that, where there is one, the inference may succeed.
+\end{reply}
+
+\begin{objection}[The argument proves too much]
+If no measure over the constants is available, then no reasoning about the probability of the constants is possible, and physicists' multiverse explanations are equally undermined.
+\end{objection}
+
+\begin{reply}
+We accept the consequence. A multiverse explanation of fine-tuning, if it relies on the improbability of the life-permitting range in a single universe, is undermined in the same way; a multiverse theory that supplies a physical measure over the constants of its universes would not be, but it would be a measure supplied by a physical theory, not by indifference. The present argument is an argument about the fine-tuning argument for theism, and the symmetry is no objection to it.
+\end{reply}
+
+\begin{objection}[Several constants]
+The argument concerns many constants at once, and the joint life-permitting region is far smaller than each individual one.
+\end{objection}
+
+\begin{reply}
+The joint range is a product of unbounded ranges, and Theorem~\ref{t:discrete} applies to it as to each factor: a product of countably many cells is countable. Adding constants multiplies the problem; it does not solve it.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not show that the constants are not fine-tuned in the non-probabilistic sense that small changes would preclude life; that is a claim of physics, and nothing here disputes it. Nor does it show that theism is false, that a designer would not have reason to create a life-permitting universe, or that no future physical theory will supply a privileged measure over the constants. It shows that, as things stand, the improbability on which the fine-tuning argument relies is undefined, so that the observation of fine-tuning does not support theism. The argument for theism defended in REL-01-a does not appeal to fine-tuning, and its standing is unaffected.
+
+\section{Formalization}
+
+Theorem~\ref{t:discrete} and Proposition~\ref{p:arbitrary} are formalized in \nolinkurl{Philosophy/REL/REL_10.lean}. Cells are indexed by the natural numbers and weights are natural numbers in units of $1/D$ for an arbitrary denominator, so that every rational weight is represented; \texttt{psum f k} is the total weight of the first $k$ cells. The main theorem reads:
+
+\begin{lstlisting}
+theorem no_uniform (f : Nat → Nat) (c : Nat) (hf : ∀ n, f n = c) :
+    (∀ k, psum f k = 0) ∨ (∀ B, ∃ k, B < psum f k)
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.REL_10.no_uniform' depends on axioms: [propext, Quot.sound]
+'Philosophy.REL_10.not_normalizable' depends on axioms: [propext, Quot.sound]
+'Philosophy.REL_10.arbitrary_probability' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+The two axioms are Lean's own, used by the simplifier and the arithmetic tactic. The results are arithmetical, and the module contains no philosophical axioms: the philosophical premise, Principle~\ref{p:indiff}, appears as the hypothesis that every cell receives the same weight. Corollary~\ref{c:cont} is not formalized, since core Lean lacks the real numbers; its proof is the partition argument given above.
+
+\section{Conclusion}
+
+The fine-tuning argument requires that the life-permitting values of the constants be improbable on the hypothesis of no design. The principle of indifference that is supposed to define that improbability yields no probability measure over an unbounded range, since a uniform weighting of countably many cells sums to zero or to no finite total. The escapes either make every bounded range equally improbable, so that the degree of tuning plays no role, or choose a measure that could give the life-permitting range any probability. There is no normalizable probability measure over the space of constants that the hypothesis of no design determines, the claimed improbability is undefined, and fine-tuning does not support theism.
+
+\begin{thebibliography}{99}\small
+\bibitem[Barnes(2012)]{Barnes2012} Barnes, L.~A. (2012). The fine-tuning of the universe for intelligent life. \emph{Publications of the Astronomical Society of Australia}, 29(4), 529--564.
+\bibitem[Carter(1974)]{Carter1974} Carter, B. (1974). Large number coincidences and the anthropic principle in cosmology. In M.~S. Longair (ed.), \emph{Confrontation of Cosmological Theories with Observational Data}, 291--298. Reidel.
+\bibitem[Collins(2009)]{Collins2009} Collins, R. (2009). The teleological argument: An exploration of the fine-tuning of the universe. In W.~L. Craig and J.~P. Moreland (eds.), \emph{The Blackwell Companion to Natural Theology}, 202--281. Wiley-Blackwell.
+\bibitem[Colyvan et~al.(2005)]{ColyvanGarfieldPriest2005} Colyvan, M., Garfield, J.~L. and Priest, G. (2005). Problems with the argument from fine tuning. \emph{Synthese}, 145(3), 325--338.
+\bibitem[de Finetti(1974)]{deFinetti1974} de Finetti, B. (1974). \emph{Theory of Probability}, vol.~1. Wiley.
+\bibitem[Leslie(1989)]{Leslie1989} Leslie, J. (1989). \emph{Universes}. Routledge.
+\bibitem[Manson(2000)]{Manson2000} Manson, N.~A. (2000). There is no adequate definition of \enquote{fine-tuned for life}. \emph{Inquiry}, 43(3), 341--351.
+\bibitem[McGrew et~al.(2001)]{McGrewMcGrewVestrup2001} McGrew, T., McGrew, L. and Vestrup, E. (2001). Probabilities and the fine-tuning argument: A sceptical view. \emph{Mind}, 110(440), 1027--1038.
+\bibitem[Rees(1999)]{Rees1999} Rees, M. (1999). \emph{Just Six Numbers: The Deep Forces That Shape the Universe}. Weidenfeld \& Nicolson.
+\bibitem[Swinburne(2004)]{Swinburne2004} Swinburne, R. (2004). \emph{The Existence of God}, 2nd edition. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

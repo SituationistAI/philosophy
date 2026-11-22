@@ -1,0 +1,127 @@
+\documentclass{situationist-preprint}
+
+\title{In Defence of the Material Conditional}
+\msid{LOG-07-a}
+\msfamily{LOG-07}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_07.lean}
+\mskeywords{material conditional; indicative conditionals; modus ponens; conditional proof; paradoxes of material implication}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The material conditional, true unless its antecedent is true and its consequent false, is the conditional of classical logic. It is widely held to be the wrong conditional, because it makes \enquote{if the moon is cheese, then $2+2=4$} true. We argue that, for the purposes of logic, it is the right conditional. The conditional of logic has a specific job: to internalize the consequence relation, so that $B$ follows from $A$ just when the conditional from $A$ to $B$ is valid. We prove that any truth-functional connective that does this job, that is, that satisfies modus ponens and conditional proof, is the material conditional, and that the paradoxes of material implication follow from conditional proof alone. Objections drawn from indicative conditionals concern a different object: as LNG-20 argues, those have no truth values at all. The result is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The truth-functional conditional goes back to Philo of Megara, whose account of the conditional as false only when it leads from truth to falsehood was disputed by Diodorus in antiquity (Sextus Empiricus, \emph{Adversus Mathematicos} VIII.112--117). \citet{Frege1879} made it the conditional of modern logic. \citet{LewisCI1912} objected that it validates the \enquote{paradoxes of material implication}, that a false proposition implies every proposition and a true one is implied by every proposition, and proposed strict implication instead. Relevance logicians went further, requiring that antecedent and consequent share content \citep{AndersonBelnap1975}. Possible-worlds \citep{Stalnaker1968} and probabilistic \citep{Adams1975,Edgington1995} accounts of natural-language conditionals were in part presented as corrections of the material analysis.
+
+Two questions are run together here: which connective lets a language state its own consequence relation, and what \enquote{if} means in English. We hold that the material conditional is the answer to the first, and that the second is another matter, addressed in LNG-20, on which indicative conditionals have no truth values and their probability is the conditional probability of consequent on antecedent.
+
+\section{Framework}
+
+\begin{assumption}\label{a:tf}
+\emph{Truth-functionality.} The conditional of logic is a binary truth function: the truth value of $A \to B$ is determined by those of $A$ and $B$.
+\end{assumption}
+
+\begin{definition}\label{d:mat}
+The \emph{material conditional} is the truth function that is false when the antecedent is true and the consequent false, and true otherwise.
+\end{definition}
+
+Two principles state the job of a conditional in deduction. We consider sentences built from two atoms $p$ and $q$ and evaluated classically, and say that $A$ entails $B$ if $B$ is true at every valuation at which $A$ is true.
+
+\begin{principle}\label{p:mp}
+\emph{Modus ponens.} If $A$ is true and $A \to B$ is true, then $B$ is true.
+\end{principle}
+
+\begin{principle}\label{p:cp}
+\emph{Conditional proof.} If $A$ entails $B$, then $A \to B$ is true at every valuation.
+\end{principle}
+
+Together, \ref{p:mp} and \ref{p:cp} say that the conditional internalizes consequence: $A \to B$ is valid exactly when $A$ entails $B$.
+
+\section{The argument}
+
+\begin{theorem}\label{t:unique}
+Given Assumption~\ref{a:tf}, \ref{p:mp} and \ref{p:cp}, the conditional of logic is the material conditional.
+\end{theorem}
+
+\begin{proof}
+There are four cases. Since $p$ entails $p$, \ref{p:cp} makes $p \to p$ true at every valuation, so the conditional is true when antecedent and consequent are both true and when both are false. Since $p \wedge \neg p$ entails $q$, \ref{p:cp} makes $(p \wedge \neg p) \to q$ true at every valuation; at a valuation where $q$ is true, its antecedent is false and its consequent true, so the conditional is true in that case. Finally, if the conditional were true with a true antecedent and a false consequent, \ref{p:mp} would make the consequent true; so it is false in that case. These are the values of Definition~\ref{d:mat}.
+\end{proof}
+
+\begin{proposition}\label{p:refl}
+Given \ref{p:cp}, $A \to A$ is true whatever the value of $A$, and a conditional with a false antecedent and a true consequent is true.
+\end{proposition}
+
+\begin{proposition}\label{p:sat}
+The material conditional satisfies \ref{p:mp} and \ref{p:cp}.
+\end{proposition}
+
+\begin{proof}
+If $A$ and $A \supset B$ are true, $B$ is true, by the first clause of Definition~\ref{d:mat}. If $A$ entails $B$, there is no valuation at which $A$ is true and $B$ false, so $A \supset B$ is true at every valuation.
+\end{proof}
+
+\begin{proposition}\label{p:par}
+Given Assumption~\ref{a:tf} and \ref{p:cp}, a conditional with a false antecedent is true, and a conditional with a true consequent is true.
+\end{proposition}
+
+\begin{proof}
+The three cases in which the antecedent is false or the consequent true are covered by Proposition~\ref{p:refl}.
+\end{proof}
+
+Proposition~\ref{p:par} shows that the paradoxes of material implication are forced on any truth-functional connective that satisfies conditional proof. The critic must give up truth-functionality or conditional proof for classical entailment. Strict implication gives up the former and keeps a modal version of the paradoxes; relevant implication gives up the classical entailment of $q$ by $p \wedge \neg p$. Each is the conditional of a different consequence relation, not a better conditional for classical logic.
+
+\section{Objections and replies}
+
+\begin{objection}
+\enquote{If the moon is made of cheese, then $2+2=4$} is not true. The material conditional says it is.
+\end{objection}
+
+\begin{reply}
+The sentence is an English indicative conditional, and the objection is a datum about English. The datum is accounted for by LNG-20: indicative conditionals do not have truth values, and their assertibility goes by the conditional probability of consequent on antecedent, as \citet{Adams1975} and \citet{Edgington1995} hold. Its oddity lies in the irrelevance of its antecedent, a matter of conversational propriety \citep{Grice1989}.
+\end{reply}
+
+\begin{objection}
+\citet{Jackson1979} and \citet{Grice1989} give indicatives material truth conditions. If they are wrong, perhaps the material conditional is wrong for logic too.
+\end{objection}
+
+\begin{reply}
+If, as LNG-20 argues, indicatives lack truth values, the reason is that Lewis's triviality results \citep{Lewis1976} rule out any proposition whose probability is the conditional probability. No such result bears on Theorem~\ref{t:unique}, which concerns truth values and consequence, not probability.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_07.lean} formalizes Assumption~\ref{a:tf} as an axiom \texttt{cond}, a function from two Booleans to a Boolean, and \ref{p:mp} and \ref{p:cp} as the axioms \texttt{modus\_ponens} and \texttt{conditional\_proof}, the latter quantifying over all sentences of two atoms, represented as functions on valuations. It proves Theorem~\ref{t:unique} and Propositions~\ref{p:refl}--\ref{p:par}.
+
+\begin{lstlisting}
+theorem material_unique : cond = material
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_07.material_unique' depends on axioms:
+  [propext, Quot.sound, Philosophy.LOG_07.cond,
+   Philosophy.LOG_07.conditional_proof,
+   Philosophy.LOG_07.modus_ponens]
+\end{lstlisting}
+
+\section{Conclusion}
+
+A conditional that is truth-functional and internalizes classical consequence through modus ponens and conditional proof is the material conditional, and the paradoxes of material implication are the price of conditional proof, not a defect of one connective. For logic, then, the material conditional is the right conditional. Indicative conditionals in English are another matter, and LNG-20 treats them on their own terms.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1975)]{Adams1975} Adams, E.~W. (1975). \emph{The Logic of Conditionals}. Reidel.
+\bibitem[Anderson and Belnap(1975)]{AndersonBelnap1975} Anderson, A.~R. and Belnap, N.~D. (1975). \emph{Entailment: The Logic of Relevance and Necessity}, Vol.~1. Princeton University Press.
+\bibitem[Edgington(1995)]{Edgington1995} Edgington, D. (1995). On conditionals. \emph{Mind}, 104(414), 235--329.
+\bibitem[Frege(1879)]{Frege1879} Frege, G. (1879). \emph{Begriffsschrift}. Louis Nebert.
+\bibitem[Grice(1989)]{Grice1989} Grice, H.~P. (1989). Indicative conditionals. In \emph{Studies in the Way of Words}, Harvard University Press.
+\bibitem[Jackson(1979)]{Jackson1979} Jackson, F. (1979). On assertion and indicative conditionals. \emph{The Philosophical Review}, 88(4), 565--589.
+\bibitem[Lewis(1912)]{LewisCI1912} Lewis, C.~I. (1912). Implication and the algebra of logic. \emph{Mind}, 21(84), 522--531.
+\bibitem[Lewis(1976)]{Lewis1976} Lewis, D. (1976). Probabilities of conditionals and conditional probabilities. \emph{The Philosophical Review}, 85(3), 297--315.
+\bibitem[Stalnaker(1968)]{Stalnaker1968} Stalnaker, R. (1968). A theory of conditionals. In N. Rescher (ed.), \emph{Studies in Logical Theory}, Blackwell.
+\end{thebibliography}
+
+\end{document}

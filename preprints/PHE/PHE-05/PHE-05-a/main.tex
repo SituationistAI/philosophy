@@ -1,0 +1,279 @@
+\documentclass{situationist-preprint}
+
+\title{The Thickness of the Living Present}
+\msid{PHE-05-a}
+\msfamily{PHE-05}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_05.lean}
+\mskeywords{time-consciousness; Husserl; retention; protention; specious present; absolute flow; Dainton; Grush}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What is the structure of the consciousness of time? We argue that the living present, the present of experience in which a melody or a movement is heard or seen as unfolding, is not an instant but a structured thickness of primal impression, retention and protention, and that its extent is fixed by the retentional horizon. The argument starts from the principle that a succession of experiences is not by itself an experience of succession, and uses Husserl's distinction between retention, which gives the just-past as just-past, and recollection, which re-presents it. We show that an instantaneous present excludes the experience of succession, that the retentional part of the living present is exactly the window of phases within the retentional horizon, and that the flow is given to itself through the longitudinal intentionality of its own retentions, so that the regress threatened by an absolute time-constituting consciousness does not arise. We compare the account with extensionalist rivals and with recent computational models, and argue that it is compatible with a tenseless theory of time: the living present is a structure of experience, not a metaphysical present. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+When we hear a melody we do not hear a series of isolated tones. We hear the third tone as following the second, the second as having followed the first, and the phrase as moving towards a close that has not yet sounded. Yet at any moment only one tone is sounding. The problem of time-consciousness is to say how the experience of succession, of duration and of change is possible for a consciousness whose acts themselves occur in time. \citet[XI.20--28]{Augustine} posed it in the form of a paradox: the past is no longer and the future not yet, and the present, if it had extension, would be divisible into a past and a future part; so time can be measured only in the mind, as memory, attention and expectation. The modern discussion begins with the observation, made by Reid and repeated by James, that a succession of feelings is not, in and of itself, a feeling of succession \citep[ch.~15]{James1890}. If consciousness were a series of momentary states, each with momentary content, there would be succession in consciousness but no consciousness of succession.
+
+There are three main families of response \citep{Dainton2000}. \emph{Cinematic} views hold that each experience is momentary and has momentary content; the impression of change is built up by inference or memory. \emph{Retentional} views hold that each experience is momentary or very brief but has temporally extended content: it presents what is now together with what has just been, as just past. \emph{Extensional} views hold that experiences are themselves extended over short intervals and that their temporal content mirrors their temporal extension. Husserl's lectures of 1905 are the classical statement of the retentional view, and our thesis is a version of it.
+
+We argue that the living present is not an instant but a structured thickness of primal impression, retention and protention, whose extent is fixed by the retentional horizon. The thesis has three parts. The living present is not an instant (Lemma~\ref{l:instant}). It is a structured whole whose phases are ordered by their retentional depth, not a mere interval (Theorem~\ref{t:main}). Its extent is not set by the duration of the object, nor by attention, but by the depth to which retention reaches before past phases cease to be given as differentiated (Lemma~\ref{l:window}). We add that the account escapes the regress problem that troubled Husserl (Proposition~\ref{p:self}), and that it does not commit phenomenology to a metaphysically privileged present (Section~\ref{s:btheory}).
+
+\section{The history of the problem}\label{s:history}
+
+\subsection{From the specious present to original association}
+
+The phrase \enquote{specious present} was introduced by E.~R.~Clay and made famous by \citet[ch.~15]{James1890}, who described the practically cognized present as a saddle-back, with a certain breadth of its own, from which we look in two directions into time. James's specious present had a duration of up to a few seconds, and within it the earlier and later parts of a change were given together. The history of this idea before James is longer than is usually recognized; \citet{AndersenGrush2009} trace it through Reid, Thomas Brown, Hamilton and Hodgson. The account faced an immediate difficulty, which \citet{Kelly2005} has called the puzzle of temporal experience: if the earlier part of a change is given together with the later part, it seems to be given as present, and the experience should be one of simultaneity, a chord rather than a melody.
+
+\citet{Brentano1874} had proposed a different solution in lectures that Husserl attended. On Brentano's theory of \enquote{original association}, every sensation immediately produces a phantasy presentation of its content, which is joined to the sensation and receives a temporal determination as past. The pastness of the just-past tone is a modification of its content, added by the imagination. Husserl's objection, in the first part of the 1905 lectures, is that this theory makes the experience of the past a present experience of a present phantasm, and cannot then explain why the phantasm is given as past rather than as a present image of something \citep[\S\S 3--6]{Husserl1966}. A temporal modification of content cannot by itself turn a present content into a past one; the difference between the just-past and the present must lie in the manner of givenness, not in what is given.
+
+\subsection{Husserl's lectures of 1905}
+
+Husserl's solution is the distinction between three moments of every phase of consciousness of a temporal object. The \emph{primal impression} is the consciousness of the now-phase of the object. \emph{Retention} is the consciousness of the phase that has just elapsed, given as just elapsed. \emph{Protention} is the consciousness of the phase that is about to come, given as about to come. Retention is not memory in the ordinary sense. Recollection (secondary memory) re-presents a past event: it is a new act, which can be performed at will, in which the past event is reproduced \enquote{as if} it were present again. Retention (primary memory) is not a re-presentation but a presentation: it gives the just-past itself, in its original pastness, as the comet's tail of the present phase \citep[\S\S 11--19]{Husserl1966}. Retention is therefore a form of perception in the broad sense, in which the perceived includes the just-elapsed.
+
+Each retention is itself retained. As the tone sounds, the primal impression of its first phase becomes a retention of that phase, which becomes a retention of the retention, and so on: the past phase sinks back continuously, each later phase of consciousness holding all earlier phases in a continuum of retentional modifications. Husserl represents this by a diagram \citep[\S 10]{Husserl1966}. A horizontal line represents the series of now-points of the object. From each point an oblique line descends, representing the sinking back of that point into the past. A vertical line through the current now represents the continuum of retentional phases held at that now: its top is the primal impression, and each point lower on it is the retention of an earlier now, at a depth proportional to its distance from the present. The vertical line is the cross-section of the living present.
+
+The diagram makes visible two features on which our argument rests. First, the cross-section has an internal order: its phases are not merely simultaneous with each other but ordered by depth, and the order of depth reproduces the order of the object's phases. Second, the oblique lines do not descend indefinitely. In the lectures Husserl writes that the continuum of retentional modifications reaches a limit, beyond which past phases are no longer differentiated; the retentional modification is a continuous fading, and the past slips into an undifferentiated background from which it can be recovered only by recollection \citep[\S 11]{Husserl1966}. The diagram is therefore drawn with a finite vertical. This is the retentional horizon.
+
+\subsection{Absolute flow and the regress}
+
+The lectures raise a further question, which became decisive for Husserl in the years after 1905 \citep{Brough1972}. The phases of consciousness that constitute the temporal object are themselves temporal: the retention of a retention follows the retention. If they are temporal, they must in turn be constituted by a consciousness of their succession, and that consciousness by a further one, and so on. Husserl's response was to distinguish three levels: the objects in objective time, the immanent temporal unities (the acts and sensations of the stream of consciousness), and the absolute time-constituting flow, which is not itself in time in the sense in which its products are \citep[\S\S 34--36]{Husserl1966}. For the absolute flow, he wrote, we lack names. The response threatens to replace a regress with a mystery: if the flow is not temporal, how is it a flow, and how is it given at all?
+
+Husserl's answer to the second question is the doctrine of the double intentionality of retention \citep[\S 39]{Husserl1966}. A retention has a \emph{transverse} intentionality (Querintentionalit\"at), by which it is directed to the elapsed phase of the tone and constitutes the tone as an immanent temporal object enduring through its phases. It also has a \emph{longitudinal} intentionality (L\"angsintentionalit\"at), by which it is directed to the elapsed phase of consciousness itself, the previous retentional continuum, and constitutes the unity of the flow. The flow is therefore given to itself, not by a further act, but by its own retentions. Husserl calls this the self-appearance of the flow. We return to whether it escapes the regress in Section~\ref{s:regress}.
+
+\subsection{The Bernau manuscripts}
+
+In the manuscripts written at Bernau in 1917 and 1918 \citep{Husserl2001}, Husserl reworked the analysis in two directions. He gave protention a role symmetrical to retention, describing each phase as an intersection of retentional and protentional intentionalities, in which protention is directed not only to the coming phase of the object but to the coming retentions; and he described the primal process as a continuous fulfilment and disappointment of protentions. He also reconsidered the primal impression, which in the later texts appears less as a self-standing moment than as the limit at which retention and protention meet. Husserl was still troubled by the regress: a primal process that constitutes the temporality of the stream seems to require its own constitution, and the manuscripts contain several attempts to show that the series of levels closes. \citet{Kortooms2002} gives a detailed reconstruction of these attempts and argues that they do not converge on a single view. \citet{Zahavi2004} reads the Bernau material as confirming that the absolute flow is not a further stream behind the stream but the pre-reflective self-manifestation of the experiences themselves.
+
+\section{Framework}\label{s:framework}
+
+We speak of the experiential flow as composed of phases, without assuming that phases are instantaneous or that the flow is dense. Each phase has a date in the time in which the experiencing subject exists, and phases are ordered as earlier and later by their dates.
+
+\begin{definition}[Phase]\label{d:phase}
+A \emph{phase} of experience is a part of the experiential flow that is not itself experienced as having earlier and later parts.
+\end{definition}
+
+\begin{definition}[Primal impression, retention, protention]\label{d:moments}
+At a phase $t$, the \emph{primal impression} is the consciousness at $t$ of what is given as now. A \emph{retention} at $t$ is the consciousness at $t$ of an earlier phase $s$, given as elapsed. A \emph{protention} at $t$ is the consciousness at $t$ of a coming phase, given as about to come.
+\end{definition}
+
+\begin{definition}[Retentional depth]\label{d:depth}
+If a phase $t$ retains an earlier phase $s$, the \emph{depth} of the retention is the number of phases from $s$ to $t$, which we write $t-s$. The primal impression is the limiting case of depth $0$.
+\end{definition}
+
+Phases are counted, so depth is a natural number; nothing in the argument depends on this discretization, which serves to give the horizon a sharp value.
+
+\begin{definition}[Retentional horizon]\label{d:horizon}
+The \emph{retentional horizon} of a flow is the greatest depth $K$ at which a past phase is still retained as differentiated from its neighbours.
+\end{definition}
+
+\begin{definition}[Living present]\label{d:lp}
+The \emph{living present} at $t$ is the structured whole consisting of the primal impression at $t$, the retentions held at $t$, ordered by depth, and the protentions held at $t$. Its \emph{retentional part} is the set of phases retained at $t$, including $t$ itself as the limit of depth $0$.
+\end{definition}
+
+The definitions do not settle how far retention reaches. That is what the principles do.
+
+\begin{principle}[Succession]\label{p:succ}
+A subject experiences a succession at $t$ only if some phase earlier than $t$ is retained at $t$.
+\end{principle}
+
+\begin{principle}[Continuity]\label{p:cont}
+Retentional modification is continuous: if a phase $s$ is retained at $t$ at depth $d$, every phase between $s$ and $t$ is retained at $t$, and every phase within the retentional horizon of $t$ is retained at $t$.
+\end{principle}
+
+\begin{principle}[Finite horizon]\label{p:fin}
+No phase is retained at a depth greater than the retentional horizon, and no phase is retained before it occurs.
+\end{principle}
+
+\begin{principle}[No further act]\label{p:nfa}
+The retention of a phase is not a further act directed at the phase from outside the flow; it belongs to the same flow as the retained phase.
+\end{principle}
+
+\begin{assumption}[Non-null horizon]\label{a:pos}
+The retentional horizon is not null: $K>0$.
+\end{assumption}
+
+Principle~\ref{p:succ} is the Reid--James principle in a positive form. Suppose a subject experiences the third tone of a melody as following the second. The experience at the onset of the third tone presents the second as having just sounded. If nothing earlier were retained, the experience would present the third tone alone, and the order of the tones would be at best inferred. Recollection does not help, since recollecting the second tone is a new act that presents it as a past event re-presented, and the experience of a melody is not an alternation of hearing and recollecting. This is the lesson of Husserl's criticism of Brentano: the just-past must be given, not reproduced.
+
+Principle~\ref{p:cont} records the continuity that the diagram expresses with the oblique lines. A retention does not leap: the phase that sank to depth $d$ passed through all smaller depths, and at each phase the whole continuum of shallower retentions is held together with it. Principle~\ref{p:fin} records the finite vertical of the diagram. Its empirical support is that past phases beyond a short interval are not given with their order and duration: the beginning of a long sentence can be recalled but is no longer heard. Principle~\ref{p:nfa} is the phenomenological core of the doctrine of double intentionality. Assumption~\ref{a:pos} follows from the fact, which the sceptic about time-consciousness does not deny, that some successions are experienced; by Principle~\ref{p:succ} something earlier is then retained, so the horizon is not null.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:instant}
+If the retentional part of the living present at $t$ contained only $t$, no succession would be experienced at $t$.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:succ}, experiencing a succession at $t$ requires that some phase earlier than $t$ be retained at $t$. If only $t$ is retained, no earlier phase is.
+\end{proof}
+
+\begin{lemma}\label{l:window}
+The retentional part of the living present at $t$ consists exactly of the phases $s$ with $s\le t$ and $t-s\le K$.
+\end{lemma}
+
+\begin{proof}
+By Principle~\ref{p:fin}, every retained phase satisfies the two conditions. By Principle~\ref{p:cont}, every phase that satisfies them is retained.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+At every phase $t$ after the first, the living present is not an instant: it contains phases other than $t$. Its retentional extent is fixed by the retentional horizon: it contains the phase at depth $K$ whenever there is one, and no phase deeper than $K$. Its phases are ordered by depth.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:pos}, $K\ge 1$, so the phase $t-1$ satisfies the conditions of Lemma~\ref{l:window} and is retained at $t$. If $t\ge K$, the phase $t-K$ satisfies them, and by Lemma~\ref{l:window} no phase $s$ with $s+K<t$ is retained. The order by depth is given by Definition~\ref{d:depth}: two retained phases differ in depth exactly as they differ in date.
+\end{proof}
+
+Three remarks fix the content of the theorem.
+
+\begin{remark}\label{r:structure}
+The living present is not a short interval that happens to be experienced all at once. An interval is a set of times; the living present is a structure of modes of givenness. Its phases are given differently, the deepest as most faded, the primal impression as now, and the difference in mode is what makes the whole a presentation of succession rather than of simultaneity. This is the answer to the puzzle of temporal experience. The earlier tone is given together with the later, but not as present: it is given at depth, as just-past. A chord is the case in which all components are given at depth $0$.
+\end{remark}
+
+\begin{remark}\label{r:protention}
+The theorem, and its formalization, concern the retentional extent. Protention completes the structure but does not fix its extent. Protentions are typically less determinate than retentions: they anticipate the style of what is coming rather than its content, and they may be disappointed. Their reach is therefore not a second horizon measured in phases but a horizon of open expectation, whose determinacy depends on what has been retained. This asymmetry is why we say, with the catalogue thesis, that the extent of the living present is fixed by the retentional horizon.
+\end{remark}
+
+\begin{remark}\label{r:object}
+The extent of the living present is independent of the duration of the object. A melody of a minute exceeds the living present at every moment, and is unified as a melody by protentions and recollections that link successive living presents. A single click falls within it. What varies with the object is which phases of it fill the living present, not how far the present reaches.
+\end{remark}
+
+\begin{corollary}\label{c:sep}
+The experience of succession and the experience of the remote past are of different kinds. Every experienced succession falls within a single living present, and every past phase deeper than $K$ is accessible only by recollection.
+\end{corollary}
+
+\begin{proof}
+By Principle~\ref{p:succ} and Lemma~\ref{l:window}, the phases presented in an experience of succession at $t$ are within depth $K$. Phases deeper than $K$ are not retained, by Lemma~\ref{l:window}, and can be given only by a further act that re-presents them.
+\end{proof}
+
+The corollary is a version of Husserl's distinction between primary and secondary memory, and it explains a phenomenological datum. We can hear a short phrase as a phrase, but we cannot hear a long piece as a whole; we can only grasp it as a whole by remembering and anticipating. A theory on which the present was as long as attention could make it would leave this unexplained.
+
+\section{Double intentionality and the regress}\label{s:regress}
+
+The regress argument runs as follows. The phases of the flow are temporal, since they succeed one another. Whatever is temporal and given is given by a consciousness of time. So the phases of the flow are given by a consciousness of their succession, which, being temporal, is in turn given by a further consciousness. Either the series is infinite, or it ends in a consciousness that is not given, in which case the flow is unconscious, or in a consciousness that is not temporal, in which case it is unclear what it is.
+
+\begin{proposition}\label{p:self}
+Every phase of the flow is retained by its successor within the same flow. Hence the flow is given to itself by the longitudinal intentionality of its own retentions, and its self-givenness requires no higher-order flow.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:pos} and Lemma~\ref{l:window}, the phase $t$ is retained at $t+1$, since $t\le t+1$ and $(t+1)-t=1\le K$. By Principle~\ref{p:nfa}, this retention belongs to the same flow as $t$. The retention at $t+1$ is directed both at the elapsed phase of the object (transversely) and at the elapsed phase of consciousness in which the object was given (longitudinally). Every phase is therefore given in a later phase of the same flow, and no phase requires, for its givenness, a consciousness outside the flow.
+\end{proof}
+
+The proposition does not say that the flow is given to a consciousness that stands outside time; it says that it is given to itself. The regress argument assumed that a temporal item can be given only by a further act directed at it. Principle~\ref{p:nfa} denies this for the phases of the flow. That denial is not ad hoc: it is required independently by the Reid--James principle, since a flow of acts each given only by a further act would again be a succession of experiences without an experience of succession, one level up.
+
+Two points remain. First, the proposition does not give the current phase to itself by retention, since nothing retains it yet. Here we follow \citet{Zahavi2003b,Zahavi2005}: the current phase is pre-reflectively self-aware, given in the mode of the primal impression without being an object, and retention prolongs this self-awareness rather than producing it. This blocks a second regress, the one that would arise if self-awareness required an act that takes the phase as object. Second, the proposition does not make the flow atemporal. It makes it temporal in a sense different from that of the immanent unities it constitutes: the flow does not endure as a tone endures, through phases that are its parts given in a further consciousness; it is the ordered series of those phases, each holding its predecessors. This is the reading of the absolute flow that \citet{Zahavi2004} finds in the Bernau manuscripts, and it is what Husserl meant, on our reading, by the claim that the flow is not in time in the sense in which its products are. The difficulty that \citet{Kortooms2002} documents arises when the primal process is treated as a further stream with its own phases; on the present account there is no further stream.
+
+\section{Recent discussion}\label{s:recent}
+
+\subsection{Extensionalism}
+
+\citet{Dainton2000} defends an extensionalist alternative. On his overlap model, experiences are themselves temporally extended over short intervals, and the experience of change is the experience of contents that are co-conscious across that interval; successive specious presents overlap and share parts, which accounts for the continuity of the stream without retention. The extensionalist objects that retentionalism multiplies contents: the same phase of the tone is presented again and again, at increasing depth, in each later phase of consciousness, which should yield an experience of repetition rather than of a single tone \citep{Dainton2000}.
+
+We grant that the model of repeated presentation would be objectionable if retentions were further presentations of the same content in the same mode. They are not. A phase of the tone retained at depths $1,2,\dots,K$ is given once as present and then as receding; the depth is not a property of a copy but the mode in which the one phase is given. The extensionalist's own account must, moreover, explain the difference between hearing the earlier note of a pair as earlier and hearing it as merely co-conscious with the later. Co-consciousness is symmetric; the experience of succession is not. Whatever in the extended experience makes the earlier note given as earlier is what we call its retentional depth. Extensionalism and our thesis then differ less than appears: an extensionalist who admits that the phases of an extended experience are given in different temporal modes, and that the extent of the experience has a limit set by how far those modes reach, has accepted Theorem~\ref{t:main} under another name. What we deny is the stronger claim that the temporal structure of the content is simply the temporal structure of the experience. That claim cannot account for temporal illusions, to which we now turn.
+
+\subsection{Computational models}
+
+\citet{Grush2005,Grush2006} has proposed a model of temporal perception on which the brain produces, at each moment, an estimate not of the current state of the world but of its trajectory over a short interval extending into the recent past and the near future. The estimate of the past part of the trajectory is revised in the light of later input (smoothing), and the estimate of the future part is a prediction. Grush presents the model as an implementation of Husserl's structure: the smoothed past corresponds to retention, the predicted future to protention, the current estimate to the primal impression. The model explains postdictive illusions, such as the colour phi phenomenon and the cutaneous rabbit, in which what is experienced at a time depends on input received after it: the past part of the trajectory is revised before it is experienced as settled.
+
+The model supports the thesis in two respects. It assigns the living present a fixed extent, the lag of the smoothing window, which is a parameter of the estimator and not of the object. And it makes the present a structure of differently qualified contents rather than an interval of uniform presentation. It also refines the thesis. Postdiction shows that the retentional content is not a fixed record but can be revised within the horizon. That is consistent with Principle~\ref{p:cont}: the principle says which phases are retained, not that their retained content is unrevisable. Grush himself argues that a direct mapping of his model onto Husserl's terms is not straightforward \citep{Grush2006}, since the estimator's representations of the past are not obviously experienced as past. We take this to concern the implementation, not the structure; the phenomenological claim is about what is given, and the computational claim about what subserves it. \citet{Varela1999} had earlier proposed a neurodynamical account on which the living present corresponds to the time scale of large-scale integration, a fraction of a second to a few seconds, with protention reflected in the dynamical readiness of the system; the two proposals agree that the extent is fixed by the integrating mechanism and not by the object.
+
+\subsection{The puzzle of temporal experience}
+
+\citet{Kelly2005} argues that the specious present theory faces a dilemma. If the earlier phases of a movement are perceived, then we perceive what is no longer there, which seems impossible; if they are not perceived but remembered, the account collapses into the cinematic view. Kelly concludes that we lack an adequate theory of the experience of motion. The dilemma depends on an equivocation on \enquote{perceive}. In the narrow sense, perception presents its object as present, and in that sense we do not perceive the just-past. In the broad sense that Husserl distinguishes \citep[\S 17]{Husserl1966}, perception is any act that presents its object in person rather than by an image or a sign, and in that sense retention perceives the just-past as just-past. The broad sense is not a stipulation: it marks the difference between hearing the previous note and recalling it, which is a difference everyone can verify. With the equivocation removed, the first horn is not impossible and the second does not arise. \citet{Gallagher1998} reaches a similar verdict, though he places more weight on protention.
+
+\section{Compatibility with a tenseless theory of time}\label{s:btheory}
+
+The thesis might seem to commit phenomenology to a metaphysically privileged present: a moving now, at the top of Husserl's vertical line, through which the series of retentions flows. It does not. TSM-01 argues that time is real and is constituted by the B-series of earlier and later, the A-series being incoherent; TSM-02 that the impression of passage is a feature of experience, not of time; TSM-15 that the present has no metaphysical privilege, being the time at which a thought or utterance occurs. Theorem~\ref{t:main} is consistent with all three.
+
+The living present at $t$ is defined by tenseless relations among phases: a phase $s$ is retained at a phase $t$ when $t$ presents $s$ as elapsed, and the depth of the retention is the B-theoretic distance between them. Nothing in the definitions requires that one phase be absolutely present. Every phase of the flow has its living present, structured by what it retains, and the living present of each is \enquote{now} only in the indexical sense: for a subject at $t$, the primal impression at $t$ is what is given as now. The structure is a structure of experience, and the passage it involves is the passage of which TSM-02 speaks, the sinking of phases into retentional depth as the flow is ordered by earlier and later. Husserl's own analysis, which brackets objective time, is neutral on the metaphysics of time; our thesis inherits that neutrality and is therefore compatible with a tenseless theory. It explains, if anything, why the impression of passage arises: each phase presents its predecessors as receding, and a subject who reflects on this structure is apt to project it onto time itself.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Regress]
+The longitudinal intentionality is itself a temporal process: the retention at $t+1$ of the phase $t$ is an event, later than $t$. So the flow's self-givenness is a temporal object constituted by the flow, and the regress returns.
+\end{objection}
+
+\begin{reply}
+The objection assumes that whatever is temporal is a temporal object, that is, a unity constituted across phases. The retention at $t+1$ is not such a unity; it is a phase. Phases are temporally ordered, but they are not given by a further consciousness of their order; they are given by one another (Proposition~\ref{p:self}), and the current phase is given to itself pre-reflectively. The regress requires the step from \enquote{temporally ordered} to \enquote{given as a temporal object by a further act}, which Principle~\ref{p:nfa} denies.
+\end{reply}
+
+\begin{objection}[Vagueness of the horizon]
+Retention fades continuously, so there is no sharp depth beyond which phases cease to be retained. The retentional horizon is vague, and the thesis that it fixes the extent of the living present has no determinate content.
+\end{objection}
+
+\begin{reply}
+The horizon may be vague and still fix the extent: the extent of the living present is then vague in the same way. The thesis is that the extent depends on the horizon and on nothing else, in particular not on the duration of the object or on attention, and this dependence holds whether the horizon is sharp or vague. The formalization fixes a sharp $K$ as an idealization; a treatment of vagueness by supervaluation over admissible sharpenings would preserve every result, since each holds for every value of $K>0$.
+\end{reply}
+
+\begin{objection}[Attention]
+The extent of the specious present varies with attention and with the type of content: a rhythm can be grasped over a longer span than a series of unrelated sounds. The extent is therefore fixed by attention or grouping, not by a retentional horizon.
+\end{objection}
+
+\begin{reply}
+Grouping changes what is retained as a unit, not the depth to which retention reaches. A rhythmic group is retained as one articulated content, and so more objective time can fall within the same depth; unrelated sounds are retained as many. The retentional horizon is measured in phases of experience, not in seconds of objective time, which is why its objective duration varies with content while its role remains constant (Remark~\ref{r:object}).
+\end{reply}
+
+\begin{objection}[Cinematic sufficiency]
+A cinematic theory can explain everything the retentional theory explains: each momentary experience carries information about the recent past, and the impression of succession is the product of this information. The structure of retention is superfluous.
+\end{objection}
+
+\begin{reply}
+Information about the past is not the givenness of the past. A momentary experience carrying a representation that a tone has just sounded would present a present fact about the past, as a memory does; it would not present the tone as just sounding away. The cinematic theory thus falls under Husserl's objection to Brentano. If, on the other hand, the momentary experience presents the past tone as past, in the mode of receding, it has the structure of retention and the theory is retentional.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not determine the value of the retentional horizon, which is an empirical matter; estimates of the extent of the experienced present range from a fraction of a second to a few seconds, and they vary with the measure used. It does not establish that protention has a horizon of the same kind as retention; we have argued that it does not (Remark~\ref{r:protention}). It does not show that phases are discrete; the discretization is a device for stating the horizon. It does not decide between Husserl's and Zahavi's accounts of the primal impression, beyond the claim that the current phase is given to itself pre-reflectively. And it does not establish any thesis about the metaphysics of time: the living present is a structure of experience, compatible with a tenseless theory (Section~\ref{s:btheory}). The relation of time-consciousness to the self, which this account touches through the self-manifestation of the flow, is treated in PHE-20, which argues that the transcendental ego survives every reduction as an irreducible residue; nothing here depends on that result.
+
+\section{Formalization}\label{s:formal}
+
+Lemmas~\ref{l:instant} and~\ref{l:window}, Theorem~\ref{t:main} and Proposition~\ref{p:self} are formalized in \nolinkurl{Philosophy/PHE/PHE_05.lean}. Phases are natural numbers, the horizon $K$ is a constant, and retention is a primitive relation \texttt{retains t s}. Principles~\ref{p:cont} and~\ref{p:fin} are axioms characterizing retention by depth; Principle~\ref{p:succ} is an axiom used in Lemma~\ref{l:instant}; Assumption~\ref{a:pos} is the axiom \texttt{horizon\_pos}. The main theorem reads:
+
+\begin{lstlisting}
+theorem thickness (t : Nat) (ht : t ≥ 1) :
+    (∃ s, s ≠ t ∧ LivingPresent t s) ∧
+    (t ≥ K → LivingPresent t (t - K)) ∧
+    (∀ s, s + K < t → ¬ LivingPresent t s)
+\end{lstlisting}
+
+The checker reports, for \texttt{thickness} and for \texttt{self\_manifestation}:
+
+\begin{lstlisting}
+depends on axioms: [propext, Quot.sound,
+ Philosophy.PHE_05.K, Philosophy.PHE_05.horizon_pos,
+ Philosophy.PHE_05.retains,
+ Philosophy.PHE_05.retention_bounded,
+ Philosophy.PHE_05.retention_continuous]
+\end{lstlisting}
+
+\texttt{propext} and \texttt{Quot.sound} are part of Lean's core logic. \texttt{K} and \texttt{retains} are the primitives: the horizon and the retention relation. \texttt{retention\_bounded} is Principle~\ref{p:fin}, \texttt{retention\_continuous} Principle~\ref{p:cont}, and \texttt{horizon\_pos} Assumption~\ref{a:pos}. Principle~\ref{p:succ} does not appear: the main theorem does not need it, and it is used only in Lemma~\ref{l:instant}, where it shows why the horizon must be non-null. Principle~\ref{p:nfa} is not formalized; in the module it is reflected only in the fact that retention is a relation between phases of a single flow. The module does not model protention.
+
+\section{Conclusion}
+
+The experience of succession requires that earlier phases be given, as elapsed, in later ones. Retention, unlike recollection, does this, and it reaches back continuously as far as the retentional horizon and no further. The living present is therefore not an instant but a structured thickness of primal impression, retention and protention, whose extent is fixed by the retentional horizon. Because each phase is retained by its successor within the same flow, the flow is given to itself without a further consciousness, and because the structure is defined by tenseless relations between phases, it is a structure of experience rather than a metaphysical present.
+
+\begin{thebibliography}{99}\small
+\bibitem[Andersen and Grush(2009)]{AndersenGrush2009} Andersen, H. and Grush, R. (2009). A brief history of time-consciousness: Historical precursors to James and Husserl. \emph{Journal of the History of Philosophy}, 47(2), 277--307.
+\bibitem[Augustine(c.~400)]{Augustine} Augustine. \emph{Confessiones}. Book XI.
+\bibitem[Brentano(1874)]{Brentano1874} Brentano, F. (1874). \emph{Psychologie vom empirischen Standpunkte}. Duncker \& Humblot.
+\bibitem[Brough(1972)]{Brough1972} Brough, J.~B. (1972). The emergence of an absolute consciousness in Husserl's early writings on time-consciousness. \emph{Man and World}, 5(3), 298--326.
+\bibitem[Dainton(2000)]{Dainton2000} Dainton, B. (2000). \emph{Stream of Consciousness: Unity and Continuity in Conscious Experience}. Routledge.
+\bibitem[Gallagher(1998)]{Gallagher1998} Gallagher, S. (1998). \emph{The Inordinance of Time}. Northwestern University Press.
+\bibitem[Grush(2005)]{Grush2005} Grush, R. (2005). Internal models and the construction of time: Generalizing from state estimation to trajectory estimation to address temporal features of perception, including temporal illusions. \emph{Journal of Neural Engineering}, 2(3), S209--S218.
+\bibitem[Grush(2006)]{Grush2006} Grush, R. (2006). How to, and how not to, bridge computational cognitive neuroscience and Husserlian phenomenology of time consciousness. \emph{Synthese}, 153(3), 417--450.
+\bibitem[Husserl(1966)]{Husserl1966} Husserl, E. (1966). \emph{Zur Ph\"anomenologie des inneren Zeitbewusstseins (1893--1917)}. Ed. R. Boehm. Husserliana X. Martinus Nijhoff. Trans. J.~B. Brough, \emph{On the Phenomenology of the Consciousness of Internal Time (1893--1917)}, Kluwer, 1991.
+\bibitem[Husserl(2001)]{Husserl2001} Husserl, E. (2001). \emph{Die \enquote{Bernauer Manuskripte} \"uber das Zeitbewusstsein (1917/18)}. Ed. R. Bernet and D. Lohmar. Husserliana XXXIII. Kluwer.
+\bibitem[James(1890)]{James1890} James, W. (1890). \emph{The Principles of Psychology}. Henry Holt.
+\bibitem[Kelly(2005)]{Kelly2005} Kelly, S.~D. (2005). The puzzle of temporal experience. In A. Brook and K. Akins (eds.), \emph{Cognition and the Brain: The Philosophy and Neuroscience Movement}. Cambridge University Press.
+\bibitem[Kortooms(2002)]{Kortooms2002} Kortooms, T. (2002). \emph{Phenomenology of Time: Edmund Husserl's Analysis of Time-Consciousness}. Kluwer.
+\bibitem[Varela(1999)]{Varela1999} Varela, F.~J. (1999). The specious present: A neurophenomenology of time consciousness. In J. Petitot, F.~J. Varela, B. Pachoud and J.-M. Roy (eds.), \emph{Naturalizing Phenomenology}. Stanford University Press.
+\bibitem[Zahavi(2003)]{Zahavi2003b} Zahavi, D. (2003). Inner time-consciousness and pre-reflective self-awareness. In D. Welton (ed.), \emph{The New Husserl: A Critical Reader}. Indiana University Press.
+\bibitem[Zahavi(2004)]{Zahavi2004} Zahavi, D. (2004). Time and consciousness in the Bernau manuscripts. \emph{Husserl Studies}, 20(2), 99--118.
+\bibitem[Zahavi(2005)]{Zahavi2005} Zahavi, D. (2005). \emph{Subjectivity and Selfhood: Investigating the First-Person Perspective}. MIT Press.
+\end{thebibliography}
+
+\end{document}

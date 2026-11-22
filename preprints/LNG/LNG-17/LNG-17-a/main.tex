@@ -1,0 +1,292 @@
+\documentclass{situationist-preprint}
+
+\title{Structured Propositions}
+\msid{LNG-17-a}
+\msfamily{LNG-17}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_17.lean}
+\mskeywords{propositions; structured propositions; singular propositions; hyperintensionality; Cantor's theorem; Russell--Myhill paradox; cognitive act theories; abstract objects}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What are propositions, the things that sentences express, that are believed and asserted, and that are true or false? We argue that they are structured, abstract and fine-grained, and that there are more of them than there are sentences of any given language. Propositions are structured complexes of objects, properties and relations, individuated by their constituents and the way these are combined; they are not sets of possible worlds, which are too coarse, and they are not the products of linguistic or cognitive acts. The central argument is Cantorian. If every set of sentences of a language is an object, and singular propositions with different constituents differ, then the propositions outnumber the sentences, whatever the language and however many sentences it has. We infer that propositions cannot be created by the acts of speakers and thinkers, as recent naturalistic theories hold. We show that structured propositions are exactly as fine-grained as the impossible-worlds contents defined from them, and we draw the limit that the Russell--Myhill paradox places on the structuring principle. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+Sentences express propositions. \enquote{Snow is white} and \enquote{La neige est blanche} express the same proposition, which is what both say; \enquote{I am hungry} expresses different propositions in the mouths of different speakers. Propositions are also the objects of belief and of the other attitudes: to believe that snow is white is to stand in the belief relation to the proposition that snow is white. And they are the primary bearers of truth and falsity, and of necessity and possibility. The question is what these things are.
+
+There are four main answers. On the \emph{possible-worlds} view, a proposition is a set of possible worlds, or a function from worlds to truth values: the proposition that snow is white is the set of worlds at which snow is white \citep{Carnap1947,Stalnaker1984}. On the \emph{structured} view, a proposition is a complex entity whose constituents are the objects, properties and relations it is about, or senses that present them, combined in a structure that mirrors the syntax of sentences that express it \citep{Russell1903,Kaplan1989,Salmon1986,Soames1987}. On \emph{naturalistic} versions of the structured view, the structure is supplied by the acts of speakers or thinkers: propositions are facts that include the syntactic relations of sentences \citep{King2007}, or types of cognitive acts of predication \citep{Soames2010,Hanks2015}. And on the \emph{primitivist} view, propositions are fine-grained but have no constituents \citep{Merricks2015}.
+
+We defend a version of the second view. Our thesis has four parts. Propositions are \emph{structured}: they have constituents, and propositions with different constituents are different. They are \emph{fine-grained}: necessarily equivalent propositions can differ. They are \emph{abstract}: they are not located in space or time, and they do not depend for their existence on being expressed or entertained. And there are more of them than sentences of any given language. The last claim, which is the subject of the formal part of the manuscript, is also our main argument for the third.
+
+\section{A history of the debate}\label{s:history}
+
+\subsection{Frege and Russell}
+
+\citet{Frege1892} distinguished the sense of a sentence, the thought it expresses, from its reference, its truth value. Thoughts are what is true or false, what is grasped in understanding a sentence, and what is shared between those who communicate. In \citet{Frege1918} he argued that thoughts are neither things of the outer world nor ideas in a mind, but inhabitants of a \enquote{third realm}: they are not perceptible, like physical things, and they are not private, like ideas, since the same thought can be grasped by many. Frege's thoughts are structured, since the sense of a sentence is composed of the senses of its parts, and they are fine-grained, since \enquote{Hesperus is Phosphorus} and \enquote{Hesperus is Hesperus} express different thoughts although both are true and necessarily so.
+
+\citet{Russell1903} held that a proposition contains the entities it is about: the proposition that Socrates is wise contains Socrates himself and the property of wisdom. Russellian propositions are structured, and since their constituents are objects rather than modes of presentation, they are coarser than Frege's: \enquote{Hesperus is a planet} and \enquote{Phosphorus is a planet} express the same Russellian proposition. In the same work Russell raised two difficulties that have shaped the debate since. The first is the unity of the proposition: what distinguishes the proposition that Socrates is wise from the mere collection of Socrates and wisdom (\citealp[\S 54]{Russell1903}; see \citealp{Gaskin2008}). The second, in Appendix~B, is a paradox: if to every class of propositions there corresponds a distinct proposition, such as the proposition that every member of the class is true, then there are at least as many propositions as classes of propositions, which Cantor's theorem forbids. Russell later abandoned propositions as single entities and adopted the multiple relation theory of judgment, on which a judgment relates the judge directly to the constituents \citep{Russell1912}.
+
+\subsection{Intensions}
+
+\citet{Carnap1947} identified the intension of a sentence with the set of state descriptions in which it holds, and possible-worlds semantics made this identification standard. On it the proposition expressed by a sentence is its truth set. The view has three virtues: propositions are well-understood set-theoretic objects; the logical operations on them are the Boolean operations; and the content of a belief or an assertion is explained as the exclusion of possibilities \citep{Stalnaker1984}. Its defect is that it is too coarse. All necessary truths have the same intension, so that the proposition that $2+2=4$ is the proposition that there are infinitely many primes, and whoever believes one believes the other. \citet{Stalnaker1984} accepted the consequence and explained the appearance of ignorance of necessary truths as ignorance of which proposition a sentence expresses. The explanation does not generalize well: a mathematician who does not know whether Fermat's last theorem holds does not seem to be ignorant of what the sentence \enquote{Fermat's last theorem holds} expresses.
+
+\subsection{Structured meanings and singular propositions}
+
+\citet{Lewis1970} proposed that meanings be represented as trees whose nodes are labeled with intensions, so that the meaning of a sentence reflects its syntactic structure and necessarily equivalent sentences with different structures have different meanings. \citet{Cresswell1985} developed the idea into a general theory of structured meanings for the attitudes. In parallel, the theory of direct reference revived Russellian propositions. \citet{Kaplan1989} argued that indexicals and names contribute their referents to the propositions expressed, so that \enquote{I am hungry}, said by David Kaplan, expresses a singular proposition containing Kaplan himself. \citet{Salmon1986} and \citet{Soames1987} defended structured Russellian propositions against Frege's puzzle, and Soames argued that the possible-worlds view cannot be combined with direct reference without absurd results about belief: anyone who believes a conjunction of the form \enquote{$a$ is $F$ and $b$ is $G$} would believe every proposition necessarily equivalent to it, including the proposition that some object is $F$ and $G$ when $a$ is $b$.
+
+\subsection{Naturalized propositions}
+
+The structured view inherited Russell's problem of unity. \citet{King2007} proposed that the relation that unites the constituents of a proposition is supplied by a language: the proposition that Dara swims is a fact consisting of Dara and the property of swimming standing in a relation that involves the syntactic relation between a name and a predicate in some language and the semantic relations of these words to their values. \citet{Soames2010} and \citet{Hanks2015} proposed instead that propositions are types of cognitive acts: the proposition that Dara swims is the act type of predicating swimming of Dara, which is tokened whenever anyone so predicates, and which represents things as being a certain way because its tokens do. The views explain where propositions come from and how they come to represent; both make the existence of propositions depend on languages or minds \citep{KingSoamesSpeaks2014}.
+
+\subsection{Primitivism and the higher-order turn}
+
+\citet{Merricks2015} argued that propositions are fine-grained but simple: they essentially represent things as being a certain way, and nothing further explains this. More recently, a number of philosophers have recast the question in higher-order logic, where propositions are the values of sentential variables and their identity conditions are expressed by higher-order identity rather than by a relation between objects. \citet{Dorr2016} developed a theory of identity in this setting on which many propositions that the structured view distinguishes are identical, and \citet{Goodman2017} argued that reality, and with it the realm of propositions, is not structured in the way the structured view requires. In this setting the Russell--Myhill paradox becomes the observation that the natural structural principle for propositions about properties of propositions is inconsistent, and \citet{Uzquiano2015} examined what a resolution of the paradox requires. We return to this argument in Section~\ref{s:rm}.
+
+\subsection{Cardinality}
+
+A separate line of argument concerns how many propositions there are. \citet{Grim1991} argued from Cantor's theorem that there is no set of all truths, since for every set of truths there are more truths than its members; TSM-07-a accepts the conclusion and draws from it that worlds, construed as maximal consistent sets of propositions, are not members of a single set of worlds. \citet{Kaplan1995} showed that a possible-worlds semantics cannot accommodate, for every set of worlds, the possibility that it is exactly the set of propositions someone is entertaining, because there would then be more worlds than sets of worlds. Arguments of this form show that propositions are very numerous. Ours uses one to show that they outrun every language.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:lang}
+A \emph{language} consists of a collection of sentences and an assignment to each sentence of the proposition it expresses. For a context-sensitive language, the sentences in this sense are pairs of a sentence and a context.
+\end{definition}
+
+The definition is general. It does not require that a language be learnable, that its sentences be finite strings, or that there be countably many of them. A language with a name for every real number, or with infinitely long sentences, is a language in this sense, and so is the language of thought, if there is one. Ambiguous sentences are treated as several sentences, one for each reading.
+
+\begin{definition}\label{d:struct}
+A \emph{structured proposition} is a complex built from constituents, which may be objects, properties, relations or other propositions, by modes of combination such as predication, negation and conjunction. A \emph{singular proposition} is one that has an object among its constituents.
+\end{definition}
+
+\begin{principle}[Structure]\label{p:structure}
+Structured propositions with different constituents, or with the same constituents differently combined, are different propositions. In particular, singular propositions that predicate the same property of different objects are different.
+\end{principle}
+
+\begin{assumption}[Sets of sentences]\label{a:sets}
+Every collection of sentences of a language has a set, which is an object; sets with different members are different.
+\end{assumption}
+
+\begin{assumption}[Singular propositions]\label{a:singular}
+For every object there is a singular proposition that has it as a constituent, for instance the proposition that it exists.
+\end{assumption}
+
+Principle~\ref{p:structure} is the core of the structured view; every structured theory, Fregean, Russellian or naturalistic, accepts it in the form stated, since all of them individuate propositions by their constituents and structure. Assumption~\ref{a:sets} is ordinary set theory, applied to sentences, which are objects of a familiar kind; nothing requires the set of all sentences of a language to be small. Assumption~\ref{a:singular} is the doctrine of singular propositions of \citet{Kaplan1989} and \citet{Salmon1986}, restricted to a single property that every object has.
+
+\section{More propositions than sentences}\label{s:card}
+
+\begin{lemma}[Cantor]\label{l:diag}
+Let $S$ and $P$ be any two collections. If there is a map from collections of members of $S$ into $P$ that sends different collections to different members of $P$, then for every map $e$ from $S$ into $P$ some member of $P$ is not a value of $e$.
+\end{lemma}
+
+\begin{proof}
+Let $i$ be the injective map. Let $D$ be the collection of those $s$ in $S$ such that there is no collection $X$ with $e(s) = i(X)$ and $s \in X$. Suppose that $e(s_0) = i(D)$ for some $s_0$. If $s_0 \in D$, then $X = D$ is a collection with $e(s_0) = i(X)$ and $s_0 \in X$, so $s_0 \notin D$. If $s_0 \notin D$, there is some $X$ with $e(s_0) = i(X)$ and $s_0 \in X$; since $i(X) = i(D)$ and $i$ is injective, $X = D$, so $s_0 \in D$. Either way there is a contradiction, so $i(D)$ is not a value of $e$.
+\end{proof}
+
+The proof is Cantor's diagonal argument \citep{Cantor1891}. It does not use excluded middle: the contradiction is derived from the supposition that $s_0$ is in $D$ and from the supposition that it is not, by an argument valid intuitionistically.
+
+\begin{theorem}\label{t:inexpressible}
+For every language, some proposition is expressed by no sentence of the language.
+\end{theorem}
+
+\begin{proof}
+For each collection $X$ of sentences, let $i(X)$ be the singular proposition, given by Assumption~\ref{a:singular}, that has the set of $X$ as its constituent. By Assumption~\ref{a:sets}, different collections have different sets, and by Principle~\ref{p:structure}, different sets give different singular propositions. So $i$ is injective, and by Lemma~\ref{l:diag} the assignment of propositions to sentences misses some proposition.
+\end{proof}
+
+\begin{proposition}\label{p:embed}
+For every language, different sentences can be sent to different propositions.
+\end{proposition}
+
+\begin{proof}
+Send each sentence $s$ to the singular proposition about the set whose only member is $s$. Different sentences have different unit sets, and these give different singular propositions.
+\end{proof}
+
+\begin{corollary}\label{c:more}
+For every language, there are strictly more propositions than sentences: the sentences can be mapped one to one into the propositions, and no assignment of propositions to sentences reaches every proposition.
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{p:embed} and Theorem~\ref{t:inexpressible}, the latter applied to an arbitrary assignment rather than to the one the language uses.
+\end{proof}
+
+Three features of the argument deserve comment. First, it is independent of the size of the language. For a language with countably many sentences, the conclusion follows from a simpler observation: there are uncountably many real numbers, and for each a singular proposition about it. But Corollary~\ref{c:more} holds also for languages with uncountably many sentences, or with a sentence for every real number; the argument needs only that the language's sentences form a collection of which every subcollection has a set. Second, it is independent of the language's resources for context-sensitivity. Pairs of sentences and contexts form a collection to which the theorem applies, so no assignment of propositions to sentences in contexts reaches every proposition either; demonstratives and indexicals extend the reach of a language without making it complete. Third, the inexpressible propositions are not exotic. They are singular propositions about sets of sentences, of the same kind as the proposition that the set of English sentences is infinite, which English expresses.
+
+The companion manuscript LNG-17-b gives the argument in a minimal form. Here we note how Corollary~\ref{c:more} bears on the thesis that every proposition is expressible. It does not show that there is a proposition inexpressible in every possible language: any given proposition is expressed by a sentence of some language, for instance a language obtained by adding a name for it. What it shows is that no single language suffices. This is a limit of a different kind from the one LNG-22 argues for, on which some things can be shown but not said; ours concerns the size of a language, not the kind of thing expressed.
+
+\section{Propositions are abstract}\label{s:abstract}
+
+On the naturalistic views of Section~\ref{s:history}, propositions exist because languages or minds bring them into existence: a proposition is a fact that includes a syntactic relation of some language \citep{King2007}, or an act type that is tokened when someone predicates \citep{Soames2010,Hanks2015}. We argue that Corollary~\ref{c:more} refutes these views in their natural forms and that the forms that survive concede that propositions are abstract and independent of representation.
+
+\begin{proposition}\label{p:noact}
+If every proposition were the product of a representational act or of a sentence of some actual language, then the actual languages and representational acts together would form a language, in the sense of Definition~\ref{d:lang}, that expresses every proposition. There is no such language. So not every proposition is such a product.
+\end{proposition}
+
+\begin{proof}
+Collect the sentences of all actual languages and all actual representational act tokens, each paired with the proposition it produces. The result is a language in the sense of Definition~\ref{d:lang}, since that definition imposes no condition on the nature or number of sentences. By Theorem~\ref{t:inexpressible}, some proposition is not the product of any of them.
+\end{proof}
+
+The naturalist has two replies. The first is that propositions are produced not by actual acts but by possible ones: the proposition that $\varphi$ exists if it is possible for someone to predicate accordingly. But the type of a merely possible act is not the product of any act, and a theory that admits such types has admitted entities that exist whether or not anything is done. They are abstract in the sense at issue, and the naturalistic explanation of their existence is gone. A cognitive act theory on which act types exist whether or not they are tokened is to that extent not a naturalistic theory of the existence of propositions, only of their representational character. The second reply is to deny Assumption~\ref{a:singular} for objects that no one has represented, and so to deny that there are propositions about sets of sentences no one has thought of. But the proposition that a given set exists is true, and it would have been true had no one thought of it; denying that there is such a proposition until someone thinks of the set is denying that there was a truth there to be found. The same holds for propositions about each of the uncountably many real numbers, almost none of which any actual being can single out.
+
+We conclude that propositions are not created by representation. They are abstract: they are not located in space and time, they do not enter into causal relations, and they exist whether or not anyone expresses them. This is the view of \citet{Frege1918}, without his metaphor of a realm. The contrast with fictional characters is instructive. LNG-14 argues that fictional characters are abstract artefacts created by authors, and the view is coherent: some abstract objects are created. But fictional characters are as numerous as the acts of storytelling that create them, while propositions are more numerous than any collection of acts. Creation by representation is therefore not available for propositions as it is for characters.
+
+The structure of propositions is not thereby left unexplained. The constituents of a singular proposition are its objects and properties, and its structure is a mode of combination, such as predication, which is itself an abstract relation. What the naturalists rightly saw is that we grasp propositions through sentences and acts that share their structure. That explains how we come to entertain propositions, not why they exist; and on the question how abstract objects can be known at all, we follow MTH-02, on which reliable belief-forming methods suffice and no causal contact is required.
+
+\section{Propositions are fine-grained}\label{s:fine}
+
+\begin{definition}\label{d:sprop}
+In a propositional language with atoms, negation and conjunction, a structured proposition is a tree: an atom, the negation of a structured proposition, or the conjunction of two. A possible world is a valuation of the atoms, and a structured proposition is true at a world according to the usual clauses.
+\end{definition}
+
+\begin{proposition}\label{p:finer}
+Structured propositions can differ while being true at exactly the same possible worlds.
+\end{proposition}
+
+\begin{proof}
+The conjunction of the first atom with the second and the conjunction of the second with the first are different trees, and each is true at a world just when both atoms are.
+\end{proof}
+
+The example is deliberately minimal, and one may doubt that the order of conjuncts is a difference between propositions; we return to this in Section~\ref{s:obj}. The substantive cases are the familiar ones. The proposition that $2+2=4$ and the proposition that there are infinitely many primes are both necessary, so the possible-worlds view identifies them; the structured view distinguishes them, since they have different constituents. The singular proposition that Hesperus is Hesperus and the singular proposition that Hesperus is Phosphorus are, on a Russellian view, the same; on a Fregean view they differ in the senses they contain. Our thesis that propositions are fine-grained is the claim that they are at least as fine as the first distinction requires, and the argument is that the objects of belief must be: a mathematician can believe one and not the other, and belief is a relation to propositions.
+
+TSM-09-a argues that hyperintensional content requires impossible worlds, and that contents are best modeled as sets of points of evaluation, possible and impossible, because the point format supplies a logic of entailment and update which structured propositions alone do not. The two theses are consistent, and they fit together as follows.
+
+\begin{proposition}\label{p:asfine}
+Let the points of evaluation be arbitrary collections of propositions, consistent or not, and let a proposition be true at a point when it belongs to it. Then the content of a proposition, the collection of points at which it is true, determines the proposition.
+\end{proposition}
+
+\begin{proof}
+Let $p$ and $q$ have the same content. The point whose only member is $p$ contains $p$, so it contains $q$, so $q = p$.
+\end{proof}
+
+Points of this kind are the worlds of TSM-07-a, maximal consistent sets of propositions, together with the impossible worlds of TSM-09-a, sets that are not consistent. Proposition~\ref{p:asfine} says that when worlds are built from propositions in this way, the contents they define are exactly as fine-grained as the propositions themselves. Structure is what individuates propositions; the point format is a representation of them that inherits their individuation and adds the operations of entailment and update. The structured view and the impossible-worlds view of content are therefore not rivals. The structured view says what propositions are; the impossible-worlds model says how they are related by inclusion and exclusion.
+
+\section{The Russell--Myhill limit}\label{s:rm}
+
+Lemma~\ref{l:diag} has a second consequence, which was Russell's and was rediscovered by \citet{Myhill1958}.
+
+\begin{theorem}[Russell, Myhill]\label{t:rm}
+No map from collections of propositions into propositions sends different collections to different propositions.
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{l:diag} with $S$ and $P$ both the propositions and $e$ the identity map. The identity reaches every proposition, so no such injective map exists.
+\end{proof}
+
+The theorem looks like a refutation of the structured view. For each collection of propositions $X$, consider the proposition that every member of $X$ is true. If the collection $X$ is a constituent of this proposition, Principle~\ref{p:structure} makes the map from collections to propositions injective, and Theorem~\ref{t:rm} says it is not. Arguments of this form have been pressed against the structured view in the higher-order setting \citep{Dorr2016,Goodman2017}.
+
+We draw a narrower conclusion. Theorem~\ref{t:rm} shows that collections of propositions, taken arbitrarily, cannot all be constituents of propositions. Principle~\ref{p:structure} is a claim about constituents, and it does not say which entities can be constituents; Assumption~\ref{a:singular} says that objects can be, and Assumption~\ref{a:sets} that sets of sentences are objects. The argument of Section~\ref{s:card} therefore uses only constituents that are not propositions. There are two ways to understand the restriction. On the first, which is Russell's, propositions come in types or orders, and a proposition can have as constituents only collections of propositions of lower order; the proposition that every member of $X$ is true is then of higher order than the members of $X$, and no single collection of all propositions of every order exists to be diagonalized. On the second, generality is not represented by a collection as constituent but by a quantifier and a property: the proposition that every member of $X$ is true has as constituents the property of being a member of $X$, and distinct collections of propositions need not determine distinct properties of this kind. Either way, the structure principle survives with a restriction on what can be a constituent, and both ways leave Section~\ref{s:card} untouched. \citet{Uzquiano2015} examines a resolution that restricts instead the comprehension principles of the higher-order setting, and the argument of Section~\ref{s:card} is consistent with that resolution too, since it assumes collections only of sentences.
+
+The restriction is principled. Cantor's theorem shows that the totality of propositions is larger than any collection whose subcollections it can index; TSM-07-a draws the same lesson for worlds. A theory of propositions that let every collection of propositions be a constituent would make the propositions index their own subcollections, which no totality can do. The structured view must say which entities are possible constituents, and Theorem~\ref{t:rm} is a constraint on the answer, not a refutation of the view.
+
+\section{Further cases}\label{s:cases}
+
+\paragraph{Translation.} \citet{Church1950} argued that reports of what someone said must be about propositions rather than sentences, because their translations into another language preserve truth while changing the sentences mentioned. The argument supports the existence of propositions; Corollary~\ref{c:more} adds that propositions cannot be identified with equivalence classes of sentences under translation, since there are not enough sentences to go round.
+
+\paragraph{Unexpressed truths about the world.} Every grain of sand on every beach has a mass. For each grain and each real number there is a proposition that the grain has that mass in grams. There are uncountably many such propositions, of which one per grain is true, and no finite being has expressed more than a handful. The truths about masses do not wait on expression, and since there are propositions that are true, these propositions do not either.
+
+\paragraph{Attitudes towards the inexpressible.} If some propositions are inexpressible in a given language, can its speakers believe them? Some of them, perhaps, through demonstration: a speaker who points to a sand grain and thinks \enquote{that has this mass} may entertain a singular proposition for which her language has no context-free sentence. But the propositions that no being has means to single out are not believed by anyone, and nothing in the view requires that they be. Propositions are what can be believed, not what is.
+
+\paragraph{Unity.} The problem of unity asks what distinguishes a proposition from a list of its constituents. On our view, a proposition is the result of applying a mode of combination to constituents, and the mode of combination is not an additional constituent but the function that yields the proposition. The proposition that Socrates is wise is the value of predication at Socrates and wisdom; the list of the two is not the value of anything. This answer is available to any view on which modes of combination are abstract functions, and it does not require that a language or a mind perform the combination. Whether it removes every puzzle that has gone under the name of unity is not something we need to settle \citep{Gaskin2008}; it removes the one that motivated the naturalistic views.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[Too fine]\label{o:fine}
+If the conjunction of $p$ and $q$ differs from the conjunction of $q$ and $p$, the structured view distinguishes propositions that no one could believe apart. The view is too fine-grained.
+\end{objection}
+
+\begin{reply}
+The objection presupposes that belief is closed under the identities of propositions and that propositions not believable apart must be identical. The second is the possible-worlds theorist's principle, applied at a finer grain, and nothing supports it. Propositions that differ in structure but are a priori and obviously equivalent are believed together because believing one leads immediately to believing the other, not because they are one. The structured view must say which differences in syntax correspond to differences in structure; ordering of conjuncts may or may not, depending on whether conjunction is taken to combine a pair or a collection. Proposition~\ref{p:finer} uses ordered conjunction for simplicity. Our thesis requires only that the grain be at least that of the hyperintensional distinctions belief draws.
+\end{reply}
+
+\begin{objection}[Ontological economy]\label{o:econ}
+The argument multiplies abstract objects beyond necessity. Sentences and minds are enough; the work propositions are said to do can be done by sentences in a language of thought or by the attitudes themselves.
+\end{objection}
+
+\begin{reply}
+Corollary~\ref{c:more} shows that the work cannot be done by sentences of any language: there are truths that no sentence of a given language expresses, and the theory of truth and of modality needs to quantify over them, as TSM-07-a does in constructing worlds from propositions. A theory of attitudes with sentences of a language of thought as objects inherits the same limit. The economy is therefore false economy: it saves on propositions by failing to account for the truths that no one expresses. The abstract objects posited are of a kind already admitted by mathematics, which MTH-01 holds to concern abstract objects.
+\end{reply}
+
+\begin{objection}[Russell--Myhill]\label{o:rm}
+Theorem~\ref{t:rm} shows that the structure principle is inconsistent. A principle that must be restricted ad hoc to avoid paradox is not a principle.
+\end{objection}
+
+\begin{reply}
+The restriction is not ad hoc; Section~\ref{s:rm} gives it a rationale, which is the rationale of Russell's theory of types and of the iterative conception of set: a totality cannot have among its constituents arbitrary subcollections of itself. Every theory of propositions must restrict something, since Theorem~\ref{t:rm} applies to every theory on which propositions form a collection and there is a proposition for every collection of them. The possible-worlds theorist escapes only because on her view distinct collections of propositions routinely determine the same proposition; this is coarseness, and it is the defect of Section~\ref{s:history}, not a solution.
+\end{reply}
+
+\begin{objection}[Higher-order identity]\label{o:ho}
+In higher-order logic, the question whether propositions are structured is the question whether $\forall X \forall Y (F(X) = G(Y) \to X = Y)$ holds for suitable operations $F$ and $G$. \citet{Dorr2016} and \citet{Goodman2017} argue that the natural principles of this form are inconsistent or unmotivated, and that propositions are individuated more coarsely than the structured view says.
+\end{objection}
+
+\begin{reply}
+The inconsistent principles are those that let a proposition be built from an arbitrary property of propositions, which Section~\ref{s:rm} declines. Restricted to predication of first-order properties of objects, which is what Section~\ref{s:card} uses, structural principles are consistent: they are satisfied in any model where singular propositions are pairs of an object and a property. The higher-order setting, an extension of the second-order logic that LOG-09 regards as logic, is a good setting for the question, but in it the structured theorist's claim is a restricted injectivity principle, and the arguments against the unrestricted principle do not reach it.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The argument does not decide between Fregean and Russellian structured propositions: Corollary~\ref{c:more} uses only singular propositions about sets, which both views admit, and Section~\ref{s:fine} requires only the grain that distinguishes necessarily equivalent propositions with different constituents. It does not show that propositions exist necessarily, since the singular propositions of Section~\ref{s:card} depend on the existence of their constituents. It does not show that every proposition is expressible in some language, nor that some proposition is expressible in none. And it does not settle which collections of propositions are possible constituents; Section~\ref{s:rm} gives two acceptable answers and leaves the choice open.
+
+\section{Formalization}\label{s:formal}
+
+The module \nolinkurl{Philosophy/LNG/LNG_17.lean} proves Lemma~\ref{l:diag} for arbitrary types, with collections represented as predicates. It then states the framework of Section~\ref{s:frame} as axioms: a type of propositions; a type of sentences with an expression map (Definition~\ref{d:lang}); a type of objects; a map from collections of sentences to objects with its extensionality (Assumption~\ref{a:sets}); a map from objects to singular propositions (Assumption~\ref{a:singular}); and the injectivity of that map (Principle~\ref{p:structure}). It proves Theorem~\ref{t:inexpressible}, Proposition~\ref{p:embed} and Corollary~\ref{c:more}, Propositions~\ref{p:finer} and~\ref{p:asfine}, and Theorem~\ref{t:rm}.
+
+\begin{lstlisting}
+theorem more_propositions :
+    (∃ f : Sentence → Proposition, ∀ s t, f s = f t → s = t) ∧
+    ∀ g : Sentence → Proposition, ∃ p, ∀ s, g s ≠ p
+
+theorem russell_myhill {P : Type} (i : (P → Prop) → P) :
+    ¬ ∀ X Y, i X = i Y → X = Y
+\end{lstlisting}
+
+The checker reports:
+
+\begin{lstlisting}
+'Philosophy.LNG_17.more_propositions' depends on axioms:
+  [Philosophy.LNG_17.Proposition,
+   Philosophy.LNG_17.Sentence,
+   Philosophy.LNG_17.setOf,
+   Philosophy.LNG_17.setOf_ext,
+   Philosophy.LNG_17.singular,
+   Philosophy.LNG_17.structure_principle]
+'Philosophy.LNG_17.russell_myhill' does not depend on any axioms
+\end{lstlisting}
+
+\texttt{Proposition} and \texttt{Sentence} are the primitives of Definition~\ref{d:lang}; \texttt{setOf} and \texttt{setOf\_ext} are Assumption~\ref{a:sets}; \texttt{singular} is Assumption~\ref{a:singular}; and \texttt{structure\_principle} is Principle~\ref{p:structure}. Since the sentence type is an arbitrary type, about which nothing is assumed, the result holds for every language. No axiom of Lean's logic is used, not even excluded middle, in line with the remark after Lemma~\ref{l:diag}. The second statement, Theorem~\ref{t:rm}, is a theorem about every type and uses no axioms at all; it is consistent with the first because the axioms make only collections of sentences, not collections of propositions, into constituents.
+
+\section{Conclusion}
+
+Propositions are structured complexes of constituents, individuated by what they are composed of and how. They are fine-grained, as the objects of belief must be, and exactly as fine-grained as the impossible-worlds contents defined from them. A Cantorian argument shows that they outnumber the sentences of any language, whatever its size, and so cannot be the products of the representational acts of speakers and thinkers: they are abstract and independent of representation. The Russell--Myhill paradox limits which entities may be their constituents, and it leaves this argument standing.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cantor(1891)]{Cantor1891} Cantor, G. (1891). \"Uber eine elementare Frage der Mannigfaltigkeitslehre. \emph{Jahresbericht der Deutschen Mathematiker-Vereinigung}, 1, 75--78.
+\bibitem[Carnap(1947)]{Carnap1947} Carnap, R. (1947). \emph{Meaning and Necessity}. University of Chicago Press.
+\bibitem[Church(1950)]{Church1950} Church, A. (1950). On Carnap's analysis of statements of assertion and belief. \emph{Analysis}, 10(5), 97--99.
+\bibitem[Cresswell(1985)]{Cresswell1985} Cresswell, M.~J. (1985). \emph{Structured Meanings}. MIT Press.
+\bibitem[Dorr(2016)]{Dorr2016} Dorr, C. (2016). To be F is to be G. \emph{Philosophical Perspectives}, 30.
+\bibitem[Frege(1892)]{Frege1892} Frege, G. (1892). \"Uber Sinn und Bedeutung. \emph{Zeitschrift f\"ur Philosophie und philosophische Kritik}, 100, 25--50.
+\bibitem[Frege(1918)]{Frege1918} Frege, G. (1918). Der Gedanke. \emph{Beitr\"age zur Philosophie des deutschen Idealismus}, 1, 58--77.
+\bibitem[Gaskin(2008)]{Gaskin2008} Gaskin, R. (2008). \emph{The Unity of the Proposition}. Oxford University Press.
+\bibitem[Goodman(2017)]{Goodman2017} Goodman, J. (2017). Reality is not structured. \emph{Analysis}, 77(1), 43--53.
+\bibitem[Grim(1991)]{Grim1991} Grim, P. (1991). \emph{The Incomplete Universe: Totality, Knowledge, and Truth}. MIT Press.
+\bibitem[Hanks(2015)]{Hanks2015} Hanks, P. (2015). \emph{Propositional Content}. Oxford University Press.
+\bibitem[Kaplan(1989)]{Kaplan1989} Kaplan, D. (1989). Demonstratives. In J. Almog, J. Perry and H. Wettstein (eds.), \emph{Themes from Kaplan}, Oxford University Press.
+\bibitem[Kaplan(1995)]{Kaplan1995} Kaplan, D. (1995). A problem in possible-world semantics. In W. Sinnott-Armstrong, D. Raffman and N. Asher (eds.), \emph{Modality, Morality and Belief: Essays in Honor of Ruth Barcan Marcus}, Cambridge University Press.
+\bibitem[King(2007)]{King2007} King, J.~C. (2007). \emph{The Nature and Structure of Content}. Oxford University Press.
+\bibitem[King et~al.(2014)]{KingSoamesSpeaks2014} King, J.~C., Soames, S. and Speaks, J. (2014). \emph{New Thinking about Propositions}. Oxford University Press.
+\bibitem[Lewis(1970)]{Lewis1970} Lewis, D. (1970). General semantics. \emph{Synthese}, 22, 18--67.
+\bibitem[Merricks(2015)]{Merricks2015} Merricks, T. (2015). \emph{Propositions}. Oxford University Press.
+\bibitem[Myhill(1958)]{Myhill1958} Myhill, J. (1958). Problems arising in the formalization of intensional logic. \emph{Logique et Analyse}, 1.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\bibitem[Russell(1912)]{Russell1912} Russell, B. (1912). \emph{The Problems of Philosophy}. Williams and Norgate.
+\bibitem[Salmon(1986)]{Salmon1986} Salmon, N. (1986). \emph{Frege's Puzzle}. MIT Press.
+\bibitem[Soames(1987)]{Soames1987} Soames, S. (1987). Direct reference, propositional attitudes, and semantic content. \emph{Philosophical Topics}, 15, 47--87.
+\bibitem[Soames(2010)]{Soames2010} Soames, S. (2010). \emph{What Is Meaning?} Princeton University Press.
+\bibitem[Stalnaker(1984)]{Stalnaker1984} Stalnaker, R. (1984). \emph{Inquiry}. MIT Press.
+\bibitem[Uzquiano(2015)]{Uzquiano2015} Uzquiano, G. (2015). A neglected resolution of Russell's paradox of propositions. \emph{The Review of Symbolic Logic}, 8(2).
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,195 @@
+\documentclass{situationist-preprint}
+
+\title{Why Be Moral? A Two-Case Argument}
+\msid{MTE-04-a}
+\msfamily{MTE-04}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_04.lean}
+\mskeywords{why be moral; prudence; moral reasons; Gyges; sensible knave; convergence; Prichard}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\enquote{Why should I be moral?} has been taken to demand a justification of morality from outside it, and to be unanswerable for that reason. We argue that the question has an answer, because it has two readings and each has an answer. Asked by someone who already grants that she morally ought to act, the question asks either for moral reasons or for prudential ones. On the moral reading it is answered by morality itself: the moral reasons that make the act required are the reasons there are to do it, and to cite them is not to beg the question but to answer it. On the prudential reading it is answered by showing that moral and prudential reasons largely converge: over most of a life, what one morally ought to do is also what serves one's own good. We prove that, in convergent situations, the question is answered on both readings and that every positive weighting of the two kinds of reasons favors the moral act; we prove that the prudential answer fails only in divergent situations, and that these bound the number of its failures. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+In the second book of the \emph{Republic}, Glaucon tells the story of the ring of Gyges, which makes its wearer invisible, and asks Socrates to show that a just man who possessed it would have reason to remain just \citep[II, 359b--360d]{Plato}. The challenge has been restated many times. Hobbes's Foole says in his heart that there is no such thing as justice, and that keeping covenants is not against reason only when it is to one's benefit \citep[ch.~15]{Hobbes1651}. Hume's sensible knave observes that honesty is the best policy as a general rule, but that he may be wisest who observes the general rule and takes advantage of all the exceptions \citep[Conclusion, Part~II]{HumeEPM}. \citet{Bradley1876} devoted an essay to the question, and argued that it cannot be answered in terms of anything other than morality without degrading morality into a means.
+
+Twentieth-century philosophers divided over whether the question makes sense. \citet{Prichard1912} argued that moral philosophy rests on a mistake if it tries to answer it: any answer either cites moral considerations, in which case it presupposes what it is supposed to justify, or cites non-moral considerations such as the agent's advantage, in which case it gives a reason of the wrong kind, which may move her to act but not to act from duty. \citet{Toulmin1950} treated the question as a limiting question, to which no answer from within morality could be given and none from outside was required. Others took it at face value and tried to answer it. \citet{Foot1972} argued that moral considerations give reasons only to those who care about the ends morality serves; \citet{Gauthier1986} argued that a rational maximizer would choose to become a constrained maximizer, disposed to keep agreements even against her immediate interest; and \citet{Sidgwick1907} concluded the \emph{Methods} with the dualism of practical reason, the view that reasons of self-interest and reasons of impartial benevolence are both ultimate and may conflict without any higher standpoint to settle their conflict.
+
+We argue that the question has an answer, and that its answer has the form Prichard's dilemma suggests without the consequence he drew. The question is either moral, and answered by morality, or prudential, and answered by showing that moral and prudential reasons largely converge. Prichard was right that the two readings must be separated; he was wrong that neither yields an answer.
+
+\section{Framework}
+
+We use the framework of MTE-11, on which reasons are primitive and ought is defined from them: an agent ought to choose an option if the reasons for it are stronger than those for each alternative.
+
+\begin{definition}[Moral and prudential reasons]\label{d:kinds}
+In each situation, the options open to the agent are supported by moral reasons and by prudential reasons, each of some strength. \emph{Moral} reasons are those that make acts right or wrong: reasons given by the claims, interests and rights of others and by the agent's commitments to them. \emph{Prudential} reasons are those given by the agent's own well-being.
+\end{definition}
+
+\begin{definition}[Moral and prudential ought]\label{d:ought}
+The agent \emph{morally ought} to choose an option if the moral reasons for it are stronger than the moral reasons for each alternative; she \emph{prudentially ought} to choose it if the prudential reasons for it are stronger than the prudential reasons for each alternative.
+\end{definition}
+
+The question \enquote{why should I be moral?} is asked about an act the agent already grants that she morally ought to do; an agent who doubts that she ought to do it is asking a first-order moral question, not this one. The question asks for a reason to do it.
+
+\begin{principle}[Two readings]\label{p:two}
+Asked about an act that the agent morally ought to do, \enquote{why should I do it?} asks either for the moral reasons for doing it, or for the prudential reasons for doing it.
+\end{principle}
+
+\ref{p:two} is the claim that there is no third standpoint from which the question is asked, a standpoint with reasons of its own that are neither moral nor prudential. We defend it in Objection~\ref{o:third}. Here it suffices to note why the questioner who asks for a non-moral reason asks for a prudential one. Glaucon's challenge, the Foole's and the knave's are all challenges to show what being moral does for the agent; that is what makes them challenges rather than requests for information. Other non-moral reasons, aesthetic or epistemic, bear on acts only occasionally and do not give the question its force.
+
+\begin{assumption}[Convergence]\label{a:conv}
+In convergent situations, what the agent morally ought to do is what she prudentially ought to do. Most of the situations in a normal human life are convergent.
+\end{assumption}
+
+The first clause defines convergence; the second is the substantive claim. We argue for it in Section~\ref{s:conv}. It does not say that every situation is convergent, and the cases in which morality and prudence diverge are taken up in Section~\ref{s:div}.
+
+\section{The argument}
+
+\begin{theorem}[Two cases]\label{t:main}
+In a convergent situation, the question why one should do what one morally ought to do is answered on both of its readings.
+\end{theorem}
+
+\begin{proof}
+Let the agent morally ought to choose $a$. On the moral reading, the question asks for the moral reasons for $a$; by Definition~\ref{d:ought}, the moral reasons for $a$ are stronger than those for each alternative, and to cite them is to answer the question. On the prudential reading, the question asks for the prudential reasons for $a$; by Assumption~\ref{a:conv}, since the situation is convergent, the agent prudentially ought to choose $a$, so the prudential reasons for $a$ are stronger than those for each alternative, and to cite them is to answer the question. By \ref{p:two}, there is no other reading.
+\end{proof}
+
+The moral answer is not empty. An agent who asks why she should keep a promise, granting that she morally ought to, is answered by being reminded that she promised, that the promisee is relying on her, and that breaking the promise would wrong him; these are the facts that make the act required, and they are reasons. Prichard thought that such an answer begs the question. It would, if the question were a request to justify morality from outside it; but on the moral reading the question is a request for the moral reasons, and it is answered by them. To ask, having heard them, why one should act on these reasons is to repeat the question on its other reading.
+
+\begin{lemma}[Dominance]\label{l:dom}
+If the moral reasons and the prudential reasons both favor an option over each alternative, then every weighting of the two kinds of reasons that gives positive weight to moral reasons favors it as well.
+\end{lemma}
+
+\begin{proof}
+Let $m$ and $p$ be the strengths of the moral and prudential reasons and $k_1>0$, $k_2\ge 0$ the weights. For each alternative $b$ to $a$, $m(b)<m(a)$ and $p(b)<p(a)$, so $k_1 m(b)<k_1 m(a)$ and $k_2 p(b)\le k_2 p(a)$, and the sum of the weighted strengths of $b$ is less than that of $a$.
+\end{proof}
+
+\begin{corollary}[All things considered]\label{c:atc}
+In a convergent situation, the act that one morally ought to do is the act that the moral and prudential reasons together favor, whatever their relative weight, provided the moral reasons have some.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:conv} and Lemma~\ref{l:dom}.
+\end{proof}
+
+Corollary~\ref{c:atc} disposes of the question of overridingness for the convergent case. Whether moral reasons always outweigh prudential ones is a disputed question \citep{Wolf1982,Copp1997}, and the corollary shows that, where the two converge, it need not be answered: the verdict is the same on every weighting.
+
+\begin{proposition}[Divergence]\label{p:div}
+If what one morally ought to do differs from what one prudentially ought to do, then the prudential reading of the question receives a negative answer, and the situation is not convergent.
+\end{proposition}
+
+\begin{proof}
+Let the agent morally ought to choose $a$ and prudentially ought to choose $b\neq a$. By Definition~\ref{d:ought}, there is at most one option that the prudential reasons favor over every alternative, so it is not true that she prudentially ought to choose $a$, and the prudential reading gets no positive answer. If the situation were convergent, she would prudentially ought to choose $a$ by Assumption~\ref{a:conv}; so it is not.
+\end{proof}
+
+\begin{proposition}[The prudential answer fails only where convergence fails]\label{p:bound}
+Over any sequence of situations, the number in which the prudential reading receives no positive answer for the morally required act is at most the number of divergent situations.
+\end{proposition}
+
+\begin{proof}
+In each convergent situation the prudential reading receives a positive answer, by Theorem~\ref{t:main}; so each situation in which it receives none is divergent, and the count of the first is bounded by the count of the second.
+\end{proof}
+
+Proposition~\ref{p:bound} is the precise content of \enquote{largely} in the thesis. The prudential answer is as good as the convergence on which it rests, and its failures are confined to the divergent cases.
+
+\section{Why moral and prudential reasons converge}\label{s:conv}
+
+The second clause of Assumption~\ref{a:conv} is empirical in part, and the case for it is cumulative.
+
+First, most human goods are obtained in cooperation with others, and cooperation depends on trust. An agent known to keep her word, to deal fairly and to refrain from harming others is offered opportunities that others are not; an agent known to exploit others when she can is excluded from them. This was Hobbes's reply to the Foole: the man who breaks covenant when it suits him cannot be received into any society that unites for peace and defence except by the error of those who receive him \citep[ch.~15]{Hobbes1651}. The reply depends on detection being likely, and in small, stable communities, which are the communities in which most human lives have been led, it is.
+
+Second, the reply to the sensible knave does not depend on detection alone. The knave who succeeds forgoes what Hume called inward peace of mind and the consciousness of integrity \citep[Conclusion, Part~II]{HumeEPM}, and, more importantly, he forgoes relationships that require him to be what he appears to be. Friendship and love are among the greatest prudential goods, and they cannot be had by an agent disposed to exploit those he befriends whenever it pays, since to have such a friend is to be someone he would exploit. ETH-01 counts relationships among the irreducible components of the good; whatever their status there, their contribution to the well-being of the person who has them is not in doubt.
+
+Third, dispositions cannot be tuned case by case. The prudential question is often asked about a single act, but what an agent can choose, for the most part, is the kind of person to be. A disposition to act morally except when one can gain by not doing so and escape detection requires constant calculation, tends to be revealed in the calculation, and tends to widen in its exceptions. \citet{Gauthier1986} argued that a constrained maximizer does better than a straightforward one among agents who can discern each other's dispositions, and \citet{Frank1988} that the emotions which make honesty spontaneous are adaptations to exactly this problem, credible commitments that a calculating agent cannot fake. \citet{Kavka1984} called the attempt to show that morality and prudence coincide the reconciliation project, and concluded that it succeeds for most agents in most circumstances, though not for all.
+
+None of these arguments shows that convergence is complete, and none needs to. They show that the divergent situations are a minority in a normal life, and that is what Assumption~\ref{a:conv} claims.
+
+\section{When morality and prudence diverge}\label{s:div}
+
+Divergence is real. The Gyges case is constructed to produce it, and there are actual cases: the rescuer who risks death, the whistleblower who loses her career, the person who keeps a promise to a dying friend at great cost and with no possibility of reward. Proposition~\ref{p:div} says what the theory implies about these: the prudential reading of the question has a negative answer. There is no prudential reason, all told, for the rescuer to risk her life.
+
+This is an honest answer, and it does not leave the question unanswered. On the moral reading, the question is answered in divergent cases exactly as in convergent ones: the moral reasons that make the act required are reasons to do it. They are reasons whether or not the agent is moved by them, since ACT-12 argues that there are external reasons, which an agent may have although no sound deliberation from her motivations would reveal them.
+
+Whether acting morally in a divergent case is \emph{rational} is a further question, and it is answered by ETH-25: self-sacrifice is rational if and only if the agent's deepest concerns lie beyond her own well-being. An agent whose concerns include the people she would rescue, or the integrity of her word, acts rationally in sacrificing her good for them. MTE-07 adds that a rational agent who judges that she morally ought to act is moved by the judgment, so that a concern for doing what morality requires is among her concerns; combined with ETH-25, this makes required sacrifices rational for the rational agent who accepts the requirement, as ETH-25 itself observes. The divergent case therefore splits the three questions that the convergent case allows us to run together: whether there is moral reason for the act (yes), whether there is prudential reason for it (no), and whether it is rational for this agent (yes, if her concerns reach beyond herself, as those of a rational agent who accepts the requirement do).
+
+\section{Objections and replies}
+
+\begin{objection}[A third reading]\label{o:third}
+The question may ask neither for moral nor for prudential reasons, but for reasons all things considered: whether, taking every reason into account, one should do what morality requires. This reading is not covered by \ref{p:two}, and it is the reading on which the question is serious.
+\end{objection}
+
+\begin{reply}
+The all-things-considered ought is not a further standpoint with reasons of its own. By the framework of MTE-11, it is what the reasons there are, taken together, favor; and the reasons there are, so far as they bear on the question, are moral and prudential. So the all-things-considered question is a question about the two kinds of reasons and their combination. In the convergent case it is answered by Corollary~\ref{c:atc}, whatever the relative weights. In the divergent case it is the question whether, in this case, the moral reasons outweigh the prudential ones, and that is a question about the strength of particular reasons, a rescue against a risk, a promise against a career, which has different answers in different cases. It is not the question why one should be moral, which is asked about morality as such, and it does not need a general answer.
+\end{reply}
+
+\begin{objection}[Circularity]
+The moral answer is circular. To be told that one should be moral because there are moral reasons is to be told that one should be moral because one should be moral.
+\end{objection}
+
+\begin{reply}
+The moral answer cites the reasons that make the act required, not the requirement. To be told that one should keep one's promise because one promised and the promisee relies on it is to be told something informative about why the requirement holds; it is the explanation of the ought by the reasons on which MTE-11 insists. Circularity would threaten only if the question were a request to justify the authority of moral reasons in terms of something else, and on the moral reading it is not.
+\end{reply}
+
+\begin{objection}[Wishful thinking]
+The convergence thesis is wishful thinking. Successful wrongdoers exist, and some of them live long and comfortable lives; the history of the powerful is full of them.
+\end{objection}
+
+\begin{reply}
+The thesis is that moral and prudential reasons \emph{largely} converge, not that they always do, and Proposition~\ref{p:bound} makes the claim exact: the prudential answer fails at most where convergence fails. The successful wrongdoer is evidence of divergent situations, which we grant. He is not evidence that most situations in a normal life are divergent. Moreover, many apparent cases of prudential success through wrongdoing are cases of external success, wealth and power, accompanied by the loss of the relational goods described in Section~\ref{s:conv}; ETH-05 argues that well-being includes contact with reality, and a life whose relationships rest on fear or deception is poorer in it than it appears from outside.
+\end{reply}
+
+\begin{objection}[The wrong motive]
+To answer the question prudentially is to corrupt morality. An agent who is moral because it pays acts from self-interest, not from moral motives, like Kant's shopkeeper who is honest because honesty is good for business.
+\end{objection}
+
+\begin{reply}
+The prudential answer concerns what reasons there are, not what the agent's motive should be. An agent who does the right thing because of the moral reasons, and who is reassured, on reflection, that doing so does not cost her her own good, acts from a moral motive; the reassurance is not her motive but a reason for her not to be troubled. Convergence is a fact about the world in which the moral agent lives, not a substitute for her morality. Bradley's worry is answered by keeping the two readings apart, which is what \ref{p:two} does.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTE/MTE_04.lean} formalizes Definitions~\ref{d:kinds} and~\ref{d:ought}, \ref{p:two}, Assumption~\ref{a:conv} (its first clause), Theorem~\ref{t:main}, Lemma~\ref{l:dom}, Corollary~\ref{c:atc} and Propositions~\ref{p:div} and~\ref{p:bound}. Situations, acts, options and the strengths of moral and prudential reasons are primitives; the two readings of \ref{p:two} are the two constructors of an inductive type, so that the claim that there is no third reading is built into the type; an answer on a reading is the statement that the reasons of that reading's kind favor the act over each alternative. The main theorem is:
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+theorem two_case (s : Sit) (a : Act) (hc : Convergent s)
+    (hm : MorallyOught s a) : ∀ r, Answered r s a
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+'Philosophy.MTE_04.two_case' depends on axioms:
+ [Philosophy.MTE_04.Act, Philosophy.MTE_04.Convergent,
+  Philosophy.MTE_04.Sit, Philosophy.MTE_04.convergence,
+  Philosophy.MTE_04.moral, Philosophy.MTE_04.opts,
+  Philosophy.MTE_04.prudential]
+\end{lstlisting}
+
+\texttt{Sit}, \texttt{Act}, \texttt{opts}, \texttt{moral} and \texttt{prudential} are the primitives of Definitions~\ref{d:kinds} and~\ref{d:ought}; \texttt{Convergent} is the class of convergent situations, and \texttt{convergence} is the first clause of Assumption~\ref{a:conv}. No axiom of classical logic is used. Corollary~\ref{c:atc} (\texttt{all\_things\_considered}) depends on the same axioms, and Proposition~\ref{p:bound} (\texttt{negative\_answers\_bounded}) on these together with \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}, which enter through the counting of situations. Lemma~\ref{l:dom} uses none of the module's primitives. The second clause of Assumption~\ref{a:conv}, that most situations are convergent, is not formalized; it is the empirical claim of Section~\ref{s:conv}.
+
+\section{Conclusion}
+
+\enquote{Why should I be moral?} has an answer because it has two readings. On the moral reading, it asks for the moral reasons for the act, and morality supplies them; to cite them is to explain the requirement, not to beg the question. On the prudential reading, it asks what the act does for the agent, and the answer is that, in most of the situations of a normal life, the act that morality requires is also the one her own good recommends, so that every weighting of the two kinds of reasons agrees. Where they diverge, the prudential answer is negative, the moral answer stands, and whether acting morally is rational depends on whether the agent's concerns reach beyond herself.
+
+\begin{thebibliography}{99}\small
+\bibitem[Bradley(1876)]{Bradley1876} Bradley, F.~H. (1876). \emph{Ethical Studies}. Henry S. King. Essay II, \enquote{Why should I be moral?}
+\bibitem[Copp(1997)]{Copp1997} Copp, D. (1997). The ring of Gyges: Overridingness and the unity of reason. \emph{Social Philosophy and Policy}, 14(1), 86--106.
+\bibitem[Foot(1972)]{Foot1972} Foot, P. (1972). Morality as a system of hypothetical imperatives. \emph{The Philosophical Review}, 81(3), 305--316.
+\bibitem[Frank(1988)]{Frank1988} Frank, R.~H. (1988). \emph{Passions Within Reason: The Strategic Role of the Emotions}. W.~W. Norton.
+\bibitem[Gauthier(1986)]{Gauthier1986} Gauthier, D. (1986). \emph{Morals by Agreement}. Oxford University Press.
+\bibitem[Hobbes(1651)]{Hobbes1651} Hobbes, T. (1651). \emph{Leviathan}.
+\bibitem[Hume(1751)]{HumeEPM} Hume, D. (1751). \emph{An Enquiry Concerning the Principles of Morals}.
+\bibitem[Kavka(1984)]{Kavka1984} Kavka, G.~S. (1984). The reconciliation project. In D.~Copp and D.~Zimmerman (Eds.), \emph{Morality, Reason and Truth}. Rowman \& Allanheld.
+\bibitem[Plato(Republic)]{Plato} Plato. \emph{Republic}. Cited by book and Stephanus page.
+\bibitem[Prichard(1912)]{Prichard1912} Prichard, H.~A. (1912). Does moral philosophy rest on a mistake? \emph{Mind}, 21(81), 21--37.
+\bibitem[Sidgwick(1907)]{Sidgwick1907} Sidgwick, H. (1907). \emph{The Methods of Ethics} (7th ed.). Macmillan.
+\bibitem[Toulmin(1950)]{Toulmin1950} Toulmin, S. (1950). \emph{An Examination of the Place of Reason in Ethics}. Cambridge University Press.
+\bibitem[Wolf(1982)]{Wolf1982} Wolf, S. (1982). Moral saints. \emph{The Journal of Philosophy}, 79(8), 419--439.
+\end{thebibliography}
+
+\end{document}

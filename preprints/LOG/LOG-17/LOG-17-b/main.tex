@@ -1,0 +1,88 @@
+\documentclass{situationist-preprint}
+
+\title{The Size of the Confirmation}
+\msid{LOG-17-b}
+\msfamily{LOG-17}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{raven paradox; Bayesian confirmation; likelihood ratio; white shoe; reference class; negligible confirmation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-17-a shows that a white shoe, drawn from the non-black things, confirms that all ravens are black, with likelihood ratio $1 + k/a$ against the alternative that $k$ ravens are not black, where $a$ is the number of non-black non-ravens. We estimate the ratio for realistic counts. Taking the non-black draw from birds alone, with conservative figures, the shoe raises the odds of the hypothesis by a factor that differs from one by about one part in ten billion for an alternative positing a single non-black raven, and by at most one part in a hundred for the most extreme alternative. About a thousand shoes are needed to match one black raven, and millions to double the odds. The confirmation is real and too small to register.
+\end{abstract}
+
+\section{The quantities}
+
+The paradox is \citeauthor{Hempel1945}'s \citeyearpar{Hempel1945}, and LOG-17-a treats it in the Bayesian manner surveyed by \citet{FitelsonHawthorne2010}. By Proposition~3.2 of LOG-17-a, under the sampling model of its Assumption~2.3, a non-black draw that yields a non-raven has likelihood ratio
+\[
+L_{\mathrm{shoe}} = \frac{k + a}{a} = 1 + \frac{k}{a}
+\]
+in favor of $H$, \enquote{all ravens are black}, against $H_k$, \enquote{exactly $k$ ravens are not black}, and a raven draw that yields a black raven has likelihood ratio $L_{\mathrm{raven}} = 1 + k/b$, where, under $H_k$, $b$ is the number of black ravens and $a$ the number of non-black non-ravens. Three quantities therefore fix the size of the confirmation: the number of ravens, $k + b$; the number $k$ of non-black ravens posited by the alternative; and the number $a$ of non-black things that are not ravens.
+
+\paragraph{The reference class.} The value of $a$ depends on the class from which the non-black draw is made, and this is the main source of uncertainty in any estimate. The reply to the objection from random objects in LOG-17-a shows that the likelihood ratio does not depend on the size of the class from which the object is drawn, provided the hypotheses agree on it; but it does depend on how many non-black non-ravens the class contains. We take the smallest natural class: birds. A draw from all non-black physical objects, or from all non-black manufactured objects, would increase $a$ by many orders of magnitude and make every figure below smaller still.
+
+\paragraph{Birds.} \citet{Callaghan2021} estimate the global population of birds at about fifty billion individuals. Many abundant species are dark, but the great majority of individual birds are not black, and we take $a \geq 10^{10}$ as a conservative lower bound.
+
+\paragraph{Ravens.} We do not rely on an exact count of ravens. We take $k + b = 10^7$ as a central figure for the number of ravens of all species, and $10^8$ as a deliberately generous upper bound; the latter is larger than any figure we know to have been proposed, and larger than the illustrative figure used in LOG-17-a.
+
+\paragraph{Alternatives.} The realistic alternatives to $H$ posit few non-black ravens: leucistic and albino individuals are occasionally reported, and an alternative positing a population of white ravens comparable to that of black ones is not seriously entertained. We tabulate values of $k$ from $1$ to $10^6$, and treat the extreme case $k = 10^8$ separately.
+
+\section{Estimates}
+
+Table~\ref{tab:lr} gives the likelihood ratios for $a = 10^{10}$ and $k + b = 10^7$. The last column gives the number of independent non-black draws, each yielding a non-raven, needed to double the odds of $H$ against $H_k$, which is $\ln 2 / \ln(1 + k/a)$, approximately $0.69\, a/k$.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{rccr}
+\toprule
+$k$ & $L_{\mathrm{shoe}} - 1$ & $L_{\mathrm{raven}} - 1$ & shoes to double the odds \\
+\midrule
+$1$ & $1.0 \times 10^{-10}$ & $1.0 \times 10^{-7}$ & $6.9 \times 10^{9}$ \\
+$10^{3}$ & $1.0 \times 10^{-7}$ & $1.0 \times 10^{-4}$ & $6.9 \times 10^{6}$ \\
+$10^{5}$ & $1.0 \times 10^{-5}$ & $1.0 \times 10^{-2}$ & $6.9 \times 10^{4}$ \\
+$10^{6}$ & $1.0 \times 10^{-4}$ & $1.1 \times 10^{-1}$ & $6.9 \times 10^{3}$ \\
+\bottomrule
+\end{tabular}
+\caption{Likelihood ratios for a white shoe and a black raven against $H_k$, with $a = 10^{10}$ non-black non-raven birds and $10^7$ ravens.}\label{tab:lr}
+\end{table}
+
+Three features of the table matter.
+
+First, the shoe's confirmation is minute for every realistic alternative. Against an alternative positing a thousand white ravens, a single shoe multiplies the odds of $H$ by $1.0000001$. With prior probability $\frac12$ for $H$ against $H_k$, the posterior is $\frac12 + 2.5 \times 10^{-8}$: the shoe moves the probability in the eighth decimal place.
+
+Second, a black raven confirms $H$ about a thousand times more than a white shoe does, for every $k$ in the table. For small $k$, the ratio of the logarithms of the two likelihood ratios is approximately $a/b$, here $10^{10}/10^7 = 10^3$. This is Theorem~3.4 of LOG-17-a made quantitative: the raven confirms more because $a > b$, and by as much as non-black non-ravens outnumber black ravens.
+
+Third, even the extreme alternative leaves the confirmation small. If $k = 10^8$, the generous bound on all ravens with every one of them non-black, then $k/a \leq 10^{-2}$, and by Corollary~3.5 of LOG-17-a, with $M = 100$, the shoe's likelihood ratio is at most $1.01$. By Remark~3.6 of LOG-17-a, since every alternative $H_k$ satisfies $a \geq 100\,k$, the same bound holds against the disjunction of all the alternatives, $\neg H$.
+
+\section{Objections and replies}
+
+\begin{objection}[The class is arbitrary]
+Restricting the draw to birds is arbitrary. One could restrict it to non-black corvids, among which white ravens would be a large fraction, and the shoe, now a white crow, would confirm substantially.
+\end{objection}
+
+\begin{reply}
+The likelihood ratio does depend on the class, and that is the point of Assumption~2.3 of LOG-17-a: what an observation confirms depends on how it was obtained. A draw from the non-black corvids is a different experiment, and it would be more informative, since it samples from a class in which a non-black raven would be relatively frequent. But the paradox concerns the white shoe, and a shoe is not drawn from the corvids. For the experiments that could yield a shoe, the class is at least as large as the non-black birds, and the estimate is an upper bound.
+\end{reply}
+
+\begin{objection}[Ravens are not all black]
+Since leucistic ravens exist, the hypothesis that all ravens are black is false, and estimates of how much it is confirmed are idle.
+\end{objection}
+
+\begin{reply}
+The likelihood ratio measures how much an observation favors one hypothesis over another, and it is well defined whether or not the favored hypothesis is true. The paradox asks whether the shoe is evidence for the generalization, not whether the generalization is true. The estimates apply equally to the comparison of any two hypotheses that differ in the number of non-black ravens, such as $H_{10}$ against $H_{1000}$, where the same formula gives the same order of magnitude.
+\end{reply}
+
+\section{Conclusion}
+
+For realistic counts, the likelihood ratio of a white shoe differs from one by between about $10^{-10}$ and $10^{-4}$, depending on how many non-black ravens the alternative posits, and never by more than $10^{-2}$. A black raven is worth about a thousand white shoes, and millions of shoes are needed to double the odds of the hypothesis against a realistic alternative. This bears out the conclusion of LOG-17-a: the white shoe confirms that all ravens are black, and the confirmation is negligible.
+
+\begin{thebibliography}{99}\small
+\bibitem[Callaghan et al.(2021)]{Callaghan2021} Callaghan, C.~T., Nakagawa, S. and Cornwell, W.~K. (2021). Global abundance estimates for 9,700 bird species. \emph{Proceedings of the National Academy of Sciences}, 118(21), e2023170118.
+\bibitem[Fitelson and Hawthorne(2010)]{FitelsonHawthorne2010} Fitelson, B. and Hawthorne, J. (2010). How Bayesian confirmation theory handles the paradox of the ravens. In E. Eells and J. H. Fetzer (eds.), \emph{The Place of Probability in Science}, 247--275. Springer.
+\bibitem[Hempel(1945)]{Hempel1945} Hempel, C.~G. (1945). Studies in the logic of confirmation. \emph{Mind}, 54(213), 1--26, and 54(214), 97--121.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,75 @@
+\documentclass{situationist-preprint}
+
+\title{Rule-Circularity Is Benign}
+\msid{EPI-03-b}
+\msfamily{EPI-03}
+\msdiscipline{Epistemology}
+\mstype{Companion manuscript}
+\mskeywords{induction; rule-circularity; epistemic circularity; reliabilism; entitlement; deduction}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+EPI-03-a argues that induction is justified inductively and that the circularity involved is benign because it is rule-circular rather than premise-circular. We give three further arguments for the second claim. First, a criterion: an argument is viciously circular if it can yield its conclusion only for someone antecedently justified in believing it, and rule-circular arguments do not meet this condition. Second, a parity argument: every justification of a basic rule, deductive or inductive, is rule-circular, so treating rule-circularity as vicious leads to scepticism about all inference. Third, a test: the rule-circular argument for induction is not self-certifying, since in a world in which induction fails, it concludes that induction fails.
+\end{abstract}
+
+\section{The criterion}
+
+An argument is \emph{premise-circular} if its conclusion is among its premises, and \emph{rule-circular} if it is drawn according to a rule whose reliability is its conclusion \citep{VanCleve1984}. EPI-03-a proves that, in a uniform world, the rule-circular argument for induction has true conclusions at every step while the parallel argument for counter-induction has false ones (its Corollary~4.5). The remaining question is whether rule-circularity is a vice at all.
+
+\begin{definition}\label{d:vicious}
+An argument is \emph{viciously circular} if it can confer justification on its conclusion only for a subject who is already justified in believing that conclusion.
+\end{definition}
+
+A premise-circular argument is vicious in this sense: a premise confers justification only if the subject is justified in believing it, and here the premise is the conclusion. A rule-circular argument confers justification, by Principle~P1 of EPI-03-a, if its rule is reliable and the subject has no defeater, and by Principle~P2 the subject need not be justified in believing that the rule is reliable. So the rule-circular argument for induction is not vicious.
+
+This conclusion must be stated with the distinction of EPI-06-a. What the reliability of a rule confers is an externalist standing: it makes the beliefs the rule produces fit to be relied on as sources of truth, and so is part of what a belief needs, beyond justification in the internalist sense, to be knowledge (EPI-06-a, Section~4). A competent inductive reasoner is justified in the internalist sense whether or not induction is reliable, as is her duplicate in a world where it fails. The question Hume raised, and the one rule-circular arguments answer, is whether the rule has the standing; and that it has it, if it does, does not depend on the reasoner's antecedent justification for believing that it does.
+
+\section{Parity}
+
+\begin{proposition}\label{p:parity}
+If rule-circularity were vicious, no basic rule of inference, deductive or inductive, could be justified by argument.
+\end{proposition}
+
+\begin{proof}
+An argument for the reliability of a basic rule either uses that rule or does not. If it does, it is rule-circular. If it does not, it uses other rules, and those rules either reduce to the first, in which case the argument is rule-circular after all, or the first rule is not basic. The familiar demonstration that modus ponens preserves truth, reasoning from the truth table of the conditional, uses modus ponens; \citet{Carroll1895} showed that adding the rule as a premise does not remove the dependence.
+\end{proof}
+
+Hence the sceptic who rejects the inductive justification of induction on the ground of its circularity must either reject the justification of deduction on the same ground or find a difference between the cases. The difference usually offered is that deduction is necessarily truth-preserving and induction is not. That is a difference in the strength of the rules, and EPI-03-a acknowledges it (its Proposition~4.1: no rule is reliable in every world). It is not a difference in the structure of their justification, which is what the charge of circularity concerns.
+
+\section{The test}
+
+A remaining worry is that a rule-circular argument is idle: since it uses induction, it could only ever conclude that induction is reliable. This is false.
+
+\begin{proposition}\label{p:test}
+In the alternating world $0, 1, 0, 1, \ldots$, induction is not reliable, its track record is uniformly unsuccessful, and induction applied to its own track record predicts failure at every step and is right at every step.
+\end{proposition}
+
+\begin{proof}
+In the alternating world $w_{n+1} \neq w_n$ for every $n$, so induction, which predicts $w_{n+1} = w_n$, fails at every step, and its track record (Definition~3.3 of EPI-03-a) is the uniform world $0, 0, 0, \ldots$. Induction applied to that record predicts that each next entry is $0$, that is, failure, and every entry is $0$.
+\end{proof}
+
+The rule-circular argument for induction therefore reports the facts about induction's reliability: in a uniform world it concludes success, and in the alternating world it concludes failure, correctly in both. An argument whose outcome depends on the world in this way is a genuine test of the rule, which a premise-circular argument cannot be. \citet{Black1958} defended self-supporting inductive arguments on similar grounds; Proposition~\ref{p:test} shows that the support is not guaranteed in advance.
+
+\section{Objection}
+
+\begin{objection}
+The counter-inductivist can run a rule-circular argument for counter-induction, and by the criterion of Definition~\ref{d:vicious} it is no more vicious than the argument for induction.
+\end{objection}
+
+\begin{reply}
+Neither argument is vicious; they differ in whether their rules are reliable. Whether an argument is vicious is a question about its structure, and whether it confers justification is a further question about its rule. In a uniform world the counter-inductive argument has a false conclusion at every step (Proposition~4.4 of EPI-03-a), and its rule lacks the standing that Principle~P1 requires. Benign circularity is necessary for justification by argument, not sufficient.
+\end{reply}
+
+\section{Conclusion}
+
+Rule-circularity is not a vice: it does not require antecedent justification for the conclusion, it is shared by every justification of a basic rule, and it allows the argument to report failure where failure occurs. The inductive justification of induction, as EPI-03-a defends it, is circular only in this benign way.
+
+\begin{thebibliography}{9}\small
+\bibitem[Black(1958)]{Black1958} Black, M. (1958). Self-supporting inductive arguments. \emph{The Journal of Philosophy}, 55(17), 718--725.
+\bibitem[Carroll(1895)]{Carroll1895} Carroll, L. (1895). What the tortoise said to Achilles. \emph{Mind}, 4(14), 278--280.
+\bibitem[Van Cleve(1984)]{VanCleve1984} Van Cleve, J. (1984). Reliability, justification, and the problem of induction. \emph{Midwest Studies in Philosophy}, 9, 555--567.
+\end{thebibliography}
+
+\end{document}

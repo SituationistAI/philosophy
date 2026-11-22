@@ -1,0 +1,128 @@
+\documentclass{situationist-preprint}
+
+\title{Numbers as Positions in Structures}
+\msid{MTH-14-a}
+\msfamily{MTH-14}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mskeywords{structuralism; ante rem structures; Benacerraf; natural numbers; structural properties; identity of indiscernibles; Hume's principle}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are numbers objects with a nature of their own, or positions in structures? We argue that they are positions, and that they have no properties beyond their structural ones. The argument generalizes Benacerraf's: every assignment of non-structural properties to the numbers can be matched by an equally good assignment that denies them, so nothing in mathematical practice fixes such properties, and numbers, which exist, lack them. On the ante rem structuralism we defend, positions are abstract objects, so the view is consistent with the thesis that numbers are abstract objects, and with neo-logicism: the objects Hume's principle introduces are fixed only up to relabeling, and an object fixed only by its place in a structure is a position. We show that the natural number structure is rigid, so that the identity problem for structuralism does not arise for the natural numbers, and we answer the objection from impure properties such as being the number of planets.
+\end{abstract}
+
+\section{The question}
+
+\citet{Benacerraf1965} imagined two children taught set theory, one of whom learns that the numbers are Zermelo's ordinals, on which $3 = \{2\}$, and the other von Neumann's, on which $3 = \{0, 1, 2\}$. Both can do arithmetic equally well; they disagree on whether $1 \in 3$. Nothing decides between them. Benacerraf concluded that numbers are not sets, and, more radically, that they are not objects at all: arithmetic is the science of the abstract structure that all progressions share.
+
+Three views have since been developed. On \emph{ante rem} structuralism, structures exist independently of their systems, and their positions are objects, though objects whose nature is exhausted by their relations to other positions \citep{Shapiro1997,Resnik1997}. On \emph{eliminative} structuralism, talk of numbers is general talk about all systems of a given kind, actual or possible, and there are no numbers over and above those systems \citep{Hellman1989}. On the \emph{object} view, defended by Frege and by the neo-Fregeans, numbers are objects with determinate identity conditions, given by Hume's principle \citep{Frege1884,HaleWright2001}.
+
+We defend ante rem structuralism for the numbers, in a form compatible with MTH-01, on which numbers are abstract objects whose existence the indispensability argument establishes, and with MTH-04, on which arithmetic reduces to logic plus Hume's principle.
+
+\section{Framework}
+
+\begin{definition}\label{d:system}
+A \emph{system} is a domain with distinguished relations and functions. Two systems are \emph{isomorphic} if some bijection between their domains preserves the distinguished relations and functions in both directions. A \emph{structure} is the form isomorphic systems share.
+\end{definition}
+
+\begin{definition}\label{d:struct}
+A property of the elements of a system is \emph{structural} if it is preserved by every isomorphism between that system and any system isomorphic to it. The \emph{structural} properties of a position in a structure are those it has in virtue of its relations to the other positions.
+\end{definition}
+
+For the natural numbers, the distinguished items are zero and successor; for the cardinal numbers, they include the relation \enquote{is the number of}, which holds between a number and a concept. Being prime, being the successor of $2$, being the number of the concept \enquote{planet} (on the account of Section~\ref{s:impure}) are structural properties. Being a member of $\{\emptyset, \{\emptyset\}\}$ and being identical with Caesar are not.
+
+\begin{principle}[Ante rem existence]\label{p:ante}
+For every coherent structure, there is an abstract system, the structure itself, whose elements are its positions; the positions are objects, and their only properties are structural.
+\end{principle}
+
+Principle~\ref{p:ante} is Shapiro's coherence principle together with the places-are-objects perspective \citep[ch.~3--4]{Shapiro1997}. Its support for the case at hand is MTH-01, which establishes that numbers exist as abstract objects; the structuralist thesis concerns what these objects are.
+
+\begin{principle}[No arbitrary choice]\label{p:arb}
+If the facts that fix the reference of a mathematical vocabulary are satisfied equally by two assignments that differ on whether its objects have a property $Q$, then the objects the vocabulary refers to do not have $Q$.
+\end{principle}
+
+Principle~\ref{p:arb} is the premise Benacerraf's argument needs. It is stronger than the claim that we cannot know whether numbers have $Q$, and it would be false of concrete objects, about which there are facts beyond those our vocabulary fixes. For mathematical objects it is supported by the fact that nothing but mathematical practice, including its applications, could fix their properties, since they are causally inert.
+
+\section{The argument}
+
+\begin{proposition}\label{p:match}
+Let $Q$ be a non-structural property of the elements of a progression. Then there are two progressions, each satisfying every condition that arithmetic and its applications impose on the numbers, such that the element in position $n$ of one has $Q$ and the element in position $n$ of the other does not, for some $n$.
+\end{proposition}
+
+\begin{proof}
+Since $Q$ is not structural, there is an isomorphism $f$ between a progression $S$ and a progression $S'$ such that, for some element $x$ of $S$, $x$ has $Q$ and $f(x)$ does not, or conversely. The conditions arithmetic imposes are preserved by isomorphism, since they are stated in terms of zero and successor. The conditions its applications impose concern which number is the number of which concept, and these are transported by $f$ along with the rest, by letting the number of $F$ in $S'$ be the image under $f$ of the number of $F$ in $S$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+The natural numbers are the positions of the natural number structure, and they have no properties beyond their structural ones.
+\end{theorem}
+
+\begin{proof}
+By MTH-01, numbers exist and are abstract objects. By Proposition~\ref{p:match} and Principle~\ref{p:arb}, they have no non-structural properties. By Principle~\ref{p:ante}, the natural number structure exists and its positions are abstract objects whose only properties are structural. An object whose properties are exactly the structural properties of the position $n$ of the natural number structure is indiscernible from that position; since both are abstract and neither has a property the other lacks, they are identical. Hence the natural number $n$ is the $n$th position of the structure.
+\end{proof}
+
+The last step uses the identity of indiscernibles, which is contested for structures with nontrivial automorphisms. For the natural numbers the step is safe, by the following result.
+
+\begin{proposition}\label{p:rigid}
+The natural number structure is rigid: its only automorphism is the identity. Hence every natural number is discernible from every other by a structural property.
+\end{proposition}
+
+\begin{proof}
+An automorphism $f$ sends zero to the unique element that is not a successor, which is zero. If $f(n) = n$, then $f(n + 1) = f(n) + 1 = n + 1$, since $f$ preserves successor. By induction, $f$ is the identity. For discernibility: the number $n$ is the unique element reached from zero by exactly $n$ applications of successor, a property definable from zero and successor.
+\end{proof}
+
+\section{Positions, abstract objects and Hume's principle}
+
+On the ante rem view, Theorem~\ref{t:main} is not a rival to the view that numbers are objects. Positions can be quantified over and referred to, satisfy the laws of identity, and are abstract. The thesis that numbers are positions concerns the nature of certain abstract objects, and is consistent with MTH-01.
+
+It is also consistent with MTH-04, on which arithmetic reduces to logic plus Hume's principle (HP), that the number of $F$s is the number of $G$s if and only if the $F$s and $G$s are equinumerous. MTH-04-a shows that any two operators satisfying HP on a domain differ by a relabeling that is one-one on the numbers, and that the numbers HP introduces, ordered by the predecessor relation, form a progression. HP fixes nothing about its abstracts beyond their pattern of identities and their relation to the concepts they number. An object about which nothing is fixed beyond its place in a structure is what Principle~\ref{p:ante} calls a position. The abstracts of HP are positions in the structure of cardinal number, which includes, besides the order of the numbers, the relation \enquote{is the number of}; the finite cardinals are, by Proposition~\ref{p:rigid}, the positions of the natural number structure. The neo-Fregean describes these objects by the principle that introduces them, the structuralist by the structure they occupy.
+
+The two views also meet on the Caesar problem, which HP alone leaves open. MTH-04-a answers the problem by appeal to the thesis that numbers have no properties beyond their structural ones, which is our Theorem~\ref{t:main}: Caesar has non-structural properties, such as having been born in Rome, and so is not a number. The companion MTH-14-b discusses the problem in detail.
+
+\section{Impure properties}\label{s:impure}
+
+\begin{objection}
+The number $8$ has the property of being the number of planets, and the property of being Jones's favorite number. Neither is structural: a different progression could have had its eighth element unrelated to the planets or to Jones. So numbers have non-structural properties.
+\end{objection}
+
+\begin{reply}
+The two cases differ. Being the number of planets is structural in the sense of Definition~\ref{d:struct} once the structure of cardinal number is taken to include the relation \enquote{is the number of}. The relation is preserved by every isomorphism of that structure, as Proposition~\ref{p:match} requires, and the property is fixed by the position of $8$ together with the fact, about the planets, that they are equinumerous with the numbers from $0$ to $7$. Being Jones's favorite number is not a property of $8$ in the sense at issue. It is a property of Jones, a relation in which he stands to a number, and it holds in virtue of facts about Jones and the position. Such extrinsic predicates are true of positions in virtue of facts about other things, and add nothing to the nature of the number.
+\end{reply}
+
+\begin{objection}[The identity problem]
+Ante rem structuralism individuates positions by their structural properties. The complex numbers $i$ and $-i$ have the same structural properties, since conjugation is an automorphism. So structuralism must identify them, which is absurd \citep{Burgess1999,Keranen2001}.
+\end{objection}
+
+\begin{reply}
+For the natural numbers the problem does not arise, by Proposition~\ref{p:rigid}. Elsewhere, Theorem~\ref{t:main} requires only that the properties of positions be structural, not that monadic properties individuate them; distinctness is a structural relation that $i$ and $-i$ bear to each other. Identity of positions may be taken as primitive, as \citet{Ladyman2005} and \citet{LeitgebLadyman2008} propose, without abandoning the thesis that positions have no non-structural properties.
+\end{reply}
+
+\begin{objection}[Eliminativism]
+There is no need for positions as objects. Arithmetic can be read as general statements about all possible progressions, and this reading avoids commitment to abstract objects \citep{Hellman1989}.
+\end{objection}
+
+\begin{reply}
+The modal reading replaces abstract objects by a primitive modality and must assume that a progression is possible. Given MTH-01, the existence of numbers is established and the motivation for elimination lapses; the ordinary semantics of arithmetic, on which its singular terms refer, then favors the ante rem view.
+\end{reply}
+
+\section{Conclusion}
+
+Numbers are positions in structures. Any non-structural property of numbers could be denied by an equally adequate assignment, and since nothing beyond mathematical practice fixes what numbers are, they have no such property. Positions are abstract objects, so the thesis is compatible with the existence of numbers as abstract objects, and the objects Hume's principle introduces, fixed only up to relabeling, are the positions of the structure of cardinal number.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1965)]{Benacerraf1965} Benacerraf, P. (1965). What numbers could not be. \emph{Philosophical Review}, 74(1), 47--73.
+\bibitem[Burgess(1999)]{Burgess1999} Burgess, J.~P. (1999). Review of Stewart Shapiro, \emph{Philosophy of Mathematics: Structure and Ontology}. \emph{Notre Dame Journal of Formal Logic}, 40(2), 283--291.
+\bibitem[Frege(1884)]{Frege1884} Frege, G. (1884). \emph{Die Grundlagen der Arithmetik}. Koebner.
+\bibitem[Hale and Wright(2001)]{HaleWright2001} Hale, B. and Wright, C. (2001). \emph{The Reason's Proper Study: Essays towards a Neo-Fregean Philosophy of Mathematics}. Oxford University Press.
+\bibitem[Hellman(1989)]{Hellman1989} Hellman, G. (1989). \emph{Mathematics without Numbers: Towards a Modal-Structural Interpretation}. Oxford University Press.
+\bibitem[Ker\"anen(2001)]{Keranen2001} Ker\"anen, J. (2001). The identity problem for realist structuralism. \emph{Philosophia Mathematica}, 9(3), 308--330.
+\bibitem[Ladyman(2005)]{Ladyman2005} Ladyman, J. (2005). Mathematical structuralism and the identity of indiscernibles. \emph{Analysis}, 65(3), 218--221.
+\bibitem[Leitgeb and Ladyman(2008)]{LeitgebLadyman2008} Leitgeb, H. and Ladyman, J. (2008). Criteria of identity and structuralist ontology. \emph{Philosophia Mathematica}, 16(3), 388--396.
+\bibitem[Resnik(1997)]{Resnik1997} Resnik, M.~D. (1997). \emph{Mathematics as a Science of Patterns}. Oxford University Press.
+\bibitem[Shapiro(1997)]{Shapiro1997} Shapiro, S. (1997). \emph{Philosophy of Mathematics: Structure and Ontology}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

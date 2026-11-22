@@ -1,0 +1,134 @@
+\documentclass{situationist-preprint}
+
+\title{Underdetermination and Rival Theories}
+\msid{SCI-04-a}
+\msfamily{SCI-04}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mskeywords{underdetermination; empirical equivalence; Duhem--Quine thesis; indirect confirmation; independent motivation; theory choice}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is theory underdetermined by evidence? We argue that it is, but only in a restricted form. Every theory with unobservable content has empirically equivalent rivals that are not notational variants, and some can be constructed by algorithm. But a rival with independent motivation receives or loses evidential support through its connections with the rest of science, and so is evidentially distinguishable from the theory it rivals even when the two have the same observational consequences. The rivals that the total evidence leaves undistinguished are those whose only ground is that they reproduce a theory's consequences, such as theories with an undetectable privileged frame or with extra clauses about precisely the cases that cannot be observed. Underdetermination by such rivals is real, but it leaves rational theory choice untouched.
+\end{abstract}
+
+\section{The problem}
+
+The thesis that theory is underdetermined by evidence has two sources. \citet{Duhem1954} observed that hypotheses are tested only in conjunction with auxiliary assumptions, so that a failed prediction refutes only the conjunction. \citet{Quine1975} went further and conjectured that for any theory of the world there are empirically equivalent but logically incompatible rivals, theories with the same observational consequences that cannot be reconciled by a reconstrual of predicates.
+
+The thesis matters for scientific realism. If nothing in the evidence favours a theory over its empirically equivalent rivals, belief in its claims about unobservables seems arbitrary \citep{vanFraassen1980}. \citet{LaudanLeplin1991} replied that empirical equivalence is not fixed, since what a theory predicts depends on the auxiliaries available, and that evidential support is not confined to a theory's consequences, since a hypothesis can be confirmed by evidence that confirms a more general theory entailing it. \citet{Kukla1993} replied in turn that algorithms generate empirically equivalent rivals to any theory, whatever the auxiliaries. \citet{Earman1993} questioned whether the rivals so generated are genuine competitors.
+
+We argue for a specific resolution. Theory is underdetermined by evidence, in the sense that empirically equivalent rivals exist and the total evidence does not discriminate all of them from our theories. But the rivals the total evidence does not discriminate are exactly those that lack independent motivation. Underdetermination is therefore real but harmless: it never leaves the choice between two well-motivated theories to anything other than evidence.
+
+\section{Framework}
+
+\begin{definition}[Empirical equivalence]\label{d:ee}
+Theories $T$ and $T'$ are \emph{empirically equivalent} if, for every set of auxiliary assumptions $A$ that is available and compatible with both, $T \wedge A$ and $T' \wedge A$ have the same observational consequences.
+\end{definition}
+
+The quantification over auxiliaries meets the point of \citet{LaudanLeplin1991} that equivalence relative to one background may fail relative to another.
+
+\begin{definition}[Notational variant]\label{d:variant}
+$T'$ is a \emph{notational variant} of $T$ if there is a translation of the vocabulary of $T'$ into that of $T$ under which $T'$ and $T$ are logically equivalent.
+\end{definition}
+
+Notational variants, such as the Lagrangian and Hamiltonian formulations of classical mechanics, are the same theory differently expressed, and Quine excluded them from his conjecture \citep{Quine1975}.
+
+\begin{definition}[Independent motivation]\label{d:motiv}
+A rival $T'$ to $T$ has \emph{independent motivation} if some claim of $T'$ that $T$ does not share is supported by evidence or theory other than the observational consequences that $T'$ shares with $T$: for instance, because it is entailed by a broader theory with independent confirmation, because it unifies the domain of $T$ with another domain, or because it solves a problem that $T$ leaves unsolved.
+\end{definition}
+
+\begin{principle}[Indirect support]\label{p:indirect}
+Evidence that confirms a theory $B$ confirms the claims that $B$ entails, including claims that have no observational consequences of their own.
+\end{principle}
+
+Principle~\ref{p:indirect} is the principle that \citet{LaudanLeplin1991} used to separate evidential support from empirical consequence. It holds on the Bayesian account of SCI-12: if $B$ entails $h$, evidence that raises the probability of $B$ raises the lower bound on that of $h$.
+
+\section{The argument}
+
+\begin{proposition}[Existence of rivals]\label{p:exist}
+For every theory $T$ with unobservable content there is an empirically equivalent rival that is not a notational variant of $T$.
+\end{proposition}
+
+\begin{proof}
+Let $T^*$ be the theory that asserts the observational consequences of $T$ together with the denial of some claim of $T$ about unobservables that has no observational consequences in conjunction with any available auxiliary. Since $T$ has unobservable content, some such claim exists, or else every claim of $T$ has observational consequences and the observational consequences of $T$ exhaust its content. $T^*$ has the same observational consequences as $T$ under every available auxiliary, and it is logically incompatible with $T$ under any translation that preserves the observational vocabulary, so it is not a notational variant.
+\end{proof}
+
+Proposition~\ref{p:exist} is the algorithmic construction of \citet{Kukla1993} in a simple form. An algorithmic variant of a motivated rival inherits only what it shares with its source; the claims by which it differs are supported by nothing, so motivation attaches to claims, not to theories wholesale.
+
+\begin{lemma}[Discrimination]\label{l:discrim}
+If $T'$ is an empirically equivalent rival to $T$ that is not a notational variant of $T$ and has independent motivation, then the total evidence bears differently on $T$ and $T'$.
+\end{lemma}
+
+\begin{proof}
+Since $T'$ is not a notational variant of $T$, there is a claim $h$ of $T'$ that $T$ does not share and that cannot be translated into a claim of $T$. By Definition~\ref{d:motiv}, $h$ is supported by evidence or theory other than the shared observational consequences: it is entailed by a broader theory $B$ that is independently confirmed, or it unifies the domain of $T$ with another, or it solves a problem that $T$ leaves open. In the first case, by Principle~\ref{p:indirect}, the evidence confirming $B$ confirms $h$, and so bears on $T'$ in a way it does not bear on $T$. In the second, the unifying claim has consequences in the other domain that bear on $T'$ and not in the same way on $T$. In the third case, the problem $h$ solves is an empirical anomaly or a conflict with another accepted theory, and the evidence constituting the anomaly, or supporting that theory, bears differently on the two.
+\end{proof}
+
+The bearing need not favour $T$. When the evidence favours an independently motivated rival, science changes its theory, which is the ordinary working of evidence, not underdetermination.
+
+\begin{theorem}\label{t:main}
+Theory is underdetermined by evidence: every theory with unobservable content has empirically equivalent rivals that are not notational variants. But every empirically equivalent rival that is not a notational variant and that the total evidence does not distinguish from $T$ lacks independent motivation.
+\end{theorem}
+
+\begin{proof}
+The first conjunct is Proposition~\ref{p:exist}. The second is the contrapositive of Lemma~\ref{l:discrim}.
+\end{proof}
+
+\begin{corollary}\label{c:choice}
+Where the total evidence does not distinguish two theories that are not notational variants, at most one of them has independent motivation, and the choice between them is not left open by the evidence: everything that supports the unmotivated one supports the other equally.
+\end{corollary}
+
+\begin{proof}
+If both had independent motivation, each would be a rival to the other satisfying the conditions of Lemma~\ref{l:discrim}, and the total evidence would bear differently on them.
+\end{proof}
+
+\section{Cases}
+
+\paragraph{The neo-Lorentzian frame.} Lorentz's electron theory, with rods contracting and clocks slowing by the relativistic factors, is empirically equivalent to special relativity, and it adds a privileged frame of absolute rest that no measurement can detect. The privileged frame is entailed by no confirmed theory, unifies nothing and solves no empirical problem; its motivation today is the global present required by the A-theory of time, which TSM-16-a rejects on the ground that the present is local rather than global. It is the paradigm of the underdetermination that Theorem~\ref{t:main} allows.
+
+\paragraph{Time without change.} In a world of three regions that freeze locally at regular intervals, and occasionally all at once, the hypothesis that time passes during the joint freeze has rivals that differ only on what happens during it, which cannot be observed. Each is obtained by adding to the uniform laws a clause about precisely the unobservable case, as in TSM-17-a; the clause has no motivation beyond the generation of a rival, and Theorem~\ref{t:main} classifies the rivals as unmotivated.
+
+\paragraph{Bohmian mechanics.} Bohmian mechanics is empirically equivalent to Everettian quantum mechanics in quantum equilibrium and adds a particle configuration, motivated as providing definite outcomes. SCI-09-c argues that the configuration adds nothing that affects predictions in equilibrium and that the shared wave function already accounts for outcomes. If so, the motivation is not independent, and the case falls under Theorem~\ref{t:main}.
+
+\section{Objections}
+
+\begin{objection}[Indirect support is not evidence]
+Principle~\ref{p:indirect} confuses theoretical support with evidence. The evidence for $T$ and $T'$ is their observational consequences; support from broader theories reflects background beliefs, not evidence.
+\end{objection}
+
+\begin{reply}
+The broader theory is supported by observation, and what it transmits is evidential support. To restrict evidence for a hypothesis to its own consequences would be to deny that planetary motions, by confirming Newton's theory, bore on the acceleration of falling bodies on the moon before anyone observed it.
+\end{reply}
+
+\begin{objection}[Unmotivated rivals may be true]
+A rival without independent motivation may nonetheless be true. If the neo-Lorentzian theory were true, our preference for special relativity would be a preference for a falsehood that no evidence could correct.
+\end{objection}
+
+\begin{reply}
+The objection concedes Theorem~\ref{t:main}: it describes underdetermination by an unmotivated rival. That our theories could be false in respects no evidence can reveal follows from the ampliative character of all inference about unobservables, but it does not make belief in them arbitrary. On the selective realism of SCI-02, realists are committed to the claims used ineliminably in deriving novel successes, and the claims on which unmotivated rivals differ from our theories, such as an undetectable privileged frame, are used in deriving nothing.
+\end{reply}
+
+\begin{objection}[Duhem]
+Since hypotheses are tested only with auxiliaries, any hypothesis can be saved by revising them, and the evidence never discriminates hypotheses taken singly.
+\end{objection}
+
+\begin{reply}
+Evidence bears on conjunctions, but not equally on every way of distributing blame. Auxiliaries are tested in other contexts, and Principle~\ref{p:indirect} weighs against revising those that are independently confirmed. A revision made only to save a hypothesis produces a rival whose distinctive claims are supported by nothing else, which is an unmotivated rival in the sense of Definition~\ref{d:motiv}.
+\end{reply}
+
+\section{Conclusion}
+
+Theory is underdetermined by evidence: every theory with unobservable content has empirically equivalent rivals that are not notational variants. But an independently motivated rival is evidentially distinguishable through its connections with the rest of science, so the only rivals the total evidence leaves undistinguished are those whose sole ground is that they reproduce a theory's observational consequences. Underdetermination by such rivals is real but does not make theory choice arbitrary.
+
+\begin{thebibliography}{9}\small
+\bibitem[Duhem(1954)]{Duhem1954} Duhem, P. (1954). \emph{The Aim and Structure of Physical Theory}. Translated by P.~P. Wiener. Princeton University Press. Original work published 1906.
+\bibitem[Earman(1993)]{Earman1993} Earman, J. (1993). Underdetermination, realism, and reason. \emph{Midwest Studies in Philosophy}, 18, 19--38.
+\bibitem[Kukla(1993)]{Kukla1993} Kukla, A. (1993). Laudan, Leplin, empirical equivalence and underdetermination. \emph{Analysis}, 53(1), 1--7.
+\bibitem[Laudan and Leplin(1991)]{LaudanLeplin1991} Laudan, L. and Leplin, J. (1991). Empirical equivalence and underdetermination. \emph{The Journal of Philosophy}, 88(9), 449--472.
+\bibitem[Quine(1975)]{Quine1975} Quine, W.~V. (1975). On empirically equivalent systems of the world. \emph{Erkenntnis}, 9(3), 313--328.
+\bibitem[van Fraassen(1980)]{vanFraassen1980} van Fraassen, B.~C. (1980). \emph{The Scientific Image}. Clarendon Press.
+\end{thebibliography}
+
+\end{document}

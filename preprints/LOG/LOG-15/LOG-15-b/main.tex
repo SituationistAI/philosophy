@@ -1,0 +1,90 @@
+\documentclass{situationist-preprint}
+
+\title{Higher-Order Vagueness}
+\msid{LOG-15-b}
+\msfamily{LOG-15}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{vagueness; higher-order vagueness; epistemicism; margin for error; KK principle; definiteness; bivalence}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-15-a argues that three-valued semantics cannot describe higher-order vagueness, because its definiteness operator is bivalent and idempotent: the hierarchy of definiteness collapses at the first step. We show how higher-order vagueness is described on the bivalent view. In the margin-for-error model of MET-18-a, \enquote{definitely} is knowledge, and $k$-fold definiteness holds of a case just when it lies at least $k$ margins inside the boundary. The hierarchy does not collapse, because the KK principle fails. Every order has a sharp boundary, and no boundary of any order can be known; in particular, the edges of the borderline region are unknowable. Higher-order vagueness is ignorance that iterates.
+\end{abstract}
+
+\section{The model}
+
+We use the concrete model of Proposition~3.6 of MET-18-a. A sorites series for $F$ has positions $0, 1, 2, \ldots$; the interpretations are the natural numbers $c$, and $F$ applies to position $i$ under $c$ iff $i < c$; two interpretations are indiscriminable iff they differ by at most a fixed margin $m \geq 1$. By Definition~2.5 of MET-18-a, a claim is known at $c$ iff it holds under every interpretation indiscriminable from $c$. Following the epistemic view \citep{Williamson1994}, we read \enquote{definitely} as \enquote{known}: $DA$ holds at $c$ iff $A$ is known at $c$. We write $D^k$ for $k$ iterations of $D$, with $D^0 A = A$.
+
+Proposition~3.6 of MET-18-a shows that $DF(i)$ holds at $c$ iff $i + m < c$, that $D\neg F(i)$ holds at $c$ iff $c + m \leq i$, and that the borderline cases at $c$ are the positions with $c - m \leq i < c + m$. We extend this to all orders.
+
+\section{Iterated definiteness}
+
+\begin{proposition}\label{p:iter}
+For every $k \geq 0$, every position $i$ and every interpretation $c$:
+\begin{enumerate}[label=(\roman*)]
+\item $D^k F(i)$ holds at $c$ iff $i + km < c$;
+\item $D^k \neg F(i)$ holds at $c$ iff $c + km \leq i$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By induction on $k$. For $k = 0$, (i) and (ii) are the definition of the model. Suppose (i) holds for $k$. Then $D^{k+1}F(i)$ holds at $c$ iff $i + km < d$ for every natural number $d$ with $|d - c| \leq m$. If $c \geq m$, the least such $d$ is $c - m$, and the condition is $i + km < c - m$, that is, $i + (k+1)m < c$. If $c < m$, the least such $d$ is $0$, the condition fails for every $i$, and $i + (k+1)m < c$ fails too. Case (ii) is similar, with the greatest indiscriminable interpretation, $c + m$, in place of the least.
+\end{proof}
+
+\begin{corollary}\label{c:nocollapse}
+The hierarchy of definiteness does not collapse: if $c > 2m$, the position $c - m - 1$ is definitely $F$ at $c$ but not definitely definitely $F$. More generally, if $c > (k+1)m$, the extension of $D^{k+1} F$ at $c$ is a proper part of the extension of $D^k F$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{p:iter}, the extension of $D^k F$ at $c$ is the set of positions below $c - km$, and that of $D^{k+1} F$ the set of positions below $c - (k+1)m$, which is a proper part when $c - (k+1)m > 0$.
+\end{proof}
+
+Corollary~\ref{c:nocollapse} is the contrast with Lemma~3.1 of LOG-15-a. There, $v(DDA) = v(DA)$ for every sentence, because the three-valued operator $D$ is truth-functional: whether $DA$ holds is fixed by the value of $A$. Here $D$ is not truth-functional. Whether $F(i)$ is known at $c$ depends not only on whether $F(i)$ holds at $c$ but on whether it holds at the interpretations indiscriminable from $c$, and whether that is known depends on interpretations further away. The non-collapse is the failure of the KK principle, which the margin-for-error structure implies \citep[ch.~5]{Williamson2000}: position $c - m - 1$ is known to be $F$ without its being known that it is known.
+
+\begin{proposition}\label{p:edges}
+For every $k \geq 1$, no position is known at $c$ to be the last case of $D^k F$, and no position is known at $c$ to be the first or the last borderline case.
+\end{proposition}
+
+\begin{proof}
+Suppose it is known at $c$ that $i$ is the last case of $D^k F$. Then this holds at $c$, so $D^k F$ has cases at $c$, and it holds at $c + 1$, which is indiscriminable from $c$ since $m \geq 1$. By Proposition~\ref{p:iter}, the last case of $D^k F$ at $c$ is $c - km - 1$ and at $c + 1$ is $c - km$. These differ, a contradiction. Likewise, the first borderline case is $c - m$ at $c$ and $c - m + 1$ at $c + 1$, and the last is $c + m - 1$ at $c$ and $c + m$ at $c + 1$.
+\end{proof}
+
+Proposition~\ref{p:edges} is the claim made in MET-18-a that the edges of the borderline region are themselves unknowable, extended to every order. At each order there are sharp boundaries, a last case of $D^k F$ and a first case of $D^k \neg F$, fixed by the interpretation. None is knowable, and for the same reason as the first-order boundary: its location shifts with the interpretation, and the interpretation is known only to within a margin.
+
+\section{Higher-order vagueness on the bivalent view}
+
+Principle~P1 of LOG-15-a states the datum: there are borderline cases of \enquote{definitely bald}, and there is no sharp point at which clear cases give way to borderline cases. Corollary~3.3 of LOG-15-a shows that a three-valued theorist can respect it only by holding the boundaries between values sharp but unknowable. The bivalent view respects it in the same way at every order, and the model shows that it does so without strain. There are borderline cases of $DF$ in the epistemic sense, cases of which it is not known whether they are definitely $F$: by Proposition~\ref{p:iter}, these are the positions $i$ with $c - 2m \leq i < c$, neither $D^2F$ nor $D\neg DF$. The \enquote{sharp point} of P1 exists at every order, but no speaker can know where it is, by Proposition~\ref{p:edges}. What P1 records, read on the bivalent view, is that no such point is knowable, and this is what speakers observe when they find no point at which clear cases end.
+
+The epistemic view thus gives a uniform account of vagueness at every order. First-order vagueness is ignorance of where $F$ ends; second-order vagueness is ignorance of where knowledge of $F$ ends; and so on. Each order is generated by the same margin-for-error principle, and none requires a further semantic value. This is what LOG-15-a means in concluding that the epistemic account, conceded by the three-valued theorist at the second level, is acceptable at the first.
+
+\begin{objection}[Regularity]
+In the model the boundaries of successive orders are equally spaced, $m$ positions apart. Real higher-order vagueness shows no such regularity, and the model is an artefact of a fixed margin.
+\end{objection}
+
+\begin{reply}
+The spacing is a feature of the model, chosen for simplicity, and we do not claim it for real predicates, whose indiscriminability relations are not uniform. What the model shows is that two features are jointly consistent with bivalence and with the margin-for-error structure: a non-collapsing hierarchy of definiteness, and the unknowability of every boundary in it. These are the features the three-valued semantics cannot provide, and they do not depend on the spacing.
+\end{reply}
+
+\begin{objection}[No hierarchy]
+\citet{Sainsbury1991} argues that higher-order vagueness is not a hierarchy of boundaries at all, but the absence of boundaries. A theory that posits a sharp boundary at every order misdescribes it.
+\end{objection}
+
+\begin{reply}
+LOG-15-a needs only the weaker form of the datum stated in its Principle~P1, and the bivalent view agrees with Sainsbury about everything speakers can know: no boundary of any order is available to them. Where it disagrees is about the facts, holding with MET-18 and LNG-12 that the boundaries exist. That the boundaries are sharp is a consequence of bivalence, and their unknowability, by Proposition~\ref{p:edges}, is what makes the predicate seem boundaryless to those who use it \citep{Williamson1999}.
+\end{reply}
+
+\section{Conclusion}
+
+On the bivalent view, \enquote{definitely} is a knowledge operator, and in the margin-for-error model of MET-18-a its iterations form a hierarchy that does not collapse, because knowing does not imply knowing that one knows. Every order of the hierarchy has a sharp boundary, and none can be known; the edges of the borderline region are themselves unknowable. Higher-order vagueness is thus described without a third value, as iterated ignorance of sharp boundaries, which is what LOG-15-a, MET-18 and LNG-12 require.
+
+\begin{thebibliography}{99}\small
+\bibitem[Sainsbury(1991)]{Sainsbury1991} Sainsbury, R.~M. (1991). Is there higher-order vagueness? \emph{The Philosophical Quarterly}, 41(163), 167--182.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\bibitem[Williamson(1999)]{Williamson1999} Williamson, T. (1999). On the structure of higher-order vagueness. \emph{Mind}, 108(429), 127--143.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

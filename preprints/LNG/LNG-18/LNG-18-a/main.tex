@@ -1,0 +1,118 @@
+\documentclass{situationist-preprint}
+
+\title{Self-Reference Without Paradox}
+\msid{LNG-18-a}
+\msfamily{LNG-18}
+\msdiscipline{Philosophy of Language}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LNG/LNG\_18.lean}
+\mskeywords{self-reference; liar paradox; truth-teller; diagonal lemma; semantic predicates; fixed points}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can a sentence speak about itself without paradox? We argue that it can, and that self-reference is unproblematic in itself. \enquote{This sentence is in English} is true, \enquote{This sentence has five words} is false, and arithmetic is full of sentences that say things about their own codes. Paradox arises only when self-reference is combined with a semantic predicate, governed by a disquotational principle, in a classical logic. We represent a self-referential sentence by the way its truth value depends on the value attributed to it, and prove that a sentence that applies no semantic predicate to itself always has a consistent classical value, that the truth-teller has two, that the liar has none classically and one in strong Kleene logic, and that among all classical contents a sentence can have about its own truth value, the negation of its own truth is the only paradoxical one. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}
+
+The liar sentence, \enquote{this sentence is not true}, refers to itself, and the paradox has often been blamed on self-reference. The medieval \emph{restrictio} solution banned it, and the doctrine that a sentence cannot say anything about itself recurs in Russell's vicious circle principle. But self-reference cannot be banned. By the diagonal lemma, any language that can describe its own syntax contains, for every property it can express, a sentence that ascribes that property to itself \citep{Godel1931}. And much self-reference is harmless. LOG-01-a notes this and locates the liar's trouble elsewhere: in the transparency of truth together with classical logic.
+
+We argue that self-reference is unproblematic in itself, and that paradox requires self-reference together with a semantic predicate. The argument is a fixed-point analysis \citep{Kripke1975}. It also shows that a third ingredient, classical logic, is needed.
+
+\section{Framework}
+
+\begin{definition}\label{d:content}
+The \emph{content} of a self-referential sentence is the function that gives its truth value from the truth value that the truth predicate assigns to it. A sentence that applies no semantic predicate to itself has a constant content: whether \enquote{this sentence is in English} is true does not depend on the value attributed to it.
+\end{definition}
+
+\begin{definition}\label{d:accept}
+A value is \emph{acceptable} for a sentence if the sentence's content, applied to that value, returns that value: the value attributed to the sentence by the truth predicate is the value of what it says. A sentence is \emph{paradoxical} if no value is acceptable.
+\end{definition}
+
+Definition~\ref{d:accept} encodes the transparency of truth: the sentence and the claim that it is true have the same value. A semantic predicate, in our sense, is one governed by such a principle, as truth is by the equivalence schema and satisfaction by its analogue for predicates.
+
+\section{Results}
+
+\begin{proposition}\label{p:harmless}
+A self-referential sentence that applies no semantic predicate to itself has an acceptable classical value.
+\end{proposition}
+
+\begin{proof}
+Its content is constant, and the constant value is acceptable.
+\end{proof}
+
+\begin{proposition}\label{p:teller}
+The truth-teller, \enquote{this sentence is true}, has two acceptable classical values.
+\end{proposition}
+
+\begin{proposition}\label{p:liar}
+With classical values, the liar is paradoxical.
+\end{proposition}
+
+\begin{proposition}\label{p:kleene}
+With the three values of strong Kleene logic, the liar has exactly one acceptable value, the middle one.
+\end{proposition}
+
+\begin{theorem}\label{t:unique}
+A classical self-referential sentence is paradoxical if and only if its content is the negation of its own truth.
+\end{theorem}
+
+\begin{proof}
+There are four functions on two values. The identity (the truth-teller) and the two constants (non-semantic self-reference) each have an acceptable value. Negation has none.
+\end{proof}
+
+The four results jointly establish the thesis. Self-reference alone never produces paradox (Proposition~\ref{p:harmless}). Self-reference with a semantic predicate need not (Proposition~\ref{p:teller}): the truth-teller is defective, since nothing settles which of its two values it has, but it is not contradictory. Self-reference with a semantic predicate in a logic with a third value need not either (Proposition~\ref{p:kleene}), which is the basis of the gap theories of \citet{Kripke1975} and of LOG-01-a. Paradox arises when all three ingredients are present and the sentence denies its own truth (Theorem~\ref{t:unique}).
+
+\section{Objections and replies}
+
+\begin{objection}[Yablo]
+\citet{Yablo1993} gives a paradox without self-reference: an infinite sequence of sentences, each saying that all later ones are untrue.
+\end{objection}
+
+\begin{reply}
+Each sentence of the sequence refers, through a quantifier, to sentences that refer to sentences, and so on, and the sequence can be defined only by a fixed point of a predicate that applies to all of its members; \citet{Priest1997} argues that the construction is therefore circular. The paradox also uses a semantic predicate and classical logic. It extends self-reference to referential circularity among infinitely many sentences, but it confirms that a semantic predicate is needed.
+\end{reply}
+
+\begin{objection}[Curry and Russell]
+Curry's sentence, \enquote{if this sentence is true, then the moon is cheese}, contains no negation, and Russell's paradox contains no semantic predicate.
+\end{objection}
+
+\begin{reply}
+Classically, the content of Curry's sentence is the negation of its own truth, since a conditional with a false consequent has the value of the negated antecedent; Theorem~\ref{t:unique} classifies it with the liar. Without classical logic, LOG-04 argues that contraction fails and Curry's sentence proves nothing. Russell's paradox uses naive membership in the extension of a predicate, governed by the principle that $x$ belongs to the extension of $F$ if and only if $F$ is true of $x$. That is a semantic principle, of the same form as the schema for satisfaction, and the paradox is the set-theoretic version of Grelling's.
+\end{reply}
+
+\begin{objection}[Gödel]
+The Gödel sentence of arithmetic says of itself that it is unprovable, without any semantic predicate, and yields a limitative result. Self-reference is not harmless there.
+\end{objection}
+
+\begin{reply}
+The Gödel sentence is not paradoxical: it is true and unprovable. Provability in a formal system is not governed by a disquotational principle, since what is provable need not be true and what is true need not be provable, and Proposition~\ref{p:harmless} applies: the sentence has a consistent value, which is \enquote{true}. The limitative result is what self-reference yields when a predicate is not semantic.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LNG/LNG_18.lean} represents contents as functions from Booleans to Booleans (Definition~\ref{d:content}) and defines acceptable values and paradox as in Definition~\ref{d:accept}. It proves Propositions~\ref{p:harmless}--\ref{p:kleene} and Theorem~\ref{t:unique}.
+
+\begin{lstlisting}
+theorem paradox_iff_liar (c : Content) : Paradoxical c ↔ c = (fun v => !v)
+
+'Philosophy.LNG_18.paradox_iff_liar' depends on axioms: [propext, Quot.sound]
+'Philosophy.LNG_18.nonsemantic_harmless' does not depend on any axioms
+\end{lstlisting}
+
+The results use no axioms beyond Lean's core logic; the axioms listed identify functions that agree everywhere. The module treats a single sentence that refers to itself directly; Yablo's sequence and other networks of sentences are not formalized.
+
+\section{Conclusion}
+
+A sentence can speak about itself without paradox. It is paradoxical only when it applies a semantic predicate to itself in a way that, in classical logic, has no fixed point, and among single self-referential sentences that is the liar alone.
+
+\begin{thebibliography}{9}\small
+\bibitem[G\"odel(1931)]{Godel1931} G\"odel, K. (1931). \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f\"ur Mathematik und Physik}, 38, 173--198.
+\bibitem[Kripke(1975)]{Kripke1975} Kripke, S. (1975). Outline of a theory of truth. \emph{The Journal of Philosophy}, 72(19), 690--716.
+\bibitem[Priest(1997)]{Priest1997} Priest, G. (1997). Yablo's paradox. \emph{Analysis}, 57(4), 236--242.
+\bibitem[Yablo(1993)]{Yablo1993} Yablo, S. (1993). Paradox without self-reference. \emph{Analysis}, 53(4), 251--252.
+\end{thebibliography}
+
+\end{document}

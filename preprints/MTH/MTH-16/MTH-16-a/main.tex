@@ -1,0 +1,171 @@
+\documentclass{situationist-preprint}
+
+\title{Against Fictionalism}
+\msid{MTH-16-a}
+\msfamily{MTH-16}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_16.lean}
+\mskeywords{mathematical fictionalism; nominalism; Field; representation theorems; quantum mechanics; indispensability}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Mathematical fictionalism holds that mathematical statements with existential import are false, since there are no mathematical objects, and that mathematics is nonetheless useful because it is conservative over the nominalistic content of science. Field showed how the program could be carried out for Newtonian gravitation, by replacing quantification over real-valued functions with quantification over spacetime points and regions and proving representation theorems. We argue that the program cannot be completed, and that fictionalism fails with it. A nominalization represents the states that figure in a theory's predictions by concrete configurations, and a concrete configuration represents only a state that some system is actually in. The predictions of quantum mechanics are computed from states that no system is in: the eigenstates of measured observables, onto which the Born rule projects the actual state, and which for continuous observables are not physical states at all. Quantum mechanics therefore cannot be nominalized, and the fictionalist who accepts our best physics has no nominalistic content to accept. We answer the easy-road, propensity and modal responses. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Are mathematical statements false? The fictionalist says that they are, or at least that those with existential import are. There are no numbers, functions or sets, so \enquote{there is a prime between 10 and 20} is false, as \enquote{there is a detective at 221B Baker Street} is false; and mathematics is valuable not because it is true but because it is useful, in a way that does not require its truth \citep{Field1980,Balaguer1998,Leng2010}. The view is the most developed form of nominalism about mathematics, and it is the natural target of the indispensability argument \citep{Quine1948,Putnam1971,Colyvan2001}. That argument says that we ought to believe the existence of the entities indispensable to our best scientific theories, and that mathematical entities are among them. MTH-01 defends it. The fictionalist's reply is to deny the second premise: mathematics is dispensable, because the physical content of science can be stated without it.
+
+\subsection{Field's program and its critics}
+
+\citet{Field1980} gave the reply its canonical form. A nominalist is entitled to use mathematics in science if two conditions are met. First, mathematics must be \emph{conservative}: adding it to a nominalistic theory yields no new nominalistic consequences. Then the use of mathematics is a deductive shortcut, and its falsity does not matter. Second, the physical theory must be \emph{nominalizable}: there must be a nominalistic theory whose content is the nominalistic content of the platonistic one, together with a representation theorem showing that every model of the nominalistic theory is represented by the mathematical structures the platonistic theory uses. Field proved the conservativeness of set theory over nominalistic theories, and he nominalized Newtonian gravitational theory. He took spacetime points and regions to be concrete, and replaced quantification over real-valued fields with comparative relations among points, such as betweenness, congruence and relations of comparative field strength, following the model of Hilbert's axiomatization of geometry.
+
+\citet{Shapiro1983} showed that the conservativeness claim faces a dilemma: a first-order nominalistic theory does not capture the content of the physics, and over a second-order one mathematics is not deductively conservative. \citet{Malament1982}, reviewing Field's book, raised the objection that concerns us. Field's method works for theories whose mathematical apparatus represents the actual distribution of physical quantities over actual spacetime. It does not obviously work for theories whose apparatus represents a space of possible states, such as the phase space of Hamiltonian mechanics or the Hilbert space of quantum mechanics, because the points of such a space are not concrete. Malament concluded that the nominalization of quantum mechanics would require something other than Field's method, and he doubted that it could be found.
+
+The responses to Malament took two forms. \citet{Balaguer1996} proposed to nominalize quantum mechanics by taking its mathematical apparatus to represent the propensities of physical systems, construed as physically real properties; \citet{Bueno2003} argued that the proposal either reintroduces abstract objects or leaves essential parts of the theory unrepresented. \citet{ArntzeniusDorr2012} extended Field's methods to theories formulated in differential geometry, but the Hilbert-space formalism of quantum mechanics lies outside their scope. The other response was to abandon Field's program. The \enquote{easy road} fictionalists, among them \citet{Melia2000}, \citet{Yablo2005}, \citet{Balaguer1998} and \citet{Leng2010}, argue that the fictionalist can accept the nominalistic content of a theory without stating it in nominalistic terms: she believes that the concrete world is as the theory says, so far as the concrete world goes. \citet{Colyvan2010} replied that the easy road is no easier than the hard one.
+
+We argue for Malament's conclusion, and we argue that the easy road does not avoid it. Section~2 states the framework, Section~3 the argument, and Section~4 the responses.
+
+\section{Framework}
+
+\begin{definition}[Fictionalism]\label{d:fict}
+\emph{Mathematical fictionalism} holds that mathematical statements with existential import are false, and that the fictionalist accepts of our scientific theories only their nominalistic content.
+\end{definition}
+
+\begin{definition}[Nominalization]\label{d:nom}
+A physical theory $P$ is \emph{nominalizable} if there is a theory $N$ that quantifies only over concrete entities, together with a representation theorem showing that every model of $N$ is represented by a model of the mathematical structures $P$ uses, such that $N$ and $P$ agree on every nominalistic consequence.
+\end{definition}
+
+\begin{assumption}[Entitlement]\label{a:ent}
+The fictionalist is entitled to accept a best physical theory only if it is nominalizable.
+\end{assumption}
+
+\begin{assumption}\label{a:best}
+Quantum mechanics is among our best physical theories.
+\end{assumption}
+
+\begin{assumption}[Representation]\label{a:rep}
+A nominalization of a theory represents every state that figures in the theory's predictions about actual systems by a concrete configuration.
+\end{assumption}
+
+\begin{assumption}[Actuality]\label{a:act}
+A concrete configuration represents only a state that some physical system is in.
+\end{assumption}
+
+\begin{assumption}[Uninstantiated states]\label{a:uninst}
+Some state that figures in the predictions of quantum mechanics about actual systems is a state that no physical system is in.
+\end{assumption}
+
+Assumption~\ref{a:ent} is the fictionalist's own standard, as Field states it. To accept a theory while denying its mathematics, she must say what she accepts; and to say it without the mathematics is to give a nominalistic theory with the same nominalistic consequences. The easy-road fictionalist denies the assumption, and we answer her in Section~4. Assumption~\ref{a:best} expresses the scientific realism of SCI-02: quantum mechanics is mature and predictively successful, and so approximately true.
+
+Assumption~\ref{a:rep} generalizes Field's method. A representation theorem shows that the structure of the concrete entities the nominalistic theory describes is mirrored in the mathematical structure the platonistic theory uses. For the nominalistic theory to deliver a prediction that the platonistic theory computes from a state, the state must have a concrete counterpart whose intrinsic relations to other concrete items carry the information the computation uses. In Newtonian gravitation, the predictions are computed from the values of the gravitational potential at spacetime points, and each value has a concrete counterpart in the comparative relations among points that Field's axioms describe. Assumption~\ref{a:act} is the content of nominalism about states. A concrete configuration is a configuration of actual things; it can represent the state that those things are in, but not a state that nothing is in. To represent the latter one would need possible but non-actual configurations, which are not concrete; TSM-08 argues that there are no concrete possible worlds.
+
+Assumption~\ref{a:uninst} is the physical premise. The Born rule computes the probability that a measurement of an observable on a system in state $\psi$ yields the outcome $a$ by projecting $\psi$ onto the eigenspace of the observable for the eigenvalue $a$. Every eigenstate of the measured observable therefore figures in the prediction, while at most one of them, the one corresponding to the outcome, comes to be instantiated, and frequently none does, since the system is typically not in an eigenstate before the measurement. For observables with continuous spectra, such as position and momentum, the situation is starker. The generalized eigenstates are not normalizable and are not physical states at all, yet the spectral measure built from them is what the Born rule uses to predict the distribution of positions. No interpretation removes these states from the predictions. On the Everett interpretation, which SCI-09 defends, the probabilities are recovered from the branch weights, which are the squared amplitudes of the projections of the universal state onto the eigenspaces, and the eigenstates figure in the computation in the same way.
+
+\section{The argument}
+
+\begin{lemma}\label{l:nonom}
+No theory in whose predictions about actual systems an uninstantiated state figures is nominalizable.
+\end{lemma}
+
+\begin{proof}
+Suppose the theory has a nominalization. By Assumption~\ref{a:rep}, every state that figures in its predictions is represented by a concrete configuration, in particular the uninstantiated state. By Assumption~\ref{a:act}, that state is then instantiated, which contradicts the hypothesis.
+\end{proof}
+
+\begin{proposition}\label{p:qm}
+Quantum mechanics is not nominalizable.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:uninst} and Lemma~\ref{l:nonom}.
+\end{proof}
+
+\begin{theorem}[Main result]\label{t:main}
+Mathematical fictionalism fails: the fictionalist is not entitled to accept our best physics.
+\end{theorem}
+
+\begin{proof}
+Suppose fictionalism. By Assumption~\ref{a:ent}, every best physical theory is nominalizable; by Assumption~\ref{a:best}, quantum mechanics is a best physical theory, so it is nominalizable. This contradicts Proposition~\ref{p:qm}.
+\end{proof}
+
+Lemma~\ref{l:nonom} explains both Field's success and its limits. Newtonian gravitation computes its predictions from the actual distribution of mass and potential over actual spacetime, so every state it needs is instantiated. Quantum mechanics computes them from a space of possible states. That is Malament's point in general form: the obstacle is not the complexity of the mathematics but what it represents. And the conclusion is stronger than the claim that no one has yet nominalized quantum mechanics: if the assumptions hold, the failure is not a matter of insufficient ingenuity.
+
+\section{Objections and replies}
+
+\begin{objection}[The easy road]
+The fictionalist need not nominalize anything. She believes that the concrete world is as quantum mechanics says it is, so far as concrete things are concerned, and she can believe this without being able to state it in nominalistic terms \citep{Melia2000,Balaguer1998,Leng2010}.
+\end{objection}
+
+\begin{reply}
+What the fictionalist believes is then the nominalistic content of quantum mechanics, and the question is whether there is such a content apart from the mathematics. The theory's claims about concrete things are claims about the probabilities with which actual measurements yield their outcomes, and by Assumption~\ref{a:uninst} these claims are computed from, and are partly about, states that nothing is in. To believe them is to believe something about those states. If the fictionalist believes only the claims about concrete things that do not involve them, such as the actual relative frequencies of recorded outcomes, she believes much less than the theory says: not that the theory is approximately true, but that it is empirically adequate in its actual applications. That is instrumentalism about quantum mechanics, which SCI-02 rejects, and it is not the position the fictionalist set out to occupy, which accepts our best science and denies only its mathematics. The easy road therefore reaches the same place as the hard one: either the content is stated nominalistically, which Proposition~\ref{p:qm} rules out, or it is not believed \citep{Colyvan2010}.
+\end{reply}
+
+\begin{objection}[Wavefunction realism]
+The wavefunction can be taken as a concrete field on a high-dimensional configuration space. Its actual values are instantiated, and a Field-style nominalization of the dynamics of that field requires only the actual field.
+\end{objection}
+
+\begin{reply}
+Granting the concreteness of configuration space, the dynamics of the actual field is nominalizable at best in the way Newtonian gravitation is. The predictions are not. Probabilities of outcomes are computed by projecting the actual field onto the eigenstates of the measured observable, which are other possible fields, not the actual one. The concreteness of the actual wavefunction does not make the eigenstates concrete.
+\end{reply}
+
+\begin{objection}[Propensities]
+The states of quantum mechanics can be construed as representing the propensities of actual systems to produce outcomes. Propensities are physical properties of actual systems, and so are concrete enough for the nominalist \citep{Balaguer1996}.
+\end{objection}
+
+\begin{reply}
+A propensity of an actual system represents the state that system is in, and to that extent the proposal respects Assumption~\ref{a:act}. But the prediction of an outcome probability requires the relation between the actual state and the eigenstates of the observable, and the eigenstates are not propensities of any actual system. Balaguer must therefore either take unexemplified propensities as objects, which are properties that nothing has and are as abstract as the vectors they replace, or encode the structure of the Hilbert space in the propensities of the actual system, which requires a single concrete property for each of continuum many possible outcomes and measurement contexts, with the full inner-product structure among them. The first option abandons nominalism; the second restates the mathematics as the structure of a property space that is no more concrete than the Hilbert space \citep{Bueno2003}.
+\end{reply}
+
+\begin{objection}[Modal nominalization]
+Uninstantiated states can be represented modally: instead of quantifying over states, the nominalist asserts that it is possible for a system to be in a configuration of a given kind. \citet{Field1989} used modal notions in stating conservativeness, and \citet{Hellman1989} showed how mathematics can be recast as a theory of possible structures.
+\end{objection}
+
+\begin{reply}
+The modal claims needed are claims that structures with the inner-product structure of an infinite-dimensional Hilbert space are possible, and that the probabilities of actual outcomes are fixed by relations among such possibilities. Such a theory is not a nominalization in the sense of Definition~\ref{d:nom}, since its representation theorem would relate possible structures, not concrete configurations, to the mathematics. And it is not fictionalism. Hellman's modal structuralism holds that mathematical statements are true under a modal reinterpretation; it denies that they are false. The fictionalist who adopts it has given up Definition~\ref{d:fict}.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not by itself establish that mathematical objects exist. It shows that the most developed denial of their existence fails; the positive case is the indispensability argument of MTH-01, to which the present result supplies the premise that the mathematics of physics cannot be dispensed with. Nor does it refute views on which mathematical statements are true under a reinterpretation, such as modal structuralism. Finally, it has a consequence outside the philosophy of mathematics. MTE-05 argues that Mackie's argument from queerness would make mathematics false; the present result shows that the cost of that consequence is the falsity of our best physics, as MTE-05 holds.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTH/MTH_16.lean} formalizes Definitions~\ref{d:fict} and~\ref{d:nom} as primitives, Assumptions~\ref{a:ent}--\ref{a:uninst} as axioms, and Lemma~\ref{l:nonom}, Proposition~\ref{p:qm} and Theorem~\ref{t:main} as theorems. The states of a theory are a type depending on the theory. The main theorem and its axioms are:
+
+\begin{lstlisting}
+theorem against_fictionalism : ¬ Fictionalism
+'Philosophy.MTH_16.against_fictionalism' depends on axioms:
+ [Fictionalism, Instantiated, Nominalizable, QM, State,
+  Theory, actuality, entitlement, qm_best,
+  qm_uninstantiated, representation]
+\end{lstlisting}
+
+(The prefix \texttt{Philosophy.MTH\_16.} is omitted inside the list.) \texttt{entitlement}, \texttt{qm\_best}, \texttt{representation}, \texttt{actuality} and \texttt{qm\_uninstantiated} are Assumptions~\ref{a:ent}--\ref{a:uninst}; the rest are primitives. Among the premises, Proposition~\ref{p:qm} depends only on \texttt{representation}, \texttt{actuality} and \texttt{qm\_uninstantiated}: the impossibility of nominalizing quantum mechanics does not depend on any claim about what the fictionalist is entitled to.
+
+\section{Conclusion}
+
+Field showed what the fictionalist must do to accept our best physics while denying its mathematics: state the physical content without the mathematics. That can be done for theories whose predictions are computed from the actual state of the world. It cannot be done for quantum mechanics, whose predictions are computed from states that nothing is in, and which a nominalistic theory cannot represent. The easy road leads to instrumentalism, and propensities and modal reformulations give up nominalism or fictionalism. Mathematical statements are not false, and fictionalism fails because physics cannot be nominalized.
+
+\begin{thebibliography}{99}\small
+\bibitem[Arntzenius and Dorr(2012)]{ArntzeniusDorr2012} Arntzenius, F. and Dorr, C. (2012). Calculus as geometry. In F. Arntzenius, \emph{Space, Time, and Stuff}, Oxford University Press.
+\bibitem[Balaguer(1996)]{Balaguer1996} Balaguer, M. (1996). Towards a nominalization of quantum mechanics. \emph{Mind}, 105(418), 209--226.
+\bibitem[Balaguer(1998)]{Balaguer1998} Balaguer, M. (1998). \emph{Platonism and Anti-Platonism in Mathematics}. Oxford University Press.
+\bibitem[Bueno(2003)]{Bueno2003} Bueno, O. (2003). Is it possible to nominalize quantum mechanics? \emph{Philosophy of Science}, 70(5), 1424--1436.
+\bibitem[Colyvan(2001)]{Colyvan2001} Colyvan, M. (2001). \emph{The Indispensability of Mathematics}. Oxford University Press.
+\bibitem[Colyvan(2010)]{Colyvan2010} Colyvan, M. (2010). There is no easy road to nominalism. \emph{Mind}, 119(474), 285--306.
+\bibitem[Field(1980)]{Field1980} Field, H. (1980). \emph{Science Without Numbers: A Defence of Nominalism}. Blackwell.
+\bibitem[Field(1989)]{Field1989} Field, H. (1989). \emph{Realism, Mathematics and Modality}. Blackwell.
+\bibitem[Hellman(1989)]{Hellman1989} Hellman, G. (1989). \emph{Mathematics without Numbers: Towards a Modal-Structural Interpretation}. Clarendon Press.
+\bibitem[Leng(2010)]{Leng2010} Leng, M. (2010). \emph{Mathematics and Reality}. Oxford University Press.
+\bibitem[Malament(1982)]{Malament1982} Malament, D. (1982). Review of Hartry Field, \emph{Science Without Numbers}. \emph{The Journal of Philosophy}, 79(9), 523--534.
+\bibitem[Melia(2000)]{Melia2000} Melia, J. (2000). Weaseling away the indispensability argument. \emph{Mind}, 109(435), 455--479.
+\bibitem[Putnam(1971)]{Putnam1971} Putnam, H. (1971). \emph{Philosophy of Logic}. Harper and Row.
+\bibitem[Quine(1948)]{Quine1948} Quine, W.~V.~O. (1948). On what there is. \emph{The Review of Metaphysics}, 2(5), 21--38.
+\bibitem[Shapiro(1983)]{Shapiro1983} Shapiro, S. (1983). Conservativeness and incompleteness. \emph{The Journal of Philosophy}, 80(9), 521--531.
+\bibitem[Yablo(2005)]{Yablo2005} Yablo, S. (2005). The myth of the seven. In M.~E. Kalderon (ed.), \emph{Fictionalism in Metaphysics}, Clarendon Press.
+\end{thebibliography}
+
+\end{document}

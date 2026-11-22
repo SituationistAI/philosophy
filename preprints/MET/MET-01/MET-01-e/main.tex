@@ -1,0 +1,38 @@
+\documentclass{situationist-preprint}
+
+\title{Corrigendum to \enquote{Why There Is Something Rather Than Nothing}, Volume II}
+\msid{MET-01-e}
+\msfamily{MET-01}
+\msdiscipline{Metaphysics}
+\mstype{Erratum}
+\mskeywords{corrigendum; subtraction argument; combinatorial space; neighboring worlds}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lemma~12.4 of Volume~II of MET-01 (\emph{The Subtraction Argument and Its Converse}) omits a side-condition: subtracting an object from a world yields a neighboring world only if the object exists in that world. We state the corrected lemma and show that Theorem~12.6, the only result that uses it, and the thesis of the work are unaffected.
+\end{abstract}
+
+Volume~II, Chapter~12 (p.~467), works in the space $W_n$ of assignments of existence or non-existence to $n$ potential objects $a_1, \ldots, a_n$ (MET-01-a, Definition~4.1); two worlds are \emph{neighbors} if they differ with respect to exactly one object. For a world $w$ and an object $a_i$, the world $w - a_i$ is the assignment that agrees with $w$ except that $a_i$ does not exist. Lemma~12.4 is printed as follows.
+
+\begin{quote}\small
+\textbf{Lemma 12.4.} For every world $w$ of $W_n$ and every $i \leq n$, $w - a_i$ belongs to $W_n$ and is a neighbor of $w$.
+\end{quote}
+
+The second clause is false when $a_i$ does not exist in $w$, for then $w - a_i$ is $w$ itself. The lemma should read:
+
+\begin{quote}\small
+\textbf{Lemma 12.4 (corrected).} For every world $w$ of $W_n$ and every $i \leq n$, $w - a_i$ belongs to $W_n$; and if $a_i$ exists in $w$, then $w - a_i$ is a neighbor of $w$ with exactly one fewer existing object.
+\end{quote}
+
+Lemma~12.4 is used once, in the proof of Theorem~12.6, which states that every world of $W_n$ in which exactly $k$ objects exist is joined to the empty world by a path of exactly $k$ subtraction steps, each step leading to a neighbor. The proof subtracts, at each step, an object that exists in the current world, so that every application of the lemma satisfies the added condition. Theorem~12.6, and the count of $k$ steps, stand as printed.
+
+Theorem~12.6 is the combinatorial form of the subtraction argument of \citet{Baldwin1996}, as refined by \citet{RodriguezPereyra1997}: it establishes that the empty world is possible and says nothing about its measure. The thesis of Volume~II, that the subtraction argument establishes the possibility and not the measure of the empty world, is unaffected, as is Theorem~4.4 of Volume~I (MET-01-a), that this measure tends to zero. No result of Volume~I, and nothing in its formalization, depends on Lemma~12.4.
+
+\begin{thebibliography}{9}\small
+\bibitem[Baldwin(1996)]{Baldwin1996} Baldwin, T. (1996). There might be nothing. \emph{Analysis}, 56(4), 231--238.
+\bibitem[Rodriguez-Pereyra(1997)]{RodriguezPereyra1997} Rodriguez-Pereyra, G. (1997). There might be nothing: the subtraction argument improved. \emph{Analysis}, 57(3), 159--166.
+\end{thebibliography}
+
+\end{document}

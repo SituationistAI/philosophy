@@ -1,0 +1,290 @@
+\documentclass{situationist-preprint}
+
+\title{The Demarcation Problem Revisited}
+\msid{SCI-01-a}
+\msfamily{SCI-01}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_01.lean}
+\mskeywords{demarcation; pseudoscience; falsifiability; error-correction; peer review; replication; public criticism; social epistemology}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+What distinguishes science from non-science? The classical answers located the difference in the logical form of scientific statements (verifiability, falsifiability) or in the dynamics of theories (puzzle-solving, progressive research programs), and each was defeated by cases. We argue that the distinguishing mark is institutionalized error-correction: the standing practices of peer review, replication and public criticism through which an enterprise exposes its accepted results to checks that recur without a last occasion. The unit of demarcation is the enterprise, not the statement or the theory. We prove, in a simple model of a record of accepted claims, that a record is self-cleansing, in the sense that every error eventually leaves it whenever it was admitted, if and only if its checks are standing; that an enterprise whose checks cease retains every later error forever; and that, given the existence of content-identical enterprises of which one is a science and the other is not, no criterion that depends only on content can be extensionally adequate. Given that the point of demarcation is to pick out fallible enterprises whose records merit trust, science is exactly the enterprise with institutionalized error-correction. The results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The demarcation problem asks what distinguishes science from non-science, and in particular from pseudoscience: enterprises such as astrology, homeopathy and creation science that present themselves as scientific and are not. The question matters outside philosophy. Courts have had to decide whether creation science may be taught as science \citep{Ruse1982,Laudan1982}; funding agencies, regulators and journalists must decide whose claims about medicine, climate or nutrition to treat as the findings of science; and the authority that science enjoys in public deliberation presupposes that there is something that earns it.
+
+The classical answers looked for the mark of science in its statements or its theories, and each was defeated; in 1983 Laudan declared the problem dead \citep{Laudan1983}. It has since been revived by authors who look for clusters of features or for features of practices \citep{PigliucciBoudry2013,Hansson2013,HoyningenHuene2013}.
+
+We defend a definite answer. Science is distinguished by institutionalized error-correction: peer review, replication and the public criticism of results, practices through which an enterprise exposes what it has accepted to checks that recur and that can remove what fails them. The answer has antecedents in Peirce's view that inquiry is distinguished by its capacity to correct itself \citep{Peirce1877}, in Merton's norm of organized skepticism \citep{Merton1973}, in Popper's own remark that the objectivity of science lies not in the impartiality of individual scientists but in the critical cooperation of many \citep[ch.~23]{Popper1945}, and in Longino's account of objectivity as a property of communities that institutionalize transformative criticism \citep{Longino1990,Longino2002}. What we add is an argument that this feature, and not any feature of content, is what a demarcation criterion must track, and a proof that the feature can be characterized exactly: a record of accepted claims eliminates every error, whenever admitted, if and only if its checks are standing.
+
+Section~\ref{s:history} reviews the history of the problem, with the case that defeated each main proposal. Section~\ref{s:framework} sets out the framework. Section~\ref{s:argument} gives the argument. Section~\ref{s:cases} applies the criterion to a range of cases, and Section~\ref{s:recent} relates it to recent work. Objections are discussed in Section~\ref{s:objections}, and Section~\ref{s:not} records what the result does not establish.
+
+\section{A short history of the problem}\label{s:history}
+
+\paragraph{Verifiability.} The logical empiricists identified the scientific with the cognitively meaningful, and the meaningful with what can be verified by experience \citep{Ayer1936}. The criterion was not designed to separate science from pseudoscience but science from metaphysics, and it failed on both sides. Universal laws, which are the heart of science, cannot be conclusively verified by any finite set of observations; and astrological predictions of the form \enquote{Sagittarians will meet a stranger this month} are verified easily. \citet{Carnap1936} weakened verifiability to confirmability, but degree of confirmation separates well-supported claims from poorly supported ones, not science from non-science.
+
+\paragraph{Falsifiability.} Popper proposed that a statement belongs to empirical science if and only if it is falsifiable: if it is logically incompatible with some possible observation statement \citep{Popper1959}. The proposal was motivated by a contrast between Einstein's theory, which risked refutation by the observation of starlight in 1919, and the theories of Freud, Adler and Marx, which in Popper's view could accommodate any outcome \citep[ch.~1]{Popper1963}. Two difficulties defeated it as a criterion of demarcation. First, many pseudoscientific claims are falsifiable and have been falsified. Astrology makes testable predictions; \citet{Carlson1985} tested whether astrologers could match natal charts to personality profiles better than chance, under conditions the astrologers had agreed to, and found that they could not. If falsifiability made astrology a science, it would make it a science that is false, which is not what anyone meant by calling it a pseudoscience. As \citet{Kuhn1970} observed, astrology is not unscientific because its predictions are untestable; astrologers made testable predictions and recognized that they often failed. Second, the Duhem problem: no hypothesis meets observation alone, and any hypothesis can be protected from refutation by adjusting auxiliary assumptions. Popper acknowledged this and supplemented the logical criterion with methodological rules forbidding ad hoc rescues. With that supplement, falsifiability ceases to be a property of statements and becomes a property of how a community treats them. This is the move we generalize.
+
+\paragraph{Puzzle-solving.} \citet{Kuhn1970} proposed that what distinguishes a science is a tradition of normal research in which practitioners solve puzzles under a shared paradigm, and in which failures are attributed to the practitioner rather than the paradigm. Astrology fails the test because, although it made predictions that failed, its failures gave rise to no puzzles: there was no research tradition that tried to explain them and to refine the art in response. The proposal locates the difference in a practice, but a community can solve puzzles under a framework it protects from all criticism, and the criterion counts as non-scientific any period without a single paradigm.
+
+\paragraph{Progressive research programs.} \citet{Lakatos1970} took the unit of appraisal to be the research program, a hard core of claims protected by a belt of auxiliary hypotheses. A program is progressive if its modifications predict novel facts some of which are corroborated, and degenerating if its modifications only accommodate facts already known. Lakatos proposed that science consists of progressive programs and pseudoscience of degenerating ones. The criterion classifies by trajectory, and trajectories reverse. Lakatos himself described Prout's program, the hypothesis that atomic weights are whole multiples of that of hydrogen, which degenerated for a century before the discovery of isotopes vindicated it. A criterion on which a program passes in and out of science with its fortunes misdescribes the scientists who kept working on it; their enterprise did not cease to be science when their program stalled.
+
+\paragraph{Multiple criteria.} \citet{Thagard1978} combined Kuhn's and Lakatos's conditions: a theory is pseudoscientific if it has been less progressive than alternatives over a long period and its community of practitioners makes little attempt to develop it toward solutions of its problems, shows no concern for evaluating it in relation to others, and is selective in considering confirmations and disconfirmations. The second clause is the decisive one, and it describes a community, not a theory. Our criterion can be read as isolating that clause and stating it precisely.
+
+\paragraph{The obituary.} \citet{Laudan1983} reviewed these proposals and concluded that the problem was a pseudo-problem. The sciences are epistemically heterogeneous: some are well supported and some not, some make bold predictions and some do not, some have unified theories and some are collections of observations. There is no epistemic feature that all and only the sciences share, and the interesting question is which beliefs are warranted, which cuts across the distinction between science and non-science. Laudan's survey was confined to epistemic properties of statements, theories and methods. It did not consider properties of the institutions in which claims are made, defended and withdrawn, and it is there that we locate the answer.
+
+\paragraph{The revival.} Laudan's verdict was widely accepted for a generation, and the problem was revived in the last fifteen years. \citet{PigliucciBoudry2013} collected work arguing that the absence of necessary and sufficient conditions does not make the distinction arbitrary, and that pseudoscience is a family-resemblance concept. \citet{Hansson2013} characterized pseudoscience as doctrine that is not epistemically warranted and whose proponents try to create the impression that it is. \citet{HoyningenHuene2013} argued that science is distinguished by its higher degree of systematicity in description, explanation, prediction, the defense of claims, critical discourse and other dimensions. We discuss these and related proposals in Section~\ref{s:recent}.
+
+The lesson of the history is twofold. Every criterion stated in terms of the content of statements or theories was defeated by a case in which the same content was treated scientifically by one community and unscientifically by another. And every proposal that came close to the right extension did so by appealing, sometimes without remarking on it, to what a community does with its claims when they meet difficulties.
+
+\section{Framework}\label{s:framework}
+
+We take the unit of demarcation to be an enterprise: a community of inquirers together with the practices by which it admits claims to, and removes them from, a shared record.
+
+\begin{principle}[Unit]\label{p:unit}
+What is scientific or not is in the first instance an enterprise. A claim is scientific in a derivative sense, by being part of the record of a scientific enterprise.
+\end{principle}
+
+Principle~\ref{p:unit} is the lesson of the history. The claim that high dilutions of an antibody retain biological activity was published in a leading scientific journal \citep{Davenas1988}, investigated, found not to replicate under controlled conditions \citep{Maddox1988}, and removed from the record of immunology; the same claim remains part of the doctrine of homeopathy. It was a scientific claim in one enterprise and is a pseudoscientific claim in another. What changed between the two was not its content but the enterprise that held it.
+
+\begin{definition}[Record]\label{d:record}
+The \emph{record} of an enterprise at a time is the set of claims it accepts at that time: those it treats as established and available as premises for further work. A claim enters the record at its admission and remains until it is removed.
+\end{definition}
+
+\begin{definition}[Refutation schedule]\label{d:schedule}
+A \emph{check} of a claim is any procedure by which members of the enterprise, other than its producer, test it against evidence or argument. The \emph{refutation schedule} of an enterprise for a false claim is the set of times at which its checks would refute that claim and so remove it from the record if it were there.
+\end{definition}
+
+The refutation schedule is a dispositional notion: it records when the enterprise's checks would catch a given error, not only when they did. Truth and falsity enter the definitions only through the claims to which the schedule applies; an enterprise is not required to know which of its claims are false.
+
+\begin{definition}[Self-cleansing]\label{d:clean}
+An enterprise's record is \emph{self-cleansing} if for every false claim and every time at which it might be admitted, there is a later time at which it is not in the record.
+\end{definition}
+
+\begin{definition}[Institutionalized error-correction]\label{d:ec}
+An enterprise has \emph{standing}, or \emph{institutionalized}, error-correction if for every false claim its refutation schedule has no last element: for every time there is a later time at which a check would refute it.
+\end{definition}
+
+Definition~\ref{d:ec} makes precise the sense in which error-correction must be institutionalized. It is not enough that a claim was once criticized, or that the enterprise has had critics. The checks must be standing: a matter of the enterprise's continuing practice rather than of an occasion, so that there is no time after which an error, once present, is safe. The institutions that realize standing checks in modern science are three. Peer review checks claims at admission and constitutes the record by fixing what counts as published. Replication re-tests accepted results by repeating the procedures that produced them, or by testing their consequences by independent means. Public criticism opens every accepted result to challenge by anyone competent, at any time, in the venues of the enterprise.
+
+\begin{principle}[Fallibilism]\label{p:fall}
+Every enterprise of inquiry admits false claims to its record, at times that cannot be predicted in advance.
+\end{principle}
+
+\begin{principle}[The point of demarcation]\label{p:point}
+A demarcation criterion picks out the enterprises whose records merit the provisional trust accorded to science. For a fallible enterprise, that trust is merited exactly when its record is self-cleansing. Hence an enterprise is a science if and only if its record is self-cleansing.
+\end{principle}
+
+Principle~\ref{p:point} is the substantive premise, and we defend it here. The question what demarcation is for has a determinate answer, and Laudan was right to press it. We do not need a criterion of science in order to evaluate individual claims; for that we need a theory of evidence. We need it in order to know whose claims to take on trust when we cannot evaluate them ourselves: which enterprise to consult on the safety of a vaccine, the age of the earth or the effect of a drug. A criterion that answered this need would have to identify a property of enterprises in virtue of which their records merit that trust.
+
+By Principle~\ref{p:fall}, the property cannot be that the record contains no errors. Every science has accepted false claims, and some of its present claims are surely false. Nor can it be that the enterprise uses a method guaranteed to avoid error, since there is no such method and, as SCI-05 argues, no single scientific method at all. What makes it reasonable to trust a fallible record is that its errors do not last: that whatever errors enter will be found and removed, so that relying on the record is relying on a body of claims each of which has so far survived and will continue to be exposed to checks. That property is self-cleansing in the sense of Definition~\ref{d:clean}. It is a property of the enterprise, not of its claims, as Principle~\ref{p:unit} requires, and it holds whatever the motives of individual inquirers, which is the point of Merton's and Strevens's insistence that the reliability of science does not depend on the virtue of scientists \citep{Merton1973,Strevens2020}.
+
+Conversely, an enterprise whose record is not self-cleansing does not merit the trust in question even if, by good fortune, its present record is largely true. The trust we place in science is forward-looking: we rely on the record as it will be corrected, not merely as it now stands. A record that contains true claims protected from checks, as the record of the sect in Assumption~\ref{a:twins} below would, offers no assurance that it would lose them if they were false.
+
+\begin{assumption}[Twin enterprises]\label{a:twins}
+There are two enterprises with the same content, of which one is a science and the other is not.
+\end{assumption}
+
+The assumption is supported by a constructed case and by actual approximations to it. Imagine a sect that accepts exactly the claims of a current physics textbook as revealed doctrine, transmitted by authority and closed to revision. Its content is that of physics; it is not a science. The case of high dilutions shows the same thing for a single claim, and the history of Lysenkoism shows it for a body of agronomic and genetic claims, some true and some false, that were removed from public criticism by political decision in 1948 \citep{Joravsky1970}: what made Soviet genetics after that date unscientific was not, or not only, that its claims were false, but that they could not be checked.
+
+\section{The argument}\label{s:argument}
+
+The first two lemmas concern a single false claim admitted to a record at a given time.
+
+\begin{lemma}[Persistence]\label{l:persist}
+If no check refutes a claim at or after its admission, the claim remains in the record at every later time.
+\end{lemma}
+
+\begin{proof}
+By induction on time. At the time of admission the claim is in the record. If it is in the record at a time at which no check refutes it, nothing removes it, and it is in the record at the next time.
+\end{proof}
+
+\begin{lemma}[Elimination]\label{l:elim}
+If a check refutes a claim at some time at or after its admission, the claim is out of the record at the next time.
+\end{lemma}
+
+\begin{proof}
+A refutation removes the claim, and since its admission lies in the past, nothing readmits it at the next time.
+\end{proof}
+
+\begin{theorem}\label{t:char}
+A record is self-cleansing with respect to a false claim if and only if the refutation schedule for that claim has no last element.
+\end{theorem}
+
+\begin{proof}
+Suppose the schedule has no last element, and let the claim be admitted at any time $t_0$. There is a time $s \ge t_0$ at which a check refutes it, and by Lemma~\ref{l:elim} the claim is out of the record at $s+1$. Conversely, suppose the schedule has a last element, or is empty, so that there is a time $t$ after which no check refutes the claim. If the claim is admitted at $t$, then by Lemma~\ref{l:persist} it remains in the record at every later time, and the record is not self-cleansing.
+\end{proof}
+
+The theorem says that self-cleansing, a property of the outcome, is equivalent to a property of the practice: the recurrence of checks without a last occasion. It is the reason the criterion speaks of institutionalized correction. An enterprise in which criticism happened, even vigorously, during some period and then stopped, would leave every error admitted after that period in place.
+
+\begin{theorem}[Demarcation]\label{t:dem}
+An enterprise is a science if and only if it has institutionalized error-correction.
+\end{theorem}
+
+\begin{proof}
+By Principle~\ref{p:point}, an enterprise is a science if and only if its record is self-cleansing, that is, self-cleansing with respect to every false claim. By Theorem~\ref{t:char}, this holds if and only if, for every false claim, the refutation schedule has no last element, which is Definition~\ref{d:ec}.
+\end{proof}
+
+\begin{proposition}[Against content criteria]\label{p:content}
+No criterion that depends only on the content of an enterprise, that is, on which claims it accepts, is extensionally adequate.
+\end{proposition}
+
+\begin{proof}
+Suppose a criterion classified every enterprise as a science exactly when its content had some property. By Assumption~\ref{a:twins} there are enterprises $e_1$ and $e_2$ with the same content, where $e_1$ is a science and $e_2$ is not. Since $e_1$ is a science, its content has the property; since $e_2$ has the same content, $e_2$ is classified as a science, which it is not.
+\end{proof}
+
+Verifiability, falsifiability and Hansson's epistemic warrant, insofar as they are properties of the claims accepted, fall under Proposition~\ref{p:content}. The proposition does not tell against Popper's methodological rules, Kuhn's puzzle-solving or Thagard's community clause, which concern what an enterprise does and not what it says; these are partial descriptions of institutionalized error-correction.
+
+\begin{corollary}[Closed canon]\label{c:canon}
+If an enterprise's checks of a false claim cease at some time, the claim, if admitted at that time, remains in the record forever, and the enterprise is not a science.
+\end{corollary}
+
+\begin{proof}
+The first part is Lemma~\ref{l:persist}. For the second, if the enterprise were a science, by Theorem~\ref{t:dem} the refutation schedule for the claim would have no last element, contrary to the hypothesis that the checks cease.
+\end{proof}
+
+Corollary~\ref{c:canon} describes the characteristic structure of pseudoscience. Astrology rests on a canon fixed in antiquity, homeopathy on a founding text, creation science on a reading of scripture that is not open to revision by evidence. In each case the refutation schedule for the central claims is empty from the moment of canonization: there is no procedure within the enterprise by which they could be removed. Such enterprises may check peripheral claims, and astrologers have argued about house systems. What the corollary requires for science is that no claim, central or peripheral, be exempt.
+
+\paragraph{The three institutions.} The model is silent on how standing checks are realized, and the catalogue of institutions requires a further argument. Three conditions must be met by a community's checks if they are to realize a refutation schedule without a last element for every false claim. The checks must be independent of the producer of the claim, since the producer's own errors are correlated with her checks; this is the point developed in SCI-22-a, where a sound check is shown to make the reliability of the producer irrelevant to the status of the accepted results. The checks must recur after admission, since by Lemma~\ref{l:persist} a check at admission alone leaves in place whatever passes it. And they must be open to anyone competent, since a check restricted to a fixed group lasts only as long as the group's interest, and a group can close. Peer review supplies independence at admission and constitutes the record. Replication supplies recurrence by those positioned to repeat the work. Public criticism supplies openness without terminal date. None alone suffices; together they are what standing correction consists in for a community of finite inquirers. Peer review in its modern form is recent, and the criterion does not make the science of the seventeenth century non-science: the Royal Society's practices of witnessing and of publishing reports for criticism \citep{ShapinSchaffer1985} and the correspondence networks of the period performed the function of admission checks before the referee system became general in the twentieth century \citep{Csiszar2016}.
+
+\section{Cases}\label{s:cases}
+
+We apply the criterion to cases that have figured in the debate and to some that defeated earlier proposals.
+
+\paragraph{Astrology.} The criterion classifies astrology as non-science, and for the right reason. Astrology is not unscientific because its claims are untestable; they have been tested \citep{Carlson1985}. It is unscientific because no failure of its predictions removes any of its principles from its record. The refutations occurred in another enterprise, and the canon survived them unaltered. SCI-01-b develops the case.
+
+\paragraph{Homeopathy and high dilutions.} The episode of 1988 is a controlled comparison. The same claim, that water retains the biological activity of a substance diluted out of it, was admitted to the record of immunology through peer review, checked by replication under supervision, and removed. In homeopathy it was not removed and could not be. The criterion classifies the claim as scientific while it stood in the record of immunology, and the enterprise of homeopathy as non-science throughout.
+
+\paragraph{Creation science.} The court in \emph{McLean v.\ Arkansas} (1982) adopted criteria proposed by Ruse, among them that science is tentative and testable \citep{Ruse1982}. \citet{Laudan1982} objected that creationist claims are testable and have been refuted, so that the court's reasoning implied that creation science is a false science rather than no science. The criterion resolves the dispute in Ruse's favor while accepting Laudan's premise: creationist claims are testable and false, and creation science is not a science, because its central claims are exempt from removal by the outcome of any test, as \citet{Kitcher1982} documented in detail.
+
+\paragraph{Lysenkoism.} The criterion classifies Soviet genetics as science before the suppression of opposing views in August 1948 and as non-science after it, even for those of its claims that happened to be true \citep{Joravsky1970}. A true claim protected from checks carries no more credentials than a false one.
+
+\paragraph{The early replication record of psychology.} The large-scale replication of one hundred studies in psychology by the \citet{OSC2015} found that fewer than half reproduced. It might seem that the criterion must classify social psychology as non-science. It does not. The replication project is an instance of the institution the criterion requires, and its results have been absorbed into the record: effects have been withdrawn, methods reformed, and the practice of preregistration adopted. A field in which errors accumulated for decades before correction is a slow science, not a non-science; SCI-19 argues that this slowness is the normal condition of scientific self-correction. The criterion separates science from non-science, not good science from bad.
+
+\paragraph{String theory.} String theory has made no prediction that has been tested, and critics have argued that it has ceased to be science \citep{EllisSilk2014}, while \citet{Dawid2013} has defended non-empirical forms of theory assessment. On the present criterion the question does not turn on testability. String theorists work within the institutions of physics, where their calculations are refereed, checked and corrected by others, so that a theory can be part of the record of a science, as a conjecture under development, before it is testable. Whether it merits its resources is a different question.
+
+\paragraph{Mathematics.} The criterion does not require that checks be empirical. Proofs are refereed, re-derived and criticized, and flawed results are withdrawn or repaired, so mathematics is classified with the sciences in the broad sense of \emph{Wissenschaft}. Formal verification, discussed in SCI-22-a, is the limiting case of a sound check.
+
+\paragraph{Private inquiry.} Cavendish's unpublished electrical experiments, edited by Maxwell in 1879, were good inquiry, but they were not part of the record of science until published, since no one else could check them. The criterion classifies them as scientific only in a derivative sense: apt for, but not yet exposed to, the institutions of correction.
+
+\section{Recent work}\label{s:recent}
+
+The criterion fits much of the recent revival of the problem and corrects some of it.
+
+\citet{HoyningenHuene2013} identifies science with a higher degree of systematicity than everyday knowledge along several dimensions, among them critical discourse. The other dimensions do not distinguish pseudoscience, which can be highly systematic: astrology has an elaborate doctrine of aspects and houses. On our account the dimension of critical discourse carries the weight, and it does so in virtue of its role in removing errors, not of the systematicity of the discourse.
+
+\citet{Hansson2013} defines pseudoscience by two conditions: its doctrine lacks epistemic warrant, and its proponents try to create the impression that it is warranted. The first condition makes pseudoscience a matter of content and falls under Proposition~\ref{p:content}: the sect of Assumption~\ref{a:twins} holds warranted doctrine and is not a science. The second condition captures something real, the imitation of science, and our criterion explains what is imitated. Pseudosciences acquire journals, conferences and referees; what they do not acquire is a refutation schedule for their central claims.
+
+\citet{Longino1990,Longino2002} gives four norms for communities whose criticism confers objectivity: recognized venues for criticism, uptake of criticism, publicly recognized standards, and tempered equality of intellectual authority. Our definition coincides in substance with the first three, and the model gives a reason for the fourth: a community that discounts the criticism of some of its competent members narrows the class of checks, and by Theorem~\ref{t:char} what it loses is the guarantee that the errors those members would catch will be caught. The cost of such exclusion in lost knowledge is measured in EPI-16-a.
+
+\citet{Oreskes2019} argues that the trustworthiness of science rests on its social processes of critical scrutiny, not on a method; \citet{Strevens2020} that modern science owes its power to an \enquote{iron rule} confining disputes in official venues to empirical testing. Oreskes does not say which feature of the processes grounds trust; Theorem~\ref{t:char} identifies it as the recurrence of checks without a last occasion. Strevens's rule specifies, for the empirical sciences, what may count as a check in Definition~\ref{d:ec}.
+
+\citet{HeesenBright2021} have argued that prepublication peer review should be abolished in favor of postpublication review, on the ground that it costs much and filters little. If they are right, peer review in its present form is not necessary for science. The criterion survives the result, since what it requires is a standing schedule of checks, of which prepublication review is one component, and since postpublication review is itself an institution of checking. The catalogue of institutions in Definition~\ref{d:ec} describes how standing correction is now realized; it does not legislate that it be realized only so.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}[Heterogeneity]
+Laudan's argument applies to institutions as much as to theories. The sciences differ in their institutions as in their methods: particle physics has collaborations of thousands with internal review, field ecology has small groups, mathematics has no replication. There is no common institutional feature.
+\end{objection}
+
+\begin{reply}
+The particular institutions differ; the function they serve does not. Definition~\ref{d:ec} states a functional condition, satisfied in particle physics by internal review and by competition between detectors, in ecology by replication across sites, and in mathematics by refereeing and re-derivation. This is the pattern SCI-05 finds for method: no single method, but a family of methods united by common norms. The norm that unites the institutions of correction is that no accepted claim be exempt from checks at any time.
+\end{reply}
+
+\begin{objection}[Peer review fails]
+Peer review is unreliable. Resubmitted articles that had already been published were rejected by the journals that had published them, mostly without detection of the resubmission \citep{PetersCeci1982}; famous papers have been rejected, and Einstein withdrew a paper from the \emph{Physical Review} rather than accept a referee's criticism that turned out to be correct \citep{Kennefick2005}. A criterion that makes such a practice part of the definition of science makes science depend on something that does not work.
+\end{objection}
+
+\begin{reply}
+The criterion does not require that any single check be reliable. It requires that checks recur without a last occasion, so that an error missed by one is exposed to the next. The Einstein episode illustrates the point: the referee's criticism, which Einstein rejected, reached him again through a colleague and was accepted, and the published version was corrected. Theorem~\ref{t:char} shows why unreliable checks can make a reliable record: what matters is not the probability that a given check catches a given error but that the schedule of checks never ends.
+\end{reply}
+
+\begin{objection}[Pseudoscientific journals]
+Homeopathy, parapsychology and creation science have journals with peer review, conferences with discussion, and even attempts at replication. By the criterion they are sciences.
+\end{objection}
+
+\begin{reply}
+The criterion is stated in terms of the refutation schedule, not the existence of venues. An enterprise has institutionalized error-correction only if every false claim in its record would at some later time be refuted by its checks. In the enterprises named, the central claims have an empty schedule: no outcome of review or replication within the enterprise removes the efficacy of high dilutions or the recent creation of the earth from its record. By Corollary~\ref{c:canon} they are not sciences, whatever the form of their journals. Parapsychology is the instructive borderline case: in periods when its researchers accepted that failures to replicate counted against their claims and withdrew claims accordingly, it satisfied the criterion in part, and its standing has depended on whether it did.
+\end{reply}
+
+\begin{objection}[Unfalsifiable criterion]
+The criterion is itself not testable by observation, and by its own lights is not part of the record of a science. It is philosophy, not science, and it cannot claim the authority of science.
+\end{objection}
+
+\begin{reply}
+The criterion does not claim the authority of science. It is a proposal about how to draw a distinction, justified by the point of drawing it (Principle~\ref{p:point}), and, like Popper's criterion, it is not self-refuting merely because it is not itself an empirical claim (SCI-07). It is, moreover, open to the kind of check the criterion requires: it may be confronted with cases and abandoned if it misclassifies them, which is what we have done in Section~\ref{s:cases}.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The criterion does not establish that the claims in the record of a science are true, or that they are more likely to be true than the claims of a non-science at any given time. It establishes that the record of a science, unlike that of a non-science, does not retain its errors forever. How quickly errors are removed is a separate question, to which SCI-19 gives a quantitative answer: replication and meta-analysis correct the record, but with a substantial delay. The criterion also does not establish that non-scientific enterprises are worthless or irrational. Ordinary perception, history written without institutional review, and much of philosophy produce knowledge without satisfying it; it identifies a particular kind of trustworthiness, not the only kind. Finally, the criterion classifies enterprises, and whether a given unpublished or unreviewed result is scientific is a further question, considered in SCI-01-c.
+
+\section{Formalization}\label{s:lean}
+
+The module \nolinkurl{Philosophy/SCI/SCI_01.lean} represents time by the natural numbers and the record of a single claim by a recursively defined Boolean function of the refutation schedule and the time of admission (Definitions~\ref{d:record} and~\ref{d:schedule}). It proves Lemmas~\ref{l:persist} and~\ref{l:elim} and Theorem~\ref{t:char} without philosophical premises. Theorem~\ref{t:dem} is stated as follows.
+
+\begin{lstlisting}
+theorem demarcation (e : Enterprise) :
+    Science e ↔ InstitutionalizedEC e
+\end{lstlisting}
+
+The axioms it depends on, as reported by the checker, are these.
+
+\begin{lstlisting}
+'Philosophy.SCI_01.demarcation' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.SCI_01.Claim, Philosophy.SCI_01.Enterprise,
+   Philosophy.SCI_01.Science,
+   Philosophy.SCI_01.demarcation_point,
+   Philosophy.SCI_01.refutes, Philosophy.SCI_01.truth]
+\end{lstlisting}
+
+The first three are standard axioms of Lean's logic; classical choice enters through the proof by contradiction in Theorem~\ref{t:char}. \texttt{Claim}, \texttt{Enterprise}, \texttt{Science}, \texttt{truth} and \texttt{refutes} are primitives: claims, enterprises, the property of being a science, truth values, and the refutation schedule of each enterprise for each claim. The only philosophical premise is \texttt{demarcation\_point}, which is Principle~\ref{p:point}. Proposition~\ref{p:content} depends, besides primitives for content, only on the axiom \texttt{twins}, which is Assumption~\ref{a:twins}. The module also proves Corollary~\ref{c:canon}. It does not formalize the argument that peer review, replication and public criticism are the institutions that realize standing checks, which is given in prose at the end of Section~\ref{s:argument}.
+
+\section{Conclusion}
+
+The classical criteria of demarcation looked for the mark of science in what scientists say, and failed because the same claims can be held scientifically or unscientifically. The mark lies in what an enterprise does with its claims. A fallible enterprise merits the trust accorded to science exactly when its record is self-cleansing, and a record is self-cleansing exactly when its checks recur without a last occasion. Peer review, replication and public criticism are the institutions through which modern science keeps its checks standing. Science is distinguished from non-science by institutionalized error-correction.
+
+\begin{thebibliography}{99}\small
+\bibitem[Ayer(1936)]{Ayer1936} Ayer, A.~J. (1936). \emph{Language, Truth and Logic}. Gollancz.
+\bibitem[Carlson(1985)]{Carlson1985} Carlson, S. (1985). A double-blind test of astrology. \emph{Nature} 318: 419--425.
+\bibitem[Carnap(1936--1937)]{Carnap1936} Carnap, R. (1936--1937). Testability and meaning. \emph{Philosophy of Science} 3: 419--471; 4: 1--40.
+\bibitem[Csiszar(2016)]{Csiszar2016} Csiszar, A. (2016). Peer review: Troubled from the start. \emph{Nature} 532: 306--308.
+\bibitem[Davenas et~al.(1988)]{Davenas1988} Davenas, E., et~al. (1988). Human basophil degranulation triggered by very dilute antiserum against IgE. \emph{Nature} 333: 816--818.
+\bibitem[Dawid(2013)]{Dawid2013} Dawid, R. (2013). \emph{String Theory and the Scientific Method}. Cambridge University Press.
+\bibitem[Ellis and Silk(2014)]{EllisSilk2014} Ellis, G. and Silk, J. (2014). Scientific method: Defend the integrity of physics. \emph{Nature} 516: 321--323.
+\bibitem[Hansson(2013)]{Hansson2013} Hansson, S.~O. (2013). Defining pseudoscience and science. In \citet{PigliucciBoudry2013}.
+\bibitem[Heesen and Bright(2021)]{HeesenBright2021} Heesen, R. and Bright, L.~K. (2021). Is peer review a good idea? \emph{British Journal for the Philosophy of Science} 72.
+\bibitem[Hoyningen-Huene(2013)]{HoyningenHuene2013} Hoyningen-Huene, P. (2013). \emph{Systematicity: The Nature of Science}. Oxford University Press.
+\bibitem[Joravsky(1970)]{Joravsky1970} Joravsky, D. (1970). \emph{The Lysenko Affair}. Harvard University Press.
+\bibitem[Kennefick(2005)]{Kennefick2005} Kennefick, D. (2005). Einstein versus the \emph{Physical Review}. \emph{Physics Today} 58(9): 43--48.
+\bibitem[Kitcher(1982)]{Kitcher1982} Kitcher, P. (1982). \emph{Abusing Science: The Case Against Creationism}. MIT Press.
+\bibitem[Kuhn(1970)]{Kuhn1970} Kuhn, T.~S. (1970). Logic of discovery or psychology of research? In I.~Lakatos and A.~Musgrave (eds.), \emph{Criticism and the Growth of Knowledge}, 1--23. Cambridge University Press.
+\bibitem[Lakatos(1970)]{Lakatos1970} Lakatos, I. (1970). Falsification and the methodology of scientific research programmes. In I.~Lakatos and A.~Musgrave (eds.), \emph{Criticism and the Growth of Knowledge}, 91--196. Cambridge University Press.
+\bibitem[Laudan(1982)]{Laudan1982} Laudan, L. (1982). Commentary: Science at the bar---causes for concern. \emph{Science, Technology, \& Human Values} 7: 16--19.
+\bibitem[Laudan(1983)]{Laudan1983} Laudan, L. (1983). The demise of the demarcation problem. In R.~S. Cohen and L.~Laudan (eds.), \emph{Physics, Philosophy and Psychoanalysis}, 111--127. Reidel.
+\bibitem[Longino(1990)]{Longino1990} Longino, H.~E. (1990). \emph{Science as Social Knowledge}. Princeton University Press.
+\bibitem[Longino(2002)]{Longino2002} Longino, H.~E. (2002). \emph{The Fate of Knowledge}. Princeton University Press.
+\bibitem[Maddox et~al.(1988)]{Maddox1988} Maddox, J., Randi, J. and Stewart, W.~W. (1988). \enquote{High-dilution} experiments a delusion. \emph{Nature} 334: 287--290.
+\bibitem[Merton(1973)]{Merton1973} Merton, R.~K. (1973). The normative structure of science. In \emph{The Sociology of Science}. University of Chicago Press. (First published 1942.)
+\bibitem[Open Science Collaboration(2015)]{OSC2015} Open Science Collaboration (2015). Estimating the reproducibility of psychological science. \emph{Science} 349: aac4716.
+\bibitem[Oreskes(2019)]{Oreskes2019} Oreskes, N. (2019). \emph{Why Trust Science?} Princeton University Press.
+\bibitem[Peirce(1877)]{Peirce1877} Peirce, C.~S. (1877). The fixation of belief. \emph{Popular Science Monthly} 12: 1--15.
+\bibitem[Peters and Ceci(1982)]{PetersCeci1982} Peters, D.~P. and Ceci, S.~J. (1982). Peer-review practices of psychological journals: The fate of published articles, submitted again. \emph{Behavioral and Brain Sciences} 5.
+\bibitem[Pigliucci and Boudry(2013)]{PigliucciBoudry2013} Pigliucci, M. and Boudry, M. (eds.) (2013). \emph{Philosophy of Pseudoscience: Reconsidering the Demarcation Problem}. University of Chicago Press.
+\bibitem[Popper(1945)]{Popper1945} Popper, K.~R. (1945). \emph{The Open Society and Its Enemies}. Routledge.
+\bibitem[Popper(1959)]{Popper1959} Popper, K.~R. (1959). \emph{The Logic of Scientific Discovery}. Hutchinson. (First published as \emph{Logik der Forschung}, 1934.)
+\bibitem[Popper(1963)]{Popper1963} Popper, K.~R. (1963). \emph{Conjectures and Refutations}. Routledge \& Kegan Paul.
+\bibitem[Ruse(1982)]{Ruse1982} Ruse, M. (1982). Creation science is not science. \emph{Science, Technology, \& Human Values} 7: 72--78.
+\bibitem[Shapin and Schaffer(1985)]{ShapinSchaffer1985} Shapin, S. and Schaffer, S. (1985). \emph{Leviathan and the Air-Pump}. Princeton University Press.
+\bibitem[Strevens(2020)]{Strevens2020} Strevens, M. (2020). \emph{The Knowledge Machine: How Irrationality Created Modern Science}. Liveright.
+\bibitem[Thagard(1978)]{Thagard1978} Thagard, P.~R. (1978). Why astrology is a pseudoscience. In \emph{PSA 1978}, vol.~1, 223--234. Philosophy of Science Association.
+\end{thebibliography}
+
+\end{document}

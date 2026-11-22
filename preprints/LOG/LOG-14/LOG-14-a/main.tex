@@ -1,0 +1,167 @@
+\documentclass{situationist-preprint}
+
+\title{A Logic of Imperatives}
+\msid{LOG-14-a}
+\msfamily{LOG-14}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mskeywords{imperatives; imperative logic; Jørgensen's dilemma; Ross's paradox; satisfaction; compliance; free choice}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Imperatives are neither true nor false, yet some inferences among them seem valid: from \enquote{Take all the boxes to the station} and \enquote{This is one of the boxes} it follows that one should take this box to the station. This is Jørgensen's dilemma. The best-known answer defines validity for imperatives by the preservation of satisfaction, and the best-known objection to that answer is Ross's paradox: \enquote{Mail the letter} entails \enquote{Mail the letter or burn it}, which seems to allow burning it. We argue that there is a logic of imperatives, that it is defined by satisfaction-preservation, and that Ross's paradox is blocked. The key is a distinction between what an inference yields and what an agent must do to comply. We prove that adding to a set of imperatives in force any imperative it entails leaves the set of compliant courses of action unchanged. The Ross conclusion is therefore valid and idle: it never makes burning the letter a way of complying. The same result disarms the explosion of inconsistent commands and explains why no imperative with directive force follows from indicatives alone.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Jorgensen1938} observed that the notion of logical validity is defined for sentences that can be true or false, and that imperatives cannot. Either, then, there is no logic of imperatives, or validity must be defined in some other way. Yet there seem to be valid imperative inferences. A quartermaster who is told to take all the boxes to the station and who knows that a given object is one of the boxes has been told, by implication, to take that object to the station; an order to close the doors and windows is an order, among other things, to close the doors. The dilemma is to reconcile these.
+
+\subsection{Satisfaction and validity}
+
+\citet{HofstadterMcKinsey1939} proposed to associate with each imperative a declarative sentence describing what would be the case if it were obeyed, and to define the logic of imperatives through the logic of these sentences. \citet{Ross1941} distinguished two ways of doing this. In the \emph{logic of satisfaction}, an imperative is satisfied when what it demands is done, and an inference is valid when the conclusion is satisfied whenever the premises are. In the \emph{logic of validity}, an imperative is valid (in a sense close to \enquote{in force}) when it is issued by a competent authority, and an inference is valid when the conclusion is in force whenever the premises are. Ross argued that the first notion yields a logic that is formally adequate and intuitively absurd. In it, \enquote{Mail the letter} entails \enquote{Mail the letter or burn it}, because every way of mailing the letter is a way of mailing it or burning it. But the conclusion, Ross thought, is not an imperative that anyone who issued the premise has issued, and it seems to leave the addressee free to burn the letter. He concluded that a genuine logic of imperatives was doubtful.
+
+\subsection{Later work}
+
+\citet{Hare1949,Hare1967} defended imperative logic by separating the content of an imperative, which it shares with the corresponding indicative, from the mood in which the content is presented; on his view the logical relations hold between contents, and the paradoxical air of Ross's inference comes from confusing what is entailed with what would be conversationally appropriate to say. \citet{Williams1963} argued that much of imperative inference is better understood as practical reasoning about how to comply than as entailment between imperatives. More recently, \citet{Vranas2008,Vranas2011} has developed a systematic theory in which imperatives (and prescriptions generally) are identified by both their satisfaction and their violation conditions, and validity is defined in terms of support relations between them. \citet{Charlow2014} proposes a dynamic semantics on which imperatives update a plan-like component of the context, and on which logical relations among imperatives are relations among such updates. In the semantics of natural language, the free-choice reading of disjunctive imperatives and permissions, on which \enquote{Take an apple or a pear} conveys that either is allowed, has been studied as a phenomenon in its own right \citep{Kamp1973,Fox2007}.
+
+We defend the simplest of these positions, satisfaction-preservation, and we show that Ross's paradox does not tell against it. What the paradox needs is a principle connecting entailment to compliance, and the principle it needs is false.
+
+\section{Framework}
+
+Let $W$ be a set of possible outcomes, each settling both how the world is and what the addressee does. Indicative sentences are true or false at outcomes. For each indicative $\varphi$ describing conduct of the addressee, $!\varphi$ is the imperative to make $\varphi$ true. We write $[\varphi]$ for the set of outcomes at which $\varphi$ is true.
+
+\begin{definition}[Satisfaction]\label{d:sat}
+The imperative $!\varphi$ is \emph{satisfied} at an outcome $w$ iff $\varphi$ is true at $w$.
+\end{definition}
+
+\begin{definition}[Validity]\label{d:valid}
+Let $\Gamma$ be a set of indicatives and $\Delta$ a set of imperatives. The inference from $\Gamma$ and $\Delta$ to $!\psi$ is \emph{valid}, written $\Gamma; \Delta \models\, !\psi$, iff $!\psi$ is satisfied at every outcome at which every member of $\Gamma$ is true and every member of $\Delta$ is satisfied. The inference from $\Gamma$ and $\Delta$ to an indicative $\chi$ is valid iff $\Gamma \models \chi$.
+\end{definition}
+
+The second clause says that imperatives do not support indicative conclusions: what is commanded is no evidence of what is the case. The first clause is the satisfaction-preservation criterion. Conditional imperatives, such as \enquote{If it rains, close the window}, we treat as imperatives with conditional content, $!(\rho \rightarrow \kappa)$, satisfied unless it rains and the window is not closed. Nothing below depends on this choice; Objection~\ref{o:conditional} returns to it.
+
+\begin{definition}[Compliance]\label{d:comply}
+Given a background $\Gamma$, a set $\Delta$ of imperatives in force, and an outcome $w$ at which $\Gamma$ is true, the addressee's conduct at $w$ \emph{complies} with $\Delta$ iff every member of $\Delta$ is satisfied at $w$. We write $C_\Gamma(\Delta)$ for the set of $\Gamma$-outcomes that comply with $\Delta$.
+\end{definition}
+
+\begin{principle}[Compliance is what is demanded]\label{p:demand}
+What a set of imperatives in force demands of the addressee is compliance with all of them. A course of action is permitted by the imperatives in force iff it complies with them, and two sets of imperatives with the same compliance set make the same demands.
+\end{principle}
+
+Principle~\ref{p:demand} says that the normative upshot of a set of imperatives, for the addressee, is the set of courses of action that satisfy them all. It does not say that imperatives are the only source of permissions; it says that, as far as these imperatives go, the addressee is permitted exactly what complies with them.
+
+\section{Results}
+
+\begin{proposition}[Jørgensen's dilemma answered]\label{p:jorgensen}
+The following are valid by Definition~\ref{d:valid}:
+\begin{enumerate}[label=(\alph*)]
+\item $!(\varphi \wedge \psi) \models\, !\varphi$;
+\item $Ba;\; !\forall x(Bx \rightarrow Sx) \models\, !Sa$;
+\item $\varphi \rightarrow \psi;\; !\varphi \models\, !\psi$, when $\varphi \rightarrow \psi$ is a true indicative, as in \enquote{if you mail the letter, you go to the post office}.
+\end{enumerate}
+The following is invalid: $\Gamma; \emptyset \models\, !\psi$ whenever $\psi$ is not true at every $\Gamma$-outcome.
+\end{proposition}
+
+\begin{proof}
+(a) Every outcome at which $\varphi \wedge \psi$ is true is one at which $\varphi$ is true. (c) Every outcome at which $\varphi$ and $\varphi \rightarrow \psi$ are true is one at which $\psi$ is. (b) At every outcome at which $a$ is a box and every box is taken to the station, $a$ is taken to the station. The invalidity claim is immediate from Definition~\ref{d:valid} with $\Delta$ empty.
+\end{proof}
+
+Case (b) is the quartermaster's inference, and case (c) is the elementary means--end inference. Jørgensen's dilemma is answered: validity for imperatives is not truth-preservation, but it is a relation between contents that can be checked with the ordinary logic of indicatives.
+
+\begin{theorem}[Compliance invariance]\label{t:invariance}
+If $\Gamma; \Delta \models\, !\psi$, then $C_\Gamma(\Delta \cup \{!\psi\}) = C_\Gamma(\Delta)$.
+\end{theorem}
+
+\begin{proof}
+Every outcome that complies with $\Delta \cup \{!\psi\}$ complies with $\Delta$. Conversely, if $w$ is a $\Gamma$-outcome that complies with $\Delta$, every member of $\Delta$ is satisfied at $w$ and every member of $\Gamma$ is true at $w$, so by validity $!\psi$ is satisfied at $w$, and $w$ complies with $\Delta \cup \{!\psi\}$.
+\end{proof}
+
+\begin{corollary}[Ross's paradox blocked]\label{c:ross}
+The inference from \enquote{Mail the letter} to \enquote{Mail the letter or burn it} is valid. Adding its conclusion to the imperatives in force does not make burning the letter without mailing it a way of complying, and does not permit it.
+\end{corollary}
+
+\begin{proof}
+Validity: $[m] \subseteq [m \vee b]$. By Theorem~\ref{t:invariance}, $C_\Gamma(\{!m, !(m \vee b)\}) = C_\Gamma(\{!m\}) = [m] \cap [\Gamma]$. An outcome at which the letter is burned and not mailed is not in this set. By Principle~\ref{p:demand}, it is not permitted by the imperatives in force.
+\end{proof}
+
+Ross's argument needs a bridge from validity to permission: if $!(m \vee b)$ follows from what is in force, then doing $b$ is a way of doing what is required. That bridge would hold if the derived imperative replaced its premise, so that $!(m \vee b)$ alone were in force. It does not. The premise remains in force, and compliance is compliance with everything in force. The derived imperative is entailed and binding, since every compliant course of action satisfies it, but it adds no demand and removes none.
+
+\begin{proposition}[Inconsistent commands]\label{p:explosion}
+If no $\Gamma$-outcome satisfies every member of $\Delta$, then $\Gamma; \Delta \models\, !\psi$ for every $\psi$, and $C_\Gamma(\Delta \cup \{!\psi\}) = C_\Gamma(\Delta) = \emptyset$.
+\end{proposition}
+
+\begin{proof}
+The first claim holds vacuously; the second follows from Theorem~\ref{t:invariance} and the hypothesis.
+\end{proof}
+
+\enquote{Shut the door} and \enquote{Do not shut the door} entail every imperative, including the imperative to do something terrible. Proposition~\ref{p:explosion} shows that this is harmless in the same way as Ross's inference: the derived imperatives add nothing to a set of demands that could not be met in any case. What the addressee of inconsistent commands faces is a practical predicament, not a logical licence.
+
+\begin{proposition}[No directive force from indicatives]\label{p:hume}
+If $\Gamma; \emptyset \models\, !\psi$, then $C_\Gamma(\{!\psi\})$ is the set of all $\Gamma$-outcomes.
+\end{proposition}
+
+\begin{proof}
+By Definition~\ref{d:valid}, $\psi$ is true at every $\Gamma$-outcome, so every $\Gamma$-outcome complies with $!\psi$.
+\end{proof}
+
+From \enquote{You will shut the door} it follows, by satisfaction-preservation, that \enquote{Shut the door!} is satisfied; it has sometimes been objected that the logic thereby derives an imperative from an indicative. Proposition~\ref{p:hume} shows that the imperative so derived is one that, given the premises, makes no demand: whatever the addressee does in the outcomes that the premises allow, she complies. This is the correct form of Poincaré's principle that no imperative conclusion follows from indicative premises: no imperative with directive force does. The result parallels the treatment of Hume's law in MTE-10, on which normative conclusions require a normative premise.
+
+\section{Objections}
+
+\begin{objection}[Free choice]
+\enquote{Mail the letter or burn it}, said by the addressee's superior, does give permission to burn the letter. The logic must say why that permission is not inherited.
+\end{objection}
+
+\begin{reply}
+The permission is conveyed by the act of issuing a disjunctive imperative, whether as an implicature, as on the account of \citet{Fox2007}, or as part of the semantics of the utterance in context, as \citet{Kamp1973} proposed for permissions. Either way, it is generated by an act of a speaker who chose to offer a disjunction rather than one of its disjuncts. The conclusion of a valid inference is not uttered by anyone, and nobody chose to offer it in place of the stronger premise; so the conditions that generate free choice are absent. If, alternatively, the permission is built into the content of disjunctive imperatives, then it is not part of their satisfaction conditions, and the logic of satisfaction is silent about it. In either case the satisfaction logic does not license burning, and Corollary~\ref{c:ross} shows that the imperatives in force do not.
+\end{reply}
+
+\begin{objection}[Ross's other logic]
+Ross held that what matters is not satisfaction but validity in his sense: whether the derived imperative is in force. \enquote{Mail the letter or burn it} was never issued, so it is not in force, and a logic that derives it misdescribes what is in force.
+\end{objection}
+
+\begin{reply}
+On our account the derived imperative is in force in the only sense that matters to the addressee: it is binding, since no course of action that complies with what was issued fails to satisfy it. It is not separately issued, and nothing in Definition~\ref{d:valid} says that it is. The logic describes what one is committed to by what was issued, just as the logic of indicatives describes what a speaker is committed to without implying that she asserted every consequence of what she said. Theorem~\ref{t:invariance} shows that being committed to the consequences of the imperatives in force never changes what one must do.
+\end{reply}
+
+\begin{objection}[Conditional imperatives]\label{o:conditional}
+Treating \enquote{If it rains, close the window} as $!(\rho \rightarrow \kappa)$ makes it satisfied when it does not rain, whatever the addressee does, and it validates the inference from \enquote{Close the window} to \enquote{If it rains, close the window}. \citet{Vranas2008} argues that conditional imperatives are neither satisfied nor violated when their condition is false.
+\end{objection}
+
+\begin{reply}
+The inference from \enquote{Close the window} to \enquote{If it rains, close the window} seems to us correct: whoever has been told to close the window has been told, among other things, to close it if it rains. The case that the material treatment gets wrong, if any, is one in which the addressee is credited with satisfying a conditional imperative merely because the condition failed; but on Definition~\ref{d:comply} nothing turns on this credit, since compliance is a matter of not failing any imperative in force, and the addressee who was never in the condition has not failed. LOG-07 defends the material conditional for the purposes of logic, while leaving indicative conditionals in natural language to separate treatment, and the same division applies here. A three-valued refinement that distinguishes satisfaction from non-violation would leave Theorem~\ref{t:invariance} and Corollary~\ref{c:ross} unchanged for unconditional imperatives, which is where Ross's paradox arises.
+\end{reply}
+
+\begin{objection}[Deontic logic]
+Ross's paradox has a deontic counterpart: in standard deontic logic, $O m$ implies $O(m \vee b)$. Whatever is said about imperatives must be said about obligation, and there the conclusion seems to imply that burning is a way of meeting one's obligations.
+\end{objection}
+
+\begin{reply}
+The diagnosis transfers. That one ought to mail or burn the letter is true whenever one ought to mail it, and it is not a sufficient condition of meeting one's obligations to do something that satisfies it; one meets one's obligations by satisfying all of them, including the obligation to mail. The appearance that $O(m \vee b)$ permits $b$ comes, as with imperatives, from the free-choice reading of disjunctions under modals, which is not the reading on which the inference is valid.
+\end{reply}
+
+\section{What the result does not establish}
+
+The logic defined here is a logic of the satisfaction of imperatives, with a definition of compliance. It is not a semantics for the imperative mood in natural language, which must also account for the uses of imperatives to give permission, advice and invitation, and for their interaction with modals \citep{Charlow2014}. It is not a logic of permission: Principle~\ref{p:demand} says what the imperatives in force permit, but permissions issued explicitly are a further source of normative change that the logic does not model. And it is not a theory of practical reasoning: as \citet{Williams1963} emphasized, the reasoning by which an agent works out how to comply involves means--end beliefs, defeasible preferences and choices among ways of complying, which satisfaction-preservation does not settle. The companion LOG-14-b examines Ross's paradox and its variants in more detail.
+
+\section{Conclusion}
+
+There is a logic of imperatives, and it is defined by satisfaction-preservation: an imperative follows from premises when every outcome at which the indicative premises are true and the imperative premises satisfied is one at which it is satisfied. Ross's paradox is blocked, because the paradox requires that a derived imperative extend the ways of complying, and adding an entailed imperative to those in force never changes the set of compliant courses of action. The same fact makes the explosion of inconsistent commands harmless and shows that no imperative with directive force follows from indicatives alone.
+
+\begin{thebibliography}{99}\small
+\bibitem[Charlow(2014)]{Charlow2014} Charlow, N. (2014). Logic and semantics for imperatives. \emph{Journal of Philosophical Logic}, 43(4), 617--664.
+\bibitem[Fox(2007)]{Fox2007} Fox, D. (2007). Free choice and the theory of scalar implicatures. In U. Sauerland and P. Stateva (eds.), \emph{Presupposition and Implicature in Compositional Semantics}, 71--120. Palgrave Macmillan.
+\bibitem[Hare(1949)]{Hare1949} Hare, R.~M. (1949). Imperative sentences. \emph{Mind}, 58(229), 21--39.
+\bibitem[Hare(1967)]{Hare1967} Hare, R.~M. (1967). Some alleged differences between imperatives and indicatives. \emph{Mind}, 76(303), 309--326.
+\bibitem[Hofstadter and McKinsey(1939)]{HofstadterMcKinsey1939} Hofstadter, A. and McKinsey, J.~C.~C. (1939). On the logic of imperatives. \emph{Philosophy of Science}, 6(4), 446--457.
+\bibitem[Jørgensen(1938)]{Jorgensen1938} Jørgensen, J. (1938). Imperatives and logic. \emph{Erkenntnis}, 7, 288--296.
+\bibitem[Kamp(1973)]{Kamp1973} Kamp, H. (1973). Free choice permission. \emph{Proceedings of the Aristotelian Society}, 74, 57--74.
+\bibitem[Ross(1941)]{Ross1941} Ross, A. (1941). Imperatives and logic. \emph{Theoria}, 7(1), 53--71.
+\bibitem[Vranas(2008)]{Vranas2008} Vranas, P.~B.~M. (2008). New foundations for imperative logic I: Logical connectives, consistency, and quantifiers. \emph{Noûs}, 42(4), 529--572.
+\bibitem[Vranas(2011)]{Vranas2011} Vranas, P.~B.~M. (2011). New foundations for imperative logic: Pure imperative inference. \emph{Mind}, 120(478), 369--446.
+\bibitem[Williams(1963)]{Williams1963} Williams, B.~A.~O. (1963). Imperative inference. \emph{Analysis}, 23 (Supplement), 30--36.
+\end{thebibliography}
+
+\end{document}

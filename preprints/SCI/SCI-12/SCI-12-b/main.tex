@@ -1,0 +1,75 @@
+\documentclass{situationist-preprint}
+
+\title{Counterfactual Credences}
+\msid{SCI-12-b}
+\msfamily{SCI-12}
+\msdiscipline{Philosophy of Science}
+\mstype{Companion manuscript}
+\mskeywords{Bayesianism; old evidence; counterfactual credence; confirmation; uniqueness; Glymour}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+SCI-12-a solves the problem of old evidence by evaluating confirmation relative to the counterfactual credence, the credence that would be rational on the agent's evidence with the item in question removed. The usual complaint is that such credences are indeterminate or inaccessible. We show exactly what the counterfactual credence contributes. The actual credence fixes the counterfactual credence conditional on the evidence, but not its value conditional on the negation of the evidence or the counterfactual probability of the evidence, and confirmation turns on the first of these: old evidence confirms a hypothesis exactly when the actual credence in the hypothesis exceeds the counterfactual credence in it given that the evidence had been otherwise. This makes the role of the uniqueness premise precise and gives the account a tractable criterion.
+\end{abstract}
+
+\section{What the actual credence leaves open}
+
+Let $B$ be an agent's evidence base, $E\in B$, and $B'=B\setminus\{E\}$. Write $C=C_B$ for the actual rational credence and $C'=C_{B'}$ for the counterfactual one (Definition~2.4 of SCI-12-a), and let $p=C'(E)$. By Assumption~2.3 of SCI-12-a, if $p>0$ then $C(\cdot)=C'(\cdot\mid E)$.
+
+The complaint against counterfactual credences, pressed since \citet{Glymour1980} and \citet{Howson1991}, is that the agent has only her actual credence, and that any counterfactual credence is a reconstruction which she could choose to suit the verdict she wants. The first step is to see how much of the counterfactual credence the actual one fixes.
+
+\begin{lemma}\label{l:fix}
+The actual credence fixes $C'(\cdot\mid E)$ and nothing else about $C'$: for any $q\in(0,1)$ and any probability function $D$ with $D(E)=0$, the function $q\,C+(1-q)\,D$ is a counterfactual credence consistent with $C$ by conditionalization.
+\end{lemma}
+
+\begin{proof}
+Let $C^*=q\,C+(1-q)\,D$. Since $C(E)=1$ and $D(E)=0$, $C^*(E)=q>0$, and for any $X$, $C^*(X\wedge E)=q\,C(X)$, so $C^*(X\mid E)=C(X)$. Conversely, any $C'$ with $C'(E)>0$ is determined by $C'(\cdot\mid E)$, $C'(\cdot\mid\neg E)$ and $C'(E)$, of which only the first is constrained by $C$.
+\end{proof}
+
+\section{The criterion}
+
+\begin{proposition}\label{p:crit}
+Suppose $0<p<1$. Then $E$ confirms $H$, in the sense of Principle~P1 of SCI-12-a, if and only if $C(H)>C'(H\mid\neg E)$. More precisely,
+\[
+C(H)-C'(H)=(1-p)\,\bigl(C(H)-C'(H\mid\neg E)\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+By total probability, $C'(H)=p\,C'(H\mid E)+(1-p)\,C'(H\mid\neg E)=p\,C(H)+(1-p)\,C'(H\mid\neg E)$. Subtracting from $C(H)$ gives the identity, and since $1-p>0$ the sign of the difference is that of $C(H)-C'(H\mid\neg E)$. By Theorem~3.3 of SCI-12-a, $E$ confirms $H$ iff $C(H)>C'(H)$.
+\end{proof}
+
+The identity is the instance at the counterfactual credence of the decomposition in Proposition~4.1 of SCI-12-a, and the criterion agrees with Corollary~4.2 there: the bracketed term is the measure $s$ evaluated at $C'$. What is new is the division of labor it displays. The actual credence supplies $C(H)$. The counterfactual credence contributes two quantities: $C'(H\mid\neg E)$, which decides whether $E$ confirms $H$, and $p$, which only scales the degree. Applied to Mercury, the question whether the perihelion confirms general relativity is the question whether the rational credence in the theory, had the perihelion advance been found to be Newtonian, would have been lower than it actually is. Put so, the answer is obvious, and it does not depend on fixing the counterfactual probability of the observation, about which physicists might reasonably have hesitated.
+
+By Lemma~\ref{l:fix}, $C'(H\mid\neg E)$ is not fixed by the actual credence. It is fixed by Assumption~2.2 of SCI-12-a: the evidence base $B'$ determines a unique rational credence, and that credence has a value conditional on $\neg E$. Uniqueness is therefore not an idle premise of the account. Without it, the actual credence would leave open exactly the quantity on which confirmation turns, and the complaint of arbitrariness would be justified.
+
+\begin{objection}
+A counterfactual credence is the credence of an agent who does not exist. Why should the confirmation relation, a relation the actual agent uses, depend on it?
+\end{objection}
+
+\begin{reply}
+Confirmation is a relation between evidence and hypothesis relative to a body of background evidence, not a fact about anyone's history of belief change \citep{Christensen1999,Joyce1999}. That relation is the same whether $E$ was learned first or last, as Proposition~3.6 of SCI-12-a records. The counterfactual credence is not the credence of another agent but the evidential standing of the hypothesis on part of the evidence, which the actual agent can assess as she assesses any conditional probability.
+\end{reply}
+
+\begin{objection}
+Removing $E$ is underdetermined when other items of evidence depend on $E$.
+\end{objection}
+
+\begin{reply}
+Definition~2.1 of SCI-12-a treats items held only in virtue of $E$ as part of what is removed, and evidence is a base rather than a deductively closed theory, so the removal is well defined. Where $B'$ still entails $E$, Proposition~3.7 of SCI-12-a classifies $E$ as neutral, and Proposition~\ref{p:crit} is not needed, since then $p=1$.
+\end{reply}
+
+\section{Conclusion}
+
+Counterfactual credences are not arbitrary reconstructions. The actual credence fixes what they say on the supposition of the evidence; the uniqueness of rational credence fixes the rest; and confirmation by old evidence depends on a single counterfactual quantity, the rational credence in the hypothesis had the evidence been otherwise.
+
+\begin{thebibliography}{99}\small
+\bibitem[Christensen(1999)]{Christensen1999} Christensen, D. (1999). Measuring confirmation. \emph{The Journal of Philosophy}, 96(9), 437--461.
+\bibitem[Glymour(1980)]{Glymour1980} Glymour, C. (1980). \emph{Theory and Evidence}. Princeton University Press.
+\bibitem[Howson(1991)]{Howson1991} Howson, C. (1991). The \enquote{old evidence} problem. \emph{The British Journal for the Philosophy of Science}, 42(4), 547--555.
+\bibitem[Joyce(1999)]{Joyce1999} Joyce, J.~M. (1999). \emph{The Foundations of Causal Decision Theory}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

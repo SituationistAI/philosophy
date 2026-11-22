@@ -1,0 +1,98 @@
+\documentclass{situationist-preprint}
+
+\title{Revenge Paradoxes}
+\msid{LOG-01-b}
+\msfamily{LOG-01}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Companion manuscript}
+\mskeywords{liar paradox; revenge; determinateness; exact truth; continuity; Łukasiewicz logic}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-01-a argues that the liar is neither true nor false and that the revenge sentences built from Field's determinateness operator are not paradoxical. A revenge paradox can be built from any notion the theorist uses to describe the liar's status, and the principal examines only two. We give a general criterion. In the continuum-valued Łukasiewicz setting, the liar built from an operator has an acceptable value whenever the operator is continuous, and has none whenever the operator is classical-valued and agrees with truth on the classical values. The paradoxical operators are therefore exactly those that sort sentences classically. We apply the criterion to \enquote{just true}, \enquote{defective} and the limit $D^\omega$ of the determinateness hierarchy, which we prove to be the exact-truth operator. Every revenge sentence that the theory can express has a value, and the hierarchy of determinateness operators blocks revenge.
+\end{abstract}
+
+\section{The general form of revenge}
+
+A revenge paradox takes the theorist's description of the liar's status, say that it is \emph{defective}, \emph{gappy} or \emph{not determinately true}, and forms a sentence that says of itself that it has that status, or that it lacks the complementary one. If the new sentence is paradoxical, the account has not escaped the paradox but moved it. LOG-01-a (Section 6) answers the two forms of revenge that matter most for Field's theory \citep{Field2003,Field2008}: the liar built from \enquote{not determinately true}, and its iterations. Theorem 4.3 there shows that the $D^n$-liar has a value strictly between falsity and truth, and Proposition 4.6 shows that the liar built from exact truth has no value, so that exact truth is not expressible.
+
+Critics of the theory hold that this leaves the most dangerous forms of revenge untouched. \citet{Priest2010} argues that the theorist's general claim about the hierarchy brings with it an operator $D^\omega$; \citet{Beall2009} discusses the parallel problem of \enquote{just true} for the dialetheist; \citet{MurziRossi2020} argue that any theory that can say that a sentence is defective generates a sentence that is paradoxical. To answer them case by case would leave open whether some further notion generates revenge. We give a criterion instead.
+
+\section{A criterion}
+
+We work in the continuum-valued Łukasiewicz logic, the limit of the logics $\mathrm{L}_k$ of LOG-01-a, with values in $[0,1]$ and $\neg x = 1 - x$. An operator $\varphi$ is interpreted by a function $f$ from $[0,1]$ to $[0,1]$; as in Definition 3.2 of LOG-01-a, a value $x$ is acceptable for the $\varphi$-liar if $1 - f(x) = x$, and the $\varphi$-liar is paradoxical if it has no acceptable value.
+
+\begin{proposition}\label{p:cont}
+If $f$ is continuous, the $\varphi$-liar has an acceptable value.
+\end{proposition}
+
+\begin{proof}
+Let $g(x) = 1 - f(x) - x$. Then $g(0) = 1 - f(0) \geq 0$ and $g(1) = -f(1) \leq 0$. Since $g$ is continuous, by the intermediate value theorem $g(x) = 0$ for some $x$, and that $x$ is acceptable.
+\end{proof}
+
+Call $f$ \emph{classical-valued} if it takes only the values $0$ and $1$, and \emph{faithful} if $f(0) = 0$ and $f(1) = 1$, that is, if it agrees with truth on sentences that are fully true or fully false.
+
+\begin{proposition}\label{p:class}
+If $f$ is classical-valued and faithful, the $\varphi$-liar is paradoxical.
+\end{proposition}
+
+\begin{proof}
+If $x$ is acceptable, then $x = 1 - f(x)$ is $0$ or $1$, since $f(x)$ is. If $x = 0$, then $1 - f(0) = 1 \neq 0$. If $x = 1$, then $1 - f(1) = 0 \neq 1$.
+\end{proof}
+
+The two propositions together locate revenge. A faithful classical-valued operator is discontinuous, since it jumps from $0$ to $1$ somewhere in $[0,1]$; the operators of Proposition~\ref{p:class} lie outside the scope of Proposition~\ref{p:cont}. By McNaughton's theorem, the functions definable from the connectives of continuum-valued Łukasiewicz logic are exactly the continuous piecewise linear functions with integer coefficients \citep{McNaughton1951}. Every operator definable from the connectives and the transparent truth predicate is therefore continuous, and its liar has a value. Determinateness $D$, with $D x = \max(0, 2x - 1)$ (Definition 3.3 of LOG-01-a), is such an operator, and so is each of its finite iterations. Theorem 4.3 of LOG-01-a computes the values; Proposition~\ref{p:cont} shows that no choice of definable operator could have yielded paradox.
+
+The criterion is general but not complete: a discontinuous operator that is not classical-valued may or may not generate paradox. Every revenge notion we know of is either definable, and so continuous, or classical-valued and faithful, and the following cases are typical.
+
+\section{Applications}
+
+\paragraph{Just true.} \enquote{$A$ is just true} is meant to apply to $A$ when $A$ is true and in no way false. On the gap reading of LOG-01-a, a sentence with an intermediate value is not true, and \enquote{just true} adds nothing to \enquote{fully true}; it is the exact-truth operator $E$ of Definition 4.5 of LOG-01-a, classical-valued and faithful. Its liar is paradoxical by Proposition~\ref{p:class}, which generalizes Proposition 4.6 of LOG-01-a from the finite logics to the continuum, and $E$ is not definable.
+
+\paragraph{Defective.} Let \enquote{$A$ is defective} be true to degree $1$ if $A$ has an intermediate value and $0$ otherwise. The sentence that says of itself that it is false or defective is the $\varphi$-liar for $f(x) = 1$ if $x = 1$ and $f(x) = 0$ otherwise: it is the $E$-liar again. A classical notion of defectiveness is inexpressible for the same reason as exact truth. What the theory can express is defectiveness of a given degree: $A \wedge \neg D A$ has the value $\min(x, 1 - \max(0, 2x - 1))$, which is positive exactly when $x$ is intermediate and is continuous. Its liars have values.
+
+\paragraph{The limit of the hierarchy.} Priest's objection is that the general claim about the hierarchy yields an operator $D^\omega$, the conjunction of all the $D^n$. If that conjunction is evaluated as the infimum of its conjuncts, the following holds.
+
+\begin{proposition}\label{p:limit}
+For every $n$, $D^n x = \max(0,\ 1 - 2^n(1 - x))$. Hence the infimum of the $D^n x$ is $1$ if $x = 1$ and $0$ otherwise: $D^\omega$ is the exact-truth operator.
+\end{proposition}
+
+\begin{proof}
+For $n = 0$ the formula gives $x$. If it holds for $n$ and $D^n x > 0$, then $D^{n+1} x = \max(0,\ 2(1 - 2^n(1-x)) - 1) = \max(0,\ 1 - 2^{n+1}(1-x))$; if $D^n x = 0$, then $D^{n+1} x = D 0 = 0$, and $1 - 2^{n+1}(1 - x) \leq 1 - 2^n(1-x) \leq 0$. For $x = 1$ every $D^n x$ is $1$. For $x < 1$, $2^n(1-x) \geq 1$ for large $n$, so $D^n x = 0$ from some $n$ on.
+\end{proof}
+
+Proposition~\ref{p:limit} turns Priest's objection into an instance of the criterion. Each $D^n$ is continuous, and the hierarchy does not collapse (Corollary 4.4 of LOG-01-a); but the pointwise limit of the hierarchy is discontinuous, and it is exact truth. So $D^\omega$, so understood, is not expressible, and the theory is not obliged to express it. This is consistent with the reply to Priest in LOG-01-a, which leaves open whether the quantified theory defines a $D^\omega$: in Field's construction the values of quantified sentences are not computed as infima over a continuum \citep{Field2008}, and whatever operator his theory defines at the limit stage is not the operator of Proposition~\ref{p:limit}. What the criterion adds is that if it were, it would be undefinable, and if it is definable, its liar has a value.
+
+\section{Objections and replies}
+
+\begin{objection}
+The criterion presupposes that the theorist's notions must be definable from the Łukasiewicz connectives. But the theorist understands \enquote{exactly true}, and understanding is not limited to what is definable.
+\end{objection}
+
+\begin{reply}
+The theorist understands \enquote{exactly true} as she understands \enquote{the set of all non-self-membered sets}: well enough to prove that nothing answers to it in the language she is describing. Proposition~\ref{p:class} is that proof. The relevant question is not whether the phrase is understood but whether the language contains an operator that applies to its own sentences with that meaning. It cannot, on pain of paradox, and Tarski's theorem in its general form tells us that every consistent theory of transparent truth excludes some notion. LOG-01-a argues that exact truth is the least costly exclusion.
+\end{reply}
+
+\begin{objection}
+The theorist must assert, in her metalanguage, that the liar is not exactly true. If the metalanguage is classical, revenge has been relocated to it.
+\end{objection}
+
+\begin{reply}
+It has been located there, which is not the same. The metalanguage in which we state Propositions~\ref{p:cont}--\ref{p:limit} is classical mathematics about functions on $[0,1]$; it does not contain a transparent truth predicate for its own sentences, and so does not contain the liar. That a theory of transparent truth for a language cannot be its own classical metatheory is the content of the revenge results, and \citet{MurziRossi2020} draw the same moral for the theorist's notion of validity. LOG-01-a accepts the limitation. The theorist's object language contains its own truth predicate and the full hierarchy of determinateness; the classical sorting of its sentences is done from outside, as in every consistent theory.
+\end{reply}
+
+\section{Conclusion}
+
+Revenge paradoxes are generated by operators that sort sentences classically while agreeing with truth on the classical values. Every operator definable from the Łukasiewicz connectives and the truth predicate is continuous, and continuous operators generate liars with values. The hierarchy of determinateness operators therefore blocks revenge at every finite level, and the notions that would reinstate it, just truth, classical defectiveness and the limit of the hierarchy evaluated as an infimum, are one and the same operator, exact truth, which is not expressible. The liar is neither true nor false, and the revenge paradoxes do not show otherwise.
+
+\begin{thebibliography}{99}\small
+\bibitem[Beall(2009)]{Beall2009} Beall, J.~C. (2009). \emph{Spandrels of Truth}. Oxford University Press.
+\bibitem[Field(2003)]{Field2003} Field, H. (2003). A revenge-immune solution to the semantic paradoxes. \emph{Journal of Philosophical Logic}, 32(2), 139--177.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[McNaughton(1951)]{McNaughton1951} McNaughton, R. (1951). A theorem about infinite-valued sentential logic. \emph{The Journal of Symbolic Logic}, 16(1), 1--13.
+\bibitem[Murzi and Rossi(2020)]{MurziRossi2020} Murzi, J. and Rossi, L. (2020). Generalized revenge. \emph{Australasian Journal of Philosophy}, 98(1), 153--177.
+\bibitem[Priest(2010)]{Priest2010} Priest, G. (2010). Hopes fade for saving truth. \emph{Philosophy}, 85(1), 109--140.
+\end{thebibliography}
+
+\end{document}

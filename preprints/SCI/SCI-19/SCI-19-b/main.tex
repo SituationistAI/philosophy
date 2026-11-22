@@ -1,0 +1,84 @@
+\documentclass{situationist-preprint}
+
+\title{The Replication Crisis as Self-Correction}
+\msid{SCI-19-b}
+\msfamily{SCI-19}
+\msdiscipline{Philosophy of Science}
+\mstype{Companion manuscript}
+\mskeywords{replication crisis; self-correction; meta-analysis; publication bias; preregistration; Peirce}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The replication crisis is often cited as evidence that science is not self-correcting. We argue that it is an episode of self-correction, and that what changed in it was the rate of correction, not its existence. In the model of SCI-19-a, the time a false finding survives is governed by three parameters: the evidential weight of the original finding, the weight of a single replication, and the interval between published replications. We show that the conditions before the crisis made correction slow but not impossible, that the crisis itself consisted of corrections the model predicts, and that the reforms it produced act on the three parameters. The crisis is a change in the rate of self-correction, not its introduction.
+\end{abstract}
+
+\section{The challenge}
+
+In the 2010s, large replication projects reproduced only a part of the published findings they tested, in psychology \citep{OSC2015} and in experimental social science more broadly \citep{Camerer2018}. Earlier analyses had argued that flexible analysis and selective publication could make a large share of published findings false \citep{Ioannidis2005,Simmons2011}. The episode is commonly described as a failure of self-correction. If science were self-correcting, it is said, the false findings would not have accumulated for decades.
+
+SCI-19-a holds that science is self-correcting, but slowly. Its model represents a false finding by its evidential weight $W$, a disconfirming replication by its weight $w$, and the scarcity of replication by an interval $k$. By its Definition~3.1, the record is corrected when the pooled weight of published disconfirming replications reaches $W$. Under steady replication (Assumption~3.2), Theorem~3.5 guarantees correction by time $nk$ for any $n$ with $W\le wn$; under bounded replication (Assumption~3.3), Theorem~3.7 shows that the record is not corrected at any time up to $nk$ whenever $wn<W$.
+
+\section{The crisis in the model}
+
+\begin{proposition}\label{p:window}
+When replication is both steady and bounded with the same interval $k$, the time to correction lies between $nk$ and $(n+1)k$, where $n+1$ is the least integer not less than $W/w$.
+\end{proposition}
+
+\begin{proof}
+Let $m$ be the least integer with $W\le wm$, so that $m=n+1$. By Theorem~3.5 of SCI-19-a the record is corrected by time $mk$. Since $wn<W$, Theorem~3.7 of SCI-19-a shows that it is not corrected at any time up to $nk$.
+\end{proof}
+
+Proposition~\ref{p:window} says that the delay is proportional to $k$ and to the ratio $W/w$. Before the crisis, all three factors were unfavorable. Direct replication was rare and negative results hard to publish, so the effective interval $k$ was long; findings accumulated weight through selectively published conceptual replications and through citation, so $W$ was large; and single replications were often small, so $w$ was low. The model predicts that false findings would survive for decades. They did.
+
+The model also predicts what the crisis was. The large replication projects are disconfirming replications of high weight, published together. They shortened $k$ abruptly and raised $w$, and the record of many findings was corrected within a few years. The episode called a crisis is the moment at which corrections that had been delayed for decades occurred together. It is therefore an instance of the self-correction that SCI-19-a describes, not a counterexample to it.
+
+\begin{proposition}\label{p:rate}
+The reforms that followed the crisis, among them preregistration, registered reports, multi-laboratory replication and bias-corrected meta-analysis, change the parameters of the model and so the rate of correction. They do not introduce correction where there was none.
+\end{proposition}
+
+\begin{proof}
+Registered reports and the publication of negative replications shorten the effective interval $k$. Preregistration restricts analytic flexibility, which limits the weight a false finding can acquire at admission, and so reduces $W$ \citep{Nosek2018}. Multi-laboratory replications raise $w$. Bias-corrected meta-analysis prevents selectively published conceptual replications from inflating $W$. Each acts on $k$, $W$ or $w$. Since correction was already guaranteed under steady replication, which the occurrence of published replications before the crisis shows to have held, the reforms shorten the delay of Proposition~\ref{p:window} rather than create the guarantee.
+\end{proof}
+
+\section{Objections and replies}
+
+\begin{objection}
+Some false findings were not corrected at all but canonized: when negative results are published with low probability, a false claim can become accepted as fact \citep{Nissen2016}. Here self-correction failed.
+\end{objection}
+
+\begin{reply}
+SCI-19-a notes that in the limit where no negative results are published, steady replication fails and correction is not guaranteed. Canonization is a case in which $k$ is effectively unbounded. The crisis showed that this limit was not reached in the fields concerned, since the replications were in fact carried out and published. Where the limit is approached, the model says that correction is indefinitely delayed, which is a description of slow correction, not a denial that the institutions of SCI-01 eventually operate.
+\end{reply}
+
+\begin{objection}
+The corrections came from methodologists and outside critics rather than from the ordinary operation of the fields, so they were not self-correction.
+\end{objection}
+
+\begin{reply}
+The self in self-correction is science as an institution, which SCI-01 identifies by peer review, replication and public criticism, not the individual researchers who produced a finding. Methodological critics publishing in scientific venues, and replication projects conducted by scientists, are that institution at work.
+\end{reply}
+
+\begin{objection}
+The crisis was not primarily one of error. PHE-17-a argues that it was a crisis of self-understanding: fields discovered that they could not say what their accumulated results meant, because the relation of their statistical techniques to the phenomena had been forgotten.
+\end{objection}
+
+\begin{reply}
+The two descriptions are compatible. PHE-17-a itself treats the episode as an instance of slow self-correction and explains why the correction was slow: error-correction by the standards of a method detects errors in results but not a forgetting of what the method is for. In the terms of the present model, that forgetting is what allowed $W$ to grow unchecked, since findings were credited by the method's standards without the question whether the effects could be seen again. The answer, given by replication, is the correction this manuscript describes.
+\end{reply}
+
+\section{Conclusion}
+
+Before the crisis, science corrected its record, but with a delay governed by rare replication, inflated evidential weight and weak single replications. The crisis was the concentrated arrival of corrections long delayed, and the reforms that followed shorten the delay. The replication crisis is a change in the rate of self-correction, not its introduction, and it confirms that science is self-correcting, but slowly.
+
+\begin{thebibliography}{99}\small
+\bibitem[Camerer et~al.(2018)]{Camerer2018} Camerer, C.~F., Dreber, A., Holzmeister, F., et~al. (2018). Evaluating the replicability of social science experiments in \emph{Nature} and \emph{Science} between 2010 and 2015. \emph{Nature Human Behaviour}, 2, 637--644.
+\bibitem[Ioannidis(2005)]{Ioannidis2005} Ioannidis, J.~P.~A. (2005). Why most published research findings are false. \emph{PLoS Medicine}, 2(8), e124.
+\bibitem[Nissen et~al.(2016)]{Nissen2016} Nissen, S.~B., Magidson, T., Gross, K. and Bergstrom, C.~T. (2016). Publication bias and the canonization of false facts. \emph{eLife}, 5, e21451.
+\bibitem[Nosek et~al.(2018)]{Nosek2018} Nosek, B.~A., Ebersole, C.~R., DeHaven, A.~C. and Mellor, D.~T. (2018). The preregistration revolution. \emph{Proceedings of the National Academy of Sciences}, 115(11), 2600--2606.
+\bibitem[Open Science Collaboration(2015)]{OSC2015} Open Science Collaboration (2015). Estimating the reproducibility of psychological science. \emph{Science}, 349(6251), aac4716.
+\bibitem[Simmons et~al.(2011)]{Simmons2011} Simmons, J.~P., Nelson, L.~D. and Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. \emph{Psychological Science}, 22(11), 1359--1366.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,182 @@
+\documentclass{situationist-preprint}
+
+\title{The Normativity of Logic}
+\msid{LOG-05-a}
+\msfamily{LOG-05}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mskeywords{normativity of logic; bridge principles; preface paradox; Lockean thesis; wide scope; Harman; MacFarlane}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Logic is often said to be normative for thought, but logical consequence is a relation between propositions, and it is unclear how it constrains what anyone should believe. Following MacFarlane, we treat the question as one about bridge principles linking consequence to norms of belief, and we ask which bridge principle is correct. We argue that logic is normative only weakly, through a single permissive principle: if $A$ entails $C$, one ought not both believe $A$ and disbelieve $C$. Positive principles, which require belief in consequences, fail because finite believers cannot and need not believe all consequences of what they believe. Multi-premise principles fail because of the preface: an author may rationally believe each claim in her book and disbelieve their conjunction. We prove that the single-premise principle is exactly the one that probabilistic coherence underwrites for every Lockean threshold above one half, whereas any principle with $k \geq 2$ premises is violated by a coherent believer whose threshold lies at or below $k/(k+1)$. The permissive principle is therefore compatible with the preface case, and it captures the residual rational criticism that logic supports.
+\end{abstract}
+
+\section{The problem}
+
+Frege held that the laws of logic are laws of truth, and that from them follow prescriptions for thinking: whoever wishes to think truly must conform to them (\emph{Grundgesetze}, Preface; \citealp{Frege1893}). Kant described general logic as containing the absolutely necessary rules of thought, without which there is no use of the understanding (\emph{Critique of Pure Reason}, A52/B76; \citealp{Kant1781}). On both views logic does not describe how we think but says how we ought to.
+
+\citet{Harman1984,Harman1986} challenged the connection. Logic, he argued, is a theory of implication, not of inference or of belief revision. That $A$ and $A \rightarrow B$ imply $B$ does not tell a believer of $A$ and $A \rightarrow B$ to believe $B$: she may instead give up one of the premises, and often should, if $B$ is absurd. Nor should she believe every consequence of what she believes, since there are infinitely many and most are useless clutter. Nor should her beliefs be consistent, since the preface paradox shows that rational beliefs can be jointly inconsistent \citep{Makinson1965}. Harman concluded that there is no specially logical norm of reasoning.
+
+\citet{MacFarlane2004} reframed the debate. Whether logic is normative for thought depends on whether there is a true \emph{bridge principle} of the form: if $A_1, \ldots, A_n$ entail $C$, then (some normative claim about believing the $A_i$ and $C$). He classified bridge principles by the deontic operator (ought, may, or has reason to), by its scope (over the consequent only, over both antecedent and consequent, or over the whole conditional), and by polarity (a positive requirement to believe the conclusion, or a negative requirement not to disbelieve it). \citet{Field2009} and \citet{Milne2009} proposed principles for degrees of belief, and \citet{Steinberger2019} distinguished the roles a bridge principle might play: as a directive for deliberation, as a standard for evaluation, or as a basis for attributing blame. \citet{Broome2013} and \citet{Kolodny2005} developed the debate over wide-scope rational requirements, and \citet{Christensen2004} argued that the normativity of logic is to be found at the level of degrees of belief rather than of full belief.
+
+We argue for a definite answer: logic is normative for belief, but weakly, through exactly one permissive bridge principle. The argument is an elimination: the other candidates are refuted by finitude or by the preface, and the survivor is supported by a probabilistic result that also explains why it survives.
+
+\section{Framework}
+
+Belief, disbelief and suspension are the three attitudes a subject can take to a proposition; to disbelieve $C$ is to believe $\neg C$. We write $\models$ for classical consequence; LOG-02 argues that classical logic is the correct logic, and nothing below depends on the choice, provided that consequence is monotonic and reflexive.
+
+\begin{definition}[Bridge principle]\label{d:bridge}
+A \emph{bridge principle} is a schema of the form: if $A_1, \ldots, A_k \models C$, then $N(A_1, \ldots, A_k; C)$, where $N$ is a normative claim about a subject's attitudes to the $A_i$ and to $C$. It is \emph{$k$-premise} if it is restricted to arguments with at most $k$ premises; the \emph{single-premise} principles are the $1$-premise ones.
+\end{definition}
+
+\begin{definition}[Permissive]\label{d:permissive}
+A bridge principle is \emph{permissive} if every instance of it can be satisfied by a subject who suspends judgment on the conclusion; that is, it never requires that any belief be formed.
+\end{definition}
+
+\begin{principle}[Finitude]\label{p:finite}
+No correct norm of belief requires a subject to believe every consequence of what she believes, or every consequence she has not considered.
+\end{principle}
+
+\begin{principle}[Preface]\label{p:preface}
+An author may rationally believe each of the claims $s_1, \ldots, s_n$ of her book while believing $\neg(s_1 \wedge \cdots \wedge s_n)$.
+\end{principle}
+
+\begin{principle}[Residual criticism]\label{p:residual}
+A subject who believes $A$ and disbelieves something that $A$ entails is, for that reason, open to rational criticism.
+\end{principle}
+
+Principle~\ref{p:finite} is Harman's clutter point. Principle~\ref{p:preface} is defended in EPI-10, which argues that it is rational to believe each claim in a book while believing that the book contains an error, and that rational belief is therefore not required to be consistent or closed under conjunction. Principle~\ref{p:residual} records the datum that makes the question worth asking. Someone who believes that all the guests have left and disbelieves that Smith, a guest, has left has made a mistake, whatever else is true of him, and the mistake is one that logic identifies.
+
+\begin{definition}[The permissive bridge principle]\label{d:B}
+(B) If $A \models C$, then one ought not both believe $A$ and disbelieve $C$.
+\end{definition}
+
+(B) is single-premise, negative in polarity and wide in scope. Read narrowly, it says that one ought not to disbelieve the logical consequences of what one believes; we take the wide-scope reading for reasons given in Objection~\ref{o:scope}. (B) is permissive in the sense of Definition~\ref{d:permissive}: it can always be satisfied by suspending judgment on $C$, and it can also be satisfied by giving up the belief in $A$.
+
+\section{The argument}
+
+\begin{lemma}\label{l:positive}
+No correct bridge principle is positive with an ought-operator.
+\end{lemma}
+
+\begin{proof}
+A positive ought-principle requires, for some range of arguments from believed premises, that the conclusion be believed. Every proposition has infinitely many consequences ($A \vee B$ for every $B$). Whether the principle is restricted to single-premise arguments or not, it requires belief in infinitely many consequences of anything believed, contrary to Principle~\ref{p:finite}. Restricting it to consequences the subject has considered does not help: a subject who considers $A \vee B$ for an arbitrary $B$ is not thereby required to believe it rather than to suspend, provided she does not disbelieve it.
+\end{proof}
+
+\begin{lemma}\label{l:multi}
+No correct ought-principle of negative polarity applies to arguments with more than one premise.
+\end{lemma}
+
+\begin{proof}
+Consider the multi-premise analogue of (B): if $A_1, \ldots, A_k \models C$, one ought not both believe each $A_i$ and disbelieve $C$. Take $A_i = s_i$ and $C = s_1 \wedge \cdots \wedge s_n$, with $k = n$. The author of Principle~\ref{p:preface} believes each $s_i$ and believes $\neg C$, so she violates the principle. Since by Principle~\ref{p:preface} she is rational, the principle is false. The argument works for every $k \geq 2$, since a book with two claims and a sufficiently reliable record of error is a preface case.
+\end{proof}
+
+Weaker deontic operators do not rescue the multi-premise and positive principles. A \enquote{may} principle (one may believe the consequences of what one believes) is false when the premises are believed without justification, and does not in any case yield Principle~\ref{p:residual}, since it says nothing about disbelief. A \enquote{reason} principle (one has a reason to believe the consequences of what one believes) generates reasons by the mere fact of belief, and reasons can be outweighed, so it too fails to explain why the combination of believing $A$ and disbelieving a consequence is always open to criticism. The ought-operator is needed for Principle~\ref{p:residual}, and with it only single-premise negative principles remain.
+
+\begin{theorem}\label{t:only}
+Among bridge principles with the ought-operator, (B) is the only one compatible with Principles~\ref{p:finite} and~\ref{p:preface} that yields Principle~\ref{p:residual}.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:positive}, a correct ought-principle is negative. By Lemma~\ref{l:multi}, it is single-premise. A negative single-premise ought-principle forbids the combination of believing $A$ and disbelieving $C$; if it is narrow in scope it forbids disbelieving $C$ given that one believes $A$, and the wide-scope version is preferred for the reason given in Objection~\ref{o:scope}. (B) is compatible with Principle~\ref{p:finite} because it is permissive, and with Principle~\ref{p:preface} because, as Corollary~\ref{c:preface} shows, the preface author does not violate it. It yields Principle~\ref{p:residual} directly.
+\end{proof}
+
+Theorem~\ref{t:only} establishes the conclusion by elimination, given the principles. The next result shows that (B) is not merely what survives, but what a natural account of rational belief predicts.
+
+\begin{definition}[Lockean belief]\label{d:lockean}
+A subject with a probabilistically coherent credence function $P$ is \emph{Lockean with threshold $t$}, where $\tfrac12 < t \leq 1$, if she believes exactly the propositions whose credence is at least $t$, and disbelieves $C$ iff $P(\neg C) \geq t$.
+\end{definition}
+
+\begin{proposition}\label{p:threshold}
+Let a subject be Lockean with threshold $t$, and let $A_1, \ldots, A_k \models C$.
+\begin{enumerate}[label=(\alph*)]
+\item If $t > k/(k+1)$, she does not both believe each $A_i$ and disbelieve $C$.
+\item If $k \geq 2$ and $t \leq k/(k+1)$, there is a coherent credence function on which she believes each $A_i$ and disbelieves $C$, for suitable $A_i$ and $C$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Since the $A_i$ entail $C$, $\neg C$ entails $\neg A_1 \vee \cdots \vee \neg A_k$, so $P(\neg C) \leq \sum_i P(\neg A_i)$. If she believes each $A_i$, each $P(\neg A_i) \leq 1 - t$, so $P(\neg C) \leq k(1-t)$. If $t > k/(k+1)$, then $k(1-t) < t$, so $P(\neg C) < t$ and she does not disbelieve $C$.
+
+(b) Take $k+1$ equiprobable worlds $w_0, \ldots, w_k$. For $1 \leq i \leq k$ let $A_i$ be false at $w_i$ and true elsewhere, and let $C = A_1 \wedge \cdots \wedge A_k$, true only at $w_0$. Then $P(A_i) = k/(k+1) \geq t$ and $P(\neg C) = k/(k+1) \geq t$. This is the model of the preface paradox given in EPI-10, with $k$ claims.
+\end{proof}
+
+\begin{corollary}\label{c:single}
+Every Lockean subject satisfies (B), whatever her threshold. For every $k \geq 2$, some Lockean subjects with thresholds above $\tfrac12$ violate the $k$-premise analogue of (B).
+\end{corollary}
+
+\begin{proof}
+For $k = 1$, the condition of Proposition~\ref{p:threshold}(a) is $t > \tfrac12$, which holds by Definition~\ref{d:lockean}. For $k \geq 2$, $k/(k+1) \geq 2/3 > \tfrac12$, so thresholds in $(\tfrac12, k/(k+1)]$ exist, and Proposition~\ref{p:threshold}(b) applies.
+\end{proof}
+
+\begin{corollary}\label{c:preface}
+The preface author satisfies (B). Her rational inconsistency is a violation only of multi-premise principles.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{c:single}, applied to the model of Proposition~\ref{p:threshold}(b), which represents her belief state. Directly: she disbelieves the conjunction $C$, and she violates (B) only if she believes some single proposition that entails $C$. She does not believe $C$ itself, and no single claim $s_i$ entails $C$ unless the claims are logically redundant. What would bring her into conflict with (B) is belief in the conjunction of her claims, and EPI-10 argues that rationality does not require her to agglomerate her beliefs in this way.
+\end{proof}
+
+Corollary~\ref{c:preface} makes explicit the sense in which (B) and the preface are compatible. The preface does not show that logic places no constraint on belief; it shows that the constraint does not pass through conjunction. Logic constrains each belief individually, by forbidding the disbelief of what it entails, and it does not constrain the set of a subject's beliefs taken together. The companion LOG-05-b examines the preface case in detail.
+
+\section{Objections}
+
+\begin{objection}[Logical omniscience]
+(B) forbids disbelieving any consequence of a belief, however remote. A mathematician who believes the axioms of set theory and disbelieves an unproved consequence of them violates (B), but she is not irrational.
+\end{objection}
+
+\begin{reply}
+We distinguish, with \citet{Steinberger2019}, the evaluative role of a norm from its role in attributing blame. (B) is a standard of correctness: the mathematician's belief state falls short of it, as is shown by the fact that, once the proof is found, she must revise. She is not blameworthy, because she could not have known that she fell short. A version of (B) restricted to recognized entailments would make her belief state flawless until the proof was found, and would not explain why the proof obliges her to revise rather than merely giving her a new option.
+\end{reply}
+
+\begin{objection}[Scope]\label{o:scope}
+The surface form of the conclusion is narrow: one ought not to disbelieve the logical consequences of what one believes. Why read it widely?
+\end{objection}
+
+\begin{reply}
+The narrow reading generates obligations from irrational beliefs. If a subject believes, without any justification, that the moon is made of cheese, the narrow principle says that she ought not to disbelieve that the moon is made of something edible; but what she ought to do is give up the first belief, and the narrow principle would make that a further violation. This is the bootstrapping problem for narrow-scope requirements \citep{Broome2013}. The wide-scope reading forbids only the combination, and leaves it to evidence to determine which way to restore coherence. It agrees with the narrow reading whenever the belief in $A$ is held fixed.
+\end{reply}
+
+\begin{objection}[Contradictory beliefs]
+A subject who believes a contradiction is forbidden by (B) to disbelieve anything, since a contradiction entails everything. That is absurd.
+\end{objection}
+
+\begin{reply}
+On the wide reading, (B) forbids her to combine belief in the contradiction with any disbelief, and the way to comply is to give up the contradictory belief, which is what anyone would advise her. Unlike the multi-premise principle, (B) does not forbid a subject whose beliefs are jointly but not singly inconsistent from disbelieving anything; it applies only to a single believed proposition that is itself inconsistent, which is a defect in a way that the preface author's beliefs are not.
+\end{reply}
+
+\begin{objection}[Not specifically logical]
+(B) follows from a norm against believing falsehoods: if $A \models C$, believing $A$ and disbelieving $C$ guarantees that one belief is false. Logic plays no normative role of its own.
+\end{objection}
+
+\begin{reply}
+The general norm on which the objection relies, that one ought not to hold beliefs that are jointly guaranteed to include a falsehood, is refuted by the preface, whose author holds such a set rationally. What survives is the norm for sets of two beliefs one of which is the negation of a consequence of the other, and logic is what determines which pairs these are. Proposition~\ref{p:threshold} explains why pairs are special: probabilistic coherence alone excludes such a pair for every threshold above one half, and excludes no larger inconsistent set for every such threshold. Logic is normative through consequence, and coherence explains how far that normativity reaches.
+\end{reply}
+
+\section{What the result does not establish}
+
+First, the result concerns full belief. It does not deny that logic constrains degrees of belief, as \citet{Field2009} proposes: one ought to have credences such that $P(\neg C) \leq \sum_i P(\neg A_i)$ whenever the $A_i$ entail $C$. That constraint is compatible with the preface, and our Proposition~\ref{p:threshold} uses it. Second, it concerns the static question of which combinations of attitudes are permitted, not the dynamic question of how to reason; Harman is right that logic does not by itself tell one what to infer. Third, it does not settle which logic is correct. We have assumed classical consequence, but the elimination argument and Proposition~\ref{p:threshold} require only that consequence be reflexive, monotonic and respected by probability.
+
+\section{Conclusion}
+
+Logic is normative for thought weakly. Positive bridge principles conflict with the finitude of believers, and multi-premise principles with the rationality of the preface author. What remains is a single permissive principle: if $A$ entails $C$, one ought not both believe $A$ and disbelieve $C$. It is the principle that probabilistic coherence underwrites for every Lockean threshold, it is satisfied by the preface author, and it explains the rational criticism that logic supports.
+
+\begin{thebibliography}{99}\small
+\bibitem[Broome(2013)]{Broome2013} Broome, J. (2013). \emph{Rationality Through Reasoning}. Wiley-Blackwell.
+\bibitem[Christensen(2004)]{Christensen2004} Christensen, D. (2004). \emph{Putting Logic in Its Place: Formal Constraints on Rational Belief}. Oxford University Press.
+\bibitem[Field(2009)]{Field2009} Field, H. (2009). What is the normative role of logic? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 83, 251--268.
+\bibitem[Frege(1893)]{Frege1893} Frege, G. (1893). \emph{Grundgesetze der Arithmetik}, vol. I. Hermann Pohle.
+\bibitem[Harman(1984)]{Harman1984} Harman, G. (1984). Logic and reasoning. \emph{Synthese}, 60(1), 107--127.
+\bibitem[Harman(1986)]{Harman1986} Harman, G. (1986). \emph{Change in View: Principles of Reasoning}. MIT Press.
+\bibitem[Kant(1781)]{Kant1781} Kant, I. (1781/1787). \emph{Kritik der reinen Vernunft}. Hartknoch.
+\bibitem[Kolodny(2005)]{Kolodny2005} Kolodny, N. (2005). Why be rational? \emph{Mind}, 114(455), 509--563.
+\bibitem[MacFarlane(2004)]{MacFarlane2004} MacFarlane, J. (2004). In what sense (if any) is logic normative for thought? Unpublished manuscript.
+\bibitem[Makinson(1965)]{Makinson1965} Makinson, D.~C. (1965). The paradox of the preface. \emph{Analysis}, 25(6), 205--207.
+\bibitem[Milne(2009)]{Milne2009} Milne, P. (2009). What is the normative role of logic? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 83, 269--298.
+\bibitem[Steinberger(2019)]{Steinberger2019} Steinberger, F. (2019). Three ways in which logic might be normative. \emph{The Journal of Philosophy}, 116(1), 5--31.
+\end{thebibliography}
+
+\end{document}

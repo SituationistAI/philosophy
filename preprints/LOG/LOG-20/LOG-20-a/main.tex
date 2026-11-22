@@ -1,0 +1,103 @@
+\documentclass{situationist-preprint}
+
+\title{Completeness and Its Limits}
+\msid{LOG-20-a}
+\msfamily{LOG-20}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_20.lean}
+\mskeywords{completeness; first-order logic; incompleteness; diagonal lemma; philosophical theories; axiomatization}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+By G\"odel's completeness theorem, every argument valid in all first-order models is derivable. We ask whether a comparable result holds for collections of philosophical theorems, and argue that it does not. A collection that is sound, effectively axiomatized and contains elementary arithmetic, as any collection including the philosophy of mathematics does, has a true sentence that it does not prove, by the diagonal argument. Pooling the premises of rival philosophical arguments yields an inconsistent and so trivial theory. And there is no fixed axiom set or class of intended models for philosophical vocabulary relative to which a completeness theorem could be stated. Completeness is a property of first-order logic, not of the theories formulated in it. The incompleteness argument is formalized in Lean.
+\end{abstract}
+
+\section{Two senses of completeness}
+
+A deductive system is \emph{complete} if every argument that is valid, in the semantic sense, is derivable in it. \citet{Goedel1930} proved this for first-order logic: if $\phi$ is true in every model of $\Gamma$, then $\phi$ is derivable from $\Gamma$. \citet{Henkin1949} gave the proof now standard, by extending a consistent set of sentences to a maximal consistent one and building a model from its terms. It is one half of Kreisel's squeezing argument, on which LOG-06 relies, that model-theoretic validity coincides with intuitive validity for first-order languages \citep{Kreisel1967}.
+
+A \emph{theory} is complete in a different sense: for every sentence $\phi$ of its language, it proves $\phi$ or proves $\neg\phi$. \citet{Goedel1931} showed that no consistent, effectively axiomatized theory that contains elementary arithmetic is complete in this sense. The two results are compatible: whatever follows from a theory's axioms in all models is derivable from them, but the axioms need not settle every sentence, since their models may disagree.
+
+Logic beyond the first order is not complete in the first sense. Second-order logic with the standard semantics has no sound, complete and effective deductive system, since second-order Peano arithmetic is categorical, so that such a system would make the set of arithmetical truths recursively enumerable, which it is not \citep{Shapiro1991}. LOG-09 argues that second-order logic is logic; so the answer to the question \enquote{Is logic complete?} is that first-order logic is, and that completeness is not a property of logic as such.
+
+Our question is whether a comparable result holds for collections of philosophical theorems, each proved in a precise language from explicit premises. Such a collection could be complete as a theory, by deciding every sentence of its language, or relative to a fixed set of philosophical axioms. We argue that it is complete in neither sense in any way that would be a result about philosophy.
+
+\section{Framework}
+
+\begin{definition}\label{d:coll}
+A \emph{collection of theorems} is a set $\mathrm{Thm}$ of sentences of a language with a negation operator $\neg$. It is \emph{effectively axiomatized} if there is a recursive set of sentences whose consequences are exactly the members of $\mathrm{Thm}$.
+\end{definition}
+
+\begin{assumption}\label{a:neg}
+For every sentence $\phi$, $\neg\phi$ is true if and only if $\phi$ is not true.
+\end{assumption}
+
+\begin{assumption}\label{a:sound}
+\emph{Soundness.} Every member of $\mathrm{Thm}$ is true.
+\end{assumption}
+
+\begin{assumption}\label{a:diag}
+\emph{Diagonal sentence.} There is a sentence $G$ that is true if and only if $G$ is not in $\mathrm{Thm}$.
+\end{assumption}
+
+Assumption~\ref{a:neg} restricts the language to sentences with classical content, as LOG-02 recommends. Assumption~\ref{a:sound} is the least one can ask of a collection of theorems. Assumption~\ref{a:diag} holds of every effectively axiomatized collection that contains elementary arithmetic: membership in $\mathrm{Thm}$ is then expressible by an arithmetical formula, and the diagonal lemma yields a sentence that says of itself that it is not a member \citep{Goedel1931,Smullyan1992}. A collection of philosophical theorems contains elementary arithmetic as soon as it includes the philosophy of mathematics; if it includes MTH-04, on which arithmetic reduces to logic plus Hume's principle, it contains second-order arithmetic.
+
+\section{Results}
+
+\begin{theorem}\label{t:incomplete}
+Under Assumptions~\ref{a:neg}--\ref{a:diag}, there is a sentence $G$ that is true, is not a member of $\mathrm{Thm}$, and whose negation is not a member of $\mathrm{Thm}$.
+\end{theorem}
+
+\begin{proof}
+Let $G$ be as in Assumption~\ref{a:diag}. If $G$ were in $\mathrm{Thm}$, it would be true by soundness, and so, by its defining property, not in $\mathrm{Thm}$. So $G$ is not in $\mathrm{Thm}$, and therefore $G$ is true. If $\neg G$ were in $\mathrm{Thm}$, it would be true by soundness, so $G$ would not be true by Assumption~\ref{a:neg}, which contradicts what was just shown.
+\end{proof}
+
+\begin{proposition}\label{p:pool}
+A collection closed under explosion that contains a sentence and its negation contains every sentence.
+\end{proposition}
+
+\begin{proof}
+Immediate from closure under explosion.
+\end{proof}
+
+Theorem~\ref{t:incomplete} disposes of completeness in the first sense. Proposition~\ref{p:pool} bears on the second. A philosophical collection proves its theorems from premises that vary from one argument to the next, and the premises of rival arguments are often jointly inconsistent: a collection that contains an argument for compatibilism and one for libertarianism, or an argument from one theory of reference and another from its rival, does not have a single axiom set of which all its theorems are consequences. Pooling the premises yields a trivial theory. What remains is completeness relative to each argument's own premises: every first-order consequence of those premises is derivable from them. That is true, but it is G\"odel's completeness theorem applied to a particular set of premises. It is a result about logic, not about philosophy.
+
+A comparable result would need a fixed, consistent set of philosophical axioms and a class of intended models for philosophical vocabulary. Neither is available. There is no agreed axiom set for any branch of philosophy, and the disagreement is not a temporary state of the literature but the subject matter itself. There is no class of intended models either: the interpretation of \enquote{knowledge}, \enquote{cause} or \enquote{good} is what philosophical theories dispute, so the class of models cannot be fixed in advance of the theories it would be used to assess. And where both components could be supplied, Theorem~\ref{t:incomplete} would apply to the resulting theory as soon as it contained arithmetic.
+
+The results do not show that philosophical questions lack answers. Arithmetic is incomplete, and every arithmetical sentence is true or false. Incompleteness bounds what a fixed collection of theorems can contain, not what can be known by adding axioms, which is how both mathematics and philosophy proceed.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_20.lean} formalizes Definition~\ref{d:coll}, Assumptions~\ref{a:neg}--\ref{a:diag}, Theorem~\ref{t:incomplete} and Proposition~\ref{p:pool}. The diagonal lemma is not proved; it is the content of Assumption~\ref{a:diag}. Nor is the completeness of first-order logic, which is cited. The main theorem is stated as follows.
+
+\begin{lstlisting}
+theorem incompleteness : ∃ G, True' G ∧ ¬ Thm G ∧ ¬ Thm (neg G)
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_20.incompleteness' depends on axioms:
+  [Philosophy.LOG_20.Sentence, Philosophy.LOG_20.Thm,
+   Philosophy.LOG_20.True', Philosophy.LOG_20.diagonal,
+   Philosophy.LOG_20.neg, Philosophy.LOG_20.soundness,
+   Philosophy.LOG_20.true_neg]
+\end{lstlisting}
+
+Besides the primitives (sentences, negation, theorems, truth), the premises are \texttt{true\_neg}, \texttt{soundness} and \texttt{diagonal} (Assumptions~\ref{a:neg}, \ref{a:sound} and~\ref{a:diag}). The proof uses no classical axioms.
+
+\section{Conclusion}
+
+First-order logic is complete: every argument valid in all models is derivable. No comparable result holds for collections of philosophical theorems. A sound, effectively axiomatized collection that contains arithmetic leaves a truth unproved; pooling the premises of rival arguments produces triviality; and without a fixed axiom set and a fixed class of intended models, completeness relative to philosophical premises reduces to the completeness of first-order logic itself.
+
+\begin{thebibliography}{9}\small
+\bibitem[G\"odel(1930)]{Goedel1930} G\"odel, K. (1930). Die Vollst\"andigkeit der Axiome des logischen Funktionenkalk\"uls. \emph{Monatshefte f\"ur Mathematik und Physik}, 37, 349--360.
+\bibitem[G\"odel(1931)]{Goedel1931} G\"odel, K. (1931). \"Uber formal unentscheidbare S\"atze der Principia Mathematica und verwandter Systeme I. \emph{Monatshefte f\"ur Mathematik und Physik}, 38, 173--198.
+\bibitem[Henkin(1949)]{Henkin1949} Henkin, L. (1949). The completeness of the first-order functional calculus. \emph{Journal of Symbolic Logic}, 14(3), 159--166.
+\bibitem[Kreisel(1967)]{Kreisel1967} Kreisel, G. (1967). Informal rigour and completeness proofs. In I. Lakatos (ed.), \emph{Problems in the Philosophy of Mathematics}, North-Holland.
+\bibitem[Shapiro(1991)]{Shapiro1991} Shapiro, S. (1991). \emph{Foundations without Foundationalism: A Case for Second-Order Logic}. Oxford University Press.
+\bibitem[Smullyan(1992)]{Smullyan1992} Smullyan, R.~M. (1992). \emph{G\"odel's Incompleteness Theorems}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

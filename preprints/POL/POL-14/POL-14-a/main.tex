@@ -1,0 +1,149 @@
+\documentclass{situationist-preprint}
+
+\title{The Case for Sortition}
+\msid{POL-14-a}
+\msfamily{POL-14}
+\msdiscipline{Political Philosophy}
+\mstype{Principal manuscript}
+\mskeywords{sortition; lottocracy; representation; descriptive representation; bicameralism; citizens' assemblies; elections}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Should legislators be chosen by lot? We argue that at least one chamber of a bicameral legislature should be. The argument is that sortition improves representativeness. A legislature represents its citizens descriptively to the extent that the distribution of relevant characteristics among its members matches their distribution in the population, and descriptive representation matters for legislation because legislators' characteristics shape which interests are noticed and which arguments are heard. Election is a selection mechanism that systematically favors candidates who are distinguished by wealth, education, occupation and social connections, as students of representative government since Aristotle have observed. Random selection of a large chamber, by contrast, matches the population in expectation on every characteristic at once, including characteristics no one thought to monitor, and the sampling error is small and calculable. We then argue that the case does not extend to every chamber: an elected chamber supplies accountability and the authorization of a program, which sortition cannot. The conclusion is a mixed legislature, with one chamber chosen by lot. We answer objections from competence, accountability, consent and capture.
+\end{abstract}
+
+\section{The problem}
+
+In Athens most magistracies and the large juries were filled by lot, and Aristotle records the view that selection by lot is democratic and selection by election oligarchic \citep[IV.9, 1294b]{AristotlePol}. Modern representative government adopted election instead, and \citet{Manin1997} has argued that this was not an accident: the founders of representative government in America and France meant elections to select a natural aristocracy of the distinguished, and elections still do. Recent work has revived sortition as a proposal for contemporary democracies. \citet{Guerrero2014} defends a \emph{lottocracy}, in which single-issue legislatures chosen by lot replace elected ones; \citet{Landemore2020} defends an \enquote{open democracy} built around randomly selected assemblies; \citet{Abizadeh2021} argues for replacing the second chamber of a bicameral legislature with a randomly selected assembly. On the other side, \citet{Lafont2019} argues that empowering randomly selected bodies asks citizens to defer blindly to people they did not choose, and so violates the democratic ideal of self-government.
+
+Experience is now considerable. The British Columbia Citizens' Assembly on Electoral Reform (2004) was a randomly selected body that designed an electoral system subsequently put to referendum; the Irish Citizens' Assembly (2016--2018) deliberated on, among other questions, the constitutional prohibition of abortion, and its recommendations informed the referendum of 2018. Deliberative polls have been run in many countries \citep{Fishkin2009}. These are advisory bodies, and our question is whether lot should select a chamber that legislates.
+
+We defend an intermediate position: at least one legislative chamber should be chosen by lot, and the case does not require that all chambers be. The argument turns on representativeness. Whether random assemblies also deliberate better is a separate question, which bears on the design of the chamber but not on our conclusion.
+
+\section{Framework}
+
+\begin{definition}\label{d:descriptive}
+A legislature is \emph{descriptively representative} with respect to a characteristic to the extent that the share of its members having that characteristic matches the share of the citizen population having it. It is descriptively representative \emph{simpliciter} to the extent that this holds jointly for the characteristics relevant to legislation.
+\end{definition}
+
+The notion is Pitkin's, who distinguished representation as \enquote{standing for}, by resemblance, from representation as \enquote{acting for}, by authorization and accountability \citep{Pitkin1967}. Pitkin was skeptical of descriptive representation as an ideal, on the ground that what matters is what representatives do. We agree that resemblance matters only for what it does, and we state what it does in a principle.
+
+\begin{principle}[Perspective]\label{p:perspective}
+Which interests a legislature notices, which arguments it hears and how it weighs them depend in part on the experiences and social positions of its members. A legislature whose members' positions diverge systematically from the population's will systematically neglect some interests and arguments.
+\end{principle}
+
+Principle~\ref{p:perspective} is the core of the case for descriptive representation made by \citet{Mansbridge1999}, who argues that shared experience improves deliberation where interests are uncrystallized and where communication across groups is marked by distrust. It is supported by the evidence that legislators' class backgrounds predict their votes on economic policy independently of party \citep{Carnes2013}.
+
+\begin{principle}[Authorization]\label{p:authorization}
+A legislature whose decisions are binding requires that some part of it be authorized by the citizens and accountable to them for a program, so that citizens can endorse or reject a general direction of policy.
+\end{principle}
+
+Principle~\ref{p:authorization} is the core of the case for election, and of Pitkin's \enquote{acting for}. Our claim is that the two principles are best satisfied together by a mixed legislature.
+
+\section{The argument}
+
+\begin{lemma}[Election distorts]\label{l:election}
+Election systematically produces legislatures that are not descriptively representative with respect to characteristics relevant to legislation.
+\end{lemma}
+
+\begin{proof}
+Election selects candidates whom voters prefer to others. Voters prefer candidates they perceive as superior in some respect, and the perception of superiority tracks characteristics that are unevenly distributed: education, wealth, professional standing, eloquence and visibility. This is Manin's \enquote{principle of distinction}, and he shows that it operates independently of franchise restrictions and of the intentions of voters \citep{Manin1997}. Running for office also requires resources of time, money and networks, which further skew the candidate pool. The result is a legislature disproportionately composed of professionals, the wealthy and the university-educated. The characteristics are relevant to legislation by Principle~\ref{p:perspective}; the distribution of working-class legislators is an example where the relevance has been measured \citep{Carnes2013}.
+\end{proof}
+
+\begin{lemma}[Lot represents]\label{l:lot}
+Uniform random selection of a chamber of $n$ members from the citizen population makes the expected share of every characteristic in the chamber equal to its share in the population, and the probability that the share of any given characteristic deviates from its population share by more than $\varepsilon$ is at most $2e^{-2n\varepsilon^2}$.
+\end{lemma}
+
+\begin{proof}
+Each seat is filled by a draw in which every citizen has the same chance of selection, so the probability that a given seat is filled by someone with characteristic $X$ is the population share of $X$; by linearity of expectation the expected share in the chamber is the same. The deviation bound is Hoeffding's inequality for sums of bounded independent variables \citep{Hoeffding1963}; for sampling without replacement from a finite population the same bound holds.
+\end{proof}
+
+For a chamber of 400 members, the probability that the share of any one characteristic differs from the population share by more than ten percentage points is below one in a thousand. Two features of the lemma matter more than the numbers. First, it holds for every characteristic at once in expectation, including characteristics not yet recognized as politically salient; no system of quotas or reserved seats can match this, since quotas must name in advance the characteristics they protect. Second, stratified sampling on a few known characteristics, such as region, sex and age, reduces the error further without affecting the expectation for the others.
+
+\begin{proposition}\label{p:improves}
+Replacing the selection of one chamber by election with selection by lot improves the descriptive representativeness of the legislature.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:election}, an elected chamber diverges systematically from the population on characteristics relevant to legislation; by Lemma~\ref{l:lot}, a chamber chosen by lot does not diverge systematically on any characteristic, and its random deviations are small for a chamber of realistic size. The legislature as a whole, which includes the allotted chamber, therefore includes a body in which the neglected perspectives are present in proportion, and by Principle~\ref{p:perspective} the interests and arguments associated with them are heard in the legislative process.
+\end{proof}
+
+\begin{proposition}\label{p:notall}
+The case for sortition does not extend to every chamber.
+\end{proposition}
+
+\begin{proof}
+By Principle~\ref{p:authorization}, some part of a legislature must be authorized by and accountable to citizens for a program. An allotted member is neither authorized by anyone, since no one chose her, nor accountable through re-selection, since she cannot be re-drawn by the citizens' decision. A legislature composed entirely of allotted chambers would therefore fail Principle~\ref{p:authorization}.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+At least one chamber of the legislature should be chosen by lot.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{p:improves}, choosing a chamber by lot improves representativeness; by Proposition~\ref{p:notall}, not every chamber should be so chosen. A mixed legislature with at least one allotted and at least one elected chamber satisfies Principle~\ref{p:perspective} through the first and Principle~\ref{p:authorization} through the second, and is therefore better than a wholly elected legislature, which fails the first systematically, and better than a wholly allotted one, which fails the second.
+\end{proof}
+
+The design question of how powers are divided between the chambers is not settled by the theorem. The natural division gives the elected chamber the initiative on the program of government and the budget, and gives the allotted chamber the power to amend, delay or veto legislation, together with the initiative on matters in which elected legislators have a conflict of interest, such as electoral law, districting and the regulation of party finance \citep{Abizadeh2021}. On the latter, an allotted chamber has the further advantage of having no electoral stake in the outcome.
+
+\section{Objections}
+
+\begin{objection}[Competence]
+Randomly selected citizens lack the knowledge and skills of professional legislators. A chamber chosen by lot will make worse decisions.
+\end{objection}
+
+\begin{reply}
+Elected legislators are not selected for competence in legislation either; they are selected for success in campaigns, and they depend on staff, committees and hearings for most of the knowledge their work requires. An allotted chamber can be given the same support. The experience of citizens' assemblies is that randomly selected members, given time, information and facilitation, master complex questions and reach considered recommendations \citep{Fishkin2009}. There is also a reason to expect a positive contribution: diversity of perspectives can improve collective problem-solving, under some conditions even more than individual ability does \citep{HongPage2004,Landemore2013}. And since the theorem requires only one allotted chamber, the competence of the legislature as a whole does not rest on it alone.
+\end{reply}
+
+\begin{objection}[Accountability]
+Allotted legislators face no re-election and have nothing to fear from voters. They will be irresponsible or corrupt.
+\end{objection}
+
+\begin{reply}
+The absence of electoral accountability is a cost, which is why Proposition~\ref{p:notall} keeps an elected chamber. But it is also a benefit: allotted members do not depend on donors, parties or media attention for their seats, which removes the main channels through which organized interests capture elected legislators \citep{Guerrero2014}. Short single terms, public deliberation, rules on conflicts of interest and criminal sanctions for corruption supply forms of accountability that do not depend on re-selection.
+\end{reply}
+
+\begin{objection}[Consent]
+Citizens did not choose the members of an allotted chamber. Subjecting them to its decisions is a form of blind deference incompatible with self-government \citep{Lafont2019}.
+\end{objection}
+
+\begin{reply}
+Lafont's objection is strongest against proposals that would make allotted bodies sovereign or bypass the public. It is weaker against one chamber in a mixed legislature, since no law passes without the elected chamber, and the allotted chamber's power is primarily to amend and to block. Moreover, the method of selection is one citizens can endorse: each citizen has an equal chance of serving, which is a form of equal standing in the making of law. POL-04 argues that democracy is justified both by the equal standing it confers and by its tendency to good outcomes; an allotted chamber contributes to both, by giving equal chances of office and by bringing neglected perspectives into legislation.
+\end{reply}
+
+\begin{objection}[Self-selection]
+Citizens may refuse to serve, and those who accept will be unrepresentative: the retired, the politically engaged, those with flexible employment.
+\end{objection}
+
+\begin{reply}
+The objection is correct about advisory assemblies with modest compensation. A legislative chamber can offer a salary at least equal to that of elected legislators, job protection and support for care responsibilities, and can stratify the draw on characteristics associated with refusal. Residual self-selection is a matter of degree; an elected chamber is self-selected to a far greater degree, since only those who choose to run can be chosen.
+\end{reply}
+
+\section{What the argument does not establish}
+
+The argument does not establish that sortition should replace election, nor that an allotted chamber deliberates better than an elected one, a question addressed in the companion manuscript POL-14-b. It does not establish that every characteristic must be represented in proportion, only that systematic divergence on characteristics relevant to legislation is a defect that lot corrects. And it does not settle the division of powers between the chambers, beyond requiring that the elected chamber retain the authorization of a program.
+
+\section{Conclusion}
+
+Election selects the distinguished, and a legislature of the distinguished systematically fails to hear some interests and arguments. Selection by lot produces a chamber that matches the population, in expectation exactly and in fact closely, on every characteristic at once. Because an allotted chamber cannot be authorized for a program or held accountable through re-selection, the case is for a mixed legislature: at least one chamber should be chosen by lot.
+
+\begin{thebibliography}{99}\small
+\bibitem[Abizadeh(2021)]{Abizadeh2021} Abizadeh, A. (2021). Representation, bicameralism, political equality, and sortition: Reconstituting the second chamber as a randomly selected assembly. \emph{Perspectives on Politics}, 19(3).
+\bibitem[Aristotle(Pol.)]{AristotlePol} Aristotle. \emph{Politics}.
+\bibitem[Carnes(2013)]{Carnes2013} Carnes, N. (2013). \emph{White-Collar Government: The Hidden Role of Class in Economic Policy Making}. University of Chicago Press.
+\bibitem[Fishkin(2009)]{Fishkin2009} Fishkin, J. S. (2009). \emph{When the People Speak: Deliberative Democracy and Public Consultation}. Oxford University Press.
+\bibitem[Guerrero(2014)]{Guerrero2014} Guerrero, A. A. (2014). Against elections: The lottocratic alternative. \emph{Philosophy \& Public Affairs}, 42(2), 135--178.
+\bibitem[Hoeffding(1963)]{Hoeffding1963} Hoeffding, W. (1963). Probability inequalities for sums of bounded random variables. \emph{Journal of the American Statistical Association}, 58(301), 13--30.
+\bibitem[Hong and Page(2004)]{HongPage2004} Hong, L., and Page, S. E. (2004). Groups of diverse problem solvers can outperform groups of high-ability problem solvers. \emph{Proceedings of the National Academy of Sciences}, 101(46), 16385--16389.
+\bibitem[Lafont(2019)]{Lafont2019} Lafont, C. (2019). \emph{Democracy without Shortcuts: A Participatory Conception of Deliberative Democracy}. Oxford University Press.
+\bibitem[Landemore(2013)]{Landemore2013} Landemore, H. (2013). \emph{Democratic Reason: Politics, Collective Intelligence, and the Rule of the Many}. Princeton University Press.
+\bibitem[Landemore(2020)]{Landemore2020} Landemore, H. (2020). \emph{Open Democracy: Reinventing Popular Rule for the Twenty-First Century}. Princeton University Press.
+\bibitem[Manin(1997)]{Manin1997} Manin, B. (1997). \emph{The Principles of Representative Government}. Cambridge University Press.
+\bibitem[Mansbridge(1999)]{Mansbridge1999} Mansbridge, J. (1999). Should Blacks represent Blacks and women represent women? A contingent \enquote{yes}. \emph{Journal of Politics}, 61(3), 628--657.
+\bibitem[Pitkin(1967)]{Pitkin1967} Pitkin, H. F. (1967). \emph{The Concept of Representation}. University of California Press.
+\end{thebibliography}
+
+\end{document}

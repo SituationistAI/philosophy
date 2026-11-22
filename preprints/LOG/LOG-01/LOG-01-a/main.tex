@@ -1,0 +1,327 @@
+\documentclass{situationist-preprint}
+
+\title{The Liar Resolved}
+\msid{LOG-01-a}
+\msfamily{LOG-01}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_01.lean}
+\mskeywords{liar paradox; truth; revenge; determinateness; Łukasiewicz logic; Kripke; Field}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The liar sentence says of itself that it is not true. If it is true, it is not; if it is not, it is. We argue that the liar is neither true nor false, and that the standard objection to this answer, the revenge paradox, can be met. The objection says that any account of the liar's status yields a new sentence, built from that status, which is paradoxical in the same way. We show that this holds for some statuses and not for others. Working in Łukasiewicz many-valued logic, we prove that the liar built from any finite iteration of Field's determinateness operator has a value strictly between truth and falsity; the hierarchy of determinateness operators does not collapse, and no sentence of the hierarchy is paradoxical. We also prove that an operator expressing \enquote{exactly true} would generate a liar with no value at all, and conclude that such an operator is not expressible. The revenge paradox therefore shows not that the gap theory is incoherent but that it cannot be stated with a classical metalanguage operator; we argue that this limitation is acceptable. The results are formalized in Lean for the quantifier-free fragment, and Section~8 states what this does and does not establish for the full theory.
+\end{abstract}
+
+\section{The problem}
+
+Consider the sentence
+\begin{equation}\label{e:liar}
+\text{(L)}\quad \text{(L) is not true.}
+\end{equation}
+Suppose (L) is true. Then what it says is the case, so (L) is not true. Suppose (L) is not true. Then what it says is the case, and a sentence that says what is the case is true, so (L) is true. Given excluded middle, (L) is both true and not true.
+
+The argument uses three things: a sentence that refers to itself, the transparency of truth (a sentence and the claim that it is true are intersubstitutable), and classical logic. Self-reference cannot be blamed, since it is available in any language that can describe its own syntax, by the diagonal lemma, and much self-reference is harmless (\enquote{This sentence is in English}). Accounts of the liar therefore divide according to which of the other two they give up. Tarski gives up transparency for the language as a whole; Kripke keeps it at the price of truth-value gaps; dialetheists keep transparency and give up the claim that contradictions are never true; revision theorists treat truth as a circular concept defined by a rule of revision. Each account faces the same challenge, known as the revenge problem: whatever status the account assigns to (L), one can construct a sentence that says of itself that it lacks that status, and the argument starts again.
+
+Our thesis is that (L) is neither true nor false, and that the revenge problem can be answered for this view. The answer has two parts. First, for a large and natural family of statuses, built by iterating a determinateness operator, revenge sentences are not paradoxical: they too have values intermediate between truth and falsity (Theorem~\ref{t:revenge}). Second, for the statuses that would generate genuine paradox, such as \enquote{exactly true}, the argument shows that the corresponding operator is not expressible in the language (Proposition~\ref{p:exact}). We argue in Section~\ref{s:obj} that this second part is not a defeat but a result.
+
+\section{A short history of the debate}
+
+\subsection{Antiquity and the Middle Ages}
+
+The paradox is attributed to Eubulides of Miletus (Diogenes Laertius II.108) and was well known in antiquity; Cicero reports it as a standard challenge to the dialecticians (\emph{Academica} II.95). It was discussed at length by medieval logicians under the name of \emph{insolubilia}. The medieval treatments anticipate most modern options. The \emph{restrictio} solution denied that a term can refer to the proposition of which it is a part, a ban on self-reference that does not survive the observation that indirect self-reference is unavoidable. The \emph{cassatio} solution held that the liar says nothing, a precursor of the view that it expresses no proposition. Thomas Bradwardine argued that every proposition signifies that it itself is true, so that the liar signifies both that it is true and that it is false, and is therefore simply false; this view was developed by Buridan, who modified it, and it has modern defenders \citep{Read2002}. The difficulty for Bradwardine's solution is the one that will recur throughout: if the liar is simply false, then since it says that it is false, it seems to say something true.
+
+\subsection{Tarski's hierarchy}
+
+\citet{Tarski1935} proved that no consistent classical language that can express its own syntax can contain a predicate satisfying all instances of the schema \enquote{$\ulcorner A \urcorner$ is true if and only if $A$}. His response was to distinguish an object language from a metalanguage containing its truth predicate, and to iterate: each language in the hierarchy has a truth predicate only for the languages below it. The liar cannot be formulated, because \enquote{true} in (L) must belong to a level higher than (L) itself. The approach is consistent and classical, and it remains the standard treatment of truth in mathematical logic. As an account of natural language it was criticized for assigning levels where speakers assign none. Kripke's example is decisive: if Nixon says that everything Dean says about Watergate is false, and Dean says that everything Nixon says about Watergate is false, neither speaker can assign a level to his own use of \enquote{false} without knowing what the other has said, and in the pathological case no assignment of levels is possible at all \citep{Kripke1975}.
+
+\subsection{Kripke's fixed points}
+
+\citet{Kripke1975} kept a single truth predicate and allowed it to be partial. Start with a language whose truth predicate has empty extension and anti-extension. Evaluate sentences in the strong Kleene scheme, on which a sentence lacking a value makes a disjunction true if the other disjunct is true, and otherwise leaves it valueless. Add to the extension of \enquote{true} the sentences that come out true, to the anti-extension those that come out false, and repeat. The process reaches a fixed point in which every sentence's being true and its being in the extension of \enquote{true} coincide. Grounded sentences, such as \enquote{\enquote{Snow is white} is true}, receive their classical values; the liar receives none. Kripke's theory explains why paradox arises (the liar is ungrounded: its value cannot be fixed by the non-semantic facts) and does so without levels. Its weakness, which Kripke acknowledged, is that the theory cannot be stated in the language it describes. The sentence \enquote{(L) is not true} is itself valueless at the fixed point, so the theorist who asserts that the liar is not true asserts something that, by her own lights, is not true. The \enquote{ghost of the Tarski hierarchy} returns in the metalanguage.
+
+\subsection{Revision theory}
+
+\citet{GuptaBelnap1993}, building on \citet{Herzberger1982}, treat \enquote{true} as a circular concept whose meaning is given by a rule of revision: given a hypothesis about the extension of \enquote{true}, the rule yields a new hypothesis, namely the set of sentences that come out true under the old one. Grounded sentences stabilize under revision; the liar oscillates forever. Revision theory keeps classical logic and explains the pathology of the liar as instability. But the claim that the liar is unstable is not one that the theory's truth predicate can express without new instability, and the theory gives up the transparency of truth in the sense required here: \enquote{(L) is true} and (L) are not intersubstitutable in all contexts.
+
+\subsection{Dialetheism}
+
+\citet{Priest1979,Priest2006} accepts the liar argument at face value: (L) is both true and false. The logic of paradox, LP, has the same three-valued tables as strong Kleene but treats the middle value as designated (both true and false) rather than undesignated (neither). Dialetheism keeps transparency and avoids a gap in expressive power where the liar is concerned. It faces revenge from \enquote{just false}: a sentence that says of itself that it is just false, that is, false and not true. The dialetheist must hold that \enquote{just false} cannot be expressed so as to exclude truth, which is structurally the position we shall defend about \enquote{exactly true}. LOG-03 argues against dialetheism on independent grounds.
+
+\subsection{Contextualism}
+
+\citet{Burge1979} and \citet{Glanzberg2004} hold that \enquote{true} is context-sensitive: the reasoning that leads from \enquote{(L) is not true} to \enquote{so (L) is true} involves a shift of context, after which \enquote{true} has a wider extension. The liar is not true in the initial context and true in the reflective one, and there is no contradiction. Contextualism explains the phenomenology of the strengthened liar, the feeling that the theorist's conclusion is correct, but it requires context shifts that ordinary speakers do not notice, and it faces revenge from a sentence that says of itself that it is not true in any context.
+
+\subsection{Field's theory}
+
+\citet{Field2003,Field2008} returned to Kripke's construction but replaced the strong Kleene scheme with a logic that has a well-behaved conditional, so that \enquote{$\ulcorner A\urcorner$ is true if and only if $A$} holds for every sentence, including the liar. In such a logic one can define a determinateness operator $D$. The liar is not determinately true; the sentence that says of itself that it is not determinately true is not determinately determinately true; and so on, through a hierarchy that has no top. Field argued that this hierarchy is not a defect: it reflects the fact that the notion of \enquote{defectiveness} is itself graded. The view we defend is a version of Field's. We differ from him in emphasis, by treating the inexpressibility of \enquote{exactly true} as a theorem rather than a limitation, and in method, by isolating a quantifier-free fragment in which the main claims can be proved exactly.
+
+\subsection{The common structure of revenge}
+
+Every account in this survey assigns the liar some status $\sigma$: false, ungrounded, unstable, both true and false, true in one context and not another, not determinately true. In each case one forms the sentence \enquote{this sentence does not have $\sigma$}, and in each case the account must either assign it $\sigma$, which seems to make it true, or deny it $\sigma$, which seems to make it what it says it is not. The question is whether this structure is fatal. Our answer is that it depends on the operator that expresses $\sigma$, and that whether a given operator generates paradox can be settled by a fixed-point computation. Sections~\ref{s:frame} and~\ref{s:results} do the computation, and Section~\ref{s:cases} applies it to other self-referential sentences.
+
+\section{Framework}\label{s:frame}
+
+We work with the sentential fragment of a language containing a negation, a conditional, a conjunction, and sentences that may refer to themselves through operators. Values are taken from a finite Łukasiewicz algebra; the continuum-valued case is the limit, and nothing in the argument turns on the restriction to finitely many values except that the formalization is simpler.
+
+\begin{definition}\label{d:luk}
+For $k \geq 1$, the logic $\mathrm{L}_k$ has the values $0, 1, \ldots, k$, read as degrees of truth from falsity ($0$) to truth ($k$). Negation, conditional and conjunction are
+\[
+\neg x = k - x, \qquad x \to y = \min(k,\ k - x + y), \qquad x \wedge y = \min(x, y).
+\]
+\end{definition}
+
+For $k = 1$ this is classical logic. For $k = 2$, negation and conjunction coincide with those of strong Kleene logic and of LP. The conditional differs: unlike the strong Kleene conditional, the Łukasiewicz conditional satisfies $A \to A$ for every value of $A$. This is what allows the truth schema to hold in full.
+
+\begin{definition}\label{d:fixed}
+Let $\varphi$ be an operator interpreted by a function $f$ on values. The \emph{$\varphi$-liar} is a sentence $S_\varphi$ equivalent to $\neg \varphi(S_\varphi)$. A value $x$ is \emph{acceptable} for $S_\varphi$ in $\mathrm{L}_k$ if $\neg f(x) = x$. The $\varphi$-liar is \emph{paradoxical} in $\mathrm{L}_k$ if it has no acceptable value.
+\end{definition}
+
+The ordinary liar is the $\varphi$-liar for the identity operator, since in a transparent theory \enquote{$S$ is true} has the same value as $S$.
+
+\begin{definition}\label{d:D}
+The \emph{determinateness operator} is $D A := A \wedge \neg (A \to \neg A)$ \citep{Field2003}. On $\mathrm{L}_k$ it is interpreted by $D x = \max(0,\ 2x - k)$.
+\end{definition}
+
+The interpretation is a short computation from Definition~\ref{d:luk}: $A \to \neg A$ has the value $\min(k, 2k - 2x)$, its negation has the value $\max(0, 2x - k)$, and since $2x - k \leq x$ whenever $x \leq k$, the conjunction with $A$ leaves this unchanged. $D$ takes truth to truth and every value at or below the midpoint to falsity, and it stretches the upper half of the scale over the whole. A sentence that is fully true is determinately true; a sentence that is only half true is determinately not true; a sentence with value $3k/4$ is determinately true to degree $k/2$.
+
+\begin{proposition}\label{p:classical}
+In $\mathrm{L}_1$ the liar has no acceptable value.
+\end{proposition}
+
+\begin{proof}
+$\neg 0 = 1$ and $\neg 1 = 0$.
+\end{proof}
+
+\begin{proposition}\label{p:kleene}
+In $\mathrm{L}_2$ the liar has exactly one acceptable value, $1$.
+\end{proposition}
+
+\begin{proof}
+$\neg x = 2 - x$, and $2 - x = x$ if and only if $x = 1$.
+\end{proof}
+
+Proposition~\ref{p:kleene} is Kripke's result for the sentential case: in strong Kleene logic the liar takes the middle value. Read the middle value as \enquote{neither true nor false} and one has a gap theory; read it as \enquote{both} and one has LP. The difference lies in which values are designated, not in the fixed-point computation, and the revenge problem has a different form in each case. We adopt the gap reading.
+
+\section{The results}\label{s:results}
+
+\begin{theorem}\label{t:liar}
+In $\mathrm{L}_k$ the liar has an acceptable value if and only if $k$ is even, and the acceptable value is then $k/2$, which is neither $0$ nor $k$.
+\end{theorem}
+
+\begin{proof}
+$k - x = x$ if and only if $2x = k$.
+\end{proof}
+
+In the continuum-valued logic, which is the limit of the $\mathrm{L}_k$, the liar has the value $1/2$. The parity condition in Theorem~\ref{t:liar} is an artefact of finiteness, and it already shows the pattern that the rest of the section generalizes: a self-referential sentence has an acceptable value in a sufficiently fine logic, and in a coarse logic it may not. The classical logic $\mathrm{L}_1$ is the coarsest of all.
+
+We now turn to the revenge sentences built from iterations of $D$. Write $D^n$ for the $n$-fold iteration, with $D^0 x = x$.
+
+\begin{lemma}\label{l:iterate}
+Let $k = 2^n + 1$. For every $m \leq n$, $D^m(2^n) = 2^n - 2^m + 1$.
+\end{lemma}
+
+\begin{proof}
+By induction on $m$. For $m = 0$, $D^0(2^n) = 2^n = 2^n - 1 + 1$. Suppose the claim holds for $m < n$. Then $D^m(2^n) = 2^n - 2^m + 1$, which lies between $1$ and $k$, and
+\[
+D^{m+1}(2^n) = 2(2^n - 2^m + 1) - (2^n + 1) = 2^n - 2^{m+1} + 1,
+\]
+which is non-negative because $2^{m+1} \leq 2^n$.
+\end{proof}
+
+\begin{theorem}\label{t:revenge}
+For every $n$, the $D^n$-liar has the acceptable value $2^n$ in $\mathrm{L}_k$ with $k = 2^n + 1$. In particular it is neither true nor false.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:iterate} with $m = n$, $D^n(2^n) = 1$, so $\neg D^n(2^n) = k - 1 = 2^n$. The value $2^n$ is strictly between $0$ and $k$.
+\end{proof}
+
+In the continuum-valued limit the $D^n$-liar has the value $2^n/(2^n + 1)$. The values approach truth as $n$ grows, which is what one should expect: the $D^n$-liar says that it is not $D^n$-true, and as $D^n$ becomes more demanding this becomes harder to deny. But no value in the sequence reaches truth.
+
+\begin{corollary}\label{c:hierarchy}
+For every $n$, the $D^n$-liar is not paradoxical, and the hierarchy of determinateness operators does not collapse: the $D^n$-liar has value strictly between falsity and truth, and its value differs from that of the $D^m$-liar for every $m \neq n$.
+\end{corollary}
+
+\begin{proof}
+The first part is Theorem~\ref{t:revenge}. For the second, the continuum values $2^n/(2^n+1)$ are strictly increasing in $n$.
+\end{proof}
+
+Corollary~\ref{c:hierarchy} is the formal content of Field's claim that the hierarchy of determinateness has no top. Each revenge sentence formed with a finite iteration of $D$ is defective, but the theory can say so with the next operator in the hierarchy: the $D^n$-liar has value $2^n/(2^n+1)$, so $D^{n+1}$ of it has value $\max(0, 2 \cdot 2^n/(2^n+1) - 1) < 2^n/(2^n+1)$, and the $D^n$-liar is not $D^{n+1}$-true. The defectiveness of each sentence is expressible; what is not expressible is a single operator that captures defectiveness at every level at once.
+
+\begin{definition}\label{d:E}
+The \emph{exact truth} operator $E$ is interpreted by $E x = k$ if $x = k$ and $E x = 0$ otherwise.
+\end{definition}
+
+\begin{proposition}\label{p:exact}
+For every $k \geq 1$, the $E$-liar has no acceptable value in $\mathrm{L}_k$.
+\end{proposition}
+
+\begin{proof}
+If $x = k$, then $\neg E x = 0 \neq k$. If $x \neq k$, then $\neg E x = k \neq x$.
+\end{proof}
+
+Proposition~\ref{p:exact} is the revenge paradox in its strongest form. If the language contained an operator that sorted sentences classically into the fully true and the rest, the sentence that says of itself that it is not fully true would be paradoxical exactly as the liar is in classical logic. Since Theorem~\ref{t:revenge} shows that no finite iteration of $D$ generates paradox, and Proposition~\ref{p:exact} shows that $E$ does, $E$ is not among the operators definable from the connectives of $\mathrm{L}_k$ and the truth predicate, nor among their finite iterations. In the continuum-valued case the point can be made directly: every operator definable from the Łukasiewicz connectives is continuous, every continuous function on $[0,1]$ has a fixed point under negation, and $E$ is discontinuous at $1$.
+
+\section{Further cases}\label{s:cases}
+
+The fixed-point method of Section~\ref{s:results} classifies self-referential sentences according to the number of acceptable values they have. A sentence with exactly one acceptable value is determined; one with none is paradoxical; one with several is underdetermined. The liar in a fine enough logic is determined. We apply the method to three further cases.
+
+\subsection{The truth-teller}
+
+The truth-teller, \enquote{this sentence is true}, is the $\varphi$-sentence equivalent to $\varphi(S)$ for $\varphi$ the identity. Every value satisfies $x = x$.
+
+\begin{proposition}\label{p:teller}
+In every $\mathrm{L}_k$, every value is acceptable for the truth-teller.
+\end{proposition}
+
+The truth-teller is not paradoxical, but nothing fixes its value. Kripke's theory assigns it no value in the least fixed point and a classical value in others, and treats it, like the liar, as ungrounded. The present framework distinguishes the two cases more sharply: the liar's value is forced, the truth-teller's is not. This seems right. A speaker who considers the truth-teller has no reason to assign it any value rather than another; a speaker who considers the liar, once she has the right logic, has reason to assign it the middle value and no other. The natural policy for the truth-teller is to assign it the value of the least fixed point, the middle value, on grounds of minimality rather than necessity, and we adopt it.
+
+\subsection{Curry's sentence}
+
+Curry's sentence says of itself that if it is true, then everything is true; in its simplest form, $C \leftrightarrow (C \to \bot)$. In classical logic, and in any logic with contraction, $C$ yields $\bot$: assume $C$; then $C \to \bot$; so $\bot$; discharging, $C \to \bot$, that is, $C$; so $\bot$.
+
+\begin{proposition}\label{p:curry}
+In $\mathrm{L}_k$, Curry's sentence has an acceptable value if and only if $2x = k$. Its acceptable value is the liar's.
+\end{proposition}
+
+\begin{proof}
+$x \to 0 = \min(k, k - x) = k - x$, so the condition is the liar's.
+\end{proof}
+
+The Łukasiewicz conditional is not contractive: $A \to (A \to B)$ does not entail $A \to B$. At the value $k/2$, $C$ and $C \to \bot$ are both half true, and modus ponens, which preserves full truth, does not apply. Curry's sentence is therefore assigned a value and proves nothing, as LOG-04 argues on independent grounds. That the same fixed point resolves both paradoxes is evidence that the framework is not tailored to the liar.
+
+\subsection{Kripke's Nixon and Dean}
+
+Nixon says that everything Dean says about Watergate is not true, and Dean says that everything Nixon says about Watergate is not true. Suppose each says nothing else about Watergate. The pair is a liar cycle of length two.
+
+\begin{proposition}\label{p:nixon}
+A pair of values $(x, y)$ for Nixon's and Dean's statements is acceptable in $\mathrm{L}_k$ if and only if $x + y = k$.
+\end{proposition}
+
+\begin{proof}
+The conditions are $k - y = x$ and $k - x = y$, both of which say that $x + y = k$.
+\end{proof}
+
+The pair is underdetermined, like the truth-teller, and not paradoxical. Its acceptable valuations include the two classical ones, on which one speaker says something true and the other something false, and the symmetric one, on which both say something half true. Kripke's point about this case was that Tarski's hierarchy cannot assign levels to the two uses of \enquote{not true}; the present framework needs no levels and returns the verdict that the facts leave the values open within a constraint. If Nixon has also said something else about Watergate that is plainly true, the constraint changes and the values may become determined. This dependence of semantic status on contingent facts, which Kripke stressed, is preserved.
+
+\subsection{Yablo's sequence}
+
+\citet{Yablo1993} constructed a paradox without self-reference: an infinite sequence of sentences $S_0, S_1, \ldots$, where each $S_i$ says that every later sentence is not true. In classical logic the sequence has no consistent valuation. Since each $S_i$ involves a universal quantifier, the case lies outside the sentential fragment of Section~\ref{s:frame}. We note only that, in the continuum-valued setting, the constant valuation $1/2$ satisfies the conditions: if every later sentence has the value $1/2$, the infimum of their negations is $1/2$, which is the value of $S_i$. The complication is that quantified Łukasiewicz logic with a truth predicate has the defects described in Section~\ref{s:limits}. Yablo's paradox is therefore a test case for the full theory rather than for the fragment studied here.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}
+The theorist says that the liar is neither true nor false. If the liar has value $1/2$, then \enquote{the liar is not true} has value $1/2$ as well. So the theorist's own assertion is only half true. Kripke's problem has not been solved.
+\end{objection}
+
+\begin{reply}
+The theorist should not assert \enquote{the liar is not true}; she should assert \enquote{the liar is not determinately true}, that is, $\neg D(L)$. Since $D(1/2) = 0$, this has value $1$, and her assertion is fully true. This is the decisive advance of Field's theory over Kripke's: the defectiveness of the liar is expressible in the object language, by an operator whose application to the liar yields a classical value. The objection succeeds against a theorist who uses only the truth predicate to state her view and fails against one who uses $D$.
+\end{reply}
+
+\begin{objection}
+Then consider the sentence $S_1$ that says of itself that it is not determinately true. The theorist will want to say that it, too, is defective. But $\neg D(S_1)$ is $S_1$ itself, which is not fully true. So the theorist cannot fully assert that $S_1$ is not determinately true, and the problem returns one level up.
+\end{objection}
+
+\begin{reply}
+The theorist can assert $\neg D^2(S_1)$, which is fully true, since $S_1$ has value $2/3$ and $D^2(2/3) = 0$. In general she can state the defectiveness of each sentence of the hierarchy with the next operator. What she cannot do is state the defectiveness of all sentences of the hierarchy with a single operator. We accept this. The hierarchy is not, like Tarski's, a hierarchy of languages that speakers must implicitly choose between; it is a hierarchy of operators available in a single language, which a speaker uses as required by the sentence she is describing.
+\end{reply}
+
+\begin{objection}
+The theorist has just made a general claim: \enquote{every sentence of the hierarchy is defective}. That claim quantifies over all levels, and it must be expressible in some way. If it is expressible, an operator $D^\omega$ is available, and its liar is paradoxical.
+\end{objection}
+
+\begin{reply}
+This is the objection that \citet{Priest2010} presses against Field, and it is the strongest. Two points. First, the general claim is expressible as a quantified statement, \enquote{for every $n$, the $D^n$-liar is not $D^{n+1}$-true}, and this statement is true in the theory, as Corollary~\ref{c:hierarchy} shows; it is a statement about the hierarchy, not an application of a new operator to a sentence. Second, whether an operator $D^\omega$ can be defined by the quantifier over $n$ depends on the expressive resources of the full theory. \citet{Field2008} shows that his construction extends the hierarchy into the transfinite, and \citet{Welch2008} shows that it cannot be extended through all ordinals; there are ordinals at which the hierarchy breaks down. What follows from Welch's result is that the transfinite hierarchy is not indefinitely extensible within the theory, not that any of its definable operators generates paradox. Proposition~\ref{p:exact} gives the general diagnosis: an operator that would generate paradox is one that behaves classically at the top of the scale, and such an operator is not definable.
+\end{reply}
+
+\begin{objection}
+Declaring \enquote{exactly true} inexpressible is an ad hoc restriction. Speakers understand the phrase, and it is perfectly clear what it means.
+\end{objection}
+
+\begin{reply}
+Every consistent theory of transparent truth must make some notion inexpressible, by Tarski's theorem in its general form: a language that can express its own syntax cannot contain a predicate that is classical and transparent. The question is only which notions are excluded. The classical theorist excludes transparent truth itself; the dialetheist excludes \enquote{just false}; the gap theorist excludes \enquote{exactly true}. Of these, we think the gap theorist's exclusion is the least costly, because \enquote{exactly true} plays no role in ordinary reasoning that $D$ and its iterations cannot play, and because its inexpressibility is not stipulated but proved (Proposition~\ref{p:exact}). As for understanding the phrase: speakers understand \enquote{the set of all sets that are not members of themselves}, and that set does not exist.
+\end{reply}
+
+\begin{objection}
+The theory is not classical, and LOG-02 holds that classical logic is the one true logic.
+\end{objection}
+
+\begin{reply}
+The theory is conservative over classical logic for sentences not containing the truth predicate \citep{Field2008}, and excluded middle fails only for ungrounded sentences such as the liar. LOG-02 argues that classical logic correctly describes consequence and that non-classical logics correctly describe other relations. The present manuscript can be read accordingly: the Łukasiewicz algebra describes the relation between semantically defective sentences and the truth predicate, not consequence among sentences with classical content. LOG-02 argues that the tension is only apparent: any many-valued semantics whose connectives agree with the classical ones on the classical values yields classical consequence for sentences with classical content, and the Łukasiewicz algebra is such a semantics.
+\end{reply}
+
+\section{Recent literature}
+
+The last fifteen years have produced four developments relevant to the present view.
+
+\emph{Substructural approaches.} \citet{Zardini2011} and \citet{CobrerosEtAl2013} keep classical logic for the connectives and give up a structural rule instead: contraction in Zardini's case, transitivity of consequence in the strict-tolerant approach. These views avoid the revenge problem in a different way, since they need no intermediate values. We note that LOG-04 resolves Curry's paradox by rejecting contraction for the conditional, and that the Łukasiewicz conditional used here is non-contractive in exactly this sense. The difference is that we locate the failure of contraction in the conditional, where Zardini locates it in the structure of consequence. The results of Section~4 do not depend on this choice.
+
+\emph{Generalized revenge.} \citet{MurziRossi2020} argue that any non-classical theory of truth that can express its own notion of consequence, or of the validity of its own arguments, is subject to revenge. Their argument does not target the hierarchy of determinateness operators directly; it targets the theorist's ability to express the claim that her own logic is correct. We accept that the theorist cannot express in the object language that every valid argument in her logic preserves full truth, for the same reason that she cannot express exact truth. This is a limitation on the theory's capacity to state its own metatheory. Every consistent theory of truth has such a limitation, and we see no reason to think that this one is worse than its rivals'.
+
+\emph{Axiomatic theories.} A separate line of work asks not for a model of truth but for an axiomatic theory, and compares theories by their proof-theoretic strength \citep{Halbach2011}. \citet{Feferman1991} gave a classical axiomatization of Kripke's construction, KF, in which the truth predicate is governed by the Kleene clauses but the logic of the theory is classical; KF proves sentences such as \enquote{the liar is not true} together with the liar's negation, and so proves that some of its own theorems are not true. \citet{HalbachHorsten2006} axiomatized Kripke's theory in partial logic instead, as PKF, which avoids this oddity but is proof-theoretically weaker than KF: what one gains in fidelity to the semantics one loses in mathematical strength. The present view inherits this trade-off. A theory based on a non-classical logic for the truth predicate loses some of the reasoning that classical theories license, and the question how much is lost is open for Field's theory. We regard this as the main outstanding problem for the view, more pressing than revenge, because it concerns not whether the theory can be stated but what it can be used to prove.
+
+\emph{Replacement.} \citet{Scharp2013} argues that the concept of truth is inconsistent and should be replaced, for theoretical purposes, by two concepts, ascending and descending truth, each of which satisfies half of the truth schema. Scharp's view shares with ours the conclusion that the ordinary concept cannot be preserved in full. It differs in recommending replacement where we recommend a non-classical logic. We prefer the latter because it keeps the full truth schema, which is the feature of truth that makes it useful as a device of generalization \citep{Field2008}.
+
+\section{What the result does not establish}\label{s:limits}
+
+The results of Section~4 are proved for the sentential fragment: sentences that refer to themselves through operators, without quantifiers and without a truth predicate applied to arbitrary names. Three limits follow.
+
+First, Theorem~\ref{t:revenge} shows that the $D^n$-liars have acceptable values, not that every sentence of the full language does. In the full language with quantifiers, the question is whether a consistent valuation exists that satisfies the truth schema for all sentences. Field proves that it does, using a construction that combines Kripke's fixed points with revision sequences \citep{Field2008}.
+
+Second, the continuum-valued Łukasiewicz logic with quantifiers is not a suitable framework for the full theory. \citet{Restall1992} showed that arithmetic with a transparent truth predicate in infinite-valued Łukasiewicz logic is $\omega$-inconsistent, and \citet{HajekEtAl2000} showed that the theory has no standard model. Field's construction avoids this by not requiring that the values of quantified sentences be computed as infima and suprema over a continuum. A further limit concerns finiteness itself: every finite Łukasiewicz logic validates a contraction principle of some order, so that a suitably iterated Curry sentence trivializes a transparent truth theory based on it \citep{Moh1954}. The finite logics $\mathrm{L}_k$ serve here only as approximations to the continuum-valued logic, a point developed in LOG-04. The sentential results of Section~4 are unaffected, since they concern finite sentences with finitely many values, but they do not by themselves extend to the quantified case.
+
+Third, nothing here bears on vagueness. Field proposed to use the same operator $D$ for higher-order vagueness. LOG-15 argues that vague predicates are bivalent and that three-valued and many-valued logics misdescribe higher-order vagueness. The present manuscript takes no position on that proposal; its claim is limited to semantic paradox, where the intermediate values are produced by self-reference rather than by borderline cases.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_01.lean} represents the values of $\mathrm{L}_k$ by natural numbers, and uses the fact that truncated subtraction on the natural numbers coincides with the Łukasiewicz operations on $\{0, \ldots, k\}$. It proves Propositions~\ref{p:classical} and~\ref{p:kleene}, Theorem~\ref{t:liar}, the computation of $D$ in Definition~\ref{d:D}, Lemma~\ref{l:iterate}, Theorem~\ref{t:revenge}, Proposition~\ref{p:exact} and Propositions~\ref{p:teller}--\ref{p:nixon}. The main theorem is stated as follows.
+
+\begin{lstlisting}
+theorem revenge_blocked (n : Nat) :
+    neg (2 ^ n + 1) (Diter (2 ^ n + 1) n (2 ^ n)) = 2 ^ n ∧
+    0 < 2 ^ n ∧ 2 ^ n < 2 ^ n + 1
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_01.revenge_blocked' depends on axioms:
+  [propext, Quot.sound]
+'Philosophy.LOG_01.exact_truth_revenge' depends on axioms:
+  [propext, Quot.sound]
+\end{lstlisting}
+
+No axiom specific to the problem is used. This is unusual in the present collection, where most formalizations isolate a philosophical premise as an axiom. Here the philosophical premises are in the choice of framework: that truth is transparent, that the liar's value is a fixed point of the corresponding operator, and that $D$ is the right analysis of determinateness. Given these, the results are arithmetic.
+
+\section{Conclusion}
+
+The liar is neither true nor false: in any Łukasiewicz logic fine enough to give it a value, its value lies strictly between the two. The revenge sentences built from the determinateness operator are not paradoxical; each has an intermediate value, and the defectiveness of each can be stated with the next operator in the hierarchy. The one form of revenge that is paradoxical, built from exact truth, shows that exact truth is not expressible in the language. This is the price of a transparent truth predicate. Every consistent theory pays some such price; this one pays it in a notion that ordinary reasoning does not need.
+
+\begin{thebibliography}{99}\small
+\bibitem[Burge(1979)]{Burge1979} Burge, T. (1979). Semantical paradox. \emph{The Journal of Philosophy}, 76(4), 169--198.
+\bibitem[Cobreros et~al.(2013)]{CobrerosEtAl2013} Cobreros, P., Égré, P., Ripley, D. and van Rooij, R. (2013). Reaching transparent truth. \emph{Mind}, 122(488), 841--866.
+\bibitem[Feferman(1991)]{Feferman1991} Feferman, S. (1991). Reflecting on incompleteness. \emph{The Journal of Symbolic Logic}, 56(1), 1--49.
+\bibitem[Field(2003)]{Field2003} Field, H. (2003). A revenge-immune solution to the semantic paradoxes. \emph{Journal of Philosophical Logic}, 32(2), 139--177.
+\bibitem[Field(2008)]{Field2008} Field, H. (2008). \emph{Saving Truth from Paradox}. Oxford University Press.
+\bibitem[Glanzberg(2004)]{Glanzberg2004} Glanzberg, M. (2004). A contextual-hierarchical approach to truth and the liar paradox. \emph{Journal of Philosophical Logic}, 33(1), 27--88.
+\bibitem[Gupta and Belnap(1993)]{GuptaBelnap1993} Gupta, A. and Belnap, N. (1993). \emph{The Revision Theory of Truth}. MIT Press.
+\bibitem[Halbach(2011)]{Halbach2011} Halbach, V. (2011). \emph{Axiomatic Theories of Truth}. Cambridge University Press.
+\bibitem[Halbach and Horsten(2006)]{HalbachHorsten2006} Halbach, V. and Horsten, L. (2006). Axiomatizing Kripke's theory of truth. \emph{The Journal of Symbolic Logic}, 71(2), 677--712.
+\bibitem[Hájek et~al.(2000)]{HajekEtAl2000} Hájek, P., Paris, J. and Shepherdson, J. (2000). The liar paradox and fuzzy logic. \emph{The Journal of Symbolic Logic}, 65(1), 339--346.
+\bibitem[Herzberger(1982)]{Herzberger1982} Herzberger, H.~G. (1982). Notes on naive semantics. \emph{Journal of Philosophical Logic}, 11(1), 61--102.
+\bibitem[Kripke(1975)]{Kripke1975} Kripke, S. (1975). Outline of a theory of truth. \emph{The Journal of Philosophy}, 72(19), 690--716.
+\bibitem[Moh(1954)]{Moh1954} Moh Shaw-Kwei (1954). Logical paradoxes for many-valued systems. \emph{The Journal of Symbolic Logic}, 19(1), 37--40.
+\bibitem[Murzi and Rossi(2020)]{MurziRossi2020} Murzi, J. and Rossi, L. (2020). Generalized revenge. \emph{Australasian Journal of Philosophy}, 98(1), 153--177.
+\bibitem[Priest(1979)]{Priest1979} Priest, G. (1979). The logic of paradox. \emph{Journal of Philosophical Logic}, 8(1), 219--241.
+\bibitem[Priest(2006)]{Priest2006} Priest, G. (2006). \emph{In Contradiction: A Study of the Transconsistent} (2nd ed.). Oxford University Press.
+\bibitem[Priest(2010)]{Priest2010} Priest, G. (2010). Hopes fade for saving truth. \emph{Philosophy}, 85(1), 109--140.
+\bibitem[Read(2002)]{Read2002} Read, S. (2002). The liar paradox from John Buridan back to Thomas Bradwardine. \emph{Vivarium}, 40(2), 189--218.
+\bibitem[Restall(1992)]{Restall1992} Restall, G. (1992). Arithmetic and truth in Łukasiewicz's infinitely valued logic. \emph{Logique et Analyse}, 35(139--140), 303--312.
+\bibitem[Scharp(2013)]{Scharp2013} Scharp, K. (2013). \emph{Replacing Truth}. Oxford University Press.
+\bibitem[Tarski(1935)]{Tarski1935} Tarski, A. (1935). Der Wahrheitsbegriff in den formalisierten Sprachen. \emph{Studia Philosophica}, 1, 261--405. English translation in \emph{Logic, Semantics, Metamathematics} (1956), Clarendon Press.
+\bibitem[Welch(2008)]{Welch2008} Welch, P.~D. (2008). Ultimate truth vis-à-vis stable truth. \emph{The Review of Symbolic Logic}, 1(1), 126--142.
+\bibitem[Yablo(1993)]{Yablo1993} Yablo, S. (1993). Paradox without self-reference. \emph{Analysis}, 53(4), 251--252.
+\bibitem[Zardini(2011)]{Zardini2011} Zardini, E. (2011). Truth without contra(di)ction. \emph{The Review of Symbolic Logic}, 4(4), 498--535.
+\end{thebibliography}
+
+\end{document}

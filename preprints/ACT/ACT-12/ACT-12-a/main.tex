@@ -1,0 +1,148 @@
+\documentclass{situationist-preprint}
+
+\title{External Reasons Exist}
+\msid{ACT-12-a}
+\msfamily{ACT-12}
+\msdiscipline{Action, Agency and Free Will}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ACT/ACT\_12.lean}
+\mskeywords{internal reasons; external reasons; Williams; sound deliberation; future-Tuesday indifference; explanatory constraint}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Williams argued that an agent has a reason to act only if there is a sound deliberative route from her existing motivations to the action, so that all reasons are internal. We argue that external reasons exist: an agent may have a reason that no sound deliberation from her motivations would reveal. The argument uses a case of Parfit's. An agent who cares about his future pains except those that fall on future Tuesdays, and who knows everything about them, ought to prefer a mild pain on Wednesday to agony on Tuesday; but no sound deliberation from his motivations, which include the indifference, leads him to that preference. Since what an agent ought to do is what she has most reason to do, he has a reason that is not internal. The case is non-moral, so the conclusion does not depend on any claim about the authority of morality. We then answer Williams's argument that external reason statements cannot explain action: the explanatory constraint is met by agents who come to believe an external reason statement by some route other than deliberation from their prior motivations. The derivation is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Williams1981} distinguished two readings of sentences of the form \enquote{$A$ has a reason to $\phi$}. On the \emph{internal} reading, the sentence is true only if $A$ has some motive that would be served or furthered by $\phi$-ing, or more exactly, only if there is a sound deliberative route from $A$'s \emph{subjective motivational set}, her desires, commitments, patterns of evaluation and loyalties, to $\phi$-ing. On the \emph{external} reading, the sentence can be true even if there is no such route. Williams argued that external reason statements, so understood, are false or incoherent, and that what they express is better put by calling the agent inconsiderate, cruel or foolish, without implying that she has a reason she lacks the motivation to recognize.
+
+Williams's argument turns on an explanatory constraint. If something is a reason for an agent to act, it must be possible for her to act for that reason, and so for the reason to figure in the explanation of her action. But nothing can explain an intentional action except a motivation of the agent. An external reason statement, true independently of the agent's motivations, cannot explain her acting unless she comes to believe it and is moved by the belief; and if the belief moves her, she must already have had a motivation that sound deliberation could connect with it, in which case the reason was internal all along \citep{Williams1981,Williams1995}.
+
+The internalist view has been widely accepted, and widely contested. \citet{Korsgaard1986} argued that the internalism requirement is weaker than Williams supposed: it requires only that reasons be capable of motivating a rational agent, and leaves open how demanding rationality is. \citet{McDowell1995} argued that an agent may come to see a reason not by deliberation from her prior motivations but by a kind of conversion, such as a good upbringing produces, and that what the conversion yields is a correct view of what there is reason to do. \citet{Parfit2011} argued that reasons are given by facts about the objects of our desires, not by the desires themselves, and constructed cases in which internalism yields verdicts that no one accepts. We develop the last line of argument into a proof, and use the second to answer Williams's explanatory argument.
+
+\section{Framework}
+
+\begin{definition}[Sound deliberation]\label{d:sound}
+\emph{Sound deliberation} from a motivational set consists of the operations \citet{Williams1981} allows: correcting false beliefs and adding true relevant ones, means--end reasoning, finding constitutive solutions, ordering and weighing the elements of the set, and imagining the outcomes of the options. A \emph{sound route} from a motive to an action is a course of such deliberation that begins from the motive and ends in a decision to perform the action.
+\end{definition}
+
+\begin{definition}[Internal and external reasons]\label{d:int}
+An action is \emph{reachable} for an agent if there is a sound route to it from some element of her motivational set. A reason to perform an action is \emph{internal} if the action is reachable, and \emph{external} otherwise. \emph{Internalism} is the thesis that every reason is internal.
+\end{definition}
+
+\begin{principle}[Ought implies reason]\label{p:ought}
+If an agent ought, all things considered, to perform an action, she has a reason to perform it.
+\end{principle}
+
+Principle~\ref{p:ought} is a consequence of the definition of ought from reasons given by MTE-11, on which reasons are primitive and an agent ought to choose an option when the reasons for it are stronger than those for every alternative. An option supported by stronger reasons than every alternative is supported by some reason. The principle does not require reasons-first, however; it is accepted by most theorists of reasons, internalists included, since the internalist's complaint is not that ought outruns reasons but that reasons are narrower than the externalist supposes.
+
+The case is \citet{Parfit1984}'s. A certain hedonist cares about the quality of his future experiences, with one exception: he does not care about pains that occur on future Tuesdays. He knows that they will be pains, as intense as any others, and that he will suffer them as fully when Tuesday comes; he simply does not care, now, about pains on Tuesdays. Offered a choice between a mild pain next Wednesday and agony next Tuesday, he chooses the agony.
+
+\begin{assumption}\label{a:ought}
+The Tuesday agent ought to choose the mild pain on Wednesday rather than the agony on Tuesday.
+\end{assumption}
+
+\begin{assumption}\label{a:unreach}
+No element of the Tuesday agent's motivational set leads, by a sound route, to his choosing the mild pain on Wednesday.
+\end{assumption}
+
+Assumption~\ref{a:ought} is a verdict about prudence, not about morality: the agony is his, and avoiding it costs him only a mild pain. Assumption~\ref{a:unreach} follows from the description of the case together with Definition~\ref{d:sound}. The agent's beliefs are true and complete, so no correction or addition of belief is available. His indifference to Tuesday pains is an element of his set, and means--end reasoning, ordering and weighing operate on the set and do not remove it. Imagination does not help either, by stipulation: he imagines the Tuesday agony as vividly as one can, and remains indifferent to it now. Williams allows that sound deliberation may add and subtract elements of the set; but a deliberation that removed the indifference without any new information or error would be a change of concern, not a deliberation from it.
+
+\section{The argument}
+
+\begin{lemma}\label{l:unreach}
+Choosing the mild pain on Wednesday is not reachable for the Tuesday agent.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{d:int}, it would be reachable only if some element of his set led to it by a sound route, which Assumption~\ref{a:unreach} denies.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+External reasons exist: the Tuesday agent has a reason that no sound deliberation from his motivations would reveal.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:ought} and Principle~\ref{p:ought}, he has a reason to choose the mild pain on Wednesday. By Lemma~\ref{l:unreach}, the choice is not reachable for him. By Definition~\ref{d:int}, the reason is external.
+\end{proof}
+
+\begin{corollary}\label{c:int}
+Internalism is false.
+\end{corollary}
+
+The Tuesday agent is unusual, but the structure of his case is common. An agent whose concern for his own future health is entrenched below the level that his interests warrant, and whom no information and no imaginative exercise moves, is in the same position with respect to the cigarette he lights; and the husband of Williams's example, who treats his wife badly and does not care, is in the same position with respect to treating her better, if moral reasons apply to every agent to whom they are addressed, as MTE-07 argues. We rely on the Tuesday case because it isolates the structure from any dispute about the authority of morality.
+
+\section{The explanatory argument}\label{s:expl}
+
+Williams's argument against external reasons does not dispute verdicts like Assumption~\ref{a:ought}; it disputes that they are verdicts about reasons. It runs: (i) if there is a reason for $A$ to $\phi$, it must be possible for $A$ to $\phi$ for that reason; (ii) if $A$ $\phi$s for a reason, her $\phi$-ing is explained by a motivation she has; (iii) a reason that is external is one that no motivation of hers can reach by sound deliberation; so (iv) she cannot $\phi$ for it.
+
+The inference to (iv) fails. Premises (i) and (ii) require that, if she acts for the reason, some motivation of hers explains her action. They do not require that the motivation be one she already has, or that she acquire it by sound deliberation from those she already has. Suppose the Tuesday agent comes to care about his Tuesday pains. He might do so through the example of a friend, through the experience of a Tuesday's agony, or through a change in his attention to his own future that no reasoning from his prior concerns produced. Then he chooses the Wednesday pain because it is less bad than the Tuesday agony, and that fact, the content of the reason he previously had, figures in the explanation of his choice. The reason was external before the change: nothing in his set led to it by deliberation. It is now one he acts on. This is the shape of \citet{McDowell1995}'s conversion, and it is enough to satisfy the explanatory constraint, which requires only that it be possible for the agent to act for the reason.
+
+Williams anticipated the reply and insisted that the agent's coming to be motivated must be the result of his coming to believe the reason statement by correct reasoning, since otherwise the change in him is not a matter of rationality \citep{Williams1981}. But this is not part of the explanatory constraint; it is internalism itself. That a change of concern is not brought about by reasoning does not make it a change away from what there was reason to do.
+
+\section{Objections and replies}
+
+\begin{objection}[Irrationality, not reasons]
+The Tuesday agent is irrational, and we may say so. What we may not say is that he has a reason he cannot reach; the criticism concerns his concerns, not his reasons \citep{Williams1995}.
+\end{objection}
+
+\begin{reply}
+The internalist cannot say that the agent is irrational. On her view rationality in action consists in acting on one's internal reasons, and the Tuesday agent does so impeccably: every choice he makes is the one his informed and imaginative deliberation recommends. To criticize his concerns as irrational is to measure them against a standard other than his own motivations, and that standard is what an external reason statement expresses. The same point holds of the criticisms in other domains that rely on ACT-12: the cult member of ETH-25-a, who has reasons she does not respond to, and the unrepentant offender of ETH-26-a, who has reason to accept censure that his present motivations do not track.
+\end{reply}
+
+\begin{objection}[Impossible case]
+No real agent could be indifferent to his own future agony on Tuesdays while knowing all about it; the case is incoherent.
+\end{objection}
+
+\begin{reply}
+The case is strange but not incoherent: indifference to one's future experiences on grounds that have nothing to do with their quality is the attitude, in extreme form, of the many agents who discount their future at rates no information about the future corrects. And internalism is a thesis about what reasons are, defended by Williams as following from the concept of a reason; a possible counterexample refutes it. Real cases with the same structure, mentioned after Corollary~\ref{c:int}, show that the counterexample is not idle.
+\end{reply}
+
+\begin{objection}[Rationality internalism]
+\citet{Korsgaard1986} holds that reasons must be capable of motivating a fully rational agent. Perhaps the Tuesday agent's reason is internal in this sense, since a fully rational agent would care about Tuesday pains.
+\end{objection}
+
+\begin{reply}
+We agree, and this is not internalism in the sense of Definition~\ref{d:int}. Korsgaard's requirement makes what an agent has reason to do depend on what a rational agent would be moved by, not on what the agent's own motivations would lead her to by deliberation. On her view as on ours, an agent may have a reason that no sound deliberation from her own motivations reveals. The view is a form of externalism about reasons in Williams's sense, though it is internalist about the connection between reasons and rational motivation, as MTE-07 is.
+\end{reply}
+
+\section{Formalization}
+
+Theorem~\ref{t:main} and Corollary~\ref{c:int} are formalized in \nolinkurl{Philosophy/ACT/ACT_12.lean}. The motivational set is a predicate on motives and sound routes a primitive relation from motives to acts; reachability and external reasons are defined as in Definition~\ref{d:int}.
+
+\begin{lstlisting}
+theorem external_reasons_exist : ∃ a x, ExternalReason a x
+theorem internalism_false : ¬ (∀ a x, Reason a x → Reachable a x)
+\end{lstlisting}
+
+Both theorems depend on the same axioms:
+
+\begin{lstlisting}
+'Philosophy.ACT_12.external_reasons_exist' depends on axioms:
+  [Philosophy.ACT_12.Act, Philosophy.ACT_12.Agent,
+   Philosophy.ACT_12.InS, Philosophy.ACT_12.Motive,
+   Philosophy.ACT_12.Reason, Philosophy.ACT_12.SoundRoute,
+   Philosophy.ACT_12.avoid, Philosophy.ACT_12.ought_reason,
+   Philosophy.ACT_12.tuesday, Philosophy.ACT_12.tuesday_ought,
+   Philosophy.ACT_12.tuesday_unreachable]
+\end{lstlisting}
+
+The substantive axioms are \texttt{ought\_reason} (Principle~\ref{p:ought}), \texttt{tuesday\_ought} (Assumption~\ref{a:ought}) and \texttt{tuesday\_unreachable} (Assumption~\ref{a:unreach}); the rest are the primitives of the framework and the agent and act of the case. The formalization shows that the internalist must reject one of the three, and Section~\ref{s:expl} argues that Williams's explanatory argument gives no reason to reject any of them.
+
+\section{Conclusion}
+
+What an agent ought to do she has reason to do. The Tuesday agent ought to avoid the agony, and no deliberation from his motivations, however informed and imaginative, leads him to avoid it. He therefore has a reason he cannot reach by deliberation. The explanatory constraint does not exclude such reasons, since an agent may come to act on them by routes other than deliberation from what she already cares about. External reasons exist.
+
+\begin{thebibliography}{99}\small
+\bibitem[Korsgaard(1986)]{Korsgaard1986} Korsgaard, C.~M. (1986). Skepticism about practical reason. \emph{The Journal of Philosophy}, 83(1), 5--25.
+\bibitem[McDowell(1995)]{McDowell1995} McDowell, J. (1995). Might there be external reasons? In J.~E.~J. Altham and R. Harrison (eds.), \emph{World, Mind, and Ethics: Essays on the Ethical Philosophy of Bernard Williams}. Cambridge University Press.
+\bibitem[Parfit(1984)]{Parfit1984} Parfit, D. (1984). \emph{Reasons and Persons}. Clarendon Press.
+\bibitem[Parfit(2011)]{Parfit2011} Parfit, D. (2011). \emph{On What Matters}, vol.~1. Oxford University Press.
+\bibitem[Williams(1981)]{Williams1981} Williams, B. (1981). Internal and external reasons. In \emph{Moral Luck: Philosophical Papers 1973--1980}. Cambridge University Press.
+\bibitem[Williams(1995)]{Williams1995} Williams, B. (1995). Internal reasons and the obscurity of blame. In \emph{Making Sense of Humanity and Other Philosophical Papers}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

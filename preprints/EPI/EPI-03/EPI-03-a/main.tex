@@ -1,0 +1,281 @@
+\documentclass{situationist-preprint}
+
+\title{The Problem of Induction}
+\msid{EPI-03-a}
+\msfamily{EPI-03}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_03.lean}
+\mskeywords{induction; Hume; rule-circularity; reliabilism; counter-induction; no free lunch; meta-induction}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Hume argued that inductive inference cannot be justified: not demonstratively, since its conclusions could be false while its premises are true, and not inductively, since that would be circular. We argue that induction is justified, and justified inductively. The circularity involved is rule-circularity, not premise-circularity: the inductive argument for induction uses the rule whose reliability it concludes, but does not assume that conclusion as a premise. Given a reliabilist account of inferential justification, rule-circular arguments can justify their conclusions, and do so exactly when the rule is in fact reliable. The standard objection is that a parallel counter-inductive argument would justify counter-induction. We prove that the parallel fails: in any world in which induction is reliable, the inductive argument for induction is reliable as well, while the counter-inductive argument for counter-induction has a false conclusion at every step. We also prove a version of Hume's thesis: no rule of prediction is reliable in every world. The two results together locate the problem precisely. Induction cannot be justified a priori; it can be justified in, and only in, worlds that cooperate, and ours appears to be one.
+\end{abstract}
+
+\section{The problem}
+
+We infer from observed to unobserved cases constantly: that the sun will rise tomorrow, that bread will nourish, that the next sample of copper will conduct electricity. Hume asked what entitles us to these inferences \citep[1.3.6]{HumeTreatise}, \citep[IV]{HumeEnquiry}. They are not demonstrative, since there is no contradiction in supposing that the course of nature changes. If they are probable, they rest on the assumption that the unobserved resembles the observed; and that assumption can be supported only by experience, that is, by a probable argument that itself rests on the same assumption. Hume concluded that our inductive inferences are not founded on reasoning at all, but on custom.
+
+The problem has two parts that are often run together. The first is the claim that induction cannot be justified a priori: no argument from premises knowable independently of experience establishes that inductive inferences tend to lead from truths to truths. The second is the claim that induction cannot be justified a posteriori either, because any empirical justification would be circular. We accept the first claim and prove a version of it (Proposition~\ref{p:hume}). We reject the second. An empirical justification of induction is circular, but its circularity is of a kind that does not prevent it from justifying, and whether it justifies depends on facts about the world, not on the form of the argument.
+
+\section{A history of responses}
+
+\subsection{The uniformity of nature}
+
+Mill took inductive inference to rest on a principle of the uniformity of nature, itself established by induction from the success of particular inductions \citep[III.iii]{Mill1843}. He was aware of the circularity and argued that it was harmless, since the principle is confirmed by an induction of maximal breadth. This is the first statement of the view we defend, though without an account of why the circularity is harmless. Russell's formulation of the problem in terms of a principle of induction, which can be neither proved nor disproved by experience, made the circularity seem fatal \citep[ch.~6]{Russell1912}, and for most of the twentieth century the uniformity principle was treated as the weak point of any justification.
+
+\subsection{Pragmatic vindication}
+
+\citet{Reichenbach1938} gave up the attempt to show that induction is reliable and argued instead that it is the best policy available: if any method of prediction succeeds in finding the limiting frequencies of events, the straight rule of induction will too. Induction is vindicated, not validated. The argument is valid for limiting frequencies, but it says nothing about the short run, which is where predictions are needed, and it does not single out the straight rule from infinitely many other rules that converge to the same limits. Reichenbach's programme has been revived in a more powerful form by \citet{Schurz2019}, discussed in Section~\ref{s:recent}.
+
+\subsection{Analytic dissolution}
+
+\citet[ch.~9]{Strawson1952} argued that the demand for a justification of induction is confused. To ask whether it is reasonable to rely on inductive procedures is like asking whether the law is legal: being reasonable, in the relevant sense, just is proportioning one's beliefs to the inductive evidence. The dissolution is correct that \enquote{reasonable} is partly defined by inductive standards, but it does not answer the question that worried Hume, which is whether those standards are likely to lead to truth. One can ask of any norm whether conforming to it serves the aim for which it is followed, and the answer is not settled by the meaning of the norm's name.
+
+\subsection{Self-supporting inductive arguments}
+
+\citet{Braithwaite1953} and \citet{Black1958} proposed that induction can be supported by an inductive argument: the rule \enquote{infer that most As are B from the fact that most observed As are B} has usually led to true conclusions in the past, so by the rule itself it will usually lead to true conclusions in future. Black insisted that this argument is not viciously circular, because its premise does not include its conclusion. \citet{Salmon1957} replied with the counter-inductive parallel. The counter-inductive rule (infer that the unobserved will differ from the observed) has usually failed in the past; so, by the counter-inductive rule, it will usually succeed in future. If the inductive argument supports induction, the counter-inductive argument supports counter-induction, and the method of self-support supports incompatible rules. The parallel has been regarded as decisive by most commentators, and answering it is the main task of this manuscript.
+
+\subsection{Rejection}
+
+\citet{Popper1959} accepted Hume's conclusion and denied that science uses induction: theories are conjectures, tested by attempts to refute them, and a theory that survives testing is corroborated but not made probable. The view founders on the question why we should act on corroborated theories rather than refuted ones when predicting the future. To rely on a well-corroborated theory is to expect the future to resemble the past in the respect the theory describes, which is an inductive expectation.
+
+\subsection{Explanationism}
+
+A different line of response holds that induction can be justified a priori after all, by way of inference to the best explanation. \citet{Armstrong1983} argued that the best explanation of an observed regularity is a law of nature, understood as a relation of necessitation between universals, and that a law, once inferred, entails that the regularity will continue. \citet{Foster1983} and \citet{BonJour1998} developed similar arguments, BonJour holding that it is a priori more probable that a persistent observed regularity is explained by an objective pattern than that it is a coincidence. The explanationist strategy does not escape Proposition~\ref{p:hume} below, since there are worlds in which the best explanation of a past regularity fails to project; it claims only that such worlds are a priori improbable. That claim requires an a priori probability measure over worlds, and the choice of measure is the problem of induction in another form: a measure that favours uniform worlds licenses induction, a measure that favours anti-uniform worlds licenses counter-induction, and nothing a priori selects the first. We return to this point in discussing Bayesian induction in Section~\ref{s:cases}. Explanationism is, in our view, the correct account of how inductive inference is structured, since what we project are the regularities that our best explanations underwrite. It is not an independent justification of it.
+
+\subsection{Reliabilism and epistemic circularity}
+
+The modern form of the view we defend was stated by \citet{vanCleve1984}, who combined Black's distinction with a reliabilist account of justification \citep{Goldman1979}. On this account an inference is justified if it is produced by a reliable process; the agent does not need to know, or to have a justified belief, that it is reliable. An inductive argument for the reliability of induction can therefore justify its conclusion if induction is in fact reliable, without vicious circularity, since the premise that induction is reliable is not needed for the argument to justify. \citet{Alston1986} called this \enquote{epistemic circularity} and argued that it affects the justification of every basic source of belief, including perception and memory: one cannot show that perception is reliable without relying on perception. If epistemic circularity were fatal, scepticism about all these sources would follow. EPI-02 argues that scepticism about the external world can be refuted; the present manuscript extends the same strategy to induction.
+
+\subsection{The new riddle}
+
+\citet{Goodman1955} showed that the problem is not only to justify induction but to say what it is. A predicate such as \enquote{grue} (green if examined before a given time, blue otherwise) is confirmed by exactly the observations that confirm \enquote{green}, yet the predictions they license conflict. EPI-04 argues that projectible predicates are those that denote natural properties. The present manuscript presupposes an answer of this kind. The rule \enquote{predict that the next observation resembles the last} is well defined only once the respects of resemblance are fixed, and we take them to be fixed by natural properties.
+
+\section{Framework}\label{s:frame}
+
+We model the inductive situation in its simplest form: an infinite sequence of binary observations, and rules that predict each observation from the one before. The model is crude, but it suffices to make the structure of the debate precise, and every result below generalizes to rules that take finite histories as input.
+
+\begin{definition}\label{d:reliable}
+A \emph{world} is an infinite sequence $w_0, w_1, \ldots$ of observations, each $0$ or $1$. A \emph{rule} is a function $f$ from observations to observations, interpreted as a prediction of the next observation from the current one. A rule $f$ is \emph{reliable} in $w$ if $f(w_n) = w_{n+1}$ for every $n$.
+\end{definition}
+
+\begin{definition}\label{d:rules}
+\emph{Induction} is the rule $f(x) = x$: predict that the next observation will be like the current one. \emph{Counter-induction} is the rule $f(x) = 1 - x$: predict that it will differ.
+\end{definition}
+
+\begin{definition}\label{d:record}
+The \emph{track record} of a rule $f$ in a world $w$ is the world $r_f(w)$ whose $n$th observation is $1$ if $f(w_n) = w_{n+1}$ and $0$ otherwise. A \emph{rule-circular argument} for a rule $f$ is an application of $f$ to its own track record: it infers, from the success or failure of $f$ at step $n$, a prediction of its success or failure at step $n+1$.
+\end{definition}
+
+An argument is \emph{premise-circular} if its conclusion is among its premises. The rule-circular argument for induction is not premise-circular: its premises report the past successes of induction, and its conclusion that induction will succeed next time is not among them. It is rule-circular because the rule by which it moves from premises to conclusion is the rule whose reliability is in question.
+
+We adopt two principles about inferential justification.
+
+\begin{principle}[Reliabilism]\label{p:rel}
+A belief formed by inference from justified beliefs is justified if the rule of inference is reliable in the actual world and the agent has no defeater for the belief.
+\end{principle}
+
+\begin{principle}[No access requirement]\label{p:access}
+For a belief formed by a rule to be justified, the agent need not be justified in believing that the rule is reliable.
+\end{principle}
+
+\ref{p:access} is what distinguishes the view from internalist accounts, on which a justifying rule must be one the agent is justified in taking to be reliable. Given an internalist principle, a rule-circular argument cannot justify, since the agent would need to be justified in believing its conclusion before it could justify anything. We discuss the case for \ref{p:access} in Section~\ref{s:benign}.
+
+\section{Results}\label{s:results}
+
+\begin{proposition}[Hume]\label{p:hume}
+No rule is reliable in every world.
+\end{proposition}
+
+\begin{proof}
+Given $f$, define a world $w$ by $w_0 = 1$ and $w_{n+1} = 1 - f(w_n)$. Then $f(w_0) \neq w_1$, so $f$ is not reliable in $w$.
+\end{proof}
+
+Proposition~\ref{p:hume} is the formal core of Hume's first claim. Since the worlds in question are all possible, and any a priori argument for the reliability of a rule would have to show that it is reliable in all of them, no such argument exists. The proposition is a simple instance of the \enquote{no free lunch} theorems of learning theory \citep{Wolpert1996,SterkenburgGrunwald2021}: averaged over all possible sequences, no learner outperforms any other.
+
+\begin{proposition}\label{p:somewhere}
+Every rule is reliable in some world.
+\end{proposition}
+
+\begin{proof}
+Given $f$, define $w$ by $w_0 = 1$ and $w_{n+1} = f(w_n)$.
+\end{proof}
+
+Propositions~\ref{p:hume} and~\ref{p:somewhere} together state the symmetry that gives the problem its force: before experience, induction is no better placed than counter-induction or any other rule. Each is reliable in some worlds and unreliable in others. The question is whether experience can break the symmetry without begging it.
+
+Call a world \emph{uniform} if $w_{n+1} = w_n$ for every $n$. Uniformity is the extreme case of the regularity that induction exploits; the results extend to worlds that are uniform from some point on, and, with rules over finite histories, to worlds with any regularity that the rule tracks.
+
+\begin{theorem}\label{t:support}
+In a uniform world, induction is reliable, its track record is uniformly successful, and induction applied to its own track record is reliable as well.
+\end{theorem}
+
+\begin{proof}
+If $w_{n+1} = w_n$ for every $n$, the inductive prediction $w_n$ is correct at every step, so the track record is the constant world $1$. The constant world is uniform, so induction is reliable in it by the first part.
+\end{proof}
+
+\begin{proposition}\label{p:counter}
+In a uniform world, counter-induction is not reliable, its track record is uniformly unsuccessful, and counter-induction applied to its own track record predicts success at every step and is wrong at every step.
+\end{proposition}
+
+\begin{proof}
+In a uniform world the counter-inductive prediction $1 - w_n$ differs from $w_{n+1} = w_n$ at every step, so the track record is the constant world $0$. Counter-induction applied to the constant world $0$ predicts $1$ at every step, that is, it predicts that counter-induction will succeed next time; the prediction is false at every step.
+\end{proof}
+
+\begin{corollary}\label{c:asym}
+In any uniform world, the rule-circular argument for induction has true conclusions at every step, and the rule-circular argument for counter-induction has false conclusions at every step. The two arguments have the same form and different epistemic standing.
+\end{corollary}
+
+Corollary~\ref{c:asym} answers Salmon's objection. The parallel between the two self-supporting arguments is a parallel of form. By \ref{p:rel}, the epistemic standing of an inference depends not on its form alone but on the reliability of its rule in the actual world. In a world where induction is reliable, the inductive argument for induction is itself reliable, and justifies its conclusion; the counter-inductive argument for counter-induction is unreliable, and justifies nothing. Salmon's argument shows that the self-supporting method cannot discriminate between the two rules a priori. That is Proposition~\ref{p:hume} again, which we accept. It does not show that the method cannot discriminate between them in fact.
+
+The symmetry is restored in an anti-uniform world, where $w_{n+1} = 1 - w_n$: there counter-induction is reliable and self-supporting, and induction is neither. This is as it should be. In such a world, the inhabitants who reason counter-inductively are justified, and the ones who reason inductively are not.
+
+\section{Why rule-circularity is benign}\label{s:benign}
+
+The results of Section~\ref{s:results} show that rule-circular arguments can discriminate between rules in the world. They do not by themselves show that the discrimination amounts to justification; that is the work of \ref{p:rel} and \ref{p:access}. We give three reasons for accepting these principles, at least for basic rules of inference.
+
+\emph{Universality.} Every basic source of belief is subject to the same circularity. One cannot establish the reliability of perception without perception, of memory without memory, or of deduction without deduction. \citet{Carroll1895} showed that a deductive rule cannot be justified by adding it as a premise without regress, and \citet{Haack1976} argued that any justification of deduction must use deduction. If rule-circular arguments could not justify, no basic source of belief would be justified, and scepticism about deduction itself would follow. An account that treats induction differently from deduction owes an explanation of the difference; we see none that does not reduce to Proposition~\ref{p:hume}, and Proposition~\ref{p:hume} has an analogue for deduction too, in that no non-circular argument establishes the validity of modus ponens.
+
+\emph{The analogy with logic.} \citet{Boghossian2000} defended the view that rule-circular arguments can confer entitlement on logical knowledge: a thinker is entitled to rely on modus ponens if the rule is meaning-constituting, and an argument for its validity that uses the rule can then yield knowledge. Our principles are externalist where Boghossian's are not, but the structure is the same: the justification is located in the status of the rule, not in an independent premise about it.
+
+\emph{Diagnosis of the opposite intuition.} The intuition that rule-circular arguments cannot justify arises, we think, from a conflation of justification with persuasion. A rule-circular argument for induction will not persuade someone who doubts induction, since she will not accept its step from premises to conclusion. But persuading the sceptic is not the same as being justified. A person can be justified in believing what she cannot prove to someone who doubts the very methods by which she believes it, and this is the general situation of anyone who believes anything on the basis of perception in conversation with a sceptic about perception.
+
+\section{Further cases}\label{s:cases}
+
+\subsection{Regular but non-uniform worlds}
+
+Most regularities are not uniformities. A world in which observations repeat with period three is regular, but the one-step inductive rule fails in it at two steps out of three, at least. The results extend to such cases when rules may take finite histories as input. Say that a rule \emph{predicts at distance $p$} if it predicts observation $n + p$ from observation $n$, and that it is reliable at distance $p$ in $w$ if every such prediction is correct; its track record is defined as in Definition~\ref{d:record}.
+
+\begin{proposition}\label{p:periodic}
+If $w$ has period $p$, that is, $w_{n+p} = w_n$ for every $n$, the inductive rule at distance $p$ (\enquote{predict the observation $p$ steps back}) is reliable in $w$, and its track record is a uniform world.
+\end{proposition}
+
+\begin{proof}
+The first claim is the periodicity condition. The track record is the constant world $1$, which is uniform.
+\end{proof}
+
+By Theorem~\ref{t:support}, the rule-circular argument applied to that track record is reliable. What matters is therefore not the uniformity of the observations but the uniformity of the success of the rule that tracks them. This is, we suggest, the precise content of Mill's principle of the uniformity of nature: the principle that the relevant regularities persist is the principle that the track records of the rules tracking them are uniform. It also explains why the principle cannot be stated without circularity in terms of observations alone. Whether a world is \enquote{uniform} depends on which rule one uses to describe it: a world of period three is non-uniform for the one-step rule and uniform for the three-step rule. Proposition~\ref{p:hume} shows that no single rule is uniform-making in every world, and Proposition~\ref{p:periodic} shows that every periodic world has some rule for which it is.
+
+The general case is a world that is periodic only from some point on, or whose regularities are statistical rather than strict. The first case reduces to the periodic one, since a rule that is reliable from step $N$ onwards has a track record that is uniform from $N$ onwards, and Theorem~\ref{t:support} applies to the tail. The second requires the probabilistic extension mentioned in Section~\ref{s:limits}.
+
+\subsection{The grue case}
+
+Let \enquote{grue} be defined as above. The inductive rule over the predicate \enquote{grue} and the inductive rule over \enquote{green} are different rules, and in our world at most one is reliable. By Theorem~\ref{t:support} applied to each, the rule-circular argument for each is reliable exactly when the rule is. Nothing in the present account selects one of them a priori, and nothing should: the selection is made by the world, through the naturalness of the properties involved, as EPI-04 argues. The present account explains why the justification of induction can be completed once the riddle has been answered, not how to answer the riddle.
+
+\subsection{Bayesian induction}
+
+On a Bayesian account, inductive inference is conditionalization on evidence, and its results depend on prior probabilities. A prior that assigns high probability to uniform worlds makes inductive predictions; a prior that assigns high probability to anti-uniform worlds makes counter-inductive ones. \citet{Howson2000} argued that this shows that Hume was right: the inductive character of Bayesian inference is put in through the prior, which cannot itself be justified. On the present account, a prior is a rule in the relevant sense, and the question whether it is justified is the question whether it is reliable, that is, whether it concentrates probability near the actual world. A prior that favours uniformity is justified in a uniform world, and Bayesian updating on the success of its predictions is the rule-circular argument in probabilistic form.
+
+\subsection{The material theory}
+
+\citet{Norton2003} argued that there are no universal formal rules of induction; each inductive inference is licensed by a local material fact (that samples of a chemical element are generally uniform in their physical properties, for instance), and the regress of justification ends in particular facts rather than a general principle. The material theory and the present account agree that the justification of induction is a posteriori and world-dependent. They differ on whether there is a general rule whose reliability is at stake. We hold that there is, but that it is schematic: it is the rule of projecting natural properties, whose instances are Norton's material facts.
+
+\section{Recent literature}\label{s:recent}
+
+\emph{Meta-induction.} \citet{Schurz2019} revives Reichenbach's programme by moving it to the level of methods. A meta-inductive strategy that tracks the success rates of all available prediction methods and weights its predictions by their past success can be proved to be optimal in the long run among the accessible methods, in every world, including worlds in which no method is reliable. Schurz's result is a priori and does not depend on the world being uniform; it is the strongest non-circular vindication available. It is compatible with the present account, and in a sense complements it: meta-induction is guaranteed to do as well as the best available method, and the present account says when that method is induction. What meta-induction does not deliver, and Schurz does not claim, is that any method is reliable in the absolute sense; that cannot be delivered a priori, by Proposition~\ref{p:hume}.
+
+\emph{No-free-lunch theorems.} \citet{SterkenburgGrunwald2021} argue that the no-free-lunch theorems of machine learning are the formal expression of Hume's problem, and that every successful learning algorithm encodes an inductive bias that is justified, if at all, by facts about the domain. Proposition~\ref{p:hume} is a simple case of these theorems. The present account gives the bias a status: it is justified when the domain cooperates, and the success of the algorithm on the domain is a rule-circular argument that the domain cooperates.
+
+\emph{Bootstrapping.} \citet{Vogel2000} and \citet{Cohen2002} argued that reliabilism permits \enquote{bootstrapping}: an agent who reads a gauge that is in fact reliable can come to know, by comparing each reading with the reading itself, that the gauge is reliable, which is absurd. The objection applies to any account on which reliable sources can be used to establish their own reliability, and so to the present one. We take it up in the next section.
+
+\section{Objections and replies}
+
+\begin{objection}[Bootstrapping]
+On the present view, the agent who uses induction to conclude that induction is reliable comes to know that induction is reliable. But knowledge of the reliability of a source cannot be obtained so easily. An agent who reads the gas gauge and concludes, of each reading, that it was correct, can then infer that the gauge is reliable; this is plainly illegitimate \citep{Vogel2000}.
+\end{objection}
+
+\begin{reply}
+The gauge case and the inductive case differ in one respect. In the gauge case, the agent's evidence that the gauge was correct on each occasion is the gauge reading itself, so the track record is not independent evidence of anything: it would be the same whether the gauge were reliable or not. In the inductive case, the track record consists of observations of whether predictions were borne out, and these observations are made independently of the predictions: they would differ if induction were unreliable. Theorem~\ref{t:support} and Proposition~\ref{p:counter} illustrate this. The track records of induction and counter-induction in a uniform world are different, and the difference is due to the world, not to the rules. Bootstrapping is a problem when the track record is generated by the source under test; it is not a problem when the track record is supplied by the world.
+\end{reply}
+
+\begin{objection}
+The account makes the justification of induction a matter of luck. If our world happens to be uniform, we are justified; if not, not. But justification should not depend on facts to which the agent has no access.
+\end{objection}
+
+\begin{reply}
+This is the general objection to externalism, and it applies to the justification of perception as much as of induction. A person in a world where her perceptual faculties are reliable is justified in her perceptual beliefs, and a person with the same experiences in a sceptical scenario is not, or not in the same way. We accept this consequence. The agent who does not know whether her world is uniform does not thereby lack justification for her inductive beliefs; she lacks a non-circular argument that she has it, which is a different thing and one that no one has for any basic source.
+\end{reply}
+
+\begin{objection}
+Even granting the account, it does not tell us whether induction is in fact justified, since it does not tell us whether our world is uniform.
+\end{objection}
+
+\begin{reply}
+It tells us that induction is justified if our world is relevantly uniform, and our evidence that it is is the long and nearly unbroken success of inductive prediction in the natural sciences. That evidence is inductive, and we have argued that this is no objection to it. The account does not deliver certainty, and nothing could; it delivers justification, which is what was asked for.
+\end{reply}
+
+\begin{objection}
+The counter-inductivist can reply that in her view the world is anti-uniform, and that by her lights the inductivist's track record shows that induction is about to fail. The dispute is a standoff.
+\end{objection}
+
+\begin{reply}
+It is a standoff in dialectic, not in epistemology. The counter-inductivist and the inductivist cannot persuade each other, since each rejects the other's rule. But in a uniform world one of them is reliable and the other is not, and by Corollary~\ref{c:asym} the reliable one is the inductivist. The standoff is like that between a person with good eyesight and a person who is sure that his eyes are deceiving him: neither can prove his case to the other, but only one of them sees.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The results do not establish that our world is uniform, or that induction is reliable in it; they establish what follows if it is. They do not provide an argument that would persuade a sceptic about induction, and we have argued that no such argument should be expected. They do not answer the new riddle of induction, for which we rely on EPI-04. Finally, the formal model is limited to deterministic binary sequences and to rules that predict from a single earlier observation. The extension to rules over finite histories is straightforward, and Proposition~\ref{p:periodic} gives its simplest case; the extension to probabilistic prediction requires replacing reliability by calibration, and we do not undertake it here.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_03.lean} represents worlds as functions from natural numbers to Booleans and rules as functions from Booleans to Booleans. It proves Propositions~\ref{p:hume}, \ref{p:somewhere}, \ref{p:counter} and~\ref{p:periodic} and Theorem~\ref{t:support}. The main results are stated as follows.
+
+\begin{lstlisting}
+theorem no_universal_rule (f : Rule) : ∃ w, ¬ Reliable f w
+
+theorem inductive_support (w : World) (hu : Uniform w) :
+    Reliable induction w ∧ (∀ n, record induction w n = true) ∧
+    Reliable induction (record induction w)
+
+theorem counter_support_fails (w : World) (hu : Uniform w) :
+    ¬ Reliable counter w ∧ (∀ n, record counter w n = false) ∧
+    (∀ n, counter (record counter w n) ≠ record counter w (n + 1))
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.EPI_03.no_universal_rule' depends on axioms: [propext]
+'Philosophy.EPI_03.inductive_support' depends on axioms: [propext]
+'Philosophy.EPI_03.counter_support_fails' depends on axioms: [propext]
+'Philosophy.EPI_03.periodic_support' depends on axioms: [propext]
+\end{lstlisting}
+
+The formal results depend on no philosophical premise. The philosophical content of the manuscript lies in \ref{p:rel} and \ref{p:access}, which connect reliability to justification; these are not formalized, since they are not statements about the model but about how the model bears on epistemic standing.
+
+\section{Conclusion}
+
+Induction cannot be justified a priori, since no rule of prediction is reliable in every possible world. It can be justified a posteriori, by an argument that uses induction. Such an argument is rule-circular but not premise-circular, and given a reliabilist account of justification it justifies its conclusion when induction is in fact reliable. Salmon's counter-inductive parallel has the same form and a different standing: in a world where induction is reliable, the inductive argument for induction is reliable too, and the counter-inductive argument for counter-induction is wrong at every step. Hume was right that the justification of induction depends on the course of nature. He was wrong to conclude that it is therefore not founded on reasoning.
+
+\begin{thebibliography}{99}\small
+\bibitem[Alston(1986)]{Alston1986} Alston, W.~P. (1986). Epistemic circularity. \emph{Philosophy and Phenomenological Research}, 47(1), 1--30.
+\bibitem[Armstrong(1983)]{Armstrong1983} Armstrong, D.~M. (1983). \emph{What Is a Law of Nature?} Cambridge University Press.
+\bibitem[Black(1958)]{Black1958} Black, M. (1958). Self-supporting inductive arguments. \emph{The Journal of Philosophy}, 55(17), 718--725.
+\bibitem[Boghossian(2000)]{Boghossian2000} Boghossian, P. (2000). Knowledge of logic. In P.~Boghossian and C.~Peacocke (Eds.), \emph{New Essays on the A Priori} (pp.~229--254). Oxford University Press.
+\bibitem[BonJour(1998)]{BonJour1998} BonJour, L. (1998). \emph{In Defense of Pure Reason}. Cambridge University Press.
+\bibitem[Braithwaite(1953)]{Braithwaite1953} Braithwaite, R.~B. (1953). \emph{Scientific Explanation}. Cambridge University Press.
+\bibitem[Carroll(1895)]{Carroll1895} Carroll, L. (1895). What the tortoise said to Achilles. \emph{Mind}, 4(14), 278--280.
+\bibitem[Cohen(2002)]{Cohen2002} Cohen, S. (2002). Basic knowledge and the problem of easy knowledge. \emph{Philosophy and Phenomenological Research}, 65(2), 309--329.
+\bibitem[Foster(1983)]{Foster1983} Foster, J. (1983). Induction, explanation and natural necessity. \emph{Proceedings of the Aristotelian Society}, 83, 87--101.
+\bibitem[Goldman(1979)]{Goldman1979} Goldman, A.~I. (1979). What is justified belief? In G.~Pappas (Ed.), \emph{Justification and Knowledge} (pp.~1--23). Reidel.
+\bibitem[Goodman(1955)]{Goodman1955} Goodman, N. (1955). \emph{Fact, Fiction, and Forecast}. Harvard University Press.
+\bibitem[Haack(1976)]{Haack1976} Haack, S. (1976). The justification of deduction. \emph{Mind}, 85(337), 112--119.
+\bibitem[Howson(2000)]{Howson2000} Howson, C. (2000). \emph{Hume's Problem: Induction and the Justification of Belief}. Oxford University Press.
+\bibitem[Hume(1739)]{HumeTreatise} Hume, D. (1739). \emph{A Treatise of Human Nature}, Book I, Part III, Section VI.
+\bibitem[Hume(1748)]{HumeEnquiry} Hume, D. (1748). \emph{An Enquiry Concerning Human Understanding}, Section IV.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}, Book III.
+\bibitem[Norton(2003)]{Norton2003} Norton, J.~D. (2003). A material theory of induction. \emph{Philosophy of Science}, 70(4), 647--670.
+\bibitem[Popper(1959)]{Popper1959} Popper, K.~R. (1959). \emph{The Logic of Scientific Discovery}. Hutchinson.
+\bibitem[Reichenbach(1938)]{Reichenbach1938} Reichenbach, H. (1938). \emph{Experience and Prediction}. University of Chicago Press.
+\bibitem[Russell(1912)]{Russell1912} Russell, B. (1912). \emph{The Problems of Philosophy}. Williams and Norgate.
+\bibitem[Salmon(1957)]{Salmon1957} Salmon, W.~C. (1957). Should we attempt to justify induction? \emph{Philosophical Studies}, 8(3), 33--48.
+\bibitem[Schurz(2019)]{Schurz2019} Schurz, G. (2019). \emph{Hume's Problem Solved: The Optimality of Meta-Induction}. MIT Press.
+\bibitem[Sterkenburg and Grünwald(2021)]{SterkenburgGrunwald2021} Sterkenburg, T.~F. and Grünwald, P.~D. (2021). The no-free-lunch theorems of supervised learning. \emph{Synthese}, 199, 9979--10015.
+\bibitem[Strawson(1952)]{Strawson1952} Strawson, P.~F. (1952). \emph{Introduction to Logical Theory}. Methuen.
+\bibitem[van Cleve(1984)]{vanCleve1984} van Cleve, J. (1984). Reliability, justification, and the problem of induction. \emph{Midwest Studies in Philosophy}, 9, 555--567.
+\bibitem[Vogel(2000)]{Vogel2000} Vogel, J. (2000). Reliabilism leveled. \emph{The Journal of Philosophy}, 97(11), 602--623.
+\bibitem[Wolpert(1996)]{Wolpert1996} Wolpert, D.~H. (1996). The lack of a priori distinctions between learning algorithms. \emph{Neural Computation}, 8(7), 1341--1390.
+\end{thebibliography}
+
+\end{document}

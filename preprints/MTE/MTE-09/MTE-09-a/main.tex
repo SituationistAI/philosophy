@@ -1,0 +1,225 @@
+\documentclass{situationist-preprint}
+
+\title{Debunking the Debunkers}
+\msid{MTE-09-a}
+\msfamily{MTE-09}
+\msdiscipline{Metaethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTE/MTE\_09.lean}
+\mskeywords{evolutionary debunking; Darwinian dilemma; Street; moral realism; reliability; sensitivity; naturalism; reasons}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Evolutionary debunking arguments hold that, because our moral faculties were shaped by natural selection, which rewarded reproductive success and not moral truth, our moral beliefs are unjustified or unreliable if moral realism is true. Street's Darwinian dilemma presses the point: the realist must either deny any relation between selective pressures and moral truth, making the reliability of our moral beliefs a coincidence, or claim that selection favored tracking moral truth, which is scientifically worse than the adaptive-link explanation. We grant the first horn and take the second. Evolution selected for tracking reasons: a faculty that responds correctly to the reason-giving features of situations, such as harm, need and reciprocity, was fitness-enhancing. If moral facts are natural facts, as MTE-01 argues, the tracking explanation and the adaptive-link explanation are one explanation under two descriptions. Given that the faculty responds to features rather than to kinds of reasons, and that moral reasons are made by features that selected kinds also present, the faculty is reliable about moral reasons on a core domain and sensitive to them there, so the debunker's premise fails. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The debunking challenge}
+
+\citet{Darwin1871} observed that if men were reared under the conditions of hive-bees, the unmarried females would think it a sacred duty to kill their brothers, and the mothers to kill their fertile daughters, and no one would think of interfering. The observation suggests that the content of our moral sense depends on the contingencies of our evolutionary history, and that a different history would have given us a different morality with the same conviction. \citet{RuseWilson1986} drew the conclusion that morality is an illusion fobbed off on us by our genes to make us cooperate; \citet{Joyce2006} argued that the evolutionary explanation of moral belief undermines its justification, since the explanation does not presuppose that the beliefs are true.
+
+\citet{Street2006} gave the argument its most influential form, the Darwinian dilemma. Natural selection has had a tremendous influence on the content of human evaluative attitudes: we tend to judge that we have reason to care for our children, to reciprocate, and to avoid harm, and the explanation of these tendencies is that creatures who had them left more descendants. The realist, who holds that evaluative truths are independent of our attitudes, must say what relation, if any, holds between the selective pressures and the truths. If there is none, then the influence of selection has pushed our attitudes in directions unrelated to the truth, and it would be a coincidence if they were largely true. If there is a relation, the realist must say that selection favored the ability to grasp evaluative truths, because grasping them was adaptive; but this tracking account is scientifically inferior to the adaptive-link account, on which attitudes were selected because they forged adaptive links between circumstances and responses, with no mention of their truth.
+
+Realists have replied in several ways. Third-factor replies hold that some factor explains both why selection favored certain attitudes and why their contents are true: \citet{Enoch2010} takes the factor to be that survival is good, \citet{Wielenberg2010} that the cognitive faculties that confer rights were selected, \citet{Skarsaune2011} that pleasure is good and pain bad. \citet{Copp2008} argues that, on a society-centered naturalism, moral truths concern what would enable societies to meet their needs, which selection also tracks. \citet{FitzPatrick2015} argues that, while selection shaped our capacities, the exercise of moral reasoning is autonomous and can correct for its influences, and \citet{Huemer2016} that the historical trend toward liberal values is evidence that moral thought tracks something beyond fitness. \citet{ClarkeDoane2012} compares the case to mathematics, where selection explains our beliefs without debunking them. \citet{Kahane2011} distinguishes global from selective debunking, and \citet{Vavova2015} surveys the dialectic.
+
+We take the second horn of Street's dilemma, and we argue that, given naturalism about moral facts, the tracking account and the adaptive-link account are not rivals. Evolution selected for tracking reasons, and those reasons include moral ones.
+
+\section{The strategy}
+
+The argument has three steps.
+
+The first is to grant the first horn. If moral facts were unconnected to what selection rewarded, nothing would guarantee the reliability of our moral faculty, and its reliability, if it were reliable, would be a matter of which moral facts happened to obtain. We prove this as Propositions~\ref{p:noguarantee} and~\ref{p:coincidence}. Realists who deny any connection, such as some non-naturalists, owe an account of the coincidence, and we do not offer one.
+
+The second is to identify the connection. MTE-01 argues that moral facts are natural facts about idealized reactions, and MTE-11 that the reason relation, while primitive in the order of normative definition, is identical to a natural relation. The facts that make it the case that one has reason to avoid a predator, to feed one's child or to repay a favor are natural facts about the situation: that the predator would harm one, that the child is hungry, that the other has helped. A faculty that responds to these facts, by producing the corresponding favoring and disfavoring responses, tracks reasons. Selection favored such a faculty because responding correctly to these facts enhanced fitness. This is the tracking account, and it is the adaptive-link account: the adaptive link between the predator's presence and the response of fleeing is a response to a reason, since the predator's presence is a reason to flee.
+
+The third is to extend the result from the reasons selection rewarded to moral reasons. The extension rests on two claims: that the faculty responds to features rather than to kinds of reasons, so that a correct response to a feature in one domain is a correct response to it in another; and that moral reasons are made, in a core domain, by features that the selected domains also present. Suffering is the same feature whether it is one's own, one's child's or a stranger's.
+
+\section{Framework}
+
+A situation is individuated by its natural state, which fixes, for each kind of reason, which reason-relevant features the situation presents with respect to it: harms and benefits to whom, needs, past help received, commitments made.
+
+\begin{definition}[Reliability]\label{d:rel}
+A faculty is \emph{reliable} about a kind of reason on a domain of situations if, for every situation in the domain, its verdict about whether there is a reason of that kind agrees with the fact.
+\end{definition}
+
+\begin{definition}[Sensitivity]\label{d:sens}
+A faculty is \emph{sensitive} to a kind of reason on a domain if, for any two situations in the domain that differ in whether there is a reason of that kind, its verdicts in the two differ.
+\end{definition}
+
+\begin{definition}[Insensitivity]\label{d:insens}
+The debunker's \emph{insensitivity premise}, for a domain, is that the facts about reasons of the kind vary across situations in the domain while the faculty's verdicts do not.
+\end{definition}
+
+Definition~\ref{d:insens} formulates the core claim of the debunker: that our moral beliefs would have been the same however the moral facts had been, because what fixed them was fitness and not truth. Definitions~\ref{d:rel} and~\ref{d:sens} are the reliability and sensitivity of EPI-03 and of the epistemological literature on modal conditions, restricted to a domain. Reliability is relative to the domain, as EPI-03 shows for induction, which is reliable in uniform worlds and not in every world; no faculty is reliable relative to every possible assignment of facts, and the question is always whether it is reliable in the circumstances in which it is used.
+
+\begin{assumption}[Naturalism]\label{a:nat}
+Whether there is a reason of a given kind in a situation depends only on the reason-relevant natural features that the situation presents with respect to that kind.
+\end{assumption}
+
+Assumption~\ref{a:nat} is a consequence of MTE-01 and of the identity of reasons with natural facts defended in MTE-11. It says, for instance, that whether there is a reason to help depends on whether someone is in need and would be helped; it does not say that reasons depend on our attitudes.
+
+\begin{assumption}[Unity of the capacity]\label{a:unity}
+The evaluative faculty forms its verdicts by a single mechanism that responds to the reason-relevant features, whatever the kind of reason at issue.
+\end{assumption}
+
+\begin{assumption}[Selection for tracking]\label{a:sel}
+In ancestral situations, the faculty's verdicts about the kinds of reasons whose tracking enhanced fitness, prudential reasons and the reasons of cooperation within groups, were correct.
+\end{assumption}
+
+\begin{assumption}[Continuity]\label{a:cont}
+Some situations present moral features that are also presented, with respect to some selected kind, in some ancestral situation.
+\end{assumption}
+
+We call the situations described in Assumption~\ref{a:cont} the \emph{core domain}: the situations whose morally relevant features were also present, with respect to some selected kind, in some ancestral situation. The suffering of a stranger is in the core domain, since suffering was presented, with respect to prudential reasons and the reasons of kin care, in ancestral situations; so is a broken promise to a distant trading partner, since breach of commitment was presented in the reasons of cooperation within groups.
+
+\section{The results}\label{s:results}
+
+\begin{proposition}[No guarantee without a link]\label{p:noguarantee}
+For every faculty there is an assignment of moral facts relative to which its verdicts are false in every situation.
+\end{proposition}
+
+\begin{proof}
+Let the moral facts be the opposite of the faculty's verdicts in every situation.
+\end{proof}
+
+\begin{proposition}[Coincidence]\label{p:coincidence}
+For every faculty there is also an assignment of moral facts relative to which it is reliable in every situation.
+\end{proposition}
+
+\begin{proof}
+Let the moral facts be the faculty's verdicts.
+\end{proof}
+
+Together the two propositions are the first horn of Street's dilemma. If nothing connects the moral facts to the process that formed the faculty, then whether the faculty is reliable depends on which assignment of facts obtains, and nothing in the formation of the faculty favors the assignments on which it is reliable. The realist who severs the connection owes an explanation of why the reliable assignment obtains, and none is available from the evolutionary story.
+
+\begin{lemma}[Reliability excludes insensitivity]\label{l:sens}
+If a faculty is reliable about a kind of reason on a domain, it is sensitive to it on that domain, and the insensitivity premise fails for the domain.
+\end{lemma}
+
+\begin{proof}
+Let two situations in the domain differ in whether there is a reason. By reliability, the faculty's verdict in each agrees with the fact, so its verdicts differ; hence it is sensitive. The insensitivity premise requires two situations in the domain that differ in the facts while the verdicts are the same in all situations of the domain; by sensitivity the verdicts in those two situations differ, a contradiction.
+\end{proof}
+
+\begin{theorem}[Tracking]\label{t:main}
+The evaluative faculty is reliable about moral reasons on the core domain.
+\end{theorem}
+
+\begin{proof}
+Let a situation $x$ be in the core domain. Then there is a selected kind $k$ and an ancestral situation $y$ such that the features $y$ presents with respect to $k$ are the features $x$ presents with respect to the moral kind. By Assumption~\ref{a:sel}, the faculty's verdict about reasons of kind $k$ in $y$ was correct. By Assumption~\ref{a:unity}, that verdict is the faculty's response to those features, and by Assumption~\ref{a:nat}, the fact about reasons of kind $k$ in $y$ is fixed by those features. In $x$, the faculty's verdict about moral reasons is its response to the same features, and the moral fact is fixed by the same features in the same way. So the verdict in $x$ agrees with the moral fact.
+\end{proof}
+
+\begin{corollary}[Not debunked]\label{c:main}
+The core domain is not empty; on it, the faculty's moral verdicts are sensitive to the moral facts, and the debunker's insensitivity premise is false.
+\end{corollary}
+
+\begin{proof}
+The core domain is nonempty by Assumption~\ref{a:cont}. Sensitivity and the failure of the insensitivity premise follow from Theorem~\ref{t:main} by Lemma~\ref{l:sens}.
+\end{proof}
+
+The proof of Theorem~\ref{t:main} has a feature worth noting. In the step from Assumption~\ref{a:nat} it uses the identity of the function that fixes reasons across kinds: the same features make the same reasons, whatever the kind. That is what it is for moral reasons to be reasons of the same sort as those whose tracking was selected, and it is the content of the claim that selection for tracking reasons was selection for a capacity that includes moral ones.
+
+\section{Street's scientific objection}
+
+Street's objection to the tracking account is that it is worse science than the adaptive-link account: it posits an additional explanandum, the truth of the attitudes, which does no explanatory work. The objection presupposes that the tracking account and the adaptive-link account cite different facts. On naturalism, they do not.
+
+The adaptive-link account explains why our ancestors tended to judge that they had reason to care for their offspring: those who responded to the hunger and danger of their offspring with care left more descendants. The explanation cites the offspring's hunger and danger, and the response to them. On Assumption~\ref{a:nat}, the hunger and danger of one's offspring are what make it the case that one has reason to care for them; they are the reason. So the adaptive-link account explains the judgment by citing the reason and the faculty's response to it, and that is the tracking account. Nothing is added; the tracking description is a redescription of the adaptive-link explanation in normative terms, licensed by the identity of the reason with the natural fact.
+
+The point generalizes the reply of \citet{Copp2008}, without his society-centered theory, and it differs from third-factor replies in not needing a substantive normative premise such as that survival is good \citep{Enoch2010}. What it needs is naturalism about reasons, which MTE-01 and MTE-11 defend, and the observation that the features to which selection made us responsive are reason-giving features.
+
+\section{From selected reasons to moral reasons}\label{s:extend}
+
+Theorem~\ref{t:main} depends on two assumptions about the faculty and its subject matter, and both need defence.
+
+\paragraph{Unity.} Assumption~\ref{a:unity} says that the faculty responds to features, not to kinds. The evolutionary case for it is the case for general-purpose capacities in variable environments. Human ancestors lived in social environments that changed faster than genetic adaptation could follow, and a faculty that responded to fixed cues, this face, this kind of food, would have been outperformed by one that responded to features wherever they appeared: harm, need, help received. \citet{Sterelny2012} argues that human cognitive evolution was driven by exactly this demand for flexible, socially transmitted competence, and \citet{Kitcher2011} that the ethical project began as a technique of responding to the needs of others in small groups and extended itself by the same means. The analogy with mathematics is close: selection favored the capacity to count small collections, and the capacity it produced counts any collection \citep{ClarkeDoane2012}. A capacity to respond to suffering that is selected because it responds to the suffering of one's kin is a capacity to respond to suffering.
+
+\paragraph{Continuity.} Assumption~\ref{a:cont} says that moral reasons are made, in a core domain, by features that selected kinds also present. The central moral reasons are reasons given by harm, need, consent, reciprocity and commitment, and each of these features was presented in ancestral situations with respect to prudential reasons and the reasons of cooperation within groups. What distinguishes moral from prudential reasons is not the features but their bearers: a moral reason to relieve suffering is given by the suffering of anyone, the prudential reason by one's own. Since the faculty responds to features, it responds to the suffering of strangers as it responds to that of kin, and that is why it is reliable about moral reasons in the core domain.
+
+\paragraph{Distortions.} The actual faculty is not purely a feature-responder. Selection also produced biases that weight features by their bearers: concern restricted to kin and in-group, indifference to the distant, hostility to the stranger. These biases are departures from the feature-response mechanism of Assumption~\ref{a:unity}, and where they operate the faculty is not reliable about moral reasons, since the moral reasons do not depend on the bearer in the way the bias does. This is where evolutionary considerations debunk: they debunk the biases, selectively, as \citet{Kahane2011} says debunking arguments generally do. The correction of the biases is the work of reasoning, which uses the faculty's own responses to features against its responses to bearers; MTE-19 argues that moral progress is measurable as the expansion of the moral circle, and the expansion is the progressive removal of bearer-weighting.
+
+\paragraph{Outside the core.} For features never presented in ancestral situations, Theorem~\ref{t:main} gives no guarantee. Whether there are such morally relevant features is an open question; candidates include the moral features of acts whose effects are diffuse over millions of people and centuries. Here reliability is not inherited from selection, and it must be established, if at all, by the calibration of intuitions against principles established in the core, as MTE-08 describes. This is the condition of every faculty used outside the environment of its formation, as EPI-03 shows for induction: its reliability depends on the world it is used in, and no rule is reliable in every world.
+
+\section{Objections and replies}
+
+\begin{objection}[Begging the question]
+The argument assumes that the features to which selection made us responsive are reason-giving. That is a moral or normative premise, and it is supported only by the beliefs whose reliability is in question.
+\end{objection}
+
+\begin{reply}
+The premise is supported by normative beliefs, and the support is circular; but the circularity is of the benign kind. EPI-03 argues that the inductive justification of induction is rule-circular rather than premise-circular: it uses induction, but it does not assume as a premise that induction is reliable. The argument here uses the evaluative faculty to identify reason-giving features, and then shows that, given that identification and the evolutionary facts, the faculty is reliable. It does not assume its reliability as a premise. The parallel counter-inductive argument for counter-induction fails, and the parallel argument for a faculty that judged suffering to be a reason to inflict more suffering would fail too: no account of selection makes such a faculty correct about the reasons of prudence and cooperation, so Assumption~\ref{a:sel} would be false of it.
+\end{reply}
+
+\begin{objection}[Modularity]
+Evolutionary psychology suggests that moral intuitions are produced by domain-specific modules, such as the incest aversion and the disgust response, which respond to cues rather than to reason-giving features \citep{Haidt2001}. Assumption~\ref{a:unity} is empirically false.
+\end{objection}
+
+\begin{reply}
+Some evaluative responses are modular in this sense, and they are among the distortions of Section~\ref{s:extend}. The incest aversion responds to a cue of genetic relatedness, and the judgments it produces about consensual adult cases are debunked: there is no reason against those acts of the kind the aversion represents. The thesis concerns the faculty that grounds moral knowledge in the core domain, the response to harm, need, reciprocity and commitment, and the evidence that this response generalizes across bearers, in development, in cultural history and in the expansion of the moral circle, is evidence that it is not modular in the relevant sense.
+\end{reply}
+
+\begin{objection}[Constitutive dependence is antirealism]
+If moral facts are facts about idealized reactions of beings like us, and our reactions were shaped by evolution, then evolution shaped the moral facts as well as our beliefs about them. That is Street's own constructivist view, not realism.
+\end{objection}
+
+\begin{reply}
+The argument of Section~\ref{s:results} does not use any dependence of the moral facts on our nature: Assumption~\ref{a:nat} says that reasons depend on natural features of situations, not on our reactions to them. It is true that, on MTE-02, the content of moral truths is relative to the nature of the agents concerned, and that this nature has an evolutionary history. But MTE-02 also holds that moral truths are objective, holding for all rational agents, and what makes them objective is that they do not depend on anyone's actual attitudes: the idealized reactions of MTE-01 correct actual ones. Street's constructivism makes the evaluative facts depend on the attitudes we actually have, as refined by their own standards; the present view makes them depend on features of situations, the idealization being specified by information and equal attention. The difference shows in the cases: on the present view, a population whose attitudes were thoroughly shaped by in-group bias would be mistaken about its reasons, and evolution would explain the mistake.
+\end{reply}
+
+\begin{objection}[The hive-bees]
+Darwin's hive-bees, reared under different conditions, would judge it a sacred duty to kill their brothers. Their faculty would satisfy Assumptions~\ref{a:unity} and~\ref{a:sel} as well as ours, and it would deliver different moral verdicts. So the assumptions do not secure moral truth.
+\end{objection}
+
+\begin{reply}
+The hive-bee case is a case in which the situations differ, not one in which the same situations are judged differently. In a hive, the reason-relevant features of a sterile worker's situation differ from those of a human sibling's: the colony's reproduction depends on the elimination of some members, and the interests at stake are differently configured. Whether the hive-bee verdicts would be true for creatures of that nature is a question MTE-02 answers by relativizing content to the nature of the agents concerned. What the case does not show is that a faculty satisfying the assumptions would deliver, in situations with the same features as ours, verdicts opposite to ours; by Theorem~\ref{t:main}, it would not.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} depends on Assumptions~\ref{a:nat} to~\ref{a:cont}. Assumption~\ref{a:nat} is metaethical and rests on MTE-01; Assumptions~\ref{a:unity} to~\ref{a:cont} are partly empirical, and the evidence for them is the evidence of Section~\ref{s:extend}. The theorem concerns the core domain only, and it gives no guarantee outside it. It concerns reliability in the all-or-nothing form of Definition~\ref{d:rel}, while actual faculties are reliable in degrees; the formal result is an idealization of the claim that the faculty is generally reliable on the core, which is the claim MTE-08 needs. Finally, the theorem does not show that any particular moral belief is true: it shows that the evolutionary origin of the faculty is no reason to doubt it, and, more strongly, that the origin explains why the faculty is reliable where it is.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTE/MTE_09.lean} formalizes Definitions~\ref{d:rel} to~\ref{d:insens}, Assumptions~\ref{a:nat} to~\ref{a:cont}, Propositions~\ref{p:noguarantee} and~\ref{p:coincidence}, Lemma~\ref{l:sens}, Theorem~\ref{t:main} and Corollary~\ref{c:main}. Situations, kinds of reasons and features are primitive types; a function assigns to each kind and situation the features presented. Reasons are fixed by a single function of features (Assumption~\ref{a:nat}), and the faculty's verdicts by another single function of features (Assumption~\ref{a:unity}); the selection assumption and the continuity assumption are axioms. Propositions~\ref{p:noguarantee} and~\ref{p:coincidence} and Lemma~\ref{l:sens} are proved for arbitrary verdict and fact assignments, and Proposition~\ref{p:noguarantee} depends on no axioms at all. The main theorem is:
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+theorem tracking :
+    ReliableOn (verdict moralKind) (reason moralKind) Core
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+'Philosophy.MTE_09.tracking' depends on axioms:
+ [Philosophy.MTE_09.Ancestral, Philosophy.MTE_09.Feature,
+  Philosophy.MTE_09.Kind, Philosophy.MTE_09.Selected,
+  Philosophy.MTE_09.State, Philosophy.MTE_09.feature,
+  Philosophy.MTE_09.makes, Philosophy.MTE_09.moralKind,
+  Philosophy.MTE_09.respond, Philosophy.MTE_09.selection]
+\end{lstlisting}
+
+\texttt{State}, \texttt{Kind}, \texttt{Feature}, \texttt{feature}, \texttt{moralKind}, \texttt{Selected} and \texttt{Ancestral} are the primitives: situations, kinds of reasons, features, the features presented, the moral kind, the selected kinds and the ancestral situations. \texttt{makes} is the function of Assumption~\ref{a:nat} by which features make reasons, \texttt{respond} the single response mechanism of Assumption~\ref{a:unity}, and \texttt{selection} is Assumption~\ref{a:sel}. Corollary~\ref{c:main} (\texttt{not\_debunked}) depends on these and on \texttt{continuity}, which is Assumption~\ref{a:cont}. No axiom of classical logic is used. That Assumptions~\ref{a:nat} and~\ref{a:unity} appear as single functions of features, rather than as families indexed by kinds, is the formal content of the claim that reasons, and the faculty's responses, do not depend on the kind except through the features.
+
+\section{Conclusion}
+
+Evolution does not debunk moral knowledge. Street's first horn is sound: if the moral facts had nothing to do with what selection rewarded, nothing would make our moral faculty reliable. But the second horn is open to the naturalist. The features to which selection made us responsive, harm, need, help and commitment, are reason-giving features, so selection for responsiveness to them was selection for tracking reasons, and the tracking explanation is the adaptive-link explanation under a normative description. Because the faculty responds to features rather than to kinds, and because the central moral reasons are made by the same features presented by other bearers, the faculty is reliable about moral reasons on the core domain and sensitive to them there. What evolution debunks is the bias by which it made our concern depend on the bearer, and that bias is what moral reasoning has been correcting.
+
+\begin{thebibliography}{99}\small
+\bibitem[Clarke-Doane(2012)]{ClarkeDoane2012} Clarke-Doane, J. (2012). Morality and mathematics: The evolutionary challenge. \emph{Ethics}, 122(2), 313--340.
+\bibitem[Copp(2008)]{Copp2008} Copp, D. (2008). Darwinian skepticism about moral realism. \emph{Philosophical Issues}, 18, 186--206.
+\bibitem[Darwin(1871)]{Darwin1871} Darwin, C. (1871). \emph{The Descent of Man, and Selection in Relation to Sex}. John Murray.
+\bibitem[Enoch(2010)]{Enoch2010} Enoch, D. (2010). The epistemological challenge to metanormative realism: How best to understand it, and how to cope with it. \emph{Philosophical Studies}, 148(3), 413--438.
+\bibitem[FitzPatrick(2015)]{FitzPatrick2015} FitzPatrick, W.~J. (2015). Debunking evolutionary debunking of ethical realism. \emph{Philosophical Studies}, 172(4), 883--904.
+\bibitem[Haidt(2001)]{Haidt2001} Haidt, J. (2001). The emotional dog and its rational tail: A social intuitionist approach to moral judgment. \emph{Psychological Review}, 108(4), 814--834.
+\bibitem[Huemer(2016)]{Huemer2016} Huemer, M. (2016). A liberal realist answer to debunking skeptics: The empirical case for realism. \emph{Philosophical Studies}, 173(7), 1983--2010.
+\bibitem[Joyce(2006)]{Joyce2006} Joyce, R. (2006). \emph{The Evolution of Morality}. MIT Press.
+\bibitem[Kahane(2011)]{Kahane2011} Kahane, G. (2011). Evolutionary debunking arguments. \emph{No\^us}, 45(1), 103--125.
+\bibitem[Kitcher(2011)]{Kitcher2011} Kitcher, P. (2011). \emph{The Ethical Project}. Harvard University Press.
+\bibitem[Ruse and Wilson(1986)]{RuseWilson1986} Ruse, M. and Wilson, E.~O. (1986). Moral philosophy as applied science. \emph{Philosophy}, 61(236), 173--192.
+\bibitem[Skarsaune(2011)]{Skarsaune2011} Skarsaune, K.~O. (2011). Darwin and moral realism: Survival of the iffiest. \emph{Philosophical Studies}, 152(2), 229--243.
+\bibitem[Sterelny(2012)]{Sterelny2012} Sterelny, K. (2012). \emph{The Evolved Apprentice: How Evolution Made Humans Unique}. MIT Press.
+\bibitem[Street(2006)]{Street2006} Street, S. (2006). A Darwinian dilemma for realist theories of value. \emph{Philosophical Studies}, 127(1), 109--166.
+\bibitem[Vavova(2015)]{Vavova2015} Vavova, K. (2015). Evolutionary debunking of moral realism. \emph{Philosophy Compass}, 10(2), 104--116.
+\bibitem[Wielenberg(2010)]{Wielenberg2010} Wielenberg, E.~J. (2010). On the evolutionary debunking of morality. \emph{Ethics}, 120(3), 441--464.
+\end{thebibliography}
+
+\end{document}

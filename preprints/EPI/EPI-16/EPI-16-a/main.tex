@@ -1,0 +1,225 @@
+\documentclass{situationist-preprint}
+
+\title{The Epistemic Costs of Prejudice}
+\msid{EPI-16-a}
+\msfamily{EPI-16}
+\msdiscipline{Epistemology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/EPI/EPI\_16.lean}
+\mskeywords{epistemic injustice; testimonial injustice; hermeneutical injustice; credibility deficit; testimony; transmission; lost knowledge}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Fricker introduced testimonial injustice, in which a speaker receives less credibility than her word deserves owing to prejudice, and hermeneutical injustice, in which a gap in shared interpretive resources leaves someone unable to make sense of an important area of her experience. Critics have asked whether these are wrongs of a distinctively epistemic kind or ethical wrongs that happen to occur in epistemic settings, and whether their costs are anything more than the hurt they cause. We argue that both are genuine epistemic wrongs and that their costs can be measured in lost knowledge. Testimony transmits knowledge from a knowing speaker to an accepting hearer. A credibility deficit blocks acceptance, and so blocks transmission: we prove that the knowledge lost to deficits is exactly the shortfall between what hearers learn and what warranted credibility would have let them learn, corrected only by whatever is gained through credibility excess. A hermeneutical gap costs more: the subject's own knowledge, and that of every hearer she would have informed. Since each loss results from an unjust departure from a standard of epistemic conduct, both are wrongs. The accounting results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Fricker2007} distinguished two forms of what she called epistemic injustice. In \emph{testimonial injustice}, prejudice on the hearer's part causes him to give a deflated level of credibility to a speaker's word. Fricker's central examples are literary: the jury in \emph{To Kill a Mockingbird} that will not believe Tom Robinson's testimony because he is black, and Herbert Greenleaf in \emph{The Talented Mr Ripley}, who dismisses Marge Sherwood's well-founded suspicions as female intuition. In \emph{hermeneutical injustice}, a gap in the collective interpretive resources puts someone at an unfair disadvantage in making sense of her social experience; Fricker's leading example is that of women who suffered sexual harassment before the concept was available to name it. In both cases, Fricker argued, the subject is wronged in her capacity as a knower.
+
+The account has been extended in several directions. \citet{Dotson2011} described practices of testimonial silencing, in which speakers come to withhold testimony they expect to be discounted; \citet{Medina2013} argued that credibility excess, as well as deficit, distorts the economy of credibility; \citet{Anderson2012} argued that epistemic justice is a virtue of institutions as well as of individuals; and \citet{Hookway2010} identified forms of injustice that concern a person's standing as a participant in inquiry rather than as an informant. Alongside these developments, a sceptical question has been pressed. Is epistemic injustice a wrong in its own right, or an ordinary moral wrong (disrespect, discrimination) that takes place in an epistemic setting? And are its costs anything beyond the humiliation and practical disadvantage it causes its victims? If the epistemic vocabulary adds nothing, the distinctive category is idle.
+
+We argue that testimonial and hermeneutical injustice are genuine epistemic wrongs, and that their costs can be measured in lost knowledge. The argument has two parts. The first is an accounting: using the thesis of EPI-08 that testimony transmits knowledge, we derive exact expressions for the knowledge that credibility deficits and hermeneutical gaps destroy. The second is normative: a loss of knowledge caused by an unjust departure from a standard of epistemic conduct is an epistemic wrong, and both forms of injustice produce such losses. Fricker's own analysis already notes that the hearer who discounts a knowing speaker misses out on knowledge, and that a culture that marginalizes some of its members deprives itself of what they know \citep{Fricker2007}. Our contribution is to make the cost precise and to show that it is a cost of the wrong, not merely a side effect of it.
+
+\section{Framework}
+
+We consider a finite set of testimonial exchanges, in each of which a speaker tells a hearer that $p$.
+
+\begin{definition}[Reports]\label{d:report}
+For each report $r$: $K(r)$ says that the speaker knows the proposition she reports; $\mathit{Cr}(r)$ that the credibility the hearer actually gives her meets the threshold at which he accepts what she says; and $W(r)$ that the credibility warranted by the hearer's evidence about the speaker and the subject matter meets that threshold.
+\end{definition}
+
+The warranted credibility of Definition~\ref{d:report} is well defined. By EPI-17, there is for each body of evidence a unique rational credence in each proposition; in particular, there is a unique rational credence that the speaker is right, given what the hearer has to go on. A hearer may lack evidence of a speaker's reliability, and then the warranted credibility may fall short of the threshold even when the speaker knows. Such cases involve no injustice and, as will be seen, are not counted as losses.
+
+\begin{definition}[Deficit and excess]\label{d:deficit}
+A report suffers a \emph{credibility deficit} if $W(r)$ and not $\mathit{Cr}(r)$; it enjoys a \emph{credibility excess} if $\mathit{Cr}(r)$ and not $W(r)$.
+\end{definition}
+
+The deficits that matter to testimonial injustice are those caused by identity prejudice. Definition~\ref{d:deficit} is neutral on the cause; the cause enters at Principle~\ref{p:wrong} below.
+
+\begin{assumption}[Transmission]\label{a:trans}
+A hearer comes to know a proposition from a report if and only if the speaker knows it and the hearer accepts the report. The same holds of the counterfactual situation in which the hearer gives warranted credibility.
+\end{assumption}
+
+Assumption~\ref{a:trans} is the thesis of EPI-08: testimony transmits knowledge but does not generate it, and the apparent counterexamples, such as \citeauthor{Lackey2008}'s teacher who conveys a theory she does not believe \citep{Lackey2008}, are cases in which the hearer generates knowledge from the content with resources of his own. Since we are concerned with what testimony as such conveys, we set such generation aside. The assumption is generous to credibility excess, since it allows a hearer to learn from a knowing speaker whom he trusts more than his evidence warrants; we return to this in Objection~\ref{o:excess}.
+
+\begin{definition}[Measures]\label{d:measures}
+For a list of reports $R$: the knowledge \emph{gained}, $G(R)$, is the number of reports from which the hearer comes to know; the knowledge \emph{warranted}, $G^{*}(R)$, is the number from which he would come to know were he to give warranted credibility; the knowledge \emph{lost}, $L(R)$, is the number of reports from a knowing speaker that suffer a deficit; and the knowledge \emph{gained through excess}, $X(R)$, is the number of reports from a knowing speaker that enjoy an excess.
+\end{definition}
+
+For hermeneutical injustice, the unit is not a report but an experience that bears on a proposition about the subject's situation, for instance that what is happening to her at work is harassment.
+
+\begin{definition}[Hermeneutical gaps]\label{d:gap}
+For each experience $e$: $A(e)$ says that the collective interpretive resources supply the concept needed to form the belief that the experience bears on; $V(e)$ that, with the concept, the subject would know the proposition. The experience falls into a \emph{hermeneutical gap} if $V(e)$ and not $A(e)$.
+\end{definition}
+
+\begin{assumption}[Concept requirement]\label{a:concept}
+The subject knows the proposition that the experience bears on if and only if the concept is available and, with it, she would know it.
+\end{assumption}
+
+Assumption~\ref{a:concept} needs little defence. One cannot know a proposition one cannot entertain, and one cannot entertain a proposition without the concepts that compose it. Fricker's example shows how much this excludes. Before the concept of sexual harassment was available, a woman subjected to it could know that she was being touched and propositioned, and that she felt humiliated, but not that she was being harassed, with what that implies about the wrong done to her and the remedies available. Nor could she tell anyone else.
+
+\begin{assumption}[Audience]\label{a:audience}
+A subject who knows a proposition about her situation conveys it to $n$ hearers who give her warranted credibility and so come to know it; a subject who does not know it conveys it to no one.
+\end{assumption}
+
+Assumption~\ref{a:audience} separates hermeneutical from testimonial injustice: it supposes that, once the concept is available, the subject meets no credibility deficit. Where both injustices are present, the losses add.
+
+\begin{definition}[Total knowledge]\label{d:total}
+For a list of experiences $E$, $T(E)$ is the number of propositions known, counting the subject's knowledge and each hearer's; $T^{*}(E)$ is the same number when the concept is available in every case; and $\Gamma(E)$ is the number of experiences that fall into a gap.
+\end{definition}
+
+The normative premise is the following.
+
+\begin{principle}[Epistemic wrong]\label{p:wrong}
+A practice wrongs a subject epistemically if (i) it deprives her, or those she would inform, of knowledge that she would otherwise have had or conveyed; (ii) the deprivation results from a departure, by an agent or an institution, from a standard of epistemic conduct that binds it; and (iii) the departure is unjust, in that it results from prejudice against, or the marginalization of, a social group to which she belongs, and not from the evidence.
+\end{principle}
+
+Clause (i) makes the harm epistemic, since what is lost is knowledge. Clause (ii) makes it a wrong rather than a misfortune: a speaker whom no one believes because she has no track record is not wronged, and Definition~\ref{d:deficit} does not count her, since the warranted credibility is itself below threshold. Clause (iii) makes it an injustice: the subject is treated as less of a knower than she is, on account of who she is \citep{Fricker2007}. The principle states a sufficient condition; there may be other epistemic wrongs, such as deliberate deception, that it does not cover.
+
+\section{The argument}
+
+\begin{lemma}[What is lost]\label{l:lost}
+A report counts towards $L(R)$ if and only if the hearer would come to know from it under warranted credibility and does not come to know from it.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:trans}, the hearer would come to know under warranted credibility if and only if the speaker knows and $W(r)$; he comes to know if and only if the speaker knows and $\mathit{Cr}(r)$. The first holds and the second fails exactly when the speaker knows, $W(r)$ and not $\mathit{Cr}(r)$, that is, when the speaker knows and the report suffers a deficit.
+\end{proof}
+
+Lemma~\ref{l:lost} shows that $L$ measures what it is meant to measure: not the reports that were disbelieved, but the knowledge that warranted credibility would have transmitted and that was not transmitted.
+
+\begin{theorem}[Accounting]\label{t:account}
+For every list of reports $R$, $G(R) + L(R) = G^{*}(R) + X(R)$.
+\end{theorem}
+
+\begin{proof}
+By induction on $R$. For the empty list both sides are zero. For a report $r$ added to $R$, consider the eight combinations of $K(r)$, $\mathit{Cr}(r)$ and $W(r)$. If the speaker does not know, $r$ contributes to none of the four measures, by Assumption~\ref{a:trans} and Definition~\ref{d:measures}. If she knows and $\mathit{Cr}(r)$ and $W(r)$ agree, $r$ contributes equally to $G$ and $G^{*}$, and to neither $L$ nor $X$. If she knows and the report suffers a deficit, it contributes one to $L$ and one to $G^{*}$. If she knows and it enjoys an excess, it contributes one to $G$ and one to $X$. In every case the contributions to the two sides are equal.
+\end{proof}
+
+\begin{corollary}[Shortfall]\label{c:shortfall}
+If no knowing speaker enjoys a credibility excess, then $G^{*}(R) = G(R) + L(R)$: the knowledge lost to credibility deficits is exactly the shortfall between what hearers learn and what warranted credibility would have let them learn.
+\end{corollary}
+
+\begin{proposition}[Positive loss]\label{p:positive}
+$L(R) > 0$ if and only if some report in $R$ comes from a knowing speaker and suffers a credibility deficit.
+\end{proposition}
+
+\begin{proof}
+A count is positive if and only if some member of the list is counted.
+\end{proof}
+
+Proposition~\ref{p:positive} is the formal core of the claim that testimonial injustice has a cost in knowledge. It is not enough that a speaker be disbelieved; she must know, and her word must deserve acceptance. When both conditions hold, a credibility deficit always destroys knowledge, whatever else it does. The jury in Fricker's example does not fail to believe a mere assertion; it fails to receive the knowledge of the one witness who knew what had happened.
+
+\begin{theorem}[Hermeneutical loss]\label{t:herm}
+For every list of experiences $E$, $T^{*}(E) = T(E) + (n+1)\,\Gamma(E)$.
+\end{theorem}
+
+\begin{proof}
+By induction on $E$. An experience for which the subject would not know the proposition even with the concept contributes nothing to either total. One for which she would know it and the concept is available contributes $1 + n$ to both, by Assumptions~\ref{a:concept} and~\ref{a:audience}. One that falls into a gap contributes $1 + n$ to $T^{*}$ and nothing to $T$, since by Assumption~\ref{a:concept} the subject does not know, and by Assumption~\ref{a:audience} she informs no one.
+\end{proof}
+
+Theorem~\ref{t:herm} shows why hermeneutical injustice is, in Fricker's phrase, the more structural of the two. A testimonial deficit costs the hearer one item of knowledge that the speaker keeps. A hermeneutical gap costs the subject herself, and everyone she would have told. The multiplier $n+1$ also explains why closing such a gap has effects out of proportion to the coining of a single word. When the concept of sexual harassment became available, it did not add one item of knowledge but made available the knowledge of every subject who had the relevant experience, and of every hearer she could then inform.
+
+\begin{theorem}[Genuine epistemic wrongs]\label{t:wrong}
+Testimonial injustice against a knowing speaker, and hermeneutical injustice concerning an experience about which its subject would otherwise have known, are epistemic wrongs in the sense of Principle~\ref{p:wrong}, and their costs in lost knowledge are given by Corollary~\ref{c:shortfall} and Theorem~\ref{t:herm}.
+\end{theorem}
+
+\begin{proof}
+For testimonial injustice: by definition, the deficit results from identity prejudice in the hearer, so clause (iii) holds. The hearer departs from the standard that binds every believer, that of proportioning his credence to his evidence; since his evidence warrants credibility above the threshold and he gives less, he departs from it, and clause (ii) holds. Since the speaker knows, Proposition~\ref{p:positive} and Lemma~\ref{l:lost} show that the hearer is deprived of knowledge that the speaker would otherwise have conveyed, so clause (i) holds. For hermeneutical injustice: by definition, the gap results from the hermeneutical marginalization of the subject's group, which is excluded from the practices in which shared concepts are formed, so clause (iii) holds. The standard departed from is that a community's interpretive resources should answer to the significant experiences of its members, a standard that binds the institutions in which concepts are formed and transmitted \citep{Anderson2012}; clause (ii) holds. By Theorem~\ref{t:herm}, the gap deprives the subject of knowledge and the $n$ hearers of what she would have conveyed, so clause (i) holds.
+\end{proof}
+
+\section{Objections}
+
+\begin{objection}[Mere error]\label{o:error}
+A hearer who underrates a speaker makes an epistemic mistake, as he does when he misreads a thermometer. Mistakes are failures, not wrongs; the wrong in testimonial injustice is moral, and the epistemic vocabulary adds nothing.
+\end{objection}
+
+\begin{reply}
+The thermometer is not wronged. What distinguishes the two cases is that the speaker is a knower whose knowledge the hearer fails to receive, and that the failure is caused by a judgment about her worth as a knower. Clause (i) of Principle~\ref{p:wrong} is satisfied in both cases, if the misread thermometer is accurate; clauses (ii) and (iii) only in the testimonial case. The wrong is epistemic in its object, since it concerns the speaker's standing as a source of knowledge, and in its standard, since the norm violated is the norm of proportioning credence to evidence. That the same act may also be a moral wrong, an expression of contempt for instance, does not show that it is not an epistemic one; many acts are wrongs of more than one kind.
+\end{reply}
+
+\begin{objection}[Excess compensates]\label{o:excess}
+Theorem~\ref{t:account} shows that credibility excess restores knowledge. A society that inflates the credibility of one group while deflating that of another may lose nothing on balance, and then there is no net cost.
+\end{objection}
+
+\begin{reply}
+The identity of Theorem~\ref{t:account} is an accounting of totals, and a total does not record whose knowledge is lost. The knowledge gained by trusting one speaker too much is knowledge about other matters, conveyed by other people; it does not restore what a discounted speaker knew. Moreover, Assumption~\ref{a:trans} is generous to excess. A hearer who accepts a report beyond what his evidence warrants holds a belief that is not justified by his evidence, and on the internalist account of justification of EPI-06 he does not acquire knowledge from it. If so, $X(R) = 0$ and Corollary~\ref{c:shortfall} applies without qualification. Excess has costs of its own, as \citet{Medina2013} argues, among them the false beliefs it transmits from speakers who do not know; our measures, which count only knowledge, record those costs as zero, and so understate the damage done by a distorted economy of credibility.
+\end{reply}
+
+\begin{objection}[No perpetrator]\label{o:structural}
+Hermeneutical injustice is structural. No individual withholds the concept; the gap is no one's doing. A wrong requires a wrongdoer.
+\end{objection}
+
+\begin{reply}
+Clause (ii) of Principle~\ref{p:wrong} allows the departure to be an institution's. Collective practices of concept formation, in professions, courts, the press and the academy, are bound by standards of inclusion, and a practice that systematically excludes the experience of a group from the formation of concepts falls short of them \citep{Anderson2012}. That no individual chose the exclusion does not show that the exclusion is no one's responsibility; it shows that the responsibility is shared. In any case, the claim that the subject is wronged does not depend on there being a wrongdoer who can be blamed. Fricker herself describes the wrong of hermeneutical injustice as having no perpetrator in the ordinary sense; it is a wrong done to the subject by a social situation that should have been otherwise.
+\end{reply}
+
+\begin{objection}[Knowledge is not countable]\label{o:count}
+Items of knowledge are not discrete units. To speak of measurable costs is to borrow a false precision.
+\end{objection}
+
+\begin{reply}
+The measures count reports and experiences, which are discrete, and the propositions known through them. The results do not depend on a cardinal measure of all that someone knows, only on comparisons between the actual case and the case with warranted credibility or available concepts, in a fixed list of exchanges. Such comparisons are measurable in practice wherever the truth of discounted reports can later be established, as it often is when testimony that was dismissed is vindicated by investigation. If items of knowledge differ in significance, the counts may be weighted; the identities of Theorems~\ref{t:account} and~\ref{t:herm} hold for any non-negative weights, since the proofs proceed report by report.
+\end{reply}
+
+\begin{objection}[The speaker loses nothing]\label{o:speaker}
+In testimonial injustice the speaker keeps her knowledge. The knowledge lost is the hearer's, and the hearer is not the victim. The cost in knowledge is therefore not a cost to the person wronged.
+\end{objection}
+
+\begin{reply}
+Principle~\ref{p:wrong} counts knowledge that the subject would have conveyed as well as knowledge she would have had, and the speaker's capacity to convey what she knows is part of what it is to be a knower in a community. To be prevented from sharing knowledge is to be prevented from exercising that capacity, which is the primary harm \citet{Fricker2007} identified. The model also understates the speaker's loss. Persistent deficits lead speakers to withhold testimony \citep{Dotson2011} and to lose confidence in their own judgment, and both reduce what they come to know; these losses do not appear in a single list of exchanges, but they appear in any sequence of them.
+\end{reply}
+
+\section{What the result does not establish}
+
+The accounting results are identities about idealized lists of exchanges. They do not establish how much knowledge is lost in any actual community, nor that any given deficit is caused by prejudice rather than by an innocent error about the evidence; that is an empirical matter for each case. Theorem~\ref{t:wrong} rests on Principle~\ref{p:wrong}, which states a sufficient condition for an epistemic wrong and does not settle whether epistemic wrongs are a species of moral wrong. Nor do the results say what is owed to the victims, or how institutions should be reformed; they say only what is lost and why its loss is a wrong. Finally, the hermeneutical model treats a gap as all or nothing; real concepts emerge gradually and are available to some members of a community before others, and a fuller model would make $A(e)$ a matter of degree.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/EPI/EPI_16.lean} takes reports and experiences as primitive types, the conditions of Definitions~\ref{d:report} and~\ref{d:gap} as Boolean primitives, and Assumptions~\ref{a:trans}, \ref{a:concept} and~\ref{a:audience} as axioms. The measures of Definitions~\ref{d:measures} and~\ref{d:total} are defined by counting over lists. It proves Lemma~\ref{l:lost}, Theorem~\ref{t:account}, Corollary~\ref{c:shortfall}, Proposition~\ref{p:positive} and Theorem~\ref{t:herm}. The main statements are:
+
+\begin{lstlisting}
+theorem accounting (rs : List Report) :
+    gained rs + lost rs = gainedFair rs + excessGain rs
+
+theorem loss_positive (rs : List Report) :
+    0 < lost rs ↔
+      ∃ r, r ∈ rs ∧ speakerKnows r = true ∧ deficit r = true
+
+theorem hermeneutical_loss (es : List Experience) :
+    totalFair es = total es + (audience + 1) * gaps es
+\end{lstlisting}
+
+The checker reports (namespace prefixes omitted):
+
+\begin{lstlisting}
+'accounting' depends on axioms: [propext, Quot.sound, Report,
+  credible, learns, learnsFair, speakerKnows, transmission,
+  transmission_fair, warranted]
+'loss_positive' depends on axioms: [propext, Quot.sound, Report,
+  credible, speakerKnows, warranted]
+'hermeneutical_loss' depends on axioms: [propext, Quot.sound,
+  Experience, audience, audience_actual, audience_fair,
+  conceptAvailable, concept_requirement, hearersKnow,
+  hearersKnowFair, knowsExp, wouldKnow]
+\end{lstlisting}
+
+Assumption~\ref{a:trans} is the pair of axioms \texttt{transmission} and \texttt{transmission\_fair}; Assumption~\ref{a:concept} is the axiom \texttt{concept\_requirement}; and Assumption~\ref{a:audience} is given by \texttt{audience}, \texttt{audience\_actual} and \texttt{audience\_fair}. The remaining non-logical axioms are the primitives of Definitions~\ref{d:report} and~\ref{d:gap}. Proposition~\ref{p:positive} does not depend on Assumption~\ref{a:trans}, since $L$ is defined directly; the assumption is what connects it, through Lemma~\ref{l:lost}, to knowledge not transmitted. Principle~\ref{p:wrong} and Theorem~\ref{t:wrong} are not formalized: the step from loss to wrong is argued in prose.
+
+\section{Conclusion}
+
+Testimony transmits knowledge from a knowing speaker to an accepting hearer, so a credibility deficit against a knowing speaker whose word deserves acceptance destroys the knowledge it would have transmitted, and the knowledge so lost is exactly the shortfall from what warranted credibility would have yielded, up to what credibility excess adds. A hermeneutical gap destroys the subject's own knowledge and that of everyone she would have informed. Since both losses result from unjust departures from standards that bind hearers and institutions, testimonial and hermeneutical injustice are genuine epistemic wrongs, with costs that can be counted.
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(2012)]{Anderson2012} Anderson, E. (2012). Epistemic justice as a virtue of social institutions. \emph{Social Epistemology}, 26(2), 163--173.
+\bibitem[Dotson(2011)]{Dotson2011} Dotson, K. (2011). Tracking epistemic violence, tracking practices of silencing. \emph{Hypatia}, 26(2), 236--257.
+\bibitem[Fricker(2007)]{Fricker2007} Fricker, M. (2007). \emph{Epistemic Injustice: Power and the Ethics of Knowing}. Oxford University Press.
+\bibitem[Hookway(2010)]{Hookway2010} Hookway, C. (2010). Some varieties of epistemic injustice: Reflections on Fricker. \emph{Episteme}, 7(2), 151--163.
+\bibitem[Lackey(2008)]{Lackey2008} Lackey, J. (2008). \emph{Learning from Words: Testimony as a Source of Knowledge}. Oxford University Press.
+\bibitem[Medina(2013)]{Medina2013} Medina, J. (2013). \emph{The Epistemology of Resistance: Gender and Racial Oppression, Epistemic Injustice, and Resistant Imaginations}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

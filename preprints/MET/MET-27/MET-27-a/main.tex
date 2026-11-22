@@ -1,0 +1,342 @@
+\documentclass{situationist-preprint}
+
+\title{Natural Kinds and Their Number}
+\msid{MET-27-a}
+\msfamily{MET-27}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_27.lean}
+\mskeywords{natural kinds; property clusters; laws of nature; taxonomy; species; jade; projectibility; sparse universals}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Do natural kinds exist, and if so, are they the kinds that our taxonomies list? We argue that natural kinds are real divisions in nature, but fewer than standard taxonomies suggest. A natural kind is the class of objects that have all the features in a cluster of genuine properties, where a cluster consists of a core of genuine features together with the further features that the laws attach to it. On this account natural kinds exist as soon as some law attaches a further feature to an instantiated core, and membership in them is fixed by the genuine features of things, not by our classifications. The account also yields tests for non-kinds. We prove that a class is not a natural kind if some object outside it has every genuine feature common to its members, or if it excludes an object that has every feature of one of its members. Jade, the invertebrates and biological species fail the first test. Chemical elements, isotopes, compounds and the kinds of elementary particle pass. The results are formalized in Lean.
+\end{abstract}
+
+\section{The question}\label{s:question}
+
+Science classifies. Chemists sort substances into elements and compounds, mineralogists sort rocks into mineral species, biologists sort organisms into species, genera and families, physicians sort illnesses into diseases. The question whether natural kinds exist is the question whether some of these classifications track divisions that are in nature itself, independently of the interests and conventions of the classifiers. The question of their number is the question which classifications do so.
+
+There are three main positions. \emph{Conventionalism} holds that all classifications are ours: there are similarities between things, but which similarities we use to sort them is a matter of interest, and no sorting is privileged by nature. \emph{Taxonomic realism} holds that the classifications of the mature sciences, roughly as they stand, are the natural kinds: the elements, the mineral species, the biological species and perhaps the higher taxa. \emph{Promiscuous realism}, the view of \citet{Dupre1993}, holds that there are many natural kinds, more than any one taxonomy lists, since things fall into real classes in many crosscutting ways depending on the purposes of inquiry.
+
+We defend a fourth position. Natural kinds exist and are real divisions in nature, but they are fewer than standard taxonomies suggest. Many taxa that the sciences recognize, including some that every textbook lists, are not natural kinds. Some are disjunctive, as jade is; some are privative, as the invertebrates are; and biological species, though real, are not natural kinds, because membership in them is not fixed by a cluster of genuine properties.
+
+The position follows from an account of what a natural kind is, which we take from the sparse theory of universals defended in MET-02-a: a natural kind corresponds to a cluster of genuine properties that tend to be coinstantiated because of the laws. We make the account precise, show that it makes natural kinds real, derive from it two tests that a class must pass to be a natural kind, and apply the tests to standard taxa.
+
+\subsection{A short history of the question}\label{s:history}
+
+The Aristotelian tradition took the species and genera of living things as the paradigm of natural division. Each species has an essence, stated by a definition by genus and differentia, and every member of the species has the properties the essence includes. The debate Porphyry's \emph{Isagoge} opened concerned the status of genera and species, not whether the species recognized by naturalists were the right ones. The Aristotelian picture was defeated twice: by the discovery of variation, which showed that the members of a biological species share no set of properties that all and only they have, and by the theory of evolution, which made variation the material of change rather than a deviation from type. \citet{Sober1980} describes the move from typological to population thinking that resulted.
+
+\citet[III.vi]{LockeEssay} distinguished real essences, the unknown constitutions of things from which their observable properties flow, from nominal essences, the abstract ideas by which we sort them, and held that our sorts are made by the mind according to nominal essences. Locke did not deny that things have real essences; he denied that our sorting tracked them, and he doubted that the real essences of substances would be known. The case that told against his pessimism was the progress of chemistry, which discovered constitutions from which observable properties flow and sorted substances by them.
+
+\citet[I.vii.4]{Mill1843} held that some classes, which he called real Kinds, differ from all others in that their members share an indefinite number of properties not derivable from one another, while other classes are marked off by one or a few properties and share nothing further. Mill's criterion captures the inductive fruitfulness of natural classes, but it gives no account of why the properties cluster, and it offers no way of telling a real Kind from a class whose members happen to share many properties.
+
+\citet{Quine1969} connected natural kinds with similarity and induction, and held that a mature science would replace the notion of kind by its theoretical vocabulary; the notion of kind belonged to the prehistory of science. The case against this prediction is that mature sciences continue to classify, and that the theoretical vocabulary of chemistry is itself a vocabulary of kinds.
+
+\citet{Kripke1980} and \citet{Putnam1975} argued that natural kind terms such as \enquote{water} and \enquote{gold} designate kinds whose essences are discovered by science: water is H$_2$O, gold the element with atomic number 79, and these identities are necessary. Their view made microstructure the essence of a kind, and it gave a semantics on which kind terms refer to kinds independently of the descriptions speakers associate with them, as LNG-08 holds for meanings generally. Putnam himself noted the case that limits the view: \enquote{jade} applies to two minerals, jadeite and nephrite, of different composition, so that there is no single microstructure that jade has \citep{Putnam1975,LaPorte2004}. The microstructural account was also defeated, as an account of biological species, by the absence of any microstructure that all members of a species share.
+
+\citet{Boyd1991,Boyd1999} proposed that natural kinds are homeostatic property clusters: families of properties that tend to be coinstantiated because of underlying causal mechanisms, which need not produce perfect co-instantiation. Boyd's account accommodated variation and allowed biological species to be kinds. Its cost is permissiveness. Any class whose members share properties because of some mechanism counts, including classes that are social or historical, and Boyd accepted this consequence. On the account the boundaries of kinds are vague, and nothing in it explains why some clusters, those of chemistry, are sharp and exceptionless and others are not.
+
+\citet{Dupre1981,Dupre1993} argued from the many crosscutting classifications of organisms, by biologists, cooks and herbalists, that there is no single privileged taxonomy and that many classifications pick out real kinds. The case against promiscuous realism is that it cannot distinguish a real kind from any class that serves some purpose, and so does not say what the reality of a kind consists in.
+
+Meanwhile, systematists drew conclusions of their own. \citet{Ghiselin1974} and \citet{Hull1978} argued that species are individuals, spatiotemporally restricted lineages, not classes, and that organisms belong to a species by being parts of it, not by having properties. \citet{Okasha2002} argued that if species have essences, these are relational: an organism belongs to a species by its genealogical and reproductive relations. \citet{Ereshefsky2001} argued that the Linnaean ranks above species are conventional.
+
+\subsection{Recent work}\label{s:recent}
+
+The last fifteen years have seen the notion of natural kind reconstructed from several directions. \citet{Hacking2007} argued that the tradition of natural kinds has fragmented into a scholastic debate without a shared notion. \citet{Magnus2012} defended natural kinds relative to domains of inquiry, so that a class may be a kind for one science and not for another. \citet{Khalidi2013} characterized natural kinds as nodes in causal networks, allowing kinds to crosscut and to include kinds of the special sciences, and argued in earlier work that crosscutting classifications are compatible with realism \citep{Khalidi1998}. \citet{Slater2015} proposed that kinds are stable property clusters, where stability need not be underwritten by any mechanism. These views share Boyd's permissiveness: each admits more kinds than the cluster account defended here, and each locates the naturalness of a kind partly in its role in inquiry.
+
+Our account is closer to the older view, represented by \citet{Ellis2001}, on which natural kinds are distinguished by intrinsic essences, form a hierarchy grounded in physics and chemistry, and do not include biological species. We differ from Ellis in two respects. We do not require that kinds form a hierarchy, and we derive the restriction to fewer kinds from a general account of what a kind is, not from a prior view about which sciences are fundamental.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Features]\label{d:features}
+A \emph{genuine feature} of an object is a genuine property of it, in the sense of MET-02-a, or a genuine property of one of its parts or a genuine relation among its parts, specified by the place of those parts in the object's structure.
+\end{definition}
+
+MET-02-a counts structural properties, such as being a water molecule, as constructed from the genuine properties of the parts and the genuine relations among them. Definition~\ref{d:features} does not contradict this. A feature in our sense is not the structural property but one of the genuine properties or relations from which it is constructed, located in the structure. A cluster of features, defined below, is therefore a cluster of genuine properties and relations co-instantiated in an object and its parts, and the kind is constructed as their conjunction, as MET-02-a says.
+
+\begin{definition}[Laws]\label{d:laws}
+A set $C$ of features \emph{nomically necessitates} a feature $p$ if the laws of nature entail that whatever has every feature in $C$ has $p$. The laws are the axioms of the best system, as in MET-12.
+\end{definition}
+
+\begin{assumption}[Laws are true]\label{a:true}
+If $C$ nomically necessitates $p$, then every object that has every feature in $C$ has $p$.
+\end{assumption}
+
+\begin{definition}[Extension and intent]\label{d:extint}
+The \emph{extension} of a set $K$ of features is the class of objects that have every feature in $K$. The \emph{intent} of a class $X$ of objects is the set of features that every member of $X$ has.
+\end{definition}
+
+\begin{definition}[Cluster]\label{d:cluster}
+A set $K$ of features is a \emph{cluster with core} $C$ if $K$ consists of the features in $C$ together with the features that $C$ nomically necessitates, and $K$ contains some feature not in $C$. A \emph{cluster} is a set of features that is a cluster with some core.
+\end{definition}
+
+\begin{definition}[Natural kind]\label{d:kind}
+A \emph{natural kind} is a class of objects that is the non-empty extension of a cluster.
+\end{definition}
+
+\begin{definition}[Taxon]\label{d:taxon}
+A \emph{taxon} is a class of objects recognized in some classification of a science; a \emph{taxonomy} is a system of taxa.
+\end{definition}
+
+Definition~\ref{d:cluster} makes precise the idea of a cluster of properties that are coinstantiated because of the laws. The core is a set of genuine features; the cluster adds what the laws attach to it. The requirement of surplus, a feature beyond the core, distinguishes a natural kind from the extension of an arbitrary conjunction of genuine features. The class of things that have a certain mass is the extension of one genuine feature, and it is not a kind, because nothing further follows from that mass by law. The class of electrons is a kind, because the laws attach to the electron's charge, rest mass and spin a definite magnetic moment and a definite pattern of interaction. The class of atoms of gold is a kind, because the laws attach to the nuclear charge of 79 units, together with the presence of 79 electrons, a definite electronic structure and with it a definite spectrum, chemistry and set of bulk properties.
+
+Definition~\ref{d:kind} is the substantive thesis about what a natural kind is. It is the cluster account of MET-02-a, sharpened in two ways: clustering is nomic, not merely statistical, and the members of the cluster are genuine features, not any properties whatever. The first sharpening distinguishes our account from Boyd's, the second from Mill's and Slater's.
+
+\begin{principle}[Explanatory criterion]\label{p:criterion}
+A kind exists if it has instances and figures in true explanations that cannot be reformulated without loss of explanatory power in terms of other kinds.
+\end{principle}
+
+Principle~\ref{p:criterion} is the criterion of MET-20-a, which uses it to show that social kinds exist. It is a sufficient condition for the existence of a kind, not a definition of a natural kind. We use it to show that natural kinds exist in the sense in which other kinds do, and we distinguish, among the kinds that exist by Principle~\ref{p:criterion}, those that are natural in the sense of Definition~\ref{d:kind}.
+
+\begin{assumption}[Instantiated surplus]\label{a:surplus}
+Some set of genuine features is instantiated and nomically necessitates a feature outside it.
+\end{assumption}
+
+Assumption~\ref{a:surplus} is an empirical premise, and the examples of electrons and gold show that it is true.
+
+\section{Natural kinds are real}\label{s:real}
+
+\begin{lemma}[Projection]\label{l:projection}
+Given Assumption~\ref{a:true}, if $X$ is the extension of a cluster with core $C$, every object that has every feature in $C$ belongs to $X$.
+\end{lemma}
+
+\begin{proof}
+Let $x$ have every feature in $C$, and let $p$ be in the cluster. Either $p$ is in $C$, and $x$ has it, or $C$ nomically necessitates $p$, and $x$ has it by Assumption~\ref{a:true}. So $x$ has every feature in the cluster and belongs to its extension.
+\end{proof}
+
+\begin{theorem}[Existence]\label{t:exist}
+Given Assumptions~\ref{a:true} and~\ref{a:surplus}, there is a natural kind.
+\end{theorem}
+
+\begin{proof}
+Let $C$ be the instantiated set of features of Assumption~\ref{a:surplus}, and $p$ the feature outside it that $C$ necessitates. Let $K$ consist of the features in $C$ and those $C$ necessitates. Then $K$ is a cluster with core $C$, since it contains $p$, which is not in $C$. Let $x$ have every feature in $C$; by Lemma~\ref{l:projection}, $x$ belongs to the extension of $K$, which is therefore non-empty, and so a natural kind.
+\end{proof}
+
+\begin{proposition}[Real division]\label{p:real}
+If two objects agree on every genuine feature, then they belong to the same natural kinds.
+\end{proposition}
+
+\begin{proof}
+Membership in a natural kind is having every feature in its cluster. If two objects agree on every genuine feature, one has every feature in the cluster if and only if the other does.
+\end{proof}
+
+\begin{remark}\label{r:explain}
+Natural kinds satisfy Principle~\ref{p:criterion}. Lemma~\ref{l:projection} states the explanations in which they figure: an object has the surplus features of a kind because it has the core, and the explanation cites the laws that attach the surplus to the core. The explanation of why a sample has a certain spectrum, by citing that it is gold, cannot be reformulated in terms of another kind without loss, since any other kind either lacks the core and so does not entail the spectrum, or includes features irrelevant to it and so explains less generally.
+\end{remark}
+
+Theorem~\ref{t:exist} and Proposition~\ref{p:real} together establish that natural kinds are real divisions in nature. They exist, and which objects belong to them is fixed by the genuine features of the objects, not by the attitudes or interests of anyone who classifies them. This is the sense in which conventionalism is false. Two classifiers who divided the electrons differently would not be choosing between two conventions; one of them would be failing to divide the electrons from the other things.
+
+Lemma~\ref{l:projection} also explains why natural kind predicates are projectible. If the observed members of a kind have a surplus feature, the inference that unobserved members have it is backed by the laws that attach it to the core. EPI-04 holds that projectibility tracks naturalness, and that \enquote{green} is projectible because it denotes a natural property. Natural kinds are the clearest case: the projectibility of their surplus features is a consequence of the laws.
+
+\section{Why natural kinds are fewer than taxa}\label{s:fewer}
+
+\begin{lemma}[Upward closure]\label{l:upward}
+If $x$ belongs to a natural kind and $y$ has every genuine feature that $x$ has, then $y$ belongs to the kind.
+\end{lemma}
+
+\begin{proof}
+$x$ has every feature in the kind's cluster, and $y$ has every feature $x$ has; so $y$ has every feature in the cluster.
+\end{proof}
+
+\begin{lemma}[Closure]\label{l:closure}
+Every object that has every feature common to the members of a natural kind belongs to it.
+\end{lemma}
+
+\begin{proof}
+Let $X$ be the extension of the cluster $K$. Every member of $X$ has every feature in $K$, so every feature in $K$ belongs to the intent of $X$. An object that has every feature in the intent of $X$ therefore has every feature in $K$, and belongs to $X$.
+\end{proof}
+
+\begin{theorem}[Outsider test]\label{t:outsider}
+If some object outside a class has every genuine feature common to the members of the class, the class is not a natural kind.
+\end{theorem}
+
+\begin{proof}
+If the class were a natural kind, the outsider would belong to it by Lemma~\ref{l:closure}.
+\end{proof}
+
+\begin{corollary}[Privative test]\label{c:privative}
+If a class excludes an object that has every genuine feature of one of its members, the class is not a natural kind.
+\end{corollary}
+
+\begin{proof}
+If the class were a natural kind, the excluded object would belong to it by Lemma~\ref{l:upward}.
+\end{proof}
+
+\begin{proposition}[Determination by intent]\label{p:intent}
+Natural kinds with the same intent have the same members.
+\end{proposition}
+
+\begin{proof}
+Let $X$ and $Y$ be natural kinds with the same intent, and let $x$ be in $X$. Then $x$ has every feature in the intent of $X$, which is the intent of $Y$, so $x$ is in $Y$ by Lemma~\ref{l:closure}. The converse is the same.
+\end{proof}
+
+Lemma~\ref{l:closure} says that a natural kind is closed in the sense of the correspondence between classes of objects and sets of features: it is the extension of its own intent. Most classes are not. A class of objects selected for some purpose, a museum's collection of specimens, the organisms in a given field, is typically a proper part of the extension of its intent, since the features its members share are shared by many other things. Proposition~\ref{p:intent} says that a natural kind is determined by the features common to its members, so that there are no more natural kinds than there are sets of genuine features that are intents of extensions of clusters. Since genuine features are few (MET-02-a), natural kinds are few in the same sense.
+
+The two tests are the instruments of the argument that natural kinds are fewer than taxa. The outsider test excludes disjunctive taxa, whose members share only features that other things share too. The privative test excludes taxa defined by the absence of a feature, which exclude objects that have everything some members have and more.
+
+\begin{proposition}[A model]\label{p:model}
+There is a world, with four objects and three features, in which Assumption~\ref{a:true} holds, some class is a natural kind, some disjunctive class fails the outsider test, and some class fails the privative test.
+\end{proposition}
+
+\begin{proof}
+Let the only law attach feature 1 to the core consisting of feature 0. Let object $a$ have features 0 and 1, object $b$ all three features, object $c$ feature 2, and object $d$ features 1 and 2. The law is true, since $a$ and $b$, the objects with feature 0, have feature 1. The set of features 0 and 1 is a cluster with core $\{0\}$, and its extension, $\{a, b\}$, is a natural kind. The class $\{a, c\}$ has no common feature, so every outsider, $d$ for instance, has all its common features, and it fails the outsider test. The class $\{a\}$ excludes $b$, which has every feature of $a$, and fails the privative test.
+\end{proof}
+
+Proposition~\ref{p:model} shows that the premises are consistent and the tests not vacuous: in the model, as in nature, there are natural kinds, and there are classes that a classifier might recognize and that are not natural kinds.
+
+\section{Taxonomies examined}\label{s:taxa}
+
+We now apply the tests to three standard taxa, one from mineralogy, one from the history of zoology, and one from current systematics.
+
+\begin{assumption}[Jade]\label{a:jade}
+Some silicate that is not jade has every genuine feature common to all specimens of jade.
+\end{assumption}
+
+Jade is the name given to two minerals, jadeite, a pyroxene, and nephrite, an amphibole. They differ in chemical composition and crystal structure. The features common to all specimens of both are features of silicates in general: the presence of silicon and oxygen in tetrahedral coordination, and of further cations among those that silicates commonly contain. These are had by silicates that are not jade, and the toughness and appearance that both kinds of jade share result from different microstructures. Assumption~\ref{a:jade} records this. The case is examined further in MET-27-b.
+
+\begin{assumption}[Invertebrates]\label{a:invert}
+Some vertebrate has every genuine feature common to all invertebrates.
+\end{assumption}
+
+The class of animals without backbones, \emph{animaux sans vertèbres}, was introduced by Lamarck and retained in zoological classification for more than a century. The invertebrates include sponges, cnidarians, insects, molluscs and the invertebrate chordates. What they have in common is what all animals have in common, and every vertebrate has it. The class is defined by the absence of a feature, and it is the standard example, in the literature on systematics, of a group that is not a natural group.
+
+\begin{assumption}[Species]\label{a:species}
+For a typical biological species, some organism outside the species has every genuine feature common to all members of the species.
+\end{assumption}
+
+Assumption~\ref{a:species} is the strongest of the three, and it is supported by the facts of variation that defeated the Aristotelian picture. The members of a species include zygotes and adults, males and females, healthy organisms and organisms with developmental anomalies, and the features they all share, given that they must be shared by every one of them without exception, are features shared also by members of closely related species. Sister species are often distinguished by statistical differences and by their reproductive isolation, not by a feature every member of one has and no member of the other has. SCI-08 holds that biology has no strict laws but robust generalizations with stable exceptions, and the absence of an exceptionless cluster is the counterpart of this for kinds.
+
+\begin{theorem}[Natural kinds are real, and fewer than taxonomies suggest]\label{t:main}
+Given Assumptions~\ref{a:true}, \ref{a:surplus}, \ref{a:jade}, \ref{a:invert} and~\ref{a:species}, there are natural kinds, and jade, the invertebrates and a typical biological species are not natural kinds.
+\end{theorem}
+
+\begin{proof}
+The first clause is Theorem~\ref{t:exist}. The other three follow from Theorem~\ref{t:outsider} and Assumptions~\ref{a:jade}, \ref{a:invert} and~\ref{a:species}.
+\end{proof}
+
+Theorem~\ref{t:main} does not say that species are unreal. A species is a lineage, a population of organisms connected by descent and reproduction, and as such it is an individual in the sense of \citet{Ghiselin1974} and \citet{Hull1978}, whose parts are organisms; MET-06 counts organisms, and wholes whose parts share a common fate under the relevant dynamics, among the things that exist. Species also figure in explanations that cannot be reformulated without them, and so exist by Principle~\ref{p:criterion}. What they are not is natural kinds: membership in a species is fixed by genealogy and reproductive relations, not by a cluster of genuine features. The same holds, more clearly, of the higher taxa, whose ranks are conventional \citep{Ereshefsky2001}.
+
+\section{Further cases}\label{s:cases}
+
+The tests leave standing a definite class of natural kinds and exclude a definite class of taxa. We survey both.
+
+\paragraph{Elementary particles.} Each kind of elementary particle is the extension of a cluster: a core of charge, rest mass and spin, to which the laws attach a magnetic moment, decay modes and interaction cross sections. The classes are sharp, and no outsider has the core. These are the clearest natural kinds.
+
+\paragraph{Chemical elements and isotopes.} An element is the extension of a cluster whose core is the nuclear charge together with the corresponding number of electrons, and whose surplus includes the spectrum and the chemistry. Isotopes are subkinds: their clusters add the number of neutrons to the core and nuclear properties such as stability and half-life to the surplus. Larger clusters have smaller extensions, so the isotopes of an element are kinds within the element. That chemistry is in principle reducible to physics (SCI-11) is what makes these clusters nomic: the surplus follows from the core by the laws of physics.
+
+\paragraph{Compounds and mineral species.} Water, sodium chloride, quartz and jadeite are natural kinds, and the chemical kinds they belong to are those that \citet{Hendry2006} discusses. Their cores are compositions and structures, specified as genuine properties of constituents and genuine relations among them, and their surpluses are their bulk properties. Water, as a substance, includes ions and transient aggregates of molecules in equilibrium; the kind is the extension of the cluster whose core is the composition and the equilibrium structure, and the identification of water with H$_2$O is correct when so understood.
+
+\paragraph{Diseases.} Some diseases are natural kinds in our sense: an infectious disease whose core is infection by a given pathogen, to which the laws of physiology attach a course and a set of symptoms, is the extension of a cluster. Many diagnostic categories, defined by the presence of some number of symptoms from a list, are not: they are disjunctive by construction, and they fail the outsider test whenever an individual outside the category has every feature common to those within it.
+
+\paragraph{Colours and other relational classes.} Colours are real relational properties of objects, dependent on perceivers (MET-17). The class of red things is not a natural kind in our sense, since what red things have in common, a disposition to produce a certain experience in a certain kind of perceiver under certain conditions, is not a cluster of genuine features of the things themselves; red things of different surface constitutions share nothing further by law. This is compatible with the reality of red, as MET-02-a notes, since construction is not elimination.
+
+\paragraph{Social kinds.} Money, borders and universities exist and are no less real than natural kinds (MET-20). They exist by Principle~\ref{p:criterion}, which is the criterion we also use, and they are not natural kinds in the sense of Definition~\ref{d:kind}: membership in them depends on collective attitudes, not on a cluster of genuine features. The two claims are compatible. Being a natural kind is one way of being a real kind, not the only one.
+
+\paragraph{Crosscutting kinds.} \citet{Khalidi1998} argued that natural kinds can crosscut: two kinds may share members without either including the other. The account allows this. The kinds an object belongs to correspond to the clusters among its features, and two clusters within its features may be unrelated by inclusion, so that their extensions overlap without nesting. The account does not require that natural kinds form a hierarchy. It requires only that each be closed, in the sense of Lemma~\ref{l:closure}.
+
+The cases show the pattern Theorem~\ref{t:main} summarizes. The natural kinds are concentrated in physics, chemistry and mineralogy, with outliers in the sciences of disease and elsewhere wherever a nomic cluster is found. The taxa of biology above the level of particular lineages, and many categories of the special sciences, are real classifications without being natural kinds. In this sense natural kinds are fewer than standard taxonomies suggest.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[Promiscuity]\label{o:dupre}
+There are more natural kinds than any taxonomy lists, not fewer. Organisms fall into real classes in many ways, according to the interests of the biologist, the cook and the forester \citep{Dupre1993}.
+\end{objection}
+
+\begin{reply}
+The classes Dupré describes are real, in the sense that their members have the properties by which they are sorted and the sorting serves its purposes. Many of them exist by Principle~\ref{p:criterion}. What the objection does not show is that they are natural kinds, if that means more than being real classes. The cluster account gives a criterion of naturalness that does not depend on interest, and by it most of these classes are not natural kinds. Without some such criterion, promiscuous realism cannot distinguish a kind from any class that serves a purpose, and its claim that there are many natural kinds becomes the claim that there are many useful classes, which no one denies.
+\end{reply}
+
+\begin{objection}[Homeostatic clusters]\label{o:boyd}
+Clusters need not be exceptionless. Species are homeostatic property clusters: their members share properties because of mechanisms of gene flow, developmental constraint and selection, which produce imperfect but robust co-instantiation \citep{Boyd1999}. The requirement that clusters be nomic excludes species by fiat.
+\end{objection}
+
+\begin{reply}
+The requirement is not imposed by fiat; it is what makes membership in a kind a matter of the features of things. If imperfect co-instantiation sufficed, the boundaries of a kind would be fixed by a threshold of shared properties, and the threshold would be ours. The mechanisms Boyd describes are real, and the classes they sustain are real; MET-02-a allows degrees of naturalness, and a class sustained by a robust mechanism is more natural than a gerrymandered one. But it is not a natural kind in the sense in which electrons and gold are, and the outsider test explains why: its members share no feature that some outsider lacks. The objection marks a real difference between Boyd's notion and ours, and the difference is the difference between kinds whose boundaries are in nature and classes whose boundaries are vague.
+\end{reply}
+
+\begin{objection}[Scientism]\label{o:scient}
+The account makes biology, psychology and the social sciences sciences without natural kinds. That is a reductio, since these sciences make inductive inferences that succeed, and successful induction requires natural kinds.
+\end{objection}
+
+\begin{reply}
+Successful induction requires that the predicates projected be natural enough, and EPI-04 holds that projectibility tracks naturalness, which comes in degrees. The special sciences project predicates that are natural enough for the inferences they make, with the exceptions their generalizations admit (SCI-08). What they do not have are exceptionless clusters, and that is a fact about their subject matter that the special sciences themselves have discovered: population thinking in biology is the recognition that species are not natural kinds in the Aristotelian sense \citep{Sober1980}. The account assigns these sciences real divisions, lineages and functional classes, and denies only that the divisions are natural kinds.
+\end{reply}
+
+\begin{objection}[Features are not genuine properties]\label{o:features}
+Definition~\ref{d:features} counts properties of parts and relations among parts as features of the whole. MET-02-a counts structural properties as constructed. So the clusters of chemistry are not clusters of genuine properties, and the account contradicts the theory it claims to follow.
+\end{objection}
+
+\begin{reply}
+A feature is a genuine property or relation, located in a structure; it is not the structural property constructed from it. The cluster of water consists of genuine properties of hydrogen and oxygen atoms and genuine relations among them, placed in the arrangement that the composition and structure specify. That the conjunction of these features, the property of being water, is constructed is what MET-02-a says, and Definition~\ref{d:kind} agrees: the kind is the extension of a set of genuine features, and the property of belonging to it is the constructed conjunction.
+\end{reply}
+
+\begin{objection}[Jade is a kind after all]\label{o:jade}
+Jadeite and nephrite share a feature beyond those of silicates in general: a tough, interlocking microstructure. That feature is the basis of their use and their name. So jade passes the outsider test.
+\end{objection}
+
+\begin{reply}
+The interlocking microstructure of jadeite is granular; that of nephrite is fibrous and felted. What they share is a toughness, which is a bulk property, a disposition to resist fracture, realized differently in the two minerals and shared with other materials. A disposition with different bases is not a genuine feature in the sense of Definition~\ref{d:features}, any more than red is, and if it were, the class of tough silicates, which jade does not exhaust, would have it too. Either way the outsider test is failed.
+\end{reply}
+
+\section{What the result does not establish}\label{s:limits}
+
+The theorem depends on the cluster account of natural kinds, which we have defended but not proved, and on three empirical premises, which are claims about minerals and organisms that the sciences concerned are in a position to correct. It does not determine how many natural kinds there are, or which clusters exist; that is a question for physics and chemistry. It does not deny that biological species, higher taxa or social kinds exist, and it is consistent with MET-20, on which social kinds are no less real than natural kinds. It does not say whether every natural kind has a real definition; MET-13 holds that every object has one, and a natural kind, if it is an object, would have its core as the natural candidate, but nothing in the argument depends on this. Finally, the tests are sufficient conditions for not being a natural kind; a class that passes both may still fail to be a kind, if the features its members share are not a cluster.
+
+\section{Formalization}\label{s:formal}
+
+The results of Sections~\ref{s:framework}--\ref{s:taxa} are formalized in \nolinkurl{Philosophy/MET/MET_27.lean}. A world is a structure with types of objects and features, a possession relation and a relation of nomic necessitation between sets of features and features. Extension, intent, cluster and natural kind are defined as in Definitions~\ref{d:extint}--\ref{d:kind}. Lemmas~\ref{l:projection}, \ref{l:upward} and~\ref{l:closure}, Theorems~\ref{t:exist} and~\ref{t:outsider}, Proposition~\ref{p:real}, Corollary~\ref{c:privative} and Proposition~\ref{p:intent} are proved for an arbitrary world, with Assumption~\ref{a:true} as a hypothesis where it is used; Proposition~\ref{p:model} is proved for a concrete four-object world by computation. The actual world, the three taxa and Assumptions~\ref{a:true}, \ref{a:surplus} and~\ref{a:jade}--\ref{a:species} are then axioms. The main theorem reads:
+
+\begin{lstlisting}
+theorem theorem_5_4 :
+    (∃ X, NaturalKind actual X) ∧ ¬ NaturalKind actual jade ∧
+      ¬ NaturalKind actual invertebrata ∧ ¬ NaturalKind actual species
+\end{lstlisting}
+
+\noindent The checker reports:
+
+\begin{lstlisting}
+'Philosophy.MET_27.theorem_5_4' depends on axioms:
+  [Philosophy.MET_27.actual, Philosophy.MET_27.assumption_2_3,
+   Philosophy.MET_27.assumption_2_8, Philosophy.MET_27.assumption_5_1,
+   Philosophy.MET_27.assumption_5_2, Philosophy.MET_27.assumption_5_3,
+   Philosophy.MET_27.invertebrata, Philosophy.MET_27.jade,
+   Philosophy.MET_27.species]
+'Philosophy.MET_27.theorem_4_3' does not depend on any axioms
+'Philosophy.MET_27.proposition_4_6' depends on axioms: [propext]
+\end{lstlisting}
+
+\noindent Here \texttt{actual} is the actual world of objects, features and laws (Definitions~\ref{d:features} and~\ref{d:laws}); \texttt{jade}, \texttt{invertebrata} and \texttt{species} are the three taxa (Definition~\ref{d:taxon}); \texttt{assumption\_2\_3} and \texttt{assumption\_2\_8} are Assumptions~\ref{a:true} and~\ref{a:surplus}; and \texttt{assumption\_5\_1}, \texttt{assumption\_5\_2} and \texttt{assumption\_5\_3} are Assumptions~\ref{a:jade}, \ref{a:invert} and~\ref{a:species}. The outsider test (Theorem~\ref{t:outsider}) depends on no axioms: it follows from the definitions alone. The model of Proposition~\ref{p:model} uses only the standard axiom \texttt{propext}. Principle~\ref{p:criterion} and Remark~\ref{r:explain} are not formalized.
+
+\section{Conclusion}\label{s:conclusion}
+
+A natural kind is the extension of a cluster of genuine features, a core together with what the laws attach to it. Natural kinds so understood exist whenever a law attaches a further feature to an instantiated core, and membership in them is fixed by the genuine features of things, so they are real divisions in nature. Every natural kind is closed: it contains every object that has the features common to its members, and every object that has all the features of one of them. Taxa that fail these conditions are not natural kinds, and jade, the invertebrates and biological species fail them. Natural kinds are real, and fewer than standard taxonomies suggest.
+
+\begin{thebibliography}{99}\small
+\bibitem[Boyd(1991)]{Boyd1991} Boyd, R. (1991). Realism, anti-foundationalism and the enthusiasm for natural kinds. \emph{Philosophical Studies}, 61(1--2), 127--148.
+\bibitem[Boyd(1999)]{Boyd1999} Boyd, R. (1999). Homeostasis, species, and higher taxa. In R.~A. Wilson (Ed.), \emph{Species: New Interdisciplinary Essays} (pp.~141--185). MIT Press.
+\bibitem[Dupr\'e(1981)]{Dupre1981} Dupr\'e, J. (1981). Natural kinds and biological taxa. \emph{The Philosophical Review}, 90(1), 66--90.
+\bibitem[Dupr\'e(1993)]{Dupre1993} Dupr\'e, J. (1993). \emph{The Disorder of Things: Metaphysical Foundations of the Disunity of Science}. Harvard University Press.
+\bibitem[Ellis(2001)]{Ellis2001} Ellis, B. (2001). \emph{Scientific Essentialism}. Cambridge University Press.
+\bibitem[Ereshefsky(2001)]{Ereshefsky2001} Ereshefsky, M. (2001). \emph{The Poverty of the Linnaean Hierarchy: A Philosophical Study of Biological Taxonomy}. Cambridge University Press.
+\bibitem[Ghiselin(1974)]{Ghiselin1974} Ghiselin, M.~T. (1974). A radical solution to the species problem. \emph{Systematic Zoology}, 23(4), 536--544.
+\bibitem[Hacking(2007)]{Hacking2007} Hacking, I. (2007). Natural kinds: Rosy dawn, scholastic twilight. \emph{Royal Institute of Philosophy Supplement}, 61, 203--239.
+\bibitem[Hendry(2006)]{Hendry2006} Hendry, R.~F. (2006). Elements, compounds, and other chemical kinds. \emph{Philosophy of Science}, 73(5), 864--875.
+\bibitem[Hull(1978)]{Hull1978} Hull, D.~L. (1978). A matter of individuality. \emph{Philosophy of Science}, 45(3), 335--360.
+\bibitem[Khalidi(1998)]{Khalidi1998} Khalidi, M.~A. (1998). Natural kinds and crosscutting categories. \emph{The Journal of Philosophy}, 95(1), 33--50.
+\bibitem[Khalidi(2013)]{Khalidi2013} Khalidi, M.~A. (2013). \emph{Natural Categories and Human Kinds: Classification in the Natural and Social Sciences}. Cambridge University Press.
+\bibitem[Kripke(1980)]{Kripke1980} Kripke, S.~A. (1980). \emph{Naming and Necessity}. Harvard University Press.
+\bibitem[LaPorte(2004)]{LaPorte2004} LaPorte, J. (2004). \emph{Natural Kinds and Conceptual Change}. Cambridge University Press.
+\bibitem[Locke(1690)]{LockeEssay} Locke, J. (1690). \emph{An Essay Concerning Human Understanding}.
+\bibitem[Magnus(2012)]{Magnus2012} Magnus, P.~D. (2012). \emph{Scientific Enquiry and Natural Kinds: From Planets to Mallards}. Palgrave Macmillan.
+\bibitem[Mill(1843)]{Mill1843} Mill, J.~S. (1843). \emph{A System of Logic, Ratiocinative and Inductive}. John W. Parker.
+\bibitem[Okasha(2002)]{Okasha2002} Okasha, S. (2002). Darwinian metaphysics: Species and the question of essentialism. \emph{Synthese}, 131(2), 191--213.
+\bibitem[Putnam(1975)]{Putnam1975} Putnam, H. (1975). The meaning of \enquote{meaning}. \emph{Minnesota Studies in the Philosophy of Science}, 7, 131--193.
+\bibitem[Quine(1969)]{Quine1969} Quine, W.~V. (1969). Natural kinds. In \emph{Ontological Relativity and Other Essays} (pp.~114--138). Columbia University Press.
+\bibitem[Slater(2015)]{Slater2015} Slater, M.~H. (2015). Natural kindness. \emph{The British Journal for the Philosophy of Science}, 66(2), 375--411.
+\bibitem[Sober(1980)]{Sober1980} Sober, E. (1980). Evolution, population thinking, and essentialism. \emph{Philosophy of Science}, 47(3), 350--383.
+\end{thebibliography}
+
+\end{document}

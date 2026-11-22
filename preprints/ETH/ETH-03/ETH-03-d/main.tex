@@ -1,0 +1,92 @@
+\documentclass{situationist-preprint}
+
+\title{The Trolley Problem and Autonomous Vehicles}
+\msid{ETH-03-d}
+\msfamily{ETH-03}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Consequence}
+\mskeywords{autonomous vehicles; trolley problem; redirected threat; crash algorithms; Moral Machine; passenger protection}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The design of collision policies for autonomous vehicles has been described as the trolley problem made real. We derive what the doctrine of the redirected threat, established in ETH-03-a, implies for such policies. A vehicle's momentum is an existing threat, so a policy may swerve it from many onto fewer, including onto its own passengers; it may not introduce a new threat to anyone, for instance by propelling another road user into the path of the vehicle. Since the doctrine's verdicts depend only on redirection and numbers, the policy may not discriminate among potential victims by age, sex or social status. We address the objections that real collisions involve risk rather than certainty and that the vehicle is a driver, not a bystander.
+\end{abstract}
+
+\section{Collision policies as trolley cases}
+
+A collision policy specifies what an automated vehicle does when a collision cannot be avoided. Empirical work has shown that people endorse policies that minimize casualties but prefer to ride in vehicles that protect their passengers \citep{Bonnefon2016}, and a very large online survey has documented the preferences of millions of respondents across cultures over who should be spared \citep{Awad2018}. Some authors have doubted that the trolley literature is relevant at all, since collision policies are chosen in advance, under risk, by designers rather than by agents on the spot \citep{Nyholm2016}. We grant the differences and show that the doctrine of the redirected threat (DRT) still settles the central questions.
+
+A situation in which an automated vehicle is about to strike five pedestrians, and can steer so that it strikes one instead, is a trolley case in the sense of Definition~2.1 of ETH-03-a: the act results in the death of some and the survival of others who would otherwise die, and it has the three features the definition records. The vehicle's momentum is a threat that already exists when the policy is invoked. ETH-03-a (Section~9) states the two verdicts we develop: swerving is permitted, and a manoeuvre that propels a passenger into the path of the pedestrians is forbidden.
+
+\section{Consequences of the doctrine}
+
+By Theorem~3.1 of ETH-03-a, every rule satisfying its three adequacy conditions agrees with the DRT on every trolley case. We therefore derive the consequences from the DRT directly.
+
+\begin{proposition}\label{p:swerve}
+A policy that steers an unavoidable collision away from a larger group of road users toward a smaller one is permissible.
+\end{proposition}
+
+\begin{proof}
+Steering changes the trajectory of an existing threat, the vehicle's motion, and does not bring anyone into its path who was not already on a path to which it could be steered. The act saves more than it kills. By Definition~2.2 of ETH-03-a it is permissible.
+\end{proof}
+
+\begin{proposition}\label{p:passenger}
+A policy may steer the vehicle so that the collision kills its own passenger rather than a larger number of pedestrians, for instance by steering into a barrier.
+\end{proposition}
+
+\begin{proof}
+The passenger is already exposed to the vehicle's motion, since he moves with it. Steering into a barrier redirects the same threat so that it is borne by one rather than five. The act redirects an existing threat and saves more than it kills.
+\end{proof}
+
+Proposition~\ref{p:passenger} establishes permissibility. ETH-03-a (Section~8) argues that a driver who does nothing kills those in her path, while a bystander lets them die, and that this plausibly makes turning obligatory for the driver though merely permissible for the bystander. A vehicle whose policy determines its motion is in the driver's position, not the bystander's: if it continues, it is the vehicle that kills the five. The policy of protecting passengers at any cost to others, which respondents prefer for their own vehicles \citep{Bonnefon2016}, is therefore not one the DRT can support. It is the policy of a driver who refuses to turn.
+
+\begin{proposition}\label{p:shield}
+A policy that introduces a new threat to a person in order to reduce casualties is impermissible, whatever the numbers. Examples are a manoeuvre that pushes another vehicle into the path of the pedestrians to absorb the impact, and a braking pattern that throws a passenger or an occupant of another vehicle into their path.
+\end{proposition}
+
+\begin{proof}
+In each case the person harmed was not exposed to the vehicle's motion, or not in the way that harms him, until the manoeuvre put him there. The act introduces a new threat, and by Definition~2.2 of ETH-03-a it is impermissible. That more are saved than killed does not alter the verdict, as for Footbridge.
+\end{proof}
+
+\begin{proposition}\label{p:features}
+A permissible policy makes no use of the age, sex, social status or other personal features of those who may be struck, except as they bear on how many will be killed.
+\end{proposition}
+
+\begin{proof}
+By Principle~P3 of ETH-03-a, which the DRT satisfies (Proposition~3.3 of ETH-03-a), the verdict on a trolley case depends only on whether the act redirects an existing threat and whether it saves more than it kills. Personal features of the victims are neither.
+\end{proof}
+
+Proposition~\ref{p:features} agrees with the rule adopted by the German Ethics Commission on Automated and Connected Driving, which prohibits any distinction based on personal features in unavoidable accident situations \citep{Ethik2017}. It disagrees with several of the preferences recorded in the Moral Machine survey, such as the preference for sparing the young over the old \citep{Awad2018}. Those preferences are data about attitudes, not inputs to a policy, and the DRT explains why they should not be implemented: they make the victim's claim not to be struck depend on features other than whether the threat was already directed at him.
+
+\section{Objections}
+
+\begin{objection}[Risk]
+Collision policies operate under uncertainty about outcomes; trolley cases stipulate certainty. The DRT therefore does not apply.
+\end{objection}
+
+\begin{reply}
+The distinction between redirecting and introducing a threat does not depend on certainty: whether a manoeuvre changes the trajectory of the vehicle or puts someone into it is known in advance. What uncertainty affects is the second clause of the DRT, whether more are saved than killed. A natural extension replaces the numbers with expected numbers, and on that extension Propositions~\ref{p:swerve} and~\ref{p:passenger} hold with expected casualties, while Propositions~\ref{p:shield} and~\ref{p:features} hold unchanged, since they do not depend on the numbers. ETH-03-a does not treat risk, and the extension is an addition to the doctrine, though one that leaves its structure intact.
+\end{reply}
+
+\begin{objection}[Designers]
+The policy is chosen in advance by designers who know only that some collision of a given type will occur. They do not redirect any existing threat; they create a vehicle that will be a threat.
+\end{objection}
+
+\begin{reply}
+The designer's choice is a choice among policies, each of which determines what the vehicle does in each case it may meet. The verdict on a policy is fixed by the verdicts on the acts it prescribes: a policy is permissible if every act it prescribes is permissible. In the collision cases, the threat that the policy acts on exists when the policy is invoked, and the designer's earlier decision to build a vehicle is not a trolley case, any more than a railway company's decision to run trolleys is. Whether the decision to build vehicles that may cause such collisions is justified is a further question, answered by comparing their expected harms with those of human driving.
+\end{reply}
+
+\section{Conclusion}
+
+The doctrine of the redirected threat gives determinate guidance for collision policies: steer from more toward fewer, including toward the vehicle's own passengers; never introduce a new threat to anyone; and ignore personal features of potential victims. Since the vehicle stands in the driver's position, the permission to steer is plausibly also a requirement.
+
+\begin{thebibliography}{9}\small
+\bibitem[Awad et~al.(2018)]{Awad2018} Awad, E., Dsouza, S., Kim, R., Schulz, J., Henrich, J., Shariff, A., Bonnefon, J.-F. and Rahwan, I. (2018). The Moral Machine experiment. \emph{Nature}, 563, 59--64.
+\bibitem[Bonnefon et~al.(2016)]{Bonnefon2016} Bonnefon, J.-F., Shariff, A. and Rahwan, I. (2016). The social dilemma of autonomous vehicles. \emph{Science}, 352(6293), 1573--1576.
+\bibitem[Ethics Commission(2017)]{Ethik2017} Ethics Commission on Automated and Connected Driving (2017). \emph{Report}. Federal Ministry of Transport and Digital Infrastructure, Berlin.
+\bibitem[Nyholm and Smids(2016)]{Nyholm2016} Nyholm, S. and Smids, J. (2016). The ethics of accident-algorithms for self-driving cars: An applied trolley problem? \emph{Ethical Theory and Moral Practice}, 19(5), 1275--1289.
+\end{thebibliography}
+
+\end{document}

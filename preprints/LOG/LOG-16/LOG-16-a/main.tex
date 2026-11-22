@@ -1,0 +1,345 @@
+\documentclass{situationist-preprint}
+
+\title{The Logical Constants and Permutation Invariance}
+\msid{LOG-16-a}
+\msfamily{LOG-16}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/LOG/LOG\_16.lean}
+\mskeywords{logical constants; permutation invariance; generalized quantifiers; most; Tarski; Sher; McGee; Feferman; topic neutrality}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Which expressions are logical constants? On the received view, found in Quine and in much of the proof-theoretic tradition, they are the truth-functional connectives, the first-order quantifiers and identity, and a determiner such as \enquote{most} is excluded because it is not first-order definable and has no complete proof system. We argue for the criterion proposed by Tarski and developed by Sher: the logical constants are the operations invariant under all permutations of the domain. Invariance is the precise form of the thought that logic is topic-neutral, since an invariant operation is insensitive to which objects it is applied to. We prove that \enquote{most} depends only on the cardinalities of $A \cap B$ and $A \setminus B$, on any domain, finite or infinite, and is therefore invariant and a logical constant. We prove that an operation on one predicate is invariant if and only if it depends only on cardinalities, and that operations mentioning particular objects fail the test. The overgeneration objections of McGee and Feferman are answered: McGee's operation is logical but unnatural, and Feferman's concern conflates the logicality of an operation with the epistemic accessibility of the truths it figures in. The main results are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+Logic is the study of arguments that are valid in virtue of their form. The notion of form presupposes a division of the vocabulary: in \enquote{every whale is a mammal; Moby is a whale; so Moby is a mammal}, the words \enquote{every} and \enquote{is a} contribute to the form, and \enquote{whale}, \enquote{mammal} and \enquote{Moby} do not. An argument is formally valid when every argument of the same form, obtained by replacing the non-logical expressions uniformly, preserves truth. This is the account of consequence that \citet{Tarski1936} made precise and that LOG-06 defends in its model-theoretic form. Every version of it requires an answer to a prior question: which expressions are the logical constants? Tarski himself noted in 1936 that he knew of no principled answer, and that if every expression were treated as logical, material consequence would collapse into formal consequence.
+
+There are three families of answer.
+
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Enumeration.} The logical constants are those of first-order logic with identity: the truth-functional connectives, the universal and existential quantifiers, and the identity sign. This is the working assumption of most textbooks and the explicit position of \citet{Quine1970}, for whom logic is the theory of truth functions, quantification and identity, and anything stronger is mathematics.
+\item \emph{Inferential criteria.} A logical constant is an expression whose meaning is fully given by introduction and elimination rules standing in a relation of harmony \citep{Gentzen1935,Prawitz1965,Dummett1991}, or by rules of a sequent calculus satisfying conditions such as conservativeness \citep{Hacking1979}. On every such criterion, the connectives and first-order quantifiers qualify, and expressions such as \enquote{most}, \enquote{infinitely many} and \enquote{as many as} do not.
+\item \emph{Invariance criteria.} A logical constant is an expression that denotes an operation invariant under all permutations of the domain of objects \citep{Tarski1986,Sher1991}, or under some related class of transformations \citep{McGee1996,Feferman1999,Bonnay2008}. Logic is topic-neutral, and topic neutrality is insensitivity to the identity of objects.
+\end{enumerate}
+
+We defend the third answer in its original Tarski--Sher form, and we draw the consequence that the received view resists: generalized quantifiers such as \enquote{most}, \enquote{more than half}, \enquote{infinitely many} and \enquote{exactly as many as} are logical constants. The defence has three parts. Section~\ref{s:results} establishes precisely what invariance includes and excludes, with \enquote{most} as the central case. Section~\ref{s:received} explains why the arguments for the received view establish only that first-order logic has properties, such as completeness and compactness, that its extensions lack, and why these properties are not marks of logicality. Section~\ref{s:obj} answers the overgeneration objections of \citet{McGee1996} and \citet{Feferman1999}.
+
+\section{A short history of the debate}\label{s:history}
+
+\subsection{From geometry to logic}
+
+The idea that a discipline can be characterized by the transformations under which its notions are invariant comes from geometry. \citet{Klein1872} proposed in his Erlangen program to classify geometries by their groups of transformations: Euclidean geometry studies the properties invariant under rigid motions, affine geometry those invariant under affine maps, topology those invariant under continuous deformations. The larger the group, the fewer and more general the invariant notions. \citet{Mautner1946} applied the idea to logic, and \citet{LindenbaumTarski1935} had already proved that every relation definable in the simple theory of types is invariant under permutations of the individuals. In a lecture of 1966, published twenty years later, \citet{Tarski1986} drew the conclusion: if logic is the most general discipline, its notions should be invariant under the largest group of transformations of the domain onto itself, the group of all permutations. He observed that on this proposal the only invariant relations between individuals are the universal and empty relations, identity and diversity; that the invariant classes of classes are those determined by cardinality; and that the truth functions and quantifiers qualify.
+
+\subsection{Generalized quantifiers}
+
+Independently, \citet{Mostowski1957} introduced generalized quantifiers into logic. A quantifier in his sense is an operation that assigns to each subset of the domain a truth value and satisfies an invariance condition: it does not distinguish subsets related by a permutation of the domain. Mostowski's examples included \enquote{there are infinitely many} and \enquote{there are uncountably many}. \citet{Lindstrom1966} extended the notion to quantifiers binding several variables, and \citet{Lindstrom1969} proved that first-order logic is the strongest logic with the compactness and downward L\"owenheim--Skolem properties. Lindstr\"om's theorem is the most important technical support for the received view: if one wants those properties, one has exactly the first-order constants and no more.
+
+The linguistic application came with \citet{BarwiseCooper1981}, who treated natural-language determiners as quantifiers of type $\langle 1, 1\rangle$, relations between two sets, and proved that \enquote{most}, understood as \enquote{more than half}, is not definable in first-order logic, even over finite domains. \citet{vanBenthem1986}, \citet{Westerstahl1985} and \citet{KeenanStavi1986} established the semantic universals that natural-language determiners satisfy, among them conservativity and, for the \enquote{logical} determiners, permutation invariance. The standard reference is \citet{PetersWesterstahl2006}.
+
+\subsection{Sher and the formality of logic}
+
+\citet{Sher1991} turned Tarski's suggestion into a systematic account. A logical term, on her criterion, denotes an operation that is invariant under isomorphisms of structures, not only under permutations of a single domain, and that is defined uniformly over all domains. She argued that the criterion is the precise expression of the formality of logic, and she accepted its consequence that the logical constants include all cardinality quantifiers. \citet{McCarthy1981} and \citet{Peacocke1976} had earlier proposed criteria tied to the knowledge of meaning; \citet{McCarthy1981} argued that invariance must be supplemented by a condition on how the meaning of an expression fixes its extension across domains.
+
+\subsection{Overgeneration and its critics}
+
+\citet{McGee1996} proved that the operations invariant under isomorphism are exactly those definable in an infinitary language, and he identified the problem that has dominated the subsequent debate. An operation may be invariant and yet behave as one connective on domains of some sizes and as another connective on domains of other sizes. Such an operation passes the test, yet it seems to have no claim to logicality: whether it means conjunction or disjunction depends on how many things there are, which is not a matter of logic. \citet{Feferman1999} pressed a related objection from the side of set theory: if every cardinality quantifier is logical, then which sentences are logical truths depends on questions, such as the continuum hypothesis, that are settled, if at all, by set theory. He proposed instead invariance under homomorphisms, and showed that the monadic operations invariant in this stronger sense are exactly those definable in first-order logic without identity. \citet{Bonnay2008} proposed invariance under potential isomorphism, a relation that identifies infinite sets of different cardinalities, so that quantifiers discriminating between infinite cardinalities are no longer logical.
+
+\subsection{Recent work}
+
+The last two decades have produced three lines of work. The first refines the criterion: \citet{Bonnay2008} and \citet{BonnayWesterstahl2012} relate the choice of invariance group to the choice of consequence relation, and \citet{Woods2016} investigates which notions of invariance are coherent for intensional and higher-type operations. The second presses undergeneration: \citet{DutilhNovaes2014} argues that permutation invariance undergenerates, and that a criterion stated in terms of extensions alone cannot capture everything that is intuitively logical. The third reconsiders the epistemology: \citet{Sagi2015} examines the modal and epistemic arguments against invariance criteria and argues that they fail, and \citet{GriffithsPaseau2022} defend a logical monism on which the one true logic is highly infinitary and its constants include generalized quantifiers. The skeptical position that no criterion succeeds is set out by \citet{GomezTorrente2002}, and the conceptual issues are surveyed by \citet{MacFarlane2000}. Our position is closest to Sher's and to that of Griffiths and Paseau. Our contribution is an exact statement of what the criterion includes and excludes, an answer to overgeneration that does not modify the criterion, and a machine-checked proof of the central claims.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:perm}
+A \emph{domain} is a non-empty collection of objects. A \emph{bijection} between domains $D$ and $E$ is a function $f\colon D \to E$ with a two-sided inverse. A \emph{permutation} of $D$ is a bijection from $D$ to itself.
+\end{definition}
+
+\begin{definition}\label{d:ops}
+An \emph{operation} on a domain $D$ is one of the following: an $n$-place relation between objects of $D$; a \emph{quantifier of type $\langle 1\rangle$}, assigning a truth value to each predicate (subset) of $D$; or a \emph{quantifier of type $\langle 1, 1\rangle$}, assigning a truth value to each pair of predicates. A permutation $\pi$ acts on predicates by sending $A$ to $\pi[A]$, the set of $\pi(a)$ for $a \in A$, and on operations by transport: $(\pi Q)(A) = Q(\pi^{-1}[A])$.
+\end{definition}
+
+\begin{definition}\label{d:inv}
+An operation $Q$ on $D$ is \emph{permutation invariant} if $\pi Q = Q$ for every permutation $\pi$ of $D$. For a relation $R$, this means that $R(a_1, \ldots, a_n)$ if and only if $R(\pi a_1, \ldots, \pi a_n)$; for a quantifier of type $\langle 1, 1\rangle$, that $Q(A, B)$ if and only if $Q(\pi[A], \pi[B])$.
+\end{definition}
+
+\begin{principle}[Invariance criterion]\label{p:crit}
+An operation on a domain is a logical constant if and only if it is invariant under all permutations of the domain. An expression is a logical constant if and only if, on every domain, it denotes a permutation-invariant operation.
+\end{principle}
+
+The second clause states the criterion for expressions, which are assigned an operation on each domain. When the domain is the domain of absolutely everything, which LOG-08 argues is a coherent object of quantification, the criterion concerns permutations of everything there is, which is the form in which Tarski stated it. Sher's version adds that the assignment of operations to domains must respect bijections between domains. We adopt Principle~\ref{p:crit} as stated and record in Corollary~\ref{c:iso} that the operations with which we are concerned satisfy the stronger condition as well.
+
+\begin{definition}\label{d:card}
+For predicates $X$ on $D$ and $Y$ on $E$, there are \emph{at most as many} $X$s as $Y$s, written $|X| \leq |Y|$, if some function maps $X$ into $Y$ injectively. $X$ and $Y$ are \emph{equinumerous}, $|X| = |Y|$, if there are maps from $X$ into $Y$ and from $Y$ into $X$ that are inverse to each other.
+\end{definition}
+
+\begin{definition}\label{d:most}
+\emph{Most $A$s are $B$s}, written $\mathrm{most}(A, B)$, if $|A \setminus B| \leq |A \cap B|$ and not $|A \cap B| \leq |A \setminus B|$.
+\end{definition}
+
+Definition~\ref{d:most} is the reading of \enquote{most} as \enquote{more than half} in \citet{BarwiseCooper1981}, stated so that it makes sense on infinite domains without appeal to the axiom of choice: there are more $A$s that are $B$s than $A$s that are not. On finite domains it says that the number of $A$s that are $B$s exceeds the number of $A$s that are not, which is the proportional reading. The vaguer uses of \enquote{most}, on which most of the class passed only if substantially more than half did, are discussed in Section~\ref{s:obj}.
+
+\section{Results}\label{s:results}
+
+\begin{proposition}\label{p:standard}
+(i) Identity is permutation invariant. (ii) The universal and existential quantifiers are permutation invariant. (iii) Invariance is closed under conjunction, disjunction and negation of quantifiers, and every operation with a constant value is invariant.
+\end{proposition}
+
+\begin{proof}
+(i) If $a = b$ then $\pi a = \pi b$; conversely, if $\pi a = \pi b$, applying $\pi^{-1}$ gives $a = b$. (ii) Everything is in $A$ if and only if everything is in $\pi^{-1}[A]$, since $\pi$ is onto; something is in $A$ if and only if something is in $\pi^{-1}[A]$, for the same reason. (iii) If $Q$ and $R$ take the same values on $A$ and on $\pi^{-1}[A]$, so do their conjunction, their disjunction and the negation of each.
+\end{proof}
+
+\begin{proposition}\label{p:transport}
+Cardinal comparison depends only on the cardinalities compared: if $|X| = |X'|$ and $|Y| = |Y'|$, then $|X| \leq |Y|$ if and only if $|X'| \leq |Y'|$, whether or not $X$, $X'$, $Y$ and $Y'$ are predicates on the same domain.
+\end{proposition}
+
+\begin{proof}
+Equinumerosity yields injections in both directions, and injections compose. Given an injection of $X$ into $Y$, compose the injection of $X'$ into $X$, the given injection, and the injection of $Y$ into $Y'$. The converse is symmetric.
+\end{proof}
+
+\begin{lemma}\label{l:image}
+Every predicate is equinumerous with its image under a bijection.
+\end{lemma}
+
+\begin{proof}
+The bijection and its inverse restrict to mutually inverse maps between $X$ and its image.
+\end{proof}
+
+\begin{theorem}\label{t:card}
+\enquote{Most} depends only on the cardinalities of $A \cap B$ and $A \setminus B$: if $|A \cap B| = |A' \cap B'|$ and $|A \setminus B| = |A' \setminus B'|$, then $\mathrm{most}(A, B)$ if and only if $\mathrm{most}(A', B')$, for predicates $A, B$ on any domain $D$ and $A', B'$ on any domain $E$.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{d:most}, $\mathrm{most}(A, B)$ is a Boolean combination of two cardinal comparisons between $A \cap B$ and $A \setminus B$. By Proposition~\ref{p:transport}, each comparison has the same truth value as the corresponding comparison between $A' \cap B'$ and $A' \setminus B'$.
+\end{proof}
+
+\begin{corollary}\label{c:iso}
+\enquote{Most} is isomorphism invariant: for every bijection $f\colon D \to E$, $\mathrm{most}(A, B)$ if and only if $\mathrm{most}(f[A], f[B])$. In particular, it is invariant under every permutation of every domain.
+\end{corollary}
+
+\begin{proof}
+A bijection maps $A \cap B$ onto $f[A] \cap f[B]$ and $A \setminus B$ onto $f[A] \setminus f[B]$, so by Lemma~\ref{l:image} the cells are equinumerous with their images. Apply Theorem~\ref{t:card}. Permutations are the case $E = D$.
+\end{proof}
+
+\begin{corollary}\label{c:logical}
+Given Principle~\ref{p:crit}, \enquote{most} is a logical constant.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{c:iso}, it denotes an invariant operation on every domain.
+\end{proof}
+
+Corollary~\ref{c:logical} is the claim that the received view denies. Its proof uses nothing about \enquote{most} except that it is defined by comparing the sizes of the two cells $A \cap B$ and $A \setminus B$. The same proof shows that \enquote{more than two thirds}, \enquote{at least as many \ldots as}, \enquote{infinitely many} and \enquote{exactly as many \ldots as} are logical constants. The next result shows that this is no accident: for quantifiers on one predicate, dependence on cardinalities is exactly what invariance amounts to.
+
+\begin{theorem}\label{t:char}
+A quantifier $Q$ of type $\langle 1\rangle$ on a domain $D$ is permutation invariant if and only if $Q(A) = Q(A')$ whenever $|A| = |A'|$ and $|D \setminus A| = |D \setminus A'|$.
+\end{theorem}
+
+\begin{proof}
+Suppose $Q$ is invariant, and let $h$ be a bijection between $A$ and $A'$ and $k$ a bijection between their complements. Define $\pi(x) = h(x)$ for $x \in A$ and $\pi(x) = k(x)$ for $x \notin A$. Then $\pi$ is a permutation of $D$, with inverse defined from the inverses of $h$ and $k$ in the same way, and $\pi[A] = A'$. By invariance, $Q(A) = Q(A')$. Conversely, suppose $Q$ depends only on the two cardinalities, and let $\pi$ be a permutation. By Lemma~\ref{l:image}, $A$ is equinumerous with $\pi^{-1}[A]$ and its complement with the complement of $\pi^{-1}[A]$, so $Q(A) = Q(\pi^{-1}[A])$.
+\end{proof}
+
+Theorem~\ref{t:char} is the one-predicate case of the classical characterization \citep{Tarski1986,vanBenthem1986}: an invariant quantifier of type $\langle 1, 1\rangle$ depends only on the cardinalities of the four cells $A \cap B$, $A \setminus B$, $B \setminus A$ and $D \setminus (A \cup B)$, and is \emph{conservative}, as natural-language determiners are, exactly when it ignores the last two. The proof of the general case is the same construction carried out on four cells instead of two. The theorem shows that the invariance criterion does not merely admit \enquote{most}: it describes the logical quantifiers as precisely the quantifiers that count.
+
+The criterion also excludes. An operation that mentions a particular object is not invariant, because a permutation can move that object.
+
+\begin{proposition}\label{p:name}
+On any domain with at least two objects $a \neq b$, the quantifier \enquote{$A$ holds of $a$} is not permutation invariant, and so, given Principle~\ref{p:crit}, is not a logical constant.
+\end{proposition}
+
+\begin{proof}
+Let $\pi$ transpose $a$ and $b$ and fix everything else. The predicate \enquote{is $a$} holds of $a$; its image under $\pi^{-1}$ is the predicate \enquote{is $b$}, which does not hold of $a$.
+\end{proof}
+
+Proposition~\ref{p:name} covers names, demonstratives used with a fixed reference, and determiners such as \enquote{every $A$ except Socrates}. It also covers membership: on a domain of sets, the relation $\in$ is not invariant under permutations that exchange two sets without exchanging their members, which is why, as \citet{Tarski1986} noted, the logical character of set theory depends on how it is formulated. Set theory with $\in$ as a primitive relation between individuals is not logic; the theory of types, in which membership is the relation between an object and a higher-type predicate, is invariant at each type.
+
+The last result concerns the operation that \citet{McGee1996} used against the criterion.
+
+\begin{proposition}\label{p:mcgee}
+Let $M$ be the quantifier that, on domains with at least two objects, is the universal quantifier, and on smaller domains is the existential quantifier. Then $M$ is permutation invariant on every domain, and so, given Principle~\ref{p:crit}, a logical constant. Moreover, $M(A)$ is definable as $(\exists x \exists y\, x \neq y \wedge \forall x A x) \vee (\neg \exists x \exists y\, x \neq y \wedge \exists x A x)$.
+\end{proposition}
+
+\begin{proof}
+The condition that the domain has at least two objects is a sentence, whose value no permutation changes. By Proposition~\ref{p:standard}, the universal and existential quantifiers are invariant and invariance is preserved by the connectives.
+\end{proof}
+
+We discuss in Section~\ref{s:obj} why Proposition~\ref{p:mcgee} is not a counterexample to Principle~\ref{p:crit}. The threshold of two objects is chosen for definiteness; the argument is the same for any threshold, finite or infinite, provided the condition on the size of the domain is expressible by an invariant sentence.
+
+\section{The received view}\label{s:received}
+
+The received view does not usually deny that \enquote{most} is invariant. It denies that invariance suffices for logicality, and it offers three reasons for drawing the line at first-order logic.
+
+\subsection{Definability}
+
+\enquote{Most} is not first-order definable \citep{BarwiseCooper1981}: no formula built from the connectives, the first-order quantifiers and identity is true in a finite model exactly when more than half of the $A$s are $B$s. This is a theorem, and we accept it. What it shows is that the first-order constants do not exhaust the invariant operations. The received view takes this as a reason to exclude \enquote{most}; it is equally a reason to regard the first-order constants as a fragment of logic rather than the whole of it. The definability result cannot decide between the two readings, because it presupposes a prior choice of the base vocabulary. A theorist who started from \enquote{most} and negation would find that the first-order quantifiers are definable from them (something is $A$ just in case most $A$s are $A$s, and everything is $A$ just in case it is not the case that most non-$A$s are non-$A$s) and would have no more reason to exclude them than the first-order theorist has to exclude \enquote{most}.
+
+\subsection{Completeness and compactness}
+
+First-order logic has a sound and complete proof system, and LOG-20 argues that this is a genuine and distinctive result. Logics with generalized quantifiers generally lack such a system: the logic with the Härtig quantifier, \enquote{there are exactly as many $A$s as $B$s}, can define finiteness and so characterize the natural numbers up to isomorphism, which makes its validities not recursively enumerable. By Lindstr\"om's theorem, any logic properly extending first-order logic loses compactness or the L\"owenheim--Skolem property \citep{Lindstrom1969}. The received view concludes that logic ends at first-order logic.
+
+The inference requires the premise that a logical consequence relation must be recursively axiomatizable, and the premise is false on the conception of consequence that the received view itself accepts. Consequence is truth-preservation under all reinterpretations of the non-logical vocabulary (LOG-06); whether a consequence relation so defined admits a complete proof system is a question about it, to be answered by proving theorems, not a condition on its being a consequence relation. The point is familiar from second-order logic, which LOG-09 argues is logic although it is incomplete. It is also familiar from first-order logic itself: restricted to finite domains, first-order validity is not recursively enumerable \citep{Trakhtenbrot1950}, and no one concludes that the first-order quantifiers become non-logical when the domain is finite. Completeness is a virtue of a logic, as decidability is a virtue of propositional logic. It is not the mark of logicality, any more than decidability is.
+
+\subsection{Inferential role}
+
+On inferentialist criteria, a logical constant is one whose meaning is given by harmonious introduction and elimination rules \citep{Prawitz1965,Dummett1991,Hacking1979}. The connectives and the first-order quantifiers have such rules; \enquote{most} does not. We do not deny that the first-order constants have a distinctive proof-theoretic character. We deny that this character is what makes them logical. The inferentialist criterion is motivated by the thought that a logical constant should be meaningful independently of any subject matter, and that its meaning should be fixed by what follows from what. Both motivations are satisfied by \enquote{most}. Its meaning is fixed independently of subject matter, since by Theorem~\ref{t:card} it is fixed by the sizes of two sets whatever their members; and its inferential role is perfectly determinate, since its consequence relation is fixed by Definition~\ref{d:most} together with the account of consequence. What \enquote{most} lacks is an inferential role that can be captured by finitely many schematic rules. That is a fact about the expressive limits of finitary proof systems, not about the meaning of \enquote{most}. Competent speakers who know that most of the passengers survived and that every passenger who survived was rescued by the crew know, by logic, that the crew rescued most of the passengers; no further information about passengers is required, and none would be relevant.
+
+\subsection{Diagnosis}
+
+The three arguments share a structure. Each identifies a property that the first-order constants have and that \enquote{most} lacks: first-order definability, a complete proof system, finitary harmonious rules. In each case the property is a property of the formal system in which the constants are embedded, not of the operations the constants denote. The invariance criterion, by contrast, is a criterion on operations, and it expresses the one feature that the received view and its critics agree logic must have: topic neutrality. A logical constant does not care which objects it is applied to. Permutation invariance is the precise statement of not caring, and \enquote{most} does not care.
+
+\section{Further cases}\label{s:cases}
+
+The criterion gives verdicts on many expressions that are not usually discussed. We record the main ones, since a criterion should be tested against the cases it was not designed for.
+
+\paragraph{Numerical determiners.} \enquote{Exactly three}, \enquote{at least seven} and \enquote{an even number of} depend only on the cardinality of $A \cap B$, and so are logical constants. The first two are first-order definable with identity; the third is not, even on finite domains. The received view must therefore classify \enquote{exactly three} as logical and \enquote{an even number of} as not, although they have the same subject matter, the size of a set, and differ only in arithmetic complexity.
+
+\paragraph{Many and few.} \enquote{Many} and \enquote{few} are context-dependent: whether many of the students passed depends on a contextually supplied standard, often a proportion or a comparison with expectation. Once the context fixes the standard as a cardinality or a proportion, the resulting operation is invariant. When the standard is fixed by comparison with a particular class, as in \enquote{many students passed, compared with last year}, the operation mentions particular objects and is not invariant. The criterion therefore classifies the context-relative uses separately, which we take to be correct.
+
+\paragraph{Definite descriptions.} On Russell's analysis, \enquote{the $A$ is $B$} is true if and only if exactly one thing is $A$ and it is $B$; as a quantifier of type $\langle 1, 1\rangle$ it holds of $A$ and $B$ when $|A| = 1$ and $|A \setminus B| = 0$, and it is invariant. Possessive and demonstrative determiners such as \enquote{John's} and \enquote{that} are not, by Proposition~\ref{p:name}.
+
+\paragraph{Only.} \enquote{Only $A$s are $B$s} is \enquote{every $B$ is an $A$}, and is invariant. It is not conservative in its first argument, which is why it is not a determiner in the strict sense; logicality and conservativity are independent properties.
+
+\paragraph{Equinumerosity.} The relation that holds between two predicates when they are equinumerous is invariant, by Proposition~\ref{p:transport}. It is the relation on the right-hand side of Hume's principle, and its logicality is one ingredient of the claim, defended in MTH-04, that Hume's principle is logical in the relevant sense. The number operator on the left-hand side raises a different question, since it takes predicates to objects, and we do not address it here.
+
+\paragraph{Second-order quantifiers.} The quantifiers over all predicates on the domain are invariant, since a permutation of the domain induces a permutation of the predicates. This is the argument of LOG-09 that second-order logic is logic, and the two theses support each other: \enquote{most} is definable in second-order logic, and second-order logic is the natural home of the invariant operations.
+
+\paragraph{Modal operators.} Necessity and possibility do not act on the domain of objects but on propositions or sets of worlds. If the criterion is extended to permutations of worlds, the operators of the modal logic S5 are invariant, and those of weaker logics, defined by a particular accessibility relation, are invariant only under permutations that preserve that relation. We regard the extension as natural but do not rely on it; the thesis of this manuscript concerns the extensional constants.
+
+\paragraph{Truth functions.} All sixteen binary truth functions are invariant, since they do not act on objects at all. Most of them correspond to no word of any natural language. That they are nevertheless logical, on every view, is relevant to McGee's objection.
+
+\section{Objections and replies}\label{s:obj}
+
+\begin{objection}[McGee's overgeneration]\label{o:mcgee}
+By Proposition~\ref{p:mcgee}, the criterion counts as logical an operation that means \enquote{every} on large domains and \enquote{some} on small ones. Such an operation is not logical. Whether it means one thing or the other depends on how many things there are, and how many things there are is not settled by logic. Invariance is therefore at most necessary for logicality \citep{McGee1996}.
+\end{objection}
+
+\begin{reply}
+We accept that the operation is gerrymandered and deny that it is non-logical. Three considerations support this.
+
+First, the operation is defined from the first-order constants alone, by Proposition~\ref{p:mcgee}. If its definiens is a logical formula, so is the operation, unless logicality is not closed under definition, which no party to the debate maintains. The objection therefore cannot be met by restricting invariance, since any restriction that excludes McGee's operation must either exclude one of the first-order constants or deny that definitions from logical constants yield logical operations.
+
+Second, the intuition that the operation is not logical is an intuition that it is not a natural \emph{word}: no language lexicalizes it, and a speaker who used it would be doing something strange. But logicality is not naturalness. Of the sixteen binary truth functions, most are lexicalized in no language, and all are logical. What makes an operation logical is that it is insensitive to the identity of the objects to which it applies, and McGee's operation is insensitive in exactly this way: whatever the domain, its value on a predicate depends only on how many things satisfy it and how many do not.
+
+Third, the claim that the operation \enquote{depends on how many things there are} misdescribes it. Its value depends on the size of the domain, and the size of the domain is a fact of exactly the kind that first-order logic already registers: the sentence \enquote{there are at least two things} is a first-order sentence built from logical constants alone. Its truth value is not settled by logic, but neither is the truth value of \enquote{there is something $A$}. Logic settles which sentences follow from which, not the truth values of the sentences themselves; and the consequences of sentences containing McGee's operation are settled by its definition.
+\end{reply}
+
+\begin{objection}[Feferman's overgeneration]
+If every cardinality quantifier is logical, then logic contains set theory. The sentence of second-order logic, or of the logic with suitable cardinality quantifiers, that expresses the continuum hypothesis is either a logical truth or the negation of one, and which it is depends on a question that the axioms of set theory leave open. Logic should not be hostage to set theory in this way, and a criterion that makes it so is wrong \citep{Feferman1999}.
+\end{objection}
+
+\begin{reply}
+The objection runs together two questions: which operations are logical, and which truths involving those operations we are in a position to know. The criterion answers the first. That a logical truth may be hard or impossible to establish by the methods currently available does not show that it is not a logical truth, any more than the undecidability of first-order validity shows that first-order validities are not logical truths. The dependence that Feferman describes is a dependence of our \emph{knowledge} of certain logical truths on set-theoretic knowledge; it is not a dependence of their \emph{logicality} on anything. A theorist who regards set theory as having determinate answers to its open questions will regard the corresponding sentences as having determinate logical status, and a theorist who does not will regard them as indeterminate; neither attitude bears on whether \enquote{most} is logical.
+
+Two further points. First, Feferman's alternative criterion, invariance under homomorphisms, excludes not only \enquote{most} but identity, and so makes \enquote{there are at least two things} non-logical. The price is high, and it is paid to avoid a consequence that, as we have argued, is no defect. Second, the objection has little bearing on \enquote{most} itself. On finite domains, Definition~\ref{d:most} is a matter of counting, and no question of set theory arises. On infinite domains, the comparison of two cardinalities is settled by the existence of injections, and Theorem~\ref{t:card} holds without the axiom of choice, as the formalization confirms.
+\end{reply}
+
+\begin{objection}[The meaning of \enquote{most}]
+The English word \enquote{most} does not mean \enquote{more than half}. \enquote{Most Americans own a car} is not made true by a bare majority, and speakers use \enquote{most} with a vague and context-sensitive threshold. The operation of Definition~\ref{d:most} may be logical, but the word is not.
+\end{objection}
+
+\begin{reply}
+We grant that the word has uses with a higher and vaguer threshold. On each precisification, the threshold is a proportion, and the resulting operation, \enquote{more than $r$ of the $A$s are $B$s} for a fixed $r$ between $1/2$ and $1$, depends only on the cardinalities of $A \cap B$ and $A \setminus B$ on finite domains and is invariant for the same reason as Theorem~\ref{t:card}. The vagueness of the word therefore concerns which logical constant it expresses, not whether it expresses one. In this respect \enquote{most} is no different from \enquote{or}, which has inclusive and exclusive uses, each of which is a logical constant.
+\end{reply}
+
+\begin{objection}[Undergeneration]
+Invariance is a property of extensions. Two expressions can have the same extension on every domain and differ in meaning, and an expression can have a logical extension while its meaning is given in non-logical terms: for instance, \enquote{the number of planets is greater than seven} is a sentence whose extension is fixed, but it is not a logical truth. A criterion on extensions cannot capture logicality, which is a feature of meaning \citep{McCarthy1981,DutilhNovaes2014}.
+\end{objection}
+
+\begin{reply}
+The second clause of Principle~\ref{p:crit} answers the example. An expression is a logical constant if it denotes an invariant operation \emph{on every domain}. \enquote{The number of planets is greater than seven} is not an operation on a domain; construed as a sentence whose truth value is fixed across domains, it is the constant True, but only because its truth value is fixed by non-logical facts about planets, and on a domain that contains no planets it is false. What is needed to exclude such cases is that the assignment of operations to domains be uniform, which is what quantifying over all domains secures. We grant that two expressions with the same invariant operation on every domain may differ in cognitive significance, as \enquote{every} and \enquote{not some \ldots not} do. Logic is concerned with what follows from what, and expressions that denote the same operation on every domain license the same consequences.
+\end{reply}
+
+\begin{objection}[Epistemology]
+Logical truths are knowable a priori by anyone who understands them. Some sentences built from generalized quantifiers are not knowable a priori by anyone, since their truth depends on hard questions about infinite cardinalities. So the generalized quantifiers are not logical.
+\end{objection}
+
+\begin{reply}
+The premise is false of first-order logic already: there are first-order logical truths whose proofs exceed any length a human could survey, and first-order validity is undecidable. The defensible version of the premise is that logical truths are knowable a priori in principle, by reasoning that does not appeal to observation; and the truths of logic with \enquote{most} satisfy this as well as those of first-order logic do, since their truth depends only on facts about cardinalities, which are not learned from observation. \citet{Sagi2015} examines the modal and epistemic arguments against the invariance criterion and finds that they do not succeed.
+\end{reply}
+
+\section{What the result does not establish}
+
+Corollary~\ref{c:logical} is conditional on Principle~\ref{p:crit}, and the formal results establish what follows from the criterion, not the criterion itself. Our case for the criterion is the argument of Sections~\ref{s:received} and~\ref{s:obj}: it expresses topic neutrality, and the alternatives either presuppose a choice of formal system or exclude constants that every party regards as logical.
+
+The result does not establish that the consequence relation of a logic with generalized quantifiers is the one true logic in any sense that would compete with LOG-02. LOG-02 holds that the one true logic is classical, and the logic of \enquote{most} is classical: it is bivalent, it validates excluded middle and all classical inferences among its sentences, and it extends the classical consequence relation conservatively for the first-order vocabulary. Adding logical constants enlarges the vocabulary of classical logic; it does not revise any classical principle.
+
+Nor does it establish that the invariance criterion settles the status of every expression of natural language. Expressions whose semantics is context-dependent, intensional or non-extensional fall under the criterion only after their contribution is represented as an operation on a domain, and the representation may itself be contested.
+
+Finally, the result does not show that \enquote{most} is first-order logical in the sense of being expressible in first-order logic; it is not \citep{BarwiseCooper1981}. Our thesis is that this shows the limits of first-order logic, not the limits of logic.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/LOG/LOG_16.lean} works over arbitrary types as domains, so that its results hold for finite and infinite domains alike. A bijection is a pair of mutually inverse functions (Definition~\ref{d:perm}); predicates are functions into \texttt{Prop}; invariance for relations, quantifiers of type $\langle 1\rangle$ and quantifiers of type $\langle 1, 1\rangle$ is defined by composition with a permutation (Definitions~\ref{d:ops} and~\ref{d:inv}). Cardinal comparison and equinumerosity are defined by injections and by pairs of mutually inverse maps (Definition~\ref{d:card}), and \enquote{most} as in Definition~\ref{d:most}. The invariance criterion, Principle~\ref{p:crit}, is stated as two axioms about primitive predicates \texttt{LogicalConstant1} and \texttt{LogicalConstant11}, one for each type of quantifier. The module proves Propositions~\ref{p:standard} and~\ref{p:transport}, Lemma~\ref{l:image}, Theorem~\ref{t:card}, Corollaries~\ref{c:iso} and~\ref{c:logical}, Theorem~\ref{t:char} and Propositions~\ref{p:name} and~\ref{p:mcgee}. The main statements are these.
+
+\begin{lstlisting}
+theorem most_cardinal {D E : Type} (A B : D → Prop) (A' B' : E → Prop)
+    (hin : Equinum (fun x => A x ∧ B x) (fun y => A' y ∧ B' y))
+    (hout : Equinum (fun x => A x ∧ ¬ B x) (fun y => A' y ∧ ¬ B' y)) :
+    most A B ↔ most A' B'
+
+theorem most_invariant (D : Type) : Inv11 (@most D)
+
+theorem most_is_logical (D : Type) : LogicalConstant11 (@most D)
+
+theorem inv1_iff_cardinal {D : Type} (Q : (D → Prop) → Prop) :
+    Inv1 Q ↔ ∀ A A' : D → Prop, Equinum A A' →
+      Equinum (fun x => ¬ A x) (fun x => ¬ A' x) → (Q A ↔ Q A')
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.LOG_16.most_invariant' depends on axioms: [propext]
+'Philosophy.LOG_16.most_is_logical' depends on axioms: [propext,
+ Philosophy.LOG_16.LogicalConstant11,
+ Philosophy.LOG_16.criterion11]
+'Philosophy.LOG_16.inv1_iff_cardinal' depends on axioms: [propext,
+ Classical.choice, Quot.sound]
+'Philosophy.LOG_16.mcgee_invariant' depends on axioms:
+ [Philosophy.LOG_16.LogicalConstant1, Philosophy.LOG_16.criterion1]
+\end{lstlisting}
+
+The invariance of \enquote{most} depends only on propositional extensionality, a standard principle of Lean's logic: in particular, it does not use the axiom of choice, which confirms the remark in the reply to Feferman's objection. The characterization of Theorem~\ref{t:char} uses classical reasoning, through \texttt{Classical.choice}, to define the permutation by cases on membership in $A$. The only axioms specific to the problem are the primitive predicates of logical constancy and the two instances of Principle~\ref{p:crit}. The module does not prove that \enquote{most} is not first-order definable, which is the theorem of \citet{BarwiseCooper1981} that the manuscript cites.
+
+\section{Conclusion}
+
+The logical constants are the operations invariant under all permutations of the domain. Invariance is the exact form of topic neutrality, it includes the first-order constants and excludes every operation that mentions a particular object, and for quantifiers it coincides with dependence on cardinalities alone. \enquote{Most} depends only on the sizes of $A \cap B$ and $A \setminus B$, on every domain, and is therefore a logical constant. The received view excludes it on the basis of properties of first-order proof systems, which are virtues of a logic but not marks of logicality. McGee's operation is logical and unnatural; Feferman's concern is about the knowability of certain logical truths, not about the logicality of the operations they contain.
+
+\begin{thebibliography}{99}\small
+\bibitem[Barwise and Cooper(1981)]{BarwiseCooper1981} Barwise, J. and Cooper, R. (1981). Generalized quantifiers and natural language. \emph{Linguistics and Philosophy}, 4(2), 159--219.
+\bibitem[Bonnay(2008)]{Bonnay2008} Bonnay, D. (2008). Logicality and invariance. \emph{Bulletin of Symbolic Logic}, 14(1), 29--68.
+\bibitem[Bonnay and Westerst{\aa}hl(2012)]{BonnayWesterstahl2012} Bonnay, D. and Westerst{\aa}hl, D. (2012). Consequence mining: Constants versus consequence relations. \emph{Journal of Philosophical Logic}, 41.
+\bibitem[Dummett(1991)]{Dummett1991} Dummett, M. (1991). \emph{The Logical Basis of Metaphysics}. Harvard University Press.
+\bibitem[Dutilh Novaes(2014)]{DutilhNovaes2014} Dutilh Novaes, C. (2014). The undergeneration of permutation invariance as a criterion for logicality. \emph{Erkenntnis}, 79.
+\bibitem[Feferman(1999)]{Feferman1999} Feferman, S. (1999). Logic, logics, and logicism. \emph{Notre Dame Journal of Formal Logic}, 40(1), 31--54.
+\bibitem[Gentzen(1935)]{Gentzen1935} Gentzen, G. (1935). Untersuchungen \"uber das logische Schlie{\ss}en. \emph{Mathematische Zeitschrift}, 39, 176--210 and 405--431.
+\bibitem[G\'omez-Torrente(2002)]{GomezTorrente2002} G\'omez-Torrente, M. (2002). The problem of logical constants. \emph{Bulletin of Symbolic Logic}, 8(1), 1--37.
+\bibitem[Griffiths and Paseau(2022)]{GriffithsPaseau2022} Griffiths, O. and Paseau, A.~C. (2022). \emph{One True Logic: A Monist Manifesto}. Oxford University Press.
+\bibitem[Hacking(1979)]{Hacking1979} Hacking, I. (1979). What is logic? \emph{The Journal of Philosophy}, 76(6), 285--319.
+\bibitem[Keenan and Stavi(1986)]{KeenanStavi1986} Keenan, E.~L. and Stavi, J. (1986). A semantic characterization of natural language determiners. \emph{Linguistics and Philosophy}, 9(3), 253--326.
+\bibitem[Klein(1872)]{Klein1872} Klein, F. (1872). \emph{Vergleichende Betrachtungen \"uber neuere geometrische Forschungen}. Erlangen: Deichert.
+\bibitem[Lindenbaum and Tarski(1935)]{LindenbaumTarski1935} Lindenbaum, A. and Tarski, A. (1935). \"Uber die Beschr\"anktheit der Ausdrucksmittel deduktiver Theorien. \emph{Ergebnisse eines mathematischen Kolloquiums}, 7, 15--22.
+\bibitem[Lindstr\"om(1966)]{Lindstrom1966} Lindstr\"om, P. (1966). First order predicate logic with generalized quantifiers. \emph{Theoria}, 32(3), 186--195.
+\bibitem[Lindstr\"om(1969)]{Lindstrom1969} Lindstr\"om, P. (1969). On extensions of elementary logic. \emph{Theoria}, 35(1), 1--11.
+\bibitem[MacFarlane(2000)]{MacFarlane2000} MacFarlane, J. (2000). \emph{What Does It Mean to Say That Logic Is Formal?} PhD dissertation, University of Pittsburgh.
+\bibitem[Mautner(1946)]{Mautner1946} Mautner, F.~I. (1946). An extension of Klein's Erlanger Program: Logic as invariant-theory. \emph{American Journal of Mathematics}, 68(3), 345--384.
+\bibitem[McCarthy(1981)]{McCarthy1981} McCarthy, T. (1981). The idea of a logical constant. \emph{The Journal of Philosophy}, 78(9), 499--523.
+\bibitem[McGee(1996)]{McGee1996} McGee, V. (1996). Logical operations. \emph{Journal of Philosophical Logic}, 25(6), 567--580.
+\bibitem[Mostowski(1957)]{Mostowski1957} Mostowski, A. (1957). On a generalization of quantifiers. \emph{Fundamenta Mathematicae}, 44, 12--36.
+\bibitem[Peacocke(1976)]{Peacocke1976} Peacocke, C. (1976). What is a logical constant? \emph{The Journal of Philosophy}, 73(9), 221--240.
+\bibitem[Peters and Westerst{\aa}hl(2006)]{PetersWesterstahl2006} Peters, S. and Westerst{\aa}hl, D. (2006). \emph{Quantifiers in Language and Logic}. Oxford University Press.
+\bibitem[Prawitz(1965)]{Prawitz1965} Prawitz, D. (1965). \emph{Natural Deduction: A Proof-Theoretical Study}. Almqvist \& Wiksell.
+\bibitem[Quine(1970)]{Quine1970} Quine, W.~V.~O. (1970). \emph{Philosophy of Logic}. Prentice-Hall.
+\bibitem[Sagi(2015)]{Sagi2015} Sagi, G. (2015). The modal and epistemic arguments against the invariance criterion for logical terms. \emph{The Journal of Philosophy}, 112(3).
+\bibitem[Sher(1991)]{Sher1991} Sher, G. (1991). \emph{The Bounds of Logic: A Generalized Viewpoint}. MIT Press.
+\bibitem[Tarski(1936)]{Tarski1936} Tarski, A. (1936). \"Uber den Begriff der logischen Folgerung. \emph{Actes du Congr\`es International de Philosophie Scientifique}, 7, 1--11. English translation: On the concept of logical consequence, in \emph{Logic, Semantics, Metamathematics}, Clarendon Press, 1956.
+\bibitem[Tarski(1986)]{Tarski1986} Tarski, A. (1986). What are logical notions? Edited by J.~Corcoran. \emph{History and Philosophy of Logic}, 7(2), 143--154.
+\bibitem[Trakhtenbrot(1950)]{Trakhtenbrot1950} Trakhtenbrot, B.~A. (1950). The impossibility of an algorithm for the decision problem for finite domains. \emph{Doklady Akademii Nauk SSSR}, 70, 569--572. In Russian.
+\bibitem[van Benthem(1986)]{vanBenthem1986} van Benthem, J. (1986). \emph{Essays in Logical Semantics}. Reidel.
+\bibitem[Westerst{\aa}hl(1985)]{Westerstahl1985} Westerst{\aa}hl, D. (1985). Logical constants in quantifier languages. \emph{Linguistics and Philosophy}, 8(4), 387--413.
+\bibitem[Woods(2016)]{Woods2016} Woods, J. (2016). Characterizing invariance. \emph{Ergo}, 3.
+\end{thebibliography}
+
+\end{document}

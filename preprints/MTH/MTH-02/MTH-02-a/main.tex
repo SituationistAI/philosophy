@@ -1,0 +1,196 @@
+\documentclass{situationist-preprint}
+
+\title{Benacerraf's Problem Answered}
+\msid{MTH-02-a}
+\msfamily{MTH-02}
+\msdiscipline{Philosophy of Mathematics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MTH/MTH\_02.lean}
+\mskeywords{Benacerraf's dilemma; causal theory of knowledge; reliability; safety; mathematical platonism; Field's challenge}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+If numbers are abstract objects, they do not enter into causal relations; if knowledge requires a causal relation between knower and known, there is no knowledge of numbers. Benacerraf concluded that the platonist owes an epistemology that she cannot supply. We argue that the dilemma rests on a requirement that is too strong, and that knowledge of abstract objects is acquired through reliable belief-forming methods. Using the analysis of knowledge as safe, justified, true belief, we prove that a justified belief formed by a method all of whose outputs in close cases are true is knowledge, and that derivation by truth-preserving rules from true axioms is such a method. Given that some arithmetical belief is justified and formed by derivation, it follows that there is knowledge of abstract objects without causal contact, and that the causal requirement is false. We then answer Field's reformulation of the problem as a demand to explain the correlation between mathematical belief and mathematical truth, and we show that the demand, once made precise, is met. The argument is formalized in Lean; its premises are visible as axioms.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Benacerraf1973} posed a dilemma for the philosophy of mathematics. A semantics for mathematical language should be continuous with the semantics of the rest of language: \enquote{there are at least three perfect numbers greater than 17} should have the same logical form as \enquote{there are at least three large cities older than New York}, and so should be true only if there are numbers. An epistemology for mathematics should be continuous with the epistemology of the rest of knowledge. Benacerraf assumed that the best epistemology available was a causal one, on which knowing that $p$ requires a causal relation between the knower and the facts that make $p$ true \citep{Goldman1967}. Numbers, on the standard semantics, are abstract objects; abstract objects do not enter into causal relations; so the standard semantics makes mathematical knowledge impossible. A semantics that identified mathematical truth with provability would make knowledge possible at the cost of the continuity.
+
+MTH-01 argues that numbers exist and are abstract objects. The first horn of the dilemma is therefore the one we hold, and the question is how the epistemology is to be supplied. The literature contains four responses. The first is to reject the causal theory, as \citet{Steiner1973} did soon after the dilemma was posed, on the ground that it is false of knowledge in general. The second is to find causal contact after all: \citet{Maddy1990} argued that we perceive sets of physical objects, so that some knowledge of sets is perceptual. The third, due to \citet{Field1989}, reformulates the problem without the causal theory: the platonist must explain the reliability of mathematicians' beliefs, that is, the fact that when mathematicians believe a mathematical proposition it is usually true; and Field argued that this cannot be explained if the objects are causally isolated from us. The fourth is the neo-Fregean response of \citet{HaleWright2002}, on which knowledge of numbers is grounded in knowledge of Hume's principle, which is in turn grounded in our grasp of the concept of number. \citet{Linnebo2006} distinguishes the variants of the challenge; \citet{ClarkeDoane2017} argues that, on its most natural reading, it is a demand to show that our mathematical beliefs are safe.
+
+We defend a version of the first response that incorporates what is right in the third and fourth. The causal requirement is false, and its failure is not special to mathematics. What knowledge requires is that the belief be justified and safe; for beliefs formed by a method, safety is the reliability of the method in close cases. Derivation from true axioms by truth-preserving rules is reliable in this sense, and it is the method by which most mathematical knowledge is acquired. Field's challenge, read as a demand for safety, is met by this method, and the residual demand, to explain why we accept the axioms we do, is answered differently for different parts of mathematics.
+
+\section{Framework}
+
+We use the analysis of knowledge defended in EPI-01, with the amendment for necessary truths accepted there and stated in EPI-12: a belief is safe if, in close cases, the propositions the subject believes on the same basis are true. Since a necessary truth is true in every case, safety for beliefs in necessary truths is assessed over the range of propositions that the same basis would deliver \citep{Pritchard2005,Williamson2000}.
+
+\begin{definition}[Reliable method]\label{d:rel}
+A belief-forming method $m$ is \emph{reliable} if every proposition that $m$ delivers in close cases is true.
+\end{definition}
+
+\begin{assumption}[Safety analysis]\label{a:safe}
+If a subject believes $p$ on the basis of a method that is reliable in the sense of Definition~\ref{d:rel}, and her belief is justified, then she knows $p$.
+\end{assumption}
+
+Assumption~\ref{a:safe} is a consequence of EPI-01, on which knowledge is safe, justified, true belief: a belief formed by a reliable method is true, since the actual case is among the close ones, and it is safe, since every proposition the method delivers in close cases is true. Reliability in this sense is modal and local: it concerns the outputs of the method actually used, in cases close to the actual one, not a frequency of true outputs.
+
+\begin{definition}[Causal requirement]\label{d:cr}
+The \emph{causal requirement} holds that a subject knows $p$ only if the facts that $p$ is about stand in a causal relation to her belief that $p$.
+\end{definition}
+
+\begin{assumption}[Inertness]\label{a:inert}
+No belief stands in a causal relation to facts that concern abstract objects only.
+\end{assumption}
+
+Assumption~\ref{a:inert} is the platonist's own commitment (MTH-01), and we grant it in full. It excludes Maddy's response: if there are causal relations to sets of physical objects, they run through the physical members, and the facts about the sets as such, for instance that a set has exactly two subsets of a given kind, are not what causes the perception.
+
+\begin{definition}[Derivational method]\label{d:deriv}
+The \emph{derivational method} of arithmetic delivers, in close cases, only propositions derivable from the axioms of arithmetic by its rules of inference. A proposition is derivable if it is an axiom, or follows by a rule from propositions that are derivable.
+\end{definition}
+
+\begin{assumption}[Axioms]\label{a:ax}
+The axioms of arithmetic are true.
+\end{assumption}
+
+\begin{assumption}[Rules]\label{a:rules}
+The rules of inference of arithmetic preserve truth.
+\end{assumption}
+
+\begin{assumption}[Exercise]\label{a:ex}
+Some subject has a justified belief, formed by the derivational method, in a proposition that concerns abstract objects only.
+\end{assumption}
+
+Assumptions~\ref{a:ax} and~\ref{a:rules} are the substantive premises. Assumption~\ref{a:rules} follows from the correctness of classical logic (LOG-02), together with the claim that second-order logic is logic (LOG-09). Assumption~\ref{a:ax} is supported in two ways. EPI-12 argues that Hume's principle is constitutive of the concept of cardinal number, that the concept is not defective, and that the axioms of second-order arithmetic follow from it; and MTH-01 argues that the indispensability of arithmetic to science establishes the existence of numbers, so that the axioms, which describe them, are true. Assumption~\ref{a:ex} is a matter of record: anyone who has derived that there is a prime between 10 and 20, and believes it on that basis, satisfies it.
+
+\section{The argument}
+
+\begin{lemma}[Derivation preserves truth]\label{l:deriv}
+Every proposition derivable from true axioms by truth-preserving rules is true.
+\end{lemma}
+
+\begin{proof}
+By induction on derivations. An axiom is true by hypothesis. If $c$ follows by a rule from $a$ and $b$, and $a$ and $b$ are true by the induction hypothesis, then $c$ is true, since the rule preserves truth.
+\end{proof}
+
+\begin{theorem}[Reliability suffices]\label{t:rel}
+If a subject's belief that $p$ is justified and formed by a reliable method, she knows $p$, and $p$ is true.
+\end{theorem}
+
+\begin{proof}
+Knowledge follows by Assumption~\ref{a:safe}. The belief is among the method's deliveries in a close case, namely the actual one, and so is true by Definition~\ref{d:rel}.
+\end{proof}
+
+\begin{corollary}\label{c:deriv}
+The derivational method of arithmetic is reliable.
+\end{corollary}
+
+\begin{proof}
+By Definition~\ref{d:deriv}, every proposition it delivers in a close case is derivable from the axioms by the rules. By Assumptions~\ref{a:ax} and~\ref{a:rules} and Lemma~\ref{l:deriv}, every such proposition is true.
+\end{proof}
+
+\begin{proposition}[Acausal knowledge]\label{p:acausal}
+Some subject knows a truth that concerns abstract objects only, and her belief stands in no causal relation to the facts it concerns.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:ex}, some subject has a justified belief, formed by the derivational method, in a proposition $p$ concerning abstract objects only. By Corollary~\ref{c:deriv} and Theorem~\ref{t:rel}, she knows $p$. By Assumption~\ref{a:inert}, her belief stands in no causal relation to the facts $p$ concerns.
+\end{proof}
+
+\begin{theorem}[Main result]\label{t:main}
+The causal requirement is false.
+\end{theorem}
+
+\begin{proof}
+Immediate from Proposition~\ref{p:acausal} and Definition~\ref{d:cr}.
+\end{proof}
+
+The proof does not deny that knowledge requires a connection between belief and truth. It locates the connection in the method. For beliefs about concrete particulars the connection is typically causal, because perception is reliable only by being causally sensitive to what it represents; for beliefs about abstract objects it is supplied by the truth of the starting points and the truth-preservation of the steps.
+
+That the causal requirement is too strong can also be seen without mathematics, which is why its rejection is not special pleading. We know that there are no elephants in the room, though absences do not cause beliefs; we know that all emeralds are colored, though the general fact, as distinct from its instances, is not a cause of anything; and we know logical truths, such as that whatever is red is red, whose truth is not the effect of any event \citep{Steiner1973}. \citet[\S2.4]{Lewis1986} made the related point that a necessary truth cannot depend counterfactually on anything, so that any causal or counterfactual condition on knowledge must be restricted to contingent matters, and that the restriction leaves mathematical knowledge untouched. 
+
+\section{Field's challenge}
+
+\citet{Field1989} granted that the causal theory is false and restated the problem. Mathematicians' beliefs are highly correlated with the mathematical facts: when a mathematician accepts a mathematical sentence, it is usually true. The platonist must explain the correlation. Since the facts are causally isolated from the mathematicians, the explanation cannot run from the facts to the beliefs; and since the beliefs do not make the facts, it cannot run the other way. Field concluded that the correlation is inexplicable, and that this undermines belief in the facts.
+
+The challenge has three readings. On the first, it asks why mathematicians' beliefs counterfactually depend on the facts: why, if the facts had been different, the beliefs would have been different. Since mathematical truths are necessary, the antecedent is impossible, and the counterfactual is either trivially true or ill-posed \citep{ClarkeDoane2017}. On the second, it asks why mathematicians' beliefs are safe: why they could not easily have had false mathematical beliefs. On the third, it asks for an explanation of why we accept the particular axioms we accept.
+
+On the second reading, Corollary~\ref{c:deriv} answers the challenge for every belief formed by derivation from accepted axioms. A mathematician who derives a theorem could not easily have believed a falsehood by the same method. The correlation Field asks about is, for theorems, the correlation between derivability and truth, and Lemma~\ref{l:deriv} explains it. The explanation is not causal, but nothing in Field's restatement requires it to be.
+
+On the third reading, the challenge reduces to the question of how the axioms are known, and here the answer differs with the part of mathematics in question. For arithmetic, EPI-12 argues that the axioms are derivable from Hume's principle, which is constitutive of the concept of number, by rules constitutive of the logical concepts, so that the acceptance of the axioms is itself an output of a reliable method. The correlation between accepting Hume's principle and its truth is explained by the fact that the concept refers to whatever makes its constitutive rules truth-preserving, and the risk that the concept is defective, as the naive concept of set was, is excluded by the independent consideration that MTH-01 supplies. For set theory beyond what is conceptually grounded, EPI-12 argues that intellectual seemings alone do not yield knowledge. The axioms of strong set theory, so far as they are known, are known by their consequences, including consequences for arithmetic and analysis known independently, and through the indispensability of the mathematics they underwrite (MTH-01). Such methods are reliable to the extent that the consequences are checked; the abandonment of naive comprehension when its consequences proved inconsistent is an instance of the checking.
+
+\section{Objections and replies}
+
+\begin{objection}[Begging the question]\label{o:beg}
+Assumption~\ref{a:ax} asserts that the axioms are true. That is what the skeptic doubts. An epistemology that assumes the truth of its starting points does not answer the skeptic.
+\end{objection}
+
+\begin{reply}
+Benacerraf's problem is not skepticism about mathematics. It is the charge that, if platonism is true, mathematical knowledge is impossible, so that the platonist's semantics and epistemology are inconsistent. To answer that charge it is enough to show that, if the platonist's claims are true, the conditions on knowledge are met. Every account of perceptual knowledge likewise assumes that perception is of real objects. The skeptic who doubts the axioms is answered by EPI-12 and MTH-01.
+\end{reply}
+
+\begin{objection}[Insensitivity]
+Our mathematical beliefs would be exactly as they are if there were no numbers. A belief that would be held whether or not its subject matter existed cannot be knowledge of that subject matter \citep{Field1989}.
+\end{objection}
+
+\begin{reply}
+If numbers exist necessarily, the counterfactual has an impossible antecedent; on the standard semantics it is vacuously true and tells against no belief in particular. More importantly, sensitivity is not a condition on knowledge. It fails for knowledge that one's belief is not false and for inductive knowledge, and EPI-01 rejects it in favor of safety for exactly these reasons \citep{Sosa1999}. Safety is satisfied, by Corollary~\ref{c:deriv}.
+\end{reply}
+
+\begin{objection}[The faculty is mysterious]
+Even if derivation is reliable, the acceptance of axioms rests on a faculty for which no naturalistic account is given. The platonist has replaced a causal mystery with a faculty mystery.
+\end{objection}
+
+\begin{reply}
+For arithmetic, the faculty is concept possession: being disposed to infer by Hume's principle is no more mysterious than being disposed to infer by conjunction elimination \citep{HaleWright2002}. For set theory, the methods are inference to the best explanation and the checking of consequences. MTE-05 holds that the methods by which mathematical knowledge is acquired form a faculty unlike ordinary perception. That is consistent with our account: what is unlike perception is the absence of causal contact, and what makes the faculty reliable is not mysterious.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish that platonism is true; MTH-01 argues for that. It does not establish that the axioms of strong set theory are known, nor that derivation is the only route to mathematical knowledge: testimony and computation also yield it, by being reliable in close cases. And it is conditional on the safety analysis of knowledge; a theorist who rejects Assumption~\ref{a:safe} in favor of the causal requirement must also reject the knowledge of absences, generalizations and logical truths listed in Section~3.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MTH/MTH_02.lean} formalizes Definitions~\ref{d:rel}--\ref{d:deriv}, Lemma~\ref{l:deriv}, Theorem~\ref{t:rel}, Corollary~\ref{c:deriv}, Proposition~\ref{p:acausal} and Theorem~\ref{t:main}. Propositions, subjects, methods, truth, justification, knowledge, causal linkage and being about abstract objects are primitives. Derivability is an inductive predicate, and Lemma~\ref{l:deriv} is proved by induction on it, using no axioms beyond the primitives \texttt{Pn} and \texttt{Tr}. The main statements are these.
+
+\begin{lstlisting}
+theorem acausal_knowledge :
+    ∃ s p, AboutAbstracta p ∧ Knows s p ∧ ¬ CausallyLinked s p
+theorem causal_requirement_false : ¬ CausalRequirement
+\end{lstlisting}
+
+Both depend on the same axioms:
+
+\begin{lstlisting}
+'Philosophy.MTH_02.causal_requirement_false' depends on axioms:
+ [AboutAbstracta, ArAx, ArR, BelievesBy, CausallyLinked,
+  Delivers, Justified, Knows, Method, Pn, Subj, Tr,
+  axioms_true, belief_delivered, deriv, deriv_delivers,
+  derivational_belief, inertness, rules_preserve,
+  safety_analysis]
+\end{lstlisting}
+
+(The prefix \texttt{Philosophy.MTH\_02.} is omitted.) Apart from the primitives, the axioms are the philosophical premises: \texttt{safety\_analysis} is Assumption~\ref{a:safe}, \texttt{belief\_delivered} says that a belief formed by a method is among its deliveries, \texttt{inertness} is Assumption~\ref{a:inert}, \texttt{deriv\_delivers} is Definition~\ref{d:deriv}, and \texttt{axioms\_true}, \texttt{rules\_preserve} and \texttt{derivational\_belief} are Assumptions~\ref{a:ax}, \ref{a:rules} and~\ref{a:ex}. No classical axiom is used: the argument is constructively valid.
+
+\section{Conclusion}
+
+Benacerraf's dilemma rests on the causal requirement, which is false: it excludes knowledge of absences, generalizations and logical truths, and the arithmetical knowledge we have. Knowledge requires a justified belief formed by a method that could not easily have produced a falsehood. Derivation from true axioms by truth-preserving rules is such a method, and through it we know objects with which we have no causal contact. Field's reformulation is met by the same method, and by the conceptual grounding of arithmetic and the consequence-checking that supports the rest.
+
+\begin{thebibliography}{99}\small
+\bibitem[Benacerraf(1973)]{Benacerraf1973} Benacerraf, P. (1973). Mathematical truth. \emph{The Journal of Philosophy}, 70(19), 661--679.
+\bibitem[Clarke-Doane(2017)]{ClarkeDoane2017} Clarke-Doane, J. (2017). What is the Benacerraf problem? In F. Pataut (ed.), \emph{Truth, Objects, Infinity: New Perspectives on the Philosophy of Paul Benacerraf}, Springer.
+\bibitem[Field(1989)]{Field1989} Field, H. (1989). \emph{Realism, Mathematics and Modality}. Blackwell.
+\bibitem[Goldman(1967)]{Goldman1967} Goldman, A.~I. (1967). A causal theory of knowing. \emph{The Journal of Philosophy}, 64(12), 357--372.
+\bibitem[Hale and Wright(2002)]{HaleWright2002} Hale, B. and Wright, C. (2002). Benacerraf's dilemma revisited. \emph{European Journal of Philosophy}, 10(1), 101--129.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Linnebo(2006)]{Linnebo2006} Linnebo, {\O}. (2006). Epistemological challenges to mathematical platonism. \emph{Philosophical Studies}, 129(3), 545--574.
+\bibitem[Maddy(1990)]{Maddy1990} Maddy, P. (1990). \emph{Realism in Mathematics}. Oxford University Press.
+\bibitem[Pritchard(2005)]{Pritchard2005} Pritchard, D. (2005). \emph{Epistemic Luck}. Oxford University Press.
+\bibitem[Sosa(1999)]{Sosa1999} Sosa, E. (1999). How to defeat opposition to Moore. \emph{Philosophical Perspectives}, 13, 141--153.
+\bibitem[Steiner(1973)]{Steiner1973} Steiner, M. (1973). Platonism and the causal theory of knowledge. \emph{The Journal of Philosophy}, 70(3), 57--66.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and Its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

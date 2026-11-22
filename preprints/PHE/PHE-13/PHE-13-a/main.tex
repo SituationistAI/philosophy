@@ -1,0 +1,273 @@
+\documentclass{situationist-preprint}
+
+\title{The Infinite Demand of the Face}
+\msid{PHE-13-a}
+\msfamily{PHE-13}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_13.lean}
+\mskeywords{Levinas; face; infinite responsibility; ought implies can; Critchley; Derrida; the third party; justice; demandingness}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Levinas holds that the face of the other makes a demand on me that is infinite: responsibility grows as it is assumed, and no response acquits me of it. Critics object that a demand no one can meet violates the principle that ought implies can and so cannot bind, or that, if it binds, it buries the agent under obligations no one can fulfil. We argue that the demand of the face is infinite in principle and cannot be fully discharged, and that this does not undermine its normative force. The key move is to separate two things that the objection runs together: the binding force of a claim, which is a matter of its standing as a reason addressed to me, and obligation, whose failure is a fault. Ought implies can holds for obligations, not for the demand as a whole. We model the demand as an unbounded sequence of claims, each occasioned by the answer to its predecessor, and prove that every finite discharge leaves a binding claim unanswered, that the holistic version of ought implies can is therefore false, and that some binding claims are not obligations. The infinite demand thus coexists with a moderate morality of obligation. The passage from the one to the other is made by the third party, which introduces comparison and justice. The argument is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\subsection{The face}
+
+In \emph{Totality and Infinity}, Levinas describes the encounter with another person as the encounter with a \emph{face}: not the visible configuration of eyes and mouth, which can be perceived like any other surface, but the way in which the other presents himself as exceeding every idea I can form of him \citep[I.C, III.B]{Levinas1961}. The face does not appear as an object within my horizon. It addresses me, and its first word, on Levinas's description, is a prohibition of murder and an appeal for help at once. The face is destitute and commanding: it has no power over me, and yet it puts my freedom in question, so that my spontaneous enjoyment of the world, which Levinas calls the life of the Same, is called to justify itself.
+
+Two features of this description concern us. First, the relation to the face is asymmetrical. The other's claim on me is not conditional on my having a claim on him; I am responsible for him whether or not he is responsible for me. Second, the responsibility is infinite. Levinas does not mean that it is very large. He means that it increases in the measure that it is assumed: every response I give, far from settling my account, discloses further claims, so that the more just I am the more guilty I find myself \citep[III.B]{Levinas1961}. The demand is not a debt that could be paid off by a sufficient payment; it is a structure in which each payment opens a new debt.
+
+\subsection{From \emph{Totality and Infinity} to \emph{Otherwise than Being}}
+
+In \emph{Otherwise than Being}, the description is radicalized \citep{Levinas1974}. The subject is no longer an ego who is subsequently called to account but is constituted by responsibility: subjectivity is \enquote{substitution}, the condition of being hostage to the other, responsible even for the other's responsibility and for what he does to me. The infinite demand is here not something the subject encounters but what makes it a subject at all. Two further theses of the later work matter for the argument. One is that the demand is anarchic: it does not derive from any principle that I have adopted or could adopt, and it binds me before any commitment of mine. The other is that the infinite responsibility for the one other is interrupted by the arrival of a third person, another other, whose claims compete with the first's, and that this arrival is the origin of comparison, measure, institutions and justice \citep[V.3]{Levinas1974}. We return to the third in Section~\ref{s:third}.
+
+\subsection{Ought implies can}
+
+The infinite demand appears to collide with a principle that most moral philosophers regard as close to a conceptual truth: that if an agent ought to do something, then she can do it. The principle is usually attributed to Kant, who uses it in the form \enquote{we ought, therefore we can} to argue for the possibility of moral improvement \citep{Kant1793}. If the demand of the face asks me to answer every claim, and I cannot answer every claim, then either the demand does not bind, or ought implies can is false.
+
+Each horn has its defenders. Some have rejected ought implies can outright: \citet{Stocker1971} argued from cases of self-induced inability that one can remain obligated to do what one can no longer do, and \citet{Graham2011} has argued at length that the principle is false. Others have defended it as a conversational implicature rather than an entailment \citep{SinnottArmstrong1984}, or as a necessary truth about the deontic \enquote{ought} \citep{Vranas2007}. A Levinasian who rejects the principle in general, however, pays a high price: the principle captures something true about blame, namely that it is unfair to fault an agent for not doing what she could not do. The question is whether the Levinasian must pay it.
+
+\subsection{Critchley's infinitely demanding ethics}
+
+The most developed recent attempt to make the infinite demand the foundation of an ethics is Critchley's \emph{Infinitely Demanding} \citep{Critchley2007}. Critchley argues that ethical subjectivity is formed by the approval of a demand that the subject cannot meet, and that this constitutive inadequacy is the source of ethical motivation. A subject who could meet the demand would be satisfied with herself, and self-satisfaction, Critchley argues, is the death of ethics. Critchley draws on Løgstrup's \emph{The Ethical Demand} \citep{Logstrup1956}, which describes the demand that arises whenever one person's life is placed in another's hands as \enquote{radical}, \enquote{silent} and \enquote{unfulfillable}, as well as on Levinas.
+
+Critchley accepts that the demand is impossible to meet and treats the impossibility as its point. What he does not supply is an account of how an impossible demand can bind without making the agent permanently and culpably in default. He describes the subject as \enquote{divided} by the demand and speaks of the humor with which one may bear one's inadequacy, but the question of what exactly the agent who fails to meet the demand is guilty of is left open. Our argument is in part an attempt to answer it.
+
+\subsection{Derrida's \enquote{Violence and Metaphysics}}
+
+The most influential critique of \emph{Totality and Infinity} is Derrida's \enquote{Violence and Metaphysics} \citep{Derrida1967}. Derrida argues that Levinas cannot say what he wants to say. The face is supposed to present itself as absolutely other, outside every horizon and every concept. But to describe it at all, Levinas must use the language of the tradition he criticizes, a language of the same, of being and of phenomenality; and the other can be other only for a same, so that alterity is relative to the very structure it is meant to exceed. In particular, the other can be recognized as an other only if he is recognized as an ego like me, which is the Husserlian thesis of the fifth \emph{Cartesian Meditation} that Levinas rejects. Derrida concludes that Levinas's discourse is caught in an economy of \enquote{lesser violence}: one cannot escape the violence of conceptualization, only choose the least violent form of it.
+
+The critique bears directly on the infinite demand. If the other appears only as an alter ego, his demand is presumably symmetrical with mine, and its infinity loses the ground on which Levinas places it. We address the critique in Section~\ref{s:derrida}.
+
+\subsection{The thesis}
+
+We argue for the following thesis: \emph{the face of the other makes an ethical demand that is infinite in principle and cannot be fully discharged, and this does not undermine its normative force.} Its defence requires three things. We must say precisely what it is for a demand to be infinite and incapable of full discharge. We must show that a demand of this kind can have normative force without falsifying ought implies can. And we must show that it does not entail that every agent is perpetually in default, or that morality is overwhelmingly demanding in a sense that would conflict with the moderate account defended elsewhere in this collection (ETH-28).
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}\label{d:claim}
+A \emph{claim} is an appeal addressed by another person to me, to which an \emph{answer} is a response of mine that takes it up: an act of help, of attention, of restraint, of speech. The \emph{demand} of a face is the totality of the claims that it addresses to me.
+\end{definition}
+
+\begin{definition}\label{d:discharge}
+A \emph{discharge} is a finite set of claims of a demand that an agent answers. A discharge \emph{exhausts} the demand if it answers every claim of it.
+\end{definition}
+
+Finiteness is built into the notion of a discharge because a discharge is something an agent actually performs: whatever she does in a life is a finite set of answers, however large.
+
+\begin{definition}\label{d:infinite}
+A demand is \emph{infinite} if no discharge exhausts it.
+\end{definition}
+
+\begin{assumption}[Unboundedness]\label{a:unbounded}
+The claims of a face form a sequence $c_0, c_1, c_2, \dots$ indexed by all natural numbers: each answer occasions a further claim.
+\end{assumption}
+
+Assumption~\ref{a:unbounded} is Levinas's thesis that responsibility increases in the measure that it is assumed. It is a phenomenological claim about the structure of the encounter, and it can be made plausible from ordinary cases. The stranger I help to find the station now needs to know which train to take; the friend I sit with in hospital has a family who will need someone after she dies; the student whose essay I read asks, rightly, for a second reading. The answer does not close the relation but deepens it, and the deepened relation makes claims that the shallower one did not. The assumption does not say that each further claim is as weighty as its predecessor, nor that the agent is aware of all of them; it says only that there is no last claim.
+
+\begin{assumption}[Normative force]\label{a:binding}
+Every claim of the demand binds the one to whom it is addressed: it is a reason for her to answer it, and a reason that is not hers to dismiss.
+\end{assumption}
+
+Assumption~\ref{a:binding} has no premise about dischargeability. A claim binds because of where it comes from, the face, and not because the agent can answer it together with all the others. This is the formal counterpart of Levinas's thesis that the demand is anarchic: its authority is not derived from the agent's capacities, commitments or principles.
+
+\begin{definition}\label{d:obligation}
+Answering a claim is \emph{obligatory} if failing to answer it is a fault, that is, if failing to answer it makes the agent blameworthy in the absence of an excuse.
+\end{definition}
+
+\begin{assumption}[Ought implies can, for obligations]\label{a:oic}
+There is a single discharge that answers every claim whose answering is obligatory.
+\end{assumption}
+
+Assumption~\ref{a:oic} is the form of ought implies can that matters for blame. It requires not merely that each obligation can be met singly but that all of them can be met together, which rules out an agent's being faulted whatever she does. It is the principle that the critics of the infinite demand invoke, and we accept it.
+
+\begin{definition}\label{d:holistic}
+\emph{Holistic ought implies can} is the principle that if every claim of a demand binds, some discharge exhausts the demand.
+\end{definition}
+
+Holistic ought implies can is the principle that the objection to the infinite demand actually needs. It extends the requirement of joint satisfiability from obligations to everything that binds. The difference between Assumption~\ref{a:oic} and Definition~\ref{d:holistic} is the hinge of the argument.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}\label{l:finite}
+No discharge exhausts the demand of a face: the demand is infinite.
+\end{lemma}
+
+\begin{proof}
+By Assumption~\ref{a:unbounded}, the claims are indexed by all natural numbers. A discharge is finite, so the indices of the claims it answers have a largest member, or none if the discharge is empty. The claim whose index exceeds that member, or the claim $c_0$, is not answered. So no discharge answers every claim.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+The demand of a face is infinite and binding: every discharge leaves unanswered some claim that binds.
+\end{theorem}
+
+\begin{proof}
+Let a discharge be given. By Lemma~\ref{l:finite} some claim is not answered by it, and by Assumption~\ref{a:binding} that claim binds.
+\end{proof}
+
+\begin{proposition}\label{p:holistic}
+Holistic ought implies can is false.
+\end{proposition}
+
+\begin{proof}
+By Assumption~\ref{a:binding}, every claim of the demand binds. If holistic ought implies can were true, some discharge would exhaust the demand, contrary to Lemma~\ref{l:finite}.
+\end{proof}
+
+Proposition~\ref{p:holistic} is not a rejection of ought implies can as it is ordinarily understood. It rejects only its extension from what is obligatory to whatever binds, and the extension is not supported by the considerations that make ought implies can attractive. Those considerations concern fairness in blame: it would be unfair to blame someone for not doing what she could not do. They do not concern reasons. Nothing is unfair about there being more reasons bearing on an agent than she can act on.
+
+\begin{theorem}\label{t:notall}
+Not every binding claim is obligatory.
+\end{theorem}
+
+\begin{proof}
+By Assumption~\ref{a:oic}, some discharge $D$ answers every obligatory claim. By Lemma~\ref{l:finite}, some claim $c$ is not answered by $D$. If answering $c$ were obligatory, $D$ would answer it; so it is not. By Assumption~\ref{a:binding}, $c$ binds.
+\end{proof}
+
+\begin{corollary}\label{c:overload}
+Some discharge meets every obligation, and every such discharge leaves a binding claim unanswered. The infinite demand therefore does not place the agent under obligations she cannot jointly meet.
+\end{corollary}
+
+\begin{proof}
+The first conjunct is Assumption~\ref{a:oic}; the second is Theorem~\ref{t:main} applied to that discharge.
+\end{proof}
+
+\begin{remark}\label{r:independence}
+The normative force of the demand enters the proofs only through Assumption~\ref{a:binding}, which is independent of dischargeability. The infinity of the demand enters only through Assumption~\ref{a:unbounded}, which says nothing about binding. Normative force and infinity are therefore logically independent features, and the thesis that the demand is binding though undischargeable is not the conjunction of a premise with its own denial.
+\end{remark}
+
+What, then, is the normative force of a claim that is binding but not obligatory, as Theorem~\ref{t:notall} shows some claims to be? It is the force of a reason that is addressed to me, that I may not dismiss as none of my concern, and that does not lapse when I have done what I am obliged to do. Its marks are threefold. It counts in deliberation: when I can answer it without failing an obligation, it favors answering, and an agent who ignores it shows a defect of attention even if she commits no fault. It survives being left unanswered: the unanswered claim does not become void, as an obligation that has become impossible is often said to do, but remains as what Levinas calls bad conscience, an awareness that the account is not closed. And it orients the agent's further conduct: the claims not yet answered shape what she should attend to next. The distinction between the requiring and the merely justifying strength of reasons \citep{Gert2004} supplies a general model: a binding claim always has justifying force, while only some binding claims have the requiring force that makes failure a fault.
+
+\section{The third party and justice}\label{s:third}
+
+The framework so far concerns a single face. Levinas insists that this abstraction is never realized: the third party is always already present in the eyes of the other, and the infinite responsibility for one person is from the start in tension with responsibility for all the others \citep[V.3]{Levinas1974}; \citep{Levinas1996}. When there are two others, their claims compete. I cannot answer both infinite demands, and I must compare: whose need is more urgent, whose claim is prior, what the one has done to the other. Comparison requires measure, and measure requires that the incomparable faces be treated as comparable, as citizens equal before a law. Levinas calls this the birth of justice and of the state, and he insists that justice does not cancel the infinite demand from which it arises. Justice is required by responsibility, but it is always to be corrected by it: the law that compares must remain answerable to the faces it compares.
+
+The framework of Section~\ref{s:framework} gives this account a precise sense. Obligation, in Definition~\ref{d:obligation}, is the domain of fault, and it is subject to joint satisfiability (Assumption~\ref{a:oic}). Joint satisfiability is a constraint that can be stated only when many claims are compared and weighed against one another and against the agent's capacities. It is therefore not a feature of the dyadic demand but a product of the comparison that the third introduces. We can accordingly describe the passage to justice as follows: the third party introduces measure, measure selects among binding claims a jointly satisfiable set whose neglect is a fault, and the claims so selected are obligations. What is selected is fixed by the principles of justice and of individual morality, which are not derivable from the face alone. The claims not selected remain binding.
+
+This picture explains Levinas's two theses about justice at once. Justice is required by the demand, because without comparison an agent faced with several faces could not act at all; and justice does not exhaust the demand, because selection leaves binding claims unselected. It also explains why Levinas thought justice must always be corrected. The selection made by a particular set of institutions or principles is answerable to the claims it leaves out: a binding claim that is not an obligation today may, with a better measure, become one tomorrow. The infinite demand thus functions as the standing source of criticism of every finite morality of obligation, without itself being a morality of obligation.
+
+\section{Infinite demand and overload}\label{s:overload}
+
+The objection that motivates the denial of the infinite demand is often put as an objection from demandingness: a morality that demands infinitely of us is not one we could live by. This collection's account of demandingness is moderate. Affluent agents must give a substantial fixed share of their income, set at ten per cent (ETH-06); there is a duty to rescue up to moderate cost (ETH-18); supererogation is bounded above by sainthood and below by decency (ETH-14); and together these duties leave room for a personal prerogative (ETH-28). Does the infinite demand contradict this account?
+
+It does not, and Corollary~\ref{c:overload} shows why. The moderate account is an account of obligation: of what an agent is at fault for failing to do. The infinite demand is an account of what binds. Theorem~\ref{t:notall} shows that the two come apart, and Corollary~\ref{c:overload} shows that an agent can meet every obligation while the demand remains unexhausted. Nothing in the infinite demand requires that obligations exceed what ETH-28 allows, and nothing in ETH-28 requires that the claims not falling under obligation cease to bind. What would conflict with ETH-28 is \emph{obligation-overload}: the thesis that the agent is under more obligations than she can jointly fulfil, or that her obligations are so extensive as to leave no room for a prerogative. The infinite demand, correctly understood, is not overload, since overload is a thesis about obligations and Assumption~\ref{a:oic} rules it out.
+
+The relation to supererogation is subtler. ETH-14 bounds supererogation above by sainthood. The infinite demand, by Lemma~\ref{l:finite}, exceeds the saint's discharge as it exceeds every other. This does not mean that there are supererogatory acts beyond sainthood. It means that the claims left unanswered by the saint are not acts the saint failed to perform supererogatorily; they are claims whose answering no finite life contains. Supererogation concerns the space between what an agent must do and what she could admirably do; the infinite demand concerns the excess of what binds over every possible doing. The saint stands at the upper bound of the first and is, in Levinas's sense, as indebted as anyone to the second.
+
+Two classical discussions illuminate the distinction. \citet{Wolf1982} argued that a life devoted to moral perfection would be unattractive, since it would crowd out the personal projects that make a life good. Her argument targets the ideal of the moral saint as a model of obligation or of excellence. It does not touch the infinite demand, which does not ask the agent to discharge as many claims as possible but asks her to recognize that every discharge leaves claims standing. The second is the Kantian distinction between perfect and imperfect duties. Imperfect duties, such as beneficence, leave latitude as to when and towards whom they are fulfilled, and an agent who does some good fulfils them without having done all the good she could. The infinite demand resembles an imperfect duty in leaving latitude, but differs in that the claims it leaves unanswered are not merely claims she was permitted to pass over. They still bind, and the appropriate response to them is not the indifference with which one may regard an opportunity for beneficence one has declined, but the bad conscience of a debt one could not pay.
+
+Løgstrup's ethical demand shows the same structure from a different direction \citep{Logstrup1956}. Løgstrup holds that the demand is unfulfillable because it requires that one act for the sake of the other without regard to oneself, while the agent always also acts for her own sake. The impossibility is here one of motive rather than of number. Our framework accommodates it if each answer that is mixed with self-regard is counted as occasioning a further claim, that the answer be given more purely, and the demand then has the structure of Assumption~\ref{a:unbounded}. Løgstrup, like Levinas and unlike Critchley, does not infer from the impossibility that the agent is permanently at fault; he holds that the demand is fulfilled, as far as it can be, in the sovereign expressions of life such as trust and mercy, which are not achievements of the will. This is a version of the distinction between binding and obligating that our argument makes explicit.
+
+Critchley's position can now be stated more precisely than he states it. Critchley is right that the demand is infinite and right that its infinity is ethically productive. He is wrong if he holds, as some of his formulations suggest, that the agent's constitutive inadequacy is a form of guilt in the sense of fault. The inadequacy is real, but it is the inadequacy of every finite discharge to an infinite demand, not the failure to meet an obligation. Our account thus preserves what Critchley calls the motivational force of the demand, since unanswered binding claims orient the agent's further conduct, without his tragic conclusion that the ethical subject is always in default.
+
+\section{Derrida's objection}\label{s:derrida}
+
+Derrida's critique can be put as an argument against Assumption~\ref{a:binding}, or rather against the account of where its authority comes from. The face is supposed to bind because it is absolutely other. But the face is given, and whatever is given is given within the horizon of the one to whom it is given; the other is other only as an other ego, that is, as someone like me. If so, the asymmetry of the relation collapses into the symmetry of mutual recognition, and the demand loses its anarchic character: it binds only as much as I would be bound by any ego, and no ego binds infinitely.
+
+We grant Derrida the premise and deny the conclusion. That the other is given to me as an ego like me is the thesis of PHE-12, on which empathy gives other minds directly though non-primordially. Non-primordial givenness means that the other's experience is given to me as his, and as not lived through by me: I perceive his pain as pain, but I do not feel it. This is the asymmetry on which the infinite demand rests. What is given to me in empathy is given as exceeding what I can live through, and the claims that the other makes on me are given as arising from a life that is not mine. The alter ego is like me in being an ego, and unlike me in being the one whose life I cannot live. Derrida is right that alterity is not absolute, if absolute alterity means non-givenness; he is wrong to infer that the relation must be symmetrical. Symmetry would require that the other's claims on me be given to me as my claims on him are given to me, and they are not: my claims on him are lived, his claims on me are received.
+
+The point can be put in terms of PHE-09, which argues that the look of the other establishes objectification but not hostility. The face is the reverse side of the look: where the look makes me an object for the other, the face makes the other a claimant on me. Neither requires that the relation be one of conflict, and neither requires that it be one of symmetrical reciprocity. Both describe an asymmetry of perspective that is compatible with the other's being given as an ego.
+
+Derrida's broader point, that the language in which the face is described is the language of the same and therefore commits a minimal violence, we accept as a point about description. It does not touch the argument of Section~\ref{s:argument}, whose premises are claims about the structure of the demand, not about the inexpressibility of its source. Derrida himself later read Levinas's account of the third and of hospitality as offering a way to think justice that remains answerable to the infinite \citep{Derrida1997}, which is close to the reading of Section~\ref{s:third}.
+
+\section{Objections and replies}
+
+\begin{objection}[No reason without ability]
+A reason to do something is a consideration that counts in favor of doing it. If I cannot do it, nothing counts in favor of my doing it. So the claims that I cannot answer do not bind.
+\end{objection}
+
+\begin{reply}
+The objection mistakes the structure of the result. Each claim, taken singly, can be answered: nothing in the framework says otherwise, and in ordinary cases each claim can indeed be met. What cannot be done is to answer all of them. A reason to do something that I can do does not cease to be a reason because, together with other reasons I also have, it cannot be jointly acted on. This is the ordinary situation of an agent with more good options than time. Lemma~\ref{l:finite} shows that the situation is unavoidable for the demand of the face, not that any single claim is unanswerable.
+\end{reply}
+
+\begin{objection}[Reasons inflation]
+If every claim binds, and the claims are infinitely many, then the agent's deliberation is swamped: she has infinitely many reasons bearing on her every choice.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:unbounded} orders the claims in a sequence in which later claims are occasioned by answers to earlier ones. At any time, the agent faces the claims occasioned by what she has so far done, which are finitely many. The infinity of the demand is the absence of a last claim, not the simultaneous presence of infinitely many. Deliberation is no more swamped by it than a reader is swamped by the infinity of possible further readings.
+\end{reply}
+
+\begin{objection}[Binding without fault is idle]
+A claim that one may leave unanswered without fault has no normative force worth the name. Normative force is the capacity to make failure a fault.
+\end{objection}
+
+\begin{reply}
+This identifies normative force with requiring force, and the identification is false in general. Reasons that make an option better without making the others wrong are familiar: reasons of kindness, of gratitude, of love. The response to them, when they go unanswered, is not blame but something like regret, and the possibility of fitting regret without fault is well established in the discussion of moral remainders (ETH-27 holds that remorse remains appropriate for an agent who acts rightly). Section~\ref{s:framework} identifies three marks of binding force that do not involve fault: weight in deliberation, survival when unanswered, and orientation of further conduct.
+\end{reply}
+
+\begin{objection}[Unboundedness is false]
+Some relations end. The stranger finds the station and goes on his way. So the claims of some faces form a finite sequence, and Assumption~\ref{a:unbounded} is false.
+\end{objection}
+
+\begin{reply}
+The stranger's going on his way ends my opportunity to answer, not his claim. Levinas's thesis is not that the encounter continues but that responsibility for the other is not delimited by what I can do for him: I am responsible for what becomes of him, for the conditions in which strangers in my town must find their way, for whether the next one will be helped. Ending a relation does not answer these claims; it places them beyond my reach as an individual, which is one reason why the infinite demand requires the institutions of justice described in Section~\ref{s:third}.
+\end{reply}
+
+\begin{objection}[Ricoeur's hyperbole objection]
+\citet{Ricoeur1990} argued that Levinas's descriptions are hyperbolic, and that a self constituted entirely by the other's summons could not respond to it, since response requires a self capable of initiative. If so, the demand is not infinite but only described as such for rhetorical effect.
+\end{objection}
+
+\begin{reply}
+Our argument does not require the strongest formulations of \emph{Otherwise than Being}. It requires a responding agent, and Definitions~\ref{d:claim} and~\ref{d:discharge} presuppose one. What it requires of Levinas is only Assumption~\ref{a:unbounded}, that answers occasion further claims, and Assumption~\ref{a:binding}, that claims bind. Both are compatible with Ricoeur's insistence on a self with its own initiative, and Ricoeur's own account of solicitude, as the reciprocal recognition of selves, does not deny either.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not establish what any particular claim of the face requires, nor how the third party's comparison should select obligations. It does not establish the moderate account of obligation defended in ETH-28; it shows only that this account is compatible with the infinite demand. It does not establish that ethics is first philosophy in Levinas's sense, that the relation to the other precedes the relation to being; nothing in the argument depends on that thesis. Finally, it does not establish Assumptions~\ref{a:unbounded} and~\ref{a:binding}, which are phenomenological premises supported by description and by the cases of Section~\ref{s:framework}. The recent literature has questioned both: \citet{Perpich2008} argues that the normativity of the face cannot be a matter of the face's mere presence and must be understood as a call that can be refused, and \citet{Morgan2007} reads the face as a structural feature of all social life rather than as a datum of special encounters. Both readings are compatible with the framework, which requires only that the call bind whether or not it is answered.
+
+\section{Formalization}
+
+The argument is formalized in \nolinkurl{Philosophy/PHE/PHE_13.lean}. The demand is a function \texttt{claim} from natural numbers to claims (Assumption~\ref{a:unbounded}); a discharge is a finite list of indices (Definition~\ref{d:discharge}); normative force is an axiom \texttt{binding}, stating that every claim binds, with no premise about discharge (Assumption~\ref{a:binding}); obligation is a primitive predicate constrained by the axiom \texttt{oic} (Assumption~\ref{a:oic}). Lemma~\ref{l:finite} is proved arithmetically from the sum of a list. The main theorems are
+
+\begin{lstlisting}
+theorem infinite_binding_demand (L : Discharge) :
+    ∃ n, Binding (claim n) ∧ ¬ (n ∈ L)
+theorem holistic_oic_fails : ¬ HolisticOIC
+theorem binding_not_obligated : ∃ n, Binding (claim n) ∧ ¬ Obligated n
+\end{lstlisting}
+
+\noindent For the first two, \texttt{\#print axioms} reports (namespace prefix omitted)
+
+\begin{lstlisting}
+[propext, Quot.sound, Binding, binding, claim]
+\end{lstlisting}
+
+\noindent and for Theorem~\ref{t:notall} and Corollary~\ref{c:overload}
+
+\begin{lstlisting}
+[propext, Quot.sound, Binding, Obligated, binding, claim, oic]
+\end{lstlisting}
+
+\noindent The axioms \texttt{propext} and \texttt{Quot.sound} belong to Lean's core logic and are used by the arithmetic of Lemma~\ref{l:finite}. The remaining axioms are the primitives and Assumptions~\ref{a:unbounded}, \ref{a:binding} and~\ref{a:oic}. The formalization confirms Remark~\ref{r:independence}: the binding axiom is stated without reference to discharge, and the theorems do not use any principle linking the two.
+
+\section{Conclusion}
+
+The demand of the face is an unbounded sequence of claims, each occasioned by the answer to the one before, and no finite discharge exhausts it. Every claim binds, as a reason addressed to me that I may not dismiss, and its binding force does not depend on whether the demand can be discharged. What ought implies can constrains is obligation, the domain of fault, and obligations form a jointly satisfiable selection from among binding claims, made through the comparison that the third party introduces. The demand is therefore infinite in principle and cannot be fully discharged, and this does not undermine its normative force; nor does it overload the agent with obligations, since the morality of obligation it grounds can be as moderate as the one defended in ETH-28.
+
+\begin{thebibliography}{99}\small
+\bibitem[Critchley(2007)]{Critchley2007} Critchley, S. (2007). \emph{Infinitely Demanding: Ethics of Commitment, Politics of Resistance}. Verso.
+\bibitem[Derrida(1967)]{Derrida1967} Derrida, J. (1967). Violence et métaphysique. Essai sur la pensée d'Emmanuel Levinas. In \emph{L'écriture et la différence}. Seuil. First published 1964 in \emph{Revue de métaphysique et de morale}. English translation by A.~Bass in \emph{Writing and Difference}, University of Chicago Press, 1978.
+\bibitem[Derrida(1997)]{Derrida1997} Derrida, J. (1997). \emph{Adieu à Emmanuel Levinas}. Galilée.
+\bibitem[Gert(2004)]{Gert2004} Gert, J. (2004). \emph{Brute Rationality: Normativity and Human Action}. Cambridge University Press.
+\bibitem[Graham(2011)]{Graham2011} Graham, P.~A. (2011). \enquote{Ought} and ability. \emph{The Philosophical Review}, 120(3), 337--382.
+\bibitem[Kant(1793)]{Kant1793} Kant, I. (1793). \emph{Die Religion innerhalb der Grenzen der bloßen Vernunft}. Nicolovius.
+\bibitem[Levinas(1961)]{Levinas1961} Levinas, E. (1961). \emph{Totalité et infini. Essai sur l'extériorité}. Martinus Nijhoff. English translation by A.~Lingis, \emph{Totality and Infinity}, Duquesne University Press, 1969.
+\bibitem[Levinas(1974)]{Levinas1974} Levinas, E. (1974). \emph{Autrement qu'être ou au-delà de l'essence}. Martinus Nijhoff. English translation by A.~Lingis, \emph{Otherwise than Being or Beyond Essence}, Martinus Nijhoff, 1981.
+\bibitem[Levinas(1996)]{Levinas1996} Levinas, E. (1996). Peace and proximity. In A.~T. Peperzak, S.~Critchley and R.~Bernasconi (Eds.), \emph{Emmanuel Levinas: Basic Philosophical Writings}. Indiana University Press.
+\bibitem[Løgstrup(1956)]{Logstrup1956} Løgstrup, K.~E. (1956). \emph{Den etiske fordring}. Gyldendal. English translation, \emph{The Ethical Demand}, University of Notre Dame Press, 1997.
+\bibitem[Morgan(2007)]{Morgan2007} Morgan, M.~L. (2007). \emph{Discovering Levinas}. Cambridge University Press.
+\bibitem[Perpich(2008)]{Perpich2008} Perpich, D. (2008). \emph{The Ethics of Emmanuel Levinas}. Stanford University Press.
+\bibitem[Ricoeur(1990)]{Ricoeur1990} Ricoeur, P. (1990). \emph{Soi-même comme un autre}. Seuil.
+\bibitem[Sinnott-Armstrong(1984)]{SinnottArmstrong1984} Sinnott-Armstrong, W. (1984). \enquote{Ought} conversationally implies \enquote{can}. \emph{The Philosophical Review}, 93(2), 249--261.
+\bibitem[Stocker(1971)]{Stocker1971} Stocker, M. (1971). \enquote{Ought} and \enquote{can}. \emph{Australasian Journal of Philosophy}, 49(3), 303--316.
+\bibitem[Vranas(2007)]{Vranas2007} Vranas, P.~B.~M. (2007). I ought, therefore I can. \emph{Philosophical Studies}, 136(2), 167--216.
+\bibitem[Wolf(1982)]{Wolf1982} Wolf, S. (1982). Moral saints. \emph{The Journal of Philosophy}, 79(8), 419--439.
+\end{thebibliography}
+
+\end{document}

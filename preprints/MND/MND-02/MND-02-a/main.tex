@@ -1,0 +1,190 @@
+\documentclass{situationist-preprint}
+
+\title{Physicalism and Hempel's Dilemma}
+\msid{MND-02-a}
+\msfamily{MND-02}
+\msdiscipline{Philosophy of Mind}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MND/MND\_02.lean}
+\mskeywords{physicalism; Hempel's dilemma; the physical; no fundamental mentality; grounding; Russellian monism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Physicalism says that everything is physical. Hempel's dilemma objects that the thesis has no acceptable content: if \enquote{physical} means what current physics posits, physicalism is false, since current physics is incomplete; if it means what a future or ideal physics will posit, physicalism is trivial or indeterminate, since we cannot say what that physics will contain. We argue that physicalism is true, provided \enquote{physical} is defined by reference to current physics together with its foreseeable extensions. A foreseeable extension is characterized not by its content, which we cannot foresee, but by three constraints that can be stated now: it recovers current physics where current physics succeeds, its fundamental properties play roles in its dynamical laws or realize such roles, and none of them is mental. The definition escapes the first horn because it does not require current physics to be complete, and the second because it excludes fundamental mentality. Given four premises about the actual fundamental theory, physicalism so defined follows; a Lean formalization confirms that the theorem depends on exactly these premises. The definition counts the intrinsic natures posited by non-panpsychist Russellian monism as physical.
+\end{abstract}
+
+\section{The dilemma}
+
+Physicalism is the thesis that everything is physical, or that every instantiated property is physical or is grounded in, realized by or necessitated by physical properties \citep{Stoljar2010}. The thesis has a long history of support from the success of physical explanation, and in particular, as \citet{Papineau2001} argued, from the gradual discovery in nineteenth- and twentieth-century physiology that no forces act in living bodies other than those that act elsewhere. It also has a long history of an awkward question: what does \enquote{physical} mean?
+
+\citet{Hempel1969,Hempel1980} gave the question the form of a dilemma. If \enquote{physical} is defined by reference to current physics, physicalism is almost certainly false, since current physics is incomplete and, in places, inconsistent: general relativity and quantum field theory cannot both be exactly true. If it is defined by reference to a future or ideal physics, physicalism has no determinate content, since we do not know what that physics will posit; and if the ideal physics is simply whatever theory correctly describes the world, physicalism is trivially true and would remain true if the world contained Cartesian souls, which the ideal physics would then describe. \citet{CraneMellor1990} drew the conclusion that there is no question of physicalism.
+
+The responses fall into three groups. \emph{Current-physics} views accept the first horn and treat physicalism as a working hypothesis known to need revision \citep{Melnyk1997}: what physicalists believe is that current physics is the best available approximation to the truth about the fundamental. \emph{Future-physics} views accept the second horn and try to give it content by appeal to the methods physicists use \citep{Dowell2006}. \emph{Via negativa} views drop the reference to physics and characterize the physical by what it excludes, typically fundamental mentality \citep{Montero1999,Wilson2006}. A fourth response gives up the thesis as a claim and treats physicalism as an attitude or research programme \citep{Ney2008}.
+
+We defend a combination. The physical is defined by reference to current physics, as on the first view, but extended to its foreseeable extensions, which are characterized, as on the third view, by constraints we can state now, including the exclusion of fundamental mentality. MND-05 uses the standard formulation of physicalism as the thesis that the physical facts necessitate all the facts, and MND-01 takes materialism in the sense defended here; Section~\ref{s:russell} shows that the two uses fit.
+
+\section{Framework}\label{s:framework}
+
+\begin{definition}[Current physics]\label{d:current}
+\emph{Current physics} is the body of established physical theory, the standard model of particle physics and general relativity, together with the domains, of scale, energy and curvature, in which each is empirically successful.
+\end{definition}
+
+\begin{definition}[Foreseeable extension]\label{d:fore}
+A theory $T$ of the fundamental properties and laws is a \emph{foreseeable extension} of current physics if:
+\begin{enumerate}[label=(\alph*),nosep]
+\item $T$ recovers the predictions of current physics, to within their accuracy, in the domains in which current physics is empirically successful (correspondence);
+\item every fundamental property posited by $T$ either plays a role in the dynamical laws of $T$ or is the categorical realizer of a property that does (nomic integration);
+\item no fundamental property posited by $T$ is mental (no fundamental mentality).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Physical property]\label{d:phys}
+A property is \emph{physical} if it is a fundamental property of some foreseeable extension of current physics, or is wholly grounded in the fundamental properties of some foreseeable extension.
+\end{definition}
+
+\begin{definition}[Physicalism]\label{d:physicalism}
+\emph{Physicalism} is the thesis that every instantiated property is physical.
+\end{definition}
+
+The word \enquote{foreseeable} needs comment. We cannot foresee the content of the theory that will replace current physics: if we could, we would already have it. What we can foresee is its form. Each condition of Definition~\ref{d:fore} is a condition that every successor theory in the history of physics has met with respect to its predecessor. Relativistic mechanics recovers Newtonian mechanics at low velocities, quantum mechanics recovers classical predictions for large quantum numbers, and no successful physical theory has posited a fundamental property that does nothing in its laws or a fundamental property of minds. The conditions are therefore not stipulations designed to secure the result. They record the form that physics has had, and the extension of current physics is foreseeable in the sense that this form is.
+
+Condition (a) ties the definition to current physics without requiring that current physics be true. Condition (b) admits two kinds of fundamental property: those characterized by their roles in laws, such as mass and charge, and the categorical properties, if there are any, that occupy those roles. The second clause is not idle. If physics describes the world only structurally, as MND-01 argues, the properties that physics characterizes by role have realizers that physics does not characterize, and a definition of the physical that excluded those realizers would make physicalism false for a reason that has nothing to do with the mind. Condition (c) is the condition of \citet{Wilson2006}. A property is \emph{mental} in its sense if its instantiation consists in some subject's being in a mental state: thinking, perceiving, feeling or experiencing.
+
+Definition~\ref{d:phys} uses grounding to relate non-fundamental properties to fundamental ones. Grounding entails necessitation, so physicalism in the sense of Definition~\ref{d:physicalism} entails the necessitation thesis used in MND-05. We do not claim the converse, and nothing in the argument depends on it.
+
+\section{The argument}\label{s:argument}
+
+Let the \emph{actual fundamental theory} be the true and complete theory of the actually instantiated fundamental properties and the laws that govern them. Whether or not anyone ever formulates it, it exists as a body of truths, and the argument concerns it.
+
+\begin{assumption}[Correspondence]\label{a:corr}
+The actual fundamental theory recovers the predictions of current physics in the domains in which current physics is empirically successful.
+\end{assumption}
+
+\begin{assumption}[Nomic integration]\label{a:nomic}
+Every actually instantiated fundamental property plays a role in the fundamental dynamical laws, or is the categorical realizer of a property that does.
+\end{assumption}
+
+\begin{assumption}[No fundamental mentality]\label{a:nfm}
+No actually instantiated fundamental property is mental.
+\end{assumption}
+
+\begin{assumption}[Completeness of grounding]\label{a:ground}
+Every instantiated property is fundamental or wholly grounded in fundamental properties.
+\end{assumption}
+
+Assumption~\ref{a:corr} is warranted by the empirical success of current physics: a theory that disagreed with the standard model about the outcomes of collider experiments, or with general relativity about the orbits of binary pulsars, would be false. Assumption~\ref{a:ground} is the claim that the world has a fundamental level on which everything else depends, which we accept here without argument; a physicalist who denies it must reformulate the thesis in terms of grounding chains, and the dilemma does not turn on the point. The substantive premises are Assumptions~\ref{a:nomic} and~\ref{a:nfm}.
+
+Assumption~\ref{a:nomic} excludes fundamental properties that make no difference to anything and realize nothing that does. Such properties would be undetectable even indirectly, and we would have no reason to believe in them; the assumption is a principle of parsimony applied at the fundamental level. It does not exclude properties that physics cannot characterize, since categorical realizers are admitted.
+
+Assumption~\ref{a:nfm} is the one that carries the empirical weight of physicalism. It is supported by the argument of \citet{Papineau2001}. If minds were fundamental, or if some fundamental properties were mental, their effects would show up as departures, in the behavior of bodies, from what the non-mental forces predict: neurons would fire, or muscles contract, in ways that the electrochemistry of neurons and muscles does not explain. The physiology of the last two centuries has looked for such departures and found none. The evidence is not conclusive, since it is always possible that a mental force acts only in conditions not yet examined, but it is the kind of evidence on which empirical claims about what there is are ordinarily accepted.
+
+\begin{proposition}[Non-triviality]\label{p:nontriv}
+A mental property that is not grounded in anything is not physical.
+\end{proposition}
+
+\begin{proof}
+Suppose that $M$ is mental and ungrounded, and that it is physical. By Definition~\ref{d:phys}, there is a foreseeable extension $T$ such that $M$ is a fundamental property of $T$ or is grounded in the fundamental properties of $T$. The second disjunct is excluded, since $M$ is ungrounded. In the first case, $M$ is a fundamental property of $T$ and is mental, contrary to Definition~\ref{d:fore}(c).
+\end{proof}
+
+Proposition~\ref{p:nontriv} disposes of the second horn. Physicalism in our sense is false at any world in which there are fundamental mental properties, for example a world of Cartesian souls whose thinking is not grounded in anything else; it therefore says something about the actual world that could have been false. The first horn is disposed of by the form of Definition~\ref{d:fore}: nothing in it requires current physics to be true, complete or consistent, but only that its successors agree with it where it has been tested.
+
+\begin{theorem}\label{t:main}
+Physicalism is true.
+\end{theorem}
+
+\begin{proof}
+By Assumptions~\ref{a:corr}, \ref{a:nomic} and~\ref{a:nfm}, the actual fundamental theory satisfies conditions (a), (b) and (c) of Definition~\ref{d:fore}, and so is a foreseeable extension of current physics. Let $F$ be any instantiated property. By Assumption~\ref{a:ground}, $F$ is fundamental, and so is a fundamental property of the actual fundamental theory, or is wholly grounded in the fundamental properties of that theory. In either case $F$ is physical by Definition~\ref{d:phys}. Since $F$ was arbitrary, physicalism is true.
+\end{proof}
+
+The proof is short because the definitions were chosen to make the structure of the thesis visible: physicalism, so understood, is the conjunction of an empirical claim about the fundamental level (Assumptions~\ref{a:corr}--\ref{a:nfm}) and a metaphysical claim about the dependence of everything else on it (Assumption~\ref{a:ground}). This is what physicalists have always meant. The dilemma arose from the attempt to specify the fundamental level by listing its contents, and it disappears when the level is specified by conditions on its form.
+
+\section{Russellian monism and the physical}\label{s:russell}
+
+MND-01 argues that consciousness is the intrinsic nature of physical structure, that the intrinsic natures left open by physics are physical in the object-based sense of \citet{Stoljar2001}, and that they are among the foreseeable extensions of current physics. Definition~\ref{d:fore}(b) is what makes this claim available: the categorical realizers of the roles physics describes are admitted as fundamental properties of a foreseeable extension, provided they realize roles in its laws.
+
+Condition (c) adds a constraint. If the intrinsic natures were themselves mental, so that every electron was a subject of experience, the theory that posited them would violate condition (c), and physicalism in our sense would be false. The Russellian monism that our definition counts as physicalist is therefore the version on which the intrinsic natures are protophenomenal: they are not themselves experiences of a subject, though experiences are grounded in them. This is the version that MND-18 independently requires, by arguing that panpsychism is false and that the Russellian monism of MND-01 must be non-panpsychist. The two results fit: our definition counts non-panpsychist Russellian monism as physicalism, and panpsychist Russellian monism as a form of the view that physicalism, so defined, denies.
+
+\section{Objections and replies}
+
+\begin{objection}[The definition is gerrymandered]
+Conditions (b) and (c) were chosen to make physicalism come out true and Russellian monism come out physicalist. A definition chosen to secure a verdict cannot be used to argue for it.
+\end{objection}
+
+\begin{reply}
+The conditions are not chosen to secure the verdict, which is carried by Assumptions~\ref{a:nomic} and~\ref{a:nfm}, and these could be false. Proposition~\ref{p:nontriv} shows that the definition makes physicalism false at worlds with fundamental mentality. Nor were the conditions chosen for Russellian monism: condition (b) admits categorical realizers because any account of the physical must say whether the realizers of physical roles are physical, and the answer that they are not would make physicalism false at every world in which roles have realizers. Condition (c) excludes the panpsychist form of Russellian monism, which is the form most of its defenders hold \citep{Goff2017}.
+\end{reply}
+
+\begin{objection}[No fundamental mentality is all the work]
+If condition (c) does the work, the reference to current physics is idle, and the view is simply the via negativa of \citet{Montero1999}. Physicalism so understood would be true of a world containing fundamental vital forces, or fundamental properties of no scientific kind, provided they are not mental.
+\end{objection}
+
+\begin{reply}
+The reference to current physics is not idle. A fundamental vital force would either recover the predictions of current physics in its domains of success, in which case it acts only where current physics has not been tested and condition (a) is met, or it would not, in which case condition (a) excludes it. Condition (b) excludes fundamental properties that do nothing in the laws. What remains admissible is what a physicist would admit: new quantities that enter dynamical laws, agree with tested physics where it has been tested, and are not mental. That the via negativa view captures part of the truth is a point in its favor, and \citet{Wilson2006} herself combines no fundamental mentality with a physics-based condition.
+\end{reply}
+
+\begin{objection}[Consciousness-collapse theories]
+Some interpretations of quantum mechanics give consciousness a fundamental dynamical role, for example by making it the trigger of wave-function collapse \citep{ChalmersMcQueen2022}. Such a theory would recover current physics and integrate consciousness nomically, but it would violate condition (c). Physicalism then hangs on an open question in the foundations of physics.
+\end{objection}
+
+\begin{reply}
+It does, and it should. A theory on which consciousness is a fundamental dynamical factor is a theory on which physicalism is false; that the definition says so is evidence that it has the right content. Theorem~\ref{t:main} rests on Assumption~\ref{a:nfm}, and the evidence for that assumption is the evidence that no such factor is needed to account for the behavior of bodies. If a consciousness-collapse theory were confirmed, the assumption would be refuted, and so would physicalism.
+\end{reply}
+
+\begin{objection}[Mentality is unclear]
+Condition (c) relies on a notion of the mental that is as unclear as the notion of the physical it was meant to replace.
+\end{objection}
+
+\begin{reply}
+The notion of the mental needed is the ordinary one: a property is mental if its instantiation consists in a subject's thinking, perceiving, feeling or experiencing. There are borderline cases, among them protophenomenal properties, which are not mental in this sense, though experience is grounded in them. But the dilemma arose because \enquote{physical} had no determinate content at all, not because it had borderline cases. A thesis with a vague component is not thereby a thesis without content.
+\end{reply}
+
+\section{What the result does not establish}
+
+Theorem~\ref{t:main} does not establish that any mental property is identical to, or reducible to, a property characterized by physics. It is consistent with the grounding of experience in categorical natures that physics does not characterize, as MND-01 holds, and with the thesis of MND-10 that qualia exist and are intrinsic. Nor does it establish that the physical truths are knowable a priori to entail the phenomenal ones; MND-05 argues that they are not. Finally, the premises of the theorem are empirical, and the theorem is no more certain than Assumption~\ref{a:nfm}.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MND/MND_02.lean} states Definitions~\ref{d:fore}--\ref{d:physicalism} as Lean definitions over primitive predicates for fundamentality in a theory, grounding, nomic role and mentality, and Assumptions~\ref{a:corr}--\ref{a:ground} as axioms about a constant for the actual fundamental theory. It proves Proposition~\ref{p:nontriv} and Theorem~\ref{t:main}.
+
+\begin{lstlisting}
+theorem non_triviality (p : Property) (hm : Mental p)
+    (hu : ∀ S, ¬ GroundedIn p S) : ¬ Physical p
+theorem physicalism : Physicalism
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.MND_02.physicalism' depends on axioms:
+  [Philosophy.MND_02.FundamentalIn, Philosophy.MND_02.GroundedIn,
+   Philosophy.MND_02.Instantiated, Philosophy.MND_02.Mental,
+   Philosophy.MND_02.NomicRole, Philosophy.MND_02.Property,
+   Philosophy.MND_02.Recovers, Philosophy.MND_02.Theory,
+   Philosophy.MND_02.actualTheory,
+   Philosophy.MND_02.assumption_3_1, Philosophy.MND_02.assumption_3_2,
+   Philosophy.MND_02.assumption_3_3, Philosophy.MND_02.assumption_3_4]
+\end{lstlisting}
+
+The first eight axioms are the primitives and \texttt{actualTheory} names the actual fundamental theory; \texttt{assumption\_3\_1} to \texttt{assumption\_3\_4} are Assumptions~\ref{a:corr}--\ref{a:ground}. Proposition~\ref{p:nontriv} depends on the primitives only, which confirms that the non-triviality of the thesis is a consequence of the definition and not of any empirical premise.
+
+\section{Conclusion}
+
+Hempel's dilemma assumes that \enquote{physical} must be defined by the content of some physical theory, current or future. Defined instead by reference to current physics together with the form of its foreseeable extensions, which recover it where it succeeds, integrate every fundamental property into their laws and posit no fundamental mentality, the physical is neither so narrow that physicalism is refuted by the incompleteness of current physics nor so wide that physicalism is trivial. So defined, physicalism follows from four premises about the actual fundamental level, the substantive one being that no fundamental property is mental, and is true if they are.
+
+\begin{thebibliography}{99}\small
+\bibitem[Chalmers and McQueen(2022)]{ChalmersMcQueen2022} Chalmers, D.~J. and McQueen, K.~J. (2022). Consciousness and the collapse of the wave function. In S.~Gao (Ed.), \emph{Consciousness and Quantum Mechanics}. Oxford University Press.
+\bibitem[Crane and Mellor(1990)]{CraneMellor1990} Crane, T. and Mellor, D.~H. (1990). There is no question of physicalism. \emph{Mind}, 99(394), 185--206.
+\bibitem[Dowell(2006)]{Dowell2006} Dowell, J.~L. (2006). The physical: empirical, not metaphysical. \emph{Philosophical Studies}, 131(1), 25--60.
+\bibitem[Goff(2017)]{Goff2017} Goff, P. (2017). \emph{Consciousness and Fundamental Reality}. Oxford University Press.
+\bibitem[Hempel(1969)]{Hempel1969} Hempel, C.~G. (1969). Reduction: ontological and linguistic facets. In S.~Morgenbesser, P.~Suppes and M.~White (Eds.), \emph{Philosophy, Science, and Method: Essays in Honor of Ernest Nagel}. St.~Martin's Press.
+\bibitem[Hempel(1980)]{Hempel1980} Hempel, C.~G. (1980). Comments on Goodman's \emph{Ways of Worldmaking}. \emph{Synthese}, 45(2), 193--199.
+\bibitem[Melnyk(1997)]{Melnyk1997} Melnyk, A. (1997). How to keep the \enquote{physical} in physicalism. \emph{The Journal of Philosophy}, 94(12), 622--637.
+\bibitem[Montero(1999)]{Montero1999} Montero, B. (1999). The body problem. \emph{No\^us}, 33(2), 183--200.
+\bibitem[Ney(2008)]{Ney2008} Ney, A. (2008). Physicalism as an attitude. \emph{Philosophical Studies}, 138(1), 1--15.
+\bibitem[Papineau(2001)]{Papineau2001} Papineau, D. (2001). The rise of physicalism. In C.~Gillett and B.~Loewer (Eds.), \emph{Physicalism and Its Discontents}. Cambridge University Press.
+\bibitem[Stoljar(2001)]{Stoljar2001} Stoljar, D. (2001). Two conceptions of the physical. \emph{Philosophy and Phenomenological Research}, 62(2), 253--281.
+\bibitem[Stoljar(2010)]{Stoljar2010} Stoljar, D. (2010). \emph{Physicalism}. Routledge.
+\bibitem[Wilson(2006)]{Wilson2006} Wilson, J. (2006). On characterizing the physical. \emph{Philosophical Studies}, 131(1), 61--99.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,63 @@
+\documentclass{situationist-preprint}
+
+\title{Conservativeness and Deflationism}
+\msid{LNG-10-b}
+\msfamily{LNG-10}
+\msdiscipline{Philosophy of Language}
+\mstype{Companion manuscript}
+\mskeywords{truth; deflationism; conservativeness; compositional truth; induction; reflection}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Shapiro and Ketland argued that deflationism about truth is refuted by a theorem: adding compositional truth axioms to Peano arithmetic, with induction extended to the truth predicate, yields a theory that proves the consistency of arithmetic, so that truth is not conservative and therefore not insubstantial. We locate its failure. The compositional axioms alone are conservative; the new arithmetical consequences come from extended induction, and they arise equally for any predicate satisfying the same clauses, whether or not it expresses truth. Non-conservativeness therefore measures the strength of open-ended induction, not a nature of truth, and the deflationism of LNG-10-a survives.
+\end{abstract}
+
+\section{The argument}
+
+Let PA be first-order Peano arithmetic, which can name its own sentences by coding. Two theories of truth for its language are standard \citep{Halbach2011}. TB adds a predicate $T$ and every instance of the disquotational schema $T(\ulcorner\phi\urcorner) \leftrightarrow \phi$ for arithmetical $\phi$. CT adds instead compositional clauses: an atomic sentence is true just in case it is a true equation; a negation is true just in case the negated sentence is not; a conjunction just in case both conjuncts are; a universal sentence just in case every numerical instance is. Write CT$^-$ for CT with induction only for arithmetical formulas, and CT for the theory with induction for all formulas, including those containing $T$.
+
+The conservativeness argument has four premises \citep{Shapiro1998,Ketland1999}: (1) if truth is insubstantial, a theory of truth added to a theory of non-semantic matters proves no new non-semantic sentences; (2) CT is an adequate theory of truth for arithmetic, proving the generalizations, such as \enquote{every theorem of PA is true}, that deflationists say the truth predicate exists to express; (3) CT proves that every theorem of PA is true, hence that $0 = 1$ is not a theorem, hence the consistency of PA; (4) PA does not prove its own consistency. So truth is substantial. Premises 3 and 4 are theorems; the question is which of 1 and 2 to reject.
+
+\section{Where the strength comes from}
+
+Two facts locate the strength of CT.
+
+\begin{proposition}\label{p:cons}
+TB and CT$^-$ are conservative over PA: every arithmetical sentence that either proves is a theorem of PA.
+\end{proposition}
+
+For CT$^-$ it is the theorem of \citet{KKL1981}, that every countable recursively saturated model of PA carries a satisfaction class. So the compositional clauses themselves, which state everything the deflationist says about how truth distributes over the logical constants, add no arithmetic. The proof of premise 3 needs one further step: an induction on the length of proofs, showing that every line of a proof in PA is true, on a formula that contains $T$. That is an instance of the extended induction schema, which CT$^-$ lacks.
+
+\begin{proposition}\label{p:any}
+Let $S$ be any new predicate and CT$[S]$ the theory that results from CT by putting $S$ for $T$. Then CT$[S]$ proves the consistency of PA.
+\end{proposition}
+
+\begin{proof}
+The proof of premise 3 uses only the compositional clauses and induction over formulas in the expanded vocabulary. Neither depends on the predicate's meaning.
+\end{proof}
+
+Proposition~\ref{p:any} shows that the gain in strength is not a fact about truth. A predicate introduced by stipulation to satisfy the compositional clauses, with no pretension to be a truth predicate, yields the same arithmetic as long as induction is applied to it. This is the formal content of Field's reply \citep{Field1999}: whoever accepts induction for arithmetic accepts it as open-ended, for every predicate that is well defined on the numbers, and it is this understanding of the natural numbers that the new theorems express. Premise 1 is true when \enquote{theory of truth} means the truth axioms; then the conservativeness requirement is met, by Proposition~\ref{p:cons}. It is false when the theory of truth is taken to include extended induction, which is a principle about numbers.
+
+\begin{objection}
+The deflationist says that the truth predicate exists in order to state generalizations such as \enquote{every theorem of PA is true}. If proving them requires extended induction, then extended induction is part of what the deflationist's truth predicate is for, and the strength is the strength of truth after all \citep{Ketland1999}.
+\end{objection}
+
+\begin{reply}
+The generalizing role is to express such generalizations, not to prove them. Proposition 3.2 of LNG-10-a shows that generalizations made with the truth predicate are equivalent to generalizations over what sentences say; it does not require that the truth axioms settle which of them hold. Whether every theorem of PA is true is a question about the theorems of PA, and the induction that settles it is induction over those theorems. By Proposition 3.3 of LNG-10-a, every condition satisfied by truth is satisfied by saying what obtains; Proposition~\ref{p:any} is the arithmetical instance.
+\end{reply}
+
+\section{Conclusion}
+
+The conservativeness argument shows that open-ended induction is strong, not that truth is substantial: the truth axioms are conservative, and the extra strength comes from a principle indifferent to the meaning of the predicate. The deflationism of LNG-10-a is untouched.
+
+\begin{thebibliography}{9}\small
+\bibitem[Field(1999)]{Field1999} Field, H. (1999). Deflating the conservativeness argument. \emph{The Journal of Philosophy}, 96(10), 533--540.
+\bibitem[Halbach(2011)]{Halbach2011} Halbach, V. (2011). \emph{Axiomatic Theories of Truth}. Cambridge University Press.
+\bibitem[Ketland(1999)]{Ketland1999} Ketland, J. (1999). Deflationism and Tarski's paradise. \emph{Mind}, 108(429), 69--94.
+\bibitem[Kotlarski et~al.(1981)]{KKL1981} Kotlarski, H., Krajewski, S. and Lachlan, A.~H. (1981). Construction of satisfaction classes for nonstandard models. \emph{Canadian Mathematical Bulletin}, 24(3), 283--293.
+\bibitem[Shapiro(1998)]{Shapiro1998} Shapiro, S. (1998). Proof and truth: Through thick and thin. \emph{The Journal of Philosophy}, 95(10), 493--521.
+\end{thebibliography}
+
+\end{document}

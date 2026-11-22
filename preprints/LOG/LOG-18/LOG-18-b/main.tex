@@ -1,0 +1,44 @@
+\documentclass{situationist-preprint}
+
+\title{Rules and Premises}
+\msid{LOG-18-b}
+\msfamily{LOG-18}
+\msdiscipline{Logic and Philosophy of Logic}
+\mstype{Consequence}
+\mskeywords{rules of inference; premises; Carroll's regress; logical truths; modus ponens}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+LOG-18-a argues that rules of inference are not premises. We draw a consequence for the nature of logic: adding every logical truth as a premise makes nothing new derivable without a rule, while one rule, modus ponens, makes every consequence of finitely many premises derivable. Logic consists of truths and at least one ineliminable rule.
+\end{abstract}
+
+Let $L$ be the set of all valid formulas of propositional logic, and let derivation systems be as in Definition~2.1 of LOG-18-a.
+
+\begin{proposition}\label{p:truths}
+In the system with no rules, the formulas derivable from $\Gamma \cup L$ are exactly the members of $\Gamma \cup L$. In particular, $Z$ is not derivable from $\{A, A \to Z\} \cup L$.
+\end{proposition}
+
+\begin{proof}
+Proposition~3.1 of LOG-18-a, applied to $\Gamma \cup L$; and $Z$, an atom, is not valid.
+\end{proof}
+
+\begin{proposition}\label{p:mp}
+In the system whose only rule is modus ponens, every formula that follows from a finite set $\Gamma$ is derivable from $\Gamma \cup L$.
+\end{proposition}
+
+\begin{proof}
+Let $\Gamma = \{\gamma_1, \ldots, \gamma_n\}$ and suppose $\Gamma \models \varphi$. Then $\gamma_1 \to (\gamma_2 \to \cdots (\gamma_n \to \varphi) \cdots)$ is in $L$, and $n$ applications of modus ponens derive $\varphi$.
+\end{proof}
+
+Logic has often been conceived as a body of truths, the most general truths there are; \citet[\S 38]{Russell1903} already observed that a principle of inference cannot be stated as one of the premises it governs. Proposition~\ref{p:truths}, which generalizes Theorem~3.2 of LOG-18-a, shows that such a conception is incomplete: however many logical truths a reasoner accepts, they do not take her from premises to conclusions without a rule. By Proposition~\ref{p:mp}, one rule suffices, which is why Hilbert systems make do with modus ponens; but the number of rules cannot be reduced to zero. This is the Tortoise's lesson stated generally: the regress of \citet{Carroll1895} is the attempt to reduce the last rule to a truth, and Proposition~\ref{p:truths} shows that the attempt fails however many truths are supplied.
+
+\paragraph{Conclusion.} Logic consists of truths and at least one rule, and the rule is not a truth among the others.
+
+\begin{thebibliography}{99}\small
+\bibitem[Carroll(1895)]{Carroll1895} Carroll, L. (1895). What the tortoise said to Achilles. \emph{Mind}, 4(14), 278--280.
+\bibitem[Russell(1903)]{Russell1903} Russell, B. (1903). \emph{The Principles of Mathematics}. Cambridge University Press.
+\end{thebibliography}
+
+\end{document}

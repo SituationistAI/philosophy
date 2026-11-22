@@ -1,0 +1,198 @@
+\documentclass{situationist-preprint}
+
+\title{A Moderate Duty of Beneficence}
+\msid{ETH-06-a}
+\msfamily{ETH-06}
+\msdiscipline{Normative and Applied Ethics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/ETH/ETH\_06.lean}
+\mskeywords{beneficence; demandingness; Singer; fair share; partial compliance; global poverty}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+How much must the affluent give to those in need? Singer's argument from the drowning child, iterated, requires them to give until further giving would sacrifice something of comparable importance, which for most of them means giving most of their income. Murphy's cooperative principle requires only the share they would owe under full compliance, which is small. We argue for an intermediate requirement: affluent agents must give a substantial fixed share of their income, set here at ten per cent, but not to the point of marginal utility. The duty is a duty to contribute one's share to the collective task of meeting basic need; the share is fixed in advance, so that the duty can be known and followed; and it is set at the least whole share that meets the need even if only those holding a tenth of affluent income comply. Given that the cost of meeting basic need is at most one per cent of affluent income, that share is ten per cent. We show that the marginal requirement is not moderate for any affluent agent, and that the ten per cent requirement is. The arithmetic is formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+\citet{Singer1972} argued from a principle and a case. The principle: if it is in our power to prevent something very bad from happening without thereby sacrificing anything of comparable moral importance, we ought to do it. The case: a passer-by who can save a child drowning in a shallow pond at the cost of muddying his clothes ought to do so. Since famine relief prevents deaths at a cost to the affluent that is not of comparable importance, the affluent ought to give, and since the principle applies again after each gift, they ought to keep giving until the next gift would cost them something of comparable importance. Singer recognized that this ``strong'' version requires giving to the point of marginal utility, the point at which the giver would cause as much suffering to herself or her dependants as she would relieve, and he offered a ``moderate'' version, requiring giving only until one would sacrifice something morally significant, while holding that the strong version is correct. \citet{Unger1996} pressed the argument further, concluding that the affluent are required to give almost everything they have.
+
+Three responses have structured the subsequent debate. The first accepts a prerogative to give one's own projects more weight than impartial value warrants \citep{Scheffler1982} and holds that the requirement of beneficence is limited by it; \citet{Kagan1989} argued that no such prerogative can be defended. The second holds that the requirement is fixed by fairness. \citet{Murphy1993,Murphy2000} argued that an agent's beneficence requirement should not exceed what it would be under full compliance, that is, if every agent did her share: the requirement does not increase because others fail to do theirs. The third holds that the extreme requirement undermines itself. \citet{Cullity2004} argued that the goods for whose sake we help others, such as the pursuit of personal projects and relationships, cannot consistently be denied to the helper by the requirement that grounds the help; and \citet{Hooker2000} argued that the code whose internalization would have the best consequences would require substantial but not extreme aid.
+
+We defend a version of the second response, modified to answer the main objection to it. The objection is that Murphy's requirement is too small. If the full-compliance share is one per cent of income, and others do not comply, then need goes unmet while those who comply do only what would have sufficed had everyone else complied; it seems wrong that an agent who could easily do more should be excused because others did less. Our thesis is that the requirement is a fixed share set to be robust to partial compliance: large enough that need would be met even if most affluent agents failed to comply, and fixed in advance rather than adjusted to actual compliance. Under premises we state and defend, that share is ten per cent of income, a substantial requirement that falls far short of marginal utility.
+
+\section{Framework}
+
+Income, gifts and the cost of meeting basic need are measured in a common unit over a period, such as a year. An agent is \emph{affluent} if her income exceeds what she needs for a decent life by a substantial margin; we make this precise only where it is used, in Proposition~\ref{p:half}.
+
+\begin{definition}[Giving a share]\label{d:share}
+An agent with income $I$ \emph{gives a share of $p$ per cent} if her gift is at least $pI/100$.
+\end{definition}
+
+\begin{definition}[The marginal requirement]\label{d:marginal}
+For an agent with income $I$, let $s$ be the level of income at which a further gift would sacrifice something of comparable moral importance to what it would prevent. The \emph{marginal requirement} is to give $I - s$, a share of $100(I-s)/I$ per cent.
+\end{definition}
+
+While basic need remains unmet, Singer's strong principle, applied repeatedly, requires exactly the marginal requirement, since each further gift up to the level $s$ prevents something very bad at a cost not of comparable importance.
+
+The argument uses three principles about the structure of the duty.
+
+\begin{principle}[Collective task]\label{pr:task}
+The duty of beneficence owed to those in basic need is a duty to contribute one's share to the collective task of meeting that need, and the share is a share of one's income fixed in advance, the same for all affluent agents.
+\end{principle}
+
+\begin{principle}[Robustness]\label{pr:robust}
+The share must be large enough that, if the affluent agents who comply hold at least one tenth of the income of the affluent, basic need is met.
+\end{principle}
+
+\begin{principle}[Least robust share]\label{pr:least}
+The requirement is the least whole-percentage share that satisfies Principle~\ref{pr:robust}, provided that share is moderate.
+\end{principle}
+
+And three substantive assumptions.
+
+\begin{assumption}[The cost of need]\label{a:need}
+The cost of meeting basic need is at most one per cent of the income of the affluent.
+\end{assumption}
+
+\begin{assumption}\label{a:tenth}
+A requirement to give one tenth of one's income is moderate.
+\end{assumption}
+
+\begin{assumption}\label{a:half}
+A requirement to give one half of one's income, or more, is not moderate.
+\end{assumption}
+
+Principle~\ref{pr:task} is the core of the fair-share view \citep{Murphy2000}. We add that the share is fixed in advance. A requirement that varied with actual compliance would be unknowable by the agent who is to follow it, since no agent knows what others will give, and it would make what each owes depend without limit on the wrongdoing of others, which is the feature of Singer's requirement that the fair-share view was introduced to avoid.
+
+Principle~\ref{pr:robust} is where we depart from Murphy. A share fixed at the full-compliance level would leave need unmet whenever compliance is partial, which it always is. A share fixed in advance must therefore be chosen with partial compliance in view, as a rule of the road is chosen with careless drivers in view. The compliance floor of one in ten is a judgment about what a publicly recognized duty of moderate cost can be relied upon to achieve: it is pessimistic enough that actual compliance has a good chance of exceeding it, and not so pessimistic that the share it requires ceases to be moderate. We return to its choice in Section~\ref{s:objections}.
+
+Assumption~\ref{a:need} is empirical. The long-standing international target for official development assistance is 0.7 per cent of the national income of rich countries, and \citet{Sachs2005} argued that sustained aid at that level would suffice to end extreme poverty. Estimates vary with the definition of basic need and with the effectiveness of aid, but we know of none on which the annual cost of meeting basic need approaches one per cent of the income of the affluent populations of the world, taken together. Assumptions~\ref{a:tenth} and~\ref{a:half} are judgments of moderateness. A tenth of income is the share that many traditions of giving have taken as a standard, and its loss does not displace the central projects of an affluent life. Half of one's income, or more, cannot be given without abandoning or radically curtailing such projects for most of those who earn it.
+
+\section{The argument}
+
+\begin{lemma}\label{l:sum}
+If every member of a group gives a share of $p$ per cent, the group gives a share of $p$ per cent of its total income.
+\end{lemma}
+
+\begin{proof}
+Summing the inequalities $pI_k \leq 100\,g_k$ over the members of the group gives $p\sum I_k \leq 100 \sum g_k$.
+\end{proof}
+
+\begin{theorem}[Sufficiency]\label{t:sufficiency}
+Given Assumption~\ref{a:need}, if the agents who comply hold at least one tenth of the income of the affluent and each gives ten per cent, basic need is met.
+\end{theorem}
+
+\begin{proof}
+Let $Y$ be the income of the affluent, $N$ the cost of need, $T$ the income of those who comply and $G$ their total gift. By Lemma~\ref{l:sum}, $10\,T \leq 100\,G$. By hypothesis, $Y \leq 10\,T$, and by Assumption~\ref{a:need}, $100\,N \leq Y$. Hence $100\,N \leq 100\,G$, and $N \leq G$.
+\end{proof}
+
+\begin{proposition}[Minimality]\label{p:minimal}
+No share below ten per cent satisfies Principle~\ref{pr:robust} in every case consistent with Assumption~\ref{a:need}.
+\end{proposition}
+
+\begin{proof}
+Let $p < 10$. Take affluent income $1000$ units, need $10$ units, which is one per cent, and compliers holding $100$ units, which is one tenth. If each complier gives exactly $p$ per cent, they give $p$ units in total, which is less than $10$.
+\end{proof}
+
+\begin{proposition}\label{p:half}
+For an agent whose income is at least twice the level $s$ of Definition~\ref{d:marginal}, the marginal requirement is a share of at least fifty per cent.
+\end{proposition}
+
+\begin{proof}
+If $2s \leq I$, then $I - s \geq I/2$, so $100(I-s)/I \geq 50$.
+\end{proof}
+
+The condition $2s \leq I$ is a minimal construal of affluence: the level at which further giving would sacrifice something of comparable importance is, for an agent in a rich country, at most the level of a modest life, and the affluent earn at least twice that.
+
+\begin{theorem}[The moderate duty]\label{t:moderate}
+Given Assumptions~\ref{a:need}--\ref{a:half}: the ten per cent share is moderate and satisfies Principle~\ref{pr:robust}; no smaller whole share satisfies it; and the marginal requirement is not moderate for any affluent agent. Hence, by Principles~\ref{pr:task}--\ref{pr:least}, affluent agents are required to give ten per cent of their income, and are not required to give to the point of marginal utility.
+\end{theorem}
+
+\begin{proof}
+The first claim is Assumption~\ref{a:tenth} and Theorem~\ref{t:sufficiency}; the second is Proposition~\ref{p:minimal}; the third follows from Proposition~\ref{p:half} and Assumption~\ref{a:half}. By Principle~\ref{pr:least}, the requirement is the least robust share, which is ten per cent, and it is moderate. By Principle~\ref{pr:task}, the requirement is this share and no more, so the marginal requirement, which exceeds it, is not required.
+\end{proof}
+
+Two features of the result deserve comment. First, the requirement is substantial. For most affluent agents ten per cent of income is several times what they now give, and several times Murphy's full-compliance share. It is not a requirement that the affluent can meet by occasional gifts. Second, the requirement is fixed. It does not rise when others fail to give, and it does not fall when they give more. An agent who has given her tenth has done what beneficence requires of her toward distant need in that period, whatever others have done.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[The pond]
+Fixing the share in advance licenses the passer-by to walk past the drowning child once he has given his tenth. That is absurd.
+\end{objection}
+
+\begin{reply}
+The objection conflates two duties. The passer-by at the pond is under a duty to rescue, which ETH-18 argues holds up to moderate cost and is distinct from the duty of beneficence: it is owed to a particular person in an emergency that the agent is uniquely placed to meet, and it does not draw on the share owed to the collective task. The analogy between the pond and distant need, on which Singer's argument rests, holds for the question whether there is a duty to help, and fails for the question how the duty is limited. Rescue is not a share of a collective task, and an agent who has given her tenth is not thereby excused from rescuing. ETH-28 shows that the two duties together still leave the agent a large personal prerogative.
+\end{reply}
+
+\begin{objection}[Arbitrariness]
+The compliance floor of one in ten, and with it the figure of ten per cent, is arbitrary. A floor of one in twenty would give twenty per cent.
+\end{objection}
+
+\begin{reply}
+The floor is a judgment, not a theorem, and Theorem~\ref{t:moderate} makes the dependence explicit: with a lower floor, the least robust share rises in proportion. But the choice is constrained from both sides. A floor of one in twenty yields a share that begins to press against the bound of moderateness for agents with modest affluence; a floor of one in five yields a share that would leave need unmet under the compliance we actually observe. Within these bounds one in ten is the natural choice, and the conclusion that the duty is a substantial fixed share, not marginal utility, holds for every choice within them. A duty that must be followed by many people needs a definite figure, and the arbitrariness of the last digit is the arbitrariness of every legal limit, not a defect peculiar to the present view.
+\end{reply}
+
+\begin{objection}[Unmet need]
+If compliance falls below the floor, need goes unmet, and agents who could prevent deaths at moderate cost are permitted not to. This is the objection to Murphy's view, which the present view inherits.
+\end{objection}
+
+\begin{reply}
+The present view inherits it in a much weaker form. Murphy's requirement leaves need unmet whenever compliance is less than full; ours leaves it unmet only when compliance is less than one in ten, which is a much rarer failure. When it does occur, the shortfall is a wrong done by those who failed to comply, and the remedy lies in institutions that secure compliance rather than in a requirement that grows without limit for those who already comply. POL-13 argues that the duties of beneficence defended here apply globally and that their fulfilment requires international institutions; the robustness of the share to partial compliance is what makes such institutions feasible, since they need to secure only a fraction of the compliance that a full-compliance share would require. Agents who give more than their share act well, and beyond the requirement their giving is supererogatory in the sense of ETH-14.
+\end{reply}
+
+\begin{objection}[The prerogative is unjustified]
+Kagan argued that no agent-centered prerogative can be defended \citep{Kagan1989}. The view relies on one, in Assumptions~\ref{a:tenth} and~\ref{a:half}.
+\end{objection}
+
+\begin{reply}
+The view relies on judgments of moderateness, not on an independent prerogative. Principle~\ref{pr:task} limits the duty by fairness: no agent is required to do more than her share of a collective task, and the share is fixed by what the task needs under pessimistic compliance. Moderateness enters only as a constraint on the choice of the floor. The prerogative is then a consequence: what the duty does not require, the agent may spend on her own projects and on those close to her, which ETH-19 argues she may favor without impartial justification.
+\end{reply}
+
+\section{What the result does not establish}
+
+The result does not determine where gifts should go or through what agencies; that is a question about the effectiveness of aid and about institutions (POL-13). It does not apply to agents who are not affluent, for whom Proposition~\ref{p:half} fails and the fixed share may not be moderate. It does not fix the duty under a radically different distribution of need and income: if the cost of need rose above a few per cent of affluent income, Assumption~\ref{a:need} would fail, and the least robust share would rise with it, possibly beyond what is moderate. And it does not address duties of rectification, which those who have contributed to causing poverty may owe in addition to the duty of beneficence \citep{Pogge2002}.
+
+\section{Formalization}
+
+Theorem~\ref{t:moderate} is formalized in \nolinkurl{Philosophy/ETH/ETH_06.lean}. Groups of agents are lists of pairs of income and gift, and Lemma~\ref{l:sum} is proved by induction on the list. The cost of need and the income of the affluent are declared as constants, and Assumptions~\ref{a:need}--\ref{a:half} are axioms; moderateness is a primitive predicate on shares. The principles of Section~2 are not formalized: the theorem establishes the four facts from which, by those principles, the requirement follows.
+
+\begin{lstlisting}
+theorem moderate_duty :
+    Moderate 10 ∧
+    (∀ l : List (Nat × Nat), (∀ x, x ∈ l → GivesShare 10 x.1 x.2) →
+        affluentIncome ≤ 10 * totalIncome l → need ≤ totalGift l) ∧
+    (∀ p, p < 10 → ∃ Y N T, 100 * N = Y ∧ 10 * T = Y ∧ p * T < 100 * N) ∧
+    (∀ I s, 0 < I → 2 * s ≤ I → ¬ Moderate (marginalShare I s))
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.ETH_06.moderate_duty' depends on axioms:
+  [propext, Quot.sound, Philosophy.ETH_06.Moderate,
+   Philosophy.ETH_06.affluentIncome, Philosophy.ETH_06.half_immoderate,
+   Philosophy.ETH_06.need, Philosophy.ETH_06.need_bound,
+   Philosophy.ETH_06.tenth_moderate]
+\end{lstlisting}
+
+Besides two standard axioms of Lean's logic, the theorem depends on the primitive \texttt{Moderate}, the constants \texttt{need} and \texttt{affluentIncome}, and the axioms \texttt{need\_bound} (Assumption~\ref{a:need}), \texttt{tenth\_moderate} (Assumption~\ref{a:tenth}) and \texttt{half\_immoderate} (Assumption~\ref{a:half}).
+
+\section{Conclusion}
+
+The duty of beneficence is a duty to do one's share of the collective task of meeting basic need. The share is fixed in advance and set at the least whole share that meets the need when only those holding a tenth of affluent income comply. Since meeting basic need costs at most one per cent of affluent income, that share is ten per cent. It is substantial and moderate, while the marginal requirement that Singer's argument yields when iterated is not moderate for any affluent agent. Affluent agents must give a tenth of their income, and they are not required to give to the point of marginal utility.
+
+\begin{thebibliography}{99}\small
+\bibitem[Cullity(2004)]{Cullity2004} Cullity, G. (2004). \emph{The Moral Demands of Affluence}. Clarendon Press.
+\bibitem[Hooker(2000)]{Hooker2000} Hooker, B. (2000). \emph{Ideal Code, Real World: A Rule-Consequentialist Theory of Morality}. Clarendon Press.
+\bibitem[Kagan(1989)]{Kagan1989} Kagan, S. (1989). \emph{The Limits of Morality}. Clarendon Press.
+\bibitem[Murphy(1993)]{Murphy1993} Murphy, L.~B. (1993). The demands of beneficence. \emph{Philosophy \& Public Affairs}, 22(4), 267--292.
+\bibitem[Murphy(2000)]{Murphy2000} Murphy, L.~B. (2000). \emph{Moral Demands in Nonideal Theory}. Oxford University Press.
+\bibitem[Pogge(2002)]{Pogge2002} Pogge, T. (2002). \emph{World Poverty and Human Rights}. Polity Press.
+\bibitem[Sachs(2005)]{Sachs2005} Sachs, J.~D. (2005). \emph{The End of Poverty: Economic Possibilities for Our Time}. Penguin Press.
+\bibitem[Scheffler(1982)]{Scheffler1982} Scheffler, S. (1982). \emph{The Rejection of Consequentialism}. Clarendon Press.
+\bibitem[Singer(1972)]{Singer1972} Singer, P. (1972). Famine, affluence, and morality. \emph{Philosophy \& Public Affairs}, 1(3), 229--243.
+\bibitem[Unger(1996)]{Unger1996} Unger, P. (1996). \emph{Living High and Letting Die: Our Illusion of Innocence}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

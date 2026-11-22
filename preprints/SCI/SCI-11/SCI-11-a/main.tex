@@ -1,0 +1,182 @@
+\documentclass{situationist-preprint}
+
+\title{Chemistry Reduces to Physics in Principle}
+\msid{SCI-11-a}
+\msfamily{SCI-11}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mskeywords{reduction; chemistry; quantum chemistry; molecular structure; emergence; computational complexity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does chemistry reduce to physics? Philosophers of chemistry have argued that it does not: quantum chemistry relies on approximations that are not derived from quantum mechanics, the concept of molecular structure has no place in the exact theory, and the periodic table has never been deduced from first principles. We argue that chemistry reduces to physics in principle, and that its practical irreducibility reflects computational limits rather than ontological autonomy. We distinguish reduction in principle, which requires that chemical kinds be identical with physical kinds and that chemical regularities be entailed by physical laws together with physical conditions, from reduction in practice, which requires in addition that the entailment be computable by feasible means. We show that the standard objections establish failures of the second kind only. The approximations of quantum chemistry are controlled by the exact theory; molecular structure emerges from the exact theory by decoherence, as other classical properties do; and the cost of exact solution grows exponentially with the number of electrons, which explains why chemistry must use its own concepts without implying that those concepts track anything over and above the physics.
+\end{abstract}
+
+\section{The problem}
+
+In 1929 Dirac wrote that the physical laws needed for the mathematical theory of a large part of physics and the whole of chemistry were completely known, and that the only difficulty was that the exact application of these laws led to equations much too complicated to be soluble \citep{Dirac1929}. The remark expresses the view that chemistry reduces to physics in principle but not in practice. For several decades it was the received view among physicists and philosophers alike, and it underwrote the treatment of chemistry in the classical model of reduction \citep{Nagel1961}.
+
+Since the 1990s the philosophy of chemistry has challenged it. \citet{Scerri1994} argued that the periodic system had not been derived from quantum mechanics, even approximately, since the calculations that reproduce it use parameters fitted to data and the orbital approximation, which is strictly false of many-electron atoms. \citet{Woolley1978} argued that the exact quantum mechanical description of a molecule, in which nuclei and electrons are treated alike, has no shape: the eigenstates of the full molecular Hamiltonian are spherically symmetric, and the structural formulae of chemistry correspond to nothing in them. \citet{Hendry1998,Hendry2010} developed this into an argument for strong emergence: the molecular structures that chemistry attributes are imposed on the quantum mechanical description by the Born--Oppenheimer approximation, which fixes the nuclei by hand, and so they are not derived from the physics but added to it. If so, chemistry has a causal and explanatory autonomy that the reductionist denies. Others, notably \citet{vanBrakel2000}, have taken the failures of derivation to show that the relation between chemistry and physics is one of mutual consistency, not of reduction.
+
+We defend reduction in principle. Our thesis is that chemistry reduces to physics in principle, and that its practical irreducibility reflects computational limits, not ontological autonomy. The argument turns on a distinction between two questions that the debate has often run together: whether chemical facts are fixed by physical facts and entailed by physical laws, and whether the entailment can be carried out. The objections from the philosophy of chemistry are serious answers to the second question. We argue that they leave the first untouched.
+
+\section{Framework}
+
+\begin{definition}\label{d:inprinciple}
+A special science $S$ \emph{reduces in principle} to a theory $T$ if (i) every kind of $S$ is identical with a kind characterizable in the vocabulary of $T$, and (ii) every law of $S$ is entailed, as an approximation valid in its domain, by the laws of $T$ together with conditions characterizable in the vocabulary of $T$.
+\end{definition}
+
+\begin{definition}\label{d:inpractice}
+$S$ \emph{reduces in practice} to $T$ if it reduces in principle and, in addition, the entailments in clause (ii) can be carried out, for the systems that $S$ studies, by procedures whose cost is feasible.
+\end{definition}
+
+\begin{definition}\label{d:autonomy}
+$S$ is \emph{ontologically autonomous} from $T$ if some kind or causal power attributed by $S$ is not fixed by the kinds, laws and conditions of $T$.
+\end{definition}
+
+Definition~\ref{d:inprinciple} is Nagelian in spirit, with the two refinements that later discussion made standard: bridge principles are identities, not mere correlations \citep{Kim1998}, and the reduced laws need be entailed only as approximations, with their domain of validity specified by the reducing theory \citep{Needham2010}. The approximations must themselves be justified by the reducing theory; an approximation is \emph{controlled} if the reducing theory specifies when it holds and bounds the error it introduces. Definition~\ref{d:autonomy} is the denial of reduction in principle in its ontological dimension. It is what the strong emergentist asserts, as the British emergentists asserted it of chemical bonding before quantum mechanics \citep{Broad1925,McLaughlin1992}.
+
+The physical theory relevant to chemistry is non-relativistic quantum mechanics of nuclei and electrons interacting by Coulomb forces, with relativistic corrections for heavy elements. The kinds of chemistry are elements, compounds, bonds, functional groups and reactions; its laws are the periodic regularities, the laws of definite proportions, the rules of valence and the regularities of thermochemistry and kinetics.
+
+\begin{assumption}[Physical constitution]\label{a:constitution}
+Every chemical substance is constituted by nuclei and electrons, and every chemical process is a process involving them.
+\end{assumption}
+
+\begin{assumption}[Completeness of the Hamiltonian]\label{a:hamiltonian}
+The dynamics of nuclei and electrons in the energy range relevant to chemistry is given by the Coulomb Hamiltonian, with relativistic corrections, together with their interaction with the electromagnetic field and the environment.
+\end{assumption}
+
+Assumption~\ref{a:constitution} is the atomic theory of matter. Assumption~\ref{a:hamiltonian} is supported by the agreement of high-accuracy calculations with experiment wherever such calculations are feasible: for small molecules, computed bond lengths, vibrational frequencies and reaction energies agree with measurement to within experimental error, and no discrepancy has been found that would indicate a force or interaction missing from the Hamiltonian \citep{Kohn1999}.
+
+\section{The argument}
+
+\begin{lemma}[Kinds]\label{l:kinds}
+Every chemical kind is identical with a kind characterizable in physical vocabulary.
+\end{lemma}
+
+\begin{proof}
+An element is the kind whose members are atoms with a given nuclear charge; IUPAC defines it so, and the identification survived the discovery of isotopes because chemical behavior depends on nuclear charge and only very slightly on mass. A compound is a kind of substance whose molecules, or whose lattice units, contain nuclei of given charges in given proportions bound in a given arrangement. A chemical bond is a stable arrangement of electron density between nuclei that lowers the energy of the system relative to the separated atoms. A reaction is a transition between such arrangements. Each characterization uses only the charges and masses of nuclei, the number of electrons, and properties of the quantum state of the whole, all of which belong to the vocabulary of physics.
+\end{proof}
+
+\begin{lemma}[Laws]\label{l:laws}
+The laws of chemistry are entailed, as approximations valid in their domains, by the Coulomb Hamiltonian together with physical conditions.
+\end{lemma}
+
+\begin{proof}
+By Assumptions~\ref{a:constitution} and~\ref{a:hamiltonian}, the behavior of any chemical system is the behavior of a system of nuclei and electrons evolving under the Coulomb Hamiltonian in an environment. The chemical laws are regularities in this behavior. The periodicity of chemical properties follows from the shell structure of the many-electron atom, which is a consequence of the spectrum of the Hamiltonian; the laws of definite and multiple proportions follow from the existence of discrete stable bound states; valence follows from the energetics of electron sharing and transfer; thermochemistry follows from the energy differences between bound states; kinetics follows from the structure of the potential energy surface and the dynamics on it. In each case the regularity holds within a domain, of temperatures, pressures and nuclear charges, that the physics specifies, and fails outside it as the physics predicts: noble gases form compounds under conditions in which the octet rule fails, and the chemistry of the heaviest elements departs from periodic trends because of relativistic effects that the Hamiltonian includes.
+\end{proof}
+
+\begin{theorem}\label{t:reduction}
+Chemistry reduces in principle to physics.
+\end{theorem}
+
+\begin{proof}
+Clause (i) of Definition~\ref{d:inprinciple} is Lemma~\ref{l:kinds}, and clause (ii) is Lemma~\ref{l:laws}.
+\end{proof}
+
+\begin{proposition}[Computational cost]\label{p:cost}
+The exact solution of the Coulomb Hamiltonian for a system of $N$ electrons requires, by any general method known, resources that grow exponentially in $N$, and the problem of computing ground-state energies of interacting electron systems is computationally hard in general.
+\end{proposition}
+
+\begin{proof}
+The state space of $N$ electrons in a basis of $M$ one-electron orbitals has dimension equal to the number of ways of choosing $N$ of the $M$ orbitals, which grows exponentially when $M$ is proportional to $N$. Exact diagonalization in this space, the method of full configuration interaction, is therefore exponential in cost. \citet{SchuchVerstraete2009} showed that computing the universal functional of density functional theory is QMA-hard, so that no efficient general algorithm for the exact ground-state problem exists unless widely believed conjectures of complexity theory fail.
+\end{proof}
+
+\begin{corollary}\label{c:practice}
+Chemistry does not reduce in practice to physics, and the failure is explained by Proposition~\ref{p:cost}.
+\end{corollary}
+
+\begin{proof}
+Chemistry studies systems with tens to thousands of electrons. By Proposition~\ref{p:cost}, the entailments of Lemma~\ref{l:laws} cannot in general be carried out exactly for such systems by feasible means, so the condition of Definition~\ref{d:inpractice} fails. Chemistry must therefore proceed by approximations, models and concepts of its own, chosen for their tractability and their fit with the phenomena.
+\end{proof}
+
+\begin{corollary}\label{c:noautonomy}
+Chemistry is not ontologically autonomous from physics.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{l:kinds}, every chemical kind is fixed by physical kinds. A causal power attributed by chemistry, such as the reactivity of a functional group, is a disposition of a system of nuclei and electrons to evolve in certain ways under certain conditions, which the Hamiltonian and the conditions fix. So no chemical kind or causal power is unfixed by the physics, and Definition~\ref{d:autonomy} is not satisfied.
+\end{proof}
+
+The two corollaries together are the thesis. They show that the failure of reduction in practice, which nobody disputes, is not evidence of autonomy: it is predicted by the reducing theory itself, from the size of the state spaces it assigns to the systems chemistry studies.
+
+\section{Molecular structure}\label{s:structure}
+
+Woolley's problem is the most serious objection to Theorem~\ref{t:reduction}, and it deserves separate treatment. The eigenstates of the full molecular Hamiltonian, which treats nuclei and electrons on the same footing, are invariant under rotation and under permutation of identical nuclei. Isomers, molecules with the same atoms in different arrangements, are not distinguished by any eigenstate: the exact ground state of the atoms that make up ethanol is also the exact ground state of the atoms that make up dimethyl ether. Structure appears only when the Born--Oppenheimer approximation clamps the nuclei at fixed positions and solves for the electrons in their field \citep{BornOppenheimer1927}. Hendry concludes that structure is imposed, not derived \citep{Hendry2010}.
+
+The conclusion does not follow, because the premise considers the wrong states. A real molecule is not in an energy eigenstate of an isolated system. It is a system interacting continually with its environment, and the interaction selects states localized in nuclear configuration, for the same reason that it selects localized states for any system of sufficiently massive and strongly interacting parts \citep{Zurek2003}. The phenomenon is decoherence, and it is the same phenomenon that explains why tables and cats have definite positions. A molecule's shape is one of its classical properties, and it emerges from the quantum dynamics of molecule and environment in the way that classical properties in general emerge. The superpositions of isomers that the exact isolated eigenstates describe are dynamically unstable in any realistic environment and are not observed, as the superpositions of macroscopically distinct states of any system are not observed. On the interpretation of quantum mechanics defended in SCI-09, there is no further question whether the superposition collapses: the decohered components are branches, and in each the molecule has a definite structure.
+
+The Born--Oppenheimer approximation is then a controlled approximation in the sense of Section~2. It is justified by the ratio of electronic to nuclear masses, which makes the nuclei slow relative to the electrons, and by decoherence, which localizes the nuclei; its error is bounded by known corrections, and it fails, as the theory predicts, near conical intersections, where non-adiabatic effects must be included \citep{SutcliffeWoolley2012}. Using it is not adding structure by hand. It is exploiting a separation of time scales that the exact theory guarantees, as the use of the rigid-body approximation in mechanics exploits the stiffness of solids.
+
+\section{Objections and replies}
+
+\begin{objection}[Fitted parameters]\label{o:scerri}
+The quantum chemical calculations that reproduce the periodic table and molecular properties rely on fitted parameters and on the orbital approximation, which is false for many-electron systems. What is reproduced is therefore not derived from quantum mechanics \citep{Scerri1994}.
+\end{objection}
+
+\begin{reply}
+The objection shows that the calculations chemists actually perform are not derivations from first principles, which Corollary~\ref{c:practice} grants. It does not show that a derivation is impossible. Fitted parameters are used because exact calculation is too costly, and wherever exact or controlled ab initio methods are feasible, as for light atoms and small molecules, they reproduce the data without fitting. The orbital approximation is a computational device whose errors are themselves computable by the methods of configuration interaction and coupled cluster theory, and the order of filling of atomic shells, the core of the periodic system, is reproduced by such methods for every element for which they have been carried through. That the periodic table has not been derived in full generality is a fact about the cost of computation, not about the content of the theory.
+\end{reply}
+
+\begin{objection}[Downward causation]\label{o:hendry}
+If molecular structure is not derived but imposed, then structure is a configurational property with causal powers that the physics does not supply, a case of downward causation \citep{Hendry2006}.
+\end{objection}
+
+\begin{reply}
+Section~\ref{s:structure} argues that structure is derived from the dynamics of molecule and environment. The argument requires the environment, but the environment is physical and its interaction with the molecule is governed by the same Hamiltonian. A property that emerges from the physical dynamics of a system and its surroundings is not thereby autonomous: it is fixed by the physical state of the whole, as Definition~\ref{d:autonomy} requires for its absence. The emergentist must show that structure is not fixed even by the state of molecule and environment together, and no evidence suggests this.
+\end{reply}
+
+\begin{objection}[Chemical concepts]\label{o:concepts}
+Concepts such as aromaticity, electronegativity and the chemical bond itself have no precise counterpart in quantum mechanics. Different quantum mechanical analyses of the bond give different answers, and no analysis is privileged. Chemistry therefore has concepts that do not reduce.
+\end{objection}
+
+\begin{reply}
+That a chemical concept has several physical precisifications, none privileged, shows that it is vague, not that it picks out something beyond the physics. Vagueness in a special-science concept is to be expected when the concept was introduced to classify phenomena before the underlying theory was known. Each precisification identifies the concept's extension with a physically characterized class, and the borderline cases are cases in which chemists themselves disagree. Lemma~\ref{l:kinds} requires that each chemical kind be identical with a physically characterizable kind; for vague concepts, that holds of each admissible precisification, and that is all reduction requires.
+\end{reply}
+
+\begin{objection}[Multiple realizability]\label{o:multiple}
+Some chemical properties, such as acidity, are multiply realized: Brønsted acids, Lewis acids and superacids are physically heterogeneous. A multiply realized kind is not identical with any physical kind.
+\end{objection}
+
+\begin{reply}
+Acidity is a functional property, the disposition to donate a proton or to accept an electron pair, and the physically heterogeneous realizers share it because they share the physical disposition. A functional kind is identical with the physical disposition it names, characterized in physical vocabulary by what the system would do under specified physical conditions; Lemma~\ref{l:kinds} does not require that the disposition have a single structural basis. Where the concept covers dispositions that are not physically unified, as Brønsted and Lewis acidity are not, chemistry itself treats it as a family of kinds.
+\end{reply}
+
+\section{What the result does not establish}
+
+The argument does not establish that chemists should, or could, do without chemical concepts. By Corollary~\ref{c:practice}, they cannot: chemistry is indispensable because the computations that would replace it are infeasible. Nor does the argument establish that the computational limits are permanent. Quantum computers could in principle simulate molecular Hamiltonians with polynomial resources \citep{Feynman1982,Lloyd1996}, and early demonstrations of quantum algorithms for molecular energies have been given \citep{AspuruGuzik2005}; if such machines become practical, reduction in practice will advance for systems that are now out of reach, which is what the computational diagnosis predicts. The argument does not settle whether physics itself is complete: Assumption~\ref{a:hamiltonian} concerns the energy range relevant to chemistry, and is compatible with the existence of physics not yet discovered at other scales (see SCI-20).
+
+\section{Consequences}
+
+Two consequences deserve mention. First, the result supports physicalism in the form defended by MND-02, on which the physical is defined by reference to current physics and its foreseeable extensions: for chemistry, current physics already suffices. Second, it bears on natural kinds. MET-27-a holds that chemical elements and their isotopes are natural kinds, with clusters whose core is the nuclear charge and the electron number and whose surplus includes the spectrum and the chemistry. The reducibility of chemistry is what makes these clusters nomic: by Lemma~\ref{l:laws}, the surplus follows from the core by the laws of physics.
+
+\section{Conclusion}
+
+Chemistry reduces to physics in principle. Its kinds are physical kinds, and its laws are entailed, as approximations valid in their domains, by the Coulomb Hamiltonian and physical conditions. The objections from the philosophy of chemistry show that these entailments are not, and in general cannot be, carried out, because the cost of exact quantum mechanical computation grows exponentially with the number of electrons. That is a computational limit, predicted by the reducing theory itself, and it explains why chemistry needs its own concepts without giving those concepts anything to track beyond the physics.
+
+\begin{thebibliography}{99}\small
+\bibitem[Aspuru-Guzik et~al.(2005)]{AspuruGuzik2005} Aspuru-Guzik, A., Dutoi, A.~D., Love, P.~J. and Head-Gordon, M. (2005). Simulated quantum computation of molecular energies. \emph{Science}, 309, 1704--1707.
+\bibitem[Born and Oppenheimer(1927)]{BornOppenheimer1927} Born, M. and Oppenheimer, R. (1927). Zur Quantentheorie der Molekeln. \emph{Annalen der Physik}, 84, 457--484.
+\bibitem[Broad(1925)]{Broad1925} Broad, C.~D. (1925). \emph{The Mind and Its Place in Nature}. Kegan Paul.
+\bibitem[Dirac(1929)]{Dirac1929} Dirac, P.~A.~M. (1929). Quantum mechanics of many-electron systems. \emph{Proceedings of the Royal Society of London A}, 123, 714--733.
+\bibitem[Feynman(1982)]{Feynman1982} Feynman, R.~P. (1982). Simulating physics with computers. \emph{International Journal of Theoretical Physics}, 21, 467--488.
+\bibitem[Hendry(1998)]{Hendry1998} Hendry, R.~F. (1998). Models and approximations in quantum chemistry. In N.~Shanks (ed.), \emph{Idealization IX: Idealization in Contemporary Physics}. Rodopi.
+\bibitem[Hendry(2006)]{Hendry2006} Hendry, R.~F. (2006). Is there downward causation in chemistry? In D.~Baird, E.~Scerri and L.~McIntyre (eds.), \emph{Philosophy of Chemistry: Synthesis of a New Discipline}. Springer.
+\bibitem[Hendry(2010)]{Hendry2010} Hendry, R.~F. (2010). Ontological reduction and molecular structure. \emph{Studies in History and Philosophy of Modern Physics}, 41(2), 183--191.
+\bibitem[Kim(1998)]{Kim1998} Kim, J. (1998). \emph{Mind in a Physical World}. MIT Press.
+\bibitem[Kohn(1999)]{Kohn1999} Kohn, W. (1999). Nobel lecture: Electronic structure of matter---wave functions and density functionals. \emph{Reviews of Modern Physics}, 71(5), 1253--1266.
+\bibitem[Lloyd(1996)]{Lloyd1996} Lloyd, S. (1996). Universal quantum simulators. \emph{Science}, 273, 1073--1078.
+\bibitem[McLaughlin(1992)]{McLaughlin1992} McLaughlin, B.~P. (1992). The rise and fall of British emergentism. In A.~Beckermann, H.~Flohr and J.~Kim (eds.), \emph{Emergence or Reduction?} de Gruyter.
+\bibitem[Nagel(1961)]{Nagel1961} Nagel, E. (1961). \emph{The Structure of Science}. Harcourt, Brace and World.
+\bibitem[Needham(2010)]{Needham2010} Needham, P. (2010). Nagel's analysis of reduction: Comments in defense as well as critique. \emph{Studies in History and Philosophy of Modern Physics}, 41(2), 163--170.
+\bibitem[Scerri(1994)]{Scerri1994} Scerri, E.~R. (1994). Has chemistry been at least approximately reduced to quantum mechanics? \emph{PSA: Proceedings of the Biennial Meeting of the Philosophy of Science Association}, 1994(1).
+\bibitem[Schuch and Verstraete(2009)]{SchuchVerstraete2009} Schuch, N. and Verstraete, F. (2009). Computational complexity of interacting electrons and fundamental limitations of density functional theory. \emph{Nature Physics}, 5, 732--735.
+\bibitem[Sutcliffe and Woolley(2012)]{SutcliffeWoolley2012} Sutcliffe, B.~T. and Woolley, R.~G. (2012). On the quantum theory of molecules. \emph{The Journal of Chemical Physics}, 137, 22A544.
+\bibitem[van Brakel(2000)]{vanBrakel2000} van Brakel, J. (2000). \emph{Philosophy of Chemistry: Between the Manifest and the Scientific Image}. Leuven University Press.
+\bibitem[Woolley(1978)]{Woolley1978} Woolley, R.~G. (1978). Must a molecule have a shape? \emph{Journal of the American Chemical Society}, 100(4), 1073--1078.
+\bibitem[Zurek(2003)]{Zurek2003} Zurek, W.~H. (2003). Decoherence, einselection, and the quantum origins of the classical. \emph{Reviews of Modern Physics}, 75(3), 715--775.
+\end{thebibliography}
+
+\end{document}

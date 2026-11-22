@@ -1,0 +1,364 @@
+\documentclass{situationist-preprint}
+
+\title{Evil, Omnipotence and the Structure of Logical Space}
+\msid{REL-02-a}
+\msfamily{REL-02}
+\msdiscipline{Philosophy of Religion}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/REL/REL\_02.lean}
+\mskeywords{problem of evil; free-will defence; omnipotence; strong actualization; noseeum inference; sceptical theism; Bayesian confirmation}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Is the existence of evil compatible with the existence of an omnipotent and morally perfect God? We argue that it is. The logical problem of evil, in Mackie's form, is valid, but one of its premises is false for a structural reason. Logical space contains states of affairs whose description refers to a given agent's not bringing them about, and no agent, however powerful, can bring such a state about. If the goods of a world include the goodness of creatures that is not brought about by God, then an evil-free world with the same goods is possible but not available to God. The point requires neither libertarian freedom nor middle knowledge, and it is consistent with omnipotence in the stratified sense of REL-04-a. We prove the diagonal lemma behind it, show that Mackie's premises fail exactly there, and give a model in which an omnipotent, morally perfect being permits evil. The evidential problem fails for a different reason. Its central step infers from our failure to discern a reason for an evil that there is none, and we show that this inference confers substantial support only if our capacity to detect such reasons is high, which nothing warrants. The proofs are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+The problem of evil asks whether the evils of the world are compatible with the existence of God, or, if compatible, whether they are evidence against it. The first question defines the \emph{logical} problem: is the set consisting of \enquote{God exists}, \enquote{God is omnipotent}, \enquote{God is morally perfect} and \enquote{evil exists} consistent? The second defines the \emph{evidential} problem: do the evils we observe, and in particular evils for which we can see no justifying reason, make the existence of God improbable? We argue that the answer to the first question is that the set is consistent, and that the standard argument for a negative answer to the second rests on an inference that is not warranted. The existence of evil is therefore compatible with the existence of God, and the evidential arguments in the literature do not show that it tells against it.
+
+We use the notions of the other manuscripts of this family and of the neighbouring families. God, if God exists, is maximally great in the sense of REL-01-a: necessarily existent and, at every accessible world, omnipotent, omniscient and morally perfect. Omnipotence is understood in the stratified sense of REL-04-a: the ability to perform every possible task whose description does not quantify over the agent's own powers. Moral perfection is understood, as in REL-23-a, as the property of doing no wrong, not as the property of doing the best, since the latter is threatened by the possibility that there is no best world. None of the results of the present manuscript depend on the conclusion of REL-01-a; the question here is whether the existence of such a being is compatible with evil, not whether it exists.
+
+\subsection{A short history of the debate}
+
+The problem is old. Lactantius attributed to Epicurus the dilemma that God either wishes to remove evils and cannot, or can and does not wish to, or neither, or both, and that only the last befits God, in which case the existence of evil is unexplained \citep[13]{Lactantius}. Hume gave the dilemma its most famous modern statement, and added, through Philo, the observation that even if evil were compatible with an infinitely good and powerful creator, we could not infer such a creator from a world containing so much of it \citep[X--XI]{Hume1779}. Leibniz had answered in advance with a theodicy: God, choosing among all possible worlds, chose the best, and the evils of the actual world are the price of goods that could not otherwise be had \citep{Leibniz1710}. The two ingredients of Leibniz's answer, that God's choice is a choice among possible worlds and that some goods require some evils, return in every later discussion.
+
+The logical problem received its canonical form from \citet{Mackie1955}, who argued that the propositions \enquote{God is omnipotent}, \enquote{God is wholly good} and \enquote{evil exists} are inconsistent once two \enquote{quasi-logical} rules are made explicit: that a good being eliminates evil as far as it can, and that there are no limits to what an omnipotent being can do. Mackie considered the free-will defence, on which evil is the price of creaturely freedom, and replied that, if freedom is compatible with determinism, God could have made beings who freely choose the good on every occasion; \citet{Flew1955} pressed the same reply. \citet{Pike1963} pointed out that the inconsistency claim requires that there be no morally sufficient reason for which a good being might permit evil, and that this further premise is neither logically true nor established.
+
+\citet{Plantinga1974,Plantinga1974a} recast the free-will defence in the semantics of possible worlds. He distinguished \emph{strong} actualization, bringing about a state of affairs by causing it, from \emph{weak} actualization, bringing about the conditions under which free creatures bring it about, and argued that an omnipotent being can strongly actualize only some possible worlds. If every creaturely essence suffers from \emph{transworld depravity}, so that in every world God could weakly actualize in which the creature is significantly free, it does at least one wrong, then God could not have actualized a world containing free creatures and no moral evil. Since a defence, unlike a theodicy, needs only the possibility of its story, Plantinga concluded that the logical problem fails. The verdict has been widely accepted; even \citet[154]{Mackie1982} conceded that the problem of evil does not show the central doctrines of theism to be logically inconsistent with one another. The cost of Plantinga's defence was its dependence on counterfactuals of creaturely freedom, true propositions about what each possible creature would freely do in each circumstance, whose existence \citet{Adams1977} disputed, and on a libertarian conception of freedom, which compatibilists reject. \citet{Lewis1993} argued that, on Plantinga's own assumptions, the defence leaves unexplained why God did not create creatures whose counterfactuals happen to be good.
+
+The evidential problem received its canonical form from \citet{Rowe1979}. Rowe described a fawn burned in a forest fire, dying after days of agony, and argued that it is probable that there exist instances of intense suffering that an omnipotent, omniscient being could have prevented without thereby losing some greater good or permitting some evil equally bad or worse; that an omniscient, wholly good being would prevent such suffering; and that therefore it is probable that there is no such being. The first premise rests on the observation that no good we know of justifies the fawn's suffering. \citet{Wykstra1984} replied that this observation supports the premise only if, were there a justifying good, we would be likely to see it, a condition he called CORNEA, and that, given the cognitive distance between God and us, the condition fails. The \enquote{noseeum} label, introduced by Wykstra for inferences from \enquote{we see no X} to \enquote{there is no X}, has become standard. The ensuing debate between sceptical theists and their critics \citep{Bergmann2001,AlmeidaOppy2003,BergmannRea2005} is the setting of the second half of the present manuscript. A different evidential argument, due to \citet{Draper1989}, compares theism with a hypothesis of indifference on which the distribution of pleasure and pain owes nothing to the intentions of a creator; we argue in Section~\ref{s:evidential} that it relies on a noseeum step of the same kind.
+
+\subsection{Plan}
+
+Section~\ref{s:framework} sets out the framework. Section~\ref{s:logical} reconstructs Mackie's argument, shows that it is valid, and identifies the premise that fails and why it fails: the structure of logical space contains states of affairs that are possible but that no agent can bring about, because their description refers to that agent's not bringing them about. Section~\ref{s:consistency} gives a model in which God is omnipotent and morally perfect and evil exists. Section~\ref{s:independence} discusses the good on which the defence depends, and explains why it requires neither libertarianism nor middle knowledge. Section~\ref{s:evidential} turns to the evidential problem. Sections~\ref{s:literature} to~\ref{s:not} discuss recent literature, objections and limits, and Section~\ref{s:formal} describes the formalization.
+
+\section{Framework}\label{s:framework}
+
+We work with possible worlds and states of affairs, the latter construed as sets of worlds, so that a state of affairs obtains at a world if the world belongs to it. On the account of possible worlds defended in TSM-07, worlds are maximal consistent sets of propositions; nothing in what follows depends on that choice, except that every consistent state of affairs obtains at some world.
+
+\begin{definition}[Bringing about]\label{d:brings}
+An agent $x$ \emph{brings about} a state of affairs $p$ at a world $w$ if, at $w$, $x$ strongly actualizes $p$: $p$ obtains at $w$ because of an exercise of $x$'s powers that by itself settles that $p$ obtains.
+\end{definition}
+
+Definition~\ref{d:brings} is Plantinga's strong actualization. An agent who creates a free creature and leaves her choice to her does not bring about her choice in this sense, even if the agent knows what she will choose; an agent who causally determines her choice does. Whether, in addition, the creature's choice is free in the sense of ACT-01-a is a separate question, to which we return in Section~\ref{s:independence}.
+
+\begin{assumption}[Factivity]\label{a:factive}
+If $x$ brings about $p$ at $w$, then $p$ obtains at $w$.
+\end{assumption}
+
+\begin{assumption}[Conjunction]\label{a:conj}
+If $x$ brings about the conjunction of $p$ and $q$ at $w$, then $x$ brings about $p$ at $w$.
+\end{assumption}
+
+Assumption~\ref{a:conj} says that to settle a conjunction is to settle each conjunct. It holds for strong actualization because an exercise of powers that by itself settles that $p$ and $q$ both obtain by itself settles that $p$ obtains.
+
+\begin{definition}[Independent state]\label{d:indep}
+For an agent $x$ and a state of affairs $p$, the \emph{$x$-independent} version of $p$, written $p^{x}$, is the state of affairs that obtains at $w$ just in case $p$ obtains at $w$ and $x$ does not bring about $p$ at $w$.
+\end{definition}
+
+If $p$ is the state in which a given creature acts well, $p^{g}$, for $g$ God, is the state in which the creature acts well and God does not bring it about that she does. Such states are commonplace. That a child learns to read without being taught by a given teacher, that an artist's work is not designed by her patron, and that a gift is not prompted by the recipient are all independent states relative to an agent.
+
+\begin{definition}[Ability and possibility]\label{d:can}
+$x$ \emph{can bring about} $p$ at $w$ if, at $w$, $x$ has the ability to bring about $p$. A state of affairs is \emph{possible} if it obtains at some world.
+\end{definition}
+
+\begin{assumption}[Realization]\label{a:real}
+If $x$ can bring about $p$ at $w$, then there is a world at which $x$ brings about $p$.
+\end{assumption}
+
+Assumption~\ref{a:real} is the minimal link between ability and actualization: an ability that could not be exercised at any world is no ability. It plays the role that the corresponding outcome assumption plays in REL-04-a.
+
+\begin{definition}[Omnipotence]\label{d:omni}
+(i) $x$ is \emph{unrestrictedly omnipotent} at $w$ if $x$ can bring about at $w$ every possible state of affairs. (ii) $x$ is \emph{omnipotent} at $w$ if $x$ can bring about at $w$ every possible state of affairs that is not self-referential for $x$, where a state is self-referential for $x$ if its description quantifies over the exercise of $x$'s own powers.
+\end{definition}
+
+Clause (ii) is the notion of REL-04-a, transposed from tasks to the states of affairs that are their success conditions.
+
+\begin{assumption}[Classification]\label{a:class}
+For every agent $x$ and state $p$, the $x$-independent state $p^{x}$ is self-referential for $x$.
+\end{assumption}
+
+Assumption~\ref{a:class} applies the definition: the description of $p^{x}$ includes the clause that $x$ does not bring $p$ about, that is, that no exercise of $x$'s powers settles $p$.
+
+\begin{definition}[Moral perfection]\label{d:perfect}
+An option available to an agent is \emph{wrong} if another available option involves less evil and no less good. A being is \emph{morally perfect} if it takes no wrong option.
+\end{definition}
+
+Definition~\ref{d:perfect} is a precise version of Mackie's rule that a good being eliminates evil as far as it can, with the qualification, required since \citet{Pike1963}, that eliminating evil at the cost of a greater good is not required. It is a threshold notion in the sense of REL-23-a: it forbids options that are dominated, and does not require the best option, so that it remains satisfiable if there is no best.
+
+\section{The logical problem}\label{s:logical}
+
+Mackie's argument can be stated with three premises about a putative God $g$ at the actual world. Let the \emph{ideal state} be a state of affairs in which all the goods of the actual world obtain and no evil does.
+
+\begin{principle}[Unrestricted omnipotence]\label{p:omni}
+$g$ is unrestrictedly omnipotent.
+\end{principle}
+
+\begin{principle}[Elimination]\label{p:elim}
+If $g$ can bring about the ideal state, then no evil exists.
+\end{principle}
+
+\begin{principle}[Possibility of the ideal]\label{p:ideal}
+The ideal state is possible.
+\end{principle}
+
+Principle~\ref{p:elim} follows from Definition~\ref{d:perfect}: if $g$ could bring about the ideal state, every option that leaves evil in the world would be dominated by it, and a morally perfect being would not take it; and since $g$ has brought about whatever world obtains or permitted it, the existence of evil would show that $g$ took a dominated option. Principle~\ref{p:ideal} is the claim, which Mackie made in reply to the free-will defence, that there is nothing contradictory in a world of creatures who always do right.
+
+\begin{proposition}[Validity]\label{p:valid}
+Principles~\ref{p:omni}, \ref{p:elim} and~\ref{p:ideal} jointly entail that no evil exists.
+\end{proposition}
+
+\begin{proof}
+By Principle~\ref{p:ideal} the ideal state is possible, so by Principle~\ref{p:omni} $g$ can bring it about, and by Principle~\ref{p:elim} no evil exists.
+\end{proof}
+
+The argument is valid, and the critic who thinks the logical problem fails must reject a premise. Plantinga rejected the instance of Principle~\ref{p:omni} that the argument requires, on the ground that the ideal state may be one that God can only weakly actualize, and that whether it is weakly actualizable depends on counterfactuals of freedom. We reject the same instance, but for a reason that depends only on the logical form of the ideal state.
+
+\begin{lemma}[Diagonal lemma]\label{l:diag}
+For every agent $x$, state of affairs $p$ and world $w$, $x$ does not bring about $p^{x}$ at $w$.
+\end{lemma}
+
+\begin{proof}
+Suppose $x$ brings about $p^{x}$ at $w$. Since $p^{x}$ is the conjunction of $p$ with the state in which $x$ does not bring about $p$, Assumption~\ref{a:conj} gives that $x$ brings about $p$ at $w$. By Assumption~\ref{a:factive}, $p^{x}$ obtains at $w$, so $x$ does not bring about $p$ at $w$, a contradiction.
+\end{proof}
+
+\begin{theorem}[The structure of logical space]\label{t:space}
+For every agent $x$, state of affairs $p$ and world $w$, $x$ cannot bring about $p^{x}$ at $w$. Consequently, if $p^{x}$ is possible, $x$ is unrestrictedly omnipotent at no world.
+\end{theorem}
+
+\begin{proof}
+If $x$ could bring about $p^{x}$ at $w$, then by Assumption~\ref{a:real} it would bring it about at some world, contrary to Lemma~\ref{l:diag}. If $p^{x}$ is possible and $x$ were unrestrictedly omnipotent at $w$, $x$ could bring it about at $w$.
+\end{proof}
+
+Theorem~\ref{t:space} says something about logical space as a whole, not about God. For each agent, the possible states of affairs divide into those the agent can bring about and those it cannot, and the second class is never empty as long as some state of affairs could obtain without the agent's settling it. The space of what is possible outruns, for every agent, the space of what that agent can actualize, and it does so for a reason that has nothing to do with the agent's limitations: the states in question are defined by the absence of the agent's agency. Leibniz's picture of God surveying all possible worlds and choosing one to make actual is, to this extent, mistaken. God can survey them all, but not every one of them is a world God can make.
+
+\begin{corollary}\label{c:ideal}
+Suppose that the goods of the actual world include the $g$-independent goodness of creatures, $q^{g}$. Then $g$ cannot bring about the ideal state at any world. Principle~\ref{p:omni} is false if the ideal state is possible, and Principle~\ref{p:elim} has an antecedent that is false at every world.
+\end{corollary}
+
+\begin{proof}
+The ideal state is the conjunction of $q^{g}$, the other goods and the absence of evil. If $g$ could bring it about at $w$, then by Assumption~\ref{a:real} it would bring it about at some world, hence by Assumption~\ref{a:conj} bring about $q^{g}$ there, contrary to Lemma~\ref{l:diag}. The remaining claims follow from Theorem~\ref{t:space}.
+\end{proof}
+
+\begin{proposition}\label{p:strat}
+If $x$ is omnipotent at $w$ in the sense of Definition~\ref{d:omni}(ii), every state of affairs $x$ cannot bring about at $w$ is either impossible or self-referential for $x$. The independent states of Theorem~\ref{t:space} are of the second kind.
+\end{proposition}
+
+\begin{proof}
+The first claim is the contrapositive of Definition~\ref{d:omni}(ii); the second is Assumption~\ref{a:class}.
+\end{proof}
+
+Proposition~\ref{p:strat} shows that the failure of Principle~\ref{p:omni} is no limitation on God in the sense in which omnipotence is coherent. It is the same phenomenon that REL-04-a identified in the paradox of the stone: the tasks that an omnipotent being cannot perform are either impossible or defined by reference to that being's own powers. Mackie's second quasi-logical rule, that there are no limits to what an omnipotent being can do, is false in its unrestricted form for the same reason as in the stone paradox, and the restricted form, which is coherent, does not give the argument the premise it needs.
+
+\section{A consistency proof}\label{s:consistency}
+
+Corollary~\ref{c:ideal} removes Mackie's argument, but it does not by itself show that the existence of God is consistent with evil. For that we need a model: a description, possibly false, of a situation in which God exists, is omnipotent and morally perfect, and evil exists. A model is all a defence requires \citep{Plantinga1974}; it need not be true, or even probable, to show that the existence of evil does not entail the non-existence of God.
+
+\begin{assumption}[The independent good]\label{a:good}
+The goodness of creatures that is not brought about by God is a good, and a world in which creatures act well, some of them not brought about by God to do so, can be better on balance than any world God can bring about in which creatures act well only because God brings it about.
+\end{assumption}
+
+Section~\ref{s:independence} defends Assumption~\ref{a:good}. For the consistency proof it suffices that it be possibly true.
+
+The model has three options for God and four outcomes. God may \emph{determine} the creatures' conduct, bringing about that they act well; God may \emph{release} them, creating creatures whose conduct God does not settle; or God may release them and \emph{thwart} each wrong act as it is about to occur, which, since thwarting settles the outcome, amounts to bringing about their conduct on every occasion on which it matters. In the model, release results in a world in which creatures act well, mostly not because God brings it about, and some evil occurs. Determination and thwarting result in worlds without evil and without independent goodness. The fourth outcome, the ideal world, in which creatures act well independently of God and no evil occurs, is possible but is not the outcome of any option, in accordance with Corollary~\ref{c:ideal}. We assign the outcomes levels of good and evil as follows: determination and thwarting, good~$1$ and evil~$0$; release, good~$3$ and evil~$1$; the ideal world, good~$3$ and evil~$0$.
+
+\begin{theorem}[Consistency]\label{t:consistent}
+In the model, God is omnipotent in the sense of Definition~\ref{d:omni}(ii), God is morally perfect in the sense of Definition~\ref{d:perfect} in choosing release, evil exists in the resulting world, and the ideal world is possible. Hence the existence of an omnipotent, morally perfect God is consistent with the existence of evil and with the possibility of a world containing all its goods and no evil.
+\end{theorem}
+
+\begin{proof}
+The possible states of affairs of the model are the outcomes of the three options and the ideal world. God can bring about each of the first three, and the fourth is self-referential for God by Assumption~\ref{a:class}; so God is omnipotent. Release is not wrong, since the only options with less evil, determination and thwarting, involve less good. The world resulting from release contains evil of level~$1$. The ideal world is a world of the model.
+\end{proof}
+
+\begin{proposition}\label{p:best}
+In the model, release also maximizes the balance of good over evil among the available options.
+\end{proposition}
+
+\begin{proof}
+The balance is $2$ for release and $1$ for determination and for thwarting.
+\end{proof}
+
+Proposition~\ref{p:best} shows that the consistency result does not depend on the weakness of Definition~\ref{d:perfect}: even a critic who holds that a perfect being must choose the best available option finds that, in the model, God does so. The numbers are, of course, stipulated, and a stipulation proves nothing about the actual world. What Theorem~\ref{t:consistent} proves is that the premises of the logical problem, once omnipotence is given the only coherent sense it has, do not exclude such a model. That is the whole of what a solution to the logical problem has to show.
+
+\begin{remark}\label{r:defence}
+The model is a defence, not a theodicy. It does not claim that the evils of the actual world are in fact the price of independent creaturely goodness, nor that the levels assigned to the outcomes are correct. A theodicy would need both claims, and REL-02 does not provide one.
+\end{remark}
+
+\section{The good of independence}\label{s:independence}
+
+The defence rests on Assumption~\ref{a:good}, and its interest depends on whether the good it names is a genuine good. We make three points.
+
+\paragraph{The good is not freedom.} Mackie's and Flew's reply to the free-will defence was that, if freedom is compatible with determinism, God could have created beings who are free and who always choose the good. We grant the antecedent: on the account of ACT-01-a, free will is compatible both with determinism and with indeterminism, and consists in acting from a reasons-responsive mechanism that is the agent's own. We may also grant the consequent: there are possible worlds in which God determines the conduct of creatures who are free in that sense and who always act well. The defence does not deny this. It claims only that such a world lacks a good that the actual world may have, namely that the creatures' acting well is not settled by God. Whether that good is present depends not on whether the creatures are free, but on the relation between their conduct and God's agency. For this reason the defence requires no libertarian assumption; the companion manuscript REL-02-b develops this point for the free-will defence as such.
+
+\paragraph{The good is not a contingent fact about counterfactuals.} Plantinga's defence needs the possibility of transworld depravity, a thesis about which counterfactuals of creaturely freedom are true, and so needs that there be such counterfactuals \citep{Adams1977}. Our defence needs no counterfactuals of freedom. That God cannot bring about the ideal state follows from the logical form of the state, by Lemma~\ref{l:diag}, and holds at every world. What remains contingent is only which world results when God releases creatures, and this the model leaves open; the defence requires only that some outcome of release contain evil and be no worse on balance than every outcome God can bring about. \citet{Lewis1993} objected to Plantinga that God could have created only those creatures whose counterfactuals are good. The objection has no analogue here: for any creatures God chooses to create, the state in which they act well independently of God is one God cannot bring about, so God's choice of creatures does not give God control over whether the independent good is realized without evil.
+
+\paragraph{The good is a good.} Three considerations support Assumption~\ref{a:good}. First, the goods that matter most in relations between persons are of this form. Gratitude, love and forgiveness are valuable as responses that the person to whom they are directed has not engineered; a declaration of love that the beloved has caused by manipulating the lover's mechanism is worth little to the beloved, even if, by the standards of ACT-01-a, the lover acts freely in making it, as when the mechanism has become the lover's own by her subsequent endorsement. A God who values the love of creatures has reason to value a response God has not settled. REL-03-a argues on similar grounds that a perfectly loving God would not give an unambiguous revelation that would constrain the freedom of the response. Second, the value of the independent good does not depend on its being rare or difficult: it is a good of origin, not of achievement, and a world in which much good is done independently of God is better, in this respect, than one in which the same good is done because God settles it. Third, the good is recognized in human practice: parents, teachers and institutions forgo control over outcomes, at the cost of worse outcomes on some occasions, because outcomes that the controlled party brings about are better in a respect that controlled outcomes lack.
+
+\subsection{Further cases}
+
+\paragraph{Natural evil.} The model concerns moral evil. Natural evils, such as diseases and earthquakes, are not the conduct of creatures. For the logical problem this does not matter, since a consistency proof needs only one model and the model may include natural evils among the costs of release, for instance through a regular natural order that is a condition of independent agency \citep{Swinburne1998}. For the evidential problem it does matter, since an evil that is not plausibly connected with independent agency is a candidate for being gratuitous. Section~\ref{s:evidential} treats it.
+
+\paragraph{Heaven.} According to REL-14, the blessed are free in the sense of sourcehood but not in the sense of alternative possibilities: they cannot sin. If impeccable freedom is possible, why did God not create the blessed directly? The present framework answers that the goodness of the blessed, as REL-14 conceives it, is goodness whose source is the blessed themselves, and that a character formed by an independent history is an instance of the independent good. A God who created creatures in the state of the blessed would have brought that state about, and the result would lack what makes the state of the blessed good in the relevant respect. Heaven is not a counterexample to Corollary~\ref{c:ideal} but one of its applications: the independent good in its impeccable form is reachable only through a history that God did not settle.
+
+\paragraph{Animal suffering.} Rowe's fawn is not an agent whose independent goodness is at stake. Its suffering raises the evidential problem, and we return to it in Section~\ref{s:evidential}. For the logical problem the model suffices, since nothing in it requires that every evil be borne by an agent whose independence it serves.
+
+\section{The evidential problem}\label{s:evidential}
+
+Let $E$ be an evil, such as the fawn's suffering, and let $D$ be the proposition that we discern a reason that would justify an omnipotent, omniscient, morally perfect being in permitting $E$. Rowe's argument begins from the observation $\neg D$ and infers that probably there is no such reason, and hence, since a morally perfect being would permit $E$ only for such a reason, that probably there is no God. The inference from $\neg D$ to the absence of a reason is a noseeum inference. We ask what support $\neg D$ gives to atheism, and on what that support depends.
+
+\begin{definition}[Detection]\label{d:detect}
+The \emph{detection probability} $\delta$ is the probability that we discern a justifying reason for $E$, given that God exists and that such a reason therefore exists.
+\end{definition}
+
+\begin{assumption}[Theistic constraint]\label{a:theistic}
+Given that God exists, there is a reason that justifies God in permitting $E$.
+\end{assumption}
+
+Assumption~\ref{a:theistic} follows from Definition~\ref{d:perfect} and the existence of $E$: a morally perfect being permits no evil without a reason, since permitting an evil without a compensating good is a dominated option. Under theism, then, $P(\neg D \mid G) = 1 - \delta$. Under atheism, $P(\neg D \mid \neg G)$ is at most $1$. By Bayes's theorem, the posterior odds against theism after observing $\neg D$ equal the prior odds multiplied by the likelihood ratio $P(\neg D \mid \neg G) / P(\neg D \mid G)$, which is at most $1/(1 - \delta)$.
+
+\begin{theorem}[Detection threshold]\label{t:threshold}
+Suppose the prior odds of theism and atheism are even, and that after observing $\neg D$ the posterior odds against theism are at least $r$ to~$1$. Then $\delta \geq (r-1)/r$.
+\end{theorem}
+
+\begin{proof}
+Write probabilities as multiples of a unit $1/N$, with $P(\neg D \mid G) = (N-k)/N$, where $\delta = k/N$, and $P(\neg D \mid \neg G) = m/N$ with $m \leq N$. With even prior odds, the posterior odds against theism are $m/(N-k)$, so the hypothesis is $r(N-k) \leq m$. Since $m \leq N$, $r(N-k) \leq N$, that is, $rN \leq N + rk$, which is $\delta = k/N \geq (r-1)/r$.
+\end{proof}
+
+\begin{corollary}\label{c:zero}
+If $\delta = 0$, the observation $\neg D$ cannot raise the odds against theism above their prior value.
+\end{corollary}
+
+\begin{proof}
+With $k = 0$, the hypothesis of Theorem~\ref{t:threshold} gives $rN \leq N$, so $r \leq 1$ if $N$ is positive. The same calculation applies to uneven priors, since the likelihood ratio is then at most $1$.
+\end{proof}
+
+Theorem~\ref{t:threshold} measures the noseeum inference. To move a person from even odds to odds of $9$ to $1$ against theism, the observation must come from a detector that would discern a justifying reason, were there one, with probability at least $8/9$. To move her to $3$ to $1$, the detector must succeed at least two times in three. These are demanding requirements, and they bear not on how carefully we have looked, but on how likely our looking is to succeed if there is something to find.
+
+We claim that nothing warrants a high value of $\delta$. The goods that might justify permitting an evil form a space whose structure we know only in part. Three features of that structure bear on detection. First, some goods are independent goods in the sense of Definition~\ref{d:indep}: their realization depends on God's not settling outcomes, so that the reason for permitting a particular evil may lie not in a good connected to that evil but in the policy of not settling outcomes of a given kind. Reasons of this kind are invisible from the vantage point of the particular case, since nothing in the fawn's suffering shows the policy. Second, some goods are holistic: they are goods of a whole history, such as its containing a regular natural order or a certain distribution of opportunities for response, and a history-wide good need not be discernible from any part of the history accessible to us. Third, our acquaintance with goods is the product of a sample, namely the goods that human beings have encountered and conceived, and there is no ground for supposing that this sample is representative of the space of goods with respect to the property of justifying evils of the kind at issue \citep{Bergmann2001}. Each feature lowers the probability that, given a justifying reason, we would discern it; none of them requires a specific hypothesis about what the reason is.
+
+It might be objected that our having discerned reasons for many evils is evidence that $\delta$ is high. It is evidence that $\delta$ is high for evils of the kinds for which we have discerned reasons, and for those evils there is no evidential problem. The evils that generate the problem are by selection the ones for which we have found no reason, and the success of detection elsewhere is evidence about them only if the two classes are relevantly similar, which is what is in question.
+
+Draper's argument may seem to avoid the noseeum step, since it compares the probability of the observed distribution of pleasure and pain under theism with its probability under the hypothesis of indifference, and finds the latter much higher \citep{Draper1989}. But the estimate of the probability of the observations under theism is low only if, under theism, the distribution would be likely to reflect reasons that we could recognize as such: if the distribution of pain were governed by reasons we cannot discern, it would look to us much as it would look under indifference, and the likelihood ratio would be close to $1$. Draper's comparison therefore depends on a high value of the same detection parameter, and the argument of this section applies to it.
+
+\begin{remark}\label{r:many}
+Rowe's argument is sometimes strengthened by appeal to many evils: even if detection is unreliable for each, it is improbable that it fails for all. The strengthening assumes that detection failures are independent. They are not: they share a common source, the limits of our acquaintance with the space of goods, and a single fact about those limits makes failure probable for all evils of a kind at once. The relevant detection probability is that of the class, and Theorem~\ref{t:threshold} applies to it as to a single evil.
+\end{remark}
+
+\section{Recent literature}\label{s:literature}
+
+The last two decades of discussion of the evidential problem have centred on sceptical theism, the view that our inability to discern God's reasons is unsurprising given theism and therefore weak evidence against it. \citet{Bergmann2001} formulated the view as a set of theses: that we have no good reason to think the goods we know of are representative of the goods there are, nor the evils we know of representative of the evils there are, nor the entailment relations we know of between goods and the permission of evils representative of the entailment relations there are. Our argument agrees with Bergmann's in substance, but locates the point in a single parameter, the detection probability, and gives a structural reason, the existence of independent and holistic goods, why it is not known to be high.
+
+\citet{AlmeidaOppy2003} argued that sceptical theism has unacceptable moral consequences: if we cannot tell whether an evil serves a greater good, we cannot tell whether we ought to prevent it. \citet{BergmannRea2005} replied that our obligations depend on what we know, and that God's reasons for permitting an evil need not be reasons for us to permit it. We return to the objection below. \citet{Draper2013} has argued that sceptical theism, if it undermines Rowe's argument, also undermines the theist's arguments from apparent design, since both rest on our ability to discern divine purposes; we take this to be correct and to be no objection to our conclusion, which concerns only the evidential argument from evil. In the same spirit, REL-10-a argues that the fine-tuning argument fails for an independent reason.
+
+\citet{BentonHawthorneIsaacs2016} pointed out that, by the law of total probability, if not seeing a reason for an evil is evidence for nothing, then seeing one cannot be evidence for anything either, and that sceptical theists must accept that the observation of evils is at least some evidence against theism. Theorem~\ref{t:threshold} and Corollary~\ref{c:zero} accommodate the point. The observation $\neg D$ is evidence against theism to the extent that $\delta$ is positive, and the likelihood ratio is $1/(1-\delta)$ at most. What we deny is that it is strong evidence, since strong evidence requires a high value of $\delta$, and that the evidential argument establishes its conclusion, since its conclusion is that theism is improbable and that requires strong evidence or a prior already unfavourable to theism.
+
+On the logical problem, the main recent development is the study of \emph{unobtainable worlds}, worlds that are possible but that God cannot weakly actualize, as a generalization of transworld depravity \citep{Otte2009}. Theorem~\ref{t:space} can be read as identifying a class of worlds that are unobtainable for a structural reason: every world in which some good obtains independently of God is one God cannot strongly actualize, whatever counterfactuals of freedom are true. \citet{vanInwagen2006} has defended a version of the free-will defence on which the actual evils are the consequences of a separation from God that creatures freely chose; his defence is a story of the kind Theorem~\ref{t:consistent} requires, with more detail than we provide and more assumptions than we need.
+
+\section{Objections}\label{s:objections}
+
+\begin{objection}[God could bring about the independent good by other means]
+God cannot strongly actualize $q^{g}$, but God can weakly actualize it, by creating creatures and leaving them to act. Since weak actualization is a way of bringing a state about, the diagonal lemma applies only to a technical notion and leaves God's control over the world intact.
+\end{objection}
+
+\begin{reply}
+Weak actualization of $q^{g}$ is available, but it does not give God control over whether $q^{g}$ is accompanied by evil, and that is the control Principle~\ref{p:omni} attributes to God in the instance the argument uses. To weakly actualize the ideal state God would have to arrange things so that creatures, left to themselves, act well on every occasion; and whether a given arrangement has that result is not settled by God, on pain of God's bringing it about after all. Lemma~\ref{l:diag} therefore applies to exactly the notion Mackie's argument requires: the notion of making a world without evil.
+\end{reply}
+
+\begin{objection}[Foreknowledge]
+An omniscient God knows, in releasing the creatures, what they will do. If God releases them knowing that they will act well, God brings about their acting well; if knowing they will act badly, God brings about the evil.
+\end{objection}
+
+\begin{reply}
+Knowing that $p$ will obtain as a result of one's act is not settling that it obtains. On the account of REL-05-a, God's foreknowledge of a free choice depends counterfactually on the choice, not conversely, so that what God knows about the outcome of release is fixed by what the creatures do, not by what God does. God's knowledge of the outcome is therefore no exercise of power that settles it, and Definition~\ref{d:brings} is not met. In the model, God knows that release results in a world with evil; God also knows that every option that avoids the evil loses the independent good, and that the world resulting from release is better on balance.
+\end{reply}
+
+\begin{objection}[Moral scepticism]
+If we cannot discern God's reasons for permitting evils, we cannot know whether preventing an evil would frustrate a greater good, and so we cannot know that we ought to prevent it \citep{AlmeidaOppy2003}.
+\end{objection}
+
+\begin{reply}
+The detection probability concerns reasons that would justify God, a being who stands in a relation to the whole history of the world that no human agent stands in. Our obligations are fixed by the goods and evils we can foresee and by the roles we occupy, and a reason God has for permitting an evil, connected with the policy of not settling the conduct of creatures, is not a reason for us, who are among the creatures, to permit it. Indeed, the independent good is realized in part through our conduct, including our prevention of evils. The objection would succeed only if the reasons that justify God in permitting an evil were reasons for anyone to permit it, which is false of reasons that depend on God's position \citep{BergmannRea2005}.
+\end{reply}
+
+\begin{objection}[The independent good is not worth so much evil]
+Even if the independent good is a good, the horrors of the actual world are too great a price for it. A world containing the Holocaust is not better on balance than a world of determined but blameless creatures.
+\end{objection}
+
+\begin{reply}
+The objection concerns the evidential problem, not the logical one, since the consistency proof needs only a possible assignment of values. As an evidential claim it is a comparison of the total value of the actual world with the total value of alternatives, made by agents whose acquaintance with the goods at stake is, by the argument of Section~\ref{s:evidential}, partial. We do not claim that the actual horrors are compensated by the independent good alone; Remark~\ref{r:defence} disclaims a theodicy, and \citet{Adams1999} argues that horrendous evils call for a response beyond the balance of goods within the world. The point is that the judgement that they are not compensated by any good is a noseeum judgement, and inherits its weakness.
+\end{reply}
+
+\begin{objection}[Self-reference trivializes the defence]
+Any good can be made unobtainable for God by adding the clause \enquote{not brought about by God}. A defence that relies on such clauses can excuse any evil, and therefore explains none.
+\end{objection}
+
+\begin{reply}
+Adding the clause to a state does not make the result a good. The defence relies on one independent good, the goodness of creatures that God has not settled, and Section~\ref{s:independence} gives reasons, independent of the problem of evil, for thinking it a good. An independent state that is not a good, such as the state of a stone's being heavy without God's having made it so, gives no reason to permit any evil, and Definition~\ref{d:perfect} gives it no weight. The diagonal lemma shows only that, where a good of this form exists, it cannot be had by divine fiat; whether such a good exists, and how much it is worth, are separate questions, and the defence answers the first and needs only a possible answer to the second.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The results of this manuscript are negative in their bearing on arguments from evil, and should not be read as more. They do not establish that God exists, a question addressed in REL-01-a and not presupposed here. They do not establish that any actual evil is permitted for the sake of the independent good, or for the sake of any good we can name. They do not establish that the detection probability is low; they establish that the evidential argument needs it to be high, and that we have no warrant for thinking that it is. Nor do they establish that evil is no evidence at all against theism: by Corollary~\ref{c:zero} and the discussion of Section~\ref{s:literature}, the observation of apparently pointless evil is evidence against theism to the extent that detection is possible, and our conclusion is that this extent is not shown to be large. Finally, the logical result depends on Assumption~\ref{a:conj} and on the stratified conception of omnipotence; a theist who holds that God's omnipotence extends to self-referential states owes an answer to the stone paradox before she owes one to the problem of evil.
+
+\section{Formalization}\label{s:formal}
+
+The results of Sections~\ref{s:logical} to~\ref{s:evidential} are formalized in \nolinkurl{Philosophy/REL/REL_02.lean}. Worlds, agents, bringing about, ability, evil and self-reference are primitive constants; Assumptions~\ref{a:factive}, \ref{a:conj}, \ref{a:real} and~\ref{a:class} are axioms; independent states, the ideal state and the two notions of omnipotence are defined. The main logical theorem reads:
+
+\begin{lstlisting}
+theorem structure_of_logical_space (x : Agent) (p : State) :
+    (∀ w, ¬ CanBring x (Indep x p) w) ∧
+    (Possible (Indep x p) → ∀ w, ¬ UnrestrictedlyOmnipotent x w)
+\end{lstlisting}
+
+The consistency model of Section~\ref{s:consistency} is a concrete finite structure in the namespace \texttt{Model}, and Theorem~\ref{t:consistent} is proved there by computation. Theorem~\ref{t:threshold} is stated over the natural numbers, with probabilities as multiples of a unit, as in its proof. The checker reports (namespace prefixes omitted):
+
+\begin{lstlisting}
+'structure_of_logical_space' depends on axioms:
+  [Agent, Brings, CanBring, World, brings_factive,
+   brings_left, can_realized]
+'ideal_unavailable' depends on axioms:
+  [Agent, Brings, CanBring, Evil, World, brings_factive,
+   brings_left, can_realized]
+'stratified_limits' depends on axioms:
+  [propext, Classical.choice, Quot.sound, Agent, Brings,
+   CanBring, SelfRef, World, independent_selfref]
+'Model.consistency' depends on axioms: [propext]
+'detection_threshold' depends on axioms: [propext, Quot.sound]
+\end{lstlisting}
+
+The substantive axioms are \texttt{brings\_factive} (Assumption~\ref{a:factive}), \texttt{brings\_left} (Assumption~\ref{a:conj}), \texttt{can\_realized} (Assumption~\ref{a:real}) and \texttt{independent\_selfref} (Assumption~\ref{a:class}); the others are primitive constants. The consistency theorem and the detection threshold depend only on Lean's \texttt{propext} and \texttt{Quot.sound}, used by the simplifier and the arithmetic tactic, and Proposition~\ref{p:strat} also on \texttt{Classical.choice}, since its proof is by contradiction. Assumption~\ref{a:good} appears in the formalization only through the numbers of the model, which is what a consistency proof requires; Assumption~\ref{a:theistic} appears through the identification of $P(\neg D \mid G)$ with $(N-k)/N$.
+
+\section{Conclusion}\label{s:conclusion}
+
+The existence of evil is compatible with the existence of God. Mackie's argument is valid, but its premise that an omnipotent being can bring about every possible state of affairs fails for a structural reason: logical space contains, for every agent, possible states that the agent cannot bring about because their description refers to its not bringing them about, and the ideal world of creatures who act well independently of God is one of them. With omnipotence in its coherent, stratified sense, a model of an omnipotent, morally perfect God who permits evil is available, and it needs neither libertarian freedom nor counterfactuals of freedom. The evidential problem rests on the inference from our failing to discern a justifying reason to there being none, and that inference confers strong support on atheism only if our capacity to detect such reasons is high, which nothing warrants.
+
+\begin{thebibliography}{99}\small
+\bibitem[Adams(1977)]{Adams1977} Adams, R.~M. (1977). Middle knowledge and the problem of evil. \emph{American Philosophical Quarterly}, 14(2), 109--117.
+\bibitem[Adams(1999)]{Adams1999} Adams, M.~M. (1999). \emph{Horrendous Evils and the Goodness of God}. Cornell University Press.
+\bibitem[Almeida and Oppy(2003)]{AlmeidaOppy2003} Almeida, M.~J. and Oppy, G. (2003). Sceptical theism and evidential arguments from evil. \emph{Australasian Journal of Philosophy}, 81(4), 496--516.
+\bibitem[Benton et~al.(2016)]{BentonHawthorneIsaacs2016} Benton, M.~A., Hawthorne, J. and Isaacs, Y. (2016). Evil and evidence. \emph{Oxford Studies in Philosophy of Religion}, 7, 1--31.
+\bibitem[Bergmann(2001)]{Bergmann2001} Bergmann, M. (2001). Skeptical theism and Rowe's new evidential argument from evil. \emph{No\^us}, 35(2), 278--296.
+\bibitem[Bergmann and Rea(2005)]{BergmannRea2005} Bergmann, M. and Rea, M. (2005). In defence of sceptical theism: A reply to Almeida and Oppy. \emph{Australasian Journal of Philosophy}, 83(2), 241--251.
+\bibitem[Draper(1989)]{Draper1989} Draper, P. (1989). Pain and pleasure: An evidential problem for theists. \emph{No\^us}, 23(3), 331--350.
+\bibitem[Draper(2013)]{Draper2013} Draper, P. (2013). The limitation of pure skeptical theism. \emph{Res Philosophica}, 90(1), 97--111.
+\bibitem[Flew(1955)]{Flew1955} Flew, A. (1955). Divine omnipotence and human freedom. In A. Flew and A. MacIntyre (eds.), \emph{New Essays in Philosophical Theology}. SCM Press.
+\bibitem[Hume(1779)]{Hume1779} Hume, D. (1779). \emph{Dialogues Concerning Natural Religion}.
+\bibitem[Lactantius(c.~313)]{Lactantius} Lactantius (c.~313). \emph{De ira Dei} (On the anger of God).
+\bibitem[Leibniz(1710)]{Leibniz1710} Leibniz, G.~W. (1710). \emph{Essais de Th\'eodic\'ee}. Amsterdam.
+\bibitem[Lewis(1993)]{Lewis1993} Lewis, D. (1993). Evil for freedom's sake? \emph{Philosophical Papers}, 22(3), 149--172.
+\bibitem[Mackie(1955)]{Mackie1955} Mackie, J.~L. (1955). Evil and omnipotence. \emph{Mind}, 64(254), 200--212.
+\bibitem[Mackie(1982)]{Mackie1982} Mackie, J.~L. (1982). \emph{The Miracle of Theism}. Clarendon Press.
+\bibitem[Otte(2009)]{Otte2009} Otte, R. (2009). Transworld depravity and unobtainable worlds. \emph{Philosophy and Phenomenological Research}, 78(1), 165--177.
+\bibitem[Pike(1963)]{Pike1963} Pike, N. (1963). Hume on evil. \emph{The Philosophical Review}, 72(2), 180--197.
+\bibitem[Plantinga(1974a)]{Plantinga1974} Plantinga, A. (1974a). \emph{The Nature of Necessity}. Clarendon Press.
+\bibitem[Plantinga(1974b)]{Plantinga1974a} Plantinga, A. (1974b). \emph{God, Freedom, and Evil}. Harper \& Row.
+\bibitem[Rowe(1979)]{Rowe1979} Rowe, W.~L. (1979). The problem of evil and some varieties of atheism. \emph{American Philosophical Quarterly}, 16(4), 335--341.
+\bibitem[Swinburne(1998)]{Swinburne1998} Swinburne, R. (1998). \emph{Providence and the Problem of Evil}. Clarendon Press.
+\bibitem[van Inwagen(2006)]{vanInwagen2006} van Inwagen, P. (2006). \emph{The Problem of Evil}. Oxford University Press.
+\bibitem[Wykstra(1984)]{Wykstra1984} Wykstra, S.~J. (1984). The Humean obstacle to evidential arguments from suffering: On avoiding the evils of \enquote{appearance}. \emph{International Journal for Philosophy of Religion}, 16(2), 73--93.
+\end{thebibliography}
+
+\end{document}

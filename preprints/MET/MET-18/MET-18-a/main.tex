@@ -1,0 +1,245 @@
+\documentclass{situationist-preprint}
+
+\title{Epistemicism and the Sharpness of the World}
+\msid{MET-18-a}
+\msfamily{MET-18}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/MET/MET\_18.lean}
+\mskeywords{vagueness; vague objects; epistemicism; margin for error; sorites; Evans's argument; indeterminate identity; semantic plasticity}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Are there vague objects, things whose boundaries or identities are indeterminate in themselves and not merely in our descriptions of them? We argue that there are not. Vagueness lies in language and knowledge: a vague predicate has a sharp boundary, fixed by use, which its users cannot know. The argument has two parts. The first shows that the epistemic view accounts for the phenomena of vagueness without any indeterminacy in the world. We give a margin-for-error model of a sorites series in which every interpretation draws a sharp boundary, it is known that there is a boundary, and of no position is it known that the boundary lies there; the knowledge version of the tolerance premise holds at every point, which explains the appeal of the sorites. The second part shows that worldly indeterminacy has a cost the epistemic view does not incur: on Evans's argument, an indeterminacy operator on states of affairs cannot be applied to identity. Remaining cases of apparent vague objects, such as mountains and clouds, are precise objects picked out by vague terms. Both parts are formalized in Lean.
+\end{abstract}
+
+\section{The problem}
+
+A mountain has no sharp lower edge, a cloud no sharp outer surface, and a cat, as it sheds hair, no sharp boundary between the hairs that are parts of it and those that are not. It is natural to say that these are vague objects. The thesis that there are vague objects, or more generally that some vagueness is a feature of the world itself rather than of our representations of it, has been defended by \citet{Tye1990}, by \citet{Parsons2000}, who develops a theory of indeterminate identity, and in its most developed recent form by \citet{BarnesWilliams2011}, who model metaphysical indeterminacy as a plurality of precise ways the world might be, none of which is privileged. \citet{Barnes2010} argues that the resulting view is coherent and that the standard objections to it beg the question.
+
+The opposing tradition locates vagueness in representation. \citet{Russell1923} held that vagueness and precision are features of representations, and that the world itself is neither. \citet{Lewis1986} held that the only intelligible account of vagueness places it in our thought and language: there is no vague mountain, only many precise aggregates of rock and our failure to decide which of them \enquote{the mountain} names. On the supervaluationist version of this view \citep{Fine1975,Keefe2000}, a vague predicate has many admissible precisifications and a sentence is true if it is true on all of them. On the epistemic version \citep{Sorensen1988,Williamson1994}, a vague predicate has a single sharp extension, fixed by use, and vagueness is our inability to know where its boundary lies.
+
+The two questions, whether there are vague objects and whether vague predicates have sharp boundaries, are distinct, but they are connected. If a vague predicate has a sharp boundary, nothing in the world need correspond to the vagueness of the predicate, and the main motivation for vague objects disappears. Conversely, if there are vague objects, vague predicates will have no sharp boundaries in the cases that concern them. We defend the epistemic view and the denial of vague objects together. Section~\ref{s:frame} sets out a margin-for-error model of a sorites series. Section~\ref{s:sharp} proves that the model has the features the epistemic view claims for vague predicates and diagnoses the sorites. Section~\ref{s:objects} gives Evans's argument against vague identity and applies the result to the standard examples of vague objects. Section~\ref{s:obj} answers objections.
+
+\section{Framework}\label{s:frame}
+
+A sorites series for a predicate $F$ is a sequence of cases, indexed by the natural numbers $0, 1, 2, \ldots$, in which adjacent cases differ only slightly in the respect relevant to $F$: men with $0, 1, 2, \ldots$ hairs for \enquote{bald}, collections of $10^6, 10^6 - 1, \ldots$ grains for \enquote{heap}. We order the series so that it begins with clear cases of $F$.
+
+\begin{definition}[Interpretations]\label{d:interp}
+An \emph{interpretation} of $F$ is what a total pattern of use fixes as its extension on the series. Under an interpretation $u$, for each position $i$, either $F$ applies to $i$ or it does not. We write $\mathrm{Ext}(u,i)$ when it does.
+\end{definition}
+
+Definition~\ref{d:interp} encodes bivalence for the vague predicate under each interpretation. It is the substantive commitment of the epistemic view, and the rest of the framework is designed to show that it is compatible with what speakers know.
+
+\begin{assumption}[Penumbral monotonicity]\label{a:mono}
+Under every interpretation, if $F$ applies to position $i+1$, it applies to position $i$.
+\end{assumption}
+
+Assumption~\ref{a:mono} records a penumbral connection in the sense of \citet{Fine1975}: if a man with $i+1$ hairs is bald, so is a man with $i$. It is respected by every account of vagueness, epistemic or not.
+
+\begin{definition}[Boundary]\label{d:last}
+Position $i$ is the \emph{last} $F$ under $u$ if $\mathrm{Ext}(u,i)$ and not $\mathrm{Ext}(u,i+1)$.
+\end{definition}
+
+\begin{assumption}[Indiscriminability]\label{a:close}
+There is a reflexive relation of \emph{indiscriminability} between interpretations: $v$ is indiscriminable from $u$ if the speakers whose use fixes $u$ could not, by any means available to them, tell whether their use fixes $u$ or $v$.
+\end{assumption}
+
+\begin{definition}[Knowledge]\label{d:know}
+A claim about $F$ is \emph{known} at $u$ if it holds under every interpretation indiscriminable from $u$.
+\end{definition}
+
+Definition~\ref{d:know} is the structure of margin-for-error knowledge \citep{Williamson1994,Williamson2000}: a belief that is true but would have been false had the facts differed in ways the believer cannot discriminate is not knowledge, because it is not safe. Here the facts in question are semantic: which extension the speakers' use fixes. Applied to vagueness, it says that one knows that $F$ applies to a case only if $F$ would still have applied under every interpretation one cannot tell apart from the actual one.
+
+\begin{assumption}[Semantic plasticity]\label{a:plastic}
+For every interpretation $u$, there is an interpretation indiscriminable from $u$ under which the boundary lies one place later, and one under which it lies one place earlier: there are $v, w$ indiscriminable from $u$ such that, for every $i$, $\mathrm{Ext}(v,i+1)$ iff $\mathrm{Ext}(u,i)$, and $\mathrm{Ext}(w,i)$ iff $\mathrm{Ext}(u,i+1)$.
+\end{assumption}
+
+Assumption~\ref{a:plastic} expresses the fact that the meaning of a vague predicate supervenes on a pattern of use too diffuse to be sensitive to differences of one hair \citep[ch.~7]{Williamson1994}. A slightly different pattern of use, of the kind that would result from a few speakers having had slightly different dispositions, would have fixed a boundary one place over, and nothing available to the speakers would reveal the difference. The label is due to \citet{Hawthorne2006}, who discusses the principle critically; we return to his concern in Objection~\ref{o:plastic}.
+
+\section{Sharp boundaries that cannot be known}\label{s:sharp}
+
+\begin{lemma}[Sharpness]\label{l:sharp}
+Under any interpretation $u$, if $F$ applies to position $0$ and does not apply to position $n$, then there is a last $F$ before $n$.
+\end{lemma}
+
+\begin{proof}
+By induction on $n$. For $n = 0$ the hypotheses are inconsistent. For $n = k + 1$: if $F$ applies to $k$, then $k$ is the last $F$; otherwise $F$ does not apply to $k$, and the induction hypothesis gives a last $F$ before $k$.
+\end{proof}
+
+Lemma~\ref{l:sharp} uses only bivalence under $u$ and classical reasoning; it is the reasoning by which the sorites premises are refuted, run forward instead of backward.
+
+\begin{lemma}[Uniqueness]\label{l:unique}
+Under any interpretation there is at most one last $F$.
+\end{lemma}
+
+\begin{proof}
+Suppose $i < j$ and both are last. Since $j$ is $F$, by Assumption~\ref{a:mono} applied $j - i - 1$ times, $i + 1$ is $F$, contradicting the claim that $i$ is last.
+\end{proof}
+
+\begin{proposition}[Margin for error]\label{p:margin}
+At every interpretation $u$ and position $i$: if it is known that $i$ is $F$, then $i + 1$ is $F$; and if it is known that $i + 1$ is not $F$, then $i$ is not $F$.
+\end{proposition}
+
+\begin{proof}
+Let $w$ be the interpretation of Assumption~\ref{a:plastic} with the boundary one place earlier. If $i$ is known to be $F$, then $i$ is $F$ under $w$, since $w$ is indiscriminable from $u$; by the choice of $w$, $i + 1$ is $F$ under $u$. The second claim is proved in the same way from the interpretation $v$ with the boundary one place later.
+\end{proof}
+
+\begin{theorem}[Epistemicism]\label{t:main}
+Suppose it is known at $u$ that position $0$ is $F$ and that position $n$ is not $F$. Then (i) it is known at $u$ that there is a last $F$ before $n$; (ii) there is a last $F$ under $u$; and (iii) for no position $i$ is it known at $u$ that $i$ is the last $F$.
+\end{theorem}
+
+\begin{proof}
+(i) Let $v$ be indiscriminable from $u$. Since the endpoints are known, $0$ is $F$ and $n$ is not $F$ under $v$, and Lemma~\ref{l:sharp} gives a last $F$ under $v$. (ii) Apply the same reasoning to $u$ itself, which is indiscriminable from itself by Assumption~\ref{a:close}. (iii) Suppose it is known that $i$ is the last $F$. Then, by reflexivity, $i$ is the last $F$ under $u$; in particular $i$ is $F$ under $u$. Let $v$ be the interpretation with the boundary one place later. Then $i + 1$ is $F$ under $v$, so $i$ is not the last $F$ under $v$; but $v$ is indiscriminable from $u$, so $i$ is the last $F$ under $v$, a contradiction.
+\end{proof}
+
+Theorem~\ref{t:main} is the epistemic view in miniature. The boundary exists, and its existence is known, since it follows from what speakers know about the clear cases by classical logic. Its location is not known, and not because of any failure of diligence: no position could be known to be the boundary, whatever the boundary is. Clause (iii) does not depend on Assumption~\ref{a:mono} or on the interpretation with the boundary moved earlier; it requires only that the boundary could have been one place later without anyone being able to tell.
+
+\begin{corollary}[The sorites diagnosed]\label{c:sorites}
+Under any interpretation $u$ on which $0$ is $F$ and $n$ is not, the tolerance premise \enquote{if $i$ is $F$, then $i + 1$ is $F$} fails at exactly one position, while the premise \enquote{if $i$ is known to be $F$, then $i + 1$ is $F$} holds at every position.
+\end{corollary}
+
+\begin{proof}
+The first claim is Lemmas~\ref{l:sharp} and~\ref{l:unique}; the second is Proposition~\ref{p:margin}.
+\end{proof}
+
+Corollary~\ref{c:sorites} explains why the sorites is compelling. Every instance of the tolerance premise that a speaker could check is one in which she knows the antecedent, and in each such instance the consequent is true. The false instance is the one whose antecedent is true but unknowable. Our judgments of tolerance are reliable judgments about the knowledge version of the premise, which we mistake for judgments about the premise itself \citep[ch.~8]{Williamson1994}. The paradox is thus explained without revising logic and without supposing that anything in the world is tolerant.
+
+It remains to show that the assumptions are consistent, and that the model gives borderline cases of the right shape. Take as interpretations the natural numbers $c$, letting $F$ apply under $c$ to the positions below $c$, and call $c$ and $d$ indiscriminable if they differ by at most a fixed margin $m$.
+
+\begin{proposition}[Borderline cases]\label{p:border}
+For $m \geq 1$, the concrete model satisfies Assumptions~\ref{a:mono}, \ref{a:close} and~\ref{a:plastic}. In it, position $i$ is known to be $F$ at $c$ iff $i + m < c$, known not to be $F$ iff $c + m \leq i$, and neither iff $c - m \leq i < c + m$.
+\end{proposition}
+
+\begin{proof}
+Monotonicity and reflexivity are immediate; the shifted interpretations of Assumption~\ref{a:plastic} are $c + 1$ and $c - 1$ (with $c - 1 = 0$ when $c = 0$). Position $i$ is $F$ at every $d$ with $c - m \leq d$ iff $i < c - m$, and fails to be $F$ at every $d \leq c + m$ iff $c + m \leq i$. The third claim combines the first two.
+\end{proof}
+
+The borderline cases in the model are those of which it is unknowable whether they are $F$. They form a region of $2m$ positions centred on the boundary, as the epistemic view predicts: a borderline case is one close enough to the boundary that the margin required for knowledge cannot be met. The region's own edges are not known either, since where it begins depends on where the boundary is. This is the source of higher-order vagueness on the epistemic view, which LOG-15-a argues three-valued semantics cannot reproduce; LOG-15-b develops it on the bivalent view, and the companion MET-18-b gives a fuller defence of margin-for-error principles.
+
+\section{No vague objects}\label{s:objects}
+
+The model of Section~\ref{s:sharp} shows that the phenomena of vagueness do not require vagueness in the world. We now argue that vagueness in the world is not merely unnecessary but costly. The canonical argument is due to \citet{Evans1978}; a related argument appears in \citet{Salmon1981}.
+
+\begin{definition}[Worldly determinacy]\label{d:det}
+Let $\Delta$ be an operator on states of affairs, read \enquote{it is determinately the case that}, and let $\nabla p$ (\enquote{it is indeterminate whether $p$}) abbreviate $\neg \Delta p \wedge \neg \Delta \neg p$. The operator is \emph{worldly} if it applies to states of affairs as such, so that whether $\Delta$ holds of the state of affairs that $a$ is $G$ depends on $a$, not on how $a$ is designated.
+\end{definition}
+
+\begin{assumption}\label{a:refl}
+For every object $x$, $\Delta(x = x)$.
+\end{assumption}
+
+\begin{assumption}\label{a:closure}
+If $p$ entails $q$, then $\Delta p$ entails $\Delta q$.
+\end{assumption}
+
+\begin{theorem}[Evans]\label{t:evans}
+If $\Delta$ is worldly, then for all objects $a$ and $b$: (i) if $\nabla(a = b)$, then $a \neq b$; and (ii) if $\Delta \nabla (a = b)$, then not $\nabla (a = b)$.
+\end{theorem}
+
+\begin{proof}
+(i) Suppose $\nabla(a = b)$ and $a = b$. Since $\Delta$ is worldly, the state of affairs that $a = b$ is the state of affairs that $a = a$, so $\nabla(a = a)$, and in particular $\neg\Delta(a = a)$, contradicting Assumption~\ref{a:refl}. (ii) By (i), $\nabla(a = b)$ entails $a \neq b$. By Assumption~\ref{a:closure}, $\Delta\nabla(a = b)$ entails $\Delta(a \neq b)$, which contradicts the second conjunct of $\nabla(a = b)$.
+\end{proof}
+
+Theorem~\ref{t:evans} shows that indeterminate identity, understood as a feature of the world, is incoherent wherever it is itself determinate. Defenders of vague identity have responded in three ways: by rejecting the closure principle or the inference from $\Delta\nabla$ \citep{Parsons2000}, by holding that the indeterminacy of identity is itself indeterminate, and by reading the argument as showing only that identity statements with precise terms are determinate \citep{Lewis1988}. The last reading is the one we accept, and it is the epistemic reading. If \enquote{it is indeterminate whether} expresses a status of sentences or of knowledge, it is not worldly in the sense of Definition~\ref{d:det}: whether it is known that Everest is identical to a given aggregate of rock depends on whether the aggregate is designated by \enquote{Everest} or by a precise description, and the substitution in the first step of the proof fails. Evans's argument therefore discriminates between the two accounts of vagueness. It is harmless to the account that locates indeterminacy in language and knowledge, and fatal, given closure, to the account that locates it in the identities of things.
+
+The friend of vague objects may grant this and abandon vague identity, keeping vague boundaries: the mountain is one object, determinately identical to itself, but it is indeterminate whether a given rock is part of it. The view does not escape. If it is indeterminate whether rock $r$ is part of Everest, consider the aggregate $E^+$ of Everest's determinate parts with $r$ and the aggregate $E^-$ of its determinate parts without $r$. Either Everest is one of these or it is neither. If it is one of them, it is indeterminate which, and this is indeterminate identity again, to which Theorem~\ref{t:evans} applies. If it is neither, then there is an object, Everest, with an indeterminate part, in addition to two precise aggregates that differ only by $r$; and every role Everest plays, as the referent of \enquote{Everest}, as the thing climbed, as the thing measured, is played equally well by the two precise aggregates, since the climber stands on rock that belongs to both. The vague object is an addition to the ontology that does no work the precise objects do not do.
+
+The epistemic view gives the alternative directly. There are many precise aggregates in the vicinity of Everest, and one of them is the referent of \enquote{Everest}, fixed by use as the extension of \enquote{bald} is fixed by use. Which aggregate it is cannot be known, for the reason given in Theorem~\ref{t:main}: a slightly different pattern of use would have selected an aggregate differing by a rock, and speakers could not tell. The vagueness of \enquote{Everest} is a fact about the relation between a name and many candidates, not a fact about any one of them. MET-05 applies the same treatment to clouds.
+
+The same strategy applies to the argument from vagueness for unrestricted composition. \citet{Lewis1986} and \citet{Sider2001} argue that any restriction on composition would be vague, that composition cannot be vague because existence cannot be vague, and that composition is therefore unrestricted. The argument assumes that a restriction stated in vague terms yields vague composition. On the epistemic view it does not: a restriction stated in vague terms, such as the common-fate condition of MET-06, has a sharp but unknowable boundary, and whether some things compose is a sharp matter about which we may be ignorant. We do not assess the restriction itself here; we note only that the premise that a vague condition yields vague existence is the premise that vagueness is in the world, which the present argument rejects.
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Incredulity]\label{o:incred}
+It is incredible that a single hair makes the difference between baldness and its absence, or that there is a fact, unknowable to everyone, about the last bald man.
+\end{objection}
+
+\begin{reply}
+The incredulity is a reaction to the location of the boundary, not to its existence. Theorem~\ref{t:main} shows that the claim that there is a boundary follows by classical logic from what speakers know, and Corollary~\ref{c:sorites} explains why each particular location seems wrong: for every position we can consider, the knowledge version of tolerance is true. What would be incredible is that a speaker could know of some hair that it made the difference, and the theorem says that she cannot. Rival views, as LOG-15-a shows for three-valued semantics, draw sharp boundaries of their own, between truth and indeterminacy, and must also hold that they cannot be known.
+
+Nor is the boundary arbitrary in any objectionable sense. It is not chosen by anyone; it is fixed by the total pattern of use together with the facts about the cases, as the extension of every predicate is. It is arbitrary only in that nothing available to speakers could favor it over its neighbors, and that is Theorem~\ref{t:main}(iii) restated. What remains is the cost of the view: a range of facts, each of the form \enquote{position $i$ is $F$}, that no one can know. Bivalence for vague predicates requires accepting this ignorance, and it is a cost worth paying, since the alternatives give up classical logic and the penumbral truths and, by LOG-15-a, do not escape sharp boundaries in any case.
+\end{reply}
+
+\begin{objection}[Meaning and use]
+If use does not settle where the boundary lies, nothing does, and there is no boundary. Epistemicism requires a meaning-fixing fact that no speaker has access to, which is mysterious.
+\end{objection}
+
+\begin{reply}
+The objection assumes that the facts of use that determine meaning must be accessible to speakers in the detail required to discern their consequences. That assumption is false in general: the extension of a natural kind term depends on facts about the kind that no speaker may know, and the extension of a vague term depends on the total pattern of use, including dispositions never manifested, which no speaker surveys \citep[ch.~7]{Williamson1994}. Definition~\ref{d:interp} requires only that the total pattern of use fix some extension, and Assumption~\ref{a:plastic} explains why speakers cannot recover which one. The supervenience of meaning on use does not require that meaning be readable from use.
+\end{reply}
+
+\begin{objection}[Plasticity]\label{o:plastic}
+\citet{Hawthorne2006} argues that semantic plasticity sits uneasily with knowledge of clear cases: if meaning shifts with every small change in use, it is unclear why speakers should be able to know even that a man with no hair is bald.
+\end{objection}
+
+\begin{reply}
+Assumption~\ref{a:plastic} says that the boundary would have shifted by one place under a small change in use, not that meaning is unstable everywhere. Proposition~\ref{p:border} shows that knowledge of clear cases survives: with margin $m$, every position more than $m$ places from the boundary is known to be $F$ or known not to be $F$. The objection would succeed if the margin were unbounded, so that every case lay within it; nothing in the facts of use suggests that it is, and the existence of clear cases is evidence that it is not.
+\end{reply}
+
+\begin{objection}[Metaphysical indeterminacy]
+\citet{BarnesWilliams2011} model metaphysical indeterminacy as a set of precise ways the world might be, none privileged. That model is consistent and avoids Evans's argument, since identity is determinate at each precise way. It is therefore a coherent theory of vague objects.
+\end{objection}
+
+\begin{reply}
+The model is consistent, and its structure is that of Definition~\ref{d:know}, with ways the world might be in place of interpretations. The question is what the plurality represents. If the precise ways are alternative interpretations of our words, the model is the epistemic or supervaluationist account and no vagueness is in the world. If they are alternative ways for the world itself to be, with none actual, then the world fails to be any precise way, and the view owes an account of how a world can be such that each candidate for being it is precise but none is actual. We do not claim that worldly indeterminacy is incoherent in every application: MET-19 argues that it occurs in a restricted class of states of affairs, those involving self-reference, where it concerns whether a state of affairs obtains and not the boundaries or identities of objects. Our claim is that nothing in the phenomena of vagueness requires it, since Theorem~\ref{t:main} accounts for those phenomena without it.
+\end{reply}
+
+\section{What the result does not establish}
+
+The formal results establish that the margin model has the features the epistemic view claims, and that worldly indeterminacy of identity is incoherent where determinate. They do not establish the premises of the model: that a pattern of use fixes a classical extension, that the boundary would shift under undetectably small changes in use, and that knowledge requires a margin for error. These are defended above and, for the last, in EPI-01-a, on which margin-for-error principles follow from the safety condition on knowledge. Nor does the argument show that there is no metaphysical indeterminacy of any kind. It shows that vagueness is not such indeterminacy. MET-19 identifies a restricted class of cases, arising from self-reference rather than from borderline cases in a series, in which indeterminacy is in the world; those cases involve no vague objects and no indeterminate identity, and they are not covered by Theorem~\ref{t:evans}.
+
+\section{Formalization}\label{s:lean}
+
+The module \nolinkurl{Philosophy/MET/MET_18.lean} states the primitives of Section~\ref{s:frame} as axioms: a type of interpretations, the extension relation, the indiscriminability relation with its reflexivity, monotonicity, and the two halves of semantic plasticity. Knowledge is defined as in Definition~\ref{d:know}. The main theorem is stated as follows.
+
+\begin{lstlisting}
+theorem epistemicism (u : Interp) (n : Nat)
+    (h0 : Knows u (fun v => Ext v 0))
+    (hn : Knows u (fun v => ¬ Ext v n)) :
+    Knows u (fun v => ∃ i, i < n ∧ Last v i) ∧
+    (∃ i, Last u i) ∧
+    ∀ i, ¬ Knows u (fun v => Last v i)
+\end{lstlisting}
+
+\noindent The checker reports the following dependencies.
+
+\begin{lstlisting}
+'Philosophy.MET_18.epistemicism' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.MET_18.Close, Philosophy.MET_18.Ext,
+   Philosophy.MET_18.Interp, Philosophy.MET_18.close_refl,
+   Philosophy.MET_18.shift_up]
+'Philosophy.MET_18.evans' depends on axioms:
+  [Philosophy.MET_18.Det, Philosophy.MET_18.Obj,
+   Philosophy.MET_18.det_mono, Philosophy.MET_18.det_refl]
+\end{lstlisting}
+
+The first three axioms are Lean's own; \texttt{Classical.choice} enters through the use of excluded middle in Lemma~\ref{l:sharp}, which is the formal counterpart of bivalence. \texttt{Interp}, \texttt{Ext} and \texttt{Close} are the primitives of Definition~\ref{d:interp} and Assumption~\ref{a:close}; \texttt{close\_refl} is the reflexivity of indiscriminability; \texttt{shift\_up} is the first half of Assumption~\ref{a:plastic}. As noted after Theorem~\ref{t:main}, neither monotonicity nor the second half of plasticity is used; Corollary~\ref{c:sorites} uses both. Proposition~\ref{p:border} is proved for the concrete model without philosophical axioms, which shows that the axioms of Part~I are jointly satisfiable. Theorem~\ref{t:evans} depends only on Assumptions~\ref{a:refl} and~\ref{a:closure} and on the primitives. The worldliness of Definition~\ref{d:det} is not an axiom: it is built into the type of \texttt{Det}, an operator on propositions, which respects the identity of the objects they concern as every function in Lean does. This is the precise sense in which the argument applies to worldly indeterminacy and not to the epistemic notion of Definition~\ref{d:know}, whose argument is an interpretation and not an object.
+
+\section{Conclusion}
+
+Vague predicates have sharp boundaries fixed by use, and the boundaries cannot be known because knowledge requires a margin for error that the boundary's location always violates. This accounts for borderline cases, for the appeal of the sorites, and for higher-order vagueness, without supposing that anything in the world is vague. Supposing otherwise has a cost: indeterminacy that belongs to the world cannot coherently apply to identity, and the apparent vague objects are better understood as precise objects picked out by vague terms. There are no vague objects; vagueness lies in language and knowledge.
+
+\begin{thebibliography}{99}\small
+\bibitem[Barnes(2010)]{Barnes2010} Barnes, E. (2010). Ontic vagueness: a guide for the perplexed. \emph{Noûs}, 44(4), 601--627.
+\bibitem[Barnes and Williams(2011)]{BarnesWilliams2011} Barnes, E. and Williams, J.~R.~G. (2011). A theory of metaphysical indeterminacy. \emph{Oxford Studies in Metaphysics}, 6, 103--148.
+\bibitem[Evans(1978)]{Evans1978} Evans, G. (1978). Can there be vague objects? \emph{Analysis}, 38(4), 208.
+\bibitem[Fine(1975)]{Fine1975} Fine, K. (1975). Vagueness, truth and logic. \emph{Synthese}, 30, 265--300.
+\bibitem[Hawthorne(2006)]{Hawthorne2006} Hawthorne, J. (2006). \emph{Metaphysical Essays}. Oxford University Press.
+\bibitem[Keefe(2000)]{Keefe2000} Keefe, R. (2000). \emph{Theories of Vagueness}. Cambridge University Press.
+\bibitem[Lewis(1986)]{Lewis1986} Lewis, D. (1986). \emph{On the Plurality of Worlds}. Blackwell.
+\bibitem[Lewis(1988)]{Lewis1988} Lewis, D. (1988). Vague identity: Evans misunderstood. \emph{Analysis}, 48(3), 128--130.
+\bibitem[Parsons(2000)]{Parsons2000} Parsons, T. (2000). \emph{Indeterminate Identity: Metaphysics and Semantics}. Oxford University Press.
+\bibitem[Russell(1923)]{Russell1923} Russell, B. (1923). Vagueness. \emph{Australasian Journal of Psychology and Philosophy}, 1(2), 84--92.
+\bibitem[Salmon(1981)]{Salmon1981} Salmon, N. (1981). \emph{Reference and Essence}. Princeton University Press.
+\bibitem[Sider(2001)]{Sider2001} Sider, T. (2001). \emph{Four-Dimensionalism: An Ontology of Persistence and Time}. Oxford University Press.
+\bibitem[Sorensen(1988)]{Sorensen1988} Sorensen, R. (1988). \emph{Blindspots}. Clarendon Press.
+\bibitem[Tye(1990)]{Tye1990} Tye, M. (1990). Vague objects. \emph{Mind}, 99(396), 535--557.
+\bibitem[Williamson(1994)]{Williamson1994} Williamson, T. (1994). \emph{Vagueness}. Routledge.
+\bibitem[Williamson(2000)]{Williamson2000} Williamson, T. (2000). \emph{Knowledge and its Limits}. Oxford University Press.
+\end{thebibliography}
+
+\end{document}

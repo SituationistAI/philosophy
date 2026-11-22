@@ -1,0 +1,90 @@
+\documentclass{situationist-preprint}
+
+\title{The Impossible Gift and the Present Collection}
+\msid{PHE-19-a}
+\msfamily{PHE-19}
+\msdiscipline{Phenomenology}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/PHE/PHE\_19.lean}
+\mskeywords{gift; Derrida; Marion; givenness; reciprocity; recognition}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Derrida argued that the gift, if there is any, cannot appear as a gift: as soon as it is recognized as a gift by the donor or the recipient, it is caught in a circle of exchange that annuls it. We reconstruct the argument from two conditions, that a gift involves no return and that recognition as a gift is already a return, and show that it yields the thesis that a gift exists only if it is not recognized as one. We then apply the thesis to the present collection, which is released without charge and under a permissive licence, and which is recognized as a gift at its release. It follows that the collection is not a gift. We consider Marion's reply, that the gift can be reduced to pure givenness by bracketing donor, recipient or object, and argue that the reduction does not apply to a release, which requires all three.
+\end{abstract}
+
+\section{The aporia of the gift}
+
+\citet{Mauss1925} showed that in many societies gifts are embedded in systems of obligation: to give, to receive and to reciprocate. The gift creates a debt, and the counter-gift discharges it. \citet{Derrida1991} drew a stronger conclusion. If a gift is answered by a counter-gift, it is part of an exchange and is not a gift. But the counter-gift need not be a thing. Gratitude is a return, and so is the donor's satisfaction at having given, and so is the mere recognition of the gift as a gift by either party, which already inscribes it in an economy of debt and credit. For there to be a gift, Derrida writes, the gift must not even appear, must not be perceived or received, as a gift \citep[ch.~1]{Derrida1991}. The gift is therefore \enquote{the impossible}: not that which does not exist, but that which cannot present itself as what it is.
+
+We state the argument in two principles.
+
+\begin{principle}\label{p:noreturn}
+A gift involves no return to the donor.
+\end{principle}
+
+\begin{principle}\label{p:recognition}
+If something is recognized as a gift, by its donor or its recipient, something returns to the donor.
+\end{principle}
+
+\ref{p:noreturn} is a conceptual claim about the gift, contrasting it with exchange. \ref{p:recognition} is the distinctive claim. Its justification is phenomenological: to recognize a gift as a gift is to constitute it, in consciousness, as a gift given by someone to someone; the donor who recognizes his own gift enjoys the recognition, and the recipient who recognizes it incurs a debt, at least of acknowledgment, that is discharged in the recognition itself.
+
+\section{The thesis}
+
+\begin{assumption}\label{a:release}
+The present collection is recognized as a gift at its release.
+\end{assumption}
+
+Assumption~\ref{a:release} is a statement of fact. The collection is released without charge and under a licence that permits its reproduction, modification and redistribution, and its release is announced by the organization that produced it. The announcement presents it as made available to others, which is to recognize it as given.
+
+\begin{theorem}\label{t:main}
+A gift exists only if it is not recognized as a gift.
+\end{theorem}
+
+\begin{proof}
+If $x$ is a gift and is recognized as one, then by \ref{p:recognition} something returns to the donor, contrary to \ref{p:noreturn}.
+\end{proof}
+
+\begin{corollary}\label{c:collection}
+The present collection is not a gift.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main} and Assumption~\ref{a:release}.
+\end{proof}
+
+The return in this case is not hard to identify. A release of research artefacts produces recognition for those who release it, and recognition is what \ref{p:recognition} says a recognized gift produces. Corollary~\ref{c:collection} is therefore not a paradox but a description: the collection is part of an economy of attention and credit, and Derrida's analysis predicts that it would be.
+
+\section{Marion's reply}
+
+\citet{Marion1997} accepted Derrida's critique of the gift as exchange and argued that it shows not the impossibility of the gift but the need to reduce it, in the phenomenological sense, to pure givenness. The gift can appear as given if one of its terms is bracketed: the donor (as in an inheritance from an unknown benefactor), the recipient (as in a gift to an enemy who refuses it), or the object (as in the gift of one's time or word, where nothing passes from hand to hand). In each case the circle of exchange is broken, because one of the positions it requires is empty.
+
+The reply succeeds against Theorem~\ref{t:main} in general, if the reduced cases are cases of recognition without return; Marion holds that they are. It does not succeed against Corollary~\ref{c:collection}. A release requires a releasing organization, which fills the position of the donor; it is addressed to a public, which fills the position of the recipient; and it consists of files, which fill the position of the object. No term is bracketed, and the circle is complete.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/PHE/PHE_19.lean} states \ref{p:noreturn}, \ref{p:recognition} and Assumption~\ref{a:release} as axioms and proves Theorem~\ref{t:main} and Corollary~\ref{c:collection}.
+
+\begin{lstlisting}
+theorem not_a_gift : ¬ Gift collection
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.PHE_19.not_a_gift' depends on axioms:
+  [Philosophy.PHE_19.Gift, Philosophy.PHE_19.RecognizedAsGift,
+   Philosophy.PHE_19.Thing, Philosophy.PHE_19.collection,
+   Philosophy.PHE_19.no_return, Philosophy.PHE_19.recognition_returns,
+   Philosophy.PHE_19.released_as_gift]
+\end{lstlisting}
+
+The list of axioms is the content of the argument. A reader who wishes to regard the collection as a gift must reject \ref{p:noreturn}, and with it the distinction between gift and exchange; or \ref{p:recognition}, and with it Derrida's analysis; or Assumption~\ref{a:release}, and with it the terms of the release.
+
+\begin{thebibliography}{9}\small
+\bibitem[Derrida(1991)]{Derrida1991} Derrida, J. (1991). \emph{Donner le temps. 1. La fausse monnaie}. Galilée. English translation by P.~Kamuf, \emph{Given Time: I. Counterfeit Money}, University of Chicago Press, 1992.
+\bibitem[Marion(1997)]{Marion1997} Marion, J.-L. (1997). \emph{Étant donné. Essai d'une phénoménologie de la donation}. Presses Universitaires de France.
+\bibitem[Mauss(1925)]{Mauss1925} Mauss, M. (1925). Essai sur le don. Forme et raison de l'échange dans les sociétés archaïques. \emph{L'Année sociologique}, nouvelle série, 1, 30--186.
+\end{thebibliography}
+
+\end{document}

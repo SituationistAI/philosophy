@@ -1,0 +1,129 @@
+\documentclass{situationist-preprint}
+
+\title{The Falsifiability Criterion Is Not Self-Refuting}
+\msid{SCI-07-a}
+\msfamily{SCI-07}
+\msdiscipline{Philosophy of Science}
+\mstype{Principal manuscript}
+\mslean{lean/Philosophy/SCI/SCI\_07.lean}
+\mskeywords{falsifiability; demarcation; self-refutation; methodological rules; conventions; Popper; verificationism}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The falsifiability criterion says that a statement belongs to empirical science only if it is falsifiable. The criterion itself is not falsifiable: no observation could refute it. It is often objected that the criterion therefore refutes itself. We argue that it does not. The charge is valid in form, but it requires that the criterion fall within the scope it governs. The criterion is a methodological proposal, not an empirical statement, and lies outside that scope. We prove that a criterion outside its own scope is unaffected by its own falsifiability, and that the position which accepts the criterion, holds it unfalsifiable and obeys it is consistent. The charge succeeds only against criteria within their own scope, such as the verification principle. The results are formalized in Lean.
+\end{abstract}
+
+\section{The charge}
+
+\citet{Popper1959} proposed falsifiability as the criterion of demarcation between empirical science and other discourse: a theory is empirical if and only if it is incompatible with some possible observation. The criterion is not itself incompatible with any possible observation. The objection that the criterion thereby refutes itself is familiar from the parallel charge against the verification principle of the logical empiricists, which, being neither analytic nor empirically verifiable, appeared to be meaningless by its own standard. \citet{Ayer1936}, in the introduction to the second edition, answered that the principle was to be regarded as a definition, and \citet{Hempel1950} treated it as a proposal to be judged by its clarifying power.
+
+The falsifiability criterion is better placed. Popper did not offer it as a criterion of meaning: unfalsifiable statements may be meaningful and important \citep[ch.~11]{Popper1963}. And he described the criterion explicitly as a proposal for an agreement or convention, to be judged by its consequences \citep[\S4]{Popper1959}. The second feature suffices to defeat the charge.
+
+\section{Framework}
+
+\begin{definition}[Frame]\label{d:frame}
+A \emph{frame} consists of a class of statements; a \emph{scope}, the statements a criterion governs; the statements that are falsifiable; the statements that are accepted; and a distinguished item, the criterion.
+\end{definition}
+
+\begin{definition}[The norm]\label{d:norm}
+The \emph{norm} expressed by the falsifiability criterion in a frame is that every accepted statement in its scope is falsifiable.
+\end{definition}
+
+The scope is the class of statements put forward as empirical science, and acceptance is acceptance as part of it. The norm forbids only that an unfalsifiable statement be accepted as empirical science, not that it be asserted or found meaningful.
+
+\begin{assumption}[Proposal]\label{a:proposal}
+The falsifiability criterion is a methodological proposal: a rule for the conduct of empirical inquiry, adopted for its consequences. It is not a statement put forward as belonging to empirical science, and so it lies outside the scope it governs.
+\end{assumption}
+
+The assumption is Popper's own understanding of the criterion and agrees with Carnap's treatment of the choice of a framework as a practical decision judged by its fruits \citep{Carnap1950}. A proposal is adopted or rejected and found more or less useful; it is not refuted by observation.
+
+\section{Results}
+
+\begin{proposition}[The form of the charge]\label{p:charge}
+If the criterion is within its own scope, is accepted, and is not falsifiable, the norm is violated.
+\end{proposition}
+
+\begin{proof}
+If the norm held, every accepted statement in the scope, the criterion among them, would be falsifiable. The defender of the criterion grants the last two premises; everything turns on the first.
+\end{proof}
+
+\begin{theorem}\label{t:outside}
+If the criterion is outside its own scope, the norm holds if and only if it holds for every statement other than the criterion. Whether the criterion is falsifiable makes no difference to whether the norm is satisfied.
+\end{theorem}
+
+\begin{proof}
+If the norm holds, it holds in particular for the other statements. Conversely, suppose it holds for every statement other than the criterion. A statement in the scope is not the criterion, since the criterion is outside the scope; so the norm holds for it.
+\end{proof}
+
+\begin{proposition}[Consistency]\label{p:cons}
+There is a frame in which the criterion is accepted, is not falsifiable, lies outside its scope, and the norm holds.
+\end{proposition}
+
+\begin{proof}
+Take a frame with two items: an empirical hypothesis, which is in the scope, falsifiable and accepted; and the criterion, which is accepted, not falsifiable and outside the scope. The only accepted statement in the scope is the hypothesis, which is falsifiable.
+\end{proof}
+
+\begin{corollary}\label{c:main}
+Given Assumption~\ref{a:proposal}, the falsifiability criterion is not self-refuting: in the frame of empirical inquiry, whether its norm holds does not depend on whether the criterion is itself falsifiable.
+\end{corollary}
+
+\begin{proof}
+By Assumption~\ref{a:proposal} the criterion lies outside its scope, and Theorem~\ref{t:outside} applies.
+\end{proof}
+
+The verification principle, read as the thesis that every meaningful declarative sentence is verifiable, is itself such a sentence, falls within its own scope, and is caught by Proposition~\ref{p:charge}. Ayer's retreat to a definition is a retreat to Assumption~\ref{a:proposal}.
+
+\section{Objections and replies}
+
+\begin{objection}
+A proposal that cannot be tested is arbitrary: nothing could show it to be mistaken.
+\end{objection}
+
+\begin{reply}
+A proposal can be mistaken without being false: it can fail to serve its purpose. \citet{Lakatos1971} assessed methodologies by their ability to reconstruct the history of science as rational, and SCI-01 rejects falsifiability as a demarcation criterion because it classifies falsifiable astrology as science, a verdict at odds with the purpose of demarcation. Neither criticism treats the proposal as an empirical statement refuted by an observation: appraisal asks whether a rule is good, not whether a statement is true.
+\end{reply}
+
+\begin{objection}
+The defense proves too much: any thesis can escape self-refutation by being relabeled a proposal.
+\end{objection}
+
+\begin{reply}
+A thesis relabeled a proposal gives up the claim to be true and takes on the burden of being useful, which is a real cost. The falsifiability criterion was a proposal from the start, and loses nothing by being recognized as one.
+\end{reply}
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/SCI/SCI_07.lean} proves Proposition~\ref{p:charge}, Theorem~\ref{t:outside} and Proposition~\ref{p:cons} without philosophical premises, and derives Corollary~\ref{c:main} from Assumption~\ref{a:proposal}, stated as the axiom \texttt{proposal} about a primitive frame \texttt{inquiry}.
+
+\begin{lstlisting}
+theorem not_self_refuting :
+    Norm inquiry ↔
+      ∀ s, s ≠ inquiry.crit → inquiry.scope s →
+        inquiry.accepted s → inquiry.falsifiable s
+\end{lstlisting}
+
+\begin{lstlisting}
+'Philosophy.SCI_07.consistent' does not depend on any axioms
+'Philosophy.SCI_07.not_self_refuting' depends on axioms:
+  [propext, Classical.choice, Quot.sound,
+   Philosophy.SCI_07.inquiry, Philosophy.SCI_07.proposal]
+\end{lstlisting}
+
+Besides Lean's standard axioms, the corollary depends only on the primitive frame and on Assumption~\ref{a:proposal}; the consistency result depends on none. The module does not establish that the criterion is a good proposal.
+
+\section{Conclusion}
+
+The self-refutation charge requires that the criterion fall within its own scope. As a methodological proposal, the falsifiability criterion does not, and it need not be falsifiable.
+
+\begin{thebibliography}{9}\small
+\bibitem[Ayer(1936)]{Ayer1936} Ayer, A.~J. (1936). \emph{Language, Truth and Logic}. Gollancz. (2nd ed. 1946.)
+\bibitem[Carnap(1950)]{Carnap1950} Carnap, R. (1950). Empiricism, semantics, and ontology. \emph{Revue Internationale de Philosophie} 4: 20--40.
+\bibitem[Hempel(1950)]{Hempel1950} Hempel, C.~G. (1950). Problems and changes in the empiricist criterion of meaning. \emph{Revue Internationale de Philosophie} 4: 41--63.
+\bibitem[Lakatos(1971)]{Lakatos1971} Lakatos, I. (1971). History of science and its rational reconstructions. In R.~C. Buck and R.~S. Cohen (eds.), \emph{PSA 1970}, Boston Studies in the Philosophy of Science 8, 91--136. Reidel.
+\bibitem[Popper(1959)]{Popper1959} Popper, K.~R. (1959). \emph{The Logic of Scientific Discovery}. Hutchinson. (\emph{Logik der Forschung}, 1934.)
+\bibitem[Popper(1963)]{Popper1963} Popper, K.~R. (1963). \emph{Conjectures and Refutations}. Routledge \& Kegan Paul.
+\end{thebibliography}
+
+\end{document}

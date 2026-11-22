@@ -1,0 +1,95 @@
+\documentclass{situationist-preprint}
+
+\title{Black's Spheres Vindicated}
+\msid{MET-28-a}
+\msfamily{MET-28}
+\msdiscipline{Metaphysics}
+\mstype{Principal manuscript}
+\msstatus{Revised 7 October 2026}
+\mslean{lean/Philosophy/MET/MET\_28.lean}
+\mskeywords{identity of indiscernibles; Black's spheres; weak discernibility; symmetry; Leibniz}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Black imagined a world containing nothing but two qualitatively identical iron spheres, two miles apart. If the world is possible, the principle of the identity of indiscernibles is false. We show that the principle fails in its absolute and relative forms: in Black's world, no qualitative property and no qualitative relation to the other sphere distinguishes one sphere from the other. The principle survives only in its weak form, since the spheres stand in an irreflexive qualitative relation, being two miles apart, which suffices for weak discernibility. The result is formalized in Lean, where the spheres are modelled as the two elements of a set equipped with a symmetry that exchanges them.
+\end{abstract}
+
+\paragraph{Note on the revision.} The version of 6 October 2026 claimed that Black's spheres refute the identity of indiscernibles without qualification. The formalization showed that the spheres are weakly discernible: the qualitative relation of being at a distance from one another is irreflexive and holds between them. The main theorem is restricted to absolute and relative discernibility, and Section~4 is new.
+
+\section{The principle and the counterexample}
+
+The principle of the identity of indiscernibles (PII) holds that objects that share all their qualitative properties are identical. Leibniz took it to follow from the principle of sufficient reason. \citet{Black1952} offered a counterexample: a world containing only two iron spheres, each one mile in diameter, of the same temperature, colour and composition, two miles apart. Everything true of one is true of the other, yet they are two.
+
+The discussion was transformed by \citet{Quine1976}, who distinguished grades of discernibility. Two objects are \emph{absolutely} discernible if some formula with one free variable is satisfied by one and not the other; \emph{relatively} discernible if some formula with two free variables is satisfied by them in one order and not the other; and \emph{weakly} discernible if some formula with two free variables is satisfied by them but not by either object paired with itself. Each grade yields a version of PII. \citet{Saunders2003,Saunders2006} argued that fermions in the singlet state, though absolutely indiscernible, are weakly discernible, and that weak discernibility is the version of PII that physics supports.
+
+\section{Framework}
+
+\begin{definition}\label{d:world}
+\emph{Black's world} consists of two spheres, $a$ and $b$, and a symmetry $\sigma$ of the world that exchanges them: $\sigma(a) = b$ and $\sigma(b) = a$.
+\end{definition}
+
+\begin{definition}\label{d:qual}
+A property or relation is \emph{qualitative} if it is invariant under every symmetry of the world.
+\end{definition}
+
+Definition~\ref{d:qual} expresses the idea that qualitative properties do not discriminate between objects that the world's structure treats alike. That Black's world has a symmetry exchanging the spheres is the formal content of Black's description: the world looks the same from the standpoint of either sphere.
+
+\section{Absolute and relative indiscernibility}
+
+\begin{theorem}\label{t:abs}
+No qualitative property distinguishes $a$ from $b$.
+\end{theorem}
+
+\begin{proof}
+Let $P$ be qualitative. Then $P(a) \leftrightarrow P(\sigma(a))$, that is, $P(a) \leftrightarrow P(b)$.
+\end{proof}
+
+\begin{theorem}\label{t:rel}
+No qualitative relation distinguishes the ordered pair $\langle a, b\rangle$ from $\langle b, a\rangle$.
+\end{theorem}
+
+\begin{proof}
+Let $R$ be qualitative. Then $R(a,b) \leftrightarrow R(\sigma(a),\sigma(b))$, that is, $R(a,b) \leftrightarrow R(b,a)$.
+\end{proof}
+
+\begin{corollary}\label{c:pii}
+In Black's world, the absolute and relative forms of PII are false.
+\end{corollary}
+
+\section{Weak discernibility}
+
+\begin{proposition}\label{p:weak}
+The spheres are weakly discernible: there is a qualitative relation that holds between $a$ and $b$ and holds between neither sphere and itself.
+\end{proposition}
+
+\begin{proof}
+Let $D(x,y)$ hold if and only if $x$ is two miles from $y$. $D$ is invariant under $\sigma$, since $\sigma$ preserves distances; it holds between $a$ and $b$; and no sphere is two miles from itself.
+\end{proof}
+
+Proposition~\ref{p:weak} is the content of the revision. It means that Black's world is not a counterexample to weak PII. Whether weak discernibility is a genuine form of discernibility has been disputed: \citet{Hawley2009} argues that the irreflexive relation presupposes the numerical distinctness it is supposed to ground, and \citet{LadymanLinneboPettigrew2012} map the logical relations among the grades. We take no stand on that dispute. Our claim is that the absolute and relative forms of PII are refuted by Black's world, and that the weak form is not.
+
+\section{Formalization}
+
+The module \nolinkurl{Philosophy/MET/MET_28.lean} models the spheres as the two Boolean values and the symmetry as negation. Theorems~\ref{t:abs} and \ref{t:rel} and Proposition~\ref{p:weak} are proved for all invariant properties and relations, without axioms.
+
+\begin{lstlisting}
+theorem weakly_discernible :
+    ∃ R : Sphere → Sphere → Prop, Qualitative2 R ∧ R a b ∧ ∀ x, ¬ R x x
+\end{lstlisting}
+
+\section{Conclusion}
+
+The identity of indiscernibles fails in its absolute and relative forms, as Black argued. It holds in its weak form for Black's world, since the spheres are at a distance from one another. The consequences for the bundle theory of objects are drawn in MET-29.
+
+\begin{thebibliography}{99}\small
+\bibitem[Black(1952)]{Black1952} Black, M. (1952). The identity of indiscernibles. \emph{Mind}, 61(242), 153--164.
+\bibitem[Hawley(2009)]{Hawley2009} Hawley, K. (2009). Identity and indiscernibility. \emph{Mind}, 118(469), 101--119.
+\bibitem[Ladyman et~al.(2012)]{LadymanLinneboPettigrew2012} Ladyman, J., Linnebo, {\O}. and Pettigrew, R. (2012). Identity and discernibility in philosophy and logic. \emph{The Review of Symbolic Logic}, 5(1), 162--186.
+\bibitem[Quine(1976)]{Quine1976} Quine, W.~V. (1976). Grades of discriminability. \emph{The Journal of Philosophy}, 73(5), 113--116.
+\bibitem[Saunders(2003)]{Saunders2003} Saunders, S. (2003). Physics and Leibniz's principles. In K. Brading and E. Castellani (Eds.), \emph{Symmetries in Physics: Philosophical Reflections} (pp.~289--307). Cambridge University Press.
+\bibitem[Saunders(2006)]{Saunders2006} Saunders, S. (2006). Are quantum particles objects? \emph{Analysis}, 66(1), 52--63.
+\end{thebibliography}
+
+\end{document}

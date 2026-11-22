@@ -1,0 +1,446 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable,array}
+
+\title{Gödel's Ontological Argument Without Modal Collapse}
+\msid{REL-01-c}
+\msfamily{REL-01}
+\msdiscipline{Philosophy of Religion}
+\mstype{Alternative proof}
+\mskeywords{ontological argument; Gödel; positive properties; modal collapse; Anderson's emendation; proper filter; finite models; natural deduction}
+
+\input{gen/modelstats.tex}
+\newcommand{\Pos}{\mathcal{P}}
+\newcommand{\NE}{\mathit{NE}}
+\newcommand{\Ess}{\mathrm{Ess}}
+\newcommand{\GS}{G_{\!S}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Gödel's ontological argument derives the necessary existence of a godlike being from axioms about positive properties, but in Scott's standard version its axioms entail modal collapse, the thesis that every truth is necessary. We give a variant that proves the conclusion without the collapse. Its positivity axioms say that the positive properties form a proper filter, closed under conjunction and necessary entailment and excluding the empty property, which is the hypothesis of Lemma~2417 of \emph{On the Existence of God}; its definitions of godlikeness, essence and necessary existence are Anderson's. We prove that necessarily something is godlike, and that some being is godlike, has godlikeness as its essence and exists necessarily, using of the accessibility conditions only symmetry. Relative to the main argument (REL-01-a), the variant avoids the possibility premise, which becomes a lemma. Modal collapse fails in models of the variant, including a full model with two worlds and one being. The computed part enumerates \csModels{} finite models up to isomorphism, checks the axioms and the conclusion in each and lists the countermodels to collapse, and gives the main derivations as natural-deduction proofs checked line by line by machine.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The problem}
+
+Among ontological arguments, Gödel's is the one most often called a proof. It is stated in a second-order modal logic, its premises are a handful of axioms about a primitive notion of positive property, and its conclusion, that necessarily something is godlike, follows from them by steps that have now been checked by machine \citep{Benzmuller2014}. Its weakness lies elsewhere. \citet{Sobel1987} showed that the axioms, in the form Scott gave them, entail that whatever is true is necessarily true. This consequence, modal collapse, is unacceptable to almost everyone and in particular to theists, for whom the existence of the world and the choices of God are contingent. An argument whose premises entail modal collapse cannot be sound, since collapse is false; and if collapse were true, the argument's conclusion would be trivial, since necessary existence would differ from existence in nothing.
+
+The question of this manuscript is whether the collapse is the price of Gödel's conclusion, or an accident of a particular formulation. We argue that it is an accident. The variant we give keeps Gödel's conclusion and Gödel's method, the derivation of a godlike being's necessary existence from axioms about positive properties, and does not entail collapse.
+
+\subsection{Thesis}
+
+The variant, which we call AF, has two components. Its axioms about positivity say that the positive properties form a proper filter: they are closed under conjunction and under necessary entailment, and the empty property is not positive. That is exactly the hypothesis of Lemma~2417 of \emph{On the Existence of God}, stated in Volume~X and analysed in REL-01-f. Its definitions of godlikeness, essence and necessary existence are those of \citet{Anderson1990}: a being is godlike if the properties it has necessarily are exactly the positive ones, and an essence of a being is a property that necessarily entails exactly the properties the being has necessarily. Godlikeness and necessary existence are positive. We prove:
+
+\begin{enumerate}[label=(\roman*)]
+\item In every model of AF on a symmetric frame, at every world, necessarily something is godlike, and some being is godlike, has godlikeness as an essence and has necessary existence (Theorem~\ref{t:main}).
+\item AF does not entail modal collapse: there are models of AF, including full models, in which a proposition is true but not necessary (Proposition~\ref{p:nocollapse}).
+\item Relative to the main argument of REL-01-a, AF avoids the possibility premise (Assumption~3.1 of REL-01-a), which it derives as Lemma~\ref{l:poss}, and of the S5 conditions (Assumption~2.1) it uses only symmetry.
+\end{enumerate}
+
+\subsection{Method}
+
+Both claims of the thesis that admit mechanical checking are checked mechanically. The main theorem, and Sobel's collapse theorem for Scott's system, are given in Appendix~\ref{app:derivations} as derivations in a labelled natural-deduction system, written as data and checked line by line by a program. The absence of collapse, and the dependence of the theorem on symmetry, are exhibited by an exhaustive enumeration of finite models in Appendix~\ref{app:models}: all models of AF up to isomorphism with at most three worlds and at most six points (world--individual pairs) on arbitrary frames, together with larger models on symmetric and on reflexive frames, \csModels{} models in all. For each model the program checks the axioms, the conclusion, the corresponding Scott axioms and the collapse of every proposition of the form \enquote{something is $Y$}.
+
+\section{Gödel's argument and its emendations}\label{s:history}
+
+\subsection{Gödel and Scott}
+
+Gödel's argument survives in a two-page note dated 1970, published in the third volume of his \emph{Collected Works} \citep{Godel1995}. Dana Scott reformulated it in 1972, and Scott's version, with an essence clause that Gödel's note omits, is the one most later discussions take as standard \citep{Sobel1987, Sobel2004, Fitting2002}. Scott's system has five axioms, about a second-order predicate $\Pos$ of properties (\enquote{$Y$ is positive}):
+
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+S1 & $\Pos(\lambda x.\neg Y(x)) \leftrightarrow \neg\Pos(Y)$ \\
+S2 & $\Pos(Y) \wedge \nec\forall x(Y(x) \to Z(x)) \to \Pos(Z)$ \\
+S3 & $\Pos(\GS)$ \\
+S4 & $\Pos(Y) \to \nec\Pos(Y)$ \\
+S5 & $\Pos(\NE_S)$
+\end{tabular}
+\end{center}
+
+\noindent and three definitions: $x$ is godlike, $\GS(x)$, if it has every positive property; $Y$ is an essence of $x$, $\Ess_S(Y,x)$, if $Y(x)$ and every property of $x$ is necessarily entailed by $Y$; and $x$ has necessary existence, $\NE_S(x)$, if every essence of $x$ is necessarily instantiated. From these, in a modal logic in which $\pos\nec q \to q$ holds, it follows that necessarily something is godlike. Gödel's note has a conjunction axiom in place of S3 and an essence clause without the conjunct $Y(x)$; \citet{Benzmuller2016} showed by automated reasoning that the note's axioms, so read, are inconsistent, which is a reason for taking Scott's version as the standard one.
+
+\subsection{Positivity}
+
+Everything in Gödel's argument depends on the primitive notion of a positive property. Gödel's note glosses it in two ways: positive in a moral and aesthetic sense, independently of the accidental structure of the world, and, alternatively, as pure attribution in contrast to privation, that is, as a property whose logical form contains no negation \citep{Godel1995}. Neither gloss determines the axioms. The moral-aesthetic reading makes it plausible that positive properties are compatible with one another and that what a positive property entails is not bad; the attribution reading makes it plausible that exactly one of a property and its negation is positive, since one of them contains a privation. Scott's S1 expresses the second thought in its full strength, and Anderson's weakening of it to one direction expresses the first. \citet{Oppy1995} and \citet{Sobel2004} press the objection that, on any reading on which the axioms are plausible, the notion is either too weak to yield the conclusion or too strong to be credited independently of it.
+
+The filter axioms of the variant below take a definite position on this question. They say that positive properties are jointly compatible (properness and conjunction) and that whatever a positive property necessarily entails is positive (entailment), and they say nothing about negations. They are therefore the axioms suited to the moral-aesthetic reading, and they are the conditions that Volume~III of \emph{On the Existence of God} places on the great-making properties when it appeals to Lemma~2417.
+
+\subsection{Collapse}
+
+\citet{Sobel1987} proved that Scott's axioms entail $q \to \nec q$ for every proposition $q$. The proof is short. A godlike being has every positive property, and by S1 it has a property or its negation positive; so every property it has is positive, and by S4 necessarily positive, and hence necessarily entailed by godlikeness. Godlikeness is therefore an essence of the godlike being, and the being's essence entails every property it has, including the property of being such that $q$, whenever $q$ is true. Since necessarily something is godlike, necessarily something is such that $q$; that is, necessarily $q$. Appendix~\ref{app:derivations} gives the proof as a checked derivation (Derivation~B.2).
+
+\subsection{Emendations}
+
+\citet{Anderson1990} located the source of collapse in the combination of S1, which makes the positive properties maximal, with the definitions of godlikeness and essence, which make every property of a godlike being, contingent ones included, flow from its essence. He weakened S1 to its left-to-right half, that if a property is positive its negation is not, and redefined godlikeness and essence in terms of the properties a being has necessarily. Anderson's version proves the necessary existence of a godlike being, and it does not entail collapse. \citet{Hajek2002} studied the relations between Anderson's axioms and Gödel's, and proposed a further small emendation. \citet{Fitting2002} gave a careful treatment of the argument in intensional type theory, distinguishing extensional and intensional readings of positivity, and \citet{Sobel2004} placed the collapse problem within a general assessment of ontological arguments. \citet{Benzmuller2014} verified Scott's version and Sobel's collapse with higher-order automated theorem provers and reported that the modal logic KB suffices for the main theorem.
+
+The variant we study belongs to the Anderson line. It differs from Anderson's version in replacing his first axiom by the filter axioms below, which entail it, and it is chosen so that its positivity axioms coincide with the hypothesis of Lemma~2417 of \emph{On the Existence of God}. The choice is not idle: it shows that the filter hypothesis on which Volume~III relies is consistent with denying modal collapse, and it makes the comparison with REL-01-a and REL-01-f exact.
+
+\section{Framework}\label{s:framework}
+
+\subsection{Language and models}
+
+The language has individual variables $x, y, \ldots$, property variables $Y, Z, \ldots$, the positivity predicate $\Pos$, the operators $\nec$ and $\pos$, and $\lambda$-abstraction for forming properties. Formulas are evaluated at worlds of a model.
+
+\begin{definition}\label{d:model}
+A \emph{model} consists of a non-empty set $W$ of worlds with an accessibility relation $R$, a non-empty domain $D$ of individuals, the same at every world, a set $\Pi$ of admissible properties, each a function from worlds to subsets of $D$, and a set $\Pos \subseteq \Pi$ of positive properties, the same at every world. Property quantifiers range over $\Pi$. $\Pi$ is required to be closed under the Boolean operations, under $\nec$ (the property of being necessarily $Y$), and under existential projection (the property of being such that something is $Y$), and to contain the properties defined below. A model is \emph{full} if $\Pi$ contains every function from worlds to subsets of $D$.
+\end{definition}
+
+Models with restricted $\Pi$ are general models in the sense of \citet{Henkin1950}. The closure conditions guarantee that every property term used in the derivations of Appendix~\ref{app:derivations} denotes a member of $\Pi$; the checker of Appendix~\ref{app:derivations} admits exactly such terms. The positive properties are taken to be the same at every world, so that Scott's axiom S4 holds automatically; we state it as an axiom below so that the derivations show where it is used.
+
+\subsection{Definitions}
+
+\begin{definition}[Godlikeness]\label{d:godlike}
+$G(x) \;:\leftrightarrow\; \forall Y\,(\Pos(Y) \leftrightarrow \nec Y(x))$: the properties $x$ has necessarily are exactly the positive properties.
+\end{definition}
+
+\begin{definition}[Essence]\label{d:essence}
+$\Ess(Y,x) \;:\leftrightarrow\; \forall Z\,(\nec Z(x) \leftrightarrow \nec\forall y\,(Y(y) \to Z(y)))$: the properties $Y$ necessarily entails are exactly the properties $x$ has necessarily.
+\end{definition}
+
+\begin{definition}[Necessary existence]\label{d:ne}
+$\NE(x) \;:\leftrightarrow\; \forall Y\,(\Ess(Y,x) \to \nec\exists y\,Y(y))$: every essence of $x$ is necessarily instantiated.
+\end{definition}
+
+Definitions~\ref{d:godlike} and~\ref{d:essence} are Anderson's. They differ from Scott's in two ways. Godlikeness requires that the positive properties be had necessarily, and that only positive properties be had necessarily; a godlike being may have contingent properties, provided none of them is positive and none of its non-positive properties is had necessarily. An essence is tied to the necessary properties of its bearer, not to all its properties, so that a being's essence does not entail its contingent properties.
+
+\subsection{Axioms}
+
+The axioms of AF are the following. The labels in brackets are those used in the derivations of Appendix~\ref{app:derivations}; F stands for filter, and A3--A5 keep Scott's numbering for the axioms that AF shares with his system in form.
+
+\begin{assumption}[F1, conjunction]\label{a:f1}
+$\Pos(Y) \wedge \Pos(Z) \to \Pos(\lambda x.\,Y(x) \wedge Z(x))$.
+\end{assumption}
+
+\begin{assumption}[F2, entailment]\label{a:f2}
+$\Pos(Y) \wedge \nec\forall x\,(Y(x) \to Z(x)) \to \Pos(Z)$.
+\end{assumption}
+
+\begin{assumption}[F3, properness]\label{a:f3}
+$\neg\Pos(\lambda x.\,\bot)$: the empty property is not positive.
+\end{assumption}
+
+\begin{assumption}[A3]\label{a:a3}
+$\Pos(G)$: godlikeness is positive.
+\end{assumption}
+
+\begin{assumption}[A4]\label{a:a4}
+$\Pos(Y) \to \nec\Pos(Y)$.
+\end{assumption}
+
+\begin{assumption}[A5]\label{a:a5}
+$\Pos(\NE)$: necessary existence is positive.
+\end{assumption}
+
+Assumptions~\ref{a:f1} to~\ref{a:f3} say that the positive properties form a proper filter, which is the hypothesis of Lemma~2417 of Volume~X as REL-01-f states it. They entail Anderson's first axiom, that the negation of a positive property is not positive: if $Y$ and $\lambda x.\neg Y(x)$ were both positive, so would be their conjunction, which necessarily entails the empty property (Derivation~B.4). They do not entail Scott's S1, since a proper filter need not contain, for every property, either it or its negation. Every axiom is assumed to hold at every world.
+
+In a finite model, a family of admissible properties satisfying Assumptions~\ref{a:f1} and~\ref{a:f2} is determined by its least member, which we call its \emph{core}: the positive properties are exactly the admissible properties that include the core. This is how the models of Appendix~\ref{app:models} are generated.
+
+\begin{definition}[Modal collapse]\label{d:collapse}
+A model exhibits \emph{modal collapse} if $q \to \nec q$ holds at every world for every sentence $q$. A \emph{collapse witness} is an admissible property $Y$ and a world $w$ at which $\exists x\,Y(x)$ is true and $\nec\exists x\,Y(x)$ false.
+\end{definition}
+
+A model with a collapse witness does not exhibit modal collapse. The converse need not hold, since collapse may fail for sentences of other forms; the witnesses are what the enumeration searches for.
+
+\section{The argument}\label{s:argument}
+
+\begin{lemma}[Possibility]\label{l:poss}
+Assumptions~\ref{a:f2}, \ref{a:f3} and~\ref{a:a3} entail, at every world, that possibly something is godlike: $\pos\exists x\,G(x)$.
+\end{lemma}
+
+\begin{proof}
+Suppose that at a world $w$ nothing is godlike at any accessible world. Then at $w$ it is necessary that everything that is godlike has the empty property, since nothing is godlike. Godlikeness is positive (Assumption~\ref{a:a3}), so by Assumption~\ref{a:f2} the empty property is positive, contrary to Assumption~\ref{a:f3}.
+\end{proof}
+
+The same argument shows that every positive property is possibly instantiated (Derivation~B.3). It is the argument of Lemma~2417 in the form REL-01-f gives it, and it uses no condition on accessibility. In particular, it shows that the axioms force every world to have an accessible world.
+
+\begin{lemma}[Rigidity]\label{l:rigid}
+Assumption~\ref{a:a3} entails that whatever is godlike is necessarily godlike: $G(x) \to \nec G(x)$.
+\end{lemma}
+
+\begin{proof}
+If $x$ is godlike, every positive property is had by $x$ necessarily (Definition~\ref{d:godlike}, left to right). Godlikeness is positive.
+\end{proof}
+
+Lemma~\ref{l:rigid} is the point at which Anderson's definition does the work that Scott's system assigns to essence and necessary existence. A Scott-godlike being has all positive properties, and showing that it has them necessarily requires S1, S4 and the essence clause. An Anderson-godlike being has its positive properties necessarily by definition, so the persistence of godlikeness along accessibility is immediate.
+
+\begin{lemma}[Essence]\label{l:essence}
+On a symmetric frame, if $x$ is godlike at $w$, then godlikeness is an essence of $x$ at $w$: $G(x) \to \Ess(G,x)$.
+\end{lemma}
+
+\begin{proof}
+Let $x$ be godlike at $w$. We must show, for every admissible $Z$, that $\nec Z(x)$ holds at $w$ if and only if $\nec\forall y(G(y) \to Z(y))$ does.
+
+Suppose first that $\nec Z(x)$ holds at $w$. Since $x$ is godlike, $Z$ is positive. Let $u$ be accessible from $w$ and $y$ godlike at $u$. By Lemma~\ref{l:rigid}, $y$ is necessarily godlike at $u$, and by symmetry $w$ is accessible from $u$; so $y$ is godlike at $w$. Since $Z$ is positive and $y$ is godlike at $w$, $\nec Z(y)$ holds at $w$, and so $Z(y)$ holds at $u$. Hence $\nec\forall y(G(y) \to Z(y))$ holds at $w$.
+
+Suppose conversely that $\nec\forall y(G(y) \to Z(y))$ holds at $w$. By Lemma~\ref{l:rigid}, $x$ is godlike at every world accessible from $w$, and so $Z(x)$ holds at each of them. Hence $\nec Z(x)$ holds at $w$.
+\end{proof}
+
+The positivity of $Z$ is used at $w$, where it was established, rather than at $u$; that is why the proof needs no appeal to Assumption~\ref{a:a4}. Symmetry is used to bring the godlike being $y$ back from $u$ to $w$.
+
+\begin{lemma}[Necessary existence]\label{l:ne}
+On a symmetric frame, if $x$ is godlike at $w$ and some world is accessible from $w$, then $x$ has necessary existence at $w$.
+\end{lemma}
+
+\begin{proof}
+Let $v$ be accessible from $w$. By Lemma~\ref{l:rigid}, $x$ is godlike at $v$. Necessary existence is positive (Assumption~\ref{a:a5}), so $\nec\NE(x)$ holds at $v$. By symmetry $w$ is accessible from $v$, so $\NE(x)$ holds at $w$.
+\end{proof}
+
+\begin{theorem}\label{t:main}
+In every model of AF on a symmetric frame, at every world $w$:
+\[
+\nec\exists x\,G(x) \;\wedge\; \exists x\,(G(x) \wedge \Ess(G,x) \wedge \NE(x)).
+\]
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:poss}, there are a world $v$ accessible from $w$ and a being $g$ godlike at $v$. By Lemma~\ref{l:rigid}, $g$ is necessarily godlike at $v$, and by symmetry $w$ is accessible from $v$; so $g$ is godlike at $w$. By Lemma~\ref{l:rigid} again, $g$ is godlike at every world accessible from $w$, which gives the first conjunct. Lemma~\ref{l:essence} gives $\Ess(G,g)$ at $w$, and Lemma~\ref{l:ne}, with $v$ as the accessible world, gives $\NE(g)$ at $w$.
+\end{proof}
+
+\begin{corollary}\label{c:actual}
+At the actual world some being is godlike and exists necessarily, in the strong sense that its essence, godlikeness, is necessarily instantiated.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{t:main} for $w = @$; the essence $G$ of the godlike being $g$ is necessarily instantiated by the first conjunct, and also by $\NE(g)$ with Definition~\ref{d:ne}.
+\end{proof}
+
+The derivation of Theorem~\ref{t:main} in Appendix~\ref{app:derivations} (Derivation~B.1) has \csLinesAf{} lines. The checker reports that it depends on no open assumption, that the only relational rule it uses is symmetry, and that the axioms it cites are F2, F3, A3 and A5. Two of the six axioms of AF are therefore idle for the main theorem: the conjunction axiom F1, as REL-01-f found for Lemma~2417, and the axiom A4 that positivity is necessary. They belong to AF because they belong to the filter hypothesis of Volume~X and to the Gödel--Scott tradition respectively, and they do no harm: the enumeration verifies them in every model.
+
+\subsection*{Beyond symmetry}
+
+Symmetry is sufficient for Theorem~\ref{t:main}, and it is the only relational rule in Derivation~B.1, but it is not necessary. The persistence of godlikeness along accessibility (Lemma~\ref{l:rigid}) iterates: whatever is godlike at $v$ is godlike at every world reachable from $v$ by a chain of accessibility steps. Each use of symmetry in the proofs of Section~\ref{s:argument} serves to return from a world $v$ accessible from $w$ to $w$ itself, and a chain of steps from $v$ back to $w$ serves as well.
+
+\begin{proposition}\label{p:retrace}
+Theorem~\ref{t:main} holds on every retraceable frame, that is, every frame on which $wRv$ implies that $w$ is reachable from $v$ by a chain of accessibility steps.
+\end{proposition}
+
+\begin{proof}
+In the proof of Theorem~\ref{t:main}, $g$ is godlike at $v$ and hence, iterating Lemma~\ref{l:rigid}, at every world on a chain from $v$ to $w$, including $w$. In the proof of Lemma~\ref{l:essence}, the godlike $y$ at $u$ is brought back to $w$ along a chain from $u$ to $w$ in the same way. In the proof of Lemma~\ref{l:ne}, let $v'$ be the last world before $w$ on a chain from $v$ to $w$; $x$ is godlike at $v'$, so $\nec\NE(x)$ holds at $v'$, and $v' R w$.
+\end{proof}
+
+Retraceability is the condition that REL-01-b identifies as exact for its version of the modal argument without the S5 axiom. The enumeration confirms Proposition~\ref{p:retrace}: among the \csNon{} models on non-symmetric frames, \csNonC{} lie on retraceable frames, and the conclusion and all four lemmas hold in each of them; of the \csNonNotC{} models on frames that are not retraceable, the first conjunct of the conclusion fails in \csNonNotCFail{}. In the remaining \csNonNotCOk{} the conclusion holds for reasons particular to the model. We have not determined whether retraceability is necessary for the theorem in the sense in which REL-01-b shows it necessary for its schemas; the countermodels show only that it cannot be dropped altogether.
+
+\section{Modal collapse}\label{s:collapse}
+
+\begin{proposition}[Sobel]\label{p:sobel}
+On a symmetric frame, Scott's axioms entail, at every world, that whatever is instantiated is necessarily instantiated: $\forall Y(\exists x\,Y(x) \to \nec\exists x\,Y(x))$. More generally, they entail $q \to \nec q$ for every sentence $q$ such that the property $\lambda z.\,q$ is admissible.
+\end{proposition}
+
+\begin{proof}
+The argument of Section~\ref{s:history}. Derivation~B.2 proves the first claim; the general claim has the same proof with $\lambda z.\,q$ in place of $\lambda z.\,\exists x\,Y(x)$ at line~80 of that derivation.
+\end{proof}
+
+\begin{proposition}\label{p:nocollapse}
+AF does not entail modal collapse. In particular, there is a full model of AF with two worlds, universal accessibility and one individual, in which some proposition is true at one world and false at the other.
+\end{proposition}
+
+\begin{proof}
+Model S18 of the listing in Appendix~\ref{app:models}. Let $W = \{0, 1\}$ with every world accessible from every world, $D = \{d\}$, and let $\Pi$ contain all four properties. Let the core of positivity be the property that $d$ has at both worlds, so that a property is positive exactly when $d$ has it at both worlds. Then $d$ is godlike at both worlds: the properties it has necessarily are exactly those it has at both worlds, which are exactly the positive ones. One checks the remaining axioms directly; the program checks them all. The property $Y$ that $d$ has at world~0 only is admissible, and $\exists x\,Y(x)$ is true at world~0 and false at world~1.
+\end{proof}
+
+\begin{proposition}\label{p:consistent}
+AF is consistent with modal collapse.
+\end{proposition}
+
+\begin{proof}
+Model S1 of the listing has one world, accessible from itself, and one individual; every axiom of AF holds, and every truth is necessary, since the only accessible world is the world of evaluation.
+\end{proof}
+
+More informatively, in the enumeration each of the \csUltra{} models of AF whose positive properties form an ultrafilter of the admissible properties is also a model of Scott's axioms, and none of the \csScottSym{} among them that lie on symmetric frames has a collapse witness, as Proposition~\ref{p:sobel} requires, since the admissible properties are closed under existential projection.
+
+Propositions~\ref{p:nocollapse} and~\ref{p:consistent} together locate the collapse precisely. AF neither entails nor excludes it; what entails it, given AF's filter, is the further requirement that the filter be an ultrafilter, which is Scott's S1. In Derivation~B.2 the right-to-left half of S1 is used at lines~25 to~32, to infer from the fact that a godlike being has a property $Z$ that $Z$ is positive. That inference is the step through which every contingent property of a godlike being acquires the status of a positive, and therefore necessary, property. AF has no counterpart of it. In AF a godlike being has as positive properties exactly the properties it has necessarily, and its contingent properties, such as the property of being such that world~0 obtains in model S18, are neither positive nor negatively positive.
+
+Scott's essence clause is the second ingredient. Under Definition~\ref{d:essence} an essence entails only the necessary properties of its bearer, so that even if godlikeness is an essence of a being, the essence does not transmit the being's contingent properties to every world. In Derivation~B.2 the collapse is reached at line~80 by instantiating Scott's essence clause with the property $\lambda z.\,\exists x\,Y(x)$, which a godlike being has whenever something is $Y$. The corresponding instance of Definition~\ref{d:essence} requires that the godlike being have that property necessarily, which is what collapse would assert and what the countermodel denies.
+
+\subsection{The four systems compared}
+
+Table~\ref{tab:systems} summarizes how the four systems discussed in Section~\ref{s:history} stand to the two properties at issue. The entries for AF and for Scott's system are proved in this manuscript and checked in its appendices; the entries for Gödel's and Anderson's systems report the results of \citet{Benzmuller2016} and \citet{Anderson1990}.
+
+\begin{table}[ht]
+\caption{Four versions of Gödel's argument.}\label{tab:systems}
+\begin{center}\small
+\begin{tabular}{@{}lllll@{}}
+\toprule
+& positivity axioms & godlikeness, essence & necessary existence & collapse \\
+\midrule
+Gödel (note) & conjunction, S1, S2 & Scott's, no $Y(x)$ in essence & axioms inconsistent & -- \\
+Scott & S1, S2, S3 & Scott's & proved (KB) & entailed \\
+Anderson & half of S1, S2, \ldots & Anderson's & proved & not entailed \\
+AF & F1--F3, A3 & Anderson's & proved (KB) & not entailed \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{The premise avoided}\label{s:avoided}
+
+The main argument of REL-01-a rests on two assumptions: the S5 conditions on accessibility (Assumption~2.1) and the possibility premise (Assumption~3.1), that possibly some being is maximally great. AF avoids the second. In its place stand the positivity axioms, from which Lemma~\ref{l:poss} derives the possibility of a godlike being. This is exactly the use to which Volume~III puts Lemma~2417, transferring support from the coherence of a family of perfections to the possibility of their joint instantiation; AF makes the transfer part of the argument rather than a separate defence of its premise. Of the S5 conditions, AF uses symmetry alone. Reflexivity and transitivity are not needed for Theorem~\ref{t:main}, in agreement with the observation of \citet{Benzmuller2014} that KB suffices for Scott's version, and in contrast with REL-01-a, whose possibility premise yields necessary maximal greatness only on uniform frames, a condition that symmetry does not provide (REL-01-b).
+
+Avoiding the possibility premise does not mean avoiding a substantive premise. The work is done by A3, that godlikeness is positive, together with the properness of the filter. If godlikeness is positive and the positive properties are not jointly impossible, godlikeness is possibly instantiated, and then, by Lemma~\ref{l:rigid} and symmetry, actually and necessarily instantiated. Someone who rejects the conclusion must reject A3 or the filter axioms. The converse argument of REL-01-a (Proposition~4.1) has an analogue here: from Lemma~\ref{l:rigid}, the possibility that nothing is godlike entails, on any frame, that nothing is godlike (Derivation~B.6). The analogue is not a symmetric rival within AF, since AF refutes its premise, but it shows where the burden lies: the choice between the possibility of a godlike being and the possibility of its absence is made, in AF, by the positivity axioms. Whether they are true is a question about the notion of positivity, and it is the question that Volume~III addresses for the great-making properties.
+
+\section{The computation}\label{s:computation}
+
+\subsection{Summary}
+
+The enumeration of Appendix~\ref{app:models} examines \csCandidates{} candidate structures (a frame, a domain, an algebra of admissible properties closed as Definition~\ref{d:model} requires, and a core) and finds \csModels{} models of AF up to isomorphism: \csSym{} on symmetric frames and \csNon{} on frames that are not symmetric. Of the candidates rejected, \csRejFTwo{} violate the entailment axiom F2 at some world and \csRejAThree{} make godlikeness non-positive; in no candidate does necessary existence fail to be positive once the other axioms hold, and in none do godlikeness or necessary existence fall outside the admissible properties. For each model the program verifies Lemmas~\ref{l:poss}--\ref{l:ne} semantically, evaluates the conclusion of Theorem~\ref{t:main} at every world, and searches for a collapse witness. As an independent check, the axioms and conclusions written in the syntax of the derivations are evaluated directly in the \csXModels{} models with at most 64 admissible properties, \csXFormulas{} evaluations in all, and agree with the hand-coded checks.
+
+The results are these. In all \csSym{} models on symmetric frames the conclusion of Theorem~\ref{t:main} holds at every world, as the theorem requires. \csSymColl{} of them have a collapse witness, \csSymTColl{} of which are on reflexive symmetric frames. Of the \csNon{} models on non-symmetric frames, the first conjunct of the conclusion fails at some world in \csNonFail{}, including \csNonFailT{} on reflexive frames and \csNonFailTFour{} on reflexive transitive frames: symmetry cannot be replaced by reflexivity, or by reflexivity and transitivity together. Of the \csModels{} models, \csScottModels{} have an ultrafilter of positive properties and are models of Scott's axioms; on symmetric frames none of these has a collapse witness, while on non-symmetric frames \csScottNonColl{} do, which shows that Sobel's collapse theorem, like the main theorem, depends on symmetry. In \csManyGods{} models on symmetric frames more than one individual is godlike at world~0. Table~\ref{tab:counts} breaks the counts down by size.
+
+\begin{table}[ht]
+\caption{Models of AF by number of worlds $n$ and individuals $m$. Scope \enquote{all}: every frame; \enquote{B}: symmetric frames only; \enquote{B or T}: symmetric or reflexive frames. \enquote{Collapse fails}: models with a collapse witness.}\label{tab:counts}
+\input{gen/modelcounts.tex}
+\end{table}
+
+\subsection{Six models}
+
+\emph{S18} is the countermodel of Proposition~\ref{p:nocollapse}: frame F2.10 (two worlds, universal accessibility), one individual, all four properties admissible, the core equal to the individual's whole profile. The listing writes its algebra as \texttt{a|b}: the individual's point at world~0 is the atom \texttt{a} and its point at world~1 the atom \texttt{b}. The collapse witness \texttt{a@0} is the property of being such that world~0 obtains, instantiated at world~0 and not at world~1. S18 is the smallest model of AF with a collapse witness, and it is full, so the failure of collapse does not depend on restricting the admissible properties.
+
+\emph{S19} has the same frame and individual but only the two trivial properties admissible. Its positive properties form an ultrafilter, Scott's axioms hold, and there is no collapse witness. S19 and S18 differ only in the richness of the property algebra, and the comparison shows that collapse in Scott's system is a matter of what the positivity axioms say about properties that distinguish worlds.
+
+\emph{S158} lies on frame F3.96: world~0 sees all three worlds, and worlds~1 and~2 see each other and world~0 but not themselves. The frame is symmetric but neither reflexive nor transitive. The conclusion holds at every world, and the property of being such that world~0 obtains is a collapse witness. S158 shows that Theorem~\ref{t:main} holds, without collapse, in a model that S5, S4 and KTB all exclude.
+
+\emph{S55} has two worlds, three individuals and an algebra (\texttt{aaa|bbb}) that cannot distinguish individuals. All three individuals are godlike at every world, and the proposition that world~0 obtains is again a collapse witness. AF does not prove that there is exactly one godlike being; in models whose admissible properties cannot tell beings apart it cannot.
+
+\emph{N3} lies on frame F2.9, the smallest reflexive transitive frame that is not an equivalence relation: world~0 sees both worlds, world~1 only itself. The one individual is godlike at world~1 only. All the axioms hold, possibly something is godlike at world~0, and nothing is godlike there, so the conclusion fails at world~0. The same model satisfies Scott's axioms, whose conclusion fails there too (\texttt{s} in the listing). N3 is the counterexample that shows symmetry to be needed in both systems; it has the shape of the S4 countermodel F2.9 to the main argument in REL-01-b.
+
+\emph{N1} lies on frame F2.5, in which both worlds see world~0 only. It satisfies Scott's axioms, Scott's conclusion holds at both worlds, and yet the proposition that world~1 obtains is a collapse witness at world~1: it is true there, and false at world~0, the only world accessible from world~1. Sobel's derivation fails at the step at which it needs a godlike being at the world of evaluation; at world~1 there is none. N1 is the smallest model in which Scott's axioms hold without collapse.
+
+\section{Objections and replies}\label{s:objections}
+
+\begin{objection}
+Anderson's godlikeness makes A3 a disguised possibility premise. To say that godlikeness is positive, when godlikeness is defined as having the positive properties necessarily, is to say that it is possible to have them necessarily; the proof merely moves the possibility premise of REL-01-a into an axiom.
+\end{objection}
+
+\begin{reply}
+The objection is half right, and the half that is right is the point of the manuscript. A3 and the filter axioms together entail the possibility of a godlike being (Lemma~\ref{l:poss}), and nothing weaker would do, since the possibility is necessary for the conclusion. What changes is the form of the premise. The possibility premise of REL-01-a is a bare modal claim, and REL-01-a records that its converse has the same logical standing. A3 and the filter axioms are claims about a family of properties: that godlikeness belongs to it, and that the family is closed and contains no impossibility. These are the claims that REL-01-f identifies as the content Volume~III must establish, and they are claims of a kind that a theory of perfections can support or refute. The proof does not make them easier to believe; it makes clear what believing them commits one to.
+\end{reply}
+
+\begin{objection}
+A godlike being that has contingent properties is not God. The tradition holds that God is simple and that all of God's attributes are necessary; collapse is the price of taking that seriously, and avoiding it gives up divine perfection.
+\end{objection}
+
+\begin{reply}
+In AF every positive property of a godlike being is had necessarily, so every perfection is necessary. What may be contingent are properties that are not positive, such as being such that a particular contingent world obtains, or having created this world rather than another. A tradition that holds that God's free choices are contingent needs exactly this. Simplicity is a further thesis, which Volume~VIII takes up; it is consistent with AF, which says nothing about how a godlike being's properties are related to one another.
+\end{reply}
+
+\begin{objection}
+The countermodels are finite and, mostly, general rather than full models. Collapse might fail in them only because they lack the properties needed to derive it.
+\end{objection}
+
+\begin{reply}
+That is true of Scott's system on finite models, where collapse is derived through the admissibility of $\lambda z.\,q$, and our closure conditions are designed to make every instance used in the derivations admissible. For AF the point does not arise, because the countermodel S18 is full: every function from worlds to sets of individuals is admissible. The other countermodels show how common the failure of collapse is; S18 alone shows that it does not depend on restricting $\Pi$.
+\end{reply}
+
+\begin{objection}
+The entailment axiom F2 makes every property entailed by a perfection positive, including trivial and disjunctive ones; this is the objection that REL-01-f records against closure under entailment, and AF inherits it.
+\end{objection}
+
+\begin{reply}
+AF uses F2 once, in Lemma~\ref{l:poss}, to infer from the necessary emptiness of godlikeness that the empty property is positive. REL-01-f shows that the finite intersection property suffices for Lemma~2417; in the present setting, the finite intersection property applied to the family $\{G\}$ gives Lemma~\ref{l:poss} directly, and Derivation~B.1 then uses no axiom about positivity except A3 and A5. Anyone moved by the objection can replace F1 to F3 by the finite intersection property without loss. We state AF with the filter axioms because they are the hypothesis of Lemma~2417 as Volume~X states it, and the aim is to show that that hypothesis is compatible with denying collapse.
+\end{reply}
+
+\begin{objection}
+Without uniqueness, the conclusion is not monotheism; S55 has three godlike beings.
+\end{objection}
+
+\begin{reply}
+The conclusion asserts existence. In AF any two godlike beings have exactly the same necessary properties, namely the positive ones (Derivation~B.5, which uses no axiom and no frame condition), so they are indiscernible in every respect that matters to godlikeness, and in S55 the admissible properties cannot distinguish them at all. Whether indiscernible godlike beings are identical is the question of Volume~VIII, on uniqueness and simplicity, and it requires principles about identity that no version of Gödel's axioms supplies.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result is a validity result and a consistency result. It does not show that the axioms of AF are true: that godlikeness and necessary existence are positive, and that the positive properties form a proper filter. It does not show that symmetry holds for metaphysical accessibility, though it shows that nothing more is needed. It does not show that a godlike being in the sense of Definition~\ref{d:godlike} is maximally great in the sense of Definition~2.4 of REL-01-a; the two notions are related through the positivity of necessary existence and of the components of maximal excellence, a connection that belongs to Volume~IV. Finally, the countermodels to collapse show that AF does not entail it; they do not show that collapse is false, which is a premise of the motivation of this manuscript, not a conclusion.
+
+\section{Conclusion}
+
+Modal collapse is not the price of Gödel's conclusion. With Anderson's definitions and positivity axioms that say only that the positive properties form a proper filter, which is the hypothesis of Lemma~2417, the necessary existence of a godlike being follows on every symmetric frame, and there are models, among them a full model with two worlds and one being, in which some truths are contingent. The variant avoids the possibility premise of REL-01-a by deriving it, and it uses only the symmetry of accessibility. Its decisive premises are that godlikeness is positive and that the positive properties are jointly possible.
+
+\begin{thebibliography}{99}\small
+\bibitem[Anderson(1990)]{Anderson1990} Anderson, C.~A. (1990). Some emendations of Gödel's ontological proof. \emph{Faith and Philosophy}, 7(3), 291--303.
+\bibitem[Benzmüller and Woltzenlogel~Paleo(2014)]{Benzmuller2014} Benzmüller, C. and Woltzenlogel Paleo, B. (2014). Automating Gödel's ontological proof of God's existence with higher-order automated theorem provers. In \emph{Proceedings of the 21st European Conference on Artificial Intelligence (ECAI 2014)} (pp.~93--98). IOS Press.
+\bibitem[Benzmüller and Woltzenlogel~Paleo(2016)]{Benzmuller2016} Benzmüller, C. and Woltzenlogel Paleo, B. (2016). The inconsistency in Gödel's ontological argument: A success story for AI in metaphysics. In \emph{Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence (IJCAI 2016)}. AAAI Press.
+\bibitem[Fitting(2002)]{Fitting2002} Fitting, M. (2002). \emph{Types, Tableaus, and Gödel's God}. Kluwer Academic Publishers.
+\bibitem[Gödel(1995)]{Godel1995} Gödel, K. (1995). Ontological proof. In S.~Feferman et al. (Eds.), \emph{Collected Works, Volume III: Unpublished Essays and Lectures} (pp.~403--404). Oxford University Press.
+\bibitem[Hájek(2002)]{Hajek2002} Hájek, P. (2002). A new small emendation of Gödel's ontological proof. \emph{Studia Logica}, 71, 149--164.
+\bibitem[Henkin(1950)]{Henkin1950} Henkin, L. (1950). Completeness in the theory of types. \emph{The Journal of Symbolic Logic}, 15(2), 81--91.
+\bibitem[Lemmon(1965)]{Lemmon1965} Lemmon, E.~J. (1965). \emph{Beginning Logic}. Nelson.
+\bibitem[Oppy(1995)]{Oppy1995} Oppy, G. (1995). \emph{Ontological Arguments and Belief in God}. Cambridge University Press.
+\bibitem[Sobel(1987)]{Sobel1987} Sobel, J.~H. (1987). Gödel's ontological proof. In J.~J. Thomson (Ed.), \emph{On Being and Saying: Essays for Richard Cartwright} (pp.~241--261). MIT Press.
+\bibitem[Sobel(2004)]{Sobel2004} Sobel, J.~H. (2004). \emph{Logic and Theism: Arguments for and against Beliefs in God}. Cambridge University Press.
+\bibitem[Viganò(2000)]{Vigano2000} Viganò, L. (2000). \emph{Labelled Non-Classical Logics}. Kluwer Academic Publishers.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{Part A: finite models}\label{app:models}
+
+\subsection{What is enumerated}
+
+A candidate structure consists of a frame, a domain size $m$, an algebra $\Pi$ of admissible properties and a core $c$. Worlds are numbered $0, \ldots, n-1$ and individuals $0, \ldots, m-1$; a property is a set of points $(w,d)$, encoded as an $nm$-bit mask. Frames are those of the enumeration of REL-01-b and carry its identifiers F$n$.$k$. Every Boolean algebra of properties is generated by a partition of the $nm$ points into atoms, and the program generates all set partitions of the points, keeping those whose algebra is closed under $\nec$ and existential projection on the given frame (Definition~\ref{d:model}); \csRejClosure{} partitions fail the closure test across all frames. For each surviving algebra, every non-empty element is tried as the core $c$, with the positive properties those admissible properties that include $c$. As explained in Section~\ref{s:framework}, every family of positive properties satisfying F1 and F2 with a non-empty least member arises in this way, so for a given frame and algebra the enumeration of models of AF is exhaustive. Candidates are reduced up to isomorphism by applying every automorphism of the frame and every permutation of the individuals and keeping the least image.
+
+The scope is: (I) every frame with one to three worlds and every $m$ with $nm \leq 6$; (II) every symmetric frame with $(n,m)$ equal to $(1,4)$, $(2,4)$, $(3,3)$ or $(4,2)$; (III) every frame with four worlds that is symmetric or reflexive, with $m = 1$.
+
+\subsection{How each entry is checked}
+
+For each candidate the program computes, by brute force over $\Pi$, the extension of Anderson's godlikeness and necessary existence (Definitions~\ref{d:godlike}--\ref{d:ne}) and checks that both are admissible and positive (A3, A5), and that F2 holds at every world for every pair of admissible properties. F1, F3 and A4 hold by construction. For each model it then checks Lemma~\ref{l:poss} (every positive property is possibly instantiated at every world), Lemma~\ref{l:rigid}, and, at every world and for every godlike individual, Lemmas~\ref{l:essence} and~\ref{l:ne}; it records the worlds at which something is godlike, the godlike individuals at world~0, and the worlds at which $\nec\exists x\,G(x)$ fails. It searches all admissible properties and worlds for a collapse witness (Definition~\ref{d:collapse}) and records the one with fewest points. If the core is an atom, so that the positive properties form an ultrafilter, it computes Scott's godlikeness and necessary existence and checks Scott's axioms and his conclusion. The program halts with an error if, on a symmetric frame, the conclusion or any lemma fails, if on a retraceable frame the conclusion fails, or a model of Scott's axioms whose conclusion holds has a collapse witness; and if any of the direct evaluations of the formulas of Appendix~\ref{app:derivations} disagrees with these checks. It completes without error.
+
+\subsection{How to read the listing}
+
+Each row gives: the model's identifier (S for symmetric frames, N otherwise); the frame; its standard conditions T, B, 4 (a dash for each that fails); $m$; the algebra $\Pi$, written by giving, for each world in turn and each individual in order, the letter of the atom containing that point, worlds separated by bars; the core; the extensions of $G$ and $\NE$, as sets of atoms; the worlds at which something is godlike; the godlike individuals at world~0; \texttt{+} if $\nec\exists x\,G(x)$ holds at every world, or a dash followed by the first world at which it fails; Scott's verdict (\texttt{S}: Scott's axioms and conclusion hold; \texttt{s}: the axioms hold and the conclusion fails at some world; \texttt{.}: the positive properties do not form an ultrafilter); and the collapse witness with fewest points, written as a set of atoms followed by \texttt{@} and the world, or \texttt{none}.
+
+\subsection{Models on symmetric frames}
+
+\input{gen/models_sym.tex}
+
+\subsection{Models on non-symmetric frames}
+
+\input{gen/models_nonsym.tex}
+
+\clearpage
+\section{Part B: checked derivations}\label{app:derivations}
+
+\subsection{The system}
+
+Derivations are written in a labelled natural-deduction system for second-order modal logic \citep{Vigano2000}, in the dependency style of \citet{Lemmon1965}. A line is either a labelled formula $w:\varphi$, read \enquote{$\varphi$ holds at the world $w$}, or an accessibility statement $w\,R\,v$. Every line depends on a set of assumption lines, which the checker computes; a derivation proves its last line if that line depends on nothing. The rules are the classical introduction and elimination rules for the connectives and for first- and second-order quantifiers (eigenvariable conditions checked against the dependencies), reductio and ex falso, and the modal rules: $\nec$I discharges an assumption $w\,R\,v$ and infers $w:\nec\varphi$ from $v:\varphi$, provided $v$ is fresh; $\nec$E infers $v:\varphi$ from $w:\nec\varphi$ and $w\,R\,v$; $\pos$I and $\pos$E are dual. Def replaces a formula by one that is equal to it after unfolding Definitions~\ref{d:godlike}--\ref{d:ne} (or Scott's definitions) and $\beta$-reduction. Ax introduces an axiom at any label. Rel restates a line that depends on nothing at another label. Sym infers $v\,R\,w$ from $w\,R\,v$; it is the only relational rule used. Second-order instantiation ($\forall^2$E, $\exists^2$I) is restricted to property terms admissible in the models of Part~A: property variables, the defined properties, and $\lambda$-terms built from atoms by Boolean connectives, modal operators and individual quantifiers, with at most one free individual variable in each subformula.
+
+The derivations are written as data in \texttt{gen/derivations.py} and checked by \texttt{gen/nd.py}, which verifies for each line that the cited lines exist and precede it, that the rule applies to them, that eigenvariable and freshness conditions hold, that discharged lines are assumptions, and that instantiation terms are admissible; it computes the dependency set shown in the second column. The program was also run on corrupted copies of the derivations (a symmetry step replaced by an assumption, a violated eigenvariable condition, a box introduction on a non-fresh world, an inadmissible comprehension term), and rejected each. The tables below are typeset from the checked data.
+
+\subsection{Derivation B.1: the main theorem of AF}
+
+\csLinesAf{} lines; open assumptions: none; relational rules: Sym; axioms cited: F2, F3, A3, A5. Lines 1--19 prove Lemma~\ref{l:poss} at $@$; lines 22--26 and 28--32 are Lemma~\ref{l:rigid}, at $v$ and at $@$; lines 37--66 prove Lemma~\ref{l:essence}; lines 67--70 prove Lemma~\ref{l:ne}; the last line is Theorem~\ref{t:main} at $@$.
+
+\input{gen/deriv_af.tex}
+
+\subsection{Derivation B.2: modal collapse in Scott's system}
+
+\csLinesScott{} lines; open assumptions: none; relational rules: Sym; axioms cited: S1, S2 (written F2), S3, S4 (written A4), S5. Lines 1--21 prove that possibly something is Scott-godlike; lines 22--50 that Scott-godlikeness is the Scott essence of any Scott-godlike being; lines 51--62 that a Scott-godlike being has necessary existence; lines 63--72 that something is Scott-godlike, at an arbitrary world; lines 73--92 derive the collapse of every proposition of the form $\exists x\,Y(x)$, the comprehension instance at line~80 being $\lambda z.\,\exists x\,Y(x)$.
+
+\input{gen/deriv_scott.tex}
+
+\subsection{Derivation B.3: positive properties are possibly instantiated}
+
+\csLinesPositive{} lines; open assumptions: none; relational rules: none; axioms cited: F2, F3. This is the general form of Lemma~\ref{l:poss}, and the form of Lemma~2417 that REL-01-f states.
+
+\input{gen/deriv_positive.tex}
+
+\subsection{Derivation B.4: Anderson's first axiom from the filter axioms}
+
+\csLinesAnderson{} lines; open assumptions: none; relational rules: none; axioms cited: F1, F2, F3.
+
+\input{gen/deriv_anderson.tex}
+
+\subsection{Derivation B.5: godlike beings share their necessary properties}
+
+\csLinesIndisc{} lines; open assumptions: none; relational rules: none; axioms cited: none. The result follows from Definition~\ref{d:godlike} alone.
+
+\input{gen/deriv_indisc.tex}
+
+\subsection{Derivation B.6: the converse argument}
+
+\csLinesConverse{} lines; open assumptions: none; relational rules: none; axioms cited: A3. If it is possible that nothing is godlike, nothing is godlike, on every frame.
+
+\input{gen/deriv_converse.tex}
+
+\end{document}

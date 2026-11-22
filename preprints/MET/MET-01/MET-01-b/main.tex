@@ -1,0 +1,367 @@
+\documentclass{situationist-preprint}
+\usepackage{longtable}
+\usepackage{array}
+
+\title{The Instability of the Empty World}
+\msid{MET-01-b}
+\msfamily{MET-01}
+\msdiscipline{Metaphysics}
+\mstype{Companion manuscript}
+\mskeywords{nothingness; empty world; modal plenitude; stability; modal measure; Addition principle; perturbation; up-sets}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+MET-01 holds that there is something rather than nothing because the empty world is not a stable possibility, and that under principles of modal plenitude it receives measure zero among the possibilities. Volume~I of the principal work (MET-01-a) proves the measure claim for one measure, the uniform one, and promises a notion of stability. We supply the notion. A cell of the partition that a contrastive question draws is \emph{unstable} if its measure tends to zero uniformly over every measure that respects the Addition principle of MET-01-c, if it still tends to zero when that principle holds only up to a fixed tolerance, and if every variation of its members leaves it. We prove that the empty world is unstable in this sense: its measure in a space of $n$ potential objects is at most $2^{-n}$ under every admissible measure, at most $((1+\varepsilon)/(2+\varepsilon))^n$ under every measure that respects Addition up to the factor $1+\varepsilon$, and at most $(1+\varepsilon)^2 2^{-n}$ under every multiplicative perturbation of size $\varepsilon$ of an admissible measure; all three bounds are attained. The cell \enquote{something} is stable. Seven appendices verify these results by exact rational computation, exhaustively for $n \leq 5$ and across nine families of measures for $n \leq 12$.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The claim to be made precise}
+
+MET-01 answers the question why there is something rather than nothing by a claim about the structure of the space of possibilities: the empty world is possible, but it is not a stable possibility, and under principles of modal plenitude it receives measure zero among the possibilities. Volume~I of the principal work (MET-01-a) reconstructs the argument of \citet{vanInwagen1996} in finite combinatorial spaces. In the space $W_n$ of assignments of existence and non-existence to $n$ potential concrete objects, the uniform measure gives the empty world the share $2^{-n}$, and this share is less than $1/k$ once $n \geq k$ (MET-01-a, Theorem~4.4). The volume also announces, for its Chapter~7, a notion of stability under which the empty world, though possible, is not a stable possibility. MET-01-c removes the uniform measure from the premises: any measure that satisfies its Addition principle, that adding an object to a world never lowers the world's measure, gives the empty world at most $2^{-n}$ (MET-01-c, Theorem~2.2). MET-01-d distinguishes combinatorial from serious possibility and concludes that nothing is combinatorially possible but not seriously possible.
+
+Two things are still missing. The first is a definition of instability that is precise enough to be proved and strong enough to bear the weight the thesis puts on it. MET-01-a describes the empty world as maximally isolated in $W_n$, since every one of its neighbors is non-empty, and MET-01-d calls a possibility stable if some small variation of it preserves its status. These are claims about the combinatorial structure of the space, and they hold whatever measure is put on it. The thesis, however, joins instability to measure, and the critics of van Inwagen's argument have always aimed at the measure \citep{Lowe1996,Grunbaum2004}. A result that depends on a single measure, or on a principle that holds exactly and fails under any small change, is fragile in exactly the way those critics allege. The second thing missing is a demonstration that the claim does not depend on such fragility. We provide both.
+
+\subsection{Thesis and plan}
+
+We argue that the empty world is unstable in a sense that has three components, each of which can be checked: its measure is uniformly negligible over every measure that respects Addition; it remains negligible over every measure that respects Addition only up to a fixed tolerance; and it is variationally isolated, in that every variation of it is a variation into something. We also show that the complementary possibility, that there is something, is stable in the same sense, and that the empty world is the unique world that is the minimum of every admissible measure. Section~\ref{s:frame} sets out the framework. Section~\ref{s:results} proves the results. Section~\ref{s:cases} discusses particular entries of the computed appendices. Section~\ref{s:obj} answers five objections, and Section~\ref{s:not} states what the result does not establish. Appendices~A to~G contain the computations: the measures of the empty world under nine families of measures for $n \leq 12$, the worlds of $W_n$ for $n \leq 5$ with the extreme values that admissible measures can give them, every non-empty up-set of $W_n$ for $n \leq 4$ together with a census for $n = 5$, the tolerance bounds, 440 perturbed measures, the isolation of the empty world for $n \leq 16$, and an exhaustive check, for $n \leq 5$, of the extension of the measure bound to every proposition closed under subtraction.
+
+\subsection{The literature}
+
+Van Inwagen's argument has been criticized on three grounds, which MET-01-a calls the objections from measure, from indifference and from meaning. The objection from measure is that there is no uniform countably additive measure on a countably infinite set of worlds. MET-01-a answers it by working in finite spaces and taking the limit over the conclusions rather than over the spaces. The objection from indifference, pressed by \citet{Lowe1996}, is that the assignment of equal measure to each world is arbitrary: partition the possibilities into \enquote{something} and \enquote{nothing} and indifference gives each one half. \citet{Grunbaum2004} adds that the assumption that nothingness is the natural state, the one that would obtain spontaneously and needs no explanation, has never been given a reason, and that van Inwagen's argument and its theistic rivals differ in whether they make it. MET-01-c answers the objection from indifference by replacing indifference with Addition, which states only that absence is not modally privileged. The present manuscript addresses a residual form of the same objection: that even Addition is a sharp principle, and that a conclusion which depended on its holding exactly would be an artefact of a choice of measure.
+
+The literature on the possibility of the empty world bears on the question in a different way. The subtraction argument of \citet{Baldwin1996}, refined by \citet{RodriguezPereyra1997} and \citet{EfirdStoneham2005}, and criticized by \citet{Paseau2006} and \citet{Coggins2010}, concerns whether the empty world is possible at all. MET-01 grants that it is: combinatorial plenitude (P1 of MET-01-a) puts the empty world in every $W_n$. As Volume~II of the principal work argues, the subtraction argument and its refinements strengthen the case for the possibility of the empty world without bearing on its measure; its Chapter~12 works in $W_n$ and proves, in Theorem~12.6, that every world with $k$ existing objects is joined to the empty world by exactly $k$ subtraction steps, a result that establishes possibility and not measure (see MET-01-e for the corrected statement of the lemma it uses). Instability is a claim about measure and variation, not about possibility, and it is compatible with every version of the subtraction argument.
+
+Finally, there is a general literature on events of probability zero. \citet{Williamson2007} shows that the probability of an infinite sequence of heads is zero, and argues that this zero is not a mere infinitesimal; \citet{Hajek2003} argues that probability-zero events are a reason to take conditional probability as primitive. Both discussions concern single outcomes of a fine-grained space. The empty world is a single outcome too, and the objection that every world has measure zero in the limit, so that measure zero cannot explain why one of them is not actual, is a form of the dart objection that MET-01-a mentions at the end of its fifth chapter. Section~\ref{s:obj} answers it with the notion of instability defined here, which distinguishes the empty world from the other single worlds by its place in the partition the question draws.
+
+The idea that nothingness is unstable is older than its precise formulation. \citet[ch.~2]{Nozick1981} considered the suggestion that nothing is so unstable that it would produce something, and found it attractive but obscure, since it seems to give nothing a causal power. The notion defined below gives the word a sense that requires no such power: instability is a structural feature of the space of possibilities, and it is the feature that makes the empty world negligible.
+
+\section{Framework}\label{s:frame}
+
+\begin{definition}\label{d:space}
+Let $a_1, \ldots, a_n$ be potential concrete objects. The \emph{combinatorial space} $W_n$ is the set of assignments of existence or non-existence to each $a_i$ (MET-01-a, Definition~4.1). For a world $w$, $|w|$ is the number of objects that exist in $w$. The \emph{empty world} $e$ is the world with $|e| = 0$ and the \emph{full world} $f$ the world with $|f| = n$. Two worlds are \emph{neighbors} if they differ with respect to exactly one object. For $a$ not existing in $w$, $w + a$ is the world that agrees with $w$ except that $a$ exists. A set $U \subseteq W_n$ is an \emph{up-set} if $w \in U$ implies $w + a \in U$ for every $a$ not existing in $w$; $\mathord{\uparrow} w$ is the up-set of worlds in which every object existing in $w$ exists.
+\end{definition}
+
+\begin{definition}\label{d:measure}
+A \emph{measure} on $W_n$ is a function $\mu$ assigning a non-negative rational or real number to each world, with $\sum_{w} \mu(w) = 1$; for a set $S$ of worlds, $\mu(S) = \sum_{w \in S} \mu(w)$.
+\end{definition}
+
+The principle that does the work is the one introduced by MET-01-c.
+
+\begin{principle}[Addition]\label{p:add}
+For every world $w$ of $W_n$ and every potential object $a$ that does not exist in $w$, $\mu(w) \leq \mu(w + a)$.
+\end{principle}
+
+\begin{definition}\label{d:adm}
+A measure on $W_n$ is \emph{admissible} if it satisfies Addition. $\mathcal{A}_n$ is the set of admissible measures on $W_n$. For $\varepsilon \geq 0$, a measure is \emph{$\varepsilon$-admissible} if $\mu(w) \leq (1 + \varepsilon)\,\mu(w + a)$ for every $w$ and every $a$ not existing in $w$; $\mathcal{A}_n^{\varepsilon}$ is the set of such measures.
+\end{definition}
+
+An $\varepsilon$-admissible measure may favor absence, but only by a bounded factor at each step: lacking one object can raise a world's share by at most the factor $1 + \varepsilon$. Admissibility is $0$-admissibility, and $\mathcal{A}_n \subseteq \mathcal{A}_n^{\varepsilon} \subseteq \mathcal{A}_n^{\delta}$ whenever $\varepsilon \leq \delta$.
+
+\begin{definition}\label{d:pert}
+Let $\mu$ be a measure on $W_n$ and $\varepsilon \geq 0$. A measure $\nu$ is an \emph{$\varepsilon$-perturbation} of $\mu$ if there is a function $g$ on $W_n$ with $(1+\varepsilon)^{-1} \leq g(w) \leq 1 + \varepsilon$ for every $w$ such that $\nu(w) = \mu(w) g(w) / \sum_v \mu(v) g(v)$.
+\end{definition}
+
+A perturbation in this sense changes the relative shares of any two worlds by at most the factor $(1+\varepsilon)^2$. It is the natural notion for a principle such as Addition, which constrains relative shares and says nothing about absolute ones. We return in Section~\ref{s:obj} to the additive notion, on which a measure is close to another if their values differ little in sum.
+
+\begin{definition}\label{d:negl}
+A sequence $(S_n)$ of sets of worlds, $S_n \subseteq W_n$, is \emph{negligible} under a sequence of measures $(\mu_n)$ if, for every $k \geq 1$, $\mu_n(S_n) < 1/k$ for all sufficiently large $n$. It is \emph{uniformly negligible} over a sequence of classes $(\mathcal{C}_n)$ of measures if $\sup_{\mu \in \mathcal{C}_n} \mu(S_n)$ tends to zero.
+\end{definition}
+
+Negligibility is the notion of MET-01-d. Uniform negligibility is stronger: it requires one rate of decay for all measures of the class, so that no measure of the class can keep the set's share from vanishing.
+
+\begin{definition}\label{d:unstable}
+Let $\Pi_n$ be a partition of $W_n$ and $C_n$ a cell of it, for each $n$. The sequence $(C_n)$ is \emph{unstable} if
+\begin{enumerate}[label=(\roman*)]
+\item it is uniformly negligible over $(\mathcal{A}_n)$;
+\item for every $\varepsilon > 0$, it is uniformly negligible over $(\mathcal{A}_n^{\varepsilon})$;
+\item for every $n \geq 2$, every neighbor of every member of $C_n$ lies outside $C_n$.
+\end{enumerate}
+It is \emph{stable} if $\inf_{\mu \in \mathcal{A}_n} \mu(C_n)$ tends to one and some member of $C_n$ has a neighbor in $C_n$ for every $n \geq 2$.
+\end{definition}
+
+Clause (i) says that no measure respecting Addition gives the cell a share that resists enlargement of the space. Clause (ii) says that this does not depend on Addition holding exactly: it survives any bounded tolerance for absence. Clause (iii) is the variational component that MET-01-a and MET-01-d describe: a member of the cell cannot be varied in one respect without leaving the cell. Instability is relative to a partition, because the status a variation preserves or changes is the status that the partition records. The partition that matters here is the one that the question why there is something rather than nothing draws.
+
+\begin{definition}\label{d:contrast}
+The \emph{contrast partition} of $W_n$ is $\{N_n, S_n\}$, where $N_n = \{e\}$ and $S_n = W_n \setminus \{e\}$.
+\end{definition}
+
+\section{Results}\label{s:results}
+
+\begin{lemma}[Decomposition]\label{l:decomp}
+Every admissible measure on $W_n$ is a convex combination of measures of the form $\mu_U$, where $U$ is a non-empty up-set and $\mu_U$ gives each member of $U$ the share $1/|U|$ and every other world nothing. Each $\mu_U$ is admissible.
+\end{lemma}
+
+\begin{proof}
+That $\mu_U$ is admissible is immediate: if $w \in U$ then $w + a \in U$, so $\mu_U(w) = \mu_U(w + a)$; if $w \notin U$ then $\mu_U(w) = 0$. Now let $\mu$ be admissible and let $0 = v_0 < v_1 < \cdots < v_r$ be the distinct values that $\mu$ takes, together with $0$. For $j = 1, \ldots, r$, let $U_j$ be the set of worlds $w$ with $\mu(w) \geq v_j$. By Addition, each $U_j$ is an up-set, and each is non-empty. For every world $w$, $\mu(w) = \sum_{j \leq r} (v_j - v_{j-1})\,[w \in U_j]$, since the sum telescopes to the largest $v_j$ not exceeding $\mu(w)$, which is $\mu(w)$. Hence $\mu = \sum_j c_j \mu_{U_j}$ with $c_j = (v_j - v_{j-1})|U_j| > 0$, and summing over worlds gives $\sum_j c_j = 1$.
+\end{proof}
+
+Lemma~\ref{l:decomp} reduces every question about the largest or smallest share an admissible measure can give a set of worlds to a question about up-sets, since a linear quantity such as $\mu(S)$ attains its extreme values over a convex combination at one of the combined measures. Appendix~C lists every non-empty up-set of $W_n$ for $n \leq 4$ and counts those for $n = 5$; their numbers, $2$, $5$, $19$, $167$ and $7{,}580$, are the Dedekind numbers less one \citep{Kleitman1969}.
+
+\begin{proposition}[Extreme shares]\label{p:extreme}
+For every world $w$ of $W_n$,
+\[
+\sup_{\mu \in \mathcal{A}_n} \mu(w) = 2^{|w| - n}, \qquad \inf_{\mu \in \mathcal{A}_n} \mu(w) = \begin{cases} 2^{-n} & \text{if } w = f,\\ 0 & \text{otherwise,}\end{cases}
+\]
+and both values are attained. In particular, $\mu(e) \leq 2^{-n}$ for every admissible $\mu$, with equality only for the uniform measure, and $e$ is the only world whose largest admissible share is $2^{-n}$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:decomp} it suffices to consider the measures $\mu_U$. If $w \in U$ then $\mathord{\uparrow} w \subseteq U$, so $\mu_U(w) = 1/|U| \leq 1/|\mathord{\uparrow} w| = 2^{-(n - |w|)}$, with equality for $U = \mathord{\uparrow} w$. The full world belongs to every non-empty up-set, so $\mu_U(f) = 1/|U| \geq 2^{-n}$, with equality for $U = W_n$; every other world $w$ lies outside the non-empty up-set $\{f\}$, so $\mu_{\{f\}}(w) = 0$. For the empty world, $\mathord{\uparrow} e = W_n$, and $\mu(e) = 2^{-n}$ requires that every $\mu_{U_j}$ in the decomposition of $\mu$ have $U_j = W_n$, which is to say that $\mu$ is uniform. Every world other than $e$ has $|w| \geq 1$ and so a largest share of at least $2^{1-n}$.
+\end{proof}
+
+The bound $\mu(e) \leq 2^{-n}$ is Theorem~2.2 of MET-01-c. Proposition~\ref{p:extreme} adds that it is sharp, that the uniform measure of MET-01-a is the only measure that attains it, and that the empty world is distinguished among all worlds by the smallness of its largest admissible share. It also shows that the empty world is the minimum of every admissible measure, the only world of which this is true: $\mu(e) \leq \mu(w)$ for every $w$ follows from Addition along the path of MET-01-c (Lemma~2.1), and for $w \neq e$ the measure $\mu_{\mathord{\uparrow} w}$ gives $w$ a positive share and $e$ none, so it cannot be that $\mu(w) \leq \mu(v)$ for all $v$ and all admissible $\mu$.
+
+\begin{theorem}[Uniform negligibility]\label{t:uniform}
+The sequence $(N_n)$ is uniformly negligible over $(\mathcal{A}_n)$: $\sup_{\mu \in \mathcal{A}_n} \mu(e) = 2^{-n}$. The sequence $(S_n)$ satisfies $\inf_{\mu \in \mathcal{A}_n} \mu(S_n) = 1 - 2^{-n}$.
+\end{theorem}
+
+\begin{proof}
+The first claim is Proposition~\ref{p:extreme} for $w = e$; the second follows, since $\mu(S_n) = 1 - \mu(e)$.
+\end{proof}
+
+\begin{proposition}[Tolerance]\label{p:tol}
+For every $\varepsilon \geq 0$,
+\[
+\sup_{\mu \in \mathcal{A}_n^{\varepsilon}} \mu(e) = \left(\frac{1 + \varepsilon}{2 + \varepsilon}\right)^{n},
+\]
+and the supremum is attained by the measure $\tau^{\varepsilon}$ that gives each world $w$ a share proportional to $(1 + \varepsilon)^{-|w|}$.
+\end{proposition}
+
+\begin{proof}
+Let $\mu$ be $\varepsilon$-admissible and $w$ a world with $|w| = k$. The path of MET-01-c (Lemma~2.1) leads from $e$ to $w$ in $k$ steps, each of which adds an object; applying the defining inequality at each step gives $\mu(e) \leq (1 + \varepsilon)^k \mu(w)$, that is, $\mu(w) \geq (1+\varepsilon)^{-k}\mu(e)$. Summing over the $\binom{n}{k}$ worlds with $k$ objects and over $k$,
+\[
+1 = \sum_w \mu(w) \geq \mu(e) \sum_{k=0}^{n} \binom{n}{k} (1+\varepsilon)^{-k} = \mu(e) \left(1 + \frac{1}{1+\varepsilon}\right)^{n} = \mu(e)\left(\frac{2+\varepsilon}{1+\varepsilon}\right)^n.
+\]
+The measure $\tau^{\varepsilon}$ is $\varepsilon$-admissible, since $\tau^{\varepsilon}(w) = (1+\varepsilon)\tau^{\varepsilon}(w + a)$ for every step, and every inequality above holds with equality for it.
+\end{proof}
+
+Since $(1+\varepsilon)/(2+\varepsilon) < 1$ for every $\varepsilon \geq 0$, the supremum decays exponentially in $n$ however large the tolerance. A tolerance of $\varepsilon = 1$ permits each object's absence to double a world's share, so that the empty world may have $2^n$ times the share of the full one; even then the empty world's share is at most $(2/3)^n$. Appendix~D tabulates the bound for six tolerances and $n \leq 30$, and states the least $n$ for which it falls below $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-6}$ and $10^{-9}$.
+
+\begin{proposition}[Perturbation]\label{p:pert}
+If $\mu$ is admissible and $\nu$ is an $\varepsilon$-perturbation of $\mu$, then $\nu$ is $((1+\varepsilon)^2 - 1)$-admissible and $\nu(e) \leq (1+\varepsilon)^2\, 2^{-n}$.
+\end{proposition}
+
+\begin{proof}
+Let $g$ be as in Definition~\ref{d:pert}. For every step, $\nu(w)/\nu(w+a) = \mu(w)g(w)/(\mu(w+a)g(w+a)) \leq (1+\varepsilon)^2$, using Addition for $\mu$ and the bounds on $g$; if $\nu(w+a) = 0$ then $\mu(w+a) = 0$, so $\mu(w) = 0$ by Addition and $\nu(w) = 0$. For the second claim, $\sum_v \mu(v)g(v) \geq (1+\varepsilon)^{-1}$, and $\mu(e)g(e) \leq (1+\varepsilon)2^{-n}$ by Proposition~\ref{p:extreme}.
+\end{proof}
+
+The second bound of Proposition~\ref{p:pert} is attained in the limit: perturb the uniform measure by raising the empty world's weight by the factor $1+\varepsilon$ and lowering every other world's by the same factor. Appendix~E calls this the adversarial perturbation and computes it, together with a pseudo-random one, for five admissible base measures, four values of $\varepsilon$ and $2 \leq n \leq 12$.
+
+\begin{proposition}[Isolation]\label{p:iso}
+For $n \geq 2$, every neighbor of $e$ lies in $S_n$, and every member of $S_n$ has at least $n - 1$ neighbors in $S_n$.
+\end{proposition}
+
+\begin{proof}
+A neighbor of $e$ differs from it in exactly one object, which exists in the neighbor. A non-empty world $w$ has $n$ neighbors, of which at most one is empty, namely when $|w| = 1$.
+\end{proof}
+
+Proposition~\ref{p:iso} is the observation of MET-01-a, Section~4. Appendix~F verifies it by enumeration for $n \leq 16$ and counts, for each $n$, the worlds none of whose neighbors shares their status in the contrast partition: for $n \geq 2$ there is exactly one, the empty world.
+
+\begin{theorem}[Instability of the empty world]\label{t:main}
+In the contrast partition, the cell $(N_n)$ of the empty world is unstable and the cell $(S_n)$ of the non-empty worlds is stable.
+\end{theorem}
+
+\begin{proof}
+Clause (i) of Definition~\ref{d:unstable} is Theorem~\ref{t:uniform}; clause (ii) is Proposition~\ref{p:tol}, since $((1+\varepsilon)/(2+\varepsilon))^n \to 0$ for each fixed $\varepsilon$; clause (iii) is the first half of Proposition~\ref{p:iso}. The stability of $(S_n)$ follows from the second half of Theorem~\ref{t:uniform} and the second half of Proposition~\ref{p:iso}.
+\end{proof}
+
+\begin{corollary}\label{c:zero}
+Under combinatorial plenitude and Addition, the empty world receives measure zero among the possibilities, in the sense that its share is negligible under every sequence of admissible measures; and this remains so under every sequence of $\varepsilon$-admissible measures and every sequence of $\varepsilon$-perturbations of admissible measures, for every fixed $\varepsilon$.
+\end{corollary}
+
+\begin{proof}
+Plenitude (P1 of MET-01-a) places the empty world in every $W_n$ and provides the spaces $W_n$ for every $n$. Negligibility under each sequence follows from the uniform bounds of Theorem~\ref{t:uniform} and Propositions~\ref{p:tol} and~\ref{p:pert}.
+\end{proof}
+
+Corollary~\ref{c:zero} is the conclusion of MET-01 in its robust form. Its first clause is the conclusion of MET-01-a and MET-01-c. The second and third clauses are new: they say that the conclusion is not an artefact of a sharp principle, since it survives any fixed tolerance for absence and any fixed perturbation of relative shares.
+
+\subsection{Propositions closed under subtraction}
+
+The subtraction argument moves from a world to its neighbors by removing objects. Call a set $D$ of worlds a \emph{down-set} if it is closed under this operation: whenever $w \in D$ and $a$ exists in $w$, the world that agrees with $w$ except that $a$ does not exist belongs to $D$. The down-sets are exactly the complements of the up-sets. They are the propositions that the subtraction argument, run from any of their members, never leaves: \enquote{there is nothing}, \enquote{there are at most $k$ concrete things}, \enquote{$a_1$ does not exist}. The question arises whether the empty world's instability is a special case of a property shared by all such propositions. The next result says that it is, in one respect, and that it is not, in another.
+
+\begin{proposition}[Down-sets]\label{p:down}
+For every down-set $D$ of $W_n$, $\sup_{\mu \in \mathcal{A}_n} \mu(D) = |D|/2^n$, attained by the uniform measure. The only non-empty down-set none of whose members has a neighbor in it is $\{e\}$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{l:decomp} it suffices to show that $\mu_U(D) \leq |D|/2^n$ for every non-empty up-set $U$, that is, $|U \cap D| \cdot 2^n \leq |U| \cdot |D|$. This is the inequality of \citet{Kleitman1966}: an up-set and a down-set of the Boolean lattice are non-positively correlated under the uniform measure. For the second claim, a down-set containing a world $w \neq e$ contains the neighbor obtained by removing from $w$ an object that exists in it.
+\end{proof}
+
+\begin{corollary}\label{c:few}
+For each fixed $k$, the proposition that at most $k$ concrete objects exist satisfies clauses (i) and (ii) of Definition~\ref{d:unstable} and, for $k \geq 1$, fails clause (iii).
+\end{corollary}
+
+\begin{proof}
+Its worlds form the down-set $D_k$ of worlds with $|w| \leq k$, so by Proposition~\ref{p:down} its largest admissible share is $2^{-n}\sum_{j \leq k}\binom{n}{j}$, which tends to zero for fixed $k$; for clause (ii), let $\mu$ be $\varepsilon$-admissible and $|w| = k' \leq k$. The argument of Proposition~\ref{p:tol}, applied within the up-set $\mathord{\uparrow} w$, which has the structure of $W_{n-k'}$, gives $\mu(w) \leq ((1+\varepsilon)/(2+\varepsilon))^{n-k'}$, so that $\mu(D_k) \leq |D_k|\,((1+\varepsilon)/(2+\varepsilon))^{n-k}$, a polynomial in $n$ multiplied by an exponentially decreasing factor. Clause (iii) fails by the second half of Proposition~\ref{p:down}.
+\end{proof}
+
+Proposition~\ref{p:down} says that the uniform measure, the measure of MET-01-a, is the admissible measure most favorable to every proposition closed under subtraction, not only to the empty world. Corollary~\ref{c:few} says that the measure-theoretic part of instability extends from \enquote{nothing} to \enquote{very little}: under Addition, the proposition that there are at most $k$ concrete things is uniformly negligible for every fixed $k$. The variational part does not extend. The empty world is the only proposition closed under subtraction that is left by every variation of each of its members, and so the only one that is unstable in the full sense of Definition~\ref{d:unstable}. Appendix~G verifies Proposition~\ref{p:down} exhaustively for $n \leq 5$, over all $7{,}581$ down-sets and $7{,}580$ non-empty up-sets of $W_5$, and tabulates the largest admissible share of $D_k$ for $k \leq 6$ and $n \leq 30$.
+
+\section{Particular cases}\label{s:cases}
+
+We discuss six entries of the appendices. Each identifier names a row of a table.
+
+\emph{A12.T.} The threshold measure gives a world weight $2$ if at least half the objects exist in it and $1$ otherwise. It is admissible, but barely: it satisfies Addition with equality on every step except those that cross the threshold. For $n = 12$ its normalizing constant is $6606$, and the empty world receives $1/6606$, which is $0.620$ times the uniform share $2^{-12}$. The entry shows that a measure need not favor fuller worlds strongly to push the empty world below its uniform share; it is enough that it favor them anywhere.
+
+\emph{A12.S1.} The uniform measure on the worlds in which $a_1$ exists is admissible and gives the empty world nothing. It is one of the extreme points of Lemma~\ref{l:decomp}, and it shows that the infimum of the empty world's share over $\mathcal{A}_n$ is zero for every $n$ (Proposition~\ref{p:extreme}). This is not a defect of the argument: Addition does not require that the empty world receive any share, only that it receive no more than any world containing more.
+
+\emph{A12.H.} The measure that halves a world's weight for each object existing in it violates Addition at every step. It is the tilted measure $\tau^{1}$ of Proposition~\ref{p:tol}, and it gives the empty world $(2/3)^{12} = 4096/531441$, about $31.6$ times the uniform share. It attains the tolerance bound exactly, as the table records. It is the strongest case that can be made for nothingness by a measure that treats each absence alike and favors it by a fixed factor, and the share it gives the empty world still falls below one percent at $n = 12$ and below one in a billion at $n = 52$ (Table~D2). An opponent of the conclusion who wants the empty world to keep a share bounded away from zero must favor absence by a factor that grows without bound as the space is enlarged.
+
+\emph{C4.167 and C4.001.} Among the $167$ non-empty up-sets of $W_4$, exactly one contains the empty world: the whole space, C4.167, whose uniform measure gives the empty world $1/16$. At the other extreme, C4.001 is the up-set consisting of the full world alone, whose measure gives the full world everything. The census for $n = 5$ in Appendix~C confirms the pattern: of $7{,}580$ non-empty up-sets, one gives the empty world a positive share. These entries are the computational form of Proposition~\ref{p:extreme}: the empty world and the full world are mirror images, the one with largest share $2^{-n}$ and smallest share $0$, the other with largest share $1$ and smallest share $2^{-n}$.
+
+\emph{E05.U.aa.} The adversarial perturbation of the uniform measure on $W_5$ with $\varepsilon = 1/100$ gives the empty world $0.031858$, which is $0.9994$ of the bound $(1+\varepsilon)^2 2^{-5}$ of Proposition~\ref{p:pert}; across all 440 perturbed measures of Appendix~E the ratio never exceeds $0.999995$. The entry shows that the perturbation bound is close to sharp, and that the perturbed measure, though it violates Addition (its largest step ratio is $1.0201 = (1.01)^2$), stays within the tolerance that Proposition~\ref{p:pert} predicts.
+
+\emph{F01.} For $n = 1$ there are two isolated worlds, since the full world's only neighbor is the empty world. The restriction $n \geq 2$ in clause (iii) of Definition~\ref{d:unstable} is required by this case and by no other: from $n = 2$ on, the empty world is the only isolated world (Appendix~F).
+
+\section{Objections}\label{s:obj}
+
+\begin{objection}[Additive perturbations]
+A measure that agrees with an admissible measure in all but a share $\delta$, and puts that share on the empty world, is close to the admissible measure in every ordinary sense, and it gives the empty world at least $\delta$ for every $n$. So the empty world's negligibility is not robust after all.
+\end{objection}
+
+\begin{reply}
+The measure described is close to an admissible one in total variation, and it is not close to any admissible measure in the sense that matters for the argument. In $W_n$ it gives the empty world at least $\delta$ while the uniform measure gives each of its $n$ neighbors about $2^{-n}$; it therefore favors the absence of a single object by a factor of order $\delta 2^n$, which grows without bound with $n$. By Proposition~\ref{p:tol}, no measure with a fixed tolerance can do this. The additive perturbation looks small only because it is measured against the total, and it is very large when measured against the comparisons that Addition makes. What is at issue is whether absence is privileged, which is a matter of relative shares; a perturbation that fixes a share on nothing however large the space becomes is not a perturbation of a view on which absence is not privileged, but a different view on which it is. That view is the inegalitarian assumption that MET-01-c identifies as question-begging.
+\end{reply}
+
+\begin{objection}[Every world is negligible]
+By Proposition~\ref{p:extreme}, the largest admissible share of any world with $k$ objects is $2^{k-n}$, which tends to zero for each fixed $k$. Every particular world is therefore uniformly negligible, including the actual one. Negligibility cannot explain why the empty world is not actual if it does not distinguish it from the actual world.
+\end{objection}
+
+\begin{reply}
+This is the dart objection that MET-01-a raises against itself. Instability is a property of a cell of a partition, and it answers a contrastive question by appeal to the partition that the question draws. The question why there is something rather than nothing contrasts the cell $N_n$ with the cell $S_n$, and in that partition one cell is unstable and the other is stable (Theorem~\ref{t:main}). The question why this world rather than another contrasts the actual world with every other, and in that partition every cell is a single world. The present answer does not address that question, as MET-01-a states in its second chapter: the answer is selector-free and does not explain why this world exists. The objection would succeed against a claim that measure zero explains the non-actuality of every world of measure zero. It does not succeed against the claim that the cell \enquote{nothing} of the contrast partition is unstable and the cell \enquote{something} stable. The empty world is, moreover, distinguished among single worlds: it is the only world that is the minimum of every admissible measure, and the only one whose largest admissible share is $2^{-n}$.
+\end{reply}
+
+\begin{objection}[The tolerance is still a premise]
+Proposition~\ref{p:tol} assumes that absence is favored by at most a fixed factor at each step. A critic who rejects Addition may reject this too.
+\end{objection}
+
+\begin{reply}
+She may, but the cost is now explicit. To keep the empty world's share above some fixed $\delta$ for all $n$, a measure must favor absence by a factor that grows with the size of the space: by Proposition~\ref{p:tol}, it must satisfy $((1+\varepsilon_n)/(2+\varepsilon_n))^n \geq \delta$, which requires $\varepsilon_n$ to grow at least linearly in $n$. The privilege of absence must increase as more potential objects are considered. This is not a modest refinement of indifference. It is the view that nothingness is the natural state and that each potential object pays an increasing price for existing, which is the view \citet[ch.~2]{Nozick1981} called inegalitarian and \citet{Grunbaum2004} called the spontaneity of nothing. Both authors treat it as a substantive claim in need of support, and it cannot be used as a premise in an argument about whether nothingness is privileged.
+\end{reply}
+
+\begin{objection}[The limit is not a measure]
+Uniform negligibility is a statement about a sequence of finite spaces. The space of possibilities is not finite, and nothing in the argument puts a measure on it.
+\end{objection}
+
+\begin{reply}
+We accept the description and deny that it is an objection. MET-01-a takes the limit over the conclusions rather than over the spaces, and argues that this is what \enquote{measure zero among the possibilities} should mean when there is no privileged measure on the infinite space; its sixth chapter compares the notion with the alternatives in finitely additive and non-standard probability. The present results strengthen the finite conclusions without changing their logical form: for every $n$, every admissible measure, every $\varepsilon$-admissible measure and every $\varepsilon$-perturbation of an admissible measure gives the empty world less than an explicit bound that tends to zero. Any measure on an infinite space whose restrictions to the finite spaces are of these kinds inherits the conclusion.
+\end{reply}
+
+\begin{objection}[Possibility is enough]
+The subtraction argument shows that the empty world is possible. If it is possible, it is a possibility, and its instability is irrelevant to whether there might have been nothing.
+\end{objection}
+
+\begin{reply}
+The thesis of MET-01 concedes that the empty world is possible. What it denies is that the empty world is a stable possibility, and MET-01-d shows that the claim that there might have been nothing is true on the combinatorial reading of \enquote{might} and false on the serious one. The subtraction argument, as Theorem~12.6 of Volume~II reconstructs it in $W_n$, shows that the empty world is reachable from every world by subtraction steps; Proposition~\ref{p:iso} shows that it is equally left by every addition step. The two results are halves of one structural fact, and neither bears on measure. What the present manuscript adds is that every measure respecting the modal independence of potential objects, exactly or within a tolerance, gives the reachable point a vanishing share.
+\end{reply}
+
+\section{What the result does not establish}\label{s:not}
+
+The result does not establish that the empty world is impossible, or that a world of vanishing measure cannot be actual. It does not establish that the actual world is populous. Corollary~\ref{c:few} shows that the propositions that there are at most $k$ concrete things are negligible, but they are not unstable in the full sense, and negligibility is not non-actuality; the cells \enquote{exactly the objects of a fixed finite set exist} are uniformly negligible too, by Proposition~\ref{p:extreme}, and the result says nothing about which of the non-empty worlds is actual. It does not show that Addition is true; it shows that the conclusion survives the weakening of Addition to any fixed tolerance, and MET-01-c argues for Addition itself. It does not decide between contingentism and necessitism, since, as MET-01-a notes, the combinatorial argument transfers unchanged when concreteness replaces existence. Finally, it does not supply an explanation of the kind demanded by the principle of sufficient reason; whether instability explains the existence of something is the subject of Volume~III of the principal work.
+
+\section{Conclusion}
+
+The empty world is unstable in a precise sense. Every measure that respects the Addition principle gives it at most $2^{-n}$ in a space of $n$ potential objects, and only the uniform measure gives it that much; every measure that favors absence by a fixed factor at each step gives it at most $((1+\varepsilon)/(2+\varepsilon))^n$; every bounded perturbation of an admissible measure gives it at most $(1+\varepsilon)^2 2^{-n}$; and every variation of it is a variation into something. The cell of non-empty worlds is stable in the same sense. Under modal plenitude the empty world therefore receives measure zero among the possibilities, robustly, and the appendices verify each of these bounds by exact computation in every case examined.
+
+\appendix
+
+\section{Volume A: nine families of measures, \texorpdfstring{$n \leq 12$}{n <= 12}}\label{app:a}
+
+\paragraph{What is computed.} For each $n$ from $1$ to $12$ and each of nine families of measures, the program constructs the measure on all $2^n$ worlds of $W_n$ in exact rational arithmetic (Python's \texttt{fractions} module), checks Addition on each of the $n 2^{n-1}$ steps $(w, w+a)$, computes the share $\mu(e)$ of the empty world exactly, and checks that $\mu(e) \leq 2^{-n}$ and that $e$ is a minimum of the measure. A world is encoded as an $n$-bit integer whose $i$-th bit records whether $a_i$ exists. The families are given by weights, which the program normalizes; $Z$ is the sum of the weights. U: uniform. G2: weight $2^{|w|}$, the non-uniform measure of MET-01-c. G32 and G3: weights $(3/2)^{|w|}$ and $3^{|w|}$; with U and G2 these are members of the parametrized family with weight $\lambda^{|w|}$, which is admissible exactly when $\lambda \geq 1$ and gives the empty world $(1+\lambda)^{-n}$. L: weight $|w| + 1$. T: weight $2$ if $2|w| \geq n$ and $1$ otherwise. P: a product measure that is not invariant under permutation of the objects, with weight $\prod_{a_i \in w} (i+1)/i$. S1: the uniform measure on the worlds in which $a_1$ exists. H: weight $2^{-|w|}$, which violates Addition and is included as the tolerance case; for it the program records the largest step ratio $1+\varepsilon$ and checks that $\mu(e)$ equals the tolerance bound of Proposition~\ref{p:tol}.
+
+\paragraph{Exhaustiveness and checks.} Within each $W_n$ the check is exhaustive: every step is examined, $405{,}513$ in all over the table. The families are not exhaustive of $\mathcal{A}_n$, which is infinite; Appendix~C supplies the exhaustive check, over the extreme points. The program asserts every verdict and halts on any failure.
+
+\paragraph{Summary.} Of the $108$ rows, $96$ are admissible measures, and in each the bound $\mu(e) \leq 2^{-n}$ holds and $e$ is a minimum; equality $2^n\mu(e) = 1$ occurs exactly in the uniform rows. The $12$ rows of family H violate Addition and attain the tolerance bound with $\varepsilon = 1$. The column $2^n\mu(e)$ shows how far below the uniform share each admissible family places the empty world.
+
+\input{gen/tab_a.tex}
+
+\section{Volume B: the worlds of \texorpdfstring{$W_n$}{W\_n}, \texorpdfstring{$n \leq 5$}{n <= 5}}\label{app:b}
+
+\paragraph{What is computed.} For $n \leq 5$, each of the $62$ worlds is listed by its string of existence values for $a_1, \ldots, a_n$ ($1$ for existence), with its share under four admissible measures of Appendix~A (U, G2, L, P), the infimum and supremum of its share over all of $\mathcal{A}_n$, and the number of its non-empty neighbors. The infimum and supremum are computed by exhaustive search over the extreme points of $\mathcal{A}_n$, the measures $\mu_U$ of Lemma~\ref{l:decomp}, enumerated in Appendix~C; this search is independent of the proof of Proposition~\ref{p:extreme}, and the last column records that its result agrees with the formula of that proposition. The program also checks that each of the four listed measures lies between the computed infimum and supremum.
+
+\paragraph{Summary.} All $62$ worlds agree with Proposition~\ref{p:extreme}. In each $W_n$ the empty world is the unique world with supremum $2^{-n}$, the full world the unique world with infimum $2^{-n}$ rather than $0$, and the empty world the unique world all of whose neighbors are non-empty (for $n \geq 2$).
+
+\input{gen/tab_b.tex}
+
+\section{Volume C: the extreme points of \texorpdfstring{$\mathcal{A}_n$}{A\_n}}\label{app:c}
+
+\paragraph{What is enumerated.} By Lemma~\ref{l:decomp}, the extreme points of the set of admissible measures are the uniform measures on non-empty up-sets of $W_n$. The program enumerates all up-sets of $W_n$ by the recursion on which an up-set of $W_n$ is a pair $(U_0, U_1)$ of up-sets of $W_{n-1}$ with $U_0 \subseteq U_1$, $U_0$ collecting the worlds in which $a_n$ does not exist and $U_1$ those in which it does. It checks independently that each set produced is an up-set, and that the counts are the Dedekind numbers $3, 6, 20, 168, 7581$ for $n = 1, \ldots, 5$ \citep{Kleitman1969}; the recursion produces every up-set exactly once, so the enumeration is exhaustive. For each non-empty up-set $U$, the program builds $\mu_U$, checks Addition on all steps, and computes the shares of the empty world $e$ and the full world $f$.
+
+\paragraph{Encoding.} An up-set is given by its minimal elements, each written as the set of indices of the objects that exist in it; $\{\}$ is the empty world, whose up-set is all of $W_n$. Rows are ordered by $|U|$.
+
+\paragraph{Summary.} For $n = 1, \ldots, 5$ there are $2, 5, 19, 167$ and $7{,}580$ non-empty up-sets. Every $\mu_U$ satisfies Addition, and in each $W_n$ exactly one of them, the uniform measure on the whole space, gives the empty world a positive share, namely $2^{-n}$. Since every admissible measure is a convex combination of these, this verifies $\mu(e) \leq 2^{-n}$ over all of $\mathcal{A}_n$ for $n \leq 5$ by exhaustive computation. The census for $n = 5$ (Table~C5) gives the number of up-sets of each size, with the share they give the full world.
+
+\input{gen/tab_c.tex}
+
+\begin{center}
+\textbf{Table C5.} Non-empty up-sets of $W_5$ by size.\\[0.5em]
+\input{gen/tab_c5.tex}
+\end{center}
+
+\section{Volume D: tolerance bounds}\label{app:d}
+
+\paragraph{What is computed.} For six tolerances $\varepsilon$ and $1 \leq n \leq 30$, the table gives the supremum $((1+\varepsilon)/(2+\varepsilon))^n$ of the empty world's share over $\varepsilon$-admissible measures (Proposition~\ref{p:tol}), next to the admissible bound $2^{-n}$. For $n \leq 10$ the program constructs the tilted measure $\tau^{\varepsilon}$ on all of $W_n$ in exact arithmetic, checks that its largest step ratio is exactly $1+\varepsilon$, and checks that it gives the empty world exactly the tabulated value ($60$ checks, all passed); for $n > 10$ the value is computed from the formula. Table~D2 gives, for each tolerance, the least $n$ at which the bound falls below $1/k$.
+
+\paragraph{Summary.} The bound decays geometrically for every tolerance. With $\varepsilon = 4$, which allows each absence to multiply a world's share by five, the empty world's share is below one in a thousand from $n = 38$ on.
+
+\input{gen/tab_d.tex}
+
+\begin{center}
+\textbf{Table D2.} Least $n$ with $\sup_{\mathcal{A}_n^\varepsilon} \mu(e) < 1/k$.\\[0.5em]
+\input{gen/tab_d2.tex}
+\end{center}
+
+\section{Volume E: perturbations}\label{app:e}
+
+\paragraph{What is computed.} For $2 \leq n \leq 12$, five admissible base measures (U, G2, L, T, P of Appendix~A), four sizes $\varepsilon \in \{1/100, 1/10, 1/2, 1\}$ and two kinds of perturbation, the program constructs the perturbed measure $\nu$ of Definition~\ref{d:pert} in exact arithmetic. The adversarial kind (\texttt{adv}) multiplies the weight of $e$ by $1 + \varepsilon$ and every other weight by $(1+\varepsilon)^{-1}$. The pseudo-random kind (\texttt{rnd}) multiplies each weight by $1 + j\varepsilon/8$ with $j$ drawn uniformly from $\{-4, \ldots, 8\}$ by Python's \texttt{random} module with fixed seed $20261006$; every such factor lies in $[(1+\varepsilon)^{-1}, 1+\varepsilon]$ for $\varepsilon \leq 1$, which the program asserts. Identifiers end in \texttt{a}, \texttt{b}, \texttt{c}, \texttt{d} for the four values of $\varepsilon$ and in \texttt{a} or \texttt{r} for the kind.
+
+\paragraph{Checks.} For each $\nu$ the program computes $\nu(e)$, the bound $(1+\varepsilon)^2 2^{-n}$ of Proposition~\ref{p:pert} and their ratio, the largest step ratio $\nu(w)/\nu(w+a)$ over all steps (which Proposition~\ref{p:pert} bounds by $(1+\varepsilon)^2$), whether $\nu$ still satisfies Addition, and the tolerance bound of Proposition~\ref{p:tol} with $1 + \varepsilon$ replaced by $(1+\varepsilon)^2$. Decimals are roundings of exact values.
+
+\paragraph{Summary.} All $440$ rows satisfy both bounds. In $133$ rows the perturbed measure still satisfies Addition. Almost all of these are perturbations of G2, L or P, whose step ratios lie below one and leave room for a perturbation that does not reverse any step; the threshold measure T, whose steps are mostly equalities, survives perturbation only in four rows with $n = 2$, and the uniform measure, all of whose steps are equalities, only in one (E02.U.dr), where the pseudo-random factors happen to increase with $|w|$. The largest ratio of $\nu(e)$ to the perturbation bound is $0.999995$, attained by the adversarial perturbation of the uniform measure with $\varepsilon = 1/100$ and $n = 12$, so the bound cannot be improved by more than a vanishing amount; as noted after Proposition~\ref{p:pert}, the ratio tends to one along the adversarial perturbations of the uniform measure. For the base measures G2, L and P the ratio falls with $n$, because these measures already place the empty world far below its uniform share.
+
+\input{gen/tab_e.tex}
+
+\section{Volume F: isolation}\label{app:f}
+
+\paragraph{What is computed.} For $1 \leq n \leq 16$, the program examines every world of $W_n$ and every one of its $n$ neighbors, and counts the worlds none of whose neighbors shares their cell in the contrast partition (\enquote{isolated worlds}). It also records the number of neighbors of the empty world, all non-empty, the least number of non-empty neighbors of a non-empty world, and the infimum $1 - 2^{-n}$ of the share of the non-empty cell over $\mathcal{A}_n$ (Theorem~\ref{t:uniform}). The enumeration is exhaustive, $16 \cdot 2^{16}$ neighbor relations for $n = 16$.
+
+\paragraph{Summary.} For $n = 1$ both worlds are isolated; for every $n \geq 2$ the empty world is the only isolated world, and every non-empty world has at least $n-1$ non-empty neighbors, as Proposition~\ref{p:iso} states.
+
+\input{gen/tab_f.tex}
+
+\section{Volume G: propositions closed under subtraction}\label{app:g}
+
+\paragraph{What is computed.} For $n \leq 5$, the program forms every down-set $D$ of $W_n$ as the complement of an up-set from the enumeration of Appendix~C, and for each pair consisting of a down-set $D$ and a non-empty up-set $U$ checks the inequality $|U \cap D| \cdot 2^n \leq |U| \cdot |D|$ in integer arithmetic, which by Lemma~\ref{l:decomp} is equivalent to the first claim of Proposition~\ref{p:down}. It also computes, for each $D$, the largest share $\mu_U(D)$ over all non-empty up-sets $U$ and checks that it equals $|D|/2^n$, and it counts the non-empty down-sets none of whose members are neighbors. Table~G1 gives the counts; $57{,}463{,}980$ pairs are checked for $n = 5$. Table~G2 gives the largest admissible share $2^{-n}\sum_{j \leq k}\binom{n}{j}$ of the proposition that at most $k$ objects exist (Corollary~\ref{c:few}), verified exhaustively for $n \leq 5$ and computed from the formula beyond.
+
+\paragraph{Summary.} There are no violations. Every down-set attains its largest admissible share at the uniform measure, and in every $W_n$ exactly one non-empty down-set is isolated, the set $\{e\}$. In Table~G2 the column $k = 0$ is the bound of Theorem~\ref{t:uniform}; the columns $k \geq 1$ decrease more slowly, by a polynomial factor, and the entry GK30 for $k = 6$, about $7.2 \cdot 10^{-4}$, shows that \enquote{at most six concrete things} is already negligible in a space of thirty potential objects.
+
+\begin{center}
+\textbf{Table G1.} Exhaustive check of Proposition~\ref{p:down}.\\[0.5em]
+\input{gen/tab_g1.tex}
+\end{center}
+
+\begin{center}
+\textbf{Table G2.} Largest admissible share of \enquote{at most $k$ concrete objects exist}.
+\end{center}
+\input{gen/tab_g2.tex}
+
+\begin{thebibliography}{99}\small
+\bibitem[Baldwin(1996)]{Baldwin1996} Baldwin, T. (1996). There might be nothing. \emph{Analysis}, 56(4), 231--238.
+\bibitem[Coggins(2010)]{Coggins2010} Coggins, G. (2010). \emph{Could There Have Been Nothing? Against Metaphysical Nihilism}. Palgrave Macmillan.
+\bibitem[Efird and Stoneham(2005)]{EfirdStoneham2005} Efird, D. and Stoneham, T. (2005). The subtraction argument for metaphysical nihilism. \emph{The Journal of Philosophy}, 102(6), 303--325.
+\bibitem[Grünbaum(2004)]{Grunbaum2004} Grünbaum, A. (2004). The poverty of theistic cosmology. \emph{The British Journal for the Philosophy of Science}, 55(4), 561--614.
+\bibitem[Hájek(2003)]{Hajek2003} Hájek, A. (2003). What conditional probability could not be. \emph{Synthese}, 137(3), 273--323.
+\bibitem[Kleitman(1966)]{Kleitman1966} Kleitman, D.~J. (1966). Families of non-disjoint subsets. \emph{Journal of Combinatorial Theory}, 1(1), 153--155.
+\bibitem[Kleitman(1969)]{Kleitman1969} Kleitman, D. (1969). On Dedekind's problem: the number of monotone Boolean functions. \emph{Proceedings of the American Mathematical Society}, 21(3), 677--682.
+\bibitem[Lowe(1996)]{Lowe1996} Lowe, E.~J. (1996). Why is there anything at all? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 70, 111--120.
+\bibitem[Nozick(1981)]{Nozick1981} Nozick, R. (1981). \emph{Philosophical Explanations}. Harvard University Press.
+\bibitem[Paseau(2006)]{Paseau2006} Paseau, A. (2006). The subtraction argument(s). \emph{Dialectica}, 60(2), 145--156.
+\bibitem[Rodriguez-Pereyra(1997)]{RodriguezPereyra1997} Rodriguez-Pereyra, G. (1997). There might be nothing: the subtraction argument improved. \emph{Analysis}, 57(3), 159--166.
+\bibitem[van Inwagen(1996)]{vanInwagen1996} van Inwagen, P. (1996). Why is there anything at all? \emph{Proceedings of the Aristotelian Society, Supplementary Volume}, 70, 95--110.
+\bibitem[Williamson(2007)]{Williamson2007} Williamson, T. (2007). How probable is an infinite sequence of heads? \emph{Analysis}, 67(3), 173--180.
+\end{thebibliography}
+
+\end{document}
