@@ -13,7 +13,8 @@ Yes. Moods are pre-reflective disclosures of one's situation, fallible but not a
 ## Files
 
 - [`PHE-21-a.pdf`](PHE-21-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

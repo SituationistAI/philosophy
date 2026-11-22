@@ -1,0 +1,85 @@
+{\scriptsize\setlength{\tabcolsep}{2.5pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.75cm}>{\raggedright\arraybackslash}p{2.9cm}llll>{\raggedright\arraybackslash}p{1.45cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.9cm}r@{}}
+\toprule
+Id & Candidate & Type & Inv & Law & Univ & Verdict & Construction or reason & Support & Dp \\
+\midrule\endfirsthead
+\toprule
+Id & Candidate & Type & Inv & Law & Univ & Verdict & Construction or reason & Support & Dp \\
+\midrule\endhead
+\midrule\multicolumn{10}{r}{\emph{continued}}\\\endfoot
+\bottomrule\endlastfoot
+K.01 & metric (infinitesimal interval) & rel & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.02 & interval between finitely separated events & rel & Y & N & Y & constructed & extremal $\int ds$ along connecting geodesics [K.01, NBHD] & 01, NBHD & 1 \\
+K.03 & causal order of events & rel & Y & N & Y & constructed & future-directed non-spacelike curve exists [K.01, K.04, NBHD] & 01, 04, NBHD & 1 \\
+K.04 & time orientation & qty & Y & N & Y & \emph{provisional} & open: is the direction of time genuine or constructed from entropy gradients? & -- & -- \\
+K.05 & proper time along a worldline & qty & Y & N & Y & constructed & $\int\sqrt{g_{ab}\dot x^a\dot x^b}$ along the worldline [K.01, NBHD] & 01, NBHD & 1 \\
+K.06 & spatial distance & rel & F & N & Y & constructed & interval orthogonal to a frame's worldlines [K.01, FRAME] & FRAME, 01 & 1 \\
+K.07 & temporal duration & rel & F & N & Y & constructed & proper time of a frame's worldline between its simultaneity slices [K.01, FRAME] & FRAME, 01 & 1 \\
+K.08 & distant simultaneity & rel & F & N & Y & constructed & orthogonality to a frame's worldlines (Einstein synchrony) [K.01, FRAME] & FRAME, 01 & 1 \\
+K.09 & Christoffel symbols & qty & N & N & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.10 & Riemann curvature & qty & Y & Y & Y & constructed & second derivatives of the metric [K.01, NBHD] & 01, NBHD & 1 \\
+K.11 & Ricci curvature & qty & Y & Y & Y & constructed & contraction $R^a{}_{bad}$ [K.10] & 01, NBHD & 2 \\
+K.12 & Weyl curvature & qty & Y & N & Y & constructed & trace-free part of $R_{abcd}$ [K.10, K.11, K.01] & 01, NBHD & 3 \\
+K.13 & scalar curvature & qty & Y & N & Y & constructed & $g^{ab}R_{ab}$ [K.11, K.01] & 01, NBHD & 3 \\
+K.14 & coordinate position & qty & N & N & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.20 & spin (Casimir label $s$) & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.21 & chirality (Weyl representation) & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.22 & helicity & qty & F & N & Y & constructed & spin projected on momentum [K.20, K.27] & FRAME, 01, 20, 24, NBHD & 4 \\
+K.23 & spin component along an axis & qty & F & N & Y & constructed & projection on an axis fixed by a body [K.20, FRAME] & FRAME, 20 & 1 \\
+K.24 & invariant (rest) mass & qty & Y & Y & Y & \emph{provisional} & open: Casimir label, or constructed from Yukawa coupling and Higgs vacuum value (K.46, K.45)? & -- & -- \\
+K.25 & four-momentum & qty & Y & N & Y & constructed & $m\,dx^a/d\tau$ [K.24, K.05, NBHD] & 01, 24, NBHD & 2 \\
+K.26 & energy & qty & F & N & Y & constructed & $p_a u^a$ for the frame velocity $u^a$ [K.25, FRAME] & FRAME, 01, 24, NBHD & 3 \\
+K.27 & three-momentum & qty & F & N & Y & constructed & projection of $p^a$ orthogonal to $u^a$ [K.25, FRAME] & FRAME, 01, 24, NBHD & 3 \\
+K.28 & velocity & rel & F & N & Y & constructed & $d\vec x/dt$ in a frame [K.06, K.07, NBHD] & FRAME, 01, NBHD & 2 \\
+K.29 & orbital angular momentum & qty & F & N & Y & constructed & $\vec r\times\vec p$ about a chosen origin [K.27, K.06, FRAME] & FRAME, 01, 24, NBHD & 4 \\
+K.30 & weak hypercharge $Y$ & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.31 & weak isospin multiplet $T$ & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.32 & colour representation & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.33 & colour index (red, green, blue) & qty & N & N & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.34 & weak isospin component $T_3$ & qty & Y & N & Y & constructed & $T_3 = Q - Y/2$, relative to the vacuum [K.35, K.30] & 30, 35 & 1 \\
+K.35 & electric charge $Q$ & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.36 & electromagnetic field tensor $F_{ab}$ & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.37 & electric field $\vec E$ & qty & F & N & Y & constructed & $F_{ab}u^b$ [K.36, FRAME] & FRAME, 36 & 1 \\
+K.38 & magnetic field $\vec B$ & qty & F & N & Y & constructed & dual of $F_{ab}$ contracted with $u^b$ [K.36, FRAME] & FRAME, 36 & 1 \\
+K.39 & electromagnetic potential $A_a$ & qty & N & Y & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.40 & electromagnetic holonomy (loop phase) & rel & Y & N & Y & \emph{provisional} & open: genuine non-local relation, or constructed from $F_{ab}$ where the region is simply connected? & -- & -- \\
+K.41 & non-abelian field strengths (components) & qty & N & Y & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.42 & non-abelian holonomies (Wilson loops) & rel & Y & N & Y & \emph{provisional} & open: are gauge-invariant loop quantities the genuine content of $SU(2)$ and $SU(3)$ fields? & -- & -- \\
+K.43 & Higgs field components & qty & N & Y & Y & non-qual. & gauge- or coordinate-relative; no physical relatum & -- & -- \\
+K.44 & hypercharge field strength $B_{ab}$ & qty & Y & Y & Y & \textbf{genuine} & -- & -- & -- \\
+K.45 & Higgs field magnitude $H^\dagger H$ & qty & Y & Y & Y & \emph{provisional} & open: elementary or composite scalar sector? & -- & -- \\
+K.46 & Yukawa couplings & rel & Y & Y & Y & \emph{provisional} & open: parameters of the best system, or genuine relations among fields? & -- & -- \\
+K.47 & gauge couplings & rel & Y & Y & Y & \emph{provisional} & open: values run with the energy scale; scale-relative? & -- & -- \\
+K.48 & generation (family) & qty & Y & N & Y & constructed & ordering by mass within an indiscernibility class [K.24, K.46] & 24, 46 & 1 \\
+K.49 & baryon number $B$ & qty & Y & N & Y & constructed & $(n_{\mathbf 3}-n_{\bar{\mathbf 3}})/3$ over spin-1/2 fields [K.32, K.20, COUNT] & COUNT, 20, 32 & 1 \\
+K.50 & lepton number $L$ & qty & Y & N & Y & constructed & count of colourless spin-1/2 fields, sign by $Y$ [K.32, K.20, K.30, COUNT] & COUNT, 20, 30, 32 & 1 \\
+K.51 & $B-L$ & qty & Y & N & Y & constructed & difference [K.49, K.50] & COUNT, 20, 30, 32 & 2 \\
+K.52 & flavour numbers $S, C, B', T$ & qty & Y & N & Y & constructed & counts of quarks by generation and charge [K.48, K.35, K.32, COUNT] & COUNT, 24, 32, 35, 46 & 2 \\
+K.53 & strong isospin $I_3$ & qty & Y & N & Y & constructed & $(n_u-n_d)/2$ with antiquarks subtracted [K.34, K.48, COUNT] & COUNT, 24, 30, 35, 46 & 2 \\
+K.54 & intrinsic parity & qty & Y & N & Y & \emph{provisional} & open: convention-laden, and parity is violated by the weak interaction & -- & -- \\
+K.55 & quark and lepton mixing & rel & Y & Y & Y & \emph{provisional} & open: derived from Yukawa matrices (K.46)? & -- & -- \\
+K.56 & neutrino mass & qty & Y & Y & Y & \emph{provisional} & open: Dirac or Majorana? & -- & -- \\
+K.57 & right-handed neutrino charges & qty & Y & N & N & \emph{provisional} & open: existence of $\nu_R$ unknown & -- & -- \\
+K.58 & graviton (spin-2 quantum) & qty & Y & N & N & \emph{provisional} & open: no established quantum theory of gravity & -- & -- \\
+K.60 & cosmological constant & rel & Y & Y & Y & \emph{provisional} & open: constant of law, or vacuum energy? & -- & -- \\
+K.61 & temperature & qty & F & N & Y & constructed & $1/T = \partial S/\partial E$ in the rest frame [K.26, K.62] & COUNT, FRAME, 01, 24, NBHD & 5 \\
+K.62 & entropy & qty & Y & N & Y & constructed & $k\ln W$, counting microstates in an energy shell [K.26, COUNT] & COUNT, FRAME, 01, 24, NBHD & 4 \\
+K.63 & pressure & qty & F & N & Y & constructed & momentum flux per area [K.27, K.06, K.07] & FRAME, 01, 24, NBHD & 4 \\
+K.64 & atomic number (chemical element) & qty & Y & N & Y & constructed & number of protons in the nucleus [K.35, K.49, COUNT] & COUNT, 20, 32, 35 & 2 \\
+K.65 & shape (e.g.\ cubical) & qty & Y & N & Y & constructed & arrangement of parts [K.06, NBHD] & FRAME, 01, NBHD & 2 \\
+K.66 & perceived colour (e.g.\ red) & qty & Y & N & Y & constructed & surface reflectance and perceiver response [K.36, NBHD, PERC] & 36, NBHD, PERC & 1 \\
+K.67 & luminous intensity & qty & F & N & Y & constructed & radiant power weighted by human spectral sensitivity [K.26, K.07, PERC] & FRAME, 01, 24, NBHD, PERC & 4 \\
+K.68 & amount of substance & qty & Y & N & Y & constructed & number of entities divided by $N_A$ [COUNT] & COUNT & 1 \\
+K.68b & number of entities & qty & Y & N & Y & constructed & numerical quantifier over a kind [COUNT] & COUNT & 1 \\
+K.69 & electric current & qty & F & N & Y & constructed & charge crossing a surface per unit time [K.35, K.07, K.06, COUNT] & COUNT, FRAME, 01, 35 & 2 \\
+K.70 & magnetic moment of a particle & qty & Y & N & Y & constructed & $g\,(Q/2m)\,\vec S$ [K.20, K.35, K.24] & 20, 24, 35 & 1 \\
+K.71 & colour singlet (hadron) & qty & Y & N & Y & constructed & invariant contraction of constituents [K.32, COUNT] & COUNT, 32 & 1 \\
+K.72 & existence & qty & Y & N & Y & constructed & empty conjunction & $\varnothing$ & 0 \\
+K.73 & self-identity & rel & Y & N & Y & constructed & logical (permutation invariant) & $\varnothing$ & 0 \\
+K.74 & grue & qty & F & N & Y & constructed & green and examined before $t_0$, or blue and not [K.66, K.07, FRAME] & FRAME, 01, 36, NBHD, PERC & 2 \\
+K.75 & solubility (a disposition) & qty & Y & N & Y & constructed & supervenient on constituents' charges, masses and fields [K.35, K.36, K.24, NBHD] & 24, 35, 36, NBHD & 1 \\
+K.81 & being an electron & kind & Y & N & Y & constructed & conjunction of determinates (A.3.07) [K.20, K.35, K.31, K.30, K.32, K.24] & 20, 24, 30, 31, 32, 35 & 1 \\
+K.82 & being a proton & kind & Y & N & Y & constructed & colour singlet $uud$ (D.02) of spin 1/2 [K.49, K.35, K.20, K.71] & COUNT, 20, 32, 35 & 2 \\
+K.83 & rest mass of a composite & qty & Y & N & Y & constructed & invariant norm of total four-momentum [K.25, NBHD] & 01, 24, NBHD & 3 \\
+K.84 & stress-energy tensor & qty & Y & Y & Y & constructed & sum of matter and field contributions [K.25, K.36, NBHD] & 01, 24, 36, NBHD & 3 \\
+\end{longtable}}

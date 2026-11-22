@@ -13,7 +13,8 @@ No single author in the relevant sense: the manuscripts were produced by process
 ## Files
 
 - [`PID-16-a.pdf`](PID-16-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

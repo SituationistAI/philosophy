@@ -13,7 +13,8 @@ Yes, provided they are independently verified, for instance by formal proof.
 ## Files
 
 - [`SCI-22-a.pdf`](SCI-22-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

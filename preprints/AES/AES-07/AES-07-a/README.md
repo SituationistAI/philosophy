@@ -13,7 +13,8 @@ Yes. Music expresses emotions by resembling their characteristic expressive beha
 ## Files
 
 - [`AES-07-a.pdf`](AES-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

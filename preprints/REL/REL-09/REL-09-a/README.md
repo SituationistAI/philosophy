@@ -13,7 +13,8 @@ Neither horn. Goodness and divine command are jointly grounded in a third relati
 ## Files
 
 - [`REL-09-a.pdf`](REL-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

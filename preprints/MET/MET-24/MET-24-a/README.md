@@ -13,7 +13,8 @@ Existence is a first-order property had by everything. Meinongian objects do not
 ## Files
 
 - [`MET-24-a.pdf`](MET-24-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

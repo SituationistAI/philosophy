@@ -13,7 +13,8 @@ Yes. Moral sentences express states of being for, which compose according to the
 ## Files
 
 - [`MTE-03-a.pdf`](MTE-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

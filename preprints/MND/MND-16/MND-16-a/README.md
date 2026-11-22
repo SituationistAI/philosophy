@@ -13,7 +13,8 @@ Yes. Naïve realism is true; hallucinations are experiences of a different kind 
 ## Files
 
 - [`MND-16-a.pdf`](MND-16-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

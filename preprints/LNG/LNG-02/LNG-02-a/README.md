@@ -13,7 +13,8 @@ Causally, with a descriptive component that takes over when the causal chain bre
 ## Files
 
 - [`LNG-02-a.pdf`](LNG-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

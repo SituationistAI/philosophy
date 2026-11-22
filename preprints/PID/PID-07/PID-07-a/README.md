@@ -13,7 +13,8 @@ Yes, but psychological connectedness with one's childhood self is weak, and so a
 ## Files
 
 - [`PID-07-a.pdf`](PID-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

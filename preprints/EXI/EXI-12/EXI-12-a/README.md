@@ -13,7 +13,8 @@ No. A life containing more good than bad is better than non-existence (see ETH-2
 ## Files
 
 - [`EXI-12-a.pdf`](EXI-12-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

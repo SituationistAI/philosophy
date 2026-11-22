@@ -13,7 +13,8 @@ No. The present has no metaphysical privilege; it is the time at which a thought
 ## Files
 
 - [`TSM-15-a.pdf`](TSM-15-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

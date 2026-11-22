@@ -13,7 +13,8 @@ A cause is a counterfactual difference-maker selected by norms of normality. Cau
 ## Files
 
 - [`MET-04-a.pdf`](MET-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

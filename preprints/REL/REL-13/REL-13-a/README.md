@@ -13,7 +13,8 @@ Yes. It is consistent in any logic of relative identity extending Geach's system
 ## Files
 
 - [`REL-13-a.pdf`](REL-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

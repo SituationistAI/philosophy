@@ -13,7 +13,8 @@ An ethical demand that is infinite in principle and cannot be fully discharged; 
 ## Files
 
 - [`PHE-13-a.pdf`](PHE-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

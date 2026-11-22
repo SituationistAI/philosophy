@@ -13,7 +13,8 @@ Yes. The blessed are free in the sense of sourcehood, though not in the sense of
 ## Files
 
 - [`REL-14-a.pdf`](REL-14-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

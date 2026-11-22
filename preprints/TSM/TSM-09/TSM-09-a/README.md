@@ -13,7 +13,8 @@ Yes. Impossible worlds are required to model hyperintensional content.
 ## Files
 
 - [`TSM-09-a.pdf`](TSM-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Arithmetic reduces to logic plus Hume's principle, and Hume's principle is logic
 ## Files
 
 - [`MTH-04-a.pdf`](MTH-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

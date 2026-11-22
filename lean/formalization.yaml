@@ -1,0 +1,1122 @@
+# Formalization catalogue
+# 159 of 372 top-line results have a Lean 4 formalization of their main argument.
+# A successful build certifies validity relative to the stated premises (axioms), not the premises themselves.
+toolchain: "leanprover/lean4:v4.15.0"
+build: "cd lean && lake build"
+policy:
+  sorry_allowed: false
+  print_axioms_required: true
+results:
+  - family: MET-01
+    discipline: MET
+    manuscript: MET-01-a
+    title: "Why There Is Something Rather Than Nothing"
+    question: "Why is there something rather than nothing?"
+    module: Philosophy/MET/MET_01.lean
+    revised: false
+  - family: MET-02
+    discipline: MET
+    manuscript: MET-02-a
+    title: "The Sparse Universals Theorem"
+    question: "Do universals exist?"
+    module: Philosophy/MET/MET_02.lean
+    revised: false
+  - family: MET-03
+    discipline: MET
+    manuscript: MET-03-a
+    title: "Realism by Parsimony"
+    question: "Does the external world exist?"
+    module: Philosophy/MET/MET_03.lean
+    revised: false
+  - family: MET-04
+    discipline: MET
+    manuscript: MET-04-a
+    title: "Causation as Counterfactual Dependence Plus Normality"
+    question: "What is a cause?"
+    module: Philosophy/MET/MET_04.lean
+    revised: false
+  - family: MET-06
+    discipline: MET
+    manuscript: MET-06-a
+    title: "A Solution to the Special Composition Question"
+    question: "When do several things compose one?"
+    module: Philosophy/MET/MET_06.lean
+    revised: false
+  - family: MET-12
+    discipline: MET
+    manuscript: MET-12-a
+    title: "Laws Without Governance"
+    question: "Do laws of nature govern what happens?"
+    module: Philosophy/MET/MET_12.lean
+    revised: false
+  - family: MET-14
+    discipline: MET
+    manuscript: MET-14-a
+    title: "The Unity of Grounding"
+    question: "Is grounding a single relation?"
+    module: Philosophy/MET/MET_14.lean
+    revised: false
+  - family: MET-18
+    discipline: MET
+    manuscript: MET-18-a
+    title: "Epistemicism and the Sharpness of the World"
+    question: "Are there vague objects?"
+    module: Philosophy/MET/MET_18.lean
+    revised: false
+  - family: MET-21
+    discipline: MET
+    manuscript: MET-21-a
+    title: "Parmenides and the Two Senses of 'Is'"
+    question: "Is change possible?"
+    module: Philosophy/MET/MET_21.lean
+    revised: false
+  - family: MET-24
+    discipline: MET
+    manuscript: MET-24-a
+    title: "Existence as a First-Order Property"
+    question: "What is existence?"
+    module: Philosophy/MET/MET_24.lean
+    revised: false
+  - family: MET-25
+    discipline: MET
+    manuscript: MET-25-a
+    title: "The Simulation Argument Undermined"
+    question: "Are we living in a simulation?"
+    module: Philosophy/MET/MET_25.lean
+    revised: false
+  - family: MET-27
+    discipline: MET
+    manuscript: MET-27-a
+    title: "Natural Kinds and Their Number"
+    question: "Do natural kinds exist?"
+    module: Philosophy/MET/MET_27.lean
+    revised: false
+  - family: MET-28
+    discipline: MET
+    manuscript: MET-28-a
+    title: "Black's Spheres Vindicated"
+    question: "Is the identity of indiscernibles true?"
+    module: Philosophy/MET/MET_28.lean
+    revised: true
+  - family: MET-30
+    discipline: MET
+    manuscript: MET-30-a
+    title: "On the Possibility of Metaphysics"
+    question: "Is metaphysics possible?"
+    module: Philosophy/MET/MET_30.lean
+    revised: false
+  - family: REL-01
+    discipline: REL
+    manuscript: REL-01-a
+    title: "On the Existence of God"
+    question: "Does God exist?"
+    module: Philosophy/REL/REL_01.lean
+    revised: false
+  - family: REL-02
+    discipline: REL
+    manuscript: REL-02-a
+    title: "Evil, Omnipotence and the Structure of Logical Space"
+    question: "Is the existence of evil compatible with the existence of God?"
+    module: Philosophy/REL/REL_02.lean
+    revised: false
+  - family: REL-03
+    discipline: REL
+    manuscript: REL-03-a
+    title: "Divine Hiddenness as a Signalling Equilibrium"
+    question: "Is divine hiddenness evidence against God?"
+    module: Philosophy/REL/REL_03.lean
+    revised: false
+  - family: REL-04
+    discipline: REL
+    manuscript: REL-04-a
+    title: "The Paradox of the Stone and Stratified Ability"
+    question: "Is omnipotence coherent?"
+    module: Philosophy/REL/REL_04.lean
+    revised: false
+  - family: REL-05
+    discipline: REL
+    manuscript: REL-05-a
+    title: "Foreknowledge Without Fatalism"
+    question: "Is divine foreknowledge compatible with human freedom?"
+    module: Philosophy/REL/REL_05.lean
+    revised: false
+  - family: REL-06
+    discipline: REL
+    manuscript: REL-06-a
+    title: "Pascal's Wager Under Bounded Utilities"
+    question: "Is Pascal's wager sound?"
+    module: Philosophy/REL/REL_06.lean
+    revised: false
+  - family: REL-07
+    discipline: REL
+    manuscript: REL-07-a
+    title: "Hume's Maxim Quantified"
+    question: "Can testimony justify belief in miracles?"
+    module: Philosophy/REL/REL_07.lean
+    revised: true
+  - family: REL-09
+    discipline: REL
+    manuscript: REL-09-a
+    title: "Escaping Euthyphro via Joint Grounding"
+    question: "How should the Euthyphro dilemma be resolved?"
+    module: Philosophy/REL/REL_09.lean
+    revised: false
+  - family: REL-10
+    discipline: REL
+    manuscript: REL-10-a
+    title: "Fine-Tuning and the Normalizability Problem"
+    question: "Does fine-tuning support theism?"
+    module: Philosophy/REL/REL_10.lean
+    revised: false
+  - family: REL-11
+    discipline: REL
+    manuscript: REL-11-a
+    title: "Asymmetric Steadfastness in Religious Disagreement"
+    question: "What does religious disagreement among peers require?"
+    module: Philosophy/REL/REL_11.lean
+    revised: false
+  - family: REL-13
+    discipline: REL
+    manuscript: REL-13-a
+    title: "A Consistency Proof for Trinitarian Doctrine"
+    question: "Is the doctrine of the Trinity coherent?"
+    module: Philosophy/REL/REL_13.lean
+    revised: false
+  - family: REL-15
+    discipline: REL
+    manuscript: REL-15-a
+    title: "A Uniqueness Theorem for Maximal Greatness"
+    question: "Could there be more than one god?"
+    module: Philosophy/REL/REL_15.lean
+    revised: true
+  - family: REL-16
+    discipline: REL
+    manuscript: REL-16-a
+    title: "Against Divine Simplicity"
+    question: "Is divine simplicity coherent?"
+    module: Philosophy/REL/REL_16.lean
+    revised: false
+  - family: REL-17
+    discipline: REL
+    manuscript: REL-17-a
+    title: "The Rationality of Faith Under Underdetermination"
+    question: "Is faith rational?"
+    module: Philosophy/REL/REL_17.lean
+    revised: false
+  - family: REL-19
+    discipline: REL
+    manuscript: REL-19-a
+    title: "Timeless Omniscience and Indexical Knowledge"
+    question: "Is God in time?"
+    module: Philosophy/REL/REL_19.lean
+    revised: false
+  - family: REL-20
+    discipline: REL
+    manuscript: REL-20-a
+    title: "Proportionality and Eternal Punishment"
+    question: "Is eternal punishment just?"
+    module: Philosophy/REL/REL_20.lean
+    revised: false
+  - family: REL-23
+    discipline: REL
+    manuscript: REL-23-a
+    title: "Gaunilo's Island, the Devil and an Asymmetry"
+    question: "Is there an ontological argument for a maximally evil being?"
+    module: Philosophy/REL/REL_23.lean
+    revised: false
+  - family: REL-24
+    discipline: REL
+    manuscript: REL-24-a
+    title: "On the Evidential Irrelevance of the Present Collection"
+    question: "Should anyone believe in God on the basis of this collection?"
+    module: Philosophy/REL/REL_24.lean
+    revised: false
+  - family: ETH-01
+    discipline: ETH
+    manuscript: ETH-01-a
+    title: "On the Good"
+    question: "What is the good?"
+    module: Philosophy/ETH/ETH_01.lean
+    revised: false
+  - family: ETH-02
+    discipline: ETH
+    manuscript: ETH-02-a
+    title: "The Consequentializing Equivalence"
+    question: "Consequentialism or deontology?"
+    module: Philosophy/ETH/ETH_02.lean
+    revised: false
+  - family: ETH-03
+    discipline: ETH
+    manuscript: ETH-03-a
+    title: "The Trolley Problem Solved"
+    question: "The trolley problem"
+    module: Philosophy/ETH/ETH_03.lean
+    revised: false
+  - family: ETH-06
+    discipline: ETH
+    manuscript: ETH-06-a
+    title: "A Moderate Duty of Beneficence"
+    question: "How much must we give to those in need?"
+    module: Philosophy/ETH/ETH_06.lean
+    revised: false
+  - family: ETH-07
+    discipline: ETH
+    manuscript: ETH-07-a
+    title: "Moral Status and the Capacity for Welfare"
+    question: "Do animals have moral status?"
+    module: Philosophy/ETH/ETH_07.lean
+    revised: false
+  - family: ETH-09
+    discipline: ETH
+    manuscript: ETH-09-a
+    title: "The Repugnant Conclusion Is Not Repugnant"
+    question: "Is the repugnant conclusion true?"
+    module: Philosophy/ETH/ETH_09.lean
+    revised: false
+  - family: ETH-10
+    discipline: ETH
+    manuscript: ETH-10-a
+    title: "The Ethics of Eating Animals"
+    question: "Is it wrong to eat meat?"
+    module: Philosophy/ETH/ETH_10.lean
+    revised: false
+  - family: ETH-15
+    discipline: ETH
+    manuscript: ETH-15-a
+    title: "There Are No Genuine Moral Dilemmas"
+    question: "Can there be genuine moral dilemmas?"
+    module: Philosophy/ETH/ETH_15.lean
+    revised: false
+  - family: ETH-18
+    discipline: ETH
+    manuscript: ETH-18-a
+    title: "The Duty to Rescue and Its Limits"
+    question: "Is there a duty to rescue?"
+    module: Philosophy/ETH/ETH_18.lean
+    revised: false
+  - family: ETH-20
+    discipline: ETH
+    manuscript: ETH-20-a
+    title: "The Asymmetry Argument Fails"
+    question: "Is it wrong to have children?"
+    module: Philosophy/ETH/ETH_20.lean
+    revised: false
+  - family: ETH-24
+    discipline: ETH
+    manuscript: ETH-24-a
+    title: "The Moral Status of Artificial Systems"
+    question: "Do we owe anything to machines?"
+    module: Philosophy/ETH/ETH_24.lean
+    revised: false
+  - family: ETH-26
+    discipline: ETH
+    manuscript: ETH-26-a
+    title: "Punishment as Communication"
+    question: "Is punishment justified?"
+    module: Philosophy/ETH/ETH_26.lean
+    revised: false
+  - family: ETH-28
+    discipline: ETH
+    manuscript: ETH-28-a
+    title: "The Demandingness of Morality"
+    question: "How demanding is morality?"
+    module: Philosophy/ETH/ETH_28.lean
+    revised: false
+  - family: MTE-01
+    discipline: MTE
+    manuscript: MTE-01-a
+    title: "Moral Realism Established"
+    question: "Are there moral facts?"
+    module: Philosophy/MTE/MTE_01.lean
+    revised: false
+  - family: MTE-02
+    discipline: MTE
+    manuscript: MTE-02-a
+    title: "Objectivity Without Absoluteness"
+    question: "Is morality objective?"
+    module: Philosophy/MTE/MTE_02.lean
+    revised: false
+  - family: MTE-03
+    discipline: MTE
+    manuscript: MTE-03-a
+    title: "The Frege-Geach Problem Solved"
+    question: "Can expressivism solve the Frege-Geach problem?"
+    module: Philosophy/MTE/MTE_03.lean
+    revised: false
+  - family: MTE-04
+    discipline: MTE
+    manuscript: MTE-04-a
+    title: "Why Be Moral? A Two-Case Argument"
+    question: "Why be moral?"
+    module: Philosophy/MTE/MTE_04.lean
+    revised: false
+  - family: MTE-05
+    discipline: MTE
+    manuscript: MTE-05-a
+    title: "Companions in Guilt and the Error Theory"
+    question: "Is all moral talk false?"
+    module: Philosophy/MTE/MTE_05.lean
+    revised: false
+  - family: MTE-09
+    discipline: MTE
+    manuscript: MTE-09-a
+    title: "Debunking the Debunkers"
+    question: "Does evolution debunk moral knowledge?"
+    module: Philosophy/MTE/MTE_09.lean
+    revised: false
+  - family: MTE-11
+    discipline: MTE
+    manuscript: MTE-11-a
+    title: "Reasons First"
+    question: "Are reasons fundamental?"
+    module: Philosophy/MTE/MTE_11.lean
+    revised: false
+  - family: MTE-16
+    discipline: MTE
+    manuscript: MTE-16-a
+    title: "Expected Choiceworthiness, Variance-Normalized"
+    question: "What should one do under moral uncertainty?"
+    module: Philosophy/MTE/MTE_16.lean
+    revised: true
+  - family: MTE-17
+    discipline: MTE
+    manuscript: MTE-17-a
+    title: "The Collapse of Quasi-Realism"
+    question: "Is quasi-realism stable?"
+    module: Philosophy/MTE/MTE_17.lean
+    revised: false
+  - family: MTE-19
+    discipline: MTE
+    manuscript: MTE-19-a
+    title: "Moral Progress Is Measurable"
+    question: "Is moral progress real?"
+    module: Philosophy/MTE/MTE_19.lean
+    revised: false
+  - family: EPI-01
+    discipline: EPI
+    manuscript: EPI-01-a
+    title: "The Analysis of Knowledge"
+    question: "What is knowledge?"
+    module: Philosophy/EPI/EPI_01.lean
+    revised: false
+  - family: EPI-02
+    discipline: EPI
+    manuscript: EPI-02-a
+    title: "A Defence of Moore's Proof"
+    question: "Can scepticism be refuted?"
+    module: Philosophy/EPI/EPI_02.lean
+    revised: false
+  - family: EPI-03
+    discipline: EPI
+    manuscript: EPI-03-a
+    title: "The Problem of Induction"
+    question: "Is induction justified?"
+    module: Philosophy/EPI/EPI_03.lean
+    revised: false
+  - family: EPI-05
+    discipline: EPI
+    manuscript: EPI-05-a
+    title: "The Structure of Justification"
+    question: "Foundationalism or coherentism?"
+    module: Philosophy/EPI/EPI_05.lean
+    revised: false
+  - family: EPI-07
+    discipline: EPI
+    manuscript: EPI-07-a
+    title: "Moderate Conciliationism"
+    question: "What should we do when an epistemic peer disagrees?"
+    module: Philosophy/EPI/EPI_07.lean
+    revised: false
+  - family: EPI-08
+    discipline: EPI
+    manuscript: EPI-08-a
+    title: "Testimony Transmits Knowledge"
+    question: "Can testimony give knowledge?"
+    module: Philosophy/EPI/EPI_08.lean
+    revised: false
+  - family: EPI-10
+    discipline: EPI
+    manuscript: EPI-10-a
+    title: "The Preface Paradox and the Present Collection"
+    question: "How should the preface paradox be resolved?"
+    module: Philosophy/EPI/EPI_10.lean
+    revised: false
+  - family: EPI-13
+    discipline: EPI
+    manuscript: EPI-13-a
+    title: "Contextualism and Scepticism"
+    question: "Is 'know' context-sensitive?"
+    module: Philosophy/EPI/EPI_13.lean
+    revised: false
+  - family: EPI-16
+    discipline: EPI
+    manuscript: EPI-16-a
+    title: "The Epistemic Costs of Prejudice"
+    question: "Is epistemic injustice a genuine wrong?"
+    module: Philosophy/EPI/EPI_16.lean
+    revised: false
+  - family: EPI-17
+    discipline: EPI
+    manuscript: EPI-17-a
+    title: "Uniqueness Defended"
+    question: "Is rationality permissive?"
+    module: Philosophy/EPI/EPI_17.lean
+    revised: false
+  - family: EPI-18
+    discipline: EPI
+    manuscript: EPI-18-a
+    title: "Sleeping Beauty: The Thirder Solution"
+    question: "What should Sleeping Beauty believe?"
+    module: Philosophy/EPI/EPI_18.lean
+    revised: true
+  - family: EPI-19
+    discipline: EPI
+    manuscript: EPI-19-a
+    title: "Phenomenal Conservatism Defended"
+    question: "Does perceptual experience justify belief?"
+    module: Philosophy/EPI/EPI_19.lean
+    revised: false
+  - family: EPI-20
+    discipline: EPI
+    manuscript: EPI-20-a
+    title: "Closure Holds"
+    question: "Is knowledge closed under known entailment?"
+    module: Philosophy/EPI/EPI_20.lean
+    revised: false
+  - family: MND-01
+    discipline: MND
+    manuscript: MND-01-a
+    title: "On the Hard Problem of Consciousness"
+    question: "Can the hard problem of consciousness be solved?"
+    module: Philosophy/MND/MND_01.lean
+    revised: false
+  - family: MND-02
+    discipline: MND
+    manuscript: MND-02-a
+    title: "Physicalism and Hempel's Dilemma"
+    question: "Is physicalism true?"
+    module: Philosophy/MND/MND_02.lean
+    revised: false
+  - family: MND-04
+    discipline: MND
+    manuscript: MND-04-a
+    title: "Mary's Room and the Ability Hypothesis"
+    question: "Does Mary learn something new when she leaves the room?"
+    module: Philosophy/MND/MND_04.lean
+    revised: false
+  - family: MND-05
+    discipline: MND
+    manuscript: MND-05-a
+    title: "Zombies Are Conceivable but Impossible"
+    question: "Are zombies possible?"
+    module: Philosophy/MND/MND_05.lean
+    revised: false
+  - family: MND-07
+    discipline: MND
+    manuscript: MND-07-a
+    title: "The Systems Reply Vindicated"
+    question: "Does the Chinese Room understand Chinese?"
+    module: Philosophy/MND/MND_07.lean
+    revised: false
+  - family: MND-11
+    discipline: MND
+    manuscript: MND-11-a
+    title: "Mental Causes Are Proportional"
+    question: "Can the mental cause the physical?"
+    module: Philosophy/MND/MND_11.lean
+    revised: false
+  - family: MND-13
+    discipline: MND
+    manuscript: MND-13-a
+    title: "Eliminativism Is Self-Undermining"
+    question: "Do beliefs exist?"
+    module: Philosophy/MND/MND_13.lean
+    revised: false
+  - family: MND-18
+    discipline: MND
+    manuscript: MND-18-a
+    title: "The Combination Problem Is Unsolvable"
+    question: "Is panpsychism true?"
+    module: Philosophy/MND/MND_18.lean
+    revised: false
+  - family: MND-21
+    discipline: MND
+    manuscript: MND-21-a
+    title: "Computation Without a Central Processor"
+    question: "Is the mind a computer?"
+    module: Philosophy/MND/MND_21.lean
+    revised: false
+  - family: MND-26
+    discipline: MND
+    manuscript: MND-26-a
+    title: "The Mind-Body Problem: A Synthesis"
+    question: "Is the mind-body problem solved?"
+    module: Philosophy/MND/MND_26.lean
+    revised: false
+  - family: LNG-01
+    discipline: LNG
+    manuscript: LNG-01-a
+    title: "On Meaning"
+    question: "What is meaning?"
+    module: Philosophy/LNG/LNG_01.lean
+    revised: false
+  - family: LNG-02
+    discipline: LNG
+    manuscript: LNG-02-a
+    title: "Causal Reference With Descriptive Backup"
+    question: "How do names refer?"
+    module: Philosophy/LNG/LNG_02.lean
+    revised: false
+  - family: LNG-03
+    discipline: LNG
+    manuscript: LNG-03-a
+    title: "The Present King of France Is Not Bald"
+    question: "Is the present King of France bald?"
+    module: Philosophy/LNG/LNG_03.lean
+    revised: false
+  - family: LNG-05
+    discipline: LNG
+    manuscript: LNG-05-a
+    title: "Meaning Facts as Primitive"
+    question: "Is there a fact about what we mean by 'plus'?"
+    module: Philosophy/LNG/LNG_05.lean
+    revised: false
+  - family: LNG-07
+    discipline: LNG
+    manuscript: LNG-07-a
+    title: "Against Private Language"
+    question: "Can there be a private language?"
+    module: Philosophy/LNG/LNG_07.lean
+    revised: false
+  - family: LNG-10
+    discipline: LNG
+    manuscript: LNG-10-a
+    title: "Deflationism Defended"
+    question: "Is truth a substantive property?"
+    module: Philosophy/LNG/LNG_10.lean
+    revised: false
+  - family: LNG-12
+    discipline: LNG
+    manuscript: LNG-12-a
+    title: "The Sorites and Sharp Boundaries"
+    question: "Is there a sharp boundary for 'heap'?"
+    module: Philosophy/LNG/LNG_12.lean
+    revised: false
+  - family: LNG-14
+    discipline: LNG
+    manuscript: LNG-14-a
+    title: "Fictional Characters as Abstract Artefacts"
+    question: "Can we talk about what does not exist?"
+    module: Philosophy/LNG/LNG_14.lean
+    revised: false
+  - family: LNG-17
+    discipline: LNG
+    manuscript: LNG-17-a
+    title: "Structured Propositions"
+    question: "What are propositions?"
+    module: Philosophy/LNG/LNG_17.lean
+    revised: false
+  - family: LNG-18
+    discipline: LNG
+    manuscript: LNG-18-a
+    title: "Self-Reference Without Paradox"
+    question: "Can a sentence speak about itself without paradox?"
+    module: Philosophy/LNG/LNG_18.lean
+    revised: false
+  - family: LNG-20
+    discipline: LNG
+    manuscript: LNG-20-a
+    title: "Conditionals Without Truth Values"
+    question: "Do indicative conditionals have truth values?"
+    module: Philosophy/LNG/LNG_20.lean
+    revised: false
+  - family: LOG-01
+    discipline: LOG
+    manuscript: LOG-01-a
+    title: "The Liar Resolved"
+    question: "How should the liar paradox be resolved?"
+    module: Philosophy/LOG/LOG_01.lean
+    revised: false
+  - family: LOG-02
+    discipline: LOG
+    manuscript: LOG-02-a
+    title: "Logical Monism"
+    question: "Is there one true logic?"
+    module: Philosophy/LOG/LOG_02.lean
+    revised: false
+  - family: LOG-03
+    discipline: LOG
+    manuscript: LOG-03-a
+    title: "Against Dialetheism"
+    question: "Are there true contradictions?"
+    module: Philosophy/LOG/LOG_03.lean
+    revised: false
+  - family: LOG-04
+    discipline: LOG
+    manuscript: LOG-04-a
+    title: "Curry's Paradox and the Failure of Contraction"
+    question: "How should Curry's paradox be resolved?"
+    module: Philosophy/LOG/LOG_04.lean
+    revised: false
+  - family: LOG-06
+    discipline: LOG
+    manuscript: LOG-06-a
+    title: "Logical Consequence and the Actual World"
+    question: "What is logical consequence?"
+    module: Philosophy/LOG/LOG_06.lean
+    revised: false
+  - family: LOG-07
+    discipline: LOG
+    manuscript: LOG-07-a
+    title: "In Defence of the Material Conditional"
+    question: "Is the material conditional the right conditional?"
+    module: Philosophy/LOG/LOG_07.lean
+    revised: false
+  - family: LOG-08
+    discipline: LOG
+    manuscript: LOG-08-a
+    title: "Absolute Generality Defended"
+    question: "Can we quantify over absolutely everything?"
+    module: Philosophy/LOG/LOG_08.lean
+    revised: false
+  - family: LOG-09
+    discipline: LOG
+    manuscript: LOG-09-a
+    title: "Second-Order Logic Is Logic"
+    question: "Is second-order logic logic?"
+    module: Philosophy/LOG/LOG_09.lean
+    revised: false
+  - family: LOG-11
+    discipline: LOG
+    manuscript: LOG-11-a
+    title: "The Surprise Examination"
+    question: "Can the surprise examination take place?"
+    module: Philosophy/LOG/LOG_11.lean
+    revised: true
+  - family: LOG-12
+    discipline: LOG
+    manuscript: LOG-12-a
+    title: "Identity Is Absolute"
+    question: "Is identity relative?"
+    module: Philosophy/LOG/LOG_12.lean
+    revised: false
+  - family: LOG-13
+    discipline: LOG
+    manuscript: LOG-13-a
+    title: "Distributivity Survives Quantum Mechanics"
+    question: "Can logic be revised on empirical grounds?"
+    module: Philosophy/LOG/LOG_13.lean
+    revised: false
+  - family: LOG-16
+    discipline: LOG
+    manuscript: LOG-16-a
+    title: "The Logical Constants and Permutation Invariance"
+    question: "What are the logical constants?"
+    module: Philosophy/LOG/LOG_16.lean
+    revised: false
+  - family: LOG-17
+    discipline: LOG
+    manuscript: LOG-17-a
+    title: "Hempel's Ravens and Bayesian Confirmation"
+    question: "Does a white shoe confirm that all ravens are black?"
+    module: Philosophy/LOG/LOG_17.lean
+    revised: false
+  - family: LOG-18
+    discipline: LOG
+    manuscript: LOG-18-a
+    title: "What the Tortoise Said to Achilles, Revisited"
+    question: "What did the tortoise say to Achilles?"
+    module: Philosophy/LOG/LOG_18.lean
+    revised: false
+  - family: LOG-19
+    discipline: LOG
+    manuscript: LOG-19-a
+    title: "Fitch's Paradox Accepted"
+    question: "Is every truth knowable?"
+    module: Philosophy/LOG/LOG_19.lean
+    revised: false
+  - family: LOG-20
+    discipline: LOG
+    manuscript: LOG-20-a
+    title: "Completeness and Its Limits"
+    question: "Is logic complete?"
+    module: Philosophy/LOG/LOG_20.lean
+    revised: false
+  - family: SCI-01
+    discipline: SCI
+    manuscript: SCI-01-a
+    title: "The Demarcation Problem Revisited"
+    question: "What distinguishes science from non-science?"
+    module: Philosophy/SCI/SCI_01.lean
+    revised: false
+  - family: SCI-02
+    discipline: SCI
+    manuscript: SCI-02-a
+    title: "Scientific Realism Defended"
+    question: "Is scientific realism true?"
+    module: Philosophy/SCI/SCI_02.lean
+    revised: false
+  - family: SCI-07
+    discipline: SCI
+    manuscript: SCI-07-a
+    title: "The Falsifiability Criterion Is Not Self-Refuting"
+    question: "Is the falsifiability criterion self-refuting?"
+    module: Philosophy/SCI/SCI_07.lean
+    revised: false
+  - family: SCI-09
+    discipline: SCI
+    manuscript: SCI-09-a
+    title: "The Everett Interpretation Defended"
+    question: "How should quantum mechanics be interpreted?"
+    module: Philosophy/SCI/SCI_09.lean
+    revised: false
+  - family: SCI-10
+    discipline: SCI
+    manuscript: SCI-10-a
+    title: "Idealization and Representation"
+    question: "Are scientific models true?"
+    module: Philosophy/SCI/SCI_10.lean
+    revised: false
+  - family: SCI-12
+    discipline: SCI
+    manuscript: SCI-12-a
+    title: "Bayesian Confirmation and Old Evidence"
+    question: "Is Bayesianism the right account of confirmation?"
+    module: Philosophy/SCI/SCI_12.lean
+    revised: false
+  - family: SCI-16
+    discipline: SCI
+    manuscript: SCI-16-a
+    title: "From Correlation to Causation"
+    question: "Is correlation causation?"
+    module: Philosophy/SCI/SCI_16.lean
+    revised: false
+  - family: SCI-19
+    discipline: SCI
+    manuscript: SCI-19-a
+    title: "Self-Correction in Science"
+    question: "Is science self-correcting?"
+    module: Philosophy/SCI/SCI_19.lean
+    revised: false
+  - family: SCI-21
+    discipline: SCI
+    manuscript: SCI-21-a
+    title: "Survival of the Fittest Is Not a Tautology"
+    question: "Is 'survival of the fittest' a tautology?"
+    module: Philosophy/SCI/SCI_21.lean
+    revised: false
+  - family: SCI-22
+    discipline: SCI
+    manuscript: SCI-22-a
+    title: "The Scientific Status of Machine-Generated Results"
+    question: "Do machine-generated results count as science?"
+    module: Philosophy/SCI/SCI_22.lean
+    revised: false
+  - family: POL-01
+    discipline: POL
+    manuscript: POL-01-a
+    title: "On Justice"
+    question: "What is justice?"
+    module: Philosophy/POL/POL_01.lean
+    revised: false
+  - family: POL-02
+    discipline: POL
+    manuscript: POL-02-a
+    title: "The Legitimacy of the State"
+    question: "Is the state legitimate?"
+    module: Philosophy/POL/POL_02.lean
+    revised: false
+  - family: POL-04
+    discipline: POL
+    manuscript: POL-04-a
+    title: "Democracy, Doubly Justified"
+    question: "What justifies democracy?"
+    module: Philosophy/POL/POL_04.lean
+    revised: false
+  - family: POL-06
+    discipline: POL
+    manuscript: POL-06-a
+    title: "Property Is Not Theft"
+    question: "Is property theft?"
+    module: Philosophy/POL/POL_06.lean
+    revised: false
+  - family: POL-11
+    discipline: POL
+    manuscript: POL-11-a
+    title: "The Social Contract as Implicit Framework"
+    question: "Is there a social contract?"
+    module: Philosophy/POL/POL_11.lean
+    revised: false
+  - family: POL-16
+    discipline: POL
+    manuscript: POL-16-a
+    title: "The Paradox of Tolerance"
+    question: "How should the paradox of tolerance be resolved?"
+    module: Philosophy/POL/POL_16.lean
+    revised: false
+  - family: AES-01
+    discipline: AES
+    manuscript: AES-01-a
+    title: "What Art Is"
+    question: "What is art?"
+    module: Philosophy/AES/AES_01.lean
+    revised: false
+  - family: AES-05
+    discipline: AES
+    manuscript: AES-05-a
+    title: "Quasi-Emotions and the Paradox of Fiction"
+    question: "Why do we fear what we know to be fictional?"
+    module: Philosophy/AES/AES_05.lean
+    revised: false
+  - family: ACT-01
+    discipline: ACT
+    manuscript: ACT-01-a
+    title: "On Free Will"
+    question: "Do we have free will?"
+    module: Philosophy/ACT/ACT_01.lean
+    revised: false
+  - family: ACT-02
+    discipline: ACT
+    manuscript: ACT-02-a
+    title: "Frankfurt Cases Vindicated"
+    question: "Can one be responsible without alternative possibilities?"
+    module: Philosophy/ACT/ACT_02.lean
+    revised: false
+  - family: ACT-05
+    discipline: ACT
+    manuscript: ACT-05-a
+    title: "Libet Does Not Refute Free Will"
+    question: "Does neuroscience refute free will?"
+    module: Philosophy/ACT/ACT_05.lean
+    revised: false
+  - family: ACT-08
+    discipline: ACT
+    manuscript: ACT-08-a
+    title: "The Basic Argument Fails"
+    question: "Must we be the ultimate source of our actions?"
+    module: Philosophy/ACT/ACT_08.lean
+    revised: false
+  - family: ACT-12
+    discipline: ACT
+    manuscript: ACT-12-a
+    title: "External Reasons Exist"
+    question: "Are there reasons we cannot reach by deliberation?"
+    module: Philosophy/ACT/ACT_12.lean
+    revised: false
+  - family: ACT-15
+    discipline: ACT
+    manuscript: ACT-15-a
+    title: "Luck and Libertarian Freedom"
+    question: "Is indeterministic luck compatible with responsibility?"
+    module: Philosophy/ACT/ACT_15.lean
+    revised: false
+  - family: PID-01
+    discipline: PID
+    manuscript: PID-01-a
+    title: "On Personal Identity"
+    question: "What makes you the same person over time?"
+    module: Philosophy/PID/PID_01.lean
+    revised: false
+  - family: PID-02
+    discipline: PID
+    manuscript: PID-02-a
+    title: "Teletransportation and Extrinsic Survival"
+    question: "Would you survive teleportation?"
+    module: Philosophy/PID/PID_02.lean
+    revised: true
+  - family: PID-05
+    discipline: PID
+    manuscript: PID-05-a
+    title: "Animalism Defended"
+    question: "Are you an animal?"
+    module: Philosophy/PID/PID_05.lean
+    revised: false
+  - family: PID-10
+    discipline: PID
+    manuscript: PID-10-a
+    title: "Disembodied Persons"
+    question: "Can there be persons without bodies?"
+    module: Philosophy/PID/PID_10.lean
+    revised: false
+  - family: PID-11
+    discipline: PID
+    manuscript: PID-11-a
+    title: "Perdurantism and Persons"
+    question: "Are we four-dimensional objects?"
+    module: Philosophy/PID/PID_11.lean
+    revised: false
+  - family: TSM-01
+    discipline: TSM
+    manuscript: TSM-01-a
+    title: "On the Reality of Time"
+    question: "Is time real?"
+    module: Philosophy/TSM/TSM_01.lean
+    revised: false
+  - family: TSM-02
+    discipline: TSM
+    manuscript: TSM-02-a
+    title: "Against Temporal Passage"
+    question: "Does time flow?"
+    module: Philosophy/TSM/TSM_02.lean
+    revised: false
+  - family: TSM-04
+    discipline: TSM
+    manuscript: TSM-04-a
+    title: "Time Travel and the Grandfather Paradox"
+    question: "Is time travel possible?"
+    module: Philosophy/TSM/TSM_04.lean
+    revised: false
+  - family: TSM-07
+    discipline: TSM
+    manuscript: TSM-07-a
+    title: "Possible Worlds as Abstract Objects"
+    question: "What are possible worlds?"
+    module: Philosophy/TSM/TSM_07.lean
+    revised: false
+  - family: TSM-13
+    discipline: TSM
+    manuscript: TSM-13-a
+    title: "Zeno's Achilles and Convergent Series"
+    question: "Can Achilles overtake the tortoise?"
+    module: Philosophy/TSM/TSM_13.lean
+    revised: true
+  - family: EXI-01
+    discipline: EXI
+    manuscript: EXI-01-a
+    title: "On the Meaning of Life"
+    question: "What is the meaning of life?"
+    module: Philosophy/EXI/EXI_01.lean
+    revised: false
+  - family: PHE-01
+    discipline: PHE
+    manuscript: PHE-01-a
+    title: "The Duration of the Epoché"
+    question: "Can the natural attitude be suspended?"
+    module: Philosophy/PHE/PHE_01.lean
+    revised: false
+  - family: PHE-05
+    discipline: PHE
+    manuscript: PHE-05-a
+    title: "The Thickness of the Living Present"
+    question: "What is the structure of time-consciousness?"
+    module: Philosophy/PHE/PHE_05.lean
+    revised: false
+  - family: PHE-07
+    discipline: PHE
+    manuscript: PHE-07-a
+    title: "Anticipatory Resoluteness as a Limit Concept"
+    question: "Is authentic being-towards-death possible?"
+    module: Philosophy/PHE/PHE_07.lean
+    revised: false
+  - family: PHE-11
+    discipline: PHE
+    manuscript: PHE-11-a
+    title: "The World as Horizon of Horizons"
+    question: "Is the world a horizon?"
+    module: Philosophy/PHE/PHE_11.lean
+    revised: false
+  - family: PHE-13
+    discipline: PHE
+    manuscript: PHE-13-a
+    title: "The Infinite Demand of the Face"
+    question: "What does the face of the other demand?"
+    module: Philosophy/PHE/PHE_13.lean
+    revised: false
+  - family: PHE-18
+    discipline: PHE
+    manuscript: PHE-18-a
+    title: "Philosophy as Rigorous Science, Circularly Grounded"
+    question: "Is phenomenology possible as a rigorous science?"
+    module: Philosophy/PHE/PHE_18.lean
+    revised: false
+  - family: PHE-19
+    discipline: PHE
+    manuscript: PHE-19-a
+    title: "The Impossible Gift and the Present Collection"
+    question: "Does the gift exist?"
+    module: Philosophy/PHE/PHE_19.lean
+    revised: false
+  - family: PHE-20
+    discipline: PHE
+    manuscript: PHE-20-a
+    title: "The Irreducible Residue"
+    question: "Can the ego bracket itself?"
+    module: Philosophy/PHE/PHE_20.lean
+    revised: false
+  - family: PHE-22
+    discipline: PHE
+    manuscript: PHE-22-a
+    title: "On the Impossibility of Machine Epoché"
+    question: "Can a machine perform the phenomenological reduction?"
+    module: Philosophy/PHE/PHE_22.lean
+    revised: false
+  - family: MTH-01
+    discipline: MTH
+    manuscript: MTH-01-a
+    title: "On the Existence of Numbers"
+    question: "Do numbers exist?"
+    module: Philosophy/MTH/MTH_01.lean
+    revised: false
+  - family: MTH-02
+    discipline: MTH
+    manuscript: MTH-02-a
+    title: "Benacerraf's Problem Answered"
+    question: "How can we know abstract objects?"
+    module: Philosophy/MTH/MTH_02.lean
+    revised: false
+  - family: MTH-04
+    discipline: MTH
+    manuscript: MTH-04-a
+    title: "Neo-Logicism Vindicated"
+    question: "Does mathematics reduce to logic?"
+    module: Philosophy/MTH/MTH_04.lean
+    revised: false
+  - family: MTH-05
+    discipline: MTH
+    manuscript: MTH-05-a
+    title: "Gödel's Theorem and the Mechanist Thesis"
+    question: "Does Gödel's theorem show that the mind is not a machine?"
+    module: Philosophy/MTH/MTH_05.lean
+    revised: false
+  - family: MTH-06
+    discipline: MTH
+    manuscript: MTH-06-a
+    title: "The Continuum Hypothesis Is False"
+    question: "Is the continuum hypothesis true?"
+    module: Philosophy/MTH/MTH_06.lean
+    revised: false
+  - family: MTH-07
+    discipline: MTH
+    manuscript: MTH-07-a
+    title: "Excluded Middle in Mathematics"
+    question: "Does the law of excluded middle hold in mathematics?"
+    module: Philosophy/MTH/MTH_07.lean
+    revised: false
+  - family: MTH-09
+    discipline: MTH
+    manuscript: MTH-09-a
+    title: "What Is a Proof?"
+    question: "What is a proof?"
+    module: Philosophy/MTH/MTH_09.lean
+    revised: false
+  - family: MTH-12
+    discipline: MTH
+    manuscript: MTH-12-a
+    title: "Unknowable Mathematical Truths"
+    question: "Are there mathematical facts we cannot know?"
+    module: Philosophy/MTH/MTH_12.lean
+    revised: false
+  - family: MTH-16
+    discipline: MTH
+    manuscript: MTH-16-a
+    title: "Against Fictionalism"
+    question: "Are mathematical statements false?"
+    module: Philosophy/MTH/MTH_16.lean
+    revised: false
+  - family: MTH-18
+    discipline: MTH
+    manuscript: MTH-18-a
+    title: "Can Machines Do Philosophy?"
+    question: "Can machines do philosophy?"
+    module: Philosophy/MTH/MTH_18.lean
+    revised: false

@@ -13,7 +13,8 @@ Yes, when the agent tries to bring about each of the competing outcomes.
 ## Files
 
 - [`ACT-15-a.pdf`](ACT-15-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

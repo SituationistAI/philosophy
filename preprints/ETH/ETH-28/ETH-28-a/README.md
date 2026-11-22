@@ -13,7 +13,8 @@ Moderately. The combined duties of beneficence, rescue and supererogation (ETH-0
 ## Files
 
 - [`ETH-28-a.pdf`](ETH-28-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

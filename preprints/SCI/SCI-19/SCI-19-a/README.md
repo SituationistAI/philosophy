@@ -13,7 +13,8 @@ Yes, but slowly: replication and meta-analysis correct the record with a substan
 ## Files
 
 - [`SCI-19-a.pdf`](SCI-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

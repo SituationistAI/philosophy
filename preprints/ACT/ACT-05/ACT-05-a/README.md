@@ -13,7 +13,8 @@ No. The readiness potential precedes the decision to flex, not the decision to t
 ## Files
 
 - [`ACT-05-a.pdf`](ACT-05-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

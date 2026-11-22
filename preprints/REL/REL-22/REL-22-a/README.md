@@ -13,7 +13,8 @@ No. But God can change the significance of past events in light of later ones.
 ## Files
 
 - [`REL-22-a.pdf`](REL-22-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

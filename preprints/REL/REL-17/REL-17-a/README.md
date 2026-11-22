@@ -13,7 +13,8 @@ Faith is rational where the evidence underdetermines the question and the stakes
 ## Files
 
 - [`REL-17-a.pdf`](REL-17-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

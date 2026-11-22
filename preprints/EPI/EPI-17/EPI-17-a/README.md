@@ -13,7 +13,8 @@ No. For any body of evidence, there is a unique rational credence for each propo
 ## Files
 
 - [`EPI-17-a.pdf`](EPI-17-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

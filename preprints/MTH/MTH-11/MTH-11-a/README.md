@@ -13,7 +13,8 @@ No. Category theory provides an alternative foundation at least as adequate.
 ## Files
 
 - [`MTH-11-a.pdf`](MTH-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

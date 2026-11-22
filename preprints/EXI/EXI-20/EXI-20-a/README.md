@@ -13,7 +13,8 @@ That depends on whether it was engagement with something worthwhile (EXI-17); th
 ## Files
 
 - [`EXI-20-a.pdf`](EXI-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

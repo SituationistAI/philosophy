@@ -13,7 +13,8 @@ Yes. Mature, predictively successful theories are approximately true; the pessim
 ## Files
 
 - [`SCI-02-a.pdf`](SCI-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

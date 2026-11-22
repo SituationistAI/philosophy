@@ -13,7 +13,8 @@ One third, under the standard protocol in which awakenings are subjectively indi
 ## Files
 
 - [`EPI-18-a.pdf`](EPI-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

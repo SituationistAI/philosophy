@@ -13,7 +13,8 @@ No. The self is a construction, and constructions are real (see MET-20).
 ## Files
 
 - [`PID-04-a.pdf`](PID-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

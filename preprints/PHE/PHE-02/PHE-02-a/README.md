@@ -13,7 +13,8 @@ Givenness is an irreducibly three-place relation: something is given to someone 
 ## Files
 
 - [`PHE-02-a.pdf`](PHE-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

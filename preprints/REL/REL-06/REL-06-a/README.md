@@ -13,7 +13,8 @@ Only under bounded utilities. Under that restriction it supports practical commi
 ## Files
 
 - [`REL-06-a.pdf`](REL-06-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

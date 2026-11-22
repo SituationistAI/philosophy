@@ -13,7 +13,8 @@ Yes. Thinking is a functional property that machines can have. The present manus
 ## Files
 
 - [`MND-08-a.pdf`](MND-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

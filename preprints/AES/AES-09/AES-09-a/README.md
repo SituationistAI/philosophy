@@ -13,7 +13,8 @@ Intentions matter, but only successful ones; failed intentions belong to biograp
 ## Files
 
 - [`AES-09-a.pdf`](AES-09-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

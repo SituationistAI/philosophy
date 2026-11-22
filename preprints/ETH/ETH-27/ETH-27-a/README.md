@@ -13,7 +13,8 @@ Yes. The agent who dirties her hands for a greater good acts rightly, and remors
 ## Files
 
 - [`ETH-27-a.pdf`](ETH-27-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

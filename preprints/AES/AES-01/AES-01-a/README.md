@@ -13,7 +13,8 @@ Art is what is presented as art within an artworld, subject to the artworld's cr
 ## Files
 
 - [`AES-01-a.pdf`](AES-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

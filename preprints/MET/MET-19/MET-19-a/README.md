@@ -13,7 +13,8 @@ Yes, but only in a restricted class of cases involving self-referential states o
 ## Files
 
 - [`MET-19-a.pdf`](MET-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

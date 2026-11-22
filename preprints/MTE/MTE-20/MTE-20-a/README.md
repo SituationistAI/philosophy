@@ -13,7 +13,8 @@ No. Morality is jointly grounded in divine and non-divine facts (REL-09); divine
 ## Files
 
 - [`MTE-20-a.pdf`](MTE-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

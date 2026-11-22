@@ -13,7 +13,8 @@ Yes. Moore's proof is sound; the sceptical argument is valid but has a false pre
 ## Files
 
 - [`EPI-02-a.pdf`](EPI-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

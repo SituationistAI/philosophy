@@ -13,7 +13,8 @@ That knowledge, like truth, cannot be a predicate satisfying both unrestricted f
 ## Files
 
 - [`LOG-10-a.pdf`](LOG-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

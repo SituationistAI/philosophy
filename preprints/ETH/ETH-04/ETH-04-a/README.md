@@ -13,7 +13,8 @@ Yes. Kant's argument fails at the universalizability step, because the relevant 
 ## Files
 
 - [`ETH-04-a.pdf`](ETH-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

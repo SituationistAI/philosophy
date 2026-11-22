@@ -4,7 +4,7 @@ The collection contains 719 manuscripts. Most readers will want a path through i
 
 ## 1. The principal results, in brief
 
-Read the [overview](overview.md). Each family is one question with one answer, stated in a sentence or two. Then open the principal manuscript (the one ending in `-a`) of any family whose answer you find surprising. Principal manuscripts range from one page (EXI-01-a) to several hundred.
+Read the [overview](overview.pdf). Each family is one question with one answer, stated in a sentence or two. Then open the principal manuscript (the one ending in `-a`) of any family whose answer you find surprising. Principal manuscripts range from one page (EXI-01-a) to several hundred.
 
 ## 2. Ten families to start with
 
@@ -49,4 +49,4 @@ The nominal length of each manuscript is given in the [manuscript map](CONTENTS.
 
 ## 6. Formalization and apparatus
 
-The [formalization catalogue](formalization/README.md) lists 159 Lean modules and what each establishes. A formalization shows that an argument is valid relative to its premises, which are stated as axioms; it does not show that they are true. The [apparatus](apparatus/README.md) gives cross-references between all manuscripts, the family-level citation graph, an index of keywords and a count of numbered statements, all computed from the sources.
+The [formalization catalogue](lean/formalization.yaml) lists 159 Lean modules and what each establishes. A formalization shows that an argument is valid relative to its premises, which are stated as axioms; it does not show that they are true. The [apparatus](apparatus/README.md) gives cross-references between all manuscripts, the family-level citation graph, an index of keywords and a count of numbered statements, all computed from the sources.

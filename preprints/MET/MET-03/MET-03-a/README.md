@@ -13,7 +13,8 @@ Yes. Idealism is consistent but requires one more primitive than realism, and is
 ## Files
 
 - [`MET-03-a.pdf`](MET-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Only with a normative bridge premise. Hume's law holds for purely descriptive pr
 ## Files
 
 - [`MTE-10-a.pdf`](MTE-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

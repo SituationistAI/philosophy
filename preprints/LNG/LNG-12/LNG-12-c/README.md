@@ -9,7 +9,8 @@
 ## Files
 
 - [`LNG-12-c.pdf`](LNG-12-c.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Yes, if and only if the agent's deepest concerns lie beyond her own well-being.
 ## Files
 
 - [`ETH-25-a.pdf`](ETH-25-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

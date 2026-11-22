@@ -13,7 +13,8 @@ Fission produces two persons, each of whom has what matters in survival; identit
 ## Files
 
 - [`PID-03-a.pdf`](PID-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

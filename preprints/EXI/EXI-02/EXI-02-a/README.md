@@ -13,7 +13,8 @@ Yes. Death deprives the one who dies of goods, and Epicurus's argument fails bec
 ## Files
 
 - [`EXI-02-a.pdf`](EXI-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

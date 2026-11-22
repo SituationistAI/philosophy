@@ -13,7 +13,8 @@ Yes. Mental causes are proportional causes, whereas physical causes are overly s
 ## Files
 
 - [`MND-11-a.pdf`](MND-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

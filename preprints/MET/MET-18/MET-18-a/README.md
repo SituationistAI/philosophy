@@ -13,7 +13,8 @@ No. Vagueness lies in language and knowledge, not in the world: vague predicates
 ## Files
 
 - [`MET-18-a.pdf`](MET-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

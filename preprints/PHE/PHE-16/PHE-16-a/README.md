@@ -13,7 +13,8 @@ Anxiety discloses the nothing as the withdrawal of beings as a whole. The disclo
 ## Files
 
 - [`PHE-16-a.pdf`](PHE-16-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

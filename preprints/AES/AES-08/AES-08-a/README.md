@@ -13,7 +13,8 @@ Moral flaws are aesthetic flaws when they prevent the intended response; otherwi
 ## Files
 
 - [`AES-08-a.pdf`](AES-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Yes, prima facie, but its weight is low in the absence of cross-checking procedu
 ## Files
 
 - [`REL-21-a.pdf`](REL-21-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

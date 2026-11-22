@@ -13,7 +13,8 @@ Coherent but unstable: anarchist societies tend to develop state-like institutio
 ## Files
 
 - [`POL-07-a.pdf`](POL-07-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

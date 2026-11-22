@@ -13,7 +13,8 @@ Yes, but only by empirically equivalent rivals that lack independent motivation.
 ## Files
 
 - [`SCI-04-a.pdf`](SCI-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ No. Models are false but represent through partial similarity, and their idealiz
 ## Files
 
 - [`SCI-10-a.pdf`](SCI-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

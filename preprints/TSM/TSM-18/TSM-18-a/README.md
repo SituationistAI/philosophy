@@ -13,7 +13,8 @@ Because "now" is an indexical. The question has a trivial answer and no deep one
 ## Files
 
 - [`TSM-18-a.pdf`](TSM-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

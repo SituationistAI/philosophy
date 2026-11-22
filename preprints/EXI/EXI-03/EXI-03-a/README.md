@@ -13,7 +13,8 @@ No. An endless life would eventually exhaust the categorical desires that give l
 ## Files
 
 - [`EXI-03-a.pdf`](EXI-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

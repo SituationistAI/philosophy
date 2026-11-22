@@ -13,7 +13,8 @@ Because the empty world is not a stable possibility. Under plausible principles 
 ## Files
 
 - [`MET-01-a.pdf`](MET-01-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

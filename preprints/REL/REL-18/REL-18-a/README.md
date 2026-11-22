@@ -13,7 +13,8 @@ Yes. They are truth-apt, even though most of their truth-conditions cannot be ve
 ## Files
 
 - [`REL-18-a.pdf`](REL-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

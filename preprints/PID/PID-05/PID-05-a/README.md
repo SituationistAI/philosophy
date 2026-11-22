@@ -13,7 +13,8 @@ Yes. You are a thinking organism, and you would not survive as a brain in a vat.
 ## Files
 
 - [`PID-05-a.pdf`](PID-05-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

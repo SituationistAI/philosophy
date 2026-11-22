@@ -13,7 +13,8 @@ Yes. Every object has a real definition stating what it is, and essence is prior
 ## Files
 
 - [`MET-13-a.pdf`](MET-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

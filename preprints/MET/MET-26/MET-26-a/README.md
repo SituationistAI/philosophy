@@ -13,7 +13,8 @@ No. Information requires a physical medium, and structure presupposes something 
 ## Files
 
 - [`MET-26-a.pdf`](MET-26-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

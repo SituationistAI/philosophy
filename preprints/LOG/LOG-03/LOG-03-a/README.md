@@ -13,7 +13,8 @@ No. The dialetheist's cases are better treated with truth-value gaps.
 ## Files
 
 - [`LOG-03-a.pdf`](LOG-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

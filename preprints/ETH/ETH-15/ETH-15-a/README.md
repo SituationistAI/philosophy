@@ -13,7 +13,8 @@ No. Every apparent dilemma has a uniquely permissible option, though it may be i
 ## Files
 
 - [`ETH-15-a.pdf`](ETH-15-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

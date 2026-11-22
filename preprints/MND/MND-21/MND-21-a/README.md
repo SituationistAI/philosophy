@@ -13,7 +13,8 @@ The mind computes but is not a single computer: cognition is distributed over se
 ## Files
 
 - [`MND-21-a.pdf`](MND-21-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

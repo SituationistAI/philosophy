@@ -13,7 +13,8 @@ Exactly when the parts share a common fate under the relevant dynamics. Tables a
 ## Files
 
 - [`MET-06-a.pdf`](MET-06-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

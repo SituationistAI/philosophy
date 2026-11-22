@@ -13,7 +13,8 @@ Through reliable belief-forming methods; Benacerraf's causal requirement is too 
 ## Files
 
 - [`MTH-02-a.pdf`](MTH-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

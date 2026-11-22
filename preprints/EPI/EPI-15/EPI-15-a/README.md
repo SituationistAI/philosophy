@@ -13,7 +13,8 @@ Yes, by transparency: one knows whether one believes p by considering whether p.
 ## Files
 
 - [`EPI-15-a.pdf`](EPI-15-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

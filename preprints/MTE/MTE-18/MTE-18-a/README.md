@@ -13,7 +13,8 @@ Procedures, about which it is realist, and outcomes, about which it is not. The 
 ## Files
 
 - [`MTE-18-a.pdf`](MTE-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

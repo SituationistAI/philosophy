@@ -13,7 +13,8 @@ Objective but not absolute: moral truths hold for all rational agents, but their
 ## Files
 
 - [`MTE-02-a.pdf`](MTE-02-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

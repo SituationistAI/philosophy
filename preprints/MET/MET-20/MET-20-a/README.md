@@ -13,7 +13,8 @@ Yes. Social kinds exist and depend on the absence of collective rejection rather
 ## Files
 
 - [`MET-20-a.pdf`](MET-20-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

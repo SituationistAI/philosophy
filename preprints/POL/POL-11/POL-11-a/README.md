@@ -13,7 +13,8 @@ Yes, as an implicit framework of mutual expectations rather than an actual agree
 ## Files
 
 - [`POL-11-a.pdf`](POL-11-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

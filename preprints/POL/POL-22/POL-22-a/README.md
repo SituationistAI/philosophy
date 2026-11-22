@@ -13,7 +13,8 @@ Partly. Political science explains well but predicts poorly.
 ## Files
 
 - [`POL-22-a.pdf`](POL-22-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

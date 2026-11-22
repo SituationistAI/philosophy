@@ -13,7 +13,8 @@ An answer to a why-question that locates the explanandum in a pattern of depende
 ## Files
 
 - [`SCI-03-a.pdf`](SCI-03-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

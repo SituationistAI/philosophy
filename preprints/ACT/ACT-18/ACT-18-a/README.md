@@ -13,7 +13,8 @@ No. Since free will is real (ACT-01), illusionism is unmotivated.
 ## Files
 
 - [`ACT-18-a.pdf`](ACT-18-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

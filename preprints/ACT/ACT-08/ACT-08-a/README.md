@@ -13,7 +13,8 @@ No. Strawson's Basic Argument fails because self-formation need not start from n
 ## Files
 
 - [`ACT-08-a.pdf`](ACT-08-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Yes. Backward time travel is consistent provided the past is not changed; the gr
 ## Files
 
 - [`TSM-04-a.pdf`](TSM-04-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

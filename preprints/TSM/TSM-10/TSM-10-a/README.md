@@ -13,7 +13,8 @@ Truth in all worlds consistent with the essences of things (see MET-13).
 ## Files
 
 - [`TSM-10-a.pdf`](TSM-10-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

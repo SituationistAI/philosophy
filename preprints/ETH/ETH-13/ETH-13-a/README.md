@@ -13,7 +13,8 @@ Yes. Moral luck is real, and it does not undermine responsibility.
 ## Files
 
 - [`ETH-13-a.pdf`](ETH-13-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

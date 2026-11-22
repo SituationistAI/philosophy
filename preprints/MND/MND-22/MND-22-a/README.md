@@ -13,7 +13,8 @@ Possible but undetectable in principle, and therefore without consequence for fu
 ## Files
 
 - [`MND-22-a.pdf`](MND-22-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 

@@ -13,7 +13,8 @@ Yes. Occurrent thoughts have a distinctive phenomenal character not reducible to
 ## Files
 
 - [`MND-19-a.pdf`](MND-19-a.pdf): compiled manuscript
-- `main.tex`, `situationist-preprint.cls`: sources
+- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
+- `gen/` (where present): the program that generates the computed tables, with its own README
 
 ## Build
 
