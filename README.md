@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24439719.svg)](https://doi.org/10.5281/zenodo.24439719)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24439718.svg)](https://doi.org/10.5281/zenodo.24439718)
 
 # Philosophy
 
@@ -47,7 +47,7 @@ There are two kinds of exception. For the computed volumes (TSM-01-a, PID-01-a, 
 
 ## Versions and citations
 
-The collection is archived on Zenodo: [doi:10.5281/zenodo.24439719](https://doi.org/10.5281/zenodo.24439719). This DOI always resolves to the latest version.
+The collection is archived on Zenodo: [doi:10.5281/zenodo.24439718](https://doi.org/10.5281/zenodo.24439718). This DOI always resolves to the latest version.
 
 The release history is preserved in [history.md](history.md). Corrections are recorded as new versions of the affected manuscripts, each with a changelog in its directory. To cite an individual manuscript, use the BibTeX entry in its directory; to cite the collection, see [`CITATION.cff`](CITATION.cff).
 
