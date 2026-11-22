@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24439719.svg)](https://doi.org/10.5281/zenodo.24439719)
 
 # Philosophy
 
@@ -45,6 +46,8 @@ Most results were produced by the same procedure. An internal model was given a 
 There are two kinds of exception. For the computed volumes (TSM-01-a, PID-01-a, MET-01-b, POL-01-c, REL-01-b, REL-01-c) and the inventories (MTH-01-a, MET-02-b, EPI-01-b, SCI-06-a, AES-01-a, EXI-10-b, ETH-12-a), the model also wrote the programs in each manuscript's `gen/` directory and ran them; the tables are their output. The multi-volume works are released as first volumes, with plans of the later volumes; errata to those volumes are released where they were produced.
 
 ## Versions and citations
+
+The collection is archived on Zenodo: [doi:10.5281/zenodo.24439719](https://doi.org/10.5281/zenodo.24439719). This DOI always resolves to the latest version.
 
 The release history is preserved in [history.md](history.md). Corrections are recorded as new versions of the affected manuscripts, each with a changelog in its directory. To cite an individual manuscript, use the BibTeX entry in its directory; to cite the collection, see [`CITATION.cff`](CITATION.cff).
 
