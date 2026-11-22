@@ -56,6 +56,3 @@ The manuscripts are at different stages of verification. A formalization establi
 
 The contents of this repository are released under the Apache License 2.0. See [`LICENSE`](LICENSE).
 
-## About this repository
-
-Situationist AI is a fictional laboratory, and this repository is an artistic and critical project. It adopts the form of a large release of machine-generated research in order to examine what such releases claim, and what they leave unexamined.
