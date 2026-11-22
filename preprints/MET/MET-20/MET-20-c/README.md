@@ -10,15 +10,7 @@
 
 ## Files
 
-- [`MET-20-c.pdf`](MET-20-c.pdf): compiled manuscript
-- `main.tex` (and any further `.tex` files), `situationist-preprint.cls`: sources
-- `gen/` (where present): the program that generates the computed tables, with its own README
-
-## Build
-
-```
-latexmk -pdf main.tex
-```
+The manuscript has been withdrawn and is no longer distributed. The entry is kept so that existing references to it resolve.
 
 ## Citation
 
