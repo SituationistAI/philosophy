@@ -2,6 +2,8 @@
 
 # Philosophy
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24439719.svg)](https://doi.org/10.5281/zenodo.24439719)
+
 This repository contains philosophical manuscripts and supporting proof artifacts produced by an internal Situationist AI model. As part of model development, we evaluate our models on open problems in philosophy.
 
 ## Navigating the collection
